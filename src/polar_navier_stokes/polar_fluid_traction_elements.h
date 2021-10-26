@@ -62,7 +62,7 @@ namespace oomph
     unsigned Dim;
 
   protected:
-    /// \short Access function that returns the local equation numbers
+    /// Access function that returns the local equation numbers
     /// for velocity components.
     /// u_local_eqn(n,i) = local equation number or < 0 if pinned.
     /// The default is to asssume that n is the local node number
@@ -72,7 +72,7 @@ namespace oomph
       return nodal_local_eqn(n, i);
     }
 
-    ///\short Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping
     inline double shape_and_test_at_knot(const unsigned& ipt,
                                          Shape& psi,
@@ -113,7 +113,7 @@ namespace oomph
       }
     }
 
-    ///\short This function returns the residuals for the
+    /// This function returns the residuals for the
     /// traction function.
     /// flag=1(or 0): do (or don't) compute the Jacobian as well.
     void fill_in_generic_residual_contribution(Vector<double>& residuals,
@@ -123,10 +123,10 @@ namespace oomph
     /// Pointer to the angle alpha
     double* Alpha_pt;
 
-    /// \short Pointer to the Data item that stores the external pressure
+    /// Pointer to the Data item that stores the external pressure
     Data* Pext_data_pt;
 
-    /// \short The Data that contains the traded pressure is stored
+    /// The Data that contains the traded pressure is stored
     /// as external Data for the element. Which external Data item is it?
     unsigned External_data_number_of_Pext;
 
@@ -265,7 +265,7 @@ namespace oomph
         residuals, jacobian, GeneralisedElement::Dummy_matrix, 1);
     }
 
-    ///\short Compute the element's residual Vector and the jacobian matrix
+    /// Compute the element's residual Vector and the jacobian matrix
     /// Plus the mass matrix especially for eigenvalue problems
     void fill_in_contribution_to_jacobian_and_mass_matrix(
       Vector<double>& residuals,
@@ -303,9 +303,9 @@ namespace oomph
   };
 
 
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //============================================================================
@@ -349,7 +349,7 @@ namespace oomph
     int local_eqn = 0, local_unknown = 0, pext_local_eqn = 0,
         pext_local_unknown = 0;
 
-    ////////////////////////////////////////NEW//////////////////////////////////////////
+    /// /////////////////////////////////////NEW//////////////////////////////////////////
 
     // Get local equation number of external pressure
     // Note that if we have not passed an external pressure pointer to this
@@ -371,7 +371,7 @@ namespace oomph
     // The local unkown number of pext will be the same
     pext_local_unknown = pext_local_eqn;
 
-    ////////////////////////////////////////NEW//////////////////////////////////////////
+    /// /////////////////////////////////////NEW//////////////////////////////////////////
 
     // Loop over the integration points
     for (unsigned ipt = 0; ipt < n_intpt; ipt++)
@@ -431,14 +431,14 @@ namespace oomph
                                     (interpolated_u[i] / interpolated_x[0]) *
                                     testf[l] * interpolated_x[0] * Alpha * W;
 
-            ////////////////////////////////////////NEW//////////////////////////////////////////
+            /// /////////////////////////////////////NEW//////////////////////////////////////////
 
             // Plus additional external pressure contribution at inlet
             // This is zero if we haven't passed a Pext_data_pt to the element
             residuals[local_eqn] +=
               pext * testf[l] * interpolated_x[0] * Alpha * W;
 
-            ////////////////////////////////////////NEW//////////////////////////////////////////
+            /// /////////////////////////////////////NEW//////////////////////////////////////////
 
             // CALCULATE THE JACOBIAN
             if (flag)
@@ -462,7 +462,7 @@ namespace oomph
                 } // End of i2=0 section
               } // End of l2 loop
 
-              ////////////////////////////////////////NEW//////////////////////////////////////////
+              /// /////////////////////////////////////NEW//////////////////////////////////////////
               // Add pext's contribution to these residuals
               // This only needs to be done once hence why it is outside the l2
               // loop
@@ -472,7 +472,7 @@ namespace oomph
                 jacobian(local_eqn, pext_local_unknown) +=
                   testf[l] * interpolated_x[0] * Alpha * W;
               }
-              ////////////////////////////////////////NEW//////////////////////////////////////////
+              /// /////////////////////////////////////NEW//////////////////////////////////////////
 
             } /*End of Jacobian calculation*/
 
@@ -481,7 +481,7 @@ namespace oomph
 
       } // End of loop over shape functions
 
-      ////////////////////////////////////////NEW//////////////////////////////////////////
+      /// /////////////////////////////////////NEW//////////////////////////////////////////
 
       /// The additional residual for the mass flux
       /// (ie. the extra equation for pext)
@@ -528,7 +528,7 @@ namespace oomph
         } // end of if not boundary condition statement
       } // End of additional residual for the mass flux
 
-      ////////////////////////////////////////NEW//////////////////////////////////////////
+      /// /////////////////////////////////////NEW//////////////////////////////////////////
 
     } // End of loop over integration points
 

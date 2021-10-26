@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner}{}\doxysection{oomph\+::Pseudo\+Elastic\+F\+S\+I\+Preconditioner Class Reference}
+\hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner}{}\doxysection{oomph\+::Pseudo\+Elastic\+FSIPreconditioner Class Reference}
 \label{classoomph_1_1PseudoElasticFSIPreconditioner}\index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 
 
-Preconditioner for F\+SI problems with pseudo-\/elastic fluid node updates. Note\+: Navier\+Stokes\+Schur\+Complement\+Preconditioner is applied to the Navier Stokes subsidiary system. Default solid preconditioner is Super\+L\+U\+Preconditioner. {\bfseries{Enumeration}} of Elastic D\+OF types in the Pseudo-\/\+Elastic Elements The method get\+\_\+dof\+\_\+types\+\_\+for\+\_\+unknowns() must be implemented such that D\+O\+Fs subject be Lagrange multiplier and D\+O\+Fs N\+OT subject to Lagrange multiplier have different labels. For example in a 3D problem there are 6 D\+OF types and the following labelling must be implemented\+: 0 -\/ x displacement (without lagr mult traction) 1 -\/ y displacement (without lagr mult traction) 2 -\/ z displacement (without lagr mult traction) 3 -\/ x displacement (with lagr mult traction) 4 -\/ y displacement (with lagr mult traction) 5 -\/ z displacement (with lagr mult traction)  
+Preconditioner for FSI problems with pseudo-\/elastic fluid node updates. Note\+: Navier\+Stokes\+Schur\+Complement\+Preconditioner is applied to the Navier Stokes subsidiary system. Default solid preconditioner is Super\+LUPreconditioner. {\bfseries{Enumeration}} of Elastic DOF types in the Pseudo-\/\+Elastic Elements The method get\+\_\+dof\+\_\+types\+\_\+for\+\_\+unknowns() must be implemented such that DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange multiplier have different labels. For example in a 3D problem there are 6 DOF types and the following labelling must be implemented\+: 0 -\/ x displacement (without lagr mult traction) 1 -\/ y displacement (without lagr mult traction) 2 -\/ z displacement (without lagr mult traction) 3 -\/ x displacement (with lagr mult traction) 4 -\/ y displacement (with lagr mult traction) 5 -\/ z displacement (with lagr mult traction)  
 
 
 
 
 {\ttfamily \#include $<$pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h$>$}
 
-Inheritance diagram for oomph\+::Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Pseudo\+Elastic\+FSIPreconditioner\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1PseudoElasticFSIPreconditioner}
@@ -18,11 +18,11 @@ Inheritance diagram for oomph\+::Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+:\beg
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_aa3132ef3e4ecd57adf64da72e84b5d9d}{Pseudo\+Elastic\+F\+S\+I\+Preconditioner}} (const unsigned \&dim, Problem $\ast$problem\+\_\+pt)
+\mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_aa3132ef3e4ecd57adf64da72e84b5d9d}{Pseudo\+Elastic\+FSIPreconditioner}} (const unsigned \&dim, Problem $\ast$problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em constructor -\/ just set defaults. Specify the spatial dimension of the fluid and a (non-\/const) problem pointer needed for the underlying Navier\+Stokes\+Schur\+Complement\+Preconditioner. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a8f57b2dc7f9e37d419ead6b786dfac82}{$\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner}} ()
+virtual \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a8f57b2dc7f9e37d419ead6b786dfac82}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner}} ()
 \item 
-\mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_aa7efe57119bf77e503049922f8d16722}{Pseudo\+Elastic\+F\+S\+I\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner}{Pseudo\+Elastic\+F\+S\+I\+Preconditioner}} \&)
+\mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_af9c058ad9987dd04e986affc32f4b44f}{Pseudo\+Elastic\+FSIPreconditioner}} (const \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner}{Pseudo\+Elastic\+FSIPreconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a15859381010faa40a47fdca28b281475}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
@@ -38,14 +38,14 @@ void \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_ad30185179d7c
 \begin{DoxyCompactList}\small\item\em specify the mesh containing the lagrange multiplier elements \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a92e59f83606d77e7407a4ace534546f2}{set\+\_\+solid\+\_\+preconditioner}} (Preconditioner $\ast$prec\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em speicify a non default solid preconditioner. This preconditioner will not delete it \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}} $\ast$const \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_af10b20ad8e90cd99ba35326f1207d6a7}{pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}} $\ast$const \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a44144a5b968575e11178323119085898}{pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the pseudo elastic subsidiary preconditioner. \end{DoxyCompactList}\item 
-Navier\+Stokes\+Schur\+Complement\+Preconditioner $\ast$const \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a4e13b64643e9026f421fa1228333ca95}{navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt}} ()
+Navier\+Stokes\+Schur\+Complement\+Preconditioner $\ast$const \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_acd22aa65e802700c40a68c77c832f2a3}{navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the Navier Stokes Schur complement preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a136fa015ebb39a20e82682bacd65c65b}{enable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Call to use the Navier Stokes Schur complement preconditioner. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_af2adaec06d407d4b89bca034984c66ba}{disable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner}} ()
-\begin{DoxyCompactList}\small\item\em Call to use the Super\+L\+U\+Preconditioner is used for the Navier Stokes subsidiary system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Call to use the Super\+LUPreconditioner is used for the Navier Stokes subsidiary system. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -78,13 +78,13 @@ Mesh $\ast$ \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_a0a754
 unsigned \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_aec1e28a3a746a76ed6a283115e8d3146}{Dim}}
 \begin{DoxyCompactList}\small\item\em the dimension of the fluid \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner_aa9eab77e9d4dfbdecfac9cccceb68c7b}{Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner}}
-\begin{DoxyCompactList}\small\item\em If true the Navier Stokes Schur complement preconditioner is used. Otherwise Super\+L\+U\+Preconditioner is used for the Navier Stokes subsidiary system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em If true the Navier Stokes Schur complement preconditioner is used. Otherwise Super\+LUPreconditioner is used for the Navier Stokes subsidiary system. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Preconditioner for F\+SI problems with pseudo-\/elastic fluid node updates. Note\+: Navier\+Stokes\+Schur\+Complement\+Preconditioner is applied to the Navier Stokes subsidiary system. Default solid preconditioner is Super\+L\+U\+Preconditioner. {\bfseries{Enumeration}} of Elastic D\+OF types in the Pseudo-\/\+Elastic Elements The method get\+\_\+dof\+\_\+types\+\_\+for\+\_\+unknowns() must be implemented such that D\+O\+Fs subject be Lagrange multiplier and D\+O\+Fs N\+OT subject to Lagrange multiplier have different labels. For example in a 3D problem there are 6 D\+OF types and the following labelling must be implemented\+: 0 -\/ x displacement (without lagr mult traction) 1 -\/ y displacement (without lagr mult traction) 2 -\/ z displacement (without lagr mult traction) 3 -\/ x displacement (with lagr mult traction) 4 -\/ y displacement (with lagr mult traction) 5 -\/ z displacement (with lagr mult traction) 
+Preconditioner for FSI problems with pseudo-\/elastic fluid node updates. Note\+: Navier\+Stokes\+Schur\+Complement\+Preconditioner is applied to the Navier Stokes subsidiary system. Default solid preconditioner is Super\+LUPreconditioner. {\bfseries{Enumeration}} of Elastic DOF types in the Pseudo-\/\+Elastic Elements The method get\+\_\+dof\+\_\+types\+\_\+for\+\_\+unknowns() must be implemented such that DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange multiplier have different labels. For example in a 3D problem there are 6 DOF types and the following labelling must be implemented\+: 0 -\/ x displacement (without lagr mult traction) 1 -\/ y displacement (without lagr mult traction) 2 -\/ z displacement (without lagr mult traction) 3 -\/ x displacement (with lagr mult traction) 4 -\/ y displacement (with lagr mult traction) 5 -\/ z displacement (with lagr mult traction) 
 
-Definition at line 60 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00060}{60}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
@@ -93,7 +93,7 @@ Definition at line 60 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!PseudoElasticFSIPreconditioner@{PseudoElasticFSIPreconditioner}}
 \index{PseudoElasticFSIPreconditioner@{PseudoElasticFSIPreconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{PseudoElasticFSIPreconditioner()}{PseudoElasticFSIPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner (\begin{DoxyParamCaption}\item[{const unsigned \&}]{dim,  }\item[{Problem $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Pseudo\+Elastic\+FSIPreconditioner (\begin{DoxyParamCaption}\item[{const unsigned \&}]{dim,  }\item[{Problem $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -101,39 +101,35 @@ constructor -\/ just set defaults. Specify the spatial dimension of the fluid an
 
 
 
-Definition at line 67 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{67}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt, Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt, Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt, Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt, Solid\+\_\+fluid\+\_\+matvec\+\_\+pt, Solid\+\_\+mesh\+\_\+pt, Solid\+\_\+preconditioner\+\_\+pt, Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner, and Using\+\_\+default\+\_\+solid\+\_\+preconditioner.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00240}{Fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00228}{Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00246}{Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00237}{Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00210}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00214}{Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00207}{Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00231}{Solid\+\_\+fluid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00243}{Solid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00217}{Solid\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00234}{Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00254}{Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00221}{Using\+\_\+default\+\_\+solid\+\_\+preconditioner}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a8f57b2dc7f9e37d419ead6b786dfac82}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a8f57b2dc7f9e37d419ead6b786dfac82}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!````~PseudoElasticFSIPreconditioner@{$\sim$PseudoElasticFSIPreconditioner}}
 \index{````~PseudoElasticFSIPreconditioner@{$\sim$PseudoElasticFSIPreconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{$\sim$PseudoElasticFSIPreconditioner()}{~PseudoElasticFSIPreconditioner()}}
-{\footnotesize\ttfamily virtual oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::$\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::$\sim$\+Pseudo\+Elastic\+FSIPreconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 102 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{102}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt, Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt, Solid\+\_\+fluid\+\_\+matvec\+\_\+pt, Solid\+\_\+preconditioner\+\_\+pt, Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, and Using\+\_\+default\+\_\+solid\+\_\+preconditioner.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00228}{Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00237}{Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00210}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00214}{Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00207}{Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00231}{Solid\+\_\+fluid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00217}{Solid\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00234}{Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00221}{Using\+\_\+default\+\_\+solid\+\_\+preconditioner}}.
 
-\mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_aa7efe57119bf77e503049922f8d16722}\label{classoomph_1_1PseudoElasticFSIPreconditioner_aa7efe57119bf77e503049922f8d16722}} 
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_af9c058ad9987dd04e986affc32f4b44f}\label{classoomph_1_1PseudoElasticFSIPreconditioner_af9c058ad9987dd04e986affc32f4b44f}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!PseudoElasticFSIPreconditioner@{PseudoElasticFSIPreconditioner}}
 \index{PseudoElasticFSIPreconditioner@{PseudoElasticFSIPreconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{PseudoElasticFSIPreconditioner()}{PseudoElasticFSIPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner}{Pseudo\+Elastic\+F\+S\+I\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Pseudo\+Elastic\+FSIPreconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PseudoElasticFSIPreconditioner}{Pseudo\+Elastic\+FSIPreconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 128 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
 
 
 
@@ -142,7 +138,7 @@ Definition at line 128 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -150,39 +146,39 @@ Broken assignment operator.
 
 clean up memory method 
 
-Definition at line 34 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+cc.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{34}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+cc}}.
 
 
 
-References oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::clean\+\_\+up\+\_\+memory(), Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt, Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt, Solid\+\_\+fluid\+\_\+matvec\+\_\+pt, Solid\+\_\+preconditioner\+\_\+pt, and Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt.
+References \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00527}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00228}{Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00237}{Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00210}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00214}{Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00207}{Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00231}{Solid\+\_\+fluid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00217}{Solid\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00234}{Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}.
 
 
 
-Referenced by setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_af2adaec06d407d4b89bca034984c66ba}\label{classoomph_1_1PseudoElasticFSIPreconditioner_af2adaec06d407d4b89bca034984c66ba}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!disable\_navier\_stokes\_schur\_complement\_preconditioner@{disable\_navier\_stokes\_schur\_complement\_preconditioner}}
 \index{disable\_navier\_stokes\_schur\_complement\_preconditioner@{disable\_navier\_stokes\_schur\_complement\_preconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{disable\_navier\_stokes\_schur\_complement\_preconditioner()}{disable\_navier\_stokes\_schur\_complement\_preconditioner()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::disable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::disable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Call to use the Super\+L\+U\+Preconditioner is used for the Navier Stokes subsidiary system. 
+Call to use the Super\+LUPreconditioner is used for the Navier Stokes subsidiary system. 
 
 
 
-Definition at line 204 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00200}{200}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00254}{Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a136fa015ebb39a20e82682bacd65c65b}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a136fa015ebb39a20e82682bacd65c65b}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!enable\_navier\_stokes\_schur\_complement\_preconditioner@{enable\_navier\_stokes\_schur\_complement\_preconditioner}}
 \index{enable\_navier\_stokes\_schur\_complement\_preconditioner@{enable\_navier\_stokes\_schur\_complement\_preconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{enable\_navier\_stokes\_schur\_complement\_preconditioner()}{enable\_navier\_stokes\_schur\_complement\_preconditioner()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::enable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::enable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -190,17 +186,17 @@ Call to use the Navier Stokes Schur complement preconditioner.
 
 
 
-Definition at line 197 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00193}{193}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00254}{Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner}}.
 
-\mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a4e13b64643e9026f421fa1228333ca95}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a4e13b64643e9026f421fa1228333ca95}} 
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_acd22aa65e802700c40a68c77c832f2a3}\label{classoomph_1_1PseudoElasticFSIPreconditioner_acd22aa65e802700c40a68c77c832f2a3}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!navier\_stokes\_schur\_complement\_preconditioner\_pt@{navier\_stokes\_schur\_complement\_preconditioner\_pt}}
 \index{navier\_stokes\_schur\_complement\_preconditioner\_pt@{navier\_stokes\_schur\_complement\_preconditioner\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{navier\_stokes\_schur\_complement\_preconditioner\_pt()}{navier\_stokes\_schur\_complement\_preconditioner\_pt()}}
-{\footnotesize\ttfamily Navier\+Stokes\+Schur\+Complement\+Preconditioner$\ast$ const oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Navier\+Stokes\+Schur\+Complement\+Preconditioner $\ast$const oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -208,17 +204,17 @@ Access function to the Navier Stokes Schur complement preconditioner.
 
 
 
-Definition at line 190 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00186}{186}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00214}{Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_ad29c2852949caec2d20cbe7cf99f1b38}\label{classoomph_1_1PseudoElasticFSIPreconditioner_ad29c2852949caec2d20cbe7cf99f1b38}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
 \index{preconditioner\_solve@{preconditioner\_solve}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const Double\+Vector \&}]{r,  }\item[{Double\+Vector \&}]{z }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const Double\+Vector \&}]{r,  }\item[{Double\+Vector \&}]{z }\end{DoxyParamCaption})}
 
 
 
@@ -226,17 +222,17 @@ Apply the preconditioner.
 
 
 
-Definition at line 280 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+cc.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{280}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+cc}}.
 
 
 
-References oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::elastic\+\_\+preconditioner\+\_\+solve(), Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve(), Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt, Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt, Solid\+\_\+fluid\+\_\+matvec\+\_\+pt, Solid\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner, Solid\+\_\+preconditioner\+\_\+pt, Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, and Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner.
+References \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00493}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::elastic\+\_\+preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00228}{Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8cc_source_l00503}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::lagrange\+\_\+multiplier\+\_\+preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00237}{Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00210}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00214}{Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00207}{Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00231}{Solid\+\_\+fluid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00225}{Solid\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00217}{Solid\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00234}{Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00254}{Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner}}.
 
-\mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_af10b20ad8e90cd99ba35326f1207d6a7}\label{classoomph_1_1PseudoElasticFSIPreconditioner_af10b20ad8e90cd99ba35326f1207d6a7}} 
+\mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a44144a5b968575e11178323119085898}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a44144a5b968575e11178323119085898}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!pseudo\_elastic\_preconditioner\_pt@{pseudo\_elastic\_preconditioner\_pt}}
 \index{pseudo\_elastic\_preconditioner\_pt@{pseudo\_elastic\_preconditioner\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{pseudo\_elastic\_preconditioner\_pt()}{pseudo\_elastic\_preconditioner\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}$\ast$ const oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}} $\ast$const oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -244,17 +240,17 @@ Access function to the pseudo elastic subsidiary preconditioner.
 
 
 
-Definition at line 184 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00180}{180}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00207}{Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a8d0b7212ad06c4f5942fed253c680010}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a8d0b7212ad06c4f5942fed253c680010}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!set\_fluid\_and\_pseudo\_elastic\_mesh\_pt@{set\_fluid\_and\_pseudo\_elastic\_mesh\_pt}}
 \index{set\_fluid\_and\_pseudo\_elastic\_mesh\_pt@{set\_fluid\_and\_pseudo\_elastic\_mesh\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{set\_fluid\_and\_pseudo\_elastic\_mesh\_pt()}{set\_fluid\_and\_pseudo\_elastic\_mesh\_pt()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::set\+\_\+fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::set\+\_\+fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -262,17 +258,17 @@ specify the mesh containing the combined fluid/pseudo solid elements
 
 
 
-Definition at line 154 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00150}{150}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00240}{Fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_ad30185179d7c2bc6c725e550c48a0c90}\label{classoomph_1_1PseudoElasticFSIPreconditioner_ad30185179d7c2bc6c725e550c48a0c90}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!set\_lagrange\_multiplier\_mesh\_pt@{set\_lagrange\_multiplier\_mesh\_pt}}
 \index{set\_lagrange\_multiplier\_mesh\_pt@{set\_lagrange\_multiplier\_mesh\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{set\_lagrange\_multiplier\_mesh\_pt()}{set\_lagrange\_multiplier\_mesh\_pt()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::set\+\_\+lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::set\+\_\+lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -280,17 +276,17 @@ specify the mesh containing the lagrange multiplier elements
 
 
 
-Definition at line 166 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00162}{162}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00246}{Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_af2c1fc8d2dd795c5a4a2ae266ad32d18}\label{classoomph_1_1PseudoElasticFSIPreconditioner_af2c1fc8d2dd795c5a4a2ae266ad32d18}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!set\_solid\_mesh\_pt@{set\_solid\_mesh\_pt}}
 \index{set\_solid\_mesh\_pt@{set\_solid\_mesh\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{set\_solid\_mesh\_pt()}{set\_solid\_mesh\_pt()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::set\+\_\+solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::set\+\_\+solid\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{Mesh $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -298,17 +294,17 @@ specify the mesh containing the solid elements
 
 
 
-Definition at line 160 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00156}{156}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Solid\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00243}{Solid\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a92e59f83606d77e7407a4ace534546f2}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a92e59f83606d77e7407a4ace534546f2}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!set\_solid\_preconditioner@{set\_solid\_preconditioner}}
 \index{set\_solid\_preconditioner@{set\_solid\_preconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{set\_solid\_preconditioner()}{set\_solid\_preconditioner()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::set\+\_\+solid\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{Preconditioner $\ast$}]{prec\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::set\+\_\+solid\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{Preconditioner $\ast$}]{prec\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -316,17 +312,17 @@ speicify a non default solid preconditioner. This preconditioner will not delete
 
 
 
-Definition at line 173 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00169}{169}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-References Solid\+\_\+preconditioner\+\_\+pt, and Using\+\_\+default\+\_\+solid\+\_\+preconditioner.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00217}{Solid\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00221}{Using\+\_\+default\+\_\+solid\+\_\+preconditioner}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a460ad5eea59f4c07dfde8b11696fabb1}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a460ad5eea59f4c07dfde8b11696fabb1}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
-{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -334,11 +330,11 @@ Setup the precoonditioner.
 
 
 
-Definition at line 52 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+cc.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{52}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+cc}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), Dim, Fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt, Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt, Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt, Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt, Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt, Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt, oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::set\+\_\+elastic\+\_\+mesh(), oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::set\+\_\+lagrange\+\_\+multiplier\+\_\+mesh(), Solid\+\_\+fluid\+\_\+matvec\+\_\+pt, Solid\+\_\+mesh\+\_\+pt, Solid\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner, Solid\+\_\+preconditioner\+\_\+pt, Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt, and Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner.
+References \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00249}{Dim}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00240}{Fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00228}{Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00246}{Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00237}{Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00210}{Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00214}{Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00207}{Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00178}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::set\+\_\+elastic\+\_\+mesh()}}, \mbox{\hyperlink{pseudo__elastic__preconditioner_8h_source_l00185}{oomph\+::\+Pseudo\+Elastic\+Preconditioner\+::set\+\_\+lagrange\+\_\+multiplier\+\_\+mesh()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00231}{Solid\+\_\+fluid\+\_\+matvec\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00243}{Solid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00225}{Solid\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00217}{Solid\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00234}{Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00254}{Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner}}.
 
 
 
@@ -347,7 +343,7 @@ References clean\+\_\+up\+\_\+memory(), Dim, Fluid\+\_\+and\+\_\+pseudo\+\_\+ela
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Dim@{Dim}}
 \index{Dim@{Dim}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Dim}{Dim}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Dim\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Dim\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -355,17 +351,17 @@ the dimension of the fluid
 
 
 
-Definition at line 253 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00249}{249}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by setup().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a9d8025b022a2ca180210da2f7979dfe2}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a9d8025b022a2ca180210da2f7979dfe2}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Fluid\_and\_pseudo\_elastic\_mesh\_pt@{Fluid\_and\_pseudo\_elastic\_mesh\_pt}}
 \index{Fluid\_and\_pseudo\_elastic\_mesh\_pt@{Fluid\_and\_pseudo\_elastic\_mesh\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Fluid\_and\_pseudo\_elastic\_mesh\_pt}{Fluid\_and\_pseudo\_elastic\_mesh\_pt}}
-{\footnotesize\ttfamily Mesh$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Mesh$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -373,17 +369,17 @@ Mesh containing the combined fluid and pseudo solid element.
 
 
 
-Definition at line 244 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00240}{240}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), set\+\_\+fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt(), and setup().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00150}{set\+\_\+fluid\+\_\+and\+\_\+pseudo\+\_\+elastic\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a77c8b262ee8535947e52f36462544eec}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a77c8b262ee8535947e52f36462544eec}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Fluid\_pseudo\_elastic\_matvec\_pt@{Fluid\_pseudo\_elastic\_matvec\_pt}}
 \index{Fluid\_pseudo\_elastic\_matvec\_pt@{Fluid\_pseudo\_elastic\_matvec\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Fluid\_pseudo\_elastic\_matvec\_pt}{Fluid\_pseudo\_elastic\_matvec\_pt}}
-{\footnotesize\ttfamily Matrix\+Vector\+Product$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Matrix\+Vector\+Product$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Fluid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -391,17 +387,17 @@ fluid onto pseudosolid matrix vector operator
 
 
 
-Definition at line 232 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00228}{228}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a0a75413264015a10ce59e7a31c7fe7c4}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a0a75413264015a10ce59e7a31c7fe7c4}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Lagrange\_multiplier\_mesh\_pt@{Lagrange\_multiplier\_mesh\_pt}}
 \index{Lagrange\_multiplier\_mesh\_pt@{Lagrange\_multiplier\_mesh\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Lagrange\_multiplier\_mesh\_pt}{Lagrange\_multiplier\_mesh\_pt}}
-{\footnotesize\ttfamily Mesh$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Mesh$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -409,31 +405,31 @@ Mesh containing the lagrange multiplier elements.
 
 
 
-Definition at line 250 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00246}{246}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), set\+\_\+lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt(), and setup().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00162}{set\+\_\+lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a1129dcb6e7e335aca44acdb4231adc38}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a1129dcb6e7e335aca44acdb4231adc38}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Lagrange\_solid\_matvec\_pt@{Lagrange\_solid\_matvec\_pt}}
 \index{Lagrange\_solid\_matvec\_pt@{Lagrange\_solid\_matvec\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Lagrange\_solid\_matvec\_pt}{Lagrange\_solid\_matvec\_pt}}
-{\footnotesize\ttfamily Matrix\+Vector\+Product$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Matrix\+Vector\+Product$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Lagrange\+\_\+solid\+\_\+matvec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 241 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00237}{237}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a5314b4734298c3de8f394a45792ba1c9}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a5314b4734298c3de8f394a45792ba1c9}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Navier\_stokes\_preconditioner\_pt@{Navier\_stokes\_preconditioner\_pt}}
 \index{Navier\_stokes\_preconditioner\_pt@{Navier\_stokes\_preconditioner\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Navier\_stokes\_preconditioner\_pt}{Navier\_stokes\_preconditioner\_pt}}
-{\footnotesize\ttfamily Preconditioner$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Preconditioner$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Navier\+\_\+stokes\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -441,17 +437,17 @@ pointer to the navier stokes precondtioner
 
 
 
-Definition at line 214 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00210}{210}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a438b2a5932c1fde633a73107043f0b09}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Navier\_stokes\_schur\_complement\_preconditioner\_pt@{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}
 \index{Navier\_stokes\_schur\_complement\_preconditioner\_pt@{Navier\_stokes\_schur\_complement\_preconditioner\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Navier\_stokes\_schur\_complement\_preconditioner\_pt}{Navier\_stokes\_schur\_complement\_preconditioner\_pt}}
-{\footnotesize\ttfamily Navier\+Stokes\+Schur\+Complement\+Preconditioner$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Navier\+Stokes\+Schur\+Complement\+Preconditioner$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -459,17 +455,17 @@ Navier Stokes Schur complement preconditioner.
 
 
 
-Definition at line 218 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00214}{214}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00186}{navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_afad4b204e6b7b2a63e4c4e0fe2f9f2c0}\label{classoomph_1_1PseudoElasticFSIPreconditioner_afad4b204e6b7b2a63e4c4e0fe2f9f2c0}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Pseudo\_elastic\_preconditioner\_pt@{Pseudo\_elastic\_preconditioner\_pt}}
 \index{Pseudo\_elastic\_preconditioner\_pt@{Pseudo\_elastic\_preconditioner\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Pseudo\_elastic\_preconditioner\_pt}{Pseudo\_elastic\_preconditioner\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1PseudoElasticPreconditioner}{Pseudo\+Elastic\+Preconditioner}}$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -477,17 +473,17 @@ pointer to the pseudo solid preconditioner
 
 
 
-Definition at line 211 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00207}{207}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00180}{pseudo\+\_\+elastic\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a8699afc5b64ec0c3db5c3cea5fd60c18}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a8699afc5b64ec0c3db5c3cea5fd60c18}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Solid\_fluid\_matvec\_pt@{Solid\_fluid\_matvec\_pt}}
 \index{Solid\_fluid\_matvec\_pt@{Solid\_fluid\_matvec\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Solid\_fluid\_matvec\_pt}{Solid\_fluid\_matvec\_pt}}
-{\footnotesize\ttfamily Matrix\+Vector\+Product$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Solid\+\_\+fluid\+\_\+matvec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Matrix\+Vector\+Product$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Solid\+\_\+fluid\+\_\+matvec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -495,17 +491,17 @@ solid onto fluid matrix vector operatio
 
 
 
-Definition at line 235 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00231}{231}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_afd02372d56906a9f86c5b00bf50297aa}\label{classoomph_1_1PseudoElasticFSIPreconditioner_afd02372d56906a9f86c5b00bf50297aa}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Solid\_mesh\_pt@{Solid\_mesh\_pt}}
 \index{Solid\_mesh\_pt@{Solid\_mesh\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Solid\_mesh\_pt}{Solid\_mesh\_pt}}
-{\footnotesize\ttfamily Mesh$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Mesh$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Solid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -513,17 +509,17 @@ Mesh containing the solid elements.
 
 
 
-Definition at line 247 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00243}{243}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), set\+\_\+solid\+\_\+mesh\+\_\+pt(), and setup().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00156}{set\+\_\+solid\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_aa58001a8248ecac64087de254c0ae763}\label{classoomph_1_1PseudoElasticFSIPreconditioner_aa58001a8248ecac64087de254c0ae763}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Solid\_preconditioner\_is\_block\_preconditioner@{Solid\_preconditioner\_is\_block\_preconditioner}}
 \index{Solid\_preconditioner\_is\_block\_preconditioner@{Solid\_preconditioner\_is\_block\_preconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Solid\_preconditioner\_is\_block\_preconditioner}{Solid\_preconditioner\_is\_block\_preconditioner}}
-{\footnotesize\ttfamily bool oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Solid\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Solid\+\_\+preconditioner\+\_\+is\+\_\+block\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -531,17 +527,17 @@ boolean flag to indicate whether the Solid preconditioner is a block preconditio
 
 
 
-Definition at line 229 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00225}{225}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by preconditioner\+\_\+solve(), and setup().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a2d96e724939038637ff4911372ee69b4}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a2d96e724939038637ff4911372ee69b4}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Solid\_preconditioner\_pt@{Solid\_preconditioner\_pt}}
 \index{Solid\_preconditioner\_pt@{Solid\_preconditioner\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Solid\_preconditioner\_pt}{Solid\_preconditioner\_pt}}
-{\footnotesize\ttfamily Preconditioner$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Solid\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Preconditioner$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Solid\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -549,17 +545,17 @@ pointer to the solid preconditioner
 
 
 
-Definition at line 221 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00217}{217}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), set\+\_\+solid\+\_\+preconditioner(), setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00169}{set\+\_\+solid\+\_\+preconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_a05eb73f45602a85e5dfb0a9cd10a488e}\label{classoomph_1_1PseudoElasticFSIPreconditioner_a05eb73f45602a85e5dfb0a9cd10a488e}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Solid\_pseudo\_elastic\_matvec\_pt@{Solid\_pseudo\_elastic\_matvec\_pt}}
 \index{Solid\_pseudo\_elastic\_matvec\_pt@{Solid\_pseudo\_elastic\_matvec\_pt}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Solid\_pseudo\_elastic\_matvec\_pt}{Solid\_pseudo\_elastic\_matvec\_pt}}
-{\footnotesize\ttfamily Matrix\+Vector\+Product$\ast$ oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Matrix\+Vector\+Product$\ast$ oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Solid\+\_\+pseudo\+\_\+elastic\+\_\+matvec\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -567,35 +563,35 @@ solid onto pseudo solid matrix vector operatio
 
 
 
-Definition at line 238 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00234}{234}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), setup(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00034}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_aa9eab77e9d4dfbdecfac9cccceb68c7b}\label{classoomph_1_1PseudoElasticFSIPreconditioner_aa9eab77e9d4dfbdecfac9cccceb68c7b}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Use\_navier\_stokes\_schur\_complement\_preconditioner@{Use\_navier\_stokes\_schur\_complement\_preconditioner}}
 \index{Use\_navier\_stokes\_schur\_complement\_preconditioner@{Use\_navier\_stokes\_schur\_complement\_preconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Use\_navier\_stokes\_schur\_complement\_preconditioner}{Use\_navier\_stokes\_schur\_complement\_preconditioner}}
-{\footnotesize\ttfamily bool oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Use\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-If true the Navier Stokes Schur complement preconditioner is used. Otherwise Super\+L\+U\+Preconditioner is used for the Navier Stokes subsidiary system. 
+If true the Navier Stokes Schur complement preconditioner is used. Otherwise Super\+LUPreconditioner is used for the Navier Stokes subsidiary system. 
 
 
 
-Definition at line 258 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00254}{254}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by disable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner(), enable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner(), preconditioner\+\_\+solve(), Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), and setup().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00200}{disable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00193}{enable\+\_\+navier\+\_\+stokes\+\_\+schur\+\_\+complement\+\_\+preconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00280}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8cc_source_l00052}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PseudoElasticFSIPreconditioner_aab116f252418ca092f7e6f0f75de6778}\label{classoomph_1_1PseudoElasticFSIPreconditioner_aab116f252418ca092f7e6f0f75de6778}} 
 \index{oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}!Using\_default\_solid\_preconditioner@{Using\_default\_solid\_preconditioner}}
 \index{Using\_default\_solid\_preconditioner@{Using\_default\_solid\_preconditioner}!oomph::PseudoElasticFSIPreconditioner@{oomph::PseudoElasticFSIPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Using\_default\_solid\_preconditioner}{Using\_default\_solid\_preconditioner}}
-{\footnotesize\ttfamily bool oomph\+::\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner\+::\+Using\+\_\+default\+\_\+solid\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Pseudo\+Elastic\+FSIPreconditioner\+::\+Using\+\_\+default\+\_\+solid\+\_\+preconditioner\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -603,11 +599,11 @@ boolean flag to indicate whether default Solid preconditioner is used
 
 
 
-Definition at line 225 of file pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00221}{221}} of file \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source}{pseudo\+\_\+elastic\+\_\+fsi\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by Pseudo\+Elastic\+F\+S\+I\+Preconditioner(), set\+\_\+solid\+\_\+preconditioner(), and $\sim$\+Pseudo\+Elastic\+F\+S\+I\+Preconditioner().
+Referenced by \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00067}{Pseudo\+Elastic\+FSIPreconditioner()}}, \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00169}{set\+\_\+solid\+\_\+preconditioner()}}, and \mbox{\hyperlink{pseudo__elastic__fsi__preconditioner_8h_source_l00102}{$\sim$\+Pseudo\+Elastic\+FSIPreconditioner()}}.
 
 
 

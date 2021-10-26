@@ -34,12 +34,12 @@
 namespace oomph
 {
   //=================================================================
-  /// \short Annular domain
+  /// Annular domain
   //=================================================================
   class AnnularDomain : public Domain
   {
   public:
-    /// \short Constructor: Specify azimuthal fraction (1.0 is 360 degrees)
+    /// Constructor: Specify azimuthal fraction (1.0 is 360 degrees)
     /// number of macro elements in azimuthal and radial direction,
     /// inner radius and thickness. Rotate mesh by angle phi.
     AnnularDomain(const double& azimuthal_fraction,
@@ -66,23 +66,16 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    AnnularDomain(const AnnularDomain&)
-    {
-      BrokenCopy::broken_copy("AnnularDomain");
-    }
+    AnnularDomain(const AnnularDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const AnnularDomain&)
-    {
-      BrokenCopy::broken_assign("AnnularDomain");
-    }
-
+    void operator=(const AnnularDomain&) = delete;
 
     /// Destructor: Empty; cleanup done in base class
     ~AnnularDomain() {}
 
 
-    /// \short Vector representation of the  i_macro-th macro element
+    /// Vector representation of the  i_macro-th macro element
     /// boundary i_direct (N/S/W/E) at time level t
     /// (t=0: present; t>0: previous):
     /// f(s).
@@ -113,13 +106,13 @@ namespace oomph
   };
 
 
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
 
 
   //=================================================================
-  /// \short Vector representation of the  imacro-th macro element
+  /// Vector representation of the  imacro-th macro element
   /// boundary idirect (N/S/W/E) at time level t
   /// (t=0: present; t>0: previous): f(s)
   //=================================================================

@@ -1,0 +1,736 @@
+\hypertarget{channel__spine__mesh_8template_8cc_source}{}\doxysection{channel\+\_\+spine\+\_\+mesh.\+template.\+cc}
+\label{channel__spine__mesh_8template_8cc_source}\index{channel\_spine\_mesh.template.cc@{channel\_spine\_mesh.template.cc}}
+\mbox{\hyperlink{channel__spine__mesh_8template_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00026}00026 \textcolor{preprocessor}{\#ifndef OOMPH\_CHANNEL\_SPINE\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00027}00027 \textcolor{preprocessor}{\#define OOMPH\_CHANNEL\_SPINE\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00029}00029 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{channel__spine__mesh_8template_8h}{channel\_spine\_mesh.template.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00030}00030 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{rectangular__quadmesh_8template_8cc}{rectangular\_quadmesh.template.cc}}"{}}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00033}00033 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00034}00034 \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00035}00035   \textcolor{comment}{//===========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00036}00036 \textcolor{comment}{  /// Constructor for spine 2D mesh: Pass number of elements in x-\/direction,}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00037}00037 \textcolor{comment}{  /// number of elements in y-\/direction, axial length and height of layer,}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00038}00038 \textcolor{comment}{  /// and pointer to timestepper (defaults to Static timestepper).}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00039}00039 \textcolor{comment}{  ///}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00040}00040 \textcolor{comment}{  /// The mesh contains a layer of spinified fluid elements (of type ELEMENT;}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00041}00041 \textcolor{comment}{  /// e.g  SpineElement<QCrouzeixRaviartElement<2>)}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00042}00042 \textcolor{comment}{  /// and a surface layer of corresponding Spine interface elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00043}00043 \textcolor{comment}{  /// of type INTERFACE\_ELEMENT, e.g.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00044}00044 \textcolor{comment}{  /// SpineLineFluidInterfaceElement<ELEMENT> for 2D planar}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00045}00045 \textcolor{comment}{  /// problems.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00046}00046 \textcolor{comment}{}  \textcolor{comment}{//===========================================================================}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00047}00047   \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00048}\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a9f8cdd0476807b44bccb7b1ae6f97a4a}{00048}}   \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a9f8cdd0476807b44bccb7b1ae6f97a4a}{ChannelSpineMesh<ELEMENT>::ChannelSpineMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx0,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00049}00049                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx1,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00050}00050                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx2,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00051}00051                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ny,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00052}00052                                               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx0,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00053}00053                                               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx1,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00054}00054                                               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx2,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00055}00055                                               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& h,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00056}00056                                               GeomObject* wall\_pt,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00057}00057                                               TimeStepper* time\_stepper\_pt)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00058}00058     : \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{RectangularQuadMesh}}<ELEMENT>(nx0 + nx1 + nx2,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00059}00059                                    ny,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00060}00060                                    0.0,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00061}00061                                    lx0 + lx1 + lx2,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00062}00062                                    0.0,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00063}00063                                    h,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00064}00064                                    false,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00065}00065                                    false,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00066}00066                                    time\_stepper\_pt),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00067}00067       Nx0(nx0),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00068}00068       Nx1(nx1),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00069}00069       Nx2(nx2),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00070}00070       Lx0(lx0),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00071}00071       Lx1(lx1),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00072}00072       Lx2(lx2),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00073}00073       Wall\_pt(wall\_pt)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00074}00074   \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00075}00075     \textcolor{comment}{// Mesh can only be built with 2D Qelements.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00076}00076     MeshChecker::assert\_geometric\_element<QElementGeometricBase, ELEMENT>(2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00078}00078     \textcolor{comment}{// Mesh can only be built with spine elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00079}00079     MeshChecker::assert\_geometric\_element<SpineFiniteElement, ELEMENT>(2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00081}00081     \textcolor{comment}{// We've called the "{}generic"{} constructor for the RectangularQuadMesh}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00082}00082     \textcolor{comment}{// which doesn't do much...}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00084}00084     \textcolor{comment}{// Build the straight line object}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00085}00085     \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a34f4583f2aa944d5d1ff723f6a4123bf}{Straight\_wall\_pt}} = \textcolor{keyword}{new} StraightLine(h);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00087}00087     \textcolor{comment}{// Now build the mesh:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00088}00088     \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a12eae5013f54ae04f9eb1cdffacf3955}{build\_channel\_spine\_mesh}}(time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00089}00089   \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00092}00092   \textcolor{comment}{//===========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00093}00093 \textcolor{comment}{  /// Constuctor for spine 2D mesh: Pass number of elements in x-\/direction,}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00094}00094 \textcolor{comment}{  /// number of elements in y-\/direction, axial length and height of layer,}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00095}00095 \textcolor{comment}{  /// a boolean flag to make the mesh periodic in the x-\/direction,}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00096}00096 \textcolor{comment}{  /// and pointer to timestepper (defaults to Static timestepper).}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00097}00097 \textcolor{comment}{  ///}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00098}00098 \textcolor{comment}{  /// The mesh contains a layer of elements (of type ELEMENT)}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00099}00099 \textcolor{comment}{  /// and a surface layer of corresponding Spine interface elements (of type}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00100}00100 \textcolor{comment}{  /// SpineLineFluidInterfaceElement<ELEMENT>).}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00101}00101 \textcolor{comment}{}  \textcolor{comment}{//===========================================================================}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00102}00102   \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00103}\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_afb1b729691c03cef065d351094092406}{00103}}   \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a9f8cdd0476807b44bccb7b1ae6f97a4a}{ChannelSpineMesh<ELEMENT>::ChannelSpineMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx0,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00104}00104                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx1,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00105}00105                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nx2,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00106}00106                                               \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ny,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00107}00107                                               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx0,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00108}00108                                               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx1,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00109}00109                                               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lx2,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00110}00110                                               \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& h,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00111}00111                                               GeomObject* wall\_pt,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00112}00112                                               \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& periodic\_in\_x,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00113}00113                                               TimeStepper* time\_stepper\_pt)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00114}00114     : \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{RectangularQuadMesh}}<ELEMENT>(nx0 + nx1 + nx2,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00115}00115                                    ny,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00116}00116                                    0.0,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00117}00117                                    lx0 + lx1 + lx2,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00118}00118                                    0.0,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00119}00119                                    h,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00120}00120                                    periodic\_in\_x,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00121}00121                                    false,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00122}00122                                    time\_stepper\_pt),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00123}00123       Nx0(nx0),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00124}00124       Nx1(nx1),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00125}00125       Nx2(nx2),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00126}00126       Lx0(lx0),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00127}00127       Lx1(lx1),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00128}00128       Lx2(lx2),}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00129}00129       Wall\_pt(wall\_pt)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00130}00130   \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00131}00131     \textcolor{comment}{// Mesh can only be built with 2D Qelements.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00132}00132     MeshChecker::assert\_geometric\_element<QElementGeometricBase, ELEMENT>(2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00133}00133 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00134}00134     \textcolor{comment}{// Mesh can only be built with spine elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00135}00135     MeshChecker::assert\_geometric\_element<SpineFiniteElement, ELEMENT>(2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00136}00136 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00137}00137     \textcolor{comment}{// We've called the "{}generic"{} constructor for the RectangularQuadMesh}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00138}00138     \textcolor{comment}{// which doesn't do much...}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00139}00139 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00140}00140     \textcolor{comment}{// Build the straight line object}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00141}00141     \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a34f4583f2aa944d5d1ff723f6a4123bf}{Straight\_wall\_pt}} = \textcolor{keyword}{new} StraightLine(h);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00142}00142 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00143}00143     \textcolor{comment}{// Now build the mesh:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00144}00144     \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a12eae5013f54ae04f9eb1cdffacf3955}{build\_channel\_spine\_mesh}}(time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00145}00145   \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00147}00147 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00148}00148   \textcolor{comment}{//===========================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00149}00149 \textcolor{comment}{  /// Helper function that actually builds the channel-\/spine mesh}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00150}00150 \textcolor{comment}{  /// based on the parameters set in the various constructors}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00151}00151 \textcolor{comment}{}  \textcolor{comment}{//===========================================================================}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00152}00152   \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00153}\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a12eae5013f54ae04f9eb1cdffacf3955}{00153}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a12eae5013f54ae04f9eb1cdffacf3955}{ChannelSpineMesh<ELEMENT>::build\_channel\_spine\_mesh}}(}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00154}00154     TimeStepper* time\_stepper\_pt)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00155}00155   \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00156}00156     \textcolor{comment}{// Build the underlying quad mesh:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00157}00157     \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{RectangularQuadMesh<ELEMENT>::build\_mesh}}(time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00158}00158 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00159}00159     \textcolor{comment}{// Read out the number of elements in the x-\/direction and y-\/direction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00160}00160     \textcolor{comment}{// and in each of the left, centre and right regions}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00161}00161     \textcolor{keywordtype}{unsigned} n\_x = this-\/>Nx;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00162}00162     \textcolor{keywordtype}{unsigned} n\_y = this-\/>Ny;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00163}00163     \textcolor{keywordtype}{unsigned} n\_x0 = this-\/>Nx0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00164}00164     \textcolor{keywordtype}{unsigned} n\_x1 = this-\/>Nx1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00165}00165     \textcolor{keywordtype}{unsigned} n\_x2 = this-\/>Nx2;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00166}00166 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00167}00167     \textcolor{comment}{// Set up the pointers to elements in the left region}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00168}00168     \textcolor{keywordtype}{unsigned} nleft = n\_x0 * n\_y;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00169}00169     ;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00170}00170     Left\_element\_pt.reserve(nleft);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00171}00171     \textcolor{keywordtype}{unsigned} ncentre = n\_x1 * n\_y;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00172}00172     ;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00173}00173     Centre\_element\_pt.reserve(ncentre);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00174}00174     \textcolor{keywordtype}{unsigned} nright = n\_x2 * n\_y;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00175}00175     ;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00176}00176     Right\_element\_pt.reserve(nright);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00177}00177     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} irow = 0; irow < n\_y; irow++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00178}00178     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00179}00179       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n\_x0; e++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00180}00180       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00181}00181         Left\_element\_pt.push\_back(this-\/>finite\_element\_pt(irow * n\_x + e));}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00182}00182       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00183}00183       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n\_x1; e++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00184}00184       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00185}00185         Centre\_element\_pt.push\_back(}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00186}00186           this-\/>finite\_element\_pt(irow * n\_x + (n\_x0 + e)));}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00187}00187       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00188}00188       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n\_x2; e++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00189}00189       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00190}00190         Right\_element\_pt.push\_back(}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00191}00191           this-\/>finite\_element\_pt(irow * n\_x + (n\_x0 + n\_x1 + e)));}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00192}00192       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00193}00193     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00194}00194 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00195}00195 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00196}00196     \textcolor{comment}{// Check that we have the correct number of elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00197}00197     \textcolor{keywordflow}{if} (nelement() != nleft + ncentre + nright)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00198}00198     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00199}00199       \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Incorrect number of element pointers!"{}},}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00200}00200                           OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00201}00201                           OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00202}00202     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00203}00203 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00204}00204 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00205}00205     \textcolor{comment}{// Allocate memory for the spines and fractions along spines}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00206}00206     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00207}00207 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00208}00208     \textcolor{comment}{// Read out number of linear points in the element}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00209}00209     \textcolor{keywordtype}{unsigned} n\_p = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(finite\_element\_pt(0))-\/>nnode\_1d();}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00210}00210 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00211}00211     \textcolor{keywordtype}{unsigned} nspine;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00212}00212     \textcolor{comment}{// Allocate store for the spines:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00213}00213     \textcolor{keywordflow}{if} (this-\/>Xperiodic)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00214}00214     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00215}00215       nspine = (n\_p -\/ 1) * n\_x;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00216}00216       Spine\_pt.reserve(nspine);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00217}00217       \textcolor{comment}{// Number of spines in each region}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00218}00218       \textcolor{comment}{// NOTE that boundary spines are in both regions}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00219}00219       Nleft\_spine = (n\_p -\/ 1) * n\_x0 + 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00220}00220       Ncentre\_spine = (n\_p -\/ 1) * n\_x1 + 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00221}00221       Nright\_spine = (n\_p -\/ 1) * n\_x2;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00222}00222     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00223}00223     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00224}00224     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00225}00225       nspine = (n\_p -\/ 1) * n\_x + 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00226}00226       Spine\_pt.reserve(nspine);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00227}00227       \textcolor{comment}{// Number of spines in each region}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00228}00228       \textcolor{comment}{// NOTE that boundary spines are in both regions}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00229}00229       Nleft\_spine = (n\_p -\/ 1) * n\_x0 + 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00230}00230       Ncentre\_spine = (n\_p -\/ 1) * n\_x1 + 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00231}00231       Nright\_spine = (n\_p -\/ 1) * n\_x2 + 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00232}00232     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00234}00234     \textcolor{comment}{// end Allocating memory}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00235}00235 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00236}00236 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00237}00237     \textcolor{comment}{// set up the vectors of geometric data \& objects for building spines}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00238}00238     Vector<double> r\_wall(2), zeta(1), s\_wall(1);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00239}00239     GeomObject* geometric\_object\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00240}00240 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00241}00241     \textcolor{comment}{// LEFT REGION}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00242}00242     \textcolor{comment}{// ===========}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00243}00243 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00244}00244     \textcolor{comment}{// SPINES IN LEFT REGION}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00245}00245     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00246}00246 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00247}00247     \textcolor{comment}{// Set up zeta increments}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00248}00248     \textcolor{keywordtype}{double} zeta\_lo = 0.0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00249}00249     \textcolor{keywordtype}{double} dzeta = Lx0 / n\_x0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00250}00250 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00251}00251     \textcolor{comment}{// Initialise number of elements in previous regions:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00252}00252     \textcolor{keywordtype}{unsigned} n\_prev\_elements = 0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00253}00253 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00254}00254 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00255}00255     \textcolor{comment}{// FIRST SPINE}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00256}00256     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00257}00257 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00258}00258     \textcolor{comment}{// Element 0}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00259}00259     \textcolor{comment}{// Node 0}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00260}00260     \textcolor{comment}{// Assign the new spine with unit length}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00261}00261     Spine* new\_spine\_pt = \textcolor{keyword}{new} Spine(1.0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00262}00262     new\_spine\_pt-\/>spine\_height\_pt()-\/>pin(0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00263}00263     Spine\_pt.push\_back(new\_spine\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00264}00264 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00265}00265     \textcolor{comment}{// Get pointer to node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00266}00266     SpineNode* nod\_pt = element\_node\_pt(0, 0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00267}00267     \textcolor{comment}{// Set the pointer to the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00268}00268     nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00269}00269     \textcolor{comment}{// Set the fraction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00270}00270     nod\_pt-\/>fraction() = 0.0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00271}00271     \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00272}00272     nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00273}00273     \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00274}00274     nod\_pt-\/>node\_update\_fct\_id() = 0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00275}00275 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00276}00276     \textcolor{comment}{// Provide spine with additional storage for wall coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00277}00277     \textcolor{comment}{// and wall geom object:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00278}00278 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00279}00279     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00280}00280       \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00281}00281       zeta[0] = 0.0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00282}00282       \textcolor{comment}{// Get the geometric object and local coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00283}00283       Straight\_wall\_pt-\/>locate\_zeta(zeta, geometric\_object\_pt, s\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00284}00284 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00285}00285       \textcolor{comment}{// The local coordinate is a geometric parameter}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00286}00286       \textcolor{comment}{// This needs to be set (rather than added) because the}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00287}00287       \textcolor{comment}{// same spine may be visited more than once}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00288}00288       Vector<double> parameters(1, s\_wall[0]);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00289}00289       nod\_pt-\/>spine\_pt()-\/>set\_geom\_parameter(parameters);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00290}00290 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00291}00291       \textcolor{comment}{// Get position of wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00292}00292       Straight\_wall\_pt-\/>position(s\_wall, r\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00293}00293 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00294}00294       \textcolor{comment}{// Adjust spine height}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00295}00295       nod\_pt-\/>spine\_pt()-\/>height() = r\_wall[1];}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00296}00296 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00297}00297       \textcolor{comment}{// The sub geom object is one (and only) geom object}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00298}00298       \textcolor{comment}{// for spine:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00299}00299       Vector<GeomObject*> geom\_object\_pt(1);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00300}00300       geom\_object\_pt[0] = geometric\_object\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00301}00301 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00302}00302       \textcolor{comment}{// Pass geom object(s) to spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00303}00303       nod\_pt-\/>spine\_pt()-\/>set\_geom\_object\_pt(geom\_object\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00304}00304     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00305}00305 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00306}00306     \textcolor{comment}{// Loop vertically along the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00307}00307     \textcolor{comment}{// Loop over the elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00308}00308     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} i = 0; i < n\_y; i++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00309}00309     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00310}00310       \textcolor{comment}{// Loop over the vertical nodes, apart from the first}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00311}00311       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l1 = 1; l1 < n\_p; l1++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00312}00312       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00313}00313         \textcolor{comment}{// Get pointer to node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00314}00314         SpineNode* nod\_pt = element\_node\_pt(i * n\_x, l1 * n\_p);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00315}00315         \textcolor{comment}{// Set the pointer to the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00316}00316         nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00317}00317         \textcolor{comment}{// Set the fraction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00318}00318         nod\_pt-\/>fraction() =}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00319}00319           (double(i) + double(l1) / double(n\_p -\/ 1)) / \textcolor{keywordtype}{double}(n\_y);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00320}00320         \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00321}00321         nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00322}00322         \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00323}00323         nod\_pt-\/>node\_update\_fct\_id() = 0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00324}00324       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00325}00325     \} \textcolor{comment}{// end loop over elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00326}00326 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00327}00327 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00328}00328     \textcolor{comment}{// LOOP OVER OTHER SPINES}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00329}00329     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00330}00330 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00331}00331     \textcolor{comment}{// Now loop over the elements horizontally}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00332}00332     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < n\_x0; j++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00333}00333     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00334}00334       \textcolor{comment}{// Loop over the nodes in the elements horizontally, ignoring}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00335}00335       \textcolor{comment}{// the first column}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00336}00336       \textcolor{keywordtype}{unsigned} n\_pmax = n\_p;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00337}00337       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l2 = 1; l2 < n\_pmax; l2++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00338}00338       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00339}00339         \textcolor{comment}{// Assign the new spine with unit height}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00340}00340         new\_spine\_pt = \textcolor{keyword}{new} Spine(1.0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00341}00341         new\_spine\_pt-\/>spine\_height\_pt()-\/>pin(0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00342}00342         Spine\_pt.push\_back(new\_spine\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00343}00343 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00344}00344         \textcolor{comment}{// Get the node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00345}00345         SpineNode* nod\_pt = element\_node\_pt(j, l2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00346}00346         \textcolor{comment}{// Set the pointer to spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00347}00347         nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00348}00348         \textcolor{comment}{// Set the fraction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00349}00349         nod\_pt-\/>fraction() = 0.0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00350}00350         \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00351}00351         nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00352}00352         \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00353}00353         nod\_pt-\/>node\_update\_fct\_id() = 0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00354}00354 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00355}00355         \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00356}00356           \textcolor{comment}{// Provide spine with additional storage for wall coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00357}00357           \textcolor{comment}{// and wall geom object:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00358}00358 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00359}00359           \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00360}00360           zeta[0] =}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00361}00361             zeta\_lo + double(j) * dzeta + double(l2) * dzeta / (n\_p -\/ 1.0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00362}00362           \textcolor{comment}{// Get the geometric object and local coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00363}00363           Straight\_wall\_pt-\/>locate\_zeta(zeta, geometric\_object\_pt, s\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00364}00364 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00365}00365           \textcolor{comment}{// The local coordinate is a geometric parameter}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00366}00366           \textcolor{comment}{// This needs to be set (rather than added) because the}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00367}00367           \textcolor{comment}{// same spine may be visited more than once}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00368}00368           Vector<double> parameters(1, s\_wall[0]);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00369}00369           nod\_pt-\/>spine\_pt()-\/>set\_geom\_parameter(parameters);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00370}00370 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00371}00371           \textcolor{comment}{// Get position of wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00372}00372           Straight\_wall\_pt-\/>position(s\_wall, r\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00373}00373 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00374}00374           \textcolor{comment}{// Adjust spine height}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00375}00375           nod\_pt-\/>spine\_pt()-\/>height() = r\_wall[1];}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00376}00376 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00377}00377           \textcolor{comment}{// The sub geom object is one (and only) geom object}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00378}00378           \textcolor{comment}{// for spine:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00379}00379           Vector<GeomObject*> geom\_object\_pt(1);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00380}00380           geom\_object\_pt[0] = geometric\_object\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00381}00381 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00382}00382           \textcolor{comment}{// Pass geom object(s) to spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00383}00383           nod\_pt-\/>spine\_pt()-\/>set\_geom\_object\_pt(geom\_object\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00384}00384         \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00385}00385 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00386}00386         \textcolor{comment}{// Loop vertically along the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00387}00387         \textcolor{comment}{// Loop over the elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00388}00388         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} i = 0; i < n\_y; i++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00389}00389         \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00390}00390           \textcolor{comment}{// Loop over the vertical nodes, apart from the first}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00391}00391           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l1 = 1; l1 < n\_p; l1++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00392}00392           \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00393}00393             \textcolor{comment}{// Get the node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00394}00394             SpineNode* nod\_pt = element\_node\_pt(i * n\_x + j, l1 * n\_p + l2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00395}00395             \textcolor{comment}{// Set the pointer to the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00396}00396             nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00397}00397             \textcolor{comment}{// Set the fraction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00398}00398             nod\_pt-\/>fraction() =}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00399}00399               (double(i) + double(l1) / double(n\_p -\/ 1)) / \textcolor{keywordtype}{double}(n\_y);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00400}00400             \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00401}00401             nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00402}00402             \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00403}00403             nod\_pt-\/>node\_update\_fct\_id() = 0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00404}00404           \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00405}00405         \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00406}00406       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00407}00407     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00408}00408 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00409}00409     \textcolor{comment}{// Increment number of previous elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00410}00410     n\_prev\_elements += n\_x0 * n\_y;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00411}00411 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00412}00412 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00413}00413     \textcolor{comment}{// CENTRE REGION}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00414}00414     \textcolor{comment}{// ===========}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00415}00415 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00416}00416     zeta\_lo = Lx0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00417}00417     dzeta = Lx1 / n\_x1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00418}00418 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00419}00419     \textcolor{comment}{// SPINES IN LEFT REGION}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00420}00420     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00421}00421 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00422}00422     \textcolor{comment}{// LOOP OVER OTHER SPINES}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00423}00423     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00424}00424 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00425}00425     \textcolor{comment}{// Now loop over the elements horizontally}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00426}00426     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = n\_x0; j < n\_x0 + n\_x1; j++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00427}00427     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00428}00428       \textcolor{comment}{// Loop over the nodes in the elements horizontally, ignoring}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00429}00429       \textcolor{comment}{// the first column}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00430}00430       \textcolor{keywordtype}{unsigned} n\_pmax = n\_p;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00431}00431       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l2 = 1; l2 < n\_pmax; l2++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00432}00432       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00433}00433         \textcolor{comment}{// Assign the new spine with unit height}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00434}00434         new\_spine\_pt = \textcolor{keyword}{new} Spine(1.0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00435}00435         new\_spine\_pt-\/>spine\_height\_pt()-\/>pin(0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00436}00436         Spine\_pt.push\_back(new\_spine\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00437}00437 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00438}00438         \textcolor{comment}{// Get the node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00439}00439         SpineNode* nod\_pt = element\_node\_pt(j, l2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00440}00440         \textcolor{comment}{// Set the pointer to spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00441}00441         nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00442}00442         \textcolor{comment}{// Set the fraction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00443}00443         nod\_pt-\/>fraction() = 0.0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00444}00444         \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00445}00445         nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00446}00446         \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00447}00447         nod\_pt-\/>node\_update\_fct\_id() = 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00448}00448 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00449}00449         \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00450}00450           \textcolor{comment}{// Provide spine with additional storage for wall coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00451}00451           \textcolor{comment}{// and wall geom object:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00452}00452 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00453}00453           \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00454}00454           zeta[0] = zeta\_lo + double(j -\/ n\_x0) * dzeta +}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00455}00455                     double(l2) * dzeta / (n\_p -\/ 1.0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00456}00456           \textcolor{comment}{// Get the geometric object and local coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00457}00457           Wall\_pt-\/>locate\_zeta(zeta, geometric\_object\_pt, s\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00458}00458 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00459}00459           \textcolor{comment}{// The local coordinate is a geometric parameter}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00460}00460           \textcolor{comment}{// This needs to be set (rather than added) because the}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00461}00461           \textcolor{comment}{// same spine may be visited more than once}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00462}00462           Vector<double> parameters(1, s\_wall[0]);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00463}00463           nod\_pt-\/>spine\_pt()-\/>set\_geom\_parameter(parameters);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00464}00464 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00465}00465           \textcolor{comment}{// Get position of wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00466}00466           Wall\_pt-\/>position(s\_wall, r\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00467}00467 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00468}00468           \textcolor{comment}{// Adjust spine height}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00469}00469           nod\_pt-\/>spine\_pt()-\/>height() = r\_wall[1];}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00470}00470 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00471}00471           \textcolor{comment}{// The sub geom object is one (and only) geom object}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00472}00472           \textcolor{comment}{// for spine:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00473}00473           Vector<GeomObject*> geom\_object\_pt(1);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00474}00474           geom\_object\_pt[0] = geometric\_object\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00475}00475 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00476}00476           \textcolor{comment}{// Pass geom object(s) to spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00477}00477           nod\_pt-\/>spine\_pt()-\/>set\_geom\_object\_pt(geom\_object\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00478}00478         \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00479}00479 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00480}00480         \textcolor{comment}{// Loop vertically along the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00481}00481         \textcolor{comment}{// Loop over the elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00482}00482         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} i = 0; i < n\_y; i++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00483}00483         \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00484}00484           \textcolor{comment}{// Loop over the vertical nodes, apart from the first}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00485}00485           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l1 = 1; l1 < n\_p; l1++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00486}00486           \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00487}00487             \textcolor{comment}{// Get the node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00488}00488             SpineNode* nod\_pt = element\_node\_pt(i * n\_x + j, l1 * n\_p + l2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00489}00489             \textcolor{comment}{// Set the pointer to the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00490}00490             nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00491}00491             \textcolor{comment}{// Set the fraction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00492}00492             nod\_pt-\/>fraction() =}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00493}00493               (double(i) + double(l1) / double(n\_p -\/ 1)) / \textcolor{keywordtype}{double}(n\_y);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00494}00494             \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00495}00495             nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00496}00496             \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00497}00497             nod\_pt-\/>node\_update\_fct\_id() = 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00498}00498           \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00499}00499         \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00500}00500       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00501}00501     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00502}00502 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00503}00503     \textcolor{comment}{// Increment number of previous elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00504}00504     n\_prev\_elements += n\_x1 * n\_y;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00505}00505 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00506}00506 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00507}00507     \textcolor{comment}{// RIGHT REGION}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00508}00508     \textcolor{comment}{// ===========}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00509}00509 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00510}00510     \textcolor{comment}{// SPINES IN RIGHT REGION}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00511}00511     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00512}00512 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00513}00513     \textcolor{comment}{// Set up zeta increments}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00514}00514     zeta\_lo = Lx0 + Lx1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00515}00515     dzeta = Lx2 / n\_x2;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00516}00516 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00517}00517     \textcolor{comment}{// LOOP OVER OTHER SPINES}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00518}00518     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00519}00519 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00520}00520     \textcolor{comment}{// Now loop over the elements horizontally}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00521}00521     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = n\_x0 + n\_x1; j < n\_x0 + n\_x1 + n\_x2; j++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00522}00522     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00523}00523       \textcolor{comment}{// Need to copy last spine in previous element over to first spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00524}00524       \textcolor{comment}{// in next elements, for all elements other than the first}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00525}00525       \textcolor{keywordflow}{if} (j > 0)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00526}00526       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00527}00527         \textcolor{comment}{// For first spine, re-\/assign the geometric objects, since}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00528}00528         \textcolor{comment}{// we treat it as part of the right region.}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00529}00529         \textcolor{keywordflow}{if} (j == n\_x0 + n\_x1)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00530}00530         \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00531}00531           SpineNode* nod\_pt = element\_node\_pt(j, 0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00532}00532           \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00533}00533           nod\_pt-\/>node\_update\_fct\_id() = 2;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00534}00534           \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00535}00535             \textcolor{comment}{// Provide spine with additional storage for wall coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00536}00536             \textcolor{comment}{// and wall geom object:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00537}00537 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00538}00538             \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00539}00539             zeta[0] = zeta\_lo + double(j -\/ n\_x0 -\/ n\_x1) * dzeta;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00540}00540             \textcolor{comment}{// Get the geometric object and local coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00541}00541             Straight\_wall\_pt-\/>locate\_zeta(zeta, geometric\_object\_pt, s\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00542}00542 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00543}00543             \textcolor{comment}{// The local coordinate is a geometric parameter}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00544}00544             \textcolor{comment}{// This needs to be set (rather than added) because the}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00545}00545             \textcolor{comment}{// same spine may be visited more than once}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00546}00546             Vector<double> parameters(1, s\_wall[0]);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00547}00547             nod\_pt-\/>spine\_pt()-\/>set\_geom\_parameter(parameters);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00548}00548 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00549}00549             \textcolor{comment}{// Get position of wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00550}00550             Straight\_wall\_pt-\/>position(s\_wall, r\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00551}00551 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00552}00552             \textcolor{comment}{// Adjust spine height}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00553}00553             nod\_pt-\/>spine\_pt()-\/>height() = r\_wall[1];}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00554}00554 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00555}00555             \textcolor{comment}{// The sub geom object is one (and only) geom object}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00556}00556             \textcolor{comment}{// for spine:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00557}00557             Vector<GeomObject*> geom\_object\_pt(1);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00558}00558             geom\_object\_pt[0] = geometric\_object\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00559}00559 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00560}00560             \textcolor{comment}{// Pass geom object(s) to spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00561}00561             nod\_pt-\/>spine\_pt()-\/>set\_geom\_object\_pt(geom\_object\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00562}00562           \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00563}00563         \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00564}00564       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00565}00565       \textcolor{comment}{// Loop over the nodes in the elements horizontally, ignoring}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00566}00566       \textcolor{comment}{// the first column}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00567}00567 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00568}00568       \textcolor{comment}{// Last spine needs special treatment in x-\/periodic meshes:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00569}00569       \textcolor{keywordtype}{unsigned} n\_pmax = n\_p;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00570}00570       \textcolor{keywordflow}{if} ((this-\/>Xperiodic) \&\& (j == n\_x -\/ 1)) n\_pmax = n\_p -\/ 1;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00571}00571 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00572}00572       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l2 = 1; l2 < n\_pmax; l2++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00573}00573       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00574}00574         \textcolor{comment}{// Assign the new spine with unit height}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00575}00575         new\_spine\_pt = \textcolor{keyword}{new} Spine(1.0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00576}00576         new\_spine\_pt-\/>spine\_height\_pt()-\/>pin(0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00577}00577         Spine\_pt.push\_back(new\_spine\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00578}00578 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00579}00579         \textcolor{comment}{// Get the node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00580}00580         SpineNode* nod\_pt = element\_node\_pt(j, l2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00581}00581         \textcolor{comment}{// Set the pointer to spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00582}00582         nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00583}00583         \textcolor{comment}{// Set the fraction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00584}00584         nod\_pt-\/>fraction() = 0.0;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00585}00585         \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00586}00586         nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00587}00587         \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00588}00588         nod\_pt-\/>node\_update\_fct\_id() = 2;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00589}00589 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00590}00590         \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00591}00591           \textcolor{comment}{// Provide spine with additional storage for wall coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00592}00592           \textcolor{comment}{// and wall geom object:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00593}00593 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00594}00594           \textcolor{comment}{// Get the Lagrangian coordinate in the Lower Wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00595}00595           zeta[0] = zeta\_lo + double(j -\/ n\_x0 -\/ n\_x1) * dzeta +}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00596}00596                     double(l2) * dzeta / (n\_p -\/ 1.0);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00597}00597           \textcolor{comment}{// Get the geometric object and local coordinate}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00598}00598           Straight\_wall\_pt-\/>locate\_zeta(zeta, geometric\_object\_pt, s\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00599}00599 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00600}00600           \textcolor{comment}{// The local coordinate is a geometric parameter}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00601}00601           \textcolor{comment}{// This needs to be set (rather than added) because the}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00602}00602           \textcolor{comment}{// same spine may be visited more than once}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00603}00603           Vector<double> parameters(1, s\_wall[0]);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00604}00604           nod\_pt-\/>spine\_pt()-\/>set\_geom\_parameter(parameters);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00605}00605 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00606}00606           \textcolor{comment}{// Get position of wall}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00607}00607           Straight\_wall\_pt-\/>position(s\_wall, r\_wall);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00608}00608 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00609}00609           \textcolor{comment}{// Adjust spine height}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00610}00610           nod\_pt-\/>spine\_pt()-\/>height() = r\_wall[1];}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00611}00611 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00612}00612           \textcolor{comment}{// The sub geom object is one (and only) geom object}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00613}00613           \textcolor{comment}{// for spine:}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00614}00614           Vector<GeomObject*> geom\_object\_pt(1);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00615}00615           geom\_object\_pt[0] = geometric\_object\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00616}00616 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00617}00617           \textcolor{comment}{// Pass geom object(s) to spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00618}00618           nod\_pt-\/>spine\_pt()-\/>set\_geom\_object\_pt(geom\_object\_pt);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00619}00619         \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00620}00620 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00621}00621         \textcolor{comment}{// Loop vertically along the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00622}00622         \textcolor{comment}{// Loop over the elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00623}00623         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} i = 0; i < n\_y; i++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00624}00624         \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00625}00625           \textcolor{comment}{// Loop over the vertical nodes, apart from the first}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00626}00626           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l1 = 1; l1 < n\_p; l1++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00627}00627           \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00628}00628             \textcolor{comment}{// Get the node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00629}00629             SpineNode* nod\_pt = element\_node\_pt(i * n\_x + j, l1 * n\_p + l2);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00630}00630             \textcolor{comment}{// Set the pointer to the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00631}00631             nod\_pt-\/>spine\_pt() = new\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00632}00632             \textcolor{comment}{// Set the fraction}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00633}00633             nod\_pt-\/>fraction() =}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00634}00634               (double(i) + double(l1) / double(n\_p -\/ 1)) / \textcolor{keywordtype}{double}(n\_y);}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00635}00635             \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00636}00636             nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00637}00637             \textcolor{comment}{// Set update fct id}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00638}00638             nod\_pt-\/>node\_update\_fct\_id() = 2;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00639}00639           \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00640}00640         \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00641}00641       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00642}00642     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00643}00643 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00644}00644     \textcolor{comment}{// Increment number of previous elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00645}00645     n\_prev\_elements += n\_x2 * n\_y;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00646}00646 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00647}00647     \textcolor{comment}{// Last spine needs special treatment for periodic meshes}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00648}00648     \textcolor{comment}{// because it's the same as the first one...}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00649}00649     \textcolor{keywordflow}{if} (this-\/>Xperiodic)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00650}00650     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00651}00651       \textcolor{comment}{// Last spine is the same as first one...}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00652}00652       Spine* final\_spine\_pt = Spine\_pt[0];}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00653}00653 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00654}00654       \textcolor{comment}{// Get the node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00655}00655       SpineNode* nod\_pt = element\_node\_pt((n\_x -\/ 1), (n\_p -\/ 1));}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00656}00656 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00657}00657       \textcolor{comment}{// Set the pointer for the first node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00658}00658       nod\_pt-\/>spine\_pt() = final\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00659}00659       \textcolor{comment}{// Set the fraction to be the same as for the nodes on the first row}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00660}00660       nod\_pt-\/>fraction() = element\_node\_pt(0, 0)-\/>fraction();}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00661}00661       \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00662}00662       nod\_pt-\/>spine\_mesh\_pt() = element\_node\_pt(0, 0)-\/>spine\_mesh\_pt();}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00663}00663 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00664}00664       \textcolor{comment}{// Now loop vertically along the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00665}00665       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_y; i++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00666}00666       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00667}00667         \textcolor{comment}{// Loop over the vertical nodes, apart from the first}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00668}00668         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} l1 = 1; l1 < n\_p; l1++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00669}00669         \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00670}00670           \textcolor{comment}{// Get the node}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00671}00671           SpineNode* nod\_pt =}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00672}00672             element\_node\_pt(i * n\_x + (n\_x -\/ 1), l1 * n\_p + (n\_p -\/ 1));}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00673}00673 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00674}00674           \textcolor{comment}{// Set the pointer to the spine}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00675}00675           nod\_pt-\/>spine\_pt() = final\_spine\_pt;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00676}00676           \textcolor{comment}{// Set the fraction to be the same as in first row}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00677}00677           nod\_pt-\/>fraction() = element\_node\_pt(i * n\_x, l1 * n\_p)-\/>fraction();}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00678}00678           \textcolor{comment}{// Pointer to the mesh that implements the update fct}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00679}00679           nod\_pt-\/>spine\_mesh\_pt() =}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00680}00680             element\_node\_pt(i * n\_x, l1 * n\_p)-\/>spine\_mesh\_pt();}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00681}00681         \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00682}00682       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00683}00683     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00684}00684 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00685}00685 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00686}00686   \} \textcolor{comment}{// end of build\_channel\_spine\_mesh}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00687}00687 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00688}00688 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00689}00689   \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00690}00690 \textcolor{comment}{  /// Reorder the elements, so we loop over them vertically first}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00691}00691 \textcolor{comment}{  /// (advantageous in "{}wide"{} domains if a frontal solver is used).}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00692}00692 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00693}00693   \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00694}\mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_ad449460c4d06b2be64b53097143a3b09}{00694}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_ad449460c4d06b2be64b53097143a3b09}{ChannelSpineMesh<ELEMENT>::element\_reorder}}()}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00695}00695   \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00696}00696     \textcolor{keywordtype}{unsigned} n\_x = this-\/>Nx;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00697}00697     \textcolor{keywordtype}{unsigned} n\_y = this-\/>Ny;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00698}00698     \textcolor{comment}{// Find out how many elements there are}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00699}00699     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} Nelement = nelement();}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00700}00700     \textcolor{comment}{// Find out how many fluid elements there are}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00701}00701     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} Nfluid = n\_x * n\_y;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00702}00702     \textcolor{comment}{// Create a dummy array of elements}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00703}00703     Vector<FiniteElement*> dummy;}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00704}00704 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00705}00705     \textcolor{comment}{// Loop over the elements in horizontal order}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00706}00706     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} j = 0; j < n\_x; j++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00707}00707     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00708}00708       \textcolor{comment}{// Loop over the elements in lower layer vertically}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00709}00709       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} i = 0; i < n\_y; i++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00710}00710       \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00711}00711         \textcolor{comment}{// Push back onto the new stack}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00712}00712         dummy.push\_back(finite\_element\_pt(n\_x * i + j));}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00713}00713       \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00714}00714 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00715}00715       \textcolor{comment}{// Push back the line element onto the stack}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00716}00716       dummy.push\_back(finite\_element\_pt(Nfluid + j));}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00717}00717     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00718}00718 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00719}00719     \textcolor{comment}{// Now copy the reordered elements into the element\_pt}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00720}00720     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} e = 0; e < Nelement; e++)}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00721}00721     \{}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00722}00722       Element\_pt[e] = dummy[e];}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00723}00723     \}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00724}00724 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00725}00725   \} \textcolor{comment}{// end of element\_reorder}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00726}00726 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00727}00727 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00728}00728 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00729}00729 }
+\DoxyCodeLine{\Hypertarget{channel__spine__mesh_8template_8cc_source_l00730}00730 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

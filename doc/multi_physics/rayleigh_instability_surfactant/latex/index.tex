@@ -59,9 +59,9 @@ The global parameters are simply the dimensionless parameters described above.
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The parameter values are chosen to be those used in Figures 8, 9 }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// in Campana et al.}}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// The parameter values are chosen to be those used in Figures 8, 9 }}
+\DoxyCodeLine{\textcolor{comment}{/// in Campana et al.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
@@ -93,16 +93,16 @@ The global parameters are simply the dimensionless parameters described above.
 \DoxyCodeLine{\textcolor{comment}{ /// Free surface cosine deformation parameter}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a28f21de3d342b1dab2fa0be362c6a944}{Epsilon}} = 1.0e-\/3;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Surface Elasticity number (weak case)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Surface Elasticity number (weak case)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a351a17b52cfcabc688393423f3de361b}{Beta}} = 3.6e-\/3;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Surface Peclet number}}
+\DoxyCodeLine{\textcolor{comment}{ /// Surface Peclet number}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a99dc85e71075cd6efb06e692d8a15bcd}{Peclet\_S}} = 4032.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Sufrace Peclet number multiplied by Strouhal number}}
+\DoxyCodeLine{\textcolor{comment}{ /// Sufrace Peclet number multiplied by Strouhal number}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_abec1e1c8c78ade3a7b2e7396321c6466}{Peclet\_St\_S}} = 1.0; }
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pvd file -\/-\/ a wrapper for all the different}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pvd file -\/-\/ a wrapper for all the different}}
 \DoxyCodeLine{\textcolor{comment}{ /// vtu output files plus information about continuous time}}
 \DoxyCodeLine{\textcolor{comment}{ /// to facilitate animations in paraview}}
 \DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4f2fe790aa186202e4e2d5f6ee21d7f4}{Pvd\_file}};}
@@ -110,18 +110,15 @@ The global parameters are simply the dimensionless parameters described above.
 \DoxyCodeLine{\} \textcolor{comment}{// End of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code and problem class}\label{index_main}
 The driver code and problem are very similar to those in the \href{../../../navier_stokes/single_layer_free_surface/html/index.html}{\texttt{ two-\/dimensional }} and \href{../../../axisym_navier_stokes/two_layer_interface_axisym/html/index.html}{\texttt{ axisymmetric }} interface-\/relaxation problems on which this driver was based. The main difference between this problem and standard free surface problems is that instead of ~\newline
- \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Fluid\+Interface\+Element}}, we use the custom \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}. The symmetry boundary conditions for the surface concentration are the natural boundary conditions of our formulation, so we \char`\"{}do
- nothing\char`\"{} for the additional field at the boundaries.
+ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Fluid\+Interface\+Element}}, we use the custom \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}. The symmetry boundary conditions for the surface concentration are the natural boundary conditions of our formulation, so we \char`\"{}do  nothing\char`\"{} for the additional field at the boundaries.
 
 An additional member function {\ttfamily \mbox{\hyperlink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}{Interface\+Problem\+::compute\+\_\+total\+\_\+mass()}}} is provided as a check on the implementation of the the surface transport equations. The surfactant cannot be removed from the surface, so its mass must be conserved. The function simply loops over the interface elements and sums their contribution to the total mass.  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Compute the total mass of the insoluble surfactant}}
+\DoxyCodeLine{\textcolor{comment}{ /// Compute the total mass of the insoluble surfactant}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} compute\_total\_mass()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Initialise to zero}}
@@ -144,19 +141,17 @@ An additional member function {\ttfamily \mbox{\hyperlink{classInterfaceProblem_
 \DoxyCodeLine{  \} \textcolor{comment}{// End of compute\_total\_mass}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_element}{}\doxysection{The Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element class}\label{index_element}
 This class is implemented in our driver code and inherits directly from \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Fluid\+Interface\+Element}}. The class provides storage for the required additional dimensionless groups and the nodal index where the surface concentration will be stored.  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{///Spine-\/based Marangoni surface tension elements that add}}
-\DoxyCodeLine{\textcolor{comment}{///a linear dependence on concentration}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///of a surface chemical to the surface tension, }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///which decreases with increasing concentration.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///The non-\/dimensionalisation is the same as Campana et al (2004)}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///but we may wish to revisit this.}}
+\DoxyCodeLine{\textcolor{comment}{/// Spine-\/based Marangoni surface tension elements that add}}
+\DoxyCodeLine{\textcolor{comment}{/// a linear dependence on concentration}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// of a surface chemical to the surface tension, }}
+\DoxyCodeLine{\textcolor{comment}{/// which decreases with increasing concentration.}}
+\DoxyCodeLine{\textcolor{comment}{/// The non-\/dimensionalisation is the same as Campana et al (2004)}}
+\DoxyCodeLine{\textcolor{comment}{/// but we may wish to revisit this.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement : }
@@ -177,13 +172,11 @@ This class is implemented in our driver code and inherits directly from \mbox{\h
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} C\_index;}
 
 \end{DoxyCodeInclude}
-
-
-Most of the functionality is already provided by the underlying {\ttfamily Fluid\+Interface\+Element} and we need simply to overload a few functions. The constructor sets default values for the physical constants and adds the additional data value to nodes on the surface. 
+ Most of the functionality is already provided by the underlying {\ttfamily Fluid\+Interface\+Element} and we need simply to overload a few functions. The constructor sets default values for the physical constants and adds the additional data value to nodes on the surface. 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{///Constructor that passes the bulk element and face index down}}
-\DoxyCodeLine{\textcolor{comment}{ ///to the underlying}}
-\DoxyCodeLine{\textcolor{comment}{}  SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement(FiniteElement* \textcolor{keyword}{const} \&element\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \&face\_index) : SpineAxisymmetricFluidInterfaceElement<ELEMENT>}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor that passes the bulk element and face index down}}
+\DoxyCodeLine{\textcolor{comment}{ /// to the underlying}}
+\DoxyCodeLine{  SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement(FiniteElement* \textcolor{keyword}{const} \&element\_pt, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \&face\_index) : SpineAxisymmetricFluidInterfaceElement<ELEMENT>}
 \DoxyCodeLine{                                                                                                                       (element\_pt,face\_index)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Initialise the values}}
@@ -209,11 +202,9 @@ Most of the functionality is already provided by the underlying {\ttfamily Fluid
 \DoxyCodeLine{\}}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily Fluid\+Interface\+Element\+::sigma()} is overloaded using the equation of state defined in the problem specification  
+ The function {\ttfamily Fluid\+Interface\+Element\+::sigma()} is overloaded using the equation of state defined in the problem specification  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{rayleigh__instability__surfactant_8txt_a56933c4e69e45788991a5fdc8ba11a1d}{sigma}}(\textcolor{keyword}{const} Vector<double> \&s)}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} sigma(\textcolor{keyword}{const} Vector<double> \&s)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Find the number of shape functions}}
 \DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = this-\/>nnode();}
@@ -235,9 +226,7 @@ The function {\ttfamily Fluid\+Interface\+Element\+::sigma()} is overloaded usin
 \DoxyCodeLine{  \} \textcolor{comment}{// End of sigma}}
 
 \end{DoxyCodeInclude}
-
-
-The majority of the work is performed in 
+ The majority of the work is performed in 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} add\_additional\_residual\_contributions\_interface(Vector<double> \&residuals, DenseMatrix<double> \&jacobian,}
 \DoxyCodeLine{                                                       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&flag,\textcolor{keyword}{const} Shape \&psif, \textcolor{keyword}{const} DShape \&dpsifds,}
@@ -349,7 +338,7 @@ Finally the elements contain a function
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass number of elements in x-\/direction, number of}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass number of elements in x-\/direction, number of}}
 \DoxyCodeLine{\textcolor{comment}{ /// elements in y-\/direction, radial extent, axial length , and pointer }}
 \DoxyCodeLine{\textcolor{comment}{ /// to timestepper (defaults to Steady timestepper)}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh_a0bd73ed947e30341144d081df52332b5}{MyHorizontalSingleLayerSpineMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, }
@@ -397,5 +386,5 @@ demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convect
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -43,7 +43,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short A version of the GeneralisedAdvection Diffusion equations that can
+  /// A version of the GeneralisedAdvection Diffusion equations that can
   /// be used with non-uniform mesh refinement. In essence, the class overloads
   /// the fill_in_generic_residual_contribution_cons_adv_diff()
   /// function so that contributions
@@ -57,7 +57,7 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    /// \short Empty Constructor
+    /// Empty Constructor
     RefineableGeneralisedAdvectionDiffusionEquations()
       : GeneralisedAdvectionDiffusionEquations<DIM>(),
         RefineableElement(),
@@ -68,18 +68,12 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableGeneralisedAdvectionDiffusionEquations(
-      const RefineableGeneralisedAdvectionDiffusionEquations<DIM>& dummy)
-    {
-      BrokenCopy::broken_copy(
-        "RefineableGeneralisedAdvectionDiffusionEquations");
-    }
+      const RefineableGeneralisedAdvectionDiffusionEquations<DIM>& dummy) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const RefineableGeneralisedAdvectionDiffusionEquations<DIM>&)
-    {
-      BrokenCopy::broken_assign(
-        "RefineableGeneralisedAdvectionDiffusionEquations");
-    }
+    void operator=(
+      const RefineableGeneralisedAdvectionDiffusionEquations<DIM>&) = delete;
 
     /// Number of 'flux' terms for Z2 error estimation
     unsigned num_Z2_flux_terms()
@@ -87,7 +81,7 @@ namespace oomph
       return DIM;
     }
 
-    /// \short Get 'flux' for Z2 error recovery:
+    /// Get 'flux' for Z2 error recovery:
     /// Standard flux.from GeneralisedAdvectionDiffusion equations
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
@@ -95,7 +89,7 @@ namespace oomph
     }
 
 
-    /// \short Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -127,7 +121,7 @@ namespace oomph
       }
     }
 
-    /// \short Get the function value u in Vector.
+    /// Get the function value u in Vector.
     /// Note: Given the generality of the interface (this function
     /// is usually called from black-box documentation or interpolation
     /// routines), the values Vector sets its own size in here.
@@ -183,7 +177,7 @@ namespace oomph
     }
 
   protected:
-    /// \short Add the element's contribution to the elemental residual vector
+    /// Add the element's contribution to the elemental residual vector
     /// and/or Jacobian matrix
     /// flag=1: compute both
     /// flag=0: compute only residual vector
@@ -196,7 +190,7 @@ namespace oomph
 
 
   //======================================================================
-  /// \short Refineable version of QGeneralisedAdvectionDiffusionElement.
+  /// Refineable version of QGeneralisedAdvectionDiffusionElement.
   /// Inherit from the standard QGeneralisedAdvectionDiffusionElement and the
   /// appropriate refineable geometric element and the refineable equations.
   //======================================================================
@@ -207,7 +201,7 @@ namespace oomph
       public virtual RefineableQElement<DIM>
   {
   public:
-    /// \short Empty Constructor:
+    /// Empty Constructor:
     RefineableQGeneralisedAdvectionDiffusionElement()
       : RefineableElement(),
         RefineableGeneralisedAdvectionDiffusionEquations<DIM>(),
@@ -220,19 +214,12 @@ namespace oomph
     /// Broken copy constructor
     RefineableQGeneralisedAdvectionDiffusionElement(
       const RefineableQGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>&
-        dummy)
-    {
-      BrokenCopy::broken_copy(
-        "RefineableQuadGeneralisedAdvectionDiffusionElement");
-    }
+        dummy) = delete;
 
     /// Broken assignment operator
     void operator=(
-      const RefineableQGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign(
-        "RefineableQuadGeneralisedAdvectionDiffusionElement");
-    }
+      const RefineableQGeneralisedAdvectionDiffusionElement<DIM, NNODE_1D>&) =
+      delete;
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const
@@ -240,14 +227,14 @@ namespace oomph
       return 1;
     }
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QGeneralisedAdvectionDiffusionElement<DIM,
                                                    NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QGeneralisedAdvectionDiffusionElement<DIM,
@@ -257,21 +244,21 @@ namespace oomph
     /// Rebuild from sons: empty
     void rebuild_from_sons(Mesh*& mesh_pt) {}
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
       return (NNODE_1D - 1);
     }
 
-    ///  \short Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty.
     void further_setup_hanging_nodes() {}
   };
 
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
 
 
   //=======================================================================
@@ -287,7 +274,7 @@ namespace oomph
     : public virtual QElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QElement<DIM - 1, NNODE_1D>() {}
   };

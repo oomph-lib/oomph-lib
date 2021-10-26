@@ -24,48 +24,44 @@ If we expand $ u(x) = U_{j} \psi_{j}(x) $ and $ w(x) = W_{j} \psi_{j}(x) $ in te
  \DoxyHorRuler{0}
 \hypertarget{index_impl}{}\doxysection{Implementation}\label{index_impl}
 The implementation closely follows that in the \href{../../harmonic/html/index.html}{\texttt{ harmonic eigenproblem }}, and so we shall concentrate on the differences from that problem.\hypertarget{index_equations}{}\doxysubsection{Creating the elements}\label{index_equations}
-For generality, we implement the mathematics to assemble contributions to the Jacobian and mass matrices defined above in the class {\ttfamily \mbox{\hyperlink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}}} that inherits from {\ttfamily Finite\+Element}.
+For generality, we implement the mathematics to assemble contributions to the Jacobian and mass matrices defined above in the class {\ttfamily Complex\+Harmonic\+Equations} that inherits from {\ttfamily Finite\+Element}.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/// A class for all elements that solve the eigenvalue problem}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial w\}\{\(\backslash\)partial x\}  = \(\backslash\)lambda u}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f] }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\} = (\(\backslash\)lambda -\/ \(\backslash\)mu) w}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// This class  contains the generic maths. Shape functions, geometric}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// mapping etc. must get implemented in derived class.}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial w\}\{\(\backslash\)partial x\}  = \(\backslash\)lambda u}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f] }}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\} = (\(\backslash\)lambda -\/ \(\backslash\)mu) w}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// This class  contains the generic maths. Shape functions, geometric}}
+\DoxyCodeLine{\textcolor{comment}{/// mapping etc. must get implemented in derived class.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classComplexHarmonicEquations}{ComplexHarmonicEquations}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} FiniteElement}
+\DoxyCodeLine{\textcolor{keyword}{class }ComplexHarmonicEquations : \textcolor{keyword}{public} \textcolor{keyword}{virtual} FiniteElement}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Constructor}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classComplexHarmonicEquations_aa93feb265f731b0d82c3c1c4c29f183d}{ComplexHarmonicEquations}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} ComplexHarmonicEquations() \{\}}
 
 \end{DoxyCodeInclude}
-
-
-The unknowns that represent the discretised eigenfunction are assumed to be stored at the nodes, but there are now two unknowns\+: $u$ is assumed to be the first and $w$ is the second.
+ The unknowns that represent the discretised eigenfunction are assumed to be stored at the nodes, but there are now two unknowns\+: $u$ is assumed to be the first and $w$ is the second.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Access function: First eigenfunction value at local node n}}
-\DoxyCodeLine{\textcolor{comment}{ /// Note that solving the eigenproblem does not assign values}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// to this storage space. It is used for output purposes only.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Access function: First eigenfunction value at local node n}}
+\DoxyCodeLine{\textcolor{comment}{ /// Note that solving the eigenproblem does not assign values}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// to this storage space. It is used for output purposes only.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} u(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)\textcolor{keyword}{ const }}
 \DoxyCodeLine{\textcolor{keyword}{  }\{\textcolor{keywordflow}{return} nodal\_value(n,0);\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Second eigenfunction value at local node n}}
+\DoxyCodeLine{\textcolor{comment}{ /// Second eigenfunction value at local node n}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} w(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)\textcolor{keyword}{ const }}
 \DoxyCodeLine{\textcolor{keyword}{  }\{\textcolor{keywordflow}{return} nodal\_value(n,1);\}}
 
 \end{DoxyCodeInclude}
-
-
-As before, the key function is {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix} which implements the calculation of the equations.
+ As before, the key function is {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix} which implements the calculation of the equations.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -159,37 +155,35 @@ As before, the key function is {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to
 \DoxyCodeLine{ \} \textcolor{comment}{//end\_of\_fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
 
 \end{DoxyCodeInclude}
+ Note that the {\bfseries{shift}} $\mu$ is implemented in a global namespace as {\ttfamily \mbox{\hyperlink{namespaceEigenproblemShift_a82e816b5ecba937123c65c5bd953a2fb}{Eigenproblem\+Shift\+::\+Mu}}}.
 
-
-Note that the {\bfseries{shift}} $\mu$ is implemented in a global namespace as {\ttfamily \mbox{\hyperlink{namespaceEigenproblemShift_a82e816b5ecba937123c65c5bd953a2fb}{Eigenproblem\+Shift\+::\+Mu}}}.
-
-The shape functions are specified in the {\ttfamily \mbox{\hyperlink{classQComplexHarmonicElement}{Q\+Complex\+Harmonic\+Element}}} class that inherits from our standard one-\/dimensional Lagrange elements {\ttfamily Q\+Element$<$1,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} as well as {\ttfamily \mbox{\hyperlink{classHarmonicEquations}{Harmonic\+Equations}}}. The number of unknowns (two) is specified and the output functions and shape functions are overloaded as required\+: the output functions are specified in the {\ttfamily \mbox{\hyperlink{classComplexHarmonicEquations}{Complex\+Harmonic\+Equations}}} class, whereas the shape functions are provided by the {\ttfamily Q\+Element$<$1,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} class.
+The shape functions are specified in the {\ttfamily \mbox{\hyperlink{classQComplexHarmonicElement}{QComplex\+Harmonic\+Element}}} class that inherits from our standard one-\/dimensional Lagrange elements {\ttfamily QElement$<$1,\+NNODE\+\_\+1\+D$>$} as well as {\ttfamily Harmonic\+Equations}. The number of unknowns (two) is specified and the output functions and shape functions are overloaded as required\+: the output functions are specified in the {\ttfamily Complex\+Harmonic\+Equations} class, whereas the shape functions are provided by the {\ttfamily QElement$<$1,\+NNODE\+\_\+1\+D$>$} class.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{unsigned} NNODE\_1D>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classQComplexHarmonicElement}{QComplexHarmonicElement}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} QElement<1,NNODE\_1D>, }
-\DoxyCodeLine{                         \textcolor{keyword}{public} \mbox{\hyperlink{classComplexHarmonicEquations}{ComplexHarmonicEquations}}}
+\DoxyCodeLine{                         \textcolor{keyword}{public} ComplexHarmonicEquations}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ }
 \DoxyCodeLine{  \textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short  Constructor: Call constructors for QElement and }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Call constructors for QElement and }}
 \DoxyCodeLine{\textcolor{comment}{ /// Poisson equations}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classQComplexHarmonicElement_a9f1e88c4b5c7031d77c6f6dd3758de2a}{QComplexHarmonicElement}}() : QElement<1,NNODE\_1D>(), }
-\DoxyCodeLine{                             \mbox{\hyperlink{classComplexHarmonicEquations}{ComplexHarmonicEquations}}() \{\}}
+\DoxyCodeLine{                             ComplexHarmonicEquations() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short  Required  \# of `values' (pinned or dofs) }}
+\DoxyCodeLine{\textcolor{comment}{ ///  Required  \# of `values' (pinned or dofs) }}
 \DoxyCodeLine{\textcolor{comment}{ /// at node n. Here there are two (u and w)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classQComplexHarmonicElement_a3f1d68324e9d8b9e143044d716c72a87}{required\_nvalue}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} 2;\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Output function overloaded from ComplexHarmonicEquations}}
+\DoxyCodeLine{\textcolor{comment}{ /// Output function overloaded from ComplexHarmonicEquations}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQComplexHarmonicElement_a8c45d7281a7bc7e2e2d53a7f87339ca4}{output}}(ostream \&outfile) }
-\DoxyCodeLine{  \{\mbox{\hyperlink{classComplexHarmonicEquations_a9185e07b984e735c1c45b6f5a6c02b5f}{ComplexHarmonicEquations::output}}(outfile);\}}
+\DoxyCodeLine{  \{ComplexHarmonicEquations::output(outfile);\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///  \(\backslash\)short Output function overloaded from ComplexHarmonicEquations}}
+\DoxyCodeLine{\textcolor{comment}{ ///  Output function overloaded from ComplexHarmonicEquations}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classQComplexHarmonicElement_a8c45d7281a7bc7e2e2d53a7f87339ca4}{output}}(ostream \&outfile, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&Nplot) }
-\DoxyCodeLine{  \{\mbox{\hyperlink{classComplexHarmonicEquations_a9185e07b984e735c1c45b6f5a6c02b5f}{ComplexHarmonicEquations::output}}(outfile,Nplot);\}}
+\DoxyCodeLine{  \{ComplexHarmonicEquations::output(outfile,Nplot);\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{protected}:}
@@ -201,7 +195,7 @@ The shape functions are specified in the {\ttfamily \mbox{\hyperlink{classQCompl
 \DoxyCodeLine{\textcolor{keyword}{  }\{\textcolor{keywordflow}{return} QElement<1,NNODE\_1D>::dshape\_eulerian(s,psi,dpsidx);\}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Shape, test functions \& derivs. w.r.t. to global coords. at}}
+\DoxyCodeLine{\textcolor{comment}{ /// Shape, test functions \& derivs. w.r.t. to global coords. at}}
 \DoxyCodeLine{\textcolor{comment}{ /// integration point ipt. Return Jacobian.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{inline} \textcolor{keywordtype}{double} \mbox{\hyperlink{classQComplexHarmonicElement_a3f8d1d9396135d4d86f416dcf6c23904}{dshape\_eulerian\_at\_knot}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{                                       Shape \&psi, }
@@ -239,5 +233,5 @@ The {\ttfamily \mbox{\hyperlink{classComplexHarmonicProblem}{Complex\+Harmonic\+
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

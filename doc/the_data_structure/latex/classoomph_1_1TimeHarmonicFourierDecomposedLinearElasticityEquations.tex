@@ -2,6 +2,11 @@
 \label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations}\index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}}
 
 
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
+
+
 {\ttfamily \#include $<$time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h$>$}
 
 Inheritance diagram for oomph\+::Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+:\begin{figure}[H]
@@ -15,40 +20,42 @@ Inheritance diagram for oomph\+::Time\+Harmonic\+Fourier\+Decomposed\+Linear\+El
 \item 
 \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a2e154a0615ab34321abb0c6a76966cc9}{Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a60b3470109b5dbfd868c1fad44b89d3e}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a60b3470109b5dbfd868c1fad44b89d3e}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Number of values required at node n. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a38dec4f82df17e0eced052a2aff8aa7c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a38dec4f82df17e0eced052a2aff8aa7c}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the residuals for the equations (the discretised principle of virtual displacements) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae5924f4e2937f652da983c47ea8f08d0}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a80202d873758f403b08545e7d62658d4}{get\+\_\+strain}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$$>$ \&strain)
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae5924f4e2937f652da983c47ea8f08d0}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+\begin{DoxyCompactList}\small\item\em The jacobian is calculated by finite differences by default, We need only to take finite differences w.\+r.\+t. positional variables For this element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_aed013f2b28d4fc1b776763e75104834b}{get\+\_\+strain}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&strain)
 \begin{DoxyCompactList}\small\item\em Get strain tensor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a5dc79c23b17db6bf138f757859e2b53e}{compute\+\_\+norm}} (double \&norm)
 \begin{DoxyCompactList}\small\item\em Compute norm of solution\+: square of the L2 norm. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a55bdbed4f99fe87124edba907acdf581}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a55bdbed4f99fe87124edba907acdf581}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output exact solution\+: r,z, u\+\_\+r\+\_\+real, u\+\_\+z\+\_\+real, ..., u\+\_\+theta\+\_\+imag. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a31a091df2b2e53d6998585c992c9e724}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output\+: r,z, u\+\_\+r\+\_\+real, u\+\_\+z\+\_\+real, ..., u\+\_\+theta\+\_\+imag. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae93876a9ca68be25baa7cd1d4178990e}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae93876a9ca68be25baa7cd1d4178990e}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output\+: r,z, u\+\_\+r\+\_\+real, u\+\_\+z\+\_\+real, ..., u\+\_\+theta\+\_\+imag. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae2f89d9d35bf4904328dd32e7f8abbfa}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae2f89d9d35bf4904328dd32e7f8abbfa}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output\+: r,z, u\+\_\+r\+\_\+real, u\+\_\+z\+\_\+real, ..., u\+\_\+theta\+\_\+imag. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a50b96a6a3cba3791978eb49b5cfcba39}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a50b96a6a3cba3791978eb49b5cfcba39}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output\+: r,z, u\+\_\+r\+\_\+real, u\+\_\+z\+\_\+real, ..., u\+\_\+theta\+\_\+imag. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a3d8df91bb12e738299b2eb854340f5c8}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of displacement solution over element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_abf2e9e9a58dae02f8ca72ee454d2ded7}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fourier\+\_\+decomp\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
+virtual void \mbox{\hyperlink{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_abf2e9e9a58dae02f8ca72ee454d2ded7}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fourier\+\_\+decomp\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Private helper function to compute residuals and (if requested via flag) also the Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
+
 A class for elements that solve the Fourier decomposed (in cylindrical polars) equations of time-\/harmonic linear elasticity 
 
-Definition at line 350 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00350}{350}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
@@ -65,7 +72,7 @@ Constructor.
 
 
 
-Definition at line 355 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00355}{355}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
@@ -76,7 +83,9 @@ Definition at line 355 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+
 \doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}}
 {\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt,  }\item[{double \&}]{error,  }\item[{double \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
-Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of displacement solution over element
+
+
+Validate against exact solution. Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of displacement solution over element. 
 
 Validate against exact solution Solution is provided via function pointer. Plot at a given number of plot points and compute L2 error and L2 norm of velocity solution over element. 
 
@@ -84,11 +93,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a73c79a1f1e5b1d3
 
 
 
-Definition at line 997 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00997}{997}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc}}.
 
 
 
-References i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00072}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a5dc79c23b17db6bf138f757859e2b53e}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a5dc79c23b17db6bf138f757859e2b53e}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!compute\_norm@{compute\_norm}}
@@ -100,17 +109,19 @@ References i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Time\
 
 Compute norm of solution\+: square of the L2 norm. 
 
-Compute norm of the solution. 
+/////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////
+
+Compute norm of the solution 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af2025a472df6752a946739da58e7fb37}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 56 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00056}{56}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc}}.
 
 
 
-References i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity(), oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), s, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00072}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a808557a124b98d5bbe3bb3b22c81b44b}{oomph\+::\+Finite\+Element\+::\+J\+\_\+eulerian()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae5924f4e2937f652da983c47ea8f08d0}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae5924f4e2937f652da983c47ea8f08d0}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
@@ -118,17 +129,21 @@ References i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Time\
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
 {\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-The jacobian is calculated by finite differences by default, We need only to take finite differences w.\+r.\+t. positional variables For this element 
+
+
+The jacobian is calculated by finite differences by default, We need only to take finite differences w.\+r.\+t. positional variables For this element. 
+
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0d53bf283dc85bdfea}{oomph\+::\+Finite\+Element}}.
 
 
 
-Definition at line 375 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00375}{375}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-References residuals().
+References \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a38dec4f82df17e0eced052a2aff8aa7c}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a38dec4f82df17e0eced052a2aff8aa7c}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
@@ -146,11 +161,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 365 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00365}{365}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fourier\+\_\+decomp\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity(), and residuals().
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00232}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+fourier\+\_\+decomp\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_abf2e9e9a58dae02f8ca72ee454d2ded7}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_abf2e9e9a58dae02f8ca72ee454d2ded7}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!fill\_in\_generic\_contribution\_to\_residuals\_fourier\_decomp\_time\_harmonic\_linear\_elasticity@{fill\_in\_generic\_contribution\_to\_residuals\_fourier\_decomp\_time\_harmonic\_linear\_elasticity}}
@@ -162,23 +177,25 @@ References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, fill\+\_\+in\
 
 Private helper function to compute residuals and (if requested via flag) also the Jacobian matrix. 
 
+//////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////
+
 Compute the residuals for the Fourier decomposed (in cyl. polars) time harmonic linear elasticity equations in. Flag indicates if we want Jacobian too. 
 
-Definition at line 232 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00231}{231}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc}}.
 
 
 
-References a(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force(), oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::fourier\+\_\+wavenumber(), oomph\+::\+Mathematical\+Constants\+::\+I(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Integral\+::knot(), n, oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::nu(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::omega\+\_\+sq(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value(), residuals(), s, oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::youngs\+\_\+modulus().
+References \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00241}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::body\+\_\+force()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00205}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::fourier\+\_\+wavenumber()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00183}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::nu()}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00159}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::omega\+\_\+sq()}}, \mbox{\hyperlink{elements_8cc_source_l01686}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02581}{oomph\+::\+Finite\+Element\+::raw\+\_\+nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00065}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}, and \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00177}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::youngs\+\_\+modulus()}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00365}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
-\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a80202d873758f403b08545e7d62658d4}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a80202d873758f403b08545e7d62658d4}} 
+\mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_aed013f2b28d4fc1b776763e75104834b}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_aed013f2b28d4fc1b776763e75104834b}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!get\_strain@{get\_strain}}
 \index{get\_strain@{get\_strain}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}}
 \doxysubsubsection{\texorpdfstring{get\_strain()}{get\_strain()}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::get\+\_\+strain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$$>$ \&}]{strain }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::get\+\_\+strain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{strain }\end{DoxyParamCaption})}
 
 
 
@@ -186,21 +203,21 @@ Get strain tensor.
 
 
 
-Definition at line 114 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00114}{114}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::fourier\+\_\+wavenumber(), oomph\+::\+Mathematical\+Constants\+::\+I(), i, interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), n, oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), and oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity().
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a9296c17b134688049256a4bbc886df69}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian()}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00205}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::fourier\+\_\+wavenumber()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, and \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00065}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::u\+\_\+index\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}.
 
 
 
-Referenced by oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux().
+Referenced by \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00579}{oomph\+::\+TTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+\+Z2\+\_\+flux()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae2f89d9d35bf4904328dd32e7f8abbfa}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae2f89d9d35bf4904328dd32e7f8abbfa}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!output@{output}}
 \index{output@{output}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -212,21 +229,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a81a75203b1c0d2f110259547e51c8cac}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QTimeHarmonicFourierDecomposedLinearElasticityElement_afc1d5ed96b566665d0a90c79ee347028}{oomph\+::\+Q\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QTimeHarmonicFourierDecomposedLinearElasticityElement_afc1d5ed96b566665d0a90c79ee347028}{oomph\+::\+QTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a81a75203b1c0d2f110259547e51c8cac}{oomph\+::\+TTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line 408 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00408}{408}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-References output().
+References \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00398}{output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a50b96a6a3cba3791978eb49b5cfcba39}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a50b96a6a3cba3791978eb49b5cfcba39}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!output@{output}}
 \index{output@{output}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -238,15 +255,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a05e2f49a9bd2941f4bbabd5f0279d86a}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QTimeHarmonicFourierDecomposedLinearElasticityElement_aa965a2e2d7f942f43e5e668b9111e9e0}{oomph\+::\+Q\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QTimeHarmonicFourierDecomposedLinearElasticityElement_aa965a2e2d7f942f43e5e668b9111e9e0}{oomph\+::\+QTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a05e2f49a9bd2941f4bbabd5f0279d86a}{oomph\+::\+TTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line 941 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00941}{941}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
+References \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00072}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, and \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a31a091df2b2e53d6998585c992c9e724}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a31a091df2b2e53d6998585c992c9e724}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!output@{output}}
@@ -264,21 +281,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ae14527add57636a4412ea584dd66cdbe}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QTimeHarmonicFourierDecomposedLinearElasticityElement_a8d2c88dba3a246693ba43bab9d84fbd8}{oomph\+::\+Q\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QTimeHarmonicFourierDecomposedLinearElasticityElement_a8d2c88dba3a246693ba43bab9d84fbd8}{oomph\+::\+QTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_ae14527add57636a4412ea584dd66cdbe}{oomph\+::\+TTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line 398 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00398}{398}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-Referenced by output(), oomph\+::\+Q\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::output(), and oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::output().
+References \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00398}{output()}}.
+
+
+
+Referenced by \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00398}{output()}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00458}{oomph\+::\+QTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$\+::output()}}, and \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00525}{oomph\+::\+TTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae93876a9ca68be25baa7cd1d4178990e}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_ae93876a9ca68be25baa7cd1d4178990e}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!output@{output}}
 \index{output@{output}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -290,21 +311,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a8f1141e19dcdd594824d1adc971b2832}{oomph\+::\+T\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QTimeHarmonicFourierDecomposedLinearElasticityElement_a42122255353025f62a4ff73fc35db587}{oomph\+::\+Q\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QTimeHarmonicFourierDecomposedLinearElasticityElement_a42122255353025f62a4ff73fc35db587}{oomph\+::\+QTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1TTimeHarmonicFourierDecomposedLinearElasticityElement_a8f1141e19dcdd594824d1adc971b2832}{oomph\+::\+TTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Element$<$ NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line 889 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00889}{889}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), u(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
+References \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00072}{oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+Base\+::interpolated\+\_\+u\+\_\+time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a55bdbed4f99fe87124edba907acdf581}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a55bdbed4f99fe87124edba907acdf581}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}}
-{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -316,17 +337,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a22b695c714f60ee
 
 
 
-Definition at line 840 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source_l00840}{840}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8cc_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
+References \mbox{\hyperlink{elements_8h_source_l03153}{oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l03191}{oomph\+::\+Finite\+Element\+::nplot\+\_\+points()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{elements_8h_source_l03166}{oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string()}}, \mbox{\hyperlink{elements_8h_source_l03179}{oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a60b3470109b5dbfd868c1fad44b89d3e}\label{classoomph_1_1TimeHarmonicFourierDecomposedLinearElasticityEquations_a60b3470109b5dbfd868c1fad44b89d3e}} 
 \index{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations@{oomph::TimeHarmonicFourierDecomposedLinearElasticityEquations}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -338,7 +359,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 358 of file time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source_l00358}{358}} of file \mbox{\hyperlink{time__harmonic__fourier__decomposed__linear__elasticity__elements_8h_source}{time\+\_\+harmonic\+\_\+fourier\+\_\+decomposed\+\_\+linear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 

@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement}{}\doxysection{oomph\+::Spine\+Update\+Fluid\+Interface\+Element$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement}{}\doxysection{oomph\+::Spine\+Update\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1SpineUpdateFluidInterfaceElement}\index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Generic Spine node update interface template class that can be combined with a g
 
 {\ttfamily \#include $<$specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Spine\+Update\+Fluid\+Interface\+Element$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Spine\+Update\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=0.633843cm]{classoomph_1_1SpineUpdateFluidInterfaceElement}
@@ -22,22 +22,22 @@ Inheritance diagram for oomph\+::Spine\+Update\+Fluid\+Interface\+Element$<$ E\+
 \begin{DoxyCompactList}\small\item\em Constructor, the arguments are a pointer to the \char`\"{}bulk\char`\"{} element and the index of the face to be created. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a457ca93343689e34535054cf829a9499}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Calculate the contribution to the residuals and the jacobian. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const D\+Shape \&dpsifds, const D\+Shape \&dpsifdS, const D\+Shape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const DShape \&dpsifds, const DShape \&dpsifdS, const DShape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
 \begin{DoxyCompactList}\small\item\em Helper function to calculate the additional contributions These are those filled in by the particular equations. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_ae2875e70d1f8eacc229ea3d4318f7de4}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3c9c00def11f68f48db0f46004f1e6fe}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output the element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a963fdd8b603e563da9fb966e0c429457}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a963fdd8b603e563da9fb966e0c429457}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_af876d90d19b6faa253260193ded3f175}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_af876d90d19b6faa253260193ded3f175}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a8e464c689a19ce2d6fbff2c167dcc41a}{make\+\_\+bounding\+\_\+element}} (const int \&face\+\_\+index)
+virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_ac748273fcf9783be4d3cb82341384d6a}{make\+\_\+bounding\+\_\+element}} (const int \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Create an \char`\"{}bounding\char`\"{} element of the type specified by the \mbox{\hyperlink{classoomph_1_1BoundingElementType}{Bounding\+Element\+Type}} policy class Here, this allows the application of a contact angle boundary condition on the the specified face. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a75debcd348674d5ea58bfefc0e72b737}{compute\+\_\+surface\+\_\+derivatives}} (const Shape \&psi, const D\+Shape \&dpsids, const Dense\+Matrix$<$ double $>$ \&interpolated\+\_\+t, const Vector$<$ double $>$ \&interpolated\+\_\+x, D\+Shape \&surface\+\_\+gradient, D\+Shape \&surface\+\_\+divergence)
+double \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a75debcd348674d5ea58bfefc0e72b737}{compute\+\_\+surface\+\_\+derivatives}} (const Shape \&psi, const DShape \&dpsids, const Dense\+Matrix$<$ double $>$ \&interpolated\+\_\+t, const Vector$<$ double $>$ \&interpolated\+\_\+x, DShape \&surface\+\_\+gradient, DShape \&surface\+\_\+divergence)
 \begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations by calling the appropriate class function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -49,12 +49,11 @@ void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_aafe4d848b7
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+S\+S, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+S\+S, E\+L\+E\+M\+E\+N\+T $>$}
-
+\subsubsection*{template$<$class EQUATION\+\_\+\+CLASS, class DERIVATIVE\+\_\+\+CLASS, class ELEMENT$>$\newline
+class oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$}
 Generic Spine node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses spines. 
 
-Definition at line 152 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00152}{152}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 
 
@@ -63,8 +62,8 @@ Definition at line 152 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!SpineUpdateFluidInterfaceElement@{SpineUpdateFluidInterfaceElement}}
 \index{SpineUpdateFluidInterfaceElement@{SpineUpdateFluidInterfaceElement}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{SpineUpdateFluidInterfaceElement()}{SpineUpdateFluidInterfaceElement()}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{Spine\+Update\+Fluid\+Interface\+Element}} (\begin{DoxyParamCaption}\item[{Finite\+Element $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const unsigned \&}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{Spine\+Update\+Fluid\+Interface\+Element}} (\begin{DoxyParamCaption}\item[{Finite\+Element $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const unsigned \&}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -72,7 +71,11 @@ Constructor, the arguments are a pointer to the \char`\"{}bulk\char`\"{} element
 
 
 
-Definition at line 203 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00203}{203}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00097}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$\+::nadditional\+\_\+values()}}, and \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00106}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$\+::setup\+\_\+equation\+\_\+indices()}}.
 
 
 
@@ -81,8 +84,8 @@ Definition at line 203 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}}
 \index{add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{add\_additional\_residual\_contributions\_interface()}{add\_additional\_residual\_contributions\_interface()}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const Shape \&}]{psif,  }\item[{const D\+Shape \&}]{dpsifds,  }\item[{const D\+Shape \&}]{dpsifdS,  }\item[{const D\+Shape \&}]{dpsifd\+S\+\_\+div,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W,  }\item[{const double \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const Shape \&}]{psif,  }\item[{const DShape \&}]{dpsifds,  }\item[{const DShape \&}]{dpsifdS,  }\item[{const DShape \&}]{dpsifd\+S\+\_\+div,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W,  }\item[{const double \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -90,14 +93,14 @@ Helper function to calculate the additional contributions These are those filled
 
 
 
-Definition at line 293 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00293}{293}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_a75debcd348674d5ea58bfefc0e72b737}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_a75debcd348674d5ea58bfefc0e72b737}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
 \index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const Shape \&}]{psi,  }\item[{const D\+Shape \&}]{dpsids,  }\item[{const Dense\+Matrix$<$ double $>$ \&}]{interpolated\+\_\+t,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{D\+Shape \&}]{surface\+\_\+gradient,  }\item[{D\+Shape \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const Shape \&}]{psi,  }\item[{const DShape \&}]{dpsids,  }\item[{const Dense\+Matrix$<$ double $>$ \&}]{interpolated\+\_\+t,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{DShape \&}]{surface\+\_\+gradient,  }\item[{DShape \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -105,14 +108,14 @@ Fill in the specific surface derivative calculations by calling the appropriate 
 
 
 
-Definition at line 183 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00183}{183}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_a457ca93343689e34535054cf829a9499}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_a457ca93343689e34535054cf829a9499}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -120,14 +123,14 @@ Calculate the contribution to the residuals and the jacobian.
 
 
 
-Definition at line 279 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00279}{279}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_aafe4d848b76bb62c987bdb9852c117bb}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_aafe4d848b76bb62c987bdb9852c117bb}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!hijack\_kinematic\_conditions@{hijack\_kinematic\_conditions}}
 \index{hijack\_kinematic\_conditions@{hijack\_kinematic\_conditions}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{hijack\_kinematic\_conditions()}{hijack\_kinematic\_conditions()}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::hijack\+\_\+kinematic\+\_\+conditions (\begin{DoxyParamCaption}\item[{const Vector$<$ unsigned $>$ \&}]{bulk\+\_\+node\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::hijack\+\_\+kinematic\+\_\+conditions (\begin{DoxyParamCaption}\item[{const Vector$<$ unsigned $>$ \&}]{bulk\+\_\+node\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -135,14 +138,14 @@ Hijacking the kinematic condition corresponds to hijacking the variables associa
 
 
 
-Definition at line 168 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00168}{168}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_a94f737e046cb2796cb2b2dd5534bd3cd}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_a94f737e046cb2796cb2b2dd5534bd3cd}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!kinematic\_local\_eqn@{kinematic\_local\_eqn}}
 \index{kinematic\_local\_eqn@{kinematic\_local\_eqn}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{kinematic\_local\_eqn()}{kinematic\_local\_eqn()}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::kinematic\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::kinematic\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -150,14 +153,14 @@ In spine elements, the kinematic condition is the equation used to determine the
 
 
 
-Definition at line 161 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00161}{161}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_a8e464c689a19ce2d6fbff2c167dcc41a}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_a8e464c689a19ce2d6fbff2c167dcc41a}} 
+\mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_ac748273fcf9783be4d3cb82341384d6a}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_ac748273fcf9783be4d3cb82341384d6a}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!make\_bounding\_element@{make\_bounding\_element}}
 \index{make\_bounding\_element@{make\_bounding\_element}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{make\_bounding\_element()}{make\_bounding\_element()}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}}$\ast$ \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::make\+\_\+bounding\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1FluidInterfaceBoundingElement}{Fluid\+Interface\+Bounding\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::make\+\_\+bounding\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -165,14 +168,14 @@ Create an \char`\"{}bounding\char`\"{} element of the type specified by the \mbo
 
 
 
-Definition at line 352 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00352}{352}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_a963fdd8b603e563da9fb966e0c429457}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_a963fdd8b603e563da9fb966e0c429457}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -180,14 +183,14 @@ Overload the C-\/style output function.
 
 
 
-Definition at line 335 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00335}{335}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_af876d90d19b6faa253260193ded3f175}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_af876d90d19b6faa253260193ded3f175}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -195,14 +198,14 @@ C-\/style Output function.
 
 
 
-Definition at line 341 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00341}{341}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_ae2875e70d1f8eacc229ea3d4318f7de4}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_ae2875e70d1f8eacc229ea3d4318f7de4}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -210,14 +213,14 @@ Overload the output function.
 
 
 
-Definition at line 323 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00323}{323}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineUpdateFluidInterfaceElement_a3c9c00def11f68f48db0f46004f1e6fe}\label{classoomph_1_1SpineUpdateFluidInterfaceElement_a3c9c00def11f68f48db0f46004f1e6fe}} 
 \index{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$@{oomph::SpineUpdateFluidInterfaceElement$<$ EQUATION\_CLASS, DERIVATIVE\_CLASS, ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$class E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS , class D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS , class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+SS, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+SS, E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class EQUATION\+\_\+\+CLASS , class DERIVATIVE\+\_\+\+CLASS , class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element}}$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -225,7 +228,7 @@ Output the element.
 
 
 
-Definition at line 329 of file specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{specific__node__update__interface__elements_8h_source_l00329}{329}} of file \mbox{\hyperlink{specific__node__update__interface__elements_8h_source}{specific\+\_\+node\+\_\+update\+\_\+interface\+\_\+elements.\+h}}.
 
 
 

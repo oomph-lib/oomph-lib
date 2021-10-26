@@ -11,16 +11,16 @@ struct \mbox{\hyperlink{structMemoryStatisticsStorage}{Memory\+Statistics\+Stora
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{superlu__dist_8c_a2402ef70b70f76dbd6cd3824f80aeb3b}{get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist}} ()
-\begin{DoxyCompactList}\small\item\em Function to calculate the number of bytes used to store the LU factors. \end{DoxyCompactList}\item 
+\item 
 double \mbox{\hyperlink{superlu__dist_8c_a06a6e09f687861556218d7bffc0f8af3}{get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist}} ()
-\begin{DoxyCompactList}\small\item\em Function to calculate the number of bytes used in calculating and storing the LU factors. \end{DoxyCompactList}\item 
+\item 
 void \mbox{\hyperlink{superlu__dist_8c_a9f3f38c273359b89ea37dbb6a718d1a9}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist}} (double $\ast$lu\+\_\+factor\+\_\+memory, double $\ast$total\+\_\+memory)
 \item 
 void \mbox{\hyperlink{superlu__dist_8c_a26f239b3f535d534a737fbe03c51fe5e}{superlu\+\_\+cr\+\_\+to\+\_\+cc}} (int nrow, int ncol, int nnz, double $\ast$cr\+\_\+values, int $\ast$cr\+\_\+index, int $\ast$cr\+\_\+start, double $\ast$$\ast$cc\+\_\+values, int $\ast$$\ast$cc\+\_\+index, int $\ast$$\ast$cc\+\_\+start)
 \item 
-void \mbox{\hyperlink{superlu__dist_8c_ab9ab33a5547d5891fde671a5ae3c4353}{superlu\+\_\+dist\+\_\+distributed\+\_\+matrix}} (int opt\+\_\+flag, int allow\+\_\+permutations, int \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, int nnz\+\_\+local, int nrow\+\_\+local, int first\+\_\+row, double $\ast$\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}}, int $\ast$col\+\_\+index, int $\ast$row\+\_\+start, double $\ast$b, int nprow, int npcol, int doc, void $\ast$$\ast$data, int $\ast$info, M\+P\+I\+\_\+\+Comm comm)
+void \mbox{\hyperlink{superlu__dist_8c_ab9ab33a5547d5891fde671a5ae3c4353}{superlu\+\_\+dist\+\_\+distributed\+\_\+matrix}} (int opt\+\_\+flag, int allow\+\_\+permutations, int n, int nnz\+\_\+local, int nrow\+\_\+local, int first\+\_\+row, double $\ast$values, int $\ast$col\+\_\+index, int $\ast$row\+\_\+start, double $\ast$b, int nprow, int npcol, int doc, void $\ast$$\ast$data, int $\ast$info, MPI\+\_\+\+Comm comm)
 \item 
-void \mbox{\hyperlink{superlu__dist_8c_aff01995cee249faccc94f0d1a4ab06ee}{superlu\+\_\+dist\+\_\+global\+\_\+matrix}} (int opt\+\_\+flag, int allow\+\_\+permutations, int n\+\_\+in, int nnz\+\_\+in, double $\ast$\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}}, int $\ast$row\+\_\+index, int $\ast$col\+\_\+start, double $\ast$b, int nprow, int npcol, int doc, void $\ast$$\ast$data, int $\ast$info, M\+P\+I\+\_\+\+Comm comm)
+void \mbox{\hyperlink{superlu__dist_8c_aff01995cee249faccc94f0d1a4ab06ee}{superlu\+\_\+dist\+\_\+global\+\_\+matrix}} (int opt\+\_\+flag, int allow\+\_\+permutations, int n\+\_\+in, int nnz\+\_\+in, double $\ast$values, int $\ast$row\+\_\+index, int $\ast$col\+\_\+start, double $\ast$b, int nprow, int npcol, int doc, void $\ast$$\ast$data, int $\ast$info, MPI\+\_\+\+Comm comm)
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -38,19 +38,11 @@ struct \mbox{\hyperlink{structMemoryStatisticsStorage}{Memory\+Statistics\+Stora
 
 
 
-Function to calculate the number of bytes used to store the LU factors. 
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00077}{77}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
 
 
 
-Definition at line 77 of file superlu\+\_\+dist.\+c.
-
-
-
-References Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded, and symbolic\+\_\+memory\+\_\+statistics\+\_\+storage.
-
-
-
-Referenced by oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors().
+References \mbox{\hyperlink{superlu_8c_source_l00044}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage}}, \mbox{\hyperlink{superlu_8c_source_l00047}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded}}, and \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}.
 
 \mbox{\Hypertarget{superlu__dist_8c_a9f3f38c273359b89ea37dbb6a718d1a9}\label{superlu__dist_8c_a9f3f38c273359b89ea37dbb6a718d1a9}} 
 \index{superlu\_dist.c@{superlu\_dist.c}!get\_memory\_usage\_in\_bytes\_dist@{get\_memory\_usage\_in\_bytes\_dist}}
@@ -60,11 +52,11 @@ Referenced by oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+memory\+\_\+usage\+\_\+
 
 
 
-Definition at line 109 of file superlu\+\_\+dist.\+c.
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00109}{109}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
 
 
 
-References Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, and symbolic\+\_\+memory\+\_\+statistics\+\_\+storage.
+References \mbox{\hyperlink{superlu_8c_source_l00044}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage}}, and \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}.
 
 \mbox{\Hypertarget{superlu__dist_8c_a06a6e09f687861556218d7bffc0f8af3}\label{superlu__dist_8c_a06a6e09f687861556218d7bffc0f8af3}} 
 \index{superlu\_dist.c@{superlu\_dist.c}!get\_total\_memory\_usage\_in\_bytes\_dist@{get\_total\_memory\_usage\_in\_bytes\_dist}}
@@ -74,19 +66,11 @@ References Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, and symbolic\+\_\
 
 
 
-Function to calculate the number of bytes used in calculating and storing the LU factors. 
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00093}{93}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
 
 
 
-Definition at line 93 of file superlu\+\_\+dist.\+c.
-
-
-
-References Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded, and symbolic\+\_\+memory\+\_\+statistics\+\_\+storage.
-
-
-
-Referenced by oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+total\+\_\+needed\+\_\+memory().
+References \mbox{\hyperlink{superlu_8c_source_l00044}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage}}, \mbox{\hyperlink{superlu_8c_source_l00047}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage\+\_\+has\+\_\+been\+\_\+recorded}}, and \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}.
 
 \mbox{\Hypertarget{superlu__dist_8c_a26f239b3f535d534a737fbe03c51fe5e}\label{superlu__dist_8c_a26f239b3f535d534a737fbe03c51fe5e}} 
 \index{superlu\_dist.c@{superlu\_dist.c}!superlu\_cr\_to\_cc@{superlu\_cr\_to\_cc}}
@@ -96,47 +80,35 @@ Referenced by oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+total\+\_\+needed\+\_\+
 
 
 
-Definition at line 120 of file superlu\+\_\+dist.\+c.
-
-
-
-Referenced by oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed().
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00120}{120}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
 
 \mbox{\Hypertarget{superlu__dist_8c_ab9ab33a5547d5891fde671a5ae3c4353}\label{superlu__dist_8c_ab9ab33a5547d5891fde671a5ae3c4353}} 
 \index{superlu\_dist.c@{superlu\_dist.c}!superlu\_dist\_distributed\_matrix@{superlu\_dist\_distributed\_matrix}}
 \index{superlu\_dist\_distributed\_matrix@{superlu\_dist\_distributed\_matrix}!superlu\_dist.c@{superlu\_dist.c}}
 \doxysubsubsection{\texorpdfstring{superlu\_dist\_distributed\_matrix()}{superlu\_dist\_distributed\_matrix()}}
-{\footnotesize\ttfamily void superlu\+\_\+dist\+\_\+distributed\+\_\+matrix (\begin{DoxyParamCaption}\item[{int}]{opt\+\_\+flag,  }\item[{int}]{allow\+\_\+permutations,  }\item[{int}]{n,  }\item[{int}]{nnz\+\_\+local,  }\item[{int}]{nrow\+\_\+local,  }\item[{int}]{first\+\_\+row,  }\item[{double $\ast$}]{values,  }\item[{int $\ast$}]{col\+\_\+index,  }\item[{int $\ast$}]{row\+\_\+start,  }\item[{double $\ast$}]{b,  }\item[{int}]{nprow,  }\item[{int}]{npcol,  }\item[{int}]{doc,  }\item[{void $\ast$$\ast$}]{data,  }\item[{int $\ast$}]{info,  }\item[{M\+P\+I\+\_\+\+Comm}]{comm }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void superlu\+\_\+dist\+\_\+distributed\+\_\+matrix (\begin{DoxyParamCaption}\item[{int}]{opt\+\_\+flag,  }\item[{int}]{allow\+\_\+permutations,  }\item[{int}]{n,  }\item[{int}]{nnz\+\_\+local,  }\item[{int}]{nrow\+\_\+local,  }\item[{int}]{first\+\_\+row,  }\item[{double $\ast$}]{values,  }\item[{int $\ast$}]{col\+\_\+index,  }\item[{int $\ast$}]{row\+\_\+start,  }\item[{double $\ast$}]{b,  }\item[{int}]{nprow,  }\item[{int}]{npcol,  }\item[{int}]{doc,  }\item[{void $\ast$$\ast$}]{data,  }\item[{int $\ast$}]{info,  }\item[{MPI\+\_\+\+Comm}]{comm }\end{DoxyParamCaption})}
 
 
 
-Definition at line 161 of file superlu\+\_\+dist.\+c.
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l00161}{161}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
 
 
 
-References superlu\+\_\+dist\+\_\+data\+::A, a(), superlu\+\_\+dist\+\_\+data\+::anorm, oomph\+::\+Oc\+Tree\+Names\+::B, superlu\+\_\+dist\+\_\+data\+::colequ, oomph\+::\+Leak\+Check\+Names\+::doc(), superlu\+\_\+dist\+\_\+data\+::grid, i, if(), superlu\+\_\+dist\+\_\+data\+::\+L\+Ustruct, Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, n, superlu\+\_\+dist\+\_\+data\+::options, oomph\+::\+Binary\+Tree\+Names\+::R, superlu\+\_\+dist\+\_\+data\+::rowequ, superlu\+\_\+dist\+\_\+data\+::\+Scale\+Permstruct, superlu\+\_\+dist\+\_\+data\+::\+S\+O\+L\+V\+Estruct, symbolic\+\_\+memory\+\_\+statistics\+\_\+storage, t, and values.
-
-
-
-Referenced by oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed().
+References \mbox{\hyperlink{superlu__dist_8c_source_l00049}{superlu\+\_\+dist\+\_\+data\+::A}}, \mbox{\hyperlink{superlu__dist_8c_source_l00057}{superlu\+\_\+dist\+\_\+data\+::anorm}}, \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{superlu__dist_8c_source_l00056}{superlu\+\_\+dist\+\_\+data\+::colequ}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{superlu__dist_8c_source_l00048}{superlu\+\_\+dist\+\_\+data\+::grid}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00572}{if()}}, \mbox{\hyperlink{superlu__dist_8c_source_l00052}{superlu\+\_\+dist\+\_\+data\+::\+LUstruct}}, \mbox{\hyperlink{superlu_8c_source_l00044}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage}}, \mbox{\hyperlink{superlu__dist_8c_source_l00054}{superlu\+\_\+dist\+\_\+data\+::options}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{superlu__dist_8c_source_l00055}{superlu\+\_\+dist\+\_\+data\+::rowequ}}, \mbox{\hyperlink{superlu__dist_8c_source_l00051}{superlu\+\_\+dist\+\_\+data\+::\+Scale\+Permstruct}}, \mbox{\hyperlink{superlu__dist_8c_source_l00053}{superlu\+\_\+dist\+\_\+data\+::\+SOLVEstruct}}, \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 \mbox{\Hypertarget{superlu__dist_8c_aff01995cee249faccc94f0d1a4ab06ee}\label{superlu__dist_8c_aff01995cee249faccc94f0d1a4ab06ee}} 
 \index{superlu\_dist.c@{superlu\_dist.c}!superlu\_dist\_global\_matrix@{superlu\_dist\_global\_matrix}}
 \index{superlu\_dist\_global\_matrix@{superlu\_dist\_global\_matrix}!superlu\_dist.c@{superlu\_dist.c}}
 \doxysubsubsection{\texorpdfstring{superlu\_dist\_global\_matrix()}{superlu\_dist\_global\_matrix()}}
-{\footnotesize\ttfamily void superlu\+\_\+dist\+\_\+global\+\_\+matrix (\begin{DoxyParamCaption}\item[{int}]{opt\+\_\+flag,  }\item[{int}]{allow\+\_\+permutations,  }\item[{int}]{n\+\_\+in,  }\item[{int}]{nnz\+\_\+in,  }\item[{double $\ast$}]{values,  }\item[{int $\ast$}]{row\+\_\+index,  }\item[{int $\ast$}]{col\+\_\+start,  }\item[{double $\ast$}]{b,  }\item[{int}]{nprow,  }\item[{int}]{npcol,  }\item[{int}]{doc,  }\item[{void $\ast$$\ast$}]{data,  }\item[{int $\ast$}]{info,  }\item[{M\+P\+I\+\_\+\+Comm}]{comm }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void superlu\+\_\+dist\+\_\+global\+\_\+matrix (\begin{DoxyParamCaption}\item[{int}]{opt\+\_\+flag,  }\item[{int}]{allow\+\_\+permutations,  }\item[{int}]{n\+\_\+in,  }\item[{int}]{nnz\+\_\+in,  }\item[{double $\ast$}]{values,  }\item[{int $\ast$}]{row\+\_\+index,  }\item[{int $\ast$}]{col\+\_\+start,  }\item[{double $\ast$}]{b,  }\item[{int}]{nprow,  }\item[{int}]{npcol,  }\item[{int}]{doc,  }\item[{void $\ast$$\ast$}]{data,  }\item[{int $\ast$}]{info,  }\item[{MPI\+\_\+\+Comm}]{comm }\end{DoxyParamCaption})}
 
 
 
-Definition at line 1236 of file superlu\+\_\+dist.\+c.
+Definition at line \mbox{\hyperlink{superlu__dist_8c_source_l01236}{1236}} of file \mbox{\hyperlink{superlu__dist_8c_source}{superlu\+\_\+dist.\+c}}.
 
 
 
-References superlu\+\_\+dist\+\_\+data\+::A, a(), superlu\+\_\+dist\+\_\+data\+::\+AC, superlu\+\_\+dist\+\_\+data\+::anorm, oomph\+::\+Oc\+Tree\+Names\+::B, superlu\+\_\+dist\+\_\+data\+::colequ, oomph\+::\+Leak\+Check\+Names\+::doc(), superlu\+\_\+dist\+\_\+data\+::grid, i, superlu\+\_\+dist\+\_\+data\+::\+L\+Ustruct, Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage, n, superlu\+\_\+dist\+\_\+data\+::options, oomph\+::\+Binary\+Tree\+Names\+::R, superlu\+\_\+dist\+\_\+data\+::rowequ, superlu\+\_\+dist\+\_\+data\+::\+Scale\+Permstruct, symbolic\+\_\+memory\+\_\+statistics\+\_\+storage, t, and values.
-
-
-
-Referenced by oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory(), and oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed().
+References \mbox{\hyperlink{superlu__dist_8c_source_l00049}{superlu\+\_\+dist\+\_\+data\+::A}}, \mbox{\hyperlink{superlu__dist_8c_source_l00050}{superlu\+\_\+dist\+\_\+data\+::\+AC}}, \mbox{\hyperlink{superlu__dist_8c_source_l00057}{superlu\+\_\+dist\+\_\+data\+::anorm}}, \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{superlu__dist_8c_source_l00056}{superlu\+\_\+dist\+\_\+data\+::colequ}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{superlu__dist_8c_source_l00048}{superlu\+\_\+dist\+\_\+data\+::grid}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{superlu__dist_8c_source_l00052}{superlu\+\_\+dist\+\_\+data\+::\+LUstruct}}, \mbox{\hyperlink{superlu_8c_source_l00044}{Memory\+Statistics\+Storage\+::\+Memory\+\_\+usage}}, \mbox{\hyperlink{superlu__dist_8c_source_l00054}{superlu\+\_\+dist\+\_\+data\+::options}}, \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}, \mbox{\hyperlink{superlu__dist_8c_source_l00055}{superlu\+\_\+dist\+\_\+data\+::rowequ}}, \mbox{\hyperlink{superlu__dist_8c_source_l00051}{superlu\+\_\+dist\+\_\+data\+::\+Scale\+Permstruct}}, \mbox{\hyperlink{superlu__dist_8c_a0cd3d1bf634c847c38dc10ec8278cb0f}{symbolic\+\_\+memory\+\_\+statistics\+\_\+storage}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 
 
@@ -149,5 +121,5 @@ Referenced by oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed(), oomp
 
 
 
-Referenced by get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist(), get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist(), get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist(), superlu\+\_\+dist\+\_\+distributed\+\_\+matrix(), and superlu\+\_\+dist\+\_\+global\+\_\+matrix().
+Referenced by \mbox{\hyperlink{superlu__dist_8c_source_l00077}{get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist()}}, \mbox{\hyperlink{superlu__dist_8c_source_l00109}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist()}}, \mbox{\hyperlink{superlu__dist_8c_source_l00093}{get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist()}}, \mbox{\hyperlink{superlu__dist_8c_source_l00161}{superlu\+\_\+dist\+\_\+distributed\+\_\+matrix()}}, and \mbox{\hyperlink{superlu__dist_8c_source_l01236}{superlu\+\_\+dist\+\_\+global\+\_\+matrix()}}.
 

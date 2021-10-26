@@ -50,6 +50,7 @@ Enabling spatial adaptivity in time-\/dependent problems involves essentially th
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::unsteady\_newton\_solve(dt,max\_adapt,first)}
+
 \end{DoxyCode}
 
 
@@ -73,7 +74,7 @@ This procedure is the obvious generalisation of the procedure for steady problem
 \begin{DoxyEnumerate}
 \item In a steady problem the interpolation of the solution onto the adapted mesh (step 4 in the above sketch) merely serves to provide an initial guess for the solution on the refined mesh. It is irrelevant if the interpolation from the coarse mesh provides a poor approximation of the actual solution as the solution is completely recomputed anyway. ~\newline
 ~\newline
- In an unsteady problem, we also have to interpolate the history values (the solution at previous timesteps in a B\+DF scheme) onto the adapted mesh. Their values are {\itshape not} changed when the solution is advanced from time $ t $ to $ t+ dt. $ In time-\/dependent problems, the benefit of repeated mesh adaptations (i.\+e. {\ttfamily max\+\_\+adapt} $>$ 1) is therefore limited by the fact that mesh refinement cannot improve their accuracy -- the history values are always given by the (possibly poor) approximations obtained by interpolation from the coarser mesh employed at the previous timestep. We therefore recommend limiting the number of spatial adaptations to {\ttfamily max\+\_\+adapt} = 1. We stress that, in practice, this is not a serious restriction because the time-\/integration procedure will only provide (temporally) accurate results if the timestep {\ttfamily dt} is so small that the solution at time $ t $ only differs slightly from that at time $ t + dt $ . One level of mesh adaptation per timestep should therefore be sufficient to adapt the mesh in response to these changes.
+ In an unsteady problem, we also have to interpolate the history values (the solution at previous timesteps in a BDF scheme) onto the adapted mesh. Their values are {\itshape not} changed when the solution is advanced from time $ t $ to $ t+ dt. $ In time-\/dependent problems, the benefit of repeated mesh adaptations (i.\+e. {\ttfamily max\+\_\+adapt} \texorpdfstring{$>$}{>} 1) is therefore limited by the fact that mesh refinement cannot improve their accuracy -- the history values are always given by the (possibly poor) approximations obtained by interpolation from the coarser mesh employed at the previous timestep. We therefore recommend limiting the number of spatial adaptations to {\ttfamily max\+\_\+adapt} = 1. We stress that, in practice, this is not a serious restriction because the time-\/integration procedure will only provide (temporally) accurate results if the timestep {\ttfamily dt} is so small that the solution at time $ t $ only differs slightly from that at time $ t + dt $ . One level of mesh adaptation per timestep should therefore be sufficient to adapt the mesh in response to these changes.
 \item The only exception to this recommendation arises during the computation of the first timestep, illustrated in the following sketch\+:  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{adapted_ic1}
@@ -87,9 +88,9 @@ This procedure is the obvious generalisation of the procedure for steady problem
  With this procedure, repeated mesh adaptations will improve the accuracy of the solution, therefore much larger values of {\ttfamily max\+\_\+adapt} can (and should!) be specified when the first timestep is computed. The unsteady Newton solver {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} performs the revised procedure if the boolean argument {\ttfamily first} is set {\ttfamily true}. In that case, the values and history values on the adapted mesh are (re-\/)assigned by calling the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::set\_initial\_condition()}
+
 \end{DoxyCode}
- which is defined as an empty virtual function in the {\ttfamily Problem} base class. You should overload it in your derived {\ttfamily Problem} to ensure that your specific initial conditions are assigned by the mesh adaptation procedures. \mbox{[}In fact, the function {\ttfamily Problem\+::set\+\_\+initial\+\_\+condition()} is not quite empty -- not re-\/setting the initial condition when performing mesh adaptations during the first timestep of a time-\/dependent simulation seems \char`\"{}so 
-   wrong\char`\"{} that the function issues a warning message. Although the overloading of this function is not strictly necessary if the initial conditions can be represented exactly by the interpolation from the coarse mesh onto the fine mesh, we consider it good practice to do so, for reasons discussed in \href{../../../axisym_navier_stokes/spin_up/html/index.html\#good_practice_ics}{\texttt{ another tutorial}}.\mbox{]}
+ which is defined as an empty virtual function in the {\ttfamily Problem} base class. You should overload it in your derived {\ttfamily Problem} to ensure that your specific initial conditions are assigned by the mesh adaptation procedures. \mbox{[}In fact, the function {\ttfamily Problem\+::set\+\_\+initial\+\_\+condition()} is not quite empty -- not re-\/setting the initial condition when performing mesh adaptations during the first timestep of a time-\/dependent simulation seems \char`\"{}so     wrong\char`\"{} that the function issues a warning message. Although the overloading of this function is not strictly necessary if the initial conditions can be represented exactly by the interpolation from the coarse mesh onto the fine mesh, we consider it good practice to do so, for reasons discussed in \href{../../../axisym_navier_stokes/spin_up/html/index.html\#good_practice_ics}{\texttt{ another tutorial}}.\mbox{]}
 \end{DoxyEnumerate}
 
 \DoxyHorRuler{0}
@@ -116,16 +117,16 @@ As discussed \href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ else
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_MyUnitCircle====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Unit circle as GeomObject}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = \(\backslash\)sin(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// Unit circle as GeomObject}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = \(\backslash\)sin(\(\backslash\)xi)  \(\backslash\)f]}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyUnitCircle}{MyUnitCircle}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: The circle is a 1D object}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: The circle is a 1D object}}
 \DoxyCodeLine{\textcolor{comment}{ /// (i.e. it's parametrised by one intrinsic coordinate) in 2D space.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pass these arguments to the constructor of the GeomObject base class.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyUnitCircle_a056add64776e52a8ea2ba2e9d6d0e32d}{MyUnitCircle}}() : GeomObject(1,2) \{\}}
@@ -133,7 +134,7 @@ As discussed \href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ else
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor: Empty}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classMyUnitCircle_ae6b321a25ef6f6b12d7c9a225f91140d}{\string~MyUnitCircle}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Current position vector to material point at }}
+\DoxyCodeLine{\textcolor{comment}{ /// Current position vector to material point at }}
 \DoxyCodeLine{\textcolor{comment}{ /// Lagrangian coordinate xi }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyUnitCircle_ab60b73d1c28b013c40dd2aaa98072261}{position}}(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
@@ -143,7 +144,7 @@ As discussed \href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ else
 \DoxyCodeLine{  \} \textcolor{comment}{// end of position(...)}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Parametrised position on object: r(xi). Evaluated at}}
+\DoxyCodeLine{\textcolor{comment}{ /// Parametrised position on object: r(xi). Evaluated at}}
 \DoxyCodeLine{\textcolor{comment}{ /// previous time level. t=0: current time; t>0: previous}}
 \DoxyCodeLine{\textcolor{comment}{ /// time level. Circle is fixed -\/-\/ simply call the steady version.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyUnitCircle_ab60b73d1c28b013c40dd2aaa98072261}{position}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, \textcolor{keyword}{const} Vector<double>\& xi,}
@@ -167,9 +168,9 @@ As before, we use command line arguments to (optionally) specify a restart file.
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_main=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unsteady heat problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with mesh adaptation. Command line arguments specify }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the name of the restart file. }}
+\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unsteady heat problem}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// with mesh adaptation. Command line arguments specify }}
+\DoxyCodeLine{\textcolor{comment}{/// the name of the restart file. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__unsteady__heat__adapt_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -179,33 +180,29 @@ As before, we use command line arguments to (optionally) specify a restart file.
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Build problem}}
 \DoxyCodeLine{ \mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{RefineableUnsteadyHeatProblem<RefineableQUnsteadyHeatElement<2,3>}} >}
-\DoxyCodeLine{  \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}(\&\mbox{\hyperlink{namespaceTanhSolnForUnsteadyHeat_aea922a29dfeeb80ef4768def0d6fbde4}{TanhSolnForUnsteadyHeat::get\_source}});}
+\DoxyCodeLine{  problem(\&\mbox{\hyperlink{namespaceTanhSolnForUnsteadyHeat_aea922a29dfeeb80ef4768def0d6fbde4}{TanhSolnForUnsteadyHeat::get\_source}});}
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Specify duration of the simulation}}
 \DoxyCodeLine{ \textcolor{comment}{//double t\_max=3.0;}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set targets for spatial adaptivity}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.bulk\_mesh\_pt()-\/>max\_permitted\_error()=0.001;}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.bulk\_mesh\_pt()-\/>min\_permitted\_error()=0.0001;}
+\DoxyCodeLine{ problem.bulk\_mesh\_pt()-\/>max\_permitted\_error()=0.001;}
+\DoxyCodeLine{ problem.bulk\_mesh\_pt()-\/>min\_permitted\_error()=0.0001;}
 
 \end{DoxyCodeInclude}
-
-
-We create and initialise the boolean flag that indicates if the first timestep is computed, and choose a large initial value for the number of permitted mesh adaptations. We then assign the initial conditions on the coarse initial mesh and retrieve the timestep (chosen when the initial conditions are assigned in {\ttfamily set\+\_\+initial\+\_\+condition()} ) from the problem\textquotesingle{}s {\ttfamily Time} object.
+ We create and initialise the boolean flag that indicates if the first timestep is computed, and choose a large initial value for the number of permitted mesh adaptations. We then assign the initial conditions on the coarse initial mesh and retrieve the timestep (chosen when the initial conditions are assigned in {\ttfamily set\+\_\+initial\+\_\+condition()} ) from the problem\textquotesingle{}s {\ttfamily Time} object.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Set IC}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.set\_initial\_condition();}
+\DoxyCodeLine{ problem.set\_initial\_condition();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Initial timestep: Use the one used when setting up the initial}}
 \DoxyCodeLine{ \textcolor{comment}{// condition}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} dt=\mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.time\_pt()-\/>dt();}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} dt=problem.time\_pt()-\/>dt();}
 
 \end{DoxyCodeInclude}
-
-
-If the simulation has been restarted, the first timestep is not the step at which the initial condition has to be assigned, therefore we reset the {\ttfamily first} and {\ttfamily max\+\_\+adapt} parameters to their appropriate values. If the run is not restarted, the problem will have been built with a very coarse initial mesh (comprising just three elements). We don\textquotesingle{}t need an error estimator to tell us that this is too coarse to represent the solution accurately and apply two levels of uniform refinement before solving the problem. Note that we refine the entire problem, not just the mesh to ensure that {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} are executed and the equation numbering scheme is re-\/generated. {\ttfamily Problem\+::refine\+\_\+uniformly()} also interpolates the solution from the coarse initial mesh onto the refined mesh but, as discussed above, this will lead to a very poor representation of the initial condition. Therefore we re-\/assign the initial condition on the refined mesh and document the finite-\/element representation of the initial condition.
+ If the simulation has been restarted, the first timestep is not the step at which the initial condition has to be assigned, therefore we reset the {\ttfamily first} and {\ttfamily max\+\_\+adapt} parameters to their appropriate values. If the run is not restarted, the problem will have been built with a very coarse initial mesh (comprising just three elements). We don\textquotesingle{}t need an error estimator to tell us that this is too coarse to represent the solution accurately and apply two levels of uniform refinement before solving the problem. Note that we refine the entire problem, not just the mesh to ensure that {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} are executed and the equation numbering scheme is re-\/generated. {\ttfamily Problem\+::refine\+\_\+uniformly()} also interpolates the solution from the coarse initial mesh onto the refined mesh but, as discussed above, this will lead to a very poor representation of the initial condition. Therefore we re-\/assign the initial condition on the refined mesh and document the finite-\/element representation of the initial condition.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -222,21 +219,19 @@ If the simulation has been restarted, the first timestep is not the step at whic
 \DoxyCodeLine{ \textcolor{comment}{// If no restart, refine mesh uniformly before we get started}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.refine\_uniformly();}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.refine\_uniformly();}
+\DoxyCodeLine{   problem.refine\_uniformly();}
+\DoxyCodeLine{   problem.refine\_uniformly();}
 \DoxyCodeLine{   \textcolor{comment}{// Solution is automatically interpolated from the coarse initial mesh}}
 \DoxyCodeLine{   \textcolor{comment}{// onto the refined mesh but this provides a very poor representation}}
 \DoxyCodeLine{   \textcolor{comment}{// of the intial condition: Re-\/assign the initial conditions}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.set\_initial\_condition();}
+\DoxyCodeLine{   problem.set\_initial\_condition();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output FE representation of the initial condition}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution();}
+\DoxyCodeLine{ problem.doc\_solution();}
 
 \end{DoxyCodeInclude}
-
-
-The time-\/stepping loop itself is very similar to that used in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ example without spatial adaptivity}}. Here we call the three-\/argument version of the unsteady Newton solver {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} and re-\/set the parameters {\ttfamily max\+\_\+adapt} and {\ttfamily first} to their appropriate values once the first step has been performed.
+ The time-\/stepping loop itself is very similar to that used in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ example without spatial adaptivity}}. Here we call the three-\/argument version of the unsteady Newton solver {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} and re-\/set the parameters {\ttfamily max\+\_\+adapt} and {\ttfamily first} to their appropriate values once the first step has been performed.
 
  
 \begin{DoxyCodeInclude}{0}
@@ -247,7 +242,7 @@ The time-\/stepping loop itself is very similar to that used in the \href{../../
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Take timestep }}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.unsteady\_newton\_solve(dt,max\_adapt,first);}
+\DoxyCodeLine{   problem.unsteady\_newton\_solve(dt,max\_adapt,first);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Now we've done the first timestep -\/-\/ don't re-\/set the IC}}
 \DoxyCodeLine{   \textcolor{comment}{// in subsequent steps}}
@@ -258,7 +253,7 @@ The time-\/stepping loop itself is very similar to that used in the \href{../../
 \DoxyCodeLine{   max\_adapt=1;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution();}
+\DoxyCodeLine{   problem.doc\_solution();}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
@@ -277,7 +272,7 @@ As discussed above, the problem class mainly contains verbatim copies of the mem
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_problem\_class=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unsteady heat problem in quarter circle domain.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableUnsteadyHeatProblem}{RefineableUnsteadyHeatProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -294,13 +289,13 @@ As discussed above, the problem class mainly contains verbatim copies of the mem
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ada522772b79e92a75edf3724d0a273da}{actions\_after\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_aac1935e15c67b196e6db97dd058511b5}{actions\_before\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after timestep (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_aa740f2eb1b3909100a04709b401c0b41}{actions\_after\_implicit\_timestep}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before next timestep: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before next timestep: }}
 \DoxyCodeLine{\textcolor{comment}{ /// Set Dirchlet boundary conditions from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ac754f1313cd6d684c149443beb5bcf9e}{actions\_before\_implicit\_timestep}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
@@ -310,33 +305,33 @@ As discussed above, the problem class mainly contains verbatim copies of the mem
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: Rebuild the mesh of prescribed flux elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1f8a9e91269440c799a2075f989d62b1}{actions\_after\_adapt}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set initial condition (incl previous timesteps) according}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set initial condition (incl previous timesteps) according}}
 \DoxyCodeLine{\textcolor{comment}{ /// to specified function. Note that his overloads the virtual}}
 \DoxyCodeLine{\textcolor{comment}{ /// function in the Problem base class and is therefore executed }}
 \DoxyCodeLine{\textcolor{comment}{ /// automatically to re-\/assign the initial conditions during the }}
 \DoxyCodeLine{\textcolor{comment}{ /// spatially adaptive solution at the first timestep.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a30e2e1d62b059982f7014b74f4fe2be9}{set\_initial\_condition}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create UnsteadyHeat flux elements on boundary b of the Mesh pointed}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create UnsteadyHeat flux elements on boundary b of the Mesh pointed}}
 \DoxyCodeLine{\textcolor{comment}{ /// to by bulk\_mesh\_pt and add them to the Mesh object pointed to by }}
 \DoxyCodeLine{\textcolor{comment}{ /// surface\_mesh\_pt}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}{create\_flux\_elements}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&b, Mesh* \textcolor{keyword}{const} \&\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a4d8eec1505a3c53960a3182ec462b4e7}{bulk\_mesh\_pt}},}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a65601ec64c73ac578b43f4af04c46569}{create\_flux\_elements}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&b, Mesh* \textcolor{keyword}{const} \&\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}{bulk\_mesh\_pt}},}
 \DoxyCodeLine{                           Mesh* \textcolor{keyword}{const} \&surface\_mesh\_pt);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Delete UnsteadyHeat flux elements and wipe the surface mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Delete UnsteadyHeat flux elements and wipe the surface mesh}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ad2e53af5c385e44e33e400b430b610e8}{delete\_flux\_elements}}(Mesh* \textcolor{keyword}{const} \&surface\_mesh\_pt);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a77d590171785b6b5f4070af9401c0e37}{doc\_solution}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Dump problem data to allow for later restart}}
+\DoxyCodeLine{\textcolor{comment}{ /// Dump problem data to allow for later restart}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}{dump\_it}}(ofstream\& dump\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Read problem data for restart}}
+\DoxyCodeLine{\textcolor{comment}{ /// Read problem data for restart}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}{restart}}(ifstream\& restart\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to bulk mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a4d8eec1505a3c53960a3182ec462b4e7}{bulk\_mesh\_pt}}()}
+\DoxyCodeLine{\textcolor{comment}{} RefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a49ee185e10fdab1851a67150cbb0710a}{bulk\_mesh\_pt}}()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_afade341e03a4c97e62444c80adc9552f}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{  \}}
@@ -350,10 +345,10 @@ As discussed above, the problem class mainly contains verbatim copies of the mem
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to source function}}
 \DoxyCodeLine{\textcolor{comment}{} UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a99eb5a2cd4b680b4f83e739bd4e16639}{Source\_fct\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "bulk" mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}bulk"{} mesh}}
 \DoxyCodeLine{\textcolor{comment}{} RefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_afade341e03a4c97e62444c80adc9552f}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "surface" mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}surface"{} mesh}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a2febbb317a74e427bf6304235d779fe6}{Surface\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to central node (exists at all refinement levels) for doc}}
@@ -378,8 +373,8 @@ The problem constructor combines the constructors of the \href{../../../poisson/
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_constructor============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem in quarter circle domain.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Pass pointer to source function.}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem in quarter circle domain.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Pass pointer to source function.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a894f3bd6c1c23c307a736de6898e4e98}{RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem}}(}
@@ -392,24 +387,24 @@ The problem constructor combines the constructors of the \href{../../../poisson/
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output number}}
 \DoxyCodeLine{ Doc\_info.number()=0; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},Doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},Doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"time t\(\backslash\)",\(\backslash\)"u<SUB>FE</SUB>\(\backslash\)",\(\backslash\)"u<SUB>exact</SUB>\(\backslash\)","}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"\(\backslash\)"A\(\backslash\)","}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"\(\backslash\)"X<SUB>step</SUB>\(\backslash\)","}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"\(\backslash\)"N<SUB>element</SUB>\(\backslash\)","}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"\(\backslash\)"N<SUB>refined</SUB>\(\backslash\)","}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"\(\backslash\)"N<SUB>unrefined</SUB>\(\backslash\)","}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"\(\backslash\)"norm of error\(\backslash\)","}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"\(\backslash\)"norm of solution\(\backslash\)""}}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}time t\(\backslash\)"{},\(\backslash\)"{}u<SUB>FE</SUB>\(\backslash\)"{},\(\backslash\)"{}u<SUB>exact</SUB>\(\backslash\)"{},"{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}\(\backslash\)"{}A\(\backslash\)"{},"{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}\(\backslash\)"{}X<SUB>step</SUB>\(\backslash\)"{},"{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}\(\backslash\)"{}N<SUB>element</SUB>\(\backslash\)"{},"{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}\(\backslash\)"{}N<SUB>refined</SUB>\(\backslash\)"{},"{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}\(\backslash\)"{}N<SUB>unrefined</SUB>\(\backslash\)"{},"{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}\(\backslash\)"{}norm of error\(\backslash\)"{},"{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}\(\backslash\)"{}norm of solution\(\backslash\)"{}"{}}}
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -460,9 +455,7 @@ We create the {\ttfamily Geom\+Object} that describes the curvilinear domain bou
 \DoxyCodeLine{  Boundary\_pt,xi\_lo,fract\_mid,xi\_hi,time\_stepper\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-Next, we create the surface mesh that contains the prescribed flux elements and combine the two submeshes to the {\ttfamily Problem\textquotesingle{}s} global mesh. We create an instance of the {\ttfamily Z2\+Error\+Estimator} and pass it to the bulk mesh.
+ Next, we create the surface mesh that contains the prescribed flux elements and combine the two submeshes to the {\ttfamily Problem\textquotesingle{}s} global mesh. We create an instance of the {\ttfamily Z2\+Error\+Estimator} and pass it to the bulk mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -486,9 +479,7 @@ Next, we create the surface mesh that contains the prescribed flux elements and 
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-We pin the nodal values on the Dirichlet boundaries and select the central node in the unrefined three-\/element mesh as the control node at which the solution is documented in the trace file.
+ We pin the nodal values on the Dirichlet boundaries and select the central node in the unrefined three-\/element mesh as the control node at which the solution is documented in the trace file.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -517,9 +508,7 @@ We pin the nodal values on the Dirichlet boundaries and select the central node 
 \DoxyCodeLine{ Doc\_node\_pt=el0\_pt-\/>node\_pt(nnod-\/1);}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we complete the build of all elements by passing the relevant function pointers to the elements, and assign the equation numbers.
+ Finally, we complete the build of all elements by passing the relevant function pointers to the elements, and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -555,14 +544,12 @@ Finally, we complete the build of all elements by passing the relevant function 
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_old_functions}{}\doxysection{Other member functions}\label{index_old_functions}
 The remaining member functions
@@ -590,7 +577,7 @@ It is worth examining the dump and restart functions, however, as they demonstra
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_dump\_it=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Dump the solution to disk}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}{RefineableUnsteadyHeatProblem<ELEMENT>::dump\_it}}(ofstream\& dump\_file)}
 \DoxyCodeLine{\{}
@@ -612,9 +599,7 @@ It is worth examining the dump and restart functions, however, as they demonstra
 \DoxyCodeLine{\} \textcolor{comment}{// end of restart}}
 
 \end{DoxyCodeInclude}
-
-
-Since details of their implementation are hidden from the user, we briefly comment on the various tasks performed by these functions. The main task of the {\ttfamily Problem\+::read(...)} function is to read values (and history values) of all {\ttfamily Data} objects from a file and to assign these values to the appropriate {\ttfamily Data} (and {\ttfamily Node}) objects in the {\ttfamily Problem}. This assumes that the {\ttfamily Problem\textquotesingle{}s} constituent {\ttfamily Meshes}, elements, {\ttfamily Nodes} and {\ttfamily Data} objects have been created, and that the {\ttfamily Problem\textquotesingle{}s} various pointer-\/based lookup schemes access them in the order they were in when the {\ttfamily Problem} was dumped to the restart file. In a non-\/adaptive computation, the number of elements and the number of {\ttfamily Data} objects remain constant throughout the simulation and the {\ttfamily Problem\+::read(...)} function can be called as soon as the {\ttfamily Problem} has been built -- usually by its constructor. (The {\ttfamily Problem} constructor always builds and enumerates its constituent objects in the same order.)
+ Since details of their implementation are hidden from the user, we briefly comment on the various tasks performed by these functions. The main task of the {\ttfamily Problem\+::read(...)} function is to read values (and history values) of all {\ttfamily Data} objects from a file and to assign these values to the appropriate {\ttfamily Data} (and {\ttfamily Node}) objects in the {\ttfamily Problem}. This assumes that the {\ttfamily Problem\textquotesingle{}s} constituent {\ttfamily Meshes}, elements, {\ttfamily Nodes} and {\ttfamily Data} objects have been created, and that the {\ttfamily Problem\textquotesingle{}s} various pointer-\/based lookup schemes access them in the order they were in when the {\ttfamily Problem} was dumped to the restart file. In a non-\/adaptive computation, the number of elements and the number of {\ttfamily Data} objects remain constant throughout the simulation and the {\ttfamily Problem\+::read(...)} function can be called as soon as the {\ttfamily Problem} has been built -- usually by its constructor. (The {\ttfamily Problem} constructor always builds and enumerates its constituent objects in the same order.)
 
 In a simulation with spatial adaptivity the number of elements, {\ttfamily Nodes} and {\ttfamily Data} objects varies throughout the computation. It is therefore necessary to re-\/generate the {\ttfamily Problem\textquotesingle{}s} refinement pattern before the {\ttfamily Data} values can be read from the restart file. This is achieved (internally) by calling the function {\ttfamily Refineable\+Mesh\+::dump\+\_\+refinement(...)} for all refineable meshes before the {\ttfamily Data} is dumped. This function writes the {\ttfamily Mesh\textquotesingle{}s} refinement pattern to the restart file, using a format that can be read by the corresponding member function {\ttfamily Refineable\+Mesh\+::refine(...)} which adapts an unrefined mesh so that its topology and the order of its {\ttfamily Nodes} and elements is recreated.
 
@@ -638,10 +623,10 @@ The plots below show the time history of various parameters.
 The plots illustrate clearly how the mesh is adapted as the step moves through the domain -- the peaks in the number of refined/unrefined elements per timestep coincide with the periods during which the step moves very rapidly. The increase in the error during these phases is mainly due to the temporal error -- the \href{../figures/step_soln.avi}{\texttt{ animation}} shows that the computed solution lags behind the exact one. We will address this by adding adaptive time-\/stepping in \href{../../two_d_unsteady_heat_2adapt/html/index.html}{\texttt{ another example.}}\hypertarget{index_ex}{}\doxysubsection{Exercises}\label{index_ex}
 
 \begin{DoxyEnumerate}
-\item Confirm that the error during the periods of rapid change in the solution is due to the temporal error by repeating the simulation with a smaller/larger timestep and/or a time-\/stepping scheme with higher/lower order (e.\+g. B\+D\+F$<$1$>$ or B\+D\+F$<$4$>$).
+\item Confirm that the error during the periods of rapid change in the solution is due to the temporal error by repeating the simulation with a smaller/larger timestep and/or a time-\/stepping scheme with higher/lower order (e.\+g. BDF$<$1$>$ or BDF$<$4$>$).
 \item Assess the importance of re-\/assigning the initial conditions when spatial adaptations are performed during the computation of the first timestep.
 \begin{DoxyEnumerate}
-\item Compare the finite-\/element representation of the initial condition(contained in the file {\ttfamily R\+E\+S\+L\+T/soln0.\+dat}) against that obtained when the re-\/assignment of the initial conditions after the two calls to {\ttfamily problem.\+refine\+\_\+uniformly()} in the {\ttfamily main} function is suppressed.
+\item Compare the finite-\/element representation of the initial condition(contained in the file {\ttfamily RESLT/soln0.\+dat}) against that obtained when the re-\/assignment of the initial conditions after the two calls to {\ttfamily problem.\+refine\+\_\+uniformly()} in the {\ttfamily main} function is suppressed.
 \item Comment out the calls to {\ttfamily problem.\+refine\+\_\+uniformly()} and set {\ttfamily first=false} throughout the {\ttfamily main} function and compare the computed results against those obtained with ~\newline
  the correct procedure.
 \end{DoxyEnumerate}
@@ -664,5 +649,5 @@ demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/two_d_unsteady_heat_adapt.c
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

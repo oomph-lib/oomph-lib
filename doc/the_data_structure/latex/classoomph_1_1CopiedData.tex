@@ -22,9 +22,9 @@ void \mbox{\hyperlink{classoomph_1_1CopiedData_a675b1811d9c6b1ba1ce4bbcb7b681245
 \begin{DoxyCompactList}\small\item\em Clear the pointers to the copied data. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CopiedData_ab613f17b01f372d5dbe7365cdb8b8819}{Copied\+Data}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1CopiedData_a80125e8a22f8de1d26be39fe85a5e207}{Copied\+Data}} (const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&data)
+\mbox{\hyperlink{classoomph_1_1CopiedData_ad83ed456ef5a8369b2e529eecbd5948a}{Copied\+Data}} (const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&data)=delete
 \begin{DoxyCompactList}\small\item\em (Shallow) copy constructor \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CopiedData_a1548a29a62fb5bb646af063a16a110c9}{operator=}} (const \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} \&)
+void \mbox{\hyperlink{classoomph_1_1CopiedData_ae228d2a42da6b0cc412a8a5ad43c9677}{operator=}} (const \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1CopiedData_a3a2a07b9a7c41b687cf32da306cbbb9d}{$\sim$\+Copied\+Data}} ()
 \begin{DoxyCompactList}\small\item\em Destructor informs original object that the copy is being deleted and clears its pointers to the stored values. \end{DoxyCompactList}\item 
@@ -52,7 +52,7 @@ void \mbox{\hyperlink{classoomph_1_1CopiedData_a7e29b2bb1cf0ebad16afac2e5d7342d8
 \doxysubsection{Detailed Description}
 Custom \mbox{\hyperlink{classoomph_1_1Data}{Data}} class that is used when making a shallow copy of a data object. The class contains a copy of an entire other \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
 
-Definition at line 660 of file nodes.\+h.
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00651}{651}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
 
 
 
@@ -69,25 +69,21 @@ Constructor.
 
 Constructor, creates a \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} object with all values copied from another \mbox{\hyperlink{classoomph_1_1Data}{Data}} object. 
 
-Definition at line 1409 of file nodes.\+cc.
+Definition at line \mbox{\hyperlink{nodes_8cc_source_l01409}{1409}} of file \mbox{\hyperlink{nodes_8cc_source}{nodes.\+cc}}.
 
 
 
-References oomph\+::\+Data\+::add\+\_\+copy(), oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), and oomph\+::\+Data\+::\+Value.
+References \mbox{\hyperlink{nodes_8cc_source_l00076}{oomph\+::\+Data\+::add\+\_\+copy()}}, \mbox{\hyperlink{nodes_8h_source_l00116}{oomph\+::\+Data\+::\+Eqn\+\_\+number}}, \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a\+\_\+copy()}}, and \mbox{\hyperlink{nodes_8h_source_l00112}{oomph\+::\+Data\+::\+Value}}.
 
-\mbox{\Hypertarget{classoomph_1_1CopiedData_a80125e8a22f8de1d26be39fe85a5e207}\label{classoomph_1_1CopiedData_a80125e8a22f8de1d26be39fe85a5e207}} 
+\mbox{\Hypertarget{classoomph_1_1CopiedData_ad83ed456ef5a8369b2e529eecbd5948a}\label{classoomph_1_1CopiedData_ad83ed456ef5a8369b2e529eecbd5948a}} 
 \index{oomph::CopiedData@{oomph::CopiedData}!CopiedData@{CopiedData}}
 \index{CopiedData@{CopiedData}!oomph::CopiedData@{oomph::CopiedData}}
 \doxysubsubsection{\texorpdfstring{CopiedData()}{CopiedData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Copied\+Data\+::\+Copied\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Copied\+Data\+::\+Copied\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Data}{Data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 (Shallow) copy constructor 
-
-
-
-Definition at line 677 of file nodes.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1CopiedData_a3a2a07b9a7c41b687cf32da306cbbb9d}\label{classoomph_1_1CopiedData_a3a2a07b9a7c41b687cf32da306cbbb9d}} 
 \index{oomph::CopiedData@{oomph::CopiedData}!````~CopiedData@{$\sim$CopiedData}}
@@ -101,11 +97,11 @@ Destructor informs original object that the copy is being deleted and clears its
 
 
 
-Definition at line 687 of file nodes.\+h.
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00675}{675}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
 
 
 
-References Copied\+\_\+data\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Data\+::remove\+\_\+copy(), and oomph\+::\+Data\+::\+Value.
+References \mbox{\hyperlink{nodes_8h_source_l00655}{Copied\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00116}{oomph\+::\+Data\+::\+Eqn\+\_\+number}}, \mbox{\hyperlink{nodes_8cc_source_l00102}{oomph\+::\+Data\+::remove\+\_\+copy()}}, and \mbox{\hyperlink{nodes_8h_source_l00112}{oomph\+::\+Data\+::\+Value}}.
 
 
 
@@ -126,7 +122,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a98412724efd3d51925de1a24
 
 
 
-Definition at line 720 of file nodes.\+h.
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00708}{708}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1CopiedData_a675b1811d9c6b1ba1ce4bbcb7b681245}\label{classoomph_1_1CopiedData_a675b1811d9c6b1ba1ce4bbcb7b681245}} 
 \index{oomph::CopiedData@{oomph::CopiedData}!clear\_copied\_pointers@{clear\_copied\_pointers}}
@@ -144,11 +140,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a409e3140829def2b1e738a24
 
 
 
-Definition at line 1398 of file nodes.\+cc.
+Definition at line \mbox{\hyperlink{nodes_8cc_source_l01398}{1398}} of file \mbox{\hyperlink{nodes_8cc_source}{nodes.\+cc}}.
 
 
 
-References Copied\+\_\+data\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, and oomph\+::\+Data\+::\+Value.
+References \mbox{\hyperlink{nodes_8h_source_l00655}{Copied\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00116}{oomph\+::\+Data\+::\+Eqn\+\_\+number}}, and \mbox{\hyperlink{nodes_8h_source_l00112}{oomph\+::\+Data\+::\+Value}}.
 
 \mbox{\Hypertarget{classoomph_1_1CopiedData_ac76cb0c286daa39b501bff9ef82bb05c}\label{classoomph_1_1CopiedData_ac76cb0c286daa39b501bff9ef82bb05c}} 
 \index{oomph::CopiedData@{oomph::CopiedData}!is\_a\_copy@{is\_a\_copy}}
@@ -166,7 +162,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_a736feee0f95ab3d542c70db6
 
 
 
-Definition at line 705 of file nodes.\+h.
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00693}{693}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1CopiedData_a80b677702e0cb94c5356214f5cf9f9fb}\label{classoomph_1_1CopiedData_a80b677702e0cb94c5356214f5cf9f9fb}} 
 \index{oomph::CopiedData@{oomph::CopiedData}!is\_a\_copy@{is\_a\_copy}}
@@ -184,25 +180,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_ae31cff2285588c40cd33fac0
 
 
 
-Definition at line 713 of file nodes.\+h.
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00701}{701}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1CopiedData_a1548a29a62fb5bb646af063a16a110c9}\label{classoomph_1_1CopiedData_a1548a29a62fb5bb646af063a16a110c9}} 
+\mbox{\Hypertarget{classoomph_1_1CopiedData_ae228d2a42da6b0cc412a8a5ad43c9677}\label{classoomph_1_1CopiedData_ae228d2a42da6b0cc412a8a5ad43c9677}} 
 \index{oomph::CopiedData@{oomph::CopiedData}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::CopiedData@{oomph::CopiedData}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Copied\+Data\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Copied\+Data\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CopiedData}{Copied\+Data}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 680 of file nodes.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 \mbox{\Hypertarget{classoomph_1_1CopiedData_a7e29b2bb1cf0ebad16afac2e5d7342d8}\label{classoomph_1_1CopiedData_a7e29b2bb1cf0ebad16afac2e5d7342d8}} 
 \index{oomph::CopiedData@{oomph::CopiedData}!reset\_copied\_pointers@{reset\_copied\_pointers}}
@@ -214,17 +202,19 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 Reset the pointers to the copied data. 
 
+///////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////////// Reset the pointers to the copied data 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_afd33533f3ddf61bc34106a4dc72de541}{oomph\+::\+Data}}.
 
 
 
-Definition at line 1381 of file nodes.\+cc.
+Definition at line \mbox{\hyperlink{nodes_8cc_source_l01381}{1381}} of file \mbox{\hyperlink{nodes_8cc_source}{nodes.\+cc}}.
 
 
 
-References Copied\+\_\+data\+\_\+pt, oomph\+::\+Data\+::\+Eqn\+\_\+number, oomph\+::\+Data\+::\+Nvalue, oomph\+::\+Data\+::nvalue(), and oomph\+::\+Data\+::\+Value.
+References \mbox{\hyperlink{nodes_8h_source_l00655}{Copied\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00116}{oomph\+::\+Data\+::\+Eqn\+\_\+number}}, \mbox{\hyperlink{nodes_8h_source_l00135}{oomph\+::\+Data\+::\+Nvalue}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, and \mbox{\hyperlink{nodes_8h_source_l00112}{oomph\+::\+Data\+::\+Value}}.
 
 \mbox{\Hypertarget{classoomph_1_1CopiedData_aa7c48fb5ea17cd42260965bf2c800b3d}\label{classoomph_1_1CopiedData_aa7c48fb5ea17cd42260965bf2c800b3d}} 
 \index{oomph::CopiedData@{oomph::CopiedData}!resize@{resize}}
@@ -242,7 +232,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Data_ac68583834c9bef47f5c37c89
 
 
 
-Definition at line 1438 of file nodes.\+cc.
+Definition at line \mbox{\hyperlink{nodes_8cc_source_l01438}{1438}} of file \mbox{\hyperlink{nodes_8cc_source}{nodes.\+cc}}.
 
 
 
@@ -259,11 +249,11 @@ Pointer to the \mbox{\hyperlink{classoomph_1_1Data}{Data}} object from which the
 
 
 
-Definition at line 664 of file nodes.\+h.
+Definition at line \mbox{\hyperlink{nodes_8h_source_l00655}{655}} of file \mbox{\hyperlink{nodes_8h_source}{nodes.\+h}}.
 
 
 
-Referenced by clear\+\_\+copied\+\_\+pointers(), reset\+\_\+copied\+\_\+pointers(), and $\sim$\+Copied\+Data().
+Referenced by \mbox{\hyperlink{nodes_8cc_source_l01398}{clear\+\_\+copied\+\_\+pointers()}}, \mbox{\hyperlink{nodes_8cc_source_l01381}{reset\+\_\+copied\+\_\+pointers()}}, and \mbox{\hyperlink{nodes_8h_source_l00675}{$\sim$\+Copied\+Data()}}.
 
 
 

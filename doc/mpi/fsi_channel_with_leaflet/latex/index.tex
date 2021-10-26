@@ -1,6 +1,6 @@
 This document provides an overview of how to distribute fluid-\/structure interaction problems in which algebraic node update methods are used to deform the fluid mesh in response to changes in the shape of the domain boundary. It is part of a \href{../../../example_code_list/html/index.html\#distributed}{\texttt{ series of tutorials}} that discuss how to modify existing serial driver codes so that the {\ttfamily Problem} object can be distributed across multiple processors.
 
-As discussed in the \href{../../general_mpi/html/index.html\#alg_node_update}{\texttt{ general M\+PI tutorial}}, the parallel implementation of algebraic node update methods for specific meshes is greatly facilitated if the {\ttfamily Geom\+Object} that describes the motion of the moving domain boundary is available on all processors. In F\+SI problems, the moving boundary is typically represented by a {\ttfamily Mesh\+As\+Geom\+Object} -- a compound {\ttfamily Geom\+Object} formed from the lower-\/dimensional mesh of {\ttfamily Solid\+Elements} that define the moving boundary of the fluid domain. To ensure that the {\ttfamily Mesh\+As\+Geom\+Object} remains available on all processors when the underlying mesh is distributed, we use the function {\ttfamily Mesh\+::keep\+\_\+all\+\_\+elements\+\_\+as\+\_\+halos()} to indicate that all elements should be retained on all processors.
+As discussed in the \href{../../general_mpi/html/index.html\#alg_node_update}{\texttt{ general MPI tutorial}}, the parallel implementation of algebraic node update methods for specific meshes is greatly facilitated if the {\ttfamily Geom\+Object} that describes the motion of the moving domain boundary is available on all processors. In FSI problems, the moving boundary is typically represented by a {\ttfamily Mesh\+As\+Geom\+Object} -- a compound {\ttfamily Geom\+Object} formed from the lower-\/dimensional mesh of {\ttfamily Solid\+Elements} that define the moving boundary of the fluid domain. To ensure that the {\ttfamily Mesh\+As\+Geom\+Object} remains available on all processors when the underlying mesh is distributed, we use the function {\ttfamily Mesh\+::keep\+\_\+all\+\_\+elements\+\_\+as\+\_\+halos()} to indicate that all elements should be retained on all processors.
 
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
@@ -10,23 +10,21 @@ As discussed in the \href{../../general_mpi/html/index.html\#alg_node_update}{\t
 \end{center} 
 
 \DoxyHorRuler{0}
-\hypertarget{index_fsi_channel_with_leaflet}{}\doxysection{Revisiting the F\+S\+I channel with leaflet problem}\label{index_fsi_channel_with_leaflet}
+\hypertarget{index_fsi_channel_with_leaflet}{}\doxysection{Revisiting the FSI channel with leaflet problem}\label{index_fsi_channel_with_leaflet}
 We demonstrate the methodology for the problem of \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ flow past an elastic leaflet in a 2D channel}}. Most of driver code is identical to its serial counterpart and we only discuss the changes required to distribute the problem. Please refer to \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ another tutorial}} for a more detailed discussion of the problem and its (serial) implementation. ~\newline
 
 
 \DoxyHorRuler{0}
 \hypertarget{index_main_body}{}\doxysubsection{The main function}\label{index_main_body}
-As with other parallel driver codes, the changes from the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ serial driver code }} are extremely modest, essentially including the initialisation and shutdown of M\+PI. Once the problem is set up, we call {\ttfamily Problem\+::distribute(...)}, using the boolean flag {\ttfamily report\+\_\+stats} to indicate that the statistics of the distribution should be reported on screen.
+As with other parallel driver codes, the changes from the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ serial driver code }} are extremely modest, essentially including the initialisation and shutdown of MPI. Once the problem is set up, we call {\ttfamily Problem\+::distribute(...)}, using the boolean flag {\ttfamily report\+\_\+stats} to indicate that the statistics of the distribution should be reported on screen.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{   \textcolor{comment}{// Distribute problem using METIS to determine the partitioning}}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aceac2d137312489e7a8df95ead17ee0f}{problem}}.distribute(report\_stats);}
+\DoxyCodeLine{   problem.distribute(report\_stats);}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_problem_class}{}\doxysubsection{The problem class}\label{index_problem_class}
 The only additional function is {\ttfamily actions\+\_\+after\+\_\+distribute()}, described \href{\#actions_routines}{\texttt{ later in this tutorial}}.
 
@@ -43,7 +41,7 @@ The only difference from the serial counterpart is that we ~\newline
 \DoxyCodeLine{ \textcolor{comment}{// Geometric object that represents the undeformed leaflet}}
 \DoxyCodeLine{ UndeformedLeaflet* undeformed\_wall\_pt=\textcolor{keyword}{new} UndeformedLeaflet(x\_0);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{//Create the "wall" mesh with FSI Hermite beam elements}}
+\DoxyCodeLine{ \textcolor{comment}{//Create the "{}wall"{} mesh with FSI Hermite beam elements}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_wall\_el=5;}
 \DoxyCodeLine{ Wall\_mesh\_pt = \textcolor{keyword}{new} OneDLagrangianMesh<FSIHermiteBeamElement>}
 \DoxyCodeLine{  (n\_wall\_el,hleaflet,undeformed\_wall\_pt,wall\_time\_stepper\_pt);}
@@ -52,17 +50,15 @@ The only difference from the serial counterpart is that we ~\newline
 \DoxyCodeLine{ Wall\_mesh\_pt-\/>set\_keep\_all\_elements\_as\_halos();}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_action_after_adapt}{}\doxysubsection{Actions after adaptation}\label{index_action_after_adapt}
-The {\ttfamily actions\+\_\+after\+\_\+adapt()} function requires only a minor change from the serial version --- a simple re-\/ordering of the sequence in which the various steps are performed. In serial it does not matter in which order the (re-\/)assignment of the auxiliary node update functions and (re-\/)setup of the fluid-\/structure interaction are performed. In the parallel version, however, the assignment of the auxiliary node update functions must take place {\bfseries{after}} the (re-\/)setup of the fluid-\/structure interaction. This is because the function {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} creates halo copies of the fluid elements (and their nodes!) if the required fluid element is not present on the current processor. Any newly-\/created halo fluid nodes on the F\+SI boundary are accessible via the usual boundary lookup schemes and must be told about the auxiliary node update function which applies the no-\/slip condition.
+The {\ttfamily actions\+\_\+after\+\_\+adapt()} function requires only a minor change from the serial version --- a simple re-\/ordering of the sequence in which the various steps are performed. In serial it does not matter in which order the (re-\/)assignment of the auxiliary node update functions and (re-\/)setup of the fluid-\/structure interaction are performed. In the parallel version, however, the assignment of the auxiliary node update functions must take place {\bfseries{after}} the (re-\/)setup of the fluid-\/structure interaction. This is because the function {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} creates halo copies of the fluid elements (and their nodes!) if the required fluid element is not present on the current processor. Any newly-\/created halo fluid nodes on the FSI boundary are accessible via the usual boundary lookup schemes and must be told about the auxiliary node update function which applies the no-\/slip condition.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==== start\_of\_actions\_after\_adapt=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions\_after\_adapt()}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} FSIChannelWithLeafletProblem<ELEMENT>::actions\_after\_adapt()}
 \DoxyCodeLine{\{}
@@ -116,9 +112,7 @@ The {\ttfamily actions\+\_\+after\+\_\+adapt()} function requires only a minor c
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_actions\_after\_adapt}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_action_after_distribution}{}\doxysubsection{Actions after distribution}\label{index_action_after_distribution}
 The actions required after distribution are extremely similar to those required after adaptation because distribution deletes certain elements (or replaces them by halo copies). The only difference is that the redundant pressure degrees of freedom do not have to be re-\/pinned.
 
@@ -126,7 +120,7 @@ The actions required after distribution are extremely similar to those required 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==== start\_of\_actions\_after\_distribute============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions\_after\_distribute()}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} FSIChannelWithLeafletProblem<ELEMENT>::actions\_after\_distribute()}
 \DoxyCodeLine{\{}
@@ -172,9 +166,7 @@ The actions required after distribution are extremely similar to those required 
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_actions\_after\_distribute}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_doc_solution}{}\doxysubsection{The doc\+\_\+solution() function}\label{index_doc_solution}
 As usual, we add the processor number to the end of the filename for each output file to make sure that the different processors don\textquotesingle{}t over-\/write each other\textquotesingle{}s output.
 
@@ -188,13 +180,13 @@ The trace file documents the time trace of the imposed influx and the displaceme
 \DoxyCodeLine{ \textcolor{comment}{// the trace file.}}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (this-\/>communicator\_pt()-\/>my\_rank()==0)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   trace << time << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{         << Global\_Physical\_Variables::flux(time) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{         << tip\_node\_pt-\/>x(0) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{         << tip\_node\_pt-\/>x(1) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{         << tip\_node\_pt-\/>dposition\_dt(0) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{         << tip\_node\_pt-\/>dposition\_dt(1) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{         << doc\_info.number() << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{   trace << time << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{         << Global\_Physical\_Variables::flux(time) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{         << tip\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{         << tip\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{         << tip\_node\_pt-\/>dposition\_dt(0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{         << tip\_node\_pt-\/>dposition\_dt(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{         << doc\_info.number() << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{         << std::endl;}
 \DoxyCodeLine{  \}}
 
@@ -208,9 +200,9 @@ The source files for this tutorial can be found in
 
 \begin{center} \href{../../../../demo_drivers/mpi/multi_domain/fsi_channel_with_leaflet}{\texttt{ demo\+\_\+drivers/mpi/multi\+\_\+domain/fsi\+\_\+channel\+\_\+with\+\_\+leaflet }} \end{center} 
 
-Similar examples of modified driver codes for F\+SI problems for a channel with a collapsible wall and an oscillating ring can be found in \begin{center} \href{../../../../demo_drivers/mpi/multi_domain/}{\texttt{ demo\+\_\+drivers/mpi/multi\+\_\+domain }} \end{center} 
+Similar examples of modified driver codes for FSI problems for a channel with a collapsible wall and an oscillating ring can be found in \begin{center} \href{../../../../demo_drivers/mpi/multi_domain/}{\texttt{ demo\+\_\+drivers/mpi/multi\+\_\+domain }} \end{center} 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

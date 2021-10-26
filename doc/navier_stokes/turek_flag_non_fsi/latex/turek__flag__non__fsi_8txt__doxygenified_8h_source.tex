@@ -1,0 +1,412 @@
+\hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source}{}\doxysection{turek\+\_\+flag\+\_\+non\+\_\+fsi.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{turek__flag__non__fsi_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: Flow past a cylinder with a waving flag}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{In this example we consider the flow in a 2D channel that contains a cylinder}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{with a waving "{}flag"{}. This is a "{}warm-\/up problem"{}}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{for the solution of Turek \& Hron's FSI benchmark problem}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{discussed in <A HREF="{}../../../interaction/turek\_flag/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{another tutorial.</A>}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{\(\backslash\)section the\_problem The Problem}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{The figure below shows a sketch of the problem: A 2D channel of}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{height \(\backslash\)f\$ H\string^*\(\backslash\)f\$  and length \(\backslash\)f\$ L\string^* \(\backslash\)f\$ contains }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{a cylinder of diameter \(\backslash\)f\$ d\string^* \(\backslash\)f\$, centred at }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{\(\backslash\)f\$ (X\string^*\_c, Y\string^*\_c) \(\backslash\)f\$ to which a "{}flag"{} of thickness }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{\(\backslash\)f\$ H\string^*\_\{flag\}\(\backslash\)f\$  and length \(\backslash\)f\$ L\string^*\_\{flag\} \(\backslash\)f\$ is attached.}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{We assume that the flag performs time-\/periodic oscillations with }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{period \(\backslash\)f\$ T\string^*. \(\backslash\)f\$  Steady Poiseuille flow with average velocity \(\backslash\)f\$ U\string^* \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{is imposed at the left end of the channel while we assume the }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{outflow to be parallel and axially traction-\/free.}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{\(\backslash\)image html turek\_flag\_non\_fsi\_dim.gif "{}Sketch of the problem in dimensional variables. "{} }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{\(\backslash\)image latex turek\_flag\_non\_fsi\_dim.eps "{}Sketch of the problem in dimensional variables. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{   }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{We non-\/dimensionalise all length and coordinates }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{on the diameter of the cylinder, \(\backslash\)f\$ d\string^* \(\backslash\)f\$, time on the natural timescale of the flow, \(\backslash\)f\$ d\string^*/}U\string^* \(\backslash\)f\$, the}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00034}00034 velocities on the mean velocity,  \(\backslash\)f\$ U\string^* \(\backslash\)f\$, and the pressure}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00035}00035 on the viscous scale. The problem is then}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00036}00036 governed by the non-\/dimensional Navier-\/Stokes equations}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00037}00037 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00038}00038 Re \(\backslash\)left( St \(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial t\} + }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00039}00039 u\_j \(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} \(\backslash\)right) =}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00040}00040 -\/ \(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial x\_i\}  +}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00041}00041 \(\backslash\)frac\{\(\backslash\)partial \}\{\(\backslash\)partial x\_j\} \(\backslash\)left[ \(\backslash\)left(}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00042}00042 \(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} +  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00043}00043 \(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} \(\backslash\)right) \(\backslash\)right],}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00044}00044 \(\backslash\)f] }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00045}00045 where \(\backslash\)f\$ \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Re}} = \(\backslash\)rho U\string^* H\_0\string^* / \(\backslash\)mu \(\backslash\)f\$ and \(\backslash\)f\$ St = 1 \(\backslash\)f\$,}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00046}00046 and}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00047}00047 <CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00048}00048 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00049}00049 \(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_i\} = 0,}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00050}00050 \(\backslash\)f]}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00051}00051 </CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00052}00052 subject to parabolic inflow}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00053}00053 <CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00054}00054 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00055}00055 \{\(\backslash\)bf u\} = 6 x\_2 (1-\/x\_2) \{\(\backslash\)bf e\}\_1}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00056}00056 \(\backslash\)f] }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00057}00057 </CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00058}00058 at the inflow cross-\/section; parallel, axially-\/traction-\/free outflow}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00059}00059 at the outlet; and no-\/slip on the stationary channel walls}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00060}00060 and the surface of the cylinder, \(\backslash\)f\$ \{\(\backslash\)bf u\} = \{\(\backslash\)bf 0\} \(\backslash\)f\$. }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00061}00061 The no-\/slip condition on the moving flag is}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00062}00062 <CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00063}00063 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00064}00064 \{\(\backslash\)bf u\} = \(\backslash\)frac\{\(\backslash\)partial \{\(\backslash\)bf R\}\_w(\(\backslash\)xi\_\{[top,tip,bottom]\},t)\}\{\(\backslash\)partial t\}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00065}00065 \(\backslash\)f] }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00066}00066 </CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00067}00067 where \(\backslash\)f\$ \(\backslash\)xi\_\{[top,tip,bottom]\} \(\backslash\)f\$ are Lagrangian coordinates }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00068}00068 parametrising the three faces of the flag.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00069}00069 The flag performs oscillations with non-\/dimensional period}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00070}00070 \(\backslash\)f\$ T = T\string^* U\string^* / \mbox{\hyperlink{namespaceFlag__definition_a6cdf33de1fe6f94832181664d7769af7}{H}}\string^*\_\{tot\} \(\backslash\)f\$. Here is a sketch of }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00071}00071 the non-\/dimensional version of the problem:}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00073}00073 \(\backslash\)image html turek\_flag\_non\_fsi.gif \textcolor{stringliteral}{"{}Sketch of the problem in dimensionless variables, showing the Lagrangian coordinates that parametrise the three faces of the flag. "{}} }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00074}00074 \(\backslash\)image latex turek\_flag\_non\_fsi.eps \textcolor{stringliteral}{"{}Sketch of the problem in dimensionless variables, showing the Lagrangian coordinates that parametrise the three faces of the flag. "{}} width=0.75\(\backslash\)textwidth}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00075}00075  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00076}00076 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00078}00078 <HR> }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00079}00079 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00081}00081 \(\backslash\)section results Results}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00083}00083 The figure below shows a snapshot of the flow field  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00084}00084 (pressure contours and instantaneous streamlines)  \textcolor{keywordflow}{for} a Reynolds}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00085}00085 number of \(\backslash\)f\$ \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Re}}=100 \(\backslash\)f\$ and an oscillation period of \(\backslash\)f\$ T= 10 \(\backslash\)f\$, as }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00086}00086 well as the corresponding fluid mesh. Note how \(\backslash\)c oomph-\/lib\textcolor{stringliteral}{'s automatic }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00087}00087 \textcolor{stringliteral}{mesh adaptation has refined the mesh  in the high-\/shear}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00088}00088 \textcolor{stringliteral}{regions near the front of the cylinder and at the trailing edge}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00089}00089 \textcolor{stringliteral}{of the flag.}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00090}00090 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00091}00091 \textcolor{stringliteral}{\(\backslash\)image html flow\_cropped.gif "{}Mesh (top) and flow field (bottom). "{} }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00092}00092 \textcolor{stringliteral}{\(\backslash\)image latex flow\_cropped.eps "{}Mesh (top) and flow field (bottom). "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00093}00093 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00094}00094 \textcolor{stringliteral}{The corresponding <A HREF="{}../figures/turek\_flag\_non\_fsi.avi"{}> }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00095}00095 \textcolor{stringliteral}{animation</A> illustrates the algebraic node update strategy }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00096}00096 \textcolor{stringliteral}{(implemented with an \(\backslash\)c AlgebraicMesh, discussed in more detail}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00097}00097 \textcolor{stringliteral}{in  <A HREF="{}../../algebraic\_collapsible\_channel/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00098}00098 \textcolor{stringliteral}{another tutorial</A>) and the evolution of}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00099}00099 \textcolor{stringliteral}{the flow field. Note that the instantaneous streamlines intersect}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00100}00100 \textcolor{stringliteral}{the (impermeable) flag because the flag is not stationary. }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00101}00101 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00102}00102 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00103}00103 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00104}00104 \textcolor{stringliteral}{<HR> }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00105}00105 \textcolor{stringliteral}{<HR>}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00106}00106 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00107}00107 \textcolor{stringliteral}{\(\backslash\)section parameters The global parameters}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00108}00108 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00109}00109 \textcolor{stringliteral}{As usual we use a namespace to define the (single) global parameter,}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00110}00110 \textcolor{stringliteral}{the Reynolds number.}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00111}00111 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00112}00112 \textcolor{stringliteral}{\(\backslash\)dontinclude turek\_flag\_non\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00113}00113 \textcolor{stringliteral}{\(\backslash\)skipline start\_of\_global\_parameters}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00114}00114 \textcolor{stringliteral}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00115}00115 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00116}00116 \textcolor{stringliteral}{<HR> }}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00117}00117 \textcolor{stringliteral}{<HR>}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00118}00118 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00119}00119 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00120}00120 \textcolor{stringliteral}{\(\backslash\)section leaflet Specification of the flag geometry}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00121}00121 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00122}00122 \textcolor{stringliteral}{We specify the flag geometry and its time-\/dependent motion by}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00123}00123 \textcolor{stringliteral}{representing its three faces  by \(\backslash\)c GeomObjects, each parametrised}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00124}00124 \textcolor{stringliteral}{by its own Lagrangian coordinate, as shown in the sketch above.}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00125}00125 \textcolor{stringliteral}{The geometry of the cylinder is represented by one of \(\backslash\)c oomph-\/lib'}s}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00126}00126 generic \(\backslash\)c GeomObjects, the \(\backslash\)c Circle.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00127}00127 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00128}00128 We enclose the relevant data in its own \textcolor{keyword}{namespace }and }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00129}00129 start by defining the period of the oscillation, and the geometric}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00130}00130 parameters controlling the flag's initial shape and its subsequent motion.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00131}00131 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00132}00132 \(\backslash\)dontinclude turek\_flag\_non\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00133}00133 \(\backslash\)skipline start\_of\_flag\_definition}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00134}00134 \(\backslash\)until \mbox{\hyperlink{namespaceFlag__definition_adc7ca9d539ba8569c5eaa574de22c08f}{Time\_pt}}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00135}00135 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00136}00136 We choose the motion of the flag such that it vaguely resembles }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00137}00137 that expected in the corresponding FSI problem: We subject the flag's }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00138}00138 upper and lower faces to purely vertical displacements that deform }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00139}00139 them into a fraction of a sine wave, while keeping the face }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00140}00140 at the tip of the flag straight and vertical. We implement }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00141}00141 this by prescribing the time-\/dependent motion }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00142}00142 of the two vertices at the tip of the flag with two functions:}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00143}00143 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00144}00144 \(\backslash\)until end of bottom tip}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00145}00145 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00146}00146 This information is then used in three custom-\/written \(\backslash\)c GeomObject that}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00147}00147 define the time-\/dependent shape of the three faces. Here is the}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00148}00148 one describing the shape of the upper face:}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00149}00149 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00150}00150 \(\backslash\)until \};}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00152}00152 [We omit the definition of the other two \(\backslash\)c GeomObjects, }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00153}00153 \(\backslash\)c BottomOfFlag and \(\backslash\)c TipOfFlag in in the interest of brevity.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00154}00154 Their definitions can be found in the <A HREF="{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00155}00155 ../../../../demo\_drivers/navier\_stokes/turek\_flag\_non\_fsi/turek\_flag\_non\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00156}00156 "{}>source code</A>.] We provide storage for the pointers to the }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00157}00157 four \(\backslash\)c GeomObjects required for the representation of the flag,}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00158}00158 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00159}00159 \(\backslash\)skipline Pointer to GeomObject}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00160}00160 \(\backslash\)until \mbox{\hyperlink{namespaceFlag__definition_a87051411606f6aa4518ace9ce66a4189}{Cylinder\_pt}}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00161}00161 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00162}00162 and provide a \mbox{\hyperlink{namespaceFlag__definition_a61a03bffd4a34950ef9892be53c49f89}{setup}} function that generates the \(\backslash\)c GeomObjects }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00163}00163 and stores the pointer to the global \(\backslash\)c Time object that }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00164}00164 will be created by the \(\backslash\)c Problem:}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00165}00165 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00166}00166 \(\backslash\)until end of namespace}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00167}00167 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00168}00168 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00169}00169 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00170}00170 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00171}00171 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00172}00172 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00173}00173 \(\backslash\)section mesh The mesh}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00174}00174 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00175}00175 The figure below shows a sketch of the (unrefined) mesh and the}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00176}00176 enumeration of its boundaries. Various different implementations }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00177}00177 of the mesh exist, allowing the user to perform the node-\/update in response}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00178}00178 to the motion of the flag by a \(\backslash\)c Domain/MacroElement -\/ based }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00179}00179 procedure, or by using an algebraic node update.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00180}00180 In either case, only the nodes in the elements that are shaded}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00181}00181 in yellow (or refined elements that are generated from these)}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00182}00182 participate in the node-\/update. }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00183}00183 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00184}00184 \(\backslash\)image html cylinder\_with\_flag\_mesh.gif "{}The (unrefined) mesh. Only nodes in the yellow regions participate in the node-\/update. "{} }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00185}00185 \(\backslash\)image latex cylinder\_with\_flag\_mesh.eps "{}The (unrefined) mesh. Only nodes in the yellow regions participate in the node-\/update. "{} width=0.75\(\backslash\)textwidth}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00186}00186 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00187}00187 The node update strategy is illustrated in the }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00188}00188 <A HREF="{}../figures/turek\_flag\_non\_fsi.avi"{}> animation</A> }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00189}00189 of the flow field and the mesh motion.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00190}00190  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00191}00191 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00192}00192 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00193}00193 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00194}00194 \(\backslash\)section \mbox{\hyperlink{turek__flag__non__fsi_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} The driver code}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00195}00195 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00196}00196 The driver code has the usual structure for a time-\/dependent problem:}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00197}00197 We store the command line arguments, create a \(\backslash\)c DocInfo object,}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00198}00198 and assign the parameters that specify the dimensions of the channel.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00200}00200 \(\backslash\)dontinclude turek\_flag\_non\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00201}00201 \(\backslash\)skipline start\_of\_main}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00202}00202 \(\backslash\)until height=4.1;}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00203}00203 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00204}00204 We build the problem using a mesh in which}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00205}00205 the node update is performed by the \(\backslash\)c AlgebraicMesh class. (The }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00206}00206 driver code also provides the option to use a \(\backslash\)c Domain/MacroElement -\/}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00207}00207 based node update -\/-\/ this option is chosen via suitable \(\backslash\)\#ifdefs;}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00208}00208 see the <A HREF="{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00209}00209 ../../../../demo\_drivers/navier\_stokes/turek\_flag\_non\_fsi/turek\_flag\_non\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00210}00210 "{}>source code</A> for details).}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00211}00211  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00212}00212 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00213}00213 \(\backslash\)skipline Create Problem with AlgebraicMesh-\/based node update}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00214}00214 \(\backslash\)until height);}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00215}00215 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00216}00216 Next we set up the time-\/stepping (as usual, fewer timesteps are }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00217}00217 performed during a validation run which is identified by a non-\/zero }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00218}00218 number of command line arguments):}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00219}00219 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00220}00220 \(\backslash\)skipline Number of timesteps per period}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00221}00221 \(\backslash\)until initialise\_dt(dt);}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00222}00222 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00223}00223 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00224}00224 We start the simulation with a steady solve, allowing up to}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00225}00225 three levels of adaptive refinement (fewer if we are performing }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00226}00226 a validation run):}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00227}00227 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00228}00228 \(\backslash\)until doc\_info.number()++;}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00229}00229 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00230}00230 Finally, we enter the proper timestepping loop, allowing one}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00231}00231 spatial adaptation per timestep and suppressing the re-\/assignment}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00232}00232 of initial conditions following an adaptation by setting the}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00233}00233 parameter \(\backslash\)c first to false. (See the discussion of timestepping}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00234}00234 with automatic mesh adaptation in <a href="{}../../../unsteady\_heat/two\_d\_unsteady\_heat\_adapt/html/index.html"{}>another tutorial</a>.)}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00235}00235  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00236}00236 \(\backslash\)until \}\textcolor{comment}{//end of main}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00237}00237 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00238}00238 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00239}00239 <HR> }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00240}00240 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00241}00241 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00242}00242 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00243}00243 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00244}00244 \(\backslash\)section problem The Problem class}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00245}00245 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00246}00246 The problem class provides an access function to the mesh (note}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00247}00247 the use of \(\backslash\)\#ifdefs to choose the correct one), and defines the}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00248}00248 interfaces for the usual member functions, either empty}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00249}00249 or explained in more detail below.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00250}00250 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00251}00251 \(\backslash\)dontinclude turek\_flag\_non\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00252}00252 \(\backslash\)skipline start\_of\_problem\_class}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00253}00253 \(\backslash\)until end\_of\_problem\_class}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00254}00254 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00255}00255 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00256}00256 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00257}00257 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00258}00258 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00259}00259  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00260}00260 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00261}00261 \(\backslash\)section constructor The problem constructor}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00262}00262 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00263}00263 The initial assignment of zero velocity and pressure provides a}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00264}00264 very poor initial guess for the preliminary steady Newton solve.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00265}00265 We therefore increase the maximum residuals and iteration counts}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00266}00266 allowed in the Newton iteration before creating the timestepper}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00267}00267 and setting up the \(\backslash\)c GeomObjects required to parametrise the}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00268}00268 flag:}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00270}00270 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00271}00271 \(\backslash\)skipline start\_of\_constructor}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00272}00272 \(\backslash\)until \mbox{\hyperlink{namespaceFlag__definition}{Flag\_definition}}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00273}00273 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00274}00274 Next we build the mesh, passing the pointers to the various \(\backslash\)c GeomObjects}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00275}00275 and the geometric parameters to its constructor.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00276}00276 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00277}00277 \(\backslash\)skipline \textcolor{comment}{// Build mesh (with AlgebraicMesh-\/based node update)}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00278}00278 \(\backslash\)until );}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00279}00279 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00280}00280 We perform two rounds of uniform refinement (the Newton solver}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00281}00281 does not converge on coarser meshes) before creating an}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00282}00282 error estimator for the subsequent automatic mesh adaptation.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00283}00283 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00284}00284 \(\backslash\)skipline Refine uniformly}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00285}00285 \(\backslash\)until error\_estimator\_pt;}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00286}00286 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00287}00287 Both velocity components are imposed by Dirichlet conditions}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00288}00288 (either via a no-\/slip condition or via the imposed inflow profile) on all}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00289}00289 boundaries, apart from the outflow cross-\/section (mesh boundary 1), }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00290}00290 where the axial velocity is unknown.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00291}00291 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00292}00292 \(\backslash\)until done bc}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00293}00293 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00294}00294 Next we complete the build of the elements, passing the relevant}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00295}00295 pointers to physical parameters,}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00296}00296 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00297}00297 \(\backslash\)until \}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00298}00298 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00299}00299 and impose the steady Poiseuille profile at the inlet (mesh boundary 3).}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00300}00300 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00301}00301 \(\backslash\)until \}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00302}00302 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00303}00303 Finally, we pin the redundant pressure degrees of}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00304}00304 freedom (see }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00305}00305 <A HREF="{}../../../navier\_stokes/adaptive\_driven\_cavity/html/index.html"{}>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00306}00306 another tutorial</A> for details), and assign the equations numbers.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00307}00307 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00308}00308 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00309}00309 \(\backslash\)until end of constructor}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00310}00310 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00311}00311 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00312}00312 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00313}00313 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00314}00314 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00315}00315  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00316}00316 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00317}00317 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00318}00318 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00319}00319 \(\backslash\)section after\_adapt Actions before adapt}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00320}00320 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00321}00321 After each adaptation, we unpin and re-\/pin all redundant}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00322}00322 pressures degrees of freedom (see }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00323}00323 <A HREF="{}../../../navier\_stokes/adaptive\_driven\_cavity/html/index.html"{}>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00324}00324 another tutorial</A> for details). Since the inflow profile is parabolic,}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00325}00325 it is interpolated correctly from "{}father"{} to "{}son"{} elements during}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00326}00326 mesh refinement so no further action is required.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00327}00327 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00328}00328 \(\backslash\)skipline actions\_after\_adapt}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00329}00329 \(\backslash\)until end\_of\_actions\_after\_adapt}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00330}00330 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00331}00331 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00332}00332 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00333}00333 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00334}00334 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00335}00335 \(\backslash\)section timestep Actions before the timestep}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00336}00336 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00337}00337 Before each timestep we update the nodal positions in the mesh and}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00338}00338 re-\/apply the no-\/slip condition at the nodes on mesh boundaries 5 -\/ 7.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00339}00339 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00340}00340 \(\backslash\)skipline start\_of\_actions\_before\_implicit\_timestep}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00341}00341 \(\backslash\)until end\_of\_actions\_before\_implicit\_timestep}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00342}00342 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00343}00343 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00344}00344 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00345}00345 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00346}00346 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00347}00347 \(\backslash\)section doc Post Processing}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00348}00348 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00349}00349 The function doc\_solution(...) documents the results.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00350}00350 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00351}00351 \(\backslash\)skipline start\_of\_doc\_solution}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00352}00352 \(\backslash\)until end\_of\_doc\_solution}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00353}00353 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00354}00354 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00355}00355 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00356}00356 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00357}00357 \(\backslash\)section ex\_com Comments and Exercises}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00358}00358 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00359}00359 -\/ Compare the results obtained when the node update is}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00360}00360   performed with the algebraic or the \(\backslash\)c MacroElement/Domain-\/based}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00361}00361   node update. (\(\backslash\)c oomph-\/lib's build machinery will automatically}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00362}00362   generate both versions of the code, using the \(\backslash\)c -\/DUSE\_MACRO\_ELEMENTS}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00363}00363   compilation flag). }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00364}00364 . }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00365}00365 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00366}00366 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00367}00367 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00368}00368 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00369}00369 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00370}00370 \(\backslash\)section ackn Acknowledgements}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00371}00371 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00372}00372 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00373}00373 -\/ This code was originally developed by }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00374}00374   Stefan Kollmannsberger and his students Iason Papaioannou and  }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00375}00375   Orkun Oezkan Doenmez. It was completed by Floraine Cordier.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00376}00376 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00377}00377 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00378}00378 <HR>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00379}00379 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00380}00380 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00381}00381 \(\backslash\)section sources Source files for this tutorial}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00382}00382 -\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00383}00383 <CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00384}00384 <A HREF="{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00385}00385 ../../../../}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00386}00386 demo\_drivers/navier\_stokes/turek\_flag\_non\_fsi/}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00387}00387 "{}>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00388}00388 demo\_drivers/navier\_stokes/turek\_flag\_non\_fsi/}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00389}00389 </A>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00390}00390 </CENTER>\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00391}00391 -\/ The driver code is: \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00392}00392 <CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00393}00393 <A HREF="{}}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00394}00394 ../../../../}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00395}00395 demo\_drivers/navier\_stokes/turek\_flag\_non\_fsi/turek\_flag\_non\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00396}00396 "{}>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00397}00397 demo\_drivers/navier\_stokes/turek\_flag\_non\_fsi/turek\_flag\_non\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00398}00398 </A>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00399}00399 </CENTER>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00400}00400 .}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00401}00401 }
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00402}00402 <hr>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00403}00403 <hr>}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00404}00404 \(\backslash\)section pdf PDF file}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00405}00405 A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00406}00406 **/}
+\DoxyCodeLine{\Hypertarget{turek__flag__non__fsi_8txt__doxygenified_8h_source_l00407}00407 }
+
+\end{DoxyCode}

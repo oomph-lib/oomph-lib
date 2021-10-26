@@ -32,7 +32,7 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/domain.h"
+#include "domain.h"
 // #include "extruded_macro_element.h"
 
 namespace oomph
@@ -41,7 +41,7 @@ namespace oomph
   class ExtrudedMacroElement;
 
   //=================================================================
-  /// \short Base class for ExtrudedDomains with curvilinear and/or
+  /// Base class for ExtrudedDomains with curvilinear and/or
   /// time-dependent boundaries. ExtrudedDomain boundaries are
   /// typically represented by GeomObjects and the ExtrudedDomain
   /// itself is decomposed into a number of ExtrudedMacroElements.
@@ -72,26 +72,18 @@ namespace oomph
     ~ExtrudedDomain() {}
 
     /// Broken copy constructor
-    ExtrudedDomain(const ExtrudedDomain&)
-    {
-      // Return a broken copy message
-      BrokenCopy::broken_copy("ExtrudedDomain");
-    } // End of ExtrudedDomain
+    ExtrudedDomain(const ExtrudedDomain&) = delete;
 
     /// Broken assignment operator
-    void operator=(const ExtrudedDomain&)
-    {
-      // Return a broken assign message
-      BrokenCopy::broken_assign("ExtrudedDomain");
-    } // End of ExtrudedDomain
+    void operator=(const ExtrudedDomain&) = delete;
 
-    /// \short Access to i-th extruded macro element
+    /// Access to i-th extruded macro element
     ExtrudedMacroElement* macro_element_pt(const unsigned& i);
 
     /// Number of macro elements in domain
     unsigned nmacro_element();
 
-    /// \short Vector representation of the i_macro-th macro element
+    /// Vector representation of the i_macro-th macro element
     /// boundary i_direct (e.g. N/S/W/E in 2D spatial = 3D space-time).
     /// NOTE: Some extra care has to be taken here to translate the
     /// OcTree enumeration to the QuadTree enumeration (in the

@@ -1,0 +1,496 @@
+\hypertarget{gmsh__tet__mesh_8template_8cc_source}{}\doxysection{gmsh\+\_\+tet\+\_\+mesh.\+template.\+cc}
+\label{gmsh__tet__mesh_8template_8cc_source}\index{gmsh\_tet\_mesh.template.cc@{gmsh\_tet\_mesh.template.cc}}
+\mbox{\hyperlink{gmsh__tet__mesh_8template_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00027}00027 \textcolor{preprocessor}{\#ifndef OOMPH\_GMSH\_TET\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00028}00028 \textcolor{preprocessor}{\#define OOMPH\_GMSH\_TET\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00031}00031 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{gmsh__tet__mesh_8template_8h}{gmsh\_tet\_mesh.template.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00034}00034 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00035}00035 \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00036}00036   \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00037}00037 \textcolor{comment}{  /// Adapt problem based on specified elemental error estimates}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00038}00038 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00039}00039   \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00040}\mbox{\hyperlink{classoomph_1_1RefineableGmshTetMesh_ad3ee00690d125ab8211f64d5c85dd3b9}{00040}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1RefineableGmshTetMesh_ad3ee00690d125ab8211f64d5c85dd3b9}{RefineableGmshTetMesh<ELEMENT>::adapt}}(\textcolor{keyword}{const} Vector<double>\& elem\_error)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00041}00041   \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00042}00042     \textcolor{keywordtype}{double} t\_start = 0.0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00044}00044     \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00045}00045     t\_start = TimingHelpers::timer();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00046}00046     \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00048}00048     \textcolor{comment}{// Get refinement targets}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00049}00049     Vector<double> target\_size(elem\_error.size());}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00050}00050     \textcolor{keywordtype}{double} max\_edge\_ratio =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00051}00051       this-\/>compute\_volume\_target(elem\_error, target\_size);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00052}00052     \textcolor{comment}{// Get maximum target volume}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00053}00053     \textcolor{keywordtype}{unsigned} n = target\_size.size();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00054}00054     \textcolor{keywordtype}{double} max\_size = 0.0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00055}00055     \textcolor{keywordtype}{double} min\_size = DBL\_MAX;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00056}00056     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n; e++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00057}00057     \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00058}00058       \textcolor{keywordflow}{if} (target\_size[e] > max\_size) max\_size = target\_size[e];}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00059}00059       \textcolor{keywordflow}{if} (target\_size[e] < min\_size) min\_size = target\_size[e];}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00060}00060     \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00062}00062     oomph\_info << \textcolor{stringliteral}{"{}Maximum target size: "{}} << max\_size << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00063}00063     oomph\_info << \textcolor{stringliteral}{"{}Minimum target size: "{}} << min\_size << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00064}00064     oomph\_info << \textcolor{stringliteral}{"{}Number of elements to be refined "{}} << this-\/>Nrefined}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00065}00065                << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00066}00066     oomph\_info << \textcolor{stringliteral}{"{}Number of elements to be unrefined "{}} << this-\/>Nunrefined}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00067}00067                << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00068}00068     oomph\_info << \textcolor{stringliteral}{"{}Max edge ratio "{}} << max\_edge\_ratio << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00070}00070     \textcolor{keywordtype}{double} orig\_max\_size, orig\_min\_size;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00071}00071     this-\/>max\_and\_min\_element\_size(orig\_max\_size, orig\_min\_size);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00072}00072     oomph\_info << \textcolor{stringliteral}{"{}Max/min element size in original mesh: "{}} << orig\_max\_size}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00073}00073                << \textcolor{stringliteral}{"{} "{}} << orig\_min\_size << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00074}00074 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00075}00075     \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00076}00076     oomph\_info}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00077}00077       << \textcolor{stringliteral}{"{}adapt: Time for getting volume targets                      : "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00078}00078       << TimingHelpers::timer() -\/ t\_start << \textcolor{stringliteral}{"{} sec "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00079}00079     \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00081}00081     \textcolor{comment}{// Should we bother to adapt?}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00082}00082     \textcolor{keywordflow}{if} ((Nrefined > 0) || (Nunrefined > this-\/>max\_keep\_unrefined()) ||}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00083}00083         (max\_edge\_ratio > this-\/>max\_permitted\_edge\_ratio()))}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00084}00084     \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00085}00085       \textcolor{keywordflow}{if} (!((Nrefined > 0) || (Nunrefined > max\_keep\_unrefined())))}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00086}00086       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00087}00087         oomph\_info << \textcolor{stringliteral}{"{}Mesh regeneration triggered by edge ratio criterion\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00088}00088       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00089}00089 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00091}00091       \textcolor{comment}{// Are we dealing with a solid mesh?}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00092}00092       SolidMesh* solid\_mesh\_pt = \textcolor{keyword}{dynamic\_cast<}SolidMesh*\textcolor{keyword}{>}(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00093}00093 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00094}00094 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00095}00095       \textcolor{comment}{// If the mesh is a solid mesh then do the mapping based on the}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00096}00096       \textcolor{comment}{// Eulerian coordinates}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00097}00097       \textcolor{keywordtype}{bool} use\_eulerian\_coords = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00098}00098       \textcolor{keywordflow}{if} (solid\_mesh\_pt != 0)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00099}00099       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00100}00100         use\_eulerian\_coords = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00101}00101       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00103}00103       MeshAsGeomObject* mesh\_geom\_obj\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00105}00105 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_CGAL}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00106}00106 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00107}00107       \textcolor{comment}{// Make cgal-\/based bin}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00108}00108       CGALSamplePointContainerParameters cgal\_params(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00109}00109       \textcolor{keywordflow}{if} (use\_eulerian\_coords)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00110}00110       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00111}00111         cgal\_params.enable\_use\_eulerian\_coordinates\_during\_setup();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00112}00112       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00113}00113       mesh\_geom\_obj\_pt = \textcolor{keyword}{new} MeshAsGeomObject(\&cgal\_params);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00115}00115 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00117}00117       std::ostringstream error\_message;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00118}00118       error\_message << \textcolor{stringliteral}{"{}Non-\/CGAL-\/based target size transfer not implemented.\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00119}00119       \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00120}00120         error\_message.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00121}00121 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00122}00122       \textcolor{comment}{// Do something here...}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00123}00123 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00124}00124 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00126}00126       \textcolor{comment}{// Set up a map from pointer to element to its number}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00127}00127       \textcolor{comment}{// in the mesh}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00128}00128       std::map<GeneralisedElement*, unsigned> element\_number;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00129}00129       \textcolor{keywordtype}{unsigned} nelem = this-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00130}00130       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < nelem; e++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00131}00131       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00132}00132         element\_number[this-\/>element\_pt(e)] = e;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00133}00133       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00134}00134 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00135}00135       \textcolor{comment}{// Get min/max coordinates}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00136}00136       Vector<std::pair<double, double>> min\_and\_max\_coordinates =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00137}00137         mesh\_geom\_obj\_pt-\/>sample\_point\_container\_pt()}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00138}00138           -\/>min\_and\_max\_coordinates();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00139}00139 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00140}00140       \textcolor{comment}{// Setup grid dimensions for size transfer}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00141}00141       \textcolor{keywordtype}{double} dx =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00142}00142         (min\_and\_max\_coordinates[0].second -\/ min\_and\_max\_coordinates[0].first);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00143}00143       \textcolor{keywordtype}{double} dy =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00144}00144         (min\_and\_max\_coordinates[1].second -\/ min\_and\_max\_coordinates[1].first);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00145}00145       \textcolor{keywordtype}{double} dz =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00146}00146         (min\_and\_max\_coordinates[2].second -\/ min\_and\_max\_coordinates[2].first);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00147}00147 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00148}00148       \textcolor{keywordtype}{double} dx\_target =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00149}00149         this-\/>Gmsh\_parameters\_pt-\/>dx\_for\_target\_size\_transfer();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00150}00150       \textcolor{keywordtype}{unsigned} nx = unsigned(dx / dx\_target);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00151}00151       \textcolor{keywordtype}{unsigned} ny = unsigned(dy / dx\_target);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00152}00152       \textcolor{keywordtype}{unsigned} nz = unsigned(dz / dx\_target);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00153}00153 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00154}00154       dx /= double(nx);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00155}00155       dy /= double(ny);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00156}00156       dz /= double(nz);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00158}00158 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00159}00159       \textcolor{comment}{// Size transfer via hard disk -\/-\/ yikes...}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00160}00160       std::string target\_size\_file\_name =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00161}00161         this-\/>Gmsh\_parameters\_pt-\/>target\_size\_file\_name();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00162}00162 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00163}00163       std::ofstream target\_size\_file;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00164}00164       target\_size\_file.open(target\_size\_file\_name.c\_str());}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00165}00165       target\_size\_file << min\_and\_max\_coordinates[0].first << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00166}00166                        << min\_and\_max\_coordinates[1].first << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00167}00167                        << min\_and\_max\_coordinates[2].first << \textcolor{stringliteral}{"{} "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00168}00168       target\_size\_file << dx << \textcolor{stringliteral}{"{} "{}} << dy << \textcolor{stringliteral}{"{} "{}} << dz << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00169}00169       target\_size\_file << nx + 1 << \textcolor{stringliteral}{"{} "{}} << ny + 1 << \textcolor{stringliteral}{"{} "{}} << nz + 1 << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00170}00170 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00171}00171 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00172}00172       \textcolor{comment}{// Doc target areas}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00173}00173       \textcolor{keywordtype}{int} counter =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00174}00174         this-\/>Gmsh\_parameters\_pt-\/>counter\_for\_filename\_gmsh\_size\_transfer();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00175}00175       std::string stem =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00176}00176         this-\/>Gmsh\_parameters\_pt-\/>stem\_for\_filename\_gmsh\_size\_transfer();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00177}00177       std::ofstream latest\_sizes\_file;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00178}00178       \textcolor{keywordtype}{bool} doc\_target\_areas = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00179}00179       \textcolor{keywordflow}{if} ((stem != \textcolor{stringliteral}{"{}"{}}) \&\& (counter >= 0))}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00180}00180       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00181}00181         doc\_target\_areas = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00182}00182         std::string filename =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00183}00183           stem + oomph::StringConversion::to\_string(counter) + \textcolor{stringliteral}{"{}.dat"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00184}00184         latest\_sizes\_file.open(filename.c\_str());}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00185}00185         latest\_sizes\_file << \textcolor{stringliteral}{"{}ZONE I="{}} << nx + 1 << \textcolor{stringliteral}{"{}, J="{}} << ny + 1}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00186}00186                           << \textcolor{stringliteral}{"{}, K="{}} << nz + 1 << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00187}00187         this-\/>Gmsh\_parameters\_pt-\/>counter\_for\_filename\_gmsh\_size\_transfer()++;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00188}00188       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00189}00189 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00190}00190 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00191}00191       Vector<double> x(3);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00192}00192       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i <= nx; i++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00193}00193       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00194}00194         x[0] = min\_and\_max\_coordinates[0].first + double(i) * dx;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00195}00195         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j <= ny; j++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00196}00196         \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00197}00197           x[1] = min\_and\_max\_coordinates[1].first + double(j) * dy;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00198}00198           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k <= nz; k++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00199}00199           \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00200}00200             x[2] = min\_and\_max\_coordinates[2].first + double(k) * dz;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00201}00201 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00202}00202             \textcolor{comment}{// Try the specified number of nearest sample points for Newton}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00203}00203             \textcolor{comment}{// search then just settle on the nearest one}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00204}00204             Vector<double> s(3);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00205}00205             GeomObject* geom\_obj\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00206}00206             \textcolor{keywordtype}{unsigned} max\_sample\_points =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00207}00207               this-\/>Gmsh\_parameters\_pt}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00208}00208                 -\/>max\_sample\_points\_for\_limited\_locate\_zeta\_during\_target\_size\_transfer();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00209}00209 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00210}00210 \textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_CGAL}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00211}00211 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00212}00212             \textcolor{keyword}{dynamic\_cast<}CGALSamplePointContainer*\textcolor{keyword}{>}(}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00213}00213               mesh\_geom\_obj\_pt-\/>sample\_point\_container\_pt())}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00214}00214               -\/>limited\_locate\_zeta(x, max\_sample\_points, geom\_obj\_pt, s);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00215}00215 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00216}00216 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00217}00217 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00218}00218             std::ostringstream error\_message;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00219}00219             error\_message}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00220}00220               << \textcolor{stringliteral}{"{}Non-\/CGAL-\/based target size transfer not implemented.\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00221}00221             \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00222}00222                                 OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00223}00223                                 OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00224}00224 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00225}00225             \textcolor{comment}{// Do something here...}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00226}00226 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00227}00227 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00228}00228 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00229}00229 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00230}00230 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00231}00231             \textcolor{keywordflow}{if} (geom\_obj\_pt == 0)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00232}00232             \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00233}00233               std::stringstream error\_message;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00234}00234               error\_message << \textcolor{stringliteral}{"{}Limited locate zeta failed for zeta = [ "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00235}00235                             << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} << x[2]}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00236}00236                             << \textcolor{stringliteral}{"{} ]. Makes no sense!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00237}00237               \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00238}00238                                   OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00239}00239                                   OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00240}00240             \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00241}00241             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00242}00242             \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00243}00243 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00244}00244 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00245}00245               FiniteElement* fe\_pt = \textcolor{keyword}{dynamic\_cast<}FiniteElement*\textcolor{keyword}{>}(geom\_obj\_pt);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00246}00246 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00247}00247 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00248}00248               \textcolor{keywordflow}{if} (fe\_pt == 0)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00249}00249               \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00250}00250                 std::stringstream error\_message;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00251}00251                 error\_message}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00252}00252                   << \textcolor{stringliteral}{"{}Cast to FE for GeomObject returned by limited "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00253}00253                   << \textcolor{stringliteral}{"{}locate zeta failed for zeta = [ "{}} << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1]}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00254}00254                   << \textcolor{stringliteral}{"{} "{}} << x[2] << \textcolor{stringliteral}{"{} ]. Makes no sense!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00255}00255                 \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00256}00256                                     OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00257}00257                                     OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00258}00258               \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00259}00259               \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00260}00260               \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00261}00261 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00262}00262 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00263}00263                 \textcolor{comment}{// What's the target size of the element that contains this}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00264}00264                 \textcolor{comment}{// point}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00265}00265                 \textcolor{keywordtype}{double} tg\_size =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00266}00266                   pow(target\_size[element\_number[fe\_pt]], 1.0 / 3.0);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00267}00267                 target\_size\_file << tg\_size << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00268}00268 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00269}00269                 \textcolor{comment}{// Doc?}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00270}00270                 \textcolor{keywordflow}{if} (doc\_target\_areas)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00271}00271                 \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00272}00272                   latest\_sizes\_file << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} << x[2] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00273}00273                                     << tg\_size << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00274}00274                 \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00275}00275 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00276}00276 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00277}00277               \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00278}00278             \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00279}00279 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00280}00280           \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00281}00281           target\_size\_file << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00282}00282         \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00283}00283       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00284}00284       target\_size\_file.close();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00285}00285 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00286}00286       \textcolor{keywordflow}{if} (doc\_target\_areas)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00287}00287       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00288}00288         latest\_sizes\_file.close();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00289}00289       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00290}00290 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00291}00291       \textcolor{comment}{// Build new mesh, reading area information from file}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00292}00292       \textcolor{keywordtype}{bool} use\_mesh\_grading\_from\_file = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00293}00293       \mbox{\hyperlink{classoomph_1_1RefineableGmshTetMesh}{RefineableGmshTetMesh<ELEMENT>}}* new\_mesh\_pt =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00294}00294         \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1RefineableGmshTetMesh}{RefineableGmshTetMesh<ELEMENT>}}(this-\/>Gmsh\_parameters\_pt,}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00295}00295                                            use\_mesh\_grading\_from\_file,}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00296}00296                                            this-\/>Time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00297}00297 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00298}00298       \textcolor{comment}{/* // keep around for debugging */}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00299}00299       \textcolor{comment}{/* unsigned nplot=5; */}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00300}00300       \textcolor{comment}{/* ofstream vtu\_file; */}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00301}00301       \textcolor{comment}{/* vtu\_file.open("{}new\_mesh.vtu"{}); */}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00302}00302       \textcolor{comment}{/* new\_mesh\_pt-\/>output\_paraview(vtu\_file,nplot); */}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00303}00303       \textcolor{comment}{/* vtu\_file.close(); */}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00304}00304 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00305}00305       \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00306}00306       t\_start = TimingHelpers::timer();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00307}00307       \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00308}00308 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00309}00309       ProjectionProblem<ELEMENT>* project\_problem\_pt = 0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00310}00310 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00311}00311       \textcolor{comment}{// Check that the projection step is not disabled}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00312}00312       \textcolor{keywordflow}{if} (!this-\/>Gmsh\_parameters\_pt-\/>projection\_is\_disabled())}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00313}00313       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00314}00314         \textcolor{comment}{// Project current solution onto new mesh}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00315}00315         \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00316}00316         project\_problem\_pt = \textcolor{keyword}{new} ProjectionProblem<ELEMENT>;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00317}00317         project\_problem\_pt-\/>mesh\_pt() = new\_mesh\_pt;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00318}00318         project\_problem\_pt-\/>project(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00319}00319 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00320}00320         oomph\_info}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00321}00321           << \textcolor{stringliteral}{"{}adapt: Time for project soln onto new mesh                : "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00322}00322           << TimingHelpers::timer() -\/ t\_start << \textcolor{stringliteral}{"{} sec "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00323}00323       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00324}00324       \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00325}00325       t\_start = TimingHelpers::timer();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00326}00326       \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00327}00327 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00328}00328       \textcolor{comment}{// Flush the old mesh}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00329}00329       \textcolor{keywordtype}{unsigned} nnod = nnode();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00330}00330       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = nnod; j > 0; j-\/-\/)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00331}00331       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00332}00332         \textcolor{keyword}{delete} Node\_pt[j -\/ 1];}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00333}00333         Node\_pt[j -\/ 1] = 0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00334}00334       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00335}00335       \textcolor{keywordtype}{unsigned} nel = nelement();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00336}00336       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = nel; e > 0; e-\/-\/)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00337}00337       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00338}00338         \textcolor{keyword}{delete} Element\_pt[e -\/ 1];}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00339}00339         Element\_pt[e -\/ 1] = 0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00340}00340       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00341}00341 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00342}00342       \textcolor{comment}{// Now copy back to current mesh}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00343}00343       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00344}00344       nnod = new\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00345}00345       Node\_pt.resize(nnod);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00346}00346       nel = new\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00347}00347       Element\_pt.resize(nel);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00348}00348       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00349}00349       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00350}00350         Node\_pt[j] = new\_mesh\_pt-\/>node\_pt(j);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00351}00351       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00352}00352       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < nel; e++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00353}00353       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00354}00354         Element\_pt[e] = new\_mesh\_pt-\/>element\_pt(e);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00355}00355       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00356}00356 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00357}00357       \textcolor{comment}{// Copy the boundary schemes}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00358}00358       \textcolor{keywordtype}{unsigned} nbound = new\_mesh\_pt-\/>nboundary();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00359}00359       Boundary\_element\_pt.resize(nbound);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00360}00360       Face\_index\_at\_boundary.resize(nbound);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00361}00361       Boundary\_node\_pt.resize(nbound);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00362}00362       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < nbound; b++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00363}00363       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00364}00364         \textcolor{keywordtype}{unsigned} nel = new\_mesh\_pt-\/>nboundary\_element(b);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00365}00365         Boundary\_element\_pt[b].resize(nel);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00366}00366         Face\_index\_at\_boundary[b].resize(nel);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00367}00367         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < nel; e++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00368}00368         \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00369}00369           Boundary\_element\_pt[b][e] = new\_mesh\_pt-\/>boundary\_element\_pt(b, e);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00370}00370           Face\_index\_at\_boundary[b][e] =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00371}00371             new\_mesh\_pt-\/>face\_index\_at\_boundary(b, e);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00372}00372         \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00373}00373         \textcolor{keywordtype}{unsigned} nnod = new\_mesh\_pt-\/>nboundary\_node(b);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00374}00374         Boundary\_node\_pt[b].resize(nnod);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00375}00375         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00376}00376         \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00377}00377           Boundary\_node\_pt[b][j] = new\_mesh\_pt-\/>boundary\_node\_pt(b, j);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00378}00378         \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00379}00379       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00380}00380 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00381}00381       \textcolor{comment}{// Also copy over the new boundary and region information}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00382}00382       \textcolor{keywordtype}{unsigned} n\_region = new\_mesh\_pt-\/>nregion();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00383}00383 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00384}00384       \textcolor{comment}{// Only bother if we have regions}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00385}00385       \textcolor{keywordflow}{if} (n\_region > 1)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00386}00386       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00387}00387         \textcolor{comment}{// Deal with the region information first}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00388}00388         this-\/>Region\_element\_pt.resize(n\_region);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00389}00389         this-\/>Region\_attribute.resize(n\_region);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00390}00390         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_region; i++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00391}00391         \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00392}00392           \textcolor{comment}{// Copy across region attributes (region ids!)}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00393}00393           this-\/>Region\_attribute[i] = new\_mesh\_pt-\/>region\_attribute(i);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00394}00394 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00395}00395           \textcolor{comment}{// Find the number of elements in the region}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00396}00396           \textcolor{keywordtype}{unsigned} r = this-\/>Region\_attribute[i];}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00397}00397           \textcolor{keywordtype}{unsigned} n\_region\_element = new\_mesh\_pt-\/>nregion\_element(r);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00398}00398           this-\/>Region\_element\_pt[i].resize(n\_region\_element);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00399}00399           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n\_region\_element; e++)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00400}00400           \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00401}00401             this-\/>Region\_element\_pt[i][e] =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00402}00402               new\_mesh\_pt-\/>region\_element\_pt(r, e);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00403}00403           \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00404}00404         \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00405}00405 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00406}00406         \textcolor{comment}{// Now the boundary region information}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00407}00407         this-\/>Boundary\_region\_element\_pt.resize(nbound);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00408}00408         this-\/>Face\_index\_region\_at\_boundary.resize(nbound);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00409}00409 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00410}00410         \textcolor{comment}{// Now loop over the boundaries}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00411}00411         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b = 0; b < nbound; ++b)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00412}00412         \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00413}00413           \textcolor{comment}{// Loop over the regions}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00414}00414           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_region; ++i)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00415}00415           \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00416}00416             \textcolor{keywordtype}{unsigned} r = this-\/>Region\_attribute[i];}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00417}00417 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00418}00418             \textcolor{keywordtype}{unsigned} n\_boundary\_el\_in\_region =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00419}00419               new\_mesh\_pt-\/>nboundary\_element\_in\_region(b, r);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00420}00420             \textcolor{keywordflow}{if} (n\_boundary\_el\_in\_region > 0)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00421}00421             \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00422}00422               \textcolor{comment}{// Allocate storage in the map}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00423}00423               this-\/>Boundary\_region\_element\_pt[b][r].resize(}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00424}00424                 n\_boundary\_el\_in\_region);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00425}00425               this-\/>Face\_index\_region\_at\_boundary[b][r].resize(}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00426}00426                 n\_boundary\_el\_in\_region);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00427}00427 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00428}00428               \textcolor{comment}{// Copy over the information}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00429}00429               \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < n\_boundary\_el\_in\_region; ++e)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00430}00430               \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00431}00431                 this-\/>Boundary\_region\_element\_pt[b][r][e] =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00432}00432                   new\_mesh\_pt-\/>boundary\_element\_in\_region\_pt(b, r, e);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00433}00433                 this-\/>Face\_index\_region\_at\_boundary[b][r][e] =}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00434}00434                   new\_mesh\_pt-\/>face\_index\_at\_boundary\_in\_region(b, r, e);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00435}00435               \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00436}00436             \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00437}00437           \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00438}00438         \} \textcolor{comment}{// End of loop over boundaries}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00439}00439 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00440}00440       \} \textcolor{comment}{// End of case when more than one region}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00441}00441 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00442}00442 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00443}00443       \textcolor{comment}{// Flush the mesh}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00444}00444       new\_mesh\_pt-\/>flush\_element\_and\_node\_storage();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00445}00445 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00446}00446       \textcolor{comment}{// Delete the mesh and the problem}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00447}00447       \textcolor{keyword}{delete} new\_mesh\_pt;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00448}00448       \textcolor{keyword}{delete} project\_problem\_pt;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00449}00449 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00450}00450       \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00451}00451       oomph\_info}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00452}00452         << \textcolor{stringliteral}{"{}adapt: Time for moving nodes etc. to actual mesh          : "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00453}00453         << TimingHelpers::timer() -\/ t\_start << \textcolor{stringliteral}{"{} sec "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00454}00454       \textcolor{comment}{//\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00455}00455 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00456}00456 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00457}00457       \textcolor{comment}{// Solid mesh?}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00458}00458       \textcolor{keywordflow}{if} (solid\_mesh\_pt != 0)}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00459}00459       \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00460}00460         \textcolor{comment}{// Warning}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00461}00461         std::stringstream error\_message;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00462}00462         error\_message}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00463}00463           << \textcolor{stringliteral}{"{}Lagrangian coordinates are currently not projected but are\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00464}00464           << \textcolor{stringliteral}{"{}are re-\/set during adaptation. This is not appropriate for\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00465}00465           << \textcolor{stringliteral}{"{}real solid mechanics problems!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00466}00466         OomphLibWarning(error\_message.str(),}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00467}00467                         OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00468}00468                         OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00469}00469 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00470}00470         \textcolor{comment}{// Reset Lagrangian coordinates}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00471}00471         \textcolor{keyword}{dynamic\_cast<}SolidMesh*\textcolor{keyword}{>}(\textcolor{keyword}{this})-\/>set\_lagrangian\_nodal\_coordinates();}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00472}00472       \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00473}00473 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00474}00474       \textcolor{keywordtype}{double} max\_area;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00475}00475       \textcolor{keywordtype}{double} min\_area;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00476}00476       this-\/>max\_and\_min\_element\_size(max\_area, min\_area);}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00477}00477       oomph\_info << \textcolor{stringliteral}{"{}Max/min element size in adapted mesh: "{}} << max\_area << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00478}00478                  << min\_area << std::endl;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00479}00479     \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00480}00480     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00481}00481     \{}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00482}00482       oomph\_info << \textcolor{stringliteral}{"{}Not enough benefit in adaptation.\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00483}00483       Nrefined = 0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00484}00484       Nunrefined = 0;}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00485}00485     \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00486}00486   \}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00487}00487 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00488}00488 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00489}00489 }
+\DoxyCodeLine{\Hypertarget{gmsh__tet__mesh_8template_8cc_source_l00490}00490 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

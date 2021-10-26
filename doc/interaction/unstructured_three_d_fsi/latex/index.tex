@@ -29,12 +29,12 @@ As usual, we formulate the problem in non-\/dimensional form. For this purpose w
 
 We assume that the solid\textquotesingle{}s constitutive equation is given by {\ttfamily oomph-\/lib\textquotesingle{}s} generalised Hookean constitutive law and non-\/dimensionalise the solid-\/mechanics stresses and tractions with the Young\textquotesingle{}s modulus $ E $.
 
-The F\+SI interaction parameter $ Q, $ which represents the ratio of the (viscous) fluid stress scale to the reference stress used to non-\/dimensionalise the solid stresses, is therefore given by \[ Q = \frac{\mu {\cal U}}{{\cal L} E} = \frac{\Delta P^*}{E} \ . \]
+The FSI interaction parameter $ Q, $ which represents the ratio of the (viscous) fluid stress scale to the reference stress used to non-\/dimensionalise the solid stresses, is therefore given by \[ Q = \frac{\mu {\cal U}}{{\cal L} E} = \frac{\Delta P^*}{E} \ . \]
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_results}{}\doxysection{Results}\label{index_results}
-The animation below illustrates the system\textquotesingle{}s behaviour in a parameter study in which we keep the Reynolds number fixed at $ Re=100 $ while increasing the F\+SI parameter $ Q $ in small increments. The increase in $ Q $ may be interpreted as a reduction in the tube\textquotesingle{}s stiffness and the animation shows clearly how this increases the flow-\/induced deformation\+: the upstream end bulges and the downstream end is compressed.
+The animation below illustrates the system\textquotesingle{}s behaviour in a parameter study in which we keep the Reynolds number fixed at $ Re=100 $ while increasing the FSI parameter $ Q $ in small increments. The increase in $ Q $ may be interpreted as a reduction in the tube\textquotesingle{}s stiffness and the animation shows clearly how this increases the flow-\/induced deformation\+: the upstream end bulges and the downstream end is compressed.
 
  
 \begin{DoxyImage}
@@ -53,9 +53,9 @@ The animation below illustrates the system\textquotesingle{}s behaviour in a par
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_overview_implementation}{}\doxysection{Overview of the implementation}\label{index_overview_implementation}
-The general procedure described below is essentially the same as that discussed in the \href{../../unstructured_fsi/html/index.html}{\texttt{ two-\/dimensional unstructured F\+SI tutorial. }} The use of an unstructured mesh means that the most convenient node-\/update strategy for the fluid mesh is to treat it as a pseudo-\/elastic solid. Nonetheless, the majority of the steps described below are the same as for other fluid-\/structure-\/interaction problems.
+The general procedure described below is essentially the same as that discussed in the \href{../../unstructured_fsi/html/index.html}{\texttt{ two-\/dimensional unstructured FSI tutorial. }} The use of an unstructured mesh means that the most convenient node-\/update strategy for the fluid mesh is to treat it as a pseudo-\/elastic solid. Nonetheless, the majority of the steps described below are the same as for other fluid-\/structure-\/interaction problems.
 
-We reiterate that an important prerequisite for the use of the automatic {\ttfamily F\+S\+I\+\_\+functions} is that each boundary between fluid and solid meshes must be parametrised by boundary coordinates. Moreover, the boundary-\/coordinate representations {\bfseries{ must }} be the same in both the fluid and solid meshes. This use of a continuous-\/coordinate representation of the boundaries means that the fluid and solid meshes do not need to match at the boundaries; see the section \mbox{\hyperlink{index_matching_fluid_and_solid}{Fluid and solid meshes do not have to be matching}}. Unfortunately, the construction of a global surface parametrisation of a general surface is a non-\/trivial problem. We side-\/step this problem by making use of the fact that any third-\/party tetrahedral mesh generator represents domain boundaries using a surface triangulation, or planar surface facets. As the mesh is imported into {\ttfamily oomph-\/lib}, each surface facet is treated as a separate boundary and given a unique boundary identifier. The surface parametrisation of each facet is then simply given by local coordinates of the plane; see \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}}. A consequence of this approach is that the physical boundaries will consist of several mesh \char`\"{}boundaries\char`\"{}, as already discussed in the single-\/physics problems.
+We reiterate that an important prerequisite for the use of the automatic {\ttfamily FSI\+\_\+functions} is that each boundary between fluid and solid meshes must be parametrised by boundary coordinates. Moreover, the boundary-\/coordinate representations {\bfseries{ must }} be the same in both the fluid and solid meshes. This use of a continuous-\/coordinate representation of the boundaries means that the fluid and solid meshes do not need to match at the boundaries; see the section \mbox{\hyperlink{index_matching_fluid_and_solid}{Fluid and solid meshes do not have to be matching}}. Unfortunately, the construction of a global surface parametrisation of a general surface is a non-\/trivial problem. We side-\/step this problem by making use of the fact that any third-\/party tetrahedral mesh generator represents domain boundaries using a surface triangulation, or planar surface facets. As the mesh is imported into {\ttfamily oomph-\/lib}, each surface facet is treated as a separate boundary and given a unique boundary identifier. The surface parametrisation of each facet is then simply given by local coordinates of the plane; see \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}}. A consequence of this approach is that the physical boundaries will consist of several mesh \char`\"{}boundaries\char`\"{}, as already discussed in the single-\/physics problems.
 
 Since the driver code, discussed in detail below, is somewhat lengthy (partly because of the large number of self-\/tests and diagnostics included), we provide a brief overview of the main steps required to solve this problem\+: ~\newline
 ~\newline
@@ -67,33 +67,33 @@ Since the driver code, discussed in detail below, is somewhat lengthy (partly be
 \item Use the same procedure to generate the fluid mesh, as discussed in \href{../../../navier_stokes/unstructured_three_d_fluid/html/index.html\#mesh}{\texttt{ the single-\/physics fluids tutorial.}} Make sure that the fluid mesh is derived from the {\ttfamily Solid\+Mesh} base class to allow the use of pseudo-\/elasticity to update the nodal positions in response to the deformation of the domain boundary. ~\newline
 ~\newline
 
-\item Ensure that boundary coordinates are set up (consistently) on the F\+SI interface between the two meshes. For meshes derived from {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Tetgen\+Mesh} class, this may be done by calling the function {\ttfamily Tetgen\+Mesh\+::setup\+\_\+boundary\+\_\+coordinates()}; see the section \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for details. ~\newline
+\item Ensure that boundary coordinates are set up (consistently) on the FSI interface between the two meshes. For meshes derived from {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Tetgen\+Mesh} class, this may be done by calling the function {\ttfamily Tetgen\+Mesh\+::setup\+\_\+boundary\+\_\+coordinates()}; see the section \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for details. ~\newline
 ~\newline
 
-\item Attach {\ttfamily F\+S\+I\+Solid\+Traction\+Elements} to the faces of the \char`\"{}bulk\char`\"{} solid elements that are exposed to the fluid flow. These elements will apply the fluid traction to the solid. ~\newline
+\item Attach {\ttfamily FSISolid\+Traction\+Elements} to the faces of the \char`\"{}bulk\char`\"{} solid elements that are exposed to the fluid flow. These elements will apply the fluid traction to the solid. ~\newline
 ~\newline
 
-\item Combine the {\ttfamily F\+S\+I\+Solid\+Traction\+Elements} to a compound {\ttfamily Geom\+Object} that provides a continuous representation of the solid\textquotesingle{}s F\+SI boundary, required by the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} described below. ~\newline
+\item Combine the {\ttfamily FSISolid\+Traction\+Elements} to a compound {\ttfamily Geom\+Object} that provides a continuous representation of the solid\textquotesingle{}s FSI boundary, required by the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} described below. ~\newline
 ~\newline
 
-\item Attach {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} to the faces of the \char`\"{}bulk\char`\"{} fluid elements that are adjacent to the solid. These elements will employ Lagrange multipliers to deform the pseudo-\/solid fluid mesh so that its shape remains consistent with the motion of the solid\textquotesingle{}s F\+SI boundary (as described by the compound {\ttfamily Geom\+Object} created in the previous step). ~\newline
+\item Attach {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} to the faces of the \char`\"{}bulk\char`\"{} fluid elements that are adjacent to the solid. These elements will employ Lagrange multipliers to deform the pseudo-\/solid fluid mesh so that its shape remains consistent with the motion of the solid\textquotesingle{}s FSI boundary (as described by the compound {\ttfamily Geom\+Object} created in the previous step). ~\newline
 ~\newline
 
-\item Determine the \char`\"{}bulk\char`\"{} fluid elements that are adjacent to the integration points of the {\ttfamily F\+S\+I\+Solid\+Traction\+Elements}, using the function {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}. ~\newline
+\item Determine the \char`\"{}bulk\char`\"{} fluid elements that are adjacent to the integration points of the {\ttfamily FSISolid\+Traction\+Elements}, using the function {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}. ~\newline
 ~\newline
 
-\end{DoxyEnumerate}In our experience, just as in two-\/dimensions, the most error-\/prone part of this procedure is the identification of the mesh boundaries. In particular, if the description of the F\+SI interface as viewed from the fluid and solid meshes is inconsistent, the automatic matching of the unstructured fluid and solid meshes will not work (see \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for details). For this reason, the driver code presented below generates a lot of output that can be used to identify and fix such problems. See also the section \mbox{\hyperlink{index_go_wrong}{What can go wrong?}} at the end of this tutorial.
+\end{DoxyEnumerate}In our experience, just as in two-\/dimensions, the most error-\/prone part of this procedure is the identification of the mesh boundaries. In particular, if the description of the FSI interface as viewed from the fluid and solid meshes is inconsistent, the automatic matching of the unstructured fluid and solid meshes will not work (see \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for details). For this reason, the driver code presented below generates a lot of output that can be used to identify and fix such problems. See also the section \mbox{\hyperlink{index_go_wrong}{What can go wrong?}} at the end of this tutorial.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_namespace}{}\doxysection{Problem Parameters}\label{index_namespace}
-As usual we define the various problem parameters in a global namespace. We define the Reynolds number, $ Re $, and the F\+SI interaction parameter $ Q $.
+As usual we define the various problem parameters in a global namespace. We define the Reynolds number, $ Re $, and the FSI interaction parameter $ Q $.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -104,9 +104,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}}=0.0;}
 
 \end{DoxyCodeInclude}
-
-
-We provide a pointer to the constitutive equation for the solid. For simplicity, the same constitutive equation will also be used for the (pseudo-\/)solid elements that determine the deformation of the fluid mesh. In general, of course, a different constitutive equation can (and probably should) be used to control the mesh motion.
+ We provide a pointer to the constitutive equation for the solid. For simplicity, the same constitutive equation will also be used for the (pseudo-\/)solid elements that determine the deformation of the fluid mesh. In general, of course, a different constitutive equation can (and probably should) be used to control the mesh motion.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -118,10 +116,8 @@ We provide a pointer to the constitutive equation for the solid. For simplicity,
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}}=0.3;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we define the tractions that act on the fluid at the in-\/ and outflow cross-\/sections. We enforce the non-\/dimensional pressure drop of $ \Delta P = 1$ (on the viscous scale) by setting $ P_{in} = -P_{out}=0.5 $, thus pressurising the tube\textquotesingle{}s upstream end while applying an equal and opposite \char`\"{}suction\char`\"{} downstream. (Note that in the ~\newline
- \href{../../../navier_stokes/unstructured_three_d_fluid/html/index.html}{\texttt{ corresponding single-\/physics fluids problem}} the actual pressure values were irrelevant because the vessel walls were rigid. In the F\+SI problem considered here it obviously makes a big difference if the fluid pressure is positive or negative because the external reference pressure is set to zero.)
+ Finally, we define the tractions that act on the fluid at the in-\/ and outflow cross-\/sections. We enforce the non-\/dimensional pressure drop of $ \Delta P = 1$ (on the viscous scale) by setting $ P_{in} = -P_{out}=0.5 $, thus pressurising the tube\textquotesingle{}s upstream end while applying an equal and opposite \char`\"{}suction\char`\"{} downstream. (Note that in the ~\newline
+ \href{../../../navier_stokes/unstructured_three_d_fluid/html/index.html}{\texttt{ corresponding single-\/physics fluids problem}} the actual pressure values were irrelevant because the vessel walls were rigid. In the FSI problem considered here it obviously makes a big difference if the fluid pressure is positive or negative because the external reference pressure is set to zero.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -159,9 +155,7 @@ Finally, we define the tractions that act on the fluid at the in-\/ and outflow 
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_mesh_code}{}\doxysection{Creating the meshes}\label{index_mesh_code}
 \hypertarget{index_solid_mesh}{}\doxysubsection{The solid mesh}\label{index_solid_mesh}
@@ -171,16 +165,14 @@ Following the procedure discussed in the \href{../../../solid/unstructured_three
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_solid\_mesh===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Tetgen-\/based mesh upgraded to become a solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TetgenMesh<ELEMENT>, }
 \DoxyCodeLine{                       \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
 \DoxyCodeLine{\{}
 
 \end{DoxyCodeInclude}
-
-
-As before, we set the Lagrangian coordinates to the current nodal positions to make the initial configuration stress-\/free. Next, we identify the elements next to the various boundaries (\href{../../../solid/unstructured_three_d_solid/html/index.html}{\texttt{ recall }} that the domain boundaries are specified in the tetgen {\ttfamily $\ast$.poly} file), and set up the boundary coordinates. Adopting our usual state of continuous paranoia, we document these elements to facilitate debugging; see the section \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for details.
+ As before, we set the Lagrangian coordinates to the current nodal positions to make the initial configuration stress-\/free. Next, we identify the elements next to the various boundaries (\href{../../../solid/unstructured_three_d_solid/html/index.html}{\texttt{ recall }} that the domain boundaries are specified in the tetgen {\ttfamily $\ast$.poly} file), and set up the boundary coordinates. Adopting our usual state of continuous paranoia, we document these elements to facilitate debugging; see the section \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for details.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -208,7 +200,7 @@ As before, we set the Lagrangian coordinates to the current nodal positions to m
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} nb=this-\/>nboundary();}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b=0;b<nb;b++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     sprintf(filename,\textcolor{stringliteral}{"RESLT/solid\_boundary\_test\%i.dat"},b);}
+\DoxyCodeLine{     sprintf(filename,\textcolor{stringliteral}{"{}RESLT/solid\_boundary\_test\%i.dat"{}},b);}
 \DoxyCodeLine{     some\_file.open(filename);}
 \DoxyCodeLine{     this-\/>\textcolor{keyword}{template} setup\_boundary\_coordinates<ELEMENT>(b,some\_file);}
 \DoxyCodeLine{     some\_file.close();}
@@ -217,7 +209,7 @@ As before, we set the Lagrangian coordinates to the current nodal positions to m
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classMySolidTetgenMesh}{\string~MySolidTetgenMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
@@ -233,7 +225,7 @@ The creation of the fluid mesh follows the same process but uses the mesh create
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_fluid\_mesh===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Tetgen-\/based mesh upgraded to become a (pseudo-\/) solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFluidTetMesh}{FluidTetMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TetgenMesh<ELEMENT>,}
 \DoxyCodeLine{                     \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
@@ -241,7 +233,7 @@ The creation of the fluid mesh follows the same process but uses the mesh create
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: }}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFluidTetMesh_a5f8ea145d68623198abc97209a0491a6}{FluidTetMesh}}(\textcolor{keyword}{const} std::string\& node\_file\_name,}
 \DoxyCodeLine{              \textcolor{keyword}{const} std::string\& element\_file\_name,}
 \DoxyCodeLine{              \textcolor{keyword}{const} std::string\& face\_file\_name,}
@@ -259,9 +251,7 @@ The creation of the fluid mesh follows the same process but uses the mesh create
 \DoxyCodeLine{   setup\_boundary\_element\_info();}
 
 \end{DoxyCodeInclude}
-
-
-We create boundary coordinates along all mesh boundaries. To ensure that fluid and solid boundary coordinates are aligned properly, we use the flag {\ttfamily switch\+\_\+normal} to change the direction of the normal vector for the fluid mesh; see \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for details.
+ We create boundary coordinates along all mesh boundaries. To ensure that fluid and solid boundary coordinates are aligned properly, we use the flag {\ttfamily switch\+\_\+normal} to change the direction of the normal vector for the fluid mesh; see \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for details.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -279,7 +269,7 @@ We create boundary coordinates along all mesh boundaries. To ensure that fluid a
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} nb=this-\/>nboundary();}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} b=0;b<nb;b++) }
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     sprintf(filename,\textcolor{stringliteral}{"RESLT/fluid\_boundary\_test\%i.dat"},b);}
+\DoxyCodeLine{     sprintf(filename,\textcolor{stringliteral}{"{}RESLT/fluid\_boundary\_test\%i.dat"{}},b);}
 \DoxyCodeLine{     some\_file.open(filename);}
 \DoxyCodeLine{     this-\/>\textcolor{keyword}{template} setup\_boundary\_coordinates<ELEMENT>(b,switch\_normal,some\_file);}
 \DoxyCodeLine{     some\_file.close();}
@@ -288,7 +278,7 @@ We create boundary coordinates along all mesh boundaries. To ensure that fluid a
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classFluidTetMesh}{FluidTetMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classFluidTetMesh}{\string~FluidTetMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
@@ -304,23 +294,21 @@ We specify an output directory and instantiate the constitutive equation ({\ttfa
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========================= start\_of\_main=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unstructured 3D FSI problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__three__d__fsi_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Label for output}}
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Create generalised Hookean constitutive equations}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}{Global\_Parameters::Constitutive\_law\_pt}} = }
 \DoxyCodeLine{  \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\_Parameters::Nu}});}
 
 \end{DoxyCodeInclude}
-
-
-We create the {\ttfamily Problem} object and output the initial guess for the solution.
+ We create the {\ttfamily Problem} object and output the initial guess for the solution.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -328,16 +316,14 @@ We create the {\ttfamily Problem} object and output the initial guess for the so
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem}}
 \DoxyCodeLine{ \mbox{\hyperlink{classUnstructuredFSIProblem}{UnstructuredFSIProblem}}<}
 \DoxyCodeLine{ PseudoSolidNodeUpdateElement<TTaylorHoodElement<3>, TPVDElement<3,3> >,}
-\DoxyCodeLine{  TPVDElement<3,3> > \mbox{\hyperlink{unstructured__three__d__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  TPVDElement<3,3> > problem;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output initial configuration}}
-\DoxyCodeLine{ \mbox{\hyperlink{unstructured__three__d__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{ doc\_info.number()++;   }
 
 \end{DoxyCodeInclude}
-
-
-Finally, we perform a parameter study in which we compute the solution of the fully-\/coupled F\+SI problem for increasing values of the F\+SI parameter $ Q $ -- physically, an increase in $ Q $ can be interpreted as a reduction in the stiffness of the tube walls while keeping the fluid properties and the driving pressure drop constant.
+ Finally, we perform a parameter study in which we compute the solution of the fully-\/coupled FSI problem for increasing values of the FSI parameter $ Q $ -- physically, an increase in $ Q $ can be interpreted as a reduction in the stiffness of the tube walls while keeping the fluid properties and the driving pressure drop constant.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -351,10 +337,10 @@ Finally, we perform a parameter study in which we compute the solution of the fu
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{   \mbox{\hyperlink{unstructured__three__d__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve();}
+\DoxyCodeLine{   problem.newton\_solve();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{unstructured__three__d__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{   problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{   doc\_info.number()++;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Bump up FSI parameter}}
@@ -375,7 +361,7 @@ The {\ttfamily Problem} class has the usual members, with access functions to th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_problem\_class===============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured 3D FSI problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredFSIProblem}{UnstructuredFSIProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -392,9 +378,7 @@ The {\ttfamily Problem} class has the usual members, with access functions to th
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{doc\_solution}}(DocInfo\& doc\_info);}
 
 \end{DoxyCodeInclude}
-
-
-We provide several helper functions to create the {\ttfamily Face\+Elements} that (i) apply the applied traction on the fluid at the in-\/ and outflow cross-\/sections; (ii) apply the fluid traction onto the solid, and (iii) create the Lagrange multipliers that apply the solid displacement onto the pseudo-\/solid fluid mesh.
+ We provide several helper functions to create the {\ttfamily Face\+Elements} that (i) apply the applied traction on the fluid at the in-\/ and outflow cross-\/sections; (ii) apply the fluid traction onto the solid, and (iii) create the Lagrange multipliers that apply the solid displacement onto the pseudo-\/solid fluid mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -405,7 +389,7 @@ We provide several helper functions to create the {\ttfamily Face\+Elements} tha
 \DoxyCodeLine{\textcolor{comment}{ /// Create FSI traction elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_fsi\_traction\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create elements that enforce prescribed boundary motion}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create elements that enforce prescribed boundary motion}}
 \DoxyCodeLine{\textcolor{comment}{ /// for the pseudo-\/solid fluid mesh by Lagrange multipliers}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_lagrange\_multiplier\_elements();}
 
@@ -425,48 +409,44 @@ We also provide a helper function that documents the boundary coordinates on the
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solid\_boundary\_coordinates(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i);}
 
 \end{DoxyCodeInclude}
-
-
-Finally we provide a large number of additional helper functions that specify the various mesh boundaries (as defined in the tetgen {\ttfamily $\ast$.poly} file) that make up the physical boundaries of interest\+: the in-\/ and outflow boundaries in the fluid domain; the F\+SI boundaries of the fluid and solid domains and the boundaries along which the tube wall is held in a fixed position.
+ Finally we provide a large number of additional helper functions that specify the various mesh boundaries (as defined in the tetgen {\ttfamily $\ast$.poly} file) that make up the physical boundaries of interest\+: the in-\/ and outflow boundaries in the fluid domain; the FSI boundaries of the fluid and solid domains and the boundaries along which the tube wall is held in a fixed position.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Return total number of mesh boundaries that make up the inflow }}
+\DoxyCodeLine{\textcolor{comment}{ /// Return total number of mesh boundaries that make up the inflow }}
 \DoxyCodeLine{\textcolor{comment}{ /// boundary}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} nfluid\_inflow\_traction\_boundary()}
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} Inflow\_boundary\_id.size();\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///  \(\backslash\)short Return total number of mesh boundaries that make up the outflow }}
+\DoxyCodeLine{\textcolor{comment}{ ///  Return total number of mesh boundaries that make up the outflow }}
 \DoxyCodeLine{\textcolor{comment}{ /// boundary}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} nfluid\_outflow\_traction\_boundary()}
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} Outflow\_boundary\_id.size();\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Return total number of mesh boundaries that make up the }}
+\DoxyCodeLine{\textcolor{comment}{ /// Return total number of mesh boundaries that make up the }}
 \DoxyCodeLine{\textcolor{comment}{ /// in-\/ and outflow boundaries where a traction has to be applied}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} nfluid\_traction\_boundary()}
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} Inflow\_boundary\_id.size()+Outflow\_boundary\_id.size();\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Return total number of mesh boundaries in the solid mesh that}}
+\DoxyCodeLine{\textcolor{comment}{ /// Return total number of mesh boundaries in the solid mesh that}}
 \DoxyCodeLine{\textcolor{comment}{ /// make up the FSI interface}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} nsolid\_fsi\_boundary()}
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} Solid\_fsi\_boundary\_id.size();\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Return total number of mesh boundaries in the fluid mesh that}}
+\DoxyCodeLine{\textcolor{comment}{ /// Return total number of mesh boundaries in the fluid mesh that}}
 \DoxyCodeLine{\textcolor{comment}{ /// make up the FSI interface}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} nfluid\_fsi\_boundary()}
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} Fluid\_fsi\_boundary\_id.size();\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Return total number of mesh boundaries in the solid mesh }}
+\DoxyCodeLine{\textcolor{comment}{ /// Return total number of mesh boundaries in the solid mesh }}
 \DoxyCodeLine{\textcolor{comment}{ /// where the position is pinned.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} npinned\_solid\_boundary()}
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} Pinned\_solid\_boundary\_id.size();\} }
 \DoxyCodeLine{  \textcolor{comment}{//end npinned\_solid\_boundary}}
 
 \end{DoxyCodeInclude}
-
-
-The private member data includes pointers to the various meshes and the {\ttfamily Geom\+Object} representation of the F\+SI boundary (created from the {\ttfamily Face\+Elements} attached to the solid mesh).
+ The private member data includes pointers to the various meshes and the {\ttfamily Geom\+Object} representation of the FSI boundary (created from the {\ttfamily Face\+Elements} attached to the solid mesh).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -492,9 +472,7 @@ The private member data includes pointers to the various meshes and the {\ttfami
 \DoxyCodeLine{ Solid\_fsi\_boundary\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, here are the vectors that store the mesh boundary I\+Ds associated with the various domain boundaries of interest.
+ Finally, here are the vectors that store the mesh boundary IDs associated with the various domain boundaries of interest.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -502,18 +480,18 @@ Finally, here are the vectors that store the mesh boundary I\+Ds associated with
 \DoxyCodeLine{\textcolor{comment}{ /// IDs of solid mesh boundaries where displacements are pinned}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> Pinned\_solid\_boundary\_id;}
 \DoxyCodeLine{  \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short IDs of solid mesh boundaries which make up the FSI interface}}
+\DoxyCodeLine{\textcolor{comment}{ /// IDs of solid mesh boundaries which make up the FSI interface}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> Solid\_fsi\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short IDs of fluid mesh boundaries along which inflow boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// IDs of fluid mesh boundaries along which inflow boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// are applied}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> Inflow\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short IDs of fluid mesh boundaries along which inflow boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// IDs of fluid mesh boundaries along which inflow boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// are applied}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> Outflow\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short IDs of fluid mesh boundaries which make up the FSI interface}}
+\DoxyCodeLine{\textcolor{comment}{ /// IDs of fluid mesh boundaries which make up the FSI interface}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> Fluid\_fsi\_boundary\_id;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
@@ -530,17 +508,17 @@ We start by building the fluid mesh, using the files created by \href{http://wia
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_constructor==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured 3D FSI problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a6a31fd839e0215ef1312942cf7284bd2}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::UnstructuredFSIProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ \textcolor{comment}{// Define fluid mesh and its distinguished boundaries}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ }
-\DoxyCodeLine{   \textcolor{comment}{//Create fluid bulk mesh, sub-\/dividing "corner" elements}}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_fluid.1.node"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_fluid.1.ele"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} face\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_fluid.1.face"};}
+\DoxyCodeLine{   \textcolor{comment}{//Create fluid bulk mesh, sub-\/dividing "{}corner"{} elements}}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_fluid.1.node"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_fluid.1.ele"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} face\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_fluid.1.face"{}};}
 \DoxyCodeLine{ \textcolor{keywordtype}{bool} split\_corner\_elements=\textcolor{keyword}{true};}
 \DoxyCodeLine{ Fluid\_mesh\_pt =  \textcolor{keyword}{new} \mbox{\hyperlink{classFluidTetMesh}{FluidTetMesh<FLUID\_ELEMENT>}}(node\_file\_name,}
 \DoxyCodeLine{                                                  element\_file\_name,}
@@ -550,7 +528,7 @@ We start by building the fluid mesh, using the files created by \href{http://wia
 \end{DoxyCodeInclude}
 
 
-Next we associated the {\ttfamily tetgen} boundary I\+Ds with the various boundaries of interest\+: The inflow boundary is represented by {\ttfamily tetgen} boundary 0, and the two outflow boundaries have I\+Ds 1 and 2.
+Next we associated the {\ttfamily tetgen} boundary IDs with the various boundaries of interest\+: The inflow boundary is represented by {\ttfamily tetgen} boundary 0, and the two outflow boundaries have IDs 1 and 2.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -569,9 +547,7 @@ Next we associated the {\ttfamily tetgen} boundary I\+Ds with the various bounda
 \DoxyCodeLine{ Outflow\_boundary\_id[1]=2;}
 
 \end{DoxyCodeInclude}
-
-
-The F\+SI boundary (i.\+e. the boundary of the fluid mesh that is exposed to the elastic vessel wall) comprises 12 separate tetgen facets which were numbered 3 to 14 in the {\ttfamily $\ast$.poly} that describes the fluid mesh.
+ The FSI boundary (i.\+e. the boundary of the fluid mesh that is exposed to the elastic vessel wall) comprises 12 separate tetgen facets which were numbered 3 to 14 in the {\ttfamily $\ast$.poly} that describes the fluid mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -597,17 +573,15 @@ Next, we create the solid mesh, using the files created by \href{http://wias-ber
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Create solid bulk mesh}}
-\DoxyCodeLine{ node\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_solid.1.node"};}
-\DoxyCodeLine{ element\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_solid.1.ele"};}
-\DoxyCodeLine{ face\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_solid.1.face"};}
+\DoxyCodeLine{ node\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.node"{}};}
+\DoxyCodeLine{ element\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.ele"{}};}
+\DoxyCodeLine{ face\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.face"{}};}
 \DoxyCodeLine{ Solid\_mesh\_pt =  \textcolor{keyword}{new} \mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh<SOLID\_ELEMENT>}}(node\_file\_name,}
 \DoxyCodeLine{                                                    element\_file\_name,}
 \DoxyCodeLine{                                                    face\_file\_name);}
 
 \end{DoxyCodeInclude}
-
-
-Following the procedure used for the fluid mesh, we identify the mesh boundaries that make up the (pinned) ends of the tube (boundaries 0, 1 and 2, as defined in the tetgen {\ttfamily $\ast$.poly} file) and the F\+SI boundary (boundaries 3 to 14 -- note that this enumeration matches that in the fluid mesh; see \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for further details of how the fluid and solid meshes are matched).
+ Following the procedure used for the fluid mesh, we identify the mesh boundaries that make up the (pinned) ends of the tube (boundaries 0, 1 and 2, as defined in the tetgen {\ttfamily $\ast$.poly} file) and the FSI boundary (boundaries 3 to 14 -- note that this enumeration matches that in the fluid mesh; see \mbox{\hyperlink{index_boundary_coord}{How the boundary coordinates are generated}} for further details of how the fluid and solid meshes are matched).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -629,9 +603,7 @@ Following the procedure used for the fluid mesh, we identify the mesh boundaries
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We create the fluid traction elements that impose the applied pressures in the in-\/ and outflow cross-\/sections.
+ We create the fluid traction elements that impose the applied pressures in the in-\/ and outflow cross-\/sections.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -676,9 +648,7 @@ Next, we create the {\ttfamily Face\+Elements} that apply the fluid traction to 
 \DoxyCodeLine{ create\_fsi\_traction\_elements();}
 
 \end{DoxyCodeInclude}
-
-
-and the {\ttfamily Face\+Elements} that use Lagrange multipliers to deform the fluid mesh to keep it aligned with the F\+SI boundary.
+ and the {\ttfamily Face\+Elements} that use Lagrange multipliers to deform the fluid mesh to keep it aligned with the FSI boundary.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -700,9 +670,7 @@ and the {\ttfamily Face\+Elements} that use Lagrange multipliers to deform the f
 \DoxyCodeLine{ create\_lagrange\_multiplier\_elements();}
 
 \end{DoxyCodeInclude}
-
-
-We combine the various sub-\/meshes to a global mesh.
+ We combine the various sub-\/meshes to a global mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -758,7 +726,7 @@ Next, we apply the boundary conditions for the fluid mesh\+: We impose parallel 
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Doc position of pinned pseudo solid nodes}}
-\DoxyCodeLine{ std::ofstream pseudo\_solid\_bc\_file(\textcolor{stringliteral}{"RESLT/pinned\_pseudo\_solid\_nodes.dat"});}
+\DoxyCodeLine{ std::ofstream pseudo\_solid\_bc\_file(\textcolor{stringliteral}{"{}RESLT/pinned\_pseudo\_solid\_nodes.dat"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Loop over inflow/outflow boundaries to impose parallel flow}}
 \DoxyCodeLine{ \textcolor{comment}{// and pin pseudo-\/solid displacements}}
@@ -798,7 +766,7 @@ Next, we apply the boundary conditions for the fluid mesh\+: We impose parallel 
 \DoxyCodeLine{         nod\_pt-\/>pin\_position(i);         }
 \DoxyCodeLine{         }
 \DoxyCodeLine{         \textcolor{comment}{// Doc it as pinned}}
-\DoxyCodeLine{         pseudo\_solid\_bc\_file << nod\_pt-\/>x(i) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{         pseudo\_solid\_bc\_file << nod\_pt-\/>x(i) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
@@ -808,15 +776,13 @@ Next, we apply the boundary conditions for the fluid mesh\+: We impose parallel 
 \DoxyCodeLine{ pseudo\_solid\_bc\_file.close();}
 
 \end{DoxyCodeInclude}
-
-
-We apply the no-\/slip condition on the fluid nodes that are located on the F\+SI boundary. In addition, we apply boundary conditions for the Lagrange multipliers. We pin the Lagrange multipliers for nodes that are located on the in-\/ and outflow boundaries where the nodal positions are pinned. \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ Recall}} that the Lagrange multipliers are additional degrees of freedom that are added to the \char`\"{}bulk\char`\"{} degrees of freedom that were originally created by the \char`\"{}bulk\char`\"{} element. The storage for the Lagrange multipliers is added to the Nodes by the Face\+Elements and the values at which the Lagrange multipliers are stored are found using the function {\ttfamily Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element()}. The documentation of the position of the pinned Lagrange multiplier nodes in {\ttfamily R\+E\+S\+L\+T/pinned\+\_\+lagrange\+\_\+multiplier\+\_\+nodes.\+dat} is here to facilitate the debugging of the code and is highly recommended.
+ We apply the no-\/slip condition on the fluid nodes that are located on the FSI boundary. In addition, we apply boundary conditions for the Lagrange multipliers. We pin the Lagrange multipliers for nodes that are located on the in-\/ and outflow boundaries where the nodal positions are pinned. \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ Recall}} that the Lagrange multipliers are additional degrees of freedom that are added to the \char`\"{}bulk\char`\"{} degrees of freedom that were originally created by the \char`\"{}bulk\char`\"{} element. The storage for the Lagrange multipliers is added to the Nodes by the Face\+Elements and the values at which the Lagrange multipliers are stored are found using the function {\ttfamily Boundary\+Node\+Base\+::index\+\_\+of\+\_\+first\+\_\+value\+\_\+assigned\+\_\+by\+\_\+face\+\_\+element()}. The documentation of the position of the pinned Lagrange multiplier nodes in {\ttfamily RESLT/pinned\+\_\+lagrange\+\_\+multiplier\+\_\+nodes.\+dat} is here to facilitate the debugging of the code and is highly recommended.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc bcs for Lagrange multipliers}}
-\DoxyCodeLine{ ofstream pinned\_file(\textcolor{stringliteral}{"RESLT/pinned\_lagrange\_multiplier\_nodes.dat"});}
+\DoxyCodeLine{ ofstream pinned\_file(\textcolor{stringliteral}{"{}RESLT/pinned\_lagrange\_multiplier\_nodes.dat"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Loop over all fluid mesh boundaries and pin velocities}}
 \DoxyCodeLine{ \textcolor{comment}{// of nodes that haven't been dealt with yet}}
@@ -880,8 +846,8 @@ We apply the no-\/slip condition on the fluid nodes that are located on the F\+S
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{       \textcolor{comment}{// Doc that we've pinned the Lagrange multipliers at this node}}
-\DoxyCodeLine{       pinned\_file << nod\_pt-\/>x(0) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{                   << nod\_pt-\/>x(1) << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{       pinned\_file << nod\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{                   << nod\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{                   << nod\_pt-\/>x(2) << endl;}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
@@ -892,9 +858,7 @@ We apply the no-\/slip condition on the fluid nodes that are located on the F\+S
 \DoxyCodeLine{ pinned\_file.close();}
 
 \end{DoxyCodeInclude}
-
-
-We complete the build of the fluid elements by specifying the Reynolds number and the constitutive equation for the pseudo-\/solid equations; recall that we use the same constitutive equation as used for the tube wall.
+ We complete the build of the fluid elements by specifying the Reynolds number and the constitutive equation for the pseudo-\/solid equations; recall that we use the same constitutive equation as used for the tube wall.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -931,7 +895,7 @@ We apply the \char`\"{}solid\char`\"{} boundary conditions by pinning the positi
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Doc pinned solid nodes}}
-\DoxyCodeLine{ std::ofstream bc\_file(\textcolor{stringliteral}{"RESLT/pinned\_solid\_nodes.dat"});}
+\DoxyCodeLine{ std::ofstream bc\_file(\textcolor{stringliteral}{"{}RESLT/pinned\_solid\_nodes.dat"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Pin positions at inflow boundary (boundaries 0 and 1)}}
 \DoxyCodeLine{ n=npinned\_solid\_boundary();}
@@ -951,7 +915,7 @@ We apply the \char`\"{}solid\char`\"{} boundary conditions by pinning the positi
 \DoxyCodeLine{       nod\_pt-\/>pin\_position(i);}
 \DoxyCodeLine{       }
 \DoxyCodeLine{       \textcolor{comment}{// ...and doc it as pinned}}
-\DoxyCodeLine{       bc\_file << nod\_pt-\/>x(i) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{       bc\_file << nod\_pt-\/>x(i) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     bc\_file << std::endl;}
@@ -984,9 +948,7 @@ We complete the build of the solid elements by passing the pointer to the consti
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we set up the fluid-\/structure interaction by determining which \char`\"{}bulk\char`\"{} fluid elements are located next to the F\+SI traction elements that apply the fluid load to the solid. This must be done separately for each of the mesh boundaries that make up the physical F\+SI boundary. To facilitate debugging, we document the boundary coordinates along the F\+SI interface (as seen by the fluid) by opening the {\ttfamily Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+boundary\+\_\+coordinate\+\_\+file} stream before calling {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}. If this stream is open, the setup routine writes the Eulerian coordinates of the points on the F\+SI interface and their intrinsic surface coordinate $ [ x, y, z, \zeta_1, \zeta_2 ] $ to the specified file. This may be compared against the corresponding data for the solid\textquotesingle{}s view of the F\+SI interface, documented in {\ttfamily doc\+\_\+solid\+\_\+boundary\+\_\+coordinates()}.
+ Finally, we set up the fluid-\/structure interaction by determining which \char`\"{}bulk\char`\"{} fluid elements are located next to the FSI traction elements that apply the fluid load to the solid. This must be done separately for each of the mesh boundaries that make up the physical FSI boundary. To facilitate debugging, we document the boundary coordinates along the FSI interface (as seen by the fluid) by opening the {\ttfamily Multi\+\_\+domain\+\_\+functions\+::\+Doc\+\_\+boundary\+\_\+coordinate\+\_\+file} stream before calling {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}. If this stream is open, the setup routine writes the Eulerian coordinates of the points on the FSI interface and their intrinsic surface coordinate $ [ x, y, z, \zeta_1, \zeta_2 ] $ to the specified file. This may be compared against the corresponding data for the solid\textquotesingle{}s view of the FSI interface, documented in {\ttfamily doc\+\_\+solid\+\_\+boundary\+\_\+coordinates()}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -1006,7 +968,7 @@ Finally, we set up the fluid-\/structure interaction by determining which \char`
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Doc boundary coordinates in fluid}}
 \DoxyCodeLine{   \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"RESLT/fluid\_boundary\_coordinates\%i.dat"},i);}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}RESLT/fluid\_boundary\_coordinates\%i.dat"{}},i);}
 \DoxyCodeLine{   Multi\_domain\_functions::Doc\_boundary\_coordinate\_file.open(filename);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Setup FSI: Pass ID of fluid FSI boundary and associated}}
@@ -1027,23 +989,21 @@ All that\textquotesingle{}s now left to do is to set up the equation numbering s
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ std::cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ std::cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_fsi_traction}{}\doxysection{Creating the F\+S\+I traction elements}\label{index_fsi_traction}
-The creation of the F\+SI traction elements that apply the fluid traction to the solid elements that are adjacent to the F\+SI boundary follows the usual procedure\+: We loop over the relevant 3D \char`\"{}bulk\char`\"{} solid elements and attach the {\ttfamily F\+S\+I\+Solid\+Traction\+Elements} to the appropriate faces.
+ \DoxyHorRuler{0}
+\hypertarget{index_fsi_traction}{}\doxysection{Creating the FSI traction elements}\label{index_fsi_traction}
+The creation of the FSI traction elements that apply the fluid traction to the solid elements that are adjacent to the FSI boundary follows the usual procedure\+: We loop over the relevant 3D \char`\"{}bulk\char`\"{} solid elements and attach the {\ttfamily FSISolid\+Traction\+Elements} to the appropriate faces.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_fsi\_traction\_elements======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create FSI traction elements }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_a934a587c99668fca969a72814b3142a7}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a934a587c99668fca969a72814b3142a7}{create\_fsi\_traction\_elements}}()}
@@ -1074,9 +1034,7 @@ The creation of the F\+SI traction elements that apply the fluid traction to the
 \DoxyCodeLine{      \textcolor{keyword}{new} FSISolidTractionElement<SOLID\_ELEMENT,3>(bulk\_elem\_pt,face\_index);}
 
 \end{DoxyCodeInclude}
-
-
-Next we add the newly-\/created {\ttfamily Face\+Element} to the mesh of traction elements, specify which boundary of the bulk mesh it is attached to, and pass the F\+SI interaction parameter $ Q $ to the element.
+ Next we add the newly-\/created {\ttfamily Face\+Element} to the mesh of traction elements, specify which boundary of the bulk mesh it is attached to, and pass the FSI interaction parameter $ Q $ to the element.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -1100,7 +1058,7 @@ Next we add the newly-\/created {\ttfamily Face\+Element} to the mesh of tractio
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_create_lagr}{}\doxysection{Creating the Lagrange multiplier elements}\label{index_create_lagr}
-The creation of the {\ttfamily Face\+Elements} that use Lagrange multipliers to impose the boundary displacement of the pseudo-\/solid fluid mesh is again fairly straightforward (the use of Lagrange multipliers for the imposition of boundary displacements is explained in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}). The only complication is that we must loop over the different parts of the F\+SI boundary. In each case we combine the {\ttfamily F\+S\+I\+Solid\+Traction\+Elements} attached to the solid mesh into a compound {\ttfamily Geom\+Object}. Each {\ttfamily Geom\+Object} provides a continuous representation of the relevant part of the F\+SI boundary, parametrised by the boundary coordinate assigned earlier while its shape is determined by the deformation of the 3D solid elements that the {\ttfamily F\+S\+I\+Solid\+Traction\+Elements} are attached to.
+The creation of the {\ttfamily Face\+Elements} that use Lagrange multipliers to impose the boundary displacement of the pseudo-\/solid fluid mesh is again fairly straightforward (the use of Lagrange multipliers for the imposition of boundary displacements is explained in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}). The only complication is that we must loop over the different parts of the FSI boundary. In each case we combine the {\ttfamily FSISolid\+Traction\+Elements} attached to the solid mesh into a compound {\ttfamily Geom\+Object}. Each {\ttfamily Geom\+Object} provides a continuous representation of the relevant part of the FSI boundary, parametrised by the boundary coordinate assigned earlier while its shape is determined by the deformation of the 3D solid elements that the {\ttfamily FSISolid\+Traction\+Elements} are attached to.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -1130,9 +1088,7 @@ The creation of the {\ttfamily Face\+Elements} that use Lagrange multipliers to 
 \DoxyCodeLine{    (Solid\_fsi\_traction\_mesh\_pt[i]);}
 
 \end{DoxyCodeInclude}
-
-
-Having represented the boundary by a (compound) {\ttfamily Geom\+Object}, we now attach {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} to the appropriate faces of the \char`\"{}bulk\char`\"{} fluid elements that are adjacent to the F\+SI interface and add them to their own mesh\+:
+ Having represented the boundary by a (compound) {\ttfamily Geom\+Object}, we now attach {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} to the appropriate faces of the \char`\"{}bulk\char`\"{} fluid elements that are adjacent to the FSI interface and add them to their own mesh\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -1159,9 +1115,7 @@ Having represented the boundary by a (compound) {\ttfamily Geom\+Object}, we now
 \DoxyCodeLine{     Lagrange\_multiplier\_mesh\_pt[i]-\/>add\_element\_pt(el\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we pass a pointer to the compound {\ttfamily Geom\+Object} that defines the shape of the F\+SI interface and specify which boundary in the \char`\"{}bulk\char`\"{} fluid mesh the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element} is attached to.
+ Finally, we pass a pointer to the compound {\ttfamily Geom\+Object} that defines the shape of the FSI interface and specify which boundary in the \char`\"{}bulk\char`\"{} fluid mesh the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Element} is attached to.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -1176,9 +1130,7 @@ Finally, we pass a pointer to the compound {\ttfamily Geom\+Object} that defines
 \DoxyCodeLine{\} \textcolor{comment}{// end of create\_lagrange\_multiplier\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_fluid_traction}{}\doxysection{Attaching the fluid traction elements}\label{index_fluid_traction}
 The helper function {\ttfamily create\+\_\+fluid\+\_\+traction\+\_\+elements()} attaches {\ttfamily Navier\+Stokes\+Traction\+Elements} to the in-\/ and outflow cross-\/sections of the fluid mesh and thus imposes the prescribed pressure drop onto the fluid.
@@ -1187,7 +1139,7 @@ The helper function {\ttfamily create\+\_\+fluid\+\_\+traction\+\_\+elements()} 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_fluid\_traction\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create fluid traction elements }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT,\textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_af766e3bbc8963a286678cb1d277909f5}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_af766e3bbc8963a286678cb1d277909f5}{create\_fluid\_traction\_elements}}()}
@@ -1262,13 +1214,13 @@ The helper function {\ttfamily create\+\_\+fluid\+\_\+traction\+\_\+elements()} 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc_solution}{}\doxysection{Post-\/processing}\label{index_doc_solution}
-The post-\/processing routine simply executes the output functions for the fluid and solid meshes and documents their mesh boundaries. We also document the F\+SI traction that the fluid exerts onto the solid.
+The post-\/processing routine simply executes the output functions for the fluid and solid meshes and documents their mesh boundaries. We also document the FSI traction that the fluid exerts onto the solid.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_doc\_solution===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{UnstructuredFSIProblem<FLUID\_ELEMENT,SOLID\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{doc\_solution}}(DocInfo\& doc\_info)}
@@ -1283,7 +1235,7 @@ The post-\/processing routine simply executes the output functions for the fluid
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output solid boundaries}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/solid\_boundaries\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/solid\_boundaries\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output\_boundaries(some\_file);}
@@ -1292,7 +1244,7 @@ The post-\/processing routine simply executes the output functions for the fluid
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output solid solution}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/solid\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/solid\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output(some\_file,npts);}
@@ -1301,7 +1253,7 @@ The post-\/processing routine simply executes the output functions for the fluid
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output fluid boundaries}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fluid\_boundaries\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fluid\_boundaries\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Fluid\_mesh\_pt-\/>output\_boundaries(some\_file);}
@@ -1310,7 +1262,7 @@ The post-\/processing routine simply executes the output functions for the fluid
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output fluid solution}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fluid\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fluid\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Fluid\_mesh\_pt-\/>output(some\_file,npts);}
@@ -1319,7 +1271,7 @@ The post-\/processing routine simply executes the output functions for the fluid
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Output fsi traction}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fsi\_traction\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fsi\_traction\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n=nsolid\_fsi\_boundary();}
@@ -1337,18 +1289,18 @@ The post-\/processing routine simply executes the output functions for the fluid
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc_solid_zeta}{}\doxysection{Sanity check\+: Documenting the solid boundary coordinates}\label{index_doc_solid_zeta}
-The function {\ttfamily doc\+\_\+solid\+\_\+boundary\+\_\+coordinates()} documents the parametrisation of the solid\textquotesingle{}s F\+SI boundary by writing into a file the solid\textquotesingle{}s counterpart of the $ [ x, y, z, \zeta_1, \zeta_2 ] $ data that we created for the fluid side of the F\+SI interface when setting up the fluid-\/structure interaction with {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}. The two parametrisations should be consistent; see \mbox{\hyperlink{index_go_wrong}{What can go wrong?}} for more details. The implementation is straightforward and is suppressed for brevity; see the \href{../../../../demo_drivers/interaction/unstructured_three_d_fsi/unstructured_three_d_fsi.cc}{\texttt{ source code }} if you want to know how it works.
+The function {\ttfamily doc\+\_\+solid\+\_\+boundary\+\_\+coordinates()} documents the parametrisation of the solid\textquotesingle{}s FSI boundary by writing into a file the solid\textquotesingle{}s counterpart of the $ [ x, y, z, \zeta_1, \zeta_2 ] $ data that we created for the fluid side of the FSI interface when setting up the fluid-\/structure interaction with {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}. The two parametrisations should be consistent; see \mbox{\hyperlink{index_go_wrong}{What can go wrong?}} for more details. The implementation is straightforward and is suppressed for brevity; see the \href{../../../../demo_drivers/interaction/unstructured_three_d_fsi/unstructured_three_d_fsi.cc}{\texttt{ source code }} if you want to know how it works.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comm_ex}{}\doxysection{Comments and Exercises}\label{index_comm_ex}
 \hypertarget{index_boundary_coord}{}\doxysubsection{How the boundary coordinates are generated}\label{index_boundary_coord}
-The use of pseudo-\/elasticity for the node update in the fluid mesh makes the solution of F\+SI problems extremely straightforward. They key feature that allows the \char`\"{}automatic\char`\"{} coupling of the unstructured fluid and solid meshes is the (consistent!) generation of the boundary coordinates $ (\zeta_1,\zeta_2) $ along the F\+SI interface. For reasons already mentioned, the procedure is more involved than in the equivalent two-\/dimensional problem. The implementation of this functionality in {\ttfamily Tetgen\+Mesh\+::setup\+\_\+boundary\+\_\+coordinates(...)} exploits the fact that
+The use of pseudo-\/elasticity for the node update in the fluid mesh makes the solution of FSI problems extremely straightforward. They key feature that allows the \char`\"{}automatic\char`\"{} coupling of the unstructured fluid and solid meshes is the (consistent!) generation of the boundary coordinates $ (\zeta_1,\zeta_2) $ along the FSI interface. For reasons already mentioned, the procedure is more involved than in the equivalent two-\/dimensional problem. The implementation of this functionality in {\ttfamily Tetgen\+Mesh\+::setup\+\_\+boundary\+\_\+coordinates(...)} exploits the fact that
 \begin{DoxyEnumerate}
 \item Meshes generated by \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} are bounded by planar facets, and ~\newline
 ~\newline
 
-\item We insist that all facets are given distinct boundary I\+Ds ~\newline
+\item We insist that all facets are given distinct boundary IDs ~\newline
  when defining the domain in the tetgen {\ttfamily $\ast$.poly} file.
 \end{DoxyEnumerate}The figure below illustrates the generation of the boundary coordinates within a representative planar facet (shown in cyan) that defines a particular mesh boundary.
 
@@ -1383,20 +1335,20 @@ Here is how we generate the boundary coordinates\+:
 
 \end{DoxyEnumerate}Since the generation of the boundary coordinates by the above procedure only relies on the position of the \char`\"{}lower left\char`\"{} and \char`\"{}upper right\char`\"{} vertices (which are properties of the facet rather than the {\ttfamily tetgen} mesh) the boundary coordinates are unique, regardless of the actual discretisation generated by {\ttfamily tetgen}. Furthermore, the boundary coordinates created from the fluid and solid meshes will be consistent {\itshape provided} we reverse the direction of the outer unit normal in one of the meshes. This is exactly what the {\ttfamily switch\+\_\+normal} flag in {\ttfamily Tetgen\+Mesh\+::setup\+\_\+boundary\+\_\+coordinates(...)} is for. When generating the boundary coordinates for our problem, we switched the direction of the normal in the fluid mesh; see the section \mbox{\hyperlink{index_fluid_mesh}{The fluid mesh}}, above.
 
-Here is an animation of the automatically-\/generated boundary coordinates along the 12 mesh boundaries that constitute the F\+SI boundary, when viewed from the fluid and the solid, respectively. In each of the frames the contours indicate the value of ~\newline
+Here is an animation of the automatically-\/generated boundary coordinates along the 12 mesh boundaries that constitute the FSI boundary, when viewed from the fluid and the solid, respectively. In each of the frames the contours indicate the value of ~\newline
  $ \zeta_1 $ within the respective boundary. Note that the boundary coordinates established in the two meshes match, even though the discretisations do not.
 
  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{fluid_boundary_test}
-\doxyfigcaption{Contour plot of the automatically-\/generated boundary coordinates on the F\+SI boundary, viewed from the fluid mesh. }
+\doxyfigcaption{Contour plot of the automatically-\/generated boundary coordinates on the FSI boundary, viewed from the fluid mesh. }
 \end{DoxyImage}
 
 
  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{solid_boundary_test}
-\doxyfigcaption{Contour plot of the automatically-\/generated boundary coordinates on the F\+SI boundary, viewed from the solid mesh. }
+\doxyfigcaption{Contour plot of the automatically-\/generated boundary coordinates on the FSI boundary, viewed from the solid mesh. }
 \end{DoxyImage}
 
 
@@ -1404,11 +1356,12 @@ You should explore this procedure yourself as an {\bfseries{exercise\+:}} For in
 
 \DoxyHorRuler{0}
 \hypertarget{index_matching_fluid_and_solid}{}\doxysubsection{Fluid and solid meshes do not have to be matching}\label{index_matching_fluid_and_solid}
-The mesh shown in the problem sketch at the beginning of this tutorial already suggested that the fluid and solid meshes do not have to match across the F\+SI interface. To illustrate this point more clearly, here is the result of another computation for which we generated a much finer fluid mesh, using
+The mesh shown in the problem sketch at the beginning of this tutorial already suggested that the fluid and solid meshes do not have to match across the FSI interface. To illustrate this point more clearly, here is the result of another computation for which we generated a much finer fluid mesh, using
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{tetgen -\/a0.05 fsi\_bifurcation\_fluid.poly}
+
 \end{DoxyCode}
 
 
@@ -1425,24 +1378,24 @@ As an {\bfseries{exercise}}, generate some finer fluid and solid meshes yourself
 
 \DoxyHorRuler{0}
 \hypertarget{index_go_wrong}{}\doxysubsection{What can go wrong?}\label{index_go_wrong}
-Here are a few things that can (and often do) go wrong in unstructured, three-\/dimensional F\+SI problems.
+Here are a few things that can (and often do) go wrong in unstructured, three-\/dimensional FSI problems.
 \begin{DoxyItemize}
-\item {\bfseries{The facets that define the F\+SI boundary don\textquotesingle{}t match\+:}} ~\newline
+\item {\bfseries{The facets that define the FSI boundary don\textquotesingle{}t match\+:}} ~\newline
 ~\newline
- This tends to happen if the {\ttfamily $\ast$.poly} files describing the fluid and solid meshes do not use the same facets to describe the F\+SI interface. While we do not expect the fluid and solid meshes themselves to match, the representation of the F\+SI interface via facets {\ttfamily must} be consistent. A simple way to ensure consistency is to use the following procedure\+: ~\newline
+ This tends to happen if the {\ttfamily $\ast$.poly} files describing the fluid and solid meshes do not use the same facets to describe the FSI interface. While we do not expect the fluid and solid meshes themselves to match, the representation of the FSI interface via facets {\ttfamily must} be consistent. A simple way to ensure consistency is to use the following procedure\+: ~\newline
 ~\newline
 
 \begin{DoxyEnumerate}
-\item Write the {\ttfamily $\ast$.poly} file for the fluid mesh. Make sure that each facet is given a separate boundary ID (at least for the facets describing the F\+SI interface). ~\newline
+\item Write the {\ttfamily $\ast$.poly} file for the fluid mesh. Make sure that each facet is given a separate boundary ID (at least for the facets describing the FSI interface). ~\newline
 ~\newline
 
 \item Solve a single-\/physics fluids problem on this mesh to check the integrity of the mesh -- the solution of this problem will also give you some insight into the expected flow field. ~\newline
 ~\newline
 
-\item Make a copy of the {\ttfamily $\ast$.poly} file for the fluid mesh and modify it to describe the solid mesh, leaving the facets that define the F\+SI interface unchanged. This automatically ensures that the representation of the F\+SI boundary from the fluid\textquotesingle{}s and the solid\textquotesingle{}s point of view is consistent. ~\newline
+\item Make a copy of the {\ttfamily $\ast$.poly} file for the fluid mesh and modify it to describe the solid mesh, leaving the facets that define the FSI interface unchanged. This automatically ensures that the representation of the FSI boundary from the fluid\textquotesingle{}s and the solid\textquotesingle{}s point of view is consistent. ~\newline
 ~\newline
 
-\item Solve a single-\/physics solids problem on this mesh to check the integrity of the mesh, e.\+g. by applying some pressure loading on the future F\+SI boundary -- the solution of this problem will also give you some insight into the expected wall deformation. ~\newline
+\item Solve a single-\/physics solids problem on this mesh to check the integrity of the mesh, e.\+g. by applying some pressure loading on the future FSI boundary -- the solution of this problem will also give you some insight into the expected wall deformation. ~\newline
 ~\newline
 
 \item Couple the two problems, as shown in this tutorial. ~\newline
@@ -1451,14 +1404,14 @@ Here are a few things that can (and often do) go wrong in unstructured, three-\/
 \end{DoxyEnumerate}As an {\bfseries{exercise}}, modify the tetgen {\ttfamily $\ast$.poly} files and the driver code so that it can handle the extended domain considered in the \href{../../../navier_stokes/unstructured_three_d_fluid/html/index.html\#finer_mesh}{\texttt{ single-\/physics fluids problem.}} ~\newline
 ~\newline
 
-\item {\bfseries{ An F\+SI (sub-\/)boundary is not planar\+:}} ~\newline
+\item {\bfseries{ An FSI (sub-\/)boundary is not planar\+:}} ~\newline
 ~\newline
- In an unstructured mesh, the F\+SI boundary will usually be represented by a large number of distinct mesh boundaries. The automatic setup of the boundary coordinates on these mesh boundaries requires them to be (individually) planar -- at least in the problem\textquotesingle{}s initial configuration. Provided you have followed our advice and associated each of the facets that define the F\+SI boundary with a different boundary ID, you should not have any problems as {\ttfamily tetgen} does not allow non-\/planar facets. ~\newline
+ In an unstructured mesh, the FSI boundary will usually be represented by a large number of distinct mesh boundaries. The automatic setup of the boundary coordinates on these mesh boundaries requires them to be (individually) planar -- at least in the problem\textquotesingle{}s initial configuration. Provided you have followed our advice and associated each of the facets that define the FSI boundary with a different boundary ID, you should not have any problems as {\ttfamily tetgen} does not allow non-\/planar facets. ~\newline
 ~\newline
 
 \item {\bfseries{ The solver does not converge\+:}} ~\newline
 ~\newline
- A large-\/displacement F\+SI problem is a highly nonlinear problem and the provision of a good initial guess for the Newton iteration is essential. We tend to proceed as follows\+: ~\newline
+ A large-\/displacement FSI problem is a highly nonlinear problem and the provision of a good initial guess for the Newton iteration is essential. We tend to proceed as follows\+: ~\newline
 ~\newline
 
 \begin{DoxyEnumerate}
@@ -1472,10 +1425,10 @@ Here are a few things that can (and often do) go wrong in unstructured, three-\/
 ~\newline
 
 \begin{DoxyEnumerate}
-\item setting the F\+SI parameter to zero, $ Q = 0, $ ~\newline
+\item setting the FSI parameter to zero, $ Q = 0, $ ~\newline
 ~\newline
 
-\item commenting out the call to {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}, ~\newline
+\item commenting out the call to {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}, ~\newline
 ~\newline
 
 \item not creating the Lagrange-\/multiplier elements that enforce the solid displacements onto the fluid mesh.
@@ -1494,10 +1447,10 @@ Here are a few things that can (and often do) go wrong in unstructured, three-\/
 \item Increase the Reynolds number in small increments to its target value. ~\newline
 ~\newline
 
-\item Re-\/enable the call to {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} and attach the Lagrange multiplier elements but keep $ Q = 0. $ If the solid is not loaded by any forces/tractions other than those arising from the fluid, the solution should not change as the solid remains unloaded. ~\newline
+\item Re-\/enable the call to {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} and attach the Lagrange multiplier elements but keep $ Q = 0. $ If the solid is not loaded by any forces/tractions other than those arising from the fluid, the solution should not change as the solid remains unloaded. ~\newline
 ~\newline
 
-\item Gently increase the value of the F\+SI parameter, $ Q $, remembering that it represents the ratio of the typical viscous fluid stresses to the stiffness of the solid. Hence, even relatively small values of $ Q $ tend to lead to relatively large solid displacements. Be gentle!
+\item Gently increase the value of the FSI parameter, $ Q $, remembering that it represents the ratio of the typical viscous fluid stresses to the stiffness of the solid. Hence, even relatively small values of $ Q $ tend to lead to relatively large solid displacements. Be gentle!
 \end{DoxyEnumerate}
 \end{DoxyEnumerate}~\newline
 ~\newline
@@ -1520,5 +1473,5 @@ Here are a few things that can (and often do) go wrong in unstructured, three-\/
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

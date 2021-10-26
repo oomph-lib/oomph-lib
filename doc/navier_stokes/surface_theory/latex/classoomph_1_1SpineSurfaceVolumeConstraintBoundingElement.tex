@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{}\doxysection{oomph\+::Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{}\doxysection{oomph\+::Spine\+Surface\+Volume\+Constraint\+Bounding\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}\index{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$}}
+
+
+////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$constrained\+\_\+volume\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Spine\+Surface\+Volume\+Constraint\+Bounding\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.679426cm]{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}
@@ -16,19 +21,20 @@ Inheritance diagram for oomph\+::Spine\+Surface\+Volume\+Constraint\+Bounding\+E
 \mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement_a1426f4750d43008e7c33526cf01f23f3}{Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}} (Finite\+Element $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Contructor\+: Specify bulk element and index of face to which this face element is to be attached. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement_a5eec2e025f24120c6f2a959da70bb5b1}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
-\item 
+\begin{DoxyCompactList}\small\item\em Fill in contribution to residuals and Jacobian. This is specific to spine based elements in which the shape derivatives are evaluated using geometric data. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement_aa252629ad8c455a83b5f2e9643a36e94}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&i) const
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Element representation, by default. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$}
+////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
-The Two-\/dimensional interface elements that allow the application of a volume constraint specialised for the case when the nodal positions of the bulk elements are adjusted using spines. To enforce that a fluid volume has a certain volume, attach these elements to all faces of the (3D Cartesian) bulk fluid elements (of type E\+L\+E\+M\+E\+NT) that bound that region and then specify the \char`\"{}pressure\char`\"{} value that is traded for the constraint. 
+The Two-\/dimensional interface elements that allow the application of a volume constraint specialised for the case when the nodal positions of the bulk elements are adjusted using spines. To enforce that a fluid volume has a certain volume, attach these elements to all faces of the (3D Cartesian) bulk fluid elements (of type ELEMENT) that bound that region and then specify the \char`\"{}pressure\char`\"{} value that is traded for the constraint. 
 
-Definition at line 813 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00813}{813}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
@@ -37,8 +43,8 @@ Definition at line 813 of file constrained\+\_\+volume\+\_\+elements.\+h.
 \index{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$}!SpineSurfaceVolumeConstraintBoundingElement@{SpineSurfaceVolumeConstraintBoundingElement}}
 \index{SpineSurfaceVolumeConstraintBoundingElement@{SpineSurfaceVolumeConstraintBoundingElement}!oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{SpineSurfaceVolumeConstraintBoundingElement()}{SpineSurfaceVolumeConstraintBoundingElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}} (\begin{DoxyParamCaption}\item[{Finite\+Element $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}} (\begin{DoxyParamCaption}\item[{Finite\+Element $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -46,7 +52,7 @@ Contructor\+: Specify bulk element and index of face to which this face element 
 
 
 
-Definition at line 820 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00820}{820}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
@@ -55,23 +61,27 @@ Definition at line 820 of file constrained\+\_\+volume\+\_\+elements.\+h.
 \index{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Fill in contribution to residuals and Jacobian. This is specific to spine based elements in which the shape derivatives are evaluated using geometric data 
-
-Definition at line 834 of file constrained\+\_\+volume\+\_\+elements.\+h.
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References oomph\+::\+Surface\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint().
+Fill in contribution to residuals and Jacobian. This is specific to spine based elements in which the shape derivatives are evaluated using geometric data. 
+
+
+
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00834}{834}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00435}{oomph\+::\+Surface\+Volume\+Constraint\+Bounding\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+volume\+\_\+constraint()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement_aa252629ad8c455a83b5f2e9643a36e94}\label{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement_aa252629ad8c455a83b5f2e9643a36e94}} 
 \index{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$@{oomph::SpineSurfaceVolumeConstraintBoundingElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineSurfaceVolumeConstraintBoundingElement}{oomph\+::\+Spine\+Surface\+Volume\+Constraint\+Bounding\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -79,7 +89,7 @@ The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed a
 
 
 
-Definition at line 848 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00848}{848}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 

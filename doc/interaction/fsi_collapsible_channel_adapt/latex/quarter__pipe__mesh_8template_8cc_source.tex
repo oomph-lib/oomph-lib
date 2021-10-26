@@ -1,0 +1,112 @@
+\hypertarget{quarter__pipe__mesh_8template_8cc_source}{}\doxysection{quarter\+\_\+pipe\+\_\+mesh.\+template.\+cc}
+\label{quarter__pipe__mesh_8template_8cc_source}\index{quarter\_pipe\_mesh.template.cc@{quarter\_pipe\_mesh.template.cc}}
+\mbox{\hyperlink{quarter__pipe__mesh_8template_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00026}00026 \textcolor{preprocessor}{\#ifndef OOMPH\_QUARTER\_PIPE\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00027}00027 \textcolor{preprocessor}{\#define OOMPH\_QUARTER\_PIPE\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00029}00029 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{quarter__pipe__mesh_8template_8h}{quarter\_pipe\_mesh.template.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00032}00032 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00033}00033 \{}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00034}00034   \textcolor{comment}{//====================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00035}00035 \textcolor{comment}{  /// Constructor: Pass number of elements in various directions,}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00036}00036 \textcolor{comment}{  /// the inner and outer radius and the length of the tube}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00037}00037 \textcolor{comment}{}  \textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00038}00038   \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00039}\mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_a453b84a80ccde867b8526e538135f43b}{00039}}   \mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_a453b84a80ccde867b8526e538135f43b}{QuarterPipeMesh<ELEMENT>::QuarterPipeMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ntheta,}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00040}00040                                             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nr,}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00041}00041                                             \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nz,}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00042}00042                                             \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& rmin,}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00043}00043                                             \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& rmax,}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00044}00044                                             \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& length,}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00045}00045                                             TimeStepper* time\_stepper\_pt)}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00046}00046     : \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh}{SimpleCubicMesh}}<ELEMENT>(}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00047}00047         ntheta, nr, nz, 1.0, 1.0, length, time\_stepper\_pt)}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00048}00048   \{}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00049}00049     \textcolor{comment}{// Mesh can only be built with 3D Qelements.}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00050}00050     MeshChecker::assert\_geometric\_element<QElementGeometricBase, ELEMENT>(3);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00051}00051 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00052}00052     \textcolor{comment}{// Variables declaration}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00053}00053     \mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_aabe271e163f56d913936d12d2c4d0f21}{Ntheta}} = ntheta;}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00054}00054     \mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_a8e6896852024ecf017ab687926fb3ef3}{Nr}} = nr;}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00055}00055     \mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_a43bdaa4d81e936615332c5d43e347413}{Nz}} = \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}};}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00056}00056     \mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_aa75ba32bf5f825254f1e92a00109af3e}{Rmin}} = rmin;}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00057}00057     \mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_ab080d887f508016140bac78d82be37d4}{Rmax}} = rmax;}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00058}00058     \mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_a00530b53de926a9a4f37cace7e2ffbdb}{Length}} = length;}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00059}00059 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00060}00060     \textcolor{comment}{// Build macro element-\/based domain}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00061}00061     \mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_a1b3656a71bc9f6159aa237d3a76d5a15}{Domain\_pt}} = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1QuarterPipeDomain}{QuarterPipeDomain}}(ntheta, nr, \mbox{\hyperlink{classoomph_1_1SimpleCubicMesh_a30a7daf6d2841672f4d7e32041e81957}{nz}}, rmin, rmax, length);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00063}00063     \textcolor{comment}{// Loop over all elements}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00064}00064     \textcolor{keywordtype}{unsigned} nel = this-\/>nelement();}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00065}00065     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 0; e < nel; e++)}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00066}00066     \{}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00067}00067       \textcolor{comment}{// Try to cast to FiniteElement}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00068}00068       FiniteElement* el\_pt = \textcolor{keyword}{dynamic\_cast<}FiniteElement*\textcolor{keyword}{>}(this-\/>element\_pt(e));}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00070}00070       \textcolor{comment}{// Set macro element pointer}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00071}00071       el\_pt-\/>set\_macro\_elem\_pt(\mbox{\hyperlink{classoomph_1_1QuarterPipeMesh_a1b3656a71bc9f6159aa237d3a76d5a15}{Domain\_pt}}-\/>macro\_element\_pt(e));}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00072}00072     \}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00073}00073 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00074}00074     \textcolor{comment}{// Update node coordinates with macroelement coordinates,}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00075}00075     \textcolor{comment}{// updating solid coordinates too.}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00076}00076     this-\/>node\_update(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00078}00078     \textcolor{comment}{// Setup boundary coordinates on inner boundary (boundary 1)}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00079}00079     \textcolor{keywordtype}{unsigned} b = 1;}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00080}00080     \textcolor{keywordtype}{unsigned} nnod = this-\/>nboundary\_node(b);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00081}00081     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < nnod; j++)}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00082}00082     \{}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00083}00083       \textcolor{comment}{// Pointer to node}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00084}00084       Node* nod\_pt = this-\/>boundary\_node\_pt(b, j);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00085}00085 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00086}00086       \textcolor{comment}{// Get the Eulerian coordinates}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00087}00087       \textcolor{keywordtype}{double} x = nod\_pt-\/>x(0);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00088}00088       \textcolor{keywordtype}{double} y = nod\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00089}00089       \textcolor{keywordtype}{double} z = nod\_pt-\/>x(2);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00091}00091       \textcolor{comment}{// Polar angle}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00092}00092       \textcolor{keywordtype}{double} phi = atan2(y, x);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00093}00093 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00094}00094       \textcolor{comment}{// Set boundary coordinates}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00095}00095       Vector<double> zeta(2);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00096}00096       zeta[0] = z;}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00097}00097       zeta[1] = phi;}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00098}00098       nod\_pt-\/>set\_coordinates\_on\_boundary(b, zeta);}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00099}00099     \}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00100}00100     this-\/>Boundary\_coordinate\_exists[b] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00101}00101   \}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00103}00103 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00105}00105 }
+\DoxyCodeLine{\Hypertarget{quarter__pipe__mesh_8template_8cc_source_l00106}00106 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

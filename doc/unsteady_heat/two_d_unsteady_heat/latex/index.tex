@@ -2,8 +2,7 @@ This is our first time-\/dependent example problem. We will demonstrate that, co
 \begin{DoxyItemize}
 \item The creation of a suitable {\ttfamily Time\+Stepper} object and its addition to the {\ttfamily Problem\textquotesingle{}s} list of timesteppers. ({\ttfamily Problems} may employ multiple {\ttfamily Time\+Steppers} -- a key requirement for the simulation of multiphysics problems.)
 \item The initialisation of the timestep, {\ttfamily dt}.
-\item Setting the initial conditions by assigning suitable values for the {\ttfamily Data} objects\textquotesingle{} \char`\"{}history values\char`\"{} and the {\ttfamily Nodes\textquotesingle{}} \char`\"{}positional
-  history values\char`\"{}.
+\item Setting the initial conditions by assigning suitable values for the {\ttfamily Data} objects\textquotesingle{} \char`\"{}history values\char`\"{} and the {\ttfamily Nodes\textquotesingle{}} \char`\"{}positional   history values\char`\"{}.
 \item Optionally\+: (Re-\/)implementing the empty virtual functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+implicit\+\_\+timestep()}, e.\+g. to update time-\/dependent boundary conditions before each timestep.
 \end{DoxyItemize}Once these steps have been performed, {\ttfamily oomph-\/lib\textquotesingle{}s} unsteady Newton solver, {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)}, may be called to advance the solution from its state at time $ t $ to its new state at $ t \ + $ {\ttfamily dt}.
 
@@ -48,7 +47,7 @@ As usual, we store the problem parameters in a namespace.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_ExactSolnForUnsteadyHeat=====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for unforced exact solution for UnsteadyHeat equation }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceExactSolnForUnsteadyHeat}{ExactSolnForUnsteadyHeat}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -82,9 +81,7 @@ As usual, we store the problem parameters in a namespace.
 \DoxyCodeLine{\} \textcolor{comment}{// end of ExactSolnForUnsteadyHeat}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We start by building the {\ttfamily Problem} object, create a {\ttfamily Doc\+Info} object to label the output files, and open a trace file in which we will record the time evolution of the solution and the error. We choose the length {\ttfamily t\+\_\+max} of the simulation and the (constant) timestep, {\ttfamily dt}.
@@ -92,20 +89,20 @@ We start by building the {\ttfamily Problem} object, create a {\ttfamily Doc\+In
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Driver code for unsteady heat equation}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady heat equation}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__unsteady__heat_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Build problem}}
 \DoxyCodeLine{ \mbox{\hyperlink{classUnsteadyHeatProblem}{UnsteadyHeatProblem<QUnsteadyHeatElement<2,4>}} >}
-\DoxyCodeLine{  \mbox{\hyperlink{two__d__unsteady__heat_8txt_aaff9a073880a8a1831a6f9563f872749}{problem}}(\&\mbox{\hyperlink{namespaceExactSolnForUnsteadyHeat_ab4e853d6368b1fcdbd6205079687455a}{ExactSolnForUnsteadyHeat::get\_source}});}
+\DoxyCodeLine{  problem(\&\mbox{\hyperlink{namespaceExactSolnForUnsteadyHeat_ab4e853d6368b1fcdbd6205079687455a}{ExactSolnForUnsteadyHeat::get\_source}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Setup labels for output}}
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
@@ -113,20 +110,18 @@ We start by building the {\ttfamily Problem} object, create a {\ttfamily Doc\+In
 \DoxyCodeLine{ \textcolor{comment}{// Open a trace file}}
 \DoxyCodeLine{ ofstream trace\_file;}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ trace\_file.open(filename);}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"time\(\backslash\)",\(\backslash\)"u<SUB>FE</SUB>\(\backslash\)","}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"\(\backslash\)"u<SUB>exact</SUB>\(\backslash\)",\(\backslash\)"norm of error\(\backslash\)",\(\backslash\)"norm of solution\(\backslash\)""}}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}time\(\backslash\)"{},\(\backslash\)"{}u<SUB>FE</SUB>\(\backslash\)"{},"{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}\(\backslash\)"{}u<SUB>exact</SUB>\(\backslash\)"{},\(\backslash\)"{}norm of error\(\backslash\)"{},\(\backslash\)"{}norm of solution\(\backslash\)"{}"{}}}
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Choose simulation interval and timestep}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} t\_max=0.5;}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{two__d__unsteady__heat_8txt_a86b85e72d6c63eeaa3e9ddd1be283f8e}{dt}}=0.01;}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} dt=0.01;}
 
 \end{DoxyCodeInclude}
-
-
-Before using any of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping functions, the timestep {\ttfamily dt} {\bfseries{must}} be passed to the {\ttfamily Problem\textquotesingle{}s} timestepping routines by calling the function {\ttfamily Problem\+::initialise\+\_\+dt(...)} which sets the weights for all timesteppers in the problem.
+ Before using any of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping functions, the timestep {\ttfamily dt} {\bfseries{must}} be passed to the {\ttfamily Problem\textquotesingle{}s} timestepping routines by calling the function {\ttfamily Problem\+::initialise\+\_\+dt(...)} which sets the weights for all timesteppers in the problem.
 
 Next we assign the initial conditions by calling {\ttfamily set\+\_\+initial\+\_\+condition()}, to be discussed in more detail below, and document the initial conditions.
 
@@ -134,37 +129,35 @@ Next we assign the initial conditions by calling {\ttfamily set\+\_\+initial\+\_
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Initialise timestep -\/-\/ also sets the weights for all timesteppers}}
 \DoxyCodeLine{ \textcolor{comment}{// in the problem.}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__unsteady__heat_8txt_aaff9a073880a8a1831a6f9563f872749}{problem}}.initialise\_dt(\mbox{\hyperlink{two__d__unsteady__heat_8txt_a86b85e72d6c63eeaa3e9ddd1be283f8e}{dt}});}
+\DoxyCodeLine{ problem.initialise\_dt(dt);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set IC}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__unsteady__heat_8txt_aaff9a073880a8a1831a6f9563f872749}{problem}}.set\_initial\_condition();}
+\DoxyCodeLine{ problem.set\_initial\_condition();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Output initial condition}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__unsteady__heat_8txt_aaff9a073880a8a1831a6f9563f872749}{problem}}.doc\_solution(doc\_info,trace\_file);}
+\DoxyCodeLine{ problem.doc\_solution(doc\_info,trace\_file);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{ doc\_info.number()++;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we execute the timestepping loop and document the computed solutions.
+ Finally, we execute the timestepping loop and document the computed solutions.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Find number of steps}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep = unsigned(t\_max/\mbox{\hyperlink{two__d__unsteady__heat_8txt_a86b85e72d6c63eeaa3e9ddd1be283f8e}{dt}});}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep = unsigned(t\_max/dt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Timestepping loop}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{" Timestep "} << istep << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{} Timestep "{}} << istep << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Take timestep}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat_8txt_aaff9a073880a8a1831a6f9563f872749}{problem}}.unsteady\_newton\_solve(\mbox{\hyperlink{two__d__unsteady__heat_8txt_a86b85e72d6c63eeaa3e9ddd1be283f8e}{dt}});}
+\DoxyCodeLine{   problem.unsteady\_newton\_solve(dt);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat_8txt_aaff9a073880a8a1831a6f9563f872749}{problem}}.doc\_solution(doc\_info,trace\_file);}
+\DoxyCodeLine{   problem.doc\_solution(doc\_info,trace\_file);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{   doc\_info.number()++;}
@@ -177,9 +170,7 @@ Finally, we execute the timestepping loop and document the computed solutions.
 \DoxyCodeLine{\}; \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-In this loop, each call to the unsteady Newton solver, {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)}, advances the solution from its current state, at time $ t = $ {\ttfamily Problem\+::time\+\_\+pt()-\/$>$time()}, to $ t \ + $ {\ttfamily dt}. The unsteady Newton solver automatically \char`\"{}shifts\char`\"{} the history values \char`\"{}backwards\char`\"{} and advances the value of the continuous time.
+ In this loop, each call to the unsteady Newton solver, {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)}, advances the solution from its current state, at time $ t = $ {\ttfamily Problem\+::time\+\_\+pt()-\/\texorpdfstring{$>$}{>}time()}, to $ t \ + $ {\ttfamily dt}. The unsteady Newton solver automatically \char`\"{}shifts\char`\"{} the history values \char`\"{}backwards\char`\"{} and advances the value of the continuous time.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -195,7 +186,7 @@ Finally, the private member data {\ttfamily Control\+\_\+node\+\_\+pt} provides 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_problem\_class=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// UnsteadyHeat problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnsteadyHeatProblem}{UnsteadyHeatProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -212,17 +203,17 @@ Finally, the private member data {\ttfamily Control\+\_\+node\+\_\+pt} provides 
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a88e3d534b5904f7c10ce6a8fbd6df0ea}{actions\_after\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_aa1ee8fbe2a5439d1cacb37131e0f81c6}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_afd14cbe343adfa39e3b8b2ca681c5020}{actions\_after\_implicit\_timestep}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before next timestep: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before next timestep: }}
 \DoxyCodeLine{\textcolor{comment}{ /// Set Dirchlet boundary conditions from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a7074e52f6a3a791549687e1b4ddd059a}{actions\_before\_implicit\_timestep}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set initial condition (incl previous timesteps) according}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set initial condition (incl previous timesteps) according}}
 \DoxyCodeLine{\textcolor{comment}{ /// to specified function. }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a98de3ed2d9cf5409323121bbb482bc1b}{set\_initial\_condition}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -240,19 +231,17 @@ Finally, the private member data {\ttfamily Control\+\_\+node\+\_\+pt} provides 
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
-We start by constructing the {\ttfamily Time\+Stepper}, the second-\/order accurate {\ttfamily B\+D\+F$<$2$>$} timestepper from the {\ttfamily B\+DF} family, and pass a pointer to it to the {\ttfamily Problem}, using the member function {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)}. As the name of this function indicates, {\ttfamily oomph-\/lib} can operate with multiple timesteppers -- an essential feature in multi-\/physics problems. (For instance, in fluid-\/structure interaction-\/problems timestepping for the solid equations might be performed with a timestepper from the {\ttfamily Newmark} family, while a {\ttfamily B\+DF} timestepper might be used for the Navier--Stokes equations.) When called for the first time, the function ~\newline
+We start by constructing the {\ttfamily Time\+Stepper}, the second-\/order accurate {\ttfamily BDF$<$2$>$} timestepper from the {\ttfamily BDF} family, and pass a pointer to it to the {\ttfamily Problem}, using the member function {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)}. As the name of this function indicates, {\ttfamily oomph-\/lib} can operate with multiple timesteppers -- an essential feature in multi-\/physics problems. (For instance, in fluid-\/structure interaction-\/problems timestepping for the solid equations might be performed with a timestepper from the {\ttfamily Newmark} family, while a {\ttfamily BDF} timestepper might be used for the Navier--Stokes equations.) When called for the first time, the function ~\newline
  {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)} creates the {\ttfamily Problem\textquotesingle{}s} {\ttfamily Time} object (accessible via {\ttfamily Problem\+::time\+\_\+pt()}) with sufficient storage for the history of previous timesteps. This is required if the timestep is adjusted during the simulation, e.\+g. when an adaptive timestepper is used. (If further {\ttfamily Time\+Steppers} which require more storage are added subsequently, {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper(...)} updates the amount of storage in the {\ttfamily Problem\textquotesingle{}s} {\ttfamily Time} object accordingly).
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_constructor============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem in square domain}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnsteadyHeatProblem_abd3a46eea132b1e5872be6a6309a51b2}{UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem}}(}
 \DoxyCodeLine{ UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt source\_fct\_pt) : }
@@ -292,9 +281,7 @@ Next we set the problem parameters and build the mesh, passing the pointer to th
 \DoxyCodeLine{ mesh\_pt() = \textcolor{keyword}{new} RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time\_stepper\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-The position of the pointer to the timestepper in the list of arguments to the mesh constructor reflects another {\ttfamily oomph-\/lib} convention\+:
+ The position of the pointer to the timestepper in the list of arguments to the mesh constructor reflects another {\ttfamily oomph-\/lib} convention\+:
 
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
@@ -303,7 +290,7 @@ The position of the pointer to the timestepper in the list of arguments to the m
 \Hypertarget{index_conv_mesh_const}%
 \begin{center}{\bfseries{A general convention}}\end{center} 
 
-Recall that all {\ttfamily Data} objects store a pointer to a {\ttfamily Time\+Stepper} that translates their \char`\"{}history values\char`\"{} into approximations of the values\textquotesingle{} time derivatives. The required number of \char`\"{}history values\char`\"{} depends on the specific timestepper. For instance, a B\+D\+F$<$1$>$ timestepper (the backward Euler scheme) requires storage of the solution at the previous timestep; the B\+D\+F$<$2$>$ timestepper computes an approximation of the time-\/derivative, based on the solution at two previous timesteps, etc.
+Recall that all {\ttfamily Data} objects store a pointer to a {\ttfamily Time\+Stepper} that translates their \char`\"{}history values\char`\"{} into approximations of the values\textquotesingle{} time derivatives. The required number of \char`\"{}history values\char`\"{} depends on the specific timestepper. For instance, a BDF$<$1$>$ timestepper (the backward Euler scheme) requires storage of the solution at the previous timestep; the BDF$<$2$>$ timestepper computes an approximation of the time-\/derivative, based on the solution at two previous timesteps, etc.
 
 {\ttfamily Nodes} (which {\itshape are} {\ttfamily Data!}) are typically built by the {\ttfamily Mesh} constructor using the {\ttfamily Finite\+Element\textquotesingle{}s} member function {\ttfamily Finite\+Element\+::construct\+\_\+node(...)}. This function takes a pointer to the timestepper from which the required amount of storage for the \char`\"{}history values\char`\"{} is extracted. To facilitate the (re-\/)use of meshes in steady and time-\/dependent problems, we adopt the convention that
 
@@ -355,6 +342,7 @@ This convention allows the use of meshes in steady problems without having to (a
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
+
 \end{DoxyCode}
 
 
@@ -379,9 +367,7 @@ Next, we apply the boundary conditions, pinning the values at all boundary nodes
 \DoxyCodeLine{  \} \textcolor{comment}{// end of set boundary conditions}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we loop over the elements and pass the pointer to the source function.
+ Finally, we loop over the elements and pass the pointer to the source function.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -403,7 +389,7 @@ Finally, we loop over the elements and pass the pointer to the source function.
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
@@ -418,8 +404,8 @@ We overload the (empty) virtual function {\ttfamily Problem\+::actions\+\_\+befo
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start of actions\_before\_implicit\_timestep===============================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Actions before timestep: update the domain, then reset the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// boundary conditions for the current time.}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before timestep: update the domain, then reset the }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// boundary conditions for the current time.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a7074e52f6a3a791549687e1b4ddd059a}{UnsteadyHeatProblem<ELEMENT>::actions\_before\_implicit\_timestep}}()}
@@ -449,14 +435,12 @@ We overload the (empty) virtual function {\ttfamily Problem\+::actions\+\_\+befo
 \DoxyCodeLine{\} \textcolor{comment}{// end of actions\_before\_implicit\_timestep}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_IC}{}\doxysection{Set initial condition}\label{index_IC}
-Before starting a time-\/dependent simulation, the current and history values of all {\ttfamily Data} objects must be initialised. In a {\ttfamily B\+DF} timestepping scheme, the history values represent the solution at previous discrete timesteps. In the present problem (where the exact solution is known -- admittedly, a somewhat artificial situation) we can therefore assign the history values by looping over the previous timesteps and setting the history values with {\ttfamily Data\+::set\+\_\+value(...)}.
+Before starting a time-\/dependent simulation, the current and history values of all {\ttfamily Data} objects must be initialised. In a {\ttfamily BDF} timestepping scheme, the history values represent the solution at previous discrete timesteps. In the present problem (where the exact solution is known -- admittedly, a somewhat artificial situation) we can therefore assign the history values by looping over the previous timesteps and setting the history values with {\ttfamily Data\+::set\+\_\+value(...)}.
 
-{\bfseries{Important\+:}} {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Unsteady\+Heat\+Equations} are based on the Arbitrary-\/\+Lagrangian-\/\+Eulerian (A\+LE) formulation of the unsteady heat equation to permit computations in moving domains; we will illustrate this capability in ~\newline
+{\bfseries{Important\+:}} {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Unsteady\+Heat\+Equations} are based on the Arbitrary-\/\+Lagrangian-\/\+Eulerian (ALE) formulation of the unsteady heat equation to permit computations in moving domains; we will illustrate this capability in ~\newline
  \href{../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html}{\texttt{ another example. }} In such problems, the nodal positions may vary as a function of time. In the present problem, the computation is performed in a fixed domain, therefore we initialise the previous nodal positions with their current values, accessed via the member function {\ttfamily Node\+::x(t,i)} which returns (a reference to) the {\ttfamily i} -\/th nodal coordinate at previous timestep {\ttfamily t}.
 
 \begin{center} \tabulinesep=1mm
@@ -464,7 +448,7 @@ Before starting a time-\/dependent simulation, the current and history values of
 \hline
 \label{index_conv_t_arg}%
 \Hypertarget{index_conv_t_arg}%
-\begin{center}{\bfseries{A general convention}}\end{center}  Many functions in {\ttfamily oomph-\/lib} have steady and time-\/dependent versions which usually differ in their first argument. Typically, the first argument of the time-\/dependent function is an additional (unsigned) integer, {\ttfamily t}, say. As a general convention, the time-\/dependent versions return values (or perform actions) that are appropriate for the current time if called with {\ttfamily t=0}, and return values (or perform actions) that are appropriate for previous time levels if the argument is set to {\ttfamily t$>$0}. Note that we refer to previous time levels, rather than previous timesteps, because history values do not necessarily represent values at previous timesteps, as they do for {\ttfamily B\+DF} schemes. For instance, in {\ttfamily Newmark} timestepping schemes, the history values include approximations of the first and second time-\/derivatives at the previous timestep.
+\begin{center}{\bfseries{A general convention}}\end{center}  Many functions in {\ttfamily oomph-\/lib} have steady and time-\/dependent versions which usually differ in their first argument. Typically, the first argument of the time-\/dependent function is an additional (unsigned) integer, {\ttfamily t}, say. As a general convention, the time-\/dependent versions return values (or perform actions) that are appropriate for the current time if called with {\ttfamily t=0}, and return values (or perform actions) that are appropriate for previous time levels if the argument is set to {\ttfamily t\texorpdfstring{$>$}{>}0}. Note that we refer to previous time levels, rather than previous timesteps, because history values do not necessarily represent values at previous timesteps, as they do for {\ttfamily BDF} schemes. For instance, in {\ttfamily Newmark} timestepping schemes, the history values include approximations of the first and second time-\/derivatives at the previous timestep.
 
 \DoxyHorRuler{1}
  \label{index_conv_hist_vals}%
@@ -474,26 +458,28 @@ Before starting a time-\/dependent simulation, the current and history values of
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TimeStepper::nprev\_values()}
+
 \end{DoxyCode}
 
 
-As an example, {\ttfamily B\+D\+F$<$4$>$\+::nprev\+\_\+values()} returns 4. The total number of history values (including the current value!) is returned by
+As an example, {\ttfamily BDF$<$4$>$\+::nprev\+\_\+values()} returns 4. The total number of history values (including the current value!) is returned by
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TimeStepper::ntstorage()}
+
 \end{DoxyCode}
 
 
-As an example, {\ttfamily B\+D\+F$<$4$>$\+::ntstorage()} returns 5.   \\\cline{1-1}
+As an example, {\ttfamily BDF$<$4$>$\+::ntstorage()} returns 5.   \\\cline{1-1}
 \end{longtabu}
 \end{center} 
 
 Here is the source code for the {\ttfamily set\+\_\+initial\+\_\+condition()} function\+: 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_set\_initial\_condition====================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set initial condition: Assign previous and current values}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from exact solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a98de3ed2d9cf5409323121bbb482bc1b}{UnsteadyHeatProblem<ELEMENT>::set\_initial\_condition}}()}
@@ -516,17 +502,17 @@ Here is the source code for the {\ttfamily set\+\_\+initial\+\_\+condition()} fu
 \DoxyCodeLine{ \textcolor{comment}{// How many previous timesteps does the timestepper use?}}
 \DoxyCodeLine{ \textcolor{keywordtype}{int} nprev\_steps=time\_stepper\_pt()-\/>nprev\_values();}
 \DoxyCodeLine{ Vector<double> prev\_time(nprev\_steps+1);}
-\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}=nprev\_steps;\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}>=0;\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}-\/-\/)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} t=nprev\_steps;t>=0;t-\/-\/)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   prev\_time[\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}]=time\_pt()-\/>time(\textcolor{keywordtype}{unsigned}(\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}));}
+\DoxyCodeLine{   prev\_time[t]=time\_pt()-\/>time(\textcolor{keywordtype}{unsigned}(t));}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Loop over current \& previous timesteps}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}=nprev\_steps;\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}>=0;\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}-\/-\/)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} t=nprev\_steps;t>=0;t-\/-\/)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Continuous time}}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} time=prev\_time[\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}}];}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"setting IC at time ="} << time << std::endl;}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} time=prev\_time[t];}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}setting IC at time ="{}} << time << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Loop over the nodes to set initial guess everywhere}}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n=0;n<num\_nod;n++)}
@@ -539,13 +525,13 @@ Here is the source code for the {\ttfamily set\+\_\+initial\+\_\+condition()} fu
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceExactSolnForUnsteadyHeat_a1d5b22857bd2a7825397daf1cf9c89eb}{ExactSolnForUnsteadyHeat::get\_exact\_u}}(time,x,soln);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Assign solution}}
-\DoxyCodeLine{     mesh\_pt()-\/>node\_pt(n)-\/>set\_value(\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}},0,soln[0]);}
+\DoxyCodeLine{     mesh\_pt()-\/>node\_pt(n)-\/>set\_value(t,0,soln[0]);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Loop over coordinate directions: Mesh doesn't move, so }}
 \DoxyCodeLine{     \textcolor{comment}{// previous position = present position}}
 \DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       mesh\_pt()-\/>node\_pt(n)-\/>x(\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}},i)=x[i];}
+\DoxyCodeLine{       mesh\_pt()-\/>node\_pt(n)-\/>x(t,i)=x[i];}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \} }
 \DoxyCodeLine{  \}}
@@ -556,10 +542,7 @@ Here is the source code for the {\ttfamily set\+\_\+initial\+\_\+condition()} fu
 \DoxyCodeLine{\} \textcolor{comment}{// end of set\_initial\_condition}}
 
 \end{DoxyCodeInclude}
- ~\newline
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 As in many previous examples, this member function outputs the computed solution, the exact solution and the error. We augment the solution data by tecplot text and geometries to facilitate the visualisation and record the time evolution of the solution and the error in the trace file.
@@ -568,7 +551,7 @@ As in many previous examples, this member function outputs the computed solution
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_doc\_solution============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a2c0c4b762d2dbde7396dca2a6750f433}{UnsteadyHeatProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnsteadyHeatProblem_a2c0c4b762d2dbde7396dca2a6750f433}{doc\_solution}}(DocInfo\& doc\_info,ofstream\& trace\_file)}
@@ -582,34 +565,34 @@ As in many previous examples, this member function outputs the computed solution
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ cout << std::endl;}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"================================================="} << std::endl;}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Docing solution for t="} << time\_pt()-\/>time() << std::endl;}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"================================================="} << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}================================================="{}} << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Docing solution for t="{}} << time\_pt()-\/>time() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}================================================="{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write file as a tecplot text object}}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"time = "} }
-\DoxyCodeLine{           << time\_pt()-\/>time() << \textcolor{stringliteral}{"\(\backslash\)""};}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"{}time = "{}} }
+\DoxyCodeLine{           << time\_pt()-\/>time() << \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
 \DoxyCodeLine{ \textcolor{comment}{// ...and draw a horizontal line whose length is proportional}}
 \DoxyCodeLine{ \textcolor{comment}{// to the elapsed time}}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"1"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"2"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{" 0 0"} << std::endl;}
-\DoxyCodeLine{ some\_file << time\_pt()-\/>time()*20.0 << \textcolor{stringliteral}{" 0"} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}1"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}2"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{} 0 0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << time\_pt()-\/>time()*20.0 << \textcolor{stringliteral}{"{} 0"{}} << std::endl;}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_fct(some\_file,npts,time\_pt()-\/>time(),}
@@ -619,7 +602,7 @@ As in many previous examples, this member function outputs the computed solution
 \DoxyCodeLine{ \textcolor{comment}{// Doc error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>compute\_error(some\_file,}
@@ -630,8 +613,8 @@ As in many previous examples, this member function outputs the computed solution
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc solution and error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"error: "} << error << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"norm : "} << norm << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}error: "{}} << error << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}norm : "{}} << norm << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Get exact solution at control node}}
 \DoxyCodeLine{ Vector<double> x\_ctrl(2);}
@@ -639,24 +622,22 @@ As in many previous examples, this member function outputs the computed solution
 \DoxyCodeLine{ x\_ctrl[1]=Control\_node\_pt-\/>x(1);}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} u\_exact;}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceExactSolnForUnsteadyHeat_a1d5b22857bd2a7825397daf1cf9c89eb}{ExactSolnForUnsteadyHeat::get\_exact\_u}}(time\_pt()-\/>time(),x\_ctrl,u\_exact);}
-\DoxyCodeLine{ trace\_file << time\_pt()-\/>time() << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << Control\_node\_pt-\/>value(0) << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << u\_exact << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << error   << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ trace\_file << time\_pt()-\/>time() << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << Control\_node\_pt-\/>value(0) << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << u\_exact << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << error   << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << norm    << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 The current example only illustrates the most basic timestepping procedures. In subsequent examples we will demonstrate {\ttfamily oomph-\/lib\textquotesingle{}s} ~\newline
  \href{../../two_d_unsteady_heat2/html/index.html}{\texttt{ dump and restart functions,}} \href{../../two_d_unsteady_heat_t_adapt/html/index.html}{\texttt{ the use of adaptive timestepping,}} \href{../../two_d_unsteady_heat_adapt/html/index.html}{\texttt{ the use of spatial adaptivity,}} \href{../../two_d_unsteady_heat_ALE/html/index.html}{\texttt{ computations in moving domains,}} and \href{../../two_d_unsteady_heat_2adapt/html/index.html}{\texttt{ the combination of temporal and spatial adaptivity}}.
 
-We stress that setting the initial conditions in a \char`\"{}real\char`\"{} problem often presents a delicate step, especially if higher-\/order timesteppers from the B\+DF family are used. This is because in the absence of a known exact solution, the initial condition (3) only provides enough information to determine a single \char`\"{}history value\char`\"{} at each node -- the value at the initial time. {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping procedures provide several functions that allow the simulation to be initiated with an \char`\"{}impulsive start\char`\"{}, corresponding to a past history in which the boundary condition (3) describes the system\textquotesingle{}s state for all $ t \le 0$ rather than only {\itshape at} $ t = 0$ . For instance, the top-\/level function {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()} sets the \char`\"{}history values\char`\"{} of all {\ttfamily Data} objects and the {\ttfamily Nodes\textquotesingle{}} \char`\"{}positional history values\char`\"{} to values that are appropriate for an impulsive start from the currently assigned nodal values and positions. The following exercises aim to explore this functionality.\hypertarget{index_exercises}{}\doxysubsection{Exercises}\label{index_exercises}
+We stress that setting the initial conditions in a \char`\"{}real\char`\"{} problem often presents a delicate step, especially if higher-\/order timesteppers from the BDF family are used. This is because in the absence of a known exact solution, the initial condition (3) only provides enough information to determine a single \char`\"{}history value\char`\"{} at each node -- the value at the initial time. {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping procedures provide several functions that allow the simulation to be initiated with an \char`\"{}impulsive start\char`\"{}, corresponding to a past history in which the boundary condition (3) describes the system\textquotesingle{}s state for all $ t \le 0$ rather than only {\itshape at} $ t = 0$ . For instance, the top-\/level function {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()} sets the \char`\"{}history values\char`\"{} of all {\ttfamily Data} objects and the {\ttfamily Nodes\textquotesingle{}} \char`\"{}positional history values\char`\"{} to values that are appropriate for an impulsive start from the currently assigned nodal values and positions. The following exercises aim to explore this functionality.\hypertarget{index_exercises}{}\doxysubsection{Exercises}\label{index_exercises}
 
 \begin{DoxyEnumerate}
 \item Replace the call to {\ttfamily problem.\+set\+\_\+initial\+\_\+condition()} in the main function by a call to {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()} and analyse the results. \mbox{[}Hint\+: When {\ttfamily Data} objects are created, their values are initialised to zero.\mbox{]}
@@ -666,7 +647,7 @@ We stress that setting the initial conditions in a \char`\"{}real\char`\"{} prob
 \DoxyCodeLine{     \textcolor{comment}{// previous position = present position}}
 \DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       mesh\_pt()-\/>node\_pt(n)-\/>x(\mbox{\hyperlink{two__d__unsteady__heat_8txt_ad5984e4c059a564ceba033747647feb1}{t}},i)=x[i];}
+\DoxyCodeLine{       mesh\_pt()-\/>node\_pt(n)-\/>x(t,i)=x[i];}
 \DoxyCodeLine{      \}}
 
 \end{DoxyCodeInclude}
@@ -674,12 +655,13 @@ We stress that setting the initial conditions in a \char`\"{}real\char`\"{} prob
 \begin{DoxyCode}{0}
 \DoxyCodeLine{time\_stepper\_pt()-\/>assign\_initial\_positions\_impulsive(}
 \DoxyCodeLine{                     mesh\_pt()-\/>node\_pt(n));}
+
 \end{DoxyCode}
  \mbox{[}This statement could then be moved outside the loop over the previous time levels.\mbox{]}
 \item Confirm that the initialisation of the previous nodal positions is essential by commenting out this step -- see the ~\newline
- \href{../../two_d_unsteady_heat_ALE/html/index.html}{\texttt{ A\+LE example}} for further details on computations in moving domains.
-\item Overwrite the correct assignment of the \char`\"{}history values\char`\"{} in {\ttfamily set\+\_\+initial\+\_\+condition()} by adding the statement {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()} at the end of this function (rather than bypassing the assignment completely as in the first exercise). Repeat this with the {\ttfamily B\+D\+F$<$1$>$} and {\ttfamily B\+D\+F$<$4$>$} timesteppers and explain the different behaviour.
-\item Examine the accuracy of the various {\ttfamily B\+DF} timesteppers by re-\/running the simulations with various timesteppers and with different timesteps.
+ \href{../../two_d_unsteady_heat_ALE/html/index.html}{\texttt{ ALE example}} for further details on computations in moving domains.
+\item Overwrite the correct assignment of the \char`\"{}history values\char`\"{} in {\ttfamily set\+\_\+initial\+\_\+condition()} by adding the statement {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()} at the end of this function (rather than bypassing the assignment completely as in the first exercise). Repeat this with the {\ttfamily BDF$<$1$>$} and {\ttfamily BDF$<$4$>$} timesteppers and explain the different behaviour.
+\item Examine the accuracy of the various {\ttfamily BDF} timesteppers by re-\/running the simulations with various timesteppers and with different timesteps.
 \end{DoxyEnumerate}
 
 \DoxyHorRuler{0}
@@ -693,5 +675,5 @@ We stress that setting the initial conditions in a \char`\"{}real\char`\"{} prob
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

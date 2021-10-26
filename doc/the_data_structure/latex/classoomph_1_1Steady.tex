@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1Steady}{}\doxysection{oomph\+::Steady$<$ N\+S\+T\+E\+PS $>$ Class Template Reference}
+\hypertarget{classoomph_1_1Steady}{}\doxysection{oomph\+::Steady\texorpdfstring{$<$}{<} NSTEPS \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1Steady}\index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
+
+
+////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$timesteppers.\+h$>$}
 
-Inheritance diagram for oomph\+::Steady$<$ N\+S\+T\+E\+PS $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Steady\texorpdfstring{$<$}{<} NSTEPS \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1Steady}
@@ -19,22 +24,22 @@ typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1Steady_a107849d71562b3efa4b
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1Steady_a7e6510bdcdb448db8e4f975edd72bdaf}{Steady}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Creates storage for N\+S\+T\+E\+PS previous timesteps and can evaluate up to 2nd derivatives (though it doesn\textquotesingle{}t actually do anything -- all time-\/derivatives evaluate to zero) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Steady_af4d22661e0a41a82bcf08de797bd59e1}{Steady}} (const \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} \&)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Creates storage for NSTEPS previous timesteps and can evaluate up to 2nd derivatives (though it doesn\textquotesingle{}t actually do anything -- all time-\/derivatives evaluate to zero) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Steady_a6ce2223b2b5a6d5e4ebafb47114e9b64}{Steady}} (const \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1Steady_a72bd55932539990df0c7b5db3a42926a}{operator=}} (const \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} \&)
+void \mbox{\hyperlink{classoomph_1_1Steady_a48512caa4948348768c35bcb695b75a4}{operator=}} (const \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1Steady_ac1735b614e9adf73a889e37afdd6d3a2}{order}} () const
 \begin{DoxyCompactList}\small\item\em Return the actual order of the scheme. Returning zero here -- doesn\textquotesingle{}t make much sense, though. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Steady_a1e25537dc2c134d8d23a9d5c1a1be328}{assign\+\_\+initial\+\_\+values\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, corresponding to an impulsive start. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1Steady_ad0aa4ed8297b77af2295827b1c0052b0}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1Steady_ad0aa4ed8297b77af2295827b1c0052b0}{assign\+\_\+initial\+\_\+positions\+\_\+impulsive}} (Node $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the nodal positions corresponding to an impulsive start. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Steady_a9598718f5a8ab37a123fb183ba4b8bf9}{assign\+\_\+initial\+\_\+data\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Steady_a107849d71562b3efa4bf785de60490b3}{Initial\+Condition\+Fct\+Pt}} $>$ initial\+\_\+value\+\_\+fct)
 \begin{DoxyCompactList}\small\item\em Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}} values, corresponding to given time history, specified by \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of function pointers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Steady_aa1c00b0014a2394f7b2e1b302ebbce00}{shift\+\_\+time\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&data\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em This function updates the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can advance to the next timestep. As for \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}} schemes, we simply push the values backwards... \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1Steady_a4b3c9877146cb5a3673b54e0f02d9625}{shift\+\_\+time\+\_\+positions}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em This function updates the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can advance to the next timestep. As for \mbox{\hyperlink{classoomph_1_1BDF}{BDF}} schemes, we simply push the values backwards... \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1Steady_a4b3c9877146cb5a3673b54e0f02d9625}{shift\+\_\+time\+\_\+positions}} (Node $\ast$const \&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em This function advances the time history of the positions at a node. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Steady_a2a00515fba0cfe35d486ea2bbb5af99c}{set\+\_\+weights}} ()
 \begin{DoxyCompactList}\small\item\em Set weights. \end{DoxyCompactList}\item 
@@ -57,12 +62,13 @@ static \mbox{\hyperlink{classoomph_1_1Time}{Time}} \mbox{\hyperlink{classoomph_1
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned N\+S\+T\+E\+PS$>$\newline
-class oomph\+::\+Steady$<$ N\+S\+T\+E\+P\+S $>$}
+\subsubsection*{template$<$unsigned NSTEPS$>$\newline
+class oomph\+::\+Steady$<$ NSTEPS $>$}
+////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
-Faux time-\/stepper for steady problems. Allows storage for N\+S\+T\+E\+PS previous values. 
+Faux time-\/stepper for steady problems. Allows storage for NSTEPS previous values. 
 
-Definition at line 692 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00680}{680}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
 
 
 
@@ -71,8 +77,8 @@ Definition at line 692 of file timesteppers.\+h.
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!InitialConditionFctPt@{InitialConditionFctPt}}
 \index{InitialConditionFctPt@{InitialConditionFctPt}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{InitialConditionFctPt}{InitialConditionFctPt}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::Initial\+Condition\+Fct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+typedef double($\ast$ \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::Initial\+Condition\+Fct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})}
 
 
 
@@ -80,7 +86,7 @@ Typedef for function that returns the (scalar) initial value at a given value of
 
 
 
-Definition at line 778 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00760}{760}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
 
 
 
@@ -89,31 +95,31 @@ Definition at line 778 of file timesteppers.\+h.
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!Steady@{Steady}}
 \index{Steady@{Steady}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{Steady()}{Steady()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-\mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::\mbox{\hyperlink{classoomph_1_1Steady}{Steady}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::\mbox{\hyperlink{classoomph_1_1Steady}{Steady}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Creates storage for N\+S\+T\+E\+PS previous timesteps and can evaluate up to 2nd derivatives (though it doesn\textquotesingle{}t actually do anything -- all time-\/derivatives evaluate to zero) 
+Constructor\+: Creates storage for NSTEPS previous timesteps and can evaluate up to 2nd derivatives (though it doesn\textquotesingle{}t actually do anything -- all time-\/derivatives evaluate to zero) 
 
 
 
-Definition at line 699 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00687}{687}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1Steady_af4d22661e0a41a82bcf08de797bd59e1}\label{classoomph_1_1Steady_af4d22661e0a41a82bcf08de797bd59e1}} 
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00888}{oomph\+::\+Steady$<$ NSTEPS $>$\+::\+Dummy\+\_\+time}}, \mbox{\hyperlink{timesteppers_8h_source_l00251}{oomph\+::\+Time\+Stepper\+::\+Is\+\_\+steady}}, \mbox{\hyperlink{timesteppers_8h_source_l00234}{oomph\+::\+Time\+Stepper\+::\+Time\+\_\+pt}}, and \mbox{\hyperlink{timesteppers_8h_source_l00241}{oomph\+::\+Time\+Stepper\+::\+Type}}.
+
+\mbox{\Hypertarget{classoomph_1_1Steady_a6ce2223b2b5a6d5e4ebafb47114e9b64}\label{classoomph_1_1Steady_a6ce2223b2b5a6d5e4ebafb47114e9b64}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!Steady@{Steady}}
 \index{Steady@{Steady}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{Steady()}{Steady()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-\mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::\mbox{\hyperlink{classoomph_1_1Steady}{Steady}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$ N\+S\+T\+E\+PS $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::\mbox{\hyperlink{classoomph_1_1Steady}{Steady}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$ NSTEPS $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 711 of file timesteppers.\+h.
 
 
 
@@ -122,8 +128,8 @@ Definition at line 711 of file timesteppers.\+h.
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!assign\_initial\_data\_values@{assign\_initial\_data\_values}}
 \index{assign\_initial\_data\_values@{assign\_initial\_data\_values}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{assign\_initial\_data\_values()}{assign\_initial\_data\_values()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Steady_a107849d71562b3efa4bf785de60490b3}{Initial\+Condition\+Fct\+Pt}} $>$}]{initial\+\_\+value\+\_\+fct }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Steady_a107849d71562b3efa4bf785de60490b3}{Initial\+Condition\+Fct\+Pt}} $>$}]{initial\+\_\+value\+\_\+fct }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -131,14 +137,18 @@ Initialise the time-\/history for the \mbox{\hyperlink{classoomph_1_1Data}{Data}
 
 
 
-Definition at line 783 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00765}{765}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00601}{oomph\+::\+Time\+Stepper\+::ntstorage()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00234}{oomph\+::\+Time\+Stepper\+::\+Time\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_ad0aa4ed8297b77af2295827b1c0052b0}\label{classoomph_1_1Steady_ad0aa4ed8297b77af2295827b1c0052b0}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}}
 \index{assign\_initial\_positions\_impulsive@{assign\_initial\_positions\_impulsive}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{assign\_initial\_positions\_impulsive()}{assign\_initial\_positions\_impulsive()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::assign\+\_\+initial\+\_\+positions\+\_\+impulsive (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -150,14 +160,18 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_ab66972f0eaf3ba34645793e23
 
 
 
-Definition at line 751 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00733}{733}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a1e25537dc2c134d8d23a9d5c1a1be328}\label{classoomph_1_1Steady_a1e25537dc2c134d8d23a9d5c1a1be328}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}}
 \index{assign\_initial\_values\_impulsive@{assign\_initial\_values\_impulsive}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{assign\_initial\_values\_impulsive()}{assign\_initial\_values\_impulsive()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -169,14 +183,18 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a7e894df13c88c96dd8eced270
 
 
 
-Definition at line 731 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00713}{713}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_add50fd00901dc87069f2404014d699f7}\label{classoomph_1_1Steady_add50fd00901dc87069f2404014d699f7}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!ndt@{ndt}}
 \index{ndt@{ndt}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{ndt()}{ndt()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::ndt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::ndt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -188,14 +206,14 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a00e57b6436cff4fc82af481b8
 
 
 
-Definition at line 880 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00862}{862}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_acb34aea820a95d50b4dd7a8e92bea91a}\label{classoomph_1_1Steady_acb34aea820a95d50b4dd7a8e92bea91a}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!nprev\_values@{nprev\_values}}
 \index{nprev\_values@{nprev\_values}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{nprev\_values()}{nprev\_values()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::nprev\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::nprev\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -207,29 +225,25 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a0f38713ed304c18d9f7b5cf81
 
 
 
-Definition at line 874 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00856}{856}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1Steady_a72bd55932539990df0c7b5db3a42926a}\label{classoomph_1_1Steady_a72bd55932539990df0c7b5db3a42926a}} 
+\mbox{\Hypertarget{classoomph_1_1Steady_a48512caa4948348768c35bcb695b75a4}\label{classoomph_1_1Steady_a48512caa4948348768c35bcb695b75a4}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$ N\+S\+T\+E\+PS $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}$<$ NSTEPS $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 717 of file timesteppers.\+h.
-
 \mbox{\Hypertarget{classoomph_1_1Steady_ac1735b614e9adf73a889e37afdd6d3a2}\label{classoomph_1_1Steady_ac1735b614e9adf73a889e37afdd6d3a2}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!order@{order}}
 \index{order@{order}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{order()}{order()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -241,14 +255,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a251e5d4b37381e582
 
 
 
-Definition at line 724 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00706}{706}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a2a00515fba0cfe35d486ea2bbb5af99c}\label{classoomph_1_1Steady_a2a00515fba0cfe35d486ea2bbb5af99c}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!set\_weights@{set\_weights}}
 \index{set\_weights@{set\_weights}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -260,14 +274,18 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a028fa3a8d3c6db6b0ddf580cb
 
 
 
-Definition at line 857 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00839}{839}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{timesteppers_8h_source_l00318}{oomph\+::\+Time\+Stepper\+::highest\+\_\+derivative()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a4b3c9877146cb5a3673b54e0f02d9625}\label{classoomph_1_1Steady_a4b3c9877146cb5a3673b54e0f02d9625}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!shift\_time\_positions@{shift\_time\_positions}}
 \index{shift\_time\_positions@{shift\_time\_positions}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{shift\_time\_positions()}{shift\_time\_positions()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::shift\+\_\+time\+\_\+positions (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -279,18 +297,22 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a518b1bee5dc3aae8c5ef13560
 
 
 
-Definition at line 831 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00813}{813}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_aa1c00b0014a2394f7b2e1b302ebbce00}\label{classoomph_1_1Steady_aa1c00b0014a2394f7b2e1b302ebbce00}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!shift\_time\_values@{shift\_time\_values}}
 \index{shift\_time\_values@{shift\_time\_values}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{shift\_time\_values()}{shift\_time\_values()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::shift\+\_\+time\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+void \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::shift\+\_\+time\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$const \&}]{data\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-This function updates the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can advance to the next timestep. As for \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}} schemes, we simply push the values backwards... 
+This function updates the \mbox{\hyperlink{classoomph_1_1Data}{Data}}\textquotesingle{}s time history so that we can advance to the next timestep. As for \mbox{\hyperlink{classoomph_1_1BDF}{BDF}} schemes, we simply push the values backwards... 
 
 
 
@@ -298,14 +320,18 @@ Implements \mbox{\hyperlink{classoomph_1_1TimeStepper_a010a3b03a23a1c48dd8ca1064
 
 
 
-Definition at line 809 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00791}{791}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{nodes_8h_source_l00253}{oomph\+::\+Data\+::is\+\_\+a\+\_\+copy()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a34c993309f0a5c4c1cbf35ceef86f01b}\label{classoomph_1_1Steady_a34c993309f0a5c4c1cbf35ceef86f01b}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!weight@{weight}}
 \index{weight@{weight}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{weight()}{weight()}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::weight (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::weight (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -317,7 +343,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a4cb0aecb044b77ba0
 
 
 
-Definition at line 886 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00868}{868}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{timesteppers_8h_source_l00882}{oomph\+::\+Steady$<$ NSTEPS $>$\+::\+One}}, and \mbox{\hyperlink{timesteppers_8h_source_l00885}{oomph\+::\+Steady$<$ NSTEPS $>$\+::\+Zero}}.
 
 
 
@@ -326,34 +356,42 @@ Definition at line 886 of file timesteppers.\+h.
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!Dummy\_time@{Dummy\_time}}
 \index{Dummy\_time@{Dummy\_time}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{Dummy\_time}{Dummy\_time}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-\mbox{\hyperlink{classoomph_1_1Time}{Time}} \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::Dummy\+\_\+time\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+\mbox{\hyperlink{classoomph_1_1Time}{Time}} \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::Dummy\+\_\+time\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
-Definition at line 906 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00888}{888}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{timesteppers_8h_source_l00687}{oomph\+::\+Steady$<$ NSTEPS $>$\+::\+Steady()}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_a4bbc07dac00bd37fa208731f3bd52a0b}\label{classoomph_1_1Steady_a4bbc07dac00bd37fa208731f3bd52a0b}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!One@{One}}
 \index{One@{One}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{One}{One}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::One = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::One = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
 Static variable to hold the value 1.\+0. 
 
+///////////////////////////////////////////////////////////////////// 
+
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00882}{882}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
 
 
-Definition at line 900 of file timesteppers.\+h.
+
+Referenced by \mbox{\hyperlink{timesteppers_8h_source_l00868}{oomph\+::\+Steady$<$ NSTEPS $>$\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1Steady_aaafcc85863ac0695b273a98fd4525196}\label{classoomph_1_1Steady_aaafcc85863ac0695b273a98fd4525196}} 
 \index{oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}!Zero@{Zero}}
 \index{Zero@{Zero}!oomph::Steady$<$ NSTEPS $>$@{oomph::Steady$<$ NSTEPS $>$}}
 \doxysubsubsection{\texorpdfstring{Zero}{Zero}}
-{\footnotesize\ttfamily template$<$unsigned N\+S\+T\+E\+PS$>$ \\
-double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ N\+S\+T\+E\+PS $>$\+::Zero = 0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NSTEPS$>$ \\
+double \mbox{\hyperlink{classoomph_1_1Steady}{oomph\+::\+Steady}}$<$ NSTEPS $>$\+::Zero = 0.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -361,7 +399,11 @@ Static variable to hold the value 0.\+0.
 
 
 
-Definition at line 903 of file timesteppers.\+h.
+Definition at line \mbox{\hyperlink{timesteppers_8h_source_l00885}{885}} of file \mbox{\hyperlink{timesteppers_8h_source}{timesteppers.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{timesteppers_8h_source_l00868}{oomph\+::\+Steady$<$ NSTEPS $>$\+::weight()}}.
 
 
 

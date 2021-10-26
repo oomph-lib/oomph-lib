@@ -1,0 +1,271 @@
+\hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source}{}\doxysection{adaptive\+\_\+droplet\+\_\+in\+\_\+channel.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{adaptive__droplet__in__channel_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Propagation of a droplet in a channel -\/ mesh generation and adaptation for free surface problems}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this tutorial we demonstrate another adaptive solution of free surface}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{problems on unstructured meshes, using the example of a droplet}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{propagating along a straight channel. The problem is extremely similar}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{to <a href="{}../../adaptive\_bubble\_in\_channel/html/index.html"{}> the}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{propagation of a bubble in a channel tutorial </a>. Thus, we shall}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{only discuss the differences from that tutorial. The key physical}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{difference is that instead of the uniform pressure state in an}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{inviscid bubble, the droplet}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{consists of a viscous fluid that can support internal stress variations.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{<HR> <HR> }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{\(\backslash\)section example The example problem }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{We illustrate the solution}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{of the unsteady 2D Navier-\/Stokes equations by considering the}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{propagation of a single droplet along a straight channel as shown in}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{the sketch below. The non-\/dimensionalisation is}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{the same as in the }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{<a href="{}../../adaptive\_bubble\_in\_channel/html/index.html"{}> bubble}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{tutorial, </a> and we choose the viscosity and density of the}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{surrounding liquid to be the reference values.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{\(\backslash\)image html problem.gif "{}The problem setup. "{} }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{\(\backslash\)image latex problem.eps "{}The problem setup. "{} width=0.9\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{The governing equations and boundary conditions are }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{the same as those in the  }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{<a href="{}../../adaptive\_bubble\_in\_channel/html/index.html"{}> bubble}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{tutorial. </a>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{The only difference is that the Navier-\/-\/Stokes equations must also be}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{solved within the droplet. In fact, this is a two-\/fluid problem, a}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{class of problems that is first introduced in }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{<A HREF="{}../../two\_layer\_interface/html/index.html"{}> another tutorial. </A>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{The constraint that the droplet}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{volume remains constant must be enforced explicitly in the static}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{case, as in the bubble problem. In the time-\/simulations, however, a}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{constant drop volume is implicitly enforced by the continuity}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{equation. For the bubble, the continuity equation is}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{not solved within the interior, which is why the volume constraint}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{must always be explicitly enforced in that case.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{\(\backslash\)section implementation Implementation}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{We use the same method as in the }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{<a href="{}../../adaptive\_bubble\_in\_channel/html/index.html"{}> bubble}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{problem, </a> an ALE-\/based finite-\/element method with}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{<a href="{}../../single\_layer\_free\_surface/html/index.html\#kinematic\_condition\_implementation"{}>a pseudo-\/elastic}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{node-\/update procedure</a>.  In this case,}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{there is a pressure jump across the interface between the}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{fluids, which means that we use triangular Crouzeix-\/-\/Raviart }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{elements rather than the continuous-\/pressure Taylor-\/-\/Hood}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{elements. Again, we impose the kinematic and dynamic boundary conditions}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{with \(\backslash\)c FaceElements. The volume constraint for the static problem}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{is also imposed in a similar}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{way: we attach \(\backslash\)c LineVolumeConstraintBoundingSolidElements to the }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{droplet surface and create an additional \(\backslash\)c VolumeConstraintElement. }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{Here, a pressure degree of}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{freedom within the droplet is hijacked, see }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{<A HREF="{}../../static\_two\_layer/html/index.html"{}> another tutorial, </A> }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{to be used as the unknown associated with the volume constraint. Once}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{the static initial problem has been solved, the}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{"{}volume constraint"{} elements are deleted and the pressure degree of}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{freedom is unhijacked.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{We perform the simulation in a two-\/stage procedure. We start by }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{performing a steady solve with the inflow switched off. This}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{deforms the droplet into its steady state (approximately) circular}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{configuration with the required volume. The actual time-\/dependent }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{simulation is then performed with an impulsive}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{start from this configuration. }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{The figure below shows the location of the droplet and mesh (upper figure) and }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{a contour plot of the pressure}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{distribution with overlaid velocity vectors of the difference between}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{the background Poiseuille flow and the velocity field (lower}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{figure). The figure is a snapshot for the parameters \(\backslash\)f\$ Re = ReSt =}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{0.0 \(\backslash\)f\$, \(\backslash\)f\$ Ca = 10.0 \(\backslash\)f\$ and a droplet that is ten times as viscous}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{as the surrounding liquid.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)image html drop\_snapshot.gif "{}Snapshot of the flow field (velocity vectors and pressure contours) for a propagating droplet. "{} }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)image latex drop\_snapshot.eps "{}Snapshot of the flow field (velocity vectors and pressure contours) for a propagating droplet. "{} width=0.7\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{\(\backslash\)section parameters Global parameters}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{The namespace containing the dimensionless parameters contains an}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{additional viscosity ratio parameter, compared to that in the }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{ <a href="{}../../adaptive\_bubble\_in\_channel/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{bubble problem </a>.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)dontinclude adaptive\_drop\_in\_channel.cc}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{\(\backslash\)skipline Viscosity ratio}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\)until 10.0}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)section main The driver code }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{The first difference from the bubble problem is that the steady solver}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{does not converge when \(\backslash\)f\$ Ca = 10 \(\backslash\)f\$. Instead, we start with \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{Ca = 1 \(\backslash\)f\$, solve the steady problem, set \(\backslash\)f\$ Ca=10\(\backslash\)f\$ and then resolve.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{\(\backslash\)skipline problem.steady\_newton\_solve(1)}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{\(\backslash\)until problem.steady\_newton\_solve()}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{After documenting the solution, we remove the (explicit) volume}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{constraint and then the remainder of the code is identical to that in}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{the <a href="{}../../adaptive\_bubble\_in\_channel/html/index.html"{}> bubble}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{tutorial. </a>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)skipline Switch off}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)until volume\_constraint()}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{\(\backslash\)section problem The problem class}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{Other than trivial name changes from "{}bubble"{} to "{}drop"{}, there are}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{a few significant changes between this problem and that in }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{the  }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{<a href="{}../../adaptive\_bubble\_in\_channel/html/index.html"{}> bubble}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{tutorial. </a> There is an additional boolean \(\backslash\)c Use\_volume\_constraint}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{and an additional function \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{remove\_volume\_constraint(), which are used to manage the switch from}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{the explicit enforcement of the volume constraint in the static case}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{to the implicit enforcement in the time simulations. The other key}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{difference is that we use \(\backslash\)c Triangle's }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{<a href="{}../../../meshes/mesh\_from\_inline\_triangle\_internal\_boundaries/html/index.html\#def\_extra\_regions"{}> region attributes </a> }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{to distinguish the elements inside}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{the droplet from those outside. The default behaviour is that all}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{elements are in region 0, but we label those element within the drop}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{as region 1.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{\(\backslash\)section constructor The problem constructor }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{ The construction of the mesh proceeds in exactly the same way as in}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{ <a href="{}../../adaptive\_bubble\_in\_channel/html/index.html"{}> bubble}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{tutorial, </a> except that we add a region tag "{}1"{} to label the}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{  elements within the droplet (so we specify a coordinate within the drop)}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{  and we must tell \(\backslash\)c Triangle to use the assigned attributes.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{\(\backslash\)dontinclude adaptive\_drop\_in\_channel.cc}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)skipline Define the region}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{\(\backslash\)until drop\_center)}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{ The remainder of the constructor is the same as the other tutorial.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{\(\backslash\)section problem\_setup Problem setup }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{ When the bulk elements are made fully functional, we add the pointer to}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{ the viscosity ratio to all elements in the drop (region 1).}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{\(\backslash\)skipline within the droplet }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{\(\backslash\)until \} }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{\(\backslash\)section face\_elements Generation of face elements }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{As usual we impose}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{the kinematic and dynamic boundary condition at the interface by}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{attaching \(\backslash\)c FaceElements to the relevant boundaries of the bulk}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{elements. However, we must be careful to add only a \(\backslash\)b single layer of}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{elements. If we use the standard "{}boundary element"{} functions then we}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{will be creating face elements on both sides of the internal}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{boundary. Instead, we use the elements adjacent to the boundary}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{within region 0, which ensures that only a single layer of interface}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{elements are added.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{\(\backslash\)dontinclude adaptive\_drop\_in\_channel.cc}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{\(\backslash\)skipline start\_of\_create\_free\_surface\_elements }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{\(\backslash\)until end of create\_free\_surface\_elements}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{The volume constraint elements are only created if the boolean flag \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{Use\_volume\_constraint is true (the default on construction of the problem).}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{We hijack the pressure degree of freedom associated with the first}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{element in region 1 and then the construction of the elements again}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{uses the regions to ensure that a single layer of elements is created.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)skipline start\_of\_create\_volume\_constraint\_elements}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)until end of create\_volume\_constraint\_elements}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{\(\backslash\)section remove Removal of the volume constraint}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{The function \(\backslash\)c remove\_volume\_constraint(), resets the boolean flag to}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{false, clears the hijacked data, deletes the volume constraint}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{elements and mesh and then removes the volume constraint mesh from the}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{problem's list of sub meshes, before reassigning the equation numbers.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{\(\backslash\)dontinclude adaptive\_drop\_in\_channel.cc}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{\(\backslash\)skipline Change the boundary conditions}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{ The computation of the initial static solution means that we must}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{ still include the calls to the \(\backslash\)c create\_volume\_constraint\_elements() and}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{ \(\backslash\)c delete\_volume\_constraint\_elements() in \(\backslash\)c actions\_before\_adapt()}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{ and \(\backslash\)c actions\_after\_adapt(). We have chosen to have the functions}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{ return immediately if the volume constraint is not being enforced,}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{ rather than using \(\backslash\)c if blocks within the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{ actions\_before/after\_adapt() functions.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{\(\backslash\)subsection exercises Exercises}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{-\/\# Explore what happens as the viscosity ratio is varied. Are the}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{   results as you expect? Does the solution tend to a steadily}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{   propagating state? Does the solution approach the bubble solution}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{   as this viscosity ratio tends to zero? (Is this a sensible limit to take?)}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{-\/\# How could you modify the code to compute the steadily-\/propagating}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{   solutions directly, rather than using time simulation?}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{<HR> <HR>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{-\/ The source files for}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{  this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{  <CENTER> }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{  <A HREF="{}../../../../demo\_drivers/navier\_stokes/unstructured\_adaptive\_fs/"{}>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{  demo\_drivers/navier\_stokes/unstructured\_adaptive\_fs/ </A> }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{  </CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{  <CENTER> }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{  <A HREF="{}../../../../demo\_drivers/navier\_stokes/unstructured\_adaptive\_fs/adaptive\_drop\_in\_channel.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{   demo\_drivers/navier\_stokes/unstructured\_adaptive\_fs/adaptive\_drop\_in\_channel.cc</A> }}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{  </CENTER> .}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{adaptive__droplet__in__channel_8txt__doxygenified_8h_source_l00266}00266 }
+
+\end{DoxyCode}

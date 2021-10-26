@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1BlockDiagonalPreconditioner}{}\doxysection{oomph\+::Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+IX $>$ Class Template Reference}
+\hypertarget{classoomph_1_1BlockDiagonalPreconditioner}{}\doxysection{oomph\+::Block\+Diagonal\+Preconditioner\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1BlockDiagonalPreconditioner}\index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 
 
@@ -9,7 +9,7 @@ Block diagonal preconditioner. By default Super\+LU is used to solve the subsidi
 
 {\ttfamily \#include $<$general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h$>$}
 
-Inheritance diagram for oomph\+::Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+IX $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Block\+Diagonal\+Preconditioner\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=6.000000cm]{classoomph_1_1BlockDiagonalPreconditioner}
@@ -24,9 +24,9 @@ virtual \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_a132fe93f9a46
 \begin{DoxyCompactList}\small\item\em Destructor -\/ delete the preconditioner matrices. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_aced1bed34b9f6a11903d5fd3ae42ece8}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em clean up the memory \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_a3effb680084c6ff09d10723569d49f8f}{Block\+Diagonal\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} \&)
+\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_a96e1864e29124a7b4d142ea1e5c139c2}{Block\+Diagonal\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_a103d94fce9576d964d5213f72c074a60}{operator=}} (const \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} \&)
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_a76fbab799719fb1a91f13bb6a69e4675}{operator=}} (const \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_a129f0d7877ced9efaa3a7f018618f44b}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
 \begin{DoxyCompactList}\small\item\em Apply preconditioner to r. \end{DoxyCompactList}\item 
@@ -46,7 +46,7 @@ void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_a16b97c5813edb8c
 \begin{DoxyCompactItemize}
 \item 
 virtual unsigned \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_acb723bba0b200adc25c9df9003c09205}{get\+\_\+other\+\_\+diag\+\_\+ds}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&nblock) const
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This is a helper function to allow us to implement Anti\+Diagonal preconditioner by only changing this function. Get the second index for block number i. Obviously for a diagonal preconditioner we want the blocks (i,i), (for anti diagonal we will want blocks (i, nblock -\/ i), see that class). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -60,12 +60,11 @@ bool \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_a71c6dc36aa7c668
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename M\+A\+T\+R\+IX$>$\newline
-class oomph\+::\+Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}
-
+\subsubsection*{template$<$typename MATRIX$>$\newline
+class oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$}
 Block diagonal preconditioner. By default Super\+LU is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). 
 
-Definition at line 324 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00319}{319}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
 
 
 
@@ -74,8 +73,8 @@ Definition at line 324 of file general\+\_\+purpose\+\_\+block\+\_\+precondition
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!BlockDiagonalPreconditioner@{BlockDiagonalPreconditioner}}
 \index{BlockDiagonalPreconditioner@{BlockDiagonalPreconditioner}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{BlockDiagonalPreconditioner()}{BlockDiagonalPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -83,14 +82,18 @@ constructor -\/ when the preconditioner is used as a master preconditioner
 
 
 
-Definition at line 329 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00324}{324}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00438}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00432}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+array\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00435}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Use\+\_\+two\+\_\+level\+\_\+parallelisation}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a132fe93f9a469cf81740ac4723084526}\label{classoomph_1_1BlockDiagonalPreconditioner_a132fe93f9a469cf81740ac4723084526}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!````~BlockDiagonalPreconditioner@{$\sim$BlockDiagonalPreconditioner}}
 \index{````~BlockDiagonalPreconditioner@{$\sim$BlockDiagonalPreconditioner}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$BlockDiagonalPreconditioner()}{~BlockDiagonalPreconditioner()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -98,30 +101,22 @@ Destructor -\/ delete the preconditioner matrices.
 
 
 
-Definition at line 342 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00337}{337}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
 
 
 
-References oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00343}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
 
-\mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a3effb680084c6ff09d10723569d49f8f}\label{classoomph_1_1BlockDiagonalPreconditioner_a3effb680084c6ff09d10723569d49f8f}} 
+\mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a96e1864e29124a7b4d142ea1e5c139c2}\label{classoomph_1_1BlockDiagonalPreconditioner_a96e1864e29124a7b4d142ea1e5c139c2}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!BlockDiagonalPreconditioner@{BlockDiagonalPreconditioner}}
 \index{BlockDiagonalPreconditioner@{BlockDiagonalPreconditioner}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{BlockDiagonalPreconditioner()}{BlockDiagonalPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::\mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 361 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -130,8 +125,8 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -139,22 +134,26 @@ clean up the memory
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner_a3272742d3c7f86327d33c5647af874e6}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner_a3272742d3c7f86327d33c5647af874e6}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$}}.
 
 
 
-Definition at line 348 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00343}{343}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
 
 
 
-References oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00112}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00432}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+array\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00435}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Use\+\_\+two\+\_\+level\+\_\+parallelisation}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00337}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::$\sim$\+Block\+Diagonal\+Preconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a0df789685d30d01e073caa5740366149}\label{classoomph_1_1BlockDiagonalPreconditioner_a0df789685d30d01e073caa5740366149}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!disable\_doc\_time\_during\_preconditioner\_solve@{disable\_doc\_time\_during\_preconditioner\_solve}}
 \index{disable\_doc\_time\_during\_preconditioner\_solve@{disable\_doc\_time\_during\_preconditioner\_solve}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{disable\_doc\_time\_during\_preconditioner\_solve()}{disable\_doc\_time\_during\_preconditioner\_solve()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::disable\+\_\+doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::disable\+\_\+doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -162,14 +161,18 @@ Disable Doc timings in application of block sub-\/preconditioners.
 
 
 
-Definition at line 402 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00391}{391}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00438}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a8f9dffebea9f173f53f9a815e46efa7c}\label{classoomph_1_1BlockDiagonalPreconditioner_a8f9dffebea9f173f53f9a815e46efa7c}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!disable\_two\_level\_parallelisation@{disable\_two\_level\_parallelisation}}
 \index{disable\_two\_level\_parallelisation@{disable\_two\_level\_parallelisation}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{disable\_two\_level\_parallelisation()}{disable\_two\_level\_parallelisation()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::disable\+\_\+two\+\_\+level\+\_\+parallelisation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::disable\+\_\+two\+\_\+level\+\_\+parallelisation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -177,14 +180,18 @@ Don\textquotesingle{}t use two-\/level parallelisation.
 
 
 
-Definition at line 390 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00379}{379}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00435}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Use\+\_\+two\+\_\+level\+\_\+parallelisation}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a8b92dd0d3fba742334061711ce431b39}\label{classoomph_1_1BlockDiagonalPreconditioner_a8b92dd0d3fba742334061711ce431b39}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!enable\_doc\_time\_during\_preconditioner\_solve@{enable\_doc\_time\_during\_preconditioner\_solve}}
 \index{enable\_doc\_time\_during\_preconditioner\_solve@{enable\_doc\_time\_during\_preconditioner\_solve}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{enable\_doc\_time\_during\_preconditioner\_solve()}{enable\_doc\_time\_during\_preconditioner\_solve()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::enable\+\_\+doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::enable\+\_\+doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -192,14 +199,18 @@ Enable Doc timings in application of block sub-\/preconditioners.
 
 
 
-Definition at line 396 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00385}{385}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00438}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a2510bf4e17c5afb2023bccd3db9b4169}\label{classoomph_1_1BlockDiagonalPreconditioner_a2510bf4e17c5afb2023bccd3db9b4169}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!enable\_two\_level\_parallelisation@{enable\_two\_level\_parallelisation}}
 \index{enable\_two\_level\_parallelisation@{enable\_two\_level\_parallelisation}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{enable\_two\_level\_parallelisation()}{enable\_two\_level\_parallelisation()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::enable\+\_\+two\+\_\+level\+\_\+parallelisation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::enable\+\_\+two\+\_\+level\+\_\+parallelisation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -207,67 +218,71 @@ Use two level parallelisation.
 
 
 
-Definition at line 379 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00368}{368}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00435}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Use\+\_\+two\+\_\+level\+\_\+parallelisation}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a16b97c5813edb8c029afda15d8b62862}\label{classoomph_1_1BlockDiagonalPreconditioner_a16b97c5813edb8c029afda15d8b62862}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!fill\_in\_subsidiary\_preconditioners@{fill\_in\_subsidiary\_preconditioners}}
 \index{fill\_in\_subsidiary\_preconditioners@{fill\_in\_subsidiary\_preconditioners}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_subsidiary\_preconditioners()}{fill\_in\_subsidiary\_preconditioners()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::fill\+\_\+in\+\_\+subsidiary\+\_\+preconditioners (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nprec\+\_\+needed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::fill\+\_\+in\+\_\+subsidiary\+\_\+preconditioners (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nprec\+\_\+needed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 407 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00396}{396}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
 
 
 
-References oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::fill\+\_\+in\+\_\+subsidiary\+\_\+preconditioners(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Subsidiary\+\_\+preconditioner\+\_\+pt.
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00396}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::fill\+\_\+in\+\_\+subsidiary\+\_\+preconditioners()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00294}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$\+::\+Subsidiary\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00435}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Use\+\_\+two\+\_\+level\+\_\+parallelisation}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00396}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::fill\+\_\+in\+\_\+subsidiary\+\_\+preconditioners()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_acb723bba0b200adc25c9df9003c09205}\label{classoomph_1_1BlockDiagonalPreconditioner_acb723bba0b200adc25c9df9003c09205}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!get\_other\_diag\_ds@{get\_other\_diag\_ds}}
 \index{get\_other\_diag\_ds@{get\_other\_diag\_ds}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{get\_other\_diag\_ds()}{get\_other\_diag\_ds()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-virtual unsigned \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::get\+\_\+other\+\_\+diag\+\_\+ds (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{nblock }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+virtual unsigned \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::get\+\_\+other\+\_\+diag\+\_\+ds (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{nblock }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
 
 This is a helper function to allow us to implement Anti\+Diagonal preconditioner by only changing this function. Get the second index for block number i. Obviously for a diagonal preconditioner we want the blocks (i,i), (for anti diagonal we will want blocks (i, nblock -\/ i), see that class). 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1BlockAntiDiagonalPreconditioner_a880a182c7aca041992146d559c109fdb}{oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}.
+
+
+Reimplemented in \mbox{\hyperlink{classoomph_1_1BlockAntiDiagonalPreconditioner_a880a182c7aca041992146d559c109fdb}{oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner$<$ MATRIX $>$}}.
 
 
 
-Definition at line 434 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00423}{423}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
 
 
 
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
-\mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a103d94fce9576d964d5213f72c074a60}\label{classoomph_1_1BlockDiagonalPreconditioner_a103d94fce9576d964d5213f72c074a60}} 
+\mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a76fbab799719fb1a91f13bb6a69e4675}\label{classoomph_1_1BlockDiagonalPreconditioner_a76fbab799719fb1a91f13bb6a69e4675}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 367 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a129f0d7877ced9efaa3a7f018618f44b}\label{classoomph_1_1BlockDiagonalPreconditioner_a129f0d7877ced9efaa3a7f018618f44b}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!preconditioner\_solve@{preconditioner\_solve}}
 \index{preconditioner\_solve@{preconditioner\_solve}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -279,18 +294,18 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 211 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+cc.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8cc_source_l00211}{211}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8cc_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), i, oomph\+::oomph\+\_\+info, and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_a91bdd8e152045157f77c9cba513fe901}\label{classoomph_1_1BlockDiagonalPreconditioner_a91bdd8e152045157f77c9cba513fe901}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!setup@{setup}}
 \index{setup@{setup}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::setup\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::setup\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -302,11 +317,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 39 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+cc.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8cc_source_l00039}{39}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8cc_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+cc}}.
 
 
 
-References oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory(), i, oomph\+::oomph\+\_\+info, oomph\+::oomph\+\_\+nullstream, oomph\+::\+Oomph\+Info\+::stream\+\_\+pt(), and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00086}{oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00313}{oomph\+::oomph\+\_\+nullstream}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00464}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 
 
@@ -315,8 +330,8 @@ References oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory(), i, oomph
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!Doc\_time\_during\_preconditioner\_solve@{Doc\_time\_during\_preconditioner\_solve}}
 \index{Doc\_time\_during\_preconditioner\_solve@{Doc\_time\_during\_preconditioner\_solve}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Doc\_time\_during\_preconditioner\_solve}{Doc\_time\_during\_preconditioner\_solve}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::Doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -324,14 +339,18 @@ Doc timings in application of block sub-\/preconditioners?
 
 
 
-Definition at line 449 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00438}{438}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00324}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Diagonal\+Preconditioner()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00391}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::disable\+\_\+doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00385}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::enable\+\_\+doc\+\_\+time\+\_\+during\+\_\+preconditioner\+\_\+solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_ad792607cd44b8162e4fc612c0b2ac2b2}\label{classoomph_1_1BlockDiagonalPreconditioner_ad792607cd44b8162e4fc612c0b2ac2b2}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!Preconditioner\_array\_pt@{Preconditioner\_array\_pt}}
 \index{Preconditioner\_array\_pt@{Preconditioner\_array\_pt}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Preconditioner\_array\_pt}{Preconditioner\_array\_pt}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-\mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}}$\ast$ \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Preconditioner\+\_\+array\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+\mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}}$\ast$ \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::Preconditioner\+\_\+array\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -339,14 +358,18 @@ pointer for the \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Precondition
 
 
 
-Definition at line 443 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00432}{432}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00324}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Diagonal\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00343}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BlockDiagonalPreconditioner_af4a6531103c85abb57c22b839f77f60c}\label{classoomph_1_1BlockDiagonalPreconditioner_af4a6531103c85abb57c22b839f77f60c}} 
 \index{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}!Use\_two\_level\_parallelisation@{Use\_two\_level\_parallelisation}}
 \index{Use\_two\_level\_parallelisation@{Use\_two\_level\_parallelisation}!oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Use\_two\_level\_parallelisation}{Use\_two\_level\_parallelisation}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Use\+\_\+two\+\_\+level\+\_\+parallelisation\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::Use\+\_\+two\+\_\+level\+\_\+parallelisation\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -354,7 +377,11 @@ Use two level parallelism using the \mbox{\hyperlink{classoomph_1_1Preconditione
 
 
 
-Definition at line 446 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00435}{435}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00324}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::\+Block\+Diagonal\+Preconditioner()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00343}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00379}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::disable\+\_\+two\+\_\+level\+\_\+parallelisation()}}, \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00368}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::enable\+\_\+two\+\_\+level\+\_\+parallelisation()}}, and \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00396}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$\+::fill\+\_\+in\+\_\+subsidiary\+\_\+preconditioners()}}.
 
 
 

@@ -3,33 +3,33 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Generic problem class that will form the base class for both spine and elastic mesh-\/updates of the problem. Templated by the bulk element and interface element types. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine\+Inclined\+Plane\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine\+Inclined\+Plane\+Mesh$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Create a spine mesh for the problem. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classSpineInclinedPlaneProblem}{Spine\+Inclined\+Plane\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}}
+class \mbox{\hyperlink{classSpineInclinedPlaneProblem}{Spine\+Inclined\+Plane\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
 \item 
-class \mbox{\hyperlink{classElasticInclinedPlaneMesh}{Elastic\+Inclined\+Plane\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classElasticInclinedPlaneMesh}{Elastic\+Inclined\+Plane\+Mesh$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Create an Elastic mesh for the problem. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classElasticInclinedPlaneProblem}{Elastic\+Inclined\+Plane\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}}
+class \mbox{\hyperlink{classElasticInclinedPlaneProblem}{Elastic\+Inclined\+Plane\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (2, 0.\+0)
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (2, 0.\+0)
 \begin{DoxyCompactList}\small\item\em The Vector direction of gravity, set in \mbox{\hyperlink{inclined__plane_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main()}} \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa26e74c1f9f93f8212e45380f55fb562}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+inlet\+\_\+fct}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}, Vector$<$ double $>$ \&normal)
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa26e74c1f9f93f8212e45380f55fb562}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+inlet\+\_\+fct}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&normal)
 \begin{DoxyCompactList}\small\item\em Function that specifies the wall unit normal at the inlet. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8ab8f6e823e4cd204ed7264121a42bfb}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+outlet\+\_\+fct}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}, Vector$<$ double $>$ \&normal)
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8ab8f6e823e4cd204ed7264121a42bfb}{Global\+\_\+\+Physical\+\_\+\+Variables\+::wall\+\_\+unit\+\_\+normal\+\_\+outlet\+\_\+fct}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&normal)
 \begin{DoxyCompactList}\small\item\em Function that specified the wall unit normal at the outlet. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab577639e7c51979d3db7565c08c69c70}{Global\+\_\+\+Physical\+\_\+\+Variables\+::hydrostatic\+\_\+pressure\+\_\+outlet}} (const double \&time, const Vector$<$ double $>$ \&\mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab577639e7c51979d3db7565c08c69c70}{Global\+\_\+\+Physical\+\_\+\+Variables\+::hydrostatic\+\_\+pressure\+\_\+outlet}} (const double \&time, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Function that prescribes the hydrostatic pressure field at the outlet. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af1f48eb04a3c7f97b1efacea533acdbc}{Global\+\_\+\+Physical\+\_\+\+Variables\+::hydrostatic\+\_\+pressure\+\_\+inlet}} (const double \&time, const Vector$<$ double $>$ \&\mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af1f48eb04a3c7f97b1efacea533acdbc}{Global\+\_\+\+Physical\+\_\+\+Variables\+::hydrostatic\+\_\+pressure\+\_\+inlet}} (const double \&time, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Function that prescribes hydrostatic pressure field at the inlet. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{inclined__plane_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
 \end{DoxyCompactItemize}
@@ -39,7 +39,7 @@ int \mbox{\hyperlink{inclined__plane_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}} =0.\+0
 \begin{DoxyCompactList}\small\item\em Reynolds number, based on the average velocity within the fluid film. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}} =2.\+0
-\item 
+\begin{DoxyCompactList}\small\item\em The product of Reynolds number and inverse Froude number is set to two in this problem, which gives the free surface velocity to be sin(alpha). \mbox{[}Set to three in order to get the same scale as used by Yih, Benjamin, etc\mbox{]}. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}} = 1.\+0$\ast$atan(1.\+0)
 \begin{DoxyCompactList}\small\item\em Angle of incline of the slope (45 degrees) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}} = 1.\+0
@@ -69,9 +69,9 @@ double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f2
 
 
 
-Definition at line 756 of file inclined\+\_\+plane.\+cc.
+Definition at line \mbox{\hyperlink{inclined__plane_8cc_source_l00756}{756}} of file \mbox{\hyperlink{inclined__plane_8cc_source}{inclined\+\_\+plane.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Length, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu, problem, Re, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Wall\+\_\+normal.
+References \mbox{\hyperlink{inclined__plane_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00125}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00078}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Length}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00128}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00411}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::solve\+\_\+steady()}}, \mbox{\hyperlink{inclined__plane_8cc_source_l00444}{Inclined\+Plane\+Problem$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::timestep()}}, and \mbox{\hyperlink{inclined__plane_8cc_source_l00081}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Wall\+\_\+normal}}.
 

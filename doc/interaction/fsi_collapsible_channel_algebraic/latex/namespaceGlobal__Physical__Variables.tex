@@ -10,8 +10,8 @@ Namespace for phyical parameters.
 \item 
 void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}{prescribed\+\_\+traction}} (const double \&t, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Traction applied on the fluid at the left (inflow) boundary. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{load}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__chan__alg_8txt_a0728ecef1ef280a6dcb336cd142dc907}{xi}}, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
-\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by F\+S\+I\+Wall\+Element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
+\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by FSIWall\+Element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -28,8 +28,7 @@ double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{P\+\_\+ext}} =0.\+0
 \begin{DoxyCompactList}\small\item\em External pressure. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}} =1.\+0e-\/5
-\begin{DoxyCompactList}\small\item\em Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Lambda\+\_\+sq}} =0.\+0
 \begin{DoxyCompactList}\small\item\em Pseudo-\/solid mass density. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}} =0.\+1
@@ -48,19 +47,19 @@ Namespace for phyical parameters.
 
 
 
-Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by F\+S\+I\+Wall\+Element. 
+Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by FSIWall\+Element. 
 
 
 
-Definition at line 209 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00209}{209}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References P\+\_\+ext.
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00209}{load()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00204}{P\+\_\+ext}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00209}{load()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}\label{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!prescribed\_traction@{prescribed\_traction}}
@@ -74,15 +73,15 @@ Traction applied on the fluid at the left (inflow) boundary.
 
 
 
-Definition at line 186 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00186}{186}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References P\+\_\+up.
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00183}{P\+\_\+up}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+after\+\_\+adapt(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00897}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
 
 
 
@@ -99,11 +98,11 @@ Non-\/dimensional wall thickness. As in Jensen \& Heil (2003) paper.
 
 
 
-Definition at line 198 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00198}{198}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::convex\+\_\+hull(), Undeformed\+Wall\+::d2position(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem(), Undeformed\+Wall\+::position(), oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper(), and Undeformed\+Wall\+::\+Undeformed\+Wall().
+Referenced by \mbox{\hyperlink{triangle__mesh_8template_8h_source_l02207}{oomph\+::\+Triangle\+Mesh$<$ ELEMENT $>$\+::convex\+\_\+hull()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}, \mbox{\hyperlink{horizontal__single__layer__spine__mesh_8template_8h_source_l00063}{oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{single__layer__cubic__spine__mesh_8template_8h_source_l00066}{oomph\+::\+Single\+Layer\+Cubic\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{single__layer__spine__mesh_8template_8h_source_l00075}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00242}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00254}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}\label{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Lambda\_sq@{Lambda\_sq}}
@@ -117,7 +116,7 @@ Pseudo-\/solid mass density.
 
 
 
-Definition at line 225 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00225}{225}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}\label{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Nu@{Nu}}
@@ -131,7 +130,7 @@ Pseudo-\/solid Poisson ratio.
 
 
 
-Definition at line 228 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00228}{228}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}\label{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!P\_ext@{P\_ext}}
@@ -145,11 +144,11 @@ External pressure.
 
 
 
-Definition at line 204 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00204}{204}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), load(), and main().
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00668}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00059}{Elastic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00059}{Elastic\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00209}{load()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00811}{main()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861}\label{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!P\_up@{P\_up}}
@@ -163,11 +162,11 @@ Default pressure on the left boundary.
 
 
 
-Definition at line 183 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00183}{183}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-Referenced by main(), and prescribed\+\_\+traction().
+Referenced by \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00059}{Elastic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00059}{Elastic\+Refineable\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Collapsible\+Channel\+Mesh()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00811}{main()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00186}{prescribed\+\_\+traction()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}\label{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Q@{Q}}
@@ -177,16 +176,15 @@ Referenced by main(), and prescribed\+\_\+traction().
 
 
 
-Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. ~\newline
- 
+Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. 
 
 
 
-Definition at line 221 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00221}{221}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}\label{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Re@{Re}}
@@ -200,11 +198,11 @@ Reynolds number.
 
 
 
-Definition at line 177 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00177}{177}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}\label{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!ReSt@{ReSt}}
@@ -218,11 +216,11 @@ Womersley = Reynolds times Strouhal.
 
 
 
-Definition at line 180 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00180}{180}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}\label{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Sigma0@{Sigma0}}
@@ -236,9 +234,9 @@ Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\
 
 
 
-Definition at line 201 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00201}{201}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00378}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
 

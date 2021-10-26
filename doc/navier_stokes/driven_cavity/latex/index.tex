@@ -18,13 +18,14 @@ If the velocity is prescribed along the entire domain boundary, the fluid pressu
 \hypertarget{index_element_types}{}\doxysection{Implementation}\label{index_element_types}
 \DoxyHorRuler{0}
 \hypertarget{index_el}{}\doxysubsection{The elements}\label{index_el}
-{\ttfamily oomph-\/lib} provides two L\+B\+B-\/stable isoparametric Navier-\/\+Stokes elements that are based on the {\ttfamily Q\+Element$<$\+D\+I\+M,3$>$} family of geometric finite elements. They are nine-\/node quadrilateral (for {\ttfamily D\+IM=2}), and 27-\/node brick (for {\ttfamily D\+IM=3}) elements in which the mapping between local and global (Eulerian) coordinates is given by \begin{center} \[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2\quad [\mbox{and }3]. \] \end{center}  Here $ N^{(E)} = 3^{DIM}$ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s geometric shape functions, defined in the {\ttfamily Q\+Element$<$\+D\+I\+M,3$>$} class.
+{\ttfamily oomph-\/lib} provides two LBB-\/stable isoparametric Navier-\/\+Stokes elements that are based on the {\ttfamily QElement$<$\+DIM,3$>$} family of geometric finite elements. They are nine-\/node quadrilateral (for {\ttfamily DIM=2}), and 27-\/node brick (for {\ttfamily DIM=3}) elements in which the mapping between local and global (Eulerian) coordinates is given by \begin{center} \[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2\quad [\mbox{and }3]. \] \end{center}  Here $ N^{(E)} = 3^{DIM}$ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s geometric shape functions, defined in the {\ttfamily QElement$<$\+DIM,3$>$} class.
 
 In both elements the velocity components $ u_1, $ $ u_2, $ \mbox{[}and $ u_3 $\mbox{]} are stored as nodal values and the geometric shape functions are used to interpolate the velocities inside the element, \begin{center} \[ u_i = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad i=1,2\quad [\mbox{and }3], \] \end{center}  where $ U^{(E)}_{ij} $ is the $ i $-\/th velocity component at $ j $-\/th {\ttfamily Node} in the element. Nodal values of the velocity components are accessible via the access function
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{NavierStokesEquations<DIM>::u(\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}},j)}
+\DoxyCodeLine{NavierStokesEquations<DIM>::u(i,j)}
+
 \end{DoxyCode}
 
 
@@ -34,13 +35,14 @@ The two elements differ in the way in which the pressure is represented\+:
 
 \DoxyHorRuler{0}
 \hypertarget{index_CR}{}\doxysubsubsection{Crouzeix-\/\+Raviart elements}\label{index_CR}
-In {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Q\+Crouzeix\+Raviart\+Elements} the pressure is represented by, \begin{center} \[ p = P_0^{(E)} + P_1^{(E)} \, s_1 + P_2^{(E)} \, s_2 \quad \left[+ P_3^{(E)} \, s_3\right], \] \end{center}  where the $ s_i \in [-1,1]$ are the element\textquotesingle{}s local coordinates. This provides a discontinuous, piecewise bi-\/\mbox{[}tri-\/\mbox{]}linear representation of the pressure in terms of 3 \mbox{[}4\mbox{]} pressure degrees of freedom per element. Crouzeix-\/\+Raviart elements ensure that the continuity equation is satisfied within each element.
+In {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily QCrouzeix\+Raviart\+Elements} the pressure is represented by, \begin{center} \[ p = P_0^{(E)} + P_1^{(E)} \, s_1 + P_2^{(E)} \, s_2 \quad \left[+ P_3^{(E)} \, s_3\right], \] \end{center}  where the $ s_i \in [-1,1]$ are the element\textquotesingle{}s local coordinates. This provides a discontinuous, piecewise bi-\/\mbox{[}tri-\/\mbox{]}linear representation of the pressure in terms of 3 \mbox{[}4\mbox{]} pressure degrees of freedom per element. Crouzeix-\/\+Raviart elements ensure that the continuity equation is satisfied within each element.
 
 The pressure degrees of freedom are local to the element and are stored in the element\textquotesingle{}s internal {\ttfamily Data}. They are accessible via the member function
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{QCrouzeixRaviartElement<DIM>::p(j)}
+
 \end{DoxyCode}
 
 
@@ -50,11 +52,12 @@ Each {\ttfamily Node} in a 2D \mbox{[}3D\mbox{]} Crouzeix-\/\+Raviart element st
 
 \DoxyHorRuler{0}
 \hypertarget{index_TH}{}\doxysubsubsection{Taylor-\/\+Hood elements}\label{index_TH}
-In {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Q\+Taylor\+Hood\+Elements} the pressure is represented by a globally-\/continuous, piecewise bi-\/\mbox{[}tri-\/\mbox{]}linear interpolation between the pressure values $ P_j^{(E)} $ that are stored at the elements\textquotesingle{} $ N_p^{(E)} = 2^{DIM}$ corner/vertex nodes, \begin{center} \[ p = \sum_{j=1}^{N_p^{(E)}} P_j^{(E)} \, \psi_j^{(p)}, \] \end{center}  where the $\psi_j^{(p)}$ are the bi-\/\mbox{[}tri-\/\mbox{]}linear pressure shape functions.
+In {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily QTaylor\+Hood\+Elements} the pressure is represented by a globally-\/continuous, piecewise bi-\/\mbox{[}tri-\/\mbox{]}linear interpolation between the pressure values $ P_j^{(E)} $ that are stored at the elements\textquotesingle{} $ N_p^{(E)} = 2^{DIM}$ corner/vertex nodes, \begin{center} \[ p = \sum_{j=1}^{N_p^{(E)}} P_j^{(E)} \, \psi_j^{(p)}, \] \end{center}  where the $\psi_j^{(p)}$ are the bi-\/\mbox{[}tri-\/\mbox{]}linear pressure shape functions.
 
 The first 2 \mbox{[}3\mbox{]} values of each {\ttfamily Node} in a 2D \mbox{[}3D\mbox{]} Taylor-\/\+Hood element store the two \mbox{[}three\mbox{]} velocity components at that {\ttfamily Node}. The corner \mbox{[}vertex\mbox{]} nodes store an additional value which represents the pressure at that {\ttfamily Node}. The access function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{QTaylorHoodElement<DIM>::p(j)}
+
 \end{DoxyCode}
  returns the nodal pressure value at the element\textquotesingle{}s {\ttfamily j-\/th} corner \mbox{[}vertex\mbox{]} {\ttfamily Node}.
 
@@ -62,7 +65,7 @@ In sufficiently fine meshes, Taylor-\/\+Hood elements generate a much smaller nu
 
 \DoxyHorRuler{0}
 \hypertarget{index_params}{}\doxysection{Non-\/dimensional parameters and their default values}\label{index_params}
-The Reynolds number, Strouhal number, inverse-\/\+Froude number, density ratio and viscosity ratio are assumed to be constant within each element. Their values are accessed via pointers which are accessible via the member functions {\ttfamily \mbox{\hyperlink{driven__cavity_8txt_a25257c692cb45036772f593eb0284b78}{re\+\_\+pt()}}} for $ Re, $ {\ttfamily \mbox{\hyperlink{driven__cavity_8txt_adc1a074e08505d277036878c9aedc811}{re\+\_\+st\+\_\+pt()}}} for $ Re \ St, $ {\ttfamily \mbox{\hyperlink{driven__cavity_8txt_ae99117aed97ea6b876d159aa1c14240b}{re\+\_\+invfr\+\_\+pt()}}} for $ Re/Fr, $ {\ttfamily \mbox{\hyperlink{driven__cavity_8txt_aab4f1d8c4747c7d7ff52692f739c7956}{density\+\_\+ratio\+\_\+pt()}}} for $ R_\rho $ and {\ttfamily viscosity\+\_\+ratio\+\_\+pt()} for $ R_\mu $.
+The Reynolds number, Strouhal number, inverse-\/\+Froude number, density ratio and viscosity ratio are assumed to be constant within each element. Their values are accessed via pointers which are accessible via the member functions {\ttfamily re\+\_\+pt()} for $ Re, $ {\ttfamily re\+\_\+st\+\_\+pt()} for $ Re \ St, $ {\ttfamily re\+\_\+invfr\+\_\+pt()} for $ Re/Fr, $ {\ttfamily density\+\_\+ratio\+\_\+pt()} for $ R_\rho $ and {\ttfamily viscosity\+\_\+ratio\+\_\+pt()} for $ R_\mu $.
 
 By default the pointers point to default values (implemented as static member data in the {\ttfamily Navier\+Stokes\+Equations} class), therefore they only need to be over-\/written if the default values are not appropriate. The default values are\+:
 \begin{DoxyItemize}
@@ -71,7 +74,7 @@ By default the pointers point to default values (implemented as static member da
 \item Default product of Reynolds and inverse Froude number (a measure of gravity on the viscous scale) \[ Re/Fr = 0 \mbox{\ \ \ \ (no gravity)} \]
 \item Default viscosity ratio\+: \[ R_\mu = 1 \mbox{\ \ \ \ (viscosity = viscosity used in the definition of $Re$)} \]
 \item Default density ratio\+: \[ R_\rho = 1 \mbox{\ \ \ \ (density = density used in the definition of $Re$)} \]
-\end{DoxyItemize}We use the same approach for the specification of the body force vector $ G_i $, accessible via the function {\ttfamily g\+\_\+pt} (), the variable body force $ B_i $, accessible via the function pointer {\ttfamily \mbox{\hyperlink{driven__cavity_8txt_a277632e2445c22857bf8d91868e029d9}{body\+\_\+force\+\_\+fct\+\_\+pt()}}}, and the volumetric source function $ Q $, accessible via the function pointer {\ttfamily \mbox{\hyperlink{driven__cavity_8txt_af9c2b28e5079228a74d221480c78b0b9}{source\+\_\+fct\+\_\+pt(time,x)}}}. By default the (function) pointers are set such that
+\end{DoxyItemize}We use the same approach for the specification of the body force vector $ G_i $, accessible via the function {\ttfamily g\+\_\+pt} (), the variable body force $ B_i $, accessible via the function pointer {\ttfamily body\+\_\+force\+\_\+fct\+\_\+pt()}, and the volumetric source function $ Q $, accessible via the function pointer {\ttfamily source\+\_\+fct\+\_\+pt(time,x)}. By default the (function) pointers are set such that
 \begin{DoxyItemize}
 \item Default gravity vector\+: \[ G_i = 0 \mbox{\ \ \ \ (no gravity)} \]
 \item Default body force function\+: \[ B_i(x_j,t) = 0 \mbox{\ \ \ \ (no body force)} \]
@@ -101,7 +104,7 @@ The figure below shows \char`\"{}carpet plots\char`\"{} of the velocity and pres
 \doxyfigcaption{Plot of the velocity and pressure fields for Re=100 computed with Crouzeix-\/\+Raviart (Q2\+P-\/1) elements. }
 \end{DoxyImage}
 \hypertarget{index_results_TH}{}\doxysubsection{Taylor-\/\+Hood elements}\label{index_results_TH}
-The next figure shows the corresponding results obtained from a computation with {\ttfamily Q\+Taylor\+Hood\+Elements}. The pressure plot illustrates how the interpolation between the corner nodes creates a globally continuous representation of the pressure.
+The next figure shows the corresponding results obtained from a computation with {\ttfamily QTaylor\+Hood\+Elements}. The pressure plot illustrates how the interpolation between the corner nodes creates a globally continuous representation of the pressure.
 
  
 \begin{DoxyImage}
@@ -121,7 +124,7 @@ The Reynolds number is the only non-\/dimensional parameter needed in this probl
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -131,9 +134,7 @@ The Reynolds number is the only non-\/dimensional parameter needed in this probl
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We start by creating a {\ttfamily Doc\+Info} object to store the output directory and the label for the output files.
@@ -141,8 +142,8 @@ We start by creating a {\ttfamily Doc\+Info} object to store the output director
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for RectangularDrivenCavity test problem -\/-\/ test drive}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with two different types of element.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for RectangularDrivenCavity test problem -\/-\/ test drive}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// with two different types of element.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{driven__cavity_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
@@ -154,15 +155,13 @@ We start by creating a {\ttfamily Doc\+Info} object to store the output director
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
 
 \end{DoxyCodeInclude}
-
-
-We build the problem using {\ttfamily Q\+Crouzeix\+Raviart\+Elements}, solve using the {\ttfamily Problem\+::newton\+\_\+solve()} function, and document the result before incrementing the label for the output files.
+ We build the problem using {\ttfamily QCrouzeix\+Raviart\+Elements}, solve using the {\ttfamily Problem\+::newton\+\_\+solve()} function, and document the result before incrementing the label for the output files.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -170,14 +169,14 @@ We build the problem using {\ttfamily Q\+Crouzeix\+Raviart\+Elements}, solve usi
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Build the problem with QCrouzeixRaviartElements}}
-\DoxyCodeLine{  \mbox{\hyperlink{classRectangularDrivenCavityProblem}{RectangularDrivenCavityProblem<QCrouzeixRaviartElement<2>}} > \mbox{\hyperlink{driven__cavity_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"Doing QCrouzeixRaviartElement<2>"} << std::endl;}
+\DoxyCodeLine{  \mbox{\hyperlink{classRectangularDrivenCavityProblem}{RectangularDrivenCavityProblem<QCrouzeixRaviartElement<2>}} > problem;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}Doing QCrouzeixRaviartElement<2>"{}} << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{driven__cavity_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{  problem.newton\_solve();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Outpt the solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{driven__cavity_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classRectangularDrivenCavityProblem_ab9540b4f539b7d62a1165cc42b4190ea}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()++;}
@@ -185,9 +184,7 @@ We build the problem using {\ttfamily Q\+Crouzeix\+Raviart\+Elements}, solve usi
 \DoxyCodeLine{ \} \textcolor{comment}{// end of QCrouzeixRaviartElements}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we repeat the process with {\ttfamily Q\+Taylor\+Hood\+Elements}.
+ Finally, we repeat the process with {\ttfamily QTaylor\+Hood\+Elements}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -195,14 +192,14 @@ Finally, we repeat the process with {\ttfamily Q\+Taylor\+Hood\+Elements}.
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Build the problem with QTaylorHoodElements}}
-\DoxyCodeLine{  \mbox{\hyperlink{classRectangularDrivenCavityProblem}{RectangularDrivenCavityProblem<QTaylorHoodElement<2>}} > \mbox{\hyperlink{driven__cavity_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"Doing QTaylorHoodElement<2>"} << std::endl;}
+\DoxyCodeLine{  \mbox{\hyperlink{classRectangularDrivenCavityProblem}{RectangularDrivenCavityProblem<QTaylorHoodElement<2>}} > problem;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}Doing QTaylorHoodElement<2>"{}} << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{driven__cavity_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{  problem.newton\_solve();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Outpt the solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{driven__cavity_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classRectangularDrivenCavityProblem_ab9540b4f539b7d62a1165cc42b4190ea}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()++;}
@@ -213,9 +210,7 @@ Finally, we repeat the process with {\ttfamily Q\+Taylor\+Hood\+Elements}.
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The {\ttfamily Problem} class for our steady Navier-\/\+Stokes problem is very similar to those used for the steady scalar problems (Poisson and advection-\/diffusion) that we considered in previous examples. We provide a helper function {\ttfamily fix\+\_\+pressure(...)} which pins a pressure value in a specified element and assigns a specific value.
@@ -224,7 +219,7 @@ The {\ttfamily Problem} class for our steady Navier-\/\+Stokes problem is very s
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driven cavity problem in rectangular domain}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRectangularDrivenCavityProblem}{RectangularDrivenCavityProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -238,27 +233,25 @@ The {\ttfamily Problem} class for our steady Navier-\/\+Stokes problem is very s
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRectangularDrivenCavityProblem_a0233981e33e2bd9db424b19e51a0faef}{\string~RectangularDrivenCavityProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Fix pressure in element e at pressure dof pdof and set to pvalue}}
+\DoxyCodeLine{\textcolor{comment}{ /// Fix pressure in element e at pressure dof pdof and set to pvalue}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRectangularDrivenCavityProblem_ac02d80f5241eeb04571577ce3b9f35a3}{fix\_pressure}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&e, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&pdof, }
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&pvalue)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Cast to full element type and fix the pressure at that element}}
-\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{classRectangularDrivenCavityProblem_a408035d1f224641db75a2f48074e9593}{mesh\_pt}}()-\/>element\_pt(e))-\/>}
+\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{classRectangularDrivenCavityProblem_a8ec8787540381698d45c5d46cf2dd7c9}{mesh\_pt}}()-\/>element\_pt(e))-\/>}
 \DoxyCodeLine{                          \mbox{\hyperlink{classRectangularDrivenCavityProblem_ac02d80f5241eeb04571577ce3b9f35a3}{fix\_pressure}}(pdof,pvalue);}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of fix\_pressure}}
 
 \end{DoxyCodeInclude}
-
-
-No actions are performed after the solution is found, since the solution is documented in {\ttfamily main}. However, before solving, the boundary conditions must be set.
+ No actions are performed after the solution is found, since the solution is documented in {\ttfamily main}. However, before solving, the boundary conditions must be set.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Update the after solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the after solve (empty)}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve. }}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve. }}
 \DoxyCodeLine{\textcolor{comment}{ /// Re-\/set velocity boundary conditions just to be on the safe side...}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve()}
 \DoxyCodeLine{ \{}
@@ -268,11 +261,11 @@ No actions are performed after the solution is found, since the solution is docu
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Tangential flow}}
-\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}=0;}
-\DoxyCodeLine{    mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}},1.0);}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} i=0;}
+\DoxyCodeLine{    mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,1.0);}
 \DoxyCodeLine{    \textcolor{comment}{// No penetration}}
-\DoxyCodeLine{    \mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}=1;}
-\DoxyCodeLine{    mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}},0.0);}
+\DoxyCodeLine{    i=1;}
+\DoxyCodeLine{    mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,0.0);}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Overwrite with no flow along the other boundaries}}
@@ -282,18 +275,16 @@ No actions are performed after the solution is found, since the solution is docu
 \DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod= mesh\_pt()-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{     \{}
-\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}=0;\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}<2;\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}++)}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
 \DoxyCodeLine{       \{}
-\DoxyCodeLine{        mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}},0.0);}
+\DoxyCodeLine{        mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,0.0);}
 \DoxyCodeLine{       \}}
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{ \} \textcolor{comment}{// end\_of\_actions\_before\_newton\_solve}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we provide an access function to the specific mesh and define the post-\/processing function {\ttfamily doc\+\_\+solution(...)}.
+ Finally, we provide an access function to the specific mesh and define the post-\/processing function {\ttfamily doc\+\_\+solution(...)}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -313,9 +304,7 @@ Finally, we provide an access function to the specific mesh and define the post-
 \DoxyCodeLine{\}; \textcolor{comment}{// end\_of\_problem\_class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 Since this is a steady problem, the constructor is quite simple. We begin by building the mesh and pin the velocities on the boundaries.
@@ -324,7 +313,7 @@ Since this is a steady problem, the constructor is quite simple. We begin by bui
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for RectangularDrivenCavity problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRectangularDrivenCavityProblem_ad7382f68a780f86ea5f0e9b7d4d119ec}{RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem}}()}
 \DoxyCodeLine{\{ }
@@ -356,17 +345,15 @@ Since this is a steady problem, the constructor is quite simple. We begin by bui
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Loop over values (u and v velocities)}}
-\DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}=0;\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}<2;\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}++)}
+\DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(\mbox{\hyperlink{driven__cavity_8txt_a3999228f16bf26800d15356372c52411}{i}}); }
+\DoxyCodeLine{       mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(i); }
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-Next we pass a pointer to the Reynolds number (stored in {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}}) to all elements.
+ Next we pass a pointer to the Reynolds number (stored in {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}}) to all elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -387,9 +374,7 @@ Next we pass a pointer to the Reynolds number (stored in {\ttfamily \mbox{\hyper
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over elements}}
 
 \end{DoxyCodeInclude}
-
-
-Since Dirichlet conditions are applied to both velocity components on all boundaries, the pressure is only determined up to an arbitrary constant. We use the {\ttfamily fix\+\_\+pressure(...)} function to pin the first pressure value in the first element and set its value to zero.
+ Since Dirichlet conditions are applied to both velocity components on all boundaries, the pressure is only determined up to an arbitrary constant. We use the {\ttfamily fix\+\_\+pressure(...)} function to pin the first pressure value in the first element and set its value to zero.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -397,14 +382,12 @@ Since Dirichlet conditions are applied to both velocity components on all bounda
 \DoxyCodeLine{ fix\_pressure(0,0,0.0);}
 
 \end{DoxyCodeInclude}
-
-
-Finally, the equation numbering scheme is set up, using the function {\ttfamily assign\+\_\+eqn\+\_\+numbers()}.
+ Finally, the equation numbering scheme is set up, using the function {\ttfamily assign\+\_\+eqn\+\_\+numbers()}.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_constructor}}
 
 \end{DoxyCodeInclude}
@@ -419,7 +402,7 @@ As expected, this member function documents the computed solution.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRectangularDrivenCavityProblem_ab9540b4f539b7d62a1165cc42b4190ea}{RectangularDrivenCavityProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -431,7 +414,7 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{ npts=5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -439,9 +422,7 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_stress_divergence}{}\doxysubsection{The stress-\/divergence form}\label{index_stress_divergence}
@@ -469,5 +450,5 @@ This simpler form of the equations can be used to solve problems that do not inc
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

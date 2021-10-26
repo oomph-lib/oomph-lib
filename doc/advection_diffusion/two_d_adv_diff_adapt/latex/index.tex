@@ -52,7 +52,7 @@ Overall, the structure of the driver code is very similar to that in the \href{.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for 2D AdvectionDiffusion problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__adv__diff__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -63,34 +63,34 @@ Overall, the structure of the driver code is very similar to that in the \href{.
 \DoxyCodeLine{ \textcolor{comment}{// RefineableQuadAdvectionDiffusionElement family. Pass pointer to }}
 \DoxyCodeLine{ \textcolor{comment}{// source and wind function. }}
 \DoxyCodeLine{ \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem}{RefineableAdvectionDiffusionProblem}}<RefineableQAdvectionDiffusionElement<2,}
-\DoxyCodeLine{  3> > \mbox{\hyperlink{two__d__adv__diff__adapt_8txt_a324468ffa84fee5e9c1f91c323c12672}{problem}}(\&\mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_aaa1aa95713b02b211812fdd18eeaa369}{TanhSolnForAdvectionDiffusion::source\_function}},}
+\DoxyCodeLine{  3> > problem(\&\mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_aaa1aa95713b02b211812fdd18eeaa369}{TanhSolnForAdvectionDiffusion::source\_function}},}
 \DoxyCodeLine{               \&\mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_ab40e93031d34986762c69616c3c8b065}{TanhSolnForAdvectionDiffusion::wind\_function}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Check if we're ready to go:}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "};}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{two__d__adv__diff__adapt_8txt_a324468ffa84fee5e9c1f91c323c12672}{problem}}.self\_test()==0) }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "{}};}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (problem.self\_test()==0) }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"passed: Problem can be solved."} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}passed: Problem can be solved."{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"Self test failed"},}
+\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Self test failed"{}},}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Set the orientation of the "step" to 45 degrees}}
+\DoxyCodeLine{ \textcolor{comment}{// Set the orientation of the "{}step"{} to 45 degrees}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_a236bf82c661189623706b7c9d9b0c52f}{TanhSolnForAdvectionDiffusion::TanPhi}}=1.0;}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Choose a large value for the steepness of the "step"}}
+\DoxyCodeLine{ \textcolor{comment}{// Choose a large value for the steepness of the "{}step"{}}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_a4d202e8ac48cc75f760ef40681402ec7}{TanhSolnForAdvectionDiffusion::Alpha}}=50.0; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Solve the problem, performing up to 4 adptive refinements}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__adv__diff__adapt_8txt_a324468ffa84fee5e9c1f91c323c12672}{problem}}.newton\_solve(4);}
+\DoxyCodeLine{ problem.newton\_solve(4);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output the solution}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__adv__diff__adapt_8txt_a324468ffa84fee5e9c1f91c323c12672}{problem}}.doc\_solution();}
+\DoxyCodeLine{ problem.doc\_solution();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
@@ -106,8 +106,8 @@ The specification of the source function and the exact solution in the namespace
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_namespace============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for AdvectionDiffusion equation }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with "sharp" step }}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for AdvectionDiffusion equation }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// with "{}sharp"{} step }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion}{TanhSolnForAdvectionDiffusion}}}
 \DoxyCodeLine{\{}
@@ -156,9 +156,7 @@ The specification of the source function and the exact solution in the namespace
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The problem class is very similar to those used in the corresponding \href{../../../poisson/two_d_poisson/html/index.html\#problem}{\texttt{ Poisson examples.}} The only change is that we use the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} to document the progress of the automatic spatial adaptation. For this purpose, we store a {\ttfamily Doc\+Info} as private member data in the {\ttfamily Problem}. This allows us to increment the counter that labels the output files, accessible from {\ttfamily Doc\+Info\+::number()}, whenever a new solution has been documented.
@@ -166,9 +164,9 @@ The problem class is very similar to those used in the corresponding \href{../..
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====== start\_of\_problem\_class=======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D AdvectionDiffusion problem on rectangular domain, discretised }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// with refineable 2D QAdvectionDiffusion elements. The specific type}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// of element is specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D AdvectionDiffusion problem on rectangular domain, discretised }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// with refineable 2D QAdvectionDiffusion elements. The specific type}}
+\DoxyCodeLine{\textcolor{comment}{/// of element is specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableAdvectionDiffusionProblem}{RefineableAdvectionDiffusionProblem}} : \textcolor{keyword}{public} Problem}
@@ -184,7 +182,7 @@ The problem class is very similar to those used in the corresponding \href{../..
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor. Empty}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_ae746646f6c255dca13e5abe9fcf85fe3}{\string~RefineableAdvectionDiffusionProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve: Reset boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: Reset boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// to the values from the tanh solution.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_a7cbcaa45fd7e932f335cc07a83b4d3e2}{actions\_before\_newton\_solve}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -201,13 +199,13 @@ The problem class is very similar to those used in the corresponding \href{../..
 \DoxyCodeLine{   \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_a42bd65f40095a70a103ee900e7614b19}{Doc\_info}}.number()++;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_a735d7fdd587d4730ffe1113b11ca3b56}{doc\_solution}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Overloaded version of the problem's access function to }}
+\DoxyCodeLine{\textcolor{comment}{ /// Overloaded version of the problem's access function to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the mesh. Recasts the pointer to the base Mesh object to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableRectangularQuadMesh<ELEMENT>* \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_abe616b5b3d3e4d3c0d3be777e3b3ac34}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RefineableRectangularQuadMesh<ELEMENT>* \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_a9f5a735394a1359c63cb4eaf98dd9e87}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}(}
 \DoxyCodeLine{    Problem::mesh\_pt());}
@@ -237,8 +235,8 @@ The constructor is practically identical to the constructors used in the various
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Constructor for AdvectionDiffusion problem: Pass pointer to }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// source function.}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for AdvectionDiffusion problem: Pass pointer to }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// source function.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_a515147bf0907ad339811955edb89817c}{RefineableAdvectionDiffusionProblem<ELEMENT>::RefineableAdvectionDiffusionProblem}}(}
@@ -248,7 +246,7 @@ The constructor is practically identical to the constructors used in the various
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup mesh}}
 \DoxyCodeLine{}
@@ -285,9 +283,7 @@ The constructor is practically identical to the constructors used in the various
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-We complete the problem setup by passing the function pointers to the source and wind functions, and the pointer to the Peclet number to the elements. Finally, we set up the equation numbering scheme.
+ We complete the problem setup by passing the function pointers to the source and wind functions, and the pointer to the Peclet number to the elements. Finally, we set up the equation numbering scheme.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -313,14 +309,12 @@ We complete the problem setup by passing the function pointers to the source and
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_actions_before}{}\doxysection{Actions before solve}\label{index_actions_before}
 As before, we use the {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} function to set/update the boundary conditions.
@@ -328,8 +322,8 @@ As before, we use the {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========================================start\_of\_actions\_before\_newton\_solve===}}
-\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to the values from the tanh solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// to the values from the tanh solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_a7cbcaa45fd7e932f335cc07a83b4d3e2}{RefineableAdvectionDiffusionProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
@@ -365,9 +359,7 @@ As before, we use the {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\
 \DoxyCodeLine{\}  \textcolor{comment}{// end of actions before solve}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 The function {\ttfamily doc\+\_\+solution(...)} is identical to that in the \href{../../../poisson/two_d_poisson/html/index.html\#doc}{\texttt{ Poisson example.}} We output the solution, the exact solution and the error.
@@ -376,7 +368,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is identical to that in the \hre
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableAdvectionDiffusionProblem_a735d7fdd587d4730ffe1113b11ca3b56}{RefineableAdvectionDiffusionProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{ }
@@ -389,7 +381,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is identical to that in the \hre
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -397,7 +389,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is identical to that in the \hre
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_fct(some\_file,npts,\mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_ae4c9ed0a4f123ec8e634f0cc45bfcebc}{TanhSolnForAdvectionDiffusion::get\_exact\_u}}); }
@@ -406,7 +398,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is identical to that in the \hre
 \DoxyCodeLine{ \textcolor{comment}{// Doc error and return of the square of the L2 error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceTanhSolnForAdvectionDiffusion_ae4c9ed0a4f123ec8e634f0cc45bfcebc}{TanhSolnForAdvectionDiffusion::get\_exact\_u}},}
@@ -414,15 +406,13 @@ The function {\ttfamily doc\+\_\+solution(...)} is identical to that in the \hre
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc L2 error and norm of solution}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)nNorm of error   : "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Norm of solution: "} << sqrt(norm) << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)nNorm of error   : "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Norm of solution: "{}} << sqrt(norm) << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_com}{}\doxysection{Comments and Exercises}\label{index_com}
 
@@ -440,5 +430,5 @@ The function {\ttfamily doc\+\_\+solution(...)} is identical to that in the \hre
 \item The driver code is\+: \begin{center} \href{../../../../demo_drivers/advection_diffusion/two_d_adv_diff_adapt/two_d_adv_diff_adapt.cc}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+adapt/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+adapt.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -13,9 +13,7 @@ Unlike the \href{../../static_single_layer/html/index.html}{\texttt{ equivalent 
 \DoxyCodeLine{  Bulk\_mesh\_pt-\/>upper\_layer\_element\_pt(0))-\/>hijack\_internal\_value(0,0);}
 
 \end{DoxyCodeInclude}
-
-
-In addition, we must fix another fluid pressure at a fixed reference value so that the problem is non-\/degenerate. It is conceptually appealing to fix the reference pressure in the other (lower) fluid because the (constant) pressure in the upper fluid is already \char`\"{}being set\char`\"{} by the volume constraint.
+ In addition, we must fix another fluid pressure at a fixed reference value so that the problem is non-\/degenerate. It is conceptually appealing to fix the reference pressure in the other (lower) fluid because the (constant) pressure in the upper fluid is already \char`\"{}being set\char`\"{} by the volume constraint.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -25,41 +23,39 @@ In addition, we must fix another fluid pressure at a fixed reference value so th
 \DoxyCodeLine{  -\/>fix\_pressure(0,0.0);}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_contact_angle}{}\doxysection{Enforcing the contact angle constraint}\label{index_contact_angle}
+ \hypertarget{index_contact_angle}{}\doxysection{Enforcing the contact angle constraint}\label{index_contact_angle}
 The method of enforcing the contact angle constraint is exactly the same as discussed in the \href{../../static_single_layer/html/index.html\#contact_angle}{\texttt{ single-\/layer tutorial. }}\hypertarget{index_mesh}{}\doxysection{Constructing the Two-\/\+Layer Elastic Mesh}\label{index_mesh}
 We must create a two-\/layer elastic mesh that will allow us access to the elements in each fluid. We will also need to set the volume constraint by adding {\ttfamily Elastic\+Line\+Volume\+Constraint\+Bounding\+Elements} to the boundaries that surround one of the fluids and to add the {\ttfamily Elastic\+Line\+Fluid\+Interface\+Elements} along the interface. Thus, we need to change the boundaries of the existing mesh.
 
 We begin by inheriting from the {\ttfamily Elastic\+Rectangular\+Quad\+Mesh}.  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_specific\_mesh\_class==========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Two layer mesh which employs a pseudo-\/solid node-\/update strategy.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// This class is essentially a wrapper to an }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// ElasticRectangularQuadMesh, with an additional boundary}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to represent the interface between the two fluid layers. In addition,}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the mesh paritions the elements into those above and below}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the interface and relabels boundaries so that we can impose}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// a volume constraint on the lower or upper fluid.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///                                 3}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               |                                     |}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///             4 |                                     | 2}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               |                 6                   |}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               |                                     |}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///             5 |                                     | 1}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               |                                     |}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///                                 0}}
+\DoxyCodeLine{\textcolor{comment}{/// Two layer mesh which employs a pseudo-\/solid node-\/update strategy.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// This class is essentially a wrapper to an }}
+\DoxyCodeLine{\textcolor{comment}{/// ElasticRectangularQuadMesh, with an additional boundary}}
+\DoxyCodeLine{\textcolor{comment}{/// to represent the interface between the two fluid layers. In addition,}}
+\DoxyCodeLine{\textcolor{comment}{/// the mesh paritions the elements into those above and below}}
+\DoxyCodeLine{\textcolor{comment}{/// the interface and relabels boundaries so that we can impose}}
+\DoxyCodeLine{\textcolor{comment}{/// a volume constraint on the lower or upper fluid.}}
+\DoxyCodeLine{\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{///                                 3}}
+\DoxyCodeLine{\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{///               |                                     |}}
+\DoxyCodeLine{\textcolor{comment}{///             4 |                                     | 2}}
+\DoxyCodeLine{\textcolor{comment}{///               |                 6                   |}}
+\DoxyCodeLine{\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{///               |                                     |}}
+\DoxyCodeLine{\textcolor{comment}{///             5 |                                     | 1}}
+\DoxyCodeLine{\textcolor{comment}{///               |                                     |}}
+\DoxyCodeLine{\textcolor{comment}{///               -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\textcolor{comment}{///                                 0}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticTwoLayerMesh}{ElasticTwoLayerMesh}} :}
 \DoxyCodeLine{ \textcolor{keyword}{public} ElasticRectangularQuadMesh<ELEMENT>}
 
 \end{DoxyCodeInclude}
-
-
-The arguments to the constructor specify the number of elements in the horizontal direction and in each layer and also the width of the container and the height of each layer. The remaining arguments determine whether the mesh should be made periodic in the x direction and are the {\ttfamily Time\+Stepper} object.
+ The arguments to the constructor specify the number of elements in the horizontal direction and in each layer and also the width of the container and the height of each layer. The remaining arguments determine whether the mesh should be made periodic in the x direction and are the {\ttfamily Time\+Stepper} object.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -74,9 +70,7 @@ The arguments to the constructor specify the number of elements in the horizonta
 \DoxyCodeLine{                     \&Mesh::Default\_TimeStepper)}
 
 \end{DoxyCodeInclude}
-
-
-We provide separate storage for elements above and below the interface
+ We provide separate storage for elements above and below the interface
 
 
 \begin{DoxyCodeInclude}{0}
@@ -99,9 +93,7 @@ We provide separate storage for elements above and below the interface
 \DoxyCodeLine{   \textcolor{comment}{//end of upper and lower fluid element assignment}}
 
 \end{DoxyCodeInclude}
-
-
-and the elements adjacent to the interface in the upper and lower fluid.
+ and the elements adjacent to the interface in the upper and lower fluid.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -121,9 +113,7 @@ and the elements adjacent to the interface in the upper and lower fluid.
 \DoxyCodeLine{   \} \textcolor{comment}{//end of bulk elements next to interface setup}}
 
 \end{DoxyCodeInclude}
-
-
-We will use these elements adjacent to the interface to construct the {\ttfamily Elastic\+Line\+Fluid\+Interface\+Elements} and it is important that we only add one layer of interface elements, as discussed in another tutorial.
+ We will use these elements adjacent to the interface to construct the {\ttfamily Elastic\+Line\+Fluid\+Interface\+Elements} and it is important that we only add one layer of interface elements, as discussed in another tutorial.
 
 We next change the number of boundaries
 
@@ -133,9 +123,7 @@ We next change the number of boundaries
 \DoxyCodeLine{   this-\/>set\_nboundary(7);}
 
 \end{DoxyCodeInclude}
-
-
-and then reassign the existing boundary nodes to the new numbering scheme. This is tedious and not terribly instructive, so is not shown, but it\textquotesingle{}s all in the code if you want to see how it\textquotesingle{}s done.
+ and then reassign the existing boundary nodes to the new numbering scheme. This is tedious and not terribly instructive, so is not shown, but it\textquotesingle{}s all in the code if you want to see how it\textquotesingle{}s done.
 
 Finally, we add the nodes to the new interface boundary and setup the lookup schemes for the bulk elements adjacent to the new boundaries.
 
@@ -174,7 +162,7 @@ Finally, we add the nodes to the new interface boundary and setup the lookup sch
 \DoxyCodeLine{   this-\/>setup\_boundary\_element\_info();}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
+ \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The problem class is extremely similar to that in the \href{../../static_single_layer/html/index.html}{\texttt{ singer-\/layer problem. }} The main differences are that the {\ttfamily \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}} is used instead of the {\ttfamily Elastic\+Rectangular\+Quad\+Mesh} and the boundary conditions are modified to take the new boundary numbering into account. In addition, the free surface elements and volume constraint elements are created using the lookup schemes in the {\ttfamily \mbox{\hyperlink{classElasticTwoLayerMesh}{Elastic\+Two\+Layer\+Mesh}}} to ensure that only a single layer of elements are included on the free surface. If we used the lookup schemes assigned by the generic function {\ttfamily Mesh\+::setup\+\_\+boundary\+\_\+element\+\_\+info()} bulk elements on both sides of internal boundaries will be included, so we would construct twice as many interface elements as required. \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
@@ -215,5 +203,5 @@ The problem class is extremely similar to that in the \href{../../static_single_
 \begin{center} \href{../../../../demo_drivers/axisym_navier_stokes/two_fluid_spherical_cap/two_fluid_spherical_cap.cc}{\texttt{ demo\+\_\+drivers/axisym\+\_\+navier\+\_\+stokes/two\+\_\+fluid\+\_\+spherical\+\_\+cap/two\+\_\+fluid\+\_\+spherical\+\_\+cap.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

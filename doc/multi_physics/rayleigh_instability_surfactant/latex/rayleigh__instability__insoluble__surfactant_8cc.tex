@@ -3,18 +3,18 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{oomph\+::\+My\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\item 
-class \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Spine-\/based Marangoni surface tension elements that add a linear dependence on concentration of a surface chemical to the surface tension, which decreases with increasing concentration. The non-\/dimensionalisation is the same as Campana et al (2004) but we may wish to revisit this. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{oomph\+::\+My\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Inherit from the standard Horizontal single-\/layer Spine\+Mesh and modify the \mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh_ad007f1c20530cda9a495d89a4470772c}{spine\+\_\+node\+\_\+update()}} function so that it is appropriate for an annular film, rather than a fluid fibre. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
+\begin{DoxyCompactList}\small\item\em Single fluid interface problem including transport of an insoluble surfactant. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
-\item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em Namepspace for global parameters, chosen from Campana et al. as in the axisymmetric problem. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -22,7 +22,7 @@ class \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem$<$ E\+L\+E\+M\+
 Vector$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::G}} (3)
 \begin{DoxyCompactList}\small\item\em Direction of gravity. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\begin{DoxyCompactList}\small\item\em Driver code for single fluid axisymmetric horizontal interface problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,15 +41,15 @@ ofstream \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4f2fe790aa186202
 
 
 
-Driver code for single fluid axisymmetric horizontal interface problem. 
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
-Maximum time
+Driver code for single fluid axisymmetric horizontal interface problem Maximum time
 
 Duration of timestep
 
-Definition at line 1255 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l01255}{1255}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G(), and Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::unsteady\+\_\+run().
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00484}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run()}}.
 

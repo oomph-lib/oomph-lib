@@ -62,7 +62,7 @@ As usual, we employ a namespace to define the problem\textquotesingle{}s physica
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_namespace============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -85,9 +85,7 @@ As usual, we employ a namespace to define the problem\textquotesingle{}s physica
 \DoxyCodeLine{ \} \textcolor{comment}{//end of load}}
 
 \end{DoxyCodeInclude}
-
-
-We also define the non-\/dimensional wall thickness $ h $ and the timescale ratio $ \Lambda^2 $. These are multiplied by powers of a scaling factor whose role will become apparent in the \mbox{\hyperlink{index_exercises}{Exercises}}. (By default, the scaling factor is set to 1.\+0 and does not play any role.)
+ We also define the non-\/dimensional wall thickness $ h $ and the timescale ratio $ \Lambda^2 $. These are multiplied by powers of a scaling factor whose role will become apparent in the \mbox{\hyperlink{index_exercises}{Exercises}}. (By default, the scaling factor is set to 1.\+0 and does not play any role.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -99,16 +97,14 @@ We also define the non-\/dimensional wall thickness $ h $ and the timescale rati
 \DoxyCodeLine{\textcolor{comment}{ /// Wall thickness -\/-\/ 1/20 for default value of scaling factor}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}}=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}}*1.0/20.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Square of timescale ratio (i.e. non-\/dimensional density)  }}
+\DoxyCodeLine{\textcolor{comment}{ /// Square of timescale ratio (i.e. non-\/dimensional density)  }}
 \DoxyCodeLine{\textcolor{comment}{ /// -\/-\/ 1.0 for default value of scaling factor}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Lambda\_sq}}=pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}},2);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 The main function is very simple. We store the (up to) two optional command line arguments which (if present) specify (i) a flag that indicates if the code is run in validation mode, and (ii) the name of a restart file.
@@ -117,7 +113,7 @@ The main function is very simple. We store the (up to) two optional command line
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for oscillating ring problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unsteady__ring_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -125,9 +121,7 @@ The main function is very simple. We store the (up to) two optional command line
 \DoxyCodeLine{ CommandLineArgs::setup(argc,argv);}
 
 \end{DoxyCodeInclude}
-
-
-Next, we build the problem with thirteen {\ttfamily Hermite\+Beam\+Elements} and a {\ttfamily Newmark$<$3$>$} timestepper ( \href{../../../linear_wave/two_d_linear_wave/html/index.html\#IC}{\texttt{ recall }} that a {\ttfamily Newmark$<$\+N\+S\+T\+E\+P\+S$>$} timestepper allocates and manages storage for the solution at {\ttfamily N\+S\+T\+E\+PS} previous timesteps; we shall illustrate this capability in the section \mbox{\hyperlink{index_prev}{How to retrieve the solution at previous timesteps}} ), before executing the timestepping loop.
+ Next, we build the problem with thirteen {\ttfamily Hermite\+Beam\+Elements} and a {\ttfamily Newmark$<$3$>$} timestepper ( \href{../../../linear_wave/two_d_linear_wave/html/index.html\#IC}{\texttt{ recall }} that a {\ttfamily Newmark$<$\+NSTEPS$>$} timestepper allocates and manages storage for the solution at {\ttfamily NSTEPS} previous timesteps; we shall illustrate this capability in the section \mbox{\hyperlink{index_prev}{How to retrieve the solution at previous timesteps}} ), before executing the timestepping loop.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -136,17 +130,15 @@ Next, we build the problem with thirteen {\ttfamily Hermite\+Beam\+Elements} and
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nelem = 13;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{ \mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem<HermiteBeamElement,Newmark<3>}} > \mbox{\hyperlink{unsteady__ring_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(nelem);}
+\DoxyCodeLine{ \mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem<HermiteBeamElement,Newmark<3>}} > problem(nelem);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do unsteady run}}
-\DoxyCodeLine{ \mbox{\hyperlink{unsteady__ring_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.unsteady\_run();}
+\DoxyCodeLine{ problem.unsteady\_run();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The problem class is very similar to that used in the \href{../../steady_ring/html/index.html}{\texttt{ previous, steady example}} , but includes a few (obvious) additional functions that specify the initial conditions (\mbox{\hyperlink{index_IC}{Setting the initial condition}}) and perform the timestepping (\mbox{\hyperlink{index_unsteady_run}{The timestepping loop}}). We also provide two functions that allow us to dump the solution to disk (\mbox{\hyperlink{index_dump}{Writing a restart file}}) and to restart the time-\/dependent simulation (\mbox{\hyperlink{index_restart}{Restarting from a file}}).
@@ -155,7 +147,7 @@ The problem class is very similar to that used in the \href{../../steady_ring/ht
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Ring problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -166,7 +158,7 @@ The problem class is very similar to that used in the \href{../../steady_ring/ht
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRingProblem_a57be33a379c1ec4418a7fb3e8db8ef2b}{ElasticRingProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the specific mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_a763200d4985bca4a120f2be2a217f4a8}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_ab7e6b68cb51f8d6bc636e0f0789793ce}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
@@ -177,7 +169,7 @@ The problem class is very similar to that used in the \href{../../steady_ring/ht
 \DoxyCodeLine{\textcolor{comment}{ /// Update function is empty }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_aac5f3adac1e1a42492bd428eeb732a3d}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Setup initial conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// Setup initial conditions}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_ab435f36b59e5f76301123c3440363704}{set\_initial\_conditions}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc solution}}
@@ -186,18 +178,16 @@ The problem class is very similar to that used in the \href{../../steady_ring/ht
 \DoxyCodeLine{\textcolor{comment}{ /// Do unsteady run}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_acd30c4363ffedbaadc1523aa8b85523b}{unsteady\_run}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Dump problem-\/specific parameter values, then dump}}
+\DoxyCodeLine{\textcolor{comment}{ /// Dump problem-\/specific parameter values, then dump}}
 \DoxyCodeLine{\textcolor{comment}{ /// generic problem data.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a5d932c03b49cb7fe4da256a5c3c9be26}{dump\_it}}(ofstream\& dump\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Read problem-\/specific parameter values, then recover}}
+\DoxyCodeLine{\textcolor{comment}{ /// Read problem-\/specific parameter values, then recover}}
 \DoxyCodeLine{\textcolor{comment}{ /// generic problem data.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a0b7d864f52a18bb2a9f3a2378d8b02aa}{restart}}(ifstream\& restart\_file);}
 
 \end{DoxyCodeInclude}
-
-
-The private member data includes an output stream that we shall use to write a trace file. The two boolean flags indicate if the code is run in validation mode, and if the simulation has been restarted, respectively.
+ The private member data includes an output stream that we shall use to write a trace file. The two boolean flags indicate if the code is run in validation mode, and if the simulation has been restarted, respectively.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -217,9 +207,7 @@ The private member data includes an output stream that we shall use to write a t
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 The constructor assigns default values for the two control flags corresponding to a non-\/validation run without restart. We create a timestepper of the type specified by the template parameter and add it to the {\ttfamily Problem\textquotesingle{}s} collection of timesteppers.
@@ -228,7 +216,7 @@ The constructor assigns default values for the two control flags corresponding t
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for elastic ring problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classElasticRingProblem_a57be33a379c1ec4418a7fb3e8db8ef2b}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::ElasticRingProblem}}}
 \DoxyCodeLine{(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element) :}
@@ -241,9 +229,7 @@ The constructor assigns default values for the two control flags corresponding t
 \DoxyCodeLine{ add\_time\_stepper\_pt(\textcolor{keyword}{new} TIMESTEPPER());}
 
 \end{DoxyCodeInclude}
-
-
-Next we build the geometric object that defines the shape of the ring\textquotesingle{}s undeformed centreline (an ellipse with unit half axes, i.\+e. a unit circle) and use it to build the mesh. As in \href{../../steady_ring/html/index.html}{\texttt{ the previous steady example}} we exploit the symmetry of the deformation and only discretise a quarter of the domain.
+ Next we build the geometric object that defines the shape of the ring\textquotesingle{}s undeformed centreline (an ellipse with unit half axes, i.\+e. a unit circle) and use it to build the mesh. As in \href{../../steady_ring/html/index.html}{\texttt{ the previous steady example}} we exploit the symmetry of the deformation and only discretise a quarter of the domain.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -259,9 +245,7 @@ Next we build the geometric object that defines the shape of the ring\textquotes
 \DoxyCodeLine{  n\_element,length,undef\_geom\_pt,Problem::time\_stepper\_pt()); }
 
 \end{DoxyCodeInclude}
-
-
-The boundary conditions are identical to those in \href{../../steady_ring/html/index.html}{\texttt{ the steady example}}.
+ The boundary conditions are identical to those in \href{../../steady_ring/html/index.html}{\texttt{ the steady example}}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -283,9 +267,7 @@ The boundary conditions are identical to those in \href{../../steady_ring/html/i
 \DoxyCodeLine{ mesh\_pt()-\/>boundary\_node\_pt(ibound,0)-\/>pin\_position(1,1); }
 
 \end{DoxyCodeInclude}
-
-
-Finally, we pass the pointers to the load function and the pointer to the geometric object that specifies the ring\textquotesingle{}s initial shape to the elements and assign the equation numbers.
+ Finally, we pass the pointers to the load function and the pointer to the geometric object that specifies the ring\textquotesingle{}s initial shape to the elements and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -313,14 +295,12 @@ Finally, we pass the pointers to the load function and the pointer to the geomet
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\# of dofs "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\# of dofs "{}} << assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 We compute the total kinetic and potential (=strain) energies stored in the (quarter-\/)ring and document them, their sum, and the control radius in the trace file.
@@ -329,14 +309,14 @@ We compute the total kinetic and potential (=strain) energies stored in the (qua
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_doc\_solution===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Document solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a9aa904e4cf82d45711f890cd8440ced9}{ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc\_solution}}(}
 \DoxyCodeLine{ DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Doc-\/ing step "} <<  doc\_info.number()}
-\DoxyCodeLine{      << \textcolor{stringliteral}{" for time "} << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Doc-\/ing step "{}} <<  doc\_info.number()}
+\DoxyCodeLine{      << \textcolor{stringliteral}{"{} for time "{}} << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Loop over all elements to get global kinetic and potential energy}}
@@ -360,16 +340,14 @@ We compute the total kinetic and potential (=strain) energies stored in the (qua
 \DoxyCodeLine{ s\_trace[0]=1.0;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Write trace file: Time, control position, energies}}
-\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time()  << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time()  << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << trace\_elem\_pt-\/>interpolated\_x(s\_trace,1) }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << global\_pot  << \textcolor{stringliteral}{" "} << global\_kin}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << global\_pot + global\_kin}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << global\_pot  << \textcolor{stringliteral}{"{} "{}} << global\_kin}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << global\_pot + global\_kin}
 \DoxyCodeLine{            << std::endl; \textcolor{comment}{// end of output to trace file}}
 
 \end{DoxyCodeInclude}
-
-
-Next we use the default output function to document the ring shape and add a few tecplot commands to facilitate the animation of the results.
+ Next we use the default output function to document the ring shape and add a few tecplot commands to facilitate the animation of the results.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -381,27 +359,27 @@ Next we use the default output function to document the ring shape and add a few
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/ring\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/ring\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write file as a tecplot text object}}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"time = "} }
-\DoxyCodeLine{           << time\_pt()-\/>time() << \textcolor{stringliteral}{"\(\backslash\)""};}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"{}time = "{}} }
+\DoxyCodeLine{           << time\_pt()-\/>time() << \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// ...and draw a horizontal line whose length is proportional}}
 \DoxyCodeLine{ \textcolor{comment}{// to the elapsed time}}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"1"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"2"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{" 0 0"} << std::endl;}
-\DoxyCodeLine{ some\_file << time\_pt()-\/>time()*20.0 << \textcolor{stringliteral}{" 0"} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}1"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}2"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{} 0 0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << time\_pt()-\/>time()*20.0 << \textcolor{stringliteral}{"{} 0"{}} << std::endl;}
 \DoxyCodeLine{ some\_file.close();}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_prev}{}\doxysubsection{How to retrieve the solution at previous timesteps}\label{index_prev}
-The next few lines illustrate how to retrieve (and document) the ring shape at previous timesteps. \href{../../../linear_wave/two_d_linear_wave/html/index.html\#IC}{\texttt{ Recall }} that {\ttfamily Newmark} timesteppers are implicit, single-\/step timestepping schemes that compute approximations for the time-\/derivatives, based on the solution at the current time level, and on \char`\"{}history values\char`\"{} that represent quantities at a single previous timestep. In some applications (particularly in fluid-\/structure interaction problems) it is necessary to keep track of the solution at additional previous timesteps. Storage for such additional history values is allocated (and managed) by the generalised {\ttfamily Newmark$<$\+N\+S\+T\+E\+P\+S$>$} timesteppers if {\ttfamily N\+S\+T\+E\+PS} $>$ 1. We stress that these additional history values are not involved in the approximation of the time-\/derivatives; they are simply stored and updated by the timestepper when the solution is advanced to the next timestep.
+ \hypertarget{index_prev}{}\doxysubsection{How to retrieve the solution at previous timesteps}\label{index_prev}
+The next few lines illustrate how to retrieve (and document) the ring shape at previous timesteps. \href{../../../linear_wave/two_d_linear_wave/html/index.html\#IC}{\texttt{ Recall }} that {\ttfamily Newmark} timesteppers are implicit, single-\/step timestepping schemes that compute approximations for the time-\/derivatives, based on the solution at the current time level, and on \char`\"{}history values\char`\"{} that represent quantities at a single previous timestep. In some applications (particularly in fluid-\/structure interaction problems) it is necessary to keep track of the solution at additional previous timesteps. Storage for such additional history values is allocated (and managed) by the generalised {\ttfamily Newmark$<$\+NSTEPS$>$} timesteppers if {\ttfamily NSTEPS} \texorpdfstring{$>$}{>} 1. We stress that these additional history values are not involved in the approximation of the time-\/derivatives; they are simply stored and updated by the timestepper when the solution is advanced to the next timestep.
 
 \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#IC}{\texttt{ Recall }} also that the member function {\ttfamily Time\+Stepper\+::nprev\+\_\+values()} may be used to determine how many of the history values that are stored in an associated {\ttfamily Data} object represent the solution at previous timesteps. Finally, \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#IC}{\texttt{ recall }} that history values that represent the solution at previous timesteps are always stored before those that represent \char`\"{}generalised\char`\"{} history values (such as approximations of the first time-\/derivative at the previous timestep, etc). It is therefore always possible to determine how many previous solutions are stored in a {\ttfamily Data} object, and where they are stored.
 
@@ -413,24 +391,22 @@ To document the shape of a {\ttfamily Hermite\+Beam\+Element} at a previous time
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Loop over all elements do dump out previous solutions}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nsteps=time\_stepper\_pt()-\/>nprev\_values();}
-\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{unsteady__ring_8txt_a7a0eb570c0549e9c0d2d326ff26344f0}{t}}=0;\mbox{\hyperlink{unsteady__ring_8txt_a7a0eb570c0549e9c0d2d326ff26344f0}{t}}<=nsteps;\mbox{\hyperlink{unsteady__ring_8txt_a7a0eb570c0549e9c0d2d326ff26344f0}{t}}++)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} t=0;t<=nsteps;t++)}
 \DoxyCodeLine{  \{     }
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"\%s/ring\%i-\/\%i.dat"},doc\_info.directory().c\_str(),}
-\DoxyCodeLine{           doc\_info.number(),\mbox{\hyperlink{unsteady__ring_8txt_a7a0eb570c0549e9c0d2d326ff26344f0}{t}});}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}\%s/ring\%i-\/\%i.dat"{}},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{           doc\_info.number(),t);}
 \DoxyCodeLine{   some\_file.open(filename);}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_elem=mesh\_pt()-\/>nelement();}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} ielem=0;ielem<n\_elem;ielem++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(ielem))-\/>}
-\DoxyCodeLine{      output(\mbox{\hyperlink{unsteady__ring_8txt_a7a0eb570c0549e9c0d2d326ff26344f0}{t}},some\_file,npts);}
+\DoxyCodeLine{      output(t,some\_file,npts);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   some\_file.close();}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of output of previous solutions}}
 
 \end{DoxyCodeInclude}
-
-
-At timestep {\ttfamily t}, these statements create the output files {\ttfamily R\+E\+S\+L\+T/ring} t{\ttfamily -\/0{\ttfamily }.dat}, {\ttfamily R\+E\+S\+L\+T/ring} t{\ttfamily -\/1{\ttfamily }.dat}, {\ttfamily R\+E\+S\+L\+T/ring} t{\ttfamily -\/2{\ttfamily }.dat}, {\ttfamily R\+E\+S\+L\+T/ring} t{\ttfamily -\/3{\ttfamily }.dat}, which contain the shape of the ring at the {\ttfamily t} -\/th, ( {\ttfamily t} -\/1)th, ( {\ttfamily t} -\/2)th and ~\newline
+ At timestep {\ttfamily t}, these statements create the output files {\ttfamily RESLT/ring} t{\ttfamily -\/0{\ttfamily }.dat}, {\ttfamily RESLT/ring} t{\ttfamily -\/1{\ttfamily }.dat}, {\ttfamily RESLT/ring} t{\ttfamily -\/2{\ttfamily }.dat}, {\ttfamily RESLT/ring} t{\ttfamily -\/3{\ttfamily }.dat}, which contain the shape of the ring at the {\ttfamily t} -\/th, ( {\ttfamily t} -\/1)th, ( {\ttfamily t} -\/2)th and ~\newline
  ( {\ttfamily t} -\/3)th, timestep, respectively.
 
 Finally, we write a restart file that will allow us to restart the simulation.
@@ -440,7 +416,7 @@ Finally, we write a restart file that will allow us to restart the simulation.
 \DoxyCodeLine{  }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Write restart file}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/ring\_restart\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/ring\_restart\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ dump\_it(some\_file);}
@@ -450,9 +426,7 @@ Finally, we write a restart file that will allow us to restart the simulation.
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_dump}{}\doxysection{Writing a restart file}\label{index_dump}
 Writing the restart file for the present problem is as easy as in the previous examples, as the generic {\ttfamily Problem} data may again be written with the {\ttfamily Problem\+::dump(...)} function. We customise the restart file slightly by adding the value $ p_{cos} $ and the flag that indicates if the code is run in validation mode.
@@ -460,8 +434,8 @@ Writing the restart file for the present problem is as easy as in the previous e
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_dump\_it====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Dump problem-\/specific parameter values, then dump}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// generic problem data.}}
+\DoxyCodeLine{\textcolor{comment}{/// Dump problem-\/specific parameter values, then dump}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// generic problem data.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a5d932c03b49cb7fe4da256a5c3c9be26}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::dump\_it}}(ofstream\& dump\_file)}
@@ -469,11 +443,11 @@ Writing the restart file for the present problem is as easy as in the previous e
 \DoxyCodeLine{\{}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Write Pcos}}
-\DoxyCodeLine{ dump\_file << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Global\_Physical\_Variables::Pcos}} << \textcolor{stringliteral}{" \# Pcos"} << std::endl;}
+\DoxyCodeLine{ dump\_file << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Global\_Physical\_Variables::Pcos}} << \textcolor{stringliteral}{"{} \# Pcos"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write validation run flag}}
 \DoxyCodeLine{ dump\_file << Validation\_run\_flag }
-\DoxyCodeLine{           << \textcolor{stringliteral}{" \# Validation run flag"} << std::endl;}
+\DoxyCodeLine{           << \textcolor{stringliteral}{"{} \# Validation run flag"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Call generic dump()}}
 \DoxyCodeLine{ Problem::dump(dump\_file);}
@@ -481,9 +455,7 @@ Writing the restart file for the present problem is as easy as in the previous e
 \DoxyCodeLine{\} \textcolor{comment}{// end of dump it}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_restart}{}\doxysection{Restarting from a file}\label{index_restart}
 The restart operation reverses the steps performed in the dump function\+: We recover the two problem-\/specific parameters and then read the generic {\ttfamily Problem} data with the {\ttfamily Problem\+::read(...)} function.
@@ -491,8 +463,8 @@ The restart operation reverses the steps performed in the dump function\+: We re
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_restart=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Read problem-\/specific parameter values, then recover}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// generic problem data.}}
+\DoxyCodeLine{\textcolor{comment}{/// Read problem-\/specific parameter values, then recover}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// generic problem data.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a0b7d864f52a18bb2a9f3a2378d8b02aa}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::restart}}(ifstream\& restart\_file)}
@@ -521,9 +493,7 @@ The restart operation reverses the steps performed in the dump function\+: We re
 \DoxyCodeLine{\} \textcolor{comment}{// end of restart}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_IC}{}\doxysection{Setting the initial condition}\label{index_IC}
 The assignment of initial conditions depends on whether or not a restart from a previous computation is performed. If no restart is performed, we specify the initial timestep, {\ttfamily dt}, and assign history values that are consistent with an impulsive start from the ring\textquotesingle{}s initial shape.
@@ -531,8 +501,8 @@ The assignment of initial conditions depends on whether or not a restart from a 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_set\_ic=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Setup initial conditions -\/-\/ either restart from solution }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// specified via command line or impulsive start. }}
+\DoxyCodeLine{\textcolor{comment}{/// Setup initial conditions -\/-\/ either restart from solution }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// specified via command line or impulsive start. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_ab435f36b59e5f76301123c3440363704}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::set\_initial\_conditions}}()}
@@ -550,9 +520,7 @@ The assignment of initial conditions depends on whether or not a restart from a 
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-If the computation is restarted, the name of the restart file will have been specified on the command line. We try to open the restart file
+ If the computation is restarted, the name of the restart file will have been specified on the command line. We try to open the restart file
 
 
 \begin{DoxyCodeInclude}{0}
@@ -564,23 +532,21 @@ If the computation is restarted, the name of the restart file will have been spe
 \DoxyCodeLine{    \textcolor{keyword}{new} ifstream(CommandLineArgs::Argv[2],ios\_base::in);}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (restart\_file\_pt!=0)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Have opened "} << CommandLineArgs::Argv[2] << }
-\DoxyCodeLine{      \textcolor{stringliteral}{" for restart. "} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Have opened "{}} << CommandLineArgs::Argv[2] << }
+\DoxyCodeLine{      \textcolor{stringliteral}{"{} for restart. "{}} << std::endl;}
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-and display an error message and terminate the program execution if the file cannot be opened.
+ and display an error message and terminate the program execution if the file cannot be opened.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     std::ostringstream error\_stream;}
-\DoxyCodeLine{     error\_stream << \textcolor{stringliteral}{"ERROR while trying to open "} }
+\DoxyCodeLine{     error\_stream << \textcolor{stringliteral}{"{}ERROR while trying to open "{}} }
 \DoxyCodeLine{                  << CommandLineArgs::Argv[2] }
-\DoxyCodeLine{                  << \textcolor{stringliteral}{" for restart."} << std::endl;}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"{} for restart."{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
 \DoxyCodeLine{                         OOMPH\_CURRENT\_FUNCTION,}
@@ -588,9 +554,7 @@ and display an error message and terminate the program execution if the file can
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-If the file can be opened we call the restart function which returns the the {\ttfamily Problem} into the state it was in when the restart file was written. No further steps are required.
+ If the file can be opened we call the restart function which returns the the {\ttfamily Problem} into the state it was in when the restart file was written. No further steps are required.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -603,9 +567,7 @@ If the file can be opened we call the restart function which returns the the {\t
 \DoxyCodeLine{\} \textcolor{comment}{// end of set ic}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_unsteady_run}{}\doxysection{The timestepping loop}\label{index_unsteady_run}
 We start by converting the (optional) command line arguments into the flags that determine what mode the code is run in\+: Without command line arguments, we use the default assignments, as specified in \mbox{\hyperlink{index_constructor}{The problem constructor}}.
@@ -614,7 +576,7 @@ We start by converting the (optional) command line arguments into the flags that
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_unsteady\_run=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Solver loop to perform unsteady run.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_acd30c4363ffedbaadc1523aa8b85523b}{ElasticRingProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}()}
 \DoxyCodeLine{\{}
@@ -624,14 +586,12 @@ We start by converting the (optional) command line arguments into the flags that
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::Argc<2)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"No command line arguments -\/-\/ using defaults."} }
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}No command line arguments -\/-\/ using defaults."{}} }
 \DoxyCodeLine{        << std::endl;}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-A single command line argument is interpreted as the \char`\"{}validation run\char`\"{} flag (1 for true, 0 for false) which will be used to limit the number of timesteps.
+ A single command line argument is interpreted as the \char`\"{}validation run\char`\"{} flag (1 for true, 0 for false) which will be used to limit the number of timesteps.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -642,9 +602,7 @@ A single command line argument is interpreted as the \char`\"{}validation run\ch
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-The presence of two command line arguments indicates that a restart is performed. In this case the second argument specifies the name of the restart file.
+ The presence of two command line arguments indicates that a restart is performed. In this case the second argument specifies the name of the restart file.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -659,19 +617,17 @@ The presence of two command line arguments indicates that a restart is performed
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We print an error message if the code is run with any other number of command line arguments.
+ We print an error message if the code is run with any other number of command line arguments.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   std::string error\_message =}
-\DoxyCodeLine{    \textcolor{stringliteral}{"Wrong number of command line arguments. Specify two or fewer.\(\backslash\)n"};}
-\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"Arg1: Validation\_run\_flag [0/1] for [false/true]\(\backslash\)n"};}
-\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"Arg2: Name of restart\_file (optional)\(\backslash\)n"};}
-\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"No arguments specified -\/-\/> default run\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Wrong number of command line arguments. Specify two or fewer.\(\backslash\)n"{}};}
+\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"{}Arg1: Validation\_run\_flag [0/1] for [false/true]\(\backslash\)n"{}};}
+\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"{}Arg2: Name of restart\_file (optional)\(\backslash\)n"{}};}
+\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"{}No arguments specified -\/-\/> default run\(\backslash\)n"{}};}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(error\_message,}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
@@ -679,9 +635,7 @@ We print an error message if the code is run with any other number of command li
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We create a {\ttfamily Doc\+Info} object to specify the name of the output directory, and open the trace file.
+ We create a {\ttfamily Doc\+Info} object to specify the name of the output directory, and open the trace file.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -691,24 +645,22 @@ We create a {\ttfamily Doc\+Info} object to specify the name of the output direc
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set up trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace\_ring.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace\_ring.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ Trace\_file <<  \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"time\(\backslash\)",\(\backslash\)"R<sub>ctrl</sub>\(\backslash\)",\(\backslash\)"E<sub>pot</sub>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"E<sub>kin</sub>\(\backslash\)",\(\backslash\)"E<sub>kin</sub>+E<sub>pot</sub>\(\backslash\)""} }
+\DoxyCodeLine{ Trace\_file <<  \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}time\(\backslash\)"{},\(\backslash\)"{}R<sub>ctrl</sub>\(\backslash\)"{},\(\backslash\)"{}E<sub>pot</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}E<sub>kin</sub>\(\backslash\)"{},\(\backslash\)"{}E<sub>kin</sub>+E<sub>pot</sub>\(\backslash\)"{}"{}} }
 \DoxyCodeLine{            << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-Next, we set the problem parameters and the number of timesteps to be performed, before assigning the initial conditions.
+ Next, we set the problem parameters and the number of timesteps to be performed, before assigning the initial conditions.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -728,9 +680,7 @@ Next, we set the problem parameters and the number of timesteps to be performed,
 \DoxyCodeLine{ set\_initial\_conditions();}
 
 \end{DoxyCodeInclude}
-
-
-The timestepping loop itself is practically identical to that used in \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#main}{\texttt{ driver codes for other unsteady problems}}. To demonstrate that {\ttfamily Newmark} timesteppers can deal with variable timesteps, we reduce the timestep slightly after every step.
+ The timestepping loop itself is practically identical to that used in \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#main}{\texttt{ driver codes for other unsteady problems}}. To demonstrate that {\ttfamily Newmark} timesteppers can deal with variable timesteps, we reduce the timestep slightly after every step.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -779,9 +729,7 @@ The timestepping loop itself is practically identical to that used in \href{../.
 \DoxyCodeLine{\} \textcolor{comment}{// end of unsteady run}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_timescale}{}\doxysubsection{The default non-\/dimensionalisation of time}\label{index_timescale}
@@ -801,6 +749,7 @@ It is possible to non-\/dimensionalise the governing equations on a different ti
 By default, we have $ \Lambda = 1 $ but the member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{KirchhoffLoveBeamEquations::lambda\_sq\_pt()}
+
 \end{DoxyCode}
  may be used to assign a different value for the {\itshape square} of the timescale ratio which may also be interpreted as the non-\/dimensional density. The case $ \Lambda^2=0 $ therefore corresponds to the case of zero wall inertia. (We store $ \Lambda^2 $ rather than $ \Lambda $ itself because the governing equations contain only the square of the timescale ratio). As with most other physical parameters, $ \Lambda^2 $ must be defined as a global variable, preferably by adding it to the namespace that contains the problem parameters, e.\+g.
 
@@ -818,6 +767,7 @@ By default, we have $ \Lambda = 1 $ but the member function
 \DoxyCodeLine{ [...]}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
+
 \end{DoxyCode}
 
 
@@ -837,6 +787,7 @@ By default, we have $ \Lambda = 1 $ but the member function
 \DoxyCodeLine{  [...]}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -862,17 +813,20 @@ The definition of the non-\/dimensional kinetic energy used in {\ttfamily Kirchh
 \end{DoxyEnumerate}Combine these results to show that a ring of wall thickness $ h $ and a density $ \rho $, subject to a forcing of magnitude $ f $ will deform (approximately) as a ring of wall thickness $ \alpha h $ with a density $ \alpha^2 \rho $, subject to a forcing of magnitude $ \alpha^3 f$. Confirm these theoretical predictions computationally\+: Change the initial assignment for the scaling factor {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}} and repeat the computation.
 \item Confirm that the restart procedure works correctly by plotting the time-\/trace obtained from a restarted simulation on top of the original time-\/trace.
 \item Compare the results obtained from a simulation with a variable timestep against the results obtained from a computation with a fixed timestep (comment out the line that reduces the timestep after every solve).
-\item Compare the various output files generated in {\ttfamily doc\+\_\+solution()} to confirm that the {\ttfamily Newmark$<$3$>$} timestepper correctly maintains the history of the solution at three previous timesteps. E.\+g. confirm that the output file {\ttfamily R\+E\+S\+L\+T/ring3-\/0.\+dat} which contains the ring shape at timestep 3 is identical to {\ttfamily R\+E\+S\+L\+T/ring5-\/2.\+dat} which contains the ring shape computed two timesteps before timestep 5. Explore {\ttfamily oomph-\/lib\textquotesingle{}s} internal use of the history values by analysing the functions 
+\item Compare the various output files generated in {\ttfamily doc\+\_\+solution()} to confirm that the {\ttfamily Newmark$<$3$>$} timestepper correctly maintains the history of the solution at three previous timesteps. E.\+g. confirm that the output file {\ttfamily RESLT/ring3-\/0.\+dat} which contains the ring shape at timestep 3 is identical to {\ttfamily RESLT/ring5-\/2.\+dat} which contains the ring shape computed two timesteps before timestep 5. Explore {\ttfamily oomph-\/lib\textquotesingle{}s} internal use of the history values by analysing the functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{HermiteBeamElement::output(...)}
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::interpolated\_x(...)}
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::x\_gen(...)}
+
 \end{DoxyCode}
 
 \end{DoxyEnumerate}
@@ -888,5 +842,5 @@ The definition of the non-\/dimensional kinetic energy used in {\ttfamily Kirchh
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

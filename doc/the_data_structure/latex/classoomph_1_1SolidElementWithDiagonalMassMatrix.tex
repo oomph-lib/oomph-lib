@@ -2,6 +2,11 @@
 \label{classoomph_1_1SolidElementWithDiagonalMassMatrix}\index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
 
 
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
+
+
 {\ttfamily \#include $<$elements.\+h$>$}
 
 Inheritance diagram for oomph\+::Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+:\begin{figure}[H]
@@ -17,18 +22,20 @@ Inheritance diagram for oomph\+::Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+:
 \begin{DoxyCompactList}\small\item\em Empty constructor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_aea964b70c55588fabf8cbc7fffe9be4a}{$\sim$\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} ()
 \begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_af26b74b9e29bc074bf2845556ff1bbae}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&)
+\mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_a80299ea70fc53c28812736de2b81318a}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_af7f7f5c4068cbfa7237be672d5b0fa58}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&)
+void \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_a6d40917349ed56abf7ce9cd0e0a4fa9e}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix_ad2335852a20987f6a6c8e0d6ce5bc3af}{get\+\_\+mass\+\_\+matrix\+\_\+diagonal}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&mass\+\_\+diag)=0
 \begin{DoxyCompactList}\small\item\em Get the diagonal of whatever represents the mass matrix in the specific preconditionable element. For Navier-\/\+Stokes elements this is the velocity mass matrix; for incompressible solids it\textquotesingle{}s the mass matrix; ... \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Pure virtual base class for elements that can be used with \mbox{\hyperlink{classoomph_1_1PressureBasedSolidLSCPreconditioner}{Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner}}. 
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
-Definition at line 5258 of file elements.\+h.
+Pure virtual base class for elements that can be used with Pressure\+Based\+Solid\+LSCPreconditioner. 
+
+Definition at line \mbox{\hyperlink{elements_8h_source_l05220}{5220}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
@@ -45,7 +52,7 @@ Empty constructor.
 
 
 
-Definition at line 5262 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05224}{5224}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_aea964b70c55588fabf8cbc7fffe9be4a}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_aea964b70c55588fabf8cbc7fffe9be4a}} 
 \index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}!````~SolidElementWithDiagonalMassMatrix@{$\sim$SolidElementWithDiagonalMassMatrix}}
@@ -59,25 +66,17 @@ Virtual destructor.
 
 
 
-Definition at line 5265 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05227}{5227}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_af26b74b9e29bc074bf2845556ff1bbae}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_af26b74b9e29bc074bf2845556ff1bbae}} 
+\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_a80299ea70fc53c28812736de2b81318a}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_a80299ea70fc53c28812736de2b81318a}} 
 \index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}!SolidElementWithDiagonalMassMatrix@{SolidElementWithDiagonalMassMatrix}}
 \index{SolidElementWithDiagonalMassMatrix@{SolidElementWithDiagonalMassMatrix}!oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
 \doxysubsubsection{\texorpdfstring{SolidElementWithDiagonalMassMatrix()}{SolidElementWithDiagonalMassMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 5268 of file elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -94,29 +93,17 @@ Get the diagonal of whatever represents the mass matrix in the specific precondi
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ad216a201134e2b239e3d5bcaedd56973}{oomph\+::\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPressure_ab15495baf81c012c6569f37b5c2b1e0f}{oomph\+::\+Refineable\+P\+V\+D\+Equations\+With\+Pressure$<$ D\+I\+M $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1RefineablePVDEquationsWithPressure_ab15495baf81c012c6569f37b5c2b1e0f}{oomph\+::\+Refineable\+PVDEquations\+With\+Pressure$<$ DIM $>$}}, and \mbox{\hyperlink{classoomph_1_1PVDEquationsWithPressure_ad216a201134e2b239e3d5bcaedd56973}{oomph\+::\+PVDEquations\+With\+Pressure$<$ DIM $>$}}.
 
-
-
-Referenced by oomph\+::\+Pressure\+Based\+Solid\+L\+S\+C\+Preconditioner\+::assemble\+\_\+mass\+\_\+matrix\+\_\+diagonal().
-
-\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_af7f7f5c4068cbfa7237be672d5b0fa58}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_af7f7f5c4068cbfa7237be672d5b0fa58}} 
+\mbox{\Hypertarget{classoomph_1_1SolidElementWithDiagonalMassMatrix_a6d40917349ed56abf7ce9cd0e0a4fa9e}\label{classoomph_1_1SolidElementWithDiagonalMassMatrix_a6d40917349ed56abf7ce9cd0e0a4fa9e}} 
 \index{oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::SolidElementWithDiagonalMassMatrix@{oomph::SolidElementWithDiagonalMassMatrix}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{Solid\+Element\+With\+Diagonal\+Mass\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 5275 of file elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 

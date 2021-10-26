@@ -1,4 +1,4 @@
-\hypertarget{classFSICollapsibleChannelProblem}{}\doxysection{F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classFSICollapsibleChannelProblem}{}\doxysection{FSICollapsible\+Channel\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classFSICollapsibleChannelProblem}\index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ Problem class.
 
 {\ttfamily \#include $<$fsi\+\_\+chan\+\_\+problem.\+h$>$}
 
-Inheritance diagram for F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for FSICollapsible\+Channel\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classFSICollapsibleChannelProblem}
@@ -18,17 +18,17 @@ Inheritance diagram for F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classFSICollapsibleChannelProblem_a74efdd9ed027ab0ca5cf59ec8da6b95c}{F\+S\+I\+Collapsible\+Channel\+Problem}} (const unsigned \&nup, const unsigned \&ncollapsible, const unsigned \&ndown, const unsigned \&ny, const double \&lup, const double \&lcollapsible, const double \&ldown, const double \&ly, const bool \&displ\+\_\+control, const bool \&steady\+\_\+flag)
+\mbox{\hyperlink{classFSICollapsibleChannelProblem_a74efdd9ed027ab0ca5cf59ec8da6b95c}{FSICollapsible\+Channel\+Problem}} (const unsigned \&nup, const unsigned \&ncollapsible, const unsigned \&ndown, const unsigned \&ny, const double \&lup, const double \&lcollapsible, const double \&ldown, const double \&ly, const bool \&displ\+\_\+control, const bool \&steady\+\_\+flag)
 \begin{DoxyCompactList}\small\item\em Constructor\+: The arguments are the number of elements and the lengths of the domain. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classFSICollapsibleChannelProblem_abe33aaaae15ea3eb10885527a1d1ad9a}{$\sim$\+F\+S\+I\+Collapsible\+Channel\+Problem}} ()
+\mbox{\hyperlink{classFSICollapsibleChannelProblem_abe33aaaae15ea3eb10885527a1d1ad9a}{$\sim$\+FSICollapsible\+Channel\+Problem}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classFSICollapsibleChannelProblem_a299ba7d5819e7871eae7e331d1abab8b}{steady\+\_\+run}} ()
-\begin{DoxyCompactList}\small\item\em Steady run. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Steady run; virtual so it can be overloaded in derived problem classes. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classFSICollapsibleChannelProblem_ae4f2b3abaf5e2dfc35489548d5a72edc}{unsteady\+\_\+run}} (const double \&dt=0.\+1)
 \begin{DoxyCompactList}\small\item\em Unsteady run; virtual so it can be overloaded in derived problem classes. Specify timestep or use default of 0.\+1. \end{DoxyCompactList}\item 
-Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a9b461f3afef3185ea0b461714675ef8f}{bulk\+\_\+mesh\+\_\+pt}} ()
+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_ae9ad9667460168fa74f8ec8e3ab9e988}{bulk\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the specific bulk (fluid) mesh. \end{DoxyCompactList}\item 
-One\+D\+Lagrangian\+Mesh$<$ F\+S\+I\+Hermite\+Beam\+Element $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_ae8b71da8da82f3c52387052ce400b930}{wall\+\_\+mesh\+\_\+pt}} ()
+One\+DLagrangian\+Mesh$<$ FSIHermite\+Beam\+Element $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_aec24d3eb06747f8429cf14857aed29a1}{wall\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the wall mesh. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSICollapsibleChannelProblem_ad10b2d12be052c6b1bc5005dc27cd229}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
 \begin{DoxyCompactList}\small\item\em Actions before solve. Reset counter for number of Newton iterations. \end{DoxyCompactList}\item 
@@ -68,13 +68,13 @@ double \mbox{\hyperlink{classFSICollapsibleChannelProblem_a0964686847cc64f2a77a8
 \begin{DoxyCompactList}\small\item\em x-\/length in the downstream part of the channel \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classFSICollapsibleChannelProblem_adb381270408cea69b7290ff2aeb5928f}{Ly}}
 \begin{DoxyCompactList}\small\item\em Transverse length. \end{DoxyCompactList}\item 
-Algebraic\+Collapsible\+Channel\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a74c09286f4ad4242c37b6ea16c069fae}{Bulk\+\_\+mesh\+\_\+pt}}
+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a74c09286f4ad4242c37b6ea16c069fae}{Bulk\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the \char`\"{}bulk\char`\"{} mesh. \end{DoxyCompactList}\item 
 Mesh $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_acf74b392297104d704004124b8dfc7bb}{Displ\+\_\+control\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the mesh that contains the displacement control element. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classFSICollapsibleChannelProblem_afc33ee9a23af728b98ed73623b65e1ac}{Displ\+\_\+control}}
 \begin{DoxyCompactList}\small\item\em Use displacement control? \end{DoxyCompactList}\item 
-One\+D\+Lagrangian\+Mesh$<$ F\+S\+I\+Hermite\+Beam\+Element $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a071b5cc9f660fdaccf1bf1e256320bfa}{Wall\+\_\+mesh\+\_\+pt}}
+One\+DLagrangian\+Mesh$<$ FSIHermite\+Beam\+Element $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a071b5cc9f660fdaccf1bf1e256320bfa}{Wall\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the \char`\"{}wall\char`\"{} mesh. \end{DoxyCompactList}\item 
 Node $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a4f37708b6caa6d79bff16b444c2e19ff}{Left\+\_\+node\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the left control node. \end{DoxyCompactList}\item 
@@ -85,7 +85,7 @@ Node $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a377285ce93d55b9c
 bool \mbox{\hyperlink{classFSICollapsibleChannelProblem_a7f21548c86e387a26a55062ef50ea416}{Steady\+\_\+flag}}
 \begin{DoxyCompactList}\small\item\em Flag for steady run. \end{DoxyCompactList}\item 
 Geom\+Object $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a0af9dba0fa399669d099b67b8c6906fa}{Ctrl\+\_\+geom\+\_\+obj\+\_\+pt}}
-\item 
+\begin{DoxyCompactList}\small\item\em Pointer to Geom\+Object at which displacement control is applied (or at which wall displacement is monitored in unsteady runs) \end{DoxyCompactList}\item 
 Vector$<$ double $>$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a203ee0ecb406f97e62b6e7facb8119b5}{S\+\_\+displ\+\_\+ctrl}}
 \begin{DoxyCompactList}\small\item\em Vector of local coordinates of displacement control point in Ctrl\+\_\+geom\+\_\+obj\+\_\+pt. \end{DoxyCompactList}\item 
 Mesh\+As\+Geom\+Object $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem_a1fc8d15ea0d359e0df8a677415b77dc3}{Wall\+\_\+geom\+\_\+object\+\_\+pt}}
@@ -97,12 +97,11 @@ Doc\+Info \mbox{\hyperlink{classFSICollapsibleChannelProblem_a31ea75b732e42eec45
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$}
 Problem class. 
 
-Definition at line 314 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00314}{314}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
@@ -111,8 +110,8 @@ Definition at line 314 of file fsi\+\_\+chan\+\_\+problem.\+h.
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!FSICollapsibleChannelProblem@{FSICollapsibleChannelProblem}}
 \index{FSICollapsibleChannelProblem@{FSICollapsibleChannelProblem}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{FSICollapsibleChannelProblem()}{FSICollapsibleChannelProblem()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nup,  }\item[{const unsigned \&}]{ncollapsible,  }\item[{const unsigned \&}]{ndown,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lup,  }\item[{const double \&}]{lcollapsible,  }\item[{const double \&}]{ldown,  }\item[{const double \&}]{ly,  }\item[{const bool \&}]{displ\+\_\+control,  }\item[{const bool \&}]{steady\+\_\+flag }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nup,  }\item[{const unsigned \&}]{ncollapsible,  }\item[{const unsigned \&}]{ndown,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lup,  }\item[{const double \&}]{lcollapsible,  }\item[{const double \&}]{ldown,  }\item[{const double \&}]{ly,  }\item[{const bool \&}]{displ\+\_\+control,  }\item[{const bool \&}]{steady\+\_\+flag }\end{DoxyParamCaption})}
 
 
 
@@ -120,18 +119,18 @@ Constructor\+: The arguments are the number of elements and the lengths of the d
 
 Constructor for the collapsible channel problem. 
 
-Definition at line 483 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{483}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, Global\+\_\+\+Physical\+\_\+\+Variables\+::load(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::Q, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Sigma0, Flags\+::\+Steady\+\_\+flag, Wall\+\_\+mesh\+\_\+pt, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00042}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00076}{Global\+\_\+\+Physical\+\_\+\+Variables\+::load()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00089}{Global\+\_\+\+Physical\+\_\+\+Variables\+::Q}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00036}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00039}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00045}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Sigma0}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00242}{Flags\+::\+Steady\+\_\+flag}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_abe33aaaae15ea3eb10885527a1d1ad9a}\label{classFSICollapsibleChannelProblem_abe33aaaae15ea3eb10885527a1d1ad9a}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!````~FSICollapsibleChannelProblem@{$\sim$FSICollapsibleChannelProblem}}
 \index{````~FSICollapsibleChannelProblem@{$\sim$FSICollapsibleChannelProblem}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$FSICollapsibleChannelProblem()}{~FSICollapsibleChannelProblem()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -139,7 +138,7 @@ Destructor.
 
 
 
-Definition at line 333 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00333}{333}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
@@ -148,8 +147,8 @@ Definition at line 333 of file fsi\+\_\+chan\+\_\+problem.\+h.
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -157,14 +156,14 @@ Update the problem after solve (empty)
 
 
 
-Definition at line 371 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00371}{371}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_ace5343d2e6e6e0480d077d4f17365288}\label{classFSICollapsibleChannelProblem_ace5343d2e6e6e0480d077d4f17365288}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -172,18 +171,18 @@ Update before checking Newton convergence\+: Update the nodal positions in the f
 
 
 
-Definition at line 377 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00377}{377}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Bulk\+\_\+mesh\+\_\+pt, and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Newton\+\_\+iter.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00433}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00469}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+Newton\+\_\+iter}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_ad10b2d12be052c6b1bc5005dc27cd229}\label{classFSICollapsibleChannelProblem_ad10b2d12be052c6b1bc5005dc27cd229}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -191,18 +190,18 @@ Actions before solve. Reset counter for number of Newton iterations.
 
 
 
-Definition at line 365 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00365}{365}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Newton\+\_\+iter.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00469}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+Newton\+\_\+iter}}.
 
-\mbox{\Hypertarget{classFSICollapsibleChannelProblem_a9b461f3afef3185ea0b461714675ef8f}\label{classFSICollapsibleChannelProblem_a9b461f3afef3185ea0b461714675ef8f}} 
+\mbox{\Hypertarget{classFSICollapsibleChannelProblem_ae9ad9667460168fa74f8ec8e3ab9e988}\label{classFSICollapsibleChannelProblem_ae9ad9667460168fa74f8ec8e3ab9e988}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!bulk\_mesh\_pt@{bulk\_mesh\_pt}}
 \index{bulk\_mesh\_pt@{bulk\_mesh\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{bulk\_mesh\_pt()}{bulk\_mesh\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Algebraic\+Collapsible\+Channel\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::bulk\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Algebraic\+Collapsible\+Channel\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::bulk\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -210,18 +209,18 @@ Access function for the specific bulk (fluid) mesh.
 
 
 
-Definition at line 347 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00347}{347}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Bulk\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00433}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a6541733e0d9e8e09bda489d6ce567ecb}\label{classFSICollapsibleChannelProblem_a6541733e0d9e8e09bda489d6ce567ecb}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!doc\_solution\_steady@{doc\_solution\_steady}}
 \index{doc\_solution\_steady@{doc\_solution\_steady}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution\_steady()}{doc\_solution\_steady()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution\+\_\+steady (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file,  }\item[{const double \&}]{cpu,  }\item[{const unsigned \&}]{niter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution\+\_\+steady (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file,  }\item[{const double \&}]{cpu,  }\item[{const unsigned \&}]{niter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -229,18 +228,18 @@ Doc the steady solution.
 
 Doc the solution for a steady run. 
 
-Definition at line 853 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00852}{852}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_aa9c8f2c34cea9b43e1496cc63b1f496c}\label{classFSICollapsibleChannelProblem_aa9c8f2c34cea9b43e1496cc63b1f496c}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!doc\_solution\_unsteady@{doc\_solution\_unsteady}}
 \index{doc\_solution\_unsteady@{doc\_solution\_unsteady}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution\_unsteady()}{doc\_solution\_unsteady()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution\+\_\+unsteady (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file,  }\item[{const double \&}]{cpu,  }\item[{const unsigned \&}]{niter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution\+\_\+unsteady (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file,  }\item[{const double \&}]{cpu,  }\item[{const unsigned \&}]{niter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -248,14 +247,14 @@ Doc the unsteady solution.
 
 Doc the solution for an unstady run. 
 
-Definition at line 914 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00913}{913}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a2a947a11c11090b39d2bc4439fb96e36}\label{classFSICollapsibleChannelProblem_a2a947a11c11090b39d2bc4439fb96e36}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!dump\_it@{dump\_it}}
 \index{dump\_it@{dump\_it}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{dump\_it()}{dump\_it()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::dump\+\_\+it (\begin{DoxyParamCaption}\item[{ofstream \&}]{dump\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::dump\+\_\+it (\begin{DoxyParamCaption}\item[{ofstream \&}]{dump\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -263,18 +262,18 @@ Dump problem to disk to allow for restart.
 
 Dump the solution to disk to allow for restart. 
 
-Definition at line 974 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00974}{974}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt, and Wall\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a2ee280c8cccc90baae4b0b6744be9efe}\label{classFSICollapsibleChannelProblem_a2ee280c8cccc90baae4b0b6744be9efe}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!restart@{restart}}
 \index{restart@{restart}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{restart()}{restart()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::restart (\begin{DoxyParamCaption}\item[{ifstream \&}]{restart\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::restart (\begin{DoxyParamCaption}\item[{ifstream \&}]{restart\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -282,18 +281,18 @@ Read problem for restart from specified restart file.
 
 Read solution from disk for restart. 
 
-Definition at line 1016 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l01016}{1016}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+step, and Wall\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00062}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+step}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_afdd6752cb134fd09ee8830158ed557b2}\label{classFSICollapsibleChannelProblem_afdd6752cb134fd09ee8830158ed557b2}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!set\_initial\_condition@{set\_initial\_condition}}
 \index{set\_initial\_condition@{set\_initial\_condition}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+initial\+\_\+condition}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::set\+\_\+initial\+\_\+condition}
 
 
 
@@ -301,41 +300,41 @@ Apply initial conditions.
 
 
 
-Definition at line 1073 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l01073}{1073}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References Flags\+::\+Restart\+\_\+file\+\_\+name, and Flags\+::\+Steady\+\_\+flag.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00251}{Flags\+::\+Restart\+\_\+file\+\_\+name}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00242}{Flags\+::\+Steady\+\_\+flag}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a299ba7d5819e7871eae7e331d1abab8b}\label{classFSICollapsibleChannelProblem_a299ba7d5819e7871eae7e331d1abab8b}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!steady\_run@{steady\_run}}
 \index{steady\_run@{steady\_run}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{steady\_run()}{steady\_run()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::steady\+\_\+run\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::steady\+\_\+run\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
+
+Steady run; virtual so it can be overloaded in derived problem classes. 
 
 Steady run. 
 
-Steady run; virtual so it can be overloaded in derived problem classes 
-
-Reimplemented in \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a9a6b0dfeda9eb0d4c50e195768c93e37}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a9a6b0dfeda9eb0d4c50e195768c93e37}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 1160 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l01160}{1160}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References Flags\+::\+Nsteps, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmax, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmin, Global\+\_\+\+Physical\+\_\+\+Variables\+::Q, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Flags\+::\+Resolution\+\_\+factor, Flags\+::\+Run\+\_\+identifier\+\_\+string, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr\+\_\+min.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00245}{Flags\+::\+Nsteps}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00058}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmax}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00053}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmin}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00089}{Global\+\_\+\+Physical\+\_\+\+Variables\+::Q}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00036}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00236}{Flags\+::\+Resolution\+\_\+factor}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00248}{Flags\+::\+Run\+\_\+identifier\+\_\+string}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00071}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr\+\_\+min}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_ae4f2b3abaf5e2dfc35489548d5a72edc}\label{classFSICollapsibleChannelProblem_ae4f2b3abaf5e2dfc35489548d5a72edc}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!unsteady\_run@{unsteady\_run}}
 \index{unsteady\_run@{unsteady\_run}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{dt = {\ttfamily 0.1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{dt = {\ttfamily 0.1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -343,18 +342,18 @@ Unsteady run; virtual so it can be overloaded in derived problem classes. Specif
 
 Unsteady run. Specify timestep or use default of 0.\+1. 
 
-Definition at line 1282 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l01282}{1282}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References Flags\+::\+Nsteps, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmax, Global\+\_\+\+Physical\+\_\+\+Variables\+::Q, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Flags\+::\+Resolution\+\_\+factor, and Flags\+::\+Run\+\_\+identifier\+\_\+string.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00245}{Flags\+::\+Nsteps}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00058}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmax}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00089}{Global\+\_\+\+Physical\+\_\+\+Variables\+::Q}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00036}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00236}{Flags\+::\+Resolution\+\_\+factor}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00248}{Flags\+::\+Run\+\_\+identifier\+\_\+string}}.
 
-\mbox{\Hypertarget{classFSICollapsibleChannelProblem_ae8b71da8da82f3c52387052ce400b930}\label{classFSICollapsibleChannelProblem_ae8b71da8da82f3c52387052ce400b930}} 
+\mbox{\Hypertarget{classFSICollapsibleChannelProblem_aec24d3eb06747f8429cf14857aed29a1}\label{classFSICollapsibleChannelProblem_aec24d3eb06747f8429cf14857aed29a1}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!wall\_mesh\_pt@{wall\_mesh\_pt}}
 \index{wall\_mesh\_pt@{wall\_mesh\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{wall\_mesh\_pt()}{wall\_mesh\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-One\+D\+Lagrangian\+Mesh$<$F\+S\+I\+Hermite\+Beam\+Element$>$$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::wall\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+One\+DLagrangian\+Mesh$<$ FSIHermite\+Beam\+Element $>$ $\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::wall\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -362,11 +361,11 @@ Access function for the wall mesh.
 
 
 
-Definition at line 357 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00357}{357}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Wall\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00442}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+Wall\+\_\+mesh\+\_\+pt}}.
 
 
 
@@ -375,8 +374,8 @@ References F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
 \index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Algebraic\+Collapsible\+Channel\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Algebraic\+Collapsible\+Channel\+Mesh$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -384,29 +383,33 @@ Pointer to the \char`\"{}bulk\char`\"{} mesh.
 
 
 
-Definition at line 433 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00433}{433}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::bulk\+\_\+mesh\+\_\+pt().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00377}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00129}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00147}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+segregated\+\_\+convergence\+\_\+check()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00347}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::bulk\+\_\+mesh\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a0af9dba0fa399669d099b67b8c6906fa}\label{classFSICollapsibleChannelProblem_a0af9dba0fa399669d099b67b8c6906fa}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Ctrl\_geom\_obj\_pt@{Ctrl\_geom\_obj\_pt}}
 \index{Ctrl\_geom\_obj\_pt@{Ctrl\_geom\_obj\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ctrl\_geom\_obj\_pt}{Ctrl\_geom\_obj\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Geom\+Object$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ctrl\+\_\+geom\+\_\+obj\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Geom\+Object$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Ctrl\+\_\+geom\+\_\+obj\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
 
 Pointer to Geom\+Object at which displacement control is applied (or at which wall displacement is monitored in unsteady runs) 
 
-Definition at line 458 of file fsi\+\_\+chan\+\_\+problem.\+h.
+
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00458}{458}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_afc33ee9a23af728b98ed73623b65e1ac}\label{classFSICollapsibleChannelProblem_afc33ee9a23af728b98ed73623b65e1ac}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Displ\_control@{Displ\_control}}
 \index{Displ\_control@{Displ\_control}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Displ\_control}{Displ\_control}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Displ\+\_\+control\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Displ\+\_\+control\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -414,14 +417,14 @@ Use displacement control?
 
 
 
-Definition at line 439 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00439}{439}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_acf74b392297104d704004124b8dfc7bb}\label{classFSICollapsibleChannelProblem_acf74b392297104d704004124b8dfc7bb}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Displ\_control\_mesh\_pt@{Displ\_control\_mesh\_pt}}
 \index{Displ\_control\_mesh\_pt@{Displ\_control\_mesh\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Displ\_control\_mesh\_pt}{Displ\_control\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Mesh$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Displ\+\_\+control\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Displ\+\_\+control\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -429,14 +432,14 @@ Pointer to the mesh that contains the displacement control element.
 
 
 
-Definition at line 436 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00436}{436}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a31ea75b732e42eec45f333a26d6cb2ac}\label{classFSICollapsibleChannelProblem_a31ea75b732e42eec45f333a26d6cb2ac}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
 \index{Doc\_info@{Doc\_info}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Doc\+Info \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Doc\+\_\+info\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Doc\+\_\+info\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -444,14 +447,14 @@ Doc\+Info object.
 
 
 
-Definition at line 472 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00472}{472}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_ae6ce3834d06f0fb75db945a782ff0108}\label{classFSICollapsibleChannelProblem_ae6ce3834d06f0fb75db945a782ff0108}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Lcollapsible@{Lcollapsible}}
 \index{Lcollapsible@{Lcollapsible}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Lcollapsible}{Lcollapsible}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Lcollapsible\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Lcollapsible\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -459,14 +462,14 @@ x-\/length in the collapsible part of the channel
 
 
 
-Definition at line 424 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00424}{424}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a0964686847cc64f2a77a866187aec626}\label{classFSICollapsibleChannelProblem_a0964686847cc64f2a77a866187aec626}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Ldown@{Ldown}}
 \index{Ldown@{Ldown}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ldown}{Ldown}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ldown\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Ldown\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -474,14 +477,14 @@ x-\/length in the downstream part of the channel
 
 
 
-Definition at line 427 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00427}{427}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a4f37708b6caa6d79bff16b444c2e19ff}\label{classFSICollapsibleChannelProblem_a4f37708b6caa6d79bff16b444c2e19ff}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Left\_node\_pt@{Left\_node\_pt}}
 \index{Left\_node\_pt@{Left\_node\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Left\_node\_pt}{Left\_node\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Node$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Left\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Left\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -489,14 +492,14 @@ Pointer to the left control node.
 
 
 
-Definition at line 445 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00445}{445}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a7b8288e57097875d247bda6201b1bfcf}\label{classFSICollapsibleChannelProblem_a7b8288e57097875d247bda6201b1bfcf}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Lup@{Lup}}
 \index{Lup@{Lup}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Lup}{Lup}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Lup\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Lup\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -504,14 +507,14 @@ x-\/length in the upstream part of the channel
 
 
 
-Definition at line 421 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00421}{421}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_adb381270408cea69b7290ff2aeb5928f}\label{classFSICollapsibleChannelProblem_adb381270408cea69b7290ff2aeb5928f}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Ly@{Ly}}
 \index{Ly@{Ly}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ly}{Ly}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ly\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Ly\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -519,14 +522,14 @@ Transverse length.
 
 
 
-Definition at line 430 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00430}{430}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a3fb9656feb1c32045f4fdbd74f91258f}\label{classFSICollapsibleChannelProblem_a3fb9656feb1c32045f4fdbd74f91258f}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Ncollapsible@{Ncollapsible}}
 \index{Ncollapsible@{Ncollapsible}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ncollapsible}{Ncollapsible}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ncollapsible\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Ncollapsible\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -534,14 +537,14 @@ Number of elements in the x direction in the collapsible part of the channel.
 
 
 
-Definition at line 412 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00412}{412}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a64c0aa974b39527ef22e352a4f22b156}\label{classFSICollapsibleChannelProblem_a64c0aa974b39527ef22e352a4f22b156}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Ndown@{Ndown}}
 \index{Ndown@{Ndown}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ndown}{Ndown}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ndown\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Ndown\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -549,14 +552,14 @@ Number of elements in the x direction in the downstream part of the channel.
 
 
 
-Definition at line 415 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00415}{415}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a72b19fe66f2c9019ee2da6987a09995c}\label{classFSICollapsibleChannelProblem_a72b19fe66f2c9019ee2da6987a09995c}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Newton\_iter@{Newton\_iter}}
 \index{Newton\_iter@{Newton\_iter}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Newton\_iter}{Newton\_iter}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Newton\+\_\+iter\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Newton\+\_\+iter\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -564,18 +567,18 @@ Counter for Newton iterations.
 
 
 
-Definition at line 469 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00469}{469}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00377}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00365}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a22a5ea767bf0c437b78ed4e37b7a4818}\label{classFSICollapsibleChannelProblem_a22a5ea767bf0c437b78ed4e37b7a4818}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Nup@{Nup}}
 \index{Nup@{Nup}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Nup}{Nup}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Nup\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Nup\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -583,14 +586,14 @@ Number of elements in the x direction in the upstream part of the channel.
 
 
 
-Definition at line 408 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00408}{408}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a536804b714fd0033f3028ff1c6032918}\label{classFSICollapsibleChannelProblem_a536804b714fd0033f3028ff1c6032918}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Ny@{Ny}}
 \index{Ny@{Ny}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ny}{Ny}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ny\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Ny\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -598,14 +601,14 @@ Number of elements across the channel.
 
 
 
-Definition at line 418 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00418}{418}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a5ab75d4a593a35fb12d1e016ae3e41c4}\label{classFSICollapsibleChannelProblem_a5ab75d4a593a35fb12d1e016ae3e41c4}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Right\_node\_pt@{Right\_node\_pt}}
 \index{Right\_node\_pt@{Right\_node\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Right\_node\_pt}{Right\_node\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Node$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Right\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Right\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -613,14 +616,14 @@ Pointer to right control node.
 
 
 
-Definition at line 448 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00448}{448}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a203ee0ecb406f97e62b6e7facb8119b5}\label{classFSICollapsibleChannelProblem_a203ee0ecb406f97e62b6e7facb8119b5}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!S\_displ\_ctrl@{S\_displ\_ctrl}}
 \index{S\_displ\_ctrl@{S\_displ\_ctrl}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{S\_displ\_ctrl}{S\_displ\_ctrl}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$double$>$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::S\+\_\+displ\+\_\+ctrl\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Vector$<$double$>$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::S\+\_\+displ\+\_\+ctrl\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -628,14 +631,14 @@ Vector of local coordinates of displacement control point in Ctrl\+\_\+geom\+\_\
 
 
 
-Definition at line 462 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00462}{462}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a7f21548c86e387a26a55062ef50ea416}\label{classFSICollapsibleChannelProblem_a7f21548c86e387a26a55062ef50ea416}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Steady\_flag@{Steady\_flag}}
 \index{Steady\_flag@{Steady\_flag}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Steady\_flag}{Steady\_flag}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Steady\+\_\+flag\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Steady\+\_\+flag\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -643,14 +646,14 @@ Flag for steady run.
 
 
 
-Definition at line 454 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00454}{454}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a1fc8d15ea0d359e0df8a677415b77dc3}\label{classFSICollapsibleChannelProblem_a1fc8d15ea0d359e0df8a677415b77dc3}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Wall\_geom\_object\_pt@{Wall\_geom\_object\_pt}}
 \index{Wall\_geom\_object\_pt@{Wall\_geom\_object\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Wall\_geom\_object\_pt}{Wall\_geom\_object\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Mesh\+As\+Geom\+Object$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\+As\+Geom\+Object$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Wall\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -658,14 +661,14 @@ Pointer to geometric object (one Lagrangian, two Eulerian coordinates) that will
 
 
 
-Definition at line 466 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00466}{466}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a071b5cc9f660fdaccf1bf1e256320bfa}\label{classFSICollapsibleChannelProblem_a071b5cc9f660fdaccf1bf1e256320bfa}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Wall\_mesh\_pt@{Wall\_mesh\_pt}}
 \index{Wall\_mesh\_pt@{Wall\_mesh\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Wall\_mesh\_pt}{Wall\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-One\+D\+Lagrangian\+Mesh$<$F\+S\+I\+Hermite\+Beam\+Element$>$$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+One\+DLagrangian\+Mesh$<$FSIHermite\+Beam\+Element$>$$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -673,18 +676,18 @@ Pointer to the \char`\"{}wall\char`\"{} mesh.
 
 
 
-Definition at line 442 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00442}{442}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wall\+\_\+mesh\+\_\+pt().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00357}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::wall\+\_\+mesh\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classFSICollapsibleChannelProblem_a377285ce93d55b9c6035737796da1bbf}\label{classFSICollapsibleChannelProblem_a377285ce93d55b9c6035737796da1bbf}} 
 \index{FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}!Wall\_node\_pt@{Wall\_node\_pt}}
 \index{Wall\_node\_pt@{Wall\_node\_pt}!FSICollapsibleChannelProblem$<$ ELEMENT $>$@{FSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Wall\_node\_pt}{Wall\_node\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Node$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node$\ast$ \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::Wall\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -692,7 +695,7 @@ Pointer to control node on the wall.
 
 
 
-Definition at line 451 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00451}{451}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 

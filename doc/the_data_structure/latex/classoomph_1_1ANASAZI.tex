@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1ANASAZI}{}\doxysection{oomph\+::A\+N\+A\+S\+A\+ZI Class Reference}
+\hypertarget{classoomph_1_1ANASAZI}{}\doxysection{oomph\+::ANASAZI Class Reference}
 \label{classoomph_1_1ANASAZI}\index{oomph::ANASAZI@{oomph::ANASAZI}}
 
 
@@ -9,7 +9,7 @@ Class for the \mbox{\hyperlink{namespaceAnasazi}{Anasazi}} eigensolver.
 
 {\ttfamily \#include $<$trilinos\+\_\+eigen\+\_\+solver.\+h$>$}
 
-Inheritance diagram for oomph\+::A\+N\+A\+S\+A\+ZI\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::ANASAZI\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1ANASAZI}
@@ -18,21 +18,21 @@ Inheritance diagram for oomph\+::A\+N\+A\+S\+A\+ZI\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ANASAZI_af90440448c3cbbb7c21bc6ce3bbb2d0a}{A\+N\+A\+S\+A\+ZI}} ()
+\mbox{\hyperlink{classoomph_1_1ANASAZI_af90440448c3cbbb7c21bc6ce3bbb2d0a}{ANASAZI}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ANASAZI_abfab863205ce697807b4a1ac5e74ac8f}{A\+N\+A\+S\+A\+ZI}} (const \mbox{\hyperlink{classoomph_1_1ANASAZI}{A\+N\+A\+S\+A\+ZI}} \&)
+\mbox{\hyperlink{classoomph_1_1ANASAZI_abfab863205ce697807b4a1ac5e74ac8f}{ANASAZI}} (const \mbox{\hyperlink{classoomph_1_1ANASAZI}{ANASAZI}} \&)
 \begin{DoxyCompactList}\small\item\em Empty copy constructor. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1ANASAZI_a3f7e7f7fdc23c04c419fba24474f95a7}{$\sim$\+A\+N\+A\+S\+A\+ZI}} ()
+virtual \mbox{\hyperlink{classoomph_1_1ANASAZI_a3f7e7f7fdc23c04c419fba24474f95a7}{$\sim$\+ANASAZI}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, delete the linear solver. \end{DoxyCompactList}\item 
-int \& \mbox{\hyperlink{classoomph_1_1ANASAZI_a525fd6b30a06a869c50983d6ccad0801}{narnoldi}} ()
+int \& \mbox{\hyperlink{classoomph_1_1ANASAZI_a6a54e642c8208d7e1bf0c3fcf17d4581}{narnoldi}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the number of Arnoldi vectors. \end{DoxyCompactList}\item 
-const int \& \mbox{\hyperlink{classoomph_1_1ANASAZI_a5f0489a5b0cd830ba93e1ae33cc14c24}{narnoldi}} () const
+const int \& \mbox{\hyperlink{classoomph_1_1ANASAZI_a055012dc3030fffff1f7f3fa835d3164}{narnoldi}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the number of Arnoldi vectors (const version) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ANASAZI_aa965449f7db8c881305665ba83d4b9b6}{enable\+\_\+compute\+\_\+eigenvectors}} ()
 \begin{DoxyCompactList}\small\item\em Set to enable the computation of the eigenvectors (default) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ANASAZI_a7e2035b9291fdc43d9e514c2f97a2b95}{disable\+\_\+compute\+\_\+eigenvectors}} ()
 \begin{DoxyCompactList}\small\item\em Set to disable the computation of the eigenvectors. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ANASAZI_af3084c6ec6fc86b5758bb853088c7f8a}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector)
+void \mbox{\hyperlink{classoomph_1_1ANASAZI_a5b13a2a77a422033c6a522ec68549fa5}{solve\+\_\+eigenproblem}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, const int \&n\+\_\+eval, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&eigenvalue, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&eigenvector)
 \begin{DoxyCompactList}\small\item\em Solve the eigen problem. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ANASAZI_a914ad9d78433c746b46f22bc429db8e9}{get\+\_\+eigenvalues\+\_\+left\+\_\+of\+\_\+shift}} ()
 \begin{DoxyCompactList}\small\item\em Set the desired eigenvalues to be left of the shift. \end{DoxyCompactList}\item 
@@ -44,26 +44,26 @@ void \mbox{\hyperlink{classoomph_1_1ANASAZI_ab68875d414ab91de32715ab87e20b5ce}{t
 \begin{DoxyCompactList}\small\item\em Set the imaginary part fo the quantity of interest. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ANASAZI_a08a235118d10b28a6f03cc9f6d6ca503}{track\+\_\+eigenvalue\+\_\+magnitude}} ()
 \begin{DoxyCompactList}\small\item\em Set the magnitude to be the quantity of interest. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ANASAZI_ae37601dd7b0ec11195f7e355047e7329}{linear\+\_\+solver\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& \mbox{\hyperlink{classoomph_1_1ANASAZI_a722642959f946fdda1b9b5266ad07521}{linear\+\_\+solver\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1ANASAZI_a8abde7ddc8a5785c9db713c45ed61e24}{linear\+\_\+solver\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1ANASAZI_ac16c5671b8291377505d5d9a9ee4ef9c}{linear\+\_\+solver\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object (const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Types}
 \begin{DoxyCompactItemize}
 \item 
 typedef double \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}
 \item 
-typedef Teuchos\+::\+Scalar\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}{S\+CT}}
+typedef Teuchos\+::\+Scalar\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}{SCT}}
 \item 
-typedef S\+C\+T\+::magnitude\+Type \mbox{\hyperlink{classoomph_1_1ANASAZI_a8c8982a3b6f716d4ea9b497235351cf2}{MT}}
+typedef SCT\+::magnitude\+Type \mbox{\hyperlink{classoomph_1_1ANASAZI_a8c8982a3b6f716d4ea9b497235351cf2}{MT}}
 \item 
 typedef Anasazi\+::\+Multi\+Vec$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}
 \item 
 typedef Anasazi\+::\+Operator$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{OP}}
 \item 
-typedef Anasazi\+::\+Multi\+Vec\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}{M\+VT}}
+typedef Anasazi\+::\+Multi\+Vec\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}{MVT}}
 \item 
-typedef Anasazi\+::\+Operator\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{OP}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}{O\+PT}}
+typedef Anasazi\+::\+Operator\+Traits$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{OP}} $>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}{OPT}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -76,7 +76,7 @@ Anasazi\+::\+Output\+Manager$<$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6
 \begin{DoxyCompactList}\small\item\em Pointer to a default linear solver. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1ANASAZI_a244c2eac42edb80948da8bcef92cf003}{Spectrum}}
 \begin{DoxyCompactList}\small\item\em Integer to set whether the real, imaginary or magnitude is required to be small or large. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1ANASAZI_a4ace6fc3f5e4503d9d1e42eb81c52fd8}{N\+Arnoldi}}
+int \mbox{\hyperlink{classoomph_1_1ANASAZI_a4ace6fc3f5e4503d9d1e42eb81c52fd8}{NArnoldi}}
 \begin{DoxyCompactList}\small\item\em Number of Arnoldi vectors to compute. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1ANASAZI_a7af7f7211016ec745689d203078f6199}{Sigma}}
 \begin{DoxyCompactList}\small\item\em Set the shifted value. \end{DoxyCompactList}\item 
@@ -90,7 +90,7 @@ bool \mbox{\hyperlink{classoomph_1_1ANASAZI_a4493c071c706cab869df34248f2dcdbf}{C
 \doxysubsection{Detailed Description}
 Class for the \mbox{\hyperlink{namespaceAnasazi}{Anasazi}} eigensolver. 
 
-Definition at line 570 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00570}{570}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
@@ -99,71 +99,71 @@ Definition at line 570 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
 \index{oomph::ANASAZI@{oomph::ANASAZI}!MT@{MT}}
 \index{MT@{MT}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{MT}{MT}}
-{\footnotesize\ttfamily typedef S\+C\+T\+::magnitude\+Type \mbox{\hyperlink{classoomph_1_1ANASAZI_a8c8982a3b6f716d4ea9b497235351cf2}{oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+MT}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef SCT\+::magnitude\+Type \mbox{\hyperlink{classoomph_1_1ANASAZI_a8c8982a3b6f716d4ea9b497235351cf2}{oomph\+::\+ANASAZI\+::\+MT}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 575 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00575}{575}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}\label{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!MV@{MV}}
 \index{MV@{MV}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{MV}{MV}}
-{\footnotesize\ttfamily typedef Anasazi\+::\+Multi\+Vec$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+MV}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef Anasazi\+::\+Multi\+Vec$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{oomph\+::\+ANASAZI\+::\+MV}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 576 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00576}{576}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}\label{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!MVT@{MVT}}
 \index{MVT@{MVT}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{MVT}{MVT}}
-{\footnotesize\ttfamily typedef Anasazi\+::\+Multi\+Vec\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}{oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+M\+VT}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef Anasazi\+::\+Multi\+Vec\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ab8d52920a458018ddcc6962d53c7ccdf}{oomph\+::\+ANASAZI\+::\+MVT}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 578 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00578}{578}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}\label{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!OP@{OP}}
 \index{OP@{OP}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{OP}{OP}}
-{\footnotesize\ttfamily typedef Anasazi\+::\+Operator$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+OP}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef Anasazi\+::\+Operator$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{oomph\+::\+ANASAZI\+::\+OP}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 577 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00577}{577}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}\label{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!OPT@{OPT}}
 \index{OPT@{OPT}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{OPT}{OPT}}
-{\footnotesize\ttfamily typedef Anasazi\+::\+Operator\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{OP}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}{oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+O\+PT}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef Anasazi\+::\+Operator\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_aa1922409eb193949b0cb4e89d43316ed}{MV}}, \mbox{\hyperlink{classoomph_1_1ANASAZI_ac89159c0da5e64ce641a2bcb8bd2d2be}{OP}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a2a83b8577f1fe904ccf0bcc37e4ea4f4}{oomph\+::\+ANASAZI\+::\+OPT}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 579 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00579}{579}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}\label{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!SCT@{SCT}}
 \index{SCT@{SCT}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{SCT}{SCT}}
-{\footnotesize\ttfamily typedef Teuchos\+::\+Scalar\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}{oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+S\+CT}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef Teuchos\+::\+Scalar\+Traits$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$ \mbox{\hyperlink{classoomph_1_1ANASAZI_a1bb5eb9f072ed92f48fdd32ca22abd0e}{oomph\+::\+ANASAZI\+::\+SCT}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 574 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00574}{574}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}\label{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!ST@{ST}}
 \index{ST@{ST}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{ST}{ST}}
-{\footnotesize\ttfamily typedef double \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+ST}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef double \mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{oomph\+::\+ANASAZI\+::\+ST}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 573 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00573}{573}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
@@ -172,7 +172,7 @@ Definition at line 573 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
 \index{oomph::ANASAZI@{oomph::ANASAZI}!ANASAZI@{ANASAZI}}
 \index{ANASAZI@{ANASAZI}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{ANASAZI()}{ANASAZI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+A\+N\+A\+S\+A\+ZI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+ANASAZI\+::\+ANASAZI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -180,17 +180,17 @@ Constructor.
 
 
 
-Definition at line 611 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00611}{611}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Output\+\_\+manager\+\_\+pt.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00582}{Output\+\_\+manager\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_abfab863205ce697807b4a1ac5e74ac8f}\label{classoomph_1_1ANASAZI_abfab863205ce697807b4a1ac5e74ac8f}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!ANASAZI@{ANASAZI}}
 \index{ANASAZI@{ANASAZI}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{ANASAZI()}{ANASAZI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+A\+N\+A\+S\+A\+ZI (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ANASAZI}{A\+N\+A\+S\+A\+ZI}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+ANASAZI\+::\+ANASAZI (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ANASAZI}{ANASAZI}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -198,13 +198,13 @@ Empty copy constructor.
 
 
 
-Definition at line 632 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00632}{632}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a3f7e7f7fdc23c04c419fba24474f95a7}\label{classoomph_1_1ANASAZI_a3f7e7f7fdc23c04c419fba24474f95a7}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!````~ANASAZI@{$\sim$ANASAZI}}
 \index{````~ANASAZI@{$\sim$ANASAZI}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{$\sim$ANASAZI()}{~ANASAZI()}}
-{\footnotesize\ttfamily virtual oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::$\sim$\+A\+N\+A\+S\+A\+ZI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+ANASAZI\+::$\sim$\+ANASAZI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -212,7 +212,7 @@ Destructor, delete the linear solver.
 
 
 
-Definition at line 635 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00635}{635}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
@@ -221,7 +221,7 @@ Definition at line 635 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
 \index{oomph::ANASAZI@{oomph::ANASAZI}!disable\_compute\_eigenvectors@{disable\_compute\_eigenvectors}}
 \index{disable\_compute\_eigenvectors@{disable\_compute\_eigenvectors}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{disable\_compute\_eigenvectors()}{disable\_compute\_eigenvectors()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::disable\+\_\+compute\+\_\+eigenvectors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+ANASAZI\+::disable\+\_\+compute\+\_\+eigenvectors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -229,17 +229,17 @@ Set to disable the computation of the eigenvectors.
 
 
 
-Definition at line 656 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00656}{656}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Compute\+\_\+eigenvectors.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00606}{Compute\+\_\+eigenvectors}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_aa965449f7db8c881305665ba83d4b9b6}\label{classoomph_1_1ANASAZI_aa965449f7db8c881305665ba83d4b9b6}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!enable\_compute\_eigenvectors@{enable\_compute\_eigenvectors}}
 \index{enable\_compute\_eigenvectors@{enable\_compute\_eigenvectors}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{enable\_compute\_eigenvectors()}{enable\_compute\_eigenvectors()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::enable\+\_\+compute\+\_\+eigenvectors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+ANASAZI\+::enable\+\_\+compute\+\_\+eigenvectors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -247,17 +247,17 @@ Set to enable the computation of the eigenvectors (default)
 
 
 
-Definition at line 650 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00650}{650}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Compute\+\_\+eigenvectors.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00606}{Compute\+\_\+eigenvectors}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a914ad9d78433c746b46f22bc429db8e9}\label{classoomph_1_1ANASAZI_a914ad9d78433c746b46f22bc429db8e9}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!get\_eigenvalues\_left\_of\_shift@{get\_eigenvalues\_left\_of\_shift}}
 \index{get\_eigenvalues\_left\_of\_shift@{get\_eigenvalues\_left\_of\_shift}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{get\_eigenvalues\_left\_of\_shift()}{get\_eigenvalues\_left\_of\_shift()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::get\+\_\+eigenvalues\+\_\+left\+\_\+of\+\_\+shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+ANASAZI\+::get\+\_\+eigenvalues\+\_\+left\+\_\+of\+\_\+shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -265,17 +265,17 @@ Set the desired eigenvalues to be left of the shift.
 
 
 
-Definition at line 769 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00769}{769}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Small.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00603}{Small}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a1fba291e41996df19379a383befaa4f9}\label{classoomph_1_1ANASAZI_a1fba291e41996df19379a383befaa4f9}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!get\_eigenvalues\_right\_of\_shift@{get\_eigenvalues\_right\_of\_shift}}
 \index{get\_eigenvalues\_right\_of\_shift@{get\_eigenvalues\_right\_of\_shift}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{get\_eigenvalues\_right\_of\_shift()}{get\_eigenvalues\_right\_of\_shift()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::get\+\_\+eigenvalues\+\_\+right\+\_\+of\+\_\+shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+ANASAZI\+::get\+\_\+eigenvalues\+\_\+right\+\_\+of\+\_\+shift (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -283,17 +283,17 @@ Set the desired eigenvalues to be right of the shift.
 
 
 
-Definition at line 775 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00775}{775}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Small.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00603}{Small}}.
 
-\mbox{\Hypertarget{classoomph_1_1ANASAZI_ae37601dd7b0ec11195f7e355047e7329}\label{classoomph_1_1ANASAZI_ae37601dd7b0ec11195f7e355047e7329}} 
+\mbox{\Hypertarget{classoomph_1_1ANASAZI_a722642959f946fdda1b9b5266ad07521}\label{classoomph_1_1ANASAZI_a722642959f946fdda1b9b5266ad07521}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!linear\_solver\_pt@{linear\_solver\_pt}}
 \index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$\& oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& oomph\+::\+ANASAZI\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -301,21 +301,21 @@ Return a pointer to the linear solver object.
 
 
 
-Definition at line 799 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00799}{799}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Linear\+\_\+solver\+\_\+pt.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00585}{Linear\+\_\+solver\+\_\+pt}}.
 
 
 
-Referenced by solve\+\_\+eigenproblem().
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00662}{solve\+\_\+eigenproblem()}}.
 
-\mbox{\Hypertarget{classoomph_1_1ANASAZI_a8abde7ddc8a5785c9db713c45ed61e24}\label{classoomph_1_1ANASAZI_a8abde7ddc8a5785c9db713c45ed61e24}} 
+\mbox{\Hypertarget{classoomph_1_1ANASAZI_ac16c5671b8291377505d5d9a9ee4ef9c}\label{classoomph_1_1ANASAZI_ac16c5671b8291377505d5d9a9ee4ef9c}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!linear\_solver\_pt@{linear\_solver\_pt}}
 \index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ const\& oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const  \& oomph\+::\+ANASAZI\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -323,17 +323,17 @@ Return a pointer to the linear solver object (const version)
 
 
 
-Definition at line 805 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00805}{805}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Linear\+\_\+solver\+\_\+pt.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00585}{Linear\+\_\+solver\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1ANASAZI_a525fd6b30a06a869c50983d6ccad0801}\label{classoomph_1_1ANASAZI_a525fd6b30a06a869c50983d6ccad0801}} 
+\mbox{\Hypertarget{classoomph_1_1ANASAZI_a6a54e642c8208d7e1bf0c3fcf17d4581}\label{classoomph_1_1ANASAZI_a6a54e642c8208d7e1bf0c3fcf17d4581}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!narnoldi@{narnoldi}}
 \index{narnoldi@{narnoldi}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{narnoldi()}{narnoldi()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily int\& oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::narnoldi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int \& oomph\+::\+ANASAZI\+::narnoldi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -341,17 +341,17 @@ Access function for the number of Arnoldi vectors.
 
 
 
-Definition at line 638 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00638}{638}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References N\+Arnoldi.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00596}{NArnoldi}}.
 
-\mbox{\Hypertarget{classoomph_1_1ANASAZI_a5f0489a5b0cd830ba93e1ae33cc14c24}\label{classoomph_1_1ANASAZI_a5f0489a5b0cd830ba93e1ae33cc14c24}} 
+\mbox{\Hypertarget{classoomph_1_1ANASAZI_a055012dc3030fffff1f7f3fa835d3164}\label{classoomph_1_1ANASAZI_a055012dc3030fffff1f7f3fa835d3164}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!narnoldi@{narnoldi}}
 \index{narnoldi@{narnoldi}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{narnoldi()}{narnoldi()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const int\& oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::narnoldi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const int \& oomph\+::\+ANASAZI\+::narnoldi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -359,17 +359,17 @@ Access function for the number of Arnoldi vectors (const version)
 
 
 
-Definition at line 644 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00644}{644}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References N\+Arnoldi.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00596}{NArnoldi}}.
 
-\mbox{\Hypertarget{classoomph_1_1ANASAZI_af3084c6ec6fc86b5758bb853088c7f8a}\label{classoomph_1_1ANASAZI_af3084c6ec6fc86b5758bb853088c7f8a}} 
+\mbox{\Hypertarget{classoomph_1_1ANASAZI_a5b13a2a77a422033c6a522ec68549fa5}\label{classoomph_1_1ANASAZI_a5b13a2a77a422033c6a522ec68549fa5}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!solve\_eigenproblem@{solve\_eigenproblem}}
 \index{solve\_eigenproblem@{solve\_eigenproblem}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{solve\_eigenproblem()}{solve\_eigenproblem()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+ANASAZI\+::solve\+\_\+eigenproblem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const int \&}]{n\+\_\+eval,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{eigenvalue,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{eigenvector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -377,21 +377,21 @@ Solve the eigen problem.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1EigenSolver_a67b1178450cd4b229432d1b497299b73}{oomph\+::\+Eigen\+Solver}}.
+Implements \mbox{\hyperlink{classoomph_1_1EigenSolver_a6a6b09612ce16457b26fa0cfe996fa71}{oomph\+::\+Eigen\+Solver}}.
 
 
 
-Definition at line 662 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00662}{662}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References a(), oomph\+::\+Problem\+::dof\+\_\+distribution\+\_\+pt(), i, Linear\+\_\+solver\+\_\+pt, linear\+\_\+solver\+\_\+pt(), oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt(), n, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::oomph\+\_\+info, Sigma, and oomph\+::\+Eigen\+Solver\+::\+Sigma\+\_\+real.
+References \mbox{\hyperlink{problem_8h_source_l01668}{oomph\+::\+Problem\+::dof\+\_\+distribution\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01466}{oomph\+::\+Problem\+::linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00585}{Linear\+\_\+solver\+\_\+pt}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00799}{linear\+\_\+solver\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00599}{Sigma}}, and \mbox{\hyperlink{eigen__solver_8h_source_l00065}{oomph\+::\+Eigen\+Solver\+::\+Sigma\+\_\+real}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_ab68875d414ab91de32715ab87e20b5ce}\label{classoomph_1_1ANASAZI_ab68875d414ab91de32715ab87e20b5ce}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!track\_eigenvalue\_imaginary\_part@{track\_eigenvalue\_imaginary\_part}}
 \index{track\_eigenvalue\_imaginary\_part@{track\_eigenvalue\_imaginary\_part}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{track\_eigenvalue\_imaginary\_part()}{track\_eigenvalue\_imaginary\_part()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::track\+\_\+eigenvalue\+\_\+imaginary\+\_\+part (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+ANASAZI\+::track\+\_\+eigenvalue\+\_\+imaginary\+\_\+part (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -399,17 +399,17 @@ Set the imaginary part fo the quantity of interest.
 
 
 
-Definition at line 787 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00787}{787}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Spectrum.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00593}{Spectrum}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a08a235118d10b28a6f03cc9f6d6ca503}\label{classoomph_1_1ANASAZI_a08a235118d10b28a6f03cc9f6d6ca503}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!track\_eigenvalue\_magnitude@{track\_eigenvalue\_magnitude}}
 \index{track\_eigenvalue\_magnitude@{track\_eigenvalue\_magnitude}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{track\_eigenvalue\_magnitude()}{track\_eigenvalue\_magnitude()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::track\+\_\+eigenvalue\+\_\+magnitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+ANASAZI\+::track\+\_\+eigenvalue\+\_\+magnitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -417,17 +417,17 @@ Set the magnitude to be the quantity of interest.
 
 
 
-Definition at line 793 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00793}{793}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Spectrum.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00593}{Spectrum}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a8c2be3c7a1f810306b1c606ec2d8f90b}\label{classoomph_1_1ANASAZI_a8c2be3c7a1f810306b1c606ec2d8f90b}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!track\_eigenvalue\_real\_part@{track\_eigenvalue\_real\_part}}
 \index{track\_eigenvalue\_real\_part@{track\_eigenvalue\_real\_part}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{track\_eigenvalue\_real\_part()}{track\_eigenvalue\_real\_part()}}
-{\footnotesize\ttfamily void oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::track\+\_\+eigenvalue\+\_\+real\+\_\+part (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+ANASAZI\+::track\+\_\+eigenvalue\+\_\+real\+\_\+part (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -435,11 +435,11 @@ Set the real part to be the quantity of interest (default)
 
 
 
-Definition at line 781 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00781}{781}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-References Spectrum.
+References \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00593}{Spectrum}}.
 
 
 
@@ -448,7 +448,7 @@ References Spectrum.
 \index{oomph::ANASAZI@{oomph::ANASAZI}!Compute\_eigenvectors@{Compute\_eigenvectors}}
 \index{Compute\_eigenvectors@{Compute\_eigenvectors}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{Compute\_eigenvectors}{Compute\_eigenvectors}}
-{\footnotesize\ttfamily bool oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+Compute\+\_\+eigenvectors\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+ANASAZI\+::\+Compute\+\_\+eigenvectors\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -456,17 +456,17 @@ Boolean to indicate whether or not to compute the eigenvectors.
 
 
 
-Definition at line 606 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00606}{606}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+compute\+\_\+eigenvectors(), and enable\+\_\+compute\+\_\+eigenvectors().
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00656}{disable\+\_\+compute\+\_\+eigenvectors()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00650}{enable\+\_\+compute\+\_\+eigenvectors()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a0d68fe86419ff9260bd2dd8c5e75b1e8}\label{classoomph_1_1ANASAZI_a0d68fe86419ff9260bd2dd8c5e75b1e8}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!Default\_linear\_solver\_pt@{Default\_linear\_solver\_pt}}
 \index{Default\_linear\_solver\_pt@{Default\_linear\_solver\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{Default\_linear\_solver\_pt}{Default\_linear\_solver\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+ANASAZI\+::\+Default\+\_\+linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -474,13 +474,13 @@ Pointer to a default linear solver.
 
 
 
-Definition at line 588 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00588}{588}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a4af90db68a430f129f360c00a669e809}\label{classoomph_1_1ANASAZI_a4af90db68a430f129f360c00a669e809}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!Linear\_solver\_pt@{Linear\_solver\_pt}}
 \index{Linear\_solver\_pt@{Linear\_solver\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{Linear\_solver\_pt}{Linear\_solver\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+Linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ oomph\+::\+ANASAZI\+::\+Linear\+\_\+solver\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -488,17 +488,17 @@ Pointer to a linear solver.
 
 
 
-Definition at line 585 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00585}{585}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-Referenced by linear\+\_\+solver\+\_\+pt(), and solve\+\_\+eigenproblem().
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00799}{linear\+\_\+solver\+\_\+pt()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00662}{solve\+\_\+eigenproblem()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a4ace6fc3f5e4503d9d1e42eb81c52fd8}\label{classoomph_1_1ANASAZI_a4ace6fc3f5e4503d9d1e42eb81c52fd8}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!NArnoldi@{NArnoldi}}
 \index{NArnoldi@{NArnoldi}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{NArnoldi}{NArnoldi}}
-{\footnotesize\ttfamily int oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+N\+Arnoldi\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int oomph\+::\+ANASAZI\+::\+NArnoldi\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -506,17 +506,17 @@ Number of Arnoldi vectors to compute.
 
 
 
-Definition at line 596 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00596}{596}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-Referenced by narnoldi().
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00638}{narnoldi()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a10a57e0c5468fd511c7458dda6f99dce}\label{classoomph_1_1ANASAZI_a10a57e0c5468fd511c7458dda6f99dce}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!Output\_manager\_pt@{Output\_manager\_pt}}
 \index{Output\_manager\_pt@{Output\_manager\_pt}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{Output\_manager\_pt}{Output\_manager\_pt}}
-{\footnotesize\ttfamily Anasazi\+::\+Output\+Manager$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$$\ast$ oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+Output\+\_\+manager\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Anasazi\+::\+Output\+Manager$<$\mbox{\hyperlink{classoomph_1_1ANASAZI_a604b8dc6a0618d81dfce82849d5b47a7}{ST}}$>$$\ast$ oomph\+::\+ANASAZI\+::\+Output\+\_\+manager\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -524,17 +524,17 @@ Pointer to output manager.
 
 
 
-Definition at line 582 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00582}{582}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-Referenced by A\+N\+A\+S\+A\+Z\+I().
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00611}{ANASAZI()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a7af7f7211016ec745689d203078f6199}\label{classoomph_1_1ANASAZI_a7af7f7211016ec745689d203078f6199}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!Sigma@{Sigma}}
 \index{Sigma@{Sigma}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{Sigma}{Sigma}}
-{\footnotesize\ttfamily double oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+Sigma\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double oomph\+::\+ANASAZI\+::\+Sigma\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -542,17 +542,17 @@ Set the shifted value.
 
 
 
-Definition at line 599 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00599}{599}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-Referenced by solve\+\_\+eigenproblem().
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00662}{solve\+\_\+eigenproblem()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_abb61aa274f84bda2752fb0e7bcc4cbee}\label{classoomph_1_1ANASAZI_abb61aa274f84bda2752fb0e7bcc4cbee}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!Small@{Small}}
 \index{Small@{Small}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{Small}{Small}}
-{\footnotesize\ttfamily bool oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+Small\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+ANASAZI\+::\+Small\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -560,17 +560,17 @@ Boolean to set which part of the spectrum left (default) or right of the shifted
 
 
 
-Definition at line 603 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00603}{603}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-Referenced by get\+\_\+eigenvalues\+\_\+left\+\_\+of\+\_\+shift(), and get\+\_\+eigenvalues\+\_\+right\+\_\+of\+\_\+shift().
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00769}{get\+\_\+eigenvalues\+\_\+left\+\_\+of\+\_\+shift()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00775}{get\+\_\+eigenvalues\+\_\+right\+\_\+of\+\_\+shift()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ANASAZI_a244c2eac42edb80948da8bcef92cf003}\label{classoomph_1_1ANASAZI_a244c2eac42edb80948da8bcef92cf003}} 
 \index{oomph::ANASAZI@{oomph::ANASAZI}!Spectrum@{Spectrum}}
 \index{Spectrum@{Spectrum}!oomph::ANASAZI@{oomph::ANASAZI}}
 \doxysubsubsection{\texorpdfstring{Spectrum}{Spectrum}}
-{\footnotesize\ttfamily int oomph\+::\+A\+N\+A\+S\+A\+Z\+I\+::\+Spectrum\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int oomph\+::\+ANASAZI\+::\+Spectrum\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -578,11 +578,11 @@ Integer to set whether the real, imaginary or magnitude is required to be small 
 
 
 
-Definition at line 593 of file trilinos\+\_\+eigen\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00593}{593}} of file \mbox{\hyperlink{trilinos__eigen__solver_8h_source}{trilinos\+\_\+eigen\+\_\+solver.\+h}}.
 
 
 
-Referenced by track\+\_\+eigenvalue\+\_\+imaginary\+\_\+part(), track\+\_\+eigenvalue\+\_\+magnitude(), and track\+\_\+eigenvalue\+\_\+real\+\_\+part().
+Referenced by \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00787}{track\+\_\+eigenvalue\+\_\+imaginary\+\_\+part()}}, \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00793}{track\+\_\+eigenvalue\+\_\+magnitude()}}, and \mbox{\hyperlink{trilinos__eigen__solver_8h_source_l00781}{track\+\_\+eigenvalue\+\_\+real\+\_\+part()}}.
 
 
 

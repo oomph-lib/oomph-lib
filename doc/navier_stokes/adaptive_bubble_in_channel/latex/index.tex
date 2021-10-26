@@ -68,9 +68,8 @@ This is the equation that determines the unknown bubble pressure $ p_{bubble} $ 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_implementation}{}\doxysection{Implementation}\label{index_implementation}
-We solve the governing equations using an A\+L\+E-\/based finite-\/element method, discretising the fluid domain with triangular Taylor-\/\+Hood elements, and updating the mesh with \href{../../single_layer_free_surface/html/index.html\#kinematic_condition_implementation}{\texttt{ a pseudo-\/elastic node-\/update procedure}}. ~\newline
- As usual, we impose the kinematic and dynamic boundary conditions with {\ttfamily Face\+Elements}. The volume constraint is imposed in a similar way\+: We attach {\ttfamily Line\+Volume\+Constraint\+Bounding\+Solid\+Elements} to the bubble surface to compute the line integrals in equation (10), and create an additional {\ttfamily Volume\+Constraint\+Element} which adds $ V_{bubble} $ to this equation and is also \char`\"{}in
-charge\char`\"{} of the unknown bubble pressure.
+We solve the governing equations using an ALE-\/based finite-\/element method, discretising the fluid domain with triangular Taylor-\/\+Hood elements, and updating the mesh with \href{../../single_layer_free_surface/html/index.html\#kinematic_condition_implementation}{\texttt{ a pseudo-\/elastic node-\/update procedure}}. ~\newline
+ As usual, we impose the kinematic and dynamic boundary conditions with {\ttfamily Face\+Elements}. The volume constraint is imposed in a similar way\+: We attach {\ttfamily Line\+Volume\+Constraint\+Bounding\+Solid\+Elements} to the bubble surface to compute the line integrals in equation (10), and create an additional {\ttfamily Volume\+Constraint\+Element} which adds $ V_{bubble} $ to this equation and is also \char`\"{}in charge\char`\"{} of the unknown bubble pressure.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -95,7 +94,7 @@ As usual, we create a namespace where we define the dimensionless parameters $ R
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for Problem Parameter}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceProblem__Parameter}{Problem\_Parameter}}}
 \DoxyCodeLine{ \{    \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Doc info object}}
@@ -113,15 +112,15 @@ As usual, we create a namespace where we define the dimensionless parameters $ R
 \DoxyCodeLine{\textcolor{comment}{  /// Initial radius of bubble}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}} = 0.25;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Volume of the bubble (negative because it's outside the}}
+\DoxyCodeLine{\textcolor{comment}{  /// Volume of the bubble (negative because it's outside the}}
 \DoxyCodeLine{\textcolor{comment}{  /// fluid!)}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_aad8e0a2d1ec39a8dd7357a43bcc5f20e}{Volume}} = -\/MathematicalConstants::Pi*\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}}*\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Radius}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Scaling factor for inflow velocity (allows it to be switched off}}
+\DoxyCodeLine{\textcolor{comment}{  /// Scaling factor for inflow velocity (allows it to be switched off}}
 \DoxyCodeLine{\textcolor{comment}{  /// to do hydrostatics)}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_a7792613e563a733ad88b8e15d126fc3a}{Inflow\_veloc\_magnitude}} = 0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Length of the channel}}
+\DoxyCodeLine{\textcolor{comment}{  /// Length of the channel}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_a7b67840fea463f29b53d12f7bd7cb34b}{Length}} = 3.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Constitutive law used to determine the mesh deformation}}
@@ -130,7 +129,7 @@ As usual, we create a namespace where we define the dimensionless parameters $ R
 \DoxyCodeLine{\textcolor{comment}{  /// Trace file}}
 \DoxyCodeLine{\textcolor{comment}{}  ofstream \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Trace\_file}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short File to document the norm of the solution (for validation }}
+\DoxyCodeLine{\textcolor{comment}{  /// File to document the norm of the solution (for validation }}
 \DoxyCodeLine{\textcolor{comment}{  /// purposes -\/-\/ triangle doesn't give fully reproducible results so}}
 \DoxyCodeLine{\textcolor{comment}{  /// mesh generation/adaptation may generate slightly different numbers}}
 \DoxyCodeLine{\textcolor{comment}{  /// of elements on different machines!)}}
@@ -149,8 +148,8 @@ We start by processing the command line arguments and create the generalised Hoo
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_main=====================================}}
-\DoxyCodeLine{\textcolor{comment}{///Driver code for moving bubble problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for moving bubble problem}}
+\DoxyCodeLine{\textcolor{comment}{//============================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{adaptive__bubble__in__channel_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{  }
@@ -161,7 +160,7 @@ We start by processing the command line arguments and create the generalised Hoo
 \DoxyCodeLine{ \textcolor{comment}{// were actually specified}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Validation?}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/validation"});}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/validation"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Parse command line}}
 \DoxyCodeLine{ CommandLineArgs::parse\_and\_assign(); }
@@ -174,26 +173,24 @@ We start by processing the command line arguments and create the generalised Hoo
 \DoxyCodeLine{  \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}{Problem\_Parameter::Nu}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Problem\_Parameter::Trace\_file}}.open(\textcolor{stringliteral}{"RESLT/trace.dat"}); }
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Problem\_Parameter::Trace\_file}}.open(\textcolor{stringliteral}{"{}RESLT/trace.dat"{}}); }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Increase precision of output}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Problem\_Parameter::Trace\_file}}.precision(20);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open norm file}}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a388e06a5e637b21378ab1832e5564bec}{Problem\_Parameter::Norm\_file}}.open(\textcolor{stringliteral}{"RESLT/norm.dat"});}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a388e06a5e637b21378ab1832e5564bec}{Problem\_Parameter::Norm\_file}}.open(\textcolor{stringliteral}{"{}RESLT/norm.dat"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Create problem in initial configuration}}
 \DoxyCodeLine{ \mbox{\hyperlink{classBubbleInChannelProblem}{BubbleInChannelProblem<ProjectableTaylorHoodElement<MyTaylorHoodElement>}} > }
 
 \end{DoxyCodeInclude}
-
-
-We start by performing a steady solve (with the inflow switched off) to compute the initial configuration, a circular bubble in stationary fluid.
+ We start by performing a steady solve (with the inflow switched off) to compute the initial configuration, a circular bubble in stationary fluid.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Before starting the time-\/integration we want to "inflate" it to form }}
+\DoxyCodeLine{ \textcolor{comment}{// Before starting the time-\/integration we want to "{}inflate"{} it to form }}
 \DoxyCodeLine{ \textcolor{comment}{// a proper circular bubble. We do this by setting the inflow to zero}}
 \DoxyCodeLine{ \textcolor{comment}{// and doing a steady solve (with one adaptation)}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a7792613e563a733ad88b8e15d126fc3a}{Problem\_Parameter::Inflow\_veloc\_magnitude}}=0.0;}
@@ -205,9 +202,7 @@ We start by performing a steady solve (with the inflow switched off) to compute 
 \DoxyCodeLine{ problem.doc\_solution();}
 
 \end{DoxyCodeInclude}
-
-
-Next, the timestepper is initialised and an impulsive start performed. The inflow is switched on and the first few unsteady Newton solves are performed without adaptation.
+ Next, the timestepper is initialised and an impulsive start performed. The inflow is switched on and the first few unsteady Newton solves are performed without adaptation.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -229,10 +224,10 @@ Next, the timestepper is initialised and an impulsive start performed. The inflo
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Solve problem on fixed mesh}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep=6;}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/validation"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   nstep=2;}
-\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"Remeshing after every second step during validation\(\backslash\)n"};}
+\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"{}Remeshing after every second step during validation\(\backslash\)n"{}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<nstep;i++)}
 \DoxyCodeLine{  \{}
@@ -251,10 +246,10 @@ To limit the distortion of the elements we allow then mesh adaptation (which inv
 \DoxyCodeLine{ \textcolor{comment}{// Now do a proper loop, doing nstep timesteps before adapting/remeshing}}
 \DoxyCodeLine{ \textcolor{comment}{// and repeating the lot ncycle times}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ncycle=1000;}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/validation"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   ncycle=1;}
-\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"Only doing one cycle during validation\(\backslash\)n"};}
+\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"{}Only doing one cycle during validation\(\backslash\)n"{}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do the cycles}}
@@ -272,7 +267,7 @@ To limit the distortion of the elements we allow then mesh adaptation (which inv
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Build the label for doc and output solution}}
 \DoxyCodeLine{     std::stringstream label;}
-\DoxyCodeLine{     label << \textcolor{stringliteral}{"Adaptation "} <<j << \textcolor{stringliteral}{" Step "}<< i;}
+\DoxyCodeLine{     label << \textcolor{stringliteral}{"{}Adaptation "{}} <<j << \textcolor{stringliteral}{"{} Step "{}}<< i;}
 \DoxyCodeLine{     problem.doc\_solution(label.str());}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// No more refinement for the next nstep steps}}
@@ -285,9 +280,7 @@ To limit the distortion of the elements we allow then mesh adaptation (which inv
 \DoxyCodeLine{\} \textcolor{comment}{//End of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 As usual, we template the Problem class by the element type
@@ -296,7 +289,7 @@ As usual, we template the Problem class by the element type
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class to simulate inviscid bubble propagating along 2D channel}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classBubbleInChannelProblem}{BubbleInChannelProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -310,13 +303,11 @@ As usual, we template the Problem class by the element type
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classBubbleInChannelProblem_a7a048a26898571d0f109df2a11f08eb7}{\string~BubbleInChannelProblem}}()}
 
 \end{DoxyCodeInclude}
-
-
-The {\ttfamily Face\+Elements} are deleted and re-\/attached before and after each adaptation. Also, as discussed in \href{../../../meshes/mesh_from_inline_triangle/html/index.html\#overview}{\texttt{ another tutorial}}, we re-\/apply the boundary conditions and complete the build of all elements after each adaptation, using the helper function {\ttfamily complete\+\_\+problem\+\_\+setup()} (discussed below).
+ The {\ttfamily Face\+Elements} are deleted and re-\/attached before and after each adaptation. Also, as discussed in \href{../../../meshes/mesh_from_inline_triangle/html/index.html\#overview}{\texttt{ another tutorial}}, we re-\/apply the boundary conditions and complete the build of all elements after each adaptation, using the helper function {\ttfamily complete\+\_\+problem\+\_\+setup()} (discussed below).
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Actions before adapt: Wipe the mesh of free surface elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the mesh of free surface elements}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Kill the  elements and wipe surface mesh}}
@@ -359,36 +350,32 @@ The {\ttfamily Face\+Elements} are deleted and re-\/attached before and after ea
 \DoxyCodeLine{   Fluid\_mesh\_pt-\/>set\_lagrangian\_nodal\_coordinates();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set boundary conditions and complete the build of all elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set boundary conditions and complete the build of all elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} complete\_problem\_setup();}
 
 \end{DoxyCodeInclude}
-
-
-We define the post-\/processing functions to document the solution and to compute the error estimates.
+ We define the post-\/processing functions to document the solution and to compute the error estimates.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{adaptive__bubble__in__channel_8txt_a3b6b5070c261a0f2b0fc7362a7ffeda3}{doc\_solution}}(\textcolor{keyword}{const} std::string\& comment=\textcolor{stringliteral}{""});}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} doc\_solution(\textcolor{keyword}{const} std::string\& comment=\textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Compute the error estimates and assign to elements for plotting}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} compute\_error\_estimate(\textcolor{keywordtype}{double}\& max\_err,}
 
 \end{DoxyCodeInclude}
-
-
-We also provide helper functions to delete and create face elements adjacent to the bubble boundary.
+ We also provide helper functions to delete and create face elements adjacent to the bubble boundary.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create free surface elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create free surface elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_free\_surface\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Delete free surface elements }}
+\DoxyCodeLine{\textcolor{comment}{ /// Delete free surface elements }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_free\_surface\_elements()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// How many surface elements are in the surface mesh}}
@@ -410,7 +397,7 @@ We also provide helper functions to delete and create face elements adjacent to 
 \DoxyCodeLine{\textcolor{comment}{/// Create elements that impose volume constraint on the bubble}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_volume\_constraint\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Delete volume constraint elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Delete volume constraint elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_volume\_constraint\_elements()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// How many surface elements are in the surface mesh}}
@@ -430,13 +417,11 @@ We also provide helper functions to delete and create face elements adjacent to 
 \DoxyCodeLine{  \} \textcolor{comment}{// end of delete\_volume\_constraint\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-The private data includes pointers to the fluid mesh, and the two face meshes which impose the kinematic and dynamic boundary conditions, and the volume constraint, respectively. We also store pointers to the Data that stores the unknown bubble pressure and to the {\ttfamily Volume\+Constraint\+Element} that imposes the volume constraint and is \char`\"{}in charge of\char`\"{} the bubble pressure.
+ The private data includes pointers to the fluid mesh, and the two face meshes which impose the kinematic and dynamic boundary conditions, and the volume constraint, respectively. We also store pointers to the Data that stores the unknown bubble pressure and to the {\ttfamily Volume\+Constraint\+Element} that imposes the volume constraint and is \char`\"{}in charge of\char`\"{} the bubble pressure.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Pointers to mesh of free surface elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointers to mesh of free surface elements}}
 \DoxyCodeLine{ Mesh* Free\_surface\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh containing elements that impose volume constraint}}
@@ -483,12 +468,12 @@ We allocate the timestepper and build the {\ttfamily Volume\+Constraint\+Element
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_constructor=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classBubbleInChannelProblem_a04bf2f20c65e85228fac381d786bedad}{BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Allocate the timestepper -\/-\/ this constructs the Problem's }}
 \DoxyCodeLine{ \textcolor{comment}{// time object with a sufficient amount of storage to store the}}
@@ -498,14 +483,8 @@ We allocate the timestepper and build the {\ttfamily Volume\+Constraint\+Element
 \DoxyCodeLine{}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Build volume constraint element: Pass pointer to double that}}
-\DoxyCodeLine{ \textcolor{comment}{// specifies target volume, data that contains the "traded" pressure}}
+\DoxyCodeLine{ \textcolor{comment}{// specifies target volume, data that contains the "{}traded"{} pressure}}
 \DoxyCodeLine{ \textcolor{comment}{// and the index of the traded pressure value within this Data item}}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Build element and create pressure internally}}
 \DoxyCodeLine{ Vol\_constraint\_el\_pt= }
 \DoxyCodeLine{  \textcolor{keyword}{new} VolumeConstraintElement(\&\mbox{\hyperlink{namespaceProblem__Parameter_aad8e0a2d1ec39a8dd7357a43bcc5f20e}{Problem\_Parameter::Volume}});}
@@ -521,9 +500,7 @@ We allocate the timestepper and build the {\ttfamily Volume\+Constraint\+Element
 \DoxyCodeLine{  set\_value(index,\mbox{\hyperlink{namespaceProblem__Parameter_af6194d2571881779c678fbabc1503d47}{Problem\_Parameter::Ca}}/\mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Problem\_Parameter::Radius}});}
 
 \end{DoxyCodeInclude}
-
-
-Next the outer boundary, consisting of four separate polylines, is built. Each polyline is defined by a start and an end point and is stored in a vector. This vector is then used to create the closed polygon required by {\ttfamily Triangle}.
+ Next the outer boundary, consisting of four separate polylines, is built. Each polyline is defined by a start and an end point and is stored in a vector. This vector is then used to create the closed polygon required by {\ttfamily Triangle}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -585,9 +562,7 @@ Next the outer boundary, consisting of four separate polylines, is built. Each p
 \DoxyCodeLine{ Outer\_boundary\_polyline\_pt = \textcolor{keyword}{new} TriangleMeshPolygon(boundary\_polyline\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-Next the polygon representing the bubble in the initial setup is generated. (\href{../../../meshes/mesh_from_inline_triangle/html/index.html\#polygonal}{\texttt{ Recall}} that closed polygons must be subdivided into at least two distinct polylines.)
+ Next the polygon representing the bubble in the initial setup is generated. (\href{../../../meshes/mesh_from_inline_triangle/html/index.html\#polygonal}{\texttt{ Recall}} that closed polygons must be subdivided into at least two distinct polylines.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -604,7 +579,7 @@ Next the polygon representing the bubble in the initial setup is generated. (\hr
 \DoxyCodeLine{                                       \mbox{\hyperlink{namespaceProblem__Parameter_a903237528f0e9bb92debcc8842576cca}{Problem\_Parameter::Radius}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Intrinsic coordinate along GeomObject defining the bubble}}
-\DoxyCodeLine{ Vector<double> \mbox{\hyperlink{adaptive__bubble__in__channel_8txt_aee432507f3bfe4dcb07d8419258226cc}{zeta}}(1);}
+\DoxyCodeLine{ Vector<double> zeta(1);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Position vector to GeomObject defining the bubble}}
 \DoxyCodeLine{ Vector<double> coord(2);}
@@ -627,8 +602,8 @@ Next the polygon representing the bubble in the initial setup is generated. (\hr
 \DoxyCodeLine{   bubble\_vertex[ipoint].resize(2);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Get the coordinates}}
-\DoxyCodeLine{   \mbox{\hyperlink{adaptive__bubble__in__channel_8txt_aee432507f3bfe4dcb07d8419258226cc}{zeta}}[0]=unit\_zeta*double(ipoint);}
-\DoxyCodeLine{   bubble\_pt-\/>position(\mbox{\hyperlink{adaptive__bubble__in__channel_8txt_aee432507f3bfe4dcb07d8419258226cc}{zeta}},coord);}
+\DoxyCodeLine{   zeta[0]=unit\_zeta*double(ipoint);}
+\DoxyCodeLine{   bubble\_pt-\/>position(zeta,coord);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Shift}}
 \DoxyCodeLine{   bubble\_vertex[ipoint][0]=coord[0]+x\_center;}
@@ -646,8 +621,8 @@ Next the polygon representing the bubble in the initial setup is generated. (\hr
 \DoxyCodeLine{   bubble\_vertex[ipoint].resize(2);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Get the coordinates}}
-\DoxyCodeLine{   \mbox{\hyperlink{adaptive__bubble__in__channel_8txt_aee432507f3bfe4dcb07d8419258226cc}{zeta}}[0]=(unit\_zeta*double(ipoint))+MathematicalConstants::Pi;}
-\DoxyCodeLine{   bubble\_pt-\/>position(\mbox{\hyperlink{adaptive__bubble__in__channel_8txt_aee432507f3bfe4dcb07d8419258226cc}{zeta}},coord);}
+\DoxyCodeLine{   zeta[0]=(unit\_zeta*double(ipoint))+MathematicalConstants::Pi;}
+\DoxyCodeLine{   bubble\_pt-\/>position(zeta,coord);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Shift}}
 \DoxyCodeLine{   bubble\_vertex[ipoint][0]=coord[0]+x\_center;}
@@ -671,9 +646,7 @@ Next the polygon representing the bubble in the initial setup is generated. (\hr
 \DoxyCodeLine{                 bubble\_center);}
 
 \end{DoxyCodeInclude}
-
-
-Once the boundary representation in form of polygons is completed the mesh is generated using {\ttfamily Triangle}. We specify the error estimator and set targets for the spatial adaptivity, and output the initial mesh.
+ Once the boundary representation in form of polygons is completed the mesh is generated using {\ttfamily Triangle}. We specify the error estimator and set targets for the spatial adaptivity, and output the initial mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -682,7 +655,7 @@ Once the boundary representation in form of polygons is completed the mesh is ge
 \DoxyCodeLine{ \textcolor{comment}{// polygons just created}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Convert to "closed curve" objects}}
+\DoxyCodeLine{ \textcolor{comment}{// Convert to "{}closed curve"{} objects}}
 \DoxyCodeLine{ TriangleMeshClosedCurve* outer\_closed\_curve\_pt=Outer\_boundary\_polyline\_pt;}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nb=Bubble\_polygon\_pt.size();}
 \DoxyCodeLine{ Vector<TriangleMeshClosedCurve*> bubble\_closed\_curve\_pt(nb);}
@@ -723,19 +696,17 @@ Once the boundary representation in form of polygons is completed the mesh is ge
 \DoxyCodeLine{ Fluid\_mesh\_pt-\/>min\_element\_size()=0.001; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Use coarser mesh during validation}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/validation"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   Fluid\_mesh\_pt-\/>min\_element\_size()=0.01; }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output boundary and mesh initial mesh for information}}
-\DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"boundaries.dat"});}
-\DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"mesh.dat"});}
+\DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}boundaries.dat"{}});}
+\DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}mesh.dat"{}});}
 
 \end{DoxyCodeInclude}
-
-
-We complete the problem setup, create the various surface meshes that impose the dynamic and kinematic boundary conditions and the volume constraint. We then combine the submeshes into a global mesh.
+ We complete the problem setup, create the various surface meshes that impose the dynamic and kinematic boundary conditions and the volume constraint. We then combine the submeshes into a global mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -766,7 +737,7 @@ We complete the problem setup, create the various surface meshes that impose the
 \DoxyCodeLine{ this-\/>build\_global\_mesh();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << this-\/>assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << this-\/>assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_constructor}}
 
@@ -782,7 +753,7 @@ During the problem setup the position of all boundary nodes in the pseudo-\/elas
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_complete\_problem\_setup=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions and complete the build of all elements}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classBubbleInChannelProblem_a7b3c042477f4ee4e62dd1e00e1a480f8}{BubbleInChannelProblem<ELEMENT>::complete\_problem\_setup}}()}
 \DoxyCodeLine{\{      }
@@ -813,9 +784,7 @@ During the problem setup the position of all boundary nodes in the pseudo-\/elas
 \DoxyCodeLine{  \} \textcolor{comment}{// points on bubble boundary located}}
 
 \end{DoxyCodeInclude}
-
-
-We pin both velocity components on the inflow, top and bottom boundaries and the vertical velocity component at the outflow.
+ We pin both velocity components on the inflow, top and bottom boundaries and the vertical velocity component at the outflow.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -858,9 +827,7 @@ We pin both velocity components on the inflow, top and bottom boundaries and the
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-Next, the bulk elements are made fully functional. For every element the pointers to the time, Reynolds number, Womersley number and the constitutive law for the mesh deformation are set.
+ Next, the bulk elements are made fully functional. For every element the pointers to the time, Reynolds number, Womersley number and the constitutive law for the mesh deformation are set.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -886,9 +853,7 @@ Next, the bulk elements are made fully functional. For every element the pointer
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we (re-\/)assign the velocity boundary values by imposing no slip on the channel walls, parallel outflow, and a Poiseuille profile at the inlet.
+ Finally, we (re-\/)assign the velocity boundary values by imposing no slip on the channel walls, parallel outflow, and a Poiseuille profile at the inlet.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -954,9 +919,7 @@ Finally, we (re-\/)assign the velocity boundary values by imposing no slip on th
 \DoxyCodeLine{\} \textcolor{comment}{// end of complete\_problem\_setup}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_face_elements}{}\doxysection{Generation of face elements}\label{index_face_elements}
 As usual we impose the kinematic and dynamic boundary condition at the free surface by attaching {\ttfamily Face\+Elements} to the relevant boundaries of the bulk elements. We specify pointers to the Capillary number $ Ca $ and the bubble pressure $ p_{bubble} $. The pointer to the Strouhal number $ St $ does not need to be set, since it already defaults to a value of 1.\+0.
@@ -964,8 +927,8 @@ As usual we impose the kinematic and dynamic boundary condition at the free surf
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_free\_surface\_elements======================}}
-\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the kinematic and dynamic bcs}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the kinematic and dynamic bcs}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classBubbleInChannelProblem_a9a5a34516352db3153baa52ccb204b62}{BubbleInChannelProblem<ELEMENT>::create\_free\_surface\_elements}}()}
@@ -1019,15 +982,13 @@ As usual we impose the kinematic and dynamic boundary condition at the free surf
 \DoxyCodeLine{\textcolor{comment}{// end of create\_free\_surface\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-The volume constraint elements are created in a similar way. Recall that the {\ttfamily Line\+Volume\+Constraint\+Bounding\+Solid\+Elements} compute the line integrals in equation (10) while the {\ttfamily Volume\+Constraint\+Element} adds $ V_{bubble} $ to this equation.
+ The volume constraint elements are created in a similar way. Recall that the {\ttfamily Line\+Volume\+Constraint\+Bounding\+Solid\+Elements} compute the line integrals in equation (10) while the {\ttfamily Volume\+Constraint\+Element} adds $ V_{bubble} $ to this equation.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_volume\_constraint\_elements=================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create elements that impose volume constraint on the bubble}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classBubbleInChannelProblem_ae1ab79ef810211e337127878876c0fa6}{BubbleInChannelProblem<ELEMENT>::create\_volume\_constraint\_elements}}()}
 \DoxyCodeLine{\{ }
@@ -1058,7 +1019,7 @@ The volume constraint elements are created in a similar way. Recall that the {\t
 \DoxyCodeLine{      \textcolor{keyword}{new} ElasticLineVolumeConstraintBoundingElement<ELEMENT>(}
 \DoxyCodeLine{       bulk\_elem\_pt,face\_index);   }
 \DoxyCodeLine{     }
-\DoxyCodeLine{     \textcolor{comment}{//Set the "master" volume constraint element}}
+\DoxyCodeLine{     \textcolor{comment}{//Set the "{}master"{} volume constraint element}}
 \DoxyCodeLine{     el\_pt-\/>set\_volume\_constraint\_element(Vol\_constraint\_el\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Add it to the mesh}}
@@ -1069,9 +1030,7 @@ The volume constraint elements are created in a similar way. Recall that the {\t
 \DoxyCodeLine{\textcolor{comment}{// end of create\_volume\_constraint\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 This member function documents the computed solution after every Newton solve.
@@ -1080,16 +1039,16 @@ This member function documents the computed solution after every Newton solve.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classBubbleInChannelProblem_a6a68ee06024107d7b3f92059365a06d1}{BubbleInChannelProblem<ELEMENT>::doc\_solution}}(\textcolor{keyword}{const} std::string\& comment)}
 \DoxyCodeLine{\{ }
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Docing step: "} << \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.number()}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Docing step: "{}} << \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.number()}
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ ofstream some\_file;}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},}
 \DoxyCodeLine{         \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.directory().c\_str(),}
 \DoxyCodeLine{         \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.number());}
 \DoxyCodeLine{}
@@ -1118,15 +1077,15 @@ This member function documents the computed solution after every Newton solve.
 \DoxyCodeLine{ some\_file << dynamic\_cast<ELEMENT*>(this-\/>Fluid\_mesh\_pt-\/>element\_pt(0))}
 \DoxyCodeLine{  -\/>variable\_identifier();}
 \DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output(some\_file,npts);   }
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"TEXT X = 25, Y = 78, CS=FRAME T = \(\backslash\)"Global Step "} }
-\DoxyCodeLine{           << \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.number() << \textcolor{stringliteral}{"  "} }
-\DoxyCodeLine{           << comment << \textcolor{stringliteral}{"\(\backslash\)"\(\backslash\)n"};}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}TEXT X = 25, Y = 78, CS=FRAME T = \(\backslash\)"{}Global Step "{}} }
+\DoxyCodeLine{           << \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.number() << \textcolor{stringliteral}{"{}  "{}} }
+\DoxyCodeLine{           << comment << \textcolor{stringliteral}{"{}\(\backslash\)"{}\(\backslash\)n"{}};}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output boundaries}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/boundaries\%i.dat"},}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/boundaries\%i.dat"{}},}
 \DoxyCodeLine{         \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.directory().c\_str(),}
 \DoxyCodeLine{         \mbox{\hyperlink{namespaceProblem__Parameter_a1dd3c6bcf97360c8fe0d288ca7610351}{Problem\_Parameter::Doc\_info}}.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
@@ -1144,14 +1103,14 @@ This member function documents the computed solution after every Newton solve.
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write trace file}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceProblem__Parameter_a55310be5f2dfcb5fcfe35d71f9c16e06}{Problem\_Parameter::Trace\_file}} }
-\DoxyCodeLine{  << this-\/>time\_pt()-\/>time() << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{  << Fluid\_mesh\_pt-\/>nelement() << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{  << max\_area << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{  << min\_area << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{  << max\_err << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{  << min\_err << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{  << sqrt(square\_of\_l2\_norm) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{  << vol << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{  << this-\/>time\_pt()-\/>time() << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{  << Fluid\_mesh\_pt-\/>nelement() << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{  << max\_area << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{  << min\_area << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{  << max\_err << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{  << min\_err << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{  << sqrt(square\_of\_l2\_norm) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{  << vol << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{  << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Increment the doc\_info number}}
@@ -1160,9 +1119,7 @@ This member function documents the computed solution after every Newton solve.
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_adapt}{}\doxysubsection{Mesh adaptation for problems with \textquotesingle{}closed\textquotesingle{} free boundaries}\label{index_adapt}
@@ -1201,7 +1158,7 @@ Next, the boundary coordinates are set up and the nodes are snapped onto the cur
  \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
 \hline
-\begin{center} {\bfseries{I\+M\+P\+O\+R\+T\+A\+NT\+:}} ~\newline
+\begin{center} {\bfseries{IMPORTANT\+:}} ~\newline
 Note that the initial shape of moving free boundaries {\bfseries{must}} {\bfseries{not}} be described by {\ttfamily Triangle\+Mesh\+Curvi\+Lines}. While the use of {\ttfamily Triangle\+Mesh\+Curvi\+Lines} would ensure that the nodes are initially located exactly on the curvilinear boundary described by the associated {\ttfamily Geom\+Object} without having to \char`\"{}snap\char`\"{} them to their desired position, a problem arises when the mesh is adapted. When this happens, nodes on curvilinear boundaries that are described by {\ttfamily Triangle\+Mesh\+Curvi\+Lines} are placed on the (presumably unchanged) geometry defined by the associated {\ttfamily Geom\+Object} rather than being placed on the deformed boundary as described above -- the free surface therefore keeps jumping back to its initial position whenever the mesh is adapted which is unlikely to be desired! \end{center}    \\\cline{1-1}
 \end{longtabu}
 \end{center} \hypertarget{index_issues}{}\doxysubsection{Modifications to the basic mesh re-\/generation procedure}\label{index_issues}
@@ -1222,6 +1179,7 @@ The tolerance for the unrefinement of polygons is set by the function
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TriangleMesh::set\_polyline\_unrefinement\_tolerance(...)}
+
 \end{DoxyCode}
 
 
@@ -1230,6 +1188,7 @@ By default we allow polyline unrefinement (with a default tolerance of 0.\+04). 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TriangleMesh::disable\_polyline\_unrefinement()}
+
 \end{DoxyCode}
 
 
@@ -1250,6 +1209,7 @@ The tolerance for the refinement of polygons is set by the function
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TriangleMesh::set\_polyline\_refinement\_tolerance(...)}
+
 \end{DoxyCode}
 
 
@@ -1258,6 +1218,7 @@ By default we allow polyline refinement (with a default tolerance of 0.\+08). Po
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TriangleMesh::disable\_polyline\_refinement()}
+
 \end{DoxyCode}
 \hypertarget{index_redistribution}{}\doxysubsubsection{Redistribution of segments between polylines}\label{index_redistribution}
 The kinematic boundary condition (5) determines only the normal displacement of the boundary, hence the tangential displacement of nodes on the boundary is not controlled directly. It is therefore possible that nodes move along the perimeter of the curvilinear boundary and, as a result, one polyline may become much shorter than the others, as illustrated in the transition from a) to b) in the figure below. This is clearly undesirable and can be avoided by redistributing the vertices/segment between the polygon\textquotesingle{}s constituent polylines such that each polyline spans an approximately equal fraction of the polygon\textquotesingle{}s overall perimeter. This process is illustrated in b) and c) in the figure below. Note that the redistribution of segments does not change the shape of the polygonal boundary but merely the way in which it is represented in terms of polylines.
@@ -1274,6 +1235,7 @@ We provide the option to perform this step immediately after the generation of t
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TriangleMeshPolygon::enable\_redistribution\_of\_segments\_between\_polylines()}
+
 \end{DoxyCode}
 
 
@@ -1298,5 +1260,5 @@ Note that the redistribution of segments is not possible/sensible for {\ttfamily
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

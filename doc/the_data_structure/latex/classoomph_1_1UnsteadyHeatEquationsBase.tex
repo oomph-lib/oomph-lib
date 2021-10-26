@@ -2,23 +2,28 @@
 \label{classoomph_1_1UnsteadyHeatEquationsBase}\index{oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}}
 
 
+Base class so that we don\textquotesingle{}t need to know the dimension just to set the source function!  
+
+
+
+
 {\ttfamily \#include $<$unsteady\+\_\+heat\+\_\+elements.\+h$>$}
 
 Inheritance diagram for oomph\+::Unsteady\+Heat\+Equations\+Base\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.955145cm]{classoomph_1_1UnsteadyHeatEquationsBase}
+\includegraphics[height=3.000000cm]{classoomph_1_1UnsteadyHeatEquationsBase}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}}) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}}) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
 \begin{DoxyCompactList}\small\item\em Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_a723b841dae0679dcfda13e565dd40f6b}{source\+\_\+fct\+\_\+pt}} ()=0
+virtual \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_ab5f65377e69b3219626ad2fda6db570c}{source\+\_\+fct\+\_\+pt}} ()=0
 \begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -26,7 +31,7 @@ virtual \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b69
 \doxysubsection{Detailed Description}
 Base class so that we don\textquotesingle{}t need to know the dimension just to set the source function! 
 
-Definition at line 47 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00047}{47}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
@@ -35,7 +40,7 @@ Definition at line 47 of file unsteady\+\_\+heat\+\_\+elements.\+h.
 \index{oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}!UnsteadyHeatSourceFctPt@{UnsteadyHeatSourceFctPt}}
 \index{UnsteadyHeatSourceFctPt@{UnsteadyHeatSourceFctPt}!oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}}
 \doxysubsubsection{\texorpdfstring{UnsteadyHeatSourceFctPt}{UnsteadyHeatSourceFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Unsteady\+Heat\+Equations\+Base\+::\+Unsteady\+Heat\+Source\+Fct\+Pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+Unsteady\+Heat\+Equations\+Base\+::\+Unsteady\+Heat\+Source\+Fct\+Pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
 
 
 
@@ -43,24 +48,20 @@ Function pointer to source function fct(t,x,f(x,t)) -- x is a Vector!
 
 
 
-Definition at line 52 of file unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{unsteady__heat__elements_8h_source_l00052}{52}} of file \mbox{\hyperlink{unsteady__heat__elements_8h_source}{unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquationsBase_a723b841dae0679dcfda13e565dd40f6b}\label{classoomph_1_1UnsteadyHeatEquationsBase_a723b841dae0679dcfda13e565dd40f6b}} 
+\mbox{\Hypertarget{classoomph_1_1UnsteadyHeatEquationsBase_ab5f65377e69b3219626ad2fda6db570c}\label{classoomph_1_1UnsteadyHeatEquationsBase_ab5f65377e69b3219626ad2fda6db570c}} 
 \index{oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}!source\_fct\_pt@{source\_fct\_pt}}
 \index{source\_fct\_pt@{source\_fct\_pt}!oomph::UnsteadyHeatEquationsBase@{oomph::UnsteadyHeatEquationsBase}}
 \doxysubsubsection{\texorpdfstring{source\_fct\_pt()}{source\_fct\_pt()}}
-{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}}\& oomph\+::\+Unsteady\+Heat\+Equations\+Base\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase_accf23819639b695221238a0e7b1c8384}{Unsteady\+Heat\+Source\+Fct\+Pt}} \& oomph\+::\+Unsteady\+Heat\+Equations\+Base\+::source\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
 Access function\+: Pointer to source function. 
-
-
-
-Implemented in \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations_a8bd87b25f079be4dbee6edfc00127d47}{oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$}}.
 
 
 

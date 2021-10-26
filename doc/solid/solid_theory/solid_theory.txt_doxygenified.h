@@ -514,25 +514,15 @@ theoretical framework. The general idea is sketched in the
 following figures:
 
 
-
-
-
-
 <CENTER>
-<TABLE>
-<TR>
-<TD COLSPAN=2>
 <center><b>State 0:</b></center>
 <CENTER>
 \image html Isotropic_growth_0.gif " " 
 \image latex Isotropic_growth_0.eps " " width=0.35\textwidth
-Undeformed, ungrown and 
-stress-free reference configuration.
+Undeformed, ungrown and stress-free reference configuration.
 </CENTER>
-</TD>
-</TR>
-</TABLE>
 </CENTER>
+
 
 
 <TABLE>
@@ -619,11 +609,10 @@ N1), generates internal stresses which
 - balance the applied loads,
 - keep the material elements in local equilibrium.
 </TD>
-</TR> 
-</TABLE> 
- 
+</TR>
+</TABLE>
 
-    
+
  
 We start our analysis with the stress-free (and 
 "ungrown") reference configuration "0" at the top of the diagram,

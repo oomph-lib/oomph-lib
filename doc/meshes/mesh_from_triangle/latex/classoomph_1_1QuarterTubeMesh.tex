@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1QuarterTubeMesh}{}\doxysection{oomph\+::Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1QuarterTubeMesh}{}\doxysection{oomph\+::Quarter\+Tube\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1QuarterTubeMesh}\index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$quarter\+\_\+tube\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Quarter\+Tube\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.445415cm]{classoomph_1_1QuarterTubeMesh}
@@ -18,19 +18,19 @@ Inheritance diagram for oomph\+::Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a4dfb9a85b3c07d8bafa0f916c445c18a}{Quarter\+Tube\+Mesh}} (Geom\+Object $\ast$\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_af59c4cde343ddd76caea4bc8c8ad8b94}{wall\+\_\+pt}}, const Vector$<$ double $>$ \&xi\+\_\+lo, const double \&fract\+\_\+mid, const Vector$<$ double $>$ \&xi\+\_\+hi, const unsigned \&nlayer, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a4dfb9a85b3c07d8bafa0f916c445c18a}{Quarter\+Tube\+Mesh}} (Geom\+Object $\ast$\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}{wall\+\_\+pt}}, const Vector$<$ double $>$ \&xi\+\_\+lo, const double \&fract\+\_\+mid, const Vector$<$ double $>$ \&xi\+\_\+hi, const unsigned \&nlayer, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper. Timestepper defaults to Steady dummy timestepper. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_aeb6ec7337a9e1666ebc6c942e788bab7}{$\sim$\+Quarter\+Tube\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
-Geom\+Object $\ast$\& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_af59c4cde343ddd76caea4bc8c8ad8b94}{wall\+\_\+pt}} ()
+Geom\+Object $\ast$\& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}{wall\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to Geom\+Object representing wall. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a5629c3a0d3f8a60165fb7024b851e3e3}{domain\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_ab9214139f27adc4cb6096ad9463c2c53}{domain\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to domain. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_a3d8c15c17d9912d8c519c028437c0b2c}{Quarter\+Tube\+Domain\+::\+B\+L\+Squash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_afa145689b62afa7e66573c8c42bda8dd}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_a3d8c15c17d9912d8c519c028437c0b2c}{Quarter\+Tube\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_ac71d6fc73082531c0a4dd51795615372}{bl\+\_\+squash\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Function pointer for function that squashes the outer macro elements towards the wall by mapping the input value of the \char`\"{}radial\char`\"{} macro element coordinate to the return value (defined in the underlying Domain object) \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a5c880d6214a07676a533227f813634d8}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} ()
+virtual \mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_ab4c35233e74407691a0d22549034ecb9}{axial\+\_\+spacing\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Function pointer for function for axial spacing. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a351b2060f43c881d7bda9b7ef4a1c32e}{domain\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_a842435a25ef82c9d2cbac5bdcfcb857f}{domain\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access function to underlying domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -48,9 +48,8 @@ Vector$<$ double $>$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh_aabb226a0b02
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}
 3D quarter tube mesh class. The domain is specified by the Geom\+Object that identifies boundary 3. Non-\/refineable base version! 
 
 The mesh boundaries are numbered as follows\+:
@@ -62,9 +61,9 @@ The mesh boundaries are numbered as follows\+:
 \item Boundary 4\+: \char`\"{}\+Outflow\char`\"{} cross section; located along the line parametrised by $ \xi_0 = \xi_0^{hi} $ on the geometric object that specifies the wall.
 \end{DoxyItemize}
 
-I\+M\+P\+O\+R\+T\+A\+NT N\+O\+TE\+: The interface looks more general than it should. The toplogy must remain that of a quarter tube, or the mesh generation will break. 
+IMPORTANT NOTE\+: The interface looks more general than it should. The toplogy must remain that of a quarter tube, or the mesh generation will break. 
 
-Definition at line 64 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00064}{64}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -73,8 +72,8 @@ Definition at line 64 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!QuarterTubeMesh@{QuarterTubeMesh}}
 \index{QuarterTubeMesh@{QuarterTubeMesh}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{QuarterTubeMesh()}{QuarterTubeMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{Quarter\+Tube\+Mesh}} (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{wall\+\_\+pt,  }\item[{const Vector$<$ double $>$ \&}]{xi\+\_\+lo,  }\item[{const double \&}]{fract\+\_\+mid,  }\item[{const Vector$<$ double $>$ \&}]{xi\+\_\+hi,  }\item[{const unsigned \&}]{nlayer,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{Quarter\+Tube\+Mesh}} (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{wall\+\_\+pt,  }\item[{const Vector$<$ double $>$ \&}]{xi\+\_\+lo,  }\item[{const double \&}]{fract\+\_\+mid,  }\item[{const Vector$<$ double $>$ \&}]{xi\+\_\+hi,  }\item[{const unsigned \&}]{nlayer,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
 
 
 
@@ -82,18 +81,18 @@ Constructor\+: Pass pointer to geometric object that specifies the wall, start a
 
 Constructor for deformable quarter tube mesh class. The domain is specified by the Geom\+Object that identifies boundary 3. Pass pointer to geometric object that specifies the wall, start and end coordinates on the geometric object, and the fraction along which the dividing line is to be placed, and the timestepper. Timestepper defaults to Static dummy timestepper. 
 
-Definition at line 44 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00044}{44}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt, oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wall\+\_\+pt(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xi\+\_\+hi, and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xi\+\_\+lo.
+References \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00121}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00086}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00133}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Xi\+\_\+hi}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00127}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Xi\+\_\+lo}}.
 
 \mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_aeb6ec7337a9e1666ebc6c942e788bab7}\label{classoomph_1_1QuarterTubeMesh_aeb6ec7337a9e1666ebc6c942e788bab7}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!````~QuarterTubeMesh@{$\sim$QuarterTubeMesh}}
 \index{````~QuarterTubeMesh@{$\sim$QuarterTubeMesh}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$QuarterTubeMesh()}{~QuarterTubeMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{Quarter\+Tube\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{Quarter\+Tube\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -101,21 +100,21 @@ Destructor\+: empty.
 
 
 
-Definition at line 80 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00080}{80}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt.
+References \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00121}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_a5c880d6214a07676a533227f813634d8}\label{classoomph_1_1QuarterTubeMesh_a5c880d6214a07676a533227f813634d8}} 
+\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_ab4c35233e74407691a0d22549034ecb9}\label{classoomph_1_1QuarterTubeMesh_ab4c35233e74407691a0d22549034ecb9}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}}
 \index{axial\_spacing\_fct\_pt@{axial\_spacing\_fct\_pt}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{axial\_spacing\_fct\_pt()}{axial\_spacing\_fct\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_ae347af42a5dcb9b3b82c2247975b01db}{Quarter\+Tube\+Domain\+::\+Axial\+Spacing\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -123,22 +122,22 @@ Function pointer for function for axial spacing.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_ac6518f83dd81c5ef1a8d908be8c9f473}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1AlgebraicRefineableQuarterTubeMesh_a66b6f6855d25e272a2730f28d2108a40}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 108 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00108}{108}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Quarter\+Tube\+Domain\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt(), and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt.
+References \mbox{\hyperlink{quarter__tube__domain_8h_source_l00116}{oomph\+::\+Quarter\+Tube\+Domain\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00121}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_afa145689b62afa7e66573c8c42bda8dd}\label{classoomph_1_1QuarterTubeMesh_afa145689b62afa7e66573c8c42bda8dd}} 
+\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_ac71d6fc73082531c0a4dd51795615372}\label{classoomph_1_1QuarterTubeMesh_ac71d6fc73082531c0a4dd51795615372}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}}
 \index{bl\_squash\_fct\_pt@{bl\_squash\_fct\_pt}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{bl\_squash\_fct\_pt()}{bl\_squash\_fct\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_a3d8c15c17d9912d8c519c028437c0b2c}{Quarter\+Tube\+Domain\+::\+B\+L\+Squash\+Fct\+Pt}}\& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain_a3d8c15c17d9912d8c519c028437c0b2c}{Quarter\+Tube\+Domain\+::\+BLSquash\+Fct\+Pt}} \& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -146,18 +145,18 @@ Function pointer for function that squashes the outer macro elements towards the
 
 
 
-Definition at line 101 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00101}{101}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Quarter\+Tube\+Domain\+::bl\+\_\+squash\+\_\+fct\+\_\+pt(), and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt.
+References \mbox{\hyperlink{quarter__tube__domain_8h_source_l00094}{oomph\+::\+Quarter\+Tube\+Domain\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00121}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_a5629c3a0d3f8a60165fb7024b851e3e3}\label{classoomph_1_1QuarterTubeMesh_a5629c3a0d3f8a60165fb7024b851e3e3}} 
+\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_ab9214139f27adc4cb6096ad9463c2c53}\label{classoomph_1_1QuarterTubeMesh_ab9214139f27adc4cb6096ad9463c2c53}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!domain\_pt@{domain\_pt}}
 \index{domain\_pt@{domain\_pt}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}}$\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -165,22 +164,22 @@ Access function to domain.
 
 
 
-Definition at line 92 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00092}{92}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt.
+References \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00121}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00325}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}.
 
-\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_a351b2060f43c881d7bda9b7ef4a1c32e}\label{classoomph_1_1QuarterTubeMesh_a351b2060f43c881d7bda9b7ef4a1c32e}} 
+\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_a842435a25ef82c9d2cbac5bdcfcb857f}\label{classoomph_1_1QuarterTubeMesh_a842435a25ef82c9d2cbac5bdcfcb857f}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!domain\_pt@{domain\_pt}}
 \index{domain\_pt@{domain\_pt}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{domain\_pt()}{domain\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}}$\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}} $\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::domain\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -188,18 +187,18 @@ Access function to underlying domain.
 
 
 
-Definition at line 114 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00114}{114}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Domain\+\_\+pt.
+References \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00121}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Domain\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_af59c4cde343ddd76caea4bc8c8ad8b94}\label{classoomph_1_1QuarterTubeMesh_af59c4cde343ddd76caea4bc8c8ad8b94}} 
+\mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}\label{classoomph_1_1QuarterTubeMesh_a1a8c0a74513d5d2a4f0772ac39b2d024}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!wall\_pt@{wall\_pt}}
 \index{wall\_pt@{wall\_pt}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{wall\_pt()}{wall\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Geom\+Object$\ast$\& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::wall\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Geom\+Object $\ast$\& \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::wall\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -207,15 +206,15 @@ Access function to Geom\+Object representing wall.
 
 
 
-Definition at line 86 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00086}{86}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Wall\+\_\+pt.
+References \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00124}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Wall\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh(), and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Tube\+Mesh().
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00448}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00044}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh()}}.
 
 
 
@@ -224,8 +223,8 @@ Referenced by oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!Domain\_pt@{Domain\_pt}}
 \index{Domain\_pt@{Domain\_pt}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Domain\_pt}{Domain\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}}$\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1QuarterTubeDomain}{Quarter\+Tube\+Domain}}$\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::Domain\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -233,18 +232,18 @@ Pointer to domain.
 
 
 
-Definition at line 121 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00121}{121}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt(), oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::domain\+\_\+pt(), oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Tube\+Mesh(), oomph\+::\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Quarter\+Tube\+Mesh(), and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::$\sim$\+Quarter\+Tube\+Mesh().
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00108}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00505}{oomph\+::\+Algebraic\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::axial\+\_\+spacing\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00101}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::bl\+\_\+squash\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00092}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00044}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh()}}, \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00171}{oomph\+::\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Quarter\+Tube\+Mesh()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00080}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::$\sim$\+Quarter\+Tube\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_ac7422bd566e566fd901bbbc98d8cb3b7}\label{classoomph_1_1QuarterTubeMesh_ac7422bd566e566fd901bbbc98d8cb3b7}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!Fract\_mid@{Fract\_mid}}
 \index{Fract\_mid@{Fract\_mid}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Fract\_mid}{Fract\_mid}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Fract\+\_\+mid\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::Fract\+\_\+mid\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -252,14 +251,14 @@ Fraction along wall where outer ring is to be divided.
 
 
 
-Definition at line 130 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00130}{130}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_a961bf18652514913c6a63c4850088e8b}\label{classoomph_1_1QuarterTubeMesh_a961bf18652514913c6a63c4850088e8b}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!Wall\_pt@{Wall\_pt}}
 \index{Wall\_pt@{Wall\_pt}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Wall\_pt}{Wall\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Geom\+Object$\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Geom\+Object$\ast$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::Wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -267,18 +266,18 @@ Pointer to the geometric object that represents the curved wall.
 
 
 
-Definition at line 124 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00124}{124}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update(), and oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wall\+\_\+pt().
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00325}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+macro\+\_\+element\+\_\+node\+\_\+update()}}, and \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00086}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::wall\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_aabb226a0b0208c579f426e58d944685c}\label{classoomph_1_1QuarterTubeMesh_aabb226a0b0208c579f426e58d944685c}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!Xi\_hi@{Xi\_hi}}
 \index{Xi\_hi@{Xi\_hi}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Xi\_hi}{Xi\_hi}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$double$>$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Xi\+\_\+hi\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Vector$<$double$>$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::Xi\+\_\+hi\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -286,18 +285,18 @@ Upper limits for the coordinates along the wall.
 
 
 
-Definition at line 133 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00133}{133}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Tube\+Mesh().
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00044}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QuarterTubeMesh_a323243990ecc860e5083d205c1ab247c}\label{classoomph_1_1QuarterTubeMesh_a323243990ecc860e5083d205c1ab247c}} 
 \index{oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}!Xi\_lo@{Xi\_lo}}
 \index{Xi\_lo@{Xi\_lo}!oomph::QuarterTubeMesh$<$ ELEMENT $>$@{oomph::QuarterTubeMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Xi\_lo}{Xi\_lo}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$double$>$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Xi\+\_\+lo\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Vector$<$double$>$ \mbox{\hyperlink{classoomph_1_1QuarterTubeMesh}{oomph\+::\+Quarter\+Tube\+Mesh}}$<$ ELEMENT $>$\+::Xi\+\_\+lo\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -305,11 +304,11 @@ Lower limits for the coordinates along the wall.
 
 
 
-Definition at line 127 of file quarter\+\_\+tube\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source_l00127}{127}} of file \mbox{\hyperlink{quarter__tube__mesh_8template_8h_source}{quarter\+\_\+tube\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Quarter\+Tube\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Quarter\+Tube\+Mesh().
+Referenced by \mbox{\hyperlink{quarter__tube__mesh_8template_8cc_source_l00044}{oomph\+::\+Quarter\+Tube\+Mesh$<$ ELEMENT $>$\+::\+Quarter\+Tube\+Mesh()}}.
 
 
 

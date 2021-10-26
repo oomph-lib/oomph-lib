@@ -32,7 +32,7 @@
 namespace oomph
 {
   //=====================================================================
-  /// \short Fill in the residuals for the volume constraint
+  /// Fill in the residuals for the volume constraint
   //====================================================================
   void VolumeConstraintElement::
     fill_in_generic_contribution_to_residuals_volume_constraint(
@@ -53,7 +53,7 @@ namespace oomph
   }
 
   //===========================================================================
-  /// \short Constructor: Pass pointer to target volume. "Pressure" value that
+  /// Constructor: Pass pointer to target volume. "Pressure" value that
   /// "traded" for the volume contraint is created internally (as a Data
   /// item with a single pressure value)
   //===========================================================================
@@ -75,7 +75,7 @@ namespace oomph
   }
 
   //======================================================================
-  /// \short Constructor: Pass pointer to target volume, pointer to Data
+  /// Constructor: Pass pointer to target volume, pointer to Data
   /// item whose value specified by index_of_traded_pressure represents
   /// the "Pressure" value that "traded" for the volume contraint.
   /// The Data is stored as external Data for this element.
@@ -100,13 +100,13 @@ namespace oomph
   }
 
 
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////
 
 
   //====================================================================
-  /// \short Helper function to fill in contributions to residuals
+  /// Helper function to fill in contributions to residuals
   /// (remember that part of the residual is added by the
   /// the associated VolumeConstraintElement). This is specific for
   /// 1D line elements that bound 2D cartesian fluid elements.
@@ -184,7 +184,7 @@ namespace oomph
 
 
   //====================================================================
-  /// \short Return this element's contribution to the total volume enclosed
+  /// Return this element's contribution to the total volume enclosed
   //====================================================================
   double LineVolumeConstraintBoundingElement::contribution_to_enclosed_volume()
   {
@@ -256,12 +256,12 @@ namespace oomph
   }
 
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
   //====================================================================
-  /// \short Return this element's contribution to the total volume enclosed
+  /// Return this element's contribution to the total volume enclosed
   //====================================================================
   double AxisymmetricVolumeConstraintBoundingElement::
     contribution_to_enclosed_volume()
@@ -334,13 +334,13 @@ namespace oomph
   }
 
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //====================================================================
-  /// \short Helper function to fill in contributions to residuals
+  /// Helper function to fill in contributions to residuals
   /// (remember that part of the residual is added by the
   /// the associated VolumeConstraintElement). This is specific for
   /// axisymmetric line elements that bound 2D axisymmetric fluid elements.
@@ -420,13 +420,13 @@ namespace oomph
     }
   }
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //=================================================================
-  /// \short Helper function to fill in contributions to residuals
+  /// Helper function to fill in contributions to residuals
   /// (remember that part of the residual is added by the
   /// the associated VolumeConstraintElement). This is specific for
   /// 2D surface elements that bound 3D cartesian fluid elements.

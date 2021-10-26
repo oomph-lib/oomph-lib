@@ -1,32 +1,37 @@
 \hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis}{}\doxysection{oomph\+::One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis Namespace Reference}
 \label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis}\index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
+
+
+One dimensional shape functions and derivatives. Empty -- simply establishes the template parameters.  
+
+
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_addb2651435ac3f5e7f4365e2c82fecb4}{shape}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$Psi)
+{\footnotesize template$<$unsigned NNODE\+\_\+1D$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_addb2651435ac3f5e7f4365e2c82fecb4}{shape}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$Psi)
 \begin{DoxyCompactList}\small\item\em Definition for 1D Lagrange shape functions. The value of all the shape functions at the local coordinate s are returned in the array Psi. \end{DoxyCompactList}\item 
-{\footnotesize template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}{dshape}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$D\+Psi)
-\begin{DoxyCompactList}\small\item\em Definition for derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array D\+Psi. \end{DoxyCompactList}\item 
-{\footnotesize template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad9b93faf921f2727926a60c53c69f96a}{d2shape}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$D\+Psi)
-\begin{DoxyCompactList}\small\item\em Definition for second derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array D\+Psi. \end{DoxyCompactList}\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a97bf7354897068717f5c9461fb976117}{shape$<$ 2 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$Psi)
+{\footnotesize template$<$unsigned NNODE\+\_\+1D$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}{dshape}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$DPsi)
+\begin{DoxyCompactList}\small\item\em Definition for derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi. \end{DoxyCompactList}\item 
+{\footnotesize template$<$unsigned NNODE\+\_\+1D$>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad9b93faf921f2727926a60c53c69f96a}{d2shape}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$DPsi)
+\begin{DoxyCompactList}\small\item\em Definition for second derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi. \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a97bf7354897068717f5c9461fb976117}{shape$<$ 2 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$Psi)
 \begin{DoxyCompactList}\small\item\em 1D shape functions specialised to linear order (2 Nodes) \end{DoxyCompactList}\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_adaaba3e5abd4532dbf77d5791f5b538f}{dshape$<$ 2 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$D\+Psi)
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_adaaba3e5abd4532dbf77d5791f5b538f}{dshape$<$ 2 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$DPsi)
 \begin{DoxyCompactList}\small\item\em Derivatives of 1D shape functions specialised to linear order (2 Nodes) \end{DoxyCompactList}\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a3b808ab290ee390ca7157727343a4298}{d2shape$<$ 2 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$D\+Psi)
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a3b808ab290ee390ca7157727343a4298}{d2shape$<$ 2 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$DPsi)
 \begin{DoxyCompactList}\small\item\em Second Derivatives of 1D shape functions, specialised to linear order (2 Nodes) \end{DoxyCompactList}\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_abbfe53c6539cf5435a7d11a17116b1c8}{shape$<$ 3 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$Psi)
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_abbfe53c6539cf5435a7d11a17116b1c8}{shape$<$ 3 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$Psi)
 \begin{DoxyCompactList}\small\item\em 1D shape functions specialised to quadratic order (3 Nodes) \end{DoxyCompactList}\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a654a28d5d92c05897f47a6cc33862e94}{dshape$<$ 3 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$D\+Psi)
-\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a9c80b1ccb62dddf586498c3635643f66}{d2shape$<$ 3 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$D\+Psi)
-\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad17bea497f267224986e1ccb4bbf6587}{shape$<$ 4 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$Psi)
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a654a28d5d92c05897f47a6cc33862e94}{dshape$<$ 3 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$DPsi)
+\begin{DoxyCompactList}\small\item\em Derivatives of 1D shape functions specialised to quadratic order (3 Nodes) \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a9c80b1ccb62dddf586498c3635643f66}{d2shape$<$ 3 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$DPsi)
+\begin{DoxyCompactList}\small\item\em Second Derivatives of 1D shape functions, specialised to quadratic order (3 Nodes) \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad17bea497f267224986e1ccb4bbf6587}{shape$<$ 4 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$Psi)
 \begin{DoxyCompactList}\small\item\em 1D shape functions specialised to cubic order (4 Nodes) \end{DoxyCompactList}\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a0cf5eef710f509c58d08fe02e4d52040}{dshape$<$ 4 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$D\+Psi)
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a0cf5eef710f509c58d08fe02e4d52040}{dshape$<$ 4 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$DPsi)
 \begin{DoxyCompactList}\small\item\em Derivatives of 1D shape functions specialised to cubic order (4 Nodes) \end{DoxyCompactList}\item 
-template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_aa5f7d6d776bf10b5453356ddee424249}{d2shape$<$ 4 $>$}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double $\ast$D\+Psi)
-\end{DoxyCompactItemize}
+template$<$$>$ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_aa5f7d6d776bf10b5453356ddee424249}{d2shape$<$ 4 $>$}} (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double $\ast$DPsi)
+\begin{DoxyCompactList}\small\item\em Second derivatives of 1D shape functions specialised to cubic order (4 nodes) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -37,23 +42,23 @@ One dimensional shape functions and derivatives. Empty -- simply establishes the
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!d2shape@{d2shape}}
 \index{d2shape@{d2shape}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{d2shape()}{d2shape()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::d2shape (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{D\+Psi }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::d2shape (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{DPsi }\end{DoxyParamCaption})}
 
 
 
-Definition for second derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array D\+Psi. 
+Definition for second derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi. 
 
 
 
-Definition at line 929 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l00920}{920}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a3b808ab290ee390ca7157727343a4298}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a3b808ab290ee390ca7157727343a4298}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!d2shape$<$ 2 $>$@{d2shape$<$ 2 $>$}}
 \index{d2shape$<$ 2 $>$@{d2shape$<$ 2 $>$}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{d2shape$<$ 2 $>$()}{d2shape< 2 >()}}
 {\footnotesize\ttfamily template$<$$>$ \\
-void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad9b93faf921f2727926a60c53c69f96a}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::d2shape}}$<$ 2 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{D\+Psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad9b93faf921f2727926a60c53c69f96a}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::d2shape}}$<$ 2 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{DPsi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -61,51 +66,59 @@ Second Derivatives of 1D shape functions, specialised to linear order (2 Nodes)
 
 
 
-Definition at line 966 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l00957}{957}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a9c80b1ccb62dddf586498c3635643f66}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a9c80b1ccb62dddf586498c3635643f66}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!d2shape$<$ 3 $>$@{d2shape$<$ 3 $>$}}
 \index{d2shape$<$ 3 $>$@{d2shape$<$ 3 $>$}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{d2shape$<$ 3 $>$()}{d2shape< 3 >()}}
 {\footnotesize\ttfamily template$<$$>$ \\
-void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad9b93faf921f2727926a60c53c69f96a}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::d2shape}}$<$ 3 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{D\+Psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad9b93faf921f2727926a60c53c69f96a}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::d2shape}}$<$ 3 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{DPsi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Second Derivatives of 1D shape functions, specialised to quadratic order (3 Nodes) 
 
-Definition at line 996 of file shape.\+h.
+
+
+Definition at line \mbox{\hyperlink{shape_8h_source_l00987}{987}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_aa5f7d6d776bf10b5453356ddee424249}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_aa5f7d6d776bf10b5453356ddee424249}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!d2shape$<$ 4 $>$@{d2shape$<$ 4 $>$}}
 \index{d2shape$<$ 4 $>$@{d2shape$<$ 4 $>$}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{d2shape$<$ 4 $>$()}{d2shape< 4 >()}}
 {\footnotesize\ttfamily template$<$$>$ \\
-void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad9b93faf921f2727926a60c53c69f96a}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::d2shape}}$<$ 4 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{D\+Psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad9b93faf921f2727926a60c53c69f96a}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::d2shape}}$<$ 4 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{DPsi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Second derivatives of 1D shape functions specialised to cubic order (4 nodes) 
 
-Definition at line 1027 of file shape.\+h.
+
+
+Definition at line \mbox{\hyperlink{shape_8h_source_l01018}{1018}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!dshape@{dshape}}
 \index{dshape@{dshape}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{dshape()}{dshape()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::dshape (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{D\+Psi }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::dshape (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{DPsi }\end{DoxyParamCaption})}
 
 
 
-Definition for derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array D\+Psi. 
+Definition for derivatives of 1D Lagrange shape functions. The value of all the shape function derivatives at the local coordinate s are returned in the array DPsi. 
 
 
 
-Definition at line 909 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l00900}{900}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_adaaba3e5abd4532dbf77d5791f5b538f}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_adaaba3e5abd4532dbf77d5791f5b538f}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!dshape$<$ 2 $>$@{dshape$<$ 2 $>$}}
 \index{dshape$<$ 2 $>$@{dshape$<$ 2 $>$}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{dshape$<$ 2 $>$()}{dshape< 2 >()}}
 {\footnotesize\ttfamily template$<$$>$ \\
-void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::dshape}}$<$ 2 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{D\+Psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::dshape}}$<$ 2 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{DPsi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -113,25 +126,29 @@ Derivatives of 1D shape functions specialised to linear order (2 Nodes)
 
 
 
-Definition at line 957 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l00948}{948}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a654a28d5d92c05897f47a6cc33862e94}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a654a28d5d92c05897f47a6cc33862e94}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!dshape$<$ 3 $>$@{dshape$<$ 3 $>$}}
 \index{dshape$<$ 3 $>$@{dshape$<$ 3 $>$}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{dshape$<$ 3 $>$()}{dshape< 3 >()}}
 {\footnotesize\ttfamily template$<$$>$ \\
-void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::dshape}}$<$ 3 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{D\+Psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::dshape}}$<$ 3 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{DPsi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Derivatives of 1D shape functions specialised to quadratic order (3 Nodes) 
 
-Definition at line 986 of file shape.\+h.
+
+
+Definition at line \mbox{\hyperlink{shape_8h_source_l00977}{977}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a0cf5eef710f509c58d08fe02e4d52040}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a0cf5eef710f509c58d08fe02e4d52040}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!dshape$<$ 4 $>$@{dshape$<$ 4 $>$}}
 \index{dshape$<$ 4 $>$@{dshape$<$ 4 $>$}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{dshape$<$ 4 $>$()}{dshape< 4 >()}}
 {\footnotesize\ttfamily template$<$$>$ \\
-void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::dshape}}$<$ 4 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{D\+Psi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ac2ef346502faf14f79eb9b66b133e952}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::dshape}}$<$ 4 $>$ (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{DPsi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -139,13 +156,13 @@ Derivatives of 1D shape functions specialised to cubic order (4 Nodes)
 
 
 
-Definition at line 1016 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l01007}{1007}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_addb2651435ac3f5e7f4365e2c82fecb4}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_addb2651435ac3f5e7f4365e2c82fecb4}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!shape@{shape}}
 \index{shape@{shape}!oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}}
 \doxysubsubsection{\texorpdfstring{shape()}{shape()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
 void oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+Mixed\+Order\+Basis\+::shape (\begin{DoxyParamCaption}\item[{const double \&}]{s,  }\item[{double $\ast$}]{Psi }\end{DoxyParamCaption})}
 
 
@@ -154,7 +171,7 @@ Definition for 1D Lagrange shape functions. The value of all the shape functions
 
 
 
-Definition at line 890 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l00881}{881}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a97bf7354897068717f5c9461fb976117}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_a97bf7354897068717f5c9461fb976117}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!shape$<$ 2 $>$@{shape$<$ 2 $>$}}
@@ -169,11 +186,11 @@ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBas
 
 
 
-Definition at line 949 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l00940}{940}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
-References s.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_abbfe53c6539cf5435a7d11a17116b1c8}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_abbfe53c6539cf5435a7d11a17116b1c8}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!shape$<$ 3 $>$@{shape$<$ 3 $>$}}
@@ -188,15 +205,15 @@ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBas
 
 
 
-Definition at line 976 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l00967}{967}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
-References s.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot().
+Referenced by \mbox{\hyperlink{mixed__order__petrov__galerkin__space__time__fluid__traction__elements_8h_source_l00200}{oomph\+::\+Navier\+Stokes\+Mixed\+Order\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad17bea497f267224986e1ccb4bbf6587}\label{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBasis_ad17bea497f267224986e1ccb4bbf6587}} 
 \index{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis@{oomph::OneDimDiscontinuousGalerkinMixedOrderBasis}!shape$<$ 4 $>$@{shape$<$ 4 $>$}}
@@ -211,9 +228,9 @@ void \mbox{\hyperlink{namespaceoomph_1_1OneDimDiscontinuousGalerkinMixedOrderBas
 
 
 
-Definition at line 1005 of file shape.\+h.
+Definition at line \mbox{\hyperlink{shape_8h_source_l00996}{996}} of file \mbox{\hyperlink{shape_8h_source}{shape.\+h}}.
 
 
 
-References s.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 

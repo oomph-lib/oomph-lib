@@ -1,0 +1,378 @@
+\hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source}{}\doxysection{unstructured\+\_\+adaptive\+\_\+fsi.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{unstructured__adaptive__fsi_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: 2D FSI on unstructured meshes with adaptivity}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{This tutorial demonstrates the use of unstructured meshes}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{in 2D fluid-\/structure interaction problems with adaptivity. The}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{formulation is extremely similar to that used in }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{<a href="{}../../../interaction/unstructured\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{unstructured fsi without adaptivity, </a> but the geometry of the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{problem is closely related to the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<a href="{}../../fsi\_channel\_with\_leaflet/html/index.html"{}> flow in a}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{channel with a leaflet using structured adaptivity. </a> }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{The solid mechanics problem is exactly the same as that described in}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{<a href="{}../../../solid/unstructured\_adaptive\_solid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{unstructured solid mechanics with adaptivity tutorial. </a> The fluid}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{mechanics problem is new, but is a simple extension of the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{previous problems. The key realisation is that the unstructured}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{refinement can take place independently for the fluid and solid}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{domains provided that the common boundary between them has a common}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{parametrisation. Moreover, the common boundary <b>must</b> have the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{same parametrisation in order for the fluid-\/structure interaction to}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{be set up in the first place. Thus, setting up unstructured adaptivity}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{for fsi problems is no more difficult than setting up the original}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{unstructured problem using \(\backslash\)c oomph-\/lib's }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{<a href="{}../../../meshes/mesh\_from\_inline\_triangle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{inline unstructured mesh generation </a> procedures.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{\(\backslash\)section the\_problem The problem}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{The figure below shows a sketch of the problem. A 2D channel}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{is partly obstructed by an elastic bar and has an imposed parabolic}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{inlet velocity profile.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{\(\backslash\)image html fsi\_sketch.gif "{}Sketch of the problem showing fluid and solid boundary "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\)image latex fsi\_sketch.eps "{}Sketch of the problem showing fluid and solid boundary "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{ The non-\/dimension formulation is the same as described in }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{<a href="{}../../unstructured\_fsi/html/index.html"{}> the related}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{ non-\/adaptive problem. </a> The fluid structure interaction parameter}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{ \(\backslash\)f\$Q \(\backslash\)f\$ is the ratio of viscous fluid stress to the reference stress}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{ (Young's modulus) of the solid.  }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{ The figure below shows streamlines and pressure contours for the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{ steady solution when \(\backslash\)f\$Q = 3\(\backslash\)times 10\string^\{-\/4\} \(\backslash\)f\$ and \(\backslash\)f\$ Re = 0 \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{\(\backslash\)image html res.gif "{}The flow field (streamlines and pressure contours) and the deformation of the elastic obstacle. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{\(\backslash\)image latex res.eps "{}The flow field (streamlines and pressure contours) and the deformation of the elastic obstacle. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{\(\backslash\)section overview\_implementation Overview of the implementation}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{ The implementation is exactly the same as described in the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{<a href="{}../../unstructured\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{non-\/adaptive unstructured mesh fluid-\/structure interaction problem. </a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{The only difference is that the meshes are constructed using \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{oomph-\/lib's <a href="{}../../../meshes/mesh\_from\_inline\_triangle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{inline mesh generation procedures. </a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{ For simplicity the common boundaries between the fluid and solid mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{ are assigned the same boundary ids, but this is not necessary. The}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{ boundary ids for each domain are shown in the sketch above.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)section namespace Problem Parameters}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{The various problem parameters are defined in a }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{global namespace. We define the Reynolds number, \(\backslash\)f\$ Re \(\backslash\)f\$, and}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{the FSI interaction parameter \(\backslash\)f\$ Q \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_adaptive\_2d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)skipline start\_namespace}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{\(\backslash\)until Q =}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{We specify the Poisson ratio of the solid and }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{provide a pointer to the constitutive equation for the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{solid. }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)until Constitutive\_law\_pt}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{The Poisson's ratio and pointer to a constitutive law for the mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{deformation is specified separately.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)until end namespace }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{We set an output directory, trace file and instantiate the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{constitutive laws for the real and mesh solid mechanics computations}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{with the appropriate Poisson ratios:}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_adaptive\_2d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)skipline DocInfo doc\_info}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{\(\backslash\)until ::Mesh\_Nu);}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{We then create the \(\backslash\)c Problem object and output the initial guess for}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{the solution}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{\(\backslash\)until ()++}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{Initially \(\backslash\)f\$ Q=0 \(\backslash\)f\$ and \(\backslash\)f\$ Re=0 \(\backslash\)f\$, so the solid should remain}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{undeformed and the fluid problem is linear. We expect to obtain the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{solution in one Newton iteration and so we perform one steady solve with}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{the default mesh and output the result. We also output the strain}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{energy of the solid and dissipation of the fluid as global measures of}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{the solution that can be used for validation. (The unstructured meshes }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{generated are not guaranteed to be exactly the same on different}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{computers.)}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{\(\backslash\)until dissipation(trace);}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{Finally, we perform a parameter study by increasing \(\backslash\)f\$ Q \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{computing the result with one round of adaptivity and then writing the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{results to output files.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{\(\backslash\)skipline Crank}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{\(\backslash\)section class The Problem class}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{The \(\backslash\)c Problem class has a constructor, destructor and a post-\/processing}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{member function. The class also includes the standard member}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{functions \(\backslash\)c actions\_before\_adapt() and \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{actions\_after\_adapt(). There are private member }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{functions that create and destroy the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{required \(\backslash\)c FSISolidTractionElements that apply the load from the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{fluid on the solid and the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{ImposeDisplacementByLagrangeMultiplierElements that are used to}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{(weakly) align the boundary of the fluid mesh with the solid}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{domain. There are also private member functions to compute the fluid}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{dissipation, solid strain energy and a public member function that }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{outputs the computed strain and dissipation to a specified trace file.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{The class provided storage for pointers to the Solid Mesh, the Fluid}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{Mesh and vectors of pointers to meshes of \(\backslash\)c FaceElements on}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{the boundaries over which the interaction takes place. There is also}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{storage for the \(\backslash\)c GeomObject incarnations of fsi boundaries of the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{solid mesh  and polygonal representations of the boundaries of the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{fluid and solid meshes.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)section constructor The Problem constructor}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{ We start by building the solid mesh, an associated error estimator}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{ and then writing the boundaries and mesh to output files. These steps}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{ are exactly the same as in the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{<a href="{}../../../solid/unstructured\_adaptive\_solid/html/index.html"{}> }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{ unstructured adaptive solid mechanics tutorial. </a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{ \(\backslash\)dontinclude unstructured\_adaptive\_2d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{ \(\backslash\)skipline start\_constructor}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{ \(\backslash\)until output("{}solid\_mesh.dat"{})}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{ We next apply the boundary conditions to the solid mesh, by pinning}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{ the positions of the nodes on the lower boundary (boundary 3)}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{ \(\backslash\)until end\_solid\_boundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{ and complete the build of the solid elements by passing the pointer}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{ to the constitutive law to all elements in the solid mesh.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{ \(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{ The next task is to build the fluid mesh, which uses three of the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{boundary segments  already constructed for the solid mesh for the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{common boundaries}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{ before constructing the remaining boundaries, building the mesh, an}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{ associated error estimator and writing the boundaries and mesh to}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{ output files.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{\(\backslash\)until output("{}fluid\_mesh.dat"{}) }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{ We then apply boundary conditions to the fluid mesh by pinning}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{ velocity everywhere apart from at the outflow (boundary 4) and}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{ pinning all nodal positions on all boundaries that are not in contact}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{ with the solid.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)until end loop over boundaries}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{ We next complete the build of the fluid elements by passing the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{ Reynolds number and mesh constitutive law to all fluid elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{\(\backslash\)until end loop over elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{ and then set the Dirichlet boundary conditions for the fluid velocity}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{ on the inlet and channel walls.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{\(\backslash\)until end Poiseuille}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{ We then build three meshes of traction elements corresponding to the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{ solid boundaries 0,1 and 2 that bound the fluid}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{\(\backslash\)until create\_fsi\_traction}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{ and three analogous meshes of Lagrange multiplier elements.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{\(\backslash\)until create\_lagrange\_multiplier}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{ The order matters because the Lagrange multiplier elements need}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{ pointers to the \(\backslash\)c GeomObject incarnation of the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{ FSITractionElements. Thus the traction elements must be created}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{ first.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{ We then combine all the sub meshes into a global mesh.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{\(\backslash\)until build\_global\_mesh()}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{ Finally, we setup the fluid-\/structure interaction for all three}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{ boundaries 0, 1 and 2 and then assign the equation numbers.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{ \(\backslash\)until end constructor}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{\(\backslash\)section actions\_before Actions before adaptation}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{Before any adaptation takes place all surface meshes are deleted and}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{the global mesh is rebuilt.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_adaptive\_2d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{\(\backslash\)skipline Actions before adapt}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{\(\backslash\)section actions\_after Actions after adaptation}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{ The adaptation is performed separately on the fluid and solid meshes}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{ and the order does not matter. In fact, the first mesh to be refined}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{ will be the first that is added as a sub mesh (in this case the fluid}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{ mesh). After adaptation of all meshes, we first reset the Lagrangian}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{ coordinates of the Fluid mesh to ensure that the mesh deformation is}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{ as robust as possible.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{ \(\backslash\)until nodal\_coordinates()}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{ Note that we <b> must </b> not reset the Lagrangian coordinates of}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{ the solid mesh because that would change the undeformed configuration}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{ of the solid. }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{ We then reapply the solid boundary conditions and pass the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{ constitutive law to the solid elements.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{ \(\backslash\)until complete solid build}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{ Next, the fluid boundary conditions are reapplied and the Reynolds}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{ number and mesh constitutive law are passed to all fluid elements., }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{ \(\backslash\)until end Poiseuille}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{ We then create the traction and Lagrange multiplier}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{ elements and rebuild the global mesh. }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{ Again the traction elements must be created first because}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{ they are used by the Lagrange multiplier elements. }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{\(\backslash\)until rebuild\_global\_mesh()}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{ Finally, we setup the FSI on the three boundaries that are in common}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{ between the fluid and the solid.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{ \(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{\(\backslash\)section fsi\_traction Creating and destroying the FSI traction and Lagrange multiplier elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{ These functions are exactly the same (apart from the obvious changes}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{ in boundary id) as those described in the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{<a href="{}../../unstructured\_fsi/html/index.html"{}> non-\/adaptive}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{unstructured fsi tutorial. </a> and are not repeated here.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{\(\backslash\)section doc\_solution Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{The post-\/processing routine simply executes the output functions for }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{the fluid and solid meshes and writes the results into separate}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{files. Again this is exactly the same as in the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{<a href="{}../../unstructured\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{non-\/adaptive </a> case.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{\(\backslash\)section comm\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{ The majority of comments in the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{<a href="{}../../unstructured\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{ non-\/adaptive unstructured FSI tutorial </a> also apply here. As}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{ mentioned above, the reason why the methodology works so}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{ straightforwardly is because the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{ parametrisation of common boundaries must be the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{ same in the fluid and solid meshes. If not, setting up the}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{ fluid-\/structure interaction will not work even before any adaptation}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{ takes place. Thus, provided that your unstructured FSI problem has been}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{ correctly set up in the case without adaptivity, adding adaptivity is}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{ completely straightforward. }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{\(\backslash\)subsection ex Exercises}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{-\/\# Confirm that the order in which the sub-\/meshes are added does not}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{   affect the results.  }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{-\/\# Investigate the behaviour of the system under increasing Reynolds}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{   number.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{-\/\# Compare the results of the present (two-\/d elastic) problem }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{to that of the }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{ <a href="{}../../fsi\_channel\_with\_leaflet/html/index.html"{}> }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{  (one-\/d) beam immersed within a channel. </a> Do the results agree as}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{   the thickness of the two-\/d elastic bar decreases?}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{-\/\# Modify your driver to perform unsteady runs and again compare your}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{   results to the one-\/dimensional beam code.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/interaction/unstructured\_adaptive\_fsi"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{demo\_drivers/interaction/unstructured\_adaptive\_fsi}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/interaction/unstructured\_adaptive\_fsi/unstructured\_adaptive\_2d\_fsi.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{demo\_drivers/interaction/unstructured\_adaptive\_fsi/unstructured\_adaptive\_2d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{unstructured__adaptive__fsi_8txt__doxygenified_8h_source_l00373}00373 }
+
+\end{DoxyCode}

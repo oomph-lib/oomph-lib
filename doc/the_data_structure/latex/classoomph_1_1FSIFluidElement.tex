@@ -1,42 +1,44 @@
-\hypertarget{classoomph_1_1FSIFluidElement}{}\doxysection{oomph\+::F\+S\+I\+Fluid\+Element Class Reference}
+\hypertarget{classoomph_1_1FSIFluidElement}{}\doxysection{oomph\+::FSIFluid\+Element Class Reference}
 \label{classoomph_1_1FSIFluidElement}\index{oomph::FSIFluidElement@{oomph::FSIFluidElement}}
 
 
-The \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} class is a base class for all fluid finite elements that apply a load (traction) onto an adjacent \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}.  
+/////////////////////////////////////////////////////////////////////////  
 
 
 
 
 {\ttfamily \#include $<$fsi.\+h$>$}
 
-Inheritance diagram for oomph\+::F\+S\+I\+Fluid\+Element\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::FSIFluid\+Element\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.174825cm]{classoomph_1_1FSIFluidElement}
+\includegraphics[height=2.616822cm]{classoomph_1_1FSIFluidElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1FSIFluidElement_a7de98463543c9e0661d4a9b248f71724}{F\+S\+I\+Fluid\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1FSIFluidElement_a7de98463543c9e0661d4a9b248f71724}{FSIFluid\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FSIFluidElement_a28c2f33a00254914cb70cd10841ed8d0}{F\+S\+I\+Fluid\+Element}} (const \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} \&)
+\mbox{\hyperlink{classoomph_1_1FSIFluidElement_aaf77002137429e4a8387e74e4156cb25}{FSIFluid\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{FSIFluid\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a5d5b8b33130b85f908b04fc2d8ddd691}{operator=}} (const \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} \&)
+void \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a2eaf0f0017ba4fa66ca67f87adcde7c3}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{FSIFluid\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FSIFluidElement_acf10e6a716b5e0f743579dfce32e9294}{get\+\_\+load}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)=0
-\begin{DoxyCompactList}\small\item\em Compute the load vector that is applied by current element (at its local coordinate s) onto the adjacent Solid\+Element. N is the outer unit normal on the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+load\+\_\+data)=0
+virtual void \mbox{\hyperlink{classoomph_1_1FSIFluidElement_acf10e6a716b5e0f743579dfce32e9294}{get\+\_\+load}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&load)=0
+\begin{DoxyCompactList}\small\item\em Compute the load vector that is applied by current element (at its local coordinate s) onto the adjacent Solid\+Element. N is the outer unit normal on the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{FSIFluid\+Element}}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}{identify\+\_\+load\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+load\+\_\+data)=0
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&paired\+\_\+pressure\+\_\+data)=0
+virtual void \mbox{\hyperlink{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}{identify\+\_\+pressure\+\_\+data}} (std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&paired\+\_\+pressure\+\_\+data)=0
 \begin{DoxyCompactList}\small\item\em Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-The \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} class is a base class for all fluid finite elements that apply a load (traction) onto an adjacent \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}. 
+///////////////////////////////////////////////////////////////////////// 
 
-Definition at line 62 of file fsi.\+h.
+///////////////////////////////////////////////////////////////////////// The \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{FSIFluid\+Element}} class is a base class for all fluid finite elements that apply a load (traction) onto an adjacent \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}. 
+
+Definition at line \mbox{\hyperlink{fsi_8h_source_l00062}{62}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
 
 
 
@@ -45,7 +47,7 @@ Definition at line 62 of file fsi.\+h.
 \index{oomph::FSIFluidElement@{oomph::FSIFluidElement}!FSIFluidElement@{FSIFluidElement}}
 \index{FSIFluidElement@{FSIFluidElement}!oomph::FSIFluidElement@{oomph::FSIFluidElement}}
 \doxysubsubsection{\texorpdfstring{FSIFluidElement()}{FSIFluidElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+F\+S\+I\+Fluid\+Element\+::\+F\+S\+I\+Fluid\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+FSIFluid\+Element\+::\+FSIFluid\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -53,25 +55,17 @@ Constructor.
 
 
 
-Definition at line 66 of file fsi.\+h.
+Definition at line \mbox{\hyperlink{fsi_8h_source_l00066}{66}} of file \mbox{\hyperlink{fsi_8h_source}{fsi.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1FSIFluidElement_a28c2f33a00254914cb70cd10841ed8d0}\label{classoomph_1_1FSIFluidElement_a28c2f33a00254914cb70cd10841ed8d0}} 
+\mbox{\Hypertarget{classoomph_1_1FSIFluidElement_aaf77002137429e4a8387e74e4156cb25}\label{classoomph_1_1FSIFluidElement_aaf77002137429e4a8387e74e4156cb25}} 
 \index{oomph::FSIFluidElement@{oomph::FSIFluidElement}!FSIFluidElement@{FSIFluidElement}}
 \index{FSIFluidElement@{FSIFluidElement}!oomph::FSIFluidElement@{oomph::FSIFluidElement}}
 \doxysubsubsection{\texorpdfstring{FSIFluidElement()}{FSIFluidElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+F\+S\+I\+Fluid\+Element\+::\+F\+S\+I\+Fluid\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+FSIFluid\+Element\+::\+FSIFluid\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{FSIFluid\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 70 of file fsi.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -80,25 +74,25 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::FSIFluidElement@{oomph::FSIFluidElement}!get\_load@{get\_load}}
 \index{get\_load@{get\_load}!oomph::FSIFluidElement@{oomph::FSIFluidElement}}
 \doxysubsubsection{\texorpdfstring{get\_load()}{get\_load()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+F\+S\+I\+Fluid\+Element\+::get\+\_\+load (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+FSIFluid\+Element\+::get\+\_\+load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{load }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Compute the load vector that is applied by current element (at its local coordinate s) onto the adjacent Solid\+Element. N is the outer unit normal on the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}}. 
+Compute the load vector that is applied by current element (at its local coordinate s) onto the adjacent Solid\+Element. N is the outer unit normal on the \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{FSIFluid\+Element}}. 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesMixedOrderEquations_a2a3697eeae70631806b4f7ea45e29861}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Mixed\+Order\+Equations$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa305847a9a9c2e7acde44333f7d1d3e9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa305847a9a9c2e7acde44333f7d1d3e9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesEquations_aa305847a9a9c2e7acde44333f7d1d3e9}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1NavierStokesEquations_af2e10e52fc3a54b580e330fd763aa9f5}{oomph\+::\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianNavierStokesEquations_ad69fe16e07deef80069fb1b27c19caa1}{oomph\+::\+Generalised\+Newtonian\+Navier\+Stokes\+Equations$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_aedb2bcbc50b05bf623ef544e5ed3bbbf}{oomph\+::\+Spherical\+Navier\+Stokes\+Equations}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1SphericalNavierStokesEquations_aedb2bcbc50b05bf623ef544e5ed3bbbf}{oomph\+::\+Spherical\+Navier\+Stokes\+Equations}}.
 
 
 
-Referenced by oomph\+::\+F\+S\+I\+Wall\+Element\+::fluid\+\_\+load\+\_\+vector().
+Referenced by \mbox{\hyperlink{fsi_8cc_source_l00162}{oomph\+::\+FSIWall\+Element\+::fluid\+\_\+load\+\_\+vector()}}.
 
-\mbox{\Hypertarget{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}\label{classoomph_1_1FSIFluidElement_ac67392272be44300a42c2285abbbea00}} 
+\mbox{\Hypertarget{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}\label{classoomph_1_1FSIFluidElement_a13c5f835cddd1b78e6d2582733619300}} 
 \index{oomph::FSIFluidElement@{oomph::FSIFluidElement}!identify\_load\_data@{identify\_load\_data}}
 \index{identify\_load\_data@{identify\_load\_data}!oomph::FSIFluidElement@{oomph::FSIFluidElement}}
 \doxysubsubsection{\texorpdfstring{identify\_load\_data()}{identify\_load\_data()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+F\+S\+I\+Fluid\+Element\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+FSIFluid\+Element\+::identify\+\_\+load\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+load\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -110,17 +104,17 @@ Add to the set {\ttfamily paired\+\_\+load\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all values (pressures, velocities) that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a6796a527a8ac53e872eecf38b932f852}{oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_aa367614e76286c010cdc4b763e721efb}{oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_aa367614e76286c010cdc4b763e721efb}{oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_aa2bdb098066efbfa2347d437c79e5864}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_ab26cbb023f3e3dabcd49597584a86f63}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_a517a8773d48cb5858bb7c0e01ee4bd0f}{oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQCrouzeixRaviartElement_a6a17783db44d8f9919ba0bdc71ad48e1}{oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQCrouzeixRaviartElement_af5669e7a3df68e9f5bb13939e7d1c658}{oomph\+::\+Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_ae23f14a1aae4bdcdbcb38ec7911f586a}{oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodMixedOrderSpaceTimeElement_a024fc04788f56718893ba6a2cd382274}{oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodSpaceTimeElement_aea9652c5729c334b9ddcfb9f22c43556}{oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianQCrouzeixRaviartElement_a4e631f11ad93e78a885900e497ea93b6}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableQTaylorHoodElement_ae33c3a85421336c32c43014fe1a693bf}{oomph\+::\+Refineable\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_ae24f981edc6e461e949fbff02bab2336}{oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a0a03c9da3f9b4454ebb15a80099409be}{oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_a032c2424c2cec01d0e60b44be2b931f8}{oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianQTaylorHoodElement_a1ab1408fbc105e8f73724cef4797e526}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1TCrouzeixRaviartElement_ab957efb789b9dbb6249c65fbe0788287}{oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a4042c16323285a08b684bb34a4437bd5}{oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a3ef0fa0d09e3a9e495f348801723d549}{oomph\+::\+QSpherical\+Crouzeix\+Raviart\+Element}}, and \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a3f964db0b1ca6e1edd0c2b450b79af6d}{oomph\+::\+QSpherical\+Taylor\+Hood\+Element}}.
 
 
 
-Referenced by oomph\+::\+F\+S\+I\+Wall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction(), and oomph\+::\+Immersed\+Rigid\+Body\+Element\+::set\+\_\+drag\+\_\+mesh().
+Referenced by \mbox{\hyperlink{fsi_8cc_source_l00279}{oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction()}}, and \mbox{\hyperlink{immersed__rigid__body__elements_8cc_source_l00206}{oomph\+::\+Immersed\+Rigid\+Body\+Element\+::set\+\_\+drag\+\_\+mesh()}}.
 
-\mbox{\Hypertarget{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}\label{classoomph_1_1FSIFluidElement_a1a28009885c5459bd92ac8cf8395910c}} 
+\mbox{\Hypertarget{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}\label{classoomph_1_1FSIFluidElement_af8e0805b769b7d111eb71f223fc83df8}} 
 \index{oomph::FSIFluidElement@{oomph::FSIFluidElement}!identify\_pressure\_data@{identify\_pressure\_data}}
 \index{identify\_pressure\_data@{identify\_pressure\_data}!oomph::FSIFluidElement@{oomph::FSIFluidElement}}
 \doxysubsubsection{\texorpdfstring{identify\_pressure\_data()}{identify\_pressure\_data()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+F\+S\+I\+Fluid\+Element\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$$>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+FSIFluid\+Element\+::identify\+\_\+pressure\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::set$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1Data}{Data}} $\ast$, unsigned $>$ $>$ \&}]{paired\+\_\+pressure\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -132,29 +126,21 @@ Add to the set {\ttfamily paired\+\_\+pressure\+\_\+data} pairs containing.
 \item the index of the value in that \mbox{\hyperlink{classoomph_1_1Data}{Data}} object
 \end{DoxyItemize}for all pressure values that affect the load computed in the {\ttfamily get\+\_\+load(...)} function. 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1QTaylorHoodElement_a64aed725ad7e718858b4daa49218da7d}{oomph\+::\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_aa1a5f359fd664298241024515f99ebe0}{oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodMixedOrderSpaceTimeElement_aa1a5f359fd664298241024515f99ebe0}{oomph\+::\+Q\+Taylor\+Hood\+Mixed\+Order\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QTaylorHoodSpaceTimeElement_ab3431e43e59e435a5bd9d4c892657574}{oomph\+::\+Q\+Taylor\+Hood\+Space\+Time\+Element$<$ 2 $>$}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQTaylorHoodElement_a6eba9e3a52e76c1d0f0e8065388afcf3}{oomph\+::\+Generalised\+Newtonian\+Q\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QCrouzeixRaviartElement_ab3dc717e812fdfc15f2bbb4c25bd3028}{oomph\+::\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianQCrouzeixRaviartElement_afbd04a29ac3ff2f3d9823a0885441f81}{oomph\+::\+Generalised\+Newtonian\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_af51646fd4bbdf6b3dd073e6858ec15e3}{oomph\+::\+Q\+Spherical\+Taylor\+Hood\+Element}}, \mbox{\hyperlink{classoomph_1_1TTaylorHoodElement_a340d49fd15d3bf68dbf37a0f0e3ac12f}{oomph\+::\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_ac8e70942a4fda151ade37cdc7d466436}{oomph\+::\+Q\+Spherical\+Crouzeix\+Raviart\+Element}}, \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTTaylorHoodElement_af9b2a46921dc435d701ff1a9d2b64d4f}{oomph\+::\+Generalised\+Newtonian\+T\+Taylor\+Hood\+Element$<$ D\+I\+M $>$}}, \mbox{\hyperlink{classoomph_1_1TCrouzeixRaviartElement_a5c17ccb129c144ec2ef9f93f09dad38e}{oomph\+::\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}, and \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianTCrouzeixRaviartElement_a7c115b69dd0e730af2f41184b2b8d2c6}{oomph\+::\+Generalised\+Newtonian\+T\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1QSphericalCrouzeixRaviartElement_a1fc00abb3eec401fe649f920267bc7f0}{oomph\+::\+QSpherical\+Crouzeix\+Raviart\+Element}}, and \mbox{\hyperlink{classoomph_1_1QSphericalTaylorHoodElement_a53b2b394a10a6a415a79c3d53aaf2a51}{oomph\+::\+QSpherical\+Taylor\+Hood\+Element}}.
 
 
 
-Referenced by oomph\+::\+F\+S\+I\+Wall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction().
+Referenced by \mbox{\hyperlink{fsi_8cc_source_l00279}{oomph\+::\+FSIWall\+Element\+::identify\+\_\+all\+\_\+field\+\_\+data\+\_\+for\+\_\+external\+\_\+interaction()}}.
 
-\mbox{\Hypertarget{classoomph_1_1FSIFluidElement_a5d5b8b33130b85f908b04fc2d8ddd691}\label{classoomph_1_1FSIFluidElement_a5d5b8b33130b85f908b04fc2d8ddd691}} 
+\mbox{\Hypertarget{classoomph_1_1FSIFluidElement_a2eaf0f0017ba4fa66ca67f87adcde7c3}\label{classoomph_1_1FSIFluidElement_a2eaf0f0017ba4fa66ca67f87adcde7c3}} 
 \index{oomph::FSIFluidElement@{oomph::FSIFluidElement}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::FSIFluidElement@{oomph::FSIFluidElement}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+F\+S\+I\+Fluid\+Element\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{F\+S\+I\+Fluid\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+FSIFluid\+Element\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1FSIFluidElement}{FSIFluid\+Element}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 76 of file fsi.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 

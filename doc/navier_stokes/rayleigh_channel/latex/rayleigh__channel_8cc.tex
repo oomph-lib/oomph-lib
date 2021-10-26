@@ -3,21 +3,21 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classRayleighProblem}{Rayleigh\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classRayleighProblem}{Rayleigh\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
+\begin{DoxyCompactList}\small\item\em Rayleigh-\/type problem\+: 2D channel whose upper wall oscillates periodically. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
 \begin{DoxyCompactList}\small\item\em Namespace for global parameters. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceExactSoln}{Exact\+Soln}}
+namespace \mbox{\hyperlink{namespaceExactSoln}{Exact\+Soln}}
 \begin{DoxyCompactList}\small\item\em Namespace for exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{Exact\+Soln\+::get\+\_\+exact\+\_\+u}} (const double \&\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
+void \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{Exact\+Soln\+::get\+\_\+exact\+\_\+u}} (const double \&t, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
 \begin{DoxyCompactList}\small\item\em Exact solution of the problem as a vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceExactSoln_ae21d368b911f958acec957ead190db93}{Exact\+Soln\+::get\+\_\+exact\+\_\+u}} (const double \&\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}, const double \&y, double \&u)
+void \mbox{\hyperlink{namespaceExactSoln_ae21d368b911f958acec957ead190db93}{Exact\+Soln\+::get\+\_\+exact\+\_\+u}} (const double \&t, const double \&y, double \&u)
 \begin{DoxyCompactList}\small\item\em Exact solution of the problem as a scalar. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{rayleigh__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Driver code for Rayleigh channel problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -31,8 +31,7 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Global\+\_\+\+Parameters\+::\+Long\+\_\+run\+\_\+flag}} =1
 \begin{DoxyCompactList}\small\item\em Flag for long/short run\+: Default = perform long run. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_aec41eb8da4929003e5d78ef4b43c0ed9}{Global\+\_\+\+Parameters\+::\+Impulsive\+\_\+start\+\_\+flag}} =0
-\begin{DoxyCompactList}\small\item\em Flag for impulsive start\+: Default = start from exact time-\/periodic solution. ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Flag for impulsive start\+: Default = start from exact time-\/periodic solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -50,9 +49,9 @@ Convert command line arguments (if any) into flags\+:
 
 Flag for impulsive start
 
-Definition at line 496 of file rayleigh\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__channel_8cc_source_l00496}{496}} of file \mbox{\hyperlink{rayleigh__channel_8cc_source}{rayleigh\+\_\+channel.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Impulsive\+\_\+start\+\_\+flag, Global\+\_\+\+Parameters\+::\+Long\+\_\+run\+\_\+flag, problem, Global\+\_\+\+Parameters\+::\+Re, and Global\+\_\+\+Parameters\+::\+Re\+St.
+References \mbox{\hyperlink{rayleigh__channel_8cc_source_l00056}{Global\+\_\+\+Parameters\+::\+Impulsive\+\_\+start\+\_\+flag}}, \mbox{\hyperlink{rayleigh__channel_8cc_source_l00052}{Global\+\_\+\+Parameters\+::\+Long\+\_\+run\+\_\+flag}}, \mbox{\hyperlink{rayleigh__channel_8cc_source_l00046}{Global\+\_\+\+Parameters\+::\+Re}}, \mbox{\hyperlink{rayleigh__channel_8cc_source_l00049}{Global\+\_\+\+Parameters\+::\+Re\+St}}, and \mbox{\hyperlink{rayleigh__channel_8cc_source_l00417}{Rayleigh\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run()}}.
 

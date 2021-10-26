@@ -9,6 +9,7 @@
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem, using oomph-\/lib's default Newton solver}}
 \DoxyCodeLine{  problem.newton\_solve();}
 \DoxyCodeLine{\}}
+
 \end{DoxyCode}
 
 
@@ -23,33 +24,38 @@ The following table lists the main steps performed by {\ttfamily oomph-\/lib\tex
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
-\[ \left. . \hspace{6cm} \right. \]  &{\bfseries{S\+E\+Q\+U\+E\+N\+CE OF M\+A\+T\+H\+E\+M\+A\+T\+I\+C\+AL S\+T\+E\+PS}}  &{\bfseries{S\+E\+Q\+U\+E\+N\+CE OF F\+U\+N\+C\+T\+I\+ON C\+A\+L\+LS / K\+EY C\+O\+N\+T\+R\+OL P\+A\+R\+A\+M\+E\+T\+E\+RS}}   \\\cline{1-3}
+\[ \left. . \hspace{6cm} \right. \]  &{\bfseries{SEQUENCE OF MATHEMATICAL STEPS}}  &{\bfseries{SEQUENCE OF FUNCTION CALLS / KEY CONTROL PARAMETERS}}   \\\cline{1-3}
 {\bfseries{Step 1\+:}} Perform actions before solve.  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_solve();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 2\+:}} Initialise counter for number of Newton iterations.  &\[ c=0 \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{unsigned} count=0;}
+
 \end{DoxyCode}
    \\\cline{1-3}
 \multicolumn{3}{|l|}{\begin{center}{\bfseries{Start loop over Newton iterations}}\end{center}    }\\\cline{1-3}
 {\bfseries{Step 3\+:}} Perform actions before the next Newton step  &\[ \left. . \hspace{6cm}\right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_step();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 \multicolumn{3}{|l|}{\begin{center} {\bfseries{Only during the first Newton step\+:}} \end{center}   }\\\cline{1-3}
 {\bfseries{Step 4a\+:}} Perform actions before Newton convergence check  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_convergence\_check();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 4b\+:}} Compute residual vector  &\[ {\cal R}_i = {\cal R}_i\left(U_1,...,U_{N}\right) \mbox{\ \ \ \ for $i=1,...,N$} \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Vector<double> residuals;}
 \DoxyCodeLine{Problem::get\_residuals(residuals); }
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 4c\+:}} Convergence check. If converged go to {\bfseries{Step 13}}  &\[ \mbox{If $\max_i |{\cal R}_i| < {\tt tol} \Longrightarrow $ converged.} \]  &
@@ -57,12 +63,13 @@ The following table lists the main steps performed by {\ttfamily oomph-\/lib\tex
 \DoxyCodeLine{...}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Check convergence}}
-\DoxyCodeLine{if (\mbox{\hyperlink{order__of__action__functions_8txt_afeb93d7b09cde7e6a7eab7f9fba91cc3}{max\_res}}<Problem::Newton\_solver\_tolerance)}
+\DoxyCodeLine{if (max\_res<Problem::Newton\_solver\_tolerance)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{   ...}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{... }
+
 \end{DoxyCode}
    \\\cline{1-3}
 \multicolumn{3}{|l|}{}\\\cline{1-3}
@@ -71,17 +78,18 @@ The following table lists the main steps performed by {\ttfamily oomph-\/lib\tex
 \DoxyCodeLine{...}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Check divergence/non-\/convergence}}
-\DoxyCodeLine{if ((\mbox{\hyperlink{order__of__action__functions_8txt_afeb93d7b09cde7e6a7eab7f9fba91cc3}{max\_res}}>Problem::Max\_residuals) ||}
+\DoxyCodeLine{if ((max\_res>Problem::Max\_residuals) ||}
 \DoxyCodeLine{    (count == Problem::Max\_newton\_iterations))}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{   ...}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Throw an error}}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} NewtonSolverError(count,\mbox{\hyperlink{order__of__action__functions_8txt_afeb93d7b09cde7e6a7eab7f9fba91cc3}{max\_res}});}
+\DoxyCodeLine{   \textcolor{keywordflow}{throw} NewtonSolverError(count,max\_res);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{... }
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 6\+:}} Solve linear system for correction of unknowns  &\[ \begin{array}{l} \mbox{Solve} \\ \\ \hspace{1cm}\sum_{j=1}^N {\cal J}_{ij} \ \delta U_j = {\cal R}_i \mbox{\ \ \ (for $i=1,...,N$)} \\ \\ \mbox{for $\delta U_j$ \ \ ($j=1,...,N$).} \\ \\ \mbox{Here the Jacobian matrix is given by} \\ \\ \hspace{1cm}{\cal J}_{ij} = \frac{\partial {\cal R}_i}{\partial U_j} \mbox{\ \ \ (for $i,j=1,...,N$)} \\ \end{array} \]  &
@@ -90,33 +98,39 @@ The following table lists the main steps performed by {\ttfamily oomph-\/lib\tex
 \DoxyCodeLine{\textcolor{comment}{// Problem::linear\_solver\_pt() to assemble}}
 \DoxyCodeLine{\textcolor{comment}{// and solve the linear system.}}
 \DoxyCodeLine{...}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 7\+:}} Apply the corrections to the solution  &\[ U_i := U_i - \delta U_i \mbox{\ \ \ (for $i=1,...,N$)} \\ \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Update the unknowns}}
 \DoxyCodeLine{...}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 8\+:}} Perform actions after Newton step  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_newton\_step();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 9\+:}} Increment counter for number of Newton iterations  &\[ c:=c+1 \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{count++;}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 10\+:}} Perform actions before Newton convergence check  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_convergence\_check();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 11\+:}} Compute residual vector  &\[ {\cal R}_i = {\cal R}_i\left(U_1,...,U_{N}\right) \mbox{\ \ \ \ for $i=1,...,N$} \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Vector<double> residuals;}
 \DoxyCodeLine{Problem::get\_residuals(residuals); }
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 12\+:}} Convergence check. If converged go to {\bfseries{Step 13}}, else go to {\bfseries{Step 3}}.  &\[ \mbox{If $\max_i |{\cal R}_i| < {\tt tol} \Longrightarrow$ converged.} \]  &
@@ -124,18 +138,20 @@ The following table lists the main steps performed by {\ttfamily oomph-\/lib\tex
 \DoxyCodeLine{...}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Check convergence}}
-\DoxyCodeLine{if (\mbox{\hyperlink{order__of__action__functions_8txt_afeb93d7b09cde7e6a7eab7f9fba91cc3}{max\_res}}<Problem::Newton\_solver\_tolerance)}
+\DoxyCodeLine{if (max\_res<Problem::Newton\_solver\_tolerance)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{   ...}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{... }
+
 \end{DoxyCode}
    \\\cline{1-3}
 \multicolumn{3}{|l|}{\begin{center}{\bfseries{End loop over Newton iterations}}\end{center}    }\\\cline{1-3}
 {\bfseries{Step 13\+:}} Converged. Perform actions after solve.  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_newton\_solve();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 \end{longtabu}
@@ -156,6 +172,7 @@ The function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}
 Recall that, by default, {\ttfamily oomph-\/lib} regards all problems as nonlinear. Provided a good initial guess for the unknowns is available, the Newton solver will converge quadratically towards the solution. Within this framework, linear problems are simply special cases for which the Newton iteration converges in one step. However, if the problem is known to be linear, a few of the steps in the generic Newton iteration are unnecessary. For instance, it is not necessary to check the residual before or after the Newton step as we know that the exact solution will have been obtained (modulo roundoff errors) after step 7. The computation of the global residual vectors in steps 4 and 11 (which require a finite amount of cpu time) are therefore superfluous and are omitted if the \char`\"{}user\char`\"{} declares a problem as linear by setting the flag 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{bool} Problem::Problem\_is\_nonlinear}
+
 \end{DoxyCode}
  which is initialised to {\ttfamily true} in the constructor of the {\ttfamily Problem} base class to {\ttfamily false}.
 
@@ -167,21 +184,24 @@ The following table lists the main steps performed by {\ttfamily oomph-\/lib\tex
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
-\[ \left. . \hspace{6cm} \right. \]  &{\bfseries{S\+E\+Q\+U\+E\+N\+CE OF M\+A\+T\+H\+E\+M\+A\+T\+I\+C\+AL S\+T\+E\+PS}}  &{\bfseries{S\+E\+Q\+U\+E\+N\+CE OF F\+U\+N\+C\+T\+I\+ON C\+A\+L\+LS / K\+EY C\+O\+N\+T\+R\+OL P\+A\+R\+A\+M\+E\+T\+E\+RS}}   \\\cline{1-3}
+\[ \left. . \hspace{6cm} \right. \]  &{\bfseries{SEQUENCE OF MATHEMATICAL STEPS}}  &{\bfseries{SEQUENCE OF FUNCTION CALLS / KEY CONTROL PARAMETERS}}   \\\cline{1-3}
 {\bfseries{Step 1\+:}} Perform actions before implicit timestep.  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_implicit\_timestep();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 2\+:}} Shift time values and dts, according to control flag.  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordflow}{if}(shift\_values) \{ shift\_time\_values(); \}}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 3\+:}} Advance global time and set current value of dt.  &\[ t:=t+dt \]  &
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{order__of__action__functions_8txt_ace10831d73c381bdf9e042170367d445}{time\_pt}}()-\/>time()+=dt;}
-\DoxyCodeLine{\mbox{\hyperlink{order__of__action__functions_8txt_ace10831d73c381bdf9e042170367d445}{time\_pt}}()-\/>dt()=dt;}
+\DoxyCodeLine{time\_pt()-\/>time()+=dt;}
+\DoxyCodeLine{time\_pt()-\/>dt()=dt;}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 4\+:}} Loop over all timesteppers and set weights.  &\[ \left. . \hspace{6cm} \right. \]  &
@@ -190,16 +210,19 @@ The following table lists the main steps performed by {\ttfamily oomph-\/lib\tex
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ time\_stepper\_pt(i)-\/>set\_weights();}
 \DoxyCodeLine{\}}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 5\+:}} Solve the non-\/linear problem for this timestep with Newton\textquotesingle{}s method.  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{order__of__action__functions_8txt_a0fadd1160b1b37b723b5e9ad350097e6}{Problem::newton\_solve}}();}
+\DoxyCodeLine{Problem::newton\_solve();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 {\bfseries{Step 6\+:}} Perform actions after implicit timestep.  &\[ \left. . \hspace{6cm} \right. \]  &
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_implicit\_timestep();}
+
 \end{DoxyCode}
    \\\cline{1-3}
 \end{longtabu}

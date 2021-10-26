@@ -40,22 +40,22 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{comment}{// Generic oomph-\/lib headers}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Solid mechanics}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "solid.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}solid.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// The fish mesh }}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/fish\_mesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/fish\_mesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }oomph;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{//=========================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{/// Refineable fish mesh upgraded to become a solid mesh}}
@@ -67,16 +67,16 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Build underlying adaptive fish mesh and then }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Build underlying adaptive fish mesh and then }}
 \DoxyCodeLine{\textcolor{comment}{ /// set current Eulerian coordinates to be the Lagrangian ones.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pass pointer to geometric objects that specify the }}
-\DoxyCodeLine{\textcolor{comment}{ /// fish's back in the "current" and "undeformed" configurations,}}
+\DoxyCodeLine{\textcolor{comment}{ /// fish's back in the "{}current"{} and "{}undeformed"{} configurations,}}
 \DoxyCodeLine{\textcolor{comment}{ /// and pointer to timestepper (defaults to Static)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{comment}{// Note: FishMesh is virtual base and its constructor is automatically}}
 \DoxyCodeLine{ \textcolor{comment}{// called first! -\/-\/> this is where we need to build the mesh;}}
 \DoxyCodeLine{ \textcolor{comment}{// the constructors of the derived meshes don't call the}}
 \DoxyCodeLine{ \textcolor{comment}{// base constructor again and simply add the extra functionality.}}
-\DoxyCodeLine{ \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh}}(GeomObject* back\_pt, GeomObject* undeformed\_back\_pt, }
+\DoxyCodeLine{ \mbox{\hyperlink{classElasticFishMesh_a76c4d63d48b9ee48c3742e55057cfba0}{ElasticFishMesh}}(GeomObject* back\_pt, GeomObject* undeformed\_back\_pt, }
 \DoxyCodeLine{                 TimeStepper* time\_stepper\_pt=\&Mesh::Default\_TimeStepper) : }
 \DoxyCodeLine{  FishMesh<ELEMENT>(back\_pt,time\_stepper\_pt), }
 \DoxyCodeLine{  RefineableFishMesh<ELEMENT>(back\_pt,time\_stepper\_pt)}
@@ -86,7 +86,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{   \textcolor{comment}{// configuration becomes the stress-\/free initial configuration }}
 \DoxyCodeLine{   set\_lagrangian\_nodal\_coordinates();}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{// Build "undeformed" domain: This is a "deep" copy of the}}
+\DoxyCodeLine{   \textcolor{comment}{// Build "{}undeformed"{} domain: This is a "{}deep"{} copy of the}}
 \DoxyCodeLine{   \textcolor{comment}{// Domain that we used to create set the Eulerian coordinates}}
 \DoxyCodeLine{   \textcolor{comment}{// in the initial mesh -\/-\/ the original domain (accessible via }}
 \DoxyCodeLine{   \textcolor{comment}{// the private member data Domain\_pt) will be used to update}}
@@ -95,7 +95,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{   \textcolor{comment}{// of any newly created SolidNodes during mesh refinement}}
 \DoxyCodeLine{   \textcolor{keywordtype}{double} xi\_nose = this-\/>Domain\_pt-\/>xi\_nose(); }
 \DoxyCodeLine{   \textcolor{keywordtype}{double} xi\_tail = this-\/>Domain\_pt-\/>xi\_tail();}
-\DoxyCodeLine{   Undeformed\_domain\_pt=\textcolor{keyword}{new} FishDomain(undeformed\_back\_pt,xi\_nose,xi\_tail);}
+\DoxyCodeLine{   \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\_domain\_pt}}=\textcolor{keyword}{new} FishDomain(undeformed\_back\_pt,xi\_nose,xi\_tail);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Loop over all elements and set the undeformed macro element pointer}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_element=this-\/>nelement();}
@@ -108,7 +108,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{     \textcolor{comment}{// of the undeformed mesh/domain get picked up during adaptive}}
 \DoxyCodeLine{     \textcolor{comment}{// mesh refinement}}
 \DoxyCodeLine{     el\_pt-\/>set\_undeformed\_macro\_elem\_pt(}
-\DoxyCodeLine{      Undeformed\_domain\_pt-\/>macro\_element\_pt(e));}
+\DoxyCodeLine{      \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\_domain\_pt}}-\/>macro\_element\_pt(e));}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Use MacroElement representation for }}
 \DoxyCodeLine{     \textcolor{comment}{// Lagrangian coordinates of newly created }}
@@ -118,28 +118,28 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Destructor: Kill "undeformed" Domain}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh}}()}
+\DoxyCodeLine{\textcolor{comment}{ /// Destructor: Kill "{}undeformed"{} Domain}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classElasticFishMesh_ab8e084bb7551b9765b95dc38e82ab1be}{\string~ElasticFishMesh}}()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keyword}{delete} Undeformed\_domain\_pt;}
+\DoxyCodeLine{   \textcolor{keyword}{delete} \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\_domain\_pt}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to "undeformed" Domain -\/-\/ used to determine the}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to "{}undeformed"{} Domain -\/-\/ used to determine the}}
 \DoxyCodeLine{\textcolor{comment}{ /// Lagrangian coordinates of any newly created SolidNodes during}}
 \DoxyCodeLine{\textcolor{comment}{ /// Mesh refinement}}
-\DoxyCodeLine{\textcolor{comment}{} Domain* Undeformed\_domain\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Domain* \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\_domain\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -161,7 +161,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{comment}{ /// Poisson's ratio}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.3;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// "Mooney Rivlin" coefficient for generalised Mooney Rivlin law}}
+\DoxyCodeLine{\textcolor{comment}{ /// "{}Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{C1}}=1.3;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Body force}}
@@ -179,9 +179,9 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -195,22 +195,22 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticFishProblem}{ElasticFishProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticFishProblem_adf9fdb0b94ac76b7fdb34bc7fa809a41}{ElasticFishProblem}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Run simulation.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} run();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticFishProblem_aaaf23036d8f282cff88e497ad214237f}{run}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}* mesh\_pt() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}* \mbox{\hyperlink{classElasticFishProblem_a9d7e8925ef5f067a9be8aefb187b20e9}{mesh\_pt}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticFishMesh}{ElasticFishMesh<ELEMENT>}}*\textcolor{keyword}{>}(Problem::mesh\_pt());\} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticFishProblem_a5cd7dbd2bc99ccf850c1a58d0b401979}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticFishProblem_a41badf8aa60bf52d888338039168fcb3}{actions\_after\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update before solve: We're dealing with a static problem so}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update before solve: We're dealing with a static problem so}}
 \DoxyCodeLine{\textcolor{comment}{ /// the nodal positions before the next solve merely serve as}}
 \DoxyCodeLine{\textcolor{comment}{ /// initial conditions. For meshes that are very strongly refined}}
 \DoxyCodeLine{\textcolor{comment}{ /// near the boundary, the update of the displacement boundary}}
@@ -219,25 +219,25 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{\textcolor{comment}{ /// Newton method to fail -\/-\/> the overall method is actually more robust}}
 \DoxyCodeLine{\textcolor{comment}{ /// if we use the nodal positions as determined by the Domain/MacroElement-\/}}
 \DoxyCodeLine{\textcolor{comment}{ /// based mesh update as initial guesses. }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticFishProblem_a7c22fcff8d94166797e87d70017540d6}{actions\_before\_newton\_solve}}()}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{keywordtype}{bool} update\_all\_solid\_nodes=\textcolor{keyword}{true};}
-\DoxyCodeLine{   mesh\_pt()-\/>node\_update(update\_all\_solid\_nodes);}
+\DoxyCodeLine{   \mbox{\hyperlink{classElasticFishProblem_a9d7e8925ef5f067a9be8aefb187b20e9}{mesh\_pt}}()-\/>node\_update(update\_all\_solid\_nodes);}
 \DoxyCodeLine{  \}   }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update after adapt: Pin all redundant pressure nodes (if required)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticFishProblem_ae54b974caafe717309ce7abc5e7f824d}{actions\_after\_adapt}}()}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{comment}{// Pin the redundant solid pressures (if any)}}
 \DoxyCodeLine{   PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures(}
-\DoxyCodeLine{    mesh\_pt()-\/>element\_pt());}
+\DoxyCodeLine{    \mbox{\hyperlink{classElasticFishProblem_a9d7e8925ef5f067a9be8aefb187b20e9}{mesh\_pt}}()-\/>element\_pt());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Geometric object that represents the deformable fish back}}
-\DoxyCodeLine{ Circle* Fish\_back\_pt;}
+\DoxyCodeLine{ Circle* \mbox{\hyperlink{classElasticFishProblem_a1a026c063e41c004f656988d6bfd541b}{Fish\_back\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -345,7 +345,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts = 5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output shape of deformed body}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -369,7 +369,7 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
@@ -431,10 +431,11 @@ Detailed documentation to be written. Here\textquotesingle{}s a plot of the resu
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+
 \end{DoxyCodeInclude}
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

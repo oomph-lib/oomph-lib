@@ -1,4 +1,4 @@
-In this example we discuss the S\+U\+P\+G-\/stabilised solution of the 2D advection-\/diffusion problem
+In this example we discuss the SUPG-\/stabilised solution of the 2D advection-\/diffusion problem
 
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
@@ -23,12 +23,12 @@ In the computations we will impose the \char`\"{}wind\char`\"{} \[ \mathbf{w}\le
 \end{DoxyImage}
 
 
-The figures below show plots of the solution for $\Phi=45^\circ, \ \alpha=50 $ and a Peclet number of $ Pe = 200$, with and without S\+U\+PG stabilisation. The wire-\/mesh plot shows the solution computed on a 10x10 mesh, the shaded surface represents the solution obtained from an unstabilised solution on a 150x150 mesh. Note how S\+U\+PG stabilisation \char`\"{}suppresses the wiggles\char`\"{} on the relatively coarse mesh.
+The figures below show plots of the solution for $\Phi=45^\circ, \ \alpha=50 $ and a Peclet number of $ Pe = 200$, with and without SUPG stabilisation. The wire-\/mesh plot shows the solution computed on a 10x10 mesh, the shaded surface represents the solution obtained from an unstabilised solution on a 150x150 mesh. Note how SUPG stabilisation \char`\"{}suppresses the wiggles\char`\"{} on the relatively coarse mesh.
 
  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{stab}
-\doxyfigcaption{Plot of the S\+U\+P\+G-\/stabilised solution at different levels of mesh refinement. }
+\doxyfigcaption{Plot of the SUPG-\/stabilised solution at different levels of mesh refinement. }
 \end{DoxyImage}
 
 
@@ -45,7 +45,7 @@ The figures below show plots of the solution for $\Phi=45^\circ, \ \alpha=50 $ a
 Overall, the structure of the driver code is very similar to that used for the \href{../../../advection_diffusion/two_d_adv_diff_adapt/html/index.html}{\texttt{ problem without stabilisation}}.\hypertarget{index_todo}{}\doxysubsection{To be written\+:}\label{index_todo}
 
 \begin{DoxyItemize}
-\item Discuss S\+U\+PG theory.
+\item Discuss SUPG theory.
 \item Implementation and the role of basis, shape and test functions (our equations are isoparametric)
 \end{DoxyItemize}Until we get around to completing this example, here\textquotesingle{}s the driver code. Fairly self-\/explanatory, isn\textquotesingle{}t it?
 
@@ -79,13 +79,13 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{\textcolor{comment}{//Driver for a simple 2D adv diff problem with SUPG stabilisation}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Generic routines}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// The Poisson equations}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "advection\_diffusion.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}advection\_diffusion.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// The mesh }}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/rectangular\_quadmesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/rectangular\_quadmesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
 \DoxyCodeLine{}
@@ -110,7 +110,7 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{\textcolor{comment}{ /// Parameter for angle of step in boundary values: 45 degrees}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobalPhysicalParameters_af9a5a947d725f1f088db6a6423f2f3ef}{TanPhi}}=1.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Some "solution" for assignment of boundary values}}
+\DoxyCodeLine{\textcolor{comment}{ /// Some "{}solution"{} for assignment of boundary values}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalPhysicalParameters_a6e1db5726436a705e9d400fedf914cef}{get\_boundary\_values}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  u[0]=tanh(1.0-\/\mbox{\hyperlink{namespaceGlobalPhysicalParameters_aec7a344b74b10d835b331ef0dc6601da}{Alpha}}*(\mbox{\hyperlink{namespaceGlobalPhysicalParameters_af9a5a947d725f1f088db6a6423f2f3ef}{TanPhi}}*x[0]-\/x[1]));}
@@ -132,9 +132,9 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{//////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ///////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ///////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ///////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//====== start\_of\_problem\_class=======================================}\textcolor{comment}{}}
@@ -148,31 +148,31 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass pointer to source and wind functions, and}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass pointer to source and wind functions, and}}
 \DoxyCodeLine{\textcolor{comment}{ /// flag to indicate if stabilisation is to be used.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem}}(}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a95aa4192c1b42327b12cdbb75295d192}{SUPGAdvectionDiffusionProblem}}(}
 \DoxyCodeLine{  AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt source\_fct\_pt,}
 \DoxyCodeLine{  AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt wind\_fct\_pt,}
 \DoxyCodeLine{  \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& use\_stabilisation);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor. Empty}}
-\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a2112492d8a8a2ad9c0d8ef79e892ebd1}{\string~SUPGAdvectionDiffusionProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve: Reset boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: Reset boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// to the values from the tanh solution and compute stabilisation}}
 \DoxyCodeLine{\textcolor{comment}{ /// parameter.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_affa45863033de517e1fba088aaae7eb5}{actions\_before\_newton\_solve}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a7ca10f3d82af3c3fec4c1a3260062ff2}{actions\_after\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution.}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a3133ba26f0917f5d210d69ea0ddcb1fe}{doc\_solution}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Overloaded version of the problem's access function to }}
+\DoxyCodeLine{\textcolor{comment}{ /// Overloaded version of the problem's access function to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the mesh. Recasts the pointer to the base Mesh object to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
-\DoxyCodeLine{\textcolor{comment}{} RectangularQuadMesh<ELEMENT>* mesh\_pt() }
+\DoxyCodeLine{\textcolor{comment}{} RectangularQuadMesh<ELEMENT>* \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a41139c639c691f95f066c8939378762b}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}(}
 \DoxyCodeLine{    Problem::mesh\_pt());}
@@ -181,23 +181,23 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// DocInfo object}}
-\DoxyCodeLine{\textcolor{comment}{} DocInfo Doc\_info;}
+\DoxyCodeLine{\textcolor{comment}{} DocInfo \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_af80606875e03033c0de217f7a861d0af}{Doc\_info}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to source function}}
-\DoxyCodeLine{\textcolor{comment}{} AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt Source\_fct\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} AdvectionDiffusionEquations<2>::AdvectionDiffusionSourceFctPt \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a9bf04de8641dd4151514c2e2603f3ac5}{Source\_fct\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to wind function}}
-\DoxyCodeLine{\textcolor{comment}{} AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt Wind\_fct\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} AdvectionDiffusionEquations<2>::AdvectionDiffusionWindFctPt \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_a89bc22484946ccf51bb7cf7328bc9df6}{Wind\_fct\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Flag to indicate if stabilisation is to be used}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} Use\_stabilisation;}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem_ab8c19428c17ac7d8bb776e91940734bd}{Use\_stabilisation}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Constructor for AdvectionDiffusion problem: Pass pointer to }}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for AdvectionDiffusion problem: Pass pointer to }}
 \DoxyCodeLine{\textcolor{comment}{/// source function and wind functions and flag to indicate }}
 \DoxyCodeLine{\textcolor{comment}{/// if stabilisation is to be used.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
@@ -213,11 +213,11 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (use\_stabilisation)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_stabilised"});}
+\DoxyCodeLine{   Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_stabilised"{}});}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_unstabilised"});}
+\DoxyCodeLine{   Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_unstabilised"{}});}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup mesh}}
@@ -274,7 +274,7 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 \DoxyCodeLine{}
@@ -355,7 +355,7 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -378,15 +378,15 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{  \textcolor{comment}{// QAdvectionDiffusionElement family. Pass pointer to }}
 \DoxyCodeLine{  \textcolor{comment}{// source and wind function. }}
 \DoxyCodeLine{  \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem<QSUPGAdvectionDiffusionElement<2,3>}} > }
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__adv__diff__SUPG_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}(\&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_aa84986d4d50cb043cc8fced56feab45f}{GlobalPhysicalParameters::source\_function}},}
+\DoxyCodeLine{   problem(\&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_aa84986d4d50cb043cc8fced56feab45f}{GlobalPhysicalParameters::source\_function}},}
 \DoxyCodeLine{           \&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_a3a17e62bc0096244627f5f1a7f53c859}{GlobalPhysicalParameters::wind\_function}},}
 \DoxyCodeLine{           use\_stabilisation);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{two__d__adv__diff__SUPG_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{  problem.newton\_solve();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Output the solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{two__d__adv__diff__SUPG_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution();}
+\DoxyCodeLine{  problem.doc\_solution();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{ }
@@ -401,15 +401,15 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{  \textcolor{comment}{// QAdvectionDiffusionElement family. Pass pointer to }}
 \DoxyCodeLine{  \textcolor{comment}{// source and wind function. }}
 \DoxyCodeLine{  \mbox{\hyperlink{classSUPGAdvectionDiffusionProblem}{SUPGAdvectionDiffusionProblem<QSUPGAdvectionDiffusionElement<2,3>}} > }
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__adv__diff__SUPG_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}(\&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_aa84986d4d50cb043cc8fced56feab45f}{GlobalPhysicalParameters::source\_function}},}
+\DoxyCodeLine{   problem(\&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_aa84986d4d50cb043cc8fced56feab45f}{GlobalPhysicalParameters::source\_function}},}
 \DoxyCodeLine{           \&\mbox{\hyperlink{namespaceGlobalPhysicalParameters_a3a17e62bc0096244627f5f1a7f53c859}{GlobalPhysicalParameters::wind\_function}},}
 \DoxyCodeLine{           use\_stabilisation);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{two__d__adv__diff__SUPG_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{  problem.newton\_solve();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Output the solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{two__d__adv__diff__SUPG_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution();}
+\DoxyCodeLine{  problem.doc\_solution();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
@@ -425,6 +425,7 @@ Overall, the structure of the driver code is very similar to that used for the \
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+
 \end{DoxyCodeInclude}
 
 
@@ -437,14 +438,14 @@ Overall, the structure of the driver code is very similar to that used for the \
 ../../../../
 
 demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/
-}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+S\+U\+P\+G/ }} \end{center} 
+}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+SUPG/ }} \end{center} 
 \item The driver code is\+: \begin{center} \href{
 ../../../../
 demo_drivers/advection_diffusion/two_d_adv_diff_SUPG/two_d_adv_diff_SUPG.cc
-}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+S\+U\+P\+G/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+S\+U\+P\+G.\+cc }} \end{center} 
+}{\texttt{ demo\+\_\+drivers/advection\+\_\+diffusion/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+SUPG/two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+\+SUPG.\+cc }} \end{center} 
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

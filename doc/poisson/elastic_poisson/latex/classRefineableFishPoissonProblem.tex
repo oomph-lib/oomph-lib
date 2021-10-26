@@ -1,6 +1,11 @@
-\hypertarget{classRefineableFishPoissonProblem}{}\doxysection{Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classRefineableFishPoissonProblem}{}\doxysection{Refineable\+Fish\+Poisson\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classRefineableFishPoissonProblem}\index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
-Inheritance diagram for Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+
+
+///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////  
+
+
+Inheritance diagram for Refineable\+Fish\+Poisson\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classRefineableFishPoissonProblem}
@@ -19,13 +24,13 @@ void \mbox{\hyperlink{classRefineableFishPoissonProblem_a7f6c356f7c8bd0130de9572
 \begin{DoxyCompactList}\small\item\em Update the problem specs after solve (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableFishPoissonProblem_a58098181f3b88c2fc65f24fb15c1a529}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
 \begin{DoxyCompactList}\small\item\em Update the problem specs before solve\+: Update mesh. \end{DoxyCompactList}\item 
-Algebraic\+Refineable\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem_a6f25d5110e5262e66e2900da051567a6}{fish\+\_\+mesh\+\_\+pt}} ()
+Algebraic\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}{fish\+\_\+mesh\+\_\+pt}} ()
 \item 
-double \& \mbox{\hyperlink{classRefineableFishPoissonProblem_a20702e8945d442c9597348b550da14e4}{load}} ()
+double \& \mbox{\hyperlink{classRefineableFishPoissonProblem_a4de3473b96dd9fc401f44717f68a9896}{load}} ()
 \begin{DoxyCompactList}\small\item\em Return value of the \char`\"{}load\char`\"{} on the elastically supported ring. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classRefineableFishPoissonProblem_a6db25ff0bd3014aa531d9f0e8b385beb}{doc\+\_\+solution}} ()
 \begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
-Doc\+Info \& \mbox{\hyperlink{classRefineableFishPoissonProblem_a093f5963e63746843c33ca444a205333}{doc\+\_\+info}} ()
+Doc\+Info \& \mbox{\hyperlink{classRefineableFishPoissonProblem_a5585bb39205a7ab53da4fb39c1393dc3}{doc\+\_\+info}} ()
 \begin{DoxyCompactList}\small\item\em Access to Doc\+Info object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -34,10 +39,10 @@ Node $\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem_afa7a846c34391fdf
 \begin{DoxyCompactList}\small\item\em Node at which the solution of the Poisson equation is documented. \end{DoxyCompactList}\item 
 ofstream \mbox{\hyperlink{classRefineableFishPoissonProblem_aa358e2b0fa91780bdca32ae4676717ff}{Trace\+\_\+file}}
 \begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
-Algebraic\+Refineable\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem_af915f09b6e4ae2f4ded2ad1a25ed7f01}{Fish\+\_\+mesh\+\_\+pt}}
+Algebraic\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem_af915f09b6e4ae2f4ded2ad1a25ed7f01}{Fish\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to fish mesh. \end{DoxyCompactList}\item 
 Mesh $\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem_adcb3831cd9c21ec454ca787ced5d9db6}{Fish\+\_\+back\+\_\+mesh\+\_\+pt}}
-\item 
+\begin{DoxyCompactList}\small\item\em Pointer to single-\/element mesh that stores the Generalised\+Element that represents the fish back. \end{DoxyCompactList}\item 
 Data $\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem_ae4a4e592320bbe9bfbee52be7dfecfaa}{Load\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to data item that stores the \char`\"{}load\char`\"{} on the fish back. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classRefineableFishPoissonProblem_a51c10ea7cbf4ab61fd953f011f72a1c4}{Fix\+\_\+position}}
@@ -47,12 +52,13 @@ Doc\+Info \mbox{\hyperlink{classRefineableFishPoissonProblem_ad6d382f1d384253236
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$}
+///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
-Refineable Poisson problem in deformable fish-\/shaped domain. Template parameter identify the elements. 
+Fish back as a Generalised\+Element\+: Circular ring whose position is given by \[ x = X_c + R \cos(\xi) \] \[ y = Y_c + R \sin(\xi) \] The ring\textquotesingle{}s vertical position $ Y_c $ is determined by \char`\"{}pseudo elasticity\char`\"{}\+: ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// Refineable Poisson problem in deformable fish-\/shaped domain. Template parameter identify the elements. 
 
-Definition at line 243 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00243}{243}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
@@ -61,28 +67,27 @@ Definition at line 243 of file elastic\+\_\+poisson.\+cc.
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!RefineableFishPoissonProblem@{RefineableFishPoissonProblem}}
 \index{RefineableFishPoissonProblem@{RefineableFishPoissonProblem}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableFishPoissonProblem()}{RefineableFishPoissonProblem()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}} (\begin{DoxyParamCaption}\item[{const bool \&}]{fix\+\_\+position,  }\item[{string}]{directory\+\_\+name }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}} (\begin{DoxyParamCaption}\item[{const bool \&}]{fix\+\_\+position,  }\item[{string}]{directory\+\_\+name }\end{DoxyParamCaption})}
 
 
 
 Constructor\+: Bool flag specifies if position of fish back is prescribed or computed from the coupled problem. String specifies output directory. 
 
-Constructor for adaptive Poisson problem in deformable fish-\/shaped domain. Pass flag if position of fish back is fixed, and the output directory. ~\newline
- Loop over elements and set pointers to source function
+Constructor for adaptive Poisson problem in deformable fish-\/shaped domain. Pass flag if position of fish back is fixed, and the output directory. Loop over elements and set pointers to source function
 
-Definition at line 326 of file elastic\+\_\+poisson.\+cc.
-
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{326}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
-References Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Doc\+\_\+info, Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Doc\+\_\+node\+\_\+pt, Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fish\+\_\+back\+\_\+mesh\+\_\+pt, Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fish\+\_\+mesh\+\_\+pt(), Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fish\+\_\+mesh\+\_\+pt, Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Fix\+\_\+position, Const\+Source\+For\+Poisson\+::get\+\_\+source(), Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Load\+\_\+pt, and Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Trace\+\_\+file.
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00312}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+info}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00293}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00303}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Fish\+\_\+back\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00273}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::fish\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00299}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Fish\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00309}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Fix\+\_\+position}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00057}{Const\+Source\+For\+Poisson\+::get\+\_\+source()}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00306}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Load\+\_\+pt}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00296}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Trace\+\_\+file}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_a7039a3409520850908940927b91af9ab}\label{classRefineableFishPoissonProblem_a7039a3409520850908940927b91af9ab}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!````~RefineableFishPoissonProblem@{$\sim$RefineableFishPoissonProblem}}
 \index{````~RefineableFishPoissonProblem@{$\sim$RefineableFishPoissonProblem}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$RefineableFishPoissonProblem()}{~RefineableFishPoissonProblem()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -90,7 +95,7 @@ Destructor.
 
 Destructor for Poisson problem in deformable fish-\/shaped domain. 
 
-Definition at line 468 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00468}{468}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
@@ -99,8 +104,8 @@ Definition at line 468 of file elastic\+\_\+poisson.\+cc.
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -108,14 +113,14 @@ Update the problem specs after solve (empty)
 
 
 
-Definition at line 264 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00264}{264}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_a8d8fb7ef1c571c57c02073edab4a7759}\label{classRefineableFishPoissonProblem_a8d8fb7ef1c571c57c02073edab4a7759}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -123,14 +128,18 @@ Update after Newton step\+: Update mesh in response to possible changes in the w
 
 
 
-Definition at line 258 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00258}{258}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00273}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::fish\+\_\+mesh\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_a58098181f3b88c2fc65f24fb15c1a529}\label{classRefineableFishPoissonProblem_a58098181f3b88c2fc65f24fb15c1a529}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -138,14 +147,18 @@ Update the problem specs before solve\+: Update mesh.
 
 
 
-Definition at line 267 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00267}{267}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
-\mbox{\Hypertarget{classRefineableFishPoissonProblem_a093f5963e63746843c33ca444a205333}\label{classRefineableFishPoissonProblem_a093f5963e63746843c33ca444a205333}} 
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00273}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::fish\+\_\+mesh\+\_\+pt()}}.
+
+\mbox{\Hypertarget{classRefineableFishPoissonProblem_a5585bb39205a7ab53da4fb39c1393dc3}\label{classRefineableFishPoissonProblem_a5585bb39205a7ab53da4fb39c1393dc3}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!doc\_info@{doc\_info}}
 \index{doc\_info@{doc\_info}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_info()}{doc\_info()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Doc\+Info\& \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \& \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -153,14 +166,22 @@ Access to Doc\+Info object.
 
 
 
-Definition at line 288 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00288}{288}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00312}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Doc\+\_\+info}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00529}{demo\+\_\+fish\+\_\+poisson()}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_a6db25ff0bd3014aa531d9f0e8b385beb}\label{classRefineableFishPoissonProblem_a6db25ff0bd3014aa531d9f0e8b385beb}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution}
 
 
 
@@ -168,29 +189,37 @@ Doc the solution.
 
 Doc the solution in tecplot format. 
 
-Definition at line 481 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00481}{481}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
-\mbox{\Hypertarget{classRefineableFishPoissonProblem_a6f25d5110e5262e66e2900da051567a6}\label{classRefineableFishPoissonProblem_a6f25d5110e5262e66e2900da051567a6}} 
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00578}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00529}{demo\+\_\+fish\+\_\+poisson()}}.
+
+\mbox{\Hypertarget{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}\label{classRefineableFishPoissonProblem_a7b6a368aa599f73d3c578b985af2fecc}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!fish\_mesh\_pt@{fish\_mesh\_pt}}
 \index{fish\_mesh\_pt@{fish\_mesh\_pt}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fish\_mesh\_pt()}{fish\_mesh\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Algebraic\+Refineable\+Fish\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fish\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Algebraic\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::fish\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 273 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00273}{273}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-Referenced by Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Fish\+Poisson\+Problem().
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00299}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Fish\+\_\+mesh\+\_\+pt}}.
 
-\mbox{\Hypertarget{classRefineableFishPoissonProblem_a20702e8945d442c9597348b550da14e4}\label{classRefineableFishPoissonProblem_a20702e8945d442c9597348b550da14e4}} 
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00258}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00267}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00578}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson()}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00529}{demo\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}.
+
+\mbox{\Hypertarget{classRefineableFishPoissonProblem_a4de3473b96dd9fc401f44717f68a9896}\label{classRefineableFishPoissonProblem_a4de3473b96dd9fc401f44717f68a9896}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!load@{load}}
 \index{load@{load}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{load()}{load()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double\& \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \& \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -198,7 +227,15 @@ Return value of the \char`\"{}load\char`\"{} on the elastically supported ring.
 
 
 
-Definition at line 279 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00279}{279}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00306}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Load\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00578}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00529}{demo\+\_\+fish\+\_\+poisson()}}.
 
 
 
@@ -207,8 +244,8 @@ Definition at line 279 of file elastic\+\_\+poisson.\+cc.
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!Doc\_info@{Doc\_info}}
 \index{Doc\_info@{Doc\_info}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Doc\_info}{Doc\_info}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Doc\+Info \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Doc\+Info \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::Doc\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -216,18 +253,18 @@ Doc info object.
 
 
 
-Definition at line 312 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00312}{312}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-Referenced by Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Fish\+Poisson\+Problem().
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00288}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+info()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_afa7a846c34391fdfbc1a7cefe268152c}\label{classRefineableFishPoissonProblem_afa7a846c34391fdfbc1a7cefe268152c}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!Doc\_node\_pt@{Doc\_node\_pt}}
 \index{Doc\_node\_pt@{Doc\_node\_pt}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Doc\_node\_pt}{Doc\_node\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Node$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Doc\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::Doc\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -235,33 +272,37 @@ Node at which the solution of the Poisson equation is documented.
 
 
 
-Definition at line 293 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00293}{293}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-Referenced by Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Fish\+Poisson\+Problem().
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_adcb3831cd9c21ec454ca787ced5d9db6}\label{classRefineableFishPoissonProblem_adcb3831cd9c21ec454ca787ced5d9db6}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!Fish\_back\_mesh\_pt@{Fish\_back\_mesh\_pt}}
 \index{Fish\_back\_mesh\_pt@{Fish\_back\_mesh\_pt}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Fish\_back\_mesh\_pt}{Fish\_back\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Mesh$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Fish\+\_\+back\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
-
-Pointer to single-\/element mesh that stores the Generalised\+Element that represents the fish back 
-
-Definition at line 303 of file elastic\+\_\+poisson.\+cc.
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::Fish\+\_\+back\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Referenced by Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Fish\+Poisson\+Problem().
+Pointer to single-\/element mesh that stores the Generalised\+Element that represents the fish back. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00303}{303}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_af915f09b6e4ae2f4ded2ad1a25ed7f01}\label{classRefineableFishPoissonProblem_af915f09b6e4ae2f4ded2ad1a25ed7f01}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!Fish\_mesh\_pt@{Fish\_mesh\_pt}}
 \index{Fish\_mesh\_pt@{Fish\_mesh\_pt}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Fish\_mesh\_pt}{Fish\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Algebraic\+Refineable\+Fish\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Fish\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Algebraic\+Refineable\+Fish\+Mesh$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::Fish\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -269,18 +310,18 @@ Pointer to fish mesh.
 
 
 
-Definition at line 299 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00299}{299}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-Referenced by Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Fish\+Poisson\+Problem().
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00273}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::fish\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_a51c10ea7cbf4ab61fd953f011f72a1c4}\label{classRefineableFishPoissonProblem_a51c10ea7cbf4ab61fd953f011f72a1c4}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!Fix\_position@{Fix\_position}}
 \index{Fix\_position@{Fix\_position}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Fix\_position}{Fix\_position}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Fix\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::Fix\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -288,18 +329,18 @@ Is the position of the fish back prescribed?
 
 
 
-Definition at line 309 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00309}{309}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-Referenced by Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Fish\+Poisson\+Problem().
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_ae4a4e592320bbe9bfbee52be7dfecfaa}\label{classRefineableFishPoissonProblem_ae4a4e592320bbe9bfbee52be7dfecfaa}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!Load\_pt@{Load\_pt}}
 \index{Load\_pt@{Load\_pt}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Load\_pt}{Load\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Data$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Load\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Data$\ast$ \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::Load\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -307,18 +348,18 @@ Pointer to data item that stores the \char`\"{}load\char`\"{} on the fish back.
 
 
 
-Definition at line 306 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00306}{306}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-Referenced by Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Fish\+Poisson\+Problem().
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00279}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::load()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}.
 
 \mbox{\Hypertarget{classRefineableFishPoissonProblem_aa358e2b0fa91780bdca32ae4676717ff}\label{classRefineableFishPoissonProblem_aa358e2b0fa91780bdca32ae4676717ff}} 
 \index{RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}!Trace\_file@{Trace\_file}}
 \index{Trace\_file@{Trace\_file}!RefineableFishPoissonProblem$<$ ELEMENT $>$@{RefineableFishPoissonProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-ofstream \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+ofstream \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem}}$<$ ELEMENT $>$\+::Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -326,11 +367,11 @@ Trace file.
 
 
 
-Definition at line 296 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00296}{296}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-Referenced by Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Fish\+Poisson\+Problem().
+Referenced by \mbox{\hyperlink{elastic__poisson_8cc_source_l00326}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::\+Refineable\+Fish\+Poisson\+Problem()}}.
 
 
 

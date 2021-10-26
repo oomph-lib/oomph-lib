@@ -24,7 +24,8 @@ When \href{../../two_d_unsteady_heat_ALE/html/index.html}{\texttt{ solving the a
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{two__d__unsteady__heat__2adapt_8txt_adc710e2cd42f86966973a17b74708edc}{doubly\_adaptive\_unsteady\_newton\_solve}}(dt,epsilon\_t,max\_adapt,first)}
+\DoxyCodeLine{doubly\_adaptive\_unsteady\_newton\_solve(dt,epsilon\_t,max\_adapt,first)}
+
 \end{DoxyCode}
 
 
@@ -38,7 +39,7 @@ This Newton solver performs the spatial and temporal adaptations sequentially, a
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_impl}{}\doxysection{The implementation}\label{index_impl}
-Since the spatial and temporal adaptations are performed independently, adding \char`\"{}double adaptivity\char`\"{} to the existing \href{../../two_d_unsteady_heat_ALE/html/index.html}{\texttt{ driver code with pure spatial adaptivity}} only requires the implementation of the additional member function {\ttfamily Problem\+::global\+\_\+temporal\+\_\+error\+\_\+norm()}. In the current problem we can use the one that we created for the \href{../../two_d_unsteady_heat_t_adapt/html/index.html}{\texttt{ example with pure temporal adaptivity}}. Furthermore, we pass a true boolean flag to the constructor of the {\ttfamily B\+D\+F$<$2$>$} timestepper, to make it adaptive. That\textquotesingle{}s all! Apart from a few (optional) improvements to the dump/restart functions (discussed below), \href{../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc}{\texttt{ the code}} does not require any other changes.
+Since the spatial and temporal adaptations are performed independently, adding \char`\"{}double adaptivity\char`\"{} to the existing \href{../../two_d_unsteady_heat_ALE/html/index.html}{\texttt{ driver code with pure spatial adaptivity}} only requires the implementation of the additional member function {\ttfamily Problem\+::global\+\_\+temporal\+\_\+error\+\_\+norm()}. In the current problem we can use the one that we created for the \href{../../two_d_unsteady_heat_t_adapt/html/index.html}{\texttt{ example with pure temporal adaptivity}}. Furthermore, we pass a true boolean flag to the constructor of the {\ttfamily BDF$<$2$>$} timestepper, to make it adaptive. That\textquotesingle{}s all! Apart from a few (optional) improvements to the dump/restart functions (discussed below), \href{../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc}{\texttt{ the code}} does not require any other changes.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -95,9 +96,7 @@ In two earlier examples, we commented on two undesirable features of the default
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Next\_dt;}
 
 \end{DoxyCodeInclude}
-
-
-\mbox{[}We also provide a public access function, {\ttfamily double} {\ttfamily next\+\_\+dt()}, to the suggested next timestep; see \mbox{\hyperlink{index_no_pub}{Do N\+OT use public member data in any classes}} .\mbox{]}
+ \mbox{[}We also provide a public access function, {\ttfamily double} {\ttfamily next\+\_\+dt()}, to the suggested next timestep; see \mbox{\hyperlink{index_no_pub}{Do NOT use public member data in any classes}} .\mbox{]}
 
 We initialise the output label in the {\ttfamily Problem} constructor,
 
@@ -105,8 +104,8 @@ We initialise the output label in the {\ttfamily Problem} constructor,
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_constructor============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem on deformable ellipse domain.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Pass pointer to source function.}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for UnsteadyHeat problem on deformable ellipse domain.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Pass pointer to source function.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a894f3bd6c1c23c307a736de6898e4e98}{RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem}}(}
@@ -118,15 +117,13 @@ We initialise the output label in the {\ttfamily Problem} constructor,
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output number}}
 \DoxyCodeLine{ Doc\_info.number()=0; }
 
 \end{DoxyCodeInclude}
-
-
-and set {\ttfamily Next\+\_\+dt} to the initial timestep when the initial condition is assigned in {\ttfamily set\+\_\+initial\+\_\+condition()}\+:
+ and set {\ttfamily Next\+\_\+dt} to the initial timestep when the initial condition is assigned in {\ttfamily set\+\_\+initial\+\_\+condition()}\+:
 
  ~\newline
  
@@ -138,7 +135,7 @@ and set {\ttfamily Next\+\_\+dt} to the initial timestep when the initial condit
 \DoxyCodeLine{   \textcolor{comment}{// in the problem.}}
 \DoxyCodeLine{   initialise\_dt(dt0);}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{// Use this as the first "suggested" timestep}}
+\DoxyCodeLine{   \textcolor{comment}{// Use this as the first "{}suggested"{} timestep}}
 \DoxyCodeLine{   Next\_dt=dt0;}
 
 \end{DoxyCodeInclude}
@@ -150,17 +147,17 @@ We modify the timestepping loop so that the adaptive timestepper\textquotesingle
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Timestepping loop}}
-\DoxyCodeLine{ \textcolor{keywordflow}{while} (\mbox{\hyperlink{two__d__unsteady__heat__2adapt_8txt_ad724132cd4dc36ddb2f0ee00eac00f50}{problem}}.time\_pt()-\/>time()<t\_max)}
+\DoxyCodeLine{ \textcolor{keywordflow}{while} (problem.time\_pt()-\/>time()<t\_max)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Take timestep with temporal and spatial adaptivity}}
 \DoxyCodeLine{   \textcolor{keywordtype}{double} dt\_new=}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8txt_ad724132cd4dc36ddb2f0ee00eac00f50}{problem}}.doubly\_adaptive\_unsteady\_newton\_solve(dt,\mbox{\hyperlink{two__d__unsteady__heat__2adapt_8txt_ad724132cd4dc36ddb2f0ee00eac00f50}{problem}}.epsilon\_t(),}
+\DoxyCodeLine{   problem.doubly\_adaptive\_unsteady\_newton\_solve(dt,problem.epsilon\_t(),}
 \DoxyCodeLine{                                                 max\_adapt,first);}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Suggested new dt: "} << dt\_new << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Suggested new dt: "{}} << dt\_new << std::endl;}
 \DoxyCodeLine{   dt=dt\_new;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Store for restart}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8txt_ad724132cd4dc36ddb2f0ee00eac00f50}{problem}}.next\_dt()=dt\_new;}
+\DoxyCodeLine{   problem.next\_dt()=dt\_new;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Now we've done the first timestep -\/-\/ don't re-\/set the IC}}
 \DoxyCodeLine{   \textcolor{comment}{// in subsequent steps}}
@@ -172,30 +169,28 @@ We modify the timestepping loop so that the adaptive timestepper\textquotesingle
 \DoxyCodeLine{   max\_adapt=1;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__2adapt_8txt_ad724132cd4dc36ddb2f0ee00eac00f50}{problem}}.doc\_solution();}
+\DoxyCodeLine{   problem.doc\_solution();}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Since the {\ttfamily Problem} now has access to the {\ttfamily Doc\+Info} object (and therefore to the label that we use to identify the output files), and to the suggested next timestep, we write both to the restart file, adding brief comments behind the \char`\"{}raw\char`\"{} data.
+ Since the {\ttfamily Problem} now has access to the {\ttfamily Doc\+Info} object (and therefore to the label that we use to identify the output files), and to the suggested next timestep, we write both to the restart file, adding brief comments behind the \char`\"{}raw\char`\"{} data.
 
  ~\newline
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_dump\_it=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Dump the solution to disk}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_a1fb939c3f9c258fd49328bb1516ced98}{RefineableUnsteadyHeatProblem<ELEMENT>::dump\_it}}(ofstream\& dump\_file)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write step number}}
-\DoxyCodeLine{ dump\_file << Doc\_info.number() << \textcolor{stringliteral}{" \# step number"} << std::endl;}
+\DoxyCodeLine{ dump\_file << Doc\_info.number() << \textcolor{stringliteral}{"{} \# step number"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write suggested next timestep}}
-\DoxyCodeLine{ dump\_file << Next\_dt << \textcolor{stringliteral}{" \# suggested next timestep"} << std::endl;}
+\DoxyCodeLine{ dump\_file << Next\_dt << \textcolor{stringliteral}{"{} \# suggested next timestep"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Dump the refinement pattern and the generic problem data}}
 \DoxyCodeLine{ Problem::dump(dump\_file);}
@@ -212,7 +207,7 @@ These values are then read during the restart\+:
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start\_of\_restart===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Read solution from disk}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_af36fa71e72852367411e21b50b179625}{RefineableUnsteadyHeatProblem<ELEMENT>::restart}}(ifstream\& restart\_file)}
 \DoxyCodeLine{\{}
@@ -244,9 +239,7 @@ These values are then read during the restart\+:
 \DoxyCodeLine{\} \textcolor{comment}{// end of restart}}
 
 \end{DoxyCodeInclude}
-
-
-\mbox{[}The slightly clumsy read procedure is required to ensure that the comments that follow the \char`\"{}raw\char`\"{} data are ignored.\mbox{]}
+ \mbox{[}The slightly clumsy read procedure is required to ensure that the comments that follow the \char`\"{}raw\char`\"{} data are ignored.\mbox{]}
 
 Following the assignment of the initial conditions, the first timestep for the timestepping loop in the {\ttfamily main} function can now be obtained from {\ttfamily next\+\_\+dt()} since {\ttfamily Next\+\_\+dt} will either have been set to the actual first timestep used when setting up the initial conditions at time $ t=0$, or to the next timestep that had been suggested by the adaptive timestepper when the restart file was created.
 
@@ -260,7 +253,7 @@ Here are the time-\/traces for the solution and the timesteps from the original 
 
 
 \DoxyHorRuler{0}
-\hypertarget{index_no_pub}{}\doxysubsection{Do N\+O\+T use public member data in any classes}\label{index_no_pub}
+\hypertarget{index_no_pub}{}\doxysubsection{Do NOT use public member data in any classes}\label{index_no_pub}
 A little aside\+: Yes, we really do recommend storing the suggestion for the size of the next timestep as private member data and providing an access function to it. This must seem like (and indeed is) slight overkill in the present context\+: Why can\textquotesingle{}t we just store it as public member data and avoid having to write the access function? The answer is\+: Because public data is bad and it\textquotesingle{}s a good habit to avoid it as a matter of principle -- even in trivial examples.
 
 \DoxyHorRuler{0}
@@ -274,5 +267,5 @@ A little aside\+: Yes, we really do recommend storing the suggestion for the siz
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

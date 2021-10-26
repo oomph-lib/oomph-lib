@@ -3,19 +3,19 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Coated sphere F\+SI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classCoatedSphereProblem}{Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Coated sphere FSI. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
-\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a373950a959cd784c8f8028099807c2fb}{Global\+\_\+\+Parameters\+::\+Nu}} (std\+::complex$<$ double $>$(0.\+3, 0.\+0))
 \begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio Nu. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}} (std\+::complex$<$ double $>$(100.\+0, 0.\+0))
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}} (std\+::complex$<$ double $>$(100.\+0, 0.\+0))
 \begin{DoxyCompactList}\small\item\em Non-\/dim square of frequency for solid -- dependent variable! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}{Global\+\_\+\+Parameters\+::update\+\_\+parameter\+\_\+values}} ()
 \begin{DoxyCompactList}\small\item\em Function to update dependent parameter values. \end{DoxyCompactList}\item 
@@ -31,7 +31,7 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Global\+\_\+\+Parameters\+::\+Outer\+\_\+radius}} =2.\+0
 \begin{DoxyCompactList}\small\item\em Radius of outer boundary of Helmholtz domain. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\+\_\+\+Parameters\+::Q}} =10.\+0
-\begin{DoxyCompactList}\small\item\em F\+SI parameter. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em FSI parameter. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}{Global\+\_\+\+Parameters\+::\+H\+\_\+coating}} =0.\+2
 \begin{DoxyCompactList}\small\item\em Non-\/dim thickness of elastic coating. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{namespaceGlobal__Parameters_ae1198385d90f52c4ed921520ae43a9e7}{Global\+\_\+\+Parameters\+::\+Fourier\+\_\+wavenumber}} =0
@@ -39,9 +39,8 @@ int \mbox{\hyperlink{namespaceGlobal__Parameters_ae1198385d90f52c4ed921520ae43a9
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Global\+\_\+\+Parameters\+::\+Density\+\_\+ratio}} =1.\+0
 \begin{DoxyCompactList}\small\item\em Density ratio\+: solid to fluid. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_abc67bb72ab99af013e3c7f6ffe453798}{Global\+\_\+\+Parameters\+::M}} =4
-\begin{DoxyCompactList}\small\item\em Wavenumber \char`\"{}zenith\char`\"{}-\/variation of imposed displacement of coating on inner boundary ~\newline
- \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\+\_\+\+Parameters\+::\+Directory}} =\char`\"{}R\+E\+S\+LT\char`\"{}
+\begin{DoxyCompactList}\small\item\em Wavenumber \char`\"{}zenith\char`\"{}-\/variation of imposed displacement of coating on inner boundary. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\+\_\+\+Parameters\+::\+Directory}} =\char`\"{}RESLT\char`\"{}
 \begin{DoxyCompactList}\small\item\em Output directory. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}{Global\+\_\+\+Parameters\+::\+El\+\_\+multiplier}} =1
 \begin{DoxyCompactList}\small\item\em Multiplier for number of elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -60,9 +59,9 @@ Driver for coated sphere loaded by lineared fluid loading.
 
 
 
-Definition at line 687 of file fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00687}{687}} of file \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source}{fourier\+\_\+decomposed\+\_\+acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Directory, Coated\+Sphere\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution(), Global\+\_\+\+Parameters\+::\+El\+\_\+multiplier, Global\+\_\+\+Parameters\+::\+K\+\_\+squared, Global\+\_\+\+Parameters\+::M, Global\+\_\+\+Parameters\+::Q, setup, and Global\+\_\+\+Parameters\+::update\+\_\+parameter\+\_\+values().
+References \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00113}{Global\+\_\+\+Parameters\+::\+Directory}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00593}{Coated\+Sphere\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00116}{Global\+\_\+\+Parameters\+::\+El\+\_\+multiplier}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00064}{Global\+\_\+\+Parameters\+::\+K\+\_\+squared}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00095}{Global\+\_\+\+Parameters\+::M}}, \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00070}{Global\+\_\+\+Parameters\+::Q}}, and \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_source_l00088}{Global\+\_\+\+Parameters\+::update\+\_\+parameter\+\_\+values()}}.
 

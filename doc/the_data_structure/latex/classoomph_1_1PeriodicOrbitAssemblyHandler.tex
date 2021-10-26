@@ -1,9 +1,20 @@
-\hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler}{}\doxysection{oomph\+::Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler}{}\doxysection{oomph\+::Periodic\+Orbit\+Assembly\+Handler\texorpdfstring{$<$}{<} NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1PeriodicOrbitAssemblyHandler}\index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
+
+
+A class that is used to assemble and solve the augmented system of equations associated with calculating periodic orbits directly.  
+
+
 
 
 {\ttfamily \#include $<$periodic\+\_\+orbit\+\_\+handler.\+h$>$}
 
+Inheritance diagram for oomph\+::Periodic\+Orbit\+Assembly\+Handler\texorpdfstring{$<$}{<} NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classoomph_1_1PeriodicOrbitAssemblyHandler}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -15,7 +26,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ab960ecaac9
 \begin{DoxyCompactList}\small\item\em Return the number of degrees of freedom in the element elem\+\_\+pt. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ac4d1e4e7e566061c2129157c67adab5b}{eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, const unsigned \&ieqn\+\_\+local)
 \begin{DoxyCompactList}\small\item\em Return the global equation number of the local unknown ieqn\+\_\+local in elem\+\_\+pt. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_af43abc524b34d8e8035e2c2323e2fc87}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_af43abc524b34d8e8035e2c2323e2fc87}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the contribution to the residuals of the element elem\+\_\+pt. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a9e8d41c8ad79134466a1a50c11c62dc3}{get\+\_\+dofs\+\_\+for\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dofs)
 \item 
@@ -23,9 +34,8 @@ void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a681a727dc0a463
 \item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a3d1d9f709e983495dac3113b8e716843}{set\+\_\+dofs\+\_\+for\+\_\+element}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \&dofs)
 \item 
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a6d901ecdefca1c59403a4ae4b215446f}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation
-/ d variable\char`\"{} for elem\+\_\+pt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a6d901ecdefca1c59403a4ae4b215446f}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation / d variable\char`\"{} for elem\+\_\+pt. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a51b7db6467c46b417b3e630d0ef96a8f}{orbit\+\_\+output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a555a59c5c5b5dd2e08a31f6c6e176611}{discrete\+\_\+times}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})
@@ -41,7 +51,7 @@ void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_a358d1749faa8ac
 \begin{DoxyCompactList}\small\item\em Pointer to the timestepper. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3a8b481f99a46352f50186a8f9efe4b}{Problem\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the problem. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{Periodic\+Orbit\+Temporal\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{Spectral\+Periodic\+Orbit\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90}{Time\+\_\+mesh\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{Periodic\+Orbit\+Temporal\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{Spectral\+Periodic\+Orbit\+Element}}$<$ NNODE\+\_\+1D $>$ $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90}{Time\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Storage for mesh of temporal elements. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ae527e33cddc33225b532e6a64f255483}{Basic\+\_\+time\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Storage for the mesh of temporal elements with a simple mesh pointer. \end{DoxyCompactList}\item 
@@ -58,12 +68,11 @@ double \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler_ae922867706dc
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$}
+A class that is used to assemble and solve the augmented system of equations associated with calculating periodic orbits directly. 
 
-A class that is used to assemble and solve the augmented system of equations associated with calculating periodic orbits directly 
-
-Definition at line 599 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00690}{690}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
@@ -72,8 +81,8 @@ Definition at line 599 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!PeriodicOrbitAssemblyHandler@{PeriodicOrbitAssemblyHandler}}
 \index{PeriodicOrbitAssemblyHandler@{PeriodicOrbitAssemblyHandler}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{PeriodicOrbitAssemblyHandler()}{PeriodicOrbitAssemblyHandler()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{Periodic\+Orbit\+Assembly\+Handler}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+element\+\_\+in\+\_\+period,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{initial\+\_\+guess,  }\item[{const double \&}]{omega }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{Periodic\+Orbit\+Assembly\+Handler}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+element\+\_\+in\+\_\+period,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{initial\+\_\+guess,  }\item[{const double \&}]{omega }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -81,18 +90,14 @@ Constructor, initialises values and constructs mesh of elements.
 
 
 
-Definition at line 740 of file periodic\+\_\+orbit\+\_\+handler.\+h.
-
-
-
-References oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Basic\+\_\+time\+\_\+mesh\+\_\+pt, oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Problem\+::dof(), oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Data\+::is\+\_\+pinned(), oomph\+::\+Problem\+::mesh\+\_\+pt(), n, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+N\+\_\+tstorage, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Ndof, oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Problem\+::nsub\+\_\+mesh(), oomph\+::\+Data\+::ntstorage(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Omega, oomph\+::\+Periodic\+Orbit\+Equations\+::omega\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs, oomph\+::\+Periodic\+Orbit\+Equations\+::set\+\_\+ntstorage(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs(), oomph\+::\+Data\+::set\+\_\+time\+\_\+stepper(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt, oomph\+::\+Periodic\+Orbit\+Equations\+::time\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+pt(), oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+stepper\+\_\+pt, value, oomph\+::\+Data\+::value(), and oomph\+::\+Node\+::value().
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00719}{719}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a919aba117d2e7f08d1462b9d00799782}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a919aba117d2e7f08d1462b9d00799782}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!````~PeriodicOrbitAssemblyHandler@{$\sim$PeriodicOrbitAssemblyHandler}}
 \index{````~PeriodicOrbitAssemblyHandler@{$\sim$PeriodicOrbitAssemblyHandler}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$PeriodicOrbitAssemblyHandler()}{~PeriodicOrbitAssemblyHandler()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{Periodic\+Orbit\+Assembly\+Handler}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{Periodic\+Orbit\+Assembly\+Handler}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -100,11 +105,11 @@ Destructor, destroy the time mesh.
 
 
 
-Definition at line 1467 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01450}{1450}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-References oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00701}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
 
 
 
@@ -113,8 +118,8 @@ References oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!adapt\_temporal\_mesh@{adapt\_temporal\_mesh}}
 \index{adapt\_temporal\_mesh@{adapt\_temporal\_mesh}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{adapt\_temporal\_mesh()}{adapt\_temporal\_mesh()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::adapt\+\_\+temporal\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::adapt\+\_\+temporal\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -122,18 +127,18 @@ Adapt the time mesh.
 
 
 
-Definition at line 1062 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{1045}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-References oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Basic\+\_\+time\+\_\+mesh\+\_\+pt, oomph\+::\+Linear\+Algebra\+Distribution\+::build(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Mesh\+::\+Default\+\_\+\+Time\+Stepper, oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt, oomph\+::\+Problem\+::\+Dof\+\_\+pt, e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Problem\+::global\+\_\+data\+\_\+pt(), i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Problem\+::mesh\+\_\+pt(), n, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+N\+\_\+element\+\_\+in\+\_\+period, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+N\+\_\+tstorage, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Ndof, oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::nglobal\+\_\+data(), oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Problem\+::nsub\+\_\+mesh(), oomph\+::\+Data\+::nvalue(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Omega, oomph\+::\+Periodic\+Orbit\+Equations\+::omega\+\_\+pt(), oomph\+::oomph\+\_\+info, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Problem\+\_\+pt, oomph\+::\+Periodic\+Orbit\+Equations\+::set\+\_\+ntstorage(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs(), oomph\+::\+Data\+::set\+\_\+time\+\_\+stepper(), oomph\+::\+Data\+::set\+\_\+value(), t, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt, oomph\+::\+Periodic\+Orbit\+Equations\+::time\+\_\+pt(), oomph\+::\+Problem\+::time\+\_\+pt(), oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+stepper\+\_\+pt, oomph\+::\+Data\+::value(), oomph\+::\+Node\+::value(), and oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt().
+References \mbox{\hyperlink{problem_8cc_source_l01989}{oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00704}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Basic\+\_\+time\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00035}{oomph\+::\+Linear\+Algebra\+Distribution\+::build()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00075}{oomph\+::\+Mesh\+::\+Default\+\_\+\+Time\+Stepper}}, \mbox{\hyperlink{problem_8h_source_l00460}{oomph\+::\+Problem\+::\+Dof\+\_\+distribution\+\_\+pt}}, \mbox{\hyperlink{problem_8h_source_l00554}{oomph\+::\+Problem\+::\+Dof\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01647}{oomph\+::\+Problem\+::global\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00713}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+element\+\_\+in\+\_\+period}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00716}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+tstorage}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00710}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Ndof}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8h_source_l01686}{oomph\+::\+Problem\+::nglobal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01323}{oomph\+::\+Problem\+::nsub\+\_\+mesh()}}, \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00719}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Omega}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00196}{oomph\+::\+Periodic\+Orbit\+Equations\+::omega\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00707}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00697}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00208}{oomph\+::\+Periodic\+Orbit\+Equations\+::set\+\_\+ntstorage()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00902}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}, \mbox{\hyperlink{nodes_8cc_source_l00406}{oomph\+::\+Data\+::set\+\_\+time\+\_\+stepper()}}, \mbox{\hyperlink{nodes_8h_source_l00271}{oomph\+::\+Data\+::set\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00701}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00214}{oomph\+::\+Periodic\+Orbit\+Equations\+::time\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01504}{oomph\+::\+Problem\+::time\+\_\+pt()}}, \mbox{\hyperlink{geom__objects_8h_source_l00192}{oomph\+::\+Geom\+Object\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00694}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, and \mbox{\hyperlink{nodes_8h_source_l01766}{oomph\+::\+Solid\+Node\+::variable\+\_\+position\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a555a59c5c5b5dd2e08a31f6c6e176611}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a555a59c5c5b5dd2e08a31f6c6e176611}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!discrete\_times@{discrete\_times}}
 \index{discrete\_times@{discrete\_times}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{discrete\_times()}{discrete\_times()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::discrete\+\_\+times (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::discrete\+\_\+times (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -141,18 +146,18 @@ Tell me the times at which you want the solution.
 
 
 
-Definition at line 1051 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01034}{1034}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-References n, t, and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00701}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ac4d1e4e7e566061c2129157c67adab5b}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ac4d1e4e7e566061c2129157c67adab5b}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!eqn\_number@{eqn\_number}}
 \index{eqn\_number@{eqn\_number}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{eqn\_number()}{eqn\_number()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned long \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::eqn\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{const unsigned \&}]{ieqn\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::eqn\+\_\+number (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{const unsigned \&}]{ieqn\+\_\+local }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -160,72 +165,87 @@ Return the global equation number of the local unknown ieqn\+\_\+local in elem\+
 
 
 
-Definition at line 935 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559cde803d1ba2195b5290}{oomph\+::\+Assembly\+Handler}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+N\+\_\+tstorage, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Ndof, oomph\+::\+Generalised\+Element\+::ndof(), and t.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00918}{918}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element().
+References \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00716}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+tstorage}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00710}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Ndof}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00949}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00963}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00978}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a9e8d41c8ad79134466a1a50c11c62dc3}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a9e8d41c8ad79134466a1a50c11c62dc3}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!get\_dofs\_for\_element@{get\_dofs\_for\_element}}
 \index{get\_dofs\_for\_element@{get\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dofs\_for\_element()}{get\_dofs\_for\_element()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 966 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Implements \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a48968325ba57e969f64298c5b2dfb8f8}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base}}.
 
 
 
-References oomph\+::\+Problem\+::dof(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::eqn\+\_\+number(), i, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::ndof(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Problem\+\_\+pt.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00949}{949}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01813}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00918}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00911}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::ndof()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00697}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a6d901ecdefca1c59403a4ae4b215446f}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a6d901ecdefca1c59403a4ae4b215446f}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!get\_jacobian@{get\_jacobian}}
 \index{get\_jacobian@{get\_jacobian}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{get\_jacobian()}{get\_jacobian()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::get\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Calculate the elemental Jacobian matrix \char`\"{}d equation
-/ d variable\char`\"{} for elem\+\_\+pt. 
+Calculate the elemental Jacobian matrix \char`\"{}d equation / d variable\char`\"{} for elem\+\_\+pt. 
 
 
 
-Definition at line 1011 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0ba6ebee8d82509458e5}{oomph\+::\+Assembly\+Handler}}.
 
 
 
-References residuals(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00994}{994}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00701}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a681a727dc0a463e924aa88e0e691e2c6}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a681a727dc0a463e924aa88e0e691e2c6}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!get\_previous\_dofs\_for\_element@{get\_previous\_dofs\_for\_element}}
 \index{get\_previous\_dofs\_for\_element@{get\_previous\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{get\_previous\_dofs\_for\_element()}{get\_previous\_dofs\_for\_element()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 980 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Implements \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a680c82526671e8213d317367f3f7a7e1}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base}}.
 
 
 
-References oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::eqn\+\_\+number(), i, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::ndof(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00963}{963}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00918}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00911}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::ndof()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00707}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_af43abc524b34d8e8035e2c2323e2fc87}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_af43abc524b34d8e8035e2c2323e2fc87}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!get\_residuals@{get\_residuals}}
 \index{get\_residuals@{get\_residuals}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{get\_residuals()}{get\_residuals()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::get\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -233,18 +253,22 @@ Return the contribution to the residuals of the element elem\+\_\+pt.
 
 
 
-Definition at line 958 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90da62b4da2af8a26d08b3}{oomph\+::\+Assembly\+Handler}}.
 
 
 
-References residuals(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00941}{941}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00701}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ab960ecaac9239cfbc47f1036893362ff}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ab960ecaac9239cfbc47f1036893362ff}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!ndof@{ndof}}
 \index{ndof@{ndof}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{ndof()}{ndof()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::ndof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::ndof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -252,60 +276,64 @@ Return the number of degrees of freedom in the element elem\+\_\+pt.
 
 
 
-Definition at line 928 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa009e0366460a7ed78e68}{oomph\+::\+Assembly\+Handler}}.
 
 
 
-References oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+N\+\_\+tstorage, and oomph\+::\+Generalised\+Element\+::ndof().
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00911}{911}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element().
+References \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00716}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+tstorage}}, and \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00949}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00963}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00978}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a51b7db6467c46b417b3e630d0ef96a8f}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a51b7db6467c46b417b3e630d0ef96a8f}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!orbit\_output@{orbit\_output}}
 \index{orbit\_output@{orbit\_output}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{orbit\_output()}{orbit\_output()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::orbit\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::orbit\+\_\+output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Calculate all desired vectors and matrices provided by the element elem\+\_\+pt. 
 
-Return an unsigned integer to indicate whether the handler is a bifurcation tracking handler. The default is zero (not)
+Return an unsigned integer to indicate whether the handler is a bifurcation tracking handler. The default is zero (not) Return a pointer to the bifurcation parameter in bifurcation tracking problems Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems Return the contribution to the residuals of the element elem\+\_\+pt 
 
-Return a pointer to the bifurcation parameter in bifurcation tracking problems
-
-Return the eigenfunction(s) associated with the bifurcation that has been detected in bifurcation tracking problems Return the contribution to the residuals of the element elem\+\_\+pt 
-
-Definition at line 1039 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01022}{1022}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-References e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Problem\+\_\+pt, and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00697}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00701}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Time\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a3d1d9f709e983495dac3113b8e716843}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a3d1d9f709e983495dac3113b8e716843}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!set\_dofs\_for\_element@{set\_dofs\_for\_element}}
 \index{set\_dofs\_for\_element@{set\_dofs\_for\_element}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{set\_dofs\_for\_element()}{set\_dofs\_for\_element()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \&}]{dofs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 995 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Implements \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase_a09d7c31dec8b9688cec82f8b24558b9b}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler\+Base}}.
 
 
 
-References oomph\+::\+Problem\+::dof(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::eqn\+\_\+number(), i, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::ndof(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Problem\+\_\+pt.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00978}{978}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{problem_8h_source_l01813}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00918}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00911}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::ndof()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00697}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3296942fb40f5ca642521db38d44988}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3296942fb40f5ca642521db38d44988}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!set\_previous\_dofs\_to\_current\_dofs@{set\_previous\_dofs\_to\_current\_dofs}}
 \index{set\_previous\_dofs\_to\_current\_dofs@{set\_previous\_dofs\_to\_current\_dofs}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{set\_previous\_dofs\_to\_current\_dofs()}{set\_previous\_dofs\_to\_current\_dofs()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -313,15 +341,15 @@ Update the previous dofs.
 
 
 
-Definition at line 919 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00902}{902}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-References oomph\+::\+Problem\+::dof(), n, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+N\+\_\+tstorage, oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs, and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Problem\+\_\+pt.
+References \mbox{\hyperlink{problem_8h_source_l01813}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00716}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+N\+\_\+tstorage}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00710}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Ndof}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00707}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Previous\+\_\+dofs}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00697}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::\+Problem\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
 
 
 
@@ -330,8 +358,8 @@ Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Basic\_time\_mesh\_pt@{Basic\_time\_mesh\_pt}}
 \index{Basic\_time\_mesh\_pt@{Basic\_time\_mesh\_pt}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Basic\_time\_mesh\_pt}{Basic\_time\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Basic\+\_\+time\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::Basic\+\_\+time\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -339,18 +367,18 @@ Storage for the mesh of temporal elements with a simple mesh pointer.
 
 
 
-Definition at line 721 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00704}{704}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_a52b49ec4c94b9cf480395c7cad123ced}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_a52b49ec4c94b9cf480395c7cad123ced}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!N\_element\_in\_period@{N\_element\_in\_period}}
 \index{N\_element\_in\_period@{N\_element\_in\_period}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{N\_element\_in\_period}{N\_element\_in\_period}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::N\+\_\+element\+\_\+in\+\_\+period\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::N\+\_\+element\+\_\+in\+\_\+period\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -358,18 +386,18 @@ Storage for number of elements in the period.
 
 
 
-Definition at line 730 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00713}{713}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ada223550212a4e5e5b6838f96e5a2170}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ada223550212a4e5e5b6838f96e5a2170}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!N\_tstorage@{N\_tstorage}}
 \index{N\_tstorage@{N\_tstorage}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{N\_tstorage}{N\_tstorage}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::N\+\_\+tstorage\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::N\+\_\+tstorage\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -377,18 +405,18 @@ Storage for the number of unknown time values.
 
 
 
-Definition at line 733 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00716}{716}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::eqn\+\_\+number(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::ndof(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00918}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00911}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::ndof()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00902}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_aa04e0d8d17e69d64d53df7f9d7369fad}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_aa04e0d8d17e69d64d53df7f9d7369fad}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Ndof@{Ndof}}
 \index{Ndof@{Ndof}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Ndof}{Ndof}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Ndof\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::Ndof\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -396,18 +424,18 @@ Store number of degrees of freedom in the original problem.
 
 
 
-Definition at line 727 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00710}{710}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::eqn\+\_\+number(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00918}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::eqn\+\_\+number()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00902}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ae922867706dcf2e79e837bbbe774e053}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ae922867706dcf2e79e837bbbe774e053}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Omega@{Omega}}
 \index{Omega@{Omega}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Omega}{Omega}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Omega\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::Omega\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -415,18 +443,18 @@ Storage for the frequency of the orbit (scaled by 2pi)
 
 
 
-Definition at line 736 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00719}{719}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_aac4a358fed9397f2ffcb796252f78025}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_aac4a358fed9397f2ffcb796252f78025}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Previous\_dofs@{Previous\_dofs}}
 \index{Previous\_dofs@{Previous\_dofs}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Previous\_dofs}{Previous\_dofs}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Previous\+\_\+dofs\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::Previous\+\_\+dofs\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -434,18 +462,18 @@ Storage for the previous solution.
 
 
 
-Definition at line 724 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00707}{707}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00963}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+previous\+\_\+dofs\+\_\+for\+\_\+element()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00902}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3a8b481f99a46352f50186a8f9efe4b}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ac3a8b481f99a46352f50186a8f9efe4b}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Problem\_pt@{Problem\_pt}}
 \index{Problem\_pt@{Problem\_pt}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Problem\_pt}{Problem\_pt}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1Problem}{Problem}}$\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1Problem}{Problem}}$\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::Problem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -453,18 +481,18 @@ Pointer to the problem.
 
 
 
-Definition at line 714 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00697}{697}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::orbit\+\_\+output(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00949}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+dofs\+\_\+for\+\_\+element()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01022}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::orbit\+\_\+output()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00978}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+dofs\+\_\+for\+\_\+element()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00902}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::set\+\_\+previous\+\_\+dofs\+\_\+to\+\_\+current\+\_\+dofs()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_aa6a4d6fc7cfbfd3a1d8babcc3d0e8a90}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Time\_mesh\_pt@{Time\_mesh\_pt}}
 \index{Time\_mesh\_pt@{Time\_mesh\_pt}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Time\_mesh\_pt}{Time\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{Periodic\+Orbit\+Temporal\+Mesh}}$<$\mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{Spectral\+Periodic\+Orbit\+Element}}$<$N\+N\+O\+D\+E\+\_\+1D$>$ $>$$\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Time\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{Periodic\+Orbit\+Temporal\+Mesh}}$<$\mbox{\hyperlink{classoomph_1_1SpectralPeriodicOrbitElement}{Spectral\+Periodic\+Orbit\+Element}}$<$NNODE\+\_\+1D$>$ $>$$\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::Time\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -472,18 +500,18 @@ Storage for mesh of temporal elements.
 
 
 
-Definition at line 718 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00701}{701}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::discrete\+\_\+times(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+jacobian(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+residuals(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::orbit\+\_\+output(), oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::$\sim$\+Periodic\+Orbit\+Assembly\+Handler().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01034}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::discrete\+\_\+times()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00994}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00941}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::get\+\_\+residuals()}}, \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01022}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::orbit\+\_\+output()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01450}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::$\sim$\+Periodic\+Orbit\+Assembly\+Handler()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitAssemblyHandler_ae2a8149c7cd33e41765ef080e1654e81}\label{classoomph_1_1PeriodicOrbitAssemblyHandler_ae2a8149c7cd33e41765ef080e1654e81}} 
 \index{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}!Time\_stepper\_pt@{Time\_stepper\_pt}}
 \index{Time\_stepper\_pt@{Time\_stepper\_pt}!oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$@{oomph::PeriodicOrbitAssemblyHandler$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Time\_stepper\_pt}{Time\_stepper\_pt}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation}{Periodic\+Orbit\+Time\+Discretisation}}$\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTimeDiscretisation}{Periodic\+Orbit\+Time\+Discretisation}}$\ast$ \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler}}$<$ NNODE\+\_\+1D $>$\+::Time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -491,11 +519,11 @@ Pointer to the timestepper.
 
 
 
-Definition at line 711 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00694}{694}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh(), and oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Periodic\+Orbit\+Assembly\+Handler().
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l01045}{oomph\+::\+Periodic\+Orbit\+Assembly\+Handler$<$ NNODE\+\_\+1\+D $>$\+::adapt\+\_\+temporal\+\_\+mesh()}}.
 
 
 

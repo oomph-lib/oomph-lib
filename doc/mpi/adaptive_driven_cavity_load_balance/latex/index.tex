@@ -7,6 +7,7 @@ Most of the driver code is identical to the codes discussed in the tutorials exp
 The initial distribution of a problem via a call to 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::distribute(...)}
+
 \end{DoxyCode}
  attempts to distribute the elements in the Problem\textquotesingle{}s mesh over the available processors such that (i) each processor stores approximately the same number of elements and (ii) the anticipated volume of inter-\/processor communication required to synchronise the solution across processor boundaries is minimised. Typically, this procedure works very well in the sense that the assembly times for the Jacobian matrix in a distributed computation scale extremely well with the number of processors.
 
@@ -22,10 +23,12 @@ A re-\/distribution of elements may be required because
 \end{DoxyEnumerate}As with other methods within {\ttfamily oomph-\/lib}, load balancing is implemented such that only minimal user intervention is required. The function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::load\_balance() }
+
 \end{DoxyCode}
  may be called at any point following the distribution of the problem. The only change required to an existing driver code is the provision (via overloading of a broken virtual function in the Problem base class) of the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::build\_mesh()}
+
 \end{DoxyCode}
  This function must
 \begin{DoxyEnumerate}
@@ -75,8 +78,8 @@ As discussed above, the function {\ttfamily Problem\+::build\+\_\+mesh()} is cre
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_build\_mesh===================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Build the mesh for RefineableDrivenCavity problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{/// Build the mesh for RefineableDrivenCavity problem }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} RefineableDrivenCavityProblem<ELEMENT>::build\_mesh()}
@@ -104,7 +107,7 @@ As discussed above, the function {\ttfamily Problem\+::build\+\_\+mesh()} is cre
 \DoxyCodeLine{ \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}(mesh\_pt())-\/>}
 \DoxyCodeLine{  spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Fine tune error targets to get "interesting" refinement pattern}}
+\DoxyCodeLine{ \textcolor{comment}{// Fine tune error targets to get "{}interesting"{} refinement pattern}}
 \DoxyCodeLine{ \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<ELEMENT>*\textcolor{keyword}{>}(mesh\_pt())-\/>}
 \DoxyCodeLine{  max\_permitted\_error()=1.0e-\/5;}
 \DoxyCodeLine{ }
@@ -148,43 +151,42 @@ As discussed above, the function {\ttfamily Problem\+::build\+\_\+mesh()} is cre
 \DoxyCodeLine{\}\textcolor{comment}{// end\_of\_build\_mesh}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_problem_constructor}{}\doxysubsection{Changes to the problem constructor}\label{index_problem_constructor}
+ \hypertarget{index_problem_constructor}{}\doxysubsection{Changes to the problem constructor}\label{index_problem_constructor}
 The problem constructor becomes very short since the bulk of the code has been moved into the {\ttfamily Problem\+::build\+\_\+mesh()} function.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for RefineableDrivenCavity problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for RefineableDrivenCavity problem }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_LOAD\_BALANCE"});}
+\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_LOAD\_BALANCE"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Build the mesh}}
 \DoxyCodeLine{ build\_mesh();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_customising_load_balance}{}\doxysection{Customising the load balancing}\label{index_customising_load_balance}
 The \href{../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc}{\texttt{ driver code}} demonstrates some of the different options available for the {\ttfamily Problem\+::load\+\_\+balance(...)} function.
 \begin{DoxyItemize}
 \item Passing a boolean argument to {\ttfamily Problem\+::load\+\_\+balance(...)} enables the output of extended statistics. ~\newline
 ~\newline
 
-\item By default, the mesh partitioning for the initial problem distribution and any subsequent load balancing operations is determined by M\+E\+T\+IS. Unfortunately, M\+E\+T\+IS is not completely deterministic. This makes it difficult to compute reference data that can be used to assert the correct execution of the code during self-\/tests. When the driver code is run with the {\ttfamily --validate} command line flag, we therefore call the {\ttfamily Problem\+::distribute(...)} function with a pre-\/determined (and deterministic but non-\/optimal) distribution of the elements. The use of M\+E\+T\+IS during the load balancing operations can be bypassed by calling 
+\item By default, the mesh partitioning for the initial problem distribution and any subsequent load balancing operations is determined by METIS. Unfortunately, METIS is not completely deterministic. This makes it difficult to compute reference data that can be used to assert the correct execution of the code during self-\/tests. When the driver code is run with the {\ttfamily --validate} command line flag, we therefore call the {\ttfamily Problem\+::distribute(...)} function with a pre-\/determined (and deterministic but non-\/optimal) distribution of the elements. The use of METIS during the load balancing operations can be bypassed by calling 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::set\_default\_partition\_in\_load\_balance()}
+
 \end{DoxyCode}
 
 \end{DoxyItemize}
@@ -238,7 +240,7 @@ Since load balancing re-\/generates the meshes -- and thus their constituent ele
  \begin{center} \href{../../../../demo_drivers/mpi/distribution/restart/two_d_unsteady_heat_2adapt_load_balance.cc}{\texttt{ demo\+\_\+drivers/mpi/distribution/restart/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+2adapt\+\_\+load\+\_\+balance.\+cc }} \end{center}  ~\newline
 ~\newline
 
-\item The original version of the distributed code for the solution of Turek \& Hron\textquotesingle{}s F\+SI benchmark problem heat equation, ~\newline
+\item The original version of the distributed code for the solution of Turek \& Hron\textquotesingle{}s FSI benchmark problem heat equation, ~\newline
 ~\newline
  \begin{center} \href{../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc}{\texttt{ demo\+\_\+drivers/mpi/multi\+\_\+domain/turek\+\_\+flag/turek\+\_\+flag.\+cc }} \end{center}  ~\newline
 ~\newline
@@ -264,5 +266,5 @@ Since load balancing re-\/generates the meshes -- and thus their constituent ele
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

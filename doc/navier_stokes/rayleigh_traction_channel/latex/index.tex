@@ -50,7 +50,7 @@ As usual, we use a namespace to define the problem parameters, the Reynolds numb
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namepspace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -62,16 +62,14 @@ As usual, we use a namespace to define the problem parameters, the Reynolds numb
 \DoxyCodeLine{\textcolor{comment}{ /// Flag for long/short run: Default =  perform long run}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Long\_run\_flag}}=1;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Flag for impulsive start: Default = start from exact}}
+\DoxyCodeLine{\textcolor{comment}{ /// Flag for impulsive start: Default = start from exact}}
 \DoxyCodeLine{\textcolor{comment}{ /// time-\/periodic solution. }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Parameters_aec41eb8da4929003e5d78ef4b43c0ed9}{Impulsive\_start\_flag}}=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_exact}{}\doxysection{The exact solution}\label{index_exact}
 We use a second namespace to define the time-\/periodic, parallel flow $ {\bf u}_{exact}$, and the traction $ {\bf t}^{[prescribed]}$ required to make $ {\bf u}_{exact}$ a solution of the problem.
@@ -80,7 +78,7 @@ We use a second namespace to define the time-\/periodic, parallel flow $ {\bf u}
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_exact\_solution=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceExactSoln}{ExactSoln}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{}}
@@ -91,14 +89,14 @@ We use a second namespace to define the time-\/periodic, parallel flow $ {\bf u}
 \DoxyCodeLine{  \textcolor{comment}{// I=sqrt(-\/1)}}
 \DoxyCodeLine{  complex<double> I(0.0,1.0);}
 \DoxyCodeLine{  \textcolor{comment}{// omega}}
-\DoxyCodeLine{  \textcolor{keywordtype}{double} \mbox{\hyperlink{rayleigh__traction__channel_8txt_ad37339aba2062c36c10b89b43966b78d}{omega}}=2.0*MathematicalConstants::Pi;}
+\DoxyCodeLine{  \textcolor{keywordtype}{double} omega=2.0*MathematicalConstants::Pi;}
 \DoxyCodeLine{  \textcolor{comment}{// lambda}}
-\DoxyCodeLine{  complex<double> lambda(0.0,\mbox{\hyperlink{rayleigh__traction__channel_8txt_ad37339aba2062c36c10b89b43966b78d}{omega}}*\mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}});}
+\DoxyCodeLine{  complex<double> lambda(0.0,omega*\mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}});}
 \DoxyCodeLine{  lambda = I*sqrt(lambda);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Solution}}
 \DoxyCodeLine{  complex<double> sol(}
-\DoxyCodeLine{   exp(complex<double>(0.0,\mbox{\hyperlink{rayleigh__traction__channel_8txt_ad37339aba2062c36c10b89b43966b78d}{omega}}*t)) * }
+\DoxyCodeLine{   exp(complex<double>(0.0,omega*t)) * }
 \DoxyCodeLine{   (exp(lambda*complex<double>(0.0,y))-\/exp(lambda*complex<double>(0.0,-\/y)))}
 \DoxyCodeLine{   /(exp(I*lambda)-\/exp(-\/I*lambda)) );}
 \DoxyCodeLine{  }
@@ -119,14 +117,14 @@ We use a second namespace to define the time-\/periodic, parallel flow $ {\bf u}
 \DoxyCodeLine{  \textcolor{comment}{// I=sqrt(-\/1)}}
 \DoxyCodeLine{  complex<double> I(0.0,1.0);}
 \DoxyCodeLine{  \textcolor{comment}{// omega}}
-\DoxyCodeLine{  \textcolor{keywordtype}{double} \mbox{\hyperlink{rayleigh__traction__channel_8txt_ad37339aba2062c36c10b89b43966b78d}{omega}}=2.0*MathematicalConstants::Pi;}
+\DoxyCodeLine{  \textcolor{keywordtype}{double} omega=2.0*MathematicalConstants::Pi;}
 \DoxyCodeLine{  \textcolor{comment}{// lambda}}
-\DoxyCodeLine{  complex<double> lambda(0.0,\mbox{\hyperlink{rayleigh__traction__channel_8txt_ad37339aba2062c36c10b89b43966b78d}{omega}}*\mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}});}
+\DoxyCodeLine{  complex<double> lambda(0.0,omega*\mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\_Parameters::ReSt}});}
 \DoxyCodeLine{  lambda = I*sqrt(lambda);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Solution}}
 \DoxyCodeLine{  complex<double> sol(}
-\DoxyCodeLine{   exp(complex<double>(0.0,\mbox{\hyperlink{rayleigh__traction__channel_8txt_ad37339aba2062c36c10b89b43966b78d}{omega}}*t)) * }
+\DoxyCodeLine{   exp(complex<double>(0.0,omega*t)) * }
 \DoxyCodeLine{   (exp(lambda*complex<double>(0.0,y))+exp(lambda*complex<double>(0.0,-\/y)))}
 \DoxyCodeLine{   *I*lambda/(exp(I*lambda)-\/exp(-\/I*lambda)) );}
 \DoxyCodeLine{   }
@@ -139,9 +137,7 @@ We use a second namespace to define the time-\/periodic, parallel flow $ {\bf u}
 \DoxyCodeLine{\}  \textcolor{comment}{// end of exact\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 As in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}} we use optional command line arguments to specify which mode the code is run in\+: Either as a short or a long run (indicated by the first command line argument being 0 or 1, respectively), and with initial conditions corresponding to an impulsive start or a start from the time-\/periodic exact solution (indicated by the second command line argument being 1 or 0, respectively). If no command line arguments are specified the code is run in the default mode, specified by parameter values assigned in the namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}}.
@@ -150,7 +146,7 @@ As in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous exampl
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for Rayleigh-\/type problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{rayleigh__traction__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -158,11 +154,11 @@ As in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous exampl
 \DoxyCodeLine{\textcolor{comment}{ /// Convert command line arguments (if any) into flags:}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordflow}{if} (argc==1)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"No command line arguments specified -\/-\/ using defaults."} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}No command line arguments specified -\/-\/ using defaults."{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argc==3)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Two command line arguments specified:"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Two command line arguments specified:"{}} << std::endl;}
 \DoxyCodeLine{   \textcolor{comment}{// Flag for long run}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Global\_Parameters::Long\_run\_flag}}=atoi(argv[1]);\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{   /// Flag for impulsive start}}
@@ -171,25 +167,23 @@ As in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous exampl
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   std::string error\_message = }
-\DoxyCodeLine{    \textcolor{stringliteral}{"Wrong number of command line arguments. Specify none or two.\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Wrong number of command line arguments. Specify none or two.\(\backslash\)n"{}};}
 \DoxyCodeLine{   error\_message +=}
-\DoxyCodeLine{    \textcolor{stringliteral}{"Arg1: Long\_run\_flag [0/1]\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Arg1: Long\_run\_flag [0/1]\(\backslash\)n"{}};}
 \DoxyCodeLine{   error\_message +=}
-\DoxyCodeLine{    \textcolor{stringliteral}{"Arg2: Impulsive\_start\_flag [0/1]\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Arg2: Impulsive\_start\_flag [0/1]\(\backslash\)n"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(error\_message,}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{  \}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Long run flag: "} }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Long run flag: "{}} }
 \DoxyCodeLine{      <<  \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Global\_Parameters::Long\_run\_flag}} << std::endl;}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Impulsive start flag: "} }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Impulsive start flag: "{}} }
 \DoxyCodeLine{      <<  \mbox{\hyperlink{namespaceGlobal__Parameters_aec41eb8da4929003e5d78ef4b43c0ed9}{Global\_Parameters::Impulsive\_start\_flag}} << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-Next we set the physical and mesh parameters.
+ Next we set the physical and mesh parameters.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -214,9 +208,7 @@ Next we set the physical and mesh parameters.
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ny=10;}
 
 \end{DoxyCodeInclude}
-
-
-Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Hood elements and Crouzeix-\/\+Raviart elements.
+ Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Hood elements and Crouzeix-\/\+Raviart elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -226,14 +218,14 @@ Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Ho
 \DoxyCodeLine{  \textcolor{comment}{// Set up doc info}}
 \DoxyCodeLine{  DocInfo doc\_info;}
 \DoxyCodeLine{  doc\_info.number()=0;}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_CR"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_CR"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Set up problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classRayleighTractionProblem}{RayleighTractionProblem<QCrouzeixRaviartElement<2>}},BDF<2> > }
-\DoxyCodeLine{   \mbox{\hyperlink{rayleigh__traction__channel_8txt_a2b46f734a1a4daa4920f680aefac42f2}{problem}}(nx,ny,lx,ly);}
+\DoxyCodeLine{   problem(nx,ny,lx,ly);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Run the unsteady simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{rayleigh__traction__channel_8txt_a2b46f734a1a4daa4920f680aefac42f2}{problem}}.unsteady\_run(doc\_info);}
+\DoxyCodeLine{  problem.unsteady\_run(doc\_info);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -242,22 +234,20 @@ Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Ho
 \DoxyCodeLine{  \textcolor{comment}{// Set up doc info}}
 \DoxyCodeLine{  DocInfo doc\_info;}
 \DoxyCodeLine{  doc\_info.number()=0;}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_TH"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classRayleighTractionProblem}{RayleighTractionProblem<QTaylorHoodElement<2>}},BDF<2> > }
-\DoxyCodeLine{   \mbox{\hyperlink{rayleigh__traction__channel_8txt_a2b46f734a1a4daa4920f680aefac42f2}{problem}}(nx,ny,lx,ly);}
+\DoxyCodeLine{   problem(nx,ny,lx,ly);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Run the unsteady simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{rayleigh__traction__channel_8txt_a2b46f734a1a4daa4920f680aefac42f2}{problem}}.unsteady\_run(doc\_info);}
+\DoxyCodeLine{  problem.unsteady\_run(doc\_info);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The problem class remains similar to that in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}}. Since we are no longer driving the flow by prescribing a time-\/periodic tangential velocity at the upper wall, the function {\ttfamily actions\+\_\+before\+\_\+implicit\+\_\+timestep()} can remain empty.
@@ -266,7 +256,7 @@ The problem class remains similar to that in the \href{../../rayleigh_channel/ht
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Rayleigh-\/type problem: 2D channel flow driven by traction bc}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRayleighTractionProblem}{RayleighTractionProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -280,7 +270,7 @@ The problem class remains similar to that in the \href{../../rayleigh_channel/ht
 \DoxyCodeLine{\textcolor{comment}{ /// Update before solve is empty}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighTractionProblem_ad8f0e846280b0dd56f90c6d40808d3ea}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update after solve is empty}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update after solve is empty}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighTractionProblem_ad85c20559eec76d54ebf666f62507d2e}{actions\_after\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before timestep (empty)}}
@@ -292,19 +282,17 @@ The problem class remains similar to that in the \href{../../rayleigh_channel/ht
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighTractionProblem_a451af703b4a6de97b060884ca71c3ef8}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set initial condition (incl previous timesteps) according}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set initial condition (incl previous timesteps) according}}
 \DoxyCodeLine{\textcolor{comment}{ /// to specified function. }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighTractionProblem_ad6394f146505e00aeba2fc37f2c75488}{set\_initial\_condition}}();}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily create\+\_\+traction\+\_\+elements(...)} (discussed in more detail below) creates the traction elements and \char`\"{}attaches\char`\"{} them to the specified boundary of the \char`\"{}bulk\char`\"{} mesh.
+ The function {\ttfamily create\+\_\+traction\+\_\+elements(...)} (discussed in more detail below) creates the traction elements and \char`\"{}attaches\char`\"{} them to the specified boundary of the \char`\"{}bulk\char`\"{} mesh.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create traction elements on boundary b of the Mesh pointed}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create traction elements on boundary b of the Mesh pointed}}
 \DoxyCodeLine{\textcolor{comment}{ /// to by bulk\_mesh\_pt and add them to the Mesh object pointed to by }}
 \DoxyCodeLine{\textcolor{comment}{ /// surface\_mesh\_pt}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_traction\_elements(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&b, }
@@ -312,19 +300,17 @@ The function {\ttfamily create\+\_\+traction\+\_\+elements(...)} (discussed in m
 \DoxyCodeLine{                               Mesh* \textcolor{keyword}{const} \&surface\_mesh\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-The traction boundary condition sets the pressure so the function {\ttfamily fix\+\_\+pressure(...)} used in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}} is no longer required. The problem\textquotesingle{}s private member data contains pointers to the bulk and surface meshes and the output stream that we use to record the time-\/trace of the solution.
+ The traction boundary condition sets the pressure so the function {\ttfamily fix\+\_\+pressure(...)} used in the \href{../../rayleigh_channel/html/index.html}{\texttt{ previous example}} is no longer required. The problem\textquotesingle{}s private member data contains pointers to the bulk and surface meshes and the output stream that we use to record the time-\/trace of the solution.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "bulk" mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}bulk"{} mesh}}
 \DoxyCodeLine{\textcolor{comment}{} RectangularQuadMesh<ELEMENT>* Bulk\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "surface" mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}surface"{} mesh}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* Surface\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
@@ -333,9 +319,7 @@ The traction boundary condition sets the pressure so the function {\ttfamily fix
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem\_class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 We start by building the timestepper, determining its type from the class\textquotesingle{}s second template argument, and pass a pointer to it to the Problem, using the function {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)}.
@@ -344,7 +328,7 @@ We start by building the timestepper, determining its type from the class\textqu
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem constructor}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classRayleighTractionProblem_a6be21517d8294957f768184a2d51844a}{RayleighTractionProblem<ELEMENT,TIMESTEPPER>::RayleighTractionProblem}}}
 \DoxyCodeLine{(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny,}
@@ -354,9 +338,7 @@ We start by building the timestepper, determining its type from the class\textqu
 \DoxyCodeLine{ add\_time\_stepper\_pt(\textcolor{keyword}{new} TIMESTEPPER); }
 
 \end{DoxyCodeInclude}
-
-
-Next we build the periodic bulk mesh,
+ Next we build the periodic bulk mesh,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -368,22 +350,18 @@ Next we build the periodic bulk mesh,
 \DoxyCodeLine{                                   time\_stepper\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-and the surface mesh,
+ and the surface mesh,
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Create "surface mesh" that will contain only the prescribed-\/traction }}
+\DoxyCodeLine{ \textcolor{comment}{// Create "{}surface mesh"{} that will contain only the prescribed-\/traction }}
 \DoxyCodeLine{ \textcolor{comment}{// elements. The constructor just creates the mesh without}}
 \DoxyCodeLine{ \textcolor{comment}{// giving it any elements, nodes, etc.}}
 \DoxyCodeLine{ Surface\_mesh\_pt = \textcolor{keyword}{new} Mesh;}
 
 \end{DoxyCodeInclude}
-
-
-and use the function {\ttfamily create\+\_\+traction\+\_\+elements(...)} to populate it with traction elements that attach themselves to the specified boundary (2) of the bulk mesh.
+ and use the function {\ttfamily create\+\_\+traction\+\_\+elements(...)} to populate it with traction elements that attach themselves to the specified boundary (2) of the bulk mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -393,9 +371,7 @@ and use the function {\ttfamily create\+\_\+traction\+\_\+elements(...)} to popu
 \DoxyCodeLine{ create\_traction\_elements(2,Bulk\_mesh\_pt,Surface\_mesh\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-We add both sub-\/meshes to the {\ttfamily Problem}, using the function {\ttfamily Problem\+::add\+\_\+sub\+\_\+mesh(...)} and use the function {\ttfamily Problem\+::build\+\_\+global\+\_\+mesh()} to combine the sub-\/meshes into the {\ttfamily Problem\textquotesingle{}s} single, global mesh.
+ We add both sub-\/meshes to the {\ttfamily Problem}, using the function {\ttfamily Problem\+::add\+\_\+sub\+\_\+mesh(...)} and use the function {\ttfamily Problem\+::build\+\_\+global\+\_\+mesh()} to combine the sub-\/meshes into the {\ttfamily Problem\textquotesingle{}s} single, global mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -408,9 +384,7 @@ We add both sub-\/meshes to the {\ttfamily Problem}, using the function {\ttfami
 \DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-We apply Dirichlet boundary conditions where required\+: No-\/slip on the stationary, lower wall, at $ x_2=0 $, parallel outflow on the left and right boundaries, at $ x_1=0 $ and $ x_1=1 $. No velocity boundary conditions are applied at the \char`\"{}upper\char`\"{} boundary, at $ x_2=1 $, where the traction boundary condition is applied.
+ We apply Dirichlet boundary conditions where required\+: No-\/slip on the stationary, lower wall, at $ x_2=0 $, parallel outflow on the left and right boundaries, at $ x_1=0 $ and $ x_1=1 $. No velocity boundary conditions are applied at the \char`\"{}upper\char`\"{} boundary, at $ x_2=1 $, where the traction boundary condition is applied.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -441,9 +415,7 @@ We apply Dirichlet boundary conditions where required\+: No-\/slip on the statio
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-Next we pass the pointers to the Reynolds and Strouhal numbers, $ Re $, $ Re\, St $, to the bulk elements.
+ Next we pass the pointers to the Reynolds and Strouhal numbers, $ Re $, $ Re\, St $, to the bulk elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -463,9 +435,7 @@ Next we pass the pointers to the Reynolds and Strouhal numbers, $ Re $, $ Re\, S
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally we pass pointers to the applied traction function to the traction elements and assign the equation numbers.
+ Finally we pass pointers to the applied traction function to the traction elements and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -501,9 +471,9 @@ The creation of the traction elements is performed exactly as in the \href{../..
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Create Navier-\/Stokes traction elements on the b-\/th boundary of the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Mesh object pointed to by bulk\_mesh\_pt and add the elements to the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Mesh object pointeed to by surface\_mesh\_pt.}}
+\DoxyCodeLine{\textcolor{comment}{/// Create Navier-\/Stokes traction elements on the b-\/th boundary of the}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Mesh object pointed to by bulk\_mesh\_pt and add the elements to the }}
+\DoxyCodeLine{\textcolor{comment}{/// Mesh object pointeed to by surface\_mesh\_pt.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighTractionProblem_a3a94c245abf443c436eb8a94be19a9f9}{RayleighTractionProblem<ELEMENT,TIMESTEPPER>::}}}
@@ -535,7 +505,7 @@ The creation of the traction elements is performed exactly as in the \href{../..
 \DoxyCodeLine{\} \textcolor{comment}{// end of create\_traction\_elements}}
 
 \end{DoxyCodeInclude}
- \textbackslash{} \DoxyHorRuler{0}
+\textbackslash{} \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_IC}{}\doxysection{Initial conditions}\label{index_IC}
 The function {\ttfamily set\+\_\+initial\+\_\+conditions(...)} remains the same as in the \href{../../rayleigh_channel/html/index.html\#IC}{\texttt{ previous example}}.
@@ -577,5 +547,5 @@ The finite element solution of the Navier-\/\+Stokes equations is based on their
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

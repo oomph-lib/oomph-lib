@@ -62,7 +62,7 @@ As usual we define the global problem parameters in a namespace. We provide poin
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============namespace\_for\_problem\_parameters=====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to strain energy function}}
@@ -72,12 +72,12 @@ As usual we define the global problem parameters in a namespace. We provide poin
 \DoxyCodeLine{\textcolor{comment}{} ConstitutiveLaw* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Elastic modulus}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d6c61f3dcbc92b55a5f6289ae1b29ff}{E}}=1.0; }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{E}}=1.0; }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Poisson's ratio}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.3;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// "Mooney Rivlin" coefficient for generalised Mooney Rivlin law}}
+\DoxyCodeLine{\textcolor{comment}{ /// "{}Mooney Rivlin"{} coefficient for generalised Mooney Rivlin law}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{C1}}=1.3;}
 
 \end{DoxyCodeInclude}
@@ -103,9 +103,7 @@ Next we define the pressure load, using the general interface defined in the {\t
 \DoxyCodeLine{ \} \textcolor{comment}{// end of pressure load}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we define the growth function and impose a spatially uniform expansion that (in the absence of any external load) would increase the disk\textquotesingle{}s volume by 10\%.
+ Finally, we define the growth function and impose a spatially uniform expansion that (in the absence of any external load) would increase the disk\textquotesingle{}s volume by 10\%.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -123,9 +121,7 @@ Finally, we define the growth function and impose a spatially uniform expansion 
 \DoxyCodeLine{\} \textcolor{comment}{// end namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 The driver code is very short\+: We store the command line arguments (as usual, we use a non-\/zero number of command line arguments as an indication that the code is run in self-\/test mode and reduce the number of steps performed in the parameter study) and create a strain-\/energy-\/based constitutive equation\+: Fung \& Tong\textquotesingle{}s generalisation of the Mooney-\/\+Rivlin law.
@@ -134,7 +130,7 @@ The driver code is very short\+: We store the command line arguments (as usual, 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_main====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for disk-\/compression}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{disk__compression_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -145,7 +141,7 @@ The driver code is very short\+: We store the command line arguments (as usual, 
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}} = }
 \DoxyCodeLine{  \textcolor{keyword}{new} GeneralisedMooneyRivlin(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
 \DoxyCodeLine{                              \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{Global\_Physical\_Variables::C1}},}
-\DoxyCodeLine{                              \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d6c61f3dcbc92b55a5f6289ae1b29ff}{Global\_Physical\_Variables::E}});}
+\DoxyCodeLine{                              \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Define a constitutive law (based on strain energy function)}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}} = }
@@ -153,9 +149,7 @@ The driver code is very short\+: We store the command line arguments (as usual, 
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}});}
 
 \end{DoxyCodeInclude}
-
-
-We build a problem object, using the displacement-\/based {\ttfamily Refineable\+Q\+P\+V\+D\+Elements} to discretise the domain, and perform a parameter study, exploring the disk\textquotesingle{}s deformation for a range of external pressures.
+ We build a problem object, using the displacement-\/based {\ttfamily Refineable\+QPVDElements} to discretise the domain, and perform a parameter study, exploring the disk\textquotesingle{}s deformation for a range of external pressures.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -164,19 +158,17 @@ We build a problem object, using the displacement-\/based {\ttfamily Refineable\
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{    \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem<RefineableQPVDElement<2,3>}} > \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem<RefineableQPVDElement<2,3>}} > problem;}
 \DoxyCodeLine{  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"gen. M.R.: RefineableQPVDElement<2,3>"} << std::endl;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}gen. M.R.: RefineableQPVDElement<2,3>"{}} << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Run the simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.parameter\_study(0);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{parameter\_study}}(0);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \} \textcolor{comment}{// done case 0}}
 
 \end{DoxyCodeInclude}
-
-
-We repeat the exercise with elements from the {\ttfamily Refineable\+Q\+P\+V\+D\+Element\+With\+Continuous\+Pressure} family which discretise the principle of virtual displacements (P\+VD) in the pressure/displacement formulation, using continuous pressures (Q2\+Q1; Taylor Hood).
+ We repeat the exercise with elements from the {\ttfamily Refineable\+QPVDElement\+With\+Continuous\+Pressure} family which discretise the principle of virtual displacements (PVD) in the pressure/displacement formulation, using continuous pressures (Q2\+Q1; Taylor Hood).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -187,20 +179,18 @@ We repeat the exercise with elements from the {\ttfamily Refineable\+Q\+P\+V\+D\
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem}}<}
-\DoxyCodeLine{   RefineableQPVDElementWithContinuousPressure<2> > \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{   RefineableQPVDElementWithContinuousPressure<2> > problem;}
 \DoxyCodeLine{  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"gen. M.R.: RefineableQPVDElementWithContinuousPressure<2> "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}gen. M.R.: RefineableQPVDElementWithContinuousPressure<2> "{}} }
 \DoxyCodeLine{       << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Run the simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.parameter\_study(1);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{parameter\_study}}(1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \}  \textcolor{comment}{// done case 1}}
 
 \end{DoxyCodeInclude}
-
-
-The next computation employs {\ttfamily Refineable\+Q\+P\+V\+D\+Element\+With\+Pressure} elements in which the pressure is interpolated by piecewise linear but globally discontinuous basis functions (Q2\+Q-\/1; Crouzeiux-\/\+Raviart).
+ The next computation employs {\ttfamily Refineable\+QPVDElement\+With\+Pressure} elements in which the pressure is interpolated by piecewise linear but globally discontinuous basis functions (Q2\+Q-\/1; Crouzeiux-\/\+Raviart).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -212,19 +202,17 @@ The next computation employs {\ttfamily Refineable\+Q\+P\+V\+D\+Element\+With\+P
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem<RefineableQPVDElementWithPressure<2>}} > }
-\DoxyCodeLine{   \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{   problem;}
 \DoxyCodeLine{  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"gen. M.R.: RefineableQPVDElementWithPressure<2>"} << std::endl;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}gen. M.R.: RefineableQPVDElementWithPressure<2>"{}} << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Run the simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.parameter\_study(2);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{parameter\_study}}(2);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \}  \textcolor{comment}{// done case 2}}
 
 \end{DoxyCodeInclude}
-
-
-Next, we change the constitutive equation to {\ttfamily oomph-\/lib\textquotesingle{}s} generalised Hooke\textquotesingle{}s law,
+ Next, we change the constitutive equation to {\ttfamily oomph-\/lib\textquotesingle{}s} generalised Hooke\textquotesingle{}s law,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -236,12 +224,10 @@ Next, we change the constitutive equation to {\ttfamily oomph-\/lib\textquotesin
 \DoxyCodeLine{ \textcolor{comment}{// Create oomph-\/lib's generalised Hooke's law constitutive equation}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}} = }
 \DoxyCodeLine{  \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
-\DoxyCodeLine{                         \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d6c61f3dcbc92b55a5f6289ae1b29ff}{Global\_Physical\_Variables::E}});}
+\DoxyCodeLine{                         \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}});}
 
 \end{DoxyCodeInclude}
-
-
-before repeating the parameter studies with the same three element types\+:
+ before repeating the parameter studies with the same three element types\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -250,12 +236,12 @@ before repeating the parameter studies with the same three element types\+:
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem<RefineableQPVDElement<2,3>}} > \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem<RefineableQPVDElement<2,3>}} > problem;}
 \DoxyCodeLine{  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"gen. Hooke: RefineableQPVDElement<2,3> "} << std::endl;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}gen. Hooke: RefineableQPVDElement<2,3> "{}} << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Run the simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.parameter\_study(3);  }
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{parameter\_study}}(3);  }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \}  \textcolor{comment}{// done case 3}}
 \DoxyCodeLine{ }
@@ -265,13 +251,13 @@ before repeating the parameter studies with the same three element types\+:
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem}}<}
-\DoxyCodeLine{   RefineableQPVDElementWithContinuousPressure<2> > \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{   RefineableQPVDElementWithContinuousPressure<2> > problem;}
 \DoxyCodeLine{  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"gen. Hooke: RefineableQPVDElementWithContinuousPressure<2> "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}gen. Hooke: RefineableQPVDElementWithContinuousPressure<2> "{}} }
 \DoxyCodeLine{       << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Run the simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.parameter\_study(4);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{parameter\_study}}(4);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \}  \textcolor{comment}{// done case 4}}
 \DoxyCodeLine{ }
@@ -281,12 +267,12 @@ before repeating the parameter studies with the same three element types\+:
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem<RefineableQPVDElementWithPressure<2>}} > \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classStaticDiskCompressionProblem}{StaticDiskCompressionProblem<RefineableQPVDElementWithPressure<2>}} > problem;}
 \DoxyCodeLine{  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"gen. Hooke: RefineableQPVDElementWithPressure<2> "} << std::endl;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}gen. Hooke: RefineableQPVDElementWithPressure<2> "{}} << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Run the simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{disk__compression_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.parameter\_study(5);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classStaticDiskCompressionProblem_ac64db4786efde78e70b1110422331b02}{parameter\_study}}(5);}
 \DoxyCodeLine{    }
 \DoxyCodeLine{ \}  \textcolor{comment}{// done case 5}}
 \DoxyCodeLine{ }
@@ -307,16 +293,16 @@ We formulate the problem in cartesian coordinates (ignoring the problem\textquot
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_mesh=================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Elastic quarter circle sector mesh with functionality to}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// attach traction elements to the curved surface. We "upgrade"}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the RefineableQuarterCircleSectorMesh to become an}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// SolidMesh and equate the Eulerian and Lagrangian coordinates,}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// thus making the domain represented by the mesh the stress-\/free }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// configuration. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)n\(\backslash\)n}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The member function \(\backslash\)c make\_traction\_element\_mesh() creates}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// a separate mesh of SolidTractionElements that are attached to the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// mesh's curved boundary (boundary 1). }}
+\DoxyCodeLine{\textcolor{comment}{/// Elastic quarter circle sector mesh with functionality to}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// attach traction elements to the curved surface. We "{}upgrade"{}}}
+\DoxyCodeLine{\textcolor{comment}{/// the RefineableQuarterCircleSectorMesh to become an}}
+\DoxyCodeLine{\textcolor{comment}{/// SolidMesh and equate the Eulerian and Lagrangian coordinates,}}
+\DoxyCodeLine{\textcolor{comment}{/// thus making the domain represented by the mesh the stress-\/free }}
+\DoxyCodeLine{\textcolor{comment}{/// configuration. }}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\textcolor{comment}{/// The member function \(\backslash\)c make\_traction\_element\_mesh() creates}}
+\DoxyCodeLine{\textcolor{comment}{/// a separate mesh of SolidTractionElements that are attached to the}}
+\DoxyCodeLine{\textcolor{comment}{/// mesh's curved boundary (boundary 1). }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh}} :}
@@ -325,9 +311,7 @@ We formulate the problem in cartesian coordinates (ignoring the problem\textquot
 \DoxyCodeLine{\{}
 
 \end{DoxyCodeInclude}
-
-
-The constructor calls the constructor of the underlying {\ttfamily Refineable\+Quarter\+Circle\+Sector\+Mesh} and sets the Lagrangian coordinates of the nodes to their current Eulerian positions, making the initial configuration stress-\/free.
+ The constructor calls the constructor of the underlying {\ttfamily Refineable\+Quarter\+Circle\+Sector\+Mesh} and sets the Lagrangian coordinates of the nodes to their current Eulerian positions, making the initial configuration stress-\/free.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -335,7 +319,7 @@ The constructor calls the constructor of the underlying {\ttfamily Refineable\+Q
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Build mesh and copy Eulerian coords to Lagrangian}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Build mesh and copy Eulerian coords to Lagrangian}}
 \DoxyCodeLine{\textcolor{comment}{ /// ones so that the initial configuration is the stress-\/free one.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}(GeomObject* wall\_pt,}
 \DoxyCodeLine{                                         \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& xi\_lo,}
@@ -353,9 +337,7 @@ The constructor calls the constructor of the underlying {\ttfamily Refineable\+Q
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We also provide a helper function that creates a mesh of {\ttfamily Solid\+Traction\+Elements} which are attached to the curved domain boundary (boundary 1). These elements will be used to apply the external pressure load.
+ We also provide a helper function that creates a mesh of {\ttfamily Solid\+Traction\+Elements} which are attached to the curved domain boundary (boundary 1). These elements will be used to apply the external pressure load.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -393,7 +375,7 @@ We also provide a helper function that creates a mesh of {\ttfamily Solid\+Tract
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem_class}{}\doxysection{The Problem class}\label{index_problem_class}
-The definition of the Problem class is very straightforward. In addition to the constructor and the (empty) {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+solve()} and {\ttfamily actions\+\_\+after\+\_\+newton\+\_\+solve()} functions, we provide the function {\ttfamily \mbox{\hyperlink{disk__compression_8txt_a88c7f0e1e79d044cf041550e654d05c0}{parameter\+\_\+study(...)}}} which performs a parameter study, computing the disk\textquotesingle{}s deformation for a range of external pressures. The member data includes pointers to the mesh of \char`\"{}bulk\char`\"{} solid elements, and the mesh of {\ttfamily Solid\+Traction\+Elements} that apply the pressure load. The trace file is used to document the disk\textquotesingle{}s load-\/displacement characteristics by plotting the radial displacement of the nodes on the curvilinear boundary, pointers to which are stored in the vector {\ttfamily Trace\+\_\+node\+\_\+pt}.
+The definition of the Problem class is very straightforward. In addition to the constructor and the (empty) {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+solve()} and {\ttfamily actions\+\_\+after\+\_\+newton\+\_\+solve()} functions, we provide the function {\ttfamily parameter\+\_\+study(...)} which performs a parameter study, computing the disk\textquotesingle{}s deformation for a range of external pressures. The member data includes pointers to the mesh of \char`\"{}bulk\char`\"{} solid elements, and the mesh of {\ttfamily Solid\+Traction\+Elements} that apply the pressure load. The trace file is used to document the disk\textquotesingle{}s load-\/displacement characteristics by plotting the radial displacement of the nodes on the curvilinear boundary, pointers to which are stored in the vector {\ttfamily Trace\+\_\+node\+\_\+pt}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -441,9 +423,7 @@ The definition of the Problem class is very straightforward. In addition to the 
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The Constructor}\label{index_constructor}
 We start by constructing the mesh of \char`\"{}bulk\char`\"{} {\ttfamily Solid\+Elements}, using the {\ttfamily Ellipse} object to specify the shape of the curvilinear domain boundary.
@@ -475,9 +455,7 @@ We start by constructing the mesh of \char`\"{}bulk\char`\"{} {\ttfamily Solid\+
 \DoxyCodeLine{  curved\_boundary\_pt,xi\_lo,fract\_mid,xi\_hi);}
 
 \end{DoxyCodeInclude}
-
-
-Next we choose the nodes on the curvilinear domain boundary (boundary 1) as the nodes whose displacement we document in the trace file.
+ Next we choose the nodes on the curvilinear domain boundary (boundary 1) as the nodes whose displacement we document in the trace file.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -490,9 +468,7 @@ Next we choose the nodes on the curvilinear domain boundary (boundary 1) as the 
 \DoxyCodeLine{  \{Trace\_node\_pt[j]=Solid\_mesh\_pt-\/>boundary\_node\_pt(1,j);\}}
 
 \end{DoxyCodeInclude}
-
-
-The {\ttfamily Quarter\+Circle\+Sector\+Mesh} that forms the basis of the \char`\"{}bulk\char`\"{} mesh contains only three elements -- not enough to expect the solution to be accurate. Therefore we apply one round of uniform mesh refinement before attaching the {\ttfamily Solid\+Traction\+Elements} to the mesh boundary 1, using the function {\ttfamily make\+\_\+traction\+\_\+element\+\_\+mesh()} in the {\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}}.
+ The {\ttfamily Quarter\+Circle\+Sector\+Mesh} that forms the basis of the \char`\"{}bulk\char`\"{} mesh contains only three elements -- not enough to expect the solution to be accurate. Therefore we apply one round of uniform mesh refinement before attaching the {\ttfamily Solid\+Traction\+Elements} to the mesh boundary 1, using the function {\ttfamily make\+\_\+traction\+\_\+element\+\_\+mesh()} in the {\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -504,9 +480,7 @@ The {\ttfamily Quarter\+Circle\+Sector\+Mesh} that forms the basis of the \char`
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>make\_traction\_element\_mesh(Traction\_mesh\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-We add both meshes to the {\ttfamily Problem} and build a combined global mesh\+:
+ We add both meshes to the {\ttfamily Problem} and build a combined global mesh\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -517,13 +491,11 @@ We add both meshes to the {\ttfamily Problem} and build a combined global mesh\+
 \DoxyCodeLine{ \textcolor{comment}{// Traction mesh is second sub-\/mesh}}
 \DoxyCodeLine{ add\_sub\_mesh(Traction\_mesh\_pt);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Build combined "global" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Build combined "{}global"{} mesh}}
 \DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-Symmetry boundary conditions along the horizontal and vertical symmetry lines require that the nodes\textquotesingle{} vertical position is pinned along boundary 0, while their horizontal position is pinned along boundary 2.
+ Symmetry boundary conditions along the horizontal and vertical symmetry lines require that the nodes\textquotesingle{} vertical position is pinned along boundary 0, while their horizontal position is pinned along boundary 2.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -540,9 +512,7 @@ Symmetry boundary conditions along the horizontal and vertical symmetry lines re
 \DoxyCodeLine{  \{Solid\_mesh\_pt-\/>boundary\_node\_pt(0,i)-\/>pin\_position(1);\}}
 
 \end{DoxyCodeInclude}
-
-
-Since we are using refineable solid elements, we pin any \char`\"{}redundant\char`\"{} pressure degrees of freedom in the \char`\"{}bulk\char`\"{} solid mesh (see \href{../../airy_cantilever/html/index.html\#ex}{\texttt{ the exercises in another tutorial}} for a more detailed discussion of this issue).
+ Since we are using refineable solid elements, we pin any \char`\"{}redundant\char`\"{} pressure degrees of freedom in the \char`\"{}bulk\char`\"{} solid mesh (see \href{../../airy_cantilever/html/index.html\#ex}{\texttt{ the exercises in another tutorial}} for a more detailed discussion of this issue).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -552,14 +522,12 @@ Since we are using refineable solid elements, we pin any \char`\"{}redundant\cha
 \DoxyCodeLine{  Solid\_mesh\_pt-\/>element\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-Next, we complete the build of the elements in the \char`\"{}bulk\char`\"{} solid mesh by passing the pointer to the constitutive equation and the pointer to the isotropic-\/growth function to the elements\+:
+ Next, we complete the build of the elements in the \char`\"{}bulk\char`\"{} solid mesh by passing the pointer to the constitutive equation and the pointer to the isotropic-\/growth function to the elements\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{//Complete the build process for elements in "bulk" solid mesh}}
+\DoxyCodeLine{ \textcolor{comment}{//Complete the build process for elements in "{}bulk"{} solid mesh}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element =Solid\_mesh\_pt-\/>nelement();}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_element;i++)}
 \DoxyCodeLine{  \{}
@@ -575,9 +543,7 @@ Next, we complete the build of the elements in the \char`\"{}bulk\char`\"{} soli
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We repeat this exercise for the {\ttfamily Solid\+Traction\+Elements} which must be given a pointer to the function that applies the pressure load
+ We repeat this exercise for the {\ttfamily Solid\+Traction\+Elements} which must be given a pointer to the function that applies the pressure load
 
 
 \begin{DoxyCodeInclude}{0}
@@ -596,15 +562,13 @@ We repeat this exercise for the {\ttfamily Solid\+Traction\+Elements} which must
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we set up the equation numbering scheme and report the number of unknowns.
+ Finally, we set up the equation numbering scheme and report the number of unknowns.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Set up equation numbering scheme}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Number of equations: "} <<  assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Number of equations: "{}} <<  assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{\}}
 
 \end{DoxyCodeInclude}
@@ -633,7 +597,7 @@ The post-\/processing function outputs the shape of the deformed disk. We use th
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts = 5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output shape of deformed body}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output(some\_file,npts);}
@@ -643,41 +607,39 @@ The post-\/processing function outputs the shape of the deformed disk. We use th
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nelement = Solid\_mesh\_pt-\/>nelement();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Work out volume}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{disk__compression_8txt_a4fba999865b0c5b6630e5741a4423cfc}{volume}} = 0.0;}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} volume = 0.0;}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<nelement;e++) }
-\DoxyCodeLine{  \{\mbox{\hyperlink{disk__compression_8txt_a4fba999865b0c5b6630e5741a4423cfc}{volume}}+= Solid\_mesh\_pt-\/>finite\_element\_pt(e)-\/>size();\}}
+\DoxyCodeLine{  \{volume+= Solid\_mesh\_pt-\/>finite\_element\_pt(e)-\/>size();\}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Exact outer radius for linear elasticity}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} nu=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}};}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} exact\_r=sqrt(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae02b5f5b098b05fba75f3b61f381c5f7}{Global\_Physical\_Variables::Uniform\_gamma}})*}
-\DoxyCodeLine{  (1.0-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d6c61f3dcbc92b55a5f6289ae1b29ff}{Global\_Physical\_Variables::E}}}
+\DoxyCodeLine{  (1.0-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}}}
 \DoxyCodeLine{   *((1.0+nu)*(1.0-\/2.0*nu)));}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write trace file: Problem parameters}}
-\DoxyCodeLine{ Trace\_file << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}  << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae02b5f5b098b05fba75f3b61f381c5f7}{Global\_Physical\_Variables::Uniform\_gamma}} << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << \mbox{\hyperlink{disk__compression_8txt_a4fba999865b0c5b6630e5741a4423cfc}{volume}} << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << exact\_r << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{ Trace\_file << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{Global\_Physical\_Variables::P}}  << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae02b5f5b098b05fba75f3b61f381c5f7}{Global\_Physical\_Variables::Uniform\_gamma}} << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << volume << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << exact\_r << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Write radii of trace nodes}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ntrace\_node=Trace\_node\_pt.size();}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j=0;j<ntrace\_node;j++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   Trace\_file << sqrt(pow(Trace\_node\_pt[j]-\/>x(0),2)+}
-\DoxyCodeLine{                      pow(Trace\_node\_pt[j]-\/>x(1),2)) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{                      pow(Trace\_node\_pt[j]-\/>x(1),2)) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ Trace\_file << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_run_it}{}\doxysection{Performing the parameter study}\label{index_run_it}
-The function {\ttfamily \mbox{\hyperlink{disk__compression_8txt_a88c7f0e1e79d044cf041550e654d05c0}{parameter\+\_\+study(...)}}} computes the disk\textquotesingle{}s deformation for a range of external pressures and outputs the results. The output directory is labelled by the {\ttfamily unsigned} function argument. This ensures that parameter studies performed with different constitutive equations are written into different directories.
+The function {\ttfamily parameter\+\_\+study(...)} computes the disk\textquotesingle{}s deformation for a range of external pressures and outputs the results. The output directory is labelled by the {\ttfamily unsigned} function argument. This ensures that parameter studies performed with different constitutive equations are written into different directories.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -694,7 +656,7 @@ The function {\ttfamily \mbox{\hyperlink{disk__compression_8txt_a88c7f0e1e79d044
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} dirname[100];}
-\DoxyCodeLine{ sprintf(dirname,\textcolor{stringliteral}{"RESLT\%i"},case\_number);}
+\DoxyCodeLine{ sprintf(dirname,\textcolor{stringliteral}{"{}RESLT\%i"{}},case\_number);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
 \DoxyCodeLine{ doc\_info.set\_directory(dirname);}
@@ -704,7 +666,7 @@ The function {\ttfamily \mbox{\hyperlink{disk__compression_8txt_a88c7f0e1e79d044
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Parameter incrementation}}
@@ -739,9 +701,7 @@ The function {\ttfamily \mbox{\hyperlink{disk__compression_8txt_a88c7f0e1e79d044
 \DoxyCodeLine{\} \textcolor{comment}{// end of parameter study}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comm_and_ex}{}\doxysection{Comments and Exercises}\label{index_comm_and_ex}
 \hypertarget{index_macro}{}\doxysubsection{The use of Macro\+Elements in solid mechanics problems}\label{index_macro}
@@ -763,5 +723,5 @@ This strategy is adapted slightly for solid mechanics problems\+:
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

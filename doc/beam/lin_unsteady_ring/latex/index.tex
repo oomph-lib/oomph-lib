@@ -30,17 +30,17 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{//Driver for small amplitude ring oscillations}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//OOMPH-\/LIB includes}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "beam.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/one\_d\_lagrangian\_mesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}beam.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/one\_d\_lagrangian\_mesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }oomph;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_namespace============================}\textcolor{comment}{}}
@@ -52,18 +52,18 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{ /// Flag for long/short run: Default =  perform long run}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_acb18f0e4952b6a1b0840ca94828ace3b}{Long\_run\_flag}}=1;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Flag for fixed timestep: Default = fixed timestep}}
+\DoxyCodeLine{\textcolor{comment}{ /// Flag for fixed timestep: Default = fixed timestep}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aae2e69454e5e73519e13dd3424d41a2c}{Fixed\_timestep\_flag}}=1;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Boolean flag to decide if to set IC for Newmark}}
+\DoxyCodeLine{\textcolor{comment}{ /// Boolean flag to decide if to set IC for Newmark}}
 \DoxyCodeLine{\textcolor{comment}{ /// directly or consistently : No Default}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Consistent\_newmark\_ic}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// //////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// //////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// //////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -77,48 +77,48 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Number of elements, length of domain, flag for}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Number of elements, length of domain, flag for}}
 \DoxyCodeLine{\textcolor{comment}{ /// setting Newmark IC directly or consistently}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&N, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&L);}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRingProblem_a57be33a379c1ec4418a7fb3e8db8ef2b}{ElasticRingProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&N, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&L);}
 \DoxyCodeLine{                    \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* mesh\_pt() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_ab7e6b68cb51f8d6bc636e0f0789793ce}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function is empty }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_ab0eb0dcecfa7e9c9e52ecf319f6e873e}{actions\_after\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function is empty }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_aac5f3adac1e1a42492bd428eeb732a3d}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_a9aa904e4cf82d45711f890cd8440ced9}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Do unsteady run}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} unsteady\_run();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_acd30c4363ffedbaadc1523aa8b85523b}{unsteady\_run}}();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Length of domain (in terms of the Lagrangian coordinates)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Length;}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classElasticRingProblem_a74aac22a4e8673b1e58c024610f8220f}{Length}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short In which element are we applying displacement control?}}
+\DoxyCodeLine{\textcolor{comment}{ /// In which element are we applying displacement control?}}
 \DoxyCodeLine{\textcolor{comment}{ /// (here only used for doc of radius)}}
-\DoxyCodeLine{\textcolor{comment}{} ELEMENT* Displ\_control\_elem\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} ELEMENT* \mbox{\hyperlink{classElasticRingProblem_aba78b855677ef08ea3d9678dcde8a71b}{Displ\_control\_elem\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// At what local coordinate are we applying displacement control?}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> S\_displ\_control;}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{classElasticRingProblem_a0acfcb485441bbe0c9e4202d8a5e72d3}{S\_displ\_control}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to geometric object that represents the undeformed shape}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* Undef\_geom\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classElasticRingProblem_ab0f0f02cc67dcabfc38f051e3d3cebfc}{Undef\_geom\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to object that specifies the initial condition}}
-\DoxyCodeLine{\textcolor{comment}{} SolidInitialCondition* IC\_pt;}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to object that specifies the initial condition}}
+\DoxyCodeLine{\textcolor{comment}{} SolidInitialCondition* \mbox{\hyperlink{classElasticRingProblem_a0d314051b66afb53fa7f28c298f38206}{IC\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file for recording control data}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
+\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classElasticRingProblem_a7f0f8c10b57021446e19c5833863cc7f}{Trace\_file}};}
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -193,7 +193,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ S\_displ\_control[0]=1.0;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\# of dofs "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\# of dofs "{}} << assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Geometric object that specifies the initial conditions}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} eps\_buckl=1.0e-\/2;}
@@ -218,8 +218,8 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Doc-\/ing step "} <<  doc\_info.number()}
-\DoxyCodeLine{      << \textcolor{stringliteral}{" for time "} << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Doc-\/ing step "{}} <<  doc\_info.number()}
+\DoxyCodeLine{      << \textcolor{stringliteral}{"{} for time "{}} << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Loop over all elements to get global kinetic and potential energy}}
@@ -246,11 +246,11 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ IC\_pt-\/>geom\_object\_pt()-\/>position(xi\_ctrl,posn\_ctrl);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Write trace file: Time, control position, energies}}
-\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time()  << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time()  << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << Displ\_control\_elem\_pt-\/>interpolated\_x(S\_displ\_control,1) }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << global\_pot  << \textcolor{stringliteral}{" "} << global\_kin}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << global\_pot + global\_kin }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << posn\_ctrl[1]}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << global\_pot  << \textcolor{stringliteral}{"{} "{}} << global\_kin}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << global\_pot + global\_kin }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << posn\_ctrl[1]}
 \DoxyCodeLine{            << std::endl; }
 \DoxyCodeLine{  }
 \DoxyCodeLine{  }
@@ -261,7 +261,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/ring\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/ring\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -271,7 +271,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nsteps=time\_stepper\_pt()-\/>nprev\_values();}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} t=0;t<=nsteps;t++)}
 \DoxyCodeLine{  \{     }
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"\%s/ring\%i-\/\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}\%s/ring\%i-\/\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{           doc\_info.number(),t);}
 \DoxyCodeLine{   some\_file.open(filename);}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} Nelem=mesh\_pt()-\/>nelement();}
@@ -284,7 +284,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Output for initial condition object}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/ic\_ring\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/ic\_ring\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{  }
@@ -302,13 +302,13 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{   IC\_pt-\/>geom\_object\_pt()-\/>dposition\_dt(xi,1,veloc);}
 \DoxyCodeLine{   IC\_pt-\/>geom\_object\_pt()-\/>dposition\_dt(xi,2,accel);}
 \DoxyCodeLine{    }
-\DoxyCodeLine{   some\_file << posn[0] << \textcolor{stringliteral}{" "} << posn[1] << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{             << xi[0] << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{             << veloc[0] << \textcolor{stringliteral}{" "} << veloc[1] << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{             << accel[0] << \textcolor{stringliteral}{" "} << accel[1] << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{             << sqrt(pow(posn[0],2)+pow(posn[1],2)) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{             << sqrt(pow(veloc[0],2)+pow(veloc[1],2)) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{             << sqrt(pow(accel[0],2)+pow(accel[1],2)) << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{   some\_file << posn[0] << \textcolor{stringliteral}{"{} "{}} << posn[1] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{             << xi[0] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{             << veloc[0] << \textcolor{stringliteral}{"{} "{}} << veloc[1] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{             << accel[0] << \textcolor{stringliteral}{"{} "{}} << accel[1] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{             << sqrt(pow(posn[0],2)+pow(posn[1],2)) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{             << sqrt(pow(veloc[0],2)+pow(veloc[1],2)) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{             << sqrt(pow(accel[0],2)+pow(accel[1],2)) << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{             << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{  }
@@ -328,19 +328,19 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{} DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set up trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace\_ring.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace\_ring.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ Trace\_file <<  \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"time\(\backslash\)",\(\backslash\)"R<sub>ctrl</sub>\(\backslash\)",\(\backslash\)"E<sub>pot</sub>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"E<sub>kin</sub>\(\backslash\)",\(\backslash\)"E<sub>kin</sub>+E<sub>pot</sub>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"<sub>exact</sub>R<sub>ctrl</sub>\(\backslash\)""} }
+\DoxyCodeLine{ Trace\_file <<  \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}time\(\backslash\)"{},\(\backslash\)"{}R<sub>ctrl</sub>\(\backslash\)"{},\(\backslash\)"{}E<sub>pot</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}E<sub>kin</sub>\(\backslash\)"{},\(\backslash\)"{}E<sub>kin</sub>+E<sub>pot</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}<sub>exact</sub>R<sub>ctrl</sub>\(\backslash\)"{}"{}} }
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Number of steps}}
@@ -357,7 +357,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{comment}{// Number of previous timesteps stored}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ndt=time\_stepper\_pt()-\/>time\_pt()-\/>ndt();}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Setup vector of "previous" timesteps}}
+\DoxyCodeLine{ \textcolor{comment}{// Setup vector of "{}previous"{} timesteps}}
 \DoxyCodeLine{ Vector<double> dt\_prev(ndt);}
 \DoxyCodeLine{ dt\_prev[0]=dt; }
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=1;i<ndt;i++)}
@@ -427,31 +427,31 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (atoi(argv[1])==1) }
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}=\textcolor{keyword}{true};}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Setting Newmark IC consistently"} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Setting Newmark IC consistently"{}} << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}=\textcolor{keyword}{false};}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Setting Newmark IC directly"} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Setting Newmark IC directly"{}} << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   }
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Not enough command line arguments specified -\/-\/ using defaults."} }
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Not enough command line arguments specified -\/-\/ using defaults."{}} }
 \DoxyCodeLine{        << std::endl;}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of 1 argument}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argc==4)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Three command line arguments specified:"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Three command line arguments specified:"{}} << std::endl;}
 \DoxyCodeLine{   \textcolor{comment}{// Nontrivial command line input: Setup Newmark IC directly}}
 \DoxyCodeLine{   \textcolor{comment}{// (rather than consistently with PVD)}}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (atoi(argv[1])==1) }
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}=\textcolor{keyword}{true};}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Setting Newmark IC consistently"} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Setting Newmark IC consistently"{}} << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}}=\textcolor{keyword}{false};}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Setting Newmark IC directly"} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Setting Newmark IC directly"{}} << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{comment}{// Flag for long run}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_acb18f0e4952b6a1b0840ca94828ace3b}{Global\_Physical\_Variables::Long\_run\_flag}}=atoi(argv[2]);}
@@ -461,20 +461,20 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   std::string error\_message =}
-\DoxyCodeLine{    \textcolor{stringliteral}{"Wrong number of command line arguments. Specify one or three.\(\backslash\)n"};}
-\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"Arg1: Long\_run\_flag [0/1]\(\backslash\)n"};}
-\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"Arg2: Impulsive\_start\_flag [0/1]\(\backslash\)n"};}
-\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"Arg3: Restart\_flag [restart\_file] (optional)\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Wrong number of command line arguments. Specify one or three.\(\backslash\)n"{}};}
+\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"{}Arg1: Long\_run\_flag [0/1]\(\backslash\)n"{}};}
+\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"{}Arg2: Impulsive\_start\_flag [0/1]\(\backslash\)n"{}};}
+\DoxyCodeLine{   error\_message += \textcolor{stringliteral}{"{}Arg3: Restart\_flag [restart\_file] (optional)\(\backslash\)n"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(error\_message,}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{  \} \textcolor{comment}{// too many arguments}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Setting Newmark IC consistently: "}}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Setting Newmark IC consistently: "{}}}
 \DoxyCodeLine{      <<  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_affe3ddb0b7c1d7dbf3955738edbda1af}{Global\_Physical\_Variables::Consistent\_newmark\_ic}} << std::endl;}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Long run flag: "} }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Long run flag: "{}} }
 \DoxyCodeLine{      <<  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_acb18f0e4952b6a1b0840ca94828ace3b}{Global\_Physical\_Variables::Long\_run\_flag}} << std::endl;}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Fixed timestep flag: "} }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Fixed timestep flag: "{}} }
 \DoxyCodeLine{      <<  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aae2e69454e5e73519e13dd3424d41a2c}{Global\_Physical\_Variables::Fixed\_timestep\_flag}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Length of domain}}
@@ -499,10 +499,11 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+
 \end{DoxyCodeInclude}
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

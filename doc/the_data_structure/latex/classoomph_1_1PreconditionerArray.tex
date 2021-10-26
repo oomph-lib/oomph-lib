@@ -2,7 +2,7 @@
 \label{classoomph_1_1PreconditionerArray}\index{oomph::PreconditionerArray@{oomph::PreconditionerArray}}
 
 
-\mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} -\/ N\+O\+TE -\/ first implementation, a number of assumptions / simplifications were made\+:  
+\mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} -\/ NOTE -\/ first implementation, a number of assumptions / simplifications were made\+:  
 
 
 
@@ -12,31 +12,31 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a70e99bbb30ed4056760430420bc5cf95}{setup\+\_\+preconditioners}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ $>$ prec\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt)
-\item 
+void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a70e99bbb30ed4056760430420bc5cf95}{setup\+\_\+preconditioners}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ $>$ prec\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Setup the preconditioners. Sets up each preconditioner in the array for the corresponding matrix in the vector matrix\+\_\+pt. The number of preconditioners in the array is taken to be the length of prec\+\_\+pt. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a11a8bc01a8addffd5212369a2dc72ef7}{solve\+\_\+preconditioners}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&r, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&z)
 \begin{DoxyCompactList}\small\item\em Applies each preconditioner to the corresponding vector in r and z. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PreconditionerArray_af982432ce1975ed8ba55948fdccb38ba}{Preconditioner\+Array}} ()
 \begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1PreconditionerArray_a39b7ea03b0a0bdee36546f759f1632b9}{Preconditioner\+Array}} (const \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} \&)
+\mbox{\hyperlink{classoomph_1_1PreconditionerArray_a75ad1d5cddfa6c6107d2471ab3021607}{Preconditioner\+Array}} (const \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a29577eaaaf9055e40e54538ec607dba4}{operator=}} (const \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} \&)
+void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_af2d73c95df07c931c6e7f2203aa47847}{operator=}} (const \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1PreconditionerArray_abb6326ed44c67eff34760bd5944d0cf3}{$\sim$\+Preconditioner\+Array}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a70e99bbb30ed4056760430420bc5cf95}{setup\+\_\+preconditioners}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ $>$ prec\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a70e99bbb30ed4056760430420bc5cf95}{setup\+\_\+preconditioners}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ $>$ prec\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Setup the preconditioners. Sets up each preconditioner in the array for the corresponding matrix in the vector matrix\+\_\+pt. The number of preconditioners in the array is taken to be the length of prec\+\_\+pt The preconditioners that are not used on this processor are deleted. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a11a8bc01a8addffd5212369a2dc72ef7}{solve\+\_\+preconditioners}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&r, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&z)
 \begin{DoxyCompactList}\small\item\em Applies each preconditioner to the corresponding vector in r and z. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PreconditionerArray_aa215f08a32f670700a08035bcc75dc63}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Clean up memory. \end{DoxyCompactList}\item 
-unsigned \& \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a73db1b394930346aa2d8d2902cca12e6}{method}} ()
+unsigned \& \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a086e9b9656c25fae62461f9bfe5e7bc3}{method}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a6a265f95d2cbb2fe10b9d08595fe7faf}{compute\+\_\+tag}} (const int \&nproc, const int \&source, const int \&dest, const int \&type)
-\begin{DoxyCompactList}\small\item\em helper method for computing the M\+P\+I\+\_\+\+Isend and M\+P\+I\+\_\+\+Irecv tags \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em helper method for computing the MPI\+\_\+\+Isend and MPI\+\_\+\+Irecv tags \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -69,21 +69,21 @@ unsigned \mbox{\hyperlink{classoomph_1_1PreconditionerArray_a28dd7675a57d1402e4b
 
 
 \doxysubsection{Detailed Description}
-\mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} -\/ N\+O\+TE -\/ first implementation, a number of assumptions / simplifications were made\+: 
+\mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} -\/ NOTE -\/ first implementation, a number of assumptions / simplifications were made\+: 
 
 
 \begin{DoxyEnumerate}
-\item Only works with C\+R\+Double\+Matrices
+\item Only works with CRDouble\+Matrices
 \item The number of processors must be greater than the number of preconditioners
 \item Currently only very crude load balancing -\/ each preconditioner will be setup and applied with the same number of processors (or as near to as possible to the same number of processors)
 \item This class will, at the appropriate time, delete the all the Preconditioners passed setup\+\_\+preconditioners(...)
-\item (but) Deletion of matrices passed to setup\+\_\+preconditioners(...) is N\+OT performed by this class
+\item (but) Deletion of matrices passed to setup\+\_\+preconditioners(...) is NOT performed by this class
 \item It is assumed that preconditioners do not require access to matrix once setup(...) is called
 \item The matrix on the subset of processors will be the same type (distributed or global) as the matrix passed to setup\+\_\+preconditioners(...)
 \item If the matrix is a distributed matrix -\/ it will be assembled with a uniform distribution on the subset of processors. 
 \end{DoxyEnumerate}
 
-Definition at line 49 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00049}{49}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
@@ -100,29 +100,21 @@ Constructor (empty)
 
 
 
-Definition at line 105 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00105}{105}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-References Method, and Nprec.
+References \mbox{\hyperlink{preconditioner__array_8h_source_l00237}{Method}}, and \mbox{\hyperlink{preconditioner__array_8h_source_l00191}{Nprec}}.
 
-\mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a39b7ea03b0a0bdee36546f759f1632b9}\label{classoomph_1_1PreconditionerArray_a39b7ea03b0a0bdee36546f759f1632b9}} 
+\mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a75ad1d5cddfa6c6107d2471ab3021607}\label{classoomph_1_1PreconditionerArray_a75ad1d5cddfa6c6107d2471ab3021607}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!PreconditionerArray@{PreconditionerArray}}
 \index{PreconditionerArray@{PreconditionerArray}!oomph::PreconditionerArray@{oomph::PreconditionerArray}}
 \doxysubsubsection{\texorpdfstring{PreconditionerArray()}{PreconditionerArray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Preconditioner\+Array\+::\+Preconditioner\+Array (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Preconditioner\+Array\+::\+Preconditioner\+Array (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 115 of file preconditioner\+\_\+array.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_abb6326ed44c67eff34760bd5944d0cf3}\label{classoomph_1_1PreconditionerArray_abb6326ed44c67eff34760bd5944d0cf3}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!````~PreconditionerArray@{$\sim$PreconditionerArray}}
@@ -136,11 +128,11 @@ Destructor (empty)
 
 
 
-Definition at line 127 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00121}{121}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 
 
@@ -157,15 +149,15 @@ Clean up memory.
 
 
 
-Definition at line 147 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{141}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-References Color, Distribution\+\_\+pt, First\+\_\+proc\+\_\+for\+\_\+prec, First\+\_\+row\+\_\+for\+\_\+proc, First\+\_\+row\+\_\+from\+\_\+proc, Global\+\_\+communicator\+\_\+pt, i, Local\+\_\+communicator\+\_\+pt, Nprec, Nproc\+\_\+for\+\_\+prec, Nrow\+\_\+local\+\_\+for\+\_\+proc, Nrow\+\_\+local\+\_\+from\+\_\+proc, and Preconditioner\+\_\+pt.
+References \mbox{\hyperlink{preconditioner__array_8h_source_l00221}{Color}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00231}{Distribution\+\_\+pt}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00198}{First\+\_\+proc\+\_\+for\+\_\+prec}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00206}{First\+\_\+row\+\_\+for\+\_\+proc}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00214}{First\+\_\+row\+\_\+from\+\_\+proc}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00224}{Global\+\_\+communicator\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00227}{Local\+\_\+communicator\+\_\+pt}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00191}{Nprec}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00202}{Nproc\+\_\+for\+\_\+prec}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00210}{Nrow\+\_\+local\+\_\+for\+\_\+proc}}, \mbox{\hyperlink{preconditioner__array_8h_source_l00218}{Nrow\+\_\+local\+\_\+from\+\_\+proc}}, and \mbox{\hyperlink{preconditioner__array_8h_source_l00194}{Preconditioner\+\_\+pt}}.
 
 
 
-Referenced by $\sim$\+Preconditioner\+Array().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00121}{$\sim$\+Preconditioner\+Array()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a6a265f95d2cbb2fe10b9d08595fe7faf}\label{classoomph_1_1PreconditionerArray_a6a265f95d2cbb2fe10b9d08595fe7faf}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!compute\_tag@{compute\_tag}}
@@ -175,59 +167,61 @@ Referenced by $\sim$\+Preconditioner\+Array().
 
 
 
-helper method for computing the M\+P\+I\+\_\+\+Isend and M\+P\+I\+\_\+\+Irecv tags 
+helper method for computing the MPI\+\_\+\+Isend and MPI\+\_\+\+Irecv tags 
 
 
 
-Definition at line 188 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00182}{182}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a73db1b394930346aa2d8d2902cca12e6}\label{classoomph_1_1PreconditionerArray_a73db1b394930346aa2d8d2902cca12e6}} 
+\mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a086e9b9656c25fae62461f9bfe5e7bc3}\label{classoomph_1_1PreconditionerArray_a086e9b9656c25fae62461f9bfe5e7bc3}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!method@{method}}
 \index{method@{method}!oomph::PreconditionerArray@{oomph::PreconditionerArray}}
 \doxysubsubsection{\texorpdfstring{method()}{method()}}
-{\footnotesize\ttfamily unsigned\& oomph\+::\+Preconditioner\+Array\+::method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned \& oomph\+::\+Preconditioner\+Array\+::method (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 181 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00175}{175}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-References Method.
+References \mbox{\hyperlink{preconditioner__array_8h_source_l00237}{Method}}.
 
-\mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a29577eaaaf9055e40e54538ec607dba4}\label{classoomph_1_1PreconditionerArray_a29577eaaaf9055e40e54538ec607dba4}} 
+\mbox{\Hypertarget{classoomph_1_1PreconditionerArray_af2d73c95df07c931c6e7f2203aa47847}\label{classoomph_1_1PreconditionerArray_af2d73c95df07c931c6e7f2203aa47847}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::PreconditionerArray@{oomph::PreconditionerArray}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+Array\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+Array\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1PreconditionerArray}{Preconditioner\+Array}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 121 of file preconditioner\+\_\+array.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a70e99bbb30ed4056760430420bc5cf95}\label{classoomph_1_1PreconditionerArray_a70e99bbb30ed4056760430420bc5cf95}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!setup\_preconditioners@{setup\_preconditioners}}
 \index{setup\_preconditioners@{setup\_preconditioners}!oomph::PreconditionerArray@{oomph::PreconditionerArray}}
 \doxysubsubsection{\texorpdfstring{setup\_preconditioners()}{setup\_preconditioners()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+Array\+::setup\+\_\+preconditioners (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ $>$}]{prec\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+Array\+::setup\+\_\+preconditioners (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ $>$}]{prec\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Setup the preconditioners. Sets up each preconditioner in the array for the corresponding matrix in the vector matrix\+\_\+pt. The number of preconditioners in the array is taken to be the length of prec\+\_\+pt. 
 
-Definition at line 52 of file preconditioner\+\_\+array.\+h.
+////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////
+
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00052}{52}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a70e99bbb30ed4056760430420bc5cf95}\label{classoomph_1_1PreconditionerArray_a70e99bbb30ed4056760430420bc5cf95}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!setup\_preconditioners@{setup\_preconditioners}}
 \index{setup\_preconditioners@{setup\_preconditioners}!oomph::PreconditionerArray@{oomph::PreconditionerArray}}
 \doxysubsubsection{\texorpdfstring{setup\_preconditioners()}{setup\_preconditioners()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+Array\+::setup\+\_\+preconditioners (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ $>$}]{prec\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+Array\+::setup\+\_\+preconditioners (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$}]{matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} $\ast$ $>$}]{prec\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
@@ -245,7 +239,7 @@ Applies each preconditioner to the corresponding vector in r and z.
 
 
 
-Definition at line 61 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00061}{61}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a11a8bc01a8addffd5212369a2dc72ef7}\label{classoomph_1_1PreconditionerArray_a11a8bc01a8addffd5212369a2dc72ef7}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!solve\_preconditioners@{solve\_preconditioners}}
@@ -272,11 +266,11 @@ the Color of this processor (or the preconditioner number)
 
 
 
-Definition at line 227 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00221}{221}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_ac233896152000f13b3527d9ff087c113}\label{classoomph_1_1PreconditionerArray_ac233896152000f13b3527d9ff087c113}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Distribution\_pt@{Distribution\_pt}}
@@ -286,11 +280,11 @@ Referenced by clean\+\_\+up\+\_\+memory().
 
 
 
-Definition at line 237 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00231}{231}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a44c35e1fafae4b68e28d95b7d76e73b5}\label{classoomph_1_1PreconditionerArray_a44c35e1fafae4b68e28d95b7d76e73b5}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!First\_proc\_for\_prec@{First\_proc\_for\_prec}}
@@ -304,11 +298,11 @@ The first\+\_\+row component of the distribution of the processors over the prec
 
 
 
-Definition at line 204 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00198}{198}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a33d9a2309355dd4d397b7ab90b1f9593}\label{classoomph_1_1PreconditionerArray_a33d9a2309355dd4d397b7ab90b1f9593}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!First\_row\_for\_proc@{First\_row\_for\_proc}}
@@ -322,11 +316,11 @@ Storage (indexed \mbox{[}i\mbox{]}\mbox{[}j\mbox{]}) for the first row that will
 
 
 
-Definition at line 212 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00206}{206}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a55eabc589d6570fec884729fd4773fea}\label{classoomph_1_1PreconditionerArray_a55eabc589d6570fec884729fd4773fea}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!First\_row\_from\_proc@{First\_row\_from\_proc}}
@@ -340,11 +334,11 @@ Storage (indexed \mbox{[}i\mbox{]}\mbox{[}j\mbox{]}) for the first row that will
 
 
 
-Definition at line 220 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00214}{214}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a6d5b7cce152e193ffeb4d30c593c6ae3}\label{classoomph_1_1PreconditionerArray_a6d5b7cce152e193ffeb4d30c593c6ae3}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Global\_communicator\_pt@{Global\_communicator\_pt}}
@@ -358,11 +352,11 @@ pointer to the global communicator for this preconditioner array
 
 
 
-Definition at line 230 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00224}{224}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a8a0fee7aa5e23878e57186dcef8c719d}\label{classoomph_1_1PreconditionerArray_a8a0fee7aa5e23878e57186dcef8c719d}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Local\_communicator\_pt@{Local\_communicator\_pt}}
@@ -376,11 +370,11 @@ Referenced by clean\+\_\+up\+\_\+memory().
 
 
 
-Definition at line 233 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00227}{227}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a28dd7675a57d1402e4b06c368ffa1e3b}\label{classoomph_1_1PreconditionerArray_a28dd7675a57d1402e4b06c368ffa1e3b}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Method@{Method}}
@@ -395,14 +389,14 @@ the communication method in the setup\+\_\+preconditioners(...) method
 
 \begin{DoxyEnumerate}
 \item Non-\/blocking Send with Blocking Recv
-\item M\+P\+I\+\_\+\+Datatypes with Non-\/blocking sends and receives 
+\item MPI\+\_\+\+Datatypes with Non-\/blocking sends and receives 
 \end{DoxyEnumerate}
 
-Definition at line 243 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00237}{237}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by method(), and Preconditioner\+Array().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00175}{method()}}, and \mbox{\hyperlink{preconditioner__array_8h_source_l00105}{Preconditioner\+Array()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_ab4f9ea783d3db44cf8401a0e0acc46dd}\label{classoomph_1_1PreconditionerArray_ab4f9ea783d3db44cf8401a0e0acc46dd}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Nprec@{Nprec}}
@@ -416,11 +410,11 @@ the number of preconditioner in the array
 
 
 
-Definition at line 197 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00191}{191}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), and Preconditioner\+Array().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{preconditioner__array_8h_source_l00105}{Preconditioner\+Array()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_accd34d22e7859ca172624b3882127e30}\label{classoomph_1_1PreconditionerArray_accd34d22e7859ca172624b3882127e30}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Nproc\_for\_prec@{Nproc\_for\_prec}}
@@ -434,11 +428,11 @@ The nrow\+\_\+local component of the distribution of the processors over the pre
 
 
 
-Definition at line 208 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00202}{202}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a510bce5793502b59923f4007bbde1838}\label{classoomph_1_1PreconditionerArray_a510bce5793502b59923f4007bbde1838}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Nrow\_local\_for\_proc@{Nrow\_local\_for\_proc}}
@@ -452,11 +446,11 @@ Storage (indexed \mbox{[}i\mbox{]}\mbox{[}j\mbox{]}) for the nrow\+\_\+local tha
 
 
 
-Definition at line 216 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00210}{210}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_abbcf38c20131412c0671a831d0960b5d}\label{classoomph_1_1PreconditionerArray_abbcf38c20131412c0671a831d0960b5d}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Nrow\_local\_from\_proc@{Nrow\_local\_from\_proc}}
@@ -470,11 +464,11 @@ Storage (indexed \mbox{[}i\mbox{]}\mbox{[}j\mbox{]}) for the nrow\+\_\+local tha
 
 
 
-Definition at line 224 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00218}{218}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PreconditionerArray_a963dad278f4abf1195666a4a050a0390}\label{classoomph_1_1PreconditionerArray_a963dad278f4abf1195666a4a050a0390}} 
 \index{oomph::PreconditionerArray@{oomph::PreconditionerArray}!Preconditioner\_pt@{Preconditioner\_pt}}
@@ -488,11 +482,11 @@ The pointer to the local preconditioner on this processor.
 
 
 
-Definition at line 200 of file preconditioner\+\_\+array.\+h.
+Definition at line \mbox{\hyperlink{preconditioner__array_8h_source_l00194}{194}} of file \mbox{\hyperlink{preconditioner__array_8h_source}{preconditioner\+\_\+array.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory().
+Referenced by \mbox{\hyperlink{preconditioner__array_8h_source_l00141}{clean\+\_\+up\+\_\+memory()}}.
 
 
 

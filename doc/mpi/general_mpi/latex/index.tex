@@ -1,48 +1,50 @@
-{\ttfamily oomph-\/lib} is designed so that, provided the library is compiled with M\+PI support, discussed below in \mbox{\hyperlink{index_basics}{Basic parallel usage}}, many of the most computationally-\/expensive phases of a typical computation are automatically performed in parallel. Examples of \char`\"{}automatically parallelised\char`\"{} tasks include
+{\ttfamily oomph-\/lib} is designed so that, provided the library is compiled with MPI support, discussed below in \mbox{\hyperlink{index_basics}{Basic parallel usage}}, many of the most computationally-\/expensive phases of a typical computation are automatically performed in parallel. Examples of \char`\"{}automatically parallelised\char`\"{} tasks include
 \begin{DoxyItemize}
 \item The assembly of the Jacobian matrix and the residual vector in Newton\textquotesingle{}s method.
 \item Error estimation.
 \item The solution of the linear systems within the Newton iteration, and any preconditioning operations performed within {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../mpi/block_preconditioners/html/index.html}{\texttt{ block-\/preconditioning framework}} which relies heavily on the library\textquotesingle{}s \href{../../../mpi/distributed_linear_algebra_infrastructure/html/index.html}{\texttt{ distributed linear algebra infrastructure.}}
-\end{DoxyItemize}The only parallel task that requires user intervention is the distribution of a problem over multiple processors so that each processor stores a subset of the elements. For straightforward problems, a single call to {\ttfamily Problem\+::distribute()} suffices. Furthermore, the majority of {\ttfamily oomph-\/lib\textquotesingle{}s} multi-\/physics helper functions ({\itshape  e.\+g.} the automatic setup of the fluid load on solid elements in F\+SI problems; the determination of \char`\"{}source elements\char`\"{} in multi-\/field problems; etc) can be used in distributed problems. For less-\/straightforward problems, the user may have to intervene in the distribution process and/or be aware of the consequences of the distribution. Hence, the section \mbox{\hyperlink{index_domain_decomposition}{Distribution of problems by domain decomposition}} provides an overview of the underlying design used for problem distribution within {\ttfamily oomph-\/lib}. A number of \href{../../../example_code_list/html/index.html\#parallel}{\texttt{ demo driver codes for distributed problems}} are provided and any additional issues are discussed in the accompanying tutorials.
+\end{DoxyItemize}The only parallel task that requires user intervention is the distribution of a problem over multiple processors so that each processor stores a subset of the elements. For straightforward problems, a single call to {\ttfamily Problem\+::distribute()} suffices. Furthermore, the majority of {\ttfamily oomph-\/lib\textquotesingle{}s} multi-\/physics helper functions ({\itshape  e.\+g.} the automatic setup of the fluid load on solid elements in FSI problems; the determination of \char`\"{}source elements\char`\"{} in multi-\/field problems; etc) can be used in distributed problems. For less-\/straightforward problems, the user may have to intervene in the distribution process and/or be aware of the consequences of the distribution. Hence, the section \mbox{\hyperlink{index_domain_decomposition}{Distribution of problems by domain decomposition}} provides an overview of the underlying design used for problem distribution within {\ttfamily oomph-\/lib}. A number of \href{../../../example_code_list/html/index.html\#parallel}{\texttt{ demo driver codes for distributed problems}} are provided and any additional issues are discussed in the accompanying tutorials.
 
 ~\newline
 ~\newline
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_basics}{}\doxysection{Basic parallel usage}\label{index_basics}
-\hypertarget{index_installation}{}\doxysubsection{How to build/install oomph-\/lib with M\+P\+I support}\label{index_installation}
+\hypertarget{index_installation}{}\doxysubsection{How to build/install oomph-\/lib with MPI support}\label{index_installation}
 
 \begin{DoxyItemize}
-\item To compile {\ttfamily oomph-\/lib} with M\+PI support you must specify the configure flag ~\newline
+\item To compile {\ttfamily oomph-\/lib} with MPI support you must specify the configure flag ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{-\/-\/enable-\/MPI}
+
 \end{DoxyCode}
  ~\newline
- If you use {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily autogen.\+sh} script to build the library you should add this line to the {\ttfamily config/configure\+\_\+options/current} file. You should also ensure that appropriate parallel compilers are specified by the {\ttfamily C\+XX}, {\ttfamily CC}, {\ttfamily F77} and {\ttfamily LD} flags. For instance, if you use \href{http://www.lam-mpi.org/}{\texttt{ L\+AM}}, you should use {\ttfamily C\+XX=mpic++}, {\ttfamily CC=mpicc}, {\ttfamily F77=mpif77} and {\ttfamily LD=mpif77}. ~\newline
+ If you use {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily autogen.\+sh} script to build the library you should add this line to the {\ttfamily config/configure\+\_\+options/current} file. You should also ensure that appropriate parallel compilers are specified by the {\ttfamily CXX}, {\ttfamily CC}, {\ttfamily F77} and {\ttfamily LD} flags. For instance, if you use \href{http://www.lam-mpi.org/}{\texttt{ LAM}}, you should use {\ttfamily CXX=mpic++}, {\ttfamily CC=mpicc}, {\ttfamily F77=mpif77} and {\ttfamily LD=mpif77}. ~\newline
 ~\newline
 
-\item When {\ttfamily oomph-\/lib} is built with M\+PI support, the macro {\ttfamily O\+O\+M\+P\+H\+\_\+\+H\+A\+S\+\_\+\+M\+PI} is defined. It is used to isolate parallel sections of code to ensure that the library can be used in serial and parallel\+: {\itshape  e.\+g. } ~\newline
+\item When {\ttfamily oomph-\/lib} is built with MPI support, the macro {\ttfamily OOMPH\+\_\+\+HAS\+\_\+\+MPI} is defined. It is used to isolate parallel sections of code to ensure that the library can be used in serial and parallel\+: {\itshape  e.\+g. } ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
 \DoxyCodeLine{}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"This code has been compiled with mpi support \(\backslash\)n "} }
-\DoxyCodeLine{             << \textcolor{stringliteral}{"and is running on "} << Communicator\_pt-\/>nproc() }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" processors. "} << std::endl;}
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}This code has been compiled with mpi support \(\backslash\)n "{}} }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{}and is running on "{}} << Communicator\_pt-\/>nproc() }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} processors. "{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"This code has been compiled without mpi support"} }
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}This code has been compiled without mpi support"{}} }
 \DoxyCodeLine{             << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
+
 \end{DoxyCode}
  ~\newline
 
@@ -52,9 +54,9 @@
 \hypertarget{index_running}{}\doxysubsection{How to run a driver code in parallel}\label{index_running}
 
 \begin{DoxyItemize}
-\item M\+PI {\bfseries{ must }} be initialised in every driver code that is to be run in parallel, which means that the commands {\ttfamily M\+P\+I\+\_\+\+Helpers\+::init(...)} and {\ttfamily M\+P\+I\+\_\+\+Helpers\+::finalize()} must be added to the beginning and end of the {\ttfamily main(...)} function, respectively ~\newline
+\item MPI {\bfseries{ must }} be initialised in every driver code that is to be run in parallel, which means that the commands {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()} must be added to the beginning and end of the {\ttfamily main(...)} function, respectively ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{  \{ }
@@ -63,28 +65,30 @@
 \DoxyCodeLine{    MPI\_Helpers::init(argc,argv);     }
 \DoxyCodeLine{  }
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{comment}{// Normal "serial" code}}
+\DoxyCodeLine{    \textcolor{comment}{// Normal "{}serial"{} code}}
 \DoxyCodeLine{    [...]  }
 \DoxyCodeLine{}
 \DoxyCodeLine{    }
 \DoxyCodeLine{    \textcolor{comment}{// Shut down oomph-\/lib's MPI}}
 \DoxyCodeLine{    MPI\_Helpers::finalize();}
 \DoxyCodeLine{  \}}
+
 \end{DoxyCode}
- ~\newline
+~\newline
  ~\newline
  ~\newline
  Running the code on multiple processors should immediately lead to a speedup, although this depends on the specific problem. In most applications, the most computationally-\/expensive tasks are the setup of the Jacobian matrix and the solution of the linear systems. When a driver code is run on multiple processors, each processor assembles contributions to the Jacobian matrix from a different subset of the elements, dividing the work of the assembly between processors. In our experience, the assembly of the Jacobian matrix tends to scale very well with the number of processors. The parallel performance of the (third-\/party) linear solvers available from within {\ttfamily oomph-\/lib} varies greatly and their performance is also strongly dependent on the underlying hardware, {\itshape  e.\+g.} the speed of your machine\textquotesingle{}s interconnects, etc. ~\newline
 ~\newline
 
-\item The M\+PI header file {\ttfamily mpi.\+h} is included in {\ttfamily oomph-\/lib\textquotesingle{}s} generic header, so it is not necessary to include it in the driver code. The functions {\ttfamily M\+P\+I\+\_\+\+Helpers\+::init(...)} and {\ttfamily M\+P\+I\+\_\+\+Helpers\+::finalize()} call their M\+PI counterparts, {\ttfamily M\+P\+I\+\_\+\+Init(...)} and {\ttfamily M\+P\+I\+\_\+\+Finalize()}, which {\bfseries{must}} {\bfseries{not}} be called again. Note also that the {\ttfamily main(...)} function must take arguments which are then passed into the {\ttfamily M\+P\+I\+\_\+\+Helpers\+::init(...)} function. ~\newline
+\item The MPI header file {\ttfamily mpi.\+h} is included in {\ttfamily oomph-\/lib\textquotesingle{}s} generic header, so it is not necessary to include it in the driver code. The functions {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()} call their MPI counterparts, {\ttfamily MPI\+\_\+\+Init(...)} and {\ttfamily MPI\+\_\+\+Finalize()}, which {\bfseries{must}} {\bfseries{not}} be called again. Note also that the {\ttfamily main(...)} function must take arguments which are then passed into the {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} function. ~\newline
 ~\newline
 
-\item The command used to run a parallel job depends on your particular M\+PI installation. If you use \href{http://www.open-mpi.org/}{\texttt{ Open\+M\+PI}}, for example, the executable {\ttfamily parallel\+\_\+executable} is run on, say, four processors by issuing the command ~\newline
+\item The command used to run a parallel job depends on your particular MPI installation. If you use \href{http://www.open-mpi.org/}{\texttt{ Open\+MPI}}, for example, the executable {\ttfamily parallel\+\_\+executable} is run on, say, four processors by issuing the command ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{mpirun -\/np 4 ./parallel\_executable}
+
 \end{DoxyCode}
  ~\newline
 
@@ -94,7 +98,7 @@
 \hypertarget{index_solvers}{}\doxysubsection{oomph-\/lib\textquotesingle{}s parallel linear solvers}\label{index_solvers}
 
 \begin{DoxyItemize}
-\item {\ttfamily oomph-\/lib\textquotesingle{}s} default linear solver is {\ttfamily Super\+L\+U\+Solver}. This is a wrapper to the direct linear solvers from the \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU / Super\+L\+U\+\_\+\+D\+I\+ST}} projects. If {\ttfamily oomph-\/lib} is built with M\+PI support and the executable is run on multiple processors, {\ttfamily Super\+L\+U\+\_\+\+D\+I\+ST} will be used by default, otherwise {\ttfamily Super\+LU} is used. ~\newline
+\item {\ttfamily oomph-\/lib\textquotesingle{}s} default linear solver is {\ttfamily Super\+LUSolver}. This is a wrapper to the direct linear solvers from the \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU / Super\+LU\+\_\+\+DIST}} projects. If {\ttfamily oomph-\/lib} is built with MPI support and the executable is run on multiple processors, {\ttfamily Super\+LU\+\_\+\+DIST} will be used by default, otherwise {\ttfamily Super\+LU} is used. ~\newline
 ~\newline
 
 \item Of {\ttfamily oomph-\/lib\textquotesingle{}s} own iterative linear solvers, only {\ttfamily CG} is parallelised. We recommend using {\ttfamily oomph-\/lib\textquotesingle{}s} wrapper to the parallel Krylov subspace solvers from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos }} library (see \href{../../../the_distribution/html/index.html\#external_dist}{\texttt{ the {\ttfamily oomph-\/lib} installation page}} for details on how to install this) instead. The interfaces are identical to those used to call these solvers in serial; see \href{../../../linear_solvers/html/index.html}{\texttt{ the linear solver tutorial}} for details. ~\newline
@@ -107,23 +111,25 @@
 \hypertarget{index_self_tests}{}\doxysubsection{How to include parallel demo codes into the self-\/tests}\label{index_self_tests}
 
 \begin{DoxyItemize}
-\item The configure flag {\ttfamily --with-\/mpi-\/self-\/tests} includes {\ttfamily oomph-\/lib\textquotesingle{}s} parallel demo driver codes into the self-\/tests executed when {\ttfamily make} {\ttfamily check} is run. The self-\/tests require the executable to be run on two processors and the command that spawns a two-\/processor parallel job on the target machine must be specified as an argument to the configure flag. For example, under \href{http://www.lam-mpi.org/}{\texttt{ L\+AM}} ~\newline
+\item The configure flag {\ttfamily --with-\/mpi-\/self-\/tests} includes {\ttfamily oomph-\/lib\textquotesingle{}s} parallel demo driver codes into the self-\/tests executed when {\ttfamily make} {\ttfamily check} is run. The self-\/tests require the executable to be run on two processors and the command that spawns a two-\/processor parallel job on the target machine must be specified as an argument to the configure flag. For example, under \href{http://www.lam-mpi.org/}{\texttt{ LAM}} ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{-\/-\/with-\/mpi-\/\textcolor{keyword}{self}-\/tests=\textcolor{stringliteral}{"mpirun -\/np 2"}}
+\DoxyCodeLine{-\/-\/with-\/mpi-\/\textcolor{keyword}{self}-\/tests=\textcolor{stringliteral}{"{}mpirun -\/np 2"{}}}
+
 \end{DoxyCode}
  ~\newline
- Some self-\/tests are performed with a greater number of processors. To perform these tests as part of the {\ttfamily make} {\ttfamily test} procedure, add the configure flag {\ttfamily --with-\/mpi-\/self-\/tests-\/variablenp} to the configure options. Its argument has to specify how to spawn an mpi job on an arbitrary number of processors, using the placeholder {\ttfamily O\+O\+M\+P\+H\+NP} for the number of processors. E.\+g. ~\newline
+ Some self-\/tests are performed with a greater number of processors. To perform these tests as part of the {\ttfamily make} {\ttfamily test} procedure, add the configure flag {\ttfamily --with-\/mpi-\/self-\/tests-\/variablenp} to the configure options. Its argument has to specify how to spawn an mpi job on an arbitrary number of processors, using the placeholder {\ttfamily OOMPHNP} for the number of processors. E.\+g. ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{-\/-\/with-\/mpi-\/\textcolor{keyword}{self}-\/tests-\/variablenp=\textcolor{stringliteral}{"mpirun -\/np OOMPHNP"}}
+\DoxyCodeLine{-\/-\/with-\/mpi-\/\textcolor{keyword}{self}-\/tests-\/variablenp=\textcolor{stringliteral}{"{}mpirun -\/np OOMPHNP"{}}}
+
 \end{DoxyCode}
  ~\newline
  It is easiest to add the appropriate lines to the {\ttfamily config/configure\+\_\+options/current} file before building/installing {\ttfamily oomph-\/lib} with {\ttfamily autogen.\+sh}. ~\newline
 ~\newline
- {\bfseries{N\+O\+TE\+:}} When using L\+AM, make sure your M\+PI demons are started before running the parallel self-\/tests, e.\+g. by using the {\ttfamily lamboot} command, otherwise the self-\/tests will fail.
+ {\bfseries{NOTE\+:}} When using LAM, make sure your MPI demons are started before running the parallel self-\/tests, e.\+g. by using the {\ttfamily lamboot} command, otherwise the self-\/tests will fail.
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
@@ -137,11 +143,12 @@ To address this problem, {\ttfamily oomph-\/lib\textquotesingle{}s} domain decom
 \hypertarget{index_how_to_distribute}{}\doxysubsection{Basic usage\+: How to distribute a simple problem}\label{index_how_to_distribute}
 
 \begin{DoxyItemize}
-\item In most cases the problem distribution is extremely straightforward. Given an existing serial driver code, modified by the addition of calls to {\ttfamily M\+P\+I\+\_\+\+Helpers\+::init(...)} and {\ttfamily M\+P\+I\+\_\+\+Helpers\+::finalize()}, the function ~\newline
+\item In most cases the problem distribution is extremely straightforward. Given an existing serial driver code, modified by the addition of calls to {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()}, the function ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::distribute()}
+
 \end{DoxyCode}
  ~\newline
  can be called at any point {\bfseries{after}} the {\ttfamily Problem} has been constructed and equation numbers have been assigned (i.\+e. at a point at which {\ttfamily Problem\+::newton\+\_\+solve()} could be called), but {\bfseries{before}} any {\bfseries{non}}-\/uniform mesh refinement has taken place. Equation numbering is required because the automatic distribution procedure uses the global equation numbering scheme to identify interactions between elements and attempts to store strongly-\/coupled elements on the same processor. ~\newline
@@ -155,7 +162,7 @@ To address this problem, {\ttfamily oomph-\/lib\textquotesingle{}s} domain decom
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} RefineableDrivenCavityProblem<ELEMENT>::doc\_solution(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -170,7 +177,7 @@ To address this problem, {\ttfamily oomph-\/lib\textquotesingle{}s} domain decom
 \DoxyCodeLine{ \textcolor{keywordtype}{int} my\_rank=this-\/>communicator\_pt()-\/>my\_rank();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i\_on\_proc\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i\_on\_proc\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number(),my\_rank);}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -185,13 +192,15 @@ To address this problem, {\ttfamily oomph-\/lib\textquotesingle{}s} domain decom
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::enable\_output\_of\_halo\_elements()}
+
 \end{DoxyCode}
  ~\newline
  or ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::disable\_output\_of halo\_elements()}
+
 \end{DoxyCode}
  ~\newline
  respectively. ~\newline
@@ -212,7 +221,7 @@ The initial distribution of a problem proceeds in two stages\+:
 \begin{DoxyItemize}
 \item {\bfseries{Initial refinement and partitioning}} ~\newline
 ~\newline
- Each processor constructs the same {\ttfamily Problem} object, using a (typically very coarse) initial mesh; in the figure below, the mesh contains a single four-\/node quad. Repeated calls to {\ttfamily Problem\+::refine\+\_\+uniformly()} should be made to increase the number of elements sufficiently for a sensible mesh partitioning --- for example, there should be at least as many elements as processors. By default, \href{http://www-users.cs.umn.edu/~karypis/metis/}{\texttt{ M\+E\+T\+IS}} is used to associate each element with a unique processor. Alternatively, user-\/defined distributions may be specified via a vector that contains the processor number to be associated with each element. Nodes located in the interior of a processor\textquotesingle{}s patch of elements are associated with that processor; nodes shared by elements associated with different processors are associated with the highest-\/numbered processor. ~\newline
+ Each processor constructs the same {\ttfamily Problem} object, using a (typically very coarse) initial mesh; in the figure below, the mesh contains a single four-\/node quad. Repeated calls to {\ttfamily Problem\+::refine\+\_\+uniformly()} should be made to increase the number of elements sufficiently for a sensible mesh partitioning --- for example, there should be at least as many elements as processors. By default, \href{http://www-users.cs.umn.edu/~karypis/metis/}{\texttt{ METIS}} is used to associate each element with a unique processor. Alternatively, user-\/defined distributions may be specified via a vector that contains the processor number to be associated with each element. Nodes located in the interior of a processor\textquotesingle{}s patch of elements are associated with that processor; nodes shared by elements associated with different processors are associated with the highest-\/numbered processor. ~\newline
 ~\newline
 
 \item {\bfseries{Identification of halo\mbox{[}ed\mbox{]} nodes/elements and pruning}} ~\newline
@@ -229,19 +238,20 @@ The initial distribution of a problem proceeds in two stages\+:
 \end{DoxyImage}
 
 
-Aside from the initial refinement process, the functionality described above is implemented in a single function, {\ttfamily Problem\+::distribute()}. Following its execution on all processors, each processor can assemble its contribution to the distributed Jacobian matrix and residual vector, required by {\ttfamily oomph-\/lib\textquotesingle{}s} parallel linear solvers, using only to locally stored non-\/halo objects. Once the Newton correction to the unknowns has been computed, each processor updates the unknowns associated with its elements and nodes, before M\+P\+I-\/based communication is employed to update the unknowns stored at the processors\textquotesingle{} halo nodes.
+Aside from the initial refinement process, the functionality described above is implemented in a single function, {\ttfamily Problem\+::distribute()}. Following its execution on all processors, each processor can assemble its contribution to the distributed Jacobian matrix and residual vector, required by {\ttfamily oomph-\/lib\textquotesingle{}s} parallel linear solvers, using only to locally stored non-\/halo objects. Once the Newton correction to the unknowns has been computed, each processor updates the unknowns associated with its elements and nodes, before MPI-\/based communication is employed to update the unknowns stored at the processors\textquotesingle{} halo nodes.
 
 After a problem has been distributed, further mesh refinement can be performed in parallel using the existing mesh adaptation procedures on the (partial) meshes held on the different processors. For spatially non-\/uniform refinement, each haloed element communicates whether or not it is to be refined to its halo counterparts before the adaptation takes place. Any nodes created during the refinement are associated with a unique processor, using the rules described above, and halo\mbox{[}ed\mbox{]} nodes are identified and added to the appropriate lookup schemes. These steps are performed automatically when {\ttfamily Problem\+::refine\+\_\+uniformly()} or any of the other mesh adaptation routines within {\ttfamily oomph-\/lib} are executed.
 
 {\bfseries{ Optional pruning of superfluous halo\mbox{[}ed\mbox{]} nodes and elements }}
 
-The parallel efficiency of the distributed mesh adaptation (in terms of the memory required to hold the partial meshes, and in terms of the C\+PU time required for their adaptation) is limited by the fact that each processor must adapt not only the $N_{\rm in \ charge}$ elements it is in charge of, but also its $N_{\rm halo}$ halo elements. We define the efficiency of the problem distribution as \[ e_{dist} = \frac{N_{\rm in \ charge}}{N_{\rm halo} + N_{\rm in \ charge}} \le 1, \] where the equality could only be achieved in the absence of any halo elements.
+The parallel efficiency of the distributed mesh adaptation (in terms of the memory required to hold the partial meshes, and in terms of the CPU time required for their adaptation) is limited by the fact that each processor must adapt not only the $N_{\rm in \ charge}$ elements it is in charge of, but also its $N_{\rm halo}$ halo elements. We define the efficiency of the problem distribution as \[ e_{dist} = \frac{N_{\rm in \ charge}}{N_{\rm halo} + N_{\rm in \ charge}} \le 1, \] where the equality could only be achieved in the absence of any halo elements.
 
 When the mesh is first distributed, the halo layer has a depth of one element, but repeated mesh refinement can make the halo layers (the original halo elements and their sons) much thicker than a single-\/element layer. Thus, to a large extent, the efficiency is determined during the initial problem distribution and at that stage of the process it can only be improved by {\bfseries{(i)}} increasing the number of non-\/distributed initial mesh refinements; {\bfseries{(ii)}} reducing the number of processors. Since both options reduce the parallelism they are not desirable. It is possible, however, to improve the parallel efficiency by pruning superfluous halo\mbox{[}ed\mbox{]} elements after each mesh refinement by calling the function ~\newline
 ~\newline
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::prune\_halo\_elements\_and\_nodes()}
+
 \end{DoxyCode}
  ~\newline
 as illustrated in the figure. If this is done after every mesh adaptation $ e_{dist}$ increases significantly as the refinement proceeds. However, the pruning of halo\mbox{[}ed\mbox{]} nodes and elements makes the refinement irreversible and the mesh(es) involved can no longer be unrefined below the previous highest level of uniform refinement.
@@ -253,6 +263,7 @@ The procedures described above are completely sufficient for straightforward pro
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_distribute()}
+
 \end{DoxyCode}
  ~\newline
 and ~\newline
@@ -260,6 +271,7 @@ and ~\newline
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_distribute()}
+
 \end{DoxyCode}
  ~\newline
 can be used to perform any additional commands required to complete the setup of the problem after distribution. In many cases, these functions will contain the same commands as those required in the equivalent {\ttfamily Problem\+::actions\+\_\+before\+\_\+adapt()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} functions used during mesh adaptation.
@@ -273,6 +285,7 @@ The same issues arise during the problem distribution\+: A {\ttfamily Face\+Elem
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_distribute()}
+
 \end{DoxyCode}
  ~\newline
 and ~\newline
@@ -280,6 +293,7 @@ and ~\newline
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_distribute()}
+
 \end{DoxyCode}
  ~\newline
 to detach and re-\/attach any {\ttfamily Face\+Elements} before and after the problem distribution. In this context it is important to note that\+: ~\newline
@@ -294,15 +308,15 @@ to detach and re-\/attach any {\ttfamily Face\+Elements} before and after the pr
 
 \DoxyHorRuler{0}
 \hypertarget{index_multi_domain}{}\doxysubsubsection{Distributing multi-\/domain problems}\label{index_multi_domain}
-Multi-\/domain problems involve interactions between P\+D\+Es that are defined in different domains, such as fluid-\/structure interaction problems. Within {\ttfamily oomph-\/lib}, multi-\/domain problems typically involve elements, derived from the {\ttfamily Element\+With\+External\+Element} class, ~\newline
- that store pointers to any \char`\"{}external\char`\"{} elements that take part in the interaction. These \char`\"{}external\char`\"{} elements are determined by helper functions such as {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} or {\ttfamily Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+multi\+\_\+domain\+\_\+interactions(...)}. The appropriate helper functions must be called in the function {\ttfamily Problem\+::actions\+\_\+after\+\_\+distribute()} to ensure that the interactions are correctly set up once the problem has been distributed.
+Multi-\/domain problems involve interactions between PDEs that are defined in different domains, such as fluid-\/structure interaction problems. Within {\ttfamily oomph-\/lib}, multi-\/domain problems typically involve elements, derived from the {\ttfamily Element\+With\+External\+Element} class, ~\newline
+ that store pointers to any \char`\"{}external\char`\"{} elements that take part in the interaction. These \char`\"{}external\char`\"{} elements are determined by helper functions such as {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)} or {\ttfamily Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+multi\+\_\+domain\+\_\+interactions(...)}. The appropriate helper functions must be called in the function {\ttfamily Problem\+::actions\+\_\+after\+\_\+distribute()} to ensure that the interactions are correctly set up once the problem has been distributed.
 
 The helper function {\ttfamily Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+external\+\_\+elements()} has been written to work even after a problem has been distributed and uses the following algorithm\+:
 \begin{DoxyEnumerate}
 \item Loop over all (non-\/halo) {\ttfamily Element\+With\+External\+Elements} and try to locate the \char`\"{}external\char`\"{} elements ({\itshape  e.\+g.} fluid elements adjacent to an elastic wall in an fluid-\/structure interaction problem) on the current processor. If the required \char`\"{}external\char`\"{} element is found locally, the {\ttfamily Element\+With\+External\+Element} stores a pointer to it. ~\newline
 ~\newline
 
-\item If the \char`\"{}external\char`\"{} element cannot be found locally, M\+P\+I-\/based communication is employed to find the \char`\"{}external\char`\"{} element on one of the other processors. Once found, a halo-\/copy of the \char`\"{}external\char`\"{} element (and its nodes) is made on the current processor and a pointer to the halo-\/element is stored. These \char`\"{}external\char`\"{} halo elements and nodes are stored in the appropriate mesh, {\itshape  i.\+e.} in an F\+SI problem, the \char`\"{}external\char`\"{} fluid elements are added to the fluid mesh. ~\newline
+\item If the \char`\"{}external\char`\"{} element cannot be found locally, MPI-\/based communication is employed to find the \char`\"{}external\char`\"{} element on one of the other processors. Once found, a halo-\/copy of the \char`\"{}external\char`\"{} element (and its nodes) is made on the current processor and a pointer to the halo-\/element is stored. These \char`\"{}external\char`\"{} halo elements and nodes are stored in the appropriate mesh, {\itshape  i.\+e.} in an FSI problem, the \char`\"{}external\char`\"{} fluid elements are added to the fluid mesh. ~\newline
 ~\newline
 
 \end{DoxyEnumerate}\char`\"{}\+External\char`\"{} halo\mbox{[}ed\mbox{]} elements are automatically included in any halo/haloed synchronisation operations performed when assigning equation numbers, or updating unknowns during the Newton iteration, etc.
@@ -310,7 +324,7 @@ The helper function {\ttfamily Multi\+\_\+domain\+\_\+functions\+::locate\+\_\+e
 The procedure discussed above has the following important consequence\+: ~\newline
 
 \begin{DoxyItemize}
-\item When an \char`\"{}external\char`\"{} halo element is created we also automatically create halo-\/copies of those of its nodes that do not already exist on the current processor. Such nodes are stored as \char`\"{}external\char`\"{} halo nodes and they are automatically synchronised with their non-\/halo counterparts on other processors. However, synchronisation of nodes does not (and cannot) include the specification of auxiliary node update functions (such as the function {\ttfamily F\+S\+I\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(...)} which automatically applies the no-\/slip condition on moving fluid-\/solid interfaces). Such functions should therefore be re-\/assigned to the appropriate nodes after {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements()} has been called. This is exactly equivalent to the sequence of steps required following an adaptive mesh refinement; see {\itshape  e.\+g.} the \href{../../../interaction/fsi_collapsible_channel_adapt/html/index.html\#before_and_after}{\texttt{ tutorial discussing the adaptive solution of the collapsible channel problem}} for a more detailed discussion of this issue. We note that \char`\"{}external\char`\"{} halo-\/nodes are added to the mesh\textquotesingle{}s boundary lookup schemes, so the specification of auxiliary node update functions for all nodes on a given mesh boundary does not require any further modification to the serial code. ~\newline
+\item When an \char`\"{}external\char`\"{} halo element is created we also automatically create halo-\/copies of those of its nodes that do not already exist on the current processor. Such nodes are stored as \char`\"{}external\char`\"{} halo nodes and they are automatically synchronised with their non-\/halo counterparts on other processors. However, synchronisation of nodes does not (and cannot) include the specification of auxiliary node update functions (such as the function {\ttfamily FSI\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(...)} which automatically applies the no-\/slip condition on moving fluid-\/solid interfaces). Such functions should therefore be re-\/assigned to the appropriate nodes after {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements()} has been called. This is exactly equivalent to the sequence of steps required following an adaptive mesh refinement; see {\itshape  e.\+g.} the \href{../../../interaction/fsi_collapsible_channel_adapt/html/index.html\#before_and_after}{\texttt{ tutorial discussing the adaptive solution of the collapsible channel problem}} for a more detailed discussion of this issue. We note that \char`\"{}external\char`\"{} halo-\/nodes are added to the mesh\textquotesingle{}s boundary lookup schemes, so the specification of auxiliary node update functions for all nodes on a given mesh boundary does not require any further modification to the serial code. ~\newline
 
 \end{DoxyItemize}
 
@@ -318,34 +332,36 @@ The procedure discussed above has the following important consequence\+: ~\newli
 \hypertarget{index_alg_node_update}{}\doxysubsubsection{Distributing problems involving meshes with algebraic node updates}\label{index_alg_node_update}
 {\ttfamily oomph-\/lib} provides a variety of algebraic node-\/update methods. These allow the fast and sparse update of the nodal positions in response to changes in the domain boundaries. The shape and position of such boundaries is typically represented by one or more {\ttfamily Geom\+Objects}. If the motion of the boundary is prescribed, (as in the case of the \href{../../../navier_stokes/osc_ellipse/html/index.html}{\texttt{ flow inside an oscillating ellipse}}, say) no modifications are required when the meshes are used in a distributed problem.
 
-In order to minimise communication, the design decision was taken that any {\ttfamily Geom\+Objects} defining the position of domain boundaries must be available on all processors after the problem is distributed. Thus, if the {\ttfamily Geom\+Object} is actually a {\ttfamily Mesh\+As\+Geom\+Object}, a compound {\ttfamily Geom\+Object} formed from a mesh of {\ttfamily Finite\+Elements}, then all the elements in the mesh, or all elements required to construct the mesh, must be retained as halo elements on every processor. This leads to a slight increase in the overall storage requirements (because none of the elements involved in the interaction are deleted when the problem is distributed) but it means that the entire {\ttfamily Geom\+Object} remains accessible to the fluid mesh without invoking M\+PI communications. Two functions can be used to specify that elements must be retained\+: ~\newline
+In order to minimise communication, the design decision was taken that any {\ttfamily Geom\+Objects} defining the position of domain boundaries must be available on all processors after the problem is distributed. Thus, if the {\ttfamily Geom\+Object} is actually a {\ttfamily Mesh\+As\+Geom\+Object}, a compound {\ttfamily Geom\+Object} formed from a mesh of {\ttfamily Finite\+Elements}, then all the elements in the mesh, or all elements required to construct the mesh, must be retained as halo elements on every processor. This leads to a slight increase in the overall storage requirements (because none of the elements involved in the interaction are deleted when the problem is distributed) but it means that the entire {\ttfamily Geom\+Object} remains accessible to the fluid mesh without invoking MPI communications. Two functions can be used to specify that elements must be retained\+: ~\newline
 ~\newline
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::keep\_all\_elements\_as\_halos()}
+
 \end{DoxyCode}
  ~\newline
 keeps every element in the {\ttfamily Mesh} available to every processor, and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{GeneralisedElement::must\_be\_kept\_as\_halo()}
+
 \end{DoxyCode}
  ~\newline
 can be called for a particular element to ensure that it is kept available to every processor.
 
 We stress that the increase in storage requirements due to the retention of these elements is minimal because the ~\newline
- elements are only located along the (lower-\/dimensional) boundaries of the domain. For instance, in the \href{../../../interaction/fsi_collapsible_channel_algebraic/html/index.html}{\texttt{ collapsible channel problem}} the 1D mesh of beam elements bounds the 2D mesh of fluid elements; in \href{../../../interaction/turek_flag/html/index.html}{\texttt{ Turek and Hron\textquotesingle{}s F\+SI benchmark problem}}, the 2D fluid domain is bounded by a 1D mesh of {\ttfamily F\+S\+I\+Solid\+Traction\+Elements}, and so on.
+ elements are only located along the (lower-\/dimensional) boundaries of the domain. For instance, in the \href{../../../interaction/fsi_collapsible_channel_algebraic/html/index.html}{\texttt{ collapsible channel problem}} the 1D mesh of beam elements bounds the 2D mesh of fluid elements; in \href{../../../interaction/turek_flag/html/index.html}{\texttt{ Turek and Hron\textquotesingle{}s FSI benchmark problem}}, the 2D fluid domain is bounded by a 1D mesh of {\ttfamily FSISolid\+Traction\+Elements}, and so on.
 
 Examples of the implementation of these ideas are given for the ~\newline
- \href{../../fsi_channel_with_leaflet/html/index.html}{\texttt{ flow past an elastic leaflet}} and \href{../../turek_flag/html/index.html}{\texttt{ Turek and Hron\textquotesingle{}s F\+SI benchmark problem }}.
+ \href{../../fsi_channel_with_leaflet/html/index.html}{\texttt{ flow past an elastic leaflet}} and \href{../../turek_flag/html/index.html}{\texttt{ Turek and Hron\textquotesingle{}s FSI benchmark problem }}.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_mpidetails}{}\doxysection{Further M\+P\+I Details}\label{index_mpidetails}
+\hypertarget{index_mpidetails}{}\doxysection{Further MPI Details}\label{index_mpidetails}
 
 \begin{DoxyItemize}
-\item {\ttfamily oomph-\/lib} mirrors the M\+PI C bindings with the methods {\ttfamily M\+P\+I\+\_\+\+Helpers\+::init(...)} and {\ttfamily M\+P\+I\+\_\+\+Helpers\+::finalize()}; they call the methods {\ttfamily M\+P\+I\+\_\+\+Init(...)} and {\ttfamily M\+P\+I\+\_\+\+Finalize()} respectively. In addition, these methods automatically create (and destroy) a new instance of {\ttfamily M\+P\+I\+\_\+\+Comm} with the same set of processes as {\ttfamily M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD} but with a different communication context. This {\ttfamily M\+P\+I\+\_\+\+Comm} instance is accessible through {\ttfamily M\+P\+I\+\_\+\+Helpers\+::\+Communicator\+\_\+pt} which returns a pointer to an {\ttfamily Oomph\+Communicator} object.
-\item An {\ttfamily Oomph\+Communicator} is {\ttfamily oomph-\/lib\textquotesingle{}s} object oriented wrapper to an {\ttfamily M\+P\+I\+\_\+\+Comm}.
-\item Under normal operation, a user does not need to specify the {\ttfamily Oomph\+Communicator} for any object -- this is all handled automatically by {\ttfamily oomph-\/lib}. For example, on construction a {\ttfamily Problem} will use the {\ttfamily M\+P\+I\+\_\+\+Helpers} communicator; a {\ttfamily Linear\+Solver} will use the corresponding {\ttfamily Problem} communicator; and a {\ttfamily Preconditioner} will use the corresponding {\ttfamily Iterative\+Linear\+Solver} communicator.
+\item {\ttfamily oomph-\/lib} mirrors the MPI C bindings with the methods {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()}; they call the methods {\ttfamily MPI\+\_\+\+Init(...)} and {\ttfamily MPI\+\_\+\+Finalize()} respectively. In addition, these methods automatically create (and destroy) a new instance of {\ttfamily MPI\+\_\+\+Comm} with the same set of processes as {\ttfamily MPI\+\_\+\+COMM\+\_\+\+WORLD} but with a different communication context. This {\ttfamily MPI\+\_\+\+Comm} instance is accessible through {\ttfamily MPI\+\_\+\+Helpers\+::\+Communicator\+\_\+pt} which returns a pointer to an {\ttfamily Oomph\+Communicator} object.
+\item An {\ttfamily Oomph\+Communicator} is {\ttfamily oomph-\/lib\textquotesingle{}s} object oriented wrapper to an {\ttfamily MPI\+\_\+\+Comm}.
+\item Under normal operation, a user does not need to specify the {\ttfamily Oomph\+Communicator} for any object -- this is all handled automatically by {\ttfamily oomph-\/lib}. For example, on construction a {\ttfamily Problem} will use the {\ttfamily MPI\+\_\+\+Helpers} communicator; a {\ttfamily Linear\+Solver} will use the corresponding {\ttfamily Problem} communicator; and a {\ttfamily Preconditioner} will use the corresponding {\ttfamily Iterative\+Linear\+Solver} communicator.
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
@@ -355,22 +371,25 @@ Examples of the implementation of these ideas are given for the ~\newline
 Once a problem has been distributed, the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::check\_halo\_schemes()}
+
 \end{DoxyCode}
  can be called to check that the halo lookup schemes for each mesh are set up correctly.
 
 Details about the mesh distribution can be generated by calling 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::doc\_mesh\_distribution(DocInfo\& doc\_info)}
+
 \end{DoxyCode}
  which outputs the elements, nodes, halo(ed) elements, halo(ed) nodes, mesh, boundary elements and boundary nodes on each processor. This routine is automatically called when {\ttfamily Problem\+::distribute()} is called with a {\ttfamily Doc\+Info} object whose {\ttfamily Doc\+\_\+flag} is set to true (the default behaviour).
 
 \DoxyHorRuler{0}
 \hypertarget{index_parallel_debug}{}\doxysubsection{Debugging parallel code}\label{index_parallel_debug}
-Parallel code can obviously fail in many more ways than a code that runs on a single processor. Here is a procedure that allows basic parallel debugging without requiring access to expensive commercial tools such as totalview, say. (The instructions below assume that you use \href{http://www.lam-mpi.org/}{\texttt{ L\+AM}} as your M\+PI installation; they can probably be modified to work with other versions of M\+PI, too).
+Parallel code can obviously fail in many more ways than a code that runs on a single processor. Here is a procedure that allows basic parallel debugging without requiring access to expensive commercial tools such as totalview, say. (The instructions below assume that you use \href{http://www.lam-mpi.org/}{\texttt{ LAM}} as your MPI installation; they can probably be modified to work with other versions of MPI, too).
 
 Let\textquotesingle{}s assume you use \href{http://www.gnu.org/software/gdb/}{\texttt{ gdb}} as your debugger. To debug a serial code with \href{http://www.gnu.org/software/gdb/}{\texttt{ gdb}} you would load the executable {\ttfamily a.\+out} into the debugger using the command 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{gdb ./a.out}
+
 \end{DoxyCode}
  on the command line. Once inside \href{http://www.gnu.org/software/gdb/}{\texttt{ gdb}}, you run the code by typing \char`\"{}run\char`\"{}. If the code crashes, typing \char`\"{}where\char`\"{} will tell you in which line of the code the crash occurred, and it will also provide a traceback of the function calls that got you to this point.
 
@@ -379,14 +398,16 @@ To do this in parallel, we have to run each (parallel) instance of the code with
 \item A shell script {\ttfamily mpidbg} that must be executable, which contains\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{mpirun \$1 \$2 -\/x DISPLAY rungdb.sh -\/x cmds.gdb}
+
 \end{DoxyCode}
 
 \item The executable file {\ttfamily rungdb.\+sh} must be in the same directory as {\ttfamily mpidbg} and contain the following 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{echo \textcolor{stringliteral}{"Running GDB on node `hostname`"}}
+\DoxyCodeLine{echo \textcolor{stringliteral}{"{}Running GDB on node `hostname`"{}}}
 \DoxyCodeLine{echo \$DISPLAY}
 \DoxyCodeLine{xterm -\/geometry 200x40 -\/e gdb \$*}
 \DoxyCodeLine{exit 0}
+
 \end{DoxyCode}
 
 \item Finally the {\ttfamily cmds.\+gdb} file should also be in the same directory and must contain the {\ttfamily run} command (so that all processors start their \href{http://www.gnu.org/software/gdb/}{\texttt{ gdb}} session simultaneously), and may also include other commands such as {\ttfamily set} {\ttfamily args} {\ttfamily command-\/line-\/arguments}, and so on.
@@ -395,10 +416,11 @@ To do this in parallel, we have to run each (parallel) instance of the code with
 Then, to run the debugger in parallel on 3 processors for the executable {\ttfamily a.\+out}, the command would be 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{mpidbg -\/np 3 ./a.out }
+
 \end{DoxyCode}
  Once the command is issued, an {\ttfamily xterm} window will be opened for each processor, and if a crash occurs on any processor, the usual \href{http://www.gnu.org/software/gdb/}{\texttt{ gdb}} commands ({\ttfamily back}, {\ttfamily up}, {\ttfamily down}, {\ttfamily quit} and so on) may be used within any of the {\ttfamily xterm} sessions where a crash has taken place.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

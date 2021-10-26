@@ -259,7 +259,7 @@ int main(int argc, char* argv[])
   // The number of elements in this must be 2*nblock_row*nblock_col.
   unsigned dimarray[] = {7,7,7,5,7,3,5,7,5,5,5,3,3,7,3,5,3,3};
 
-  /////////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////////
   // Test 0: Concatenate the sub matrices with the sizes
   // (7,7)(7,5)(7,3)
   // (5,7)(5,5)(5,3)
@@ -290,7 +290,7 @@ int main(int argc, char* argv[])
   // No longer need the result matrix.
   result_matrix0.clear();
 
-  /////////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////////
   // Test 1: Concatenate the sub matrices with the sizes
   // (7,7)(7,5)
   // (5,7)(5,5)
@@ -326,7 +326,7 @@ int main(int argc, char* argv[])
   // No longer need the result matrix.
   result_matrix1.clear();
 
-  /////////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////////
   // Test 2: Concatenate the sub matrices with the sizes
   // (7,7)(7,5)(7,3)
   // (5,7)(5,5)(5,3)
@@ -361,7 +361,7 @@ int main(int argc, char* argv[])
   // No longer need the result matrix.
   result_matrix2.clear();
 
-  /////////////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////////////
   // Delete the sub block matrices, we only need to delete them from mat0_pt.
   nblock_row = mat0_pt.nrow();
   nblock_col = mat0_pt.ncol();

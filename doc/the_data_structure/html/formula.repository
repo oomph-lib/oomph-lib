@@ -1,441 +1,263 @@
-\_form#0:$ E $
-\_form#1:$ u $
-\_form#2:\[ u = \sum_{j} U_{J(j,E)} \psi_j(s) \mbox{\hspace{5cm} (1)} \]
-\_form#3:\[ {\bf x} = \sum_{j} {\bf X}_{J(j,E)} \psi_j(s), \mbox{\hspace{5cm} (2)} \]
-\_form#4:$ j $
-\_form#5:$ J(j,E) $
-\_form#6:$ U_J $
-\_form#7:$ {\bf X}_J $
-\_form#8:$ J $
-\_form#9:$ {\bf x} $
-\_form#10:\[ U_J = \sum_{K} U_{K} \omega_{JK} \]
-\_form#11:\[ {\bf X}_J = \sum_{K} {\bf X}_{K} \omega_{JK} \]
-\_form#12:$ K $
-\_form#13:$ \omega_{JK} $
-\_form#14:$ s_J $
-\_form#15:\[ \omega_{JK} = \psi_K(s_J) \]
-\_form#16:$ \omega_{17\ 4} = \omega_{17\ 9} \times \omega_{9 \ 4}. $
-\_form#17:$\partial D$
-\_form#18:$D$
-\_form#19:\[ {\bf r}_{_{\partial D}}(\boldmath{\xi},t), \]
-\_form#20:$ t $
-\_form#21:$ \boldmath{\xi} $
-\_form#22:$DIM({\bf r}_{_{\partial D}}) = DIM(\boldmath{\xi}) + 1$
-\_form#23:$C$
-\_form#24:$R(t)$
-\_form#25:\[ {\bf r}_{_{\partial C}} = \left( \begin{array}{c} R(t) \cos(\xi_2) \\ R(t) \sin(\xi_2) \\ \xi_1 \\ \end{array} \right). \]
-\_form#26:$ {\tt t} \ne 0; $
-\_form#27:$ R(t) $
-\_form#28:$ {\bf r}(S_0,S_1) $
-\_form#29:$ (S_0, S_1) $
-\_form#30:$ S_i \in [-1..1]^2 $
-\_form#31:$ S_1\in [-1..1]$
-\_form#32:$ {\bf r}(S_0=-1,S_1) $
-\_form#33:$(S_0,S_1)=(-1,-1)$
-\_form#34:$ S_0^{min}=-1, \ S_0^{max}=0, \ S_1^{min}=-1, \ S_1^{max}=0 $
-\_form#35:$ S_0^{min}=-1, \ S_0^{max}=-0.5, \ S_1^{min}=-0.5, \ S_1^{max}=0 $
-\_form#36:\[ \frac{\partial^2 u}{\partial x_i^2} = Pe w_i(x_k) \frac{\partial u}{\partial x_i} + f(x_j) \]
-\_form#37:$\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $
-\_form#38:\[ \frac{\partial}{\partial x_{i}}\left( Pe w_{i}(x_{k}) u - D_{ij}(x_{k})\frac{\partial u}{\partial x_{j}}\right) = f(x_{j}) \]
-\_form#39:$ \ne $
-\_form#40:\[ \tau_{i} \frac{\partial C_{i}}{\partial t} + w_{j} \frac{\partial C_{i}}{\partial x_{j}} = D_{i}\frac{\partial^2 C_{i}}{\partial x_j^2} = - R_{i}(C_{i}) + f_{i} \]
-\_form#41:$\mbox{flux}[DIM r + i] = \mbox{d}C_{r} / \mbox{d}x_i $
-\_form#42:\[ Pe \mathbf{w}\cdot(\mathbf{x}) \nabla u = \nabla \cdot \left( \nabla u \right) + f(\mathbf{x}) \]
-\_form#43:\[ -\Delta u \cdot \mathbf{n} + \alpha(r,z) u = \beta(r,z) \]
-\_form#44:$ \frac{d^{j} r(\zeta)}{dt^j} $
-\_form#45:$ Q $
-\_form#46:$ Q = (\omega a)^2 \rho/E $
-\_form#47:$ e_{ij} $
-\_form#48:$ i,j = r,z,\theta $
-\_form#49:$ x_0^* = r^*$
-\_form#50:$ x_1^* = z^* $
-\_form#51:$ \partial / \partial \theta = 0 $
-\_form#52:$ u_0^* = u_r^*(r^*,z^*,t^*) = u^*(r^*,z^*,t^*), \ u_1^* = u_z^*(r^*,z^*,t^*) = w^*(r^*,z^*,t^*)$
-\_form#53:$ u_2^* = u_\theta^*(r^*,z^*,t^*) = v^*(r^*,z^*,t^*) $
-\_form#54:$ p(r^*,z^*,t^*) $
-\_form#55:$ r^* $
-\_form#56:$ z^* $
-\_form#57:$ \theta $
-\_form#58:\[ \rho\left(\frac{\partial u^*}{\partial t^*} + {u^*}\frac{\partial u^*}{\partial r^*} - \frac{{v^*}^2}{r^*} + {w^*}\frac{\partial u^*}{\partial z^*} \right) = B_r^*\left(r^*,z^*,t^*\right)+ \rho G_r^*+ \frac{1}{r^*} \frac{\partial\left({r^*}\sigma_{rr}^*\right)}{\partial r^*} - \frac{\sigma_{\theta\theta}^*}{r^*} + \frac{\partial\sigma_{rz}^*}{\partial z^*}, \]
-\_form#59:\[ \rho\left(\frac{\partial w^*}{\partial t^*} + {u^*}\frac{\partial w^*}{\partial r^*} + {w^*}\frac{\partial w^*}{\partial z^*} \right) = B_z^*\left(r^*,z^*,t^*\right)+\rho G_z^*+ \frac{1}{r^*}\frac{\partial\left({r^*}\sigma_{zr}^*\right)}{\partial r^*} + \frac{\partial\sigma_{zz}^*}{\partial z^*}, \]
-\_form#60:\[ \rho\left(\frac{\partial v^*}{\partial t^*} + {u^*}\frac{\partial v^*}{\partial r^*} + \frac{u^* v^*}{r^*} +{w^*}\frac{\partial v^*}{\partial z^*} \right)= B_\theta^*\left(r^*,z^*,t^*\right)+ \rho G_\theta^*+ \frac{1}{r^*}\frac{\partial\left({r^*}\sigma_{\theta r}^*\right)}{\partial r^*} + \frac{\sigma_{r\theta}^*}{r^*} + \frac{\partial\sigma_{\theta z}^*}{\partial z^*}, \]
-\_form#61:\[ \frac{1}{r^*}\frac{\partial\left(r^*u^*\right)}{\partial r^*} + \frac{\partial w^*}{\partial z^*} = Q^*. \]
-\_form#62:\[ \sigma_{rr}^* = -p^* + 2\mu\frac{\partial u^*}{\partial r^*}, \qquad \sigma_{\theta\theta}^* = -p^* +2\mu\frac{u^*}{r^*}, \]
-\_form#63:\[ \sigma_{zz}^* = -p^* + 2\mu\frac{\partial w^*}{\partial z^*}, \qquad \sigma_{rz}^* = \mu\left(\frac{\partial u^*}{\partial z^*} + \frac{\partial w^*}{\partial r^*}\right), \]
-\_form#64:\[ \sigma_{\theta r}^* = \mu r^*\frac{\partial}{\partial r^*} \left(\frac{v^*}{r^*}\right), \qquad \sigma_{\theta z}^* = \mu\frac{\partial v^*}{\partial z^*}. \]
-\_form#65:$ u^* $
-\_form#66:$ w^* $
-\_form#67:$ v^* $
-\_form#68:$ \rho \ G_i^* $
-\_form#69:$ B_i^*(r^*,z^*,t^*) $
-\_form#70:$ Q^*(r^*,z^*,t^*) $
-\_form#71:$ U $
-\_form#72:$ L $
-\_form#73:$ T $
-\_form#74:$ g $
-\_form#75:\[ u^* = U\, u, \qquad w^* = U\, w, \qquad v^* = U\, v, \]
-\_form#76:\[ r^* = L\, r, \qquad z^* = L\, z, \qquad t^* = T\, t, \]
-\_form#77:\[ G_i^* = g\, G_i, \qquad B_i^* = \frac{U\mu_{ref}}{L^2}\, B_i, \qquad p^* = \frac{\mu_{ref} U}{L}\, p, \qquad Q^* = \frac{U}{L}\, Q. \]
-\_form#78:$ \mu_{ref} $
-\_form#79:$ \rho_{ref} $
-\_form#80:$ \mu $
-\_form#81:$ \rho $
-\_form#82:\[ R_{\rho} Re\left(St\frac{\partial u}{\partial t} + {u}\frac{\partial u}{\partial r} - \frac{{v}^2}{r} + {w}\frac{\partial u}{\partial z} \right) = B_r\left(r,z,t\right)+ R_\rho \frac{Re}{Fr} G_r + \frac{1}{r} \frac{\partial\left({r}\sigma_{rr}\right)}{\partial r} - \frac{\sigma_{\theta\theta}}{r} + \frac{\partial\sigma_{rz}}{\partial z}, \]
-\_form#83:\[ R_{\rho} Re\left(St\frac{\partial w}{\partial t} + {u}\frac{\partial w}{\partial r} + {w}\frac{\partial w}{\partial z} \right) = B_z\left(r,z,t\right)+ R_\rho \frac{Re}{Fr} G_z+ \frac{1}{r}\frac{\partial\left({r}\sigma_{zr}\right)}{\partial r} + \frac{\partial\sigma_{zz}}{\partial z}, \]
-\_form#84:\[ R_{\rho} Re\left(St\frac{\partial v}{\partial t} + {u}\frac{\partial v}{\partial r} + \frac{u v}{r} +{w}\frac{\partial v}{\partial z} \right)= B_\theta\left(r,z,t\right)+ R_\rho \frac{Re}{Fr} G_\theta+ \frac{1}{r}\frac{\partial\left({r}\sigma_{\theta r}\right)}{\partial r} + \frac{\sigma_{r\theta}}{r} + \frac{\partial\sigma_{\theta z}}{\partial z}, \]
-\_form#85:\[ \frac{1}{r}\frac{\partial\left(ru\right)}{\partial r} + \frac{\partial w}{\partial z} = Q. \]
-\_form#86:\[ \sigma_{rr} = -p + 2R_\mu \frac{\partial u}{\partial r}, \qquad \sigma_{\theta\theta} = -p +2R_\mu \frac{u}{r}, \]
-\_form#87:\[ \sigma_{zz} = -p + 2R_\mu \frac{\partial w}{\partial z}, \qquad \sigma_{rz} = R_\mu \left(\frac{\partial u}{\partial z} + \frac{\partial w}{\partial r}\right), \]
-\_form#88:\[ \sigma_{\theta r} = R_\mu r \frac{\partial}{\partial r}\left(\frac{v}{r}\right), \qquad \sigma_{\theta z} = R_\mu \frac{\partial v}{\partial z}. \]
-\_form#89:\[ Re = \frac{UL\rho_{ref}}{\mu_{ref}}, \qquad St = \frac{L}{UT}, \qquad Fr = \frac{U^2}{gL}, \]
-\_form#90:$ R_\rho=\rho/\rho_{ref} $
-\_form#91:$ R_\mu(T) =\mu(T)/\mu_{ref}$
-\_form#92:$ R_\rho = R_\mu = 1 $
-\_form#93:\[ \int_0^{L} \left[ (\sigma_0 + \gamma) \ \delta \gamma + \frac{1}{12} \left(\frac{h}{R_0}\right)^2 \kappa \ \delta \kappa - \left( \left(\frac{R_0}{h}\right) {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot \delta {\bf R}_w \right] \ d\xi = 0, \]
-\_form#94:$ R_0 $
-\_form#95:$\gamma$
-\_form#96:$\kappa$
-\_form#97:$T$
-\_form#98:\[ \Lambda = \frac{a}{T} \sqrt{\frac{\rho}{E_{eff}}}, \]
-\_form#99:$ \Lambda^2 $
-\_form#100:$ \Lambda=0$
-\_form#101:$ {\bf f} $
-\_form#102:$ E_{eff}=E/(1-\nu^2)$
-\_form#103:$E$
-\_form#104:$ \sigma_0 $
-\_form#105:$ h/R_0$
-\_form#106:$ \Lambda^2$
-\_form#107:$ f $
-\_form#108:\[ \int_0^{L} \left( \frac{\partial^i {\bf R}_{IC}}{\partial t^i} - {\bf R}_w \right) \psi_{jk} \ d\xi = 0, \]
-\_form#109:$ \partial^i {\bf R}_{IC}/\partial t^i$
-\_form#110:$ \zeta $
-\_form#111:$ \xi $
-\_form#112:$ {\bf f}(t,{\bf x}) $
-\_form#113:$ \sigma^{ij}$
-\_form#114:$ d, $
-\_form#115:$ \kappa$
-\_form#116:$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $
-\_form#117:$ p $
-\_form#118:$ p / \kappa - d =0 $
-\_form#119:$ \overline{ \sigma^{ij}}$
-\_form#120:$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $
-\_form#121:$ \det G_{ij} - \det g_{ij} = 0 $
-\_form#122:\[ W = C_1 (I_0 - 3) + C_2 (I_1 - 3) \]
-\_form#123:$ I_2 \equiv 1$
-\_form#124:$ \sigma^{ij} $
-\_form#125:$ \gamma^{ij} $
-\_form#126:\[ \sigma^{ij} = \sigma^{ij}(\gamma_{ij}). \]
-\_form#127:\[ \gamma_{ij} = \frac{1}{2} (G_{ij} - g_{ij}), \ \ \ \ \ \ \ \ \ \ \ (1) \]
-\_form#128:$G_{ij} $
-\_form#129:$ g_{ij}$
-\_form#130:\[ \sigma^{ij} = \sigma^{ij}(\gamma_{ij}) = \sigma^{ij}\bigg( \frac{1}{2} (G_{ij} - g_{ij})\bigg), \]
-\_form#131:\[ \det G_{ij} - \det g_{ij}= 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) \]
-\_form#132:\[ \sigma^{ij} = -p G^{ij} + \overline{\sigma}^{ij}\big(\gamma_{kl}\big), \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) \]
-\_form#133:$ \overline{\sigma}^{ij}, $
-\_form#134:$ \overline{\sigma}^{ij} $
-\_form#135:$ G^{ij} $
-\_form#136:$ \det G_{ij}, $
-\_form#137:\[ p = - \kappa \ d \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) \]
-\_form#138:$ \kappa $
-\_form#139:$ d $
-\_form#140:$ \kappa \to \infty$
-\_form#141:\[ p \ \frac{1}{\kappa} + d\big(g_{ij},G_{ij}\big) = 0 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \]
-\_form#142:\[ \sigma^{ij} = E^{ijkl} \gamma_{kl} \]
-\_form#143:\[ E^{ijkl} = \frac{E}{(1+\nu)} \left( \frac{\nu}{(1-2\nu)} G^{ij} G^{kl} + \frac{1}{2} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \right) \]
-\_form#144:$ (| G_{ij} - g_{ij} | \ll 1)$
-\_form#145:$ G^{ij}$
-\_form#146:$ g^{ij}$
-\_form#147:$ \nu \ne 1/2 $
-\_form#148:$ 1/2 $
-\_form#149:$ \nu = 1/2 $
-\_form#150:$ E^{ijkl} $
-\_form#151:\[ \sigma^{ij} = -p G^{ij} + \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl} \]
-\_form#152:\[ \overline{\sigma}^{ij} = \frac{E}{3} \left( G^{ik} G^{jl} + G^{il} G^{jk} \right) \gamma_{kl}. \]
-\_form#153:$ {\tt detG} = \det G_{ij} $
-\_form#154:$ \nu \approx 1/2 $
-\_form#155:\[ \kappa = \frac{E\nu}{(1+\nu)(1-2\nu)} \]
-\_form#156:\[ d = \frac{1}{2} G^{ij} (G_{ij}-g_{ij}). \]
-\_form#157:\[ \frac{\partial u_{i}}{\partial t} + \frac{\partial}{\partial x_{j}} \left(F_{ij}(u_{k})\right), \]
-\_form#158:$ F_{ij} $
-\_form#159:\[ \nabla^4 w - \eta \frac{\partial}{\partial x_{\beta}} \left( \sigma^{\alpha \beta} \frac{\partial w}{\partial x_{\alpha}} \right) = p(x,y) \]
-\_form#160:\[ \frac{\sigma^{\alpha \beta}}{\partial x_{\beta}} = \tau_\alpha \]
-\_form#161:\[ \nabla^4 w - \eta Diamond^4(w,\phi) = p(x,y) \]
-\_form#162:\[ \nabla^4 \phi + \frac{1}{2} Diamond^4(w,w) = 0 \]
-\_form#163:\[ \nabla^2 U + k^2 U = f \]
-\_form#164:\[ U(r,\varphi,z) = \Re( u^{(n)}(r,z) \exp(-i n \varphi)) \]
-\_form#165:$ u^{(n)}(r,z)$
-\_form#166:$ k^2 $
-\_form#167:$ n $
-\_form#168:$ { Re \left( St \frac{\partial u_i}{\partial t} + (u_j - u_j^{M}) \frac{\partial u_i}{\partial x_j} \right) = - \frac{\partial p}{\partial x_i} - R_\rho B_i(x_j) - \frac{Re}{Fr} G_i + \frac{\partial }{\partial x_j} \left[ R_\mu \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right) \right] } $
-\_form#169:$ { \frac{\partial u_i}{\partial x_i} = Q } $
-\_form#170:$\lambda$
-\_form#171:$R(u,\lambda) = 0 $
-\_form#172:$ 2N+1 $
-\_form#173:\[ R(u,\lambda) = 0, \]
-\_form#174:\[ Jy = 0, \]
-\_form#175:\[\phi\cdot y = 1. \]
-\_form#176:$ dR/du $
-\_form#177:$ \phi $
-\_form#178:$ y $
-\_form#179:$ \lambda $
-\_form#180:$R(u,\lambda) = 0$
-\_form#181:$u$
-\_form#182:$2N+2$
-\_form#183:\[ R(u,\lambda) + \sigma \psi = 0,\]
-\_form#184:\[ Jy = 0,\]
-\_form#185:\[ \langle u, \phi \rangle = 0, \]
-\_form#186:\[ \phi \cdot y = 1.\]
-\_form#187:$J$
-\_form#188:$dR/du$
-\_form#189:$\phi$
-\_form#190:$y$
-\_form#191:$\sigma $
-\_form#192:$ \langle u, \phi \rangle = 0 $
-\_form#193:$ \sigma $
-\_form#194:$ R(u,\lambda) = 0 $
-\_form#195:$ 3N+2 $
-\_form#196:\[ J\phi + \omega M \psi = 0, \]
-\_form#197:\[ J\psi - \omega M \phi = 0, \]
-\_form#198:\[ c \cdot \phi = 1. \]
-\_form#199:\[ c \cdot \psi = 0. \]
-\_form#200:$ M $
-\_form#201:$ \phi + i\psi $
-\_form#202:$ J - i\omega M $
-\_form#203:$ \omega $
-\_form#204:$ c $
-\_form#205:$ {\bf s} \in [-1,1] $
-\_form#206:$ x_1 $
-\_form#207:$ \in [-1,1]^2 $
-\_form#208:$ Ax = \lambda Mx $
-\_form#209:$ X_{pq} $
-\_form#210:$ x_i $
-\_form#211:$ \psi_j $
-\_form#212:\[ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right). \]
-\_form#213:$ \frac{\partial}{\partial X_{pq}} \left( \frac{\partial \psi_j}{\partial x_i} \right) $
-\_form#214:$ d^2 \psi_j / d s^2 $
-\_form#215:$ \partial^2 \psi_j / \partial s_0^2 $
-\_form#216:$ \partial^2 \psi_j / \partial s_1^2 $
-\_form#217:$ \partial^2 \psi_j / \partial s_0 \partial s_1 $
-\_form#218:$ \partial^2 \psi_j / \partial s_2^2 $
-\_form#219:$ \partial^2 \psi_j / \partial s_0 \partial s_2 $
-\_form#220:$ \partial^2 \psi_j / \partial s_1 \partial s_2 $
-\_form#221:$ d^2 \psi_j / d x^2 $
-\_form#222:$ \partial^2 \psi_j / \partial x_0^2 $
-\_form#223:$ \partial^2 \psi_j / \partial x_1^2 $
-\_form#224:$ \partial^2 \psi_j / \partial x_0 \partial x_1 $
-\_form#225:$ \partial^2 \psi_j / \partial x_2^2 $
-\_form#226:$ \partial^2 \psi_j / \partial x_0 \partial x_2 $
-\_form#227:$ \partial^2 \psi_j / \partial x_1 \partial x_2 $
-\_form#228:$ -1 $
-\_form#229:$ d^2 \psi_j / d \xi^2 $
-\_form#230:$ \partial^2 \psi_j / \partial \xi_0^2 $
-\_form#231:$ \partial^2 \psi_j / \partial \xi_1^2 $
-\_form#232:$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1 $
-\_form#233:$ \partial^2 \psi_j / \partial \xi_2^2 $
-\_form#234:$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 $
-\_form#235:$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 $
-\_form#236:$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 $
-\_form#237:\[ 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D} \right) \psi_{lm}(\xi_n) \ dv \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$} \]
-\_form#238:$ N $
-\_form#239:$ {\bf R}^{(IC)},$
-\_form#240:$ D $
-\_form#241:$ {\bf f}({\bf x}) $
-\_form#242:$ \mbox{\tt fct}({\bf x}, {\bf f}) $
-\_form#243:$ \mbox{\tt fct}(t, {\bf x}, {\bf f}) $
-\_form#244:$ d^2 \psi_j / ds^2 $
-\_form#245:$ \frac{d^{t} dr(zeta)}{d t^{t}} $
-\_form#246:$ d^2 \psi_j / d^2 \xi^2 $
-\_form#247:$ \partial^2 \psi_j/\partial^2 \xi_0^2 $
-\_form#248:$ \partial^2 \psi_j/\partial^2 \xi_1^2 $
-\_form#249:$ \partial^2 \psi_j / \partial^2 \xi_0^2 $
-\_form#250:$ \partial^2 \psi_j / \partial^2 \xi_1^2 $
-\_form#251:$ \partial^2 \psi_j / \partial^2 \xi_2^2 $
-\_form#252:$ \partial^2 u/\partial x_i^2 = 0 $
-\_form#253:\[ u^{[FE]}(x_k) = \sum_{j=1}^{N} U_j \ \psi_j(x_k), \]
-\_form#254:$ \psi_j(x_k) $
-\_form#255:$ C^0 $
-\_form#256:$ f_i = \partial u/\partial x_i $
-\_form#257:\[ f_i^{[FE]} = \sum_{j=1}^{N} U_j \ \frac{\partial \psi_j}{\partial x_i} \]
-\_form#258:$N_{flux}$
-\_form#259:$N_{flux}=2 \ (3).$
-\_form#260:$ f_i^{[FE]} $
-\_form#261:$ f_i^{[rec]} $
-\_form#262:$p$
-\_form#263:\[ f^{[rec](p)}_i(x_k) = \sum_{j=1}^{N_{rec}} F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \mbox{ \ \ \ for $i=1,...,N_{flux}$,} \]
-\_form#264:$ \psi^{[rec]}_j(x_k)$
-\_form#265:$ f^{(p)}_i(x_0,x_1) $
-\_form#266:$N_{rec}=3$
-\_form#267:$ \psi^{[rec]}_0(x_0,x_1)=1, \ \psi^{[rec]}_1(x_0,x_1)=x_0 $
-\_form#268:$ \psi^{[rec]}_2(x_0,x_1)=x_1$
-\_form#269:$ F^{(p)}_{ij} $
-\_form#270:$ f^{(p)}_i(x_k) = f^{[FE]}_i(x_k)$
-\_form#271:\[ \int_{\mbox{Patch $p$}} \left( f^{[FE]}_i(x_k) - \sum_{j=1}^{N_{rec}} F^{(p)}_{ij} \ \psi^{[rec]}_j(x_k) \right) \psi^{[rec]}_l(x_k)\ dv = 0 \mbox{ \ \ \ \ for $l=1,...,N_{rec}$ and $i=1,...,N_{flux}$}. \]
-\_form#272:$ k $
-\_form#273:$ {\cal F}^{(p)}_{ik}$
-\_form#274:\[ {\cal F}_{ij} = \frac{1}{N_p(j)} \sum_{\mbox{Node $j \in $ patch $p$}} {\cal F}^{(p)}_{ij}, \]
-\_form#275:$N_p(j)$
-\_form#276:$ j$
-\_form#277:\[ f_i^{[rec]} = \sum_{j=1}^{N} {\cal F}_{ij}\ \psi_j, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1) \]
-\_form#278:$ N_e$
-\_form#279:\[ E_{e} = \sqrt{ \frac{ \int_{\mbox{$e$}} \left( f_i^{[rec]} - f_i^{[FE]} \right)^2 dv} {\sum_{e'=1}^{N_e} \int_{\mbox{$e'$}} \left( f_i^{[rec]} \right)^2 dv} } \mbox{\ \ \ for $e=1,...,N_e$.} \]
-\_form#280:$ Q. $
-\_form#281:$ \mu U / L$
-\_form#282:\[ Q=\frac{\mu U}{LE} \]
-\_form#283:$ Q = 1 $
-\_form#284:$ Q = \mu U/(LE) $
-\_form#285:\[ x = \zeta \]
-\_form#286:\[ y = H \]
-\_form#287:\[ x = A \cos(\zeta) \]
-\_form#288:\[ y = B \sin(\zeta) \]
-\_form#289:\[ x = X_c + R \cos(\zeta) \]
-\_form#290:\[ y = Y_c + R \sin(\zeta) \]
-\_form#291:\[ {\bf r} = ( a \cos(\zeta_1), b \sin(zeta_1), \zeta_0)^T \]
-\_form#292:$ \frac{dR_i}{d \zeta_\alpha}$
-\_form#293:$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$
-\_form#294:$\Gamma$
-\_form#295:\[ \int_\Gamma (u_{\mbox{S}} - u_{\mbox{M}}) \psi \mbox{d} s = 0 \]
-\_form#296:$\psi$
-\_form#297:\[ (u_{\mbox{S}} - u_{\mbox{M}})\big\vert_{\partial\Gamma} = 0.\]
-\_form#298:$ \psi $
-\_form#299:$ M\xi^s = P\hat{\xi^m} $
-\_form#300:$ \xi^m $
-\_form#301:$ \xi^s $
-\_form#302:$ C = M^{-1}P $
-\_form#303:\[ \int f(x_0,x_1...)\ dx_0 \ dx_1... = \sum_{i_{int}=0}^{\mbox{\tt nweight()} } f( x_j=\mbox{\tt knot($i_{int}$,j)} ) \ \ \ \mbox{\tt weight($i_{int}$)} \]
-\_form#304:$ \cos(\theta) $
-\_form#305:\[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \]
-\_form#306:$ r=\sqrt{pow(dx,2)+pow(dy,2)} $
-\_form#307:\[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \]
-\_form#308:\[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \]
-\_form#309:\[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \]
-\_form#310:$ {\bf S} $
-\_form#311:$ {\bf r} ({\bf S}) $
-\_form#312:$ {\bf r} (t,{\bf S}) $
-\_form#313:\[ {\bf f}_{i} (t,{\bf S}) \]
-\_form#314:$ i $
-\_form#315:$ {\bf S} \in [-1,1]^1 $
-\_form#316:$ {\bf S} \in [-1,1]^2 $
-\_form#317:$ i \in \{ 1,...,n \} $
-\_form#318:$ R_i = \sum_{i\neq j} |a_{ij}| $
-\_form#319:$ D(a_{ii},R_i) $
-\_form#320:$ a_{ii} $
-\_form#321:$ R_i $
-\_form#322:$ |D(a_{ii},R_i)|_{max} $
-\_form#323:$ R_i = \sum_{i\neq j}|a_{ij}| $
-\_form#324:\[ {\bf U}_J = \sum_{K} {\bf U}_{K} \omega_{JK} \]
-\_form#325:$ {\bf U}_I $
-\_form#326:$ I $
-\_form#327:\[ x_i = \sum_{j=1}^{N_{node}} X_{ij} \psi_{j}(s_k) \]
-\_form#328:$ X_{ij}\ (i=1..DIM) $
-\_form#329:\[ x_i(t) = \sum_{j=1}^{N_{node}} X_{ij}(t) \ \psi_{j}(s_k). \]
-\_form#330:\[ x_{ti} = \sum_{j=1}^{N_{node}} X_{ijt} \ \psi_{j}(s_k). \]
-\_form#331:$ X_{ijt} \ (i=1..DIM) $
-\_form#332:\[ x_i = \sum_{j=1}^{N_{node}} \sum_{k=1}^{N_{type}} X_{ijk} \psi_{jk}(s_k) \]
-\_form#333:$ N_{type} $
-\_form#334:$ N_{type}=2 $
-\_form#335:$ X_{ijk} \ (i=1..DIM, \ k=1..N_{type}) $
-\_form#336:$ \sum_{i=-1}{nval-1} Node::is_hanging(i) 2^{i+1} $
-\_form#337:$ {\bf s} \in [-1,1]^3 $
-\_form#338:$ (n+1) P_{n+1} = (2n+1)xP_{n} - nP_{n-1} $
-\_form#339:$ nP_{n+1}^{'} = (2n+1)xP_{n}^{'} - (n+1)P_{n-1}^{'} $
-\_form#340:$d\tilde x / d x$
-\_form#341:$\nu$
-\_form#342:$\nu = x - h$
-\_form#343:$\gamma=1 + (1/k)(i/|outer_boundary - x|)$
-\_form#344:$\gamma=1 + (i/k)(1/|outer_boundary - x|-1/|pml width|)$
-\_form#345:\[ {\bf J} {\bf x} = - \bf{r} \]
-\_form#346:$ Jx = \lambda M x$
-\_form#347:\[ x = R_0 \cos(\zeta) + \epsilon \left( \cos(N \zeta) \cos(\zeta) - A \sin(N \zeta) \sin(\zeta) \right) sin(2 \pi t/T) \]
-\_form#348:\[ y = R_0 \sin(\zeta) + \epsilon \left( \cos(N \zeta) \sin(\zeta) + A \sin(N \zeta) \cos(\zeta) \right) sin(2 \pi t/T) \]
-\_form#349:\[ p_{ref} = R_0 - 1.0 \]
-\_form#350:$ \partial ^2 \psi_j / \partial s_0^2 $
-\_form#351:$ \partial ^2 \psi_j / \partial s_1^2 $
-\_form#352:$ \partial ^2 \psi_j / \partial s_0 \partial s_1 $
-\_form#353:$ \partial ^2 \psi_j / \partial s_2^2 $
-\_form#354:$ \partial ^2 \psi_j / \partial s_0 \partial s_2 $
-\_form#355:$ \partial ^2 \psi_j / \partial s_1 \partial s_2 $
-\_form#356:$ {\bf s} \in [-1,1]^2 $
-\_form#357:$ \alpha AB + \beta mv $
-\_form#358:$\alpha A + \beta B$
-\_form#359:$ \alpha A^Hmv $
-\_form#360:$b[i] = A[i]^Hmv[i]$
-\_form#361:$||mv_i||_2$
-\_form#362:\[ \frac{\partial^2 u}{\partial x_i^2} + k^2 u = f(x_j) \]
-\_form#363:\[\begin{array}{cc} 0 & E_{1111} \\ 1 & E_{1112} \\ 2 & E_{1122} \\ 3 & E_{1212} \\ 4 & E_{1222} \\ 5 & E_{2222} \\ 6 & E_{1113} \\ 7 & E_{1123} \\ 8 & E_{1133} \\ 9 & E_{1213} \\ 10 & E_{1223} \\ 11 & E_{1233} \\ 12 & E_{1313} \\ 13 & E_{1322} \\ 14 & E_{1323} \\ 15 & E_{1333} \\ 16 & E_{2223} \\ 17 & E_{2233} \\ 18 & E_{2323} \\ 19 & E_{2333} \\ 20 & E_{3333} \end{array}\]
-\_form#364:$E_{ijkl}$
-\_form#365:\[\tau_{ij} = E_{ijkl} e_{kl},\]
-\_form#366:$e_{ij}$
-\_form#367:$\tau_{ij}$
-\_form#368:\[E_{ijkl} = E_{jikl} = E_{ijlk} = E_{klij}\]
-\_form#369:\[ \frac{\partial^2 u}{\partial x_i^2}= \frac{\partial^2 u}{\partial t^2}+f(t,x_j) \]
-\_form#370:$ \pi/4 $
-\_form#371:$ \cos(k \theta) = \sin(k \theta) = 1/\sqrt{2} $
-\_form#372:$ {\bf r}({\bf zeta}) $
-\_form#373:$ \zeta \in [-1,1] $
-\_form#374:$ s \in [-1,1] $
-\_form#375:$ \in [-1,1] $
-\_form#376:$\in [-1,1] $
-\_form#377:$-\pi$
-\_form#378:$\pi$
-\_form#379:$\xi_1 = 1$
-\_form#380:\[ x \in [Xmin,Xmax] \]
-\_form#381:$x=Xmin$
-\_form#382:$x=Xmax$
-\_form#383:$s \in [-1,1] $
-\_form#384:$ s \in [-1,1]*[-1,1] $
-\_form#385:$s \in [-1,1]*[-1,1] $
-\_form#386:$ \in [-1,1]x[-1,1] $
-\_form#387:$ \xi_0 = \xi_0^{lo} $
-\_form#388:$ \xi_0 = \xi_0^{hi} $
-\_form#389:$\zeta \in [0,2\pi]$
-\_form#390:$\xi_2 = 1$
-\_form#391:$\xi_0 = \xi_0^{hi}$
-\_form#392:\[ \left( \begin{array}{cc} {\bf F} & {\bf G} \\ {\bf D} & {\bf 0} \end{array} \right) \left( \begin{array}{c} {\bf z}_u \\ {\bf z}_p \end{array} \right) = \left( \begin{array}{c} {\bf r}_u \\ {\bf r}_p \end{array} \right) \]
-\_form#393:$ {\bf F}$
-\_form#394:$ {\bf G} $
-\_form#395:$ {\bf D}$
-\_form#396:$ {\bf D} = {\bf G}^T $
-\_form#397:$ {\bf B} $
-\_form#398:\[ \left( \begin{array}{cc} {\bf F} & {\bf G} \\ {\bf 0} & -{\bf M}_s \end{array} \right) \left( \begin{array}{c} {\bf z}_u \\ {\bf z}_p \end{array} \right) = \left( \begin{array}{c} {\bf r}_u \\ {\bf r}_p \end{array} \right), \]
-\_form#399:${\bf M}_s$
-\_form#400:$ {\bf S} = {\bf D} {\bf F}^{-1}{\bf G}. $
-\_form#401:$ {\bf z}_p$
-\_form#402:\[ {\bf z}_p = - {\bf M}_s^{-1} {\bf r}_p \]
-\_form#403:$ {\bf z}_p $
-\_form#404:$ {\bf z}_u$
-\_form#405:\[ {\bf z}_u = {\bf F}^{-1} \big( {\bf r}_u - {\bf G} {\bf z}_p \big) \]
-\_form#406:\[ {\bf z}_p = - \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1} \big({\bf D} \widehat{\bf Q}^{-1}{\bf F} \widehat{\bf Q}^{-1}{\bf G}\big) \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big)^{-1} {\bf r}_p, \]
-\_form#407:$ \widehat{\bf Q} $
-\_form#408:\[ {\bf P} = \big({\bf D} \widehat{\bf Q}^{-1}{\bf G} \big) \]
-\_form#409:\[ {\bf E}={\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G} \]
-\_form#410:$d\tilde x $
-\_form#411:$\gamma = 1 + \frac i {k\delta_{pml}}(1/|1-\bar\nu|)$
-\_form#412:$\tilde x = h + \nu + \log(1-|\nu / \delta|)$
-\_form#413:$ \sin(\theta) $
-\_form#414:\[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \cr -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \]
-\_form#415:$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} $
-\_form#416:\[ \cos\theta&=\dfrac{dx}{\sqrt{|dx|^2+|dy|^2}}, \]
-\_form#417:\[ \sin\theta&=\dfrac{dy}{\sqrt{|dx|^2+|dy|^2}}. \]
-\_form#418:\[ \begin{bmatrix} dx \\ dy \end{bmatrix} \leftarrow \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix}. \]
-\_form#419:\[ \begin{bmatrix} \overline{\cos\theta} & \overline{\sin\theta} \\ -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \\ dy \end{bmatrix} = \begin{bmatrix} r \\ 0 \end{bmatrix}, \]
-\_form#420:$\tilde x $
-\_form#421:\[ \frac{\partial^2 u}{\partial x_i^2} = f(x_j) \]
-\_form#422:$\mbox{\boldmath$X$}$
-\_form#423:\[ Re St^{2} M \frac{\mbox{d}^{2} \mbox{\boldmath$X$}}{\mbox{d} t^{2}} = \mbox{\boldmath$F$} + \oint \mbox{\boldmath$t$} \mbox{d} s \quad\mbox{and}\quad Re St^{2} I \frac{\mbox{d}^{2}\Phi}{\mbox{d} t^{2}} = \mbox{\boldmath$T$} + \oint \mbox{\boldmath$q$} \mbox{d} s, \]
-\_form#424:$\mbox{\boldmath$F$} = \mbox{\boldmath$F$}^{*}/\mu U$
-\_form#425:$\mbox{\boldmath$t$}$
-\_form#426:$\mbox{\boldmath$T$} = \mbox{\boldmath$T$}^{*}/(\mu UL)$
-\_form#427:$\mbox{\boldmath$q$}$
-\_form#428:$M$
-\_form#429:$I$
-\_form#430:$Re$
-\_form#431:$St$
-\_form#432:$ { Re \left( St \frac{\partial u_i}{\partial t}+ (u_j-u_j^{M}) \frac{\partial u_i}{\partial x_j} \right)= -\frac{\partial p}{\partial x_i} -R_\rho B_i(x_j) - \frac{Re}{Fr} G_i + \frac{\partial }{\partial x_j} \left[ R_\mu \left( \frac{\partial u_i}{\partial x_j}+ \frac{\partial u_j}{\partial x_i} \right) \right] } $
-\_form#433:$ { \frac{\partial u_i}{\partial x_i}=Q } $
-\_form#434:\[ \frac{\partial^2 u}{\partial x_i^2}=\frac{\partial u}{\partial t}+f(t,x_j) \]
-\_form#435:\[ \Delta u \cdot \mathbf{n} + \alpha (\mathbf{x}) = \beta (\mathbf{x}) \]
-\_form#436:\[ \mbox{flux}[i] = \nabla u = \mbox{d}u / \mbox{d} r + 1/r \mbox{d}u / \mbox{d} \theta \]
-\_form#437:$ \mbox{flux}[i] = \nabla u = \mbox{d}u / \mbox{d}x_i $
-\_form#438:\[ Re St \frac{\partial u}{\partial t} = - g + \frac{\partial^2 u}{\partial x_i^2} \]
-\_form#439:\[ div (\frac{1}{W} \nabla u) = \kappa \]
-\_form#440:\[ W^2=1+\|\nabla u\|^2 \]
+\_form#0=10x9:$ E $
+\_form#1=9x6:$ u $
+\_form#2=308x29:\[ u = \sum_{j} U_{J(j,E)} \psi_j(s) \mbox{\hspace{5cm} (1)} \]
+\_form#3=316x29:\[ {\bf x} = \sum_{j} {\bf X}_{J(j,E)} \psi_j(s), \mbox{\hspace{5cm} (2)} \]
+\_form#4=6x11:$ j $
+\_form#5=38x14:$ J(j,E) $
+\_form#6=15x13:$ U_J $
+\_form#7=19x13:$ {\bf X}_J $
+\_form#8=8x10:$ J $
+\_form#9=9x6:$ {\bf x} $
+\_form#10=94x28:\[ U_J = \sum_{K} U_{K} \omega_{JK} \]
+\_form#11=99x28:\[ {\bf X}_J = \sum_{K} {\bf X}_{K} \omega_{JK} \]
+\_form#12=11x10:$ K $
+\_form#13=24x9:$ \omega_{JK} $
+\_form#14=13x9:$ s_J $
+\_form#15=80x14:\[ \omega_{JK} = \psi_K(s_J) \]
+\_form#16=113x10:$ \omega_{17\ 4} = \omega_{17\ 9} \times \omega_{9 \ 4}. $
+\_form#17=18x10:$\partial D$
+\_form#18=10x10:$D$
+\_form#19=49x14:\[ {\bf r}_{_{\partial D}}(\boldmath{\xi},t), \]
+\_form#20=5x9:$ t $
+\_form#21=8x13:$ \boldmath{\xi} $
+\_form#22=143x14:$DIM({\bf r}_{_{\partial D}}) = DIM(\boldmath{\xi}) + 1$
+\_form#23=10x10:$C$
+\_form#24=23x14:$R(t)$
+\_form#25=139x46:\[ {\bf r}_{_{\partial C}} = \left( \begin{array}{c} R(t) \cos(\xi_2) \\ R(t) \sin(\xi_2) \\ \xi_1 \\ \end{array} \right). \]
+\_form#26=34x13:$ {\tt t} \ne 0; $
+\_form#27=23x14:$ R(t) $
+\_form#28=48x14:$ {\bf r}(S_0,S_1) $
+\_form#29=41x14:$ (S_0, S_1) $
+\_form#30=68x15:$ S_i \in [-1..1]^2 $
+\_form#31=64x14:$ S_1\in [-1..1]$
+\_form#32=80x14:$ {\bf r}(S_0=-1,S_1) $
+\_form#33=105x14:$(S_0,S_1)=(-1,-1)$
+\_form#34=253x15:$ S_0^{min}=-1, \ S_0^{max}=0, \ S_1^{min}=-1, \ S_1^{max}=0 $
+\_form#35=281x15:$ S_0^{min}=-1, \ S_0^{max}=-0.5, \ S_1^{min}=-0.5, \ S_1^{max}=0 $
+\_form#36=9x13:$ \ne $
+\_form#37=146x14:$\mbox{flux}[DIM r + i] = \mbox{d}C_{r} / \mbox{d}x_i $
+\_form#38=88x14:$\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $
+\_form#39=30x20:$ \frac{d^{j} r(\zeta)}{dt^j} $
+\_form#40=10x13:$ Q $
+\_form#41=79x15:$ Q = (\omega a)^2 \rho/E $
+\_form#42=14x10:$ e_{ij} $
+\_form#43=63x13:$ i,j = r,z,\theta $
+\_form#44=41x14:$ x_0^* = r^*$
+\_form#45=41x14:$ x_1^* = z^* $
+\_form#46=50x14:$ \partial / \partial \theta = 0 $
+\_form#47=14x13:$ R_0 $
+\_form#48=9x9:$\gamma$
+\_form#49=8x6:$\kappa$
+\_form#50=10x9:$T$
+\_form#51=15x11:$ \Lambda^2 $
+\_form#52=33x10:$ \Lambda=0$
+\_form#53=8x10:$ {\bf f} $
+\_form#54=101x15:$ E_{eff}=E/(1-\nu^2)$
+\_form#55=10x9:$E$
+\_form#56=11x9:$ \sigma_0 $
+\_form#57=28x14:$ h/R_0$
+\_form#58=15x11:$ \Lambda^2$
+\_form#59=8x13:$ f $
+\_form#60=58x15:$ \partial^i {\bf R}_{IC}/\partial t^i$
+\_form#61=6x13:$ \zeta $
+\_form#62=8x13:$ \xi $
+\_form#63=15x11:$ \sigma^{ij}$
+\_form#64=9x13:$ d, $
+\_form#65=8x6:$ \kappa$
+\_form#66=99x15:$ \sigma^{ij} = -p G^{ij} + \overline{ \sigma^{ij}} $
+\_form#67=8x9:$ p $
+\_form#68=65x14:$ p / \kappa - d =0 $
+\_form#69=18x13:$ \overline{ \sigma^{ij}}$
+\_form#70=99x15:$ \sigma^{ij} = - p G^{ij} +\overline{ \sigma^{ij}} $
+\_form#71=111x14:$ \det G_{ij} - \det g_{ij} = 0 $
+\_form#72=15x11:$ \sigma^{ij} $
+\_form#73=16x14:$ \gamma^{ij} $
+\_form#74=75x15:\[ \sigma^{ij} = E^{ijkl} \gamma_{kl} \]
+\_form#75=15x13:$ F_{ij} $
+\_form#76=45x19:$ { \frac{\partial u_i}{\partial x_i} = Q } $
+\_form#77=8x10:$\lambda$
+\_form#78=61x14:$R(u,\lambda) = 0 $
+\_form#79=39x11:$ 2N+1 $
+\_form#80=66x14:\[ R(u,\lambda) = 0, \]
+\_form#81=41x13:\[ Jy = 0, \]
+\_form#82=49x13:\[\phi\cdot y = 1. \]
+\_form#83=36x14:$ dR/du $
+\_form#84=8x13:$ \phi $
+\_form#85=8x9:$ y $
+\_form#86=8x10:$ \lambda $
+\_form#87=61x14:$R(u,\lambda) = 0$
+\_form#88=9x6:$u$
+\_form#89=39x11:$2N+2$
+\_form#90=96x14:\[ R(u,\lambda) + \sigma \psi = 0,\]
+\_form#91=41x13:\[ Jy = 0,\]
+\_form#92=55x14:\[ \langle u, \phi \rangle = 0, \]
+\_form#93=49x13:\[ \phi \cdot y = 1.\]
+\_form#94=8x10:$J$
+\_form#95=36x14:$dR/du$
+\_form#96=8x13:$\phi$
+\_form#97=8x9:$y$
+\_form#98=8x6:$\sigma $
+\_form#99=53x14:$ \langle u, \phi \rangle = 0 $
+\_form#100=8x6:$ \sigma $
+\_form#101=61x14:$ R(u,\lambda) = 0 $
+\_form#102=40x11:$ 3N+2 $
+\_form#103=86x13:\[ J\phi + \omega M \psi = 0, \]
+\_form#104=86x13:\[ J\psi - \omega M \phi = 0, \]
+\_form#105=49x13:\[ c \cdot \phi = 1. \]
+\_form#106=49x13:\[ c \cdot \psi = 0. \]
+\_form#107=14x10:$ M $
+\_form#108=35x13:$ \phi + i\psi $
+\_form#109=49x10:$ J - i\omega M $
+\_form#110=9x6:$ \omega $
+\_form#111=5x6:$ c $
+\_form#112=56x14:$ {\bf s} \in [-1,1] $
+\_form#113=13x9:$ x_1 $
+\_form#114=51x15:$ \in [-1,1]^2 $
+\_form#115=61x10:$ Ax = \lambda Mx $
+\_form#116=21x14:$ X_{pq} $
+\_form#117=11x9:$ x_i $
+\_form#118=14x14:$ \psi_j $
+\_form#119=49x15:$ d^2 \psi_j / d \xi^2 $
+\_form#120=50x15:$ \partial^2 \psi_j / \partial \xi_0^2 $
+\_form#121=50x15:$ \partial^2 \psi_j / \partial \xi_1^2 $
+\_form#122=68x15:$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1 $
+\_form#123=50x15:$ \partial^2 \psi_j / \partial \xi_2^2 $
+\_form#124=68x15:$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 $
+\_form#125=69x15:$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 $
+\_form#126=69x15:$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 $
+\_form#127=23x14:$ {\bf f}({\bf x}) $
+\_form#128=48x14:$ \mbox{\tt fct}({\bf x}, {\bf f}) $
+\_form#129=33x14:$ {\bf f}(t,{\bf x}) $
+\_form#130=58x14:$ \mbox{\tt fct}(t, {\bf x}, {\bf f}) $
+\_form#131=49x15:$ d^2 \psi_j / ds^2 $
+\_form#132=50x15:$ \partial^2 \psi_j / \partial s_0^2 $
+\_form#133=50x15:$ \partial^2 \psi_j / \partial s_1^2 $
+\_form#134=69x15:$ \partial^2 \psi_j / \partial s_0 \partial s_1 $
+\_form#135=50x15:$ \partial^2 \psi_j / \partial s_2^2 $
+\_form#136=69x15:$ \partial^2 \psi_j / \partial s_0 \partial s_2 $
+\_form#137=69x15:$ \partial^2 \psi_j / \partial s_1 \partial s_2 $
+\_form#138=50x15:$ d^2 \psi_j / d x^2 $
+\_form#139=51x15:$ \partial^2 \psi_j / \partial x_0^2 $
+\_form#140=51x15:$ \partial^2 \psi_j / \partial x_1^2 $
+\_form#141=71x15:$ \partial^2 \psi_j / \partial x_0 \partial x_1 $
+\_form#142=51x15:$ \partial^2 \psi_j / \partial x_2^2 $
+\_form#143=71x15:$ \partial^2 \psi_j / \partial x_0 \partial x_2 $
+\_form#144=71x15:$ \partial^2 \psi_j / \partial x_1 \partial x_2 $
+\_form#145=49x15:$ d^2 \psi_j / d s^2 $
+\_form#146=48x20:$ \frac{d^{t} dr(zeta)}{d t^{t}} $
+\_form#147=55x15:$ d^2 \psi_j / d^2 \xi^2 $
+\_form#148=56x15:$ \partial^2 \psi_j/\partial^2 \xi_0^2 $
+\_form#149=56x15:$ \partial^2 \psi_j/\partial^2 \xi_1^2 $
+\_form#150=56x15:$ \partial^2 \psi_j / \partial^2 \xi_0^2 $
+\_form#151=56x15:$ \partial^2 \psi_j / \partial^2 \xi_1^2 $
+\_form#152=56x15:$ \partial^2 \psi_j / \partial^2 \xi_2^2 $
+\_form#153=69x15:$ \partial^2 u/\partial x_i^2 = 0 $
+\_form#154=11x10:$ N $
+\_form#155=36x14:$ \psi_j(x_k) $
+\_form#156=15x11:$ C^0 $
+\_form#157=65x14:$ f_i = \partial u/\partial x_i $
+\_form#158=13x13:$ Q. $
+\_form#159=33x14:$ \mu U / L$
+\_form#160=48x28:\[ Q=\frac{\mu U}{LE} \]
+\_form#161=33x13:$ Q = 1 $
+\_form#162=76x14:$ Q = \mu U/(LE) $
+\_form#163=31x13:\[ x = \zeta \]
+\_form#164=35x13:\[ y = H \]
+\_form#165=68x14:\[ x = A \cos(\zeta) \]
+\_form#166=66x14:\[ y = B \sin(\zeta) \]
+\_form#167=99x14:\[ x = X_c + R \cos(\zeta) \]
+\_form#168=93x14:\[ y = Y_c + R \sin(\zeta) \]
+\_form#169=169x16:\[ {\bf r} = ( a \cos(\zeta_1), b \sin(zeta_1), \zeta_0)^T \]
+\_form#170=19x19:$ \frac{dR_i}{d \zeta_\alpha}$
+\_form#171=34x21:$ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$
+\_form#172=9x9:$\Gamma$
+\_form#173=116x30:\[ \int_\Gamma (u_{\mbox{S}} - u_{\mbox{M}}) \psi \mbox{d} s = 0 \]
+\_form#174=9x13:$\psi$
+\_form#175=101x18:\[ (u_{\mbox{S}} - u_{\mbox{M}})\big\vert_{\partial\Gamma} = 0.\]
+\_form#176=9x13:$ \psi $
+\_form#177=66x15:$ M\xi^s = P\hat{\xi^m} $
+\_form#178=16x13:$ \xi^m $
+\_form#179=11x13:$ \xi^s $
+\_form#180=63x11:$ C = M^{-1}P $
+\_form#181=33x14:$ \cos(\theta) $
+\_form#182=165x16:$ r=\sqrt{pow(dx,2)+pow(dy,2)} $
+\_form#183=8x10:$ {\bf S} $
+\_form#184=24x14:$ {\bf r} ({\bf S}) $
+\_form#185=34x14:$ {\bf r} (t,{\bf S}) $
+\_form#186=36x14:\[ {\bf f}_{i} (t,{\bf S}) \]
+\_form#187=5x9:$ i $
+\_form#188=63x15:$ {\bf S} \in [-1,1]^1 $
+\_form#189=63x15:$ {\bf S} \in [-1,1]^2 $
+\_form#190=99x28:\[ {\bf U}_J = \sum_{K} {\bf U}_{K} \omega_{JK} \]
+\_form#191=18x13:$ {\bf U}_I $
+\_form#192=8x10:$ I $
+\_form#193=111x40:\[ x_i = \sum_{j=1}^{N_{node}} X_{ij} \psi_{j}(s_k) \]
+\_form#194=98x14:$ X_{ij}\ (i=1..DIM) $
+\_form#195=148x40:\[ x_i(t) = \sum_{j=1}^{N_{node}} X_{ij}(t) \ \psi_{j}(s_k). \]
+\_form#196=126x40:\[ x_{ti} = \sum_{j=1}^{N_{node}} X_{ijt} \ \psi_{j}(s_k). \]
+\_form#197=101x14:$ X_{ijt} \ (i=1..DIM) $
+\_form#198=61x15:$ {\bf s} \in [-1,1]^3 $
+\_form#199=199x14:$ (n+1) P_{n+1} = (2n+1)xP_{n} - nP_{n-1} $
+\_form#200=200x18:$ nP_{n+1}^{'} = (2n+1)xP_{n}^{'} - (n+1)P_{n-1}^{'} $
+\_form#201=34x14:$d\tilde x / d x$
+\_form#202=6x6:$\nu$
+\_form#203=53x10:$\nu = x - h$
+\_form#204=204x14:$\gamma=1 + (1/k)(i/|outer_boundary - x|)$
+\_form#205=291x14:$\gamma=1 + (i/k)(1/|outer_boundary - x|-1/|pml width|)$
+\_form#206=49x10:\[ {\bf J} {\bf x} = - \bf{r} \]
+\_form#207=59x10:$ Jx = \lambda M x$
+\_form#208=50x15:$ \partial ^2 \psi_j / \partial s_0^2 $
+\_form#209=50x15:$ \partial ^2 \psi_j / \partial s_1^2 $
+\_form#210=69x15:$ \partial ^2 \psi_j / \partial s_0 \partial s_1 $
+\_form#211=50x15:$ \partial ^2 \psi_j / \partial s_2^2 $
+\_form#212=69x15:$ \partial ^2 \psi_j / \partial s_0 \partial s_2 $
+\_form#213=69x15:$ \partial ^2 \psi_j / \partial s_1 \partial s_2 $
+\_form#214=61x15:$ {\bf s} \in [-1,1]^2 $
+\_form#215=68x13:$ \alpha AB + \beta mv $
+\_form#216=50x13:$\alpha A + \beta B$
+\_form#217=44x11:$ \alpha A^Hmv $
+\_form#218=90x15:$b[i] = A[i]^Hmv[i]$
+\_form#219=40x14:$||mv_i||_2$
+\_form#220=54x310:\[\begin{array}{cc} 0 & E_{1111} \\ 1 & E_{1112} \\ 2 & E_{1122} \\ 3 & E_{1212} \\ 4 & E_{1222} \\ 5 & E_{2222} \\ 6 & E_{1113} \\ 7 & E_{1123} \\ 8 & E_{1133} \\ 9 & E_{1213} \\ 10 & E_{1223} \\ 11 & E_{1233} \\ 12 & E_{1313} \\ 13 & E_{1322} \\ 14 & E_{1323} \\ 15 & E_{1333} \\ 16 & E_{2223} \\ 17 & E_{2233} \\ 18 & E_{2323} \\ 19 & E_{2333} \\ 20 & E_{3333} \end{array}\]
+\_form#221=25x13:$E_{ijkl}$
+\_form#222=76x14:\[\tau_{ij} = E_{ijkl} e_{kl},\]
+\_form#223=14x10:$e_{ij}$
+\_form#224=14x10:$\tau_{ij}$
+\_form#225=155x14:\[E_{ijkl} = E_{jikl} = E_{ijlk} = E_{klij}\]
+\_form#226=21x14:$ \pi/4 $
+\_form#227=141x15:$ \cos(k \theta) = \sin(k \theta) = 1/\sqrt{2} $
+\_form#228=41x14:$ {\bf r}({\bf zeta}) $
+\_form#229=55x14:$ \zeta \in [-1,1] $
+\_form#230=55x14:$ s \in [-1,1] $
+\_form#231=45x14:$ \in [-1,1] $
+\_form#232=18x6:$-\pi$
+\_form#233=9x6:$\pi$
+\_form#234=35x13:$\xi_1 = 1$
+\_form#235=105x14:\[ x \in [Xmin,Xmax] \]
+\_form#236=59x10:$x=Xmin$
+\_form#237=61x10:$x=Xmax$
+\_form#238=55x14:$s \in [-1,1] $
+\_form#239=101x14:$ s \in [-1,1]*[-1,1] $
+\_form#240=101x14:$s \in [-1,1]*[-1,1] $
+\_form#241=88x14:$ \in [-1,1]x[-1,1] $
+\_form#242=43x15:$ \xi_0 = \xi_0^{lo} $
+\_form#243=44x15:$ \xi_0 = \xi_0^{hi} $
+\_form#244=53x14:$\zeta \in [0,2\pi]$
+\_form#245=35x13:$\xi_2 = 1$
+\_form#246=44x15:$\xi_0 = \xi_0^{hi}$
+\_form#247=14x10:$d\tilde x $
+\_form#248=131x19:$\gamma = 1 + \frac i {k\delta_{pml}}(1/|1-\bar\nu|)$
+\_form#249=141x14:$\tilde x = h + \nu + \log(1-|\nu / \delta|)$
+\_form#250=31x14:$ \sin(\theta) $
+\_form#251=179x16:$ r=\sqrt{pow(|dx|,2)+pow(|dy|,2)} $
+\_form#252=8x9:$\tilde x $
+\_form#253=13x10:$\mbox{\boldmath$X$}$
+\_form#254=68x14:$\mbox{\boldmath$F$} = \mbox{\boldmath$F$}^{*}/\mu U$
+\_form#255=6x9:$\mbox{\boldmath$t$}$
+\_form#256=84x14:$\mbox{\boldmath$T$} = \mbox{\boldmath$T$}^{*}/(\mu UL)$
+\_form#257=8x9:$\mbox{\boldmath$q$}$
+\_form#258=14x10:$M$
+\_form#259=8x10:$I$
+\_form#260=15x10:$Re$
+\_form#261=13x10:$St$
+\_form#262=45x19:$ { \frac{\partial u_i}{\partial x_i}=Q } $

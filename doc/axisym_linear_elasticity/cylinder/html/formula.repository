@@ -1,61 +1,61 @@
-\_form#0:$ \rho $
-\_form#1:$ E $
-\_form#2:$ \nu $
-\_form#3:$ D $
-\_form#4:$ \partial D $
-\_form#5:$ (r^*,\theta,z^*) $
-\_form#6:\[ \nabla^* \cdot \bm{\tau}^* + \rho \mathbf{F}^* = \rho\frac{\partial^2\mathbf{u}^*} {\partial {t^*}^2}, \]
-\_form#7:$\nabla^* = \left(\frac{\partial}{\partial r^*}, \frac{1}{r^*}\frac{\partial} {\partial \theta},\frac{\partial}{\partial z^*}\right)$
-\_form#8:$ \bm{\tau}^*(r^*,z^*,t^*) $
-\_form#9:$\mathbf{F}^*(r^*,z^*,t^*)$
-\_form#10:$ \mathbf{u^*}(r^*,z^*,t^*) $
-\_form#11:$ \theta $
-\_form#12:$ \hat{\bm{\tau}}^* $
-\_form#13:$ \hat{\mathbf{u}}^* $
-\_form#14:$ \partial D_\mathrm{n} $
-\_form#15:$ \partial D_\mathrm{d} $
-\_form#16:$ \partial D = \partial D_\mathrm{d} \cup \partial D_\mathrm{n} $
-\_form#17:\[ \mathbf{u}^* = \hat{\mathbf{u}}^*\text{ on }\partial D_\mathrm{d}, \qquad \bm{\tau}^*\cdot\mathbf{n} = \hat{\bm{\tau}}^*\text{ on }\partial D_\mathrm{n}, \]
-\_form#18:$ \mathbf{n} $
-\_form#19:\[ \bm{\tau}^* = \frac{E}{1+\nu}\left(\frac{\nu}{1-2\nu}\left(\nabla^*\cdot\mathbf{u}^*\right) \mathbf{I} + \frac{1}{2}\left(\nabla^*\mathbf{u}^* + \left(\nabla^*\mathbf{u}^*\right)^\mathrm{T}\right)\right), \]
-\_form#20:$ \mathbf{I} $
-\_form#21:$ \mathrm{T} $
-\_form#22:$ \nabla^*\mathbf{u}^* $
-\_form#23:\[ \nabla^*\mathbf{u}^* = \begin{pmatrix} \dfrac{\strut \partial u_r^*}{\strut \partial r^*} & -\dfrac{\strut u_\theta^*}{\strut r^*} & \dfrac{\strut \partial u_r^*}{\strut \partial z^*}\\ \dfrac{\strut \partial u_\theta^*}{\strut \partial r^*} & \dfrac{\strut u_r^*}{\strut r^*} & \dfrac{\strut \partial u_\theta^*}{\strut \partial z^*}\\ \dfrac{\strut \partial u_z^*}{\strut \partial r^*} & 0 & \dfrac{\strut \partial u_z^*}{\strut \partial z^*} \end{pmatrix} \]
-\_form#24:$ \nabla^*\cdot \mathbf{u}^* $
-\_form#25:$ \mathcal{L} $
-\_form#26:$ \mathcal{T} $
-\_form#27:\[ \bm{\tau}^* = E \bm{\tau}, \qquad r^* = \mathcal{L}r, \qquad z^* = \mathcal{L}z \]
-\_form#28:\[ \mathbf{u}^* = \mathcal{L} \mathbf{u} \qquad \mathbf{F}^* = \frac{E}{\rho \mathcal{L}}\mathbf{F}, \qquad t^* = \mathcal{T}t. \]
-\_form#29:\[ \nabla\cdot \bm{\tau} + \mathbf{F} = \Lambda^2\frac{\partial^2\mathbf{u}} {\partial t^2},\qquad\qquad (1) \]
-\_form#30:$ \nabla = \left(\frac{\partial}{\partial r}, \frac{1}{r}\frac{\partial} {\partial \theta},\frac{\partial}{\partial z}\right) $
-\_form#31:\[ \bm{\tau} = \frac{1}{1+\nu}\left(\frac{\nu}{1-2\nu}\left(\nabla\cdot\mathbf{u}\right) \mathbf{I} + \frac{1}{2}\left(\nabla\mathbf{u} + \left(\nabla\mathbf{u}\right)^\mathrm{T}\right)\right),\qquad\qquad (2) \]
-\_form#32:\[ \Lambda = \frac{\mathcal{L}}{\mathcal{T}}\sqrt{\frac{\rho}{E}} \]
-\_form#33:$ \mathcal{L} \sqrt{\frac{\rho}{E}} $
-\_form#34:\[ \mathbf{u} = \hat{\mathbf{u}}\text{ on } \partial D_\mathrm{d}\qquad \bm{\tau}\cdot\mathbf{n} = \hat{\bm{\tau}}\text{ on } \partial D_\mathrm{n}. \]
-\_form#35:\[ \left.\mathbf{u}\right|_{t=t_0} = \mathbf{u}^0,\qquad \left.\frac{\partial\mathbf{u}}{\partial t}\right|_{t=t_0} = \mathbf{v}^0.\qquad\qquad (3) \]
-\_form#36:\[ x_i = \sum_{j=1}^{N^{(E)}} X_{ij}^{(E)}\psi_j,\qquad i = 1,2, \]
-\_form#37:$ x_1 = r, x_2 = z $
-\_form#38:$ N^{(E)} $
-\_form#39:$ X_{ij}^{(E)} $
-\_form#40:$ i $
-\_form#41:$ j $
-\_form#42:$ \psi_j $
-\_form#43:$ u_r, u_z, u_\theta $
-\_form#44:\[ u_i = \sum_{j=1}^{N^{(E)}}U_{ij}^{(E)}\psi_{ij},\qquad i = 1,\dotsc,3, \]
-\_form#45:$ U_{ij} $
-\_form#46:$ u_1=u_r, u_2=u_z,u_3=u_\theta $
-\_form#47:\[ \mathbf{u} = \begin{pmatrix} u_r\\ u_\theta\\ u_z \end{pmatrix} = \cos(t) \begin{pmatrix} r^3\cos(z)\\ r^3z^3\\ r^3\sin(z) \end{pmatrix}.\qquad\qquad (4) \]
-\_form#48:\[ \mathbf{F} = \cos(t) \begin{pmatrix} -r\cos(z)\left\{\left(8+3r\right)\lambda + \left(16 - r\left(r-3\right)\right)\mu + r^2\Lambda^2\right\}\\ -r\left\{8z^3\mu + r^2\left(z^3\Lambda^2 + 6\mu z\right)\right\}\\ r\sin(z)\left\{- 9\mu + 4r\left(\lambda + \mu\right) + r^2\left(\lambda + 2\mu - \Lambda^2\right)\right\} \end{pmatrix},\qquad\qquad (5) \]
-\_form#49:$ \lambda = \nu/((1+\nu)(1-2\nu)) $
-\_form#50:$ \mu = 1/(2(1+\nu)) $
-\_form#51:$ r=r_\mathrm{max}, z=z_\mathrm{min}, z=z_\mathrm{max} $
-\_form#52:\[ \hat{\bm{\tau}}_3 = \bm{\tau}(r_\mathrm{min},z,t) = \cos(\omega t) \begin{pmatrix} -\cos(z)r_\mathrm{min}^2\left(6\mu + \lambda\left(4+r_\mathrm{min}\right)\right)\\ -2\mu r_\mathrm{min}^2z^3\\ -\mu r_\mathrm{min}^2\sin(z)\left(3-r_\mathrm{min}\right) \end{pmatrix},\qquad\qquad (6) \]
-\_form#53:$ r = r_\mathrm{min} $
-\_form#54:$ r $
-\_form#55:$ z $
-\_form#56:$ t \in [0,2\pi] $
-\_form#57:$ (r,z) $
-\_form#58:$ t = 2.64 $
-\_form#59:$ r=r_\mathrm{min} $
-\_form#60:$ (r,z,\theta) $
+\_form#0=8x9:$ \rho $
+\_form#1=10x9:$ E $
+\_form#2=6x6:$ \nu $
+\_form#3=10x10:$ D $
+\_form#4=18x10:$ \partial D $
+\_form#5=50x14:$ (r^*,\theta,z^*) $
+\_form#6=131x29:\[ \nabla^* \cdot \bm{\tau}^* + \rho \mathbf{F}^* = \rho\frac{\partial^2\mathbf{u}^*} {\partial {t^*}^2}, \]
+\_form#7=119x18:$\nabla^* = \left(\frac{\partial}{\partial r^*}, \frac{1}{r^*}\frac{\partial} {\partial \theta},\frac{\partial}{\partial z^*}\right)$
+\_form#8=69x14:$ \bm{\tau}^*(r^*,z^*,t^*) $
+\_form#9=70x14:$\mathbf{F}^*(r^*,z^*,t^*)$
+\_form#10=68x14:$ \mathbf{u^*}(r^*,z^*,t^*) $
+\_form#11=6x10:$ \theta $
+\_form#12=14x10:$ \hat{\bm{\tau}}^* $
+\_form#13=13x10:$ \hat{\mathbf{u}}^* $
+\_form#14=23x13:$ \partial D_\mathrm{n} $
+\_form#15=23x13:$ \partial D_\mathrm{d} $
+\_form#16=95x13:$ \partial D = \partial D_\mathrm{d} \cup \partial D_\mathrm{n} $
+\_form#17=229x13:\[ \mathbf{u}^* = \hat{\mathbf{u}}^*\text{ on }\partial D_\mathrm{d}, \qquad \bm{\tau}^*\cdot\mathbf{n} = \hat{\bm{\tau}}^*\text{ on }\partial D_\mathrm{n}, \]
+\_form#18=8x6:$ \mathbf{n} $
+\_form#19=316x31:\[ \bm{\tau}^* = \frac{E}{1+\nu}\left(\frac{\nu}{1-2\nu}\left(\nabla^*\cdot\mathbf{u}^*\right) \mathbf{I} + \frac{1}{2}\left(\nabla^*\mathbf{u}^* + \left(\nabla^*\mathbf{u}^*\right)^\mathrm{T}\right)\right), \]
+\_form#20=6x10:$ \mathbf{I} $
+\_form#21=10x9:$ \mathrm{T} $
+\_form#22=29x11:$ \nabla^*\mathbf{u}^* $
+\_form#23=161x99:\[ \nabla^*\mathbf{u}^* = \begin{pmatrix} \dfrac{\strut \partial u_r^*}{\strut \partial r^*} & -\dfrac{\strut u_\theta^*}{\strut r^*} & \dfrac{\strut \partial u_r^*}{\strut \partial z^*}\\ \dfrac{\strut \partial u_\theta^*}{\strut \partial r^*} & \dfrac{\strut u_r^*}{\strut r^*} & \dfrac{\strut \partial u_\theta^*}{\strut \partial z^*}\\ \dfrac{\strut \partial u_z^*}{\strut \partial r^*} & 0 & \dfrac{\strut \partial u_z^*}{\strut \partial z^*} \end{pmatrix} \]
+\_form#24=38x11:$ \nabla^*\cdot \mathbf{u}^* $
+\_form#25=10x10:$ \mathcal{L} $
+\_form#26=11x11:$ \mathcal{T} $
+\_form#27=196x13:\[ \bm{\tau}^* = E \bm{\tau}, \qquad r^* = \mathcal{L}r, \qquad z^* = \mathcal{L}z \]
+\_form#28=205x30:\[ \mathbf{u}^* = \mathcal{L} \mathbf{u} \qquad \mathbf{F}^* = \frac{E}{\rho \mathcal{L}}\mathbf{F}, \qquad t^* = \mathcal{T}t. \]
+\_form#29=178x29:\[ \nabla\cdot \bm{\tau} + \mathbf{F} = \Lambda^2\frac{\partial^2\mathbf{u}} {\partial t^2},\qquad\qquad (1) \]
+\_form#30=98x18:$ \nabla = \left(\frac{\partial}{\partial r}, \frac{1}{r}\frac{\partial} {\partial \theta},\frac{\partial}{\partial z}\right) $
+\_form#31=344x31:\[ \bm{\tau} = \frac{1}{1+\nu}\left(\frac{\nu}{1-2\nu}\left(\nabla\cdot\mathbf{u}\right) \mathbf{I} + \frac{1}{2}\left(\nabla\mathbf{u} + \left(\nabla\mathbf{u}\right)^\mathrm{T}\right)\right),\qquad\qquad (2) \]
+\_form#32=65x31:\[ \Lambda = \frac{\mathcal{L}}{\mathcal{T}}\sqrt{\frac{\rho}{E}} \]
+\_form#33=34x16:$ \mathcal{L} \sqrt{\frac{\rho}{E}} $
+\_form#34=201x13:\[ \mathbf{u} = \hat{\mathbf{u}}\text{ on } \partial D_\mathrm{d}\qquad \bm{\tau}\cdot\mathbf{n} = \hat{\bm{\tau}}\text{ on } \partial D_\mathrm{n}. \]
+\_form#35=235x34:\[ \left.\mathbf{u}\right|_{t=t_0} = \mathbf{u}^0,\qquad \left.\frac{\partial\mathbf{u}}{\partial t}\right|_{t=t_0} = \mathbf{v}^0.\qquad\qquad (3) \]
+\_form#36=166x43:\[ x_i = \sum_{j=1}^{N^{(E)}} X_{ij}^{(E)}\psi_j,\qquad i = 1,2, \]
+\_form#37=76x9:$ x_1 = r, x_2 = z $
+\_form#38=26x13:$ N^{(E)} $
+\_form#39=28x20:$ X_{ij}^{(E)} $
+\_form#40=5x9:$ i $
+\_form#41=6x11:$ j $
+\_form#42=14x14:$ \psi_j $
+\_form#43=50x9:$ u_r, u_z, u_\theta $
+\_form#44=191x43:\[ u_i = \sum_{j=1}^{N^{(E)}}U_{ij}^{(E)}\psi_{ij},\qquad i = 1,\dotsc,3, \]
+\_form#45=16x14:$ U_{ij} $
+\_form#46=138x9:$ u_1=u_r, u_2=u_z,u_3=u_\theta $
+\_form#47=248x46:\[ \mathbf{u} = \begin{pmatrix} u_r\\ u_\theta\\ u_z \end{pmatrix} = \cos(t) \begin{pmatrix} r^3\cos(z)\\ r^3z^3\\ r^3\sin(z) \end{pmatrix}.\qquad\qquad (4) \]
+\_form#48=421x46:\[ \mathbf{F} = \cos(t) \begin{pmatrix} -r\cos(z)\left\{\left(8+3r\right)\lambda + \left(16 - r\left(r-3\right)\right)\mu + r^2\Lambda^2\right\}\\ -r\left\{8z^3\mu + r^2\left(z^3\Lambda^2 + 6\mu z\right)\right\}\\ r\sin(z)\left\{- 9\mu + 4r\left(\lambda + \mu\right) + r^2\left(\lambda + 2\mu - \Lambda^2\right)\right\} \end{pmatrix},\qquad\qquad (5) \]
+\_form#49=129x14:$ \lambda = \nu/((1+\nu)(1-2\nu)) $
+\_form#50=91x14:$ \mu = 1/(2(1+\nu)) $
+\_form#51=153x9:$ r=r_\mathrm{max}, z=z_\mathrm{min}, z=z_\mathrm{max} $
+\_form#52=415x46:\[ \hat{\bm{\tau}}_3 = \bm{\tau}(r_\mathrm{min},z,t) = \cos(\omega t) \begin{pmatrix} -\cos(z)r_\mathrm{min}^2\left(6\mu + \lambda\left(4+r_\mathrm{min}\right)\right)\\ -2\mu r_\mathrm{min}^2z^3\\ -\mu r_\mathrm{min}^2\sin(z)\left(3-r_\mathrm{min}\right) \end{pmatrix},\qquad\qquad (6) \]
+\_form#53=46x9:$ r = r_\mathrm{min} $
+\_form#54=8x6:$ r $
+\_form#55=6x6:$ z $
+\_form#56=53x14:$ t \in [0,2\pi] $
+\_form#57=26x14:$ (r,z) $
+\_form#58=45x9:$ t = 2.64 $
+\_form#59=46x9:$ r=r_\mathrm{min} $
+\_form#60=38x14:$ (r,z,\theta) $

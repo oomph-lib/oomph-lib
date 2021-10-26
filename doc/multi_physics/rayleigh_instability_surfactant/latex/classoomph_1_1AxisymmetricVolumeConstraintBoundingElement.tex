@@ -2,6 +2,11 @@
 \label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement}\index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}}
 
 
+////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////  
+
+
+
+
 {\ttfamily \#include $<$constrained\+\_\+volume\+\_\+elements.\+h$>$}
 
 Inheritance diagram for oomph\+::Axisymmetric\+Volume\+Constraint\+Bounding\+Element\+:\begin{figure}[H]
@@ -30,11 +35,13 @@ void \mbox{\hyperlink{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_
 
 
 \doxysubsection{Detailed Description}
+////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
+
 Axisymmetric (one-\/dimensional) interface elements that allow the application of a volume constraint on the region bounded by these elements. The volume is computed by integrating x.\+n around the boundary of the domain and then dividing by three. The sign is chosen so that the volume will be positive when the elements surround a fluid domain.
 
 These elements must be used together with the associated \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement}{Volume\+Constraint\+Element}}, which stores the value of the target volume. 
 
-Definition at line 481 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00481}{481}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
@@ -51,7 +58,7 @@ Empty Contructor.
 
 
 
-Definition at line 494 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00494}{494}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_ac7b98a2915cef69c7e4825e1f5730bc5}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_ac7b98a2915cef69c7e4825e1f5730bc5}} 
 \index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}!````~AxisymmetricVolumeConstraintBoundingElement@{$\sim$AxisymmetricVolumeConstraintBoundingElement}}
@@ -65,7 +72,7 @@ Empty Destructor.
 
 
 
-Definition at line 500 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00500}{500}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 
 
@@ -80,9 +87,11 @@ Definition at line 500 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 Return this element\textquotesingle{}s contribution to the total volume enclosed. 
 
+/////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////
 
+Return this element\textquotesingle{}s contribution to the total volume enclosed 
 
-Definition at line 267 of file constrained\+\_\+volume\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00266}{266}} of file \mbox{\hyperlink{constrained__volume__elements_8cc_source}{constrained\+\_\+volume\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a746f88f325d61610e10e97465fd2ca09}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a746f88f325d61610e10e97465fd2ca09}} 
 \index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}!contribution\_to\_volume\_flux@{contribution\_to\_volume\_flux}}
@@ -96,7 +105,7 @@ Return this element\textquotesingle{}s contribution to the volume flux over the 
 
 
 
-Definition at line 507 of file constrained\+\_\+volume\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8h_source_l00507}{507}} of file \mbox{\hyperlink{constrained__volume__elements_8h_source}{constrained\+\_\+volume\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a2a3f3b86079f27d52679f357f5276d91}\label{classoomph_1_1AxisymmetricVolumeConstraintBoundingElement_a2a3f3b86079f27d52679f357f5276d91}} 
 \index{oomph::AxisymmetricVolumeConstraintBoundingElement@{oomph::AxisymmetricVolumeConstraintBoundingElement}!fill\_in\_generic\_residual\_contribution\_volume\_constraint@{fill\_in\_generic\_residual\_contribution\_volume\_constraint}}
@@ -108,21 +117,23 @@ Definition at line 507 of file constrained\+\_\+volume\+\_\+elements.\+h.
 
 Helper function to fill in contributions to residuals (remember that part of the residual is added by the the associated \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement}{Volume\+Constraint\+Element}}). This is specific for 1D line elements that bound 2D cartesian fluid elements. 
 
+/////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////
+
 Helper function to fill in contributions to residuals (remember that part of the residual is added by the the associated \mbox{\hyperlink{classoomph_1_1VolumeConstraintElement}{Volume\+Constraint\+Element}}). This is specific for axisymmetric line elements that bound 2D axisymmetric fluid elements. The only difference from the 1D case is the addition of the weighting factor in the integrand and division of the dot product by three. 
 
 Implements \mbox{\hyperlink{classoomph_1_1VolumeConstraintBoundingElement_a717f1085709bd8820b8043ff94ecb0c5}{oomph\+::\+Volume\+Constraint\+Bounding\+Element}}.
 
 
 
-Definition at line 352 of file constrained\+\_\+volume\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{constrained__volume__elements_8cc_source_l00351}{351}} of file \mbox{\hyperlink{constrained__volume__elements_8cc_source}{constrained\+\_\+volume\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::ptraded\+\_\+local\+\_\+eqn().
+References \mbox{\hyperlink{constrained__volume__elements_8h_source_l00213}{oomph\+::\+Volume\+Constraint\+Bounding\+Element\+::ptraded\+\_\+local\+\_\+eqn()}}.
 
 
 
-Referenced by oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian().
+Referenced by \mbox{\hyperlink{constrained__volume__elements_8h_source_l00621}{oomph\+::\+Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{constrained__volume__elements_8h_source_l00676}{oomph\+::\+Spine\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}.
 
 
 

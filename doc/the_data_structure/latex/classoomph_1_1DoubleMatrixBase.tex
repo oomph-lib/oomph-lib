@@ -20,9 +20,9 @@ Inheritance diagram for oomph\+::Double\+Matrix\+Base\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a9ab2dcaf990403cd43d4b952f7dbaa1c}{Double\+Matrix\+Base}} ()
 \begin{DoxyCompactList}\small\item\em (Empty) constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a9ac04a27de856720ef6478df71b1505a}{Double\+Matrix\+Base}} (const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&matrix)
+\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a449fe88a14eed90f8820a75f53883c66}{Double\+Matrix\+Base}} (const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&matrix)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a107b48a28db1ab8696e794e3d398a02e}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&)
+void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_abc390458d9899179f84488f6a94b261d}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual unsigned long \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{nrow}} () const =0
 \begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
@@ -32,25 +32,25 @@ virtual \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a82ece2e3cfc355bb68ba78a
 \begin{DoxyCompactList}\small\item\em virtual (empty) destructor \end{DoxyCompactList}\item 
 virtual double \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const =0
 \begin{DoxyCompactList}\small\item\em Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re not providing a general interface for component-\/wise write access since not all matrix formats allow efficient direct access!) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a0c100500a245852c4299fed257ad352c}{linear\+\_\+solver\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_aa2ef063bc84bee59fec7a933093ac8f7}{linear\+\_\+solver\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const  \& \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_af3a865cc9920a2fe7d895b638667be18}{linear\+\_\+solver\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const \& \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a48e6ef5e74c6c260919d3bf0420c7a68}{linear\+\_\+solver\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Return a pointer to the linear solver object (const version) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a4d445c4a1204da569f40ec1bdace9ef3}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs)
-\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_ac35083cf8225822363c25b921b4ca1ce}{solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln)
 \begin{DoxyCompactList}\small\item\em Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_ae9098f3e129833a6b1cb5fe6ebdd9835}{solve}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs)
-\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-\/written. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a8d9fb5fddec05a0b6e35cff23c79255c}{solve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&residual\+\_\+)
+virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}{residual}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&b, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&residual\+\_\+)
 \begin{DoxyCompactList}\small\item\em Find the residual, i.\+e. r=b-\/\+Ax the residual. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}{max\+\_\+residual}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs)
+virtual double \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}{max\+\_\+residual}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs)
 \begin{DoxyCompactList}\small\item\em Find the maximum residual r=b-\/\+Ax -- generic version, can be overloaded for specific derived classes where the max. can be determined \char`\"{}on the fly\char`\"{}. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const =0
+virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const =0
 \begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const =0
+virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&soln) const =0
 \begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -64,7 +64,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96
 \doxysubsection{Detailed Description}
 Abstract base class for matrices of doubles -- adds abstract interfaces for solving, LU decomposition and multiplication by vectors. 
 
-Definition at line 266 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00260}{260}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
 
 
@@ -81,25 +81,17 @@ Definition at line 266 of file matrices.\+h.
 
 
 
-Definition at line 277 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00271}{271}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a9ac04a27de856720ef6478df71b1505a}\label{classoomph_1_1DoubleMatrixBase_a9ac04a27de856720ef6478df71b1505a}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a449fe88a14eed90f8820a75f53883c66}\label{classoomph_1_1DoubleMatrixBase_a449fe88a14eed90f8820a75f53883c66}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!DoubleMatrixBase@{DoubleMatrixBase}}
 \index{DoubleMatrixBase@{DoubleMatrixBase}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
 \doxysubsubsection{\texorpdfstring{DoubleMatrixBase()}{DoubleMatrixBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Double\+Matrix\+Base\+::\+Double\+Matrix\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Double\+Matrix\+Base\+::\+Double\+Matrix\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 280 of file matrices.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a82ece2e3cfc355bb68ba78a2ed9dae9f}\label{classoomph_1_1DoubleMatrixBase_a82ece2e3cfc355bb68ba78a2ed9dae9f}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!````~DoubleMatrixBase@{$\sim$DoubleMatrixBase}}
@@ -113,16 +105,16 @@ virtual (empty) destructor
 
 
 
-Definition at line 298 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00286}{286}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a0c100500a245852c4299fed257ad352c}\label{classoomph_1_1DoubleMatrixBase_a0c100500a245852c4299fed257ad352c}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_aa2ef063bc84bee59fec7a933093ac8f7}\label{classoomph_1_1DoubleMatrixBase_aa2ef063bc84bee59fec7a933093ac8f7}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!linear\_solver\_pt@{linear\_solver\_pt}}
 \index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$\& oomph\+::\+Double\+Matrix\+Base\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$\& oomph\+::\+Double\+Matrix\+Base\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -130,21 +122,21 @@ Return a pointer to the linear solver object.
 
 
 
-Definition at line 308 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00296}{296}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
 
 
-References Linear\+\_\+solver\+\_\+pt.
+References \mbox{\hyperlink{matrices_8h_source_l00264}{Linear\+\_\+solver\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time().
+Referenced by \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l00287}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::disable\+\_\+smoother\+\_\+and\+\_\+superlu\+\_\+doc\+\_\+time()}}.
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_af3a865cc9920a2fe7d895b638667be18}\label{classoomph_1_1DoubleMatrixBase_af3a865cc9920a2fe7d895b638667be18}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a48e6ef5e74c6c260919d3bf0420c7a68}\label{classoomph_1_1DoubleMatrixBase_a48e6ef5e74c6c260919d3bf0420c7a68}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!linear\_solver\_pt@{linear\_solver\_pt}}
 \index{linear\_solver\_pt@{linear\_solver\_pt}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_pt()}{linear\_solver\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}$\ast$ const\& oomph\+::\+Double\+Matrix\+Base\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}} $\ast$const  \& oomph\+::\+Double\+Matrix\+Base\+::linear\+\_\+solver\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -152,11 +144,11 @@ Return a pointer to the linear solver object (const version)
 
 
 
-Definition at line 314 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00302}{302}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
 
 
-References Linear\+\_\+solver\+\_\+pt.
+References \mbox{\hyperlink{matrices_8h_source_l00264}{Linear\+\_\+solver\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}\label{classoomph_1_1DoubleMatrixBase_a69a001b704e1d67277170ff7c0e4f6af}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!max\_residual@{max\_residual}}
@@ -170,11 +162,11 @@ Find the maximum residual r=b-\/\+Ax -- generic version, can be overloaded for s
 
 
 
-Definition at line 360 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00348}{348}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::max(), and residual().
+References \mbox{\hyperlink{double__vector_8cc_source_l00604}{oomph\+::\+Double\+Vector\+::max()}}, \mbox{\hyperlink{matrices_8h_source_l00326}{residual()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}\label{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!multiply@{multiply}}
@@ -188,11 +180,11 @@ Multiply the matrix by the vector x\+: soln=Ax.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{oomph\+::\+Sum\+Of\+Matrices}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a54b75960df52e3aebd21aaab20e9869d}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab575dfefa0bdd8f495453baa5575a4a0}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_add24c25e344b84fb5b732e294af5e8b2}{oomph\+::\+CCDouble\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ae6c97ff92220835df3c3eeb1b0a85cc5}{oomph\+::\+Sum\+Of\+Matrices}}.
 
 
 
-Referenced by oomph\+::\+Sum\+Of\+Matrices\+::multiply(), residual(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
+Referenced by \mbox{\hyperlink{sum__of__matrices_8cc_source_l00040}{oomph\+::\+Sum\+Of\+Matrices\+::multiply()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{matrices_8h_source_l00326}{residual()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01922}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02250}{oomph\+::\+GMRES$<$ MATRIX $>$\+::solve\+\_\+helper()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}\label{classoomph_1_1DoubleMatrixBase_a843d44405b70da1d96b43218a21e6ffc}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!multiply\_transpose@{multiply\_transpose}}
@@ -206,7 +198,7 @@ Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}{oomph\+::\+Sum\+Of\+Matrices}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a42fb274c98ccf4c2a542ca15343fcc0e}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_a7cc35997d87b4ee7b77fcaaf85eeeaec}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a582352912b0a7e097f9ac31c5054beed}{oomph\+::\+CCDouble\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a0028fb64f602aa07ff557b0a11a1c659}{oomph\+::\+Sum\+Of\+Matrices}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}\label{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!ncol@{ncol}}
@@ -220,11 +212,11 @@ Return the number of columns of the matrix.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_aec36d12984999f29f5fc21feea55df1d}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ad18b4591850b5e89ee6695407aaeec54}{oomph\+::\+Sum\+Of\+Matrices}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_a4ed5597d8a34dd14f90b0e6cfb88ca2e}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_aec36d12984999f29f5fc21feea55df1d}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_aa38cc544ab30f9318161763e13c20957}{oomph\+::\+CCDouble\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_ad18b4591850b5e89ee6695407aaeec54}{oomph\+::\+Sum\+Of\+Matrices}}.
 
 
 
-Referenced by oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+serial(), oomph\+::\+Sum\+Of\+Matrices\+::ncol(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02123}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00515}{oomph\+::\+Sum\+Of\+Matrices\+::ncol()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01714}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00416}{oomph\+::\+Dense\+LU\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01056}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00715}{oomph\+::\+Mumps\+Solver\+::solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01436}{oomph\+::\+Hypre\+Solver\+::solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01524}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}\label{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!nrow@{nrow}}
@@ -238,11 +230,11 @@ Return the number of rows of the matrix.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab67993d1a41ca5ddf05c8210673723f0}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a}{oomph\+::\+Sum\+Of\+Matrices}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_abd8d231b0549540144b4739a667b1e75}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ab67993d1a41ca5ddf05c8210673723f0}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_ab541153fa5ab2c1bc18e5339bacadfb9}{oomph\+::\+CCDouble\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a5d3b790f7e4f1bce927ecfb61844a52a}{oomph\+::\+Sum\+Of\+Matrices}}.
 
 
 
-Referenced by oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Dense\+L\+U\+::factorise(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed(), oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+serial(), oomph\+::\+Sum\+Of\+Matrices\+::nrow(), oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup(), oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup(), oomph\+::\+Identity\+Preconditioner\+::setup(), oomph\+::\+Hypre\+Preconditioner\+::setup(), oomph\+::\+Mumps\+Solver\+::solve(), oomph\+::\+Dense\+L\+U\+::solve(), oomph\+::\+Trilinos\+Aztec\+O\+O\+Solver\+::solve(), oomph\+::\+Super\+L\+U\+Solver\+::solve(), oomph\+::\+Hypre\+Solver\+::solve(), oomph\+::\+C\+G$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Bi\+C\+G\+Stab$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+Augmented\+Problem\+G\+M\+R\+E\+S\+::solve\+\_\+helper(), and oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose().
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00128}{oomph\+::\+Dense\+LU\+::factorise()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02123}{oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00501}{oomph\+::\+Sum\+Of\+Matrices\+::nrow()}}, \mbox{\hyperlink{general__purpose__preconditioners_8cc_source_l00043}{oomph\+::\+Matrix\+Based\+Diag\+Preconditioner\+::setup()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01714}{oomph\+::\+Hypre\+Preconditioner\+::setup()}}, \mbox{\hyperlink{preconditioner_8h_source_l00267}{oomph\+::\+Identity\+Preconditioner\+::setup()}}, \mbox{\hyperlink{trilinos__preconditioners_8cc_source_l00053}{oomph\+::\+Trilinos\+Preconditioner\+Base\+::setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{oomph\+::\+GMRESBlock\+Preconditioner\+::setup()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00416}{oomph\+::\+Dense\+LU\+::solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01056}{oomph\+::\+Super\+LUSolver\+::solve()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00715}{oomph\+::\+Mumps\+Solver\+::solve()}}, \mbox{\hyperlink{hypre__solver_8cc_source_l01436}{oomph\+::\+Hypre\+Solver\+::solve()}}, \mbox{\hyperlink{trilinos__solver_8cc_source_l00135}{oomph\+::\+Trilinos\+Aztec\+OOSolver\+::solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00605}{oomph\+::\+CG$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l00171}{oomph\+::\+Bi\+CGStab$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l02862}{oomph\+::\+Augmented\+Problem\+GMRES\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01524}{oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}\label{classoomph_1_1DoubleMatrixBase_a20b85f0286f80464f42f0846fede2d77}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!operator()@{operator()}}
@@ -256,25 +248,17 @@ Round brackets to give access as a(i,j) for read only (we\textquotesingle{}re no
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a2fd1f3dfa66ed45be1ced60d2835634c}{oomph\+::\+C\+C\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ae41c14d2d7e4b5b568a9b371e7e53fbd}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e}{oomph\+::\+C\+R\+Double\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a934664ec676d36115ef27a9758827f7c}{oomph\+::\+Sum\+Of\+Matrices}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix_af5b1d934bae618c92aa1089671b6130e}{oomph\+::\+CRDouble\+Matrix}}, \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix_ae41c14d2d7e4b5b568a9b371e7e53fbd}{oomph\+::\+Dense\+Double\+Matrix}}, \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix_a2fd1f3dfa66ed45be1ced60d2835634c}{oomph\+::\+CCDouble\+Matrix}}, and \mbox{\hyperlink{classoomph_1_1SumOfMatrices_a934664ec676d36115ef27a9758827f7c}{oomph\+::\+Sum\+Of\+Matrices}}.
 
-\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a107b48a28db1ab8696e794e3d398a02e}\label{classoomph_1_1DoubleMatrixBase_a107b48a28db1ab8696e794e3d398a02e}} 
+\mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_abc390458d9899179f84488f6a94b261d}\label{classoomph_1_1DoubleMatrixBase_abc390458d9899179f84488f6a94b261d}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Double\+Matrix\+Base\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Double\+Matrix\+Base\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 286 of file matrices.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}\label{classoomph_1_1DoubleMatrixBase_a971bdc2d9297fc582af8467178f4e00e}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!residual@{residual}}
@@ -288,15 +272,15 @@ Find the residual, i.\+e. r=b-\/\+Ax the residual.
 
 
 
-Definition at line 338 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00326}{326}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
 
 
-References i, multiply(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{multiply()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 
 
-Referenced by max\+\_\+residual(), oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+G\+S$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper(), oomph\+::\+G\+S$<$ C\+R\+Double\+Matrix $>$\+::solve\+\_\+helper(), and oomph\+::\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::solve\+\_\+helper().
+Referenced by \mbox{\hyperlink{matrices_8h_source_l00348}{max\+\_\+residual()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01164}{oomph\+::\+GS$<$ MATRIX $>$\+::solve\+\_\+helper()}}, \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01480}{oomph\+::\+GS$<$ CRDouble\+Matrix $>$\+::solve\+\_\+helper()}}, and \mbox{\hyperlink{iterative__linear__solver_8cc_source_l01922}{oomph\+::\+Damped\+Jacobi$<$ MATRIX $>$\+::solve\+\_\+helper()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_ac35083cf8225822363c25b921b4ca1ce}\label{classoomph_1_1DoubleMatrixBase_ac35083cf8225822363c25b921b4ca1ce}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!solve@{solve}}
@@ -308,13 +292,13 @@ Referenced by max\+\_\+residual(), oomph\+::\+G\+M\+R\+E\+S\+Block\+Precondition
 
 Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. 
 
-Complete LU solve (Nothing gets overwritten!). This generic version should never need to be overwritten 
+Complete LU solve (Nothing gets overwritten!). This generic version should never need to be overwritten. 
 
-Definition at line 74 of file matrices.\+cc.
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l00074}{74}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
 
 
 
-References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
+References \mbox{\hyperlink{matrices_8h_source_l00264}{Linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a8d9fb5fddec05a0b6e35cff23c79255c}\label{classoomph_1_1DoubleMatrixBase_a8d9fb5fddec05a0b6e35cff23c79255c}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!solve@{solve}}
@@ -326,13 +310,13 @@ References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
 
 Complete LU solve (Nothing gets overwritten!). The default should not need to be overwritten. 
 
-Complete LU solve (Nothing gets overwritten!). This generic version should never need to be overwritten 
+Complete LU solve (Nothing gets overwritten!). This generic version should never need to be overwritten. 
 
-Definition at line 116 of file matrices.\+cc.
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l00116}{116}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
 
 
 
-References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
+References \mbox{\hyperlink{matrices_8h_source_l00264}{Linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a4d445c4a1204da569f40ec1bdace9ef3}\label{classoomph_1_1DoubleMatrixBase_a4d445c4a1204da569f40ec1bdace9ef3}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!solve@{solve}}
@@ -342,19 +326,19 @@ References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
 
 
 
-Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. 
+Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-\/written. 
 
-Complete LU solve (overwrites R\+HS with solution). This is the generic version which should not need to be over-\/written. 
+Complete LU solve (overwrites RHS with solution). This is the generic version which should not need to be over-\/written. 
 
-Definition at line 50 of file matrices.\+cc.
-
-
-
-References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l00050}{50}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values(), oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2(), oomph\+::\+Black\+Box\+F\+D\+Newton\+Solver\+::black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve(), oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::compute\+\_\+volume\+\_\+target(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::direct\+\_\+solve(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::get\+\_\+principal\+\_\+stress(), and oomph\+::\+Finite\+Element\+::locate\+\_\+zeta().
+References \mbox{\hyperlink{matrices_8h_source_l00264}{Linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
+
+
+
+Referenced by \mbox{\hyperlink{timesteppers_8cc_source_l00569}{oomph\+::\+Newmark$<$ NSTEPS $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values()}}, \mbox{\hyperlink{timesteppers_8cc_source_l00889}{oomph\+::\+Newmark$<$ NSTEPS $>$\+::assign\+\_\+initial\+\_\+data\+\_\+values\+\_\+stage2()}}, \mbox{\hyperlink{black__box__newton__solver_8cc_source_l00067}{oomph\+::\+Black\+Box\+FDNewton\+Solver\+::black\+\_\+box\+\_\+fd\+\_\+newton\+\_\+solve()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00922}{oomph\+::\+Refineable\+Tet\+Mesh\+Base\+::compute\+\_\+volume\+\_\+target()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l00375}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01066}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface()}}, and \mbox{\hyperlink{solid__elements_8cc_source_l01071}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::get\+\_\+principal\+\_\+stress()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_ae9098f3e129833a6b1cb5fe6ebdd9835}\label{classoomph_1_1DoubleMatrixBase_ae9098f3e129833a6b1cb5fe6ebdd9835}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!solve@{solve}}
@@ -364,15 +348,15 @@ Referenced by oomph\+::\+Newmark$<$ N\+S\+T\+E\+P\+S $>$\+::assign\+\_\+initial\
 
 
 
-Complete LU solve (replaces matrix by its LU decomposition and overwrites R\+HS with solution). The default should not need to be over-\/written. 
+Complete LU solve (replaces matrix by its LU decomposition and overwrites RHS with solution). The default should not need to be over-\/written. 
 
-Complete LU solve (overwrites R\+HS with solution). This is the generic version which should not need to be over-\/written. 
+Complete LU solve (overwrites RHS with solution). This is the generic version which should not need to be over-\/written. 
 
-Definition at line 92 of file matrices.\+cc.
+Definition at line \mbox{\hyperlink{matrices_8cc_source_l00092}{92}} of file \mbox{\hyperlink{matrices_8cc_source}{matrices.\+cc}}.
 
 
 
-References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
+References \mbox{\hyperlink{matrices_8h_source_l00264}{Linear\+\_\+solver\+\_\+pt}}, and \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver\+::solve()}}.
 
 
 
@@ -385,11 +369,11 @@ References Linear\+\_\+solver\+\_\+pt, and oomph\+::\+Linear\+Solver\+::solve().
 
 
 
-Definition at line 273 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00267}{267}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
 
 
-Referenced by oomph\+::\+C\+R\+Double\+Matrix\+::build(), oomph\+::\+C\+C\+Double\+Matrix\+::\+C\+C\+Double\+Matrix(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Dense\+Double\+Matrix\+::\+Dense\+Double\+Matrix(), oomph\+::\+C\+R\+Double\+Matrix\+::lubksub(), oomph\+::\+Dense\+Double\+Matrix\+::lubksub(), oomph\+::\+C\+C\+Double\+Matrix\+::lubksub(), oomph\+::\+C\+R\+Double\+Matrix\+::ludecompose(), oomph\+::\+Dense\+Double\+Matrix\+::ludecompose(), oomph\+::\+C\+C\+Double\+Matrix\+::ludecompose(), oomph\+::\+C\+C\+Double\+Matrix\+::$\sim$\+C\+C\+Double\+Matrix(), oomph\+::\+C\+R\+Double\+Matrix\+::$\sim$\+C\+R\+Double\+Matrix(), and oomph\+::\+Dense\+Double\+Matrix\+::$\sim$\+Dense\+Double\+Matrix().
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l01672}{oomph\+::\+CRDouble\+Matrix\+::build()}}, \mbox{\hyperlink{matrices_8cc_source_l00572}{oomph\+::\+CCDouble\+Matrix\+::\+CCDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01214}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l00139}{oomph\+::\+Dense\+Double\+Matrix\+::\+Dense\+Double\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01749}{oomph\+::\+CRDouble\+Matrix\+::lubksub()}}, \mbox{\hyperlink{matrices_8cc_source_l00202}{oomph\+::\+Dense\+Double\+Matrix\+::lubksub()}}, \mbox{\hyperlink{matrices_8cc_source_l00614}{oomph\+::\+CCDouble\+Matrix\+::lubksub()}}, \mbox{\hyperlink{matrices_8cc_source_l01728}{oomph\+::\+CRDouble\+Matrix\+::ludecompose()}}, \mbox{\hyperlink{matrices_8cc_source_l00192}{oomph\+::\+Dense\+Double\+Matrix\+::ludecompose()}}, \mbox{\hyperlink{matrices_8cc_source_l00606}{oomph\+::\+CCDouble\+Matrix\+::ludecompose()}}, \mbox{\hyperlink{matrices_8cc_source_l00597}{oomph\+::\+CCDouble\+Matrix\+::$\sim$\+CCDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01343}{oomph\+::\+CRDouble\+Matrix\+::$\sim$\+CRDouble\+Matrix()}}, and \mbox{\hyperlink{matrices_8cc_source_l00182}{oomph\+::\+Dense\+Double\+Matrix\+::$\sim$\+Dense\+Double\+Matrix()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DoubleMatrixBase_a86f0315e581cd5b41b75867383aa3760}\label{classoomph_1_1DoubleMatrixBase_a86f0315e581cd5b41b75867383aa3760}} 
 \index{oomph::DoubleMatrixBase@{oomph::DoubleMatrixBase}!Linear\_solver\_pt@{Linear\_solver\_pt}}
@@ -399,11 +383,11 @@ Referenced by oomph\+::\+C\+R\+Double\+Matrix\+::build(), oomph\+::\+C\+C\+Doubl
 
 
 
-Definition at line 270 of file matrices.\+h.
+Definition at line \mbox{\hyperlink{matrices_8h_source_l00264}{264}} of file \mbox{\hyperlink{matrices_8h_source}{matrices.\+h}}.
 
 
 
-Referenced by oomph\+::\+C\+C\+Double\+Matrix\+::\+C\+C\+Double\+Matrix(), oomph\+::\+C\+R\+Double\+Matrix\+::clear(), oomph\+::\+C\+R\+Double\+Matrix\+::\+C\+R\+Double\+Matrix(), oomph\+::\+Dense\+Double\+Matrix\+::\+Dense\+Double\+Matrix(), linear\+\_\+solver\+\_\+pt(), and solve().
+Referenced by \mbox{\hyperlink{matrices_8cc_source_l00572}{oomph\+::\+CCDouble\+Matrix\+::\+CCDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{oomph\+::\+CRDouble\+Matrix\+::clear()}}, \mbox{\hyperlink{matrices_8cc_source_l01214}{oomph\+::\+CRDouble\+Matrix\+::\+CRDouble\+Matrix()}}, \mbox{\hyperlink{matrices_8cc_source_l00139}{oomph\+::\+Dense\+Double\+Matrix\+::\+Dense\+Double\+Matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00296}{linear\+\_\+solver\+\_\+pt()}}, and \mbox{\hyperlink{matrices_8cc_source_l00050}{solve()}}.
 
 
 

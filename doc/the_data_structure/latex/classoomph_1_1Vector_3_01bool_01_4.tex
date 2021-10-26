@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1Vector_3_01bool_01_4}{}\doxysection{oomph\+::Vector$<$ bool $>$ Class Reference}
+\hypertarget{classoomph_1_1Vector_3_01bool_01_4}{}\doxysection{oomph\+::Vector\texorpdfstring{$<$}{<} bool \texorpdfstring{$>$}{>} Class Reference}
 \label{classoomph_1_1Vector_3_01bool_01_4}\index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
 
 
@@ -9,7 +9,7 @@ A \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of bools cannot be created bec
 
 {\ttfamily \#include $<$Vector.\+h$>$}
 
-Inheritance diagram for oomph\+::Vector$<$ bool $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Vector\texorpdfstring{$<$}{<} bool \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1Vector_3_01bool_01_4}
@@ -22,6 +22,8 @@ typedef bool \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a209
 \begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\item 
 typedef \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a209e5a9096b2292d8fab6}{value\+\_\+type}} \& \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_aeb7603d575291ef47dcbade68b854f9a}{reference}}
 \begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\item 
+typedef const \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a209e5a9096b2292d8fab6}{value\+\_\+type}} \& \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_abe598d2cdaa4b6fcb78d80c67ac5e761}{const\+\_\+reference}}
+\begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\item 
 typedef size\+\_\+t \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a016848fc2d6e301e64a0209ade793732}{size\+\_\+type}}
 \begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
@@ -29,11 +31,6 @@ typedef size\+\_\+t \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a016848f
 \item 
 \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a0af85cfa373f0845127ab472de8ea2c3}{Vector}} (const double \&dont\+\_\+call\+\_\+this\+\_\+constructor)
 \begin{DoxyCompactList}\small\item\em Dummy constructor to avoid compiler from warning about only-\/private constructors. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-const typedef \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a209e5a9096b2292d8fab6}{value\+\_\+type}} \& \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a7ab6e59cae5bc3f91d7d6b15cf86cbb0}{const\+\_\+reference}}
-\begin{DoxyCompactList}\small\item\em Typedef to make the constructors look a bit cleaner. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -43,6 +40,8 @@ const typedef \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a20
 \begin{DoxyCompactList}\small\item\em A constructor that creates a vector of size \+\_\+\+\_\+n. Note the use of explicit for \char`\"{}strong\char`\"{} type checking. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a9be6c35ffa4cd81c0f046be9b5adc87d}{Vector}} (\mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a016848fc2d6e301e64a0209ade793732}{size\+\_\+type}} \+\_\+\+\_\+n, const bool \&\+\_\+\+\_\+value)
 \begin{DoxyCompactList}\small\item\em A constructor that creates a vector of size \+\_\+\+\_\+n and initialises every entry to \+\_\+\+\_\+value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a05faa0ad7b63f24a43c06d2a3ac7acf0}{Vector}} (std\+::initializer\+\_\+list$<$ bool $>$ init)
+\begin{DoxyCompactList}\small\item\em A constructor that creates a vector with entries set by the values in the input initialiser\+\_\+list. Example\+: Vector$<$int$>$ arr\{true, false, false, true); Vector$<$int$>$ arr = \{true, false, false, true);. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_acd294c9e1af5c2a61af05d55f03c1800}{Vector}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ bool $>$ \&\+\_\+\+\_\+x)
 \begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a8b7fa962119d12a28ae56ff10ebfe301}{initialise}} (const bool \&\+\_\+\+\_\+value)
@@ -52,11 +51,25 @@ void \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a8b7fa962119d12a28ae56f
 \doxysubsection{Detailed Description}
 A \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of bools cannot be created because the is no compiler-\/independent implementation of the bit manipulators. Making all the constructors private should lead to compile-\/time errors. 
 
-Definition at line 193 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00200}{200}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
 \doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_abe598d2cdaa4b6fcb78d80c67ac5e761}\label{classoomph_1_1Vector_3_01bool_01_4_abe598d2cdaa4b6fcb78d80c67ac5e761}} 
+\index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!const\_reference@{const\_reference}}
+\index{const\_reference@{const\_reference}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
+\doxysubsubsection{\texorpdfstring{const\_reference}{const\_reference}}
+{\footnotesize\ttfamily typedef const \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a209e5a9096b2292d8fab6}{value\+\_\+type}}\& \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ bool $>$\+::\mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_abe598d2cdaa4b6fcb78d80c67ac5e761}{const\+\_\+reference}}}
+
+
+
+Typedef to make the constructors look a bit cleaner. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00210}{210}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
 \mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_aeb7603d575291ef47dcbade68b854f9a}\label{classoomph_1_1Vector_3_01bool_01_4_aeb7603d575291ef47dcbade68b854f9a}} 
 \index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!reference@{reference}}
 \index{reference@{reference}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
@@ -69,7 +82,7 @@ Typedef to make the constructors look a bit cleaner.
 
 
 
-Definition at line 200 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00207}{207}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_a016848fc2d6e301e64a0209ade793732}\label{classoomph_1_1Vector_3_01bool_01_4_a016848fc2d6e301e64a0209ade793732}} 
 \index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!size\_type@{size\_type}}
@@ -83,7 +96,7 @@ Typedef to make the constructors look a bit cleaner.
 
 
 
-Definition at line 206 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00213}{213}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a209e5a9096b2292d8fab6}\label{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a209e5a9096b2292d8fab6}} 
 \index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!value\_type@{value\_type}}
@@ -97,7 +110,7 @@ Typedef to make the constructors look a bit cleaner.
 
 
 
-Definition at line 197 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00204}{204}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
@@ -105,7 +118,7 @@ Definition at line 197 of file Vector.\+h.
 \mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_a0af85cfa373f0845127ab472de8ea2c3}\label{classoomph_1_1Vector_3_01bool_01_4_a0af85cfa373f0845127ab472de8ea2c3}} 
 \index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!Vector@{Vector}}
 \index{Vector@{Vector}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
-\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ bool $>$\+::\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{const double \&}]{dont\+\_\+call\+\_\+this\+\_\+constructor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -114,12 +127,12 @@ Dummy constructor to avoid compiler from warning about only-\/private constructo
 
 
 
-Definition at line 211 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00218}{218}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_a97b8a9d1eebc8ea041b3ec5561c4ec59}\label{classoomph_1_1Vector_3_01bool_01_4_a97b8a9d1eebc8ea041b3ec5561c4ec59}} 
 \index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!Vector@{Vector}}
 \index{Vector@{Vector}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
-\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ bool $>$\+::\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
@@ -128,12 +141,12 @@ Construct an empty vector.
 
 
 
-Definition at line 223 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00230}{230}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_ac7f720fa5a5c33441d5d6f483de27a7c}\label{classoomph_1_1Vector_3_01bool_01_4_ac7f720fa5a5c33441d5d6f483de27a7c}} 
 \index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!Vector@{Vector}}
 \index{Vector@{Vector}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
-\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ bool $>$\+::\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a016848fc2d6e301e64a0209ade793732}{size\+\_\+type}}}]{\+\_\+\+\_\+n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [private]}}
 
 
@@ -142,12 +155,12 @@ A constructor that creates a vector of size \+\_\+\+\_\+n. Note the use of expli
 
 
 
-Definition at line 227 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00234}{234}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_a9be6c35ffa4cd81c0f046be9b5adc87d}\label{classoomph_1_1Vector_3_01bool_01_4_a9be6c35ffa4cd81c0f046be9b5adc87d}} 
 \index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!Vector@{Vector}}
 \index{Vector@{Vector}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
-\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ bool $>$\+::\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_a016848fc2d6e301e64a0209ade793732}{size\+\_\+type}}}]{\+\_\+\+\_\+n,  }\item[{const bool \&}]{\+\_\+\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
@@ -156,12 +169,26 @@ A constructor that creates a vector of size \+\_\+\+\_\+n and initialises every 
 
 
 
-Definition at line 231 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00238}{238}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
+
+\mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_a05faa0ad7b63f24a43c06d2a3ac7acf0}\label{classoomph_1_1Vector_3_01bool_01_4_a05faa0ad7b63f24a43c06d2a3ac7acf0}} 
+\index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ bool $>$\+::\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ bool $>$}]{init }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+A constructor that creates a vector with entries set by the values in the input initialiser\+\_\+list. Example\+: Vector$<$int$>$ arr\{true, false, false, true); Vector$<$int$>$ arr = \{true, false, false, true);. 
+
+
+
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00247}{247}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_acd294c9e1af5c2a61af05d55f03c1800}\label{classoomph_1_1Vector_3_01bool_01_4_acd294c9e1af5c2a61af05d55f03c1800}} 
 \index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!Vector@{Vector}}
 \index{Vector@{Vector}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
-\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ bool $>$\+::\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ bool $>$ \&}]{\+\_\+\+\_\+x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
@@ -170,7 +197,7 @@ Copy constructor.
 
 
 
-Definition at line 236 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00250}{250}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 
@@ -187,24 +214,7 @@ Iterate over all values and set to the desired value.
 
 
 
-Definition at line 239 of file Vector.\+h.
-
-
-
-\doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1Vector_3_01bool_01_4_a7ab6e59cae5bc3f91d7d6b15cf86cbb0}\label{classoomph_1_1Vector_3_01bool_01_4_a7ab6e59cae5bc3f91d7d6b15cf86cbb0}} 
-\index{oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}!const\_reference@{const\_reference}}
-\index{const\_reference@{const\_reference}!oomph::Vector$<$ bool $>$@{oomph::Vector$<$ bool $>$}}
-\doxysubsubsection{\texorpdfstring{const\_reference}{const\_reference}}
-{\footnotesize\ttfamily const typedef \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4_ae0dcf1d783a209e5a9096b2292d8fab6}{value\+\_\+type}}\& \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector}}$<$ bool $>$\+::const\+\_\+reference}
-
-
-
-Typedef to make the constructors look a bit cleaner. 
-
-
-
-Definition at line 203 of file Vector.\+h.
+Definition at line \mbox{\hyperlink{Vector_8h_source_l00253}{253}} of file \mbox{\hyperlink{Vector_8h_source}{Vector.\+h}}.
 
 
 

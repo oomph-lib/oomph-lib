@@ -30,14 +30,14 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{\textcolor{comment}{// Driver for 2D Navier Stokes flow interacting with an elastic ring}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Oomph-\/lib include files}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "navier\_stokes.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "beam.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}navier\_stokes.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}beam.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Need to include templated meshes, so that all functions}}
 \DoxyCodeLine{\textcolor{comment}{//are instantiated for our particular element types.}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/quarter\_circle\_sector\_mesh.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/one\_d\_lagrangian\_mesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/quarter\_circle\_sector\_mesh.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/one\_d\_lagrangian\_mesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
 \DoxyCodeLine{}
@@ -86,40 +86,40 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{\textcolor{comment}{ /// Stress ratio}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set the parameters that are used in the code as a function}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set the parameters that are used in the code as a function}}
 \DoxyCodeLine{\textcolor{comment}{ /// of the Womersley number, the density ratio and H}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5928252d8e7440b329065c223926d4d2}{set\_params}}()}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n======================================================"} <<std::endl;}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"\(\backslash\)nSetting parameters. \(\backslash\)n\(\backslash\)n"};}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"Prescribed: Square of Womersley number: Alpha\_sq = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n======================================================"{}} <<std::endl;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}\(\backslash\)nSetting parameters. \(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}Prescribed: Square of Womersley number: Alpha\_sq = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a056817f9a80034eff75fcf94c44b08cd}{Alpha\_sq}} << std::endl;  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"            Density ratio:         Density\_ratio = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}            Density ratio:         Density\_ratio = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5163137c5b98c6ebb942973cba4e297}{Density\_ratio}} << std::endl;}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"            Wall thickness:                    H = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}            Wall thickness:                    H = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}} << std::endl;}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"            Poisson ratio:                    Nu = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}            Poisson ratio:                    Nu = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}} << std::endl;}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"            Pressure perturbation:          Pcos = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}            Pressure perturbation:          Pcos = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}}=1.0/12.0*pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}},3)/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a056817f9a80034eff75fcf94c44b08cd}{Alpha\_sq}};}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"\(\backslash\)nDependent:  Stress ratio:                      Q = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}\(\backslash\)nDependent:  Stress ratio:                      Q = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Lambda\_sq}}=1.0/12.0*pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}},3)*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5163137c5b98c6ebb942973cba4e297}{Density\_ratio}};}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"            Timescale ratio:           Lambda\_sq = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}            Timescale ratio:           Lambda\_sq = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}{Lambda\_sq}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a056817f9a80034eff75fcf94c44b08cd}{Alpha\_sq}};}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"            Reynolds number:                  Re = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}            Reynolds number:                  Re = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}}=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}};}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"           Womersley number:                ReSt = "} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}           Womersley number:                ReSt = "{}} }
 \DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}} << std::endl;}
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{"\(\backslash\)n======================================================\(\backslash\)n\(\backslash\)n"} }
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{}\(\backslash\)n======================================================\(\backslash\)n\(\backslash\)n"{}} }
 \DoxyCodeLine{       <<std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \}}
@@ -143,40 +143,40 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFSIRingProblem}{FSIRingProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short There are very few element types that will work for this problem.}}
+\DoxyCodeLine{\textcolor{comment}{ /// There are very few element types that will work for this problem.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Rather than passing the element type as a template parameter to the}}
 \DoxyCodeLine{\textcolor{comment}{ /// problem, we choose instead to use a typedef to specify the}}
 \DoxyCodeLine{\textcolor{comment}{ /// particular element fluid used.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{typedef} AlgebraicElement<RefineableQCrouzeixRaviartElement<2> > FLUID\_ELEMENT;}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{typedef} AlgebraicElement<RefineableQCrouzeixRaviartElement<2> > \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{FLUID\_ELEMENT}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Typedef to specify the solid element used}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{typedef} FSIHermiteBeamElement SOLID\_ELEMENT;}
+\DoxyCodeLine{\textcolor{comment}{ /// Typedef to specify the solid element used}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{typedef} FSIHermiteBeamElement \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{SOLID\_ELEMENT}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor: Number of elements in wall mesh, amplitude of the}}
 \DoxyCodeLine{\textcolor{comment}{ /// initial wall deformation, amplitude of pcos perturbation and its duration.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFSIRingProblem}{FSIRingProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nelement\_wall,}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFSIRingProblem_a8f4969c6397bebe8afa2b9285ec908e6}{FSIRingProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nelement\_wall,}
 \DoxyCodeLine{                \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& eps\_ampl, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& pcos\_initial,}
 \DoxyCodeLine{                \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& pcos\_duration);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_a63a3da079b167ccdc288372bee6bdbc3}{actions\_after\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update before solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update before solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_a9fd26120e4e078bca685a5c94482ee12}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before checking Newton}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before checking Newton}}
 \DoxyCodeLine{\textcolor{comment}{ /// convergence}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check() }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_afaf315a9b0feb319cf66b21f959e465e}{actions\_before\_newton\_convergence\_check}}() }
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Update the fluid mesh -\/-\/ auxiliary update function for algebraic}}
 \DoxyCodeLine{  \textcolor{comment}{// nodes automatically updates no slip condition.}}
-\DoxyCodeLine{  Fluid\_mesh\_pt-\/>node\_update(); }
+\DoxyCodeLine{  \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>node\_update(); }
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs after adaptation:}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt() }
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after adaptation:}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_af4ffa3d628230ef064a84b7c6e6a5fb8}{actions\_after\_adapt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// The functions used to update the no slip boundary conditions }}
 \DoxyCodeLine{   \textcolor{comment}{// must be set on any new nodes that have been created during the }}
@@ -189,16 +189,16 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{   \textcolor{comment}{// The no-\/slip boundary is boundary 1 of the mesh}}
 \DoxyCodeLine{   \textcolor{comment}{// Loop over the nodes on this boundary and reset the auxilliary}}
 \DoxyCodeLine{   \textcolor{comment}{// node update function}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node = Fluid\_mesh\_pt-\/>nboundary\_node(1);}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>nboundary\_node(1);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     Fluid\_mesh\_pt-\/>boundary\_node\_pt(1,n)-\/>set\_auxiliary\_node\_update\_fct\_pt(}
+\DoxyCodeLine{     \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(1,n)-\/>set\_auxiliary\_node\_update\_fct\_pt(}
 \DoxyCodeLine{      FSI\_functions::apply\_no\_slip\_on\_moving\_wall); }
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// (Re-\/)setup fsi: Work out which fluid dofs affect wall elements}}
 \DoxyCodeLine{   \textcolor{comment}{// the correspondance between wall dofs and fluid elements is handled}}
-\DoxyCodeLine{   \textcolor{comment}{// during the remeshing, but the "reverse" association must be done}}
+\DoxyCodeLine{   \textcolor{comment}{// during the remeshing, but the "{}reverse"{} association must be done}}
 \DoxyCodeLine{   \textcolor{comment}{// separately.}}
 \DoxyCodeLine{   \textcolor{comment}{// We need to set up the interaction every time because the fluid element}}
 \DoxyCodeLine{   \textcolor{comment}{// adjacent to a given solid element's integration point may have changed}}
@@ -206,57 +206,57 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{   \textcolor{comment}{// to the meshes. The interaction boundary is boundary 1 of the 2D }}
 \DoxyCodeLine{   \textcolor{comment}{// fluid mesh.}}
 \DoxyCodeLine{   FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<FLUID\_ELEMENT,2>}
-\DoxyCodeLine{    (\textcolor{keyword}{this},1,Fluid\_mesh\_pt,Wall\_mesh\_pt);}
+\DoxyCodeLine{    (\textcolor{keyword}{this},1,\mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}},\mbox{\hyperlink{classFSIRingProblem_a112c5285b6ea49d0e003fc3bdd817332}{Wall\_mesh\_pt}});}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc solution: Pass number of timestep, i (we append to tracefile}}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc solution: Pass number of timestep, i (we append to tracefile}}
 \DoxyCodeLine{\textcolor{comment}{ /// after every timestep but do a full doc only at certain intervals),}}
 \DoxyCodeLine{\textcolor{comment}{ /// DocInfo object and tracefile}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i, DocInfo\& doc\_info, ofstream\& trace\_file);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_a686782b9af582b68e55c288e1fe4660e}{doc\_solution}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& i, DocInfo\& doc\_info, ofstream\& trace\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Do dynamic run}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} dynamic\_run();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_acbb3bc5cd6d16cfee7a2f19a3b984ce7}{dynamic\_run}}();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Setup initial condition for both domains}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_initial\_condition();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_a309ea4c79fbae58020d94bf2c2318169}{set\_initial\_condition}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Setup initial condition for wall}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_wall\_initial\_condition();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_a5f987c1b22dc306cf7d26be7fa74e322}{set\_wall\_initial\_condition}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Setup initial condition for fluid}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_fluid\_initial\_condition();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_ad397e4e3b92845240dd6a996856f33e7}{set\_fluid\_initial\_condition}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Element used for documenting displacement}}
-\DoxyCodeLine{\textcolor{comment}{} SOLID\_ELEMENT* Doc\_displacement\_elem\_pt;}
+\DoxyCodeLine{\textcolor{comment}{ /// Element used for documenting displacement}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{SOLID\_ELEMENT}}* \mbox{\hyperlink{classFSIRingProblem_a85d9441c676456c71dffc27500bd0fec}{Doc\_displacement\_elem\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to wall mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<SOLID\_ELEMENT> *Wall\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<SOLID\_ELEMENT> *\mbox{\hyperlink{classFSIRingProblem_a112c5285b6ea49d0e003fc3bdd817332}{Wall\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} AlgebraicRefineableQuarterCircleSectorMesh<FLUID\_ELEMENT> *Fluid\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} AlgebraicRefineableQuarterCircleSectorMesh<FLUID\_ELEMENT> *\mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to geometric object that represents the undeformed wall shape}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* Undef\_geom\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classFSIRingProblem_a1c7dfd9d2798fb518403e5ef99f1f69c}{Undef\_geom\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to wall timestepper}}
-\DoxyCodeLine{\textcolor{comment}{} Newmark<2>* Wall\_time\_stepper\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Newmark<2>* \mbox{\hyperlink{classFSIRingProblem_a67d7e17b8b0513e793f94fa4357b5784}{Wall\_time\_stepper\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to fluid timestepper}}
-\DoxyCodeLine{\textcolor{comment}{} BDF<2>* Fluid\_time\_stepper\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} BDF<2>* \mbox{\hyperlink{classFSIRingProblem_a6abf3345b68a0b4b671758439340138e}{Fluid\_time\_stepper\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to node on coarsest mesh on which velocity is traced}}
-\DoxyCodeLine{\textcolor{comment}{} Node* Veloc\_trace\_node\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classFSIRingProblem_a2e64e4625ff61633607233d9a6205000}{Veloc\_trace\_node\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Amplitude of initial deformation}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Eps\_ampl;}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classFSIRingProblem_a6e14af107a8f5b5a5254a55f0707ff4c}{Eps\_ampl}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Initial pcos }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Pcos\_initial;}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classFSIRingProblem_a109eb6d9804264294357d6b76aa50ab6}{Pcos\_initial}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Duration of initial pcos}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} Pcos\_duration;}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classFSIRingProblem_a90ff979880dbecb47f8830f4217eb17f}{Pcos\_duration}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -268,11 +268,11 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIRingProblem_a309ea4c79fbae58020d94bf2c2318169}{FSIRingProblem::set\_initial\_condition}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Setting wall ic"} << std::endl;}
-\DoxyCodeLine{ set\_wall\_initial\_condition();}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Setting wall ic"{}} << std::endl;}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a5f987c1b22dc306cf7d26be7fa74e322}{set\_wall\_initial\_condition}}();}
 \DoxyCodeLine{}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Setting fluid ic"} << std::endl;}
-\DoxyCodeLine{ set\_fluid\_initial\_condition();}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Setting fluid ic"{}} << std::endl;}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_ad397e4e3b92845240dd6a996856f33e7}{set\_fluid\_initial\_condition}}();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
@@ -290,13 +290,13 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{ \textcolor{comment}{// by setting *all* velocities to zero) otherwise we get}}
 \DoxyCodeLine{ \textcolor{comment}{// an impulsive start from a very bizarre initial velocity}}
 \DoxyCodeLine{ \textcolor{comment}{// field! [Yes, it took me a while to figure this out...]}}
-\DoxyCodeLine{ Fluid\_mesh\_pt-\/>node\_update();}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>node\_update();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Assign initial values for the velocities; }}
 \DoxyCodeLine{ \textcolor{comment}{// pressures don't carry a time history and can be left alone.}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Find number of nodes in fluid mesh}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_node = Fluid\_mesh\_pt-\/>nnode();}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>nnode();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Loop over the nodes to set initial guess everywhere}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
@@ -305,12 +305,12 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{   \textcolor{comment}{// zero velocity!}}
 \DoxyCodeLine{   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     Fluid\_mesh\_pt-\/>node\_pt(n)-\/>set\_value(i,0.0);}
+\DoxyCodeLine{     \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>node\_pt(n)-\/>set\_value(i,0.0);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do an impulsive start with the assigned velocity field }}
-\DoxyCodeLine{ Fluid\_mesh\_pt-\/>assign\_initial\_values\_impulsive();}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>assign\_initial\_values\_impulsive();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
@@ -325,8 +325,8 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{ \textcolor{comment}{// Geometric object that specifies the initial conditions:}}
 \DoxyCodeLine{ \textcolor{comment}{// A ring that is bucked in a 2-\/lobed mode}}
 \DoxyCodeLine{ GeomObject* ic\_geom\_object\_pt=}
-\DoxyCodeLine{  \textcolor{keyword}{new} PseudoBucklingRing(Eps\_ampl,\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\_Physical\_Variables::H}},2,2,}
-\DoxyCodeLine{                         Wall\_time\_stepper\_pt); }
+\DoxyCodeLine{  \textcolor{keyword}{new} PseudoBucklingRing(\mbox{\hyperlink{classFSIRingProblem_a6e14af107a8f5b5a5254a55f0707ff4c}{Eps\_ampl}},\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\_Physical\_Variables::H}},2,2,}
+\DoxyCodeLine{                         \mbox{\hyperlink{classFSIRingProblem_a67d7e17b8b0513e793f94fa4357b5784}{Wall\_time\_stepper\_pt}}); }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Assign period of oscillation of the geometric object}}
 \DoxyCodeLine{ \textcolor{keyword}{static\_cast<}PseudoBucklingRing*\textcolor{keyword}{>}(ic\_geom\_object\_pt)-\/>set\_T(1.0);}
@@ -343,7 +343,7 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{ \textcolor{comment}{// Assign values of positional data of all elements on wall mesh}}
 \DoxyCodeLine{ \textcolor{comment}{// so that the wall deforms into the shape specified by IC object.}}
 \DoxyCodeLine{ SolidMesh::Solid\_IC\_problem.set\_static\_initial\_condition(}
-\DoxyCodeLine{  \textcolor{keyword}{this},Wall\_mesh\_pt,IC\_pt,time);}
+\DoxyCodeLine{  \textcolor{keyword}{this},\mbox{\hyperlink{classFSIRingProblem_a112c5285b6ea49d0e003fc3bdd817332}{Wall\_mesh\_pt}},IC\_pt,time);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
@@ -364,14 +364,14 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{  \textcolor{keywordflow}{if} (i\%nskip==0)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    doc\_info.enable\_doc();}
-\DoxyCodeLine{    cout << \textcolor{stringliteral}{"Full doc step "} <<  doc\_info.number()}
-\DoxyCodeLine{         << \textcolor{stringliteral}{" for time "} << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
+\DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}Full doc step "{}} <<  doc\_info.number()}
+\DoxyCodeLine{         << \textcolor{stringliteral}{"{} for time "{}} << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  \textcolor{comment}{//Otherwise, just output the trace file}}
 \DoxyCodeLine{  \textcolor{keywordflow}{else}}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    doc\_info.disable\_doc();}
-\DoxyCodeLine{    cout << \textcolor{stringliteral}{"Only trace for time "} }
+\DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}Only trace for time "{}} }
 \DoxyCodeLine{         << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  }
@@ -383,12 +383,12 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{    ofstream some\_file; \textcolor{keywordtype}{char} filename[100];}
 \DoxyCodeLine{    \textcolor{comment}{//Construct the output filename from the doc\_info number and the}}
 \DoxyCodeLine{    \textcolor{comment}{//output directory}}
-\DoxyCodeLine{    sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{    sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{            doc\_info.number());}
 \DoxyCodeLine{    \textcolor{comment}{//Open the output file}}
 \DoxyCodeLine{    some\_file.open(filename);\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    ///Output the solution using 5x5 plot points }}
-\DoxyCodeLine{\textcolor{comment}{}    Fluid\_mesh\_pt-\/>output(some\_file,5);}
+\DoxyCodeLine{\textcolor{comment}{    /// Output the solution using 5x5 plot points }}
+\DoxyCodeLine{\textcolor{comment}{}    \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>output(some\_file,5);}
 \DoxyCodeLine{    \textcolor{comment}{//Close the output file}}
 \DoxyCodeLine{    some\_file.close();}
 \DoxyCodeLine{   \} }
@@ -399,25 +399,25 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{  \textcolor{comment}{// Write to the trace file: }}
 \DoxyCodeLine{  trace\_file << time\_pt()-\/>time()  }
 \DoxyCodeLine{   \textcolor{comment}{//Document the displacement at the end of the the chosen element}}
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Doc\_displacement\_elem\_pt-\/>interpolated\_x(s,1) }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Veloc\_trace\_node\_pt-\/>x(0)  }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Veloc\_trace\_node\_pt-\/>x(1)  }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Veloc\_trace\_node\_pt-\/>value(0)  }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Veloc\_trace\_node\_pt-\/>value(1)  }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Fluid\_mesh\_pt-\/>nelement() }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << ndof() }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Fluid\_mesh\_pt-\/>nrefinement\_overruled() }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Fluid\_mesh\_pt-\/>max\_error()  }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Fluid\_mesh\_pt-\/>min\_error() }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Fluid\_mesh\_pt-\/>max\_permitted\_error()  }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Fluid\_mesh\_pt-\/>min\_permitted\_error()  }
-\DoxyCodeLine{             << \textcolor{stringliteral}{" "} << Fluid\_mesh\_pt-\/>max\_keep\_unrefined();}
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a85d9441c676456c71dffc27500bd0fec}{Doc\_displacement\_elem\_pt}}-\/>interpolated\_x(s,1) }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a2e64e4625ff61633607233d9a6205000}{Veloc\_trace\_node\_pt}}-\/>x(0)  }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a2e64e4625ff61633607233d9a6205000}{Veloc\_trace\_node\_pt}}-\/>x(1)  }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a2e64e4625ff61633607233d9a6205000}{Veloc\_trace\_node\_pt}}-\/>value(0)  }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a2e64e4625ff61633607233d9a6205000}{Veloc\_trace\_node\_pt}}-\/>value(1)  }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>nelement() }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << ndof() }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>nrefinement\_overruled() }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>max\_error()  }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>min\_error() }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>max\_permitted\_error()  }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>min\_permitted\_error()  }
+\DoxyCodeLine{             << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>max\_keep\_unrefined();}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Output the number of the corresponding full documentation  }}
 \DoxyCodeLine{  \textcolor{comment}{// file number (or -\/1 if no full doc was made)}}
 \DoxyCodeLine{  \textcolor{keywordflow}{if} (doc\_info.is\_doc\_enabled()) }
-\DoxyCodeLine{   \{trace\_file << \textcolor{stringliteral}{" "} <<doc\_info.number()  << \textcolor{stringliteral}{" "};\}}
-\DoxyCodeLine{  \textcolor{keywordflow}{else} \{trace\_file << \textcolor{stringliteral}{" "} <<-\/1  << \textcolor{stringliteral}{" "};\}}
+\DoxyCodeLine{   \{trace\_file << \textcolor{stringliteral}{"{} "{}} <<doc\_info.number()  << \textcolor{stringliteral}{"{} "{}};\}}
+\DoxyCodeLine{  \textcolor{keywordflow}{else} \{trace\_file << \textcolor{stringliteral}{"{} "{}} <<-\/1  << \textcolor{stringliteral}{"{} "{}};\}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//End the trace file}}
 \DoxyCodeLine{  trace\_file << std::endl;}
@@ -640,7 +640,7 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Setup fsi: Work out which fluid dofs affect the wall elements}}
 \DoxyCodeLine{ \textcolor{comment}{// the correspondance between wall dofs and fluid elements is handled}}
-\DoxyCodeLine{ \textcolor{comment}{// during the remeshing, but the "reverse" association must be done}}
+\DoxyCodeLine{ \textcolor{comment}{// during the remeshing, but the "{}reverse"{} association must be done}}
 \DoxyCodeLine{ \textcolor{comment}{// separately.}}
 \DoxyCodeLine{ \textcolor{comment}{// We pass the boundary between the fluid and solid meshes and pointers}}
 \DoxyCodeLine{ \textcolor{comment}{// to the meshes. The interaction boundary is boundary 1 of the }}
@@ -649,7 +649,7 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{  (\textcolor{keyword}{this},1,Fluid\_mesh\_pt,Wall\_mesh\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\# of dofs "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\# of dofs "{}} << assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
@@ -666,29 +666,29 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{\textcolor{comment}{} DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Open a trace file}}
-\DoxyCodeLine{ ofstream trace\_file(\textcolor{stringliteral}{"RESLT/trace\_ring.dat"});}
+\DoxyCodeLine{ ofstream trace\_file(\textcolor{stringliteral}{"{}RESLT/trace\_ring.dat"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Write header for trace file}}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"time\(\backslash\)",\(\backslash\)"V\_c\_t\_r\_l\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"x<sub>1</sub><sup>(track)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"x<sub>2</sub><sup>(track)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"u<sub>1</sub><sup>(track)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"u<sub>2</sub><sup>(track)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"N<sub>element</sub>\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"N<sub>dof</sub>\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"\# of under-\/refined elements\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"max. error\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"min. error\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"max. permitted error\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"min. permitted error\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"max. permitted \# of unrefined elements\(\backslash\)""};}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{",\(\backslash\)"doc number\(\backslash\)""};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}time\(\backslash\)"{},\(\backslash\)"{}V\_c\_t\_r\_l\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}x<sub>1</sub><sup>(track)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}x<sub>2</sub><sup>(track)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}u<sub>1</sub><sup>(track)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}u<sub>2</sub><sup>(track)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}N<sub>element</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}N<sub>dof</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}\# of under-\/refined elements\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}max. error\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}min. error\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}max. permitted error\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}min. permitted error\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}max. permitted \# of unrefined elements\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}doc number\(\backslash\)"{}"{}};}
 \DoxyCodeLine{ trace\_file << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
@@ -702,7 +702,7 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::Argc>1)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   nstep=1;}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Only doing nstep steps for validation: "} << nstep << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Only doing nstep steps for validation: "{}} << nstep << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set initial timestep}}
@@ -728,7 +728,7 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a00f471db241ed712eaefcbaf4fb1d6a9}{Pext}}=0.0;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Perturbation pressure}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}=Pcos\_initial;}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}=\mbox{\hyperlink{classFSIRingProblem_a109eb6d9804264294357d6b76aa50ab6}{Pcos\_initial}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Assign/doc corresponding computational parameters}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5928252d8e7440b329065c223926d4d2}{set\_params}}();}
@@ -742,27 +742,27 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{ refine\_uniformly();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// This sets up the solution at the initial time}}
-\DoxyCodeLine{ set\_initial\_condition();}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a309ea4c79fbae58020d94bf2c2318169}{set\_initial\_condition}}();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set targets for spatial adptivity}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Max. and min. error for adaptive refinement/unrefinement}}
-\DoxyCodeLine{ Fluid\_mesh\_pt-\/>max\_permitted\_error()=1.0e-\/2; }
-\DoxyCodeLine{ Fluid\_mesh\_pt-\/>min\_permitted\_error()=1.0e-\/3; }
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>max\_permitted\_error()=1.0e-\/2; }
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>min\_permitted\_error()=1.0e-\/3; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Don't allow refinement to drop under given level}}
-\DoxyCodeLine{ Fluid\_mesh\_pt-\/>min\_refinement\_level()=2;}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>min\_refinement\_level()=2;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Don't allow refinement beyond given level }}
-\DoxyCodeLine{ Fluid\_mesh\_pt-\/>max\_refinement\_level()=6; }
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>max\_refinement\_level()=6; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Don't bother adapting the mesh if no refinement is required}}
 \DoxyCodeLine{ \textcolor{comment}{// and if less than ... elements are to be merged.}}
-\DoxyCodeLine{ Fluid\_mesh\_pt-\/>max\_keep\_unrefined()=20;}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>max\_keep\_unrefined()=20;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc refinement targets}}
-\DoxyCodeLine{ Fluid\_mesh\_pt-\/>doc\_adaptivity\_targets(cout);}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\_mesh\_pt}}-\/>doc\_adaptivity\_targets(cout);}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do the timestepping}}
@@ -772,14 +772,14 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{ \textcolor{keywordtype}{bool} first=\textcolor{keyword}{true};}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output initial data}}
-\DoxyCodeLine{ doc\_solution(0,doc\_info,trace\_file);}
+\DoxyCodeLine{ \mbox{\hyperlink{classFSIRingProblem_a686782b9af582b68e55c288e1fe4660e}{doc\_solution}}(0,doc\_info,trace\_file);}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//  \{}}
 \DoxyCodeLine{\textcolor{comment}{//   unsigned nel=Fluid\_mesh\_pt-\/>nelement();}}
 \DoxyCodeLine{\textcolor{comment}{//   for (unsigned e=0;e<nel;e++)}}
 \DoxyCodeLine{\textcolor{comment}{//    \{}}
-\DoxyCodeLine{\textcolor{comment}{//     std::cout << "\(\backslash\)n\(\backslash\)nEl: " << e << std::endl << std::endl; }}
+\DoxyCodeLine{\textcolor{comment}{//     std::cout << "{}\(\backslash\)n\(\backslash\)nEl: "{} << e << std::endl << std::endl; }}
 \DoxyCodeLine{\textcolor{comment}{//     FiniteElement* el\_pt=Fluid\_mesh\_pt-\/>finite\_element\_pt(e);}}
 \DoxyCodeLine{\textcolor{comment}{//     unsigned n\_dof=el\_pt-\/>ndof();}}
 \DoxyCodeLine{\textcolor{comment}{//     Vector<double> residuals(n\_dof);}}
@@ -803,10 +803,10 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{   first=\textcolor{keyword}{false};}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Doc solution}}
-\DoxyCodeLine{   doc\_solution(i,doc\_info,trace\_file);}
+\DoxyCodeLine{   \mbox{\hyperlink{classFSIRingProblem_a686782b9af582b68e55c288e1fe4660e}{doc\_solution}}(i,doc\_info,trace\_file);}
 \DoxyCodeLine{   \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{   /// Switch off perturbation pressure}}
-\DoxyCodeLine{\textcolor{comment}{}   \textcolor{keywordflow}{if} (time\_pt()-\/>time()>Pcos\_duration) \{\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}=0.0;\}}
+\DoxyCodeLine{\textcolor{comment}{}   \textcolor{keywordflow}{if} (time\_pt()-\/>time()>\mbox{\hyperlink{classFSIRingProblem_a90ff979880dbecb47f8830f4217eb17f}{Pcos\_duration}}) \{\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}=0.0;\}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
@@ -847,10 +847,11 @@ Our first \char`\"{}real\char`\"{} fluid-\/structure interaction problem\+: We s
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+
 \end{DoxyCodeInclude}
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

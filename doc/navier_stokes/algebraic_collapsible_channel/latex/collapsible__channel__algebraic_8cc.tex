@@ -1,42 +1,31 @@
 \hypertarget{collapsible__channel__algebraic_8cc}{}\doxysection{collapsible\+\_\+channel\+\_\+algebraic.\+cc File Reference}
 \label{collapsible__channel__algebraic_8cc}\index{collapsible\_channel\_algebraic.cc@{collapsible\_channel\_algebraic.cc}}
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-class \mbox{\hyperlink{classOscillatingWall}{Oscillating\+Wall}}
-\item 
-class \mbox{\hyperlink{classCollapsibleChannelProblem}{Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceBL__Squash}{B\+L\+\_\+\+Squash}}
-\item 
- \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
-\begin{DoxyCompactList}\small\item\em Namespace for phyical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceBL__Squash}{BL\+\_\+\+Squash}}
+\begin{DoxyCompactList}\small\item\em Namespace to define the mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{namespaceBL__Squash_a0fdaf7661591150041b7102dbe578cdc}{B\+L\+\_\+\+Squash\+::squash\+\_\+fct}} (const double \&s)
-\begin{DoxyCompactList}\small\item\em Mapping \mbox{[}0,1\mbox{]} -\/$>$ \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}{Global\+\_\+\+Physical\+\_\+\+Variables\+::prescribed\+\_\+traction}} (const double \&\mbox{\hyperlink{algebraic__collapsible__channel_8txt_a0dc44f34a836b7b9cdeda9a988c97756}{t}}, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
-\begin{DoxyCompactList}\small\item\em Traction required at the left boundary. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{collapsible__channel__algebraic_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\end{DoxyCompactItemize}
+double \mbox{\hyperlink{namespaceBL__Squash_a0fdaf7661591150041b7102dbe578cdc}{BL\+\_\+\+Squash\+::squash\+\_\+fct}} (const double \&s)
+\begin{DoxyCompactList}\small\item\em Mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{collapsible__channel__algebraic_8cc_a32538ff879a8e272a25090d7d20195ab}{left}} (\textbackslash{}begin\{array\}\{c\} L\+\_\+\{up\}+\textbackslash{}zeta \textbackslash{}newline 1 \textbackslash{}end\{array\} \textbackslash{}right)+A \textbackslash{}left(\textbackslash{}begin
+\begin{DoxyCompactList}\small\item\em Straight, horizontal channel wall at $ y=H $ deforms into an oscillating parabola. The amplitude of the oscillation $ A $ and its period is $ T $. The position vector to a point on the wall, parametrised by the Lagrangian coordinate $ \zeta \in [0,L]$, is therefore given by. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{collapsible__channel__algebraic_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{collapsible__channel__algebraic_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
-\index{collapsible\_channel\_algebraic.cc@{collapsible\_channel\_algebraic.cc}!main@{main}}
-\index{main@{main}!collapsible\_channel\_algebraic.cc@{collapsible\_channel\_algebraic.cc}}
-\doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
-
-Driver code for an unsteady adaptive collapsible channel problem with prescribed wall motion. Presence of command line arguments indicates validation run with coarse resolution and small number of timesteps. 
-
-Definition at line 804 of file collapsible\+\_\+channel\+\_\+algebraic.\+cc.
+\mbox{\Hypertarget{collapsible__channel__algebraic_8cc_a32538ff879a8e272a25090d7d20195ab}\label{collapsible__channel__algebraic_8cc_a32538ff879a8e272a25090d7d20195ab}} 
+\index{collapsible\_channel\_algebraic.cc@{collapsible\_channel\_algebraic.cc}!left@{left}}
+\index{left@{left}!collapsible\_channel\_algebraic.cc@{collapsible\_channel\_algebraic.cc}}
+\doxysubsubsection{\texorpdfstring{left()}{left()}}
+{\footnotesize\ttfamily left (\begin{DoxyParamCaption}\item[{\textbackslash{}begin\{array\}\{c\} L\+\_\+\{up\}+\textbackslash{}zeta \textbackslash{}newline 1 \textbackslash{}end\{array\} \textbackslash{}}]{right }\end{DoxyParamCaption})}
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+up, and problem.
+Straight, horizontal channel wall at $ y=H $ deforms into an oscillating parabola. The amplitude of the oscillation $ A $ and its period is $ T $. The position vector to a point on the wall, parametrised by the Lagrangian coordinate $ \zeta \in [0,L]$, is therefore given by. 
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel__algebraic_8cc_source_l00089}{89}} of file \mbox{\hyperlink{collapsible__channel__algebraic_8cc_source}{collapsible\+\_\+channel\+\_\+algebraic.\+cc}}.
 

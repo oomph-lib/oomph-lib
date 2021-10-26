@@ -4,28 +4,28 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1Vector}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$}}
-\item 
+\begin{DoxyCompactList}\small\item\em A slight extension to the standard template vector class so that we can include \char`\"{}graceful\char`\"{} array range checks if the RANGE\+\_\+\+CHECKING flag is set. The generalisation to general allocators is NOT handled here, mainly because we never use it, but also because the intel and gnu compilers have different names for the internal classes, which makes writing code that works for both a pain! \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1Vector_3_01bool_01_4}{oomph\+::\+Vector$<$ bool $>$}}
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of bools cannot be created because the is no compiler-\/independent implementation of the bit manipulators. Making all the constructors private should lead to compile-\/time errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers}{oomph\+::\+Vector\+Helpers}}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers}{oomph\+::\+Vector\+Helpers}}
 \begin{DoxyCompactList}\small\item\em Namespace for helper functions for \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$double$>$}} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}{oomph\+::\+Vector\+Helpers\+::check\+\_\+lengths\+\_\+match}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const Vector$<$ double $>$ \&b)
+void \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_adf5dc760c5f0c03365628b293544f838}{oomph\+::\+Vector\+Helpers\+::check\+\_\+lengths\+\_\+match}} (const Vector$<$ double $>$ \&a, const Vector$<$ double $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Check the lengths if two Vectors are the same length. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{oomph\+::\+Vector\+Helpers\+::dot}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const Vector$<$ double $>$ \&b)
+double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a3df72a05fe435265c5b42dc232ff351c}{oomph\+::\+Vector\+Helpers\+::dot}} (const Vector$<$ double $>$ \&a, const Vector$<$ double $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Probably not always best/fastest because not optimised for dimension but useful... \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}{oomph\+::\+Vector\+Helpers\+::magnitude}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}})
+double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_af92401cf726dc1712b7fb861b8416e69}{oomph\+::\+Vector\+Helpers\+::magnitude}} (const Vector$<$ double $>$ \&a)
 \begin{DoxyCompactList}\small\item\em Get the magnitude of a vector. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}{oomph\+::\+Vector\+Helpers\+::angle}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const Vector$<$ double $>$ \&b)
+double \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa1e3f6ce0472f978e750514448f8ca06}{oomph\+::\+Vector\+Helpers\+::angle}} (const Vector$<$ double $>$ \&a, const Vector$<$ double $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Get the angle between two vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a462a66b178a1be39913a4b62c9d72eda}{oomph\+::\+Vector\+Helpers\+::cross}} (const Vector$<$ double $>$ \&A, const Vector$<$ double $>$ \&B, Vector$<$ double $>$ \&C)
 \begin{DoxyCompactList}\small\item\em Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok nowadays). \end{DoxyCompactList}\item 
-Vector$<$ double $>$ \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_aa016aa8f2db73ad16bf65c218e5e0da2}{oomph\+::\+Vector\+Helpers\+::cross}} (const Vector$<$ double $>$ \&A, const Vector$<$ double $>$ \&B)
+Vector$<$ double $>$ \mbox{\hyperlink{namespaceoomph_1_1VectorHelpers_a46b44975d832ac17e752658afa5e0927}{oomph\+::\+Vector\+Helpers\+::cross}} (const Vector$<$ double $>$ \&A, const Vector$<$ double $>$ \&B)
 \begin{DoxyCompactList}\small\item\em Cross product using \char`\"{}proper\char`\"{} output (move semantics means this is ok This calls the other cross(...) function. \end{DoxyCompactList}\end{DoxyCompactItemize}

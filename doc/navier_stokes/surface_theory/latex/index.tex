@@ -76,8 +76,7 @@ After using the non-\/dimensionalisation described in \href{../../single_layer_f
 Early contributors computed these terms directly, but an undesirable feature is that computation of the curvature requires taking second derivatives of the position vector, which requires a higher degree of smoothness than previously demanded. We can use the surface divergence theorem again to weaken this requirement. Firstly we must use the product rule to bring the test function into the surface divergence \[ \int\!\!\!\int_{S} \frac{1}{Ca} \left[\sigma \mbox{\boldmath$\psi$}^{(F)} \mbox{\boldmath$\cdot$}\, \kappa \, \mbox{\boldmath$n$} + \mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \mbox{\boldmath$\cdot$}\left(\sigma \mbox{\boldmath$\psi$}^{(F)} \right) - \sigma\, \mbox{\boldmath$\nabla$}_{\!\!_{S}}\,\mbox{\boldmath$\cdot\psi$}^{(F)} \right]\, \mbox{ d}S; \] and then we can use the surface divergence theorem (1) on the first two terms to obtain \[ \int_{B} \frac{1}{Ca} \sigma \mbox{\boldmath$\psi$}^{(F)} \mbox{\boldmath$\cdot m$}\,\mbox{ d}l - \int\!\!\!\int_{S} \frac{1}{Ca} \sigma \mbox{\boldmath$\nabla$}_{\!\!_{S}}\, \mbox{\boldmath$\cdot\psi$}^{(F)} \, \mbox{ d}S. \]
 
 In index notation these terms become \[ \int_{B} \frac{1}{Ca} \sigma \psi_{i}^{(F)} m_{i}\,\mbox{ d}l - \int\!\!\!\int_{S} \frac{1}{Ca} \sigma g^{\alpha\beta} \Big[\mbox{\boldmath$g$}_{\alpha}\Big]_{i} \left[\mbox{\boldmath$\psi$}^{(F)}_{,\beta}\right]_{i} \, \mbox{ d}S, \] where $ [\mbox{\boldmath$g$}_{\alpha}]_{i} $ denotes the $ i\!$-\/th component of the covariant base vector $ \mbox{\boldmath$g$}_{\alpha} $ and $ \sigma_{,\beta}$ represents the derivative $ \partial \sigma / \partial \zeta^{\beta} \quad (3) $. These are the terms that are implemented in {\ttfamily oomph-\/lib\textquotesingle{}s} free surface elements. Note that variations in surface tension are taken into account in this formulation without the explicit need to take its surface derivative. An important observation is that the intrinsic surface coordinates can be chosen to be the local coordinates of each element so that we do not need to introduce another set of coordinates.\hypertarget{index_kin_con}{}\doxysubsubsection{Kinematic condition}\label{index_kin_con}
-The kinematic condition is that \char`\"{}particles on the surface must
- remain on the surface\char`\"{}. In other words the normal velocity of the surface must equal the normal rate of change of its position with time. The condition is compactly expressed in non-\/dimensional form as \[ \left(\mbox{\boldmath$U$} - St \frac{\partial \mathbf{R}}{\partial t}\right) \mbox{\boldmath$\cdot n$} = 0, \] where $ St$ is the Strouhal number, see \href{../../single_layer_free_surface/html/index.html}{\texttt{ another tutorial }} for details. Note that, in general $ \mbox{\boldmath$U$}$ the velocity of the surface need {\itshape  not } coincide with the velocity of the fluid.
+The kinematic condition is that \char`\"{}particles on the surface must  remain on the surface\char`\"{}. In other words the normal velocity of the surface must equal the normal rate of change of its position with time. The condition is compactly expressed in non-\/dimensional form as \[ \left(\mbox{\boldmath$U$} - St \frac{\partial \mathbf{R}}{\partial t}\right) \mbox{\boldmath$\cdot n$} = 0, \] where $ St$ is the Strouhal number, see \href{../../single_layer_free_surface/html/index.html}{\texttt{ another tutorial }} for details. Note that, in general $ \mbox{\boldmath$U$}$ the velocity of the surface need {\itshape  not } coincide with the velocity of the fluid.
 
 Although this equation must be satisfied the details of how exactly it is implemented depend crucially on the mesh-\/update strategy chosen and we make use of the C++ features of inheritance and templating to avoid code duplication, see below for details.
 
@@ -87,7 +86,7 @@ Consider a chemical species with surface concentration $ \Gamma$ that is only pr
 
 Rather than covering the literature, here we shall simply state, {\itshape  ab initio }, the governing equations formulated by Huang, Lai \& Tseng as well as Cermelli et al (2005), who claim it was established by Slattery (1972). We shall demonstrate that it is equivalent to the form stated by Wong \& Rumshitski and used by Campana et al (2004), but that it leads to a simpler formulation which avoids explicit calculation of the curvature (and hence second derivatives).
 
-The dimensionless governing equations in weak form governing the transport of a scalar quantity $ \Gamma $ are \[ \int\!\!\!\int_{S} \left[ St \left(\frac{\partial \Gamma}{\partial t} - \dot{\mbox{\boldmath$R$}} \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right) + \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \left(\Gamma \mbox{\boldmath$U$}\right) - \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right]\, \phi\, \mbox{d}S = 0. \] In the above equation the time derivative is taken at fixed \`{}`nodes'\textquotesingle{} in the finite element formulation and the A\+L\+E-\/like term compensates for tangential movement of these nodes along the surface. The normal movement is enforced to be exactly the same as the surface velocity by the kinematic condition. Note that the velocity in the third term of the governing equation is the full (bulk) fluid velocity. The dimensionless quantity $ Pe_s = \mathcal{U}\mathcal{L} / D_{s} $ is the surface Peclet number.
+The dimensionless governing equations in weak form governing the transport of a scalar quantity $ \Gamma $ are \[ \int\!\!\!\int_{S} \left[ St \left(\frac{\partial \Gamma}{\partial t} - \dot{\mbox{\boldmath$R$}} \mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right) + \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \left(\Gamma \mbox{\boldmath$U$}\right) - \frac{1}{Pe_{s}} \mbox{\boldmath$\nabla$}_{\!\!_{S}}\mbox{\boldmath$\cdot$} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \Gamma \right]\, \phi\, \mbox{d}S = 0. \] In the above equation the time derivative is taken at fixed \`{}`nodes'\textquotesingle{} in the finite element formulation and the ALE-\/like term compensates for tangential movement of these nodes along the surface. The normal movement is enforced to be exactly the same as the surface velocity by the kinematic condition. Note that the velocity in the third term of the governing equation is the full (bulk) fluid velocity. The dimensionless quantity $ Pe_s = \mathcal{U}\mathcal{L} / D_{s} $ is the surface Peclet number.
 
 The formulation of Campana et al is found by decomposing the velocity in this term into normal and tangential components. \[ \mbox{\boldmath$\nabla$}_{S} \mbox{\boldmath$\cdot$} \left(\Gamma \mbox{\boldmath$U$}\right) = \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \left(\Gamma \mbox{\boldmath$U$}_{t} + \Gamma U_{n} \mbox{\boldmath$n$} \right). \] The surface gradient yields a vector that is tangential to the surface so that its inner product with the unit normal, $ \mbox{\boldmath$n$}$ is zero. Thus, \[ \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \left(\Gamma \mbox{\boldmath$U$}\right) = \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot$} \left(\Gamma \mbox{\boldmath$U$}_{t}\right) + \Gamma U_{n} \mbox{\boldmath$\nabla$}_{\!\!_{S}} \mbox{\boldmath$\cdot n$}, \] which is the starting point for Campana {\itshape  et al}\textquotesingle{}s derivation because the surface divergence of the normal may be replaced by the curvature, as described above.
 
@@ -109,26 +108,31 @@ The template-\/free \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement}{oomph\
 \item The virtual function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{double} FluidInterfaceElement::compute\_surface\_derivatives(...)}
+
 \end{DoxyCode}
  specifies how the surface gradient operators are computed.
 \item The function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{surface__theory_8txt_aa6e311b025109a0aa3e5058952a5cd99}{FluidInterfaceElement::sigma}}(\textcolor{keyword}{const} Vector<double> \&s\_local) }
+\DoxyCodeLine{\textcolor{keywordtype}{double} FluidInterfaceElement::sigma(\textcolor{keyword}{const} Vector<double> \&s\_local) }
+
 \end{DoxyCode}
  that returns the surface tension at the given local coordinate; default implementation returns 1.\+0.
 \item The function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FluidInterfaceElement::fill\_in\_generic\_residual\_contribution\_interface(..)}
+
 \end{DoxyCode}
  that is responsible for assembling the residual and jacobian contributions corresponding to the dynamic and kinematic boundary conditions.
 \item The function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FluidInterfaceElement::add\_additional\_residual\_contributions\_interface(...)}
+
 \end{DoxyCode}
  which is called from {\itshape  within } the integration loop and is used to assemble any additional surface transport equations or equations arising from different node update strategies. This function is virtual so that it can be overloaded in derived classes.
 \item The function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{FluidInterfaceElement::kinematic\_local\_eqn}}(...)}
+\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{int} FluidInterfaceElement::kinematic\_local\_eqn(...)}
+
 \end{DoxyCode}
  that is used to specify the local equation number used for the kinematic condition, which depends on the mesh-\/update strategy chosen.
 \end{DoxyItemize}\hypertarget{index_line}{}\doxysubsection{The Line\+Derivatives class}\label{index_line}
@@ -144,7 +148,7 @@ The class \mbox{\hyperlink{classoomph_1_1SurfaceDerivatives}{oomph\+::\+Surface\
 \hypertarget{index_spine_formulation}{}\doxysection{The Spine\+Line/\+Axi/\+Surface\+Fluid\+Interface\+Element classes}\label{index_spine_formulation}
 We shall discuss the \char`\"{}line\char`\"{} version of the elements, but the others are essentially the same.
 
-The class \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Element}} is templated by the bulk element type, {\ttfamily E\+L\+E\+M\+E\+NT}, and inherits from {\ttfamily Fluid\+Interface\+Element}, Line\+Derivatives and {\ttfamily Hijacked$<$Spine\+Element$<$Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$} $>$ $>$. The hijacking is only required for imposition of contact angle boundary conditions, see \href{../../static_single_layer/html/index.html}{\texttt{ another tutorial }} for more details.
+The class \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Element}} is templated by the bulk element type, {\ttfamily ELEMENT}, and inherits from {\ttfamily Fluid\+Interface\+Element}, Line\+Derivatives and {\ttfamily Hijacked\texorpdfstring{$<$}{<}Spine\+Element\texorpdfstring{$<$}{<}Face\+Geometry$<$\+ELEMENT$>$} \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>}. The hijacking is only required for imposition of contact angle boundary conditions, see \href{../../static_single_layer/html/index.html}{\texttt{ another tutorial }} for more details.
 
 Note that the use of templates to make the code generic makes it hard to read. A simplified constructor is given below and simply builds the element based on the {\ttfamily Face\+Geometry} of the bulk element and sets the indices associated with the bulk fluid velocity components from the bulk element.
 
@@ -155,29 +159,25 @@ Note that the use of templates to make the code generic makes it hard to read. A
 \end{DoxyCodeInclude}
 
 
-If a spine method is used to update the nodal positions then the spine height is the unknown associated with the kinematic condition. Thus, the function {\ttfamily \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{kinematic\+\_\+local\+\_\+eqn(...)}}} is overloaded accordingly  
+If a spine method is used to update the nodal positions then the spine height is the unknown associated with the kinematic condition. Thus, the function {\ttfamily kinematic\+\_\+local\+\_\+eqn(...)} is overloaded accordingly  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{keywordtype}{int} \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{kinematic\_local\_eqn}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
+\DoxyCodeLine{    \textcolor{keywordtype}{int} kinematic\_local\_eqn(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{      \textcolor{keywordflow}{return} this-\/>spine\_local\_eqn(n);}
 
 \end{DoxyCodeInclude}
-
-
-Finally, the element calculates the geometric contributions to the jacobian using the generic functionality in {\ttfamily Element\+With\+Moving\+Nodes} 
+ Finally, the element calculates the geometric contributions to the jacobian using the generic functionality in {\ttfamily Element\+With\+Moving\+Nodes} 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
 
 \end{DoxyCodeInclude}
-
-
-There are no additional contributions to the residuals or jacobian.
+ There are no additional contributions to the residuals or jacobian.
 
 \DoxyHorRuler{0}
 \hypertarget{index_elastic_formulation}{}\doxysection{The Elastic\+Line/\+Axi/\+Surface\+Fluid\+Interface\+Element classes}\label{index_elastic_formulation}
 We shall discuss the \char`\"{}line\char`\"{} version of the elements, but the others are essentially the same.
 
-The class \mbox{\hyperlink{classoomph_1_1ElasticLineFluidInterfaceElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Element}} is templated by the bulk element type, {\ttfamily E\+L\+E\+M\+E\+NT}, and inherits from {\ttfamily Line\+Derivatives}, Fluid\+Interface\+Element and {\ttfamily Hijacked$<$Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$} $>$. The hijacking is again only required for imposition of contact angle boundary conditions.
+The class \mbox{\hyperlink{classoomph_1_1ElasticLineFluidInterfaceElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Element}} is templated by the bulk element type, {\ttfamily ELEMENT}, and inherits from {\ttfamily Line\+Derivatives}, Fluid\+Interface\+Element and {\ttfamily Hijacked\texorpdfstring{$<$}{<}Face\+Geometry$<$\+ELEMENT$>$} \texorpdfstring{$>$}{>}. The hijacking is again only required for imposition of contact angle boundary conditions.
 
 The \char`\"{}elastic\char`\"{} versions of the elements are more complicated than the \char`\"{}spine\char`\"{} versions because the kinematic condition is imposed using Lagrange multipliers, following the method described by Cairncross et al A finite element method for free surface flows of incompressible fluids in three dimensions. Part I. Boundary fitted mesh motion\textquotesingle{} (2000). These Lagrange multipliers must be added to the {\ttfamily Nodes} on the free surface and their introduction adds additional terms to the equations governing the bulk mesh motion.
 
@@ -188,21 +188,17 @@ The constructor is given below and in addition to building the element based on 
 \DoxyCodeLine{    ElasticLineFluidInterfaceElement(FiniteElement* \textcolor{keyword}{const}\& element\_pt,}
 
 \end{DoxyCodeInclude}
-
-
-The kinematic boundary condition is associated with the Lagrange multiplier and {\ttfamily \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{kinematic\+\_\+local\+\_\+eqn(...)}}} is overloaded accordingly  
+ The kinematic boundary condition is associated with the Lagrange multiplier and {\ttfamily kinematic\+\_\+local\+\_\+eqn(...)} is overloaded accordingly  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{/// (This is the equation for the Lagrange multiplier)}}
-\DoxyCodeLine{    \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{surface__theory_8txt_a3bad7200e996f3bbea6cbbce2e83e61a}{kinematic\_local\_eqn}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
+\DoxyCodeLine{\textcolor{comment}{    /// (This is the equation for the Lagrange multiplier)}}
+\DoxyCodeLine{    \textcolor{keyword}{inline} \textcolor{keywordtype}{int} kinematic\_local\_eqn(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{      \textcolor{comment}{// Get the index of the nodal value associated with Lagrange multiplier}}
 \DoxyCodeLine{      \textcolor{keywordflow}{return} this-\/>nodal\_local\_eqn(n, this-\/>lagrange\_index(n));}
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-The element calculates the geometric contributions to the jacobian using the generic functionality in {\ttfamily Solid\+Elements} 
+ The element calculates the geometric contributions to the jacobian using the generic functionality in {\ttfamily Solid\+Elements} 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
 \DoxyCodeLine{                                          DenseMatrix<double>\& jacobian)}
@@ -216,16 +212,15 @@ The element calculates the geometric contributions to the jacobian using the gen
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-The additional contributions to the residuals and jacobian arise from the Lagrange multiplier contributions to the equations that determine the position of the nodes. The essential loop is the contribution below which adds the normal traction to the governing equations of solid mechanics\+: 
+ The additional contributions to the residuals and jacobian arise from the Lagrange multiplier contributions to the equations that determine the position of the nodes. The essential loop is the contribution below which adds the normal traction to the governing equations of solid mechanics\+: 
 \begin{DoxyCodeInclude}{0}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_surface}{}\doxysection{The Surface\+Derivatives class}\label{index_surface}
+ \hypertarget{index_surface}{}\doxysection{The Surface\+Derivatives class}\label{index_surface}
 The recommended strategy for implementing surface transport equations is to inherit from the appropriate {\ttfamily Fluid\+Interface\+Element}, and include the equations independently of the mesh-\/update strategy by overloading the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FluidInterfaceElement::add\_additional\_residual\_contributions\_interface(...)}
+
 \end{DoxyCode}
  The mesh-\/update specialisations can be added by further specialisation as required. Alternatively, one could simply inherit directly from the specialised element. This is the approach taken in this \href{../../../multi_physics/rayleigh_instability_surfactant/html/index.html}{\texttt{ example code. }}
 
@@ -233,5 +228,5 @@ An important point is that the axisymmetric formulation of the surface divergenc
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

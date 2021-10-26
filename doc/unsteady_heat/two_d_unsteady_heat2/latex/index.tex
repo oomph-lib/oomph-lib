@@ -22,8 +22,8 @@ The figure below shows a plot of computed and exact solution at a control node a
 Most of the driver code for this example is identical to that discussed in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example,}} therefore we only discuss the modifications required to enable the dump and restart operations\+:
 \begin{DoxyItemize}
 \item We use optional command line arguments to specify the name of the restart file. If the code is run without any command line arguments, we start the simulation at time $ t=0 $ and generate the initial conditions as in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example}}
-\item We add dump and restart functions to the Problem class and call the dump function when post-\/processing the solution in {\ttfamily \mbox{\hyperlink{two__d__unsteady__heat2_8txt_a8c33f390f5dc2186b59cece9f9017efa}{doc\+\_\+solution(...)}}}.
-\item We modify the Problem member function {\ttfamily \mbox{\hyperlink{two__d__unsteady__heat2_8txt_af39003811eefdbd2d5b4564c02a4decf}{set\+\_\+initial\+\_\+condition()}}} ~\newline
+\item We add dump and restart functions to the Problem class and call the dump function when post-\/processing the solution in {\ttfamily doc\+\_\+solution(...)}.
+\item We modify the Problem member function {\ttfamily set\+\_\+initial\+\_\+condition()} ~\newline
  so that the initial conditions are read from the restart file if a restart file was specified on the command line.
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -38,9 +38,9 @@ The only change to the main function is that we record the command line argument
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Driver code for unsteady heat equation with option for}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// restart from disk: Only a single command line argument is allowed.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// If specified it is interpreted as the name of the restart file.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady heat equation with option for}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// restart from disk: Only a single command line argument is allowed.}}
+\DoxyCodeLine{\textcolor{comment}{/// If specified it is interpreted as the name of the restart file.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__unsteady__heat__restarted_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -49,9 +49,7 @@ The only change to the main function is that we record the command line argument
 \DoxyCodeLine{ CommandLineArgs::setup(argc,argv);}
 
 \end{DoxyCodeInclude}
-
-
-The rest of the main function is identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example.}}
+ The rest of the main function is identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example.}}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -60,16 +58,14 @@ The problem class contains the two additional member functions
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Dump problem to disk to allow for restart.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Dump problem to disk to allow for restart.}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} dump\_it(ofstream\& dump\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Read problem for restart from specified restart file.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{two__d__unsteady__heat2_8txt_a7db09e50f04a54496d12ea041f5864b2}{restart}}(ifstream\& restart\_file);}
+\DoxyCodeLine{\textcolor{comment}{ /// Read problem for restart from specified restart file.}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} restart(ifstream\& restart\_file);}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 The problem constructor is identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example.}}
@@ -87,14 +83,14 @@ This function is identical to that in the \href{../../two_d_unsteady_heat/html/i
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_IC}{}\doxysection{Set initial condition}\label{index_IC}
-We start by checking the validity of the command line arguments, accessible via the namespace {\ttfamily Command\+Line\+Args}, as only a single command line argument is allowed. If a command line argument is provided, it is interpreted as the name of the restart file. We try to open the file and, if successful, pass the input stream to the {\ttfamily \mbox{\hyperlink{two__d__unsteady__heat2_8txt_a7db09e50f04a54496d12ea041f5864b2}{restart(...)}}} function, discussed below. If no command line arguments are specified, we generate the initial conditions, essentially as in the ~\newline
- \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example.}} The only difference is that in the current version of the code, we moved the specification and initialisation of the timestep from the {\ttfamily main} function into {\ttfamily \mbox{\hyperlink{two__d__unsteady__heat2_8txt_af39003811eefdbd2d5b4564c02a4decf}{set\+\_\+initial\+\_\+condition()}}}. This is because in a restarted simulation, the value of {\ttfamily dt} must be consistent with that used in the original simulation. If the simulation is restarted, the generic {\ttfamily Problem\+::read(...)} function, called by {\ttfamily \mbox{\hyperlink{two__d__unsteady__heat2_8txt_a7db09e50f04a54496d12ea041f5864b2}{restart(...)}}}, automatically initialises the previous timestep; otherwise we have to perform the initialisation ourselves.
+We start by checking the validity of the command line arguments, accessible via the namespace {\ttfamily Command\+Line\+Args}, as only a single command line argument is allowed. If a command line argument is provided, it is interpreted as the name of the restart file. We try to open the file and, if successful, pass the input stream to the {\ttfamily restart(...)} function, discussed below. If no command line arguments are specified, we generate the initial conditions, essentially as in the ~\newline
+ \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example.}} The only difference is that in the current version of the code, we moved the specification and initialisation of the timestep from the {\ttfamily main} function into {\ttfamily set\+\_\+initial\+\_\+condition()}. This is because in a restarted simulation, the value of {\ttfamily dt} must be consistent with that used in the original simulation. If the simulation is restarted, the generic {\ttfamily Problem\+::read(...)} function, called by {\ttfamily restart(...)}, automatically initialises the previous timestep; otherwise we have to perform the initialisation ourselves.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_set\_initial\_condition====================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set initial condition: Assign previous and current values}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from exact solution or from restart file.}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// from exact solution or from restart file.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a98de3ed2d9cf5409323121bbb482bc1b}{UnsteadyHeatProblem<ELEMENT>::set\_initial\_condition}}()}
@@ -109,7 +105,7 @@ We start by checking the validity of the command line arguments, accessible via 
 \DoxyCodeLine{ \textcolor{comment}{// a single command line argument: their name. Ignore this here.]}}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::Argc==1)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"No restart -\/-\/ setting IC from exact solution"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}No restart -\/-\/ setting IC from exact solution"{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (CommandLineArgs::Argc==2)}
 \DoxyCodeLine{  \{}
@@ -117,15 +113,15 @@ We start by checking the validity of the command line arguments, accessible via 
 \DoxyCodeLine{   restart\_file\_pt= \textcolor{keyword}{new} ifstream(CommandLineArgs::Argv[1],ios\_base::in);}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (restart\_file\_pt!=0)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Have opened "} << CommandLineArgs::Argv[1] << }
-\DoxyCodeLine{      \textcolor{stringliteral}{" for restart. "} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Have opened "{}} << CommandLineArgs::Argv[1] << }
+\DoxyCodeLine{      \textcolor{stringliteral}{"{} for restart. "{}} << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     std::ostringstream error\_stream;}
 \DoxyCodeLine{     error\_stream }
-\DoxyCodeLine{      << \textcolor{stringliteral}{"ERROR while trying to open "} << CommandLineArgs::Argv[1] << }
-\DoxyCodeLine{      \textcolor{stringliteral}{" for restart."} << std::endl;}
+\DoxyCodeLine{      << \textcolor{stringliteral}{"{}ERROR while trying to open "{}} << CommandLineArgs::Argv[1] << }
+\DoxyCodeLine{      \textcolor{stringliteral}{"{} for restart."{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{keywordflow}{throw} OomphLibError(}
 \DoxyCodeLine{      error\_stream.str(),}
@@ -137,8 +133,8 @@ We start by checking the validity of the command line arguments, accessible via 
 \DoxyCodeLine{ \textcolor{keywordflow}{else} }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   std::ostringstream error\_stream;}
-\DoxyCodeLine{   error\_stream << \textcolor{stringliteral}{"Can only specify one input file\(\backslash\)n"} }
-\DoxyCodeLine{                << \textcolor{stringliteral}{"You specified the following command line arguments:\(\backslash\)n"};}
+\DoxyCodeLine{   error\_stream << \textcolor{stringliteral}{"{}Can only specify one input file\(\backslash\)n"{}} }
+\DoxyCodeLine{                << \textcolor{stringliteral}{"{}You specified the following command line arguments:\(\backslash\)n"{}};}
 \DoxyCodeLine{   \textcolor{comment}{//Fix this}}
 \DoxyCodeLine{   CommandLineArgs::output();}
 \DoxyCodeLine{}
@@ -155,7 +151,7 @@ We start by checking the validity of the command line arguments, accessible via 
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Read the problem data from the restart file}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat2_8txt_a7db09e50f04a54496d12ea041f5864b2}{restart}}(*restart\_file\_pt);}
+\DoxyCodeLine{   restart(*restart\_file\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{// Assign initial condition from exact solution}}
@@ -164,11 +160,11 @@ We start by checking the validity of the command line arguments, accessible via 
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Choose timestep}}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} \mbox{\hyperlink{two__d__unsteady__heat2_8txt_a8d9b1de956335a98b4b70f8c32b2c130}{dt}}=0.01;}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} dt=0.01;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Initialise timestep -\/-\/ also sets the weights for all timesteppers}}
 \DoxyCodeLine{   \textcolor{comment}{// in the problem.}}
-\DoxyCodeLine{   initialise\_dt(\mbox{\hyperlink{two__d__unsteady__heat2_8txt_a8d9b1de956335a98b4b70f8c32b2c130}{dt}});}
+\DoxyCodeLine{   initialise\_dt(dt);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Backup time in global Time object}}
 \DoxyCodeLine{   \textcolor{keywordtype}{double} backed\_up\_time=time\_pt()-\/>time();}
@@ -197,7 +193,7 @@ We start by checking the validity of the command line arguments, accessible via 
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Continuous time}}
 \DoxyCodeLine{     \textcolor{keywordtype}{double} time=prev\_time[itime];}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"setting IC at time ="} << time << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}setting IC at time ="{}} << time << std::endl;}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Loop over the nodes to set initial guess everywhere}}
 \DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n=0;n<num\_nod;n++)}
@@ -229,35 +225,30 @@ We start by checking the validity of the command line arguments, accessible via 
 \DoxyCodeLine{\} \textcolor{comment}{// end of set\_initial\_condition}}
 
 \end{DoxyCodeInclude}
- ~\newline
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
-The Problem member function {\ttfamily \mbox{\hyperlink{two__d__unsteady__heat2_8txt_a8c33f390f5dc2186b59cece9f9017efa}{doc\+\_\+solution(...)}}} is identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example,}} apart from the addition of a call to the new {\ttfamily dump\+\_\+it(...)} function, discussed below.
+The Problem member function {\ttfamily doc\+\_\+solution(...)} is identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example,}} apart from the addition of a call to the new {\ttfamily dump\+\_\+it(...)} function, discussed below.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Write restart file}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/restart\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/restart\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ dump\_it(some\_file);}
 \DoxyCodeLine{ some\_file.close();}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_dump}{}\doxysection{Dumping the solution}\label{index_dump}
-The {\ttfamily Problem\+::dump(...)} function writes the generic {\ttfamily Problem} data in A\+S\+C\+II format to the specified output file. The content of the file can therefore be inspected and, if necessary, manipulated before a restart. However, the specific content of the file is generally of little interest -- it is written in a format that can be read by the corresponding function {\ttfamily Problem\+::read(...)}.
+The {\ttfamily Problem\+::dump(...)} function writes the generic {\ttfamily Problem} data in ASCII format to the specified output file. The content of the file can therefore be inspected and, if necessary, manipulated before a restart. However, the specific content of the file is generally of little interest -- it is written in a format that can be read by the corresponding function {\ttfamily Problem\+::read(...)}.
 
 Briefly, the dump file contains\+:
 \begin{DoxyItemize}
 \item A flag that indicates if the data was produced by a time-\/dependent simulation.
-\item The current value of the \char`\"{}continuous\char`\"{} time, i.\+e. the value returned by {\ttfamily Problem\+::time\+\_\+pt()-\/$>$time()};
+\item The current value of the \char`\"{}continuous\char`\"{} time, i.\+e. the value returned by {\ttfamily Problem\+::time\+\_\+pt()-\/\texorpdfstring{$>$}{>}time()};
 \item The number of previous timesteps, {\ttfamily dt}, stored in the {\ttfamily Problem\textquotesingle{}s} {\ttfamily Time} object, and their values.
 \item The values and history values for all {\ttfamily Data} objects in the {\ttfamily Problem}, as well as the present and previous coordinates of all {\ttfamily Nodes}.
 \end{DoxyItemize}The \char`\"{}raw data\char`\"{} is augmented by brief comments that facilitate the identification of individual entries.
@@ -268,7 +259,7 @@ In the present problem, the generic {\ttfamily Problem\+::dump(...)} function is
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_dump\_it===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Dump the solution to disk to allow for restart}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_a9a60874a6471414819301705f1a2afd1}{UnsteadyHeatProblem<ELEMENT>::dump\_it}}(ofstream\& dump\_file)}
 \DoxyCodeLine{\{}
@@ -290,7 +281,7 @@ Since the restart file was written by the generic {\ttfamily Problem\+::dump(...
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=================start\_of\_restart=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Read solution from disk for restart}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnsteadyHeatProblem_ad0a4a1c1da24f6d62f64b0d40be31709}{UnsteadyHeatProblem<ELEMENT>::restart}}(ifstream\& restart\_file)}
 \DoxyCodeLine{\{}
@@ -301,16 +292,14 @@ Since the restart file was written by the generic {\ttfamily Problem\+::dump(...
 \DoxyCodeLine{\} \textcolor{comment}{// end of restart}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 The {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)} functions write/read the generic data that is common to all {\ttfamily oomph-\/lib} problems. Occasionally, it is necessary to record additional data to re-\/create the system\textquotesingle{}s state when the simulations is restarted. We will explore this in more detail in \href{../../two_d_unsteady_heat_2adapt/html/index.html}{\texttt{ another example}}. Here we provide a brief exercise that illustrates the general idea and addresses a shortcoming of the driver code\+: Currently the program computes the same number of timesteps, regardless of whether or not the simulation was restarted. If a simulation is restarted, the computation therefore continues past $ t=t_{max}. $\hypertarget{index_exercises}{}\doxysubsection{Exercises}\label{index_exercises}
 
 \begin{DoxyItemize}
-\item Change the {\ttfamily for} loop over the fixed number of timesteps in the {\ttfamily main} function to a {\ttfamily while} loop that checks if the continuous time, accessible via {\ttfamily Problem\+::time\+\_\+pt()-\/$>$time()}, has reached or exceeded $ t_{max} $. This works because the {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)} functions dump and restore the value of the continuous time.
-\item Following this trivial change, the restarted simulation is terminated at the appropriate point but the numbering of the output files begins at 0, making it difficult to merge the results from the original and the restarted simulations. Modify the functions {\ttfamily dump\+\_\+it(...)} and {\ttfamily \mbox{\hyperlink{two__d__unsteady__heat2_8txt_a7db09e50f04a54496d12ea041f5864b2}{restart(...)}}} so that they write/read the current label for the output files to/from the restart file. ~\newline
+\item Change the {\ttfamily for} loop over the fixed number of timesteps in the {\ttfamily main} function to a {\ttfamily while} loop that checks if the continuous time, accessible via {\ttfamily Problem\+::time\+\_\+pt()-\/\texorpdfstring{$>$}{>}time()}, has reached or exceeded $ t_{max} $. This works because the {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)} functions dump and restore the value of the continuous time.
+\item Following this trivial change, the restarted simulation is terminated at the appropriate point but the numbering of the output files begins at 0, making it difficult to merge the results from the original and the restarted simulations. Modify the functions {\ttfamily dump\+\_\+it(...)} and {\ttfamily restart(...)} so that they write/read the current label for the output files to/from the restart file. ~\newline
 ~\newline
  {\bfseries{Hints\+:}} {\bfseries{(i)}} You can write to/read from the restart file before calling {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)}; just make sure you do it in the same order in both functions. {\bfseries{(ii)}} The easiest way to make the label, currently stored in the {\ttfamily Doc\+Info} object in the {\ttfamily main} function, accessible to all member functions in the {\ttfamily Problem} is to make the {\ttfamily Doc\+Info} object a private data member of the {\ttfamily Problem} class.
 \end{DoxyItemize}
@@ -326,5 +315,5 @@ The {\ttfamily Problem\+::dump(...)} and {\ttfamily Problem\+::read(...)} functi
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

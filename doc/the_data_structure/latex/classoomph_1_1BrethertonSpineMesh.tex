@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1BrethertonSpineMesh}{}\doxysection{oomph\+::Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1BrethertonSpineMesh}{}\doxysection{oomph\+::Bretherton\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT, INTERFACE\+\_\+\+ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1BrethertonSpineMesh}\index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
+
+
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} for 2D Bretherton problem -- based on single layer mesh. Templated by spine-\/ified Navier-\/\+Stokes element type (e.\+g. \mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}}\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$ \texorpdfstring{$>$}{>} and the corresponding interface element (e.\+g. \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{Spine\+Line\+Fluid\+Interface\+Element}}\texorpdfstring{$<$}{<}\mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}}\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$ \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>}  
+
+
 
 
 {\ttfamily \#include $<$bretherton\+\_\+spine\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Bretherton\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT, INTERFACE\+\_\+\+ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.414634cm]{classoomph_1_1BrethertonSpineMesh}
@@ -15,25 +20,25 @@ Inheritance diagram for oomph\+::Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT, I
 \item 
 \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a0e9c404141ee65b000ab4d1fdc4f11da}{Bretherton\+Spine\+Mesh}} (const unsigned \&nx1, const unsigned \&nx2, const unsigned \&nx3, const unsigned \&nh, const unsigned \&nhalf, const double \&h, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$lower\+\_\+wall\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$upper\+\_\+wall\+\_\+pt, const double \&zeta\+\_\+start, const double \&zeta\+\_\+transition\+\_\+start, const double \&zeta\+\_\+transition\+\_\+end, const double \&zeta\+\_\+end, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor. Arguments\+: \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a8ecc86c4477f498db8fa3d265baa6088}{interface\+\_\+element\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a033dc9a56ec88f965ea0250a316752f5}{interface\+\_\+element\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to interface elements. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_ae1ecd7c00fe1032e1ee16d7a98156d5c}{ninterface\+\_\+element}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements on interface. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a93770708eb4769c481d2f811f18f005c}{bulk\+\_\+element\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a2ff43312031988c685c04b059bcf2633}{bulk\+\_\+element\+\_\+pt}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in bulk. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a47184866746a1fce6dd0ca27ab7e17ce}{nbulk}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements in bulk. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_ade4d0f2933beddda517b949d80928a18}{nfree\+\_\+surface\+\_\+spines}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Number of free-\/surface spines (i.\+e. excluding the dummy spines in the channel region) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_ac80488ae4db2da00e1b38f6f07e0ff9d}{find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$const \&fs\+\_\+geom\+\_\+object\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&initial\+\_\+zeta, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine\+\_\+base, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&spine\+\_\+end)
 \begin{DoxyCompactList}\small\item\em Recalculate the spine lengths after repositioning. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a0dfeac5bc9a4fa4bfdcd443def30dcdb}{reposition\+\_\+spines}} (const double \&zeta\+\_\+lo\+\_\+transition\+\_\+start, const double \&zeta\+\_\+lo\+\_\+transition\+\_\+end, const double \&zeta\+\_\+up\+\_\+transition\+\_\+start, const double \&zeta\+\_\+up\+\_\+transition\+\_\+end)
 \begin{DoxyCompactList}\small\item\em Reposition the spines in response to changes in geometry. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a507ea97977b837f2f0d9647407d770cd}{pin\+\_\+all\+\_\+spines}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Pin all spines so the mesh can be used for computation without free surfaces. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b}{spine\+\_\+node\+\_\+update}} (\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$spine\+\_\+node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em General node update function implements pure virtual function defined in \mbox{\hyperlink{classoomph_1_1SpineMesh}{Spine\+Mesh}} base class and performs specific update actions, depending on the node update fct id stored for each node. \end{DoxyCompactList}\item 
-E\+L\+E\+M\+E\+NT $\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a9b02893724c76098f75d9285e9985f4b}{control\+\_\+element\+\_\+pt}} ()
+ELEMENT $\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a43b6d36e20b03ed1de5917d40f32f09e}{control\+\_\+element\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Pointer to control element (just under the symmetry line near the bubble tip, so the bubble tip is located at s=\mbox{[}1.\+0,1.\+0\mbox{]} in this element. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a67f784e7b3a898af6c60515042c3ea73}{spine\+\_\+centre\+\_\+fraction}} () const
 \begin{DoxyCompactList}\small\item\em Read the value of the spine centre\textquotesingle{}s vertical fraction. \end{DoxyCompactList}\item 
@@ -89,7 +94,7 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_af5e7951a89bc13
 \begin{DoxyCompactList}\small\item\em Pointer to vertical fraction of the spine centre. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a306cf8ae8f91a81054904de64195bb16}{Default\+\_\+spine\+\_\+centre\+\_\+fraction}}
 \begin{DoxyCompactList}\small\item\em Default spine fraction. \end{DoxyCompactList}\item 
-E\+L\+E\+M\+E\+NT $\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a81ee86c0c747947dab52073c221d53c1}{Control\+\_\+element\+\_\+pt}}
+ELEMENT $\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a81ee86c0c747947dab52073c221d53c1}{Control\+\_\+element\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to control element (just under the symmetry line near the bubble tip; the bubble tip is located at s=\mbox{[}1.\+0,1.\+0\mbox{]} in this element. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a207b6a5e52ce95c0a6125f56eb22b98d}{Bulk\+\_\+element\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to element in the fluid layer. \end{DoxyCompactList}\item 
@@ -99,12 +104,11 @@ E\+L\+E\+M\+E\+NT $\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh_a81e
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT, class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT, class INTERFACE\+\_\+\+ELEMENT$>$\newline
+class oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$}
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} for 2D Bretherton problem -- based on single layer mesh. Templated by spine-\/ified Navier-\/\+Stokes element type (e.\+g. \mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}}\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$ \texorpdfstring{$>$}{>} and the corresponding interface element (e.\+g. \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{Spine\+Line\+Fluid\+Interface\+Element}}\texorpdfstring{$<$}{<}\mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}}\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$ \texorpdfstring{$>$}{>} \texorpdfstring{$>$}{>} 
 
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} for 2D Bretherton problem -- based on single layer mesh. Templated by spine-\/ified Navier-\/\+Stokes element type (e.\+g. \mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}}$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$ $>$ and the corresponding interface element (e.\+g. \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{Spine\+Line\+Fluid\+Interface\+Element}}$<$\mbox{\hyperlink{classoomph_1_1SpineElement}{Spine\+Element}}$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$ $>$ $>$ 
-
-Definition at line 45 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00045}{45}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -113,8 +117,8 @@ Definition at line 45 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!BrethertonSpineMesh@{BrethertonSpineMesh}}
 \index{BrethertonSpineMesh@{BrethertonSpineMesh}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{BrethertonSpineMesh()}{BrethertonSpineMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{Bretherton\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx1,  }\item[{const unsigned \&}]{nx2,  }\item[{const unsigned \&}]{nx3,  }\item[{const unsigned \&}]{nh,  }\item[{const unsigned \&}]{nhalf,  }\item[{const double \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{lower\+\_\+wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{upper\+\_\+wall\+\_\+pt,  }\item[{const double \&}]{zeta\+\_\+start,  }\item[{const double \&}]{zeta\+\_\+transition\+\_\+start,  }\item[{const double \&}]{zeta\+\_\+transition\+\_\+end,  }\item[{const double \&}]{zeta\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{Bretherton\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx1,  }\item[{const unsigned \&}]{nx2,  }\item[{const unsigned \&}]{nx3,  }\item[{const unsigned \&}]{nh,  }\item[{const unsigned \&}]{nhalf,  }\item[{const double \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{lower\+\_\+wall\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{upper\+\_\+wall\+\_\+pt,  }\item[{const double \&}]{zeta\+\_\+start,  }\item[{const double \&}]{zeta\+\_\+transition\+\_\+start,  }\item[{const double \&}]{zeta\+\_\+transition\+\_\+end,  }\item[{const double \&}]{zeta\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
 
 
 
@@ -134,10 +138,6 @@ Constructor. Arguments\+:
 \item lower\+\_\+wall\+\_\+pt\+: Pointer to geometric object that represents the lower wall
 \item upper\+\_\+wall\+\_\+pt\+: Pointer to geometric object that represents the upper wall
 \item time\+\_\+stepper\+\_\+pt\+: Pointer to timestepper; defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}
-\end{DoxyItemize}
-
-Constructor. Arguments\+:
-\begin{DoxyItemize}
 \item nx1\+: Number of elements along wall in deposited film region
 \item nx2\+: Number of elements along wall in horizontal transition region
 \item nx3\+: Number of elements along wall in channel region
@@ -152,21 +152,21 @@ Constructor. Arguments\+:
 \item time\+\_\+stepper\+\_\+pt\+: Pointer to timestepper; defaults to Static 
 \end{DoxyItemize}
 
-Definition at line 58 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{58}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node(), oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bulk\+\_\+element\+\_\+pt, oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Control\+\_\+element\+\_\+pt, e, oomph\+::\+Spine\+Mesh\+::element\+\_\+node\+\_\+pt(), oomph\+::\+Mesh\+::\+Element\+\_\+pt, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::flush\+\_\+element\+\_\+and\+\_\+node\+\_\+storage(), oomph\+::\+Spine\+Node\+::fraction(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::H, oomph\+::\+Spine\+::height(), i, oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::initial\+\_\+element\+\_\+reorder(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Interface\+\_\+element\+\_\+pt, oomph\+::\+Geom\+Object\+::locate\+\_\+zeta(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Lower\+\_\+wall\+\_\+pt, oomph\+::\+Quad\+Tree\+Names\+::N, n, oomph\+::\+Mesh\+::nboundary\+\_\+node(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Mesh\+::\+Node\+\_\+pt, oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Spine\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Nx3, oomph\+::oomph\+\_\+info, oomph\+::\+Data\+::pin(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Mesh\+::remove\+\_\+boundary\+\_\+nodes(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Spine\+::set\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::set\+\_\+geom\+\_\+parameter(), oomph\+::\+Mesh\+::set\+\_\+nboundary(), oomph\+::\+Mesh\+::setup\+\_\+boundary\+\_\+element\+\_\+info(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+centre\+\_\+fraction(), oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt(), oomph\+::\+Spine\+Node\+::spine\+\_\+mesh\+\_\+pt(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), oomph\+::\+Spine\+Mesh\+::\+Spine\+\_\+pt, oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Upper\+\_\+wall\+\_\+pt, oomph\+::\+Node\+::x(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Zeta\+\_\+end, oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Zeta\+\_\+start, oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Zeta\+\_\+transition\+\_\+end, and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Zeta\+\_\+transition\+\_\+start.
+References \mbox{\hyperlink{mesh_8cc_source_l00243}{oomph\+::\+Mesh\+::add\+\_\+boundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l00493}{oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00543}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00540}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Control\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{spines_8h_source_l00669}{oomph\+::\+Spine\+Mesh\+::element\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00186}{oomph\+::\+Mesh\+::\+Element\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00407}{oomph\+::\+Mesh\+::flush\+\_\+element\+\_\+and\+\_\+node\+\_\+storage()}}, \mbox{\hyperlink{spines_8h_source_l00378}{oomph\+::\+Spine\+Node\+::fraction()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00511}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::H}}, \mbox{\hyperlink{spines_8h_source_l00150}{oomph\+::\+Spine\+::height()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01028}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::initial\+\_\+element\+\_\+reorder()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00546}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Interface\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{geom__objects_8h_source_l00381}{oomph\+::\+Geom\+Object\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00517}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Lower\+\_\+wall\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{mesh_8h_source_l00833}{oomph\+::\+Mesh\+::nboundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00183}{oomph\+::\+Mesh\+::\+Node\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00384}{oomph\+::\+Spine\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00501}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Nx3}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{mesh_8cc_source_l00204}{oomph\+::\+Mesh\+::remove\+\_\+boundary\+\_\+nodes()}}, \mbox{\hyperlink{spines_8h_source_l00225}{oomph\+::\+Spine\+::set\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00273}{oomph\+::\+Spine\+::set\+\_\+geom\+\_\+parameter()}}, \mbox{\hyperlink{mesh_8h_source_l00505}{oomph\+::\+Mesh\+::set\+\_\+nboundary()}}, \mbox{\hyperlink{mesh_8h_source_l00275}{oomph\+::\+Mesh\+::setup\+\_\+boundary\+\_\+element\+\_\+info()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00194}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}, \mbox{\hyperlink{spines_8h_source_l00156}{oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00391}{oomph\+::\+Spine\+Node\+::spine\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00616}{oomph\+::\+Spine\+Mesh\+::\+Spine\+\_\+pt}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00514}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Upper\+\_\+wall\+\_\+pt}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00523}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Zeta\+\_\+end}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00520}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Zeta\+\_\+start}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00529}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Zeta\+\_\+transition\+\_\+end}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00526}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Zeta\+\_\+transition\+\_\+start}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a93770708eb4769c481d2f811f18f005c}\label{classoomph_1_1BrethertonSpineMesh_a93770708eb4769c481d2f811f18f005c}} 
+\mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a2ff43312031988c685c04b059bcf2633}\label{classoomph_1_1BrethertonSpineMesh_a2ff43312031988c685c04b059bcf2633}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!bulk\_element\_pt@{bulk\_element\_pt}}
 \index{bulk\_element\_pt@{bulk\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{bulk\_element\_pt()}{bulk\_element\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::bulk\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::bulk\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -174,18 +174,18 @@ Access functions for pointers to elements in bulk.
 
 
 
-Definition at line 93 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00093}{93}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bulk\+\_\+element\+\_\+pt, and i.
+References \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00543}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+element\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
-\mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a9b02893724c76098f75d9285e9985f4b}\label{classoomph_1_1BrethertonSpineMesh_a9b02893724c76098f75d9285e9985f4b}} 
+\mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a43b6d36e20b03ed1de5917d40f32f09e}\label{classoomph_1_1BrethertonSpineMesh_a43b6d36e20b03ed1de5917d40f32f09e}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!control\_element\_pt@{control\_element\_pt}}
 \index{control\_element\_pt@{control\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{control\_element\_pt()}{control\_element\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-E\+L\+E\+M\+E\+NT$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::control\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+ELEMENT $\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::control\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -193,18 +193,18 @@ Pointer to control element (just under the symmetry line near the bubble tip, so
 
 
 
-Definition at line 187 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00187}{187}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Control\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00540}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Control\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_ac80488ae4db2da00e1b38f6f07e0ff9d}\label{classoomph_1_1BrethertonSpineMesh_ac80488ae4db2da00e1b38f6f07e0ff9d}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!find\_distance\_to\_free\_surface@{find\_distance\_to\_free\_surface}}
 \index{find\_distance\_to\_free\_surface@{find\_distance\_to\_free\_surface}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{find\_distance\_to\_free\_surface()}{find\_distance\_to\_free\_surface()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$const \&}]{fs\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{initial\+\_\+zeta,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine\+\_\+base,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine\+\_\+end }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::find\+\_\+distance\+\_\+to\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$const \&}]{fs\+\_\+geom\+\_\+object\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{initial\+\_\+zeta,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine\+\_\+base,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{spine\+\_\+end }\end{DoxyParamCaption})}
 
 
 
@@ -212,18 +212,18 @@ Recalculate the spine lengths after repositioning.
 
 Calculate the distance from the spine base to the free surface, i.\+e. the spine height. 
 
-Definition at line 1066 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01065}{1065}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References e, i, oomph\+::oomph\+\_\+info, oomph\+::\+Geom\+Object\+::position(), and oomph\+::\+Double\+Matrix\+Base\+::solve().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, and \mbox{\hyperlink{matrices_8cc_source_l00050}{oomph\+::\+Double\+Matrix\+Base\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a52ffe1a705cb720d09c831b9cf5397f6}\label{classoomph_1_1BrethertonSpineMesh_a52ffe1a705cb720d09c831b9cf5397f6}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!initial\_element\_reorder@{initial\_element\_reorder}}
 \index{initial\_element\_reorder@{initial\_element\_reorder}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{initial\_element\_reorder()}{initial\_element\_reorder()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::initial\+\_\+element\+\_\+reorder\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::initial\+\_\+element\+\_\+reorder\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -231,22 +231,22 @@ Initial reordering elements of the elements -- before the channel mesh is added.
 
 Reorder elements\+: Vertical stacks of elements, each topped by their interface element -- this is (currently) identical to the version in the \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh}{Single\+Layer\+Spine\+Mesh}} but it\textquotesingle{}s important that element reordering is maintained in exactly this form so to be on the safe side, we move the function in here. 
 
-Definition at line 1028 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01028}{1028}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References e, and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
-\mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a8ecc86c4477f498db8fa3d265baa6088}\label{classoomph_1_1BrethertonSpineMesh_a8ecc86c4477f498db8fa3d265baa6088}} 
+\mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a033dc9a56ec88f965ea0250a316752f5}\label{classoomph_1_1BrethertonSpineMesh_a033dc9a56ec88f965ea0250a316752f5}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!interface\_element\_pt@{interface\_element\_pt}}
 \index{interface\_element\_pt@{interface\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interface\_element\_pt()}{interface\_element\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::interface\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\& \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::interface\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -254,18 +254,18 @@ Access functions for pointers to interface elements.
 
 
 
-Definition at line 81 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00081}{81}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References i, and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Interface\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00546}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Interface\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a47184866746a1fce6dd0ca27ab7e17ce}\label{classoomph_1_1BrethertonSpineMesh_a47184866746a1fce6dd0ca27ab7e17ce}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!nbulk@{nbulk}}
 \index{nbulk@{nbulk}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nbulk()}{nbulk()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-unsigned long \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nbulk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nbulk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -273,33 +273,37 @@ Number of elements in bulk.
 
 
 
-Definition at line 99 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00099}{99}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bulk\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00543}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bulk\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_ade4d0f2933beddda517b949d80928a18}\label{classoomph_1_1BrethertonSpineMesh_ade4d0f2933beddda517b949d80928a18}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!nfree\_surface\_spines@{nfree\_surface\_spines}}
 \index{nfree\_surface\_spines@{nfree\_surface\_spines}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nfree\_surface\_spines()}{nfree\_surface\_spines()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::nfree\+\_\+surface\+\_\+spines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nfree\+\_\+surface\+\_\+spines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Number of free-\/surface spines (i.\+e. excluding the dummy spines in the channel region) 
 
-Definition at line 107 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00107}{107}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Nhalf, oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Nx1, and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Nx2.
+References \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00505}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Nhalf}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00495}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Nx1}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00498}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Nx2}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_ae1ecd7c00fe1032e1ee16d7a98156d5c}\label{classoomph_1_1BrethertonSpineMesh_ae1ecd7c00fe1032e1ee16d7a98156d5c}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!ninterface\_element@{ninterface\_element}}
 \index{ninterface\_element@{ninterface\_element}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ninterface\_element()}{ninterface\_element()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-unsigned long \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::ninterface\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::ninterface\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -307,33 +311,37 @@ Number of elements on interface.
 
 
 
-Definition at line 87 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00087}{87}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Interface\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00546}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Interface\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a507ea97977b837f2f0d9647407d770cd}\label{classoomph_1_1BrethertonSpineMesh_a507ea97977b837f2f0d9647407d770cd}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!pin\_all\_spines@{pin\_all\_spines}}
 \index{pin\_all\_spines@{pin\_all\_spines}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{pin\_all\_spines()}{pin\_all\_spines()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::pin\+\_\+all\+\_\+spines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Pin all spines so the mesh can be used for computation without free surfaces 
-
-Definition at line 128 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::pin\+\_\+all\+\_\+spines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References i, oomph\+::\+Spine\+Mesh\+::nspine(), oomph\+::\+Data\+::pin(), oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt(), and oomph\+::\+Spine\+Mesh\+::spine\+\_\+pt().
+Pin all spines so the mesh can be used for computation without free surfaces. 
+
+
+
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00128}{128}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{spines_8h_source_l00635}{oomph\+::\+Spine\+Mesh\+::nspine()}}, \mbox{\hyperlink{nodes_8h_source_l00385}{oomph\+::\+Data\+::pin()}}, \mbox{\hyperlink{spines_8h_source_l00156}{oomph\+::\+Spine\+::spine\+\_\+height\+\_\+pt()}}, and \mbox{\hyperlink{spines_8h_source_l00623}{oomph\+::\+Spine\+Mesh\+::spine\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0dfeac5bc9a4fa4bfdcd443def30dcdb}\label{classoomph_1_1BrethertonSpineMesh_a0dfeac5bc9a4fa4bfdcd443def30dcdb}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!reposition\_spines@{reposition\_spines}}
 \index{reposition\_spines@{reposition\_spines}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{reposition\_spines()}{reposition\_spines()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::reposition\+\_\+spines (\begin{DoxyParamCaption}\item[{const double \&}]{zeta\+\_\+lo\+\_\+transition\+\_\+start,  }\item[{const double \&}]{zeta\+\_\+lo\+\_\+transition\+\_\+end,  }\item[{const double \&}]{zeta\+\_\+up\+\_\+transition\+\_\+start,  }\item[{const double \&}]{zeta\+\_\+up\+\_\+transition\+\_\+end }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::reposition\+\_\+spines (\begin{DoxyParamCaption}\item[{const double \&}]{zeta\+\_\+lo\+\_\+transition\+\_\+start,  }\item[{const double \&}]{zeta\+\_\+lo\+\_\+transition\+\_\+end,  }\item[{const double \&}]{zeta\+\_\+up\+\_\+transition\+\_\+start,  }\item[{const double \&}]{zeta\+\_\+up\+\_\+transition\+\_\+end }\end{DoxyParamCaption})}
 
 
 
@@ -341,18 +349,18 @@ Reposition the spines in response to changes in geometry.
 
 Reposition the spines that emenate from the lower wall. 
 
-Definition at line 1158 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l01158}{1158}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::flush\+\_\+element\+\_\+and\+\_\+node\+\_\+storage(), oomph\+::\+Spine\+::height(), i, oomph\+::\+Mesh\+::nelement(), oomph\+::oomph\+\_\+info, oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), oomph\+::\+Spine\+::set\+\_\+geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::set\+\_\+geom\+\_\+parameter(), and oomph\+::\+Spine\+Node\+::spine\+\_\+pt().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00407}{oomph\+::\+Mesh\+::flush\+\_\+element\+\_\+and\+\_\+node\+\_\+storage()}}, \mbox{\hyperlink{spines_8h_source_l00150}{oomph\+::\+Spine\+::height()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{spines_8h_source_l00225}{oomph\+::\+Spine\+::set\+\_\+geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00273}{oomph\+::\+Spine\+::set\+\_\+geom\+\_\+parameter()}}, and \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a33c3ed5af92e7b22a22615f42c34c387}\label{classoomph_1_1BrethertonSpineMesh_a33c3ed5af92e7b22a22615f42c34c387}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!set\_spine\_centre\_fraction\_pt@{set\_spine\_centre\_fraction\_pt}}
 \index{set\_spine\_centre\_fraction\_pt@{set\_spine\_centre\_fraction\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{set\_spine\_centre\_fraction\_pt()}{set\_spine\_centre\_fraction\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+spine\+\_\+centre\+\_\+fraction\+\_\+pt (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{fraction\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::set\+\_\+spine\+\_\+centre\+\_\+fraction\+\_\+pt (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{fraction\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -360,18 +368,18 @@ Set the pointer to the spine centre\textquotesingle{}s vertial fraction.
 
 
 
-Definition at line 200 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00200}{200}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+\_\+centre\+\_\+fraction\+\_\+pt.
+References \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00532}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Spine\+\_\+centre\+\_\+fraction\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a67f784e7b3a898af6c60515042c3ea73}\label{classoomph_1_1BrethertonSpineMesh_a67f784e7b3a898af6c60515042c3ea73}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_centre\_fraction@{spine\_centre\_fraction}}
 \index{spine\_centre\_fraction@{spine\_centre\_fraction}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_centre\_fraction()}{spine\_centre\_fraction()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+centre\+\_\+fraction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -379,22 +387,22 @@ Read the value of the spine centre\textquotesingle{}s vertical fraction.
 
 
 
-Definition at line 194 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00194}{194}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Spine\+\_\+centre\+\_\+fraction\+\_\+pt.
+References \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00532}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Spine\+\_\+centre\+\_\+fraction\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower(), and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00231}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00393}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00277}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00335}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b}\label{classoomph_1_1BrethertonSpineMesh_a981301706d4940cfb24d3d769a7a523b}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update@{spine\_node\_update}}
 \index{spine\_node\_update@{spine\_node\_update}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update()}{spine\_node\_update()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -402,22 +410,22 @@ General node update function implements pure virtual function defined in \mbox{\
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a364648c15ab29c0c8d1cf7c2bc4cb792}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SingleLayerSpineMesh_a364648c15ab29c0c8d1cf7c2bc4cb792}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 140 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00140}{140}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Spine\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower(), and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper().
+References \mbox{\hyperlink{spines_8h_source_l00384}{oomph\+::\+Spine\+Node\+::node\+\_\+update\+\_\+fct\+\_\+id()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00464}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00208}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00440}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00231}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00393}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00277}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00335}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a5a09b6d2f5e7ffd12a0ae882754ad818}\label{classoomph_1_1BrethertonSpineMesh_a5a09b6d2f5e7ffd12a0ae882754ad818}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_channel@{spine\_node\_update\_channel}}
 \index{spine\_node\_update\_channel@{spine\_node\_update\_channel}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_channel()}{spine\_node\_update\_channel()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+channel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -425,22 +433,22 @@ Update function for the nodes in the channel region ahead of the finger tip\+: N
 
 
 
-Definition at line 464 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00464}{464}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Spine\+Node\+::fraction(), oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::geom\+\_\+parameter(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{spines_8h_source_l00378}{oomph\+::\+Spine\+Node\+::fraction()}}, \mbox{\hyperlink{spines_8h_source_l00244}{oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00287}{oomph\+::\+Spine\+::geom\+\_\+parameter()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, and \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00140}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0446cb0efaa31739f51ae0534a73d116}\label{classoomph_1_1BrethertonSpineMesh_a0446cb0efaa31739f51ae0534a73d116}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_film\_lower@{spine\_node\_update\_film\_lower}}
 \index{spine\_node\_update\_film\_lower@{spine\_node\_update\_film\_lower}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_film\_lower()}{spine\_node\_update\_film\_lower()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -448,22 +456,22 @@ Update function for the deposited film region in the lower part of the domain\+:
 
 
 
-Definition at line 208 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00208}{208}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Spine\+Node\+::fraction(), oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::geom\+\_\+parameter(), oomph\+::\+Spine\+Node\+::h(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{spines_8h_source_l00378}{oomph\+::\+Spine\+Node\+::fraction()}}, \mbox{\hyperlink{spines_8h_source_l00244}{oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00287}{oomph\+::\+Spine\+::geom\+\_\+parameter()}}, \mbox{\hyperlink{spines_8h_source_l00397}{oomph\+::\+Spine\+Node\+::h()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, and \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00140}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a3919bd086252db283ee5242b4688f8d1}\label{classoomph_1_1BrethertonSpineMesh_a3919bd086252db283ee5242b4688f8d1}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_film\_upper@{spine\_node\_update\_film\_upper}}
 \index{spine\_node\_update\_film\_upper@{spine\_node\_update\_film\_upper}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_film\_upper()}{spine\_node\_update\_film\_upper()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+film\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -471,22 +479,22 @@ Update function for the deposited film region in the upper part of the domain\+:
 
 
 
-Definition at line 440 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00440}{440}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Spine\+Node\+::fraction(), oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::geom\+\_\+parameter(), oomph\+::\+Spine\+Node\+::h(), oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{spines_8h_source_l00378}{oomph\+::\+Spine\+Node\+::fraction()}}, \mbox{\hyperlink{spines_8h_source_l00244}{oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00287}{oomph\+::\+Spine\+::geom\+\_\+parameter()}}, \mbox{\hyperlink{spines_8h_source_l00397}{oomph\+::\+Spine\+Node\+::h()}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, and \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00140}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0dc35290fc96a075d864e79528e5fec8}\label{classoomph_1_1BrethertonSpineMesh_a0dc35290fc96a075d864e79528e5fec8}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_horizontal\_transition\_lower@{spine\_node\_update\_horizontal\_transition\_lower}}
 \index{spine\_node\_update\_horizontal\_transition\_lower@{spine\_node\_update\_horizontal\_transition\_lower}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_horizontal\_transition\_lower()}{spine\_node\_update\_horizontal\_transition\_lower()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -494,22 +502,22 @@ Update function for the horizontal transitition region in the lower part of the 
 
 
 
-Definition at line 231 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00231}{231}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Spine\+Node\+::fraction(), oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::geom\+\_\+parameter(), oomph\+::\+Spine\+Node\+::h(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+centre\+\_\+fraction(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{spines_8h_source_l00378}{oomph\+::\+Spine\+Node\+::fraction()}}, \mbox{\hyperlink{spines_8h_source_l00244}{oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00287}{oomph\+::\+Spine\+::geom\+\_\+parameter()}}, \mbox{\hyperlink{spines_8h_source_l00397}{oomph\+::\+Spine\+Node\+::h()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00194}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}, and \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00140}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_aa9fa4941d8fb02a388e933a7dd1c76a2}\label{classoomph_1_1BrethertonSpineMesh_aa9fa4941d8fb02a388e933a7dd1c76a2}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_horizontal\_transition\_upper@{spine\_node\_update\_horizontal\_transition\_upper}}
 \index{spine\_node\_update\_horizontal\_transition\_upper@{spine\_node\_update\_horizontal\_transition\_upper}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_horizontal\_transition\_upper()}{spine\_node\_update\_horizontal\_transition\_upper()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+horizontal\+\_\+transition\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -517,22 +525,22 @@ Update function for the horizontal transitition region in the upper part of the 
 
 
 
-Definition at line 393 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00393}{393}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Spine\+Node\+::fraction(), oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::geom\+\_\+parameter(), oomph\+::\+Spine\+Node\+::h(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+centre\+\_\+fraction(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{spines_8h_source_l00378}{oomph\+::\+Spine\+Node\+::fraction()}}, \mbox{\hyperlink{spines_8h_source_l00244}{oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00287}{oomph\+::\+Spine\+::geom\+\_\+parameter()}}, \mbox{\hyperlink{spines_8h_source_l00397}{oomph\+::\+Spine\+Node\+::h()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00194}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}, and \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00140}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a9ec578183760e386ed5229ba193e1fdf}\label{classoomph_1_1BrethertonSpineMesh_a9ec578183760e386ed5229ba193e1fdf}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_vertical\_transition\_lower@{spine\_node\_update\_vertical\_transition\_lower}}
 \index{spine\_node\_update\_vertical\_transition\_lower@{spine\_node\_update\_vertical\_transition\_lower}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_vertical\_transition\_lower()}{spine\_node\_update\_vertical\_transition\_lower()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+lower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -540,22 +548,22 @@ Update function for the vertical transitition region in the lower part of the do
 
 
 
-Definition at line 277 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00277}{277}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Spine\+Node\+::fraction(), oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::geom\+\_\+parameter(), oomph\+::\+Spine\+Node\+::h(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+centre\+\_\+fraction(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{spines_8h_source_l00378}{oomph\+::\+Spine\+Node\+::fraction()}}, \mbox{\hyperlink{spines_8h_source_l00244}{oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00287}{oomph\+::\+Spine\+::geom\+\_\+parameter()}}, \mbox{\hyperlink{spines_8h_source_l00397}{oomph\+::\+Spine\+Node\+::h()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00194}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}, and \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00140}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a6ddc62166abfd621219551957c9b1103}\label{classoomph_1_1BrethertonSpineMesh_a6ddc62166abfd621219551957c9b1103}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!spine\_node\_update\_vertical\_transition\_upper@{spine\_node\_update\_vertical\_transition\_upper}}
 \index{spine\_node\_update\_vertical\_transition\_upper@{spine\_node\_update\_vertical\_transition\_upper}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_vertical\_transition\_upper()}{spine\_node\_update\_vertical\_transition\_upper()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+vertical\+\_\+transition\+\_\+upper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}} $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -563,15 +571,15 @@ Update function for the vertical transitition region in the upper part of the do
 
 
 
-Definition at line 335 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00335}{335}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Spine\+Node\+::fraction(), oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt(), oomph\+::\+Spine\+::geom\+\_\+parameter(), oomph\+::\+Spine\+Node\+::h(), oomph\+::\+Quad\+Tree\+Names\+::N, oomph\+::\+Geom\+Object\+::position(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+centre\+\_\+fraction(), oomph\+::\+Spine\+Node\+::spine\+\_\+pt(), and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{spines_8h_source_l00378}{oomph\+::\+Spine\+Node\+::fraction()}}, \mbox{\hyperlink{spines_8h_source_l00244}{oomph\+::\+Spine\+::geom\+\_\+object\+\_\+pt()}}, \mbox{\hyperlink{spines_8h_source_l00287}{oomph\+::\+Spine\+::geom\+\_\+parameter()}}, \mbox{\hyperlink{spines_8h_source_l00397}{oomph\+::\+Spine\+Node\+::h()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660fd56065}{oomph\+::\+Geom\+Object\+::position()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00194}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}, and \mbox{\hyperlink{spines_8h_source_l00372}{oomph\+::\+Spine\+Node\+::spine\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00140}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
 
 
@@ -580,8 +588,8 @@ Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Bulk\_element\_pt@{Bulk\_element\_pt}}
 \index{Bulk\_element\_pt@{Bulk\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Bulk\_element\_pt}{Bulk\_element\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Bulk\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Bulk\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -589,18 +597,18 @@ Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T
 
 
 
-Definition at line 543 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00543}{543}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::bulk\+\_\+element\+\_\+pt(), and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nbulk().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00093}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::bulk\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00099}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nbulk()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a81ee86c0c747947dab52073c221d53c1}\label{classoomph_1_1BrethertonSpineMesh_a81ee86c0c747947dab52073c221d53c1}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Control\_element\_pt@{Control\_element\_pt}}
 \index{Control\_element\_pt@{Control\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Control\_element\_pt}{Control\_element\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-E\+L\+E\+M\+E\+NT$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Control\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+ELEMENT$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Control\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -608,18 +616,18 @@ Pointer to control element (just under the symmetry line near the bubble tip; th
 
 
 
-Definition at line 540 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00540}{540}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::control\+\_\+element\+\_\+pt().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00187}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::control\+\_\+element\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a306cf8ae8f91a81054904de64195bb16}\label{classoomph_1_1BrethertonSpineMesh_a306cf8ae8f91a81054904de64195bb16}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Default\_spine\_centre\_fraction@{Default\_spine\_centre\_fraction}}
 \index{Default\_spine\_centre\_fraction@{Default\_spine\_centre\_fraction}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_spine\_centre\_fraction}{Default\_spine\_centre\_fraction}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Default\+\_\+spine\+\_\+centre\+\_\+fraction\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Default\+\_\+spine\+\_\+centre\+\_\+fraction\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -627,14 +635,14 @@ Default spine fraction.
 
 
 
-Definition at line 535 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00535}{535}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a3d711e1bc9d751ab14662f6839a900e3}\label{classoomph_1_1BrethertonSpineMesh_a3d711e1bc9d751ab14662f6839a900e3}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!H@{H}}
 \index{H@{H}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{H}{H}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::H\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::H\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -642,18 +650,18 @@ Thickness of deposited film.
 
 
 
-Definition at line 511 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00511}{511}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a7422b912ff7ad780777205f0cbe83362}\label{classoomph_1_1BrethertonSpineMesh_a7422b912ff7ad780777205f0cbe83362}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Interface\_element\_pt@{Interface\_element\_pt}}
 \index{Interface\_element\_pt@{Interface\_element\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Interface\_element\_pt}{Interface\_element\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Interface\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}$\ast$$>$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Interface\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -661,18 +669,18 @@ Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T
 
 
 
-Definition at line 546 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00546}{546}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh(), oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::interface\+\_\+element\+\_\+pt(), and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::ninterface\+\_\+element().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}, \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00081}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::interface\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00087}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::ninterface\+\_\+element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a04c0136de66c06a34347b89f453730e1}\label{classoomph_1_1BrethertonSpineMesh_a04c0136de66c06a34347b89f453730e1}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Lower\_wall\_pt@{Lower\_wall\_pt}}
 \index{Lower\_wall\_pt@{Lower\_wall\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Lower\_wall\_pt}{Lower\_wall\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Lower\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Lower\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -680,18 +688,18 @@ Pointer to geometric object that represents the lower wall.
 
 
 
-Definition at line 517 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00517}{517}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a4ba20dfa61b6c342f2defbc0cdb47851}\label{classoomph_1_1BrethertonSpineMesh_a4ba20dfa61b6c342f2defbc0cdb47851}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nh@{Nh}}
 \index{Nh@{Nh}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Nh}{Nh}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Nh\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Nh\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -699,14 +707,14 @@ Number of elements across the deposited film.
 
 
 
-Definition at line 508 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00508}{508}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a1e58d18dd2231c785008efa07260e8da}\label{classoomph_1_1BrethertonSpineMesh_a1e58d18dd2231c785008efa07260e8da}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nhalf@{Nhalf}}
 \index{Nhalf@{Nhalf}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Nhalf}{Nhalf}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Nhalf\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Nhalf\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -714,18 +722,18 @@ Number of elements in vertical transition region (there are twice as many elemen
 
 
 
-Definition at line 505 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00505}{505}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nfree\+\_\+surface\+\_\+spines().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00107}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nfree\+\_\+surface\+\_\+spines()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_af6ef10fb80559c3ad27a50116da60dcc}\label{classoomph_1_1BrethertonSpineMesh_af6ef10fb80559c3ad27a50116da60dcc}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nx1@{Nx1}}
 \index{Nx1@{Nx1}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Nx1}{Nx1}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Nx1\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Nx1\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -733,18 +741,18 @@ Number of elements along wall in deposited film region.
 
 
 
-Definition at line 495 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00495}{495}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nfree\+\_\+surface\+\_\+spines().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00107}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nfree\+\_\+surface\+\_\+spines()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a237b4f516eb3f74e42e190f2a23f93c3}\label{classoomph_1_1BrethertonSpineMesh_a237b4f516eb3f74e42e190f2a23f93c3}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nx2@{Nx2}}
 \index{Nx2@{Nx2}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Nx2}{Nx2}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Nx2\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Nx2\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -752,18 +760,18 @@ Number of elements along wall in horizontal transition region.
 
 
 
-Definition at line 498 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00498}{498}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::nfree\+\_\+surface\+\_\+spines().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00107}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::nfree\+\_\+surface\+\_\+spines()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a26c57f832b7cdc495087cef7b54c98fd}\label{classoomph_1_1BrethertonSpineMesh_a26c57f832b7cdc495087cef7b54c98fd}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Nx3@{Nx3}}
 \index{Nx3@{Nx3}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Nx3}{Nx3}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Nx3\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Nx3\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -771,18 +779,18 @@ Number of elements along wall in channel region.
 
 
 
-Definition at line 501 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00501}{501}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_af5e7951a89bc13d73f2b137947cda8a3}\label{classoomph_1_1BrethertonSpineMesh_af5e7951a89bc13d73f2b137947cda8a3}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Spine\_centre\_fraction\_pt@{Spine\_centre\_fraction\_pt}}
 \index{Spine\_centre\_fraction\_pt@{Spine\_centre\_fraction\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Spine\_centre\_fraction\_pt}{Spine\_centre\_fraction\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Spine\+\_\+centre\+\_\+fraction\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Spine\+\_\+centre\+\_\+fraction\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -790,18 +798,18 @@ Pointer to vertical fraction of the spine centre.
 
 
 
-Definition at line 532 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00532}{532}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+spine\+\_\+centre\+\_\+fraction\+\_\+pt(), and oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+centre\+\_\+fraction().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00200}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::set\+\_\+spine\+\_\+centre\+\_\+fraction\+\_\+pt()}}, and \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00194}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::spine\+\_\+centre\+\_\+fraction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a1f97e78a12000afcc1bd754102b5b51a}\label{classoomph_1_1BrethertonSpineMesh_a1f97e78a12000afcc1bd754102b5b51a}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Upper\_wall\_pt@{Upper\_wall\_pt}}
 \index{Upper\_wall\_pt@{Upper\_wall\_pt}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Upper\_wall\_pt}{Upper\_wall\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Upper\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}$\ast$ \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Upper\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -809,18 +817,18 @@ Pointer to geometric object that represents the upper wall.
 
 
 
-Definition at line 514 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00514}{514}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_ac1b5e005bfb5db65f54ca599942126ea}\label{classoomph_1_1BrethertonSpineMesh_ac1b5e005bfb5db65f54ca599942126ea}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Zeta\_end@{Zeta\_end}}
 \index{Zeta\_end@{Zeta\_end}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Zeta\_end}{Zeta\_end}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Zeta\+\_\+end\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Zeta\+\_\+end\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -828,18 +836,18 @@ Wall coordinate of end of liquid filled region (inflow)
 
 
 
-Definition at line 523 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00523}{523}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a0f41083aa9a97fca03d498bd6ec21eb2}\label{classoomph_1_1BrethertonSpineMesh_a0f41083aa9a97fca03d498bd6ec21eb2}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Zeta\_start@{Zeta\_start}}
 \index{Zeta\_start@{Zeta\_start}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Zeta\_start}{Zeta\_start}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Zeta\+\_\+start\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Zeta\+\_\+start\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -847,18 +855,18 @@ Start coordinate on wall.
 
 
 
-Definition at line 520 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00520}{520}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_a1d05bb741eba54ab7498ab4f3c55f1b7}\label{classoomph_1_1BrethertonSpineMesh_a1d05bb741eba54ab7498ab4f3c55f1b7}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Zeta\_transition\_end@{Zeta\_transition\_end}}
 \index{Zeta\_transition\_end@{Zeta\_transition\_end}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Zeta\_transition\_end}{Zeta\_transition\_end}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Zeta\+\_\+transition\+\_\+end\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Zeta\+\_\+transition\+\_\+end\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -866,18 +874,18 @@ Wall coordinate of end of transition region.
 
 
 
-Definition at line 529 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00529}{529}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BrethertonSpineMesh_af701937d59d7804f40cb1b4c7a262391}\label{classoomph_1_1BrethertonSpineMesh_af701937d59d7804f40cb1b4c7a262391}} 
 \index{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}!Zeta\_transition\_start@{Zeta\_transition\_start}}
 \index{Zeta\_transition\_start@{Zeta\_transition\_start}!oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$@{oomph::BrethertonSpineMesh$<$ ELEMENT, INTERFACE\_ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Zeta\_transition\_start}{Zeta\_transition\_start}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT $>$\+::Zeta\+\_\+transition\+\_\+start\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class INTERFACE\+\_\+\+ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1BrethertonSpineMesh}{oomph\+::\+Bretherton\+Spine\+Mesh}}$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::Zeta\+\_\+transition\+\_\+start\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -885,11 +893,11 @@ Wall coordinate of start of the transition region.
 
 
 
-Definition at line 526 of file bretherton\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source_l00526}{526}} of file \mbox{\hyperlink{bretherton__spine__mesh_8template_8h_source}{bretherton\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Bretherton\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T, I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$\+::\+Bretherton\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{bretherton__spine__mesh_8template_8cc_source_l00058}{oomph\+::\+Bretherton\+Spine\+Mesh$<$ ELEMENT, INTERFACE\+\_\+\+ELEMENT $>$\+::\+Bretherton\+Spine\+Mesh()}}.
 
 
 

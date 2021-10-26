@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations}{}\doxysection{oomph\+::Refineable\+Advection\+Diffusion\+Equations$<$ D\+IM $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations}{}\doxysection{oomph\+::Refineable\+Advection\+Diffusion\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RefineableAdvectionDiffusionEquations}\index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 
 
@@ -9,10 +9,10 @@ A version of the Advection Diffusion equations that can be used with non-\/unifo
 
 {\ttfamily \#include $<$refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Advection\+Diffusion\+Equations$<$ D\+IM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Advection\+Diffusion\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.269841cm]{classoomph_1_1RefineableAdvectionDiffusionEquations}
+\includegraphics[height=1.523810cm]{classoomph_1_1RefineableAdvectionDiffusionEquations}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,37 +20,36 @@ Inheritance diagram for oomph\+::Refineable\+Advection\+Diffusion\+Equations$<$ 
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_afb6628e15e162ae937f35fb88c345cbb}{Refineable\+Advection\+Diffusion\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a1ee8dc50b30ebc4bb1aee7635dcde89f}{Refineable\+Advection\+Diffusion\+Equations}} (const \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$ \&dummy)
+\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a2ca190b749cf4dca37690089c5f4ce6e}{Refineable\+Advection\+Diffusion\+Equations}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_aad3eeaeb0c18b6723939e7654541bfb2}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$ \&)
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a309f31bf0d1a36fb265ca5aebd935ff2}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$ \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a19d216ae9ab2602a9da97babe7b66c21}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_ae28af2d25f78d02a4cbe6b382dcc9546}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_ae28af2d25f78d02a4cbe6b382dcc9546}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Advection\+Diffusion equations. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_af9dd36503e3196a7f640dbcebb22551d}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_af9dd36503e3196a7f640dbcebb22551d}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a0a916bc1f20ff94e7feed984d41148fb}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a0a916bc1f20ff94e7feed984d41148fb}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_a093f39b8be3671828b7018b1f6103c68}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build\+: Copy source function pointer from father element. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_abebbab739a9f15f659ad6039499c7e59}{dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+ddata, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_abebbab739a9f15f659ad6039499c7e59}{dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+ddata, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
 \begin{DoxyCompactList}\small\item\em Compute the derivatives of the i-\/th component of velocity at point s with respect to all data that can affect its value. In addition, return the global equation numbers corresponding to the data. Overload the non-\/refineable version to take account of hanging node information. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_aa42c5000c45380b8370565fac3990320}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_aa42c5000c45380b8370565fac3990320}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM$>$\newline
-class oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$}
-
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+Refineable\+Advection\+Diffusion\+Equations$<$ DIM $>$}
 A version of the Advection Diffusion equations that can be used with non-\/uniform mesh refinement. In essence, the class overloads the \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations_aa42c5000c45380b8370565fac3990320}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff()}} function so that contributions from hanging nodes (or alternatively in-\/compatible function values) are taken into account. 
 
-Definition at line 54 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00054}{54}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
@@ -59,8 +58,8 @@ Definition at line 54 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elem
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!RefineableAdvectionDiffusionEquations@{RefineableAdvectionDiffusionEquations}}
 \index{RefineableAdvectionDiffusionEquations@{RefineableAdvectionDiffusionEquations}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableAdvectionDiffusionEquations()}{RefineableAdvectionDiffusionEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -68,26 +67,18 @@ Empty Constructor.
 
 
 
-Definition at line 61 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00061}{61}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_a1ee8dc50b30ebc4bb1aee7635dcde89f}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_a1ee8dc50b30ebc4bb1aee7635dcde89f}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_a2ca190b749cf4dca37690089c5f4ce6e}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_a2ca190b749cf4dca37690089c5f4ce6e}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!RefineableAdvectionDiffusionEquations@{RefineableAdvectionDiffusionEquations}}
 \index{RefineableAdvectionDiffusionEquations@{RefineableAdvectionDiffusionEquations}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableAdvectionDiffusionEquations()}{RefineableAdvectionDiffusionEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 70 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -96,8 +87,8 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!dinterpolated\_u\_adv\_diff\_ddata@{dinterpolated\_u\_adv\_diff\_ddata}}
 \index{dinterpolated\_u\_adv\_diff\_ddata@{dinterpolated\_u\_adv\_diff\_ddata}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dinterpolated\_u\_adv\_diff\_ddata()}{dinterpolated\_u\_adv\_diff\_ddata()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+ddata,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{global\+\_\+eqn\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::dinterpolated\+\_\+u\+\_\+adv\+\_\+diff\+\_\+ddata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+ddata,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{global\+\_\+eqn\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -105,22 +96,18 @@ Compute the derivatives of the i-\/th component of velocity at point s with resp
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a7b264e70255fa420e443e60cbd8d7dbc}{oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00199}{199}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-Definition at line 205 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff().
+References \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_aa42c5000c45380b8370565fac3990320}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_aa42c5000c45380b8370565fac3990320}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_adv\_diff@{fill\_in\_generic\_residual\_contribution\_adv\_diff}}
 \index{fill\_in\_generic\_residual\_contribution\_adv\_diff@{fill\_in\_generic\_residual\_contribution\_adv\_diff}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_adv\_diff()}{fill\_in\_generic\_residual\_contribution\_adv\_diff()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -128,22 +115,18 @@ Add the element\textquotesingle{}s contribution to the elemental residual vector
 
 Add the element\textquotesingle{}s contribution to the elemental residual vector and/or elemental jacobian matrix. This function overloads the standard version so that the possible presence of hanging nodes is taken into account. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionEquations_a399995609ea6d997496e3bcbdc5383f7}{oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8cc_source_l00037}{37}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8cc_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
 
 
 
-Definition at line 38 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
-
-
-
-References oomph\+::\+A\+L\+E\+\_\+is\+\_\+disabled, i, interpolated\+\_\+u(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::pe(), oomph\+::pe\+\_\+st(), residuals(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_a093f39b8be3671828b7018b1f6103c68}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_a093f39b8be3671828b7018b1f6103c68}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!further\_build@{further\_build}}
 \index{further\_build@{further\_build}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{further\_build()}{further\_build()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::further\+\_\+build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::further\+\_\+build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -155,26 +138,26 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a60d622f02595901b5f3ad830de915471}{oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a60d622f02595901b5f3ad830de915471}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line 183 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00177}{177}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::\+A\+L\+E\+\_\+is\+\_\+disabled, oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::pe\+\_\+pt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::\+Pe\+\_\+pt, oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::pe\+\_\+st\+\_\+pt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::\+Pe\+St\+\_\+pt, oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::source\+\_\+fct\+\_\+pt(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::\+Source\+\_\+fct\+\_\+pt, oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::wind\+\_\+fct\+\_\+pt(), and oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::\+Wind\+\_\+fct\+\_\+pt.
+References \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::further\+\_\+build().
+Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l01091}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::further\+\_\+build()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_a0a916bc1f20ff94e7feed984d41148fb}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_a0a916bc1f20ff94e7feed984d41148fb}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -186,22 +169,22 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_af178c04f0e6ee09a5d05574fcd68ac41}{oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_af178c04f0e6ee09a5d05574fcd68ac41}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line 132 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00126}{126}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff(), and values.
+References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_af9dd36503e3196a7f640dbcebb22551d}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_af9dd36503e3196a7f640dbcebb22551d}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -213,26 +196,26 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa89e116d612b3530edd2b0666d25cf01}{oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_aa89e116d612b3530edd2b0666d25cf01}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line 100 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00094}{94}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+adv\+\_\+diff(), and values.
+References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+interpolated\+\_\+values().
+Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l01007}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_ae28af2d25f78d02a4cbe6b382dcc9546}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_ae28af2d25f78d02a4cbe6b382dcc9546}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -244,26 +227,26 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a1b78fb6b311b89cff1b57fcaacd924d7}{oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a1b78fb6b311b89cff1b57fcaacd924d7}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line 90 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00084}{84}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::get\+\_\+flux().
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+\+Z2\+\_\+flux().
+Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l01126}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_a19d216ae9ab2602a9da97babe7b66c21}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_a19d216ae9ab2602a9da97babe7b66c21}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
 \index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -275,34 +258,26 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a630b9aa6c5cf924d32996e89ed230175}{oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableBuoyantQCrouzeixRaviartElement_a630b9aa6c5cf924d32996e89ed230175}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$}}.
 
 
 
-Definition at line 83 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source_l00077}{77}} of file \mbox{\hyperlink{refineable__advection__diffusion__elements_8h_source}{refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+\+Z2\+\_\+compound\+\_\+flux\+\_\+indices(), and oomph\+::\+Refineable\+Buoyant\+Q\+Crouzeix\+Raviart\+Element$<$ D\+I\+M $>$\+::get\+\_\+\+Z2\+\_\+flux().
+Referenced by \mbox{\hyperlink{boussinesq__elements_8h_source_l01160}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+compound\+\_\+flux\+\_\+indices()}}, and \mbox{\hyperlink{boussinesq__elements_8h_source_l01126}{oomph\+::\+Refineable\+Buoyant\+QCrouzeix\+Raviart\+Element$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux()}}.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_aad3eeaeb0c18b6723939e7654541bfb2}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_aad3eeaeb0c18b6723939e7654541bfb2}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableAdvectionDiffusionEquations_a309f31bf0d1a36fb265ca5aebd935ff2}\label{classoomph_1_1RefineableAdvectionDiffusionEquations_a309f31bf0d1a36fb265ca5aebd935ff2}} 
 \index{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$@{oomph::RefineableAdvectionDiffusionEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}}$<$ D\+IM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{oomph\+::\+Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableAdvectionDiffusionEquations}{Refineable\+Advection\+Diffusion\+Equations}}$<$ DIM $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 77 of file refineable\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 

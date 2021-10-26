@@ -335,7 +335,7 @@ of the bulk mesh. We then add the pointer to the bulk mesh to the
 for the adaptive solution of the Poisson equation.
 
 
-\skipline start_of_constructor   
+\skipline start_of_constructor
 \until Z2
 
 

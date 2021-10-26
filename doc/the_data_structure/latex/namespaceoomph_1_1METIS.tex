@@ -1,52 +1,52 @@
-\hypertarget{namespaceoomph_1_1METIS}{}\doxysection{oomph\+::M\+E\+T\+IS Namespace Reference}
+\hypertarget{namespaceoomph_1_1METIS}{}\doxysection{oomph\+::METIS Namespace Reference}
 \label{namespaceoomph_1_1METIS}\index{oomph::METIS@{oomph::METIS}}
 
 
-Namespace for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} graph partitioning routines.  
+Namespace for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} graph partitioning routines.  
 
 
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 typedef void($\ast$ \mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}}) (const double \&spatial\+\_\+error, const double \&max\+\_\+error, const double \&min\+\_\+error, int \&weight)
-\begin{DoxyCompactList}\small\item\em Typedef for function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Typedef for function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} partitioning. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}} (const double \&spatial\+\_\+error, const double \&max\+\_\+error, const double \&min\+\_\+error, int \&weight)
-\begin{DoxyCompactList}\small\item\em Default function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning (unit weight regardless of input). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Default function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} partitioning (unit weight regardless of input). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1METIS_a58831157b0cfadc57485c3de01df7d78}{uniform\+\_\+partition\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, const unsigned \&ndomain, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain)
 \begin{DoxyCompactList}\small\item\em Partition mesh uniformly by dividing elements equally over the partitions, in the order in which they are returned by problem. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1METIS_aa3c7e4be46d6148cc60f43354127fc94}{partition\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, const unsigned \&ndomain, const unsigned \&objective, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain)
-\begin{DoxyCompactList}\small\item\em Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1METIS_a7504999ec1517cc95d0393753a714fe9}{partition\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$comm\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const unsigned \&ndomain, const unsigned \&objective, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain)
-\begin{DoxyCompactList}\small\item\em Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701}{partition\+\_\+distributed\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, const unsigned \&objective, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc, const bool \&bypass\+\_\+metis=false)
-\begin{DoxyCompactList}\small\item\em Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on T\+HE C\+U\+R\+R\+E\+NT P\+R\+O\+C\+E\+S\+S\+OR O\+N\+LY has been assigned. The order of the non-\/halo elements is the same as in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s mesh, with the halo elements being skipped. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on THE CURRENT PROCESSOR ONLY has been assigned. The order of the non-\/halo elements is the same as in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s mesh, with the halo elements being skipped. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} \mbox{\hyperlink{namespaceoomph_1_1METIS_af21fbb8dba025be51b3e27c1822243a5}{Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt}} = \&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}
-\begin{DoxyCompactList}\small\item\em Function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} partitioning. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Namespace for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} graph partitioning routines. 
+Namespace for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} graph partitioning routines. 
 
 \doxysubsection{Typedef Documentation}
 \mbox{\Hypertarget{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}\label{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}} 
 \index{oomph::METIS@{oomph::METIS}!ErrorToWeightFctPt@{ErrorToWeightFctPt}}
 \index{ErrorToWeightFctPt@{ErrorToWeightFctPt}!oomph::METIS@{oomph::METIS}}
 \doxysubsubsection{\texorpdfstring{ErrorToWeightFctPt}{ErrorToWeightFctPt}}
-{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+M\+E\+T\+I\+S\+::\+Error\+To\+Weight\+Fct\+Pt) (const double \&spatial\+\_\+error, const double \&max\+\_\+error, const double \&min\+\_\+error, int \&weight)}
+{\footnotesize\ttfamily typedef void($\ast$ oomph\+::\+METIS\+::\+Error\+To\+Weight\+Fct\+Pt) (const double \&spatial\+\_\+error, const double \&max\+\_\+error, const double \&min\+\_\+error, int \&weight)}
 
 
 
-Typedef for function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning. 
+Typedef for function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} partitioning. 
 
 
 
-Definition at line 80 of file partitioning.\+h.
+Definition at line \mbox{\hyperlink{partitioning_8h_source_l00083}{83}} of file \mbox{\hyperlink{partitioning_8h_source}{partitioning.\+h}}.
 
 
 
@@ -55,63 +55,63 @@ Definition at line 80 of file partitioning.\+h.
 \index{oomph::METIS@{oomph::METIS}!default\_error\_to\_weight\_fct@{default\_error\_to\_weight\_fct}}
 \index{default\_error\_to\_weight\_fct@{default\_error\_to\_weight\_fct}!oomph::METIS@{oomph::METIS}}
 \doxysubsubsection{\texorpdfstring{default\_error\_to\_weight\_fct()}{default\_error\_to\_weight\_fct()}}
-{\footnotesize\ttfamily void oomph\+::\+M\+E\+T\+I\+S\+::default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct (\begin{DoxyParamCaption}\item[{const double \&}]{spatial\+\_\+error,  }\item[{const double \&}]{max\+\_\+error,  }\item[{const double \&}]{min\+\_\+error,  }\item[{int \&}]{weight }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+METIS\+::default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct (\begin{DoxyParamCaption}\item[{const double \&}]{spatial\+\_\+error,  }\item[{const double \&}]{max\+\_\+error,  }\item[{const double \&}]{min\+\_\+error,  }\item[{int \&}]{weight }\end{DoxyParamCaption})}
 
 
 
-Default function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning (unit weight regardless of input). 
+Default function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} partitioning (unit weight regardless of input). 
 
-Default function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning (unit weight regardless of input) 
+Default function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} partitioning (unit weight regardless of input) 
 
-Definition at line 45 of file partitioning.\+cc.
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00053}{53}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
 
 
 
-Referenced by partition\+\_\+mesh().
+Referenced by \mbox{\hyperlink{partitioning_8cc_source_l00116}{partition\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701}\label{namespaceoomph_1_1METIS_a9d95103cfa79d38f80b3b0a6db949701}} 
 \index{oomph::METIS@{oomph::METIS}!partition\_distributed\_mesh@{partition\_distributed\_mesh}}
 \index{partition\_distributed\_mesh@{partition\_distributed\_mesh}!oomph::METIS@{oomph::METIS}}
 \doxysubsubsection{\texorpdfstring{partition\_distributed\_mesh()}{partition\_distributed\_mesh()}}
-{\footnotesize\ttfamily void oomph\+::\+M\+E\+T\+I\+S\+::partition\+\_\+distributed\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{const unsigned \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc,  }\item[{const bool \&}]{bypass\+\_\+metis = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+METIS\+::partition\+\_\+distributed\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{const unsigned \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc,  }\item[{const bool \&}]{bypass\+\_\+metis = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
 
-Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on T\+HE C\+U\+R\+R\+E\+NT P\+R\+O\+C\+E\+S\+S\+OR O\+N\+LY has been assigned. The order of the non-\/halo elements is the same as in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s mesh, with the halo elements being skipped. 
+Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on THE CURRENT PROCESSOR ONLY has been assigned. The order of the non-\/halo elements is the same as in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s mesh, with the halo elements being skipped. 
 
-Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on T\+HE C\+U\+R\+R\+E\+NT P\+R\+O\+C\+E\+S\+S\+OR O\+N\+LY has been assigned. The order of the non-\/halo elements is the same as in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s mesh, with the halo elements being skipped. Objective\+:
+Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to assign each element in an already-\/distributed mesh to a domain. On return, element\+\_\+domain\+\_\+on\+\_\+this\+\_\+proc\mbox{[}e\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which non-\/halo element e on THE CURRENT PROCESSOR ONLY has been assigned. The order of the non-\/halo elements is the same as in the \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}\textquotesingle{}s mesh, with the halo elements being skipped. Objective\+:
 
 Objective\+:
 \begin{DoxyItemize}
 \item objective=0\+: minimise edgecut.
 \item objective=1\+: minimise total communications volume.
-\end{DoxyItemize}The partioning is based on the dof graph of the complete mesh by taking into account which global equation numbers are affected by each element and connecting elements which affect the same global equation number. Partitioning is done such that all elements associated with the same tree root move together. Non-\/refineable elements are treated as their own root elements. If the optional boolean flag is set to true (it defaults to false) each processor assigns a dumb-\/but-\/repeatable equidistribution of its non-\/halo elements over the domains and outputs the input that would have gone into \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} in the file metis\+\_\+input\+\_\+for\+\_\+validation.\+dat
+\end{DoxyItemize}The partioning is based on the dof graph of the complete mesh by taking into account which global equation numbers are affected by each element and connecting elements which affect the same global equation number. Partitioning is done such that all elements associated with the same tree root move together. Non-\/refineable elements are treated as their own root elements. If the optional boolean flag is set to true (it defaults to false) each processor assigns a dumb-\/but-\/repeatable equidistribution of its non-\/halo elements over the domains and outputs the input that would have gone into \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} in the file metis\+\_\+input\+\_\+for\+\_\+validation.\+dat
 
 
 \begin{DoxyItemize}
 \item objective=0\+: minimise edgecut.
 \item objective=1\+: minimise total communications volume.
-\end{DoxyItemize}The partioning is based on the dof graph of the complete mesh by taking into account which global equation numbers are affected by each element and connecting elements which affect the same global equation number. Partitioning is done such that all elements associated with the same tree root move together. Non-\/refineable elements are treated as their own root elements. If the optional boolean flag is set to true (it defaults to false) each processor assigns a dumb-\/but-\/repeatable equidistribution of its non-\/halo elements over the domains and outputs the input that would have gone into \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} in the file metis\+\_\+input\+\_\+for\+\_\+validation.\+dat 
+\end{DoxyItemize}The partioning is based on the dof graph of the complete mesh by taking into account which global equation numbers are affected by each element and connecting elements which affect the same global equation number. Partitioning is done such that all elements associated with the same tree root move together. Non-\/refineable elements are treated as their own root elements. If the optional boolean flag is set to true (it defaults to false) each processor assigns a dumb-\/but-\/repeatable equidistribution of its non-\/halo elements over the domains and outputs the input that would have gone into \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} in the file metis\+\_\+input\+\_\+for\+\_\+validation.\+dat 
 
-Definition at line 519 of file partitioning.\+cc.
-
-
-
-References oomph\+::\+Problem\+::communicator\+\_\+pt(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Problem\+::elemental\+\_\+assembly\+\_\+time(), oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), i, oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+M\+E\+T\+I\+S\+\_\+\+Part\+Graph\+Kway(), oomph\+::\+M\+E\+T\+I\+S\+\_\+\+Part\+Graph\+V\+Kway(), n, oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::oomph\+\_\+info, and oomph\+::\+Refineable\+Element\+::root\+\_\+element\+\_\+pt().
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00567}{567}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Problem\+::load\+\_\+balance().
+References \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l00864}{oomph\+::\+Problem\+::elemental\+\_\+assembly\+\_\+time()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{namespaceoomph_a86e73012a914a19df3d849e1c6f4b9a1}{oomph\+::\+METIS\+\_\+\+Part\+Graph\+Kway()}}, \mbox{\hyperlink{namespaceoomph_abf5fe3c38b4c12aad8fdfd89b05599bd}{oomph\+::\+METIS\+\_\+\+Part\+Graph\+VKway()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{refineable__elements_8h_source_l00524}{oomph\+::\+Refineable\+Element\+::root\+\_\+element\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{problem_8cc_source_l17185}{oomph\+::\+Problem\+::load\+\_\+balance()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1METIS_a7504999ec1517cc95d0393753a714fe9}\label{namespaceoomph_1_1METIS_a7504999ec1517cc95d0393753a714fe9}} 
 \index{oomph::METIS@{oomph::METIS}!partition\_mesh@{partition\_mesh}}
 \index{partition\_mesh@{partition\_mesh}!oomph::METIS@{oomph::METIS}}
 \doxysubsubsection{\texorpdfstring{partition\_mesh()}{partition\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+M\+E\+T\+I\+S\+::partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const unsigned \&}]{ndomain,  }\item[{const unsigned \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+METIS\+::partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$}]{comm\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const unsigned \&}]{ndomain,  }\item[{const unsigned \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})}
 
 
 
-Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
+Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
 
 
 \begin{DoxyItemize}
@@ -121,11 +121,11 @@ Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each eleme
 \index{oomph::METIS@{oomph::METIS}!partition\_mesh@{partition\_mesh}}
 \index{partition\_mesh@{partition\_mesh}!oomph::METIS@{oomph::METIS}}
 \doxysubsubsection{\texorpdfstring{partition\_mesh()}{partition\_mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+M\+E\+T\+I\+S\+::partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{const unsigned \&}]{ndomain,  }\item[{const unsigned \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+METIS\+::partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{const unsigned \&}]{ndomain,  }\item[{const unsigned \&}]{objective,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})}
 
 
 
-Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
+Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
 
 
 \begin{DoxyItemize}
@@ -133,39 +133,39 @@ Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each eleme
 \item objective=1\+: minimise total communications volume.
 \end{DoxyItemize}Partioning is based on nodal graph of mesh.
 
-Use \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} to assign each element to a domain. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned.
+
 \begin{DoxyItemize}
 \item objective=0\+: minimise edgecut.
 \item objective=1\+: minimise total communications volume.
 \end{DoxyItemize}Partioning is based on dual graph of mesh. 
 
-Definition at line 108 of file partitioning.\+cc.
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00116}{116}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
 
 
 
-References default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), elements, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt, oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+M\+E\+T\+I\+S\+\_\+\+Part\+Graph\+Kway(), oomph\+::\+M\+E\+T\+I\+S\+\_\+\+Part\+Graph\+V\+Kway(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::nsub\+\_\+mesh(), oomph\+::oomph\+\_\+info, oomph\+::\+Refineable\+Mesh\+Base\+::spatial\+\_\+error\+\_\+estimator\+\_\+pt(), and oomph\+::\+Cumulative\+Timings\+::start().
+References \mbox{\hyperlink{partitioning_8cc_source_l00053}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{partitioning_8cc_source_l00063}{Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{error__estimator_8h_source_l00056}{oomph\+::\+Error\+Estimator\+::get\+\_\+element\+\_\+errors()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{namespaceoomph_a86e73012a914a19df3d849e1c6f4b9a1}{oomph\+::\+METIS\+\_\+\+Part\+Graph\+Kway()}}, \mbox{\hyperlink{namespaceoomph_abf5fe3c38b4c12aad8fdfd89b05599bd}{oomph\+::\+METIS\+\_\+\+Part\+Graph\+VKway()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8h_source_l01323}{oomph\+::\+Problem\+::nsub\+\_\+mesh()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00143}{oomph\+::\+Refineable\+Mesh\+Base\+::spatial\+\_\+error\+\_\+estimator\+\_\+pt()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l00243}{oomph\+::\+Cumulative\+Timings\+::start()}}.
 
 
 
-Referenced by oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh().
+Referenced by \mbox{\hyperlink{problem_8cc_source_l00878}{oomph\+::\+Problem\+::partition\+\_\+global\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1METIS_a58831157b0cfadc57485c3de01df7d78}\label{namespaceoomph_1_1METIS_a58831157b0cfadc57485c3de01df7d78}} 
 \index{oomph::METIS@{oomph::METIS}!uniform\_partition\_mesh@{uniform\_partition\_mesh}}
 \index{uniform\_partition\_mesh@{uniform\_partition\_mesh}!oomph::METIS@{oomph::METIS}}
 \doxysubsubsection{\texorpdfstring{uniform\_partition\_mesh()}{uniform\_partition\_mesh()}}
-{\footnotesize\ttfamily void oomph\+::\+M\+E\+T\+I\+S\+::uniform\+\_\+partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{const unsigned \&}]{ndomain,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+METIS\+::uniform\+\_\+partition\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{const unsigned \&}]{ndomain,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{element\+\_\+domain }\end{DoxyParamCaption})}
 
 
 
 Partition mesh uniformly by dividing elements equally over the partitions, in the order in which they are returned by problem. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
 
-Partition mesh uniformly by dividing elements equally over the partitions, in the order in which they are returned by problem. On return, element\+\_\+domain\mbox{[}ielem\mbox{]} contains the number of the domain \mbox{[}0,1,...,ndomain-\/1\mbox{]} to which element ielem has been assigned. 
-
-Definition at line 68 of file partitioning.\+cc.
 
 
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00076}{76}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
 
-References oomph\+::\+Problem\+::mesh\+\_\+pt(), and oomph\+::\+Mesh\+::nelement().
+
+
+References \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
 
 
 
@@ -174,17 +174,17 @@ References oomph\+::\+Problem\+::mesh\+\_\+pt(), and oomph\+::\+Mesh\+::nelement
 \index{oomph::METIS@{oomph::METIS}!Error\_to\_weight\_fct\_pt@{Error\_to\_weight\_fct\_pt}}
 \index{Error\_to\_weight\_fct\_pt@{Error\_to\_weight\_fct\_pt}!oomph::METIS@{oomph::METIS}}
 \doxysubsubsection{\texorpdfstring{Error\_to\_weight\_fct\_pt}{Error\_to\_weight\_fct\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} oomph\+::\+M\+E\+T\+I\+S\+::\+Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt = \&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceoomph_1_1METIS_aec228e35df8426d16639b961fcf98df1}{Error\+To\+Weight\+Fct\+Pt}} oomph\+::\+METIS\+::\+Error\+\_\+to\+\_\+weight\+\_\+fct\+\_\+pt = \&\mbox{\hyperlink{namespaceoomph_1_1METIS_af5633647d4ff099648151db2d7d0a1e5}{default\+\_\+error\+\_\+to\+\_\+weight\+\_\+fct}}}
 
 
 
-Function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{M\+E\+T\+IS}} partitioning. 
+Function pointer to to function that translates spatial error into weight for \mbox{\hyperlink{namespaceoomph_1_1METIS}{METIS}} partitioning. 
 
 
 
-Definition at line 55 of file partitioning.\+cc.
+Definition at line \mbox{\hyperlink{partitioning_8cc_source_l00063}{63}} of file \mbox{\hyperlink{partitioning_8cc_source}{partitioning.\+cc}}.
 
 
 
-Referenced by partition\+\_\+mesh().
+Referenced by \mbox{\hyperlink{partitioning_8cc_source_l00116}{partition\+\_\+mesh()}}.
 

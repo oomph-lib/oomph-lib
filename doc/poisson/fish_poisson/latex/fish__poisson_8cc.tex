@@ -3,12 +3,12 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable Poisson problem in fish-\/shaped domain. Template parameter identifies the element type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\+Source\+For\+Poisson}}
+namespace \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\+Source\+For\+Poisson}}
 \begin{DoxyCompactList}\small\item\em Namespace for const source term in Poisson equation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -16,11 +16,11 @@ class \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Pois
 void \mbox{\hyperlink{namespaceConstSourceForPoisson_aeaa1153817bde9598372b803342f3299}{Const\+Source\+For\+Poisson\+::source\+\_\+function}} (const Vector$<$ double $>$ \&x, double \&source)
 \begin{DoxyCompactList}\small\item\em Const source function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{fish__poisson_8cc_a9f5ae2c03a7f02e61857d322177ce5d5}{solve\+\_\+with\+\_\+incremental\+\_\+adaptation}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve 2D Poisson problem in fish-\/shaped domain with mesh adaptation. First we solve on the original coarse mesh. Next we do a few uniform refinement steps and re-\/solve. Finally, we enter into an automatic adapation loop. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{fish__poisson_8cc_a79a1cfcdcd821bd277276d163b85acfb}{solve\+\_\+with\+\_\+fully\+\_\+automatic\+\_\+adaptation}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve 2D Poisson problem in fish-\/shaped domain with fully automatic mesh adaptation. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{fish__poisson_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve 2D Poisson problem in fish-\/shaped domain with mesh adaptation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,13 +35,17 @@ double \mbox{\hyperlink{namespaceConstSourceForPoisson_add351c5acab2561d68d1fc9e
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
 Demonstrate how to solve 2D Poisson problem in fish-\/shaped domain with mesh adaptation. 
 
-Definition at line 325 of file fish\+\_\+poisson.\+cc.
+
+
+Definition at line \mbox{\hyperlink{fish__poisson_8cc_source_l00325}{325}} of file \mbox{\hyperlink{fish__poisson_8cc_source}{fish\+\_\+poisson.\+cc}}.
 
 
 
-References solve\+\_\+with\+\_\+fully\+\_\+automatic\+\_\+adaptation(), and solve\+\_\+with\+\_\+incremental\+\_\+adaptation().
+References \mbox{\hyperlink{fish__poisson_8cc_source_l00282}{solve\+\_\+with\+\_\+fully\+\_\+automatic\+\_\+adaptation()}}, and \mbox{\hyperlink{fish__poisson_8cc_source_l00191}{solve\+\_\+with\+\_\+incremental\+\_\+adaptation()}}.
 
 \mbox{\Hypertarget{fish__poisson_8cc_a79a1cfcdcd821bd277276d163b85acfb}\label{fish__poisson_8cc_a79a1cfcdcd821bd277276d163b85acfb}} 
 \index{fish\_poisson.cc@{fish\_poisson.cc}!solve\_with\_fully\_automatic\_adaptation@{solve\_with\_fully\_automatic\_adaptation}}
@@ -49,17 +53,21 @@ References solve\+\_\+with\+\_\+fully\+\_\+automatic\+\_\+adaptation(), and solv
 \doxysubsubsection{\texorpdfstring{solve\_with\_fully\_automatic\_adaptation()}{solve\_with\_fully\_automatic\_adaptation()}}
 {\footnotesize\ttfamily void solve\+\_\+with\+\_\+fully\+\_\+automatic\+\_\+adaptation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Demonstrate how to solve 2D Poisson problem in fish-\/shaped domain with fully automatic mesh adaptation 
-
-Definition at line 282 of file fish\+\_\+poisson.\+cc.
 
 
-
-References problem.
+Demonstrate how to solve 2D Poisson problem in fish-\/shaped domain with fully automatic mesh adaptation. 
 
 
 
-Referenced by main().
+Definition at line \mbox{\hyperlink{fish__poisson_8cc_source_l00282}{282}} of file \mbox{\hyperlink{fish__poisson_8cc_source}{fish\+\_\+poisson.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fish__poisson_8cc_source_l00161}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{fish__poisson_8cc_source_l00089}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{fish__poisson_8cc_source_l00325}{main()}}.
 
 \mbox{\Hypertarget{fish__poisson_8cc_a9f5ae2c03a7f02e61857d322177ce5d5}\label{fish__poisson_8cc_a9f5ae2c03a7f02e61857d322177ce5d5}} 
 \index{fish\_poisson.cc@{fish\_poisson.cc}!solve\_with\_incremental\_adaptation@{solve\_with\_incremental\_adaptation}}
@@ -67,15 +75,19 @@ Referenced by main().
 \doxysubsubsection{\texorpdfstring{solve\_with\_incremental\_adaptation()}{solve\_with\_incremental\_adaptation()}}
 {\footnotesize\ttfamily void solve\+\_\+with\+\_\+incremental\+\_\+adaptation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
 Demonstrate how to solve 2D Poisson problem in fish-\/shaped domain with mesh adaptation. First we solve on the original coarse mesh. Next we do a few uniform refinement steps and re-\/solve. Finally, we enter into an automatic adapation loop. 
 
-Definition at line 191 of file fish\+\_\+poisson.\+cc.
+
+
+Definition at line \mbox{\hyperlink{fish__poisson_8cc_source_l00191}{191}} of file \mbox{\hyperlink{fish__poisson_8cc_source}{fish\+\_\+poisson.\+cc}}.
 
 
 
-References problem.
+References \mbox{\hyperlink{fish__poisson_8cc_source_l00161}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{fish__poisson_8cc_source_l00089}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::mesh\+\_\+pt()}}.
 
 
 
-Referenced by main().
+Referenced by \mbox{\hyperlink{fish__poisson_8cc_source_l00325}{main()}}.
 

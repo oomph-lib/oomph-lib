@@ -2,18 +2,18 @@
 \label{namespaceGlobalParameters}\index{GlobalParameters@{GlobalParameters}}
 
 
-Namespace for the Helmholtz problem parameters.  
+////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////  
 
 
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+P\+M\+L\+Mapping}}
+class \mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+PMLMapping}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobalParameters_a558ef64d34b43c794ef29491cb4840ea}{I}} (0.\+0, 1.\+0)
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}} (0.\+0, 1.\+0)
 \begin{DoxyCompactList}\small\item\em Imaginary unit. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{get\+\_\+exact\+\_\+u}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
 \begin{DoxyCompactList}\small\item\em Exact solution for scattered field (vector returns real and impaginary parts). \end{DoxyCompactList}\item 
@@ -28,12 +28,14 @@ double \mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd94
 \begin{DoxyCompactList}\small\item\em Square of the wavenumber (also known as k$^\wedge$2) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\+\_\+fourier}} =100
 \begin{DoxyCompactList}\small\item\em Number of terms used in the computation of the exact solution. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+P\+M\+L\+Mapping}} $\ast$ \mbox{\hyperlink{namespaceGlobalParameters_a66c84b0ba0a324423154d08c56051d0b}{Test\+\_\+pml\+\_\+mapping\+\_\+pt}} = new \mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+P\+M\+L\+Mapping}}
+\mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+PMLMapping}} $\ast$ \mbox{\hyperlink{namespaceGlobalParameters_a66c84b0ba0a324423154d08c56051d0b}{Test\+\_\+pml\+\_\+mapping\+\_\+pt}} = new \mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+PMLMapping}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Namespace for the Helmholtz problem parameters. 
+////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// 
+
+Namespace for the Helmholtz problem parameters 
 
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}\label{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}} 
@@ -48,17 +50,17 @@ Exact solution for scattered field (vector returns real and impaginary parts).
 
 
 
-Definition at line 80 of file unstructured\+\_\+two\+\_\+d\+\_\+helmholtz\+\_\+scattering.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00080}{80}} of file \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+helmholtz\+\_\+scattering.\+cc}}.
 
 
 
-References I(), N\+\_\+fourier, and Wavenumber.
+References \mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I()}}, \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00073}{N\+\_\+fourier}}, and \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_source_l00058}{Wavenumber}}.
 
-\mbox{\Hypertarget{namespaceGlobalParameters_a558ef64d34b43c794ef29491cb4840ea}\label{namespaceGlobalParameters_a558ef64d34b43c794ef29491cb4840ea}} 
+\mbox{\Hypertarget{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}\label{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}} 
 \index{GlobalParameters@{GlobalParameters}!I@{I}}
 \index{I@{I}!GlobalParameters@{GlobalParameters}}
 \doxysubsubsection{\texorpdfstring{I()}{I()}}
-{\footnotesize\ttfamily std\+::complex$<$double$>$ Global\+Parameters\+::I (\begin{DoxyParamCaption}\item[{0.}]{0,  }\item[{1.}]{0 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::complex$<$ double $>$ Global\+Parameters\+::I (\begin{DoxyParamCaption}\item[{0.}]{0,  }\item[{1.}]{0 }\end{DoxyParamCaption})}
 
 
 
@@ -66,7 +68,7 @@ Imaginary unit.
 
 
 
-Referenced by get\+\_\+exact\+\_\+u(), and prescribed\+\_\+incoming\+\_\+flux().
+Referenced by \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00080}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00152}{prescribed\+\_\+incoming\+\_\+flux()}}.
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}\label{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}} 
 \index{GlobalParameters@{GlobalParameters}!prescribed\_incoming\_flux@{prescribed\_incoming\_flux}}
@@ -80,15 +82,15 @@ Flux (normal derivative) on the unit disk for a planar incoming wave.
 
 
 
-Definition at line 152 of file unstructured\+\_\+two\+\_\+d\+\_\+helmholtz\+\_\+scattering.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00152}{152}} of file \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+helmholtz\+\_\+scattering.\+cc}}.
 
 
 
-References I(), N\+\_\+fourier, and Wavenumber.
+References \mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I()}}, \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00073}{N\+\_\+fourier}}, and \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_source_l00058}{Wavenumber}}.
 
 
 
-Referenced by P\+M\+L\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::create\+\_\+flux\+\_\+elements().
+Referenced by \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00748}{PMLProblem$<$ ELEMENT $>$\+::create\+\_\+flux\+\_\+elements()}}.
 
 
 
@@ -105,11 +107,11 @@ Square of the wavenumber (also known as k$^\wedge$2)
 
 
 
-Definition at line 61 of file unstructured\+\_\+two\+\_\+d\+\_\+helmholtz.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_source_l00061}{61}} of file \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+helmholtz.\+cc}}.
 
 
 
-Referenced by P\+M\+L\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::actions\+\_\+after\+\_\+adapt(), and P\+M\+L\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+P\+M\+L\+Problem().
+Referenced by \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_source_l00386}{PMLProblem$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+adapt()}}, and \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_source_l00165}{PMLProblem$<$ ELEMENT $>$\+::\+PMLProblem()}}.
 
 \mbox{\Hypertarget{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}\label{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}} 
 \index{GlobalParameters@{GlobalParameters}!N\_fourier@{N\_fourier}}
@@ -123,21 +125,21 @@ Number of terms used in the computation of the exact solution.
 
 
 
-Definition at line 73 of file unstructured\+\_\+two\+\_\+d\+\_\+helmholtz\+\_\+scattering.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00073}{73}} of file \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+helmholtz\+\_\+scattering.\+cc}}.
 
 
 
-Referenced by get\+\_\+exact\+\_\+u(), and prescribed\+\_\+incoming\+\_\+flux().
+Referenced by \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00080}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00152}{prescribed\+\_\+incoming\+\_\+flux()}}.
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a66c84b0ba0a324423154d08c56051d0b}\label{namespaceGlobalParameters_a66c84b0ba0a324423154d08c56051d0b}} 
 \index{GlobalParameters@{GlobalParameters}!Test\_pml\_mapping\_pt@{Test\_pml\_mapping\_pt}}
 \index{Test\_pml\_mapping\_pt@{Test\_pml\_mapping\_pt}!GlobalParameters@{GlobalParameters}}
 \doxysubsubsection{\texorpdfstring{Test\_pml\_mapping\_pt}{Test\_pml\_mapping\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+P\+M\+L\+Mapping}}$\ast$ Global\+Parameters\+::\+Test\+\_\+pml\+\_\+mapping\+\_\+pt = new \mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+P\+M\+L\+Mapping}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+PMLMapping}}$\ast$ Global\+Parameters\+::\+Test\+\_\+pml\+\_\+mapping\+\_\+pt = new \mbox{\hyperlink{classGlobalParameters_1_1TestPMLMapping}{Test\+PMLMapping}}}
 
 
 
-Definition at line 228 of file unstructured\+\_\+two\+\_\+d\+\_\+helmholtz\+\_\+scattering.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00228}{228}} of file \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+helmholtz\+\_\+scattering.\+cc}}.
 
 \mbox{\Hypertarget{namespaceGlobalParameters_a571b847702904d4cf646ac7ff17a7d2c}\label{namespaceGlobalParameters_a571b847702904d4cf646ac7ff17a7d2c}} 
 \index{GlobalParameters@{GlobalParameters}!Wavenumber@{Wavenumber}}
@@ -151,9 +153,9 @@ Wavenumber (also known as k), k=omega/c.
 
 
 
-Definition at line 58 of file unstructured\+\_\+two\+\_\+d\+\_\+helmholtz.\+cc.
+Definition at line \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_source_l00058}{58}} of file \mbox{\hyperlink{unstructured__two__d__helmholtz_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+helmholtz.\+cc}}.
 
 
 
-Referenced by get\+\_\+exact\+\_\+u(), and prescribed\+\_\+incoming\+\_\+flux().
+Referenced by \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00080}{get\+\_\+exact\+\_\+u()}}, and \mbox{\hyperlink{unstructured__two__d__helmholtz__scattering_8cc_source_l00152}{prescribed\+\_\+incoming\+\_\+flux()}}.
 

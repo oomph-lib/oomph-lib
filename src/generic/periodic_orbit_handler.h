@@ -48,7 +48,7 @@ namespace oomph
   class PeriodicOrbitAssemblyHandlerBase;
 
   //====================================================================
-  /// \short Timestepper used to  calculate periodic orbits directly. It's
+  /// Timestepper used to  calculate periodic orbits directly. It's
   /// not really a "timestepper" per se, but represents the time storage
   /// and means of calculating time-derivatives given the underlying
   /// discretisation.
@@ -67,16 +67,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    PeriodicOrbitTimeDiscretisation(const PeriodicOrbitTimeDiscretisation&)
-    {
-      BrokenCopy::broken_copy("PeriodicOrbitTimeDiscretisation");
-    }
+    PeriodicOrbitTimeDiscretisation(const PeriodicOrbitTimeDiscretisation&) =
+      delete;
 
     /// Broken assignment operator
-    void operator=(const PeriodicOrbitTimeDiscretisation&)
-    {
-      BrokenCopy::broken_assign("PeriodicOrbitTimeDiscretisation");
-    }
+    void operator=(const PeriodicOrbitTimeDiscretisation&) = delete;
 
     /// Return the actual order of the scheme
     unsigned order() const
@@ -84,7 +79,7 @@ namespace oomph
       return 1;
     }
 
-    /// \short Broken initialisation the time-history for the Data values
+    /// Broken initialisation the time-history for the Data values
     /// corresponding to an impulsive start.
     void assign_initial_values_impulsive(Data* const& data_pt)
     {
@@ -94,7 +89,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Broken initialisation of
+    /// Broken initialisation of
     /// the positions for the node corresponding to an impulsive start
     void assign_initial_positions_impulsive(Node* const& node_pt)
     {
@@ -105,11 +100,11 @@ namespace oomph
     }
 
 
-    /// \short Typedef for function that returns the (scalar) initial
+    /// Typedef for function that returns the (scalar) initial
     /// value at a given value of the continuous time t.
     typedef double (*InitialConditionFctPt)(const double& t);
 
-    /// \short  Initialise the time-history for the Data values,
+    ///  Initialise the time-history for the Data values,
     /// corresponding to given time history, specified by
     /// Vector of function pointers.
     void assign_initial_data_values(
@@ -187,10 +182,7 @@ namespace oomph
     PeriodicOrbitEquations() : Ntstorage(0), Omega_pt(0), Time_pt(0) {}
 
     /// Broken copy constructor
-    PeriodicOrbitEquations(const PeriodicOrbitEquations& dummy)
-    {
-      BrokenCopy::broken_copy("PeriodicOrbitEquations");
-    }
+    PeriodicOrbitEquations(const PeriodicOrbitEquations& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -198,10 +190,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const PeriodicOrbitEquations&)
-     {
-      BrokenCopy::broken_assign("PeriodicOrbitEquations");
-      }*/
+    /*void operator=(const PeriodicOrbitEquations&) = delete;*/
 
     /// Set the pointer to the frequency
     double*& omega_pt()
@@ -291,7 +280,7 @@ namespace oomph
       DenseMatrix<double>& jacobian,
       const unsigned& flag);
 
-    /// \short Set the timestepper weights
+    /// Set the timestepper weights
     void set_timestepper_weights(const Shape& psi, const DShape& dpsidt)
     {
       PeriodicOrbitTimeDiscretisation* cast_time_stepper_pt =
@@ -323,7 +312,7 @@ namespace oomph
       }
     }
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// local coord. s; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_orbit(const Vector<double>& s,
                                                    Shape& psi,
@@ -332,7 +321,7 @@ namespace oomph
                                                    DShape& dtestdt) const = 0;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     virtual double dshape_and_dtest_eulerian_at_knot_orbit(
       const unsigned& ipt,
@@ -341,12 +330,12 @@ namespace oomph
       Shape& test,
       DShape& dtestdt) const = 0;
 
-    /// \short Compute element residual Vector only (if flag=and/or element
+    /// Compute element residual Vector only (if flag=and/or element
     /// Jacobian matrix
 
     // Output function
 
-    ///  \short Output function:
+    ///  Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
   };
 
@@ -363,7 +352,7 @@ namespace oomph
       public virtual ElementWithZ2ErrorEstimator
   {
   public:
-    ///\short  Constructor: Call constructors for QElement and
+    /// Constructor: Call constructors for QElement and
     /// Poisson equations
     SpectralPeriodicOrbitElement()
       : QSpectralElement<1, NNODE_1D>(),
@@ -374,19 +363,13 @@ namespace oomph
 
     /// Broken copy constructor
     SpectralPeriodicOrbitElement(
-      const SpectralPeriodicOrbitElement<NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("SpectralPeriodicOrbitElement");
-    }
+      const SpectralPeriodicOrbitElement<NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const SpectralPeriodicOrbitElement<NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("SpectralPeriodicOrbitElement");
-      }*/
+    /*void operator=(const SpectralPeriodicOrbitElement<NNODE_1D>&) = delete;*/
 
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///  Required  # of `values' (pinned or dofs)
     /// at node n (only ever one dummy value, used for equation numbering)
     /// This is also used to represent all *spatial* variables during a
     /// temporal refinement, which is a bit naughty but it quick and dirty.
@@ -395,19 +378,19 @@ namespace oomph
       return 1;
     }
 
-    /// \short Number of continuously interpolated values (1)
+    /// Number of continuously interpolated values (1)
     inline unsigned ncont_interpolated_values() const
     {
       return 1;
     }
 
-    /// \short Return the dummy values
+    /// Return the dummy values
     void get_interpolated_values(const Vector<double>& s, Vector<double>& value)
     {
       this->get_interpolated_values(0, s, value);
     }
 
-    ///\short Return the temporal dummy values
+    /// Return the temporal dummy values
     void get_interpolated_values(const unsigned& t,
                                  const Vector<double>& s,
                                  Vector<double>& value)
@@ -425,20 +408,20 @@ namespace oomph
       }
     }
 
-    //\short Order of recovery shape functions for Z2 error estimation:
+    // Order of recovery shape functions for Z2 error estimation:
     unsigned nrecovery_order()
     {
       return NNODE_1D - 1;
     }
 
-    /// \short Number of flux terms for Z2 error estimation
+    /// Number of flux terms for Z2 error estimation
     /// This will be used to represent all spatial values,
     unsigned num_Z2_flux_terms()
     {
       return this->node_pt(0)->ntstorage();
     }
 
-    /// \short Get the fluxes for the recovert
+    /// Get the fluxes for the recovert
     void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     {
       // Find out the number of nodes in the element
@@ -477,7 +460,7 @@ namespace oomph
       return 2;
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QSpectralElement<1, NNODE_1D>::vertex_node_pt(j);
@@ -485,9 +468,9 @@ namespace oomph
 
 
     //
-    /// \short Function to return the number of values
+    /// Function to return the number of values
 
-    /// \short Output function:
+    /// Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
@@ -495,7 +478,7 @@ namespace oomph
     }
 
 
-    ///  \short Output function:
+    ///  Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -503,7 +486,7 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    /// C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
@@ -511,7 +494,7 @@ namespace oomph
     }
 
 
-    ///  \short C-style output function:
+    ///  C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -529,7 +512,7 @@ namespace oomph
                                                   DShape& dtestdt) const;
 
 
-    /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+    /// Shape, test functions & derivs. w.r.t. to global coords. at
     /// integration point ipt. Return Jacobian.
     inline double dshape_and_dtest_eulerian_at_knot_orbit(
       const unsigned& ipt,
@@ -677,7 +660,7 @@ namespace oomph
     }
   };
 
-  ///===============================================================
+  /// ===============================================================
   /// Base class to avoid template complications
   //===============================================================
   class PeriodicOrbitAssemblyHandlerBase : public AssemblyHandler
@@ -723,7 +706,7 @@ namespace oomph
     /// Storage for the previous solution
     Vector<double> Previous_dofs;
 
-    ///\short Store number of degrees of freedom in the original problem
+    /// Store number of degrees of freedom in the original problem
     unsigned Ndof;
 
     /// Storage for number of elements in the period
@@ -930,7 +913,7 @@ namespace oomph
       return ((elem_pt->ndof()) * N_tstorage + 1);
     }
 
-    /// \short Return the global equation number of the local unknown ieqn_local
+    /// Return the global equation number of the local unknown ieqn_local
     /// in elem_pt.
     unsigned long eqn_number(GeneralisedElement* const& elem_pt,
                              const unsigned& ieqn_local)
@@ -1006,7 +989,7 @@ namespace oomph
     }
 
 
-    /// \short Calculate the elemental Jacobian matrix "d equation
+    /// Calculate the elemental Jacobian matrix "d equation
     /// / d variable" for elem_pt.
     void get_jacobian(GeneralisedElement* const& elem_pt,
                       Vector<double>& residuals,
@@ -1016,22 +999,22 @@ namespace oomph
         this, elem_pt, residuals, jacobian);
     }
 
-    /// \short Calculate all desired vectors and matrices
+    /// Calculate all desired vectors and matrices
     /// provided by the element elem_pt.
     // void get_all_vectors_and_matrices(
     // GeneralisedElement* const &elem_pt,
     // Vector<Vector<double> >&vec, Vector<DenseMatrix<double> > &matrix) {}
 
-    /// \short Return an unsigned integer to indicate whether the
+    /// Return an unsigned integer to indicate whether the
     /// handler is a bifurcation tracking handler. The default
     /// is zero (not)
     // virtual int bifurcation_type() const {return 0;}
 
-    /// \short Return a pointer to the
+    /// Return a pointer to the
     /// bifurcation parameter in bifurcation tracking problems
     // virtual double* bifurcation_parameter_pt() const;
 
-    /// \short Return the eigenfunction(s) associated with the bifurcation that
+    /// Return the eigenfunction(s) associated with the bifurcation that
     /// has been detected in bifurcation tracking problems
     // virtual void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
 
@@ -1463,7 +1446,7 @@ namespace oomph
     }
 
 
-    /// \short Destructor, destroy the time mesh
+    /// Destructor, destroy the time mesh
     ~PeriodicOrbitAssemblyHandler()
     {
       delete Time_mesh_pt;

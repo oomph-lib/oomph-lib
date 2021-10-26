@@ -1,80 +1,85 @@
-\hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{}\doxysection{oomph\+::Q\+Unsteady\+Heat\+Space\+Time\+Element$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{}\doxysection{oomph\+::QUnsteady\+Heat\+Space\+Time\+Element\texorpdfstring{$<$}{<} SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1QUnsteadyHeatSpaceTimeElement}\index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
+
+
+//////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Q\+Unsteady\+Heat\+Space\+Time\+Element$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QUnsteady\+Heat\+Space\+Time\+Element\texorpdfstring{$<$}{<} SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.345901cm]{classoomph_1_1QUnsteadyHeatSpaceTimeElement}
+\includegraphics[height=0.670257cm]{classoomph_1_1QUnsteadyHeatSpaceTimeElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_abfd5df144eff6ba41aa0f5c183a199ec}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Space\+Time\+Unsteady\+Heat equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_add760ad2ff57f12b38ea32c8bafbb6bf}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} (const \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_abfd5df144eff6ba41aa0f5c183a199ec}{QUnsteady\+Heat\+Space\+Time\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Space\+Time\+Unsteady\+Heat equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a6f38a41270232d258f0c03d30d0a7653}{QUnsteady\+Heat\+Space\+Time\+Element}} (const \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aefe965fdd0fd88e72daa2b14a293761a}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aefe965fdd0fd88e72daa2b14a293761a}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Required number of \textquotesingle{}values\textquotesingle{} (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac53c69193308ba87b7b69af24cef78e5}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,t,u or x,y,t,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_acefd8f8383a3a929231391ac74f5dbae}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac200c2c224b3f8c77a6533d162eb2c7a}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac200c2c224b3f8c77a6533d162eb2c7a}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,t,u or x,y,t,u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aacdb4919b8121082c558e613df0b5363}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aacdb4919b8121082c558e613df0b5363}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ada0ae572412eade00a0302b665423dbb}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aba4db11ecfb9fbb9dbb53e17446ab4ee}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points (Calls the unsteady version) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_abfd5df144eff6ba41aa0f5c183a199ec}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Space\+Time\+Unsteady\+Heat equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_add760ad2ff57f12b38ea32c8bafbb6bf}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} (const \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points (Calls the unsteady version) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_abfd5df144eff6ba41aa0f5c183a199ec}{QUnsteady\+Heat\+Space\+Time\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Space\+Time\+Unsteady\+Heat equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a6f38a41270232d258f0c03d30d0a7653}{QUnsteady\+Heat\+Space\+Time\+Element}} (const \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aefe965fdd0fd88e72daa2b14a293761a}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aefe965fdd0fd88e72daa2b14a293761a}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Required number of \textquotesingle{}values\textquotesingle{} (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac53c69193308ba87b7b69af24cef78e5}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,t,u or x,y,t,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_acefd8f8383a3a929231391ac74f5dbae}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac200c2c224b3f8c77a6533d162eb2c7a}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac200c2c224b3f8c77a6533d162eb2c7a}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,t,u or x,y,t,u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aacdb4919b8121082c558e613df0b5363}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aacdb4919b8121082c558e613df0b5363}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ada0ae572412eade00a0302b665423dbb}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aba4db11ecfb9fbb9dbb53e17446ab4ee}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points (Calls the unsteady version) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa2d27ff6b9636f3a5ada0da578b5ecb0}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points (Calls the unsteady version) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa2d27ff6b9636f3a5ada0da578b5ecb0}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a7e15bdaa0258db0f3a26703917533c8a}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a7e15bdaa0258db0f3a26703917533c8a}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa2d27ff6b9636f3a5ada0da578b5ecb0}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa2d27ff6b9636f3a5ada0da578b5ecb0}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a7e15bdaa0258db0f3a26703917533c8a}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a7e15bdaa0258db0f3a26703917533c8a}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 static const unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aee56f0067940a3ba61014a08c1d0b207}{Initial\+\_\+\+Nvalue}} = 1
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nvalue\mbox{[}n\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$}
+//////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} elements are quadrilateral/brick-\/ shaped Unsteady\+Heat elements with isoparametric interpolation for the function. 
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}} elements are quadrilateral/brick-\/ shaped Unsteady\+Heat elements with isoparametric interpolation for the function. 
 
-Definition at line 707 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00704}{704}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
@@ -83,69 +88,53 @@ Definition at line 707 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elem
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!QUnsteadyHeatSpaceTimeElement@{QUnsteadyHeatSpaceTimeElement}}
 \index{QUnsteadyHeatSpaceTimeElement@{QUnsteadyHeatSpaceTimeElement}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QUnsteadyHeatSpaceTimeElement()}{QUnsteadyHeatSpaceTimeElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Space\+Time\+Unsteady\+Heat equations. 
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Space\+Time\+Unsteady\+Heat equations. 
 
 
 
-Definition at line 714 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00711}{711}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_add760ad2ff57f12b38ea32c8bafbb6bf}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_add760ad2ff57f12b38ea32c8bafbb6bf}} 
+\mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a6f38a41270232d258f0c03d30d0a7653}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a6f38a41270232d258f0c03d30d0a7653}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!QUnsteadyHeatSpaceTimeElement@{QUnsteadyHeatSpaceTimeElement}}
 \index{QUnsteadyHeatSpaceTimeElement@{QUnsteadyHeatSpaceTimeElement}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QUnsteadyHeatSpaceTimeElement()}{QUnsteadyHeatSpaceTimeElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 721 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_abfd5df144eff6ba41aa0f5c183a199ec}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_abfd5df144eff6ba41aa0f5c183a199ec}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!QUnsteadyHeatSpaceTimeElement@{QUnsteadyHeatSpaceTimeElement}}
 \index{QUnsteadyHeatSpaceTimeElement@{QUnsteadyHeatSpaceTimeElement}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QUnsteadyHeatSpaceTimeElement()}{QUnsteadyHeatSpaceTimeElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Space\+Time\+Unsteady\+Heat equations. 
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Space\+Time\+Unsteady\+Heat equations. 
 
 
 
-Definition at line 713 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00710}{710}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_add760ad2ff57f12b38ea32c8bafbb6bf}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_add760ad2ff57f12b38ea32c8bafbb6bf}} 
+\mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a6f38a41270232d258f0c03d30d0a7653}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a6f38a41270232d258f0c03d30d0a7653}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!QUnsteadyHeatSpaceTimeElement@{QUnsteadyHeatSpaceTimeElement}}
 \index{QUnsteadyHeatSpaceTimeElement@{QUnsteadyHeatSpaceTimeElement}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QUnsteadyHeatSpaceTimeElement()}{QUnsteadyHeatSpaceTimeElement()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 720 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -154,88 +143,72 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat@{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat@{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat()}{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
 Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. 
 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+
+Galerkin\+: Test functions=shape functions 
+
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00851}{851}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
-Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a82689c95ea9680d3089ce1bd5e9f74b3}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a7e15bdaa0258db0f3a26703917533c8a}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_a7e15bdaa0258db0f3a26703917533c8a}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat@{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat@{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat()}{dshape\_and\_dtest\_eulerian\_at\_knot\_ust\_heat()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
-
-Galerkin\+: Test functions=shape functions 
-
-Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a82689c95ea9680d3089ce1bd5e9f74b3}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
-
-
-
-Definition at line 859 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References i, and s.
-
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa2d27ff6b9636f3a5ada0da578b5ecb0}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa2d27ff6b9636f3a5ada0da578b5ecb0}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_ust\_heat@{dshape\_and\_dtest\_eulerian\_ust\_heat}}
 \index{dshape\_and\_dtest\_eulerian\_ust\_heat@{dshape\_and\_dtest\_eulerian\_ust\_heat}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_ust\_heat()}{dshape\_and\_dtest\_eulerian\_ust\_heat()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
 Shape/test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
+
+Galerkin\+: Test functions=shape functions 
+
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00823}{823}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
-Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa1b95c28b6c564e3bf968c1768126a77}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa2d27ff6b9636f3a5ada0da578b5ecb0}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aa2d27ff6b9636f3a5ada0da578b5ecb0}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_ust\_heat@{dshape\_and\_dtest\_eulerian\_ust\_heat}}
 \index{dshape\_and\_dtest\_eulerian\_ust\_heat@{dshape\_and\_dtest\_eulerian\_ust\_heat}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_ust\_heat()}{dshape\_and\_dtest\_eulerian\_ust\_heat()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+ust\+\_\+heat (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Shape/test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
-
-Galerkin\+: Test functions=shape functions 
-
-Implements \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_aa1b95c28b6c564e3bf968c1768126a77}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
-
-
-
-Definition at line 831 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References s.
-
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac200c2c224b3f8c77a6533d162eb2c7a}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac200c2c224b3f8c77a6533d162eb2c7a}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -243,22 +216,18 @@ C-\/style output function\+: x,t,u or x,y,t,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a49fb126a5c8c9129d9b6528d9905ebed}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00750}{750}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 756 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac200c2c224b3f8c77a6533d162eb2c7a}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac200c2c224b3f8c77a6533d162eb2c7a}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -266,68 +235,56 @@ C-\/style output function\+: x,t,u or x,y,t,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a49fb126a5c8c9129d9b6528d9905ebed}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00749}{749}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 757 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aacdb4919b8121082c558e613df0b5363}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aacdb4919b8121082c558e613df0b5363}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-C-\/style output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. 
+C-\/style output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a8ec51722d2716b431b737b3d826fea3f}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00759}{759}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 765 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aacdb4919b8121082c558e613df0b5363}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aacdb4919b8121082c558e613df0b5363}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-C-\/style output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. 
+C-\/style output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a8ec51722d2716b431b737b3d826fea3f}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00758}{758}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 766 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac53c69193308ba87b7b69af24cef78e5}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac53c69193308ba87b7b69af24cef78e5}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -335,22 +292,18 @@ Output function\+: x,t,u or x,y,t,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a85444812c98a167c9bc952beb7d9f031}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00732}{732}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 738 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac53c69193308ba87b7b69af24cef78e5}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ac53c69193308ba87b7b69af24cef78e5}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -358,160 +311,116 @@ Output function\+: x,t,u or x,y,t,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a85444812c98a167c9bc952beb7d9f031}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00731}{731}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 739 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_acefd8f8383a3a929231391ac74f5dbae}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_acefd8f8383a3a929231391ac74f5dbae}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. 
+Output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a507bbdc5ab85e2add0a0bb7487f49434}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00741}{741}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 747 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_acefd8f8383a3a929231391ac74f5dbae}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_acefd8f8383a3a929231391ac74f5dbae}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. 
+Output function\+: x,t,u or x,y,t,u at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a507bbdc5ab85e2add0a0bb7487f49434}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00740}{740}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 748 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aba4db11ecfb9fbb9dbb53e17446ab4ee}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aba4db11ecfb9fbb9dbb53e17446ab4ee}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function for a time-\/dependent exact solution. x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points (Calls the unsteady version) 
+Output function for a time-\/dependent exact solution. x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points (Calls the unsteady version) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab5626409c987f78758550cc69c45d0f6}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
-
-
-
-Definition at line 787 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output\+\_\+fct().
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00781}{781}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aba4db11ecfb9fbb9dbb53e17446ab4ee}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aba4db11ecfb9fbb9dbb53e17446ab4ee}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function for a time-\/dependent exact solution. x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points (Calls the unsteady version) 
+Output function for a time-\/dependent exact solution. x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points (Calls the unsteady version) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_ab5626409c987f78758550cc69c45d0f6}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
-
-
-
-Definition at line 788 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output\+\_\+fct().
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00780}{780}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ada0ae572412eade00a0302b665423dbb}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ada0ae572412eade00a0302b665423dbb}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function for an exact solution\+: x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. 
+Output function for an exact solution\+: x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a073aa06236cc2025ac4d5d3e39050006}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
-
-
-
-Definition at line 774 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output\+\_\+fct().
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00768}{768}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ada0ae572412eade00a0302b665423dbb}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_ada0ae572412eade00a0302b665423dbb}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function for an exact solution\+: x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M+1) plot points. 
+Output function for an exact solution\+: x,t,u\+\_\+exact or x,y,t,u\+\_\+exact at n\+\_\+plot$^\wedge$(SPATIAL\+\_\+\+DIM+1) plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SpaceTimeUnsteadyHeatEquations_a073aa06236cc2025ac4d5d3e39050006}{oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$}}.
-
-
-
-Definition at line 775 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Space\+Time\+Unsteady\+Heat\+Equations$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M $>$\+::output\+\_\+fct().
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00767}{767}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aefe965fdd0fd88e72daa2b14a293761a}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aefe965fdd0fd88e72daa2b14a293761a}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -519,22 +428,18 @@ Required number of \textquotesingle{}values\textquotesingle{} (pinned or dofs) a
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00723}{723}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 729 of file discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue.
+References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00812}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
 
 \mbox{\Hypertarget{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aefe965fdd0fd88e72daa2b14a293761a}\label{classoomph_1_1QUnsteadyHeatSpaceTimeElement_aefe965fdd0fd88e72daa2b14a293761a}} 
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -542,15 +447,11 @@ Required number of \textquotesingle{}values\textquotesingle{} (pinned or dofs) a
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source_l00722}{722}} of file \mbox{\hyperlink{discontinuous__galerkin__space__time__unsteady__heat__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Definition at line 730 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue.
+References \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00812}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
 
 
 
@@ -559,8 +460,8 @@ References oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element$<$ S\+P\+A\+T\+I\+
 \index{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$@{oomph::QUnsteadyHeatSpaceTimeElement$<$ SPATIAL\_DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily template$<$unsigned S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-static const unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element}}$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned SPATIAL\+\_\+\+DIM, unsigned NNODE\+\_\+1D$>$ \\
+static const unsigned \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatSpaceTimeElement}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element}}$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -568,11 +469,11 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line 819 of file space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00812}{812}} of file \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source}{space\+\_\+time\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Q\+Unsteady\+Heat\+Space\+Time\+Element$<$ S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::required\+\_\+nvalue().
+Referenced by \mbox{\hyperlink{space__time__unsteady__heat__elements_8h_source_l00723}{oomph\+::\+QUnsteady\+Heat\+Space\+Time\+Element$<$ SPATIAL\+\_\+\+DIM, NNODE\+\_\+1\+D $>$\+::required\+\_\+nvalue()}}.
 
 
 

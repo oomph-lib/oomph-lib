@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1CRComplexMatrix}{}\doxysection{oomph\+::C\+R\+Complex\+Matrix Class Reference}
+\hypertarget{classoomph_1_1CRComplexMatrix}{}\doxysection{oomph\+::CRComplex\+Matrix Class Reference}
 \label{classoomph_1_1CRComplexMatrix}\index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 
 
@@ -9,7 +9,7 @@ A class for compressed row matrices.
 
 {\ttfamily \#include $<$complex\+\_\+matrices.\+h$>$}
 
-Inheritance diagram for oomph\+::C\+R\+Complex\+Matrix\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::CRComplex\+Matrix\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.209073cm]{classoomph_1_1CRComplexMatrix}
@@ -18,15 +18,15 @@ Inheritance diagram for oomph\+::C\+R\+Complex\+Matrix\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_aafc13fb96931fb4d62bad6c3146602af}{C\+R\+Complex\+Matrix}} ()
+\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_aafc13fb96931fb4d62bad6c3146602af}{CRComplex\+Matrix}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_aeddcf19d87b5e8e4084353cd4e7c5b5e}{C\+R\+Complex\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a3e382ff145082821a6b0b3e63b6aed5d}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRMatrix_aa6057d1c2a9a491f643e0633c778f8fb}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRMatrix_a6210ebb3d384de9c3a289f5d841a0d7a}{row\+\_\+start}}, const unsigned long \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned long \&m)
+\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a2d7141c949fd722ebe025959745e0e76}{CRComplex\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{classoomph_1_1SparseMatrix_a7a5b585410f9b23da6f269faa4a1db72}{value}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRMatrix_a6102f6708bca13832e05d5914397a5f1}{column\+\_\+index}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&\mbox{\hyperlink{classoomph_1_1CRMatrix_a8764aaff252eac12f2d822e62852d729}{row\+\_\+start}}, const unsigned long \&n, const unsigned long \&m)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass vector of values, vector of column indices, vector of row starts and number of columns (can be suppressed for square matrices) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_aa7065ac556f955e2332c5954ddd2c9fc}{C\+R\+Complex\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1CRComplexMatrix}{C\+R\+Complex\+Matrix}} \&matrix)
+\mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a9758f59ae1a523e384bc550ce6f5b9f1}{CRComplex\+Matrix}} (const \mbox{\hyperlink{classoomph_1_1CRComplexMatrix}{CRComplex\+Matrix}} \&matrix)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a2c71c4bab418cf3fd362072f5c5587d2}{operator=}} (const \mbox{\hyperlink{classoomph_1_1CRComplexMatrix}{C\+R\+Complex\+Matrix}} \&)
+void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_accdc66b2b1ce57846da4eb52830c2b04}{operator=}} (const \mbox{\hyperlink{classoomph_1_1CRComplexMatrix}{CRComplex\+Matrix}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a355bb8b8f6ff1e504bb8e449d6fbfb0a}{$\sim$\+C\+R\+Complex\+Matrix}} ()
+virtual \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a355bb8b8f6ff1e504bb8e449d6fbfb0a}{$\sim$\+CRComplex\+Matrix}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: Kill the LU decomposition if it has been computed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a2a36aa0cbdba895ffd0b83f1d9575325}{enable\+\_\+doc\+\_\+stats}} ()
 \begin{DoxyCompactList}\small\item\em Set flag to indicate that stats are to be displayed during solution of linear system with Super\+LU. \end{DoxyCompactList}\item 
@@ -36,19 +36,19 @@ unsigned long \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a08280a10665278ab23
 \begin{DoxyCompactList}\small\item\em Return the number of rows of the matrix. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a4151bc429f2da548cee234e147003bfa}{ncol}} () const
 \begin{DoxyCompactList}\small\item\em Return the number of columns of the matrix. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a1a800a78ffb803e931d6884c66e9220d}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
+std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a43e7760fcbd13dbeeae9d24153095b45}{operator()}} (const unsigned long \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned long \&j) const
 \begin{DoxyCompactList}\small\item\em Overload the round-\/bracket access operator for read-\/only access. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a8f2e601ccd4bb7c74af3c55cf6c3290b}{ludecompose}} ()
 \begin{DoxyCompactList}\small\item\em LU decomposition using Super\+LU. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ac7cd6c4c59135dcf74db058939f3e0a2}{lubksub}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&rhs)
-\begin{DoxyCompactList}\small\item\em LU back solve for given R\+HS. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ac3cac0e74a1ac57526192a37fd9a1f5b}{lubksub}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&rhs)
+\begin{DoxyCompactList}\small\item\em LU back solve for given RHS. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_af541bd4937b4029764d1af2343633691}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em LU clean up (perhaps this should happen in the destructor) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae25e4a5c9fb45af4a1ef2b1f69c0681e}{residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&residual)
+void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}{residual}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&b, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&residual)
 \begin{DoxyCompactList}\small\item\em Find the residual to x of Ax=b, i.\+e. r=b-\/\+Ax. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a31d464d6fa6bfd14c5ad832532ce9ebe}{multiply}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&soln)
+void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5ebf5f24c1bd1b4e4e3df6ebcceb189e}{multiply}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Multiply the matrix by the vector x\+: soln=Ax. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_ae2a983abdbc42225fb3ced8415114d81}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&soln)
+void \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_a5df8a8b3bb15ce5627e7300448b13d28}{multiply\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -68,7 +68,7 @@ int \mbox{\hyperlink{classoomph_1_1CRComplexMatrix_adb7e147717d66f466c46178a403f
 \doxysubsection{Detailed Description}
 A class for compressed row matrices. 
 
-Definition at line 290 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00277}{277}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
@@ -77,7 +77,7 @@ Definition at line 290 of file complex\+\_\+matrices.\+h.
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!CRComplexMatrix@{CRComplexMatrix}}
 \index{CRComplexMatrix@{CRComplexMatrix}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{CRComplexMatrix()}{CRComplexMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily oomph\+::\+C\+R\+Complex\+Matrix\+::\+C\+R\+Complex\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+CRComplex\+Matrix\+::\+CRComplex\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -85,17 +85,17 @@ Default constructor.
 
 
 
-Definition at line 302 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00289}{289}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-References Doc\+\_\+stats\+\_\+during\+\_\+solve.
+References \mbox{\hyperlink{complex__matrices_8h_source_l00383}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}.
 
-\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_aeddcf19d87b5e8e4084353cd4e7c5b5e}\label{classoomph_1_1CRComplexMatrix_aeddcf19d87b5e8e4084353cd4e7c5b5e}} 
+\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a2d7141c949fd722ebe025959745e0e76}\label{classoomph_1_1CRComplexMatrix_a2d7141c949fd722ebe025959745e0e76}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!CRComplexMatrix@{CRComplexMatrix}}
 \index{CRComplexMatrix@{CRComplexMatrix}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{CRComplexMatrix()}{CRComplexMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily oomph\+::\+C\+R\+Complex\+Matrix\+::\+C\+R\+Complex\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{value,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{column\+\_\+index,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{row\+\_\+start,  }\item[{const unsigned long \&}]{n,  }\item[{const unsigned long \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+CRComplex\+Matrix\+::\+CRComplex\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{value,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{column\+\_\+index,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ int $>$ \&}]{row\+\_\+start,  }\item[{const unsigned long \&}]{n,  }\item[{const unsigned long \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -103,35 +103,27 @@ Constructor\+: Pass vector of values, vector of column indices, vector of row st
 
 
 
-Definition at line 311 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00298}{298}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-References Doc\+\_\+stats\+\_\+during\+\_\+solve.
+References \mbox{\hyperlink{complex__matrices_8h_source_l00383}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}.
 
-\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_aa7065ac556f955e2332c5954ddd2c9fc}\label{classoomph_1_1CRComplexMatrix_aa7065ac556f955e2332c5954ddd2c9fc}} 
+\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a9758f59ae1a523e384bc550ce6f5b9f1}\label{classoomph_1_1CRComplexMatrix_a9758f59ae1a523e384bc550ce6f5b9f1}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!CRComplexMatrix@{CRComplexMatrix}}
 \index{CRComplexMatrix@{CRComplexMatrix}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{CRComplexMatrix()}{CRComplexMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily oomph\+::\+C\+R\+Complex\+Matrix\+::\+C\+R\+Complex\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CRComplexMatrix}{C\+R\+Complex\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+CRComplex\+Matrix\+::\+CRComplex\+Matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CRComplexMatrix}{CRComplex\+Matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
 
-
-
-Definition at line 326 of file complex\+\_\+matrices.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
-
 \mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a355bb8b8f6ff1e504bb8e449d6fbfb0a}\label{classoomph_1_1CRComplexMatrix_a355bb8b8f6ff1e504bb8e449d6fbfb0a}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!````~CRComplexMatrix@{$\sim$CRComplexMatrix}}
 \index{````~CRComplexMatrix@{$\sim$CRComplexMatrix}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{$\sim$CRComplexMatrix()}{~CRComplexMatrix()}}
-{\footnotesize\ttfamily virtual oomph\+::\+C\+R\+Complex\+Matrix\+::$\sim$\+C\+R\+Complex\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+CRComplex\+Matrix\+::$\sim$\+CRComplex\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -139,11 +131,11 @@ Destructor\+: Kill the LU decomposition if it has been computed.
 
 
 
-Definition at line 339 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00319}{319}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{complex__matrices_8cc_source_l01080}{clean\+\_\+up\+\_\+memory()}}.
 
 
 
@@ -152,7 +144,7 @@ References clean\+\_\+up\+\_\+memory().
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
-{\footnotesize\ttfamily void oomph\+::\+C\+R\+Complex\+Matrix\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+CRComplex\+Matrix\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -160,21 +152,21 @@ LU clean up (perhaps this should happen in the destructor)
 
 Cleanup memory. 
 
-Definition at line 1080 of file complex\+\_\+matrices.\+cc.
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01080}{1080}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
 
 
 
-References oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index, oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats\+\_\+during\+\_\+solve, F\+\_\+factors, i, Info, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::N, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Nnz, oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start, oomph\+::superlu\+\_\+complex(), and oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Value.
+References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00383}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}, \mbox{\hyperlink{complex__matrices_8h_source_l00282}{F\+\_\+factors}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__matrices_8h_source_l00285}{Info}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00574}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Nnz}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start}}, \mbox{\hyperlink{namespaceoomph_a86eed4072592007720b957cf58c7bbe5}{oomph\+::superlu\+\_\+complex()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
 
 
 
-Referenced by $\sim$\+C\+R\+Complex\+Matrix().
+Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00319}{$\sim$\+CRComplex\+Matrix()}}.
 
 \mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_aacd1c3945b8a266141fbc7c32d7eb4c7}\label{classoomph_1_1CRComplexMatrix_aacd1c3945b8a266141fbc7c32d7eb4c7}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!disable\_doc\_stats@{disable\_doc\_stats}}
 \index{disable\_doc\_stats@{disable\_doc\_stats}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{disable\_doc\_stats()}{disable\_doc\_stats()}}
-{\footnotesize\ttfamily void oomph\+::\+C\+R\+Complex\+Matrix\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+CRComplex\+Matrix\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -182,17 +174,17 @@ the solve
 
 
 
-Definition at line 353 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00333}{333}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-References Doc\+\_\+stats\+\_\+during\+\_\+solve.
+References \mbox{\hyperlink{complex__matrices_8h_source_l00383}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}.
 
 \mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a2a36aa0cbdba895ffd0b83f1d9575325}\label{classoomph_1_1CRComplexMatrix_a2a36aa0cbdba895ffd0b83f1d9575325}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!enable\_doc\_stats@{enable\_doc\_stats}}
 \index{enable\_doc\_stats@{enable\_doc\_stats}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{enable\_doc\_stats()}{enable\_doc\_stats()}}
-{\footnotesize\ttfamily void oomph\+::\+C\+R\+Complex\+Matrix\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+CRComplex\+Matrix\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -200,61 +192,63 @@ Set flag to indicate that stats are to be displayed during solution of linear sy
 
 
 
-Definition at line 346 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00326}{326}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-References Doc\+\_\+stats\+\_\+during\+\_\+solve.
+References \mbox{\hyperlink{complex__matrices_8h_source_l00383}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}.
 
-\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_ac7cd6c4c59135dcf74db058939f3e0a2}\label{classoomph_1_1CRComplexMatrix_ac7cd6c4c59135dcf74db058939f3e0a2}} 
+\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_ac3cac0e74a1ac57526192a37fd9a1f5b}\label{classoomph_1_1CRComplexMatrix_ac3cac0e74a1ac57526192a37fd9a1f5b}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!lubksub@{lubksub}}
 \index{lubksub@{lubksub}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{lubksub()}{lubksub()}}
-{\footnotesize\ttfamily void oomph\+::\+C\+R\+Complex\+Matrix\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+CRComplex\+Matrix\+::lubksub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-LU back solve for given R\+HS. 
+LU back solve for given RHS. 
 
-Do back-\/substitution. R\+HS vector
+Do back-\/substitution. RHS vector
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a97f5b56fd405e9a288879c256529568c}{oomph\+::\+Complex\+Matrix\+Base}}.
-
-
-
-Definition at line 999 of file complex\+\_\+matrices.\+cc.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa0e444d60d4ec9e35a6903ab88baaf62}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-References oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index, oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats\+\_\+during\+\_\+solve, F\+\_\+factors, i, Info, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::M, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::N, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Nnz, oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start, oomph\+::superlu\+\_\+complex(), and oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Value.
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00999}{999}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
+
+
+
+References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00383}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}, \mbox{\hyperlink{complex__matrices_8h_source_l00282}{F\+\_\+factors}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__matrices_8h_source_l00285}{Info}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00574}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Nnz}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start}}, \mbox{\hyperlink{namespaceoomph_a86eed4072592007720b957cf58c7bbe5}{oomph\+::superlu\+\_\+complex()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
 
 \mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a8f2e601ccd4bb7c74af3c55cf6c3290b}\label{classoomph_1_1CRComplexMatrix_a8f2e601ccd4bb7c74af3c55cf6c3290b}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!ludecompose@{ludecompose}}
 \index{ludecompose@{ludecompose}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{ludecompose()}{ludecompose()}}
-{\footnotesize\ttfamily int oomph\+::\+C\+R\+Complex\+Matrix\+::ludecompose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily int oomph\+::\+CRComplex\+Matrix\+::ludecompose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 LU decomposition using Super\+LU. 
 
-Do LU decomposition and return sign of determinant. 
+///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////
+
+Do LU decomposition and return sign of determinant 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a11e1beeb7767e9bc5e511c17f80f097f}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line 946 of file complex\+\_\+matrices.\+cc.
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l00946}{946}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
 
 
 
-References oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index, oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats\+\_\+during\+\_\+solve, F\+\_\+factors, i, Info, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::M, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::N, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Nnz, oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start, oomph\+::superlu\+\_\+complex(), and oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Value.
+References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00383}{Doc\+\_\+stats\+\_\+during\+\_\+solve}}, \mbox{\hyperlink{complex__matrices_8h_source_l00282}{F\+\_\+factors}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{complex__matrices_8h_source_l00285}{Info}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00574}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Nnz}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start}}, \mbox{\hyperlink{namespaceoomph_a86eed4072592007720b957cf58c7bbe5}{oomph\+::superlu\+\_\+complex()}}, and \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}.
 
-\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a31d464d6fa6bfd14c5ad832532ce9ebe}\label{classoomph_1_1CRComplexMatrix_a31d464d6fa6bfd14c5ad832532ce9ebe}} 
+\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a5ebf5f24c1bd1b4e4e3df6ebcceb189e}\label{classoomph_1_1CRComplexMatrix_a5ebf5f24c1bd1b4e4e3df6ebcceb189e}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!multiply@{multiply}}
 \index{multiply@{multiply}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
-{\footnotesize\ttfamily void oomph\+::\+C\+R\+Complex\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+CRComplex\+Matrix\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -262,21 +256,21 @@ Multiply the matrix by the vector x\+: soln=Ax.
 
 Multiply the matrix by the vector x. 
 
-Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a95d43a8daf989523467c1a70c005bf37}{oomph\+::\+Complex\+Matrix\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a730c106643464a29ebf0660a6921ebaa}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line 1169 of file complex\+\_\+matrices.\+cc.
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01169}{1169}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
 
 
 
-References oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index, i, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::M, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::N, oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start, and oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Value.
+References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start}}, \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
-\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_ae2a983abdbc42225fb3ced8415114d81}\label{classoomph_1_1CRComplexMatrix_ae2a983abdbc42225fb3ced8415114d81}} 
+\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a5df8a8b3bb15ce5627e7300448b13d28}\label{classoomph_1_1CRComplexMatrix_a5df8a8b3bb15ce5627e7300448b13d28}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!multiply\_transpose@{multiply\_transpose}}
 \index{multiply\_transpose@{multiply\_transpose}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{multiply\_transpose()}{multiply\_transpose()}}
-{\footnotesize\ttfamily void oomph\+::\+C\+R\+Complex\+Matrix\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+CRComplex\+Matrix\+::multiply\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -284,21 +278,21 @@ Multiply the transposed matrix by the vector x\+: soln=A$^\wedge$T x.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa6541eade56b7c4ea786f6d1a80c22e3}{oomph\+::\+Complex\+Matrix\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a90c7832bad84aad3d0f437925efb089a}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line 1207 of file complex\+\_\+matrices.\+cc.
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01207}{1207}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
 
 
 
-References oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index, i, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::M, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::N, oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start, and oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Value.
+References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start}}, \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a4151bc429f2da548cee234e147003bfa}\label{classoomph_1_1CRComplexMatrix_a4151bc429f2da548cee234e147003bfa}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!ncol@{ncol}}
 \index{ncol@{ncol}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{ncol()}{ncol()}}
-{\footnotesize\ttfamily unsigned long oomph\+::\+C\+R\+Complex\+Matrix\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+CRComplex\+Matrix\+::ncol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -310,13 +304,21 @@ Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a849b63e50dad36ca8b2
 
 
 
-Definition at line 365 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00345}{345}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{complex__matrices_8h_source_l00345}{ncol()}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00345}{ncol()}}.
 
 \mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a08280a10665278ab233777ca7f510345}\label{classoomph_1_1CRComplexMatrix_a08280a10665278ab233777ca7f510345}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!nrow@{nrow}}
 \index{nrow@{nrow}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{nrow()}{nrow()}}
-{\footnotesize\ttfamily unsigned long oomph\+::\+C\+R\+Complex\+Matrix\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+CRComplex\+Matrix\+::nrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -328,13 +330,21 @@ Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_adcbdf19bc82c61c0a4f
 
 
 
-Definition at line 359 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00339}{339}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a1a800a78ffb803e931d6884c66e9220d}\label{classoomph_1_1CRComplexMatrix_a1a800a78ffb803e931d6884c66e9220d}} 
+
+
+References \mbox{\hyperlink{complex__matrices_8h_source_l00339}{nrow()}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8h_source_l00339}{nrow()}}.
+
+\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a43e7760fcbd13dbeeae9d24153095b45}\label{classoomph_1_1CRComplexMatrix_a43e7760fcbd13dbeeae9d24153095b45}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!operator()@{operator()}}
 \index{operator()@{operator()}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
-{\footnotesize\ttfamily std\+::complex$<$double$>$ oomph\+::\+C\+R\+Complex\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::complex$<$ double $>$ oomph\+::\+CRComplex\+Matrix\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i,  }\item[{const unsigned long \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -342,39 +352,31 @@ Overload the round-\/bracket access operator for read-\/only access.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a78d1185ec8249fec5855d01129a1c870}{oomph\+::\+Complex\+Matrix\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_a2140730b879cfc6ea58bba5a34e6c197}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line 371 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00351}{351}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-References oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::get\+\_\+entry(), and i.
+References \mbox{\hyperlink{matrices_8h_source_l00748}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::get\+\_\+entry()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
-\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a2c71c4bab418cf3fd362072f5c5587d2}\label{classoomph_1_1CRComplexMatrix_a2c71c4bab418cf3fd362072f5c5587d2}} 
+\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_accdc66b2b1ce57846da4eb52830c2b04}\label{classoomph_1_1CRComplexMatrix_accdc66b2b1ce57846da4eb52830c2b04}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+C\+R\+Complex\+Matrix\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CRComplexMatrix}{C\+R\+Complex\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+CRComplex\+Matrix\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1CRComplexMatrix}{CRComplex\+Matrix}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 333 of file complex\+\_\+matrices.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
-\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_ae25e4a5c9fb45af4a1ef2b1f69c0681e}\label{classoomph_1_1CRComplexMatrix_ae25e4a5c9fb45af4a1ef2b1f69c0681e}} 
+\mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}\label{classoomph_1_1CRComplexMatrix_ae117c59a8e27c2e909338847044a2968}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!residual@{residual}}
 \index{residual@{residual}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{residual()}{residual()}}
-{\footnotesize\ttfamily void oomph\+::\+C\+R\+Complex\+Matrix\+::residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$$>$ \&}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+CRComplex\+Matrix\+::residual (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::complex$<$ double $>$ $>$ \&}]{residual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -382,15 +384,19 @@ Find the residual to x of Ax=b, i.\+e. r=b-\/\+Ax.
 
 Find the residulal to x of Ax=b, ie r=b-\/\+Ax. 
 
-Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aa33932d1eb105818a9ccfd3857b26d25}{oomph\+::\+Complex\+Matrix\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1ComplexMatrixBase_aec72875402b9ba387e0724d6c2597430}{oomph\+::\+Complex\+Matrix\+Base}}.
 
 
 
-Definition at line 1120 of file complex\+\_\+matrices.\+cc.
+Definition at line \mbox{\hyperlink{complex__matrices_8cc_source_l01120}{1120}} of file \mbox{\hyperlink{complex__matrices_8cc_source}{complex\+\_\+matrices.\+cc}}.
 
 
 
-References oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index, i, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::M, oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::N, oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start, and oomph\+::\+Sparse\+Matrix$<$ std\+::complex$<$ double $>$, C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$ $>$\+::\+Value.
+References \mbox{\hyperlink{matrices_8h_source_l00870}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Column\+\_\+index}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l00571}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::M}}, \mbox{\hyperlink{matrices_8h_source_l00568}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::N}}, \mbox{\hyperlink{complex__matrices_8cc_source_l01120}{residual()}}, \mbox{\hyperlink{matrices_8h_source_l00873}{oomph\+::\+CRMatrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Row\+\_\+start}}, \mbox{\hyperlink{matrices_8h_source_l00565}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::\+Value}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+
+
+
+Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l01120}{residual()}}.
 
 
 
@@ -399,7 +405,7 @@ References oomph\+::\+C\+R\+Matrix$<$ std\+::complex$<$ double $>$ $>$\+::\+Colu
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!Doc\_stats\_during\_solve@{Doc\_stats\_during\_solve}}
 \index{Doc\_stats\_during\_solve@{Doc\_stats\_during\_solve}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{Doc\_stats\_during\_solve}{Doc\_stats\_during\_solve}}
-{\footnotesize\ttfamily bool oomph\+::\+C\+R\+Complex\+Matrix\+::\+Doc\+\_\+stats\+\_\+during\+\_\+solve\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool oomph\+::\+CRComplex\+Matrix\+::\+Doc\+\_\+stats\+\_\+during\+\_\+solve\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -407,17 +413,17 @@ Flag to indicate if stats are to be displayed during solution of linear system w
 
 
 
-Definition at line 403 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00383}{383}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), C\+R\+Complex\+Matrix(), disable\+\_\+doc\+\_\+stats(), enable\+\_\+doc\+\_\+stats(), lubksub(), and ludecompose().
+Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l01080}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00289}{CRComplex\+Matrix()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00333}{disable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{complex__matrices_8h_source_l00326}{enable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l00999}{lubksub()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l00946}{ludecompose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_a1c005b277efb26453ac04d753378946f}\label{classoomph_1_1CRComplexMatrix_a1c005b277efb26453ac04d753378946f}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!F\_factors@{F\_factors}}
 \index{F\_factors@{F\_factors}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{F\_factors}{F\_factors}}
-{\footnotesize\ttfamily void$\ast$ oomph\+::\+C\+R\+Complex\+Matrix\+::\+F\+\_\+factors\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void$\ast$ oomph\+::\+CRComplex\+Matrix\+::\+F\+\_\+factors\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -425,17 +431,17 @@ Storage for the LU factors as required by Super\+LU.
 
 
 
-Definition at line 295 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00282}{282}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), lubksub(), and ludecompose().
+Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l01080}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l00999}{lubksub()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l00946}{ludecompose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1CRComplexMatrix_adb7e147717d66f466c46178a403fe630}\label{classoomph_1_1CRComplexMatrix_adb7e147717d66f466c46178a403fe630}} 
 \index{oomph::CRComplexMatrix@{oomph::CRComplexMatrix}!Info@{Info}}
 \index{Info@{Info}!oomph::CRComplexMatrix@{oomph::CRComplexMatrix}}
 \doxysubsubsection{\texorpdfstring{Info}{Info}}
-{\footnotesize\ttfamily int oomph\+::\+C\+R\+Complex\+Matrix\+::\+Info\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int oomph\+::\+CRComplex\+Matrix\+::\+Info\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -443,11 +449,11 @@ Info flag for the Super\+LU solver.
 
 
 
-Definition at line 298 of file complex\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{complex__matrices_8h_source_l00285}{285}} of file \mbox{\hyperlink{complex__matrices_8h_source}{complex\+\_\+matrices.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), lubksub(), and ludecompose().
+Referenced by \mbox{\hyperlink{complex__matrices_8cc_source_l01080}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{complex__matrices_8cc_source_l00999}{lubksub()}}, and \mbox{\hyperlink{complex__matrices_8cc_source_l00946}{ludecompose()}}.
 
 
 

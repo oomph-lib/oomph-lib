@@ -1,4 +1,4 @@
-In this document we discuss the finite-\/element-\/based solution of the Helmholtz equation, an elliptic P\+DE that describes time-\/harmonic wave propagation problems. We start by reviewing the relevant theory and then present the solution of a simple model problem -- the scattering of a planar wave from a circular cylinder.
+In this document we discuss the finite-\/element-\/based solution of the Helmholtz equation, an elliptic PDE that describes time-\/harmonic wave propagation problems. We start by reviewing the relevant theory and then present the solution of a simple model problem -- the scattering of a planar wave from a circular cylinder.
 
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
@@ -10,7 +10,7 @@ In this document we discuss the finite-\/element-\/based solution of the Helmhol
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_theory}{}\doxysection{Theory\+: The Helmholtz equation for time-\/harmonic scattering problems}\label{index_theory}
-The Helmholtz equation governs time-\/harmonic solutions of problems governed by the linear wave equation \[ \nabla^2 U(x,y,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ (1) \] where $ c $ is the wavespeed. Assuming that $ U(x,y,t) $ is time-\/harmonic, with frequency $ \omega $, we write the real function $ U(x,y,t) $ as \[ U(x,y,t) =Re (u(x,y) \ e^{-i \omega t}) \] where $ u(x,y) $ is complex-\/valued. This transforms (1) into the Helmholtz equation \[ \nabla^2 u(x,y) + k^2 u(x,y) = 0 \ \ \ \ \ \ \ \ \ \ \ \ (2) \] where \[ k = \frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ (3) \] is the wave number. Like other elliptic P\+D\+Es the Helmholtz equation admits Dirichlet, Neumann (flux) and Robin boundary conditions.
+The Helmholtz equation governs time-\/harmonic solutions of problems governed by the linear wave equation \[ \nabla^2 U(x,y,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ (1) \] where $ c $ is the wavespeed. Assuming that $ U(x,y,t) $ is time-\/harmonic, with frequency $ \omega $, we write the real function $ U(x,y,t) $ as \[ U(x,y,t) =Re (u(x,y) \ e^{-i \omega t}) \] where $ u(x,y) $ is complex-\/valued. This transforms (1) into the Helmholtz equation \[ \nabla^2 u(x,y) + k^2 u(x,y) = 0 \ \ \ \ \ \ \ \ \ \ \ \ (2) \] where \[ k = \frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ (3) \] is the wave number. Like other elliptic PDEs the Helmholtz equation admits Dirichlet, Neumann (flux) and Robin boundary conditions.
 
 If the equation is solved in an infinite domain (e.\+g. in scattering problems) the solution must satisfy the so-\/called \href{http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition}{\texttt{ Sommerfeld radiation condition}} which in 2D has the form \[ \lim_{r\to \infty} \sqrt{r} \left(\frac{\partial u}{\partial r} - iku \right) =0. \] Mathematically, this conditions is required to ensure the uniqueness of the solution (and hence the well-\/posedness of the problem). In a physical context, such as a scattering problem, the condition ensures that scattering of an incoming wave only produces outgoing not incoming waves from infinity.
 
@@ -26,27 +26,26 @@ The application of Dirichlet and Neumann boundary conditions is straightforward 
 \end{DoxyItemize}The imposition of the Sommerfeld radiation condition for problems in infinite domains is slightly more complicated. In the following discussion we will restrict ourselves to two dimensions and assume that the infinite domain is truncated at a circular artificial boundary $ \Gamma $ of radius $ R. $ \mbox{[}This assumption is also made in the implementation of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Face\+Elements} that allow the (approximate) imposition of the Sommerfeld radiation condition. The methodology can easily be modified to deal with other geometries but this has not been done yet -- any volunteers?\mbox{]} All methods exploit the fact that the relevant solution of the Helmholtz equation can be written in polar coordinates as \[ u(r,\varphi) = \sum_{n=-\infty}^{+\infty} A_n \ H_n^{(1)}(kr) \ e^{i n \varphi}, \ \ \ \ \ \ \ (4) \] where the $A_n $ are suitable coefficients and $ H_n^{(1)}(r) $ is the $ n $-\/th-\/order Hankel function of the first kind.
 
 \DoxyHorRuler{0}
-\hypertarget{index_ABCs}{}\doxysubsection{Approximate/absorbing boundary conditions (\+A\+B\+Cs)}\label{index_ABCs}
-It is possible to derive approximate versions of the Sommerfeld radiation condition in which the normal derivative of the solution on the artificial boundary is related to its value and possibly its tangential derivatives. Such boundary conditions (sometimes referred to as approximate or absorbing boundary conditions -- A\+B\+Cs) are typically derived from asymptotic expansions of the solution at large distances from the origin and become more accurate the larger the radius $ R $ of the artificial boundary $ \Gamma $ is. Higher accuracy can therefore only be achieved by increasing the size of the computational domain, with an associated increase in computational cost.
+\hypertarget{index_ABCs}{}\doxysubsection{Approximate/absorbing boundary conditions (\+ABCs)}\label{index_ABCs}
+It is possible to derive approximate versions of the Sommerfeld radiation condition in which the normal derivative of the solution on the artificial boundary is related to its value and possibly its tangential derivatives. Such boundary conditions (sometimes referred to as approximate or absorbing boundary conditions -- ABCs) are typically derived from asymptotic expansions of the solution at large distances from the origin and become more accurate the larger the radius $ R $ of the artificial boundary $ \Gamma $ is. Higher accuracy can therefore only be achieved by increasing the size of the computational domain, with an associated increase in computational cost.
 
-{\ttfamily oomph-\/lib} provides an implementation of the following three boundary conditions (all taken from J. J. Shirron \& I. Babuska\textquotesingle{}s paper "A comparison of approximate boundary conditions and infinite element methods for exterior Helmholtz problems", Computer Methods in Applied Mechanics and Engineering {\bfseries{164}} 121-\/139 (1998), in which the authors compare the accuracy of these and many other approximate boundary conditions).
+{\ttfamily oomph-\/lib} provides an implementation of the following three boundary conditions (all taken from J. J. Shirron \& I. Babuska\textquotesingle{}s paper \char`\"{}\+A comparison of approximate boundary  conditions and infinite element methods for exterior Helmholtz problems\char`\"{}, Computer Methods in Applied Mechanics and Engineering {\bfseries{164}} 121-\/139 (1998), in which the authors compare the accuracy of these and many other approximate boundary conditions).
 
 
 \begin{DoxyItemize}
-\item {\bfseries{Feng\textquotesingle{}s first order A\+BC\+:}} \[ \frac {\partial u}{\partial n}-\bigg( ik - \frac{1}{2R}\bigg) u =0 \mbox{\ \ \ \ \ on\ }\Gamma \] (This is identical to the first-\/order Bayliss and Turkel boundary condition).
-\item {\bfseries{Feng\textquotesingle{}s second order A\+BC\+:}} \[ \frac{\partial u}{\partial n}-\bigg[ik-\frac {1}{2R}+\frac{i}{8kR^{2}}\bigg(1+4 \frac {\partial^{2}}{\partial \varphi^{2}}\bigg)\bigg]u =0 \mbox{\ \ \ \ \ on\ }\Gamma \]
-\item {\bfseries{Feng\textquotesingle{}s third order A\+BC\+:}} \[ \frac {\partial u}{\partial n}-\bigg[ik-\frac {1}{2R}+\frac{1}{8k^{2}R^{2}}\bigg(ik+ \frac {1}{R}\bigg) \bigg(1+4 \frac {\partial^{2}}{\partial \varphi^{2}}\bigg)\bigg]u =0 \mbox{\ \ \ \ \ on\ }\Gamma \]
-\end{DoxyItemize}All three boundary conditions are implemented in the class {\ttfamily Helmholtz\+Absorbing\+B\+C\+Element}. The order of the approximation can be set via the member function {\ttfamily Helmholtz\+Absorbing\+B\+C\+Element\+::abc\+\_\+order()}. All three boundary conditions are local (relating the function to its normal derivative) and do therefore not change the sparsity of the resulting finite element equations.
+\item {\bfseries{Feng\textquotesingle{}s first order ABC\+:}} \[ \frac {\partial u}{\partial n}-\bigg( ik - \frac{1}{2R}\bigg) u =0 \mbox{\ \ \ \ \ on\ }\Gamma \] (This is identical to the first-\/order Bayliss and Turkel boundary condition).
+\item {\bfseries{Feng\textquotesingle{}s second order ABC\+:}} \[ \frac{\partial u}{\partial n}-\bigg[ik-\frac {1}{2R}+\frac{i}{8kR^{2}}\bigg(1+4 \frac {\partial^{2}}{\partial \varphi^{2}}\bigg)\bigg]u =0 \mbox{\ \ \ \ \ on\ }\Gamma \]
+\item {\bfseries{Feng\textquotesingle{}s third order ABC\+:}} \[ \frac {\partial u}{\partial n}-\bigg[ik-\frac {1}{2R}+\frac{1}{8k^{2}R^{2}}\bigg(ik+ \frac {1}{R}\bigg) \bigg(1+4 \frac {\partial^{2}}{\partial \varphi^{2}}\bigg)\bigg]u =0 \mbox{\ \ \ \ \ on\ }\Gamma \]
+\end{DoxyItemize}All three boundary conditions are implemented in the class {\ttfamily Helmholtz\+Absorbing\+BCElement}. The order of the approximation can be set via the member function {\ttfamily Helmholtz\+Absorbing\+BCElement\+::abc\+\_\+order()}. All three boundary conditions are local (relating the function to its normal derivative) and do therefore not change the sparsity of the resulting finite element equations.
 
 \DoxyHorRuler{0}
 \hypertarget{index_DtN}{}\doxysubsection{The Dirichlet-\/to-\/\+Neumann mapping (\+Dt\+N)}\label{index_DtN}
-Using (4), it is easy to show (see, e.\+g., J. Jin \char`\"{}\+The Finite Element Method in Electromagnetics (second
-edition)\char`\"{}, Wiley (2002) p. 501ff -- but note that Jin assumes that the potential varies like $ \exp(i\omega t)$ rather than $ \exp(-i\omega t)$ as assumed here) that the normal (radial) derivative, $ \partial u / \partial n = \partial u / \partial r, $ on the artificial boundary ~\newline
- $ \Gamma $ is given by \[ \frac {\partial u}{\partial r}\bigg|_{r=R} = \frac {\partial u}{\partial n}\bigg|_{r=R} = \gamma (u) \ \ \ \ \ \ \ (5) \] where \[ \gamma (u) = \frac {k}{2 \pi} \sum_{n=-\infty}^{+\infty} \frac {H_n^{(1)^{\textnormal{\textquotesingle}}}(kR)}{H_n^{(1)}(kR)} \quad \int_0^{2\pi}u(R,\varphi^{\textnormal{\textquotesingle}}) \ e^{in(\varphi-\varphi^{\textnormal{\textquotesingle}})} \,d\varphi^{\textnormal{\textquotesingle}}. \ \ \ \ \ \ \ (6) \] Equation (5) again provides a condition on the normal derivative of the solution along the artificial boundary and is implemented in the {\ttfamily Helmholtz\+Dt\+N\+Boundary\+Element} class. Since $ \gamma $ depends on the solution everywhere along the artificial boundary (see (6)), the application of the boundary condition (5) introduces a non-\/local coupling between all the degrees of freedom located on that boundary. This is handled by classifying the unknowns that affect $ \gamma $ but are not associated with the element\textquotesingle{}s own nodes as external {\ttfamily Data}.
+Using (4), it is easy to show (see, e.\+g., J. Jin \char`\"{}\+The Finite Element Method in Electromagnetics (second edition)\char`\"{}, Wiley (2002) p. 501ff -- but note that Jin assumes that the potential varies like $ \exp(i\omega t)$ rather than $ \exp(-i\omega t)$ as assumed here) that the normal (radial) derivative, $ \partial u / \partial n = \partial u / \partial r, $ on the artificial boundary ~\newline
+ $ \Gamma $ is given by \[ \frac {\partial u}{\partial r}\bigg|_{r=R} = \frac {\partial u}{\partial n}\bigg|_{r=R} = \gamma (u) \ \ \ \ \ \ \ (5) \] where \[ \gamma (u) = \frac {k}{2 \pi} \sum_{n=-\infty}^{+\infty} \frac {H_n^{(1)^{\textnormal{\textquotesingle}}}(kR)}{H_n^{(1)}(kR)} \quad \int_0^{2\pi}u(R,\varphi^{\textnormal{\textquotesingle}}) \ e^{in(\varphi-\varphi^{\textnormal{\textquotesingle}})} \,d\varphi^{\textnormal{\textquotesingle}}. \ \ \ \ \ \ \ (6) \] Equation (5) again provides a condition on the normal derivative of the solution along the artificial boundary and is implemented in the {\ttfamily Helmholtz\+Dt\+NBoundary\+Element} class. Since $ \gamma $ depends on the solution everywhere along the artificial boundary (see (6)), the application of the boundary condition (5) introduces a non-\/local coupling between all the degrees of freedom located on that boundary. This is handled by classifying the unknowns that affect $ \gamma $ but are not associated with the element\textquotesingle{}s own nodes as external {\ttfamily Data}.
 
-To facilitate the setup of the interaction between the {\ttfamily Helmholtz\+Dt\+N\+Boundary\+Elements}, {\ttfamily oomph-\/lib} provides the class {\ttfamily Helmholtz\+Dt\+N\+Mesh} which provides storage for (the pointers to) the {\ttfamily Helmholtz\+Dt\+N\+Boundary\+Elements} that discretise the artificial boundary. The member function {\ttfamily Helmholtz\+Dt\+N\+Mesh\+::setup\+\_\+gamma()} pre-\/computes the $ \gamma $ values required for the imposition of equation (5). The radius $ R $ of the artificial boundary and the (finite) number of (Fourier) terms used in the sum in (6) are specified as arguments to the constructor of the {\ttfamily Helmholtz\+Dt\+N\+Mesh}.
+To facilitate the setup of the interaction between the {\ttfamily Helmholtz\+Dt\+NBoundary\+Elements}, {\ttfamily oomph-\/lib} provides the class {\ttfamily Helmholtz\+Dt\+NMesh} which provides storage for (the pointers to) the {\ttfamily Helmholtz\+Dt\+NBoundary\+Elements} that discretise the artificial boundary. The member function {\ttfamily Helmholtz\+Dt\+NMesh\+::setup\+\_\+gamma()} pre-\/computes the $ \gamma $ values required for the imposition of equation (5). The radius $ R $ of the artificial boundary and the (finite) number of (Fourier) terms used in the sum in (6) are specified as arguments to the constructor of the {\ttfamily Helmholtz\+Dt\+NMesh}.
 
-{\bfseries{N\+O\+TE\+:}} Since $ \gamma $ depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to {\ttfamily Helmholtz\+Dt\+N\+Mesh\+::setup\+\_\+gamma()} to {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}. \mbox{[}If Helmholtz\textquotesingle{}s equation is solved in isolation (or within a coupled, but linear problem), Newton\textquotesingle{}s method will converge in one iteration. In such cases the unnecessary recomputation of $ \gamma $ after the one-\/and-\/only Newton iteration can be suppressed by setting {\ttfamily Problem\+::\+Problem\+\_\+is\+\_\+nonlinear} to {\ttfamily false}.\mbox{]}
+{\bfseries{NOTE\+:}} Since $ \gamma $ depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to {\ttfamily Helmholtz\+Dt\+NMesh\+::setup\+\_\+gamma()} to {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}. \mbox{[}If Helmholtz\textquotesingle{}s equation is solved in isolation (or within a coupled, but linear problem), Newton\textquotesingle{}s method will converge in one iteration. In such cases the unnecessary recomputation of $ \gamma $ after the one-\/and-\/only Newton iteration can be suppressed by setting {\ttfamily Problem\+::\+Problem\+\_\+is\+\_\+nonlinear} to {\ttfamily false}.\mbox{]}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -95,42 +94,17 @@ As usual, we define the problem parameters in a global namespace. The main physi
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for the Helmholtz problem parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
-\DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobalParameters}{GlobalParameters}}}
-\DoxyCodeLine{\{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Square of the wavenumber}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}{K\_squared}}=10.0; }
-\DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Number of terms used in the computation }}
-\DoxyCodeLine{\textcolor{comment}{ /// of the exact solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}}=10;}
-\DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Flag to choose the Dirichlet to Neumann BC}}
-\DoxyCodeLine{\textcolor{comment}{ /// or ABC BC}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceGlobalParameters_a6e2bba1769e86a5d3db88e2c7062bc63}{DtN\_BC}}=\textcolor{keyword}{false};}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Flag to choose wich order to use}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{comment}{// in the ABCs BC: 1 for ABC 1st order...}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobalParameters_a552eed3548a269715a95161ad3c4b96a}{ABC\_order}}=3;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Radius of outer boundary (must be a circle!)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobalParameters_a61b086072a6b8fd38af1a85f1dd1674a}{Outer\_radius}}=1.5;}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Imaginary unit }}
-\DoxyCodeLine{\textcolor{comment}{} std::complex<double> \mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}}(0.0,1.0);}
 
 \end{DoxyCodeInclude}
- ~\newline
 
 
 The function {\ttfamily get\+\_\+exact\+\_\+u} returns the exact solution for the scattering problem. We will use this function for the validation of our results.
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Exact solution for scattered field }}
+\DoxyCodeLine{\textcolor{comment}{ /// Exact solution for scattered field }}
 \DoxyCodeLine{\textcolor{comment}{ /// (vector returns real and impaginary parts).}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& \mbox{\hyperlink{scattering_8txt_a8c816198c8bd9c7829d875346c691800}{u}})}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Switch to polar coordinates}}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} r;}
@@ -162,9 +136,9 @@ The function {\ttfamily get\+\_\+exact\+\_\+u} returns the exact solution for th
 \DoxyCodeLine{  \textcolor{keywordflow}{if} (n\_actual!=\textcolor{keywordtype}{int}(\mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}}))}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    std::ostringstream error\_stream; }
-\DoxyCodeLine{    error\_stream << \textcolor{stringliteral}{"CRBond\_Bessel::bessjyna() only computed "}}
-\DoxyCodeLine{                 << n\_actual << \textcolor{stringliteral}{" rather than "} << \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}} }
-\DoxyCodeLine{                 << \textcolor{stringliteral}{" Bessel functions.\(\backslash\)n"};    }
+\DoxyCodeLine{    error\_stream << \textcolor{stringliteral}{"{}CRBond\_Bessel::bessjyna() only computed "{}}}
+\DoxyCodeLine{                 << n\_actual << \textcolor{stringliteral}{"{} rather than "{}} << \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}} }
+\DoxyCodeLine{                 << \textcolor{stringliteral}{"{} Bessel functions.\(\backslash\)n"{}};    }
 \DoxyCodeLine{    \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
 \DoxyCodeLine{                        OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                        OOMPH\_EXCEPTION\_LOCATION);}
@@ -191,22 +165,20 @@ The function {\ttfamily get\+\_\+exact\+\_\+u} returns the exact solution for th
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Get the real \& imaginary part of the result}}
-\DoxyCodeLine{  \mbox{\hyperlink{scattering_8txt_a8c816198c8bd9c7829d875346c691800}{u}}[0]=real(u\_ex);}
-\DoxyCodeLine{  \mbox{\hyperlink{scattering_8txt_a8c816198c8bd9c7829d875346c691800}{u}}[1]=imag(u\_ex);}
+\DoxyCodeLine{  u[0]=real(u\_ex);}
+\DoxyCodeLine{  u[1]=imag(u\_ex);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \}\textcolor{comment}{// end of get\_exact\_u}}
 
 \end{DoxyCodeInclude}
-
-
-Next we provide a function that computes the prescribed flux (normal derivative) of the solution, $ \partial u/\partial n = -\partial \phi_{inc}/\partial n $, evaluated on the surface of the unit disk.
+ Next we provide a function that computes the prescribed flux (normal derivative) of the solution, $ \partial u/\partial n = -\partial \phi_{inc}/\partial n $, evaluated on the surface of the unit disk.
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Flux (normal derivative) on the unit disk}}
+\DoxyCodeLine{\textcolor{comment}{ /// Flux (normal derivative) on the unit disk}}
 \DoxyCodeLine{\textcolor{comment}{ /// for a planar incoming wave}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}{prescribed\_incoming\_flux}}(\textcolor{keyword}{const} Vector<double>\& x, }
-\DoxyCodeLine{                               complex<double>\& \mbox{\hyperlink{scattering_8txt_a6e2308ba2b055a80cdd4c2a0469b7d60}{flux}})}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}{prescribed\_incoming\_flux}}(\textcolor{keyword}{const} Vector<double>\& x, }
+\DoxyCodeLine{                               complex<double>\& flux)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Switch to polar coordinates}}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} r;}
@@ -232,9 +204,9 @@ Next we provide a function that computes the prescribed flux (normal derivative)
 \DoxyCodeLine{  \textcolor{keywordflow}{if} (n\_actual!=\textcolor{keywordtype}{int}(\mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}}))}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    std::ostringstream error\_stream; }
-\DoxyCodeLine{    error\_stream << \textcolor{stringliteral}{"CRBond\_Bessel::bessjyna() only computed "}}
-\DoxyCodeLine{                 << n\_actual << \textcolor{stringliteral}{" rather than "} << \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}} }
-\DoxyCodeLine{                 << \textcolor{stringliteral}{" Bessel functions.\(\backslash\)n"};    }
+\DoxyCodeLine{    error\_stream << \textcolor{stringliteral}{"{}CRBond\_Bessel::bessjyna() only computed "{}}}
+\DoxyCodeLine{                 << n\_actual << \textcolor{stringliteral}{"{} rather than "{}} << \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}} }
+\DoxyCodeLine{                 << \textcolor{stringliteral}{"{} Bessel functions.\(\backslash\)n"{}};    }
 \DoxyCodeLine{    \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
 \DoxyCodeLine{                        OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                        OOMPH\_EXCEPTION\_LOCATION);}
@@ -243,14 +215,14 @@ Next we provide a function that computes the prescribed flux (normal derivative)
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Compute the sum: Separate the computation of the negative and }}
 \DoxyCodeLine{  \textcolor{comment}{// positive terms}}
-\DoxyCodeLine{  \mbox{\hyperlink{scattering_8txt_a6e2308ba2b055a80cdd4c2a0469b7d60}{flux}}=std::complex<double>(0.0,0.0);}
+\DoxyCodeLine{  flux=std::complex<double>(0.0,0.0);}
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<\mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}};i++)}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    \mbox{\hyperlink{scattering_8txt_a6e2308ba2b055a80cdd4c2a0469b7d60}{flux}}+=pow(\mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}},i)*(sqrt(\mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}{K\_squared}}))*pow(exp(\mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}}*theta),i)*jnp[i];}
+\DoxyCodeLine{    flux+=pow(\mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}},i)*(sqrt(\mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}{K\_squared}}))*pow(exp(\mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}}*theta),i)*jnp[i];}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=1;i<\mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{N\_fourier}};i++)}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    \mbox{\hyperlink{scattering_8txt_a6e2308ba2b055a80cdd4c2a0469b7d60}{flux}}+=pow(\mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}},i)*(sqrt(\mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}{K\_squared}}))*pow(exp(-\/\mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}}*theta),i)*jnp[i];}
+\DoxyCodeLine{    flux+=pow(\mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}},i)*(sqrt(\mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd944eb}{K\_squared}}))*pow(exp(-\/\mbox{\hyperlink{namespaceGlobalParameters_a7642bd7303d39de0d680340586b7df60}{I}}*theta),i)*jnp[i];}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -259,9 +231,7 @@ Next we provide a function that computes the prescribed flux (normal derivative)
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysubsection{The driver code}\label{index_main}
 The driver code is very straightforward. We parse the command line to determine which boundary condition to use and set the flags in the global namespace accordingly.
@@ -269,8 +239,8 @@ The driver code is very straightforward. We parse the command line to determine 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_main=================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Solve 2D Helmholtz problem for scattering of a planar wave from a }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// unit disk }}
+\DoxyCodeLine{\textcolor{comment}{/// Solve 2D Helmholtz problem for scattering of a planar wave from a }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// unit disk }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
@@ -280,7 +250,7 @@ The driver code is very straightforward. We parse the command line to determine 
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Define case to be run}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} i\_case=0;}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/case"},\&i\_case);}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/case"{}},\&i\_case);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Parse command line}}
 \DoxyCodeLine{ CommandLineArgs::parse\_and\_assign(); }
@@ -312,9 +282,7 @@ The driver code is very straightforward. We parse the command line to determine 
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Next we build the problem, either with or without enabling spatial adaptivity and define the output directory.
+ Next we build the problem, either with or without enabling spatial adaptivity and define the output directory.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -328,14 +296,14 @@ Next we build the problem, either with or without enabling spatial adaptivity an
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem with 2D nine-\/node elements from the}}
 \DoxyCodeLine{ \textcolor{comment}{//QHelmholtzElement family.}}
 \DoxyCodeLine{ \mbox{\hyperlink{classScatteringProblem}{ScatteringProblem<RefineableQHelmholtzElement<2,3>}} > }
-\DoxyCodeLine{  \mbox{\hyperlink{scattering_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
+\DoxyCodeLine{  problem;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem with 2D nine-\/node elements from the}}
 \DoxyCodeLine{ \textcolor{comment}{//QHelmholtzElement family. }}
 \DoxyCodeLine{ \mbox{\hyperlink{classScatteringProblem}{ScatteringProblem<QHelmholtzElement<2,3>}} > }
-\DoxyCodeLine{  \mbox{\hyperlink{scattering_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
+\DoxyCodeLine{  problem;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
@@ -345,12 +313,10 @@ Next we build the problem, either with or without enabling spatial adaptivity an
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we solve the problem and document the results.
+ Finally, we solve the problem and document the results.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -363,17 +329,17 @@ Finally, we solve the problem and document the results.
 \DoxyCodeLine{ }
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem with Newton's method, allowing}}
 \DoxyCodeLine{   \textcolor{comment}{// up to max\_adapt mesh adaptations after every solve.}}
-\DoxyCodeLine{   \mbox{\hyperlink{scattering_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve(max\_adapt);}
+\DoxyCodeLine{   problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem with Newton's method}}
-\DoxyCodeLine{   \mbox{\hyperlink{scattering_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{   problem.newton\_solve();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{ \mbox{\hyperlink{scattering_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classScatteringProblem_af83ab14c4f4750ea17c21466f6c6364f}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{    }
 \DoxyCodeLine{\} \textcolor{comment}{//end of main}}
 
@@ -389,7 +355,7 @@ The problem class is very similar to that employed for the \href{../../../poisso
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========= start\_of\_problem\_class=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class to compute scattering of planar wave from unit disk}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classScatteringProblem}{ScatteringProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -402,11 +368,11 @@ The problem class is very similar to that employed for the \href{../../../poisso
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classScatteringProblem_a0a9838027d0286f22706fe6945bbac0a}{\string~ScatteringProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution. DocInfo object stores flags/labels for where the}}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution. DocInfo object stores flags/labels for where the}}
 \DoxyCodeLine{\textcolor{comment}{ /// output gets written to}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_af83ab14c4f4750ea17c21466f6c6364f}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_a91ce14b928ec6edbb9d85515a310b1fb}{actions\_before\_newton\_solve}}()\{\} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
@@ -427,44 +393,44 @@ The problem class is very similar to that employed for the \href{../../../poisso
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: Rebuild the mesh of prescribed flux elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_a13d8f85e74666c260de7364917359ed5}{actions\_after\_adapt}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create BC elements on boundary b of the Mesh pointed}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create BC elements on boundary b of the Mesh pointed}}
 \DoxyCodeLine{\textcolor{comment}{ /// to by bulk\_mesh\_pt and add them to the specified survace Mesh }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_a408e05fbe1f1456ab7013a7e8ab29ccc}{create\_outer\_bc\_elements}}(}
 \DoxyCodeLine{  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&b, Mesh* \textcolor{keyword}{const} \&bulk\_mesh\_pt,}
 \DoxyCodeLine{  Mesh* \textcolor{keyword}{const} \& helmholtz\_outer\_boundary\_mesh\_pt);}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create Helmholtz flux elements on boundary b of the Mesh pointed}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create Helmholtz flux elements on boundary b of the Mesh pointed}}
 \DoxyCodeLine{\textcolor{comment}{ /// to by bulk\_mesh\_pt and add them to the specified surface Mesh }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_af06ff518ad3250f914c0c659af3001c8}{create\_flux\_elements}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&b, Mesh* \textcolor{keyword}{const} \&bulk\_mesh\_pt,}
 \DoxyCodeLine{                           Mesh* \textcolor{keyword}{const} \& helmholtz\_inner\_boundary\_mesh\_pt);}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Delete boundary face elements and wipe the surface mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Delete boundary face elements and wipe the surface mesh}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_aaef8a78e317333ddadd0be6a500c1134}{delete\_face\_elements}}( Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt);}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set pointer to prescribed-\/flux function for all}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set pointer to prescribed-\/flux function for all}}
 \DoxyCodeLine{\textcolor{comment}{ /// elements in the surface mesh on the surface of the unit disk}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_ae75307dde909513a0f11057c96cdd622}{set\_prescribed\_incoming\_flux\_pt}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set up boundary condition elements on outer boundary}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set up boundary condition elements on outer boundary}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_a76bd8299ea7ed559681b294acfb2aad4}{setup\_outer\_boundary}}();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef ADAPTIVE}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// Pointer to the "bulk" mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Pointer to the "{}bulk"{} mesh}}
 \DoxyCodeLine{\textcolor{comment}{} RefineableTwoDAnnularMesh<ELEMENT>* \mbox{\hyperlink{classScatteringProblem_a8c61657a1d09ce49a5871ca3febe5658}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "bulk" mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}bulk"{} mesh}}
 \DoxyCodeLine{\textcolor{comment}{} TwoDAnnularMesh<ELEMENT>* \mbox{\hyperlink{classScatteringProblem_a8c61657a1d09ce49a5871ca3febe5658}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to mesh containing the DtN (or ABC) boundary}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh containing the DtN (or ABC) boundary}}
 \DoxyCodeLine{\textcolor{comment}{ /// condition elements}}
 \DoxyCodeLine{\textcolor{comment}{} HelmholtzDtNMesh<ELEMENT>* \mbox{\hyperlink{classScatteringProblem_a9692c8592b57a4363e557e5b012c744b}{Helmholtz\_outer\_boundary\_mesh\_pt}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to the mesh containing }}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the mesh containing }}
 \DoxyCodeLine{\textcolor{comment}{ /// the Helmholtz inner boundary condition elements }}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classScatteringProblem_a56b5fc73bbb51b701a43dc38f9815104}{Helmholtz\_inner\_boundary\_mesh\_pt}};}
 \DoxyCodeLine{}
@@ -476,19 +442,19 @@ The problem class is very similar to that employed for the \href{../../../poisso
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constr}{}\doxysubsection{The problem constructor}\label{index_constr}
-We start by building the bulk mesh, using the refineable or non-\/refineable version of the {\ttfamily Two\+D\+Annular\+Mesh}, depending on the macro {\ttfamily A\+D\+A\+P\+T\+I\+VE}. (The error tolerances for the adaptive version are chosen such that the mesh is refined non-\/uniformly -- with the default tolerances, {\ttfamily oomph-\/lib\textquotesingle{}s} automatic mesh adaptation procedure refine the mesh uniformly.)
+We start by building the bulk mesh, using the refineable or non-\/refineable version of the {\ttfamily Two\+DAnnular\+Mesh}, depending on the macro {\ttfamily ADAPTIVE}. (The error tolerances for the adaptive version are chosen such that the mesh is refined non-\/uniformly -- with the default tolerances, {\ttfamily oomph-\/lib\textquotesingle{}s} automatic mesh adaptation procedure refine the mesh uniformly.)
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classScatteringProblem_a94710f5d2ee52abc3df9dc8d1fd3eb71}{ScatteringProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classScatteringProblem_a94710f5d2ee52abc3df9dc8d1fd3eb71}{ScatteringProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Setup "bulk" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Setup "{}bulk"{} mesh}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// \# of elements in theta}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_theta=15;}
@@ -513,7 +479,7 @@ We start by building the bulk mesh, using the refineable or non-\/refineable ver
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef ADAPTIVE}}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Build "bulk" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Build "{}bulk"{} mesh}}
 \DoxyCodeLine{ Bulk\_mesh\_pt=}
 \DoxyCodeLine{  \textcolor{keyword}{new} RefineableTwoDAnnularMesh<ELEMENT>(periodic,}
 \DoxyCodeLine{                                         azimuthal\_fraction,n\_theta,n\_r,a,h);}
@@ -527,7 +493,7 @@ We start by building the bulk mesh, using the refineable or non-\/refineable ver
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Build "bulk" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Build "{}bulk"{} mesh}}
 \DoxyCodeLine{ Bulk\_mesh\_pt=}
 \DoxyCodeLine{  \textcolor{keyword}{new} TwoDAnnularMesh<ELEMENT>(periodic,}
 \DoxyCodeLine{                               azimuthal\_fraction,n\_theta,n\_r,a,h);}
@@ -535,9 +501,7 @@ We start by building the bulk mesh, using the refineable or non-\/refineable ver
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-Next we create the two (empty) meshes for the {\ttfamily Face\+Elements},
+ Next we create the two (empty) meshes for the {\ttfamily Face\+Elements},
 
  
 \begin{DoxyCodeInclude}{0}
@@ -552,24 +516,20 @@ Next we create the two (empty) meshes for the {\ttfamily Face\+Elements},
 \DoxyCodeLine{ Helmholtz\_inner\_boundary\_mesh\_pt = \textcolor{keyword}{new} Mesh;}
 
 \end{DoxyCodeInclude}
-
-
-and populate them using the functions {\ttfamily \mbox{\hyperlink{scattering_8txt_adf96798a41c029db39789a3f53d931b8}{create\+\_\+flux\+\_\+elements(...)}}} and {\ttfamily create\+\_\+outer\+\_\+bc\+\_\+elements(...)}.
+ and populate them using the functions {\ttfamily create\+\_\+flux\+\_\+elements(...)} and {\ttfamily create\+\_\+outer\+\_\+bc\+\_\+elements(...)}.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Create prescribed-\/flux elements from all elements that are }}
 \DoxyCodeLine{ \textcolor{comment}{// adjacent to the inner boundary , but add them to a separate mesh.}}
-\DoxyCodeLine{ \mbox{\hyperlink{scattering_8txt_adf96798a41c029db39789a3f53d931b8}{create\_flux\_elements}}(0,Bulk\_mesh\_pt,Helmholtz\_inner\_boundary\_mesh\_pt);}
+\DoxyCodeLine{ create\_flux\_elements(0,Bulk\_mesh\_pt,Helmholtz\_inner\_boundary\_mesh\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Create outer boundary elements from all elements that are }}
 \DoxyCodeLine{ \textcolor{comment}{// adjacent to the outer boundary , but add them to a separate mesh.}}
 \DoxyCodeLine{ create\_outer\_bc\_elements(2,Bulk\_mesh\_pt,Helmholtz\_outer\_boundary\_mesh\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-We add the various (sub-\/)meshes to the problem and build the global mesh
+ We add the various (sub-\/)meshes to the problem and build the global mesh
 
  
 \begin{DoxyCodeInclude}{0}
@@ -582,9 +542,7 @@ We add the various (sub-\/)meshes to the problem and build the global mesh
 \DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we complete the build of the various elements by by passing pointers to the relevant quantities to them, and assign the equation numbers.  
+ Finally, we complete the build of the various elements by by passing pointers to the relevant quantities to them, and assign the equation numbers.  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Complete the build of all elements so they are fully functional}}
 \DoxyCodeLine{ }
@@ -608,25 +566,23 @@ Finally, we complete the build of the various elements by by passing pointers to
 \DoxyCodeLine{ set\_prescribed\_incoming\_flux\_pt();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-The problem is now ready to be solved.
+ The problem is now ready to be solved.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_before_adapt}{}\doxysubsection{Actions before adapt}\label{index_before_adapt}
-The mesh adaptation is driven by the error estimates for the bulk elements. The various {\ttfamily Face\+Elements} must therefore be removed from the global mesh before the adaptation takes place. We do this by calling the function {\ttfamily \mbox{\hyperlink{scattering_8txt_a7d4c3450d2e4709cd1f29e52b7e160f6}{delete\+\_\+flux\+\_\+elements(...)}}} for the two face meshes, before rebuilding the Problem\textquotesingle{}s global mesh.
+The mesh adaptation is driven by the error estimates for the bulk elements. The various {\ttfamily Face\+Elements} must therefore be removed from the global mesh before the adaptation takes place. We do this by calling the function {\ttfamily delete\+\_\+flux\+\_\+elements(...)} for the two face meshes, before rebuilding the Problem\textquotesingle{}s global mesh.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_before\_adapt======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions before adapt: Wipe the mesh of face elements}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_aca1b756a307f9c1d8a70c7b7e68a296b}{ScatteringProblem<ELEMENT>::actions\_before\_adapt}}()}
 \DoxyCodeLine{\{ }
@@ -645,13 +601,13 @@ The mesh adaptation is driven by the error estimates for the bulk elements. The 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_after_adapt}{}\doxysubsection{Actions after adapt}\label{index_after_adapt}
-After the (bulk-\/)mesh has been adapted, the flux elements must be re-\/attached. This is done by calling the functions {\ttfamily \mbox{\hyperlink{scattering_8txt_adf96798a41c029db39789a3f53d931b8}{create\+\_\+flux\+\_\+elements(...)}}} and {\ttfamily create\+\_\+outer\+\_\+bc\+\_\+elements}, followed by rebuilding the Problem\textquotesingle{}s global mesh. Finally, we complete the build of the {\ttfamily Face\+Elements} by calling the functions {\ttfamily setup\+\_\+outer\+\_\+boundary()} and {\ttfamily set\+\_\+prescribed\+\_\+incoming\+\_\+flux\+\_\+pt()}.
+After the (bulk-\/)mesh has been adapted, the flux elements must be re-\/attached. This is done by calling the functions {\ttfamily create\+\_\+flux\+\_\+elements(...)} and {\ttfamily create\+\_\+outer\+\_\+bc\+\_\+elements}, followed by rebuilding the Problem\textquotesingle{}s global mesh. Finally, we complete the build of the {\ttfamily Face\+Elements} by calling the functions {\ttfamily setup\+\_\+outer\+\_\+boundary()} and {\ttfamily set\+\_\+prescribed\+\_\+incoming\+\_\+flux\+\_\+pt()}.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_actions\_after\_adapt=======================}}
 \DoxyCodeLine{\textcolor{comment}{///  Actions after adapt: Rebuild the face element meshes}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_a13d8f85e74666c260de7364917359ed5}{ScatteringProblem<ELEMENT>::actions\_after\_adapt}}()}
 \DoxyCodeLine{\{}
@@ -659,7 +615,7 @@ After the (bulk-\/)mesh has been adapted, the flux elements must be re-\/attache
 \DoxyCodeLine{ \textcolor{comment}{// from all elements that are adjacent to the boundaries and add them to }}
 \DoxyCodeLine{ \textcolor{comment}{// Helmholtz\_boundary\_meshes}}
 \DoxyCodeLine{ create\_outer\_bc\_elements(2,Bulk\_mesh\_pt,Helmholtz\_outer\_boundary\_mesh\_pt);}
-\DoxyCodeLine{ \mbox{\hyperlink{scattering_8txt_adf96798a41c029db39789a3f53d931b8}{create\_flux\_elements}}(0,Bulk\_mesh\_pt,Helmholtz\_inner\_boundary\_mesh\_pt);}
+\DoxyCodeLine{ create\_flux\_elements(0,Bulk\_mesh\_pt,Helmholtz\_inner\_boundary\_mesh\_pt);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Rebuild the Problem's global mesh from its various sub-\/meshes}}
 \DoxyCodeLine{ rebuild\_global\_mesh();}
@@ -682,7 +638,7 @@ The helper function {\ttfamily delete\+\_\+face\+\_\+elements()} is used to dele
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_delete\_face\_elements================}}
 \DoxyCodeLine{\textcolor{comment}{/// Delete face elements and wipe the boundary mesh}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==========================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==========================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_aaef8a78e317333ddadd0be6a500c1134}{ScatteringProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classScatteringProblem_aaef8a78e317333ddadd0be6a500c1134}{delete\_face\_elements}}(Mesh* \textcolor{keyword}{const} \& boundary\_mesh\_pt)}
@@ -701,19 +657,17 @@ The helper function {\ttfamily delete\+\_\+face\+\_\+elements()} is used to dele
 \DoxyCodeLine{\} \textcolor{comment}{// end of delete\_outer\_face\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_create_flux}{}\doxysubsection{Creating the face elements}\label{index_create_flux}
-The functions {\ttfamily \mbox{\hyperlink{scattering_8txt_adf96798a41c029db39789a3f53d931b8}{create\+\_\+flux\+\_\+elements(...)}}} and {\ttfamily create\+\_\+outer\+\_\+bc\+\_\+elements(...)} create the {\ttfamily Face\+Elements} required to apply the boundary conditions on the inner and outer boundaries of the annular computational domain. They both loop over the bulk elements that are adjacent to the appropriate mesh boundary and attach the required {\ttfamily Face\+Elements} to their faces. The newly created {\ttfamily Face\+Elements} are then added to the appropriate mesh.
+The functions {\ttfamily create\+\_\+flux\+\_\+elements(...)} and {\ttfamily create\+\_\+outer\+\_\+bc\+\_\+elements(...)} create the {\ttfamily Face\+Elements} required to apply the boundary conditions on the inner and outer boundaries of the annular computational domain. They both loop over the bulk elements that are adjacent to the appropriate mesh boundary and attach the required {\ttfamily Face\+Elements} to their faces. The newly created {\ttfamily Face\+Elements} are then added to the appropriate mesh.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_outer\_bc\_elements==============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Create outer BC elements on the b-\/th boundary of }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the Mesh object pointed to by bulk\_mesh\_pt and add the elements }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to the Mesh object pointed to by helmholtz\_outer\_boundary\_mesh\_pt.}}
+\DoxyCodeLine{\textcolor{comment}{/// Create outer BC elements on the b-\/th boundary of }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// the Mesh object pointed to by bulk\_mesh\_pt and add the elements }}
+\DoxyCodeLine{\textcolor{comment}{/// to the Mesh object pointed to by helmholtz\_outer\_boundary\_mesh\_pt.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_a408e05fbe1f1456ab7013a7e8ab29ccc}{ScatteringProblem<ELEMENT>::}}}
@@ -755,9 +709,7 @@ The functions {\ttfamily \mbox{\hyperlink{scattering_8txt_adf96798a41c029db39789
 \DoxyCodeLine{\} \textcolor{comment}{// end of create\_outer\_bc\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-(We omit the listing of the function {\ttfamily \mbox{\hyperlink{scattering_8txt_adf96798a41c029db39789a3f53d931b8}{create\+\_\+flux\+\_\+elements(...)}}} because it is very similar. Feel free to inspect in the \href{../../../../demo_drivers/helmholtz/scattering/scattering.cc}{\texttt{ source code.}})
+ (We omit the listing of the function {\ttfamily create\+\_\+flux\+\_\+elements(...)} because it is very similar. Feel free to inspect in the \href{../../../../demo_drivers/helmholtz/scattering/scattering.cc}{\texttt{ source code.}})
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -768,7 +720,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_doc=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classScatteringProblem_af83ab14c4f4750ea17c21466f6c6364f}{ScatteringProblem<ELEMENT>::doc\_solution}}(DocInfo\& }
 \DoxyCodeLine{                                              doc\_info) }
@@ -783,26 +735,26 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Compute/output the radiated power}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/power\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/power\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Accumulate contribution from elements}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{scattering_8txt_a649ec8dc57f56a2947bb323f273049ca}{power}}=0.0;}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} power=0.0;}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nn\_element=Helmholtz\_outer\_boundary\_mesh\_pt-\/>nelement(); }
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<nn\_element;e++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   HelmholtzBCElementBase<ELEMENT> *el\_pt = }
 \DoxyCodeLine{    \textcolor{keyword}{dynamic\_cast<} HelmholtzBCElementBase<ELEMENT>*\textcolor{keyword}{>}(}
 \DoxyCodeLine{     Helmholtz\_outer\_boundary\_mesh\_pt-\/>element\_pt(e)); }
-\DoxyCodeLine{   \mbox{\hyperlink{scattering_8txt_a649ec8dc57f56a2947bb323f273049ca}{power}} += el\_pt-\/>global\_power\_contribution(some\_file);}
+\DoxyCodeLine{   power += el\_pt-\/>global\_power\_contribution(some\_file);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ some\_file.close();}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Total radiated power: "} << \mbox{\hyperlink{scattering_8txt_a649ec8dc57f56a2947bb323f273049ca}{power}} << std::endl; }
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Total radiated power: "{}} << power << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
@@ -810,14 +762,14 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{ }
 \DoxyCodeLine{  \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output\_fct(some\_file,npts,\mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{GlobalParameters::get\_exact\_u}}); }
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a07}{GlobalParameters::get\_exact\_u}},}
@@ -825,13 +777,11 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Doc L2 error and norm of solution}}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"\(\backslash\)nNorm of error   : "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Norm of solution: "} << sqrt(norm) << std::endl << std::endl;}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}\(\backslash\)nNorm of error   : "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Norm of solution: "{}} << sqrt(norm) << std::endl << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we create the data required to produce an animation of the actual (real) potential at 40 instants during a period of the oscillation.
+ Finally, we create the data required to produce an animation of the actual (real) potential at 40 instants during a period of the oscillation.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -842,11 +792,11 @@ Finally, we create the data required to produce an animation of the actual (real
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep=40;}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<nstep;i++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"\%s/helmholtz\_animation\%i\_frame\%i.dat"},}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}\%s/helmholtz\_animation\%i\_frame\%i.dat"{}},}
 \DoxyCodeLine{           doc\_info.directory().c\_str(),}
 \DoxyCodeLine{           doc\_info.number(),i);}
 \DoxyCodeLine{   some\_file.open(filename);}
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_helmholtz\_animation\%i\_frame\%i.dat"},}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_helmholtz\_animation\%i\_frame\%i.dat"{}},}
 \DoxyCodeLine{           doc\_info.directory().c\_str(),}
 \DoxyCodeLine{           doc\_info.number(),i);}
 \DoxyCodeLine{   some\_file2.open(filename);}
@@ -876,6 +826,7 @@ Finally, we create the data required to produce an animation of the actual (real
 As discussed in the introduction, most practically relevant solutions of the Helmholtz equation are complex valued. Since {\ttfamily oomph-\/lib\textquotesingle{}s} solvers only deal with real (double precision) unknowns, the equations are separated into their real and imaginary parts. In the implementation of the Helmholtz elements, we store the real and imaginary parts of the solution as two separate values at each node. By default, the real and imaginary parts are accessible via {\ttfamily Node\+::value(0)} and {\ttfamily Node\+::value(1)}. However, to facilitate the use of the elements in multi-\/physics problems we avoid accessing the unknowns directly in this manner but provide the virtual function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::complex<unsigned> HelmholtzEquations<DIM>::u\_index\_helmholtz()}
+
 \end{DoxyCode}
  which returns a complex number made of the two unsigneds that indicate which nodal value represents the real and imaginary parts of the solution. This function may be overloaded in combined multi-\/physics elements in which a Helmholtz element is combined (by multiple inheritance) with another element, using the strategy described in \href{../../../multi_physics/b_convection/html/index.html}{\texttt{ the Boussinesq convection tutorial}}.
 
@@ -883,7 +834,7 @@ As discussed in the introduction, most practically relevant solutions of the Hel
 \hypertarget{index_ex}{}\doxysubsection{Exercises}\label{index_ex}
 \hypertarget{index_lin}{}\doxysubsubsection{Exploiting linearity}\label{index_lin}
 Confirm that the (costly) re-\/computation of the $ \gamma $ integral in {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} after the first (and only) linear solve in the Newton iteration can be avoided by declaring the problem to be linear.\hypertarget{index_acc}{}\doxysubsubsection{The accuracy of the boundary condition elements}\label{index_acc}
-Explore the accuracy (and computational cost) of the various {\ttfamily Face\+Elements} that apply the Sommmerfeld radiation condition. In particular, confirm that the accuracy of the DtN boundary condition is (nearly) independent of the radius of the artificial outer boundary, whereas the accuracy of the A\+BC boundary condition can only be improved by increasing the size of the computational domain.
+Explore the accuracy (and computational cost) of the various {\ttfamily Face\+Elements} that apply the Sommmerfeld radiation condition. In particular, confirm that the accuracy of the DtN boundary condition is (nearly) independent of the radius of the artificial outer boundary, whereas the accuracy of the ABC boundary condition can only be improved by increasing the size of the computational domain.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -896,5 +847,5 @@ Explore the accuracy (and computational cost) of the various {\ttfamily Face\+El
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

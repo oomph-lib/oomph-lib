@@ -3,7 +3,7 @@ This document provides a brief introduction to the finite element method and ill
 
 Readers who are familiar with the theory of finite elements may skip the introductory sections, but should consult the section \mbox{\hyperlink{index_towards_oo}{An object-\/oriented implementation}} which explains the particular implementation used in {\ttfamily oomph-\/lib}.
 
-Initially, we develop the method for scalar second-\/order (elliptic) P\+D\+Es with Dirichlet boundary conditions, using classical 1D and 2D Poisson problems as model problems. Specifically, we consider the 1D problem \[ \frac{\mbox{d}^2 u(x)}{\mbox{d} x^2} = f(x) \mbox{ \ \ \ \ for $x\in[0,1]$ \ \ \ subject to \ \ \ } u(x=0)= g_0 \mbox{\ \ \ and \ \ \ } u(x=1)= g_1, \mbox{\hspace{3cm}} \] where $ f(x)$ and the constants $g_0$ and $g_1$ are given. The 2D equivalent is given by \[ \frac{\partial^2 u(x_1,x_2)}{\partial x_1^{2}} + \frac{\partial^{2} u(x_1,x_2)}{\partial x_2^{2}} = f(x_1,x_2) \mbox{ \ \ \ \ for $(x_1,x_2)\in D$ \ \ \ subject to \ \ \ } u|_{\partial D} = g, \mbox{\hspace{5cm}} \] where $ f(x_1,x_2)$ and $ g(x_1,x_2)$ are given.
+Initially, we develop the method for scalar second-\/order (elliptic) PDEs with Dirichlet boundary conditions, using classical 1D and 2D Poisson problems as model problems. Specifically, we consider the 1D problem \[ \frac{\mbox{d}^2 u(x)}{\mbox{d} x^2} = f(x) \mbox{ \ \ \ \ for $x\in[0,1]$ \ \ \ subject to \ \ \ } u(x=0)= g_0 \mbox{\ \ \ and \ \ \ } u(x=1)= g_1, \mbox{\hspace{3cm}} \] where $ f(x)$ and the constants $g_0$ and $g_1$ are given. The 2D equivalent is given by \[ \frac{\partial^2 u(x_1,x_2)}{\partial x_1^{2}} + \frac{\partial^{2} u(x_1,x_2)}{\partial x_2^{2}} = f(x_1,x_2) \mbox{ \ \ \ \ for $(x_1,x_2)\in D$ \ \ \ subject to \ \ \ } u|_{\partial D} = g, \mbox{\hspace{5cm}} \] where $ f(x_1,x_2)$ and $ g(x_1,x_2)$ are given.
 
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
@@ -18,15 +18,14 @@ All mathematical derivations are presented using the \char`\"{}natural\char`\"{}
 
 Physically, the Poisson equation describes steady diffusion processes. For instance, the 2D Poisson problem describes the temperature distribution $u(x_i) $ within a 2D body, $D$, whose boundary $\partial D$ is maintained at a prescribed temperature, $ g(x_i)$. The function $ f(x_i)$ describes the strength of (distributed) heat sources in the body. In practical applications, the strength of these heat sources is bounded because no physical process can release infinite amounts of energy in a finite domain. Hence, we assume that \[ \int_D f(x_i) \ dx_1 dx_2 < \infty. \]
 
-We usually write all P\+D\+Es in \char`\"{}residual form\char`\"{}, obtained by moving all terms to the left-\/hand-\/side of the equation, so that the general second-\/order scalar P\+DE problem is
+We usually write all PDEs in \char`\"{}residual form\char`\"{}, obtained by moving all terms to the left-\/hand-\/side of the equation, so that the general second-\/order scalar PDE problem is
 
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
 \hline
 \begin{center} {\bfseries{ Problem P }} \end{center} 
 
-\begin{center} \[ {\cal R}\left(x_i; u(x_i), \frac{\partial u}{\partial x_i}, \frac{\partial^2 u}{\partial x_i \ \partial x_j}\right) = 0 \ \mbox{ \ \ \ \ in \ \ \ } D,\] ~\newline
- with Dirichlet (essential) boundary conditions on $ \partial D $ \[ \hfill u|_{\partial D} = g, \] where the function $g$ is given \end{center}    \\\cline{1-1}
+\begin{center} \[ {\cal R}\left(x_i; u(x_i), \frac{\partial u}{\partial x_i}, \frac{\partial^2 u}{\partial x_i \ \partial x_j}\right) = 0 \ \mbox{ \ \ \ \ in \ \ \ } D,\] with Dirichlet (essential) boundary conditions on $ \partial D $ \[ \hfill u|_{\partial D} = g, \] where the function $g$ is given \end{center}    \\\cline{1-1}
 \end{longtabu}
 \end{center} 
 
@@ -51,14 +50,14 @@ and
 \end{longtabu}
 \end{center} 
 
-We stress that neither the finite element method, nor {\ttfamily oomph-\/lib} are restricted to scalar second-\/order P\+D\+Es. Documentation for the example drivers discusses generalisations to\+:
+We stress that neither the finite element method, nor {\ttfamily oomph-\/lib} are restricted to scalar second-\/order PDEs. Documentation for the example drivers discusses generalisations to\+:
 \begin{DoxyItemize}
 \item non-\/\+Dirichlet boundary conditions
-\item systems of P\+D\+Es
+\item systems of PDEs
 \item mixed interpolation
 \item discontinuous interpolation
 \item timestepping
-\item higher-\/order P\+D\+Es
+\item higher-\/order PDEs
 \item solid mechanics and Lagrangian coordinates.
 \end{DoxyItemize}
 
@@ -66,17 +65,17 @@ We stress that neither the finite element method, nor {\ttfamily oomph-\/lib} ar
  \DoxyHorRuler{0}
 \hypertarget{index_mathFE}{}\doxysection{Mathematical background}\label{index_mathFE}
 \hypertarget{index_weaksoln}{}\doxysubsection{The weak solution}\label{index_weaksoln}
-A classical (or strong) solution of the problem P is any function $ u(x_i) $ that satisfies the P\+DE and boundary condition at every point in $ D$, \[ {\cal R}(x_i; u(x_i)) \equiv 0 \ \ \ \forall x_i \in D \mbox{\ \ \ \ and \ \ \ \ } u|_{\partial D} = g. \] The concept of a \char`\"{}weak\char`\"{} solution is based on a slight relaxation of this criterion. A weak solution, $u_w(x_i), $ of problem P is any function that satisfies the essential boundary condition, \[ u_w|_{\partial D} = g, \] and for which the so-\/called \char`\"{}weighted residual\char`\"{} \[ r = \int_{D} {\cal R}(x_i; u_w(x_i)) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 \ \ \ \ \ \ \ \ (1) \] vanishes for {\itshape any} \char`\"{}test function\char`\"{} $ \phi^{(test)}(x_i) $ which satisfies homogeneous boundary conditions so that \[ \phi^{(test)}|_{\partial D} = 0. \]
+A classical (or strong) solution of the problem P is any function $ u(x_i) $ that satisfies the PDE and boundary condition at every point in $ D$, \[ {\cal R}(x_i; u(x_i)) \equiv 0 \ \ \ \forall x_i \in D \mbox{\ \ \ \ and \ \ \ \ } u|_{\partial D} = g. \] The concept of a \char`\"{}weak\char`\"{} solution is based on a slight relaxation of this criterion. A weak solution, $u_w(x_i), $ of problem P is any function that satisfies the essential boundary condition, \[ u_w|_{\partial D} = g, \] and for which the so-\/called \char`\"{}weighted residual\char`\"{} \[ r = \int_{D} {\cal R}(x_i; u_w(x_i)) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 \ \ \ \ \ \ \ \ (1) \] vanishes for {\itshape any} \char`\"{}test function\char`\"{} $ \phi^{(test)}(x_i) $ which satisfies homogeneous boundary conditions so that \[ \phi^{(test)}|_{\partial D} = 0. \]
 
-At this point it might appear that we have fatally weakened the concept of a solution. If we only require the P\+DE to be satisfied in an average sense, couldn\textquotesingle{}t any function ~\newline
- be a \char`\"{}solution\char`\"{}? In fact, this is not the case and we shall now demonstrate that, for all practical purposes \mbox{[}we refer to the standard literature for a rigorous derivation\mbox{]}, the statement \[ \mbox{ "weak solutions are strong solutions" } \] is true. The crucial observation is that the weak solution requires the weighted residual to vanish for {\itshape any} test function. To show that this is equivalent to demanding that $ {\cal R} \equiv 0 \ \ \forall x_i \in D $ (as in the definition of the strong solution), let us try to construct a counter-\/example for which $ {\cal R} \not\equiv 0 $ in some part of the domain (implying that the candidate solution is not a classical solution) while $r=0$ (so that it qualifies as a weak solution). For simplicity we illustrate the impossibility of this in a 1D example. First consider a candidate solution $ u_c(x)$ which satisfies the essential boundary condition but does not satisfy the P\+DE anywhere, and that $ {\cal R}(x; u_c(x)) > 0 $ throughout the domain, as indicated in this sketch\+:  
+At this point it might appear that we have fatally weakened the concept of a solution. If we only require the PDE to be satisfied in an average sense, couldn\textquotesingle{}t any function ~\newline
+ be a \char`\"{}solution\char`\"{}? In fact, this is not the case and we shall now demonstrate that, for all practical purposes \mbox{[}we refer to the standard literature for a rigorous derivation\mbox{]}, the statement \[ \mbox{ "weak solutions are strong solutions" } \] is true. The crucial observation is that the weak solution requires the weighted residual to vanish for {\itshape any} test function. To show that this is equivalent to demanding that $ {\cal R} \equiv 0 \ \ \forall x_i \in D $ (as in the definition of the strong solution), let us try to construct a counter-\/example for which $ {\cal R} \not\equiv 0 $ in some part of the domain (implying that the candidate solution is not a classical solution) while $r=0$ (so that it qualifies as a weak solution). For simplicity we illustrate the impossibility of this in a 1D example. First consider a candidate solution $ u_c(x)$ which satisfies the essential boundary condition but does not satisfy the PDE anywhere, and that $ {\cal R}(x; u_c(x)) > 0 $ throughout the domain, as indicated in this sketch\+:  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{weaksoln1}
 \doxyfigcaption{Residual (blue/solid) is nonzero (and positive) throughout the domain. A constant test function (red/dotted) is sufficient to show that the candidate solution is not a weak solution. }
 \end{DoxyImage}
  Could this candidate solution possibly qualify as a weak solution? No, using the trivial test function $ \phi^{(test)} \equiv 1 $ gives a nonzero weighted residual, and it follows that $ {\cal R}(x, u_c(x)) $ must have zero average if $ u_c(x) $ is to qualify as a weak solution.
 
-The figure below shows the residual for a more sophisticated candidate solution which satisfies the P\+DE over most of the domain.  
+The figure below shows the residual for a more sophisticated candidate solution which satisfies the PDE over most of the domain.  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{weaksoln2}
 \doxyfigcaption{Residual (blue/solid) is nonzero only in two small sub-\/domains. A suitably constructed test function with finite support (red/dotted) is sufficient to show that the candidate solution is not a weak solution. }
@@ -87,7 +86,7 @@ It is clear that such a procedure may be used to obtain a nonzero weighted resid
 
 \DoxyHorRuler{0}
 \hypertarget{index_int_by_parts_1}{}\doxysubsection{A useful trick\+: Integration by parts}\label{index_int_by_parts_1}
-Consider now the weak form of the 2D Poisson problem P2, \[ \int_D \left( \sum_{j=1}^2 \frac{\partial^2 u(x_i)}{\partial x_j^2} - f(x_i) \right) \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 =0 \mbox{\ \ \ \ subject to\ \ \ \ } u|_{\partial D}=g. \ \ \ \ \ \ \ \ (2) \] After integration by parts and use of the divergence theorem, we obtain \[ \int_D \sum_{j=1}^2 \frac{\partial u(x_i)}{\partial x_j} \ \frac{\partial \phi^{(test)}(x_i)}{\partial x_j} \ \mbox{d}x_1 \mbox{d}x_2 + \int_D f(x_i) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = \oint_{\partial D} \frac{\partial u}{\partial n} \ \phi^{(test)} \ \mbox{d}s, \ \ \ \ \ (3) \] where $s$ is the arclength along the domain boundary $ \partial D$ and $ \partial/\partial n$ the outward normal derivative. Since the test functions satisfy homogeneous boundary conditions, $ \left. \phi^{(test)} \right|_{\partial D} = 0, $ the line integral on the R\+HS of equation (3) vanishes. Therefore, an alternative version of the weak form of problem P2 is given by \[ \int_D \sum_{j=1}^2 \frac{\partial u(x_i)}{\partial x_j} \ \frac{\partial \phi^{(test)}(x_i)}{\partial x_j} \ \mbox{d}x_1 \mbox{d}x_2 + \int_D f(x_i) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0. \ \ \ \ \ \ (4) \] We note that (4) involves first derivatives of the unknown function $ u $ and the test function $ \phi^{(test)} $, whereas (2) involves second derivatives of $ u $ and the zero-\/th derivatives of $ \phi^{(test)} $. The advantages of using the \char`\"{}symmetric\char`\"{}, integrated-\/by-\/parts version of the weak form will become apparent in the subsequent sections.
+Consider now the weak form of the 2D Poisson problem P2, \[ \int_D \left( \sum_{j=1}^2 \frac{\partial^2 u(x_i)}{\partial x_j^2} - f(x_i) \right) \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 =0 \mbox{\ \ \ \ subject to\ \ \ \ } u|_{\partial D}=g. \ \ \ \ \ \ \ \ (2) \] After integration by parts and use of the divergence theorem, we obtain \[ \int_D \sum_{j=1}^2 \frac{\partial u(x_i)}{\partial x_j} \ \frac{\partial \phi^{(test)}(x_i)}{\partial x_j} \ \mbox{d}x_1 \mbox{d}x_2 + \int_D f(x_i) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = \oint_{\partial D} \frac{\partial u}{\partial n} \ \phi^{(test)} \ \mbox{d}s, \ \ \ \ \ (3) \] where $s$ is the arclength along the domain boundary $ \partial D$ and $ \partial/\partial n$ the outward normal derivative. Since the test functions satisfy homogeneous boundary conditions, $ \left. \phi^{(test)} \right|_{\partial D} = 0, $ the line integral on the RHS of equation (3) vanishes. Therefore, an alternative version of the weak form of problem P2 is given by \[ \int_D \sum_{j=1}^2 \frac{\partial u(x_i)}{\partial x_j} \ \frac{\partial \phi^{(test)}(x_i)}{\partial x_j} \ \mbox{d}x_1 \mbox{d}x_2 + \int_D f(x_i) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0. \ \ \ \ \ \ (4) \] We note that (4) involves first derivatives of the unknown function $ u $ and the test function $ \phi^{(test)} $, whereas (2) involves second derivatives of $ u $ and the zero-\/th derivatives of $ \phi^{(test)} $. The advantages of using the \char`\"{}symmetric\char`\"{}, integrated-\/by-\/parts version of the weak form will become apparent in the subsequent sections.
 
 \DoxyHorRuler{0}
 \hypertarget{index_function_spaces}{}\doxysubsection{\mbox{[}\+Nearly an aside\+:\mbox{]} Function spaces}\label{index_function_spaces}
@@ -119,8 +118,7 @@ It is important to realise that the choice of suitable function spaces for $u(x_
 \hypertarget{index_galerkin}{}\doxysubsection{The Galerkin method}\label{index_galerkin}
 We now exploit the definition of the weak solution to develop a numerical method that can be used to determine approximate solutions to problem P\textsubscript{weak}. We start by splitting the solution into two parts, \[ u(x_i) = u_{h}(x_i) + u_{p}(x_i), \] where $ u_{p}(x_i)$ is an (arbitrary) function that satisfies the Dirichlet boundary conditions, \[ u_{p}|_{\partial D} = g. \] The unknown function $ u_{h}(x_i) $ then has to satisfy the homogeneous boundary conditions \[ u_{h}|_{\partial D} = 0.\] We expand $ u_{h}(x_i) $ in terms of a (given) infinite set of basis functions $ \psi_j(x_i) \in H_0(D) \ \ \ (j=1,...,\infty) $, \[ u(x_i) = u_{p}(x_i) + \sum_{j=1}^{\infty} U_j \psi_j(x_i), \ \ \ \ \ \ (5) \] which discretises the problem because the solution is now determined by the (as yet unknown) discrete coefficients $ U_j \ \ \ (j=1,...,\infty). $ There are many possible sets of basis functions\+: polynomials, trigonometric functions, systems of eigenfunctions; mathematically speaking, the only requirement is that the basis functions are sufficiently general that the solution can be represented by the expansion (5). In other words, the functions must be a complete basis for $H_0(D)$.
 
-How do we determine the discrete coefficients $ U_j $? Inserting the expansion for $u(x)$ into the definition of the weighted residual yields \[ r = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0, \ \ \ \ \ \ (6) \] ~\newline
- and we recall that this equation must be satisfied for {\itshape any} test function $ \phi^{(test)} \in H_0(D) $. The functions $\psi_j(x_i)$ form a complete basis for $ H_0(D)$, and so all possible test functions $ \phi^{(test)}(x_i) $ may be represented as \[ \phi^{(test)}(x_i) = \sum_{k=1}^{\infty} \Phi_k \psi_k(x_i). \ \ \ \ \ \ \ (7) \] Thus, the condition \[ \mbox{...for any basis function $ \phi^{(test)}(x_i) $...} \] becomes \[ \mbox{...for any values of the coefficients $ \Phi_k$...} \] Inserting the expansion (7) into the definition of the weak solution (6) yields \[ r = \sum_{k=1}^{\infty} \Phi_k \ r_k(U_1, U_2,...) = 0, \ \ \ \ \ (8) \] where \[ r_k(U_1, U_2,...) = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \psi_k(x_i) \ \mbox{d}x_1 \mbox{d}x_2. \ \ \ \ \ \ \ (9) \] Equation (8) must hold for {\itshape any} value of the coefficients $ \Phi_k $, so the coefficients $ U_j $ must satisfy the equations \[ r_k(U_1, U_2,...) = 0, \mbox{ \ \ \ \ for } k=1,2,... \]
+How do we determine the discrete coefficients $ U_j $? Inserting the expansion for $u(x)$ into the definition of the weighted residual yields \[ r = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \phi^{(test)}(x_i) \ \mbox{d}x_1 \mbox{d}x_2 = 0, \ \ \ \ \ \ (6) \] and we recall that this equation must be satisfied for {\itshape any} test function $ \phi^{(test)} \in H_0(D) $. The functions $\psi_j(x_i)$ form a complete basis for $ H_0(D)$, and so all possible test functions $ \phi^{(test)}(x_i) $ may be represented as \[ \phi^{(test)}(x_i) = \sum_{k=1}^{\infty} \Phi_k \psi_k(x_i). \ \ \ \ \ \ \ (7) \] Thus, the condition \[ \mbox{...for any basis function $ \phi^{(test)}(x_i) $...} \] becomes \[ \mbox{...for any values of the coefficients $ \Phi_k$...} \] Inserting the expansion (7) into the definition of the weak solution (6) yields \[ r = \sum_{k=1}^{\infty} \Phi_k \ r_k(U_1, U_2,...) = 0, \ \ \ \ \ (8) \] where \[ r_k(U_1, U_2,...) = \int_{D} {\cal R}\left(x_i; \ u_{p}(x_i)+\sum_{j=1}^{\infty} U_j \psi_j(x_i)\right) \ \psi_k(x_i) \ \mbox{d}x_1 \mbox{d}x_2. \ \ \ \ \ \ \ (9) \] Equation (8) must hold for {\itshape any} value of the coefficients $ \Phi_k $, so the coefficients $ U_j $ must satisfy the equations \[ r_k(U_1, U_2,...) = 0, \mbox{ \ \ \ \ for } k=1,2,... \]
 
 In practice, we truncate the expansions (5) and (7) after a finite number of terms to obtain the approximations (indicated by tildes) \[ \widetilde{u}(x_i) = u_p(x_i) + \sum_{j=1}^{M} U_j \psi_j(x_i) \mbox{ \ \ and \ \ } \widetilde{\phi^{(test)}}(x_i) = \sum_{k=1}^{M} \Phi_k \psi_k(x_i), \ \ \ \ \ \ (10) \] and we determine the $M$ unknown coefficients, $U_1,...,U_M$, from the $M$ algebraic equations \[ r_k(U_1,...,U_M)=0, \mbox{\ \ where \ \ $k=1,...,M$}. \ \ \ \ \ \ \ \ (11) \] The number of terms in each truncated expansion must be the same, so that we obtain $M$ equations for $M$ unknowns.
 
@@ -130,8 +128,7 @@ The truncation of the expansions (5) and (7) introduces two approximations\+:
 \item We \char`\"{}test\char`\"{} the solution with functions from $ \widetilde{H_{0}}(D) $ rather than with \char`\"{}all\char`\"{} functions $ \phi^{(test)} \in H_0(D). $
 \end{DoxyItemize}$\widetilde{H}(D) \to H(D)$ as $M \to \infty$, however, so the approximate solution $\widetilde{u}(x_i)$ converges to the exact solution $u(x_i)$ as we include more and more terms in the expansion. \mbox{[}The precise definition of \char`\"{}convergence\char`\"{} requires the introduction of a norm, which allows us to measure the \char`\"{}difference\char`\"{} between two functions. We refer to the standard literature for a more detailed discussion of this issue.\mbox{]}
 
-In general, the equations $r_k(U_1,...,U_M)$ are nonlinear and must be solved by an iterative method such as Newton\textquotesingle{}s method. Consult your favourite numerical analysis textbook (if you can\textquotesingle{}t think of one, have a look through chapter 9 in Press, W. H.; Flannery, B. P.; Teukolsky, S. A.; and Vetterling, W. T. \char`\"{}\+Numerical Recipes in C++.
-\+The Art of Scientific Computing\char`\"{}, Cambridge University Press) for a reminder of how (and why) Newton\textquotesingle{}s method works. The following algorithm shows the method applied to our equations\+:
+In general, the equations $r_k(U_1,...,U_M)$ are nonlinear and must be solved by an iterative method such as Newton\textquotesingle{}s method. Consult your favourite numerical analysis textbook (if you can\textquotesingle{}t think of one, have a look through chapter 9 in Press, W. H.; Flannery, B. P.; Teukolsky, S. A.; and Vetterling, W. T. \char`\"{}\+Numerical Recipes in C++. \+The Art of Scientific Computing\char`\"{}, Cambridge University Press) for a reminder of how (and why) Newton\textquotesingle{}s method works. The following algorithm shows the method applied to our equations\+:
 
 \label{index_Newton}%
 \Hypertarget{index_Newton}%
@@ -144,7 +141,7 @@ In general, the equations $r_k(U_1,...,U_M)$ are nonlinear and must be solved by
 \item Compute a suitable norm of the residual vector (e.\+g. the maximum norm). If the norm is less than some pre-\/assigned tolerance, stop and and accept $U_j^{(i)} (j=1,...,M) $ as the solution.
 \item Compute the Jacobian matrix \[ J_{kj} = \left. \frac{\partial r_k}{\partial U_j} \right|_{\left( U^{(i)}_1,..., U^{(i)}_M\right)} \mbox{\ \ \ for $j,k=1,...,M$}.\]
 \item Solve the linear system \[ \sum_{j=1}^{M} J_{kj} \ \delta U_j = - r_k^{(i)} \mbox{\ \ \ \ \ \ where $k=1,...,M$} \] for $ \delta U_{j} \ \ ($j=1,...,M$).$
-\item Compute an improved approximation via \[ U_j^{(i+1)} = U_j^{(i)} + \delta U_j \mbox{\ \ \ for $j=1,...,M$}. \] ~\newline
+\item Compute an improved approximation via \[ U_j^{(i+1)} = U_j^{(i)} + \delta U_j \mbox{\ \ \ for $j=1,...,M$}. \]~\newline
 
 \item Set $ i=i+1$ and go to 2.
 \end{DoxyEnumerate}For a \char`\"{}good\char`\"{} initial approximation, $ U^{(0)}_j$, Newton\textquotesingle{}s method converges quadratically towards the exact solution. Furthermore, for linear problems, Newton\textquotesingle{}s method provides the exact solution (modulo any roundoff errors that might be introduced during the solution of the linear system) in a single iteration. Newton\textquotesingle{}s method can, therefore, be used as a robust, general-\/purpose solver, if (!) a good initial guess for the solution can be provided. In practice, this is not a serious restriction, because good initial guesses can often be generated by continuation methods. In {\ttfamily oomph-\/lib}, Newton\textquotesingle{}s method is the default nonlinear solver.
@@ -185,7 +182,7 @@ Unfortunately, the application of the method becomes difficult, if not impossibl
 Let us briefly return to the two versions of the weak form and examine the equations that we would have obtained had we applied Galerkin\textquotesingle{}s method to the original form of the weak equations, \[ \int_0^1 \left( \frac{\mbox{d}^2 u(x)}{\mbox{d}x^2} \ - f(x) \right) \phi^{(test)}(x) \ \mbox{d}x = 0. \] The discrete residuals are then given by \[ r_k = \int_0^1 \left( \sum_{j=1}^{M} U_{j} \frac{\mbox{d}^2 \psi_j(x)}{\mbox{d} x^2} - f(x) \right) \psi_k(x) \ \mbox{d}x = 0, \mbox{\ \ \ \ \ \ for $k=1,...,M.$\ \ \ \ \ \ } (14) \] and the Jacobian matrix has the form \[ J_{kj} = \int_0^1\frac{\mbox{d}^2 \psi_j(x)}{\mbox{d} x^2} \ \psi_k(x)\ \mbox{d}x. \ \ \ \ \ \ \ (15) \]
 \begin{DoxyItemize}
 \item The restrictions that must be imposed on the basis functions, $ \psi_j(x) $, if (14) is to \char`\"{}make sense\char`\"{} are much more awkward than for the symmetric form for the problem; the product of their zeroth and second derivatives must be integrable over the domain.
-\item The Jacobian matrix (13) that arises from the symmetric form of the weak problem is symmetric for {\itshape any} choice of basis functions whereas the Jacobian matrix (15) that arises from the original form is symmetric only for certain types of basis functions. This is not only advantageous for the solution of the linear system (only a fraction of the entries in the matrix need to be computed, and (more efficient) linear solvers that exploit the symmetry of the matrix can be used), but also properly reflects the symmetry in the (self-\/adjoint!) O\+DE.
+\item The Jacobian matrix (13) that arises from the symmetric form of the weak problem is symmetric for {\itshape any} choice of basis functions whereas the Jacobian matrix (15) that arises from the original form is symmetric only for certain types of basis functions. This is not only advantageous for the solution of the linear system (only a fraction of the entries in the matrix need to be computed, and (more efficient) linear solvers that exploit the symmetry of the matrix can be used), but also properly reflects the symmetry in the (self-\/adjoint!) ODE.
 \end{DoxyItemize}   \\\cline{1-1}
 \end{longtabu}
 \end{center} 
@@ -201,9 +198,9 @@ Galerkin\textquotesingle{}s method is an efficient method for finding the approx
 \item spans the function space $ H_0(D)$,
 \item vanishes on the domain boundary, and
 \item leads to a sparse Jacobian matrix.
-\end{DoxyEnumerate}
-\end{DoxyEnumerate}~\newline
+\end{DoxyEnumerate}. ~\newline
  We shall now develop the finite element method\+: an implementation of Galerkin\textquotesingle{}s method that automatically satisfies all the above requirements.
+\end{DoxyEnumerate}
 
 \DoxyHorRuler{0}
 \hypertarget{index_fe_basis_fct}{}\doxysubsection{Finite Element shape functions}\label{index_fe_basis_fct}
@@ -248,7 +245,7 @@ We can now formulate the finite-\/element-\/based solution of problem P1 in the 
 \item Determine the residuals \[ r_k^{(0)} = \int_0^1 \left\{ \left( g_0 \frac{\mbox{d} \psi_1(x)}{\mbox{d} x} + \ g_1 \frac{\mbox{d} \psi_N(x)}{\mbox{d} x} + \ \sum_{j=2}^{N-1} U_{j}^{(0)}\frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \right) \frac{\mbox{d} \psi_k(x)}{\mbox{d} x}\ + f(x) \ \psi_k(x) \right\} \mbox{d}x \mbox{\ \ \ \ \ \ for $k=2,...,N-1,$} \] and the entries in the Jacobian matrix \[ J_{kj} = \frac{\partial r_k}{\partial U_j} = \int_0^1 \frac{\mbox{d} \psi_j(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_k(x)}{\mbox{d} x} \ dx \mbox{\ \ \ for $j,k=2,...,N-1.$} \]
 \item Solve the linear system \[ \sum_{j=2}^{N-1} J_{kj} \ \delta U_j = - r_k^{(0)} \mbox{\ \ \ for $k=2,...,N-1.$} \] for $ \delta U_k \ (k=2,...,N-1) $ .
 \item Correct the initial guess via \[ U_j = U_j^{(0)} + \ \delta U_j \mbox{\ \ \ for $j=2,...,N-1.$} \] P1 is a linear problem, so $ U_j \ (j=2,...,N-1) $ is the exact solution. For nonlinear problems, we would have to continue the \mbox{\hyperlink{index_Newton}{Newton}} iteration until the residuals $ r_k(U_2,...,U_{N-1}) \ (k=2,...,N-1) $ were sufficiently small.
-\item The finite-\/element solution is \[ u^{(FE)}(x) = g_0 \psi_1(x)+ g_1 \psi_N(x) + \sum_{j=2}^{N-1} U_j \psi_j(x) \ \ \ \ \ (19) \] ~\newline
+\item The finite-\/element solution is \[ u^{(FE)}(x) = g_0 \psi_1(x)+ g_1 \psi_N(x) + \sum_{j=2}^{N-1} U_j \psi_j(x) \ \ \ \ \ (19) \]~\newline
 
 \end{DoxyItemize}\DoxyHorRuler{0}
 \hypertarget{index_non_uniform}{}\doxysubsection{Improving the quality of the solution\+: non-\/uniformly spaced nodes and higher-\/order shape functions}\label{index_non_uniform}
@@ -353,9 +350,9 @@ Furthermore, we associate each unknown nodal value, $ U_j $, with a distinct equ
 \item Determine the equation number\+: $ {\cal E}(j) $
 \item If $ {\cal E}(j) \ne -1 $\+:
 \item Correct the initial guess via \[ U_{{\cal E}(j)} = U_{{\cal E}(j)} + y_{{\cal E}(j)} \]
-\end{DoxyItemize}
-\end{DoxyItemize}~\newline
-   \\\cline{1-1}
+\end{DoxyItemize}. ~\newline
+   
+\end{DoxyItemize}\\\cline{1-1}
 \end{longtabu}
 
 \begin{DoxyItemize}
@@ -413,7 +410,7 @@ If we discretise the domain with three-\/node (quadratic) elements, as in this s
 ~\newline
  $ \bullet $ Determine the global equation number ${\cal E}(j_{global})$ ~\newline
 ~\newline
- $ \bullet $ If ${\cal E}(j_{global})\ne -1$\+: Add the element\textquotesingle{}s contribution to the Jacobian matrix \[ J_{{\cal E}(k_{global}) {\cal E}(j_{global})} = J_{{\cal E}(k_{global}) {\cal E}(j_{global})} + \int_{e} \left( \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \right) dx \] ~\newline
+ $ \bullet $ If ${\cal E}(j_{global})\ne -1$\+: Add the element\textquotesingle{}s contribution to the Jacobian matrix \[ J_{{\cal E}(k_{global}) {\cal E}(j_{global})} = J_{{\cal E}(k_{global}) {\cal E}(j_{global})} + \int_{e} \left( \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \right) dx \]~\newline
 
 \end{DoxyItemize}
 \end{DoxyItemize}
@@ -495,7 +492,7 @@ $ \bullet $ Determine the entry in the element\textquotesingle{}s residual vecto
 \hline
 $ \bullet $ Increment the counter for the local degrees of freedom $ j_{dof}= j_{dof}+1$   \\\cline{1-1}
 \end{longtabu}
-$ \bullet $ Determine the entry in the element\textquotesingle{}s Jacobian matrix \[ J_{i_{dof}j_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \right) dx \] ~\newline
+$ \bullet $ Determine the entry in the element\textquotesingle{}s Jacobian matrix \[ J_{i_{dof}j_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \right) dx \]~\newline
 
 \end{DoxyItemize}
 \end{DoxyItemize}~\newline
@@ -506,12 +503,12 @@ $ \bullet $ Determine the entry in the element\textquotesingle{}s Jacobian matri
 \begin{DoxyItemize}
 \item Loop over the local degrees of freedom $ i_{dof}=1,...,n_{dof} $
 \begin{DoxyItemize}
-\item Add the element\textquotesingle{}s contribution to the global residual vector \[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \] ~\newline
+\item Add the element\textquotesingle{}s contribution to the global residual vector \[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \]~\newline
 
 \begin{DoxyItemize}
 \item Loop over the local degrees of freedom $ j_{dof}=1,...,n_{dof}$ ~\newline
 ~\newline
- $ \bullet $ Add the element\textquotesingle{}s contribution to the global Jacobian matrix \[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \] ~\newline
+ $ \bullet $ Add the element\textquotesingle{}s contribution to the global Jacobian matrix \[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \]~\newline
 
 \end{DoxyItemize}
 \end{DoxyItemize}
@@ -595,7 +592,7 @@ $ \bullet $ Determine the entry in the element\textquotesingle{}s residual vecto
 \end{longtabu}
 
 \begin{DoxyItemize}
-\item Determine the entry in the element\textquotesingle{}s Jacobian matrix \[ J_{i_{dof}j_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \right) dx \] ~\newline
+\item Determine the entry in the element\textquotesingle{}s Jacobian matrix \[ J_{i_{dof}j_{dof}}^{(e)} = \int_{e} \left( \frac{\mbox{d} \psi_{k_{global}}(x)}{\mbox{d} x} \ \frac{\mbox{d} \psi_{j_{global}}(x)}{\mbox{d} x} \right) dx \]~\newline
 
 \end{DoxyItemize}
 \end{DoxyItemize}~\newline
@@ -608,7 +605,7 @@ $ \bullet $ Determine the entry in the element\textquotesingle{}s residual vecto
 \item Add the element\textquotesingle{}s contribution to the global residual vector \[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \]
 \item Loop over the local degrees of freedom $ j_{dof}=1,...,n_{dof}$
 \begin{DoxyItemize}
-\item Add the element\textquotesingle{}s contribution to the global Jacobian matrix \[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \] ~\newline
+\item Add the element\textquotesingle{}s contribution to the global Jacobian matrix \[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \]~\newline
 
 \end{DoxyItemize}
 \end{DoxyItemize}
@@ -748,7 +745,7 @@ The derivatives of the local shape functions, $ \psi_j $, with respect to the gl
 \begin{DoxyItemize}
 \item Add the element\textquotesingle{}s contribution to the global residual vector \[ r_{\widehat{\cal E}(i_{dof},e)} = r_{\widehat{\cal E}(i_{dof},e)} + r_{i_{dof}}^{(e)} \]
 \item Loop over the local degrees of freedom $ j_{dof}=1,...,n_{dof}$ ~\newline
- $\bullet $ Add the element\textquotesingle{}s contribution to the global Jacobian matrix \[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \] ~\newline
+ $\bullet $ Add the element\textquotesingle{}s contribution to the global Jacobian matrix \[ J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } = J_{\widehat{\cal E}(i_{dof},e)\widehat{\cal E}(j_{dof},e) } + J_{i_{dof} j_{dof}}^{(e)} \]~\newline
 
 \end{DoxyItemize}
 \end{DoxyItemize}{\bfseries{ Phase 2b\+: Solve the linear system }}
@@ -852,6 +849,7 @@ In {\ttfamily oomph-\/lib\textquotesingle{}s} object-\/oriented implementation, 
 \DoxyCodeLine{Node node;}
 \DoxyCodeLine{\textcolor{keywordtype}{double} x\_coord=node.x(0);}
 \DoxyCodeLine{\textcolor{keywordtype}{double} y\_coord=node.x(1);}
+
 \end{DoxyCode}
 
 
@@ -862,18 +860,21 @@ The Node object does {\bfseries{not}} store a node number! This is because node 
 \DoxyCodeLine{\textcolor{keywordtype}{unsigned} j;}
 \DoxyCodeLine{Mesh mesh;}
 \DoxyCodeLine{Node* node\_pt=mesh.node\_pt(j);}
+
 \end{DoxyCode}
  Thus, we obtain the $x$-\/coordinate of global node $j$ via 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{unsigned} j;}
 \DoxyCodeLine{Mesh mesh;}
-\DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{intro_8txt_a2f9cf9d0788477757896c69e94741dbb}{x}}=mesh.node\_pt(j)-\/>x(0);}
+\DoxyCodeLine{\textcolor{keywordtype}{double} x=mesh.node\_pt(j)-\/>x(0);}
+
 \end{DoxyCode}
  Similarly, rather than determining the coordinates of local node $j_{local}$ in element $e$ via the global lookup scheme \[ x_i = X_{iJ(j_{local},e)}, \] we provide each {\ttfamily Finite\+Element} with a member function that provides pointer-\/based access to its constituent Nodes 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{unsigned} j\_local;}
 \DoxyCodeLine{FiniteElement element;}
 \DoxyCodeLine{Node* node\_pt=element.node\_pt(j\_local);}
+
 \end{DoxyCode}
 
 
@@ -890,7 +891,7 @@ An important difference between the three fundamental objects is the degree to w
 \begin{DoxyItemize}
 \item The abstract base class {\ttfamily Generalised\+Element} defines the common functionality that {\itshape all} Elements must have. All Elements must have member functions that compute the elemental Jacobian matrix and the elemental residual vector. The distinction between {\ttfamily Generalised\+Elements} and {\ttfamily Finite\+Elements} is useful because many elements in {\ttfamily oomph-\/lib} are not finite elements, and, for instance, do not have nodes.
 \item The abstract base class {\ttfamily Finite\+Element} is derived from {\ttfamily Generalised\+Element} and defines the common functionality that is shared by all finite elements. The {\ttfamily Finite\+Element} class implements all functions that are generic for finite elements and specifies the interfaces for any remaining functions that cannot be implemented in complete generality. For instance, all finite elements have shape functions but their implementation depends on the geometry of the element.
-\item Finally, we have concrete Elements that are derived from {\ttfamily Finite\+Element} and implement any virtual functions defined at lower levels; these Elements provide a specific discretisation of a specific P\+DE. The {\ttfamily Q\+Poisson\+Element$<$3,2$>$} implements, inter alia, the computation of the element residual and the element Jacobian matrix for the 2D Poisson equation, in a nine-\/node quadrilateral element. \mbox{[}{\bfseries{Note\+:}} In many cases, it is useful to sub-\/divide this level further by introducing an intermediate class that implements only the Element geometry; motivated by the observation that a specific (geometric) Element type (e.\+g. a 2D quadrilateral element) can form the basis for many different concrete Elements, e.\+g. Elements that solve the Poisson, Advection-\/\+Diffusion or Navier-\/\+Stokes equations. Examples of \char`\"{}geometric Elements\char`\"{} in {\ttfamily oomph-\/lib} include the {\ttfamily Q\+Elements}, a family of 1D line/2D quad/3D brick elements with linear (or \{bi/tri\}linear), quadratic (or \{bi/tri\}quadratic),... shape functions.\mbox{]}
+\item Finally, we have concrete Elements that are derived from {\ttfamily Finite\+Element} and implement any virtual functions defined at lower levels; these Elements provide a specific discretisation of a specific PDE. The {\ttfamily QPoisson\+Element$<$3,2$>$} implements, inter alia, the computation of the element residual and the element Jacobian matrix for the 2D Poisson equation, in a nine-\/node quadrilateral element. \mbox{[}{\bfseries{Note\+:}} In many cases, it is useful to sub-\/divide this level further by introducing an intermediate class that implements only the Element geometry; motivated by the observation that a specific (geometric) Element type (e.\+g. a 2D quadrilateral element) can form the basis for many different concrete Elements, e.\+g. Elements that solve the Poisson, Advection-\/\+Diffusion or Navier-\/\+Stokes equations. Examples of \char`\"{}geometric Elements\char`\"{} in {\ttfamily oomph-\/lib} include the {\ttfamily QElements}, a family of 1D line/2D quad/3D brick elements with linear (or \{bi/tri\}linear), quadratic (or \{bi/tri\}quadratic),... shape functions.\mbox{]}
 
 Algorithm 10 can easily be expressed in an object-\/oriented form because most steps involve operations that act exclusively on the objects\textquotesingle{} member data. Such operations are implemented as member functions of the appropriate objects.
 
@@ -992,7 +993,7 @@ Here is an overview of overall data structure, as required by the Poisson proble
 \end{DoxyItemize}\\\cline{1-1}
 \end{tabularx}}
 \end{center}  {\begin{tabularx}{\linewidth}{|*{2}{>{\raggedright\arraybackslash}X|}}\hline
-\begin{center} {\bfseries{Specific Geometric Element\+:}} \mbox{[}e.\+g. a {\ttfamily Q\+Element}\mbox{]} ~\newline
+\begin{center} {\bfseries{Specific Geometric Element\+:}} \mbox{[}e.\+g. a {\ttfamily QElement}\mbox{]} ~\newline
  \mbox{[}derived from {\bfseries{Finite\+Element}}\mbox{]} \end{center} 
 \begin{DoxyItemize}
 \item Implements functions that\+:
@@ -1004,7 +1005,7 @@ Here is an overview of overall data structure, as required by the Poisson proble
 \end{DoxyItemize}
 \end{DoxyItemize}{\bfseries{Note\+:}}
 \begin{DoxyItemize}
-\item Templating is often used to implement entire families of geometric elements. For instance, the elements of the {\ttfamily Q\+Element} family have two template parameters\+: One defines the dimension of the element, the other the number of nodes along a 1D element edge, so that a {\ttfamily Q\+Element$<$1,3$>$} is a three-\/node line element, while a {\ttfamily Q\+Element$<$3,2$>$} is an eight-\/node brick element, etc.  
+\item Templating is often used to implement entire families of geometric elements. For instance, the elements of the {\ttfamily QElement} family have two template parameters\+: One defines the dimension of the element, the other the number of nodes along a 1D element edge, so that a {\ttfamily QElement$<$1,3$>$} is a three-\/node line element, while a {\ttfamily QElement$<$3,2$>$} is an eight-\/node brick element, etc.  
 \end{DoxyItemize}&\begin{center} {\bfseries{Specific Equation\+:}} \mbox{[}e.\+g. the {\ttfamily Poisson\+Equations}\mbox{]} ~\newline
  \mbox{[}derived from {\bfseries{Finite\+Element}}\mbox{]} \end{center} 
 \begin{DoxyItemize}
@@ -1025,11 +1026,11 @@ Here is an overview of overall data structure, as required by the Poisson proble
 \end{DoxyItemize}
 \end{DoxyItemize}{\bfseries{Notes\+:}}
 \begin{DoxyItemize}
-\item Templating is often used to implement the equations in arbitrary spatial dimensions, such as {\ttfamily Poisson\+Equations$<$\+D\+I\+M$>$}.   
+\item Templating is often used to implement the equations in arbitrary spatial dimensions, such as {\ttfamily Poisson\+Equations$<$\+DIM$>$}.   
 \end{DoxyItemize}\\\cline{1-2}
 \end{tabularx}}
 \begin{center} {\begin{tabularx}{\linewidth}{|*{1}{>{\raggedright\arraybackslash}X|}}\hline
-\begin{center} {\bfseries{Specific Element\+:}} \mbox{[}e.\+g. a {\ttfamily Q\+Poisson\+Element}\mbox{]} ~\newline
+\begin{center} {\bfseries{Specific Element\+:}} \mbox{[}e.\+g. a {\ttfamily QPoisson\+Element}\mbox{]} ~\newline
  \mbox{[}Derived from a {\bfseries{Specific Equation }} and a {\bfseries{Specific Geometric Element}} by multiple inheritance\mbox{]} \end{center}  
 
 
@@ -1140,5 +1141,5 @@ Here is an overview of overall data structure, as required by the Poisson proble
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

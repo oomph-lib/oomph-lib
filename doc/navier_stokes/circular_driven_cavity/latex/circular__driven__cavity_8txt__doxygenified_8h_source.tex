@@ -1,0 +1,392 @@
+\hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source}{}\doxysection{circular\+\_\+driven\+\_\+cavity.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{circular__driven__cavity_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Example problem: 2D driven cavity flow in a quarter-\/circle domain with spatial adaptation.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this example we shall demonstrate}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{-\/ how easy it is to adapt the code for the solution of the driven }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{  cavity problem in a square domain, discussed in a}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{  <A HREF="{}../../adaptive\_driven\_cavity/html/index.html"{}> previous}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{  example </A>, to a different domain shape,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{-\/ how to apply body forces (e.g. gravity) in a Navier-\/Stokes problem,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{-\/ how to switch between the stress-\/divergence and the simplified forms}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{  of the incompressible Navier-\/Stokes equations.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{\(\backslash\)section example The example problem}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{In this example we shall illustrate the solution of the steady 2D Navier-\/Stokes}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{equations in a modified driven cavity problem: The fluid is contained}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{in a quarter-\/circle domain and is subject to gravity which acts }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{in the vertical direction. We solve the problem in two different}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{formulations, using the stress-\/divergence and the simplified form of}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{the Navier-\/Stokes equations, respectively, and by applying the }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{gravitational body  force via the gravity vector, \(\backslash\)f\$ \{\(\backslash\)bf G\} \(\backslash\)f\$, and via the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{body force  function, \(\backslash\)f\$ \{\(\backslash\)bf B\}\(\backslash\)f\$, respectively.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{<B>Problem 1:</B>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{<B>The 2D driven cavity problem in a quarter circle domain with}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{gravity, <BR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{using the stress-\/divergence form of the Navier-\/Stokes equations</B>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{Re\(\backslash\)phantom\{i\}u\_j\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} =}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{-\/ \(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial x\_i\} +}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{\(\backslash\)frac\{Re\}\{Fr\} \(\backslash\), G\_i +}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \}\{\(\backslash\)partial x\_j\} \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} +  }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} \(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_i\} = 0,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{in the quarter-\/circle domain \(\backslash\)f\$ D = \(\backslash\)\{x\_1 \(\backslash\)geq 0 \(\backslash\)f\$, \(\backslash\)f\$ x\_2 \(\backslash\)geq 0}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{\(\backslash\)f\$ and \(\backslash\)f\$ x\_1\string^2+x\_2\string^2 \(\backslash\)leq 1 \(\backslash\)\} \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{subject to the Dirichlet boundary conditions}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{\(\backslash\)left. \(\backslash\)mathbf\{u\}\(\backslash\)right|\_\{\(\backslash\)partial D\}=(0,0),}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{on the curved and left boundaries; and }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{\(\backslash\)left. \(\backslash\)mathbf\{u\}\(\backslash\)right|\_\{\(\backslash\)partial D\}=(1,0),}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{on the bottom boundary, \(\backslash\)f\$ x\_2 = 0 \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{Gravity acts vertically downwards so that \(\backslash\)f\$ (G\_1, G\_2) = (0,-\/1) \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{When discussing the implementation of the Navier-\/Stokes equations in}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{an <A HREF="{}../../driven\_cavity/html/index.html\#stress\_divergence"{}> }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{earlier example </A>, we mentioned that \(\backslash\)c oomph-\/lib allows the incompressible}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{Navier-\/Stokes equations to be solved in the simplified, rather than}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{the (default) stress-\/divergence form. We will demonstrate the use of }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{this feature by solving the following problem:}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{<TR> }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{<B>Problem 2:</B>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{<B>The 2D driven cavity problem in a quarter circle domain with}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{gravity, <BR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{using the simplified form of the Navier-\/Stokes equations</B>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{Re\(\backslash\)phantom\{i\}u\_j\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} =}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{-\/ \(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial x\_i\} +}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{B\_i + }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial\string^2 u\_i\}\{\(\backslash\)partial x\_j\string^2\},}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_i\} = 0,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{in the quarter-\/circle domain \(\backslash\)f\$ D = \(\backslash\)\{x\_1 \(\backslash\)geq 0 \(\backslash\)f\$, \(\backslash\)f\$ x\_2 \(\backslash\)geq 0}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)f\$ and \(\backslash\)f\$ x\_1\string^2+x\_2\string^2 \(\backslash\)leq 1 \(\backslash\)\} \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{subject to the Dirichlet boundary conditions}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{\(\backslash\)left. \(\backslash\)mathbf\{u\}\(\backslash\)right|\_\{\(\backslash\)partial D\}=(0,0),}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{on the curved and left boundaries; and }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{\(\backslash\)left. \(\backslash\)mathbf\{u\}\(\backslash\)right|\_\{\(\backslash\)partial D\}=(1,0),}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{on the bottom boundary, \(\backslash\)f\$ x\_2 = 0 \(\backslash\)f\$. To make this consistent}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{with Problem 1, we define the body force function as}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{\(\backslash\)f\$ (B\_1, B\_2) = (0,-\/Re/Fr) \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{Note that in Problem 2, the gravitational body force is }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{represented by the body force rather than the gravity vector.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)subsection stress\_divergence Switching between the stress-\/divergence and the simplified forms of the Navier-\/Stokes equations }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{The two forms of the Navier-\/Stokes equations differ in the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{implementation of the viscous terms, which may be represented as}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial\string^2 u\_i\}\{\(\backslash\)partial x\_j\string^2\} \(\backslash\)mbox\{ \(\backslash\) \(\backslash\) \(\backslash\) or \(\backslash\) \(\backslash\) \(\backslash\) \}}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \}\{\(\backslash\)partial x\_j\} \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} +  }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} \(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{For an incompressible flow, \(\backslash\)f\$ \(\backslash\)partial u\_i/\(\backslash\)partial x\_i = 0\(\backslash\)f\$, both}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{forms are mathematically equivalent but the stress-\/divergence form}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{is required for }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{<A HREF="{}../../single\_layer\_free\_surface/html/index.html"{}>problems with free surfaces}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{</A>, or for}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{<A HREF="{}../../rayleigh\_traction\_channel//html/index.html"{}>problems in which }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{traction boundary conditions are to be applied.</A>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{In order to be able do deal with both cases, \(\backslash\)c oomph-\/lib's Navier-\/Stokes }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{elements actually implement the viscous term as}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \}\{\(\backslash\)partial x\_j\} \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} +}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{\(\backslash\)Gamma\_i \(\backslash\), \(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} \(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{By default the components of the vector \(\backslash\)f\$ \(\backslash\)Gamma\_i \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{are set to 1.0, so that the stress-\/divergence form is used.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{The components \(\backslash\)f\$ \(\backslash\)Gamma\_i \(\backslash\)f\$ are stored in the }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{static data member}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{static Vector<double> NavierStokesEquations<DIM>::Gamma}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{of the \(\backslash\)c NavierStokesEquations<DIM> class which forms the basis}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{for all Navier-\/Stokes elements in \(\backslash\)c oomph-\/lib.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{Its entries are initialised to 1.0. The user may over-\/write these}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{assignments and thus re-\/define the values of \(\backslash\)f\$ \(\backslash\)Gamma \(\backslash\)f\$ being used}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{for a specific problem. [In principle, it is possible to use}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{stress-\/divergence form for the first component of the momentum}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{equations, and the simplified form for the second one, say. However,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{we do not believe that this is  a particularly useful/desirable option}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{and have certainly never used such (slightly bizarre) assignments in}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{any of our own computations.] }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{\(\backslash\)subsection sol1 Solution to problem 1}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{The figure below shows "{}carpet plots"{} of the velocity and pressure}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{fields as well as a contour plot of the pressure distribution with}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{superimposed streamlines for Problem 1 at a Reynolds number of }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{\(\backslash\)f\$ Re=100\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{and a ratio of Reynolds and Froude numbers (a measure of gravity on }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{the viscous scale) of \(\backslash\)f\$ Re/Fr = 100\(\backslash\)f\$. The velocity vanishes }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{along the entire}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{domain boundary, apart from the bottom boundary \(\backslash\)f\$ (x\_2 = 0) \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{where the moving "{}lid"{} imposes a unit tangential velocity which drives}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{a large vortex, centred at \(\backslash\)f\$ (x\_1,x\_2) \(\backslash\)approx (0.59,0.22) \(\backslash\)f\$. The}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{pressure singularities created by the velocity discontinuities at }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{\(\backslash\)f\$ (x\_1,x\_2)=(0,0) \(\backslash\)f\$ and \(\backslash\)f\$ (x\_1, x\_2)=(1,0) \(\backslash\)f\$ are well}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{resolved. The pressure plot shows that away from the singularities,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{the pressure decreases linearly with \(\backslash\)f\$ x\_2 \(\backslash\)f\$, reflecting the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{effect of the gravitational body forces which acts in the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{negative \(\backslash\)f\$ x\_2-\/\(\backslash\)f\$ direction.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)image html sol1.gif "{}Plot of the velocity and pressure fields for problem 1 with Re=100 and Re/Fr=100, computed with adaptive Taylor-\/Hood elements. "{} }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{\(\backslash\)image latex sol1.eps "{}Plot of the velocity and pressure fields for problem 1 with Re=100 and Re/Fr=100, computed with adaptive Taylor-\/Hood elements. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)subsection sol2 Solution to problem 2}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{The next figure shows the computational results for Problem 2, obtained from}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{a computation with adaptive Crouzeix-\/Raviart elements. }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)image html sol2.gif "{}Plot of the velocity and pressure fields for problem 2 with Re=100 and Re/Fr=100, computed with adaptive Crouzeix-\/Raviart elements. "{} }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{\(\backslash\)image latex sol2.eps "{}Plot of the velocity and pressure fields for problem 2 with Re=100 and Re/Fr=100, computed with adaptive Crouzeix-\/Raviart elements. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{\(\backslash\)section code The code}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{We use a namespace \(\backslash\)c Global\_Physical\_Variables to define the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{various parameters: The Reynolds number,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)dontinclude circular\_driven\_cavity.cc}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{\(\backslash\)skipline start\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{\(\backslash\)until Re=100}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{the gravity vector \(\backslash\)f\$ \{\(\backslash\)bf G\}\(\backslash\)f\$, and the ratio of Reynolds and Froude number,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\)f\$ Re/Fr \(\backslash\)f\$, which represents the ratio of gravitational and viscous forces,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{\(\backslash\)until Vector}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{In Problem 2, gravity is introduced via the body force function}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf B\}\(\backslash\)f\$ which we define such that Problems 1 and 2 are}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{equivalent. (We use the gravity vector \(\backslash\)f\$ \{\(\backslash\)bf G\} = (0,-\/1)\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{to specify the direction of gravity, while indicating it magnitude}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{by \(\backslash\)f\$ Re/Fr.\(\backslash\)f\$)}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{Finally we define a body force function, which returns zero values,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{for use when solving Problem 1.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{\(\backslash\)until end\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{First we create a \(\backslash\)c DocInfo object to control the output, and set the maximum}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{number of spatial adaptations to three.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{\(\backslash\)until max\_adapt=3}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{To solve problem 1 we define the direction of gravity, \(\backslash\)f\$ \{\(\backslash\)bf G\} = }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{(0,-\/1)\(\backslash\)f\$, and set the entries in the \(\backslash\)c NavierStokesEquations<2>::Gamma}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{vector to \(\backslash\)f\$ (1,1)\(\backslash\)f\$, so that the stress-\/divergence form of}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{the equation is used [In fact, this step is not strictly necessary}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{as it simply re-\/assigns the default values.] }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{\(\backslash\)until Gamma[1]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{Next we build problem 1 using Taylor-\/Hood elements and passing a}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{function pointer to the \(\backslash\)c zero\_body\_force(...) function (defined }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{in the namespace \(\backslash\)c Global\_Physical\_Variables) as the argument.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{\(\backslash\)until problem(\&}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{Now problem 1 can be solved as in }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{<A HREF="{}../../adaptive\_driven\_cavity/html/index.html\#main"{}>the previous}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{example</A>.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{\(\backslash\)until end of problem 1}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{To solve problem 2 we set the entries in the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{NavierStokesEquations<2>::Gamma  vector to zero (thus choosing the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{simplified version of the Navier-\/Stokes equations), define \(\backslash\)f\$ \{\(\backslash\)bf G\} = }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{(0,0)\(\backslash\)f\$, and pass a function pointer to the \(\backslash\)c body\_force(...)}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{function to the problem constructor.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{\(\backslash\)until problem(\&}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{Problem 2 may then be solved as before.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{\(\backslash\)until end\_of\_main}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{\(\backslash\)section problem The problem class }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{The problem class is very similar to that used in the }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{<A HREF="{}../../adaptive\_driven\_cavity/html/index.html\#problem"{}> previous}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{example </A>, with two exceptions:}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{-\/ We pass a function pointer to the body force function \(\backslash\)f\$ \{\(\backslash\)bf B\}\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{  to the constructor and}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{-\/ store the function pointer to the body force function in the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{  problem's private member data.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{\(\backslash\)dontinclude circular\_driven\_cavity.cc}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{\(\backslash\)until end\_of\_problem\_class }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{\(\backslash\)section constructor The problem constructor}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{We store the function pointer to the body force function in the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{private data member \(\backslash\)c Body\_force\_fct\_pt.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{\(\backslash\)until Body\_force\_fct\_pt}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{As usual the first task is to create the mesh. We now use the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{RefineableQuarterCircleSectorMesh<ELEMENT>, which requires the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{creation of a \(\backslash\)c GeomObject to describe geometry of the curved wall:}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{We choose an ellipse with unit half axes (i.e. a unit circle).}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{\(\backslash\)until Wall\_pt,xi\_lo,}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{Next the error estimator is set, the boundary nodes are pinned and the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{Reynolds number is assigned, as }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{<A HREF="{}../../adaptive\_driven\_cavity/html/index.html\#constructor"{}>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{before </A>.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{\(\backslash\)until re\_pt()}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{Within this loop we also pass the pointers to \(\backslash\)f\$ Re/Fr \(\backslash\)f\$, the}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{gravity vector and the body-\/force function to the elements.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{\(\backslash\)until end loop over elements}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{The \(\backslash\)c RefineableQuarterCircleSectorMesh<ELEMENT> contains only }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{three elements and therefore provides a very coarse discretisation of}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{the domain. We refine the mesh uniformly twice}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{before pinning the redundant pressure degrees of freedom, pinning}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{a single pressure degree of freedom, and assigning the equation}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{numbers, as <A HREF="{}../../adaptive\_driven\_cavity/html/index.html\#doc"{}>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{before</A>.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{\(\backslash\)until end\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{\(\backslash\)section doc Post processing}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{The post processing function remains the same as in the }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{<A HREF="{}../../driven\_cavity/html/index.html\#doc"{}> previous}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{examples </A>.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{\(\backslash\)skipline start\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{\(\backslash\)until end\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{-\/\# Try making the curved boundary the driving wall [Hint: this}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{   requires a change in the wall velocities prescribed in \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{   Problem::actions\_before\_newton\_solve(). The figure below shows what you}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{   should expect.]}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{\(\backslash\)image html curved\_driving\_wall.gif "{}Plot of the velocity and pressure distribution for a circular driven cavity in which the flow is driven by the tangential motion of the curvilinear boundary. "{} }}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{\(\backslash\)image latex curved\_driving\_wall.eps "{}Plot of the velocity and pressure distribution for a circular driven cavity in which the flow is driven by the tangential motion of the curvilinear boundary. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/circular\_driven\_cavity/"{}>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{demo\_drivers/navier\_stokes/circular\_driven\_cavity/}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{-\/ The driver code is:}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/circular\_driven\_cavity/circular\_driven\_cavity.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{demo\_drivers/navier\_stokes/circular\_driven\_cavity/circular\_driven\_cavity.cc}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{circular__driven__cavity_8txt__doxygenified_8h_source_l00387}00387 }
+
+\end{DoxyCode}

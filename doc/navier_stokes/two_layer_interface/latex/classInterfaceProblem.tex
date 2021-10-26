@@ -1,9 +1,14 @@
-\hypertarget{classInterfaceProblem}{}\doxysection{Interface\+Problem$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ Class Template Reference}
+\hypertarget{classInterfaceProblem}{}\doxysection{Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classInterfaceProblem}\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-Inheritance diagram for Interface\+Problem$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+:\begin{figure}[H]
+
+
+/////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////  
+
+
+Inheritance diagram for Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{classInterfaceProblem}
+\includegraphics[height=1.924399cm]{classInterfaceProblem}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -22,7 +27,7 @@ void \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{d
 void \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\+\_\+run}} (const double \&t\+\_\+max, const double \&dt)
 \begin{DoxyCompactList}\small\item\em Do unsteady run up to maximum time t\+\_\+max with given timestep dt. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classInterfaceProblem_ae8ecf0f5a7217bc9428d8798807de37d}{Interface\+Problem}} (const unsigned \&n\+\_\+x, const unsigned \&n\+\_\+y1, const unsigned \&n\+\_\+y2, const double \&l\+\_\+x, const double \&h1, const double \&h2)
-\begin{DoxyCompactList}\small\item\em Constructor for two fluid interface problem. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements and the width of the domain in the x direction. Also pass the number of elements in the y direction of the bottom (fluid 1) and top (fluid 2) layers, along with the heights of both layers. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}{$\sim$\+Interface\+Problem}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{set\+\_\+initial\+\_\+condition}} ()
@@ -50,7 +55,7 @@ void \mbox{\hyperlink{classInterfaceProblem_a94e2cc71fe27c0c329030874e05734b8}{c
 \begin{DoxyCompactList}\small\item\em Create the 1d interface elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_ac2aaab086d9bbd3913ce8bc0d244413d}{delete\+\_\+interface\+\_\+elements}} ()
 \begin{DoxyCompactList}\small\item\em Delete the 1d interface elements. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{deform\+\_\+free\+\_\+surface}} (const double \&\mbox{\hyperlink{two__layer__interface_8txt_a12ad175f862d3fe119900bd546c618c2}{epsilon}}, const unsigned \&n\+\_\+periods)
+void \mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{deform\+\_\+free\+\_\+surface}} (const double \&epsilon, const unsigned \&n\+\_\+periods)
 \begin{DoxyCompactList}\small\item\em Deform the mesh/free surface to a prescribed function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}{fix\+\_\+pressure}} (const unsigned \&e, const unsigned \&pdof, const double \&pvalue)
 \begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\item 
@@ -60,14 +65,14 @@ void \mbox{\hyperlink{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}{a
 \begin{DoxyCompactList}\small\item\em No actions required before solve step. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
 \begin{DoxyCompactList}\small\item\em Update after solve can remain empty, because the update is performed automatically after every Newton step. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{deform\+\_\+free\+\_\+surface}} (const double \&\mbox{\hyperlink{two__layer__interface_8txt_a12ad175f862d3fe119900bd546c618c2}{epsilon}}, const unsigned \&n\+\_\+periods)
+void \mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{deform\+\_\+free\+\_\+surface}} (const double \&epsilon, const unsigned \&n\+\_\+periods)
 \begin{DoxyCompactList}\small\item\em Deform the mesh/free surface to a prescribed function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}{fix\+\_\+pressure}} (const unsigned \&e, const unsigned \&pdof, const double \&pvalue)
 \begin{DoxyCompactList}\small\item\em Fix pressure in element e at pressure dof pdof and set to pvalue. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Elastic\+Refineable\+Two\+Layer\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_ad7cdca485f230393096667bf0709ef8d}{Bulk\+\_\+mesh\+\_\+pt}}
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Elastic\+Refineable\+Two\+Layer\+Mesh}}$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_ad7cdca485f230393096667bf0709ef8d}{Bulk\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the (specific) \char`\"{}bulk\char`\"{} mesh. \end{DoxyCompactList}\item 
 Mesh $\ast$ \mbox{\hyperlink{classInterfaceProblem_a011c7b4f2307ff909f64dc158e8fc674}{Surface\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the \char`\"{}surface\char`\"{} mesh. \end{DoxyCompactList}\item 
@@ -77,17 +82,18 @@ double \mbox{\hyperlink{classInterfaceProblem_a9b5070b479a79546b983bd7027917e93}
 \begin{DoxyCompactList}\small\item\em Width of domain. \end{DoxyCompactList}\item 
 ofstream \mbox{\hyperlink{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}{Trace\+\_\+file}}
 \begin{DoxyCompactList}\small\item\em Trace file. \end{DoxyCompactList}\item 
-Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174}{Bulk\+\_\+mesh\+\_\+pt}}
+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174}{Bulk\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the specific bulk mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT, class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER$>$\newline
-class Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}
+\subsubsection*{template$<$class ELEMENT, class TIMESTEPPER$>$\newline
+class Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$}
+/////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////// 
 
 Two fluid interface problem in a rectangular domain which is periodic in the x direction 
 
-Definition at line 173 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00173}{173}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
@@ -96,8 +102,8 @@ Definition at line 173 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
 \index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}}
 
 
 
@@ -105,18 +111,18 @@ Constructor.
 
 Constructor for two fluid interface problem. 
 
-Definition at line 260 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00259}{259}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-References Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+\+Ratio, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio.
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00332}{Problem\+\_\+\+Parameter\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00076}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+\+Ratio}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00085}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Nu}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00059}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00068}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00065}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, and \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~InterfaceProblem@{$\sim$InterfaceProblem}}
 \index{````~InterfaceProblem@{$\sim$InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$InterfaceProblem()}{~InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::$\sim$\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::$\sim$\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -124,33 +130,33 @@ Destructor (empty)
 
 
 
-Definition at line 182 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00182}{182}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_ae8ecf0f5a7217bc9428d8798807de37d}\label{classInterfaceProblem_ae8ecf0f5a7217bc9428d8798807de37d}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
 \index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+y1,  }\item[{const unsigned \&}]{n\+\_\+y2,  }\item[{const double \&}]{l\+\_\+x,  }\item[{const double \&}]{h1,  }\item[{const double \&}]{h2 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+y1,  }\item[{const unsigned \&}]{n\+\_\+y2,  }\item[{const double \&}]{l\+\_\+x,  }\item[{const double \&}]{h1,  }\item[{const double \&}]{h2 }\end{DoxyParamCaption})}
 
 
-
-Constructor for two fluid interface problem. 
 
 Constructor\+: Pass the number of elements and the width of the domain in the x direction. Also pass the number of elements in the y direction of the bottom (fluid 1) and top (fluid 2) layers, along with the heights of both layers. 
 
-Definition at line 171 of file spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Constructor for two fluid interface problem. 
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00170}{170}} of file \mbox{\hyperlink{spine__two__layer__interface_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-References Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Bulk\+\_\+mesh\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+\+Ratio, Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::fix\+\_\+pressure(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St, Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::set\+\_\+boundary\+\_\+conditions(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+St, Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Surface\+\_\+mesh\+\_\+pt, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio.
+References \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00237}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00079}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00076}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+\+Ratio}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00227}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00059}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00068}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00065}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00467}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions()}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00062}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+St}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00240}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~InterfaceProblem@{$\sim$InterfaceProblem}}
 \index{````~InterfaceProblem@{$\sim$InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$InterfaceProblem()}{~InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::$\sim$\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::$\sim$\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -158,7 +164,7 @@ Destructor (empty)
 
 
 
-Definition at line 105 of file spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00105}{105}} of file \mbox{\hyperlink{spine__two__layer__interface_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
@@ -167,8 +173,8 @@ Definition at line 105 of file spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_adapt@{actions\_after\_adapt}}
 \index{actions\_after\_adapt@{actions\_after\_adapt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+after\+\_\+adapt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+adapt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -176,29 +182,14 @@ Rebuild the mesh of interface elements after adapting the bulk mesh.
 
 
 
-Definition at line 518 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00518}{518}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}\label{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Update after solve can remain empty, because the update is performed automatically after every Newton step. 
-
-
-
-Definition at line 135 of file spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
-
-\mbox{\Hypertarget{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}\label{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}} 
-\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
-\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -206,14 +197,29 @@ No actions required after solve step.
 
 
 
-Definition at line 202 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00202}{202}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+\mbox{\Hypertarget{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}\label{classInterfaceProblem_aedc2e58b3d2f5f8c898a21ba2d245cee}} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
+\index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Update after solve can remain empty, because the update is performed automatically after every Newton step. 
+
+
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00135}{135}} of file \mbox{\hyperlink{spine__two__layer__interface_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a944e5754e9b3f3394211b6c62f705abe}\label{classInterfaceProblem_a944e5754e9b3f3394211b6c62f705abe}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_adapt@{actions\_before\_adapt}}
 \index{actions\_before\_adapt@{actions\_before\_adapt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_adapt()}{actions\_before\_adapt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+before\+\_\+adapt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+adapt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -221,14 +227,14 @@ Strip off the interface elements before adapting the bulk mesh.
 
 
 
-Definition at line 502 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00502}{502}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_ae3ec75fcc8ccca97207dc7eca23b1cce}\label{classInterfaceProblem_ae3ec75fcc8ccca97207dc7eca23b1cce}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
 \index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -236,14 +242,18 @@ Actions before the timestep\+: For maximum stability, reset the current nodal po
 
 
 
-Definition at line 206 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00206}{206}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00237}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}\label{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -251,14 +261,18 @@ Spine heights/lengths are unknowns in the problem so their values get corrected 
 
 
 
-Definition at line 125 of file spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00125}{125}} of file \mbox{\hyperlink{spine__two__layer__interface_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00237}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}\label{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -266,14 +280,14 @@ No actions required before solve step.
 
 
 
-Definition at line 131 of file spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00199}{199}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}\label{classInterfaceProblem_ade63c8a74f666edf530460b989968b4f}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -281,14 +295,14 @@ No actions required before solve step.
 
 
 
-Definition at line 199 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00131}{131}} of file \mbox{\hyperlink{spine__two__layer__interface_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a94e2cc71fe27c0c329030874e05734b8}\label{classInterfaceProblem_a94e2cc71fe27c0c329030874e05734b8}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!create\_interface\_elements@{create\_interface\_elements}}
 \index{create\_interface\_elements@{create\_interface\_elements}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{create\_interface\_elements()}{create\_interface\_elements()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::create\+\_\+interface\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::create\+\_\+interface\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -296,48 +310,44 @@ Create the 1d interface elements.
 
 Create interface elements between the two fluids in the mesh pointed to by Bulk\+\_\+mesh\+\_\+pt and add the elements to the Mesh object pointed to by Surface\+\_\+mesh\+\_\+pt. 
 
-Definition at line 558 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00558}{558}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+St, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio.
+References \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00079}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00062}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+St}}, and \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Viscosity\+\_\+\+Ratio}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}\label{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!deform\_free\_surface@{deform\_free\_surface}}
 \index{deform\_free\_surface@{deform\_free\_surface}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{deform\_free\_surface()}{deform\_free\_surface()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon,  }\item[{const unsigned \&}]{n\+\_\+periods }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon,  }\item[{const unsigned \&}]{n\+\_\+periods }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Deform the mesh/free surface to a prescribed function. 
+
+
+
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00641}{641}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}\label{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!deform\_free\_surface@{deform\_free\_surface}}
 \index{deform\_free\_surface@{deform\_free\_surface}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{deform\_free\_surface()}{deform\_free\_surface()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon,  }\item[{const unsigned \&}]{n\+\_\+periods }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon,  }\item[{const unsigned \&}]{n\+\_\+periods }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Deform the mesh/free surface to a prescribed function. 
 
-
-
-Definition at line 642 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
-
-
-
-References epsilon.
-
 \mbox{\Hypertarget{classInterfaceProblem_ac2aaab086d9bbd3913ce8bc0d244413d}\label{classInterfaceProblem_ac2aaab086d9bbd3913ce8bc0d244413d}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!delete\_interface\_elements@{delete\_interface\_elements}}
 \index{delete\_interface\_elements@{delete\_interface\_elements}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{delete\_interface\_elements()}{delete\_interface\_elements()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::delete\+\_\+interface\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::delete\+\_\+interface\+\_\+elements\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -345,25 +355,14 @@ Delete the 1d interface elements.
 
 Delete the interface elements and wipe the surface mesh. 
 
-Definition at line 619 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00619}{619}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
-
-
-
-Doc the solution. 
-
-\mbox{\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}} 
-\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
-\index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
 
 
 
@@ -371,18 +370,29 @@ Document the solution.
 
 Doc the solution. 
 
-Definition at line 670 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00670}{670}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-References Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file.
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00335}{Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file}}.
+
+\mbox{\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
+\index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+
+
+
+Doc the solution. 
 
 \mbox{\Hypertarget{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}\label{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!fix\_pressure@{fix\_pressure}}
 \index{fix\_pressure@{fix\_pressure}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -390,14 +400,22 @@ Fix pressure in element e at pressure dof pdof and set to pvalue.
 
 
 
-Definition at line 141 of file spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00227}{227}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00227}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00227}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00171}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}\label{classInterfaceProblem_a9d1a04da451b6f41336cb6f3bd910633}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!fix\_pressure@{fix\_pressure}}
 \index{fix\_pressure@{fix\_pressure}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e,  }\item[{const unsigned \&}]{pdof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -405,29 +423,18 @@ Fix pressure in element e at pressure dof pdof and set to pvalue.
 
 
 
-Definition at line 227 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00141}{141}} of file \mbox{\hyperlink{spine__two__layer__interface_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Interface\+Problem().
+References \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00237}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00227}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}\label{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_boundary\_conditions@{set\_boundary\_conditions}}
 \index{set\_boundary\_conditions@{set\_boundary\_conditions}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{set\_boundary\_conditions()}{set\_boundary\_conditions()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::set\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Set boundary conditions. 
-
-\mbox{\Hypertarget{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}\label{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}} 
-\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_boundary\_conditions@{set\_boundary\_conditions}}
-\index{set\_boundary\_conditions@{set\_boundary\_conditions}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{set\_boundary\_conditions()}{set\_boundary\_conditions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::set\+\_\+boundary\+\_\+conditions}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions}
 
 
 
@@ -435,29 +442,29 @@ Set boundary conditions.
 
 Set boundary conditions\+: Set both velocity components to zero on the top and bottom (solid) walls and the horizontal component only to zero on the side (periodic) boundaries. 
 
-Definition at line 467 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00467}{467}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Interface\+Problem().
+Referenced by \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00171}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
+
+\mbox{\Hypertarget{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}\label{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_boundary\_conditions@{set\_boundary\_conditions}}
+\index{set\_boundary\_conditions@{set\_boundary\_conditions}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_boundary\_conditions()}{set\_boundary\_conditions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+boundary\+\_\+conditions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set boundary conditions. 
 
 \mbox{\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
 \index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Set initial conditions. 
-
-\mbox{\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}} 
-\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
-\index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::set\+\_\+initial\+\_\+condition}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition}
 
 
 
@@ -465,25 +472,25 @@ Set initial conditions.
 
 Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities and nodal positions to correspond to an impulsive start. 
 
-Definition at line 437 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00437}{437}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
+
+\mbox{\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
+\index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set initial conditions. 
 
 \mbox{\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
 \index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{t\+\_\+max,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})}
-
-
-
-Do unsteady run up to maximum time t\+\_\+max with given timestep dt. 
-
-\mbox{\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}} 
-\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
-\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{t\+\_\+max,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{t\+\_\+max,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})}
 
 
 
@@ -491,36 +498,36 @@ Do unsteady run up to maximum time t\+\_\+max with given timestep dt.
 
 Perform run up to specified time t\+\_\+max with given timestep dt. 
 
-Definition at line 723 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00722}{722}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-References epsilon, and Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file.
+References \mbox{\hyperlink{refineable__two__layer__interface_8cc_source_l00335}{Problem\+\_\+\+Parameter\+::\+Trace\+\_\+file}}.
+
+
+
+Referenced by \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00810}{main()}}.
+
+\mbox{\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{t\+\_\+max,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Do unsteady run up to maximum time t\+\_\+max with given timestep dt. 
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174}\label{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174}} 
-\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
-\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-Two\+Layer\+Spine\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Pointer to the specific bulk mesh. 
-
-
-
-Definition at line 157 of file spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
-
 \mbox{\Hypertarget{classInterfaceProblem_ad7cdca485f230393096667bf0709ef8d}\label{classInterfaceProblem_ad7cdca485f230393096667bf0709ef8d}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
 \index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Elastic\+Refineable\+Two\+Layer\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classElasticRefineableTwoLayerMesh}{Elastic\+Refineable\+Two\+Layer\+Mesh}}$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -528,29 +535,44 @@ Pointer to the (specific) \char`\"{}bulk\char`\"{} mesh.
 
 
 
-Definition at line 237 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00237}{237}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Interface\+Problem().
+Referenced by \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00206}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}, \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00125}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00141}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::fix\+\_\+pressure()}}, and \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00171}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
+
+\mbox{\Hypertarget{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174}\label{classInterfaceProblem_a1e9cf118e6c477ea9a1a49610bb72174}} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Two\+Layer\+Spine\+Mesh$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to the specific bulk mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00157}{157}} of file \mbox{\hyperlink{spine__two__layer__interface_8cc_source}{spine\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}\label{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
 \index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-Constitutive\+Law$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Constitutive\+Law$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 243 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00243}{243}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a9b5070b479a79546b983bd7027917e93}\label{classInterfaceProblem_a9b5070b479a79546b983bd7027917e93}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Lx@{Lx}}
 \index{Lx@{Lx}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Lx}{Lx}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Lx\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Lx\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -558,14 +580,14 @@ Width of domain.
 
 
 
-Definition at line 246 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00246}{246}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a011c7b4f2307ff909f64dc158e8fc674}\label{classInterfaceProblem_a011c7b4f2307ff909f64dc158e8fc674}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
 \index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-Mesh $\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Mesh $\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -573,18 +595,18 @@ Pointer to the \char`\"{}surface\char`\"{} mesh.
 
 Pointer to the surface mesh. 
 
-Definition at line 240 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00240}{240}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 
-Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Interface\+Problem().
+Referenced by \mbox{\hyperlink{spine__two__layer__interface_8cc_source_l00171}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}\label{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Trace\_file@{Trace\_file}}
 \index{Trace\_file@{Trace\_file}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-ofstream \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+ofstream \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -592,7 +614,7 @@ Trace file.
 
 
 
-Definition at line 249 of file elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc.
+Definition at line \mbox{\hyperlink{elastic__two__layer__interface_8cc_source_l00249}{249}} of file \mbox{\hyperlink{elastic__two__layer__interface_8cc_source}{elastic\+\_\+two\+\_\+layer\+\_\+interface.\+cc}}.
 
 
 

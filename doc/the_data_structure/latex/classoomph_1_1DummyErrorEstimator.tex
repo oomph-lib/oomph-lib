@@ -2,6 +2,11 @@
 \label{classoomph_1_1DummyErrorEstimator}\index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
 
 
+///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////  
+
+
+
+
 {\ttfamily \#include $<$error\+\_\+estimator.\+h$>$}
 
 Inheritance diagram for oomph\+::Dummy\+Error\+Estimator\+:\begin{figure}[H]
@@ -17,9 +22,9 @@ Inheritance diagram for oomph\+::Dummy\+Error\+Estimator\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor. Provide mesh and number of the elements that define the regions within which elements are to be refined subsequently. Also specify the node number of a central node within elements -- it\textquotesingle{}s used to determine if an element is in the region where refinement is supposed to take place. Optional boolean flag (defaulting to false) indicates that refinement decision is based on Lagrangian coordinates -- only applicable to solid meshes. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_ac08dd82bba49368bb49eb7f58778778f}{Dummy\+Error\+Estimator}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&lower\+\_\+left, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&upper\+\_\+right, const unsigned \&central\+\_\+node\+\_\+number, const bool \&use\+\_\+lagrangian\+\_\+coordinates=false)
 \begin{DoxyCompactList}\small\item\em Constructor. Provide vectors to \char`\"{}lower left\char`\"{} and \char`\"{}upper right\char`\"{} vertices of refinement region Also specify the node number of a central node within elements -- it\textquotesingle{}s used to determine if an element is in the region where refinement is supposed to take place. Optional boolean flag (defaulting to false) indicates that refinement decision is based on Lagrangian coordinates -- only applicable to solid meshes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a69397622563794501de5bbbeb8c072ab}{Dummy\+Error\+Estimator}} (const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&)
+\mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a3e17fcc7e3933b328c3f56f2d2c0f2f5}{Dummy\+Error\+Estimator}} (const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a001f55cc9e376d626a82147fed7f08f1}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&)
+void \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_af4b315280a88c39e84a772401d471bcb}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_ac379252c48c85e03d9a5bc8b8c0d2d5e}{$\sim$\+Dummy\+Error\+Estimator}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
@@ -39,9 +44,11 @@ unsigned \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator_a9885e1d7966047816f1
 
 
 \doxysubsection{Detailed Description}
+///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
+
 Dummy error estimator, allows manual specification of refinement pattern by forcing refinement in regions defined by elements in a reference mesh. 
 
-Definition at line 472 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00454}{454}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
@@ -58,11 +65,11 @@ Constructor. Provide mesh and number of the elements that define the regions wit
 
 
 
-Definition at line 483 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00465}{465}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
-References e, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed(), oomph\+::\+Node\+::ndim(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Solid\+Node\+::nlagrangian(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Region\+\_\+low\+\_\+bound, Region\+\_\+upp\+\_\+bound, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l01588}{oomph\+::\+Mesh\+::is\+\_\+mesh\+\_\+distributed()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{nodes_8h_source_l01871}{oomph\+::\+Solid\+Node\+::nlagrangian()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{error__estimator_8h_source_l00661}{Region\+\_\+low\+\_\+bound}}, \mbox{\hyperlink{error__estimator_8h_source_l00658}{Region\+\_\+upp\+\_\+bound}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, and \mbox{\hyperlink{nodes_8h_source_l01884}{oomph\+::\+Solid\+Node\+::xi()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_ac08dd82bba49368bb49eb7f58778778f}\label{classoomph_1_1DummyErrorEstimator_ac08dd82bba49368bb49eb7f58778778f}} 
 \index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!DummyErrorEstimator@{DummyErrorEstimator}}
@@ -76,29 +83,21 @@ Constructor. Provide vectors to \char`\"{}lower left\char`\"{} and \char`\"{}upp
 
 
 
-Definition at line 568 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00550}{550}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
-References oomph\+::\+Mesh\+::nelement(), Region\+\_\+low\+\_\+bound, and Region\+\_\+upp\+\_\+bound.
+References \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{error__estimator_8h_source_l00661}{Region\+\_\+low\+\_\+bound}}, and \mbox{\hyperlink{error__estimator_8h_source_l00658}{Region\+\_\+upp\+\_\+bound}}.
 
-\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a69397622563794501de5bbbeb8c072ab}\label{classoomph_1_1DummyErrorEstimator_a69397622563794501de5bbbeb8c072ab}} 
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a3e17fcc7e3933b328c3f56f2d2c0f2f5}\label{classoomph_1_1DummyErrorEstimator_a3e17fcc7e3933b328c3f56f2d2c0f2f5}} 
 \index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!DummyErrorEstimator@{DummyErrorEstimator}}
 \index{DummyErrorEstimator@{DummyErrorEstimator}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
 \doxysubsubsection{\texorpdfstring{DummyErrorEstimator()}{DummyErrorEstimator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Dummy\+Error\+Estimator\+::\+Dummy\+Error\+Estimator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 595 of file error\+\_\+estimator.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 \mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_ac379252c48c85e03d9a5bc8b8c0d2d5e}\label{classoomph_1_1DummyErrorEstimator_ac379252c48c85e03d9a5bc8b8c0d2d5e}} 
 \index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!````~DummyErrorEstimator@{$\sim$DummyErrorEstimator}}
@@ -112,7 +111,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 609 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00582}{582}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
@@ -133,29 +132,21 @@ Implements \mbox{\hyperlink{classoomph_1_1ErrorEstimator_a77e85262d309d6e7da0ca7
 
 
 
-Definition at line 614 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00587}{587}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
-References Central\+\_\+node\+\_\+number, e, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), Region\+\_\+low\+\_\+bound, Region\+\_\+upp\+\_\+bound, Use\+\_\+lagrangian\+\_\+coordinates, oomph\+::\+Node\+::x(), and oomph\+::\+Solid\+Node\+::xi().
+References \mbox{\hyperlink{error__estimator_8h_source_l00655}{Central\+\_\+node\+\_\+number}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00548}{oomph\+::\+Doc\+Info\+::is\+\_\+doc\+\_\+enabled()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{error__estimator_8h_source_l00661}{Region\+\_\+low\+\_\+bound}}, \mbox{\hyperlink{error__estimator_8h_source_l00658}{Region\+\_\+upp\+\_\+bound}}, \mbox{\hyperlink{error__estimator_8h_source_l00651}{Use\+\_\+lagrangian\+\_\+coordinates}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, and \mbox{\hyperlink{nodes_8h_source_l01884}{oomph\+::\+Solid\+Node\+::xi()}}.
 
-\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a001f55cc9e376d626a82147fed7f08f1}\label{classoomph_1_1DummyErrorEstimator_a001f55cc9e376d626a82147fed7f08f1}} 
+\mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_af4b315280a88c39e84a772401d471bcb}\label{classoomph_1_1DummyErrorEstimator_af4b315280a88c39e84a772401d471bcb}} 
 \index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Dummy\+Error\+Estimator\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Dummy\+Error\+Estimator\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DummyErrorEstimator}{Dummy\+Error\+Estimator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 602 of file error\+\_\+estimator.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 
@@ -172,11 +163,11 @@ Number of local node that is used to identify if an element is located in the re
 
 
 
-Definition at line 682 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00655}{655}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
-Referenced by get\+\_\+element\+\_\+errors().
+Referenced by \mbox{\hyperlink{error__estimator_8h_source_l00587}{get\+\_\+element\+\_\+errors()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a181a66a833352440c325a8edbefb51cf}\label{classoomph_1_1DummyErrorEstimator_a181a66a833352440c325a8edbefb51cf}} 
 \index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!Region\_low\_bound@{Region\_low\_bound}}
@@ -190,11 +181,11 @@ Lower bounds for the coordinates of the refinement regions.
 
 
 
-Definition at line 688 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00661}{661}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
-Referenced by Dummy\+Error\+Estimator(), and get\+\_\+element\+\_\+errors().
+Referenced by \mbox{\hyperlink{error__estimator_8h_source_l00465}{Dummy\+Error\+Estimator()}}, and \mbox{\hyperlink{error__estimator_8h_source_l00587}{get\+\_\+element\+\_\+errors()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a80f495a70922a1e458899e2e7313620d}\label{classoomph_1_1DummyErrorEstimator_a80f495a70922a1e458899e2e7313620d}} 
 \index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!Region\_upp\_bound@{Region\_upp\_bound}}
@@ -208,11 +199,11 @@ Upper bounds for the coordinates of the refinement regions.
 
 
 
-Definition at line 685 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00658}{658}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
-Referenced by Dummy\+Error\+Estimator(), and get\+\_\+element\+\_\+errors().
+Referenced by \mbox{\hyperlink{error__estimator_8h_source_l00465}{Dummy\+Error\+Estimator()}}, and \mbox{\hyperlink{error__estimator_8h_source_l00587}{get\+\_\+element\+\_\+errors()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DummyErrorEstimator_a052e3d319921a682b7fa0fef66496625}\label{classoomph_1_1DummyErrorEstimator_a052e3d319921a682b7fa0fef66496625}} 
 \index{oomph::DummyErrorEstimator@{oomph::DummyErrorEstimator}!Use\_lagrangian\_coordinates@{Use\_lagrangian\_coordinates}}
@@ -226,11 +217,11 @@ Use Lagrangian coordinates to decide which element is to be refined.
 
 
 
-Definition at line 678 of file error\+\_\+estimator.\+h.
+Definition at line \mbox{\hyperlink{error__estimator_8h_source_l00651}{651}} of file \mbox{\hyperlink{error__estimator_8h_source}{error\+\_\+estimator.\+h}}.
 
 
 
-Referenced by get\+\_\+element\+\_\+errors().
+Referenced by \mbox{\hyperlink{error__estimator_8h_source_l00587}{get\+\_\+element\+\_\+errors()}}.
 
 
 

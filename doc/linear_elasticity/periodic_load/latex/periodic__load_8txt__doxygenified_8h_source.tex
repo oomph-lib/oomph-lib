@@ -1,0 +1,464 @@
+\hypertarget{periodic__load_8txt__doxygenified_8h_source}{}\doxysection{periodic\+\_\+load.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{periodic__load_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Example problem: The deformation of an elastic strip by a periodic traction}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{This is our first linear elasticity example problem. We discuss the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{non-\/dimensionalisation of the governing equations and their}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{implementation in \(\backslash\)c oomph-\/lib, and then demonstrate the solution }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{of a 2D problem: the deformation of an elastic strip by a periodic traction.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{<TABLE BORDER=1, WIDTH=500px>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{<TD bgcolor="{}cornsilk"{}>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{<B>Acknowledgement:</B>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{This tutorial and the associated driver code was developed jointly}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{with David Rutter.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{</TABLE>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{<HR>  }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{\(\backslash\)section equation The governing equations}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{The figure below shows a sketch of a general elasticity }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{problem. A linearly elastic solid body occupies the domain }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{\(\backslash\)f\$ V \(\backslash\)f\$ and is loaded by a body}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{force \(\backslash\)f\$ \{\(\backslash\)bf F\}\string^* \(\backslash\)f\$ and by a surface traction}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf t\}\string^* \(\backslash\)f\$ which is applied along part of its boundary, }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)f\$ A\_\{\(\backslash\)rm tract\} \(\backslash\)f\$. The displacement is prescribed along the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{remainder of the boundary, \(\backslash\)f\$ A\_\{\(\backslash\)rm displ\} \(\backslash\)f\$, where }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)partial V = A\_\{\(\backslash\)rm tract\} \(\backslash\)cup  A\_\{\(\backslash\)rm displ\} \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{\(\backslash\)image html Solid\_boundary\_conds.gif "{}Sketch of a general elasticity problem: A linearly elastic body is loaded by a body force and is exposed to a prescribed traction along part of its boundary while the displacement is prescribed along the remainder of the boundary. "{} }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{\(\backslash\)image latex Solid\_boundary\_conds.eps "{}Sketch of a general elasticity problem: A linearly elastic body is loaded by a body force and is exposed to a prescribed traction along part of its boundary while the displacement is prescribed along the remainder of the boundary. "{} width=0.5\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{We adopt an Eulerian approach and describe the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{deformation in terms of the displacement field }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf u\}\string^*\(\backslash\)left( x\_i\string^*,t\string^* \(\backslash\)right) \(\backslash\)f\$ where }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{\(\backslash\)f\$ x\_i\string^* \(\backslash\)f\$ and \(\backslash\)f\$ t\string^* \(\backslash\)f\$ are the spatial coordinates and time, }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{respectively. Throughout this document we will use index notation }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{and the summation convention, and use asterisks to distinguish }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{dimensional quantities from their non-\/dimensional counterparts.  }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{Denoting the density of the body by \(\backslash\)f\$ \(\backslash\)rho \(\backslash\)f\$, the deformation}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{is governed by the Cauchy equations,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{ij\}\string^*\}\{\(\backslash\)partial x\_j\string^*\} + \(\backslash\)rho F\_i\string^*}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{\(\backslash\)rho \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_i\string^*\}\{\(\backslash\)partial t\string^\{2*\}\},}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)tau\_\{ij\}\string^* \(\backslash\)f\$ is the Cauchy stress tensor which, for a }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{linearly elastic solid, is given by}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)tau\_\{ij\}\string^* = E\_\{ijkl\}\string^* \(\backslash\) e\_\{kl\},}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{where \(\backslash\)f\$ e\_\{kl\} \(\backslash\)f\$ is the strain tensor,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{e\_\{ij\} = \(\backslash\)frac\{1\}\{2\} }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)left( \(\backslash\)frac\{\(\backslash\)partial u\_i\string^*\}\{\(\backslash\)partial x\_j\string^*\}+}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{       \(\backslash\)frac\{\(\backslash\)partial u\_j\string^*\}\{\(\backslash\)partial x\_i\string^*\}\(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{\(\backslash\)f\$ E\_\{ijkl\} \(\backslash\)f\$ is the 4th order elasticity tensor, which for }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{a homogeneous and isotropic solid is}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{E\_\{ijkl\}\string^* = \(\backslash\)frac\{E\}\{1+\(\backslash\)nu\} \(\backslash\)left(\(\backslash\)frac\{\(\backslash\)nu\}\{1-\/2\(\backslash\)nu\} \(\backslash\)delta\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{ \(\backslash\)delta\_\{kl\} + \(\backslash\)delta\_\{ik\} \(\backslash\)delta\_\{jl\} \(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{where \(\backslash\)f\$ E \(\backslash\)f\$ is Young's modulus, \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$ is the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{Poisson ratio and \(\backslash\)f\$ \(\backslash\)delta\_\{ij\} \(\backslash\)f\$ is the Kronecker delta. }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{Thus the Cauchy stress is given in terms of the displacement}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{derivatives }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{by}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)tau\_\{ij\}\string^* = \(\backslash\)frac\{E\}\{1+\(\backslash\)nu\} \(\backslash\)left(\(\backslash\)frac\{\(\backslash\)nu\}\{1-\/2\(\backslash\)nu\} \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{\(\backslash\)delta\_\{ij\} \(\backslash\) \(\backslash\)frac\{\(\backslash\)partial u\_k\string^*\}\{\(\backslash\)partial x\_k\string^*\} + }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)frac\{1\}\{2\}\(\backslash\)left(\(\backslash\)frac\{\(\backslash\)partial u\_i\string^*\}\{\(\backslash\)partial x\_j\string^*\}+}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_j\string^*\}\{\(\backslash\)partial x\_i\string^*\} \(\backslash\)right) \(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{We non-\/dimensionalise the equations, using a problem specific reference}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{length, \(\backslash\)f\$ \{\(\backslash\)cal L\} \(\backslash\)f\$, and a timescale \(\backslash\)f\$ \{\(\backslash\)cal T\} \(\backslash\)f\$, and  use}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{Young's modulus to non-\/dimensionalise the body force and the stress,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)tau\_\{ij\}\string^* = E \(\backslash\), \(\backslash\)tau\_\{ij\}, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{x\_i\string^* = \{\(\backslash\)cal L\}\(\backslash\), x\_i, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{u\_i\string^* = \{\(\backslash\)cal L\}\(\backslash\), u\_i,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{t\string^* = \{\(\backslash\)cal T\}\(\backslash\), t, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{F\_i\string^* = \(\backslash\)frac\{E\}\{\(\backslash\)rho \(\backslash\)cal L\} \(\backslash\), F\_i. \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{The non-\/dimensional form of the Cauchy equations is then given by}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{ij\}\}\{\(\backslash\)partial x\_j\} + F\_i}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{\(\backslash\)Lambda\string^2  \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_i\}\{\(\backslash\)partial t\string^2\},}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{where}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{\(\backslash\)tau\_\{ij\} = \(\backslash\)frac\{1\}\{1+\(\backslash\)nu\} \(\backslash\)left(\(\backslash\)frac\{\(\backslash\)nu\}\{1-\/2\(\backslash\)nu\} \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{\(\backslash\)delta\_\{ij\} \(\backslash\) \(\backslash\)frac\{\(\backslash\)partial u\_k\}\{\(\backslash\)partial x\_k\} + }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{\(\backslash\)frac\{1\}\{2\} \(\backslash\)left(\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\}+}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} \(\backslash\)right) \(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{The parameter}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)Lambda = \(\backslash\)frac\{\{\(\backslash\)cal L\} \(\backslash\)sqrt\{\(\backslash\)frac\{\(\backslash\)rho\}\{E\}\} \}\{\(\backslash\)cal T\},}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{is the ratio of the elastic body's intrinsic timescale,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{ \(\backslash\)f\$ \{\(\backslash\)cal L\} \(\backslash\)sqrt\{\(\backslash\)frac\{\(\backslash\)rho\}\{E\}\} \(\backslash\)f\$, to the problem-\/specific }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{timescale, \(\backslash\)f\$ \{\(\backslash\)cal T\} \(\backslash\)f\$, that we used to non-\/dimensionalise time.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{The displacement constraints provide}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{a Dirichlet condition for the displacements,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{u\_i = u\_i\string^\{[\(\backslash\)rm prescribed]\} \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)mbox\{on \$A\_\{\(\backslash\)mathrm\{displ\}\}\$\},}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{while the traction boundary conditions require that}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{t\_i = \(\backslash\)tau\_\{ij\} n\_j \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)mbox\{on \$A\_\{\(\backslash\)mathrm\{tract\}\},\$\}}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{where the \(\backslash\)f\$ n\_j \(\backslash\)f\$ are the components of the outer unit normal}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{to the boundary.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{In this tutorial we only consider steady problems for which }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{the equations reduce to}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{ij\}\}\{\(\backslash\)partial x\_j\} + F\_i = 0.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{\(\backslash\)section element\_types Implementation }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{\(\backslash\)subsection el The elements}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{Within \(\backslash\)c oomph-\/lib, the non-\/dimensional version of the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{<CODE>DIM</CODE>-\/dimensional Cauchy equations (1) with }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{the constitutive equations (2) are implemented }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{in the \(\backslash\)c LinearElasticityEquations<DIM> equations class. Following}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{our usual approach, discussed in the}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{<A HREF="{}../../../quick\_guide/html/index.html"{}> (Not-\/So-\/)Quick}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{Guide,</A> this equation class is then combined with a geometric finite}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{element to form a fully-\/functional finite element. }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{For instance, the combination of the \(\backslash\)c LinearElasticityEquations<2>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{class with the geometric finite element \(\backslash\)c QElement<2,3> yields a nine-\/node }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{quadrilateral linear elasticity element. As usual, the mapping }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{between local and global (Eulerian) coordinates within an element is given by,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{x\_i = \(\backslash\)sum\_\{j=1\}\string^\{N\string^\{(E)\}\} X\string^\{(E)\}\_\{ij\} \(\backslash\), \(\backslash\)psi\_j, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{i=1,2\(\backslash\)quad [\(\backslash\)mbox\{and \}3],}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{where \(\backslash\)f\$ N\string^\{(E)\} \(\backslash\)f\$ is the number of nodes in the element, }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{\(\backslash\)f\$ X\string^\{(E)\}\_\{ij\} \(\backslash\)f\$ is the \(\backslash\)f\$ i \(\backslash\)f\$-\/th global (Eulerian) coordinate}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{of the \(\backslash\)f\$ j \(\backslash\)f\$-\/th \(\backslash\)c Node in the element, and the \(\backslash\)f\$ \(\backslash\)psi\_j \(\backslash\)f\$ are }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{the element's shape functions, defined in the geometric}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{finite element. }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{The cartesian displacement components \(\backslash\)f\$ u\_1, \(\backslash\)f\$ \(\backslash\)f\$ u\_2, \(\backslash\)f\$  }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{[and \(\backslash\)f\$ u\_3 \(\backslash\)f\$] are stored as nodal values, and the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{shape functions are used to interpolate the displacements as}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{u\_i = \(\backslash\)sum\_\{j=1\}\string^\{N\string^\{(E)\}\} U\string^\{(E)\}\_\{ij\} \(\backslash\), \(\backslash\)psi\_j, \(\backslash\)qquad }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{i=1,2\(\backslash\)quad [\(\backslash\)mbox\{and \}3],}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{where \(\backslash\)f\$  U\string^\{(E)\}\_\{ij\} \(\backslash\)f\$  is the \(\backslash\)f\$ i \(\backslash\)f\$-\/th displacement component }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{at the \(\backslash\)f\$ j \(\backslash\)f\$-\/th \(\backslash\)c Node in the element. Nodal values of the displacement }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{components are accessible via the access function}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{LinearElasticityEquations<DIM>::u(i,j)}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{which returns the \(\backslash\)f\$ i \(\backslash\)f\$-\/th displacement component stored at the element's }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)f\$ j \(\backslash\)f\$-\/th \(\backslash\)c Node.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{\(\backslash\)section example The example problem}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{To illustrate the solution of the steady equations of linear}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{elasticity, we consider the 2D problem shown in the sketch below.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{<TR> }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{<B>The problem.</B>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{\(\backslash\)image html attempt3.gif "{}Infinitely long strip loaded by a periodic traction. "{} }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{\(\backslash\)image latex attempt3.eps "{}Infinitely long strip loaded by a periodic traction. "{} width=0.5\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{ij\}\}\{\(\backslash\)partial x\_j\} + F\_i=0,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{in the domain \(\backslash\)f\$ D = \(\backslash\)\{x\_1 \(\backslash\)in [-\/\(\backslash\)infty,+\(\backslash\)infty], x\_2 \(\backslash\)in [0,L\_y]\(\backslash\)\} \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{subject to the Dirichlet boundary conditions}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{\(\backslash\)left. \(\backslash\)mathbf\{u\}\(\backslash\)right|\_\{x\_2 = 0\}=(0,0),}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (4)}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{on the bottom boundary, the Neumann (traction) boundary conditions}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{\(\backslash\)left. \(\backslash\)mathbf\{t\}\(\backslash\)right|\_\{x\_2 = L\_y\}=\(\backslash\)left(-\/A \(\backslash\)cos\{\(\backslash\)left(\(\backslash\)frac\{2 \(\backslash\)pi x\_1\}\{L\_x\}\(\backslash\)right)\}, -\/A \(\backslash\)sin\{\(\backslash\)left(\(\backslash\)frac\{2 \(\backslash\)pi x\_1\}\{L\_x\}\(\backslash\)right)\}\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (5)}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{on the top boundary, and symmetry conditions at \(\backslash\)f\$ x\_1 = 0 \(\backslash\)f\$ and \(\backslash\)f\$ x\_1 = L\_x \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{\(\backslash\)left. \{\(\backslash\)bf u\}\(\backslash\)right|\_\{x\_1=0\} = \(\backslash\)left.\{\(\backslash\)bf u\}\(\backslash\)right|\_\{x\_1=L\_x\}.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{We note that for \(\backslash\)f\$ L\_y \(\backslash\)to \(\backslash\)infty \(\backslash\)f\$ the problem converges to the}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{analytical solution.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{u\_1\string^\{[exact]\} = -\/\(\backslash\)frac\{A(1+\(\backslash\)nu)\}\{2 \(\backslash\)pi\} }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{\(\backslash\)cos\{\(\backslash\)left(\(\backslash\)frac\{2 \(\backslash\)pi x\_1\}\{L\_x\}\(\backslash\)right)\} \(\backslash\)exp\{\(\backslash\)left(2 \(\backslash\)pi (x\_2-\/L\_y)\(\backslash\)right)\},}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{u\_2\string^\{[exact]\} = -\/\(\backslash\)frac\{A(1+\(\backslash\)nu)\}\{2 \(\backslash\)pi\} }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{\(\backslash\)sin\{\(\backslash\)left(\(\backslash\)frac\{2 \(\backslash\)pi x\_1\}\{L\_x\}\(\backslash\)right)\} \(\backslash\)exp\{\(\backslash\)left(2 \(\backslash\)pi (x\_2-\/L\_y)\(\backslash\)right)\},}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{The figure below shows a vector plot of the displacement field}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{near the upper domain boundary for \(\backslash\)f\$ L\_x = 1 \(\backslash\)f\$ and \(\backslash\)f\$ L\_y=2 \(\backslash\)f\$.  }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{Note that we only discretised the infinite strip over one period of}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{the applied, spatially-\/periodic surface traction, and imposed symmetry}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{conditions on the left and right mesh boundaries.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{The plot shows that the displacements decay rapidly with}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{distance from the loaded surface -\/-\/ as suggested by the analytical}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{solution for the infinite depth case. This suggests that the computation}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{could greatly benefit from the use of spatial adaptivity. This is}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{indeed the case and is explored in }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{<a href="{}../../refineable\_periodic\_load/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{another tutorial.</a>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{\(\backslash\)image html displ.gif "{}Plot of the displacement field. "{} }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{\(\backslash\)image latex displ.eps "{}Plot of the displacement field. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{\(\backslash\)section namespace Global parameters and functions}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{As usual, we define all non-\/dimensional parameters in a namespace.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{\(\backslash\)dontinclude periodic\_load.cc}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{\(\backslash\)skipline start\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{\(\backslash\)until end\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{We start by setting the number of elements in each of the two}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{coordinate directions before creating a  \(\backslash\)c DocInfo object to }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{store the output directory.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{\(\backslash\)until doc\_info.set\_directory("{}RESLT"{})}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{We build the problem using two-\/dimensional \(\backslash\)c QLinearElasticityElements, solve }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{using the \(\backslash\)c Problem::newton\_solve() function, and document the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{results.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{\(\backslash\)skipline // Set up problem}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{\(\backslash\)until end\_of\_main}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{\(\backslash\)section problem The problem class }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{The \(\backslash\)c Problem class is very simple. As in other problems with Neumann }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{boundary conditions, we provide separate meshes for the "{}bulk"{} }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{elements and the face elements that apply the traction }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{boundary conditions.  The latter are attached to the relevant }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{faces of the bulk elements by the function \(\backslash\)c assign\_traction\_elements().}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{\(\backslash\)dontinclude periodic\_load.cc}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{\(\backslash\)until end\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{\(\backslash\)section constructor The problem constructor}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{Since this is a steady problem, the constructor is quite simple. We}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{begin by building the meshes and pin the displacements on }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{the appropriate boundaries. We then assign the boundary values}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{for the displacements along the bottom boundary. We either }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{set the displacements to zero or assign their values }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{from the exact solution for the infinite depth case.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{\(\backslash\)until end\_loop\_over\_boundary\_nodes}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{Next we pass a pointer to the elasticity tensor (stored in}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{\(\backslash\)c Global\_Physical\_Variables::E) to all elements.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{\(\backslash\)skipline Complete the problem}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{\(\backslash\)until end loop over elements}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{We loop over the traction elements and specify the applied traction.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{\(\backslash\)skipline Loop over the traction elements}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{\(\backslash\)until end loop over traction elements}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{The two submeshes are now added to the problem and a global mesh is constructed before the equation numbering scheme is set up, using the function \(\backslash\)c assign\_eqn\_numbers().}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{\(\backslash\)skipline Add the submeshes to the problem}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{\(\backslash\)section traction\_elements The traction elements}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{In anticipation of the extension of this code to its }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{<a href="{}../../refineable\_periodic\_load/html/index.html"{}>adaptive}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{counterpart</a>, we create the face elements that apply the traction to}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{the upper boundary in a separate function. }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{\(\backslash\)skipline start\_of\_traction}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{\(\backslash\)until end of assign\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{As expected, this member function documents the computed solution.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{\(\backslash\)skipline start\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{\(\backslash\)until end\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{\(\backslash\)subsection nondim Comments}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{As discussed in the introduction, the non-\/dimensional version of the}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{steady Cauchy equations only contains a single non-\/dimensional}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{parameter, the Poisson ratio \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$ which is passed to the}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{constructor of the \(\backslash\)c IsotropicElasticityTensor. If you inspect}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{the relevant source code }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{<a href="{}../../../../src/linear\_elasticity/elasticity\_tensor.h"{}>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{src/linear\_elasticity/elasticity\_tensor.h</a> you will find that this }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{constructor has a second}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{argument which defaults to one. This argument plays the role of}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{Young's modulus and is best interpreted as the ratio of the material's}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{actual Young's modulus to the (nominal) Young's modulus used}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{in the non-\/dimensionalisation of the equations. The ability to provide}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{this ratio is important if different regions of the body contain}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{materials with different material properties.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{\(\backslash\)subsection exercises Exercises}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{-\/\# Fix the size of the domain and set the displacements along the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{   bottom boundary to the exact solution for the infinite depth case,}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{   i.e. \(\backslash\)f\$ \{\(\backslash\)bf u\} = \{\(\backslash\)bf u\}\string^\{[\(\backslash\)mathrm\{exact\}]\} \(\backslash\)f\$, using the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{   Global\_Parameters::Finite flag. Then investigate how the solution }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{   converges to the exact solution for increasing numbers of elements.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{-\/\# Try varying the depth of the domain by changing }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{   \(\backslash\)c Global\_Parameters::Ly while maintaining a constant spatial}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{   resolution (i.e. increasing the number of elements -\/-\/ this is}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{   already done in the driver code where we compute \(\backslash\)c ny in terms of \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{   Global\_Parameters::Ly ) and compare how the solution converges to the }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{   exact solution of the infinite depth case.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{   }}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/linear\_elasticity/periodic\_load/"{}>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{demo\_drivers/linear\_elasticity/periodic\_load/}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{-\/ The driver code is:}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/linear\_elasticity/periodic\_load/periodic\_load.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{demo\_drivers/linear\_elasticity/periodic\_load/periodic\_load.cc}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{periodic__load_8txt__doxygenified_8h_source_l00459}00459 }
+
+\end{DoxyCode}

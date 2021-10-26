@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1TLinearElasticityElement}{}\doxysection{oomph\+::T\+Linear\+Elasticity\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1TLinearElasticityElement}{}\doxysection{oomph\+::TLinear\+Elasticity\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1TLinearElasticityElement}\index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
+
+
+//////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$Tlinear\+\_\+elasticity\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::T\+Linear\+Elasticity\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::TLinear\+Elasticity\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.160494cm]{classoomph_1_1TLinearElasticityElement}
@@ -13,38 +18,39 @@ Inheritance diagram for oomph\+::T\+Linear\+Elasticity\+Element$<$ D\+IM, N\+N\+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_aebc7da4cf8438d0eb792f9338c6b664a}{T\+Linear\+Elasticity\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and Linear\+Elasticity equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a20c742e8456b3f7b568131bd0ef54b96}{T\+Linear\+Elasticity\+Element}} (const \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_aebc7da4cf8438d0eb792f9338c6b664a}{TLinear\+Elasticity\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{TElement}} and Linear\+Elasticity equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a7009754c42cd2400f12301380da01a96}{TLinear\+Elasticity\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a76af9620bf824adfd6bef204af7a8f81}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_acb51af6914538bf87852b892dc516ec0}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_acb51af6914538bf87852b892dc516ec0}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function\+: \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_adc8c188c039e833bfab31aa3b127b3f7}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_adc8c188c039e833bfab31aa3b127b3f7}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_ab819534efce64389b6e06bc90acefc86}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_ab819534efce64389b6e06bc90acefc86}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a41f8db113faa5d948d8a3ec21f8111b4}{nvertex\+\_\+node}} () const
+unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a41f8db113faa5d948d8a3ec21f8111b4}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a5a3dac9eae6f19eab21fc590264e64e4}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a33bb53d96b23bd36d11c112ce0430c2e}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a4e896fd9ef9e6d2efcefbb2b162925ff}{nrecovery\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Order of recovery shape functions for Z2 error estimation\+: Same order as shape functions. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a1d2268113e23f9b46ee2ce1c18d836de}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a6dd9de6d6ca3ede5624bd56d45c27445}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement_a6dd9de6d6ca3ede5624bd56d45c27445}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+T\+Linear\+Elasticity\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+TLinear\+Elasticity\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
+////////////////////////////////////////////////////////////////////// 
 
-T\+Linear\+Elasticity\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are isoparametric triangular D\+I\+M-\/dimensional Linear\+Elasticity elements with N\+N\+O\+D\+E\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations}{Linear\+Elasticity\+Equations}} 
+///////////////////////////////////////////////////////////////////// TLinear\+Elasticity\+Element$<$\+DIM,\+NNODE\+\_\+1\+D$>$ elements are isoparametric triangular DIM-\/dimensional Linear\+Elasticity elements with NNODE\+\_\+1D nodal points along each element edge. Inherits from \mbox{\hyperlink{classoomph_1_1TElement}{TElement}} and \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations}{Linear\+Elasticity\+Equations}} 
 
-Definition at line 62 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00062}{62}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
@@ -53,35 +59,27 @@ Definition at line 62 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!TLinearElasticityElement@{TLinearElasticityElement}}
 \index{TLinearElasticityElement@{TLinearElasticityElement}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{TLinearElasticityElement()}{TLinearElasticityElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{T\+Linear\+Elasticity\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{TLinear\+Elasticity\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} and Linear\+Elasticity equations. 
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1TElement}{TElement}} and Linear\+Elasticity equations. 
 
 
 
-Definition at line 70 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_a20c742e8456b3f7b568131bd0ef54b96}\label{classoomph_1_1TLinearElasticityElement_a20c742e8456b3f7b568131bd0ef54b96}} 
+\mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_a7009754c42cd2400f12301380da01a96}\label{classoomph_1_1TLinearElasticityElement_a7009754c42cd2400f12301380da01a96}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!TLinearElasticityElement@{TLinearElasticityElement}}
 \index{TLinearElasticityElement@{TLinearElasticityElement}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{TLinearElasticityElement()}{TLinearElasticityElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{T\+Linear\+Elasticity\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{TLinear\+Elasticity\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 77 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -90,8 +88,8 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -103,18 +101,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 147 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00141}{141}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ D\+I\+M $>$\+::get\+\_\+strain(), and i.
+References \mbox{\hyperlink{linear__elasticity__elements_8cc_source_l00047}{oomph\+::\+Linear\+Elasticity\+Equations\+Base$<$ DIM $>$\+::get\+\_\+strain()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_a4e896fd9ef9e6d2efcefbb2b162925ff}\label{classoomph_1_1TLinearElasticityElement_a4e896fd9ef9e6d2efcefbb2b162925ff}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
 \index{nrecovery\_order@{nrecovery\_order}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -126,14 +124,14 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 133 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00127}{127}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_a1d2268113e23f9b46ee2ce1c18d836de}\label{classoomph_1_1TLinearElasticityElement_a1d2268113e23f9b46ee2ce1c18d836de}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
 \index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -145,14 +143,14 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 139 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00133}{133}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_a41f8db113faa5d948d8a3ec21f8111b4}\label{classoomph_1_1TLinearElasticityElement_a41f8db113faa5d948d8a3ec21f8111b4}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
 \index{nvertex\_node@{nvertex\_node}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -164,14 +162,14 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 120 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00114}{114}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_adc8c188c039e833bfab31aa3b127b3f7}\label{classoomph_1_1TLinearElasticityElement_adc8c188c039e833bfab31aa3b127b3f7}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -179,22 +177,22 @@ C-\/style output function\+:
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations_a5ece3b89bf886d39782820e449a4edaa}{oomph\+::\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations_a5ece3b89bf886d39782820e449a4edaa}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 108 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00102}{102}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{linear__elasticity__elements_8h_source_l00427}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_ab819534efce64389b6e06bc90acefc86}\label{classoomph_1_1TLinearElasticityElement_ab819534efce64389b6e06bc90acefc86}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -202,22 +200,22 @@ C-\/style output function\+:
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations_ae48d7ecffb8e3c914a51947b5f79466c}{oomph\+::\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations_ae48d7ecffb8e3c914a51947b5f79466c}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 114 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00108}{108}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{linear__elasticity__elements_8h_source_l00427}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_a76af9620bf824adfd6bef204af7a8f81}\label{classoomph_1_1TLinearElasticityElement_a76af9620bf824adfd6bef204af7a8f81}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -225,22 +223,22 @@ Broken assignment operator.
 
 Output function\+: 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations_a43d6b5b646f798329c1d77f64d26cdeb}{oomph\+::\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations_a43d6b5b646f798329c1d77f64d26cdeb}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 95 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00089}{89}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{linear__elasticity__elements_8h_source_l00427}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_acb51af6914538bf87852b892dc516ec0}\label{classoomph_1_1TLinearElasticityElement_acb51af6914538bf87852b892dc516ec0}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -248,22 +246,22 @@ Output function\+:
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations_ad651870ca4e0f45f7023407656d034ee}{oomph\+::\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearElasticityEquations_ad651870ca4e0f45f7023407656d034ee}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 101 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00095}{95}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Elasticity\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{linear__elasticity__elements_8h_source_l00427}{oomph\+::\+Linear\+Elasticity\+Equations$<$ DIM $>$\+::output()}}.
 
-\mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_a5a3dac9eae6f19eab21fc590264e64e4}\label{classoomph_1_1TLinearElasticityElement_a5a3dac9eae6f19eab21fc590264e64e4}} 
+\mbox{\Hypertarget{classoomph_1_1TLinearElasticityElement_a33bb53d96b23bd36d11c112ce0430c2e}\label{classoomph_1_1TLinearElasticityElement_a33bb53d96b23bd36d11c112ce0430c2e}} 
 \index{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$@{oomph::TLinearElasticityElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+T\+Linear\+Elasticity\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1TLinearElasticityElement}{oomph\+::\+TLinear\+Elasticity\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -271,11 +269,11 @@ Pointer to the j-\/th vertex node in the element.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae3d9f6bddeb5aaf136ebbb8b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
 
 
 
-Definition at line 126 of file Tlinear\+\_\+elasticity\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source_l00120}{120}} of file \mbox{\hyperlink{Tlinear__elasticity__elements_8h_source}{Tlinear\+\_\+elasticity\+\_\+elements.\+h}}.
 
 
 

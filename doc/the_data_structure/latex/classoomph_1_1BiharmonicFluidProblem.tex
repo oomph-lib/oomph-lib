@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1BiharmonicFluidProblem}{}\doxysection{oomph\+::Biharmonic\+Fluid\+Problem$<$ D\+IM $>$ Class Template Reference}
+\hypertarget{classoomph_1_1BiharmonicFluidProblem}{}\doxysection{oomph\+::Biharmonic\+Fluid\+Problem\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1BiharmonicFluidProblem}\index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@ Biharmonic Fluid \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} Class -\/ des
 
 {\ttfamily \#include $<$biharmonic\+\_\+problem.\+h$>$}
 
-Inheritance diagram for oomph\+::Biharmonic\+Fluid\+Problem$<$ D\+IM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Biharmonic\+Fluid\+Problem\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1BiharmonicFluidProblem}
@@ -18,7 +18,7 @@ Inheritance diagram for oomph\+::Biharmonic\+Fluid\+Problem$<$ D\+IM $>$\+:\begi
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{Fluid\+B\+C\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{Fluid\+BCFct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
 \begin{DoxyCompactList}\small\item\em Definition of a dirichlet boundary condition function pointer. Takes the position along a boundary (s) in the macro element coordinate scheme and returns the fluid velocity normal (dpsi/dt) to the boundary (u\mbox{[}0\mbox{]}) and the fluid velocity tangential (dpsidn) to the boundary (u\mbox{[}1\mbox{]}). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -37,8 +37,8 @@ void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a095e8526d834c05c4929
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a1a00fff232d2438c83b66437d8e86aab}{impose\+\_\+solid\+\_\+boundary\+\_\+on\+\_\+edge}} (const unsigned \&b, const double \&psi=0)
 \begin{DoxyCompactList}\small\item\em Imposes a solid boundary on boundary b -\/ no flow into boundary or along boundary v\+\_\+n = 0 and v\+\_\+t = 0. User must presribe the streamfunction psi to ensure dpsi/dt = 0 is imposed at all points on the boundary and not just at the nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a1cc57555bbd0ceef1d93010c133ac597}{impose\+\_\+traction\+\_\+free\+\_\+edge}} (const unsigned \&b)
-\begin{DoxyCompactList}\small\item\em Impose a traction free edge -\/ i.\+e. v\+\_\+t = 0 or dpsi/dn = 0. In general dpsi/dn = 0 can only be imposed using equation elements to set the D\+O\+Fs dpsi/ds\+\_\+n, however in the special case of dt/ds\+\_\+n = 0, then dpsi/ds\+\_\+n = 0 and can be imposed using pinning -\/ this is handled automatically in this function. For a more detailed description of the equations see the description of the class \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement}{Biharmonic\+Fluid\+Boundary\+Element}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a1006320d9024555042645ed6347ff8fb}{impose\+\_\+fluid\+\_\+flow\+\_\+on\+\_\+edge}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{Fluid\+B\+C\+Fct\+Pt}} u\+\_\+imposed\+\_\+fn)
+\begin{DoxyCompactList}\small\item\em Impose a traction free edge -\/ i.\+e. v\+\_\+t = 0 or dpsi/dn = 0. In general dpsi/dn = 0 can only be imposed using equation elements to set the DOFs dpsi/ds\+\_\+n, however in the special case of dt/ds\+\_\+n = 0, then dpsi/ds\+\_\+n = 0 and can be imposed using pinning -\/ this is handled automatically in this function. For a more detailed description of the equations see the description of the class \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement}{Biharmonic\+Fluid\+Boundary\+Element}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a1006320d9024555042645ed6347ff8fb}{impose\+\_\+fluid\+\_\+flow\+\_\+on\+\_\+edge}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{Fluid\+BCFct\+Pt}} u\+\_\+imposed\+\_\+fn)
 \begin{DoxyCompactList}\small\item\em Impose a prescribed fluid flow comprising the velocity normal to the boundary (u\+\_\+imposed\+\_\+fn\mbox{[}0\mbox{]}) and the velocity tangential to the boundary (u\+\_\+imposed\+\_\+fn\mbox{[}1\mbox{]}) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -49,23 +49,22 @@ unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a2dd20deeccc884a3
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM$>$\newline
-class oomph\+::\+Biharmonic\+Fluid\+Problem$<$ D\+I\+M $>$}
-
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$}
 Biharmonic Fluid \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} Class -\/ describes stokes flow in 2D. Developed for the topologically rectangular Hermite Element \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}. Contains functions allowing the following boundary conditions to be applied (on a given edge)\+: 
 
 
 \begin{DoxyItemize}
 \item wall \+: v\+\_\+n = 0 and v\+\_\+t = 0 (psi must also be prescribed)
 \item traction free \+: v\+\_\+t = 0
-\item flow \+: v\+\_\+n and v\+\_\+t are prescribed N\+O\+TE 1 \+: psi is the stream function
+\item flow \+: v\+\_\+n and v\+\_\+t are prescribed NOTE 1 \+: psi is the stream function
 \begin{DoxyItemize}
 \item fluid velocity normal to boundary v\+\_\+n = +/-\/ dpsi/dt
-\item fluid velocity tangential to boundary v\+\_\+t = -\//+ dpsi/dn N\+O\+TE 2 \+: when a solid wall boundary condition is applied to ensure that v\+\_\+n = 0 the the streamfunction psi must also be prescribed (and constant) 
+\item fluid velocity tangential to boundary v\+\_\+t = -\//+ dpsi/dn NOTE 2 \+: when a solid wall boundary condition is applied to ensure that v\+\_\+n = 0 the the streamfunction psi must also be prescribed (and constant) 
 \end{DoxyItemize}
 \end{DoxyItemize}
 
-Definition at line 224 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00224}{224}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
@@ -74,8 +73,8 @@ Definition at line 224 of file biharmonic\+\_\+problem.\+h.
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!FluidBCFctPt@{FluidBCFctPt}}
 \index{FluidBCFctPt@{FluidBCFctPt}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{FluidBCFctPt}{FluidBCFctPt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::Fluid\+B\+C\+Fct\+Pt) (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::Fluid\+BCFct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
 
 
 
@@ -83,7 +82,7 @@ Definition of a dirichlet boundary condition function pointer. Takes the positio
 
 
 
-Definition at line 232 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00232}{232}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
@@ -92,8 +91,8 @@ Definition at line 232 of file biharmonic\+\_\+problem.\+h.
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!BiharmonicFluidProblem@{BiharmonicFluidProblem}}
 \index{BiharmonicFluidProblem@{BiharmonicFluidProblem}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{BiharmonicFluidProblem()}{BiharmonicFluidProblem()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{Biharmonic\+Fluid\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{Biharmonic\+Fluid\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -101,11 +100,11 @@ constructor
 
 
 
-Definition at line 236 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00236}{236}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-References oomph\+::\+Biharmonic\+Fluid\+Problem$<$ D\+I\+M $>$\+::\+Npoint\+\_\+element.
+References \mbox{\hyperlink{biharmonic__problem_8h_source_l00297}{oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$\+::\+Npoint\+\_\+element}}.
 
 
 
@@ -114,8 +113,8 @@ References oomph\+::\+Biharmonic\+Fluid\+Problem$<$ D\+I\+M $>$\+::\+Npoint\+\_\
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -127,14 +126,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a033ec7301123deeb7e56d
 
 
 
-Definition at line 260 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00260}{260}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidProblem_ad62b36f8b36faae1324fe29fcd8e0875}\label{classoomph_1_1BiharmonicFluidProblem_ad62b36f8b36faae1324fe29fcd8e0875}} 
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -146,18 +145,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a0c8d70891f7369bb4bf84
 
 
 
-Definition at line 244 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00244}{244}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-References oomph\+::oomph\+\_\+info, and oomph\+::\+Problem\+::self\+\_\+test().
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{problem_8cc_source_l13271}{oomph\+::\+Problem\+::self\+\_\+test()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidProblem_a095e8526d834c05c492929bd5017dfa5}\label{classoomph_1_1BiharmonicFluidProblem_a095e8526d834c05c492929bd5017dfa5}} 
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 
 
@@ -165,18 +164,18 @@ documents the solution, and if an exact solution is provided, then the error bet
 
 
 
-Definition at line 810 of file biharmonic\+\_\+problem.\+cc.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00810}{810}} of file \mbox{\hyperlink{biharmonic__problem_8cc_source}{biharmonic\+\_\+problem.\+cc}}.
 
 
 
-References oomph\+::\+Doc\+Info\+::directory(), i, oomph\+::\+Doc\+Info\+::label(), oomph\+::oomph\+\_\+info, and oomph\+::\+Biharmonic\+Equations$<$ D\+I\+M $>$\+::output\+\_\+fluid\+\_\+velocity().
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00524}{oomph\+::\+Doc\+Info\+::directory()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00572}{oomph\+::\+Doc\+Info\+::label()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{biharmonic__elements_8h_source_l00161}{oomph\+::\+Biharmonic\+Equations$<$ DIM $>$\+::output\+\_\+fluid\+\_\+velocity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidProblem_a1006320d9024555042645ed6347ff8fb}\label{classoomph_1_1BiharmonicFluidProblem_a1006320d9024555042645ed6347ff8fb}} 
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!impose\_fluid\_flow\_on\_edge@{impose\_fluid\_flow\_on\_edge}}
 \index{impose\_fluid\_flow\_on\_edge@{impose\_fluid\_flow\_on\_edge}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{impose\_fluid\_flow\_on\_edge()}{impose\_fluid\_flow\_on\_edge()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::impose\+\_\+fluid\+\_\+flow\+\_\+on\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{Fluid\+B\+C\+Fct\+Pt}}}]{u\+\_\+imposed\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::impose\+\_\+fluid\+\_\+flow\+\_\+on\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem_a93661d3b0c52bd82fd58496f9f853079}{Fluid\+BCFct\+Pt}}}]{u\+\_\+imposed\+\_\+fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -184,18 +183,18 @@ Impose a prescribed fluid flow comprising the velocity normal to the boundary (u
 
 
 
-Definition at line 658 of file biharmonic\+\_\+problem.\+cc.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00658}{658}} of file \mbox{\hyperlink{biharmonic__problem_8cc_source}{biharmonic\+\_\+problem.\+cc}}.
 
 
 
-References e, n, s, and u().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidProblem_a1a00fff232d2438c83b66437d8e86aab}\label{classoomph_1_1BiharmonicFluidProblem_a1a00fff232d2438c83b66437d8e86aab}} 
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!impose\_solid\_boundary\_on\_edge@{impose\_solid\_boundary\_on\_edge}}
 \index{impose\_solid\_boundary\_on\_edge@{impose\_solid\_boundary\_on\_edge}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{impose\_solid\_boundary\_on\_edge()}{impose\_solid\_boundary\_on\_edge()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::impose\+\_\+solid\+\_\+boundary\+\_\+on\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const double \&}]{psi = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::impose\+\_\+solid\+\_\+boundary\+\_\+on\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{const double \&}]{psi = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -203,30 +202,26 @@ Imposes a solid boundary on boundary b -\/ no flow into boundary or along bounda
 
 Imposes a solid boundary -\/ no flow into boundary or along boundary v\+\_\+n = 0 and v\+\_\+t = 0. User must presribe the streamfunction psi to ensure dpsi/dt = 0 is imposed at all points on the boundary and not just at the nodes. 
 
-Definition at line 457 of file biharmonic\+\_\+problem.\+cc.
-
-
-
-References n.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00457}{457}} of file \mbox{\hyperlink{biharmonic__problem_8cc_source}{biharmonic\+\_\+problem.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicFluidProblem_a1cc57555bbd0ceef1d93010c133ac597}\label{classoomph_1_1BiharmonicFluidProblem_a1cc57555bbd0ceef1d93010c133ac597}} 
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!impose\_traction\_free\_edge@{impose\_traction\_free\_edge}}
 \index{impose\_traction\_free\_edge@{impose\_traction\_free\_edge}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{impose\_traction\_free\_edge()}{impose\_traction\_free\_edge()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::impose\+\_\+traction\+\_\+free\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::impose\+\_\+traction\+\_\+free\+\_\+edge (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Impose a traction free edge -\/ i.\+e. v\+\_\+t = 0 or dpsi/dn = 0. In general dpsi/dn = 0 can only be imposed using equation elements to set the D\+O\+Fs dpsi/ds\+\_\+n, however in the special case of dt/ds\+\_\+n = 0, then dpsi/ds\+\_\+n = 0 and can be imposed using pinning -\/ this is handled automatically in this function. For a more detailed description of the equations see the description of the class \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement}{Biharmonic\+Fluid\+Boundary\+Element}}. 
+Impose a traction free edge -\/ i.\+e. v\+\_\+t = 0 or dpsi/dn = 0. In general dpsi/dn = 0 can only be imposed using equation elements to set the DOFs dpsi/ds\+\_\+n, however in the special case of dt/ds\+\_\+n = 0, then dpsi/ds\+\_\+n = 0 and can be imposed using pinning -\/ this is handled automatically in this function. For a more detailed description of the equations see the description of the class \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement}{Biharmonic\+Fluid\+Boundary\+Element}}. 
 
-Impose a traction free edge -\/ i.\+e. v\+\_\+t = 0 or dpsi/dn = 0. In general dpsi/dn = 0 can only be imposed using equation elements to set the D\+O\+Fs dpsi/ds\+\_\+n, however in the special case of dt/ds\+\_\+n = 0, then dpsi/ds\+\_\+n = 0 and can be imposed using pinning -\/ this is handled automatically in this function. For a more detailed description of the equations see the description of the class \+: \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement}{Biharmonic\+Fluid\+Boundary\+Element}}. 
+Impose a traction free edge -\/ i.\+e. v\+\_\+t = 0 or dpsi/dn = 0. In general dpsi/dn = 0 can only be imposed using equation elements to set the DOFs dpsi/ds\+\_\+n, however in the special case of dt/ds\+\_\+n = 0, then dpsi/ds\+\_\+n = 0 and can be imposed using pinning -\/ this is handled automatically in this function. For a more detailed description of the equations see the description of the class \+: \mbox{\hyperlink{classoomph_1_1BiharmonicFluidBoundaryElement}{Biharmonic\+Fluid\+Boundary\+Element}}. 
 
-Definition at line 489 of file biharmonic\+\_\+problem.\+cc.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00489}{489}} of file \mbox{\hyperlink{biharmonic__problem_8cc_source}{biharmonic\+\_\+problem.\+cc}}.
 
 
 
-References oomph\+::\+Hijacked$<$ E\+L\+E\+M\+E\+N\+T $>$\+::hijack\+\_\+nodal\+\_\+value(), and n.
+References \mbox{\hyperlink{hijacked__elements_8h_source_l00214}{oomph\+::\+Hijacked$<$ ELEMENT $>$\+::hijack\+\_\+nodal\+\_\+value()}}.
 
 
 
@@ -235,16 +230,16 @@ References oomph\+::\+Hijacked$<$ E\+L\+E\+M\+E\+N\+T $>$\+::hijack\+\_\+nodal\+
 \index{oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}!Npoint\_element@{Npoint\_element}}
 \index{Npoint\_element@{Npoint\_element}!oomph::BiharmonicFluidProblem$<$ DIM $>$@{oomph::BiharmonicFluidProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Npoint\_element}{Npoint\_element}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ D\+IM $>$\+::Npoint\+\_\+element\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BiharmonicFluidProblem}{oomph\+::\+Biharmonic\+Fluid\+Problem}}$<$ DIM $>$\+::Npoint\+\_\+element\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 297 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00297}{297}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-Referenced by oomph\+::\+Biharmonic\+Fluid\+Problem$<$ D\+I\+M $>$\+::\+Biharmonic\+Fluid\+Problem().
+Referenced by \mbox{\hyperlink{biharmonic__problem_8h_source_l00236}{oomph\+::\+Biharmonic\+Fluid\+Problem$<$ DIM $>$\+::\+Biharmonic\+Fluid\+Problem()}}.
 
 
 

@@ -46,13 +46,13 @@ The problem class is very similar to that used in the non-\/refineable version o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Periodic loading problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineablePeriodicLoadProblem}{RefineablePeriodicLoadProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass number of elements in x and y directions }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass number of elements in x and y directions }}
 \DoxyCodeLine{\textcolor{comment}{ /// and lengths.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRefineablePeriodicLoadProblem_ae950fdcf80e684eddb29358e1f9a3412}{RefineablePeriodicLoadProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
 \DoxyCodeLine{                               \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
@@ -125,6 +125,7 @@ The problem class is very similar to that used in the non-\/refineable version o
 A key feature of this problem is the presence of the periodic boundary conditions (4) which require that the displacement field at the left boundary is the same as that on the right one. As discussed in \href{../../../navier_stokes/rayleigh_channel/html/index.html\#periodic}{\texttt{ another tutorial,}} such constraints can be imposed by the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{BoundaryNode::make\_periodic(...).}
+
 \end{DoxyCode}
  Once this function is called for a {\ttfamily Boundary\+Node}, the {\ttfamily Boundary\+Node} shares its {\ttfamily Data} with the {\ttfamily Node} specified as the argument to that function. This \char`\"{}wraps the solution around the domain\char`\"{}.
 
@@ -146,8 +147,8 @@ This is illustrated in the following code segment which shows the revised versio
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in the coordinate}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// directions and the domain sizes.}}
+\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in the coordinate}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// directions and the domain sizes.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineablePeriodicLoadProblem_ae950fdcf80e684eddb29358e1f9a3412}{RefineablePeriodicLoadProblem<ELEMENT>::RefineablePeriodicLoadProblem}}}
@@ -161,9 +162,7 @@ This is illustrated in the following code segment which shows the revised versio
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=\textcolor{keyword}{new} Z2ErrorEstimator;}
 
 \end{DoxyCodeInclude}
-
-
-Next we declare all nodes on boundary 1 (the right boundary) to be periodic counterparts of the corresponding nodes on boundary 3 (the left boundary). (Here we exploit that within this particular mesh the boundary nodes on the left and right boundaries are enumerated consistently from top to bottom; this is not guaranteed to be the case -- for a general mesh you will have to establish which node corresponds to which; see \mbox{\hyperlink{index_comments}{Comments and Exercises}} .)
+ Next we declare all nodes on boundary 1 (the right boundary) to be periodic counterparts of the corresponding nodes on boundary 3 (the left boundary). (Here we exploit that within this particular mesh the boundary nodes on the left and right boundaries are enumerated consistently from top to bottom; this is not guaranteed to be the case -- for a general mesh you will have to establish which node corresponds to which; see \mbox{\hyperlink{index_comments}{Comments and Exercises}} .)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -179,15 +178,13 @@ Next we declare all nodes on boundary 1 (the right boundary) to be periodic coun
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We obtain the tree roots associated with the elements on the left and right boundaries, again exploiting the specific enumeration of the elements (from bottom left to top right, as in the sketch shown above).
+ We obtain the tree roots associated with the elements on the left and right boundaries, again exploiting the specific enumeration of the elements (from bottom left to top right, as in the sketch shown above).
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Now establish the new neighbours (created by "wrapping around"}}
+\DoxyCodeLine{ \textcolor{comment}{// Now establish the new neighbours (created by "{}wrapping around"{}}}
 \DoxyCodeLine{ \textcolor{comment}{// the domain) in the TreeForst representation of the mesh}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Get pointers to tree roots associated with elements on the }}
@@ -205,9 +202,7 @@ We obtain the tree roots associated with the elements on the left and right boun
 \DoxyCodeLine{   \}}
 
 \end{DoxyCodeInclude}
-
-
-Using this information it is easy to establish the (periodic) connections between the trees\+:
+ Using this information it is easy to establish the (periodic) connections between the trees\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -230,9 +225,7 @@ Using this information it is easy to establish the (periodic) connections betwee
 \DoxyCodeLine{   \} \textcolor{comment}{// done}}
 
 \end{DoxyCodeInclude}
-
-
-The rest of the problem constructor is identical to that in its non-\/refineable counterpart and is therefore omitted here.
+ The rest of the problem constructor is identical to that in its non-\/refineable counterpart and is therefore omitted here.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -241,11 +234,13 @@ The rest of the problem constructor is identical to that in its non-\/refineable
 When setting up periodic boundary conditions, it is obviously important to correctly identify the corresponding nodes and elements on the mesh boundaries. The enumeration of these nodes and elements is typically performed in the mesh constructor. If you are unsure what conventions have been used (and are too lazy to read the source code), recall that you can use the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::boundary\_node\_pt(b,j)}
+
 \end{DoxyCode}
  to obtain a pointer to the {\ttfamily j} -\/th node on the {\ttfamily Mesh\textquotesingle{}s} {\ttfamily b} -\/th boundary and ~\newline
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::boundary\_element\_pt(b,j)}
+
 \end{DoxyCode}
  to obtain a pointer to the {\ttfamily j} -\/th element on the {\ttfamily Mesh\textquotesingle{}s} {\ttfamily b} -\/th boundary.\hypertarget{index_exercises}{}\doxysubsection{Exercises}\label{index_exercises}
 
@@ -265,7 +260,7 @@ When setting up periodic boundary conditions, it is obviously important to corre
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>refine\_selected\_elements(refine\_pattern);}
 
 \end{DoxyCodeInclude}
- {\bfseries{Note\+:}} To facilitate the visualisation of the discontinuity it is helpful to perform this test with the bilinear {\ttfamily Refineable\+Q\+Linear\+Elasticity\+Element$<$2,2$>$}, with a shallower domain (e.\+g. $ L_y = 0.5 $ ), and without any further spatial refinement (set {\ttfamily max\+\_\+adapt=0} in {\ttfamily \mbox{\hyperlink{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main()}}} ).
+ {\bfseries{Note\+:}} To facilitate the visualisation of the discontinuity it is helpful to perform this test with the bilinear {\ttfamily Refineable\+QLinear\+Elasticity\+Element$<$2,2$>$}, with a shallower domain (e.\+g. $ L_y = 0.5 $ ), and without any further spatial refinement (set {\ttfamily max\+\_\+adapt=0} in {\ttfamily \mbox{\hyperlink{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main()}}} ).
 \end{DoxyEnumerate}
 
 \DoxyHorRuler{0}
@@ -279,5 +274,5 @@ When setting up periodic boundary conditions, it is obviously important to corre
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

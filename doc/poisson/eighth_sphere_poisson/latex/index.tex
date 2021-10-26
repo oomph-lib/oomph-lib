@@ -27,33 +27,33 @@ Following our usual practice, we use a namespace, {\ttfamily \mbox{\hyperlink{na
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_of\_namespace=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for Poisson equation with sharp step }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceTanhSolnForPoisson}{TanhSolnForPoisson}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Parameter for steepness of step}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}=1;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Orientation (non-\/normalised x-\/component of unit vector in direction}}
+\DoxyCodeLine{\textcolor{comment}{ /// Orientation (non-\/normalised x-\/component of unit vector in direction}}
 \DoxyCodeLine{\textcolor{comment}{ /// of step plane)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ac3d25f0791c1363f487600e02757bc97}{N\_x}}=-\/1.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Orientation (non-\/normalised y-\/component of unit vector in direction}}
+\DoxyCodeLine{\textcolor{comment}{ /// Orientation (non-\/normalised y-\/component of unit vector in direction}}
 \DoxyCodeLine{\textcolor{comment}{ /// of step plane)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a482d668ef91071985d1f4ce7cf29a926}{N\_y}}=-\/1.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Orientation (non-\/normalised z-\/component of unit vector in direction}}
+\DoxyCodeLine{\textcolor{comment}{ /// Orientation (non-\/normalised z-\/component of unit vector in direction}}
 \DoxyCodeLine{\textcolor{comment}{ /// of step plane)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae6b5b5d21747a45776004756dc97dc5c}{N\_z}}=1.0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Orientation (x-\/coordinate of step plane) }}
+\DoxyCodeLine{\textcolor{comment}{ /// Orientation (x-\/coordinate of step plane) }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_af55e0479c15ab58929eb96ee9d6cf07a}{X\_0}}=0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Orientation (y-\/coordinate of step plane) }}
+\DoxyCodeLine{\textcolor{comment}{ /// Orientation (y-\/coordinate of step plane) }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_addc6dc6578b16a1d9aa774c25776b921}{Y\_0}}=0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Orientation (z-\/coordinate of step plane) }}
+\DoxyCodeLine{\textcolor{comment}{ /// Orientation (z-\/coordinate of step plane) }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_abf4856ed1855c34c2b2ea57fd6783644}{Z\_0}}=0.0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -108,17 +108,17 @@ Following our usual practice, we use a namespace, {\ttfamily \mbox{\hyperlink{na
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
-The driver code solves the 3D Poisson problem with full spatial adaptivity -- a fairly time-\/consuming process. To minimise the run-\/times when the code is executed during {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/tests, we use command line arguments to optionally limit the number of adaptive refinements. If the code is run with \mbox{\hyperlink{eighth__sphere__poisson_8txt_a15a33fff8fc4425dd54fd49a131d2835}{a(ny)}} command line arguments, only a single adaptive refinement is performed; otherwise up to four levels of refinement are permitted. {\ttfamily oomph-\/lib} provides storage for the command line arguments in the namespace {\ttfamily Command\+Line\+Args} to make them accessible to other parts of the code.
+The driver code solves the 3D Poisson problem with full spatial adaptivity -- a fairly time-\/consuming process. To minimise the run-\/times when the code is executed during {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/tests, we use command line arguments to optionally limit the number of adaptive refinements. If the code is run with a(ny) command line arguments, only a single adaptive refinement is performed; otherwise up to four levels of refinement are permitted. {\ttfamily oomph-\/lib} provides storage for the command line arguments in the namespace {\ttfamily Command\+Line\+Args} to make them accessible to other parts of the code.
 
 Otherwise the driver code is very similar to that used in the \href{../../../poisson/fish_poisson/html/index.html}{\texttt{ corresponding 2D Poisson problems}}\+: We construct the problem, passing the pointer to the source function. Next, we create a {\ttfamily Doc\+Info} object to specify the output directory, and execute the global self-\/test to assert that the problem has been set up correctly. Next we solve the problem on the coarse initial mesh (comprising four 27-\/node brick elements) and then adapt the problem based on the elemental error estimates, until the maximum number of adaptations has been reached or until the adaptation ceases to changes the mesh.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start\_of\_main=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for 3D Poisson problem in eighth of a sphere. Solution }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// has a sharp step. If there are}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// any command line arguments, we regard this as a validation run}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// and perform only a single adaptation.}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for 3D Poisson problem in eighth of a sphere. Solution }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// has a sharp step. If there are}}
+\DoxyCodeLine{\textcolor{comment}{/// any command line arguments, we regard this as a validation run}}
+\DoxyCodeLine{\textcolor{comment}{/// and perform only a single adaptation.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{eighth__sphere__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) }
 \DoxyCodeLine{\{ }
@@ -129,25 +129,25 @@ Otherwise the driver code is very similar to that used in the \href{../../../poi
 \DoxyCodeLine{ \textcolor{comment}{// Set up the problem with 27-\/node brick elements, pass pointer to }}
 \DoxyCodeLine{ \textcolor{comment}{// source function}}
 \DoxyCodeLine{ \mbox{\hyperlink{classEighthSpherePoissonProblem}{EighthSpherePoissonProblem<RefineableQPoissonElement<3,3>}} >}
-\DoxyCodeLine{  \mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}(\&\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{TanhSolnForPoisson::get\_source}});}
+\DoxyCodeLine{  problem(\&\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{TanhSolnForPoisson::get\_source}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup labels for output}}
 \DoxyCodeLine{  DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Check if we're ready to go}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Self test: "} << \mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.self\_test() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Self test: "{}} << problem.self\_test() << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{ \mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{ problem.newton\_solve();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{ \mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{ problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{ doc\_info.number()++;}
@@ -159,7 +159,7 @@ Otherwise the driver code is very similar to that used in the \href{../../../poi
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Validation run: Just one adaptation}}
 \DoxyCodeLine{   max\_solve=1;}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Only doing one adaptation for validation"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Only doing one adaptation for validation"{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
@@ -170,28 +170,28 @@ Otherwise the driver code is very similar to that used in the \href{../../../poi
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} isolve=0;isolve<max\_solve;isolve++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Adapt problem/mesh}}
-\DoxyCodeLine{   \mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.adapt(); }
+\DoxyCodeLine{   problem.adapt(); }
 \DoxyCodeLine{         }
 \DoxyCodeLine{   \textcolor{comment}{// Re-\/solve the problem if the adaptation has changed anything}}
-\DoxyCodeLine{   \textcolor{keywordflow}{if} ((\mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.mesh\_pt()-\/>nrefined()  !=0)||}
-\DoxyCodeLine{       (\mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.mesh\_pt()-\/>nunrefined()!=0))}
+\DoxyCodeLine{   \textcolor{keywordflow}{if} ((problem.mesh\_pt()-\/>nrefined()  !=0)||}
+\DoxyCodeLine{       (problem.mesh\_pt()-\/>nunrefined()!=0))}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{     problem.newton\_solve();}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Mesh wasn't adapted -\/-\/> we'll stop here"} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Mesh wasn't adapted -\/-\/> we'll stop here"{}} << std::endl;}
 \DoxyCodeLine{     \textcolor{keywordflow}{break};}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{eighth__sphere__poisson_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{   problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{   doc\_info.number()++;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// pause("done");}}
+\DoxyCodeLine{\textcolor{comment}{// pause("{}done"{});}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
@@ -207,7 +207,7 @@ The problem class has the usual structure -- the only difference to the correspo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_class\_definition====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Poisson problem in refineable eighth of a sphere mesh.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classEighthSpherePoissonProblem}{EighthSpherePoissonProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -221,9 +221,9 @@ The problem class has the usual structure -- the only difference to the correspo
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor: Empty}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classEighthSpherePoissonProblem_a043c7aa08c939fdc019870ad2c2270cc}{\string~EighthSpherePoissonProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Overload generic access function by one that returns}}
+\DoxyCodeLine{\textcolor{comment}{ /// Overload generic access function by one that returns}}
 \DoxyCodeLine{\textcolor{comment}{ /// a pointer to the specific  mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableEighthSphereMesh<ELEMENT>* \mbox{\hyperlink{classEighthSpherePoissonProblem_aa33edbb75ba8fe8d4daac3c940a7ff6a}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RefineableEighthSphereMesh<ELEMENT>* \mbox{\hyperlink{classEighthSpherePoissonProblem_a6264a1973b4779b4ffc8fcc1b584b775}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableEighthSphereMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
@@ -231,19 +231,19 @@ The problem class has the usual structure -- the only difference to the correspo
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classEighthSpherePoissonProblem_a480189fe5d2f42fe3ff6062d5f151ea3}{actions\_after\_newton\_solve}}()  \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: }}
 \DoxyCodeLine{\textcolor{comment}{ /// Set Dirchlet boundary conditions from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classEighthSpherePoissonProblem_af82dd7abdf631950a68c997af314be5d}{actions\_before\_newton\_solve}}()}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Loop over the boundaries}}
-\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} num\_bound = \mbox{\hyperlink{classEighthSpherePoissonProblem_aa33edbb75ba8fe8d4daac3c940a7ff6a}{mesh\_pt}}()-\/>nboundary();}
+\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} num\_bound = \mbox{\hyperlink{classEighthSpherePoissonProblem_a6264a1973b4779b4ffc8fcc1b584b775}{mesh\_pt}}()-\/>nboundary();}
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} ibound=0;ibound<num\_bound;ibound++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Loop over the nodes on boundary}}
-\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod=\mbox{\hyperlink{classEighthSpherePoissonProblem_aa33edbb75ba8fe8d4daac3c940a7ff6a}{mesh\_pt}}()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod=\mbox{\hyperlink{classEighthSpherePoissonProblem_a6264a1973b4779b4ffc8fcc1b584b775}{mesh\_pt}}()-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     Node* nod\_pt=\mbox{\hyperlink{classEighthSpherePoissonProblem_aa33edbb75ba8fe8d4daac3c940a7ff6a}{mesh\_pt}}()-\/>boundary\_node\_pt(ibound,inod);}
+\DoxyCodeLine{     Node* nod\_pt=\mbox{\hyperlink{classEighthSpherePoissonProblem_a6264a1973b4779b4ffc8fcc1b584b775}{mesh\_pt}}()-\/>boundary\_node\_pt(ibound,inod);}
 \DoxyCodeLine{     \textcolor{keywordtype}{double} u;}
 \DoxyCodeLine{     Vector<double> x(3);}
 \DoxyCodeLine{     x[0]=nod\_pt-\/>x(0);}
@@ -266,9 +266,7 @@ The problem class has the usual structure -- the only difference to the correspo
 \DoxyCodeLine{\}; \textcolor{comment}{// end of class definition}}
 
 \end{DoxyCodeInclude}
-
-
-\mbox{[}See the discussion of the \href{../../../poisson/one_d_poisson/html/index.html}{\texttt{ 1D Poisson problem}} for a more detailed discussion of the function type Poisson\+Equations$<$3$>$\+::\+Poisson\+Source\+Fct\+Pt.\mbox{]}
+ \mbox{[}See the discussion of the \href{../../../poisson/one_d_poisson/html/index.html}{\texttt{ 1D Poisson problem}} for a more detailed discussion of the function type Poisson\+Equations$<$3$>$\+::\+Poisson\+Source\+Fct\+Pt.\mbox{]}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -279,7 +277,7 @@ In the {\ttfamily Problem} constructor, we set the \char`\"{}steepness parameter
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====================start\_of\_constructor================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Poisson problem on eighth of a sphere mesh}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classEighthSpherePoissonProblem_ae51db2c3e80f0d5628e4d81eb1c11db4}{EighthSpherePoissonProblem<ELEMENT>::EighthSpherePoissonProblem}}(}
 \DoxyCodeLine{   PoissonEquations<3>::PoissonSourceFctPt source\_fct\_pt) : }
@@ -299,9 +297,7 @@ In the {\ttfamily Problem} constructor, we set the \char`\"{}steepness parameter
 \DoxyCodeLine{ mesh\_pt()-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-We adjust the targets for the mesh adaptation so that the single mesh adaptation performed during a validation run produces a non-\/uniform refinement pattern. (The error targets for this case were determined by trial and error.) The tighter error tolerances specified otherwise are appropriate to properly resolve the solution, as shown in the animated gif files at the beginning of this document. 
+ We adjust the targets for the mesh adaptation so that the single mesh adaptation performed during a validation run produces a non-\/uniform refinement pattern. (The error targets for this case were determined by trial and error.) The tighter error tolerances specified otherwise are appropriate to properly resolve the solution, as shown in the animated gif files at the beginning of this document. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Adjust error targets for adaptive refinement}}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::Argc>1)}
@@ -318,15 +314,13 @@ We adjust the targets for the mesh adaptation so that the single mesh adaptation
 \DoxyCodeLine{  \} \textcolor{comment}{// end adjustment}}
 
 \end{DoxyCodeInclude}
-
-
-Next, we assign the boundary conditions. In the present problem all boundaries are Dirichlet boundaries, therefore we loop over all nodes on all boundaries and pin their values. If only a subset of the mesh boundaries were of Dirichlet type, only the nodes on those boundaries would have to be pinned. \char`\"{}\+Usually\char`\"{} the numbering of the mesh boundaries is (or at least should be!) documented in the mesh constructor but it can also be obtained from the function {\ttfamily Mesh\+::output\+\_\+boundaries(...)} whose use is illustrated here.
+ Next, we assign the boundary conditions. In the present problem all boundaries are Dirichlet boundaries, therefore we loop over all nodes on all boundaries and pin their values. If only a subset of the mesh boundaries were of Dirichlet type, only the nodes on those boundaries would have to be pinned. \char`\"{}\+Usually\char`\"{} the numbering of the mesh boundaries is (or at least should be!) documented in the mesh constructor but it can also be obtained from the function {\ttfamily Mesh\+::output\+\_\+boundaries(...)} whose use is illustrated here.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{//Doc the mesh boundaries}}
 \DoxyCodeLine{ ofstream some\_file;}
-\DoxyCodeLine{ some\_file.open(\textcolor{stringliteral}{"boundaries.dat"});}
+\DoxyCodeLine{ some\_file.open(\textcolor{stringliteral}{"{}boundaries.dat"{}});}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_boundaries(some\_file);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
@@ -365,7 +359,7 @@ Finally we loop over all elements to assign the source function pointer, and the
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering }}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
@@ -382,7 +376,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========================start\_of\_doc====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classEighthSpherePoissonProblem_ac8e9911536d04bab829cfe92bb40e302}{EighthSpherePoissonProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}
@@ -396,7 +390,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -405,7 +399,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_fct(some\_file,npts,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}}); }
@@ -415,14 +409,14 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \DoxyCodeLine{ \textcolor{comment}{// Doc error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}},}
 \DoxyCodeLine{                          error,norm); }
 \DoxyCodeLine{ some\_file.close();}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"error: "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"norm : "} << sqrt(norm) << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}error: "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}norm : "{}} << sqrt(norm) << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc}}
 
@@ -446,5 +440,5 @@ demo_drivers/poisson/eighth_sphere_poisson/eighth_sphere_poisson.cc
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

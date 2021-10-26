@@ -1,0 +1,606 @@
+\hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source}{}\doxysection{two\+\_\+layer\+\_\+interface\+\_\+axisym.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{two__layer__interface__axisym_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: Relaxation oscillations of an interface between two viscous fluids in an axisymmetric domain}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In an <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html"{}>earlier example</A>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{we considered a free surface Navier-\/-\/Stokes problem in which the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{interface between two viscous fluids was deformed to a prescribed}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{shape and then allowed to relax. This example considers a similar}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{problem in which the two fluids occupy a cylindrical domain which is}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{orientated such that its axis of symmetry is normal to the equilibrium}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{position of the interface. The problem is assumed to be axisymmetric}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{and so the computational domain is rectangular as before, with the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{difference here that the governing equations are the axisymmetric}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{Navier-\/-\/Stokes equations as opposed to the two-\/dimensional Cartesian}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{Navier-\/-\/Stokes equations employed by the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html"{}>other example</A>. }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{These equations are discussed in detail in}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{<A HREF="{}../../../axisym\_navier\_stokes/spin\_up/html/index.html"{}>another tutorial</A>.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{Otherwise, the same overall strategy is employed. Since the implementation}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{of the Navier-\/-\/Stokes elements in \(\backslash\)c oomph-\/lib is based on the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{Arbitrary Lagrangian Eulerian form of the equations, we can}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{discretise the computational domain using a boundary-\/fitted mesh which}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{deforms in }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{response to the change in position of the interface. The positions of the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{nodes in the `bulk' of the mesh are determined by treating the interior}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{of the mesh as a fictitious elastic solid and solving a solid mechanics}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{problem, a technique which we refer to as a `pseudo-\/solid node update}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{strategy'. The deformation of the free surface boundary itself is imposed by}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{solving the kinematic boundary condition for a field of Lagrange}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{multipliers at the interface, and this condition is discretised by}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{attaching \(\backslash\)c FaceElements to those `bulk' elements in the `lower' of}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{the two fluids which have boundaries adjacent to the interface.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{\(\backslash\)section interface\_def Choosing an appropriate interface deformation}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{The <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html"{}>two-\/dimensional problem</A>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{was started impulsively from a set of initial conditions such that the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{fluid was at rest and the interface was prescribed to be a cosine}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{curve. Since this was an eigenmode of the system, the shape of the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{interface remained `in mode' throughout the simulation. Choosing a}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{single eigenmode as an initial condition }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{allowed the results of the simulation to be compared with an}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{analytical solution, and as we wish to do the same}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{thing here we choose a zeroth-\/order Bessel function of the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{first kind, \(\backslash\)f\$ J\_0(kr) \(\backslash\)f\$, where \(\backslash\)f\$ k \(\backslash\)f\$ is a wavenumber and \(\backslash\)f\$ r}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)f\$ is the radial spatial coordinate. This function has the property}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{that its derivative with respect to \(\backslash\)f\$ r \(\backslash\)f\$ evaluated at \(\backslash\)f\$ r=0 \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{is zero, which must be the case if the interface is to be smooth at}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{the symmetry boundary (the central axis of the cylinder).}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{A further consideration is that we want the equilibrium state of the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{system to be such that the interface is a flat line at \(\backslash\)f\$ z=0 \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{where \(\backslash\)f\$ z \(\backslash\)f\$ is the axial coordinate. This state can only be}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{reached if we choose an initial deformation \(\backslash\)f\$ z=h(r) \(\backslash\)f\$ which is volume}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{conserving, and we therefore require}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{\(\backslash\)int\_\{r=0\}\string^\{r=a\} h(r) r dr = 0}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{to be satisfied, where \(\backslash\)f\$ a \(\backslash\)f\$ is the radius of the cylindrical}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{container (or the width of the computational domain). Since in our}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{case \(\backslash\)f\$ h(r) = J\_0(kr) \(\backslash\)f\$, and we will choose a computational domain}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{of width \(\backslash\)f\$ a=1 \(\backslash\)f\$, our initial condition must therefore satisfy}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{\(\backslash\)int\_0\string^1 r \(\backslash\), J\_0(kr) \(\backslash\), dr = 0.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{Using the properties of Bessel functions we find that this condition}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{is met if \(\backslash\)f\$ J\_1(k) = 0 \(\backslash\)f\$, and hence the values of \(\backslash\)f\$ k \(\backslash\)f\$ are}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{constrained to be zeroes of \(\backslash\)f\$ J\_1(k) \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{Furthermore, the properties of Bessel functions are such that the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{derivative of \(\backslash\)f\$ J\_0(kr) \(\backslash\)f\$ with respect to \(\backslash\)f\$ r \(\backslash\)f\$, evaluated at}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{any point along the \(\backslash\)f\$ r \(\backslash\)f\$-\/axis which corresponds to a zero of \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{J\_1(kr) \(\backslash\)f\$, is itself zero. The velocity boundary condition in the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{axial direction is therefore the traction-\/free condition \(\backslash\)f\$ \(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{u\_z / \(\backslash\)partial r = 0 \(\backslash\)f\$. This could be physically realised by having}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{a `slippery' outer wall where the contact line can move but the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{contact angle is fixed at \(\backslash\)f\$ 90\string^o \(\backslash\)f\$, and is in fact an identical}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{condition to the symmetry boundary condition prescribed at the axis of}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{symmetry (\(\backslash\)f\$ r=0 \(\backslash\)f\$).}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)section example\_problem The example problem}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{We will illustrate the solution of the unsteady axisymmetric}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{Navier-\/-\/Stokes equations using the example of a distorted interface}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{between two viscous fluids which is allowed to relax. The domain is }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{symmetric about the line \(\backslash\)f\$ r=0 \(\backslash\)f\$, which corresponds to the axis of}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{the cylindrical container.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{<TR> }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{<B>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{The unsteady axisymmetric Navier-\/-\/Stokes equations either side of a distorted interface.</B>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{ St \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{ + u\_r \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{ -\/ \(\backslash\)frac\{u\_\(\backslash\)theta\string^2\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{ + u\_z \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)right] = -\/\(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{+ \(\backslash\)frac\{Re\}\{Fr\} G\_r}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{+ \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_r\}\{\(\backslash\)partial r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{  + \(\backslash\)frac\{1\}\{r\}\(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{  -\/ \(\backslash\)frac\{u\_r\}\{r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{  + \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_r\}\{\(\backslash\)partial z\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{  St \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{  + u\_r \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{  + \(\backslash\)frac\{u\_r u\_\(\backslash\)theta\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{  + u\_z \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{= \(\backslash\)frac\{Re\}\{Fr\} G\_\(\backslash\)theta}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{+ \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_\(\backslash\)theta\}\{\(\backslash\)partial r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{  + \(\backslash\)frac\{1\}\{r\}\(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{  -\/ \(\backslash\)frac\{u\_\(\backslash\)theta\}\{r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{  + \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_\(\backslash\)theta\}\{\(\backslash\)partial z\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{  St \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{  + u\_r \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{  + u\_z \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)right] = -\/\(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{+ \(\backslash\)frac\{Re\}\{Fr\} G\_z}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{+ \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_z\}\{\(\backslash\)partial r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{  + \(\backslash\)frac\{1\}\{r\}\(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{  + \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_z\}\{\(\backslash\)partial z\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{+ \(\backslash\)frac\{u\_r\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\} = 0}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{in the `lower' fluid, and}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{R\_\(\backslash\)rho Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{ St \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{ + u\_r \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{ -\/ \(\backslash\)frac\{u\_\(\backslash\)theta\string^2\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{ + u\_z \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{\(\backslash\)right] = -\/\(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{+ R\_\(\backslash\)rho \(\backslash\)frac\{Re\}\{Fr\} G\_r}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{+ R\_\(\backslash\)mu \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_r\}\{\(\backslash\)partial r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{  + \(\backslash\)frac\{1\}\{r\}\(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{  -\/ \(\backslash\)frac\{u\_r\}\{r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{  + \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_r\}\{\(\backslash\)partial z\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{R\_\(\backslash\)rho Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{  St \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{  + u\_r \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{  + \(\backslash\)frac\{u\_r u\_\(\backslash\)theta\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{  + u\_z \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{= R\_\(\backslash\)rho \(\backslash\)frac\{Re\}\{Fr\} G\_\(\backslash\)theta}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{+ R\_\(\backslash\)mu \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_\(\backslash\)theta\}\{\(\backslash\)partial r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{  + \(\backslash\)frac\{1\}\{r\}\(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{  -\/ \(\backslash\)frac\{u\_\(\backslash\)theta\}\{r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{  + \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_\(\backslash\)theta\}\{\(\backslash\)partial z\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{R\_\(\backslash\)rho Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{  St \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{  + u\_r \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{  + u\_z \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{\(\backslash\)right] = -\/\(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{+ R\_\(\backslash\)rho \(\backslash\)frac\{Re\}\{Fr\} G\_z}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{+ R\_\(\backslash\)mu \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_z\}\{\(\backslash\)partial r\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{  + \(\backslash\)frac\{1\}\{r\}\(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{  + \(\backslash\)frac\{\(\backslash\)partial\string^2 u\_z\}\{\(\backslash\)partial z\string^2\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{+ \(\backslash\)frac\{u\_r\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\} = 0}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{in the `upper' fluid. Gravity acts in the negative \(\backslash\)f\$ z \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{direction and so \(\backslash\)f\$ G\_r = G\_\(\backslash\)theta = 0 \(\backslash\)f\$ and \(\backslash\)f\$ G\_z = 1 \(\backslash\)f\$. The}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{governing equations are subject to the no slip boundary conditions}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{u\_r = u\_\(\backslash\)theta = u\_z = 0 \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{on the top (\(\backslash\)f\$ z = 2.0 \(\backslash\)f\$) and bottom (\(\backslash\)f\$ z = 0.0 \(\backslash\)f\$) solid}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{boundaries and the symmetry boundary conditions}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{u\_r = u\_\(\backslash\)theta = 0 \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (4)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{on the left (\(\backslash\)f\$ r = 0.0 \(\backslash\)f\$) and right (\(\backslash\)f\$ r = 1.0 \(\backslash\)f\$)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{boundaries.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{We denote the position vector to the interface between the two fluids}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{by \(\backslash\)f\$ \(\backslash\)mathbf\{R\} \(\backslash\)f\$, which is subject to the kinematic condition}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{\(\backslash\)left(u\_i -\/ St\(\backslash\), \(\backslash\)frac\{\(\backslash\)partial R\_i\}\{\(\backslash\)partial t\}\(\backslash\)right) n\_i = 0,}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (5)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{and the dynamic condition}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{\(\backslash\)tau\_\{ij\}\string^\{[2]\}n\_j = \(\backslash\)tau\_\{ij\}\string^\{[1]\}n\_j+\(\backslash\)frac\{1\}\{Ca\}\(\backslash\)kappa n\_i.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (6)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{<TR> }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{The non-\/dimensional, symmetric stress tensor in the `lower' fluid is}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{defined as}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{\(\backslash\)tau\_\{rr\} = -\/p}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{+ 2\(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\},}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{\(\backslash\)qquad \(\backslash\)tau\_\{\(\backslash\)theta\(\backslash\)theta\} = -\/p}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{+ 2\(\backslash\)frac\{u\_r\}\{r\},}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{\(\backslash\)tau\_\{zz\} = -\/p}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{+ 2\(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\},}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{\(\backslash\)qquad \(\backslash\)tau\_\{rz\} = }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial z\} +}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\},}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (7)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{\(\backslash\)tau\_\{\(\backslash\)theta r\} = r \(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{    r\}\(\backslash\)left(\(\backslash\)frac\{u\_\{\(\backslash\)theta\}\}\{r\}\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{  \(\backslash\)qquad \(\backslash\)tau\_\{\(\backslash\)theta z\} =}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\}\{\(\backslash\)partial z\},}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{and that in the `upper' fluid is defined as}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{\(\backslash\)tau\_\{rr\} = -\/p}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{+ 2R\_\(\backslash\)mu \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\},}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{\(\backslash\)qquad \(\backslash\)tau\_\{\(\backslash\)theta\(\backslash\)theta\} = -\/p}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{+ 2R\_\(\backslash\)mu \(\backslash\)frac\{u\_r\}\{r\},}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{\(\backslash\)tau\_\{zz\} = -\/p}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{+ 2R\_\(\backslash\)mu \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\},}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{\(\backslash\)qquad \(\backslash\)tau\_\{rz\} = R\_\(\backslash\)mu}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{\(\backslash\)left(\(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial z\} +}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\}\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (8)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{\(\backslash\)tau\_\{\(\backslash\)theta r\} = R\_\(\backslash\)mu r \(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{    r\}\(\backslash\)left(\(\backslash\)frac\{u\_\{\(\backslash\)theta\}\}\{r\}\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{  \(\backslash\)qquad \(\backslash\)tau\_\{\(\backslash\)theta z\} =}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{  R\_\(\backslash\)mu \(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\}\{\(\backslash\)partial z\}.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{The initial shape of the interface is defined by}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{\(\backslash\)mathbf\{R\} = r \(\backslash\), \(\backslash\)mathbf\{e\}\_r + \(\backslash\)left[ 1.0 + \(\backslash\)epsilon J\_0(kr) \(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{\(\backslash\), \(\backslash\)mathbf\{e\}\_z,}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (9)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)epsilon \(\backslash\)f\$ is the amplitude of the initial deflection, \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{k \(\backslash\)f\$ is a wavenumber and \(\backslash\)f\$ J\_0(kr) \(\backslash\)f\$ is a zeroth-\/order Bessel}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{function of the first kind.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{The figure below shows a contour plot of the pressure distribution}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{taken from <A HREF="{}../figures/two\_layer\_interface\_axisym.avi"{}>an animation of the flow field</A>, }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{for the parameters \(\backslash\)f\$ Re = Re \(\backslash\), St = Re/Fr = 5.0 \(\backslash\)f\$, \(\backslash\)f\$ R\_\(\backslash\)rho =}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{0.5 \(\backslash\)f\$, \(\backslash\)f\$ R\_\(\backslash\)mu = 0.1 \(\backslash\)f\$ and \(\backslash\)f\$ Ca = 0.01 \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{\(\backslash\)image html two\_layer\_interface\_axisym.gif "{}Pressure contour plot for the axisymmetric relaxing interface problem. "{} }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{\(\backslash\)image latex two\_layer\_interface\_axisym.eps "{}Pressure contour plot for the axisymmetric relaxing interface problem. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{The restoring forces of surface tension}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{and gravitational acceleration act to revert the interface to its}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{undeformed flat state. The interface oscillates up and down, but the }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{motion is damped as the energy in the system is dissipated through}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{viscous forces. Eventually the interface settles down to its}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{equilibrium position, as can be seen in the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{following time-\/trace of the height of the interface at the left-\/hand}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{edge of the domain (\(\backslash\)f\$ r=0 \(\backslash\)f\$).}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{\(\backslash\)image html two\_layer\_interface\_axisym\_trace.gif "{}Time-\/trace of the height of the interface at the symmetry axis (r=0). "{} }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{\(\backslash\)image latex two\_layer\_interface\_axisym\_trace.eps "{}Time-\/trace of the height of the interface at the symmetry axis (r=0). "{} width=0.95\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{\(\backslash\)section validation Validation}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{The free surface boundary conditions for the axisymmetric}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{Navier-\/-\/Stokes equations have been validated against an analytical}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{test case, and we present the results in the figure}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{below. For sufficiently small amplitudes, \(\backslash\)f\$ \(\backslash\)epsilon \(\backslash\)ll 1 \(\backslash\)f\$, we}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{can linearise the governing equations and obtain a dispersion relation}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)lambda(k) \(\backslash\)f\$. In the <A HREF="{}../../../navier\_stokes/single\_layer\_free\_surface/html/index.html\#validation"{}>two-\/dimensional single-\/layer example</A>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{we discussed the derivation of such a dispersion relation, and the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{technique used for this problem is very similar. The major difference}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{is that the proposed separable solution for the linearised equations}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{is of the form}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{\(\backslash\)hat\{h\}(r,t) = H e\string^\{\(\backslash\)lambda t\} J\_0(kr),}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{\(\backslash\)hat\{u\}\_r(r,z,t) = U\_r(z) e\string^\{\(\backslash\)lambda t\} J\_1(kr),}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{\(\backslash\)hat\{u\}\_z(r,z,t) = U\_z(z) e\string^\{\(\backslash\)lambda t\} J\_0(kr),}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{\(\backslash\)hat\{p\}(r,z,t) = P(z) e\string^\{\(\backslash\)lambda t\} J\_0(kr).}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{As in the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#validation"{}>two-\/dimensional two-\/layer example</A>, }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{we will have a linear system containing nine unknowns, rather than the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{five unknowns that arise from a single-\/fluid problem.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{The real and imaginary parts of \(\backslash\)f\$ \(\backslash\)lambda \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{correspond to the growth rate and the frequency of the oscillating}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{interface respectively, and can be compared to numerical results}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{computed for given values of the wavenumber \(\backslash\)f\$ k \(\backslash\)f\$. We choose an}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{initial deflection amplitude of \(\backslash\)f\$ \(\backslash\)epsilon = 0.01 \(\backslash\)f\$ and determine}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{the growth rate and frequency of the oscillation from a time-\/trace of}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{the left-\/hand edge of the interface.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{\(\backslash\)image html two\_layer\_interface\_axisym\_code\_validation.gif "{}Validation of the code (points) by comparison with an analytical dispersion relation (lines). "{} }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{\(\backslash\)image latex two\_layer\_interface\_axisym\_code\_validation.eps "{}Validation of the code (points) by comparison with an analytical dispersion relation (lines). "{} width=0.95\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{\(\backslash\)section namespace Global parameters and functions}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{As in the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#namespace"{}>earlier example</A>, we use a namespace to define the dimensionless parameters}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{\(\backslash\)f\$ Re \(\backslash\)f\$, \(\backslash\)f\$ St \(\backslash\)f\$, \(\backslash\)f\$ Re/Fr \(\backslash\)f\$ and \(\backslash\)f\$ Ca \(\backslash\)f\$. Since we are}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{solving for the unknown bulk nodal positions by treating the interior}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{of}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{the mesh as a fictitious elastic solid, we also need to define the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{Poisson ratio for this `pseudo-\/solid's' generalised Hookean}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{constitutive law, \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$. As before, we define the density and}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{viscosity ratios of the top fluid to the bottom fluid and a unit}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{vector \(\backslash\)f\$ G \(\backslash\)f\$ which points in the direction of gravity. The only}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{difference from <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#namespace"{}>before</A> }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{is that in this case \(\backslash\)f\$ G \(\backslash\)f\$ must have three dimensions since this}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{is an axisymmetric problem.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{\(\backslash\)dontinclude elastic\_two\_layer\_interface\_axisym.cc}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{\(\backslash\)skipline Direction of gravity}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{\(\backslash\)until Vector<double> G}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{The first section of the driver code is identical to that of the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#main"{}>earlier example</A>. We define a command line flag which allows us to run a}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{`validation' version of the code (for \(\backslash\)c oomph-\/lib's self-\/testing }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{routines) and check that the non-\/dimensional quantities provided in}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{the \(\backslash\)c Global\_Physical\_Variables namespace are self-\/consistent.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{Next we specify the duration of the simulation and the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{size of the timestep. If we are running the code as a validation, we}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{set the length of the simulation such that only two timesteps are}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{taken. The direction in which gravity acts is defined to be vertically}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{downwards.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{\(\backslash\)skipline Set direction of gravity}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{\(\backslash\)until G[2]}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{Finally, we build the problem using the `pseudo-\/solid' version of \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{RefineableAxisymmetricQCrouzeixRaviartElements and the \(\backslash\)c BDF<2> timestepper, before calling \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{unsteady\_run(...). This function solves the system at each timestep}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{using the \(\backslash\)c Problem::unsteady\_newton\_solve(...) function before}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{documenting the result.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{\(\backslash\)skipline Set up the elastic test problem}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{\(\backslash\)until End of main}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{\(\backslash\)section mesh The mesh class}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{The mesh class is almost identical to that in the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#mesh"{}>two-\/dimensional problem</A>.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{The only difference is that, given that this (specific) mesh is to be}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{used in an axisymmetric problem, it does not make sense to allow the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{mesh to be periodic in the horizontal direction.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{\(\backslash\)section problem\_class The problem class}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{The problem class is almost identical to the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#problem\_class"{}>two-\/dimensional problem</A>.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{The only modification arises in the arguments of \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{deform\_free\_surface(...), as the initial shape of the interface is a}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{Bessel function \(\backslash\)f\$ J\_0(kr) \(\backslash\)f\$ as opposed to a cosine curve.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{\(\backslash\)dontinclude elastic\_two\_layer\_interface\_axisym.cc}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{\(\backslash\)skipline Deform the mesh}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{\(\backslash\)until deform\_free\_surface}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{\(\backslash\)section constructor The problem constructor}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{The constructor starts by building the timestepper and setting the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{dimensions of the mesh. The number of elements in the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{\(\backslash\)f\$ r \(\backslash\)f\$ and \(\backslash\)f\$ z \(\backslash\)f\$ directions in both fluid layers are}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{specified. The next section of the constructor is exactly as <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#constructor"{}>before</A>.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{We build the bulk mesh, create an error estimator and set}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{the maximum refinement level. An empty surface mesh is created}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{and populated with a call to \(\backslash\)c create\_interface\_elements, before the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{two meshes are combined to form the global mesh. Next we define the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{boundary conditions.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{On the top and bottom boundaries (\(\backslash\)f\$ z = 2.0 \(\backslash\)f\$ and \(\backslash\)f\$ z = 0.0 \(\backslash\)f\$)}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{we apply the no-\/slip condition by pinning all three velocity}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{components. On the outer (solid) wall (\(\backslash\)f\$ r = 1.0 \(\backslash\)f\$) we pin the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{radial (no penetration) and azimuthal (no slip) components but not the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{axial component. This simulates the "{}slippery"{} outer}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{wall. These conditions are also applied at the symmetry boundary (\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{r = 0.0 \(\backslash\)f\$). The vertical position of the nodes on the top and}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{bottom boundaries are also pinned.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{\(\backslash\)skipline Set the boundary conditions for this problem}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{\(\backslash\)until End of loop over mesh boundaries}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{We pin the horizontal position of all nodes in the mesh as well as the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{azimuthal velocity components throughout the bulk of the domain (since}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{in an axisymmetric problem these should remain zero always).}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{\(\backslash\)skipline Loop over all nodes in mesh}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{The remainder of the problem constructor is identical to that of the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{<A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#constructor"{}>two-\/dimensional problem</A>. }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{We create a generalised Hookean constitutive equation for the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{pseudo-\/solid mesh before looping over all elements in the bulk mesh}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{and assigning pointers to the Reynolds and Womersley numbers, \(\backslash\)f\$ Re \(\backslash\)f\$ and \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{Re\(\backslash\), St \(\backslash\)f\$, the product of the Reynolds number and the inverse of the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{Froude number, \(\backslash\)f\$ Re/Fr \(\backslash\)f\$, the direction of gravity, \(\backslash\)f\$ G \(\backslash\)f\$, the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{constitutive law and the global time object. For those elements which}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{correspond to the upper fluid layer, we also assign pointers for the viscosity and density ratios, \(\backslash\)f\$ R\_\(\backslash\)mu \(\backslash\)f\$ and \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{R\_\(\backslash\)rho \(\backslash\)f\$. We pin one degree of freedom and call the function which}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{assigns the boundary conditions, before finally setting up the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{equation numbering scheme.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{\(\backslash\)section set\_initial\_condition Initial conditions}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{The \(\backslash\)c set\_initial\_conditions() function is very similar to that in}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#set\_initial\_condition"{}>two-\/dimensional problem</A>. }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{We loop over all nodes in the mesh and set all three}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{velocity components to zero, before calling \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{Problem::assign\_initial\_values\_impulsive(). This function copies the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{current nodal values and positions into the required number of history}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{values for the timestepper in question, simulating an}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{impulsive start.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{\(\backslash\)skipline start\_of\_set\_initial\_condition}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{\(\backslash\)until End of set\_initial\_condition}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{\(\backslash\)section set\_boundary\_conditions Boundary conditions}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{The \(\backslash\)c set\_boundary\_conditions() function is very similar to that in}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#set\_boundary\_conditions"{}>two-\/dimensional problem</A>. }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{\(\backslash\)skipline start\_of\_set\_boundary\_conditions}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{\(\backslash\)until End of set\_boundary\_conditions}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{\(\backslash\)section before\_after\_adapt Actions before and after adaptation}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{These functions follow exactly the same structure as those in the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#before\_adapt"{}>two-\/dimensional problem</A>.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{\(\backslash\)section create\_interface\_elements Create interface elements}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{This function is identical to that in the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#create\_interface\_elements"{}>two-\/dimensional problem</A>, }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{with the exception that instead of creating interface elements of the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{type}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{ElasticLineFluidInterfaceElement<ELEMENT>,}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{we are creating interface elements of the type}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{ElasticAxisymFluidInterfaceElement<ELEMENT>,}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{where \(\backslash\)c ELEMENT is the templated bulk element type.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{\(\backslash\)section delete\_interface\_elements Delete interface elements}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{This function is identical to that in the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#delete\_interface\_elements"{}>two-\/dimensional problem</A>.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{\(\backslash\)section deform\_free\_surface Prescribing the initial free surface position}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{At the beginning of the simulation the interface is deformed by a}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{prescribed function (9), implemented in}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{the function \(\backslash\)c deform\_free\_surface(...), which cycles through}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{the bulk mesh's \(\backslash\)c Nodes and modifies their positions such that the}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{nodes on the free surface follow the prescribed interface shape and}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{the bulk nodes retain their fractional position between the solid}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{boundaries and the (now deformed) interface.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{\(\backslash\)skipline start\_of\_deform\_free\_surface}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{\(\backslash\)until End of deform\_free\_surface}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{This function follows an identical structure to that in the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#doc"{}>two-\/dimensional problem</A>.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{\(\backslash\)section unsteady\_run The timestepping loop}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{The function \(\backslash\)c unsteady\_run(...) is used to perform the timestepping}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{procedure, and is very similar to that in the <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#unsteady\_run"{}>two-\/dimensional problem</A>. }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{The only difference arises from the fact that the initial}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{interface deformation is a Bessel function rather than a cosine}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{curve. }}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{\(\backslash\)skipline Set value of epsilon}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{\(\backslash\)until deform\_free\_surface}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{The rest of the function is identical to <A HREF="{}../../../navier\_stokes/two\_layer\_interface/html/index.html\#unsteady\_run"{}>before</A>.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/axisym\_navier\_stokes/two\_layer\_interface\_axisym/"{}>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{demo\_drivers/axisym\_navier\_stokes/two\_layer\_interface\_axisym/}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{-\/ The driver code is:}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/axisym\_navier\_stokes/two\_layer\_interface\_axisym/elastic\_two\_layer\_interface\_axisym.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{demo\_drivers/axisym\_navier\_stokes/two\_layer\_interface\_axisym/elastic\_two\_layer\_interface\_axisym.cc}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{two__layer__interface__axisym_8txt__doxygenified_8h_source_l00601}00601 }
+
+\end{DoxyCode}

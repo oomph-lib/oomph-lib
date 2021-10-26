@@ -35,12 +35,14 @@ We save the figure as a $\ast$.fig file and convert it to a $\ast$.poly file usi
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{fig3poly solid.fig }
+
 \end{DoxyCode}
 
 
 This creates a file called {\ttfamily solid.\+fig.\+poly} that can be processed using Triangle. For instance, to create a quality mesh with a maximum element size of 0.\+025 we use 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{triangle -\/q -\/a0.025 solid.fig.poly}
+
 \end{DoxyCode}
 
 
@@ -78,23 +80,21 @@ We create the mesh by multiple inheritance from {\ttfamily oomph-\/lib\textquote
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//================start\_mesh===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Triangle-\/based mesh upgraded to become a solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TriangleMesh<ELEMENT>, }
 \DoxyCodeLine{                            \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
 \DoxyCodeLine{\{}
 
 \end{DoxyCodeInclude}
-
-
-The constructor calls the constructor of the underlying {\ttfamily Triangle\+Mesh}, and, as usual, sets the Lagrangian coordinates to the current nodal positions, making the current configuration stress-\/free.
+ The constructor calls the constructor of the underlying {\ttfamily Triangle\+Mesh}, and, as usual, sets the Lagrangian coordinates to the current nodal positions, making the current configuration stress-\/free.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: }}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh}}(\textcolor{keyword}{const} std::string\& node\_file\_name,}
 \DoxyCodeLine{                     \textcolor{keyword}{const} std::string\& element\_file\_name,}
 \DoxyCodeLine{                     \textcolor{keyword}{const} std::string\& poly\_file\_name,}
@@ -107,9 +107,7 @@ The constructor calls the constructor of the underlying {\ttfamily Triangle\+Mes
 \DoxyCodeLine{   set\_lagrangian\_nodal\_coordinates();}
 
 \end{DoxyCodeInclude}
-
-
-The {\ttfamily Triangle\+Mesh} constructor associates each polyline in the {\ttfamily xfig} drawing with a distinct {\ttfamily oomph-\/lib} mesh boundary. Hence the boundary nodes are initially located on the same, single boundary. To facilitate the application of boundary conditions, we divide the single boundary into three\+:
+ The {\ttfamily Triangle\+Mesh} constructor associates each polyline in the {\ttfamily xfig} drawing with a distinct {\ttfamily oomph-\/lib} mesh boundary. Hence the boundary nodes are initially located on the same, single boundary. To facilitate the application of boundary conditions, we divide the single boundary into three\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -118,9 +116,7 @@ The {\ttfamily Triangle\+Mesh} constructor associates each polyline in the {\ttf
 \DoxyCodeLine{   set\_nboundary(3);}
 
 \end{DoxyCodeInclude}
-
-
-We loop over all nodes in the mesh and identify nodes on the lower (pinned) boundary by their y-\/coordinate. We remove the node from the boundary 0 and re-\/allocate it to the new boundary 1\+:
+ We loop over all nodes in the mesh and identify nodes on the lower (pinned) boundary by their y-\/coordinate. We remove the node from the boundary 0 and re-\/allocate it to the new boundary 1\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -138,9 +134,7 @@ We loop over all nodes in the mesh and identify nodes on the lower (pinned) boun
 \DoxyCodeLine{      \}}
 
 \end{DoxyCodeInclude}
-
-
-Similarly, we identify all nodes on the upper boundary and re-\/assign them to boundary 2, before re-\/generating the various boundary lookup schemes that identify which elements are located next to the various mesh boundaries\+:
+ Similarly, we identify all nodes on the upper boundary and re-\/assign them to boundary 2, before re-\/generating the various boundary lookup schemes that identify which elements are located next to the various mesh boundaries\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -153,21 +147,19 @@ Similarly, we identify all nodes on the upper boundary and re-\/assign them to b
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"About to setup the boundary elements"} << std::endl;}
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}About to setup the boundary elements"{}} << std::endl;}
 \DoxyCodeLine{   \textcolor{comment}{// Re-\/setup boundary info, i.e. elements next to boundaries}}
 \DoxyCodeLine{   TriangleMesh<ELEMENT>::setup\_boundary\_element\_info();}
 \DoxyCodeLine{   \textcolor{comment}{//This is the bit that has gone wrong}}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classElasticTriangleMesh}{\string~ElasticTriangleMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_namespace}{}\doxysection{Problem Parameters}\label{index_namespace}
 As usual we define the various problem parameters in a global namespace. We define Poisson\textquotesingle{}s ratio and prepare a pointer to a constitutive equation.
@@ -176,7 +168,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Poisson's ratio}}
@@ -186,9 +178,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \DoxyCodeLine{\textcolor{comment}{} ConstitutiveLaw* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Constitutive\_law\_pt}}=0;}
 
 \end{DoxyCodeInclude}
-
-
-Next we define the gravitational body force
+ Next we define the gravitational body force
 
 
 \begin{DoxyCodeInclude}{0}
@@ -206,9 +196,7 @@ Next we define the gravitational body force
 \DoxyCodeLine{ \}}
 
 \end{DoxyCodeInclude}
-
-
-and the pressure load to be applied at the upper boundary
+ and the pressure load to be applied at the upper boundary
 
 
 \begin{DoxyCodeInclude}{0}
@@ -216,7 +204,7 @@ and the pressure load to be applied at the upper boundary
 \DoxyCodeLine{\textcolor{comment}{ /// Uniform pressure}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a23c2ade6398f54040b869f7f3a2bcc4b}{P}} = 0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constant pressure load. The arguments to this function are imposed}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constant pressure load. The arguments to this function are imposed}}
 \DoxyCodeLine{\textcolor{comment}{ /// on us by the SolidTractionElements which allow the traction to }}
 \DoxyCodeLine{\textcolor{comment}{ /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the }}
 \DoxyCodeLine{\textcolor{comment}{ /// outer unit normal to the surface. Here we only need the outer unit}}
@@ -234,9 +222,7 @@ and the pressure load to be applied at the upper boundary
 \DoxyCodeLine{\} \textcolor{comment}{//end namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 The driver code is straightforward. We specify an output directory and instantiate a constitutive equation. (Recall that the single-\/argument constructor to the {\ttfamily Generalised\+Hookean} constitutive law implies that all stresses are non-\/dimensionalised on Young\textquotesingle{}s modulus $ E $).
@@ -245,41 +231,37 @@ The driver code is straightforward. We specify an output directory and instantia
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_main===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__two__d__solid_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Label for output}}
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Create generalised Hookean constitutive equations}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5d5f19442938130d36ee7476ae25049c}{Global\_Physical\_Variables::Constitutive\_law\_pt}} = }
 \DoxyCodeLine{  \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
 
 \end{DoxyCodeInclude}
-
-
-We create the {\ttfamily Problem} object using a displacement formulation of the equations and output the initial configuration
+ We create the {\ttfamily Problem} object using a displacement formulation of the equations and output the initial configuration
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  std::cout << \textcolor{stringliteral}{"Running with pure displacement formulation\(\backslash\)n"};}
+\DoxyCodeLine{  std::cout << \textcolor{stringliteral}{"{}Running with pure displacement formulation\(\backslash\)n"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem<TPVDElement<2,3>}} > \mbox{\hyperlink{unstructured__solid_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem<TPVDElement<2,3>}} > problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Output initial configuration}}
-\DoxyCodeLine{  \mbox{\hyperlink{unstructured__solid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{  doc\_info.number()++;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we perform a straightforward parameter study, applying a constant gravitational load and slowly increasing the suction (negative pressure) on the upper boundary.
+ Finally, we perform a straightforward parameter study, applying a constant gravitational load and slowly increasing the suction (negative pressure) on the upper boundary.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -293,10 +275,10 @@ Finally, we perform a straightforward parameter study, applying a constant gravi
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{    \mbox{\hyperlink{unstructured__solid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve();}
+\DoxyCodeLine{    problem.newton\_solve();}
 \DoxyCodeLine{    }
 \DoxyCodeLine{    \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{    \mbox{\hyperlink{unstructured__solid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{    problem.\mbox{\hyperlink{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{    doc\_info.number()++;}
 \DoxyCodeLine{    }
 \DoxyCodeLine{    \textcolor{comment}{// Bump up suction}}
@@ -305,9 +287,7 @@ Finally, we perform a straightforward parameter study, applying a constant gravi
 \DoxyCodeLine{ \} \textcolor{comment}{//end\_displacement\_formulation}}
 
 \end{DoxyCodeInclude}
-
-
-The parameter study is then repeated for a pressure-\/displacement formulation with and without an incompressibility constraint, see the \href{../../../../demo_drivers/solid/unstructured_solid/unstructured_two_d_solid.cc}{\texttt{ source code }} for details.
+ The parameter study is then repeated for a pressure-\/displacement formulation with and without an incompressibility constraint, see the \href{../../../../demo_drivers/solid/unstructured_solid/unstructured_two_d_solid.cc}{\texttt{ source code }} for details.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -318,14 +298,14 @@ The {\ttfamily Problem} class has the usual member functions and provides storag
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_problem=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: }}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}{UnstructuredSolidProblem}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
@@ -356,23 +336,21 @@ We start by building the bulk mesh, using the files created by \href{http://www.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_constructor========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}{UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem}}()}
 \DoxyCodeLine{\{  }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Create solid mesh}}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"solid.fig.1.node"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"solid.fig.1.ele"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} poly\_file\_name=\textcolor{stringliteral}{"solid.fig.1.poly"}; }
+\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"{}solid.fig.1.node"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"{}solid.fig.1.ele"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} poly\_file\_name=\textcolor{stringliteral}{"{}solid.fig.1.poly"{}}; }
 \DoxyCodeLine{ Solid\_mesh\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classElasticTriangleMesh}{ElasticTriangleMesh<ELEMENT>}}(node\_file\_name,}
 \DoxyCodeLine{                                                  element\_file\_name,}
 \DoxyCodeLine{                                                  poly\_file\_name);}
 
 \end{DoxyCodeInclude}
-
-
-Next we create traction elements, attaching them to the \char`\"{}bulk\char`\"{} solid elements that are adjacent to boundary 2. We also specify the load function.
+ Next we create traction elements, attaching them to the \char`\"{}bulk\char`\"{} solid elements that are adjacent to boundary 2. We also specify the load function.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -408,9 +386,7 @@ Next we create traction elements, attaching them to the \char`\"{}bulk\char`\"{}
 \DoxyCodeLine{  \}  }
 
 \end{DoxyCodeInclude}
-
-
-We add both meshes as sub-\/meshes to the {\ttfamily Problem} and build the global mesh
+ We add both meshes as sub-\/meshes to the {\ttfamily Problem} and build the global mesh
 
 
 \begin{DoxyCodeInclude}{0}
@@ -423,15 +399,13 @@ We add both meshes as sub-\/meshes to the {\ttfamily Problem} and build the glob
 \DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-Next we apply the boundary conditions at the lower boundary where we suppress the displacements in both directions. We document the position of the pinned nodes to allow us to check that the boundary I\+Ds were identified correctly -- see \mbox{\hyperlink{index_comm_ex}{Comments and Exercises}} for a further discussion of this issue.
+ Next we apply the boundary conditions at the lower boundary where we suppress the displacements in both directions. We document the position of the pinned nodes to allow us to check that the boundary IDs were identified correctly -- see \mbox{\hyperlink{index_comm_ex}{Comments and Exercises}} for a further discussion of this issue.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Doc pinned solid nodes}}
-\DoxyCodeLine{ std::ofstream bc\_file(\textcolor{stringliteral}{"pinned\_nodes.dat"});}
+\DoxyCodeLine{ std::ofstream bc\_file(\textcolor{stringliteral}{"{}pinned\_nodes.dat"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Pin both positions at lower boundary (boundary 1)}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ibound=1;}
@@ -448,7 +422,7 @@ Next we apply the boundary conditions at the lower boundary where we suppress th
 \DoxyCodeLine{     nod\_pt-\/>pin\_position(i);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// ...and doc it as pinned}}
-\DoxyCodeLine{     bc\_file << nod\_pt-\/>x(i) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{     bc\_file << nod\_pt-\/>x(i) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{   bc\_file << std::endl;}
@@ -456,9 +430,7 @@ Next we apply the boundary conditions at the lower boundary where we suppress th
 \DoxyCodeLine{ bc\_file.close();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we complete the build of the solid elements by specifying their constitutive equation and the body force before assigning the equation numbers.
+ Finally, we complete the build of the solid elements by specifying their constitutive equation and the body force before assigning the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -480,7 +452,7 @@ Finally, we complete the build of the solid elements by specifying their constit
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{//end constructor}}
 
@@ -512,7 +484,7 @@ The post-\/processing routine outputs the deformed domain shape and the applied 
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output(some\_file,npts);}
@@ -520,7 +492,7 @@ The post-\/processing routine outputs the deformed domain shape and the applied 
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output traction}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/traction\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/traction\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Traction\_mesh\_pt-\/>output(some\_file,npts);}
@@ -528,7 +500,7 @@ The post-\/processing routine outputs the deformed domain shape and the applied 
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output boundaries}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/boundaries.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/boundaries.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output\_boundaries(some\_file);}
 \DoxyCodeLine{ some\_file.close();}
@@ -544,7 +516,7 @@ The post-\/processing routine outputs the deformed domain shape and the applied 
 \hypertarget{index_bound}{}\doxysubsection{Identification/assignment of mesh boundaries}\label{index_bound}
 This tutorial demonstrates that the use of unstructured meshes for solid mechanics problems is extremely straightforward. The only aspect that requires some care (and not just for solid mechanics applications) is the correct identification/assignment of domain boundaries when the mesh is generated with \href{http://en.wikipedia.org/wiki/Xfig}{\texttt{ xfig.}} The fact that we documented the mesh boundaries and the positions of the pinned nodes in the driver code suggests (correctly!) that we managed to get both assignments (slightly) wrong when we first wrote the driver code. The manual identification of nodes on domain boundaries is tedious and therefore error prone and, as usual, it pays to {\bfseries{be as a paranoid as possible}}! Ignore this advice at your own risk...
 
-We also welcome any improvements to our conversion code \href{../../../../demo_drivers/meshing/mesh_from_xfig_triangle/fig2poly.cc}{\texttt{ fig2poly.\+cc }} that would allow the specification of domain boundaries from within \href{http://en.wikipedia.org/wiki/Xfig}{\texttt{ xfig.}} It\textquotesingle{}s probably not possible but if you have any ideas how to go about this (either by hijacking information that can be generated by \href{http://en.wikipedia.org/wiki/Xfig}{\texttt{ xfig}} or via some other G\+UI interface), \href{../../../contact/html/index.html}{\texttt{ let us know.}}
+We also welcome any improvements to our conversion code \href{../../../../demo_drivers/meshing/mesh_from_xfig_triangle/fig2poly.cc}{\texttt{ fig2poly.\+cc }} that would allow the specification of domain boundaries from within \href{http://en.wikipedia.org/wiki/Xfig}{\texttt{ xfig.}} It\textquotesingle{}s probably not possible but if you have any ideas how to go about this (either by hijacking information that can be generated by \href{http://en.wikipedia.org/wiki/Xfig}{\texttt{ xfig}} or via some other GUI interface), \href{../../../contact/html/index.html}{\texttt{ let us know.}}
 
 \DoxyHorRuler{0}
 \hypertarget{index_three_d}{}\doxysubsection{3\+D Problems}\label{index_three_d}
@@ -581,5 +553,5 @@ An alternative three-\/dimensional problem\+: the deformation of a bifurcating t
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

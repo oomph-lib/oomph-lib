@@ -21,7 +21,7 @@ We use multiple inheritance to upgrade the already-\/existing refineable \char`\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_mesh=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Simple quarter tube mesh upgraded to become a solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh}} : }
 \DoxyCodeLine{ \textcolor{keyword}{public} \textcolor{keyword}{virtual} RefineableQuarterTubeMesh<ELEMENT>, }
@@ -30,7 +30,7 @@ We use multiple inheritance to upgrade the already-\/existing refineable \char`\
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: }}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh_a97c25a8845b2d8ab2a4aef1c0407bacd}{RefineableElasticQuarterTubeMesh}}(GeomObject* wall\_pt,}
 \DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double>\& xi\_lo,}
 \DoxyCodeLine{                                  \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& fract\_mid,}
@@ -53,9 +53,7 @@ We use multiple inheritance to upgrade the already-\/existing refineable \char`\
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  ~\newline
  \DoxyHorRuler{0}
 \hypertarget{index_global}{}\doxysection{Global parameters and functions}\label{index_global}
@@ -65,7 +63,7 @@ As usual, we define a namespace, {\ttfamily \mbox{\hyperlink{namespaceGlobal__Ph
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -75,10 +73,10 @@ As usual, we define a namespace, {\ttfamily \mbox{\hyperlink{namespaceGlobal__Ph
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to strain energy function}}
 \DoxyCodeLine{\textcolor{comment}{} StrainEnergyFunction* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Strain\_energy\_function\_pt}}=0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// First "Mooney Rivlin" coefficient }}
+\DoxyCodeLine{\textcolor{comment}{ /// First "{}Mooney Rivlin"{} coefficient }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a849754fa7155c1a31481674ce4845658}{C1}}=1.3;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Second "Mooney Rivlin" coefficient }}
+\DoxyCodeLine{\textcolor{comment}{ /// Second "{}Mooney Rivlin"{} coefficient }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af9defd1b5745cce50d2c386b3ac0e0ae}{C2}}=1.3;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to constitutive law}}
@@ -111,7 +109,7 @@ If the code is executed without command line arguments we perform a single simul
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for 3D cantilever beam loaded by gravity}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{three__d__cantilever_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -130,18 +128,16 @@ If the code is executed without command line arguments we perform a single simul
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a73135f793690b4386bf83bbefc7bf310}{Global\_Physical\_Variables::Strain\_energy\_function\_pt}});}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Set up the problem with continous pressure/displacement}}
-\DoxyCodeLine{   \mbox{\hyperlink{classCantileverProblem}{CantileverProblem<RefineableQPVDElementWithContinuousPressure<3>}} > \mbox{\hyperlink{three__d__cantilever_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{   \mbox{\hyperlink{classCantileverProblem}{CantileverProblem<RefineableQPVDElementWithContinuousPressure<3>}} > problem;}
 
 \end{DoxyCodeInclude}
-
-
-We document the initial configuration before starting a parameter study in which the magnitude of the gravitational body force is increased in small steps\+:
+ We document the initial configuration before starting a parameter study in which the magnitude of the gravitational body force is increased in small steps\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Doc solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{three__d__cantilever_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution();}
+\DoxyCodeLine{   problem.\mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{doc\_solution}}();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Initial values for parameter values}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b80d3e8d63b8d0a0ed435a2dd7fe2ad}{Global\_Physical\_Variables::Gravity}}=0.0;}
@@ -158,18 +154,16 @@ We document the initial configuration before starting a parameter study in which
 \DoxyCodeLine{     \textcolor{comment}{// Solve the problem with Newton's method, allowing}}
 \DoxyCodeLine{     \textcolor{comment}{// up to max\_adapt mesh adaptations after every solve.}}
 \DoxyCodeLine{     \textcolor{keywordtype}{unsigned} max\_adapt=1;   }
-\DoxyCodeLine{     \mbox{\hyperlink{three__d__cantilever_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve(max\_adapt);}
+\DoxyCodeLine{     problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Doc solution}}
-\DoxyCodeLine{     \mbox{\hyperlink{three__d__cantilever_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution();    }
+\DoxyCodeLine{     problem.\mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{doc\_solution}}();    }
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \} \textcolor{comment}{// end main demo code}}
 
 \end{DoxyCodeInclude}
-
-
-If the code is executed with a non-\/zero number of command line arguments, it performs a large number of additional self tests that we will not discuss here. See the driver code \href{../../../../demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc}{\texttt{ three\+\_\+d\+\_\+cantilever.\+cc}} for details.
+ If the code is executed with a non-\/zero number of command line arguments, it performs a large number of additional self tests that we will not discuss here. See the driver code \href{../../../../demo_drivers/solid/three_d_cantilever/three_d_cantilever.cc}{\texttt{ three\+\_\+d\+\_\+cantilever.\+cc}} for details.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -179,8 +173,8 @@ The problem class contains the usual member functions. No action is required bef
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
-\DoxyCodeLine{\textcolor{comment}{/// Problem class for the 3D cantilever "beam" structure.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{/// Problem class for the 3D cantilever "{}beam"{} structure.}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classCantileverProblem}{CantileverProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -204,20 +198,18 @@ The problem class contains the usual member functions. No action is required bef
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Pin the redundant solid pressures (if any)}}
 \DoxyCodeLine{   PVDEquationsBase<3>::pin\_redundant\_nodal\_solid\_pressures(}
-\DoxyCodeLine{    \mbox{\hyperlink{classCantileverProblem_a20f03209a5031e1bda39da9f2d2ce845}{mesh\_pt}}()-\/>element\_pt());}
+\DoxyCodeLine{    \mbox{\hyperlink{classCantileverProblem_afae2bac330172d85ab316bb94a27c822}{mesh\_pt}}()-\/>element\_pt());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{doc\_solution}}();}
 
 \end{DoxyCodeInclude}
-
-
-We overload the {\ttfamily Problem\+::mesh\+\_\+pt()} function to return a pointer to the specific mesh used in this problem\+:
+ We overload the {\ttfamily Problem\+::mesh\+\_\+pt()} function to return a pointer to the specific mesh used in this problem\+:
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Access function for the mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Access function for the mesh}}
 \DoxyCodeLine{ \mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh<ELEMENT>}}* mesh\_pt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classRefineableElasticQuarterTubeMesh}{RefineableElasticQuarterTubeMesh<ELEMENT>}}*\textcolor{keyword}{>}(}
@@ -225,9 +217,7 @@ We overload the {\ttfamily Problem\+::mesh\+\_\+pt()} function to return a point
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-The private member data stores a {\ttfamily Doc\+Info} object in which we will store the name of the output directory.
+ The private member data stores a {\ttfamily Doc\+Info} object in which we will store the name of the output directory.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -239,9 +229,7 @@ The private member data stores a {\ttfamily Doc\+Info} object in which we will s
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 We start by creating the {\ttfamily Geom\+Object} that defines the curvilinear boundary of the beam\+: a circular cylinder of unit radius.
@@ -250,7 +238,7 @@ We start by creating the {\ttfamily Geom\+Object} that defines the curvilinear b
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classCantileverProblem_abba97fc4b8402bc0363fdf16322f6572}{CantileverProblem<ELEMENT>::CantileverProblem}}() }
 \DoxyCodeLine{\{}
@@ -270,9 +258,7 @@ We start by creating the {\ttfamily Geom\+Object} that defines the curvilinear b
 \DoxyCodeLine{ xi\_hi[1]=2.0*atan(1.0);}
 
 \end{DoxyCodeInclude}
-
-
-We build the mesh, using six axial layers of elements, before creating an error estimator and specifying the error targets for the adaptive mesh refinement.
+ We build the mesh, using six axial layers of elements, before creating an error estimator and specifying the error targets for the adaptive mesh refinement.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -295,9 +281,7 @@ We build the mesh, using six axial layers of elements, before creating an error 
 \DoxyCodeLine{ mesh\_pt()-\/>min\_permitted\_error()=0.005;}
 
 \end{DoxyCodeInclude}
-
-
-We complete the build of the elements by specifying the constitutive equation and the body force. We check that the element is based on a pressure/displacement formulation, and, if so, select an incompressible formulation. (This check is only required because the self-\/tests not shown here also include cases in which the problem is solved using a displacement-\/based formulation with compressible elasticity; see also the section \mbox{\hyperlink{index_incompr}{How to enforce incompressibility}} below).
+ We complete the build of the elements by specifying the constitutive equation and the body force. We check that the element is based on a pressure/displacement formulation, and, if so, select an incompressible formulation. (This check is only required because the self-\/tests not shown here also include cases in which the problem is solved using a displacement-\/based formulation with compressible elasticity; see also the section \mbox{\hyperlink{index_incompr}{How to enforce incompressibility}} below).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -327,9 +311,7 @@ We complete the build of the elements by specifying the constitutive equation an
 \DoxyCodeLine{  \} \textcolor{comment}{// done build of elements}}
 
 \end{DoxyCodeInclude}
-
-
-We fix the position of all nodes at the left end of the beam (on boundary 0) and pin any redundant solid pressures.
+ We fix the position of all nodes at the left end of the beam (on boundary 0) and pin any redundant solid pressures.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -352,9 +334,7 @@ We fix the position of all nodes at the left end of the beam (on boundary 0) and
 \DoxyCodeLine{  mesh\_pt()-\/>element\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we assign the equation numbers and define the output directory.
+ Finally, we assign the equation numbers and define the output directory.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -363,23 +343,21 @@ Finally, we assign the equation numbers and define the output directory.
 \DoxyCodeLine{ assign\_eqn\_numbers();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Prepare output directory}}
-\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{\} \textcolor{comment}{//end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
-The post-\/processing function {\ttfamily \mbox{\hyperlink{three__d__cantilever_8txt_aef2a42ff688792c5917cf861559a961b}{doc\+\_\+solution()}}} simply outputs the shape of the deformed beam.
+The post-\/processing function {\ttfamily doc\+\_\+solution()} simply outputs the shape of the deformed beam.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCantileverProblem_a7571348f8724e71be4e67dc64cea3877}{CantileverProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{}
@@ -391,7 +369,7 @@ The post-\/processing function {\ttfamily \mbox{\hyperlink{three__d__cantilever_
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_plot = 5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output shape of deformed body}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,n\_plot);}
@@ -409,17 +387,17 @@ The post-\/processing function {\ttfamily \mbox{\hyperlink{three__d__cantilever_
  \DoxyHorRuler{0}
 \hypertarget{index_exercises}{}\doxysection{Comments and exercises}\label{index_exercises}
 \hypertarget{index_incompr}{}\doxysubsection{How to enforce incompressibility}\label{index_incompr}
-We stress that the imposition of incompressibility must be requested explicitly via the element\textquotesingle{}s member function {\ttfamily incompressible()}. Mathematically, incompressibility is enforced via a Lagrange multiplier which manifests itself physically as the pressure. Incompressibility can therefore only be enforced for elements that employ the pressure-\/displacement formulation of the principle of virtual displacements. This is why we the {\ttfamily Problem} constructor checked if the element is derived from the {\ttfamily P\+V\+D\+Equations\+With\+Pressure} class before setting the element\textquotesingle{}s {\ttfamily incompressible} flag to {\ttfamily true}.
+We stress that the imposition of incompressibility must be requested explicitly via the element\textquotesingle{}s member function {\ttfamily incompressible()}. Mathematically, incompressibility is enforced via a Lagrange multiplier which manifests itself physically as the pressure. Incompressibility can therefore only be enforced for elements that employ the pressure-\/displacement formulation of the principle of virtual displacements. This is why we the {\ttfamily Problem} constructor checked if the element is derived from the {\ttfamily PVDEquations\+With\+Pressure} class before setting the element\textquotesingle{}s {\ttfamily incompressible} flag to {\ttfamily true}.
 
 As usual, {\ttfamily oomph-\/lib} provides self-\/tests that assess if the enforcement incompressibility (or the lack thereof) is consistent\+:
 \begin{DoxyItemize}
 \item The compiler will not allow the user to enforce incompressibility on elements that are based on the displacement form of the principle of virtual displacements. ~\newline
 ~\newline
 
-\item Certain constitutive laws, such as the Mooney-\/\+Rivlin law used in the present example require an incompressible formulation. If {\ttfamily oomph-\/lib} is compiled with the {\ttfamily P\+A\+R\+A\+N\+O\+ID} flag, an error is thrown if such a constitutive law is used by an element for which incompressibility has not been requested. ~\newline
+\item Certain constitutive laws, such as the Mooney-\/\+Rivlin law used in the present example require an incompressible formulation. If {\ttfamily oomph-\/lib} is compiled with the {\ttfamily PARANOID} flag, an error is thrown if such a constitutive law is used by an element for which incompressibility has not been requested. ~\newline
 ~\newline
  \begin{center} {\bfseries{Recall that the default setting is not to enforce incompressibility!}} \end{center}  ~\newline
- If the library is compiled without the {\ttfamily P\+A\+R\+A\+N\+O\+ID} flag no warning will be issued but the results will be \char`\"{}wrong\char`\"{} at least in the sense that the material does not behave like an incompressible Mooney-\/\+Rivlin solid. In fact, it is likely that the Newton solver will diverge. Anyway, as we keep saying, without the {\ttfamily P\+A\+R\+A\+N\+O\+ID} flag, you\textquotesingle{}re on your own! ~\newline
+ If the library is compiled without the {\ttfamily PARANOID} flag no warning will be issued but the results will be \char`\"{}wrong\char`\"{} at least in the sense that the material does not behave like an incompressible Mooney-\/\+Rivlin solid. In fact, it is likely that the Newton solver will diverge. Anyway, as we keep saying, without the {\ttfamily PARANOID} flag, you\textquotesingle{}re on your own! ~\newline
 ~\newline
 
 \item Some constitutive laws can be used for compressible and incompressible behaviour. In this case it is important to set the {\ttfamily incompressible()} flag to the correct value. This issue is discussed in more detail in \href{../../compressed_square/html/index.html}{\texttt{ another tutorial.}}
@@ -441,5 +419,5 @@ As usual, {\ttfamily oomph-\/lib} provides self-\/tests that assess if the enfor
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

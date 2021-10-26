@@ -52,8 +52,7 @@ A number of issues are important\+:
 \item To facilitate mesh adaptation in free-\/boundary problems, we re-\/generate the polygonal representation of the boundary, using the vertex nodes of the elements on the boundary to re-\/define the polygon. The number of vertices in the polygons that define the mesh boundaries will therefore generally change during the mesh adaptation process. This is discussed in more detail in \href{../../../../doc/navier_stokes/adaptive_bubble_in_channel/html/index.html\#adapt}{\texttt{ another tutorial.}}~\newline
 ~\newline
 
-\item The mesh (and thus its constituent elements) are completely re-\/generated when the mesh is adapted, and so it is necessary to \char`\"{}complete
-  the build\char`\"{} of all elements after each mesh adaptation. For instance, pointers to problem parameters (Reynolds numbers, source functions, etc) must be re-\/set after the adaptation since they cannot (easily) be passed from the old to the new mesh. ~\newline
+\item The mesh (and thus its constituent elements) are completely re-\/generated when the mesh is adapted, and so it is necessary to \char`\"{}complete   the build\char`\"{} of all elements after each mesh adaptation. For instance, pointers to problem parameters (Reynolds numbers, source functions, etc) must be re-\/set after the adaptation since they cannot (easily) be passed from the old to the new mesh. ~\newline
 ~\newline
 
 \item When projecting the solution from the old to the new mesh, we project ~\newline
@@ -63,11 +62,11 @@ A number of issues are important\+:
 \item all unknowns and their associated history values (if any) ~\newline
 ~\newline
 
-\item the history values of the nodal positions. This is important for moving mesh problems where the mesh velocity is required to evaluate the A\+LE time-\/derivatives.
+\item the history values of the nodal positions. This is important for moving mesh problems where the mesh velocity is required to evaluate the ALE time-\/derivatives.
 \end{DoxyItemize}~\newline
 ~\newline
 
-\item The ability to automatically project the solution from the old to the new mesh requires the elements, of type {\ttfamily E\+L\+E\+M\+E\+NT}, say, to be wrapped in the templated {\ttfamily Projectable\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$} class. This class requires the specification of various element characteristics (such as the number of fields to be projected, the number of history values, etc) in the form of virtual functions. This is much more straightforward than upgrading an existing element to become a refineable element for use in an adaptive computation on a structured mesh because the \char`\"{}mesh adaptation by mesh re-\/generation\char`\"{} avoids the creation of hanging nodes. See the section \mbox{\hyperlink{index_wrapper}{Upgrading elements to become \char`\"{}projectable\char`\"{}}} for a slightly more detailed discussion of this aspect. ~\newline
+\item The ability to automatically project the solution from the old to the new mesh requires the elements, of type {\ttfamily ELEMENT}, say, to be wrapped in the templated {\ttfamily Projectable\+Element$<$\+ELEMENT$>$} class. This class requires the specification of various element characteristics (such as the number of fields to be projected, the number of history values, etc) in the form of virtual functions. This is much more straightforward than upgrading an existing element to become a refineable element for use in an adaptive computation on a structured mesh because the \char`\"{}mesh adaptation by mesh re-\/generation\char`\"{} avoids the creation of hanging nodes. See the section \mbox{\hyperlink{index_wrapper}{Upgrading elements to become \char`\"{}projectable\char`\"{}}} for a slightly more detailed discussion of this aspect. ~\newline
  ~\newline
 ~\newline
 
@@ -98,15 +97,15 @@ As an example we consider the adaptive solution of Poisson\textquotesingle{}s eq
 Following our usual practice, we use a namespace to define the source function and the exact solution.  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for Poisson equation with "sharp step" }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for Poisson equation with "{}sharp step"{} }}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceTanhSolnForPoisson}{TanhSolnForPoisson}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Parameter for steepness of "step"}}
+\DoxyCodeLine{\textcolor{comment}{ /// Parameter for steepness of "{}step"{}}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}=5.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Parameter for angle Phi of "step"}}
+\DoxyCodeLine{\textcolor{comment}{ /// Parameter for angle Phi of "{}step"{}}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}=0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Exact solution as a Vector}}
@@ -125,7 +124,7 @@ Following our usual practice, we use a namespace to define the source function a
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Zero function -\/-\/ used to compute norm of the computed solution by }}
+\DoxyCodeLine{\textcolor{comment}{ /// Zero function -\/-\/ used to compute norm of the computed solution by }}
 \DoxyCodeLine{\textcolor{comment}{ /// computing the norm of the error when compared against this.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a5cd8441c6e87d4bc153697eff13513dd}{zero}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 \DoxyCodeLine{ \{}
@@ -145,8 +144,8 @@ We start by processing command line arguments which allow us to run the code in 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main========================================}}
-\DoxyCodeLine{\textcolor{comment}{///Driver code for demo of inline triangle mesh generation}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for demo of inline triangle mesh generation}}
+\DoxyCodeLine{\textcolor{comment}{//============================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{mesh__from__inline__triangle_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -156,7 +155,7 @@ We start by processing command line arguments which allow us to run the code in 
 \DoxyCodeLine{ \textcolor{comment}{// were actually specified}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Validation?}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/validation"});}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/validation"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Parse command line}}
 \DoxyCodeLine{ CommandLineArgs::parse\_and\_assign(); }
@@ -178,7 +177,7 @@ We then perform a parameter study, solving the problem for various orientations 
 \DoxyCodeLine{ \textcolor{comment}{// Loop over orientation of step}}
 \DoxyCodeLine{ \textcolor{comment}{//==============================}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep=5;}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/validation"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   nstep=2;}
 \DoxyCodeLine{  \}}
@@ -187,7 +186,7 @@ We then perform a parameter study, solving the problem for various orientations 
 \DoxyCodeLine{   \textcolor{comment}{// Solve with spatial adaptation}}
 \DoxyCodeLine{   \textcolor{comment}{//==============================}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} max\_adapt=3;}
-\DoxyCodeLine{   \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/validation"}))}
+\DoxyCodeLine{   \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     max\_adapt=1;}
 \DoxyCodeLine{    \}}
@@ -196,7 +195,7 @@ We then perform a parameter study, solving the problem for various orientations 
 \DoxyCodeLine{   \textcolor{comment}{// Doc the solution}}
 \DoxyCodeLine{   \textcolor{comment}{//=================}}
 \DoxyCodeLine{   std::stringstream comment\_stream;}
-\DoxyCodeLine{   comment\_stream << \textcolor{stringliteral}{"Solution for tan(phi) = "} << \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanhSolnForPoisson::TanPhi}}; }
+\DoxyCodeLine{   comment\_stream << \textcolor{stringliteral}{"{}Solution for tan(phi) = "{}} << \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanhSolnForPoisson::TanPhi}}; }
 \DoxyCodeLine{   problem.\mbox{\hyperlink{classUnstructuredPoissonProblem_a9b21a3c3f574da71411f852006fe2a0c}{doc\_solution}}(comment\_stream.str());}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Rotate orientation of solution}}
@@ -217,7 +216,7 @@ The problem class contains the usual member functions. As discussed above, the b
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Class definition}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredPoissonProblem}{UnstructuredPoissonProblem}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} Problem}
 \DoxyCodeLine{\{}
@@ -233,7 +232,7 @@ The problem class contains the usual member functions. As discussed above, the b
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt. Empty}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_ac9627efd3c311156e5347ed37d4ea4b0}{actions\_before\_adapt}}() \{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Actions after adapt: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: }}
 \DoxyCodeLine{\textcolor{comment}{ /// Setup the problem again -\/-\/ remember that the mesh has been}}
 \DoxyCodeLine{\textcolor{comment}{ /// completely rebuilt and its element's don't have any}}
 \DoxyCodeLine{\textcolor{comment}{ /// pointers to source fcts etc. yet}}
@@ -252,7 +251,7 @@ The problem class contains the usual member functions. As discussed above, the b
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{  \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_a9b21a3c3f574da71411f852006fe2a0c}{doc\_solution}}(\textcolor{keyword}{const} std::string\& comment=\textcolor{stringliteral}{""});}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_a9b21a3c3f574da71411f852006fe2a0c}{doc\_solution}}(\textcolor{keyword}{const} std::string\& comment=\textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
@@ -263,7 +262,7 @@ The problem class contains the usual member functions. As discussed above, the b
 \DoxyCodeLine{\textcolor{comment}{ /// Helper function to apply boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_ace8b8b3097ae2024a0589b2bf9b4ee7b}{apply\_boundary\_conditions}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Helper function to (re-\/)set boundary condition}}
+\DoxyCodeLine{\textcolor{comment}{ /// Helper function to (re-\/)set boundary condition}}
 \DoxyCodeLine{\textcolor{comment}{ /// and complete the build of  all elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_a5cbf00790e8469b43c64c6aaadfe7b41}{complete\_problem\_setup}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -276,9 +275,7 @@ The problem class contains the usual member functions. As discussed above, the b
 \DoxyCodeLine{\}; \textcolor{comment}{// end\_of\_problem\_class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The Problem constructor}\label{index_constructor}
 Most of the problem constructor is concerned with the specification of the mesh boundaries. We start by generating a {\ttfamily Geom\+Object} that describes the circular outer boundary of the domain.
@@ -287,7 +284,7 @@ Most of the problem constructor is concerned with the specification of the mesh 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_constructor=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredPoissonProblem_a26e7610a714aea17c9278beec4842371}{UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem}}()}
 \DoxyCodeLine{\{          }
@@ -305,9 +302,7 @@ Most of the problem constructor is concerned with the specification of the mesh 
 \DoxyCodeLine{ Ellipse * outer\_boundary\_ellipse\_pt = \textcolor{keyword}{new} Ellipse(A,B);}
 
 \end{DoxyCodeInclude}
-
-
-This {\ttfamily Geom\+Object} is now used to describe the outer boundary in terms of a {\ttfamily Triangle\+Mesh\+Closed\+Curve} object, a base class which can represent polygonal and curvilinear boundaries. We start by providing a pointer to this (yet-\/to-\/be-\/built) object.
+ This {\ttfamily Geom\+Object} is now used to describe the outer boundary in terms of a {\ttfamily Triangle\+Mesh\+Closed\+Curve} object, a base class which can represent polygonal and curvilinear boundaries. We start by providing a pointer to this (yet-\/to-\/be-\/built) object.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -333,9 +328,7 @@ As discussed above, the closed outer boundary must be broken up into (at least) 
 \DoxyCodeLine{   Vector<TriangleMeshCurveSection*> outer\_curvilinear\_boundary\_pt(2);}
 
 \end{DoxyCodeInclude}
-
-
-We choose five boundary segments for the first {\ttfamily Triangle\+Mesh\+Curvi\+Line} which represents the upper half of the boundary which we label as boundary 0,
+ We choose five boundary segments for the first {\ttfamily Triangle\+Mesh\+Curvi\+Line} which represents the upper half of the boundary which we label as boundary 0,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -350,9 +343,7 @@ We choose five boundary segments for the first {\ttfamily Triangle\+Mesh\+Curvi\
 \DoxyCodeLine{    outer\_boundary\_ellipse\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id);}
 
 \end{DoxyCodeInclude}
-
-
-and eight segments for the lower half which we label as boundary 1\+:
+ and eight segments for the lower half which we label as boundary 1\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -367,9 +358,7 @@ and eight segments for the lower half which we label as boundary 1\+:
 \DoxyCodeLine{    outer\_boundary\_ellipse\_pt,zeta\_start,zeta\_end,nsegment,boundary\_id);}
 
 \end{DoxyCodeInclude}
-
-
-We then combine the two {\ttfamily Triangle\+Mesh\+Curvi\+Lines} to a {\ttfamily Triangle\+Mesh\+Closed\+Curve} which describes the outer boundary.
+ We then combine the two {\ttfamily Triangle\+Mesh\+Curvi\+Lines} to a {\ttfamily Triangle\+Mesh\+Closed\+Curve} which describes the outer boundary.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -381,9 +370,7 @@ We then combine the two {\ttfamily Triangle\+Mesh\+Curvi\+Lines} to a {\ttfamily
 \DoxyCodeLine{     \textcolor{keyword}{new} TriangleMeshClosedCurve(outer\_curvilinear\_boundary\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-Next we deal with the two inner (hole) boundaries
+ Next we deal with the two inner (hole) boundaries
 
 
 \begin{DoxyCodeInclude}{0}
@@ -392,9 +379,7 @@ Next we deal with the two inner (hole) boundaries
 \DoxyCodeLine{ Vector<TriangleMeshClosedCurve*> hole\_pt(2);}
 
 \end{DoxyCodeInclude}
-
-
-The first hole is a polygon whose 12 vertices we distribute along a circle of radius $ 0.1 $ , centred at $ (x_1,x_2)=(0,0.5). $ As above, we break the closed boundary into two distinct sub-\/boundaries -- this time represented by {\ttfamily Triangle\+Mesh\+Poly\+Lines\+:} 
+ The first hole is a polygon whose 12 vertices we distribute along a circle of radius $ 0.1 $ , centred at $ (x_1,x_2)=(0,0.5). $ As above, we break the closed boundary into two distinct sub-\/boundaries -- this time represented by {\ttfamily Triangle\+Mesh\+Poly\+Lines\+:} 
 
 
 \begin{DoxyCodeInclude}{0}
@@ -418,9 +403,7 @@ The first hole is a polygon whose 12 vertices we distribute along a circle of ra
 \DoxyCodeLine{ Vector<TriangleMeshCurveSection*> hole\_polyline\_pt(2);}
 
 \end{DoxyCodeInclude}
-
-
-We create the vertex coordinates for the upper half of the polygonal hole,
+ We create the vertex coordinates for the upper half of the polygonal hole,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -444,9 +427,7 @@ We create the vertex coordinates for the upper half of the polygonal hole,
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-and build the {\ttfamily Triangle\+Mesh\+Poly\+Line}, specifying a boundary ID\+:
+ and build the {\ttfamily Triangle\+Mesh\+Poly\+Line}, specifying a boundary ID\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -458,9 +439,7 @@ and build the {\ttfamily Triangle\+Mesh\+Poly\+Line}, specifying a boundary ID\+
 \DoxyCodeLine{ hole\_polyline\_pt[0] = \textcolor{keyword}{new} TriangleMeshPolyLine(bound\_hole,boundary\_id);}
 
 \end{DoxyCodeInclude}
-
-
-We repeat the exercise for the lower half which we turn into boundary 4\+:
+ We repeat the exercise for the lower half which we turn into boundary 4\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -487,9 +466,7 @@ We repeat the exercise for the lower half which we turn into boundary 4\+:
 \DoxyCodeLine{ hole\_polyline\_pt[1] = \textcolor{keyword}{new} TriangleMeshPolyLine(bound\_hole,boundary\_id);}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we build the polygonal hole itself, specifying its constituent {\ttfamily Triangle\+Mesh\+Poly\+Lines} and the coordinate of a point inside the hole, which is required by {\ttfamily Triangle\+:} 
+ Finally, we build the polygonal hole itself, specifying its constituent {\ttfamily Triangle\+Mesh\+Poly\+Lines} and the coordinate of a point inside the hole, which is required by {\ttfamily Triangle\+:} 
 
 
 \begin{DoxyCodeInclude}{0}
@@ -506,9 +483,7 @@ Finally, we build the polygonal hole itself, specifying its constituent {\ttfami
 \DoxyCodeLine{ hole\_pt[0] = \textcolor{keyword}{new} TriangleMeshPolygon(hole\_polyline\_pt, hole\_center);}
 
 \end{DoxyCodeInclude}
-
-
-The construction of the second, curvilinear internal boundary (an ellipse centred at the origin) is virtually identical to the steps taken for the construction of the outer boundary, apart from the fact that, as an internal boundary, it again requires the specification of a point inside the hole.
+ The construction of the second, curvilinear internal boundary (an ellipse centred at the origin) is virtually identical to the steps taken for the construction of the outer boundary, apart from the fact that, as an internal boundary, it again requires the specification of a point inside the hole.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -556,7 +531,7 @@ The construction of the second, curvilinear internal boundary (an ellipse centre
 \DoxyCodeLine{                                                 hole\_coords);}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_build_mesh}{}\doxysubsection{Construct the mesh}\label{index_build_mesh}
+ \hypertarget{index_build_mesh}{}\doxysubsection{Construct the mesh}\label{index_build_mesh}
 To facilitate the construction of the mesh {\ttfamily Triangle\+Mesh} object we use the object {\ttfamily Triangle\+Mesh\+Parameters}. The only necessary argument for creating this object is the outer boundary. The definition of holes, internal boundaries and regions is explained in \href{../../../../doc/meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html}{\texttt{ another tutorial}}. The object can also be used to control whether additional refinement may be performed on the mesh boundaries. The default behaviour is that such refinement will occur so that the highest quality mesh is obtained. In some cases, e.\+g. periodic boundary conditions, you may wish to ensure that each input boundary segment corresponds to a single element edge in the final mesh. This can be achieved for the outer boundary by calling {\ttfamily Triangle\+Mesh\+Parameters\+::disable\+\_\+boundary\+\_\+refinement()}. However, Triangle will still add additional points to any internal boundaries unless the additional function {\ttfamily Triangle\+Mesh\+Parameters\+::disable\+\_\+internal\+\_\+boundary\+\_\+refinement()} is also called. The functions {\ttfamily Triangle\+Mesh\+Parameters\+::enable\+\_\+boundary\+\_\+refinement()} and {\ttfamily Triangle\+Mesh\+Parameters\+::enable\+\_\+internal\+\_\+boundary\+\_\+refinement()} can be used to return to the default behaviour. Note that it is not currently possible to suppress refinement on the internal boundaries, but refine the outer boundary.
 
 We can specify a target for the element sizes and pass it to the {\ttfamily Triangle\+Mesh\+Parameters} object as showed next\+:
@@ -585,9 +560,7 @@ We can specify a target for the element sizes and pass it to the {\ttfamily Tria
 \DoxyCodeLine{ Problem::mesh\_pt()=My\_mesh\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-We specify a spatial error estimator and limit the maximum and minimum element sizes,
+ We specify a spatial error estimator and limit the maximum and minimum element sizes,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -601,9 +574,7 @@ We specify a spatial error estimator and limit the maximum and minimum element s
 \DoxyCodeLine{ My\_mesh\_pt-\/>min\_element\_size()=0.002; }
 
 \end{DoxyCodeInclude}
-
-
-before completing the problem setup (see below) and assigning the equation numbers.
+ before completing the problem setup (see below) and assigning the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -613,11 +584,11 @@ before completing the problem setup (see below) and assigning the equation numbe
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"RESLT/trace.dat"});}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}RESLT/trace.dat"{}});}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ oomph\_info <<\textcolor{stringliteral}{"Number of equations: "} }
+\DoxyCodeLine{ oomph\_info <<\textcolor{stringliteral}{"{}Number of equations: "{}} }
 \DoxyCodeLine{            << this-\/>assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_constructor}}
@@ -633,8 +604,8 @@ As discussed above, the helper function {\ttfamily complete\+\_\+problem\+\_\+se
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_complete======================================================}}
-\DoxyCodeLine{\textcolor{comment}{ /// Set boundary condition exactly, and complete the build of }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// all elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set boundary condition exactly, and complete the build of }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// all elements}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_a5cbf00790e8469b43c64c6aaadfe7b41}{UnstructuredPoissonProblem<ELEMENT>::complete\_problem\_setup}}()}
@@ -658,9 +629,7 @@ As discussed above, the helper function {\ttfamily complete\+\_\+problem\+\_\+se
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-specifies the source function pointer for all elements,
+ specifies the source function pointer for all elements,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -678,9 +647,7 @@ specifies the source function pointer for all elements,
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-and then re-\/sets the boundary values\+:
+ and then re-\/sets the boundary values\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -702,7 +669,7 @@ The function {\ttfamily apply\+\_\+boundary\+\_\+conditions()} does exactly what
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_apply\_bc=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{ /// Helper function to apply boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_ace8b8b3097ae2024a0589b2bf9b4ee7b}{UnstructuredPoissonProblem<ELEMENT>::apply\_boundary\_conditions}}()}
 \DoxyCodeLine{\{}
@@ -734,9 +701,7 @@ The function {\ttfamily apply\+\_\+boundary\+\_\+conditions()} does exactly what
 \DoxyCodeLine{\} \textcolor{comment}{// end set bc}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 We compare the computed solution against the exact solution\+:
@@ -745,7 +710,7 @@ We compare the computed solution against the exact solution\+:
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredPoissonProblem_a9b21a3c3f574da71411f852006fe2a0c}{UnstructuredPoissonProblem<ELEMENT>::doc\_solution}}(\textcolor{keyword}{const} }
 \DoxyCodeLine{                                                       std::string\& comment)}
@@ -757,23 +722,23 @@ We compare the computed solution against the exact solution\+:
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts;}
 \DoxyCodeLine{ npts=5; }
 \DoxyCodeLine{ }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"RESLT/soln\%i.dat"},Doc\_info.number());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}RESLT/soln\%i.dat"{}},Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ this-\/>My\_mesh\_pt-\/>output(some\_file,npts); }
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"TEXT X = 22, Y = 92, CS=FRAME T = \(\backslash\)""} }
-\DoxyCodeLine{           << comment << \textcolor{stringliteral}{"\(\backslash\)"\(\backslash\)n"};}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}TEXT X = 22, Y = 92, CS=FRAME T = \(\backslash\)"{}"{}} }
+\DoxyCodeLine{           << comment << \textcolor{stringliteral}{"{}\(\backslash\)"{}\(\backslash\)n"{}};}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"RESLT/exact\_soln\%i.dat"},Doc\_info.number());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}RESLT/exact\_soln\%i.dat"{}},Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ My\_mesh\_pt-\/>output\_fct(some\_file,npts,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}}); }
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output boundaries}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"RESLT/boundaries\%i.dat"},Doc\_info.number());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}RESLT/boundaries\%i.dat"{}},Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ My\_mesh\_pt-\/>output\_boundaries(some\_file);}
 \DoxyCodeLine{ some\_file.close();}
@@ -782,7 +747,7 @@ We compare the computed solution against the exact solution\+:
 \DoxyCodeLine{ \textcolor{comment}{// Doc error and return of the square of the L2 error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm,dummy\_error,zero\_norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"RESLT/error\%i.dat"},Doc\_info.number());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}RESLT/error\%i.dat"{}},Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ My\_mesh\_pt-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}},}
 \DoxyCodeLine{                           error,norm); }
@@ -792,10 +757,10 @@ We compare the computed solution against the exact solution\+:
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc L2 error and norm of solution}}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"\(\backslash\)nNorm of error   : "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Norm of exact solution: "} << sqrt(norm) << std::endl;}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Norm of computed solution: "} << sqrt(dummy\_error) << std::endl;}
-\DoxyCodeLine{ Trace\_file << sqrt(norm) << \textcolor{stringliteral}{" "} << sqrt(dummy\_error) << std::endl;}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}\(\backslash\)nNorm of error   : "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Norm of exact solution: "{}} << sqrt(norm) << std::endl;}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Norm of computed solution: "{}} << sqrt(dummy\_error) << std::endl;}
+\DoxyCodeLine{ Trace\_file << sqrt(norm) << \textcolor{stringliteral}{"{} "{}} << sqrt(dummy\_error) << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Increment the doc\_info number}}
 \DoxyCodeLine{ Doc\_info.number()++;}
@@ -809,7 +774,7 @@ We compare the computed solution against the exact solution\+:
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_wrapper}{}\doxysubsection{Upgrading elements to become \char`\"{}projectable\char`\"{}}\label{index_wrapper}
-As discussed above, a key step in the \char`\"{}mesh-\/adaptation-\/by-\/mesh-\/regeneration\char`\"{} procedure is the projection of the solution from the old to the new mesh. The ability to perform this projection fully-\/automatically during the mesh adaptation requires the elements to be \char`\"{}wrapped\char`\"{} in the templated {\ttfamily Projectable\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$} class. This class is derived from the {\ttfamily Projectable\+Element\+Base} base class which specifies a number of pure virtual functions that must be specified for each specific element type. For the Poisson problem considered here these functions are already provided in the {\ttfamily Projectable\+Poisson\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$} class. Similar wrappers exist for many other equations. If you want to \char`\"{}upgrade\char`\"{} your own elements to become projectable, inspect the prototypes for the relevant pure virtual functions which are defined in
+As discussed above, a key step in the \char`\"{}mesh-\/adaptation-\/by-\/mesh-\/regeneration\char`\"{} procedure is the projection of the solution from the old to the new mesh. The ability to perform this projection fully-\/automatically during the mesh adaptation requires the elements to be \char`\"{}wrapped\char`\"{} in the templated {\ttfamily Projectable\+Element$<$\+ELEMENT$>$} class. This class is derived from the {\ttfamily Projectable\+Element\+Base} base class which specifies a number of pure virtual functions that must be specified for each specific element type. For the Poisson problem considered here these functions are already provided in the {\ttfamily Projectable\+Poisson\+Element$<$\+ELEMENT$>$} class. Similar wrappers exist for many other equations. If you want to \char`\"{}upgrade\char`\"{} your own elements to become projectable, inspect the prototypes for the relevant pure virtual functions which are defined in
 
 \begin{center} \href{../../../../src/generic/projection.h}{\texttt{ src/generic/projection.\+h }} \end{center} 
 
@@ -826,7 +791,7 @@ As discussed above, meshes with curvilinear boundaries are created in a two-\/st
 \item The number of boundary nodes created by Triangle will be at least as big as the number of vertices specified. Triangle may add additional boundary nodes to generate a mesh of sufficient quality but it will not remove any vertices. Using a very large number of vertices can therefore lead to unnecessarily fine meshes. ~\newline
 ~\newline
 
-\item If the number of vertices is too small, the polygonal representation of the domain boundary may be a poor approximation to the actual curvilinear boundary. Elements near such boundaries may become (too) strongly distorted when nodes are \char`\"{}snapped\char`\"{} onto the curvilinear boundary. This often manifests itself in inverted elements. (An element is considered inverted if the Jacobian of the mapping between local and global coordinates becomes non-\/positive anywhere. Note that negative Jacobians may occur in the interior of elements (e.\+g. at their Gauss points) even if a plot of the element, based on its nodal positions, still looks \char`\"{}\+O\+K\char`\"{}).
+\item If the number of vertices is too small, the polygonal representation of the domain boundary may be a poor approximation to the actual curvilinear boundary. Elements near such boundaries may become (too) strongly distorted when nodes are \char`\"{}snapped\char`\"{} onto the curvilinear boundary. This often manifests itself in inverted elements. (An element is considered inverted if the Jacobian of the mapping between local and global coordinates becomes non-\/positive anywhere. Note that negative Jacobians may occur in the interior of elements (e.\+g. at their Gauss points) even if a plot of the element, based on its nodal positions, still looks \char`\"{}\+OK\char`\"{}).
 \end{DoxyItemize}\DoxyHorRuler{0}
 \hypertarget{index_ex}{}\doxysubsection{Exercises}\label{index_ex}
 
@@ -876,5 +841,5 @@ Note the {\ttfamily Triangle\+Mesh\+Open\+Curve} object, which allows to define 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -1,38 +1,38 @@
-\_form#0:\[ \sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ (1) \]
-\_form#1:$ D $
-\_form#2:\[ \mathbf{r}_{ellipse}(\xi,t) = \left( \begin{array}{c} \big( a+\hat{a}\sin(2\pi t/\hat{T}) \big) \cos(\xi) \\ \big( b+\hat{b}\sin(2\pi t/\hat{T}) \big) \sin(\xi) \end{array} \right), \ \ \ \ \ \ \ \ \ \ (2) \]
-\_form#3:\[ \left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}= - \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}= g_0, \ \ \ \ \ \ \ \ \ \ (3) \]
-\_form#4:$ \partial D_{Neumann} = \{ (x_1,x_2) | x_1 \in [0,1], x_2=0 \} $
-\_form#5:\[ \left. u\right|_{\partial D_{Dirichlet}}=h_0, \ \ \ \ \ \ \ \ \ \ (4) \]
-\_form#6:\[ u(x_1,x_2,t=0)=k_0(x_1,x_2), \ \ \ \ \ \ \ \ \ \ (5) \]
-\_form#7:$ f, g_0, \ h_0 $
-\_form#8:$ k_0 $
-\_form#9:\[ u_0(x_1,x_2,t) = \tanh\bigg[ 1-\alpha\bigg( \tan\Phi \big(x_1-\beta\tanh[ \gamma\cos\left(2\pi t\right)]\big)- x_2\bigg)\bigg] \ \ \ \ \ \ \ \ \ \ (6) \]
-\_form#10:$ \alpha $
-\_form#11:$ \alpha \gg 1 $
-\_form#12:$ \Phi $
-\_form#13:$ x_1- $
-\_form#14:$ \beta $
-\_form#15:$ \gamma $
-\_form#16:$ \gamma \gg 1 $
-\_form#17:$ \alpha=10, \ \Phi=45^o, \ \beta=-0.3, \ \gamma=5. $
-\_form#18:$ N_{node}^{(E)} $
-\_form#19:$ U_j^{(E)}(t) \ (i=1,..., N_{node}^{(E)})$
-\_form#20:\[ u = \sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ \ \ \ \ \ \ (7) \]
-\_form#21:$ s_1 $
-\_form#22:$ s_2 $
-\_form#23:\[ x_i(s_1,s_2) = \sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ (i=1,2) \ \ \ \ \ \ (8) \]
-\_form#24:$ X_{ij}^{(E)}(t) $
-\_form#25:$ dU_j(t)/dt $
-\_form#26:$ u $
-\_form#27:$ \partial u/\partial t, $
-\_form#28:\[ \left. \frac{D u}{Dt}\right|_{\mbox{\small node} \ j} = \frac{\partial u}{\partial t} + \sum_{i=1}^2 v_{ij} \ \frac{\partial u}{\partial x_i} \]
-\_form#29:\[ v_{ij} = \frac{dX_{ij}^{(E)}}{dt} \]
-\_form#30:\[ \frac{\partial u}{\partial t} = \frac{d U_j^{(E)}}{dt} - \sum_{i=1}^2 \left( \frac{dX_{ij}^{(E)}}{dt} \ \sum_{k=1}^{N_{node}^{(E)}} U_k^{(E)} \ \frac{\partial \psi_{k}}{\partial x_i} \right) . \]
-\_form#31:$ a $
-\_form#32:$ b $
-\_form#33:$ \hat{a} $
-\_form#34:$ \hat{b} $
-\_form#35:$ \hat{T} $
-\_form#36:\[ x = (a + \widehat{a} \sin(2\Pi t/T)) \cos(\xi) \]
-\_form#37:\[ y = (b + \widehat{b} \sin(2\Pi t/T)) \sin(\xi) \]
+\_form#0=159x14:\[ x = (a + \widehat{a} \sin(2\Pi t/T)) \cos(\xi) \]
+\_form#1=154x18:\[ y = (b + \widehat{b} \sin(2\Pi t/T)) \sin(\xi) \]
+\_form#2=216x38:\[ \sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} = \frac{\partial u}{\partial t} + f\left(x_1,x_2,t\right), \ \ \ \ \ \ \ \ \ \ (1) \]
+\_form#3=10x10:$ D $
+\_form#4=309x34:\[ \mathbf{r}_{ellipse}(\xi,t) = \left( \begin{array}{c} \big( a+\hat{a}\sin(2\pi t/\hat{T}) \big) \cos(\xi) \\ \big( b+\hat{b}\sin(2\pi t/\hat{T}) \big) \sin(\xi) \end{array} \right), \ \ \ \ \ \ \ \ \ \ (2) \]
+\_form#5=280x34:\[ \left. \frac{\partial u}{\partial n}\right|_{\partial D_{Neumann}}= - \left. \frac{\partial u}{\partial x_2}\right|_{\partial D_{Neumann}}= g_0, \ \ \ \ \ \ \ \ \ \ (3) \]
+\_form#6=231x14:$ \partial D_{Neumann} = \{ (x_1,x_2) | x_1 \in [0,1], x_2=0 \} $
+\_form#7=156x15:\[ \left. u\right|_{\partial D_{Dirichlet}}=h_0, \ \ \ \ \ \ \ \ \ \ (4) \]
+\_form#8=213x14:\[ u(x_1,x_2,t=0)=k_0(x_1,x_2), \ \ \ \ \ \ \ \ \ \ (5) \]
+\_form#9=45x13:$ f, g_0, \ h_0 $
+\_form#10=11x13:$ k_0 $
+\_form#11=421x31:\[ u_0(x_1,x_2,t) = \tanh\bigg[ 1-\alpha\bigg( \tan\Phi \big(x_1-\beta\tanh[ \gamma\cos\left(2\pi t\right)]\big)- x_2\bigg)\bigg] \ \ \ \ \ \ \ \ \ \ (6) \]
+\_form#12=8x6:$ \alpha $
+\_form#13=33x10:$ \alpha \gg 1 $
+\_form#14=9x10:$ \Phi $
+\_form#15=23x9:$ x_1- $
+\_form#16=9x13:$ \beta $
+\_form#17=9x9:$ \gamma $
+\_form#18=34x11:$ \gamma \gg 1 $
+\_form#19=193x13:$ \alpha=10, \ \Phi=45^o, \ \beta=-0.3, \ \gamma=5. $
+\_form#20=31x19:$ N_{node}^{(E)} $
+\_form#21=134x20:$ U_j^{(E)}(t) \ (i=1,..., N_{node}^{(E)})$
+\_form#22=211x45:\[ u = \sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ \ \ \ \ \ \ (7) \]
+\_form#23=10x9:$ s_1 $
+\_form#24=10x9:$ s_2 $
+\_form#25=304x45:\[ x_i(s_1,s_2) = \sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ (i=1,2) \ \ \ \ \ \ (8) \]
+\_form#26=43x20:$ X_{ij}^{(E)}(t) $
+\_form#27=51x14:$ dU_j(t)/dt $
+\_form#28=9x6:$ u $
+\_form#29=35x14:$ \partial u/\partial t, $
+\_form#30=166x38:\[ \left. \frac{D u}{Dt}\right|_{\mbox{\small node} \ j} = \frac{\partial u}{\partial t} + \sum_{i=1}^2 v_{ij} \ \frac{\partial u}{\partial x_i} \]
+\_form#31=68x34:\[ v_{ij} = \frac{dX_{ij}^{(E)}}{dt} \]
+\_form#32=258x54:\[ \frac{\partial u}{\partial t} = \frac{d U_j^{(E)}}{dt} - \sum_{i=1}^2 \left( \frac{dX_{ij}^{(E)}}{dt} \ \sum_{k=1}^{N_{node}^{(E)}} U_k^{(E)} \ \frac{\partial \psi_{k}}{\partial x_i} \right) . \]
+\_form#33=6x6:$ a $
+\_form#34=5x10:$ b $
+\_form#35=6x10:$ \hat{a} $
+\_form#36=5x13:$ \hat{b} $
+\_form#37=10x13:$ \hat{T} $

@@ -75,12 +75,12 @@ namespace oomph
   class Shape
   {
   protected:
-    /// \short Pointer that addresses the storage that will be used to read and
+    /// Pointer that addresses the storage that will be used to read and
     /// set the shape functions. The shape functions are packed into
     /// a flat array of doubles.
     double* Psi;
 
-    /// \short Pointer that addresses the storage allocated by the object on
+    /// Pointer that addresses the storage allocated by the object on
     /// construction. This will be the same as Psi if the object is not
     /// copied.
     double* Allocated_storage;
@@ -130,10 +130,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    Shape(const Shape& shape)
-    {
-      BrokenCopy::broken_copy("Shape");
-    }
+    Shape(const Shape& shape) = delete;
 
     /// Default constructor - just assigns a null pointers and zero index
     /// sizes.
@@ -248,7 +245,7 @@ namespace oomph
       return Psi[i * Index2 + j];
     }
 
-    ///\short Overload the round bracket operator, allowing for two indices
+    /// Overload the round bracket operator, allowing for two indices
     /// (const version)
     inline const double& operator()(const unsigned& i, const unsigned& j) const
     {
@@ -280,12 +277,12 @@ namespace oomph
   class DShape
   {
   private:
-    /// \short Pointer that addresses the storage that will be used to read and
+    /// Pointer that addresses the storage that will be used to read and
     /// set the shape-function derivatives. The values are packed into
     /// a flat array of doubles.
     double* DPsi;
 
-    /// \short Pointer that addresses the storage allocated by the object on
+    /// Pointer that addresses the storage allocated by the object on
     /// construction. This will be the same as DPsi if the object is not
     /// copied.
     double* Allocated_storage;
@@ -352,10 +349,7 @@ namespace oomph
     DShape() : DPsi(0), Allocated_storage(0), Index1(0), Index2(0), Index3(0) {}
 
     /// Broken copy constructor
-    DShape(const DShape& dshape)
-    {
-      BrokenCopy::broken_copy("DShape");
-    }
+    DShape(const DShape& dshape) = delete;
 
     /// The assignment operator does a shallow copy
     /// (resets the pointer to the data)
@@ -468,7 +462,7 @@ namespace oomph
       return DPsi[(i * Index2 + j) * Index3 + k];
     }
 
-    /// \short Direct access to internal storage of data in flat-packed C-style
+    /// Direct access to internal storage of data in flat-packed C-style
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -477,7 +471,7 @@ namespace oomph
       return DPsi[i];
     }
 
-    /// \short Direct access to internal storage of data in flat-packed C-style
+    /// Direct access to internal storage of data in flat-packed C-style
     /// column-major format. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -486,7 +480,7 @@ namespace oomph
       return DPsi[i];
     }
 
-    /// \short Caculate the offset in flat-packed C-style, column-major format,
+    /// Caculate the offset in flat-packed C-style, column-major format,
     /// required for a given i,j. WARNING: Only for experienced users. Only
     /// use this if raw speed is of the essence, as in the solid mechanics
     /// problems.
@@ -544,10 +538,7 @@ namespace oomph
     }
 
     /// Broken assignment operator
-    void operator=(const ShapeWithDeepCopy& old_shape)
-    {
-      BrokenCopy::broken_assign("ShapeWithDeepCopy");
-    }
+    void operator=(const ShapeWithDeepCopy& old_shape) = delete;
 
     /// Destructor, clear up the memory allocated by the object
     ~ShapeWithDeepCopy()
@@ -557,16 +548,16 @@ namespace oomph
     }
   };
 
-  ////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
   //
   // One dimensional shape functions and derivatives.
   // empty -- simply establishes the template parameters.
   //
-  ////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
 
   namespace OneDimLagrange
   {
-    /// \short Definition for 1D Lagrange shape functions. The
+    /// Definition for 1D Lagrange shape functions. The
     /// value of all the shape functions at the local coordinate s
     /// are returned in the array Psi.
     template<unsigned NNODE_1D>
@@ -580,7 +571,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Definition for derivatives of 1D Lagrange shape functions. The
+    /// Definition for derivatives of 1D Lagrange shape functions. The
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
     template<unsigned NNODE_1D>
@@ -594,7 +585,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Definition for second derivatives of
+    /// Definition for second derivatives of
     /// 1D Lagrange shape functions. The
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
@@ -610,7 +601,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short 1D shape functions specialised to linear order (2 Nodes)
+    /// 1D shape functions specialised to linear order (2 Nodes)
     // Note that the numbering is such that shape[0] is at s = -1.0.
     // and shape[1] is at s = 1.0
     template<>
@@ -628,7 +619,7 @@ namespace oomph
       DPsi[1] = 0.5;
     }
 
-    /// \short Second Derivatives of 1D shape functions,
+    /// Second Derivatives of 1D shape functions,
     /// specialised to linear order  (2 Nodes)
     template<>
     inline void d2shape<2>(const double& s, double* DPsi)
@@ -637,7 +628,7 @@ namespace oomph
       DPsi[1] = 0.0;
     }
 
-    /// \short 1D shape functions specialised to quadratic order (3 Nodes)
+    /// 1D shape functions specialised to quadratic order (3 Nodes)
     // Note that the numbering is such that shape[0] is at s = -1.0,
     // shape[1] is at s = 0.0 and shape[2] is at s = 1.0.
     template<>
@@ -726,7 +717,7 @@ namespace oomph
   //======================================================================
   namespace OneDimDiscontinuousGalerkin
   {
-    /// \short Definition for 1D Lagrange shape functions. The
+    /// Definition for 1D Lagrange shape functions. The
     /// value of all the shape functions at the local coordinate s
     /// are returned in the array Psi.
     template<unsigned NNODE_1D>
@@ -745,7 +736,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Definition for derivatives of 1D Lagrange shape functions. The
+    /// Definition for derivatives of 1D Lagrange shape functions. The
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
     template<unsigned NNODE_1D>
@@ -764,7 +755,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Definition for second derivatives of
+    /// Definition for second derivatives of
     /// 1D Lagrange shape functions. The
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
@@ -785,7 +776,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short 1D shape functions specialised to linear order (2 Nodes)
+    /// 1D shape functions specialised to linear order (2 Nodes)
     // Note that the numbering is such that shape[0] is at s = -1.0.
     // and shape[1] is at s = 1.0
     template<>
@@ -803,7 +794,7 @@ namespace oomph
       DPsi[1] = 0.0;
     }
 
-    /// \short Second Derivatives of 1D shape functions,
+    /// Second Derivatives of 1D shape functions,
     /// specialised to linear order  (2 Nodes)
     template<>
     inline void d2shape<2>(const double& s, double* DPsi)
@@ -812,7 +803,7 @@ namespace oomph
       DPsi[1] = 0.0;
     }
 
-    /// \short 1D shape functions specialised to quadratic order (3 Nodes)
+    /// 1D shape functions specialised to quadratic order (3 Nodes)
     // Note that the numbering is such that shape[0] is at s = -1.0,
     // shape[1] is at s = 0.0 and shape[2] is at s = 1.0.
     template<>
@@ -883,7 +874,7 @@ namespace oomph
   //======================================================================
   namespace OneDimDiscontinuousGalerkinMixedOrderBasis
   {
-    /// \short Definition for 1D Lagrange shape functions. The
+    /// Definition for 1D Lagrange shape functions. The
     /// value of all the shape functions at the local coordinate s
     /// are returned in the array Psi.
     template<unsigned NNODE_1D>
@@ -902,7 +893,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Definition for derivatives of 1D Lagrange shape functions. The
+    /// Definition for derivatives of 1D Lagrange shape functions. The
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
     template<unsigned NNODE_1D>
@@ -921,7 +912,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Definition for second derivatives of
+    /// Definition for second derivatives of
     /// 1D Lagrange shape functions. The
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
@@ -942,7 +933,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short 1D shape functions specialised to linear order (2 Nodes)
+    /// 1D shape functions specialised to linear order (2 Nodes)
     // Note that the numbering is such that shape[0] is at s = -1.0.
     // and shape[1] is at s = 1.0
     template<>
@@ -960,7 +951,7 @@ namespace oomph
       DPsi[1] = 0.5;
     }
 
-    /// \short Second Derivatives of 1D shape functions,
+    /// Second Derivatives of 1D shape functions,
     /// specialised to linear order  (2 Nodes)
     template<>
     inline void d2shape<2>(const double& s, double* DPsi)
@@ -969,7 +960,7 @@ namespace oomph
       DPsi[1] = 0.0;
     }
 
-    /// \short 1D shape functions specialised to quadratic order (3 Nodes)
+    /// 1D shape functions specialised to quadratic order (3 Nodes)
     // Note that the numbering is such that shape[0] is at s = -1.0,
     // shape[1] is at s = 0.0 and shape[2] is at s = 1.0.
     template<>
@@ -1040,7 +1031,7 @@ namespace oomph
   //======================================================================
   namespace OneDimDiscontinuousGalerkinMixedOrderTest
   {
-    /// \short Definition for 1D Lagrange shape functions. The
+    /// Definition for 1D Lagrange shape functions. The
     /// value of all the shape functions at the local coordinate s
     /// are returned in the array Psi.
     template<unsigned NNODE_1D>
@@ -1059,7 +1050,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Definition for derivatives of 1D Lagrange shape functions. The
+    /// Definition for derivatives of 1D Lagrange shape functions. The
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
     template<unsigned NNODE_1D>
@@ -1078,7 +1069,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Definition for second derivatives of
+    /// Definition for second derivatives of
     /// 1D Lagrange shape functions. The
     /// value of all the shape function derivatives at the local coordinate s
     /// are returned in the array DPsi.
@@ -1099,7 +1090,7 @@ namespace oomph
         error_stream.str(), OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short 1D shape functions specialised to linear order (2 Nodes)
+    /// 1D shape functions specialised to linear order (2 Nodes)
     // Note that the numbering is such that shape[0] is at s = -1.0.
     // and shape[1] is at s = 1.0
     template<>
@@ -1117,7 +1108,7 @@ namespace oomph
       DPsi[1] = 0.0;
     }
 
-    /// \short Second Derivatives of 1D shape functions,
+    /// Second Derivatives of 1D shape functions,
     /// specialised to linear order  (2 Nodes)
     template<>
     inline void d2shape<2>(const double& s, double* DPsi)
@@ -1126,7 +1117,7 @@ namespace oomph
       DPsi[1] = 0.0;
     }
 
-    /// \short 1D shape functions specialised to quadratic order (3 Nodes)
+    /// 1D shape functions specialised to quadratic order (3 Nodes)
     // Note that the numbering is such that shape[0] is at s = -1.0,
     // shape[1] is at s = 0.0 and shape[2] is at s = 1.0.
     template<>

@@ -24,15 +24,15 @@ Following our usual practice, we use a namespace, {\ttfamily \mbox{\hyperlink{na
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for Poisson equation with "sharp step" }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution for Poisson equation with "{}sharp step"{} }}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceTanhSolnForPoisson}{TanhSolnForPoisson}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Parameter for steepness of "step"}}
+\DoxyCodeLine{\textcolor{comment}{ /// Parameter for steepness of "{}step"{}}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{Alpha}}=1.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Parameter for angle Phi of "step"}}
+\DoxyCodeLine{\textcolor{comment}{ /// Parameter for angle Phi of "{}step"{}}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanPhi}}=0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Exact solution as a Vector}}
@@ -58,9 +58,9 @@ Following our usual practice, we use a namespace, {\ttfamily \mbox{\hyperlink{na
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
-In order to solve the 2D Poisson problem using {\ttfamily oomph-\/lib}, we represent the mathematical problem defined by equations (1) and (2) in a specific {\ttfamily Problem} object, {\ttfamily \mbox{\hyperlink{classPoissonProblem}{Poisson\+Problem}}}. {\ttfamily oomph-\/lib} provides a variety of 2D Poisson elements (e.\+g. 2D quadrilateral elements with bi-\/linear, bi-\/quadratic and bi-\/cubic representations for the unknown function) and we pass the specific element type as a template parameter to the {\ttfamily Problem}. In the driver code, listed below, we use the {\ttfamily Q\+Poisson\+Element$<$2,3$>$}, a nine-\/node (bi-\/quadratic) 2D Poisson element.
+In order to solve the 2D Poisson problem using {\ttfamily oomph-\/lib}, we represent the mathematical problem defined by equations (1) and (2) in a specific {\ttfamily Problem} object, {\ttfamily \mbox{\hyperlink{classPoissonProblem}{Poisson\+Problem}}}. {\ttfamily oomph-\/lib} provides a variety of 2D Poisson elements (e.\+g. 2D quadrilateral elements with bi-\/linear, bi-\/quadratic and bi-\/cubic representations for the unknown function) and we pass the specific element type as a template parameter to the {\ttfamily Problem}. In the driver code, listed below, we use the {\ttfamily QPoisson\+Element$<$2,3$>$}, a nine-\/node (bi-\/quadratic) 2D Poisson element.
 
-The next few lines of the {\ttfamily \mbox{\hyperlink{two__d__poisson_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main()}}} function create a {\ttfamily Doc\+Info} object -- an {\ttfamily oomph-\/lib} object that collates various items of data that can be used to label output files\+: Here we specify that the output files are to be written to the directory \char`\"{}\+R\+E\+S\+L\+T\char`\"{}, and that the first batch of output files should be labelled with the identifier \char`\"{}0\char`\"{}. See the discussion of the postprocessing routine {\ttfamily doc\+\_\+solution(...)} for details. \mbox{[}{\bfseries{Note\+:}} While the ability to specify an output directory from the driver code is useful, it does rely on the \char`\"{}user\char`\"{} having created the directory before the code is executed. We could use the C++ {\ttfamily system(...)} function to issue a system command which creates the directory if it does not exist. Since this would make the code non-\/portable, we only issue a warning suggesting the likely cause of the problem if the output file cannot be opened. If you want to make absolutely sure that the output directory does exist and can be written to, you can change this forgiving behaviour with the function {\ttfamily Doc\+Info\+::directory\+\_\+must\+\_\+exist()}. This function provides access to a boolean flag which is set to {\ttfamily false} by default. If set to {\ttfamily true}, the code execution terminates with {\ttfamily assert(false)} if the directory specified with {\ttfamily Doc\+Info\+::set\+\_\+directory(...)} cannot be written to.\mbox{]}
+The next few lines of the {\ttfamily \mbox{\hyperlink{two__d__poisson_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main()}}} function create a {\ttfamily Doc\+Info} object -- an {\ttfamily oomph-\/lib} object that collates various items of data that can be used to label output files\+: Here we specify that the output files are to be written to the directory \char`\"{}\+RESLT\char`\"{}, and that the first batch of output files should be labelled with the identifier \char`\"{}0\char`\"{}. See the discussion of the postprocessing routine {\ttfamily doc\+\_\+solution(...)} for details. \mbox{[}{\bfseries{Note\+:}} While the ability to specify an output directory from the driver code is useful, it does rely on the \char`\"{}user\char`\"{} having created the directory before the code is executed. We could use the C++ {\ttfamily system(...)} function to issue a system command which creates the directory if it does not exist. Since this would make the code non-\/portable, we only issue a warning suggesting the likely cause of the problem if the output file cannot be opened. If you want to make absolutely sure that the output directory does exist and can be written to, you can change this forgiving behaviour with the function {\ttfamily Doc\+Info\+::directory\+\_\+must\+\_\+exist()}. This function provides access to a boolean flag which is set to {\ttfamily false} by default. If set to {\ttfamily true}, the code execution terminates with {\ttfamily assert(false)} if the directory specified with {\ttfamily Doc\+Info\+::set\+\_\+directory(...)} cannot be written to.\mbox{]}
 
 Next we execute the {\ttfamily Problem\+::self\+\_\+test()} function to check whether the {\ttfamily Problem} has been correctly initialised. If this test is passed, we proceed to the solution. We choose the angle of the \char`\"{}step\char`\"{} as 45 degrees (corresponding to $ \tan \Phi = 1 $) and then solve the problem for a number of values of the steepness parameter $ \alpha. $ We document each solution with the post-\/processing routine {\ttfamily doc\+\_\+solution(...)} which accesses the step number and the output directory via the {\ttfamily Doc\+Info} object.
 
@@ -68,7 +68,7 @@ Next we execute the {\ttfamily Problem\+::self\+\_\+test()} function to check wh
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for 2D Poisson problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__poisson_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -78,37 +78,37 @@ Next we execute the {\ttfamily Problem\+::self\+\_\+test()} function to check wh
 \DoxyCodeLine{ \textcolor{comment}{// Create the problem with 2D nine-\/node elements from the}}
 \DoxyCodeLine{ \textcolor{comment}{// QPoissonElement family. Pass pointer to source function. }}
 \DoxyCodeLine{ \mbox{\hyperlink{classPoissonProblem}{PoissonProblem<QPoissonElement<2,3>}} > }
-\DoxyCodeLine{  \mbox{\hyperlink{two__d__poisson_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(\&\mbox{\hyperlink{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251}{TanhSolnForPoisson::source\_function}});}
+\DoxyCodeLine{  problem(\&\mbox{\hyperlink{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e251}{TanhSolnForPoisson::source\_function}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Create label for output}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Check that we're ready to go:}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "};}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{two__d__poisson_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.self\_test()==0) }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "{}};}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (problem.self\_test()==0) }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"passed: Problem can be solved."} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}passed: Problem can be solved."{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"Self test failed"},}
+\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Self test failed"{}},}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Set the orientation of the "step" to 45 degrees}}
+\DoxyCodeLine{ \textcolor{comment}{// Set the orientation of the "{}step"{} to 45 degrees}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanhSolnForPoisson::TanPhi}}=1.0;}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Initial value for the steepness of the "step"}}
+\DoxyCodeLine{ \textcolor{comment}{// Initial value for the steepness of the "{}step"{}}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{TanhSolnForPoisson::Alpha}}=1.0; }
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -121,14 +121,14 @@ Next we execute the {\ttfamily Problem\+::self\+\_\+test()} function to check wh
 \DoxyCodeLine{   \textcolor{comment}{// Increase the steepness of the step:}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{TanhSolnForPoisson::Alpha}}+=1.0;}
 \DoxyCodeLine{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)nSolving for TanhSolnForPoisson::Alpha="}}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nSolving for TanhSolnForPoisson::Alpha="{}}}
 \DoxyCodeLine{        << \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{TanhSolnForPoisson::Alpha}} << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__poisson_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve();}
+\DoxyCodeLine{   problem.newton\_solve();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Output the solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__poisson_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{   problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{   \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{   doc\_info.number()++;}
@@ -149,17 +149,15 @@ The {\ttfamily \mbox{\hyperlink{classPoissonProblem}{Poisson\+Problem}}} is deri
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====== start\_of\_problem\_class=======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// 2D QPoisson elements. The specific type of element is}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D QPoisson elements. The specific type of element is}}
+\DoxyCodeLine{\textcolor{comment}{/// specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classPoissonProblem}{PoissonProblem}} : \textcolor{keyword}{public} Problem}
 
 \end{DoxyCodeInclude}
-
-
-The problem class has five member functions, only three of which are non-\/trivial\+:
+ The problem class has five member functions, only three of which are non-\/trivial\+:
 \begin{DoxyItemize}
 \item the constructor {\ttfamily \mbox{\hyperlink{classPoissonProblem}{Poisson\+Problem(...)}}} 
 \item the function {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+solve()} 
@@ -176,14 +174,14 @@ The problem class has five member functions, only three of which are non-\/trivi
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classPoissonProblem_ac247e42d2d292200617f4b9db7ed1ab8}{\string~PoissonProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve: Reset boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: Reset boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// to the values from the exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classPoissonProblem_a398608a5ff73b74c5a387b3f794c58df}{actions\_before\_newton\_solve}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classPoissonProblem_a7a9478d8e1e5c7d3a886b00ab7d50bbd}{actions\_after\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution. DocInfo object stores flags/labels for where the}}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution. DocInfo object stores flags/labels for where the}}
 \DoxyCodeLine{\textcolor{comment}{ /// output gets written to}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classPoissonProblem_aab6f503fa242f687bb8452527bb7688f}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{}
@@ -195,9 +193,7 @@ The problem class has five member functions, only three of which are non-\/trivi
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 
 \end{DoxyCodeInclude}
-
-
-\mbox{[}See the discussion of the \href{../../../poisson/one_d_poisson/html/index.html}{\texttt{ 1D Poisson problem}} for a more detailed discussion of the function type Poisson\+Equations$<$2$>$\+::\+Poisson\+Source\+Fct\+Pt.\mbox{]}
+ \mbox{[}See the discussion of the \href{../../../poisson/one_d_poisson/html/index.html}{\texttt{ 1D Poisson problem}} for a more detailed discussion of the function type Poisson\+Equations$<$2$>$\+::\+Poisson\+Source\+Fct\+Pt.\mbox{]}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -212,7 +208,7 @@ Finally we loop over all elements to assign the source function pointer, and the
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Poisson problem: Pass pointer to source function.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classPoissonProblem_a9c28346c473d246d8f61022365e742ea}{PoissonProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classPoissonProblem_a9c28346c473d246d8f61022365e742ea}{      PoissonProblem}}(PoissonEquations<2>::PoissonSourceFctPt source\_fct\_pt)}
@@ -239,12 +235,12 @@ Finally we loop over all elements to assign the source function pointer, and the
 \DoxyCodeLine{ \textcolor{comment}{// free by default -\/-\/ only need to pin the ones that have Dirichlet conditions}}
 \DoxyCodeLine{ \textcolor{comment}{// here. }}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_bound = mesh\_pt()-\/>nboundary();}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}=0;\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}<n\_bound;\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}++)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_bound;i++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node = mesh\_pt()-\/>nboundary\_node(\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}});}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node = mesh\_pt()-\/>nboundary\_node(i);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}},n)-\/>pin(0); }
+\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(i,n)-\/>pin(0); }
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
@@ -254,10 +250,10 @@ Finally we loop over all elements to assign the source function pointer, and the
 \DoxyCodeLine{ \textcolor{comment}{// things that cannot be handled by the (argument-\/free!) ELEMENT }}
 \DoxyCodeLine{ \textcolor{comment}{// constructor: Pass pointer to source function}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element = mesh\_pt()-\/>nelement();}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}=0;\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}<n\_element;\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}++)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_element;i++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Upcast from GeneralsedElement to the present element}}
-\DoxyCodeLine{   ELEMENT *el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}));}
+\DoxyCodeLine{   ELEMENT *el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(i));}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Set the source function pointer}}
 \DoxyCodeLine{   el\_pt-\/>source\_fct\_pt() = \mbox{\hyperlink{classPoissonProblem_a2ba5bb705abab012b72bbd7f4016d5fe}{Source\_fct\_pt}};}
@@ -265,7 +261,7 @@ Finally we loop over all elements to assign the source function pointer, and the
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
@@ -280,8 +276,8 @@ We use {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} to up
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========================================start\_of\_actions\_before\_newton\_solve===}}
-\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to the values from the exact solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// to the values from the exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPoissonProblem_a398608a5ff73b74c5a387b3f794c58df}{PoissonProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
@@ -290,16 +286,16 @@ We use {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} to up
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_bound = mesh\_pt()-\/>nboundary();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Loop over the boundaries}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}=0;\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}<n\_bound;\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}}++)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_bound;i++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// How many nodes are there on this boundary?}}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node = mesh\_pt()-\/>nboundary\_node(\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}});}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node = mesh\_pt()-\/>nboundary\_node(i);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Loop over the nodes on boundary}}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Get pointer to node}}
-\DoxyCodeLine{     Node* nod\_pt=mesh\_pt()-\/>boundary\_node\_pt(\mbox{\hyperlink{two__d__poisson_8txt_aa166dca8d99a7a36f016ae036351695c}{i}},n);}
+\DoxyCodeLine{     Node* nod\_pt=mesh\_pt()-\/>boundary\_node\_pt(i,n);}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Extract nodal coordinates from node:}}
 \DoxyCodeLine{     Vector<double> x(2);}
@@ -332,7 +328,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPoissonProblem_aab6f503fa242f687bb8452527bb7688f}{PoissonProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -345,7 +341,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -354,7 +350,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_fct(some\_file,npts,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}}); }
@@ -363,7 +359,7 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \DoxyCodeLine{ \textcolor{comment}{// Doc error and return of the square of the L2 error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceTanhSolnForPoisson_af7896e9c18ce6438c73ae2a875e8b7de}{TanhSolnForPoisson::get\_exact\_u}},}
@@ -371,8 +367,8 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc L2 error and norm of solution}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)nNorm of error   : "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Norm of solution: "} << sqrt(norm) << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)nNorm of error   : "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Norm of solution: "{}} << sqrt(norm) << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc}}
 
@@ -391,32 +387,30 @@ The function {\ttfamily doc\+\_\+solution(...)} writes the FE solution and the c
 \doxyfigcaption{Plot of the solution for different values of the steepness parameter }
 \end{DoxyImage}
  How many elements are required to resolve the solution with $ \alpha = 10 $ as accurately as in the case of $ \alpha = 1$? \mbox{[}{\bfseries{Note\+:}} Since the solution has steep gradients only in a very narrow region, uniform mesh refinement is an extremely wasteful method of improving the accuracy of the computed solution. {\ttfamily oomph-\/lib} provides powerful mesh adaptation routines which perform fully-\/automatic mesh refinement and unrefinement, based on a posteriori error estimates of the solution. We will demonstrate these in \href{../../../poisson/fish_poisson/html/index.html}{\texttt{ another example.}}\mbox{]}
-\item Repeat the numerical experiments with different element types. Replace the nine-\/node Poisson element, {\ttfamily Q\+Poisson\+Element$<$2,3$>$}, by its lower-\/ and higher-\/order counterparts {\ttfamily Q\+Poisson\+Element$<$2,2$>$} and {\ttfamily Q\+Poisson\+Element$<$2,4$>$}, respectively. Compare the total number of degrees of freedom, the errors, and the run-\/times for the different discretisations.
+\item Repeat the numerical experiments with different element types. Replace the nine-\/node Poisson element, {\ttfamily QPoisson\+Element$<$2,3$>$}, by its lower-\/ and higher-\/order counterparts {\ttfamily QPoisson\+Element$<$2,2$>$} and {\ttfamily QPoisson\+Element$<$2,4$>$}, respectively. Compare the total number of degrees of freedom, the errors, and the run-\/times for the different discretisations.
 \end{DoxyEnumerate}\hypertarget{index_precompile_mesh}{}\doxysubsection{Header files and precompiled meshes}\label{index_precompile_mesh}
-We have repeatedly stressed that {\ttfamily oomph-\/lib} {\ttfamily Mesh} objects are (and any user-\/written ones should be) templated by the element type, so that meshes can be used with all finite elements that are derived from the same geometric element (2D quad elements from the {\ttfamily Q\+Element} family, say). Typically, the element type is specified in the driver code. Consequently, the compiler must instantiate the {\ttfamily Mesh} object for a particular element type when the driver code is compiled -- there is no point in trying to \char`\"{}pre-\/compile\char`\"{} a {\ttfamily Mesh} object for \char`\"{}all possible element types\char`\"{}. The source code for {\ttfamily Mesh} objects is therefore usually contained in a single (header) file which must be included in the driver code. The first few lines of the driver code \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson.cc}{\texttt{ two\+\_\+d\+\_\+poisson.\+cc}} illustrate the technique\+:
+We have repeatedly stressed that {\ttfamily oomph-\/lib} {\ttfamily Mesh} objects are (and any user-\/written ones should be) templated by the element type, so that meshes can be used with all finite elements that are derived from the same geometric element (2D quad elements from the {\ttfamily QElement} family, say). Typically, the element type is specified in the driver code. Consequently, the compiler must instantiate the {\ttfamily Mesh} object for a particular element type when the driver code is compiled -- there is no point in trying to \char`\"{}pre-\/compile\char`\"{} a {\ttfamily Mesh} object for \char`\"{}all possible element types\char`\"{}. The source code for {\ttfamily Mesh} objects is therefore usually contained in a single (header) file which must be included in the driver code. The first few lines of the driver code \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson.cc}{\texttt{ two\+\_\+d\+\_\+poisson.\+cc}} illustrate the technique\+:
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//Driver for a simple 2D poisson problem}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Generic routines}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// The Poisson equations}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "poisson.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}poisson.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// The mesh}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/simple\_rectangular\_quadmesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/simple\_rectangular\_quadmesh.h"{}}}
 
 \end{DoxyCodeInclude}
-
-
-The code uses objects from the {\ttfamily generic} and {\ttfamily poisson} libraries whose function prototypes are contained in the header files {\ttfamily generic.\+h} and {\ttfamily poisson.\+h}, located in the {\ttfamily oomph-\/lib} {\ttfamily include} directory. All objects in these libraries are fully instantiated and no re-\/compilation is required -- we simply link against the libraries which are located in {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily lib} directory. The mesh header files (which include the entire source code for each mesh) are located in the include (sub-\/)directory {\ttfamily include/meshes}, and are included into the driver code with a C++ include directive
+ The code uses objects from the {\ttfamily generic} and {\ttfamily poisson} libraries whose function prototypes are contained in the header files {\ttfamily generic.\+h} and {\ttfamily poisson.\+h}, located in the {\ttfamily oomph-\/lib} {\ttfamily include} directory. All objects in these libraries are fully instantiated and no re-\/compilation is required -- we simply link against the libraries which are located in {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily lib} directory. The mesh header files (which include the entire source code for each mesh) are located in the include (sub-\/)directory {\ttfamily include/meshes}, and are included into the driver code with a C++ include directive
 
 While this strategy greatly facilitates code reuse, it can incur significant compile-\/time overheads as the (possibly very lengthy) mesh sources must be recompiled whenever the driver code is changed. During code development, this overhead can become unacceptable. To avoid the constant re-\/compilation of the mesh sources, all {\ttfamily oomph-\/lib} mesh objects are contained in two separate source files. In the case of the {\ttfamily Simple\+Rectangular\+Mesh}, the class definition and function prototypes are contained in the small auxiliary header file {\ttfamily simple\+\_\+rectangular\+\_\+quadmesh.\+template.\+h}, while the actual function definitions are contained in {\ttfamily simple\+\_\+rectangular\+\_\+quadmesh.\+template.\+cc}. These are the only sources that the mesh-\/writer has to provide. The header file {\ttfamily simple\+\_\+rectangular\+\_\+quadmesh.\+h} is generated (automatically) by concatenating the two $\ast$.template.$\ast$ files and all three files are contained in the mesh include directory. This allows the \char`\"{}user\char`\"{} to pre-\/compile the mesh for a specific element type (or for a range of specific elements) to produce a separate object file that can be linked against when the driver code is built.
 
 The procedure is illustrated in the alternative source code ~\newline
- \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2.cc}{\texttt{ two\+\_\+d\+\_\+poisson2.\+cc}} and the associated mesh file, \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2_mesh.cc}{\texttt{ two\+\_\+d\+\_\+poisson2\+\_\+mesh.\+cc}}. In the original version of the code, \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson.cc}{\texttt{ two\+\_\+d\+\_\+poisson.\+cc}}, the mesh was instantiated with the element type {\ttfamily Q\+Poisson\+Element$<$2,3$>$} and we will assume that this is the only element type required in the driver code. We force the instantiation of the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} for this element type by employing the C++ \char`\"{}template\char`\"{} statement in the mesh file, \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2_mesh.cc}{\texttt{ two\+\_\+d\+\_\+poisson2\+\_\+mesh.\+cc}}, which is listed in its entirety here\+:
+ \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2.cc}{\texttt{ two\+\_\+d\+\_\+poisson2.\+cc}} and the associated mesh file, \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2_mesh.cc}{\texttt{ two\+\_\+d\+\_\+poisson2\+\_\+mesh.\+cc}}. In the original version of the code, \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson.cc}{\texttt{ two\+\_\+d\+\_\+poisson.\+cc}}, the mesh was instantiated with the element type {\ttfamily QPoisson\+Element$<$2,3$>$} and we will assume that this is the only element type required in the driver code. We force the instantiation of the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} for this element type by employing the C++ \char`\"{}template\char`\"{} statement in the mesh file, \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson2_mesh.cc}{\texttt{ two\+\_\+d\+\_\+poisson2\+\_\+mesh.\+cc}}, which is listed in its entirety here\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -452,18 +446,19 @@ The procedure is illustrated in the alternative source code ~\newline
 \DoxyCodeLine{\textcolor{comment}{// mesh with long compile times}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Include Poisson elements/equations}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "poisson.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}poisson.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Include the full source for mesh (this is the automatically generated}}
 \DoxyCodeLine{\textcolor{comment}{// combined header file that contains the templated header and the}}
 \DoxyCodeLine{\textcolor{comment}{// templated sources)}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/simple\_rectangular\_quadmesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/simple\_rectangular\_quadmesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{  \textcolor{comment}{// Force build of specific mesh}}
 \DoxyCodeLine{  \textcolor{keyword}{template} \textcolor{keyword}{class }SimpleRectangularQuadMesh<QPoissonElement<2, 3>>;}
 \DoxyCodeLine{\} \textcolor{comment}{// namespace oomph}}
+
 \end{DoxyCodeInclude}
 
 
@@ -476,40 +471,39 @@ The driver code only needs to include the templated header file (which contains 
 \DoxyCodeLine{\textcolor{comment}{//Driver for a simple 2D poisson problem}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Generic routines}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// The Poisson equations}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "poisson.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}poisson.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Include the templated mesh header only -\/-\/ the mesh is}}
 \DoxyCodeLine{\textcolor{comment}{// precompiled and instantiated with the required element type}}
 \DoxyCodeLine{\textcolor{comment}{// in the separate file, two\_d\_poisson2\_mesh.cc to avoid}}
 \DoxyCodeLine{\textcolor{comment}{// recompilation.}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/simple\_rectangular\_quadmesh.template.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/simple\_rectangular\_quadmesh.template.h"{}}}
 
 \end{DoxyCodeInclude}
-
-
-The driver code can now be compiled separately (without having to recompile the mesh sources every time) and the correctly instantiated version of the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} can be made available by including {\ttfamily two\+\_\+d\+\_\+poisson2\+\_\+mesh.\+o} during the linking phase.\hypertarget{index_different_solvers}{}\doxysubsection{How to choose the linear solver for the Newton method}\label{index_different_solvers}
-{\ttfamily oomph-\/lib} treats all problems as nonlinear problems and provides steady (and unsteady) Newton solvers to solve the system of nonlinear algebraic equations that arise from the spatial (and temporal) discretisation of the governing equations. Typically, the repeated assembly of the Jacobian matrix and the solution of the linear systems during the Newton iteration provides the major part of the computational work. Within this framework linear problems are simply special cases of nonlinear problems for which the Newton method converges in one iteration. The assembly of the Jacobian matrix and the solution of the linear system is performed by {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Linear\+Solver} objects. These typically provide interfaces to general purpose linear solvers such as {\ttfamily Super\+L\+U\+Solver} (our default solver). The list of solvers includes\+:
+ The driver code can now be compiled separately (without having to recompile the mesh sources every time) and the correctly instantiated version of the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} can be made available by including {\ttfamily two\+\_\+d\+\_\+poisson2\+\_\+mesh.\+o} during the linking phase.\hypertarget{index_different_solvers}{}\doxysubsection{How to choose the linear solver for the Newton method}\label{index_different_solvers}
+{\ttfamily oomph-\/lib} treats all problems as nonlinear problems and provides steady (and unsteady) Newton solvers to solve the system of nonlinear algebraic equations that arise from the spatial (and temporal) discretisation of the governing equations. Typically, the repeated assembly of the Jacobian matrix and the solution of the linear systems during the Newton iteration provides the major part of the computational work. Within this framework linear problems are simply special cases of nonlinear problems for which the Newton method converges in one iteration. The assembly of the Jacobian matrix and the solution of the linear system is performed by {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Linear\+Solver} objects. These typically provide interfaces to general purpose linear solvers such as {\ttfamily Super\+LUSolver} (our default solver). The list of solvers includes\+:
 \begin{DoxyItemize}
-\item {\ttfamily Super\+L\+U\+Solver\+:} An interface to Demmel, Eistenstat, Gilbert, Li \& Liu\textquotesingle{}s serial Super\+LU solver. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+L\+U/}} for details.
-\item {\ttfamily H\+S\+L\+\_\+\+M\+A42\+:} An interface to the M\+A42 frontal solver from the H\+SL library. See \href{http://www.hsl.rl.ac.uk/}{\texttt{ http\+://www.\+hsl.\+rl.\+ac.\+uk}} for details.
-\item {\ttfamily F\+D\+\_\+\+LU\+:} An extremely inefficient solver which computes the Jacobian matrix by finite differencing and stores it in a dense matrix. This solver is mainly provided to facilitate sanity checks during code development. (The residuals are easier to compute than the the Jacobian matrix!)
+\item {\ttfamily Super\+LUSolver\+:} An interface to Demmel, Eistenstat, Gilbert, Li \& Liu\textquotesingle{}s serial Super\+LU solver. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+LU/}} for details.
+\item {\ttfamily HSL\+\_\+\+MA42\+:} An interface to the MA42 frontal solver from the HSL library. See \href{http://www.hsl.rl.ac.uk/}{\texttt{ http\+://www.\+hsl.\+rl.\+ac.\+uk}} for details.
+\item {\ttfamily FD\+\_\+\+LU\+:} An extremely inefficient solver which computes the Jacobian matrix by finite differencing and stores it in a dense matrix. This solver is mainly provided to facilitate sanity checks during code development. (The residuals are easier to compute than the the Jacobian matrix!)
 \item ...and many others. See the \href{../../../linear_solvers/html/index.html}{\texttt{ Linear Solvers Tutorial}} for a more detailed discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} various direct and iterative solvers.
-\end{DoxyItemize}By default the {\ttfamily oomph-\/lib} Newton solvers use {\ttfamily Super\+LU} with compressed row storage for the Jacobian matrix as the linear solver. To change the linear solver to another type you can over-\/write the {\ttfamily Problem\textquotesingle{}s} pointer to its linear solver. For instance, to change the linear solver to {\ttfamily H\+S\+L\+\_\+\+M\+A42}, add the following lines to the {\ttfamily Problem} constructor\+:
+\end{DoxyItemize}By default the {\ttfamily oomph-\/lib} Newton solvers use {\ttfamily Super\+LU} with compressed row storage for the Jacobian matrix as the linear solver. To change the linear solver to another type you can over-\/write the {\ttfamily Problem\textquotesingle{}s} pointer to its linear solver. For instance, to change the linear solver to {\ttfamily HSL\+\_\+\+MA42}, add the following lines to the {\ttfamily Problem} constructor\+:
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Build a linear solver: Use HSL's MA42 frontal solver}}
-\DoxyCodeLine{\textcolor{comment}{}Problem::linear\_solver\_pt() = \textcolor{keyword}{new} HSL\_MA42;}
+\DoxyCodeLine{Problem::linear\_solver\_pt() = \textcolor{keyword}{new} HSL\_MA42;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{/// Switch on full doc for frontal solver}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{static\_cast<}HSL\_MA42*\textcolor{keyword}{>}(Problem::linear\_solver\_pt())-\/>doc\_stats()=\textcolor{keyword}{true};}
+
 \end{DoxyCode}
 
 
-{\ttfamily H\+S\+L\+\_\+\+M\+A42} can document various statistics such the memory usage etc. This is enabled with the second command. Other solvers have similar member functions. See the \href{../../../the_data_structure/html/index.html}{\texttt{ full documentation of all {\ttfamily oomph-\/lib} classes}} for details.
+{\ttfamily HSL\+\_\+\+MA42} can document various statistics such the memory usage etc. This is enabled with the second command. Other solvers have similar member functions. See the \href{../../../the_data_structure/html/index.html}{\texttt{ full documentation of all {\ttfamily oomph-\/lib} classes}} for details.
 
 We provide an example code \href{../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson_compare_solvers.cc}{\texttt{ two\+\_\+d\+\_\+poisson\+\_\+compare\+\_\+solvers.\+cc}} which can be used to explore the performance of various linear solvers for the 2D Poisson problem considered above.
 
@@ -524,5 +518,5 @@ We provide an example code \href{../../../../demo_drivers/poisson/two_d_poisson/
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

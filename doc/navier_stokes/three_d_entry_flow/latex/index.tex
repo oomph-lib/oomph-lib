@@ -37,7 +37,7 @@ The problem only contains one global parameter, the Reynolds number, which we de
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_namespace================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -45,9 +45,7 @@ The problem only contains one global parameter, the Reynolds number, which we de
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 Since the 3D computations can take a long time, and since all demo codes are executed during {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/test procedures, we allow the code to operate in two modes\+:
@@ -59,9 +57,9 @@ Since the 3D computations can take a long time, and since all demo codes are exe
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_main=======================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver for 3D entry flow into a quarter tube. If there are}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// any command line arguments, we regard this as a validation run}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// and perform only a single adaptation}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver for 3D entry flow into a quarter tube. If there are}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// any command line arguments, we regard this as a validation run}}
+\DoxyCodeLine{\textcolor{comment}{/// and perform only a single adaptation}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{three__d__entry__flow_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
@@ -102,9 +100,7 @@ Since the 3D computations can take a long time, and since all demo codes are exe
 \DoxyCodeLine{ \textcolor{comment}{// end max\_adapt setup}}
 
 \end{DoxyCodeInclude}
-
-
-We then create a {\ttfamily Doc\+Info} object to specify the labels for the output files, and solve the problem, first with Taylor-\/\+Hood and then with Crouzeix-\/\+Raviart elements, writing the results from the two discretisations to different directories\+:
+ We then create a {\ttfamily Doc\+Info} object to specify the labels for the output files, and solve the problem, first with Taylor-\/\+Hood and then with Crouzeix-\/\+Raviart elements, writing the results from the two discretisations to different directories\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -117,23 +113,23 @@ We then create a {\ttfamily Doc\+Info} object to specify the labels for the outp
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_TH"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()=0;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Build problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classEntryFlowProblem}{EntryFlowProblem<RefineableQTaylorHoodElement<3>}} > }
-\DoxyCodeLine{   \mbox{\hyperlink{three__d__entry__flow_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}(doc\_info,min\_error\_target,max\_error\_target);}
+\DoxyCodeLine{   problem(doc\_info,min\_error\_target,max\_error\_target);}
 \DoxyCodeLine{  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{" Doing Taylor-\/Hood elements "} << std::endl;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{} Doing Taylor-\/Hood elements "{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Doc solution after solving}}
-\DoxyCodeLine{  \mbox{\hyperlink{three__d__entry__flow_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution();}
+\DoxyCodeLine{  problem.doc\_solution();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem }}
-\DoxyCodeLine{  \mbox{\hyperlink{three__d__entry__flow_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve(max\_adapt);}
+\DoxyCodeLine{  problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -141,27 +137,25 @@ We then create a {\ttfamily Doc\+Info} object to specify the labels for the outp
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_CR"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_CR"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()=0;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Build problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classEntryFlowProblem}{EntryFlowProblem<RefineableQCrouzeixRaviartElement<3>}} >}
-\DoxyCodeLine{   \mbox{\hyperlink{three__d__entry__flow_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}(doc\_info,min\_error\_target,max\_error\_target);}
+\DoxyCodeLine{   problem(doc\_info,min\_error\_target,max\_error\_target);}
 \DoxyCodeLine{  }
-\DoxyCodeLine{  cout << \textcolor{stringliteral}{" Doing Crouzeix-\/Raviart elements "} << std::endl;}
+\DoxyCodeLine{  cout << \textcolor{stringliteral}{"{} Doing Crouzeix-\/Raviart elements "{}} << std::endl;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem }}
-\DoxyCodeLine{  \mbox{\hyperlink{three__d__entry__flow_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve(max\_adapt);}
+\DoxyCodeLine{  problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The problem class is very similar to the ones used in the \href{../../circular_driven_cavity/html/index.html\#problem}{\texttt{ 2D examples}}. We pass the {\ttfamily Doc\+Info} object and the target errors to the {\ttfamily Problem} constructor.
@@ -170,7 +164,7 @@ The problem class is very similar to the ones used in the \href{../../circular_d
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Entry flow problem in quarter tube domain}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classEntryFlowProblem}{EntryFlowProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -185,9 +179,7 @@ The problem class is very similar to the ones used in the \href{../../circular_d
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classEntryFlowProblem_a22d76abde64459f167067c1d2cb5c1e2}{\string~EntryFlowProblem}}() \{\}}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve()} is used to document the solutions computed at various levels of mesh refinement\+:
+ The function {\ttfamily Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve()} is used to document the solutions computed at various levels of mesh refinement\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -203,14 +195,12 @@ The function {\ttfamily Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve()} 
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} is discussed \href{\#before_solve}{\texttt{ below}}, and, as in all adaptive Navier-\/\+Stokes computations, we use the function {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} to pin any redundant pressure degrees of freedom; see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details.
+ The function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} is discussed \href{\#before_solve}{\texttt{ below}}, and, as in all adaptive Navier-\/\+Stokes computations, we use the function {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()} to pin any redundant pressure degrees of freedom; see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve }}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// After adaptation: Pin redudant pressure dofs.}}
@@ -222,9 +212,7 @@ The function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}
 \DoxyCodeLine{  \} }
 
 \end{DoxyCodeInclude}
-
-
-Finally, we have the usual {\ttfamily doc\+\_\+solution()} function and include an access function to the mesh. The private member data {\ttfamily Alpha} determines the bluntness of the inflow profile.
+ Finally, we have the usual {\ttfamily doc\+\_\+solution()} function and include an access function to the mesh. The private member data {\ttfamily Alpha} determines the bluntness of the inflow profile.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -232,7 +220,7 @@ Finally, we have the usual {\ttfamily doc\+\_\+solution()} function and include 
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Overload generic access function by one that returns}}
+\DoxyCodeLine{\textcolor{comment}{ /// Overload generic access function by one that returns}}
 \DoxyCodeLine{\textcolor{comment}{ /// a pointer to the specific  mesh}}
 \DoxyCodeLine{\textcolor{comment}{} RefineableQuarterTubeMesh<ELEMENT>* mesh\_pt() }
 \DoxyCodeLine{  \{}
@@ -250,9 +238,7 @@ Finally, we have the usual {\ttfamily doc\+\_\+solution()} function and include 
 \DoxyCodeLine{\}; \textcolor{comment}{// end\_of\_problem\_class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The constructor}\label{index_constructor}
 We start by building the adaptive mesh for the quarter tube domain. As for most meshes with curvilinear boundaries, the {\ttfamily Refineablequarter\+Tube\+Mesh} expects the curved boundary to be represented by a {\ttfamily Geom\+Object}. We therefore create an {\ttfamily Elliptical\+Tube} with unit half axes, i.\+e. a unit cylinder and a pass a pointer to the {\ttfamily Geom\+Object} to the mesh constructor. The \char`\"{}ends\char`\"{} of the curvilinear boundary (in terms of the maximum and minimum values of the Lagrangian coordinates that parametrise the shape of the {\ttfamily Geom\+Object}) are such that it represents a quarter of a cylindrical tube of length $L=7$.
@@ -261,7 +247,7 @@ We start by building the adaptive mesh for the quarter tube domain. As for most 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_constructor===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass DocInfo object and error targets}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classEntryFlowProblem_a0d527811321d270d769224dcbac8d240}{EntryFlowProblem<ELEMENT>::EntryFlowProblem}}(DocInfo\& doc\_info,}
 \DoxyCodeLine{                                            \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& min\_error\_target,}
@@ -300,9 +286,7 @@ We start by building the adaptive mesh for the quarter tube domain. As for most 
 \DoxyCodeLine{  \textcolor{keyword}{new} RefineableQuarterTubeMesh<ELEMENT>(Wall\_pt,xi\_lo,frac\_mid,xi\_hi,nlayer);}
 
 \end{DoxyCodeInclude}
-
-
-Next, we build an error estimator and specify the target errors for the mesh adaptation\+:
+ Next, we build an error estimator and specify the target errors for the mesh adaptation\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -317,9 +301,7 @@ Next, we build an error estimator and specify the target errors for the mesh ada
 \DoxyCodeLine{ mesh\_pt()-\/>min\_permitted\_error()=min\_error\_target; }
 
 \end{DoxyCodeInclude}
-
-
-Now we have to apply boundary conditions on the various mesh boundaries. \mbox{[}{\bfseries{Reminder\+:}} If the numbering of the mesh boundaries is not apparent from its documentation (as it should be!), you can use the function {\ttfamily Mesh\+::output\+\_\+boundaries(...)} to output them in a tecplot-\/readable form.
+ Now we have to apply boundary conditions on the various mesh boundaries. \mbox{[}{\bfseries{Reminder\+:}} If the numbering of the mesh boundaries is not apparent from its documentation (as it should be!), you can use the function {\ttfamily Mesh\+::output\+\_\+boundaries(...)} to output them in a tecplot-\/readable form.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -329,15 +311,13 @@ Now we have to apply boundary conditions on the various mesh boundaries. \mbox{[
 \DoxyCodeLine{ \textcolor{comment}{//Doc the boundaries}}
 \DoxyCodeLine{ ofstream some\_file;}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"boundaries.dat"});}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}boundaries.dat"{}});}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_boundaries(some\_file);}
 \DoxyCodeLine{ some\_file.close();}
 
 \end{DoxyCodeInclude}
-
-
-If the mesh has N boundaries, the output file will contain N different zones, each containing the $(x,y,z)$ coordinates of the nodes on the boundary.\mbox{]}
+ If the mesh has N boundaries, the output file will contain N different zones, each containing the $(x,y,z)$ coordinates of the nodes on the boundary.\mbox{]}
 
 For the {\ttfamily Refineable\+Quarter\+Tube\+Mesh}, the boundaries are numbered as follows\+:
 \begin{DoxyItemize}
@@ -392,9 +372,7 @@ We apply the following boundary conditions\+:
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-Now we assign the {\ttfamily re\+\_\+pt()} for each element and pin the redundant nodal pressures (see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details).
+ Now we assign the {\ttfamily re\+\_\+pt()} for each element and pin the redundant nodal pressures (see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -416,9 +394,7 @@ Now we assign the {\ttfamily re\+\_\+pt()} for each element and pin the redundan
 \DoxyCodeLine{  pin\_redundant\_nodal\_pressures(mesh\_pt()-\/>element\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-We provide an initial guess for the velocity field by initialising all velocity components with their Poiseuille flow values.
+ We provide an initial guess for the velocity field by initialising all velocity components with their Poiseuille flow values.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -441,9 +417,7 @@ We provide an initial guess for the velocity field by initialising all velocity 
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we set the value of {\ttfamily Alpha}, the exponent that specifies the bluntness of the inflow profile and assign the equation numbers.
+ Finally, we set the value of {\ttfamily Alpha}, the exponent that specifies the bluntness of the inflow profile and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -453,14 +427,12 @@ Finally, we set the value of {\ttfamily Alpha}, the exponent that specifies the 
 \DoxyCodeLine{ Alpha=20;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Attach the boundary conditions to the mesh}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_before_solve}{}\doxysection{Actions before solve}\label{index_before_solve}
 We use the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} to re-\/assign the inflow boundary conditions before every solve. In the present problem this is an {\itshape essential} step because the blunt inflow profile (4) cannot be represented accurately on the initial coarse mesh (see the animation of the axial velocity profiles at the beginning of this document). As discussed in the \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html}{\texttt{ example that illustrates the use of spatial adaptivity for time-\/dependent problems}}, {\ttfamily oomph-\/lib} automatically {\bfseries{(i)}} applies the correct boundary conditions for newly created nodes that are located on the mesh boundaries and {\bfseries{(ii)}} assigns the nodal values at such nodes by interpolation from the previously computed solution. This procedure is adequate on boundaries where homogeneous boundary conditions are applied, e.\+g. on the curved wall, the symmetry and the outflow boundaries. However, on the inflow boundary, the interpolation from the FE representation of the blunt velocity profile (imposed on the coarse initial mesh) onto the refined mesh, does not yield a more accurate representation of the prescribed inflow profile. It is therefore necessary to re-\/assign the nodal values on this boundary after every adaptation, i.\+e. before every solve.
@@ -469,7 +441,7 @@ We use the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+s
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_actions\_before\_newton\_solve==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Set the inflow boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classEntryFlowProblem_ae4dde95573350d8fdb19463849991130}{EntryFlowProblem<ELEMENT>::actions\_before\_newton\_solve}}()}
 \DoxyCodeLine{\{}
@@ -504,7 +476,7 @@ This function remains exactly the same as in the \href{../../driven_cavity/html/
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=start\_of\_doc\_solution==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classEntryFlowProblem_a8ba37cd2a4af4356e4182929027d7828}{EntryFlowProblem<ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{ }
@@ -517,7 +489,7 @@ This function remains exactly the same as in the \href{../../driven_cavity/html/
 \DoxyCodeLine{ npts=5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -526,9 +498,7 @@ This function remains exactly the same as in the \href{../../driven_cavity/html/
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and exercises}\label{index_comments}
 
@@ -548,5 +518,5 @@ This function remains exactly the same as in the \href{../../driven_cavity/html/
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

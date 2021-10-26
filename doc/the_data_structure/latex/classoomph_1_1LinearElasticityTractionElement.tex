@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1LinearElasticityTractionElement}{}\doxysection{oomph\+::Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1LinearElasticityTractionElement}{}\doxysection{oomph\+::Linear\+Elasticity\+Traction\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1LinearElasticityTractionElement}\index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
+
+
+A class for elements that allow the imposition of an applied traction in the equations of linear elasticity. The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class.  
+
+
 
 
 {\ttfamily \#include $<$linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Linear\+Elasticity\+Traction\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.326064cm]{classoomph_1_1LinearElasticityTractionElement}
@@ -13,53 +18,52 @@ Inheritance diagram for oomph\+::Linear\+Elasticity\+Traction\+Element$<$ E\+L\+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a77439a3f9cc538b690e43f9198e6b6f1}{Linear\+Elasticity\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a77439a3f9cc538b690e43f9198e6b6f1}{Linear\+Elasticity\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a2f3569331a13c76dcf55021be4d2ea62}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a2f3569331a13c76dcf55021be4d2ea62}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a359bf39aba8f5e99b54f0bc0242409ca}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a359bf39aba8f5e99b54f0bc0242409ca}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
 \begin{DoxyCompactList}\small\item\em Fill in contribution from Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a1e9b037926aad0682fd195bb5a9d4f55}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
-\begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a1e9b037926aad0682fd195bb5a9d4f55}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\begin{DoxyCompactList}\small\item\em Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a1d0d93c959c51f92c9ac40a71c0a85db}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a396767d3d935bd219bf2161ed461a174}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a396767d3d935bd219bf2161ed461a174}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a6b5134b3460ac380e9cca892d5b4a0a3}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a6b5134b3460ac380e9cca892d5b4a0a3}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C\+\_\+style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a0f06ed03bad8c609bd546ea5e4ebdf6d}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a0f06ed03bad8c609bd546ea5e4ebdf6d}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}{traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&traction)
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}{traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}{traction}}) \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a72284e5b40c28f131ffce5a27b9546ef}{traction\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}{traction}}) \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_ac6a2c1fc5a05d01bdbbc893b1c571204}{traction\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Reference to the traction function pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aa6cf9c9f8a36d2a32d56723b081f2079}{get\+\_\+traction}} (const double \&time, const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}{traction}})
-\begin{DoxyCompactList}\small\item\em Get the traction vector\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for F\+SI. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a5a51ebdfb9ad2b79b7c4367a0577330e}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+virtual void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aa6cf9c9f8a36d2a32d56723b081f2079}{get\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&intpt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}{traction}})
+\begin{DoxyCompactList}\small\item\em Get the traction vector\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for FSI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a5a51ebdfb9ad2b79b7c4367a0577330e}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Helper function that actually calculates the residuals. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_ad3a514b2ac65ab9cba87192ec274bc45}{U\+\_\+index\+\_\+linear\+\_\+elasticity\+\_\+traction}}
 \begin{DoxyCompactList}\small\item\em Index at which the i-\/th displacement component is stored. \end{DoxyCompactList}\item 
-void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a6a7b937fe5bae53dd6cd8d7c1f336c4f}{Traction\+\_\+fct\+\_\+pt}} )(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_a6a7b937fe5bae53dd6cd8d7c1f336c4f}{Traction\+\_\+fct\+\_\+pt}} )(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Pointer to an imposed traction function. Arguments\+: Eulerian coordinate; outer unit normal; applied traction. (Not all of the input arguments will be required for all specific load functions but the list should cover all cases) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$}
+A class for elements that allow the imposition of an applied traction in the equations of linear elasticity. The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
 
-A class for elements that allow the imposition of an applied traction in the equations of linear elasticity. The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
-
-Definition at line 75 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00075}{75}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
@@ -68,8 +72,8 @@ Definition at line 75 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!LinearElasticityTractionElement@{LinearElasticityTractionElement}}
 \index{LinearElasticityTractionElement@{LinearElasticityTractionElement}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{LinearElasticityTractionElement()}{LinearElasticityTractionElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{Linear\+Elasticity\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{Linear\+Elasticity\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -77,11 +81,11 @@ Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the
 
 
 
-Definition at line 119 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00119}{119}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), i, oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension(), oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt, and oomph\+::\+Linear\+Elasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct().
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02489}{oomph\+::\+Finite\+Element\+::nodal\+\_\+dimension()}}, \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00087}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00052}{oomph\+::\+Linear\+Elasticity\+Traction\+Element\+Helper\+::\+Zero\+\_\+traction\+\_\+fct()}}.
 
 
 
@@ -90,8 +94,8 @@ References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -103,18 +107,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 187 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00187}{187}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00275}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity\+\_\+traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a2f3569331a13c76dcf55021be4d2ea62}\label{classoomph_1_1LinearElasticityTractionElement_a2f3569331a13c76dcf55021be4d2ea62}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -126,18 +130,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 180 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00180}{180}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00275}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity\+\_\+traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a5a51ebdfb9ad2b79b7c4367a0577330e}\label{classoomph_1_1LinearElasticityTractionElement_a5a51ebdfb9ad2b79b7c4367a0577330e}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals\_linear\_elasticity\_traction@{fill\_in\_contribution\_to\_residuals\_linear\_elasticity\_traction}}
 \index{fill\_in\_contribution\_to\_residuals\_linear\_elasticity\_traction@{fill\_in\_contribution\_to\_residuals\_linear\_elasticity\_traction}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals\_linear\_elasticity\_traction()}{fill\_in\_contribution\_to\_residuals\_linear\_elasticity\_traction()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+linear\+\_\+elasticity\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -145,41 +149,41 @@ Helper function that actually calculates the residuals.
 
 Return the residuals for the \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{Linear\+Elasticity\+Traction\+Element}} equations. 
 
-Definition at line 275 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00274}{274}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References i, residuals(), and oomph\+::\+Quad\+Tree\+Names\+::W.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 
 
-Referenced by oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00187}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00180}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_aa6cf9c9f8a36d2a32d56723b081f2079}\label{classoomph_1_1LinearElasticityTractionElement_aa6cf9c9f8a36d2a32d56723b081f2079}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!get\_traction@{get\_traction}}
 \index{get\_traction@{get\_traction}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{intpt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Get the traction vector\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for F\+SI. 
+Get the traction vector\+: Pass number of integration point (dummy), Eulerlian coordinate and normal vector and return the load vector (not all of the input arguments will be required for all specific load functions but the list should cover all cases). This function is virtual so it can be overloaded for FSI. 
 
 
 
-Definition at line 98 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00098}{98}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References n, oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::traction(), and oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+References \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00249}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}, \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00087}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a6b5134b3460ac380e9cca892d5b4a0a3}\label{classoomph_1_1LinearElasticityTractionElement_a6b5134b3460ac380e9cca892d5b4a0a3}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -191,18 +195,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Definition at line 219 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00219}{219}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a0f06ed03bad8c609bd546ea5e4ebdf6d}\label{classoomph_1_1LinearElasticityTractionElement_a0f06ed03bad8c609bd546ea5e4ebdf6d}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -214,18 +218,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Definition at line 225 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00225}{225}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a1d0d93c959c51f92c9ac40a71c0a85db}\label{classoomph_1_1LinearElasticityTractionElement_a1d0d93c959c51f92c9ac40a71c0a85db}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -237,18 +241,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 207 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00207}{207}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a396767d3d935bd219bf2161ed461a174}\label{classoomph_1_1LinearElasticityTractionElement_a396767d3d935bd219bf2161ed461a174}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -260,67 +264,69 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 213 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00213}{213}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}\label{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!traction@{traction}}
 \index{traction@{traction}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction()}{traction()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})}
 
 
 
 Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! 
 
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////
+
 Compute traction vector at specified local coordinate Should only be used for post-\/processing; ignores dependence on integration point! 
 
-Definition at line 249 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00249}{249}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References s.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 
 
-Referenced by oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction().
+Referenced by \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00098}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a1e9b037926aad0682fd195bb5a9d4f55}\label{classoomph_1_1LinearElasticityTractionElement_a1e9b037926aad0682fd195bb5a9d4f55}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) 
+Specify the value of nodal zeta from the face geometry The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} representation, by default (needed to break indeterminacy if bulk element is Solid\+Element) 
 
-Specify the value of nodal zeta from the face geometry 
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f76c8487d152e68a6}{oomph\+::\+Face\+Element}}.
 
 
 
-Definition at line 199 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00199}{199}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a72284e5b40c28f131ffce5a27b9546ef}\label{classoomph_1_1LinearElasticityTractionElement_a72284e5b40c28f131ffce5a27b9546ef}} 
+\mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_ac6a2c1fc5a05d01bdbbc893b1c571204}\label{classoomph_1_1LinearElasticityTractionElement_ac6a2c1fc5a05d01bdbbc893b1c571204}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!traction\_fct\_pt@{traction\_fct\_pt}}
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void($\ast$\&)(const double\& time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}{traction}}) \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement_aefc580c2f9219976426f5c0b5f70ca77}{traction}}) \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -328,14 +334,14 @@ Reference to the traction function pointer.
 
 
 
-Definition at line 170 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00170}{170}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_a6a7b937fe5bae53dd6cd8d7c1f336c4f}\label{classoomph_1_1LinearElasticityTractionElement_a6a7b937fe5bae53dd6cd8d7c1f336c4f}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
 \index{Traction\_fct\_pt@{Traction\_fct\_pt}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Traction\_fct\_pt}{Traction\_fct\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Traction\+\_\+fct\+\_\+pt) (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void($\ast$ \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::Traction\+\_\+fct\+\_\+pt) (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -343,18 +349,18 @@ Pointer to an imposed traction function. Arguments\+: Eulerian coordinate; outer
 
 
 
-Definition at line 87 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00087}{87}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), and oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Linear\+Elasticity\+Traction\+Element().
+Referenced by \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00098}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction()}}, and \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00119}{oomph\+::\+Linear\+Elasticity\+Traction\+Element$<$ ELEMENT $>$\+::\+Linear\+Elasticity\+Traction\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LinearElasticityTractionElement_ad3a514b2ac65ab9cba87192ec274bc45}\label{classoomph_1_1LinearElasticityTractionElement_ad3a514b2ac65ab9cba87192ec274bc45}} 
 \index{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}!U\_index\_linear\_elasticity\_traction@{U\_index\_linear\_elasticity\_traction}}
 \index{U\_index\_linear\_elasticity\_traction@{U\_index\_linear\_elasticity\_traction}!oomph::LinearElasticityTractionElement$<$ ELEMENT $>$@{oomph::LinearElasticityTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{U\_index\_linear\_elasticity\_traction}{U\_index\_linear\_elasticity\_traction}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::U\+\_\+index\+\_\+linear\+\_\+elasticity\+\_\+traction\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ \mbox{\hyperlink{classoomph_1_1LinearElasticityTractionElement}{oomph\+::\+Linear\+Elasticity\+Traction\+Element}}$<$ ELEMENT $>$\+::U\+\_\+index\+\_\+linear\+\_\+elasticity\+\_\+traction\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -362,7 +368,7 @@ Index at which the i-\/th displacement component is stored.
 
 
 
-Definition at line 80 of file linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source_l00080}{80}} of file \mbox{\hyperlink{linear__elasticity__traction__elements_8h_source}{linear\+\_\+elasticity\+\_\+traction\+\_\+elements.\+h}}.
 
 
 

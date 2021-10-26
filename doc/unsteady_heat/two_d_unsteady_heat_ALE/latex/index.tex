@@ -37,9 +37,9 @@ The mesh adaptation in response to the translation of the step can be seen more 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_ale}{}\doxysection{Background\+: A\+L\+E methods and the evaluation of time-\/derivatives in moving domains}\label{index_ale}
-{\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Unsteady\+Heat\+Equations}, the equation class that forms the basis for the isoparametric {\ttfamily Q\+Unsteady\+Heat\+Elements}, is based on the Arbitrary Lagrangian Eulerian (A\+LE) formulation of the weak form of the governing P\+DE, (1). Within each element, the solution is represented by interpolation between the element\textquotesingle{}s $ N_{node}^{(E)} $ nodal values $ U_j^{(E)}(t) \ (i=1,..., N_{node}^{(E)})$ , i.\+e. \[ u = \sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ \ \ \ \ \ \ (7) \] where $ s_1 $ and $ s_2 $ are the element\textquotesingle{}s two local coordinates. The mapping between the local and global (Eulerian) coordinates is based on the interpolation between the nodal coordinates, \[ x_i(s_1,s_2) = \sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ (i=1,2) \ \ \ \ \ \ (8) \] where $ X_{ij}^{(E)}(t) $ is the i-\/th global (Eulerian) coordinate of node j in the element. In moving-\/domain problems, where the nodal positions vary as function of time, the time-\/derivative of the nodal value, $ dU_j(t)/dt $ , represents the rate-\/of-\/change of $ u $ at the moving node, rather than the time-\/derivative of $ u $ at a fixed Eulerian position, ~\newline
- $ \partial u/\partial t, $ the quantity required in the P\+DE, (1).
+\hypertarget{index_ale}{}\doxysection{Background\+: ALE methods and the evaluation of time-\/derivatives in moving domains}\label{index_ale}
+{\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Unsteady\+Heat\+Equations}, the equation class that forms the basis for the isoparametric {\ttfamily QUnsteady\+Heat\+Elements}, is based on the Arbitrary Lagrangian Eulerian (ALE) formulation of the weak form of the governing PDE, (1). Within each element, the solution is represented by interpolation between the element\textquotesingle{}s $ N_{node}^{(E)} $ nodal values $ U_j^{(E)}(t) \ (i=1,..., N_{node}^{(E)})$ , i.\+e. \[ u = \sum_{j=1}^{N_{node}^{(E)}} U_j^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ \ \ \ \ \ \ (7) \] where $ s_1 $ and $ s_2 $ are the element\textquotesingle{}s two local coordinates. The mapping between the local and global (Eulerian) coordinates is based on the interpolation between the nodal coordinates, \[ x_i(s_1,s_2) = \sum_{j=1}^{N_{node}^{(E)}} X_{ij}^{(E)}(t) \ \psi_{j}(s_1,s_2), \ \ \ \ (i=1,2) \ \ \ \ \ \ (8) \] where $ X_{ij}^{(E)}(t) $ is the i-\/th global (Eulerian) coordinate of node j in the element. In moving-\/domain problems, where the nodal positions vary as function of time, the time-\/derivative of the nodal value, $ dU_j(t)/dt $ , represents the rate-\/of-\/change of $ u $ at the moving node, rather than the time-\/derivative of $ u $ at a fixed Eulerian position, ~\newline
+ $ \partial u/\partial t, $ the quantity required in the PDE, (1).
 
 The rate of change of $ u $ at a moving node, $ dU_j(t)/dt $ , may also be expressed by the material derivative, \[ \left. \frac{D u}{Dt}\right|_{\mbox{\small node} \ j} = \frac{\partial u}{\partial t} + \sum_{i=1}^2 v_{ij} \ \frac{\partial u}{\partial x_i} \] where \[ v_{ij} = \frac{dX_{ij}^{(E)}}{dt} \] is the i-\/th velocity component of node j, often referred to as the \char`\"{}mesh velocity\char`\"{}. The rate of change of $ u $ , experienced at the (fixed) spatial position that coincides with the current position of node j is therefore given by \[ \frac{\partial u}{\partial t} = \frac{d U_j^{(E)}}{dt} - \sum_{i=1}^2 \left( \frac{dX_{ij}^{(E)}}{dt} \ \sum_{k=1}^{N_{node}^{(E)}} U_k^{(E)} \ \frac{\partial \psi_{k}}{\partial x_i} \right) . \] This is the form in which the time-\/derivative in (1) is implemented in {\ttfamily oomph-\/lib\textquotesingle{}s} unsteady heat elements. The mesh velocity is determined automatically, using the {\ttfamily Node\textquotesingle{}s} positional {\ttfamily Time\+Stepper} and the history values of the nodal positions. \mbox{[}By default, the positional {\ttfamily Time\+Stepper} is the same as the {\ttfamily Time\+Stepper} used for the evaluation of the time-\/derivatives of the nodal values; a different one may be assigned with the access function {\ttfamily Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt()}.\mbox{]} This is why it is important to initialise the \char`\"{}previous nodal positions\char`\"{} in computations on fixed meshes, as demonstrated in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ exercise in our earlier example\+:}} The previous nodal positions are initialised to zero when a {\ttfamily Node} is first created. Therefore, if the previous positions are not overwritten with the actual nodal positions, the positional {\ttfamily Time\+Stepper} would compute non-\/zero mesh velocities, even though the {\ttfamily Nodes} are stationary.
 
@@ -62,16 +62,16 @@ As discussed above, we will incorporate the time-\/dependence of the moving curv
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_MyEllipse===========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Oscillating ellipse}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = (a + \(\backslash\)widehat\{a\} \(\backslash\)sin(2\(\backslash\)Pi t/T)) \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = (b + \(\backslash\)widehat\{b\} \(\backslash\)sin(2\(\backslash\)Pi t/T)) \(\backslash\)sin(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// Oscillating ellipse}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = (a + \(\backslash\)widehat\{a\} \(\backslash\)sin(2\(\backslash\)Pi t/T)) \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = (b + \(\backslash\)widehat\{b\} \(\backslash\)sin(2\(\backslash\)Pi t/T)) \(\backslash\)sin(\(\backslash\)xi)  \(\backslash\)f]}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyEllipse}{MyEllipse}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor:  Pass half axes, amplitudes of their variation, period}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor:  Pass half axes, amplitudes of their variation, period}}
 \DoxyCodeLine{\textcolor{comment}{ /// of oscillation and pointer to time object.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyEllipse_aaa00984813af171e611e420eb3433653}{MyEllipse}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& a, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& b, }
 \DoxyCodeLine{           \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& a\_hat, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& b\_hat, }
@@ -83,20 +83,18 @@ As discussed above, we will incorporate the time-\/dependence of the moving curv
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classMyEllipse_ac2f2d3fb269c57fb26b4db6d9a0c7c05}{\string~MyEllipse}}() \{\}}
 
 \end{DoxyCodeInclude}
-
-
-The \char`\"{}steady\char`\"{} version of the {\ttfamily position(...)} function must return the position vector to the point on the {\ttfamily Geom\+Object}, identified by its intrinsic coordinate {\ttfamily xi}, and evaluated at the current value of the continuous time, which we extract from {\ttfamily Time\+::time()}\+: 
+ The \char`\"{}steady\char`\"{} version of the {\ttfamily position(...)} function must return the position vector to the point on the {\ttfamily Geom\+Object}, identified by its intrinsic coordinate {\ttfamily xi}, and evaluated at the current value of the continuous time, which we extract from {\ttfamily Time\+::time()}\+: 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Current position vector to material point at }}
+\DoxyCodeLine{\textcolor{comment}{ /// Current position vector to material point at }}
 \DoxyCodeLine{\textcolor{comment}{ /// Lagrangian coordinate xi }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a21a4f557c68498245dc3903df5e96ce7}{position}}(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Get current time:}}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} \mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}}=Time\_pt-\/>time();}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} time=Time\_pt-\/>time();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Position vector}}
-\DoxyCodeLine{   r[0] = (A+A\_hat*sin(2.0*MathematicalConstants::Pi*\mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}}/T))*cos(xi[0]);}
-\DoxyCodeLine{   r[1] = (B+B\_hat*sin(2.0*MathematicalConstants::Pi*\mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}}/T))*sin(xi[0]);}
+\DoxyCodeLine{   r[0] = (A+A\_hat*sin(2.0*MathematicalConstants::Pi*time/T))*cos(xi[0]);}
+\DoxyCodeLine{   r[1] = (B+B\_hat*sin(2.0*MathematicalConstants::Pi*time/T))*sin(xi[0]);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of position(...)}}
 
@@ -105,25 +103,23 @@ The \char`\"{}steady\char`\"{} version of the {\ttfamily position(...)} function
 
 The \char`\"{}time-\/dependent\char`\"{} version of the {\ttfamily position(...)} function must return the position vector to the {\ttfamily Geom\+Object}, evaluated at the {\ttfamily t} -\/ th previous timestep. The value of the continuous time at that timestep is available from from {\ttfamily Time\+::time(t)}\+: 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Parametrised position on object: r(xi). Evaluated at}}
-\DoxyCodeLine{\textcolor{comment}{ /// previous time level. t=0: current time; t>0: previous}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// time level.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a21a4f557c68498245dc3903df5e96ce7}{position}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a0527fcb3ba8324da07731acfafdaa797}{t}}, \textcolor{keyword}{const} Vector<double>\& xi,}
+\DoxyCodeLine{\textcolor{comment}{ /// Parametrised position on object: r(xi). Evaluated at}}
+\DoxyCodeLine{\textcolor{comment}{ /// previous time level. t=0: current time; t>0: previous}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// time level.}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} position(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, \textcolor{keyword}{const} Vector<double>\& xi,}
 \DoxyCodeLine{               Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Get current time:}}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} \mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}}=Time\_pt-\/>time(\mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a0527fcb3ba8324da07731acfafdaa797}{t}});}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} time=Time\_pt-\/>time(t);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Position vector}}
-\DoxyCodeLine{   r[0] = (A+A\_hat*sin(2.0*MathematicalConstants::Pi*\mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}}/T))*cos(xi[0]);}
-\DoxyCodeLine{   r[1] = (B+B\_hat*sin(2.0*MathematicalConstants::Pi*\mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}}/T))*sin(xi[0]);}
+\DoxyCodeLine{   r[0] = (A+A\_hat*sin(2.0*MathematicalConstants::Pi*time/T))*cos(xi[0]);}
+\DoxyCodeLine{   r[1] = (B+B\_hat*sin(2.0*MathematicalConstants::Pi*time/T))*sin(xi[0]);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of position(...)}}
 
 \end{DoxyCodeInclude}
-
-
-We omit the code that defines the private member data.
+ We omit the code that defines the private member data.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -184,8 +180,8 @@ As discussed above, the addition of a single line to {\ttfamily Problem\+::actio
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=========start of actions\_before\_implicit\_timestep===============================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Actions before timestep: Update the domain shape, then set the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// boundary conditions for the current time.}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before timestep: Update the domain shape, then set the }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// boundary conditions for the current time.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableUnsteadyHeatProblem_ac754f1313cd6d684c149443beb5bcf9e}{RefineableUnsteadyHeatProblem<ELEMENT>::actions\_before\_implicit\_timestep}}()}
@@ -194,9 +190,7 @@ As discussed above, the addition of a single line to {\ttfamily Problem\+::actio
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>node\_update();}
 
 \end{DoxyCodeInclude}
-
-
-The rest of this function is identical to the that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ fixed-\/domain version}} and updates the nodal values on the Dirichlet boundaries according to the values given by the exact solution.
+ The rest of this function is identical to the that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ fixed-\/domain version}} and updates the nodal values on the Dirichlet boundaries according to the values given by the exact solution.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -211,13 +205,13 @@ This is achieved with a few minor changes to the previous version of this functi
 \DoxyCodeLine{   \textcolor{comment}{// the mesh also moves!)}}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} itime=nprev\_steps;itime>=0;itime-\/-\/)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \textcolor{keywordtype}{double} \mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}}=prev\_time[itime];}
+\DoxyCodeLine{     \textcolor{keywordtype}{double} time=prev\_time[itime];}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Set global time (because this is how the geometric object refers }}
 \DoxyCodeLine{     \textcolor{comment}{// to continous time }}
-\DoxyCodeLine{     time\_pt()-\/>time()=\mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}};}
+\DoxyCodeLine{     time\_pt()-\/>time()=time;}
 \DoxyCodeLine{     }
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"setting IC at time ="} << \mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}setting IC at time ="{}} << time << std::endl;}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Update the mesh for this value of the continuous time}}
 \DoxyCodeLine{     \textcolor{comment}{// (The wall object reads the continous time from the same}}
@@ -232,7 +226,7 @@ This is achieved with a few minor changes to the previous version of this functi
 \DoxyCodeLine{       x[1]=Bulk\_mesh\_pt-\/>node\_pt(jnod)-\/>x(1);}
 \DoxyCodeLine{       }
 \DoxyCodeLine{       \textcolor{comment}{// Get intial solution}}
-\DoxyCodeLine{       \mbox{\hyperlink{namespaceTanhSolnForUnsteadyHeat_a36857bbdec45f44018772de70558db7d}{TanhSolnForUnsteadyHeat::get\_exact\_u}}(\mbox{\hyperlink{two__d__unsteady__heat__ALE_8txt_a6f5f4e911ccd3d58a269b0744cc88e05}{time}},x,soln);}
+\DoxyCodeLine{       \mbox{\hyperlink{namespaceTanhSolnForUnsteadyHeat_a36857bbdec45f44018772de70558db7d}{TanhSolnForUnsteadyHeat::get\_exact\_u}}(time,x,soln);}
 \DoxyCodeLine{       }
 \DoxyCodeLine{       \textcolor{comment}{// Assign solution}}
 \DoxyCodeLine{       Bulk\_mesh\_pt-\/>node\_pt(jnod)-\/>set\_value(itime,0,soln[0]);}
@@ -258,11 +252,11 @@ While the spatial adaptivity resolves the rapid spatial variations in the soluti
 \hypertarget{index_sources}{}\doxysection{Source files for this tutorial}\label{index_sources}
 
 \begin{DoxyItemize}
-\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/}{\texttt{ demo\+\_\+drivers/unsteady\+\_\+heat/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+A\+L\+E/ }} \end{center} 
-\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/two_d_unsteady_heat_ALE.cc}{\texttt{ demo\+\_\+drivers/unsteady\+\_\+heat/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+A\+L\+E/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+A\+L\+E.\+cc }} \end{center} 
+\item The source files for this tutorial are located in the directory\+: \begin{center} \href{../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/}{\texttt{ demo\+\_\+drivers/unsteady\+\_\+heat/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE/ }} \end{center} 
+\item The driver code is\+: \begin{center} \href{../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_ALE/two_d_unsteady_heat_ALE.cc}{\texttt{ demo\+\_\+drivers/unsteady\+\_\+heat/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+\+ALE.\+cc }} \end{center} 
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

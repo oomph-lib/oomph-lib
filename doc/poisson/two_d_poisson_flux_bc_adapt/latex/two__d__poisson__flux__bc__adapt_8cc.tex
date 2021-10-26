@@ -3,14 +3,14 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Simple\+Refineable\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\item 
-class \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem}{Refineable\+Two\+Mesh\+Flux\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{Simple\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Refineable equivalent of the Simple\+Rectangular\+Quad\+Mesh. Refinement is performed by the Quad\+Tree-\/based procedures implemented in the Refineable\+Quad\+Mesh base class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classRefineableTwoMeshFluxPoissonProblem}{Refineable\+Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Poisson problem on rectangular domain, discretised with 2D QPoisson elements. Flux boundary conditions are applied along boundary 1 (the boundary where x=L). The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}
+namespace \mbox{\hyperlink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}
 \begin{DoxyCompactList}\small\item\em Namespace for exact solution for Poisson equation with \char`\"{}sharp step\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -22,7 +22,7 @@ void \mbox{\hyperlink{namespaceTanhSolnForPoisson_a967bc28320e02534beb714846b63e
 void \mbox{\hyperlink{namespaceTanhSolnForPoisson_a0e99ccf27df36f28f091de6d57484172}{Tanh\+Soln\+For\+Poisson\+::prescribed\+\_\+flux\+\_\+on\+\_\+fixed\+\_\+x\+\_\+boundary}} (const Vector$<$ double $>$ \&x, double \&flux)
 \begin{DoxyCompactList}\small\item\em Flux required by the exact solution on a boundary on which x is fixed. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve 2D Poisson problem with flux boundary conditions, using two meshes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -39,11 +39,15 @@ double \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac1
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
 Demonstrate how to solve 2D Poisson problem with flux boundary conditions, using two meshes. 
 
-Definition at line 528 of file two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc\+\_\+adapt.\+cc.
+
+
+Definition at line \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00528}{528}} of file \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source}{two\+\_\+d\+\_\+poisson\+\_\+flux\+\_\+bc\+\_\+adapt.\+cc}}.
 
 
 
-References Tanh\+Soln\+For\+Poisson\+::\+Alpha, problem, Tanh\+Soln\+For\+Poisson\+::source\+\_\+function(), and Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi.
+References \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00098}{Tanh\+Soln\+For\+Poisson\+::\+Alpha}}, \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00409}{Refineable\+Two\+Mesh\+Flux\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00110}{Tanh\+Soln\+For\+Poisson\+::source\+\_\+function()}}, and \mbox{\hyperlink{two__d__poisson__flux__bc__adapt_8cc_source_l00101}{Tanh\+Soln\+For\+Poisson\+::\+Tan\+Phi}}.
 

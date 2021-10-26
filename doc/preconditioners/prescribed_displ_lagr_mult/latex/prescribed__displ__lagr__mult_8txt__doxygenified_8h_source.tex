@@ -1,0 +1,630 @@
+\hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source}{}\doxysection{prescribed\+\_\+displ\+\_\+lagr\+\_\+mult.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{prescribed__displ__lagr__mult_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: A preconditioner for the solution of (pseudo-\/)solid mechanics problems with prescribed boundary motions}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this tutorial we }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{<a href="{}../../../solid/prescribed\_displ\_lagr\_mult/html/index.html"{}>re-\/visit}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{</a> the solution of solid mechanics problems}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{in which the deformation of the domain boundary is prescribed and}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{enforced by Lagrange multipliers. This}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{functionality is required, e.g., when using (pseudo-\/)solid mechanics}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{to update the shape of the fluid mesh in large-\/displacement }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{fluid-\/structure interaction problems. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{  Here we focus on the efficient solution of the governing equations}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{by GMRES, using the problem-\/specific block-\/preconditioner developed}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{in }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{Muddle, R.L., Mihajlovic, M. \& Heil, M. (2012)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{An efficient preconditioner for monolithically-\/coupled }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{large-\/displacement fluid-\/structure interaction problems }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{with pseudo-\/solid mesh updates. <em>Journal of Computational Physics</em>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{<b>231</b>, 7315-\/7334. DOI: }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{<a href="{}http://dx.doi.org/10.1016/j.jcp.2012.07.001"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{10.1016/j.jcp.2012.07.001</a>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{\(\backslash\)section model Theory: Problem formulation, the resulting linear system and the preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{We refer to }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{<a href="{}../../../solid/prescribed\_displ\_lagr\_mult/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{another tutorial</a> for a detailed description of the problem}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{setup and its discretisation. Briefly, we consider the deformation of}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{an elastic solid body whose shape is parametrised}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{by Lagrangian coordinates \(\backslash\)f\$ \(\backslash\)xi\string^i \(\backslash\)f\$. A part of the body's boundary, }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)partial D\_\{prescr\}\(\backslash\)f\$, (which is parametrised by the boundary coordinate}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)zeta\(\backslash\)f\$) is displaced to a new position given by }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf R\}\_\{prescr\}(\(\backslash\)zeta) \(\backslash\)f\$ while the other boundaries are held}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{in a fixed position (as in the sketch below) or are subject to }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{traction boundary conditions. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{   }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{\(\backslash\)image html sketch.gif "{}Sketch of the typical problem. "{} }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{\(\backslash\)image latex sketch.eps "{}Sketch of the typical problem. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{We discretise the problem using \(\backslash\)c SolidElements in the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{bulk of the domain and employ lower-\/dimensional }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{\(\backslash\)c FaceElements to impose the displacement constraint}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{along \(\backslash\)f\$ \(\backslash\)partial D\_\{prescr\}\(\backslash\)f\$. The problem therefore contains the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{following types of discrete unknowns:}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{-\/ The nodal positions (which are stored as positional \(\backslash\)c Data at each \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{  SolidNode). \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{-\/ The nodal values representing the components of the (vector-\/valued)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{  Lagrange multipliers. These only exist for the nodes on }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{  \(\backslash\)f\$ \(\backslash\)partial D\_\{prescr\}\(\backslash\)f\$. (The nodes are re-\/sized to}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{  accommodate the additional unknowns when the \(\backslash\)c FaceElements are}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{  attached to the bulk elements.)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{The preconditioner requires a further sub-\/division of these degrees of}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{freedom into the following categories:}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{-\/ the x-\/coordinates of the unconstrained nodes}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{-\/ the y-\/coordinates of the unconstrained nodes}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{-\/ [the z-\/coordinates of the unconstrained nodes (only in 3D)]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{-\/ the x-\/coordinates of the constrained nodes}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{-\/ the y-\/coordinates of the constrained nodes}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{-\/ [the z-\/coordinates of the constrained nodes (only in 3D)]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{-\/ the x-\/component of the Lagrange multiplier at the constrained nodes}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{-\/ the y-\/component of the Lagrange multiplier at the constrained nodes}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{-\/ [the z-\/component of the Lagrange multiplier at the constrained nodes}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{  (only in 3D)].}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{For a 2D problem, the linear system to be solved in the course }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{of the Newton iteration can then be (formally) re-\/ordered }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{into the following block structure:}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)begin\{array\}\{cccc|cc\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\{ E\_\{\(\backslash\)rm xx\}\}\&\{ E\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{      x\}\}\}\&\{ E\_\{\(\backslash\)rm xy\}\}\&\{ E\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\&\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{\{ E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm x\}\}\&\{ E\_\{\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{      x\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{    y\}\}\&\{ E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ M\_\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{    x\}\}\&\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{\{ E\_\{\(\backslash\)rm yx\}\}\&\{ E\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{      x\}\}\}\&\{ E\_\{\(\backslash\)rm yy\}\}\&\{ E\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\&\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{\{ E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm x\}\}\&\{ E\_\{\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{      y\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm y\}\}\&\{ }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{  E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\&\{ M\_\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{\(\backslash\)hline}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\&\{ M\_\{\(\backslash\)rm x\}\}\&\&\&\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{\&\&\&\{ M\_\{\(\backslash\)rm y\}\}\&\&}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{X\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{\(\backslash\)overline\{X\}\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{X\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{\(\backslash\)overline\{X\}\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{L\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{L\}\_\{\(\backslash\)rm y\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{ =}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{-\/}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm l\_x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm l\_y\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)right].}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)   (1)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{Here the vectors \(\backslash\)f\$\{\(\backslash\)bf X\}\_\{\(\backslash\)rm x\}\(\backslash\)f\$, \(\backslash\)f\$\{\(\backslash\)bf X\}\_\{\(\backslash\)rm y\}\(\backslash\)f\$, }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{\(\backslash\)f\$\{\(\backslash\)bf L\}\_\{\(\backslash\)rm x\}\(\backslash\)f\$ and \(\backslash\)f\$\{\(\backslash\)bf}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{  L\}\_\{\(\backslash\)rm y\}\(\backslash\)f\$ contain the \(\backslash\)f\$x\(\backslash\)f\$ and \(\backslash\)f\$y\(\backslash\)f\$ components of the unknown}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{nodal positions and Lagrange multipliers, respectively. The overbars }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{identify the unknown nodal positions that are constrained by the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{Lagrange multiplier. The matrices \(\backslash\)f\$M\_\{\(\backslash\)rm x\}\(\backslash\)f\$ and \(\backslash\)f\$M\_\{\(\backslash\)rm y\}\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{are mass matrices }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{whose entries are formed from products of the basis functions,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{\(\backslash\)f\$[M\_\{\{\(\backslash\)rm x\}\}]\_\{ij\}=[M\_\{\{\(\backslash\)rm y\}\}]\_\{ij\} = }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{\(\backslash\)int\_\{\(\backslash\)partial D\_\{\(\backslash\)rm prescr\}\} \{\(\backslash\)psi\_i\} \(\backslash\) \{\(\backslash\)psi\_j\} \(\backslash\) dS \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{<a href="{}http://dx.doi.org/10.1016/j.jcp.2012.07.001"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{Muddle, Mihajlovic \& Heil (2012) </a> show that}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{\{\(\backslash\)cal P\}\_\{\(\backslash\)rm PS\}=\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)begin\{array\}\{cccc|cc\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{E\_\{\(\backslash\)rm xx\}\&E\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm x\}\}\&E\_\{\(\backslash\)rm xy\}\&E\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{    y\}\}\&\&\(\backslash\)\(\backslash\) E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm x\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm x\}\}+\(\backslash\)sigma}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{I\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm y\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\&\&\(\backslash\)\(\backslash\) E\_\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{  yx\}\&E\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm x\}\}\&E\_\{\(\backslash\)rm yy\}\&E\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{    y\}\}\&\&\(\backslash\)\(\backslash\) E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm x\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{    x\}\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm y\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm y\}\}+\(\backslash\)sigma}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{I\&\&\(\backslash\)\(\backslash\) \(\backslash\)hline}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{\&\&\&\&\(\backslash\)frac\{1\}\{\(\backslash\)sigma\}M\_\{\(\backslash\)rm x\}\string^2\&\(\backslash\)\(\backslash\) \&\&\&\&\&\(\backslash\)frac\{1\}\{\(\backslash\)sigma\}M\_\{\(\backslash\)rm y\}\string^2\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)   (2)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{is an optimal preconditioner for the linear system}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{(1) if we set \(\backslash\)f\$ \(\backslash\)sigma=\(\backslash\)|E\(\backslash\)|\_\{\(\backslash\)infty\} \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{where \(\backslash\)f\$ E \(\backslash\)f\$ is the compound }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{4x4 top-\/left block }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{E =}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{\(\backslash\)begin\{array\}\{cccc\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{E\_\{\(\backslash\)rm xx\}\&E\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm x\}\}\&E\_\{\(\backslash\)rm xy\}\&E\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm x\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm x\}\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm y\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm y\}\} \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{ E\_\{\(\backslash\)rm yx\}\&E\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm x\}\}\&E\_\{\(\backslash\)rm yy\}\&E\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm x\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\&}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm y\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm y\}\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{in the Jacobian matrix.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{The application of the preconditioner (i.e. the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{solution of linear systems of the form \(\backslash\)f\$ \{\(\backslash\)cal P\}\_\{\(\backslash\)rm PS\} \(\backslash\) \{\(\backslash\)bf x\} =}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{\{\(\backslash\)bf y\} \(\backslash\)f\$ for \(\backslash\)f\$ \{\(\backslash\)bf x\} \(\backslash\)f\$) requires three }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{linear solves: One involving the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{compound 4x4 top-\/left block in \(\backslash\)f\$ \{\(\backslash\)cal P\}\_\{\(\backslash\)rm PS\} \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{E\_\{\(\backslash\)rm PS\}=}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{\(\backslash\)begin\{array\}\{cccc\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{E\_\{\(\backslash\)rm xx\}\&E\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm x\}\}\&E\_\{\(\backslash\)rm xy\}\&E\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm x\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm x\}\}+\(\backslash\)sigma}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{I\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm y\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm y\}\} \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{ E\_\{\(\backslash\)rm yx\}\&E\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm x\}\}\&E\_\{\(\backslash\)rm yy\}\&E\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm x\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\&}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm y\}\&E\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm y\}\}+\(\backslash\)sigma I}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{and two involving the two squared mass matrices,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{\(\backslash\)f\$ M\_\{\(\backslash\)rm x\}\string^2 \(\backslash\)f\$ and \(\backslash\)f\$ M\_\{\(\backslash\)rm y\}\string^2 \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{Numerical experiments in <a href="{}http://dx.doi.org/10.1016/j.jcp.2012.07.001"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{Muddle, Mihajlovic \& Heil (2012) </a> show that an efficient }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{implementation of the preconditioner is obtained by}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{replacing the \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ block in the preconditioner }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)cal P\}\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ by its upper }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{block-\/triangular approximation, corresponding to the preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)widetilde\{\(\backslash\)cal P\}\_\{\(\backslash\)rm PS\}=\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{\(\backslash\)begin\{array\}\{cccc|cc\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{E\_\{xx\}\&E\_\{x\(\backslash\)bar\{x\}\}\&E\_\{xy\}\&E\_\{x\(\backslash\)bar\{y\}\}\&\&\(\backslash\)\(\backslash\) E\_\{\(\backslash\)bar\{x\}x\}\&E\_\{\(\backslash\)bar\{x\}\(\backslash\)bar\{x\}\}+\(\backslash\)sigma}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{I\&E\_\{\(\backslash\)bar\{x\}y\}\&E\_\{\(\backslash\)bar\{x\}\(\backslash\)bar\{y\}\}\&\&\(\backslash\)\(\backslash\) \&\&E\_\{yy\}\&E\_\{y\(\backslash\)bar\{y\}\}\&\&\(\backslash\)\(\backslash\) \&\&E\_\{\(\backslash\)bar\{y\}y\}\&E\_\{\(\backslash\)bar\{y\}\(\backslash\)bar\{y\}\}+\(\backslash\)sigma}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{I\&\&\(\backslash\)\(\backslash\) \(\backslash\)hline}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\&\&\&\&\(\backslash\)frac\{1\}\{\(\backslash\)sigma\}M\_x\string^2\&\(\backslash\)\(\backslash\) \&\&\&\&\&\(\backslash\)frac\{1\}\{\(\backslash\)sigma\}M\_y\string^2\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{\(\backslash\)right].}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)   (3)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{Furthermore, a fully optimal }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{preconditioner (in which the solve times scale linearly with the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{number of unknowns) can be obtained by:}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{-\/ approximately solving the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{  subsidiary linear systems involving the diagonal blocks}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{  \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{  \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{  \(\backslash\)begin\{array\}\{cc\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{  E\_\{xx\}\&E\_\{x\(\backslash\)bar\{x\}\}\(\backslash\)\(\backslash\) E\_\{\(\backslash\)bar\{x\}x\}\&E\_\{\(\backslash\)bar\{x\}\(\backslash\)bar\{x\}\}+\(\backslash\)sigma I\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{  \(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{  \(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{  \(\backslash\)mbox\{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) and\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{  \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{  \(\backslash\)begin\{array\}\{cc\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{  E\_\{yy\}\&E\_\{y\(\backslash\)bar\{y\}\}\(\backslash\)\(\backslash\) E\_\{\(\backslash\)bar\{y\}y\}\&E\_\{\(\backslash\)bar\{y\}\(\backslash\)bar\{y\}\}+\(\backslash\)sigma I\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{  \(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{  \(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{  \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{  in (3) by performing a fixed number of algebraic }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{  multigrid (AMG) cycles,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{and by}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{-\/ approximately solving the subsidiary linear systems }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{  involving \(\backslash\)f\$ M\_\{\(\backslash\)rm x\}\string^2 \(\backslash\)f\$ and \(\backslash\)f\$ M\_\{\(\backslash\)rm y\}\string^2 \(\backslash\)f\$ by }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{  two consecutive linear solves involving the mass matrices}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{  themselves. Following Wathen [A. Wathen, }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{  "{}Realistic eigenvalue bounds for the Galerkin mass matrix"{}, }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{  IMA Journal of Numerical Analysis 7 (1987) 449-\/457], }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{  <a href="{}http://dx.doi.org/10.1016/j.jcp.2012.07.001"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{  Muddle, Mihajlovic \& Heil (2012) </a>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{  suggest employing CG, preconditioned by diagonal scaling, as the solver}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{  for these systems. This solver converges so rapidly that a fixed}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{  number of four CG iterations suffices to compute the solution to}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{  sufficient accuracy so that \(\backslash\)f\$ \(\backslash\)widetilde\{\(\backslash\)cal P\}\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ can be treated}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{  as a constant preconditioner.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{With these approximations, the computational}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{cost of one application of \(\backslash\)f\$ \(\backslash\)widetilde\{\(\backslash\)cal P\}\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ is linear}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{in the number of unknowns. The optimality of the preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{can therefore be assessed by demonstrating that }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{the number of GMRES iterations remains constant under }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{mesh refinement.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{\(\backslash\)section implementation Implementation and use of the preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{The preconditioner described above is implemented within \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{(parallel) block preconditioning framework which is described in }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{<a href="{}../../../mpi/block\_preconditioners/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{another tutorial</a>. For the purpose of the implementation,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{we decompose the preconditioning matrix into the 2x2}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{main blocks indicated by the vertical and horizontal lines}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{in (2) and (3).}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{The application of the preconditioner requires}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{the classification of the unknowns into the six (in 2D) different "{}dof types"{}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{discussed above. This is done on an element-\/by-\/element basis (since}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{only the elements "{}know"{} what their nodal degrees of freedom correspond}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{to) by implementing/overloading the functions}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{-\/ \(\backslash\)c GeneralisedElement::ndof\_types(...) which returns the number of}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{  dof types classified by that element.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{-\/ \(\backslash\)c GeneralisedElement::get\_block\_numbers\_for\_unknowns(...) which}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{  associates each degree of freedom (identified by its global equation}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{  number) with the dof type within its block. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{For a 2D problem the enumeration of the dofs is chosen as follows. The}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{\(\backslash\)c SolidElements classify only the nodal positions and sub-\/divide them}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{into those that are constrained and not constrained by the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{displacement boundary condition so that within that block }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{-\/ dof type 0 corresponds to the unconstrained x-\/nodal coordinates,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{-\/ dof type 1 corresponds to the unconstrained y-\/nodal coordinates,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{-\/ dof type 2 corresponds to the constrained x-\/nodal coordinates,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{-\/ dof type 3 corresponds to the constrained y-\/nodal coordinates.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{The \(\backslash\)c FaceElements that apply the displacement constraint }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{classify the Lagrange multipliers so that within that block}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{-\/ dof type 0 corresponds to the x-\/component of the Lagrange multiplier,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{-\/ dof type 1 corresponds to the y-\/component of the Lagrange multiplier,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{with the obvious generalisation to 3D.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{We examine the performance of the preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{in the test problem discussed in }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{<a href="{}../../../solid/prescribed\_displ\_lagr\_mult/html/index.html"{}>another}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{tutorial</a>: The upper surface of a unit square is subjected}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{to a prescribed displacement that is imposed by Lagrange multipliers.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{The first of the two tables below shows the GMRES iteration counts (averaged }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{over all linear solves performed in the course of all Newton}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{iterations) as a function of the mesh refinement (represented by the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{total number of unknowns) for different implementations of the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{preconditioner. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{-\/ <b>"{}SuperLU"{}</b> corresponds to the exact implementation of the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{  preconditioner \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ in which the linear systems involving }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{  the matrix \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ and the two squared mass matrices, }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{  \(\backslash\)f\$ M\_\{\(\backslash\)rm x\}\string^2 \(\backslash\)f\$ and \(\backslash\)f\$ M\_\{\(\backslash\)rm y\}\string^2 \(\backslash\)f\$, are solved by SuperLU.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{-\/ <b>"{}Upper triangular E"{}</b> corresponds to the case in which }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{  \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ is replaced by its upper block-\/triangular}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{  approximation (corresponding to \(\backslash\)f\$ \(\backslash\)tilde\{\(\backslash\)cal P\}\_\{\(\backslash\)rm PS\} \(\backslash\)f\$)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{  but the four linear solves (two involving the diagonal blocks of}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{  \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$; two involving the squared mass matrices, }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{  \(\backslash\)f\$ M\_\{\(\backslash\)rm x\}\string^2 \(\backslash\)f\$ and \(\backslash\)f\$ M\_\{\(\backslash\)rm y\}\string^2 \(\backslash\)f\$), are performed by SuperLU.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{-\/ <b>"{}Upper triangular E; Hypre/CG"{}</b> are the results obtained when using}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{  the same block approximation of the preconditioner, but using }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{  two AMG cycles (performed with Hypre) for the approximate solution}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{  of the diagonal blocks of \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$, and diagonally}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{  preconditioned CG as the approximate solver for the mass matrices.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{<CENTER><TABLE>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{<TR> <TD> <CODE>n\_dof</CODE> </TD> <TD> 798 </TD> <TD> 3198 </TD> <TD> 12798 </TD> <TD> 51198 </TD> <TD> 204798 </TD>  </TR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{<TR><TD>SuperLU </TD> <TD> 8.1 </TD> <TD> 8.1 </TD> <TD> 8.3 </TD> <TD> 8.3 </TD> <TD> 8.3 </TD>  </TR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{<TR><TD>Upper triangular E</TD> <TD> 24.9 </TD> <TD> 26.9 </TD> <TD> 28.4 </TD> <TD> 28.7 </TD> <TD> 28.9 </TD>  </TR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{<TR><TD>Upper triangular E; Hypre/CG</TD> <TD> 24.9 </TD> <TD> 26.9 </TD> <TD> 28.4 </TD> <TD> 28.8 </TD> <TD> 29.1 </TD>  </TR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{</TABLE></CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{<b>Table 1:</b> Average GMRES iteration counts as a function of the mesh}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{refinement (indicated by}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{the number of unknowns, \(\backslash\)c n\_dof) for different implementations of the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{preconditioner.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{As expected, the GMRES iteration counts are small and mesh independent for the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{exact implementation of the preconditioner. Replacing the (costly) exact }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{solves by (faster) approximate solves leads to a modest}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{increase in the (absolute) number of GMRES iterations, while }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{retaining their virtual mesh independence under sufficiently }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{strong mesh refinement.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{The benefit of switching to the approximate solves becomes apparent}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{in the next table which shows the average cpu times required }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{for the solution of the linear systems by GMRES. For sufficiently }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{fine discretisations the larger number of GMRES iterations for the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{inexact solves is more than compensated for by the much lower cost}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{of the preconditioning operations. The final}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{implementation yields cpu times that are proportional to the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{number of unknowns -\/-\/ the hallmark of an optimal solver.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{<CENTER><TABLE>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{<TR> <TD> <CODE>n\_dof</CODE> </TD> <TD> 798 </TD> <TD> 3198 </TD> <TD> 12798 </TD> <TD> 51198 </TD> <TD> 204798 </TD>  </TR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{<TR><TD>SuperLU </TD> <TD> 0.140409 </TD> <TD> 0.720991 </TD> <TD> 4.47518 </TD> <TD> 35.1349 </TD> <TD> 336.517 </TD>  </TR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{<TR><TD>Upper triangular E</TD> <TD> 0.160478 </TD> <TD> 0.737302 </TD> <TD> 3.80428 </TD> <TD> 22.6697 </TD> <TD> 170.048 </TD>  </TR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{<TR><TD>Upper triangular E; Hypre/CG</TD> <TD> 0.225759 </TD> <TD> 0.895603 </TD> <TD> 3.61778 </TD> <TD> 15.8982 </TD> <TD> 64.4825 </TD>  </TR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{</TABLE></CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{<b>Table 2:</b>  Average GMRES solve times [sec] as a function of the mesh}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{refinement (indicated by the number of unknowns, \(\backslash\)c n\_dof) for}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{different implementations of the preconditioner.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{\(\backslash\)section modifications Modifications to the driver code}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{Most of the driver code is unchanged from the implementation}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{discussed in the  }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{<a href="{}../../../solid/prescribed\_displ\_lagr\_mult/html/index.html"{}>original}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{tutorial.</a> We therefore only discuss the modifications required}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{to employ preconditioned GMRES as the linear solver for the Newton method.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{\(\backslash\)subsection reclass (Re-\/)classification of the dof types}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{As discussed above (and in the more detailed }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{<a href="{}../../../mpi/block\_preconditioners/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{block-\/preconditioning tutorial</a>, the classification of the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{degrees of freedom into different "{}dof types"{} has to be performed}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{by the elements. Our implementation of the pseudo-\/elastic preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{treats the solver for the linear system involving  \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{as a subsidiary preconditioner. \(\backslash\)c oomph-\/lib's existing solid mechanics}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{elements already provide dof classification for the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{nodal positions according to the coordinate directions (so for a 2D}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{displacement-\/based solid element the call to}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{\(\backslash\)c ndof\_types() will return 2 -\/-\/ the x and y nodal positions). }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{If these elements are to be used with our preconditioner, this classification}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{must be over-\/written to distinguish between constrained}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{and unconstrained nodal positions. This is done most easily by providing}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{a wrapper class (templated by the type of the underlying solid}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{element) in the driver code to re-\/implement (overload) the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{relevant functions:}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{\(\backslash\)dontinclude prescribed\_displ\_lagr\_mult\_precond.cc}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{\(\backslash\)skipline start\_wrapper}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{\(\backslash\)until \{\}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{The member function \(\backslash\)c ndof\_types() returns the number of dof types }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{associated with (and classified by) this element: twice the number of spatial }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{dimensions (for the constrained and unconstrained nodal positions).}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{The member function \(\backslash\)c get\_dof\_numbers\_for\_unknowns() returns a list of}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{pairs, associating each (global) unknown (stored as the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{first entry in the pair) with the dof type within its block}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{(stored as the second entry in the pair). We distinguish between}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{constrained and unconstrained nodes by checking if the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{node has been resized to accommodate storage for the Lagrange}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{multipliers. [Recall that \(\backslash\)c FiniteElement::required\_nvalue(j)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{returns the number of nodal values at local node \(\backslash\)c j, }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{required by the element itself (recall that for "{}pure"{} solid mechanics}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{elements this number is zero because the nodal coordinates}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{are stored as a separate \(\backslash\)c Data item); \(\backslash\)c Node::nvalue() returns}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{the number of values actually stored at a \(\backslash\)c Node -\/-\/ if this}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{exceeds the value returned by  \(\backslash\)c FiniteElement::required\_nvalue(j),}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{node \(\backslash\)c j must have been resized when the \(\backslash\)c FaceElement applying}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{the displacement constraint by Lagrange multipliers was attached.]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{The \(\backslash\)c ImposeDisplacementByLagrangeMultiplierElements which we use to }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{impose the displacement constraint already label the x-\/ and y-\/ }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{[and, in 3D, z-\/]component of the Lagrange multipliers as}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{dof types 0, 1 [and 2], as required by our preconditioner.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{Therefore no modification is required.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{\(\backslash\)subsection driver Modifications to the main code}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{The main code only requires minor changes, all associated with}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{the specification of different solver options. Since we provide the option to }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{use Hypre and Trilinos solvers, we need to activate MPI}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{if \(\backslash\)c oomph-\/lib has been compiled with MPI support (even }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{if the code is run in serial):}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{\(\backslash\)dontinclude prescribed\_displ\_lagr\_mult\_precond.cc}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{\(\backslash\)until \#endif}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{Next we define and process the possible command line flags }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{which are used to select solver options and to specify the spatial }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{resolution (in terms of of the number of elements in the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{x-\/ and y-\/directions. The \(\backslash\)c -\/-\/no\_adapt flag suppresses the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{spatial adaptivity to facilitate systematic mesh refinement}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{studies. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{\(\backslash\)until diagonal\_scaling\_for\_elastic\_blocks}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{We then assign the command line flags that were specified}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{and document the ones that were recognised before building the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{problem, specifying the "{}wrapped"{} version of the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{RefineableQPVDElement as the template parameter.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{\(\backslash\)skipline Parse command line}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{\(\backslash\)until RefineableQPVDElement<2,3>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{The rest of the main code is identical to the original version }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{discussed in }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{<a href="{}../../../solid/prescribed\_displ\_lagr\_mult/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{another tutorial</a> and is therefore omitted here.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{\(\backslash\)subsection constr Modifications to the problem constructor}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{The majority of the problem constructor is unchanged from the original version}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{of the code. Having created the bulk mesh (and stored a pointer}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{to it in the private member \(\backslash\)c Solid\_mesh\_pt) and the mesh of Lagrange}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{multiplier elements (with a pointer stored in \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{Lagrange\_multiplier\_mesh\_pt), we specify a GMRES as the linear solver}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{(using Trilinos' version of it, if available):}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{\(\backslash\)dontinclude prescribed\_displ\_lagr\_mult\_precond.cc}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{\(\backslash\)skipline Create the linear solver}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{\(\backslash\)until linear\_solver\_pt() = solver\_pt;}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{Next, we create an instance of our preconditioner, specify}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{the meshes that contain the "{}bulk"{} solid and Lagrange multiplier}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{elements, respectively, and pass the preconditioner to the }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{iterative linear solver.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{\(\backslash\)until  solver\_pt-\/>preconditioner\_pt() = prec\_pt;}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{By default the preconditioner performs the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{preconditioning operations as described above, and performs }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{the block solves in (2) exactly, using SuperLU.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{The use of different blocked approximations to \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{is controlled via the \(\backslash\)c elastic\_preconditioner\_type() function. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{It is possible to specify the block approximation in terms of the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{(self-\/explanatory) enumeration}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{-\/ \(\backslash\)c PseudoElasticPreconditioner::Exact\_block\_preconditioner [the default]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{-\/ \(\backslash\)c PseudoElasticPreconditioner::Block\_diagonal\_preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{-\/ \(\backslash\)c PseudoElasticPreconditioner::Block\_upper\_triangular\_preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{-\/ \(\backslash\)c PseudoElasticPreconditioner::Block\_lower\_triangular\_preconditioner}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{So, to choose an upper block-\/triangular approximation for}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{\(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ we write }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{By default the linear systems involving }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{the diagonal blocks of \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\} \(\backslash\)f\$ are performed by }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{SuperLU. The function \(\backslash\)c set\_elastic\_subsidiary\_preconditioner(...)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{allows the specification of another (approximate) solver (or subsidiary}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{preconditioner, in the terminology of \(\backslash\)c oomph-\/lib's block preconditioning}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{framework). The argument to this function is a pointer to a }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{global function that returns an instance of the required }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{solver. A function that creates an instantiation of Hypre's AMG }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{solver (with suitable settings) is already implemented in the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{\(\backslash\)c Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{helper namespace and can be activated as follows:}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{\(\backslash\)until \#endif}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{(<a href="{}../../../../doc/mpi/distributed\_general\_purpose\_block\_preconditioners/html/index.html\#application"{}>Recall</a>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{that subsidiary preconditioners are deleted automatically}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{by the master preconditioner when they are no longer required.)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{A similar construction is used to specify alternative (approximate) solvers}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{for the linear systems involving the mass matrices. To perform the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{solves with Trilinos' CG solver (and diagonal scaling) we state:}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{\(\backslash\)until \#endif}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{That's it!}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{\(\backslash\)section comm\_and\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{\(\backslash\)subsection comm Comments}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{-\/ The machinery described here may seem rather heavy for a rather}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{  obscure problem. As mentioned at the beginning of this tutorial,}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{  the main purpose of this preconditioner is to act as a building block}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{  for our preconditioner for large-\/displacement FSI problems in which }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{  the ALE node update of the fluid mesh in response to the deformation}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{  of the fluid-\/loaded solid is handled by (pseudo-\/)elasticity. We}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{  refer to <a href="{}../../pseudo\_solid\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{  another tutorial</a> for details.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{-\/ Further details of the theory, such as the proof of the optimality of}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{  the preconditioner, can be found in  }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{  <a href="{}http://dx.doi.org/10.1016/j.jcp.2012.07.001"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{  Muddle, Mihajlovic \& Heil (2012).</a>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{      }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{\(\backslash\)subsection ex Exercises}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{-\/\# Experiment with alternative subsidiary preconditioners}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{   (inexact solvers) for the solution of the \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\}\(\backslash\)f\$ block. }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{   For instance, set the argument to}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{   \(\backslash\)c PseudoElasticPreconditioner::elastic\_preconditioner\_type()}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{   to \(\backslash\)c PseudoElasticPreconditioner::Block\_diagonal\_preconditioner.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{   With this setting, the solution of the linear systems}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{   involving \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\}\(\backslash\)f\$ is performed using the block-\/diagonal}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{   approximation of \(\backslash\)f\$ E\_\{\(\backslash\)rm PS\}\(\backslash\)f\$. This saves one matrix-\/vector }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{   product with the off-\/diagonal blocks per iteration but   }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{   significantly increases}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{   the GMRES iteration counts. [Don't take our word for it -\/-\/ try it!]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{-\/\# Specify "{}your own"{} subsidiary preconditioner (inexact solver)}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{   by writing a global function (well, you should obviously hide}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{   it in a namespace -\/-\/ remember that global data and functions are}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{   evil!) that creates an instance of that preconditioner. Pass}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{   a function pointer to this function to }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{   \(\backslash\)c PseudoElasticPreconditioner::set\_elastic\_subsidiary\_preconditioner().}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{   [Hint: The driver code already contains the relevant source lines}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{   (omitted in the code listings above) to illustrate how to }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{   solve the linear systems with a diagonal }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{   preconditioner. This leads to a fairly catastrophic}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{   deterioration of the GMRES iteration counts -\/-\/ the point of the}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{   exercise is to demonstrate how to implement such alternative}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{   (and hopefully better!) subsidiary preconditioners "{}from scratch"{}.]}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{-\/\# Inspect (and experiment with) our settings for Hypre's AMG }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{   solver -\/-\/ defined in}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{   the \(\backslash\)c Pseudo\_Elastic\_Preconditioner\_Subsidiary\_Operator\_Helper}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{   namespace in \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{   <center>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{   <code> }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{   <a href="{}../../../../src/multi\_physics/pseudo\_elastic\_preconditioner.h"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{   src/multi\_physics/pseudo\_elastic\_preconditioner.h</a>       }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{   </code> }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n and  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{   <code> }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{   <a href="{}../../../../src/multi\_physics/pseudo\_elastic\_preconditioner.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{   src/multi\_physics/pseudo\_elastic\_preconditioner.cc</a> }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{   </code> }}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{   </center>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/solid/prescribed\_displ\_lagr\_mult"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{demo\_drivers/solid/prescribed\_displ\_lagr\_mult}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/solid/prescribed\_displ\_lagr\_mult/prescribed\_displ\_lagr\_mult\_precond.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00617}00617 \textcolor{comment}{demo\_drivers/solid/prescribed\_displ\_lagr\_mult/prescribed\_displ\_lagr\_mult\_precond.cc</A>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00618}00618 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00619}00619 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00620}00620 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00621}00621 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00622}00622 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00623}00623 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00624}00624 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{prescribed__displ__lagr__mult_8txt__doxygenified_8h_source_l00625}00625 }
+
+\end{DoxyCode}

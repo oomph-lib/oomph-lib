@@ -1,7 +1,7 @@
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
 \hline
-\begin{center} {\bfseries{Acknowledgement\+:}} This tutorial and the associated driver codes were developed jointly with David Nigro and Robert Harter (Thales Underwater Systems Ltd) with financial support from a K\+TA Secondment grant from University of Manchester\textquotesingle{}s E\+P\+S\+R\+C-\/funded Knowledge Transfer Account. \end{center}    \\\cline{1-1}
+\begin{center} {\bfseries{Acknowledgement\+:}} This tutorial and the associated driver codes were developed jointly with David Nigro and Robert Harter (Thales Underwater Systems Ltd) with financial support from a KTA Secondment grant from University of Manchester\textquotesingle{}s EPSRC-\/funded Knowledge Transfer Account. \end{center}    \\\cline{1-1}
 \end{longtabu}
 \end{center} 
 
@@ -37,7 +37,7 @@ We model the coating layer as a linearly elastic solid, described in terms of a 
 As before, we assume a time-\/harmonic solution with frequency $ \omega$ so that $ {\bf U}^*(r^*,z^*,\varphi,t^*) = {\rm Re} \{ {\bf u}^*(r^*,z^*,\varphi) \exp(-{\rm i}\omega t^*)\}$. We non-\/dimensionalise the displacements on ${\cal L}$ and the stress on Young\textquotesingle{}s modulus, $E$, so that ${\bf u}^* = {\cal L} {\bf u} $ and $ \mbox{\boldmath$ \tau^*$} = E \mbox{\boldmath$ \tau$}$. The deformation of the elastic coating is then governed by the time-\/harmonic Navier-\/\+Lame equations \begin{center} \[ \mbox{\boldmath$ \nabla\cdot\tau$}+\Omega^2\mbox{\boldmath$ u$} = {\bf 0} \ \ \ \ \ \ \ \ \ \ (2) \] \end{center}  where \begin{center} \[ \mbox{\boldmath$ \tau $}=\frac{1}{1+\nu}\left( \frac{\nu}{1-2\nu}(\mbox{\boldmath$\nabla\cdot u$})\textbf{I}+ \frac{1}{2}(\mbox{\boldmath$ \nabla u$}+\mbox{\boldmath$ \nabla u$}^{{\rm T}})\right) \ \ \ \ \ \ \ \ \ \ (3) \] \end{center}  is the non-\/dimensional stress tensor. The (square of the) non-\/dimensional wavenumber \[ \Omega^2 = \frac{\rho_{\rm s} (\omega {\cal L})^2}{E}, \] where $ \rho_{\rm s}$ is the solid density, represents the ratio of the typical inertial solid pressure induced by the wall oscillation to the stiffness of the elastic coating. We note that for a `light' coating we have $\Omega \ll 1$.
 
 We then decompose $ {\bf u} $ into its Fourier components by writing \[ {\bf u}(r,\varphi,z) = \sum_{N=-\infty}^{\infty} {\bf u}_N(r,z) \exp({\rm i} N \varphi). \] This decomposition allows us to remove the $ \theta $-\/dependence from the equations by writing $ \partial (.)/\partial\theta={\rm i} N (.) $. Since the governing equations are linear, we can solve for each Fourier component separately and specify the Fourier wavenumber $ N $ as a parameter.\hypertarget{index_bc}{}\doxysubsection{Boundary conditions}\label{index_bc}
-The inner surface of the elastic coating, $ \partial D_{\rm s} $, is subject to the prescribed displacement imposed by the oscillating cylinder. For instance, if the inner cylinder performs spherically symmetric oscillations of non-\/dimensional amplitude $ \epsilon$, we have \[ \mbox{\bf u}_0 = \epsilon \, \mbox{\bf e}_{r_{\rm sphere}} \mbox{\ \ \ \ \ on $\partial D_{\rm s}$}, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) \] where \[ \mbox{\bf e}_{r_{\rm sphere}} = \frac{r}{\sqrt{r^2+z^2}} {\bf e}_r + \frac{z}{\sqrt{r^2+z^2}} {\bf e}_z \] is the unit vector in the (spherically!) radial direction, while the other Fourier components remain zero, $ \mbox{\bf u}_j = {\bf 0} $ for $ j=\pm 1, \pm 2, ...$ The fluid-\/loaded surface of the elastic coating, $ \partial D_{\rm f} $, is subject to the fluid pressure. The non-\/dimensional traction exerted by the fluid onto the solid (on the solid stress scale) is therefore given by \[ {\bf t}^{\rm [solid]} = \mbox{\boldmath$ \tau $}^{\rm [solid]} \cdot {\bf n} = - \phi \ Q \ {\bf n} \mbox{\ \ \ \ \ on $\partial D_{\rm f}$}, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \] where the $ {\bf n} = n_r {\bf e}_r + n_z {\bf e}_z $ is the outer unit normal on the solid boundary $\partial D_{\rm f}$ and \[ Q=\frac{\rho_{\rm f}({\cal L}\omega)^2}{E} \] is the final non-\/dimensional parameter in the problem. It represents the ratio of the typical inertial fluid pressure induced by the wall oscillation to the stiffness of the elastic coating. The parameter $Q$ therefore provides a measure of the strength of the fluid-\/structure interaction (F\+SI) in the sense that for $Q \to 0$ the elastic coating does not `feel' the presence of the fluid.
+The inner surface of the elastic coating, $ \partial D_{\rm s} $, is subject to the prescribed displacement imposed by the oscillating cylinder. For instance, if the inner cylinder performs spherically symmetric oscillations of non-\/dimensional amplitude $ \epsilon$, we have \[ \mbox{\bf u}_0 = \epsilon \, \mbox{\bf e}_{r_{\rm sphere}} \mbox{\ \ \ \ \ on $\partial D_{\rm s}$}, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) \] where \[ \mbox{\bf e}_{r_{\rm sphere}} = \frac{r}{\sqrt{r^2+z^2}} {\bf e}_r + \frac{z}{\sqrt{r^2+z^2}} {\bf e}_z \] is the unit vector in the (spherically!) radial direction, while the other Fourier components remain zero, $ \mbox{\bf u}_j = {\bf 0} $ for $ j=\pm 1, \pm 2, ...$ The fluid-\/loaded surface of the elastic coating, $ \partial D_{\rm f} $, is subject to the fluid pressure. The non-\/dimensional traction exerted by the fluid onto the solid (on the solid stress scale) is therefore given by \[ {\bf t}^{\rm [solid]} = \mbox{\boldmath$ \tau $}^{\rm [solid]} \cdot {\bf n} = - \phi \ Q \ {\bf n} \mbox{\ \ \ \ \ on $\partial D_{\rm f}$}, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) \] where the $ {\bf n} = n_r {\bf e}_r + n_z {\bf e}_z $ is the outer unit normal on the solid boundary $\partial D_{\rm f}$ and \[ Q=\frac{\rho_{\rm f}({\cal L}\omega)^2}{E} \] is the final non-\/dimensional parameter in the problem. It represents the ratio of the typical inertial fluid pressure induced by the wall oscillation to the stiffness of the elastic coating. The parameter $Q$ therefore provides a measure of the strength of the fluid-\/structure interaction (FSI) in the sense that for $Q \to 0$ the elastic coating does not `feel' the presence of the fluid.
 
 The fluid is forced by the normal displacement of the solid. Imposing the non-\/penetration condition $({\bf d} - {\bf u}) \cdot {\bf n} = 0$ on $\partial D_{\rm f}$ yields a Neumann condition for the displacement potential, \[ \frac{\partial \phi}{\partial n} = {\bf u} \cdot {\bf n} \mbox{\ \ \ \ \ on $\partial D_{\rm f}$}. \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (6) \] Finally, the displacement potential for the fluid must satisfy the Sommerfeld radiation condition \[ \lim_{r_{\rm sphere} \to \infty} r_{\rm sphere} \left( \frac{\partial \phi}{\partial r_{\rm sphere} } - {\rm i} k \phi \right) = 0, \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (7) \] where $ r_{\rm sphere} = \sqrt{(r^2+z^2)} $ is the (spherical) radius. The Sommerfeld radiation condition ensures that the oscillating sphere does not generate any incoming waves.
 
@@ -52,7 +52,7 @@ The implementation of the coupled problem follows the usual procedure for multi-
 \end{DoxyItemize}and
 \begin{DoxyItemize}
 \item \href{../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html}{\texttt{ time-\/harmonic linear elasticity elements}}
-\end{DoxyItemize}for the discretisation of the P\+D\+Es (1) and (2), respectively. The displacement boundary condition (4) on the inner surface of the elastic coating is imposed as usual by pinning the relevant degrees of freedom, exactly as in a \href{../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html}{\texttt{ single-\/physics solid mechanics problem}}. Similarly, the Sommerfeld radiation condition (7) on the outer boundary of the fluid domain can be imposed by any of the methods available for the solution of the single-\/physics Helmholtz equation, such as a \href{../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html\#DtN}{\texttt{ Dirichlet-\/to-\/\+Neumann mapping.}}
+\end{DoxyItemize}for the discretisation of the PDEs (1) and (2), respectively. The displacement boundary condition (4) on the inner surface of the elastic coating is imposed as usual by pinning the relevant degrees of freedom, exactly as in a \href{../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html}{\texttt{ single-\/physics solid mechanics problem}}. Similarly, the Sommerfeld radiation condition (7) on the outer boundary of the fluid domain can be imposed by any of the methods available for the solution of the single-\/physics Helmholtz equation, such as a \href{../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html\#DtN}{\texttt{ Dirichlet-\/to-\/\+Neumann mapping.}}
 
 The boundary conditions (5) and (6) at the fluid-\/solid interface are traction boundary conditions for the solid, and Neumann boundary conditions for the Helmholtz equation, respectively. In a single-\/physics problem we would impose such boundary conditions by attaching suitable {\ttfamily Face\+Elements} to the appropriate boundaries of the \char`\"{}bulk\char`\"{} elements, as shown in the sketch below\+: {\ttfamily Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Element} could be used to impose a (given) traction, $ {\bf t}_0$, onto the solid; {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Elements} could be used to impose a (given) normal derivative, $ f_0$, on the displacement potential. Both $ {\bf t}_0$ and $ f_0 $ would usually be specified in a user-\/defined namespace and accessed via function pointers as indicated in the right half of the sketch.
 
@@ -63,9 +63,9 @@ The boundary conditions (5) and (6) at the fluid-\/solid interface are traction 
 \end{DoxyImage}
 
 
-In the coupled problem, illustrated in the left half of the next sketch, the traction acting on the solid becomes a function of the displacement potential via the boundary condition (5), while the normal derivative of the displacement potential is given in terms of the solid displacement via equation (6). Note that corresponding points on the F\+SI boundary $ \partial D_{\rm f}$ are identified by matching values of the boundary coordinate $ \zeta $ which is assumed to be consistent between the two domains.
+In the coupled problem, illustrated in the left half of the next sketch, the traction acting on the solid becomes a function of the displacement potential via the boundary condition (5), while the normal derivative of the displacement potential is given in terms of the solid displacement via equation (6). Note that corresponding points on the FSI boundary $ \partial D_{\rm f}$ are identified by matching values of the boundary coordinate $ \zeta $ which is assumed to be consistent between the two domains.
 
-The implementation of this interaction in the discretised problem is illustrated in the right half of the sketch\+: We replace the single-\/physics {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Elements} by {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Elements}, and the {\ttfamily Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Elements} by {\ttfamily Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Elements}. (Yes, we like to be verbose...). Both of these {\ttfamily Face\+Elements} are derived from the {\ttfamily Element\+With\+External\+Element} base class and can therefore store a pointer to an \char`\"{}external\char`\"{} element that provides the information required to impose the appropriate boundary condition. Thus, the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+B\+C\+Elements} store pointers to the \char`\"{}adjacent\char`\"{} time-\/harmonic linear elasticity elements (from which they obtain the boundary displacement required for the imposition of (6)), while the {\ttfamily Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+B\+C\+Elements} store pointers to the \char`\"{}adjacent\char`\"{} Helmholtz elements that provide the value of the displacement potential required for the evaluation of (5).
+The implementation of this interaction in the discretised problem is illustrated in the right half of the sketch\+: We replace the single-\/physics {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Elements} by {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElements}, and the {\ttfamily Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Traction\+Elements} by {\ttfamily Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElements}. (Yes, we like to be verbose...). Both of these {\ttfamily Face\+Elements} are derived from the {\ttfamily Element\+With\+External\+Element} base class and can therefore store a pointer to an \char`\"{}external\char`\"{} element that provides the information required to impose the appropriate boundary condition. Thus, the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+From\+Normal\+Displacement\+BCElements} store pointers to the \char`\"{}adjacent\char`\"{} time-\/harmonic linear elasticity elements (from which they obtain the boundary displacement required for the imposition of (6)), while the {\ttfamily Fourier\+Decomposed\+Time\+Harmonic\+Lin\+Elast\+Loaded\+By\+Helmholtz\+Pressure\+BCElements} store pointers to the \char`\"{}adjacent\char`\"{} Helmholtz elements that provide the value of the displacement potential required for the evaluation of (5).
 
  
 \begin{DoxyImage}
@@ -102,7 +102,7 @@ Finally, we provide some validation of the computational results by comparing th
  
 \begin{DoxyImage}
 \includegraphics[width=0.6\textwidth]{trace}
-\doxyfigcaption{Radiated power as function of the F\+SI parameter Q for a spherically-\/symmetrically oscillating coating. Markers\+: computed results; continuous line\+: analytical result. }
+\doxyfigcaption{Radiated power as function of the FSI parameter Q for a spherically-\/symmetrically oscillating coating. Markers\+: computed results; continuous line\+: analytical result. }
 \end{DoxyImage}
 
 
@@ -156,14 +156,14 @@ As usual we define the problem parameters in a namespace. (\href{../../../time_h
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Square of wavenumber for the Helmholtz equation}}
+\DoxyCodeLine{\textcolor{comment}{ /// Square of wavenumber for the Helmholtz equation}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{K\_squared}}=10.0;}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Radius of outer boundary of Helmholtz domain}}
+\DoxyCodeLine{\textcolor{comment}{ /// Radius of outer boundary of Helmholtz domain}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Outer\_radius}}=2.0; }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// FSI parameter}}
@@ -179,15 +179,13 @@ As usual we define the problem parameters in a namespace. (\href{../../../time_h
 \DoxyCodeLine{\textcolor{comment}{} std::complex<double> \mbox{\hyperlink{namespaceGlobal__Parameters_a373950a959cd784c8f8028099807c2fb}{Nu}}(std::complex<double>(0.3,0.0));}
 
 \end{DoxyCodeInclude}
-
-
-We wish to perform parameter studies in which we vary the F\+SI parameter $ Q $. To make this physically meaningful, we interpret $ Q =(\rho_{\rm f}({\cal L}\omega)^2)/E $ as a measure of the stiffness of the elastic coating (so that an increase in $ Q $ corresponds to a reduction in the layer\textquotesingle{}s elastic modulus $ E $). In that case, the frequency parameter $ \Omega^2 = (\rho_{\rm s} (\omega {\cal L})^2)/E $ in the time-\/harmonic linear elasticity equations becomes a dependent parameter and is given in terms of the density ratio $ \rho_{\rm solid}/\rho_{\rm fluid} $ and $ Q $ by $ \Omega^2 = (\rho_{\rm solid}/\rho_{\rm fluid}) Q$. We therefore provide a helper function to update the dependent parameter following any change in the independent parameters.
+ We wish to perform parameter studies in which we vary the FSI parameter $ Q $. To make this physically meaningful, we interpret $ Q =(\rho_{\rm f}({\cal L}\omega)^2)/E $ as a measure of the stiffness of the elastic coating (so that an increase in $ Q $ corresponds to a reduction in the layer\textquotesingle{}s elastic modulus $ E $). In that case, the frequency parameter $ \Omega^2 = (\rho_{\rm s} (\omega {\cal L})^2)/E $ in the time-\/harmonic linear elasticity equations becomes a dependent parameter and is given in terms of the density ratio $ \rho_{\rm solid}/\rho_{\rm fluid} $ and $ Q $ by $ \Omega^2 = (\rho_{\rm solid}/\rho_{\rm fluid}) Q$. We therefore provide a helper function to update the dependent parameter following any change in the independent parameters.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Non-\/dim square of frequency for solid -\/-\/ dependent variable!}}
-\DoxyCodeLine{\textcolor{comment}{} std::complex<double>  \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Omega\_sq}}(std::complex<double>(100.0,0.0));}
+\DoxyCodeLine{\textcolor{comment}{} std::complex<double>  \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Omega\_sq}}(std::complex<double>(100.0,0.0));}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Density ratio: solid to fluid}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Density\_ratio}}=1.0; }
@@ -195,22 +193,20 @@ We wish to perform parameter studies in which we vary the F\+SI parameter $ Q $.
 \DoxyCodeLine{\textcolor{comment}{ /// Function to update dependent parameter values}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da231b7}{update\_parameter\_values}}()}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Omega\_sq}}=\mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Density\_ratio}}*\mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}};}
+\DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Omega\_sq}}=\mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Density\_ratio}}*\mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}};}
 \DoxyCodeLine{ \}}
 
 \end{DoxyCodeInclude}
-
-
-We force the system by imposing a prescribed displacement on the inner surface of the elastic coating and allow this to vary in the \char`\"{}zenith\char`\"{}-\/direction with wavenumber $ M $\+:
+ We force the system by imposing a prescribed displacement on the inner surface of the elastic coating and allow this to vary in the \char`\"{}zenith\char`\"{}-\/direction with wavenumber $ M $\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Wavenumber "zenith"-\/variation of imposed displacement of coating}}
+\DoxyCodeLine{\textcolor{comment}{ /// Wavenumber "{}zenith"{}-\/variation of imposed displacement of coating}}
 \DoxyCodeLine{\textcolor{comment}{ /// on inner boundary }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{sphere_8txt_ab10469e7eba7097891e00152fcd01958}{M}}=4; }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Parameters_abc67bb72ab99af013e3c7f6ffe453798}{M}}=4; }
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Displacement field on inner boundary of solid}}
+\DoxyCodeLine{\textcolor{comment}{ /// Displacement field on inner boundary of solid}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Parameters_ab51fa55d06d9963d363bcf966cfcc62b}{solid\_boundary\_displacement}}(\textcolor{keyword}{const} Vector<double>\& x,}
 \DoxyCodeLine{                                  Vector<std::complex<double> >\& u)}
 \DoxyCodeLine{ \{}
@@ -220,21 +216,19 @@ We force the system by imposing a prescribed displacement on the inner surface o
 \DoxyCodeLine{  normal[0]=x[0]/norm;}
 \DoxyCodeLine{  normal[1]=x[1]/norm;}
 \DoxyCodeLine{}
-\DoxyCodeLine{  u[0]=complex<double>(normal[0]*cos(\textcolor{keywordtype}{double}(\mbox{\hyperlink{sphere_8txt_ab10469e7eba7097891e00152fcd01958}{M}})*theta),0.0);}
-\DoxyCodeLine{  u[1]=complex<double>(normal[1]*cos(\textcolor{keywordtype}{double}(\mbox{\hyperlink{sphere_8txt_ab10469e7eba7097891e00152fcd01958}{M}})*theta),0.0);}
+\DoxyCodeLine{  u[0]=complex<double>(normal[0]*cos(\textcolor{keywordtype}{double}(\mbox{\hyperlink{namespaceGlobal__Parameters_abc67bb72ab99af013e3c7f6ffe453798}{M}})*theta),0.0);}
+\DoxyCodeLine{  u[1]=complex<double>(normal[1]*cos(\textcolor{keywordtype}{double}(\mbox{\hyperlink{namespaceGlobal__Parameters_abc67bb72ab99af013e3c7f6ffe453798}{M}})*theta),0.0);}
 \DoxyCodeLine{ \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we specify the output directory and a multiplier for the number of elements in the meshes to aid mesh convergence studies.
+ Finally, we specify the output directory and a multiplier for the number of elements in the meshes to aid mesh convergence studies.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Output directory}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{string} \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}}=\textcolor{stringliteral}{"RESLT"};}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{string} \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}}=\textcolor{stringliteral}{"{}RESLT"{}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Multiplier for number of elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}{El\_multiplier}}=1;}
@@ -242,9 +236,7 @@ Finally, we specify the output directory and a multiplier for the number of elem
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysubsection{The driver code}\label{index_main}
 The driver code is very straightforward. We parse the command line to determine the parameters for the parameter study and build the problem object, using nine-\/noded quadrilateral elements for the solution of the time-\/harmonic elasticity and Helmholtz equations.
@@ -253,7 +245,7 @@ The driver code is very straightforward. We parse the command line to determine 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for coated sphere loaded by lineared fluid loading}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{fourier__decomposed__acoustic__fsi_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -264,33 +256,33 @@ The driver code is very straightforward. We parse the command line to determine 
 \DoxyCodeLine{ \textcolor{comment}{// were actually specified}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/dir"},}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/dir"{}},}
 \DoxyCodeLine{                                            \&\mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\_Parameters::Directory}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Parameter for the Helmholtz equation}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/k\_squared"},}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/k\_squared"{}},}
 \DoxyCodeLine{                                            \&\mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{Global\_Parameters::K\_squared}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Initial value of Q }}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/q\_initial"}, }
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/q\_initial"{}}, }
 \DoxyCodeLine{                                            \&\mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\_Parameters::Q}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Number of steps in parameter study}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep=2;}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/nstep"},\&nstep);}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/nstep"{}},\&nstep);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Increment in FSI parameter in parameter study}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} q\_increment=5.0;}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/q\_increment"},\&q\_increment);}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/q\_increment"{}},\&q\_increment);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Wavenumber "zenith"-\/variation of imposed displacement of coating}}
+\DoxyCodeLine{ \textcolor{comment}{// Wavenumber "{}zenith"{}-\/variation of imposed displacement of coating}}
 \DoxyCodeLine{ \textcolor{comment}{// on inner boundary }}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/M"},}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/M"{}},}
 \DoxyCodeLine{                                            \&\mbox{\hyperlink{namespaceGlobal__Parameters_abc67bb72ab99af013e3c7f6ffe453798}{Global\_Parameters::M}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Multiplier for number of elements}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/el\_multiplier"},}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/el\_multiplier"{}},}
 \DoxyCodeLine{                                            \&\mbox{\hyperlink{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}{Global\_Parameters::El\_multiplier}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Parse command line}}
@@ -313,9 +305,7 @@ The driver code is very straightforward. We parse the command line to determine 
 \DoxyCodeLine{                     QFourierDecomposedHelmholtzElement<3> > problem;}
 
 \end{DoxyCodeInclude}
-
-
-We then solve the problem for various values of $ Q $, updating the dependent variables after every increment.
+ We then solve the problem for various values of $ Q $, updating the dependent variables after every increment.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -348,7 +338,7 @@ The {\ttfamily Problem} class is templated by the types of the \char`\"{}bulk\ch
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_of\_problem\_class===================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Coated sphere FSI}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classCoatedSphereProblem}{CoatedSphereProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -358,7 +348,7 @@ The {\ttfamily Problem} class is templated by the types of the \char`\"{}bulk\ch
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}{CoatedSphereProblem}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update function (empty)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_aa268009485d4d2bb6b4856bfa318aaa9}{actions\_before\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
@@ -375,22 +365,20 @@ The {\ttfamily Problem} class is templated by the types of the \char`\"{}bulk\ch
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create FSI traction elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create FSI traction elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}{create\_fsi\_traction\_elements}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create Helmholtz FSI flux elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create Helmholtz FSI flux elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a9a301689052eefd53552aadc23ff893b}{create\_helmholtz\_fsi\_flux\_elements}}(); }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Setup interaction}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}{setup\_interaction}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create DtN elements on outer boundary}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create DtN elements on outer boundary}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a867f4ed706f00a73c87c2c862dcf19c3}{create\_helmholtz\_DtN\_elements}}();}
 
 \end{DoxyCodeInclude}
-
-
-The private member data includes storage for the various meshes and objects that are used for outputting the results.
+ The private member data includes storage for the various meshes and objects that are used for outputting the results.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -407,7 +395,7 @@ The private member data includes storage for the various meshes and objects that
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of Helmholtz FSI flux elements}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* Helmholtz\_fsi\_flux\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to mesh containing the DtN elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh containing the DtN elements}}
 \DoxyCodeLine{\textcolor{comment}{} FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ\_ELEMENT>* Helmholtz\_DtN\_mesh\_pt;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
@@ -427,7 +415,7 @@ We start by building the meshes for the elasticity and Helmholtz equations. Both
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}{CoatedSphereProblem<ELASTICITY\_ELEMENT, HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedSphereProblem_ab9c983e7f0bed66f13d59bd65d6d151b}{CoatedSphereProblem}}() }
@@ -436,12 +424,10 @@ We start by building the meshes for the elasticity and Helmholtz equations. Both
 \DoxyCodeLine{ \textcolor{comment}{// Parameters for meshes}}
 \DoxyCodeLine{ \textcolor{keywordtype}{bool} periodic=\textcolor{keyword}{false};}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} azimuthal\_fraction\_of\_coating=0.5;}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{sphere_8txt_a212de9f115b2f2901e4007e1f319fa28}{phi}}=0.5*MathematicalConstants::Pi;}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} phi=0.5*MathematicalConstants::Pi;}
 
 \end{DoxyCodeInclude}
-
-
-The solid mesh occupies the region between $ r = 1-h $ and $ r=1 $ where $ h $ is the thickness of the elastic coating\+:
+ The solid mesh occupies the region between $ r = 1-h $ and $ r=1 $ where $ h $ is the thickness of the elastic coating\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -455,13 +441,13 @@ The solid mesh occupies the region between $ r = 1-h $ and $ r=1 $ where $ h $ i
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nr\_solid=3*\mbox{\hyperlink{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}{Global\_Parameters::El\_multiplier}};}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Innermost radius for solid mesh}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{sphere_8txt_ab08834efd41ff8d453645c014df450bf}{a}}=1.0-\/\mbox{\hyperlink{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}{Global\_Parameters::H\_coating}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} a=1.0-\/\mbox{\hyperlink{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}{Global\_Parameters::H\_coating}};}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Build solid mesh}}
 \DoxyCodeLine{ Solid\_mesh\_pt = \textcolor{keyword}{new} }
 \DoxyCodeLine{  TwoDAnnularMesh<ELASTICITY\_ELEMENT>(periodic,azimuthal\_fraction\_of\_coating,}
-\DoxyCodeLine{                                      ntheta\_solid,nr\_solid,\mbox{\hyperlink{sphere_8txt_ab08834efd41ff8d453645c014df450bf}{a}},}
-\DoxyCodeLine{                                      \mbox{\hyperlink{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}{Global\_Parameters::H\_coating}},\mbox{\hyperlink{sphere_8txt_a212de9f115b2f2901e4007e1f319fa28}{phi}});}
+\DoxyCodeLine{                                      ntheta\_solid,nr\_solid,a,}
+\DoxyCodeLine{                                      \mbox{\hyperlink{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}{Global\_Parameters::H\_coating}},phi);}
 
 \end{DoxyCodeInclude}
 
@@ -482,35 +468,31 @@ The Helmholtz mesh occupies the region between $ r = 1 $ and $ r=R_{\rm outer} $
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nr\_helmholtz=3*\mbox{\hyperlink{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}{Global\_Parameters::El\_multiplier}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Innermost radius of Helmholtz mesh}}
-\DoxyCodeLine{ \mbox{\hyperlink{sphere_8txt_ab08834efd41ff8d453645c014df450bf}{a}}=1.0;}
+\DoxyCodeLine{ a=1.0;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Thickness of Helmholtz mesh}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{sphere_8txt_a05fee6304cdd89e7b7155d220e5d5c4a}{h\_thick\_helmholtz}}=\mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Global\_Parameters::Outer\_radius}}-\/\mbox{\hyperlink{sphere_8txt_ab08834efd41ff8d453645c014df450bf}{a}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} h\_thick\_helmholtz=\mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Global\_Parameters::Outer\_radius}}-\/a;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Build mesh}}
 \DoxyCodeLine{ Helmholtz\_mesh\_pt = \textcolor{keyword}{new} TwoDAnnularMesh<HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{  (periodic,azimuthal\_fraction\_of\_coating,}
-\DoxyCodeLine{   ntheta\_helmholtz,nr\_helmholtz,\mbox{\hyperlink{sphere_8txt_ab08834efd41ff8d453645c014df450bf}{a}},\mbox{\hyperlink{sphere_8txt_a05fee6304cdd89e7b7155d220e5d5c4a}{h\_thick\_helmholtz}},\mbox{\hyperlink{sphere_8txt_a212de9f115b2f2901e4007e1f319fa28}{phi}});}
+\DoxyCodeLine{   ntheta\_helmholtz,nr\_helmholtz,a,h\_thick\_helmholtz,phi);}
 
 \end{DoxyCodeInclude}
-
-
-Next we create the mesh that will store the {\ttfamily Face\+Elements} that will apply the Sommerfeld radiation condition, using the specified number of Fourier terms in the Dirichlet-\/to-\/\+Neumann mapping; see the \href{../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html\#DtN}{\texttt{ Helmholtz tutorial}} for details.
+ Next we create the mesh that will store the {\ttfamily Face\+Elements} that will apply the Sommerfeld radiation condition, using the specified number of Fourier terms in the Dirichlet-\/to-\/\+Neumann mapping; see the \href{../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html\#DtN}{\texttt{ Helmholtz tutorial}} for details.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Create mesh for DtN elements on outer boundary}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{sphere_8txt_a558073be4eb9dfecd1a02957ab406727}{nfourier}}=20;}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nfourier=20;}
 \DoxyCodeLine{ Helmholtz\_DtN\_mesh\_pt=}
 \DoxyCodeLine{  \textcolor{keyword}{new} FourierDecomposedHelmholtzDtNMesh<HELMHOLTZ\_ELEMENT>(}
-\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Global\_Parameters::Outer\_radius}},\mbox{\hyperlink{sphere_8txt_a558073be4eb9dfecd1a02957ab406727}{nfourier}});}
+\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Global\_Parameters::Outer\_radius}},nfourier);}
 
 \end{DoxyCodeInclude}
-
-
-Next we pass the problem parameters to the bulk elements. The elasticity elements require a pointer to Poisson\textquotesingle{}s ratio, $ \nu $, the azimuthal (Fourier) wavenumber $ N $, and the frequency parameter $ \Omega^2 $\+:
+ Next we pass the problem parameters to the bulk elements. The elasticity elements require a pointer to Poisson\textquotesingle{}s ratio, $ \nu $, the azimuthal (Fourier) wavenumber $ N $, and the frequency parameter $ \Omega^2 $\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -530,13 +512,11 @@ Next we pass the problem parameters to the bulk elements. The elasticity element
 \DoxyCodeLine{   el\_pt-\/>nu\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Parameters_a373950a959cd784c8f8028099807c2fb}{Global\_Parameters::Nu}};}
 \DoxyCodeLine{      }
 \DoxyCodeLine{   \textcolor{comment}{// Set the pointer to square of the angular frequency}}
-\DoxyCodeLine{   el\_pt-\/>omega\_sq\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\_Parameters::Omega\_sq}};}
+\DoxyCodeLine{   el\_pt-\/>omega\_sq\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\_Parameters::Omega\_sq}};}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-The Helmholtz elements need a pointer to the (square of the) wavenumber, $ k^2 $ and the azimuthal (Fourier) wavenumber $ N $\+:
+ The Helmholtz elements need a pointer to the (square of the) wavenumber, $ k^2 $ and the azimuthal (Fourier) wavenumber $ N $\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -557,24 +537,20 @@ The Helmholtz elements need a pointer to the (square of the) wavenumber, $ k^2 $
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-It is always a good idea to check the enumeration of the mesh boundaries to facilitate the application of boundary conditions\+:
+ It is always a good idea to check the enumeration of the mesh boundaries to facilitate the application of boundary conditions\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output meshes and their boundaries so far so we can double }}
 \DoxyCodeLine{ \textcolor{comment}{// check the boundary enumeration}}
-\DoxyCodeLine{ Solid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"solid\_mesh.dat"});}
-\DoxyCodeLine{ Helmholtz\_mesh\_pt-\/>output(\textcolor{stringliteral}{"helmholtz\_mesh.dat"});}
-\DoxyCodeLine{ Solid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"solid\_mesh\_boundary.dat"});}
-\DoxyCodeLine{ Helmholtz\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"helmholtz\_mesh\_boundary.dat"});}
+\DoxyCodeLine{ Solid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}solid\_mesh.dat"{}});}
+\DoxyCodeLine{ Helmholtz\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}helmholtz\_mesh.dat"{}});}
+\DoxyCodeLine{ Solid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}solid\_mesh\_boundary.dat"{}});}
+\DoxyCodeLine{ Helmholtz\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}helmholtz\_mesh\_boundary.dat"{}});}
 
 \end{DoxyCodeInclude}
-
-
-Next we create the meshes containing the various {\ttfamily Face\+Elements} used to apply to the F\+SI traction boundary condition (5), the F\+SI flux boundary condition (6) for the Helmholtz equation, and the Sommerfeld radiation condition (7), respectively, using helper functions discussed below.
+ Next we create the meshes containing the various {\ttfamily Face\+Elements} used to apply to the FSI traction boundary condition (5), the FSI flux boundary condition (6) for the Helmholtz equation, and the Sommerfeld radiation condition (7), respectively, using helper functions discussed below.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -614,9 +590,7 @@ We add the various sub-\/meshes to the problem and build the global mesh
 \DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-The solid displacements are prescribed on the inner boundary (boundary 0) of the solid mesh so we pin all six values (representing the real and imaginary parts of the displacements in the $ r-, z- $ and $ \varphi- $ directions, respectively) and assign the boundary values using the function {\ttfamily Global\+\_\+\+Parameters\+::solid\+\_\+boundary\+\_\+displacement(...)}. (The enumeration of the unknowns in the Fourier-\/decomposed equations time-\/harmonic linear elasticity is discussed in \href{../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html\#element_types}{\texttt{ another tutorial}}.)
+ The solid displacements are prescribed on the inner boundary (boundary 0) of the solid mesh so we pin all six values (representing the real and imaginary parts of the displacements in the $ r-, z- $ and $ \varphi- $ directions, respectively) and assign the boundary values using the function {\ttfamily Global\+\_\+\+Parameters\+::solid\+\_\+boundary\+\_\+displacement(...)}. (The enumeration of the unknowns in the Fourier-\/decomposed equations time-\/harmonic linear elasticity is discussed in \href{../../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html\#element_types}{\texttt{ another tutorial}}.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -664,9 +638,7 @@ The solid displacements are prescribed on the inner boundary (boundary 0) of the
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-The radial and azimuthal displacements have to vanish on the symmetry boundary (boundaries 1 and 3)\+:
+ The radial and azimuthal displacements have to vanish on the symmetry boundary (boundaries 1 and 3)\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -723,9 +695,7 @@ The radial and azimuthal displacements have to vanish on the symmetry boundary (
 \DoxyCodeLine{ \} \textcolor{comment}{// done sym bc}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we set up the fluid-\/structure interaction, assign the equation numbers and open a trace file to record the radiated power as a function of the F\+SI parameter $ Q $.
+ Finally, we set up the fluid-\/structure interaction, assign the equation numbers and open a trace file to record the radiated power as a function of the FSI parameter $ Q $.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -736,11 +706,11 @@ Finally, we set up the fluid-\/structure interaction, assign the equation number
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},\mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\_Parameters::Directory}}.c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},\mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\_Parameters::Directory}}.c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\}\textcolor{comment}{//end\_of\_constructor}}
 
@@ -749,14 +719,14 @@ Finally, we set up the fluid-\/structure interaction, assign the equation number
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_create_flux}{}\doxysubsection{Creating the F\+S\+I traction elements (and the F\+S\+I flux and Dt\+N elements)}\label{index_create_flux}
-The function {\ttfamily create\+\_\+fsi\+\_\+traction\+\_\+elements()} creates the {\ttfamily Face\+Elements} required to apply the F\+SI traction boundary condition (5) on the outer boundary (boundary 2) of the solid mesh\+:
+\hypertarget{index_create_flux}{}\doxysubsection{Creating the FSI traction elements (and the FSI flux and Dt\+N elements)}\label{index_create_flux}
+The function {\ttfamily create\+\_\+fsi\+\_\+traction\+\_\+elements()} creates the {\ttfamily Face\+Elements} required to apply the FSI traction boundary condition (5) on the outer boundary (boundary 2) of the solid mesh\+:
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_fsi\_traction\_elements======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create fsi traction elements }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}{CoatedSphereProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedSphereProblem_a2d342158b3058cd5392e2de3fd7595da}{create\_fsi\_traction\_elements}}()}
@@ -787,9 +757,7 @@ The function {\ttfamily create\+\_\+fsi\+\_\+traction\+\_\+elements()} creates t
 \DoxyCodeLine{   FSI\_traction\_mesh\_pt-\/>add\_element\_pt(el\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-To function properly, the elements need to know the number of the bulk mesh boundary they are attached to (this allows them to determine the boundary coordinate $ \zeta $ required to set up the fluid-\/structure interaction; see \mbox{\hyperlink{index_impl}{Implementation}} ), and the F\+SI parameter $ Q $.
+ To function properly, the elements need to know the number of the bulk mesh boundary they are attached to (this allows them to determine the boundary coordinate $ \zeta $ required to set up the fluid-\/structure interaction; see \mbox{\hyperlink{index_impl}{Implementation}} ), and the FSI parameter $ Q $.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -807,36 +775,36 @@ To function properly, the elements need to know the number of the bulk mesh boun
 \end{DoxyCodeInclude}
 
 
-\mbox{[}{\bfseries{Note\+:}} We omit the listings of the functions {\ttfamily create\+\_\+helmholtz\+\_\+fsi\+\_\+flux\+\_\+elements()} and {\ttfamily create\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+elements()} which create the {\ttfamily Face\+Elements} required to apply the F\+SI flux boundary condition (6) on the inner boundary (boundary 0), and the Sommerfeld radiation condition (7) on the outer boundary (boundary 2) of the Helmholtz mesh because they are very similar. Feel free to inspect the ~\newline
+\mbox{[}{\bfseries{Note\+:}} We omit the listings of the functions {\ttfamily create\+\_\+helmholtz\+\_\+fsi\+\_\+flux\+\_\+elements()} and {\ttfamily create\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+elements()} which create the {\ttfamily Face\+Elements} required to apply the FSI flux boundary condition (6) on the inner boundary (boundary 0), and the Sommerfeld radiation condition (7) on the outer boundary (boundary 2) of the Helmholtz mesh because they are very similar. Feel free to inspect the ~\newline
  \href{../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc}{\texttt{ source code.}}\mbox{]}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_fsi}{}\doxysubsection{Setting up the fluid-\/structure interaction}\label{index_fsi}
-The setup of the fluid-\/structure interaction requires the identification of the \char`\"{}bulk\char`\"{} Helmholtz elements that are adjacent to (the Gauss points of) the {\ttfamily Face\+Elements} that impose the F\+SI traction boundary condition (5), in terms of the displacement potential $ \phi $ computed by these \char`\"{}bulk\char`\"{} elements. This can be done using the helper function {\ttfamily Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh(...)} which is templated by the type of the \char`\"{}bulk\char`\"{} element and its spatial dimension, and takes as arguments\+:
+The setup of the fluid-\/structure interaction requires the identification of the \char`\"{}bulk\char`\"{} Helmholtz elements that are adjacent to (the Gauss points of) the {\ttfamily Face\+Elements} that impose the FSI traction boundary condition (5), in terms of the displacement potential $ \phi $ computed by these \char`\"{}bulk\char`\"{} elements. This can be done using the helper function {\ttfamily Multi\+\_\+domain\+\_\+functions\+::setup\+\_\+bulk\+\_\+elements\+\_\+adjacent\+\_\+to\+\_\+face\+\_\+mesh(...)} which is templated by the type of the \char`\"{}bulk\char`\"{} element and its spatial dimension, and takes as arguments\+:
 \begin{DoxyItemize}
 \item a pointer to the {\ttfamily Problem},
-\item the boundary ID of the F\+SI boundary in the \char`\"{}bulk\char`\"{} mesh,
+\item the boundary ID of the FSI boundary in the \char`\"{}bulk\char`\"{} mesh,
 \item a pointer to that mesh,
 \item a pointer to the mesh of {\ttfamily Face\+Elements}.
-\end{DoxyItemize}Nearly a one-\/liner (if you ignore the optional output of the boundary coordinate which allows us to check that the F\+SI boundaries of the fluid and solid domains have been parametrised consistently).
+\end{DoxyItemize}Nearly a one-\/liner (if you ignore the optional output of the boundary coordinate which allows us to check that the FSI boundaries of the fluid and solid domains have been parametrised consistently).
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_setup\_interaction======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Setup interaction between two fields}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}{CoatedSphereProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedSphereProblem_aeea43c892871a6c65df992aedc3b3547}{setup\_interaction}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Setup Helmholtz "pressure" load on traction elements}}
+\DoxyCodeLine{ \textcolor{comment}{// Setup Helmholtz "{}pressure"{} load on traction elements}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} boundary\_in\_helmholtz\_mesh=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc boundary coordinate for Helmholtz}}
 \DoxyCodeLine{ ofstream the\_file;}
-\DoxyCodeLine{ the\_file.open(\textcolor{stringliteral}{"boundary\_coordinate\_hh.dat"});}
+\DoxyCodeLine{ the\_file.open(\textcolor{stringliteral}{"{}boundary\_coordinate\_hh.dat"{}});}
 \DoxyCodeLine{ Helmholtz\_mesh\_pt-\/>Mesh::template doc\_boundary\_coordinates<HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{  (boundary\_in\_helmholtz\_mesh, the\_file);}
 \DoxyCodeLine{ the\_file.close();}
@@ -847,9 +815,7 @@ The setup of the fluid-\/structure interaction requires the identification of th
 \DoxyCodeLine{  (\textcolor{keyword}{this},boundary\_in\_helmholtz\_mesh,Helmholtz\_mesh\_pt,FSI\_traction\_mesh\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-Exactly the same method can be used for the identification of the \char`\"{}bulk\char`\"{} elasticity elements that are adjacent to (the Gauss points of) the {\ttfamily Face\+Elements} that impose the F\+SI flux boundary condition (6), using the displacement $ {\bf u} $ computed by these \char`\"{}bulk\char`\"{} elements\+:
+ Exactly the same method can be used for the identification of the \char`\"{}bulk\char`\"{} elasticity elements that are adjacent to (the Gauss points of) the {\ttfamily Face\+Elements} that impose the FSI flux boundary condition (6), using the displacement $ {\bf u} $ computed by these \char`\"{}bulk\char`\"{} elements\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -858,7 +824,7 @@ Exactly the same method can be used for the identification of the \char`\"{}bulk
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} boundary\_in\_solid\_mesh=2;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc boundary coordinate for solid mesh}}
-\DoxyCodeLine{ the\_file.open(\textcolor{stringliteral}{"boundary\_coordinate\_solid.dat"});}
+\DoxyCodeLine{ the\_file.open(\textcolor{stringliteral}{"{}boundary\_coordinate\_solid.dat"{}});}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>Mesh::template doc\_boundary\_coordinates<ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{  (boundary\_in\_solid\_mesh, the\_file);}
 \DoxyCodeLine{ the\_file.close();}
@@ -871,9 +837,7 @@ Exactly the same method can be used for the identification of the \char`\"{}bulk
 \DoxyCodeLine{\}\textcolor{comment}{// end\_of\_setup\_interaction}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysubsection{Post-\/processing}\label{index_doc}
 The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and outputs the total radiated power, and plots the computed solutions (real and imaginary parts) for all fields.
@@ -882,23 +846,23 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_of\_doc\_solution===============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT, \textcolor{keyword}{class} HELMHOLTZ\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}{CoatedSphereProblem<ELASTICITY\_ELEMENT,HELMHOLTZ\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classCoatedSphereProblem_aaeade2a110160c002b2b45954a5a0edc}{doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc parameters}}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Writing result for step "} << doc\_info.number() }
-\DoxyCodeLine{            << \textcolor{stringliteral}{". Parameters: "}<< std::endl;}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Fourier mode number : N = "}}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Writing result for step "{}} << doc\_info.number() }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}. Parameters: "{}}<< std::endl;}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Fourier mode number : N = "{}}}
 \DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_ae1198385d90f52c4ed921520ae43a9e7}{Global\_Parameters::Fourier\_wavenumber}} << std::endl;}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"FSI parameter : Q = "} << \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\_Parameters::Q}} << std::endl;}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Fluid outer radius : R = "} << \mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Global\_Parameters::Outer\_radius}}}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}FSI parameter : Q = "{}} << \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\_Parameters::Q}} << std::endl;}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Fluid outer radius : R = "{}} << \mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Global\_Parameters::Outer\_radius}}}
 \DoxyCodeLine{            << std::endl;}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Fluid wavenumber : k\string^2 = "} << \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{Global\_Parameters::K\_squared}}}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Fluid wavenumber : k\string^2 = "{}} << \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{Global\_Parameters::K\_squared}}}
 \DoxyCodeLine{            << std::endl;}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Solid wavenumber : Omega\_sq = "} << \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\_Parameters::Omega\_sq}} }
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Solid wavenumber : Omega\_sq = "{}} << \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\_Parameters::Omega\_sq}} }
 \DoxyCodeLine{            << std::endl << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -910,7 +874,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Compute/output the radiated power}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/power\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/power\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{}
@@ -925,11 +889,11 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{   power += el\_pt-\/>global\_power\_contribution(some\_file);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ some\_file.close();}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Radiated power: "} << power << std::endl;}
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Radiated power: "{}} << power << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output displacement field}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/elast\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/elast\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output(some\_file,n\_plot);}
@@ -937,7 +901,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output Helmholtz}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/helmholtz\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/helmholtz\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Helmholtz\_mesh\_pt-\/>output(some\_file,n\_plot);}
@@ -946,7 +910,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output fsi traction elements}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fsi\_traction\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fsi\_traction\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ FSI\_traction\_mesh\_pt-\/>output(some\_file,n\_plot);}
@@ -955,18 +919,18 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output Helmholtz fsi flux elements}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fsi\_flux\_bc\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fsi\_flux\_bc\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Helmholtz\_fsi\_flux\_mesh\_pt-\/>output(some\_file,n\_plot);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write trace file}}
-\DoxyCodeLine{ Trace\_file << \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\_Parameters::Q}} << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{Global\_Parameters::K\_squared}} << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Global\_Parameters::Density\_ratio}} << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a91314f7f1cc80c43543948568f50f405}{Global\_Parameters::Omega\_sq}}.real() << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << power << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ Trace\_file << \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\_Parameters::Q}} << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800ffb29}{Global\_Parameters::K\_squared}} << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Global\_Parameters::Density\_ratio}} << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceGlobal__Parameters_a64666b7f54095b6095ce9214285e0b01}{Global\_Parameters::Omega\_sq}}.real() << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << power << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Bump up counter}}
@@ -975,16 +939,14 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comm_ex}{}\doxysection{Comments and Exercises}\label{index_comm_ex}
 \hypertarget{index_comm}{}\doxysubsection{Comments}\label{index_comm}
 
 \begin{DoxyItemize}
-\item The application of the Sommerfeld radiation condition via a Dirichlet-\/to-\/\+Neumann mapping is discussed in detail in \href{../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html\#DtN}{\texttt{ another tutorial.}} We explain there that, because the $ \gamma $ integral depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh\+::setup\+\_\+gamma()} to {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} as done in the driver code listed above. However, if Helmholtz\textquotesingle{}s equation is solved in isolation (or within a coupled, but linear problem as in the present case ), the Newton method is guaranteed to converge in one iteration. In such cases the unnecessary recomputation of $ \gamma $ after the one-\/and-\/only Newton iteration can be suppressed by setting {\ttfamily Problem\+::\+Problem\+\_\+is\+\_\+nonlinear} to {\ttfamily false} -- in that case, {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solver skips the convergence check in the Newton iteration and simply accepts the solution obtained after one linear solve.
-\item You may have noticed that, unlike the tutorial for the \href{../../../acoustic_fsi/acoustic_fsi_annulus/html/index.html}{\texttt{ cartesian counterpart}} of the model problem considered here, we neither demonstrate how to apply the Sommerfeld radiation condition by approximate/absorbing boundary conditions (A\+B\+Cs), nor do we demonstrate the use of spatial adaptivity. This is because the relevant elements have not (yet!) been written (Any volunteers?). If you wish to enable spatial adaptivity we suggest using an unstructured adaptive mesh, using the methodology demonstrated in \href{../../../fourier_decomposed_acoustic_fsi/unstructured_sphere/html/index.html\#DtN}{\texttt{ another tutorial.}}
+\item The application of the Sommerfeld radiation condition via a Dirichlet-\/to-\/\+Neumann mapping is discussed in detail in \href{../../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html\#DtN}{\texttt{ another tutorial.}} We explain there that, because the $ \gamma $ integral depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh\+::setup\+\_\+gamma()} to {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} as done in the driver code listed above. However, if Helmholtz\textquotesingle{}s equation is solved in isolation (or within a coupled, but linear problem as in the present case ), the Newton method is guaranteed to converge in one iteration. In such cases the unnecessary recomputation of $ \gamma $ after the one-\/and-\/only Newton iteration can be suppressed by setting {\ttfamily Problem\+::\+Problem\+\_\+is\+\_\+nonlinear} to {\ttfamily false} -- in that case, {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solver skips the convergence check in the Newton iteration and simply accepts the solution obtained after one linear solve.
+\item You may have noticed that, unlike the tutorial for the \href{../../../acoustic_fsi/acoustic_fsi_annulus/html/index.html}{\texttt{ cartesian counterpart}} of the model problem considered here, we neither demonstrate how to apply the Sommerfeld radiation condition by approximate/absorbing boundary conditions (ABCs), nor do we demonstrate the use of spatial adaptivity. This is because the relevant elements have not (yet!) been written (Any volunteers?). If you wish to enable spatial adaptivity we suggest using an unstructured adaptive mesh, using the methodology demonstrated in \href{../../../fourier_decomposed_acoustic_fsi/unstructured_sphere/html/index.html\#DtN}{\texttt{ another tutorial.}}
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
@@ -997,12 +959,12 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} computes and o
 \begin{DoxyItemize}
 \item increasing the spatial resolution e.\+g. by using the command line flag {\ttfamily --el\+\_\+multiplier} which controls the number of elements in the mesh.
 \item reducing the outer radius of the computational domain, using the command line flag {\ttfamily --outer\+\_\+radius}, say.
-\item varying the element type, from the bi-\/linear {\ttfamily Q\+Fourier\+Decomposed\+Helmholtz\+Element$<$2$>$} to the bi-\/cubic {\ttfamily Q\+Fourier\+Decomposed\+Helmholtz\+Element$<$4$>$}, say.
+\item varying the element type, from the bi-\/linear {\ttfamily QFourier\+Decomposed\+Helmholtz\+Element$<$2$>$} to the bi-\/cubic {\ttfamily QFourier\+Decomposed\+Helmholtz\+Element$<$4$>$}, say.
 \end{DoxyItemize}Which of these approaches gives you the \char`\"{}most accuracy\char`\"{} for a given number of degrees of freedom?
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_appendix}{}\doxysection{Appendix\+: The time-\/averaged radiated power}\label{index_appendix}
-This appendix provides a brief summary of the computation (and non-\/dimensionalisation) of the time-\/averaged power $ \overline{\cal P }^* $ radiated across the closed surface $ \partial V $ (with outer unit normal $ {\bf n} $) of a fluid volume $ V $. In dimensional terms, $ \overline{\cal P }^* $ is given by \[ \overline{\cal P }^* = \oint_{\partial V} I^* dA^*, \ \ \ \ \ \ \ \ \ \ \ (9) \] where the intensity \[ I^* = \frac{1}{{\cal T}} \int_0^{\cal T} {\bf U}^* \cdot P^* {\bf n} \ dt^* \] depends on the fluid velocity $ {\bf U}^* = \partial {\bf d}^*/\partial t^* = \partial/\partial t^* (\nabla^* \Phi^*) $ and the pressure $ P^* = \rho_{\rm f} \omega^2 \Phi^* $. The time average is taken over the period of the oscillation, $ {\cal T} = 2\pi/\omega. $ Using our time-\/periodic ansatz for the fluid displacement potential, $ \Phi^* = Re\{ \phi^* \exp(-{\rm i}\omega t^*) \} $, the intensity can be re-\/written as \[ I^* = \frac{1}{2} \rho_{\rm f} \omega^3 \bigg( Im \{\frac{\partial \phi^*}{\partial n^*} \} Re\{\phi^* \} - Re \{\frac{\partial \phi^*}{\partial n^*} \} Im\{\phi^* \} \bigg). \] Next we express the surface integral in (9) in cylindrical polar coordinates. Assuming the (axisymmetric) boundary of the fluid domain is parametrised (in the $ (r^*,z^*)$ plane) as $ r^* = R^*(s^*)$ and $ z^* = Z^*(s^*)$, where $ s^* $ is some curve parameter (e.\+g. the arclength), we have \[ \overline{\cal P }^* = \int \int_0^{2\pi} I^*(s^*,\varphi) \sqrt{ \left(\frac{\partial R^*}{\partial s^*}\right)^2 + \left(\frac{\partial Z^*}{\partial s^*}\right)^2 } R^*(s^*) \ d\varphi \ ds^* \] The power associated with the $ N-$th azimuthal Fourier mode, $ \phi^*_N(r^*,z^*) \exp({\rm i}N \varphi) $, is then given by \[ \overline{\cal P }^*_N = \pi \rho_{\rm f} \omega^3 \int \bigg( Im \{\frac{\partial \phi_N^*}{\partial n^*} \} Re\{\phi_N^* \} - Re \{\frac{\partial \phi_N^*}{\partial n^*} \} Im\{\phi_N^* \} \bigg) \sqrt{ \left(\frac{\partial R^*}{\partial s^*}\right)^2 + \left(\frac{\partial Z^*}{\partial s^*}\right)^2 } R^*(s^*) \ ds^*. \] Non-\/dimensionalising all lengths on $ {\cal L}$ and the displacement potential on $ {\cal L}^2 $ then yields the following expression for the non-\/dimensional time-\/averaged radiated power \[ \overline{\cal P }_N = \frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5} = \pi \int \bigg( Im \{\frac{\partial \phi_N}{\partial n} \} Re\{\phi_N \} - Re \{\frac{\partial \phi_N}{\partial n} \} Im\{\phi_N \} \bigg) \sqrt{ \left(\frac{\partial R}{\partial s}\right)^2 + \left(\frac{\partial Z}{\partial s}\right)^2 } R(s) \ ds. \] This quantity is computed by {\ttfamily oomph-\/lib} on an element-\/by-\/element basis, using the function {\ttfamily Fourier\+Decomposed\+Helmholtz\+B\+C\+Element\+Base\+::global\+\_\+power\+\_\+contribution(...)}.
+This appendix provides a brief summary of the computation (and non-\/dimensionalisation) of the time-\/averaged power $ \overline{\cal P }^* $ radiated across the closed surface $ \partial V $ (with outer unit normal $ {\bf n} $) of a fluid volume $ V $. In dimensional terms, $ \overline{\cal P }^* $ is given by \[ \overline{\cal P }^* = \oint_{\partial V} I^* dA^*, \ \ \ \ \ \ \ \ \ \ \ (9) \] where the intensity \[ I^* = \frac{1}{{\cal T}} \int_0^{\cal T} {\bf U}^* \cdot P^* {\bf n} \ dt^* \] depends on the fluid velocity $ {\bf U}^* = \partial {\bf d}^*/\partial t^* = \partial/\partial t^* (\nabla^* \Phi^*) $ and the pressure $ P^* = \rho_{\rm f} \omega^2 \Phi^* $. The time average is taken over the period of the oscillation, $ {\cal T} = 2\pi/\omega. $ Using our time-\/periodic ansatz for the fluid displacement potential, $ \Phi^* = Re\{ \phi^* \exp(-{\rm i}\omega t^*) \} $, the intensity can be re-\/written as \[ I^* = \frac{1}{2} \rho_{\rm f} \omega^3 \bigg( Im \{\frac{\partial \phi^*}{\partial n^*} \} Re\{\phi^* \} - Re \{\frac{\partial \phi^*}{\partial n^*} \} Im\{\phi^* \} \bigg). \] Next we express the surface integral in (9) in cylindrical polar coordinates. Assuming the (axisymmetric) boundary of the fluid domain is parametrised (in the $ (r^*,z^*)$ plane) as $ r^* = R^*(s^*)$ and $ z^* = Z^*(s^*)$, where $ s^* $ is some curve parameter (e.\+g. the arclength), we have \[ \overline{\cal P }^* = \int \int_0^{2\pi} I^*(s^*,\varphi) \sqrt{ \left(\frac{\partial R^*}{\partial s^*}\right)^2 + \left(\frac{\partial Z^*}{\partial s^*}\right)^2 } R^*(s^*) \ d\varphi \ ds^* \] The power associated with the $ N-$th azimuthal Fourier mode, $ \phi^*_N(r^*,z^*) \exp({\rm i}N \varphi) $, is then given by \[ \overline{\cal P }^*_N = \pi \rho_{\rm f} \omega^3 \int \bigg( Im \{\frac{\partial \phi_N^*}{\partial n^*} \} Re\{\phi_N^* \} - Re \{\frac{\partial \phi_N^*}{\partial n^*} \} Im\{\phi_N^* \} \bigg) \sqrt{ \left(\frac{\partial R^*}{\partial s^*}\right)^2 + \left(\frac{\partial Z^*}{\partial s^*}\right)^2 } R^*(s^*) \ ds^*. \] Non-\/dimensionalising all lengths on $ {\cal L}$ and the displacement potential on $ {\cal L}^2 $ then yields the following expression for the non-\/dimensional time-\/averaged radiated power \[ \overline{\cal P }_N = \frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5} = \pi \int \bigg( Im \{\frac{\partial \phi_N}{\partial n} \} Re\{\phi_N \} - Re \{\frac{\partial \phi_N}{\partial n} \} Im\{\phi_N \} \bigg) \sqrt{ \left(\frac{\partial R}{\partial s}\right)^2 + \left(\frac{\partial Z}{\partial s}\right)^2 } R(s) \ ds. \] This quantity is computed by {\ttfamily oomph-\/lib} on an element-\/by-\/element basis, using the function {\ttfamily Fourier\+Decomposed\+Helmholtz\+BCElement\+Base\+::global\+\_\+power\+\_\+contribution(...)}.
 
 The computation is most easily validated by comparing against analytical results in which the displacement potential is expressed in spherical polar coordinates $ (r_{\rm sphere}^*, \theta, \varphi) $ where $ r_{\rm sphere}^* = \sqrt{r^{*2} + z^{*2}} $ and $ \theta $ is the zenith angle which varies from $ \theta=0$ at the \char`\"{}\+North pole\char`\"{} to $ \theta=\pi $ at the \char`\"{}\+South pole\char`\"{}. If we evaluate the surface integral in (9) on a spherical surface of dimensional radius $ a^* $, the dimensional time-\/averaged radiated power is \[ \overline{\cal P }^* = \int_0^\pi \int_0^{2\pi} I^*(r_{\rm sphere}^*=a^*, \theta,\varphi)\ a^{*2} \sin(\theta) \ d\varphi \ d\theta. \] The power associated with $ N-$th azimuthal Fourier mode, $ \phi^*_N(r^*,z^*) \exp({\rm i}N \varphi) $, is then given by \[ \overline{\cal P }^*_N = \pi a^{*2} \rho_{\rm f} \omega^3 \int_0^\pi \left.\bigg( Im \{\frac{\partial \phi_N^*}{\partial n^*} \} Re\{\phi_N^* \} - Re \{\frac{\partial \phi_N^*}{\partial n^*} \} Im\{\phi_N^* \} \bigg)\right|_{r_{\rm sphere}^*=a^*} \sin(\theta) \ d\theta, \] where $ \partial / \partial n^* = \partial / \partial r_{\rm sphere}^* $. The non-\/dimensional time-\/averaged power, evaluated on a sphere of non-\/dimensional radius $ a = a^*/{\cal L}$ is then given by \[ \overline{\cal P }_N = \frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5} = \pi a^2 \int_0^\pi \left. \bigg( Im \{\frac{\partial \phi_N}{\partial n} \} Re\{\phi_N \} - Re \{\frac{\partial \phi_N}{\partial n} \} Im\{\phi_N \} \bigg)\right|_{r_{\rm sphere}=a} \sin(\theta) \ d\theta, \] where $ \partial / \partial n = \partial / \partial r_{\rm sphere} $.
 
@@ -1017,5 +979,5 @@ The derivation of the analytical expression for $ \overline{\cal P }_N $ against
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -1,0 +1,450 @@
+\hypertarget{airy__cantilever_8txt__doxygenified_8h_source}{}\doxysection{airy\+\_\+cantilever.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{airy__cantilever_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: Bending of a cantilever beam}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this example we solve a classical solid mechanics problem, }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{the bending of a cantilever beam, subject to a }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{pressure loading on its upper face and/or gravity.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{We assume that the material behaves like a generalised Hookean}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{solid with elastic modulus \(\backslash\)f\$ E\string^* \(\backslash\)f\$ and Poisson's ratio \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{Here is a sketch:}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{\(\backslash\)image html airy\_cantilever\_sketch.gif "{}Sketch of the problem. "{} }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{\(\backslash\)image latex airy\_cantilever\_sketch.eps "{}Sketch of the problem. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{This problem is interesting because it has an}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{(approximate) St. Venant solution for the stress field which may be}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{constructed in terms of an Airy stress function (see, e.g.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{H. Eschenauer \& W. Schnell "{}Elastizitaetstheorie I"{}, BI}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{Wissenschaftsverlag, 2nd edition, 1986). }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{<HR>   }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{The following figure shows an animation of beam's deformation in }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{response to an increase in the uniform pressure, \(\backslash\)f\$ P \(\backslash\)f\$, at}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{zero gravity, \(\backslash\)f\$ g=0 \(\backslash\)f\$. The colour contours represent the magnitude of}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{the "{}horizontal"{} component of the 2nd Piola-\/Kirchhoff stress tensor,}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)sigma\_\{11\} \(\backslash\)f\$ . Its approximately linear variation across the beam's}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{thickness indicates a bending-\/type stress distribution with the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{stress being positive (tensile) at the top and negative}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{(compressive) at the bottom.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)image html beam\_animation.gif "{}Animation of the beam's deformation with contours of its `horizontal' stress component. "{} }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{\(\backslash\)image latex beam\_animation.eps "{}Animation of the beam's deformation with contours of its `horizontal' stress component. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{The next figure shows a comparison of the computational predictions for}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)sigma\_\{11\} \(\backslash\)f\$ (in green), and the approximate analytical solution }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{(in red).}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)image html stress\_comparison.gif "{}Comparison of the computed distribution of the `horizontal' stress (in green) against the approximate analytical solution (in red). "{} }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{\(\backslash\)image latex stress\_comparison.eps "{}Comparison of the computed distribution of the `horizontal' stress (in green) against the approximate analytical solution (in red). "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{The agreement between the two solutions is excellent over most of the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{domain, apart from two small regions near the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{left end of the beam where stress singularities develop at}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{the vertices of the domain. The singularities arise because}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{the zero-\/tangential stress boundary condition on the top and}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{bottom faces is inconsistent with the zero-\/displacement}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{boundary condition on the left face. The singularities are not}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{captured by the approximate analytical solution. \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{automatic mesh adaptation refines the mesh in an attempt to capture }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{the rapid variations of the stresses in these regions.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{<HR>   }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{\(\backslash\)section global Global parameters and functions}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{As usual, we define a namespace, \(\backslash\)c Global\_Physical\_Variables,}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{to define the problem parameters: the dimensions of the cantilever}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{beam, (a pointer to) a constitutive equation, and its parameters}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{\(\backslash\)f\$ E \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{\(\backslash\)skipline start\_namespace}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)until Nu}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{We refer to the document <A HREF="{}../../solid\_theory/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{"{}Solid mechanics: Theory and implementation"{}</A> for a detailed }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{discussion of the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{non-\/dimensionalisation and merely recall that by setting }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)f\$ E = 1\(\backslash\)f\$, we imply that}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{all stresses are non-\/dimensionalised with the structure's dimensional }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{Young's modulus \(\backslash\)f\$ E\string^* \(\backslash\)f\$. Similarly, by setting the half-\/thickness}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{of the beam to 0.5, we imply that the beam's dimensional }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{thickness, \(\backslash\)f\$ 2H\string^*\(\backslash\)f\$ is used to non-\/dimensionalise all lengths. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{Next, we define a function that defines the constant pressure load}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{on the upper face of the cantilever,}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{\(\backslash\)skipline Uniform pressure }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{\(\backslash\)until end traction}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{and a gravitational body force, acting in the negative \(\backslash\)f\$ x\_2 \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{-\/direction,}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)skipline Non-\/dim gravity}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)until end namespace}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{The driver code is very short. We start by building a \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{GeneralisedHookean constitutive equation object and store a pointer}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{to it in the namespace \(\backslash\)c Global\_Physical\_Variables. Next we construct}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{the problem object, using (a wrapped version of) \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)c RefineableQPVDElement<2,3> -\/-\/ a nine-\/node quadrilateral}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{displacement-\/based solid mechanics element. (The wrapper is used}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{to change the element's output function; see \(\backslash\)ref com for details). }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{\(\backslash\)until CantileverProblem}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{The subsequent lines may be uncommented to experiment with}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{different element types as suggested in the \(\backslash\)ref ex.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{\(\backslash\)until RefineableQPVDElementWithPressure}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{We initialise the load parameters and perform a parameter study}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{in which we increment the pressure load in small steps. The}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{gravitational body force remains switched off to allow the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{comparison with the analytical solution which only applies to}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{the case with zero body force.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{\(\backslash\)until end of main}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{\(\backslash\)section class The problem class}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{The problem class contains the usual member functions, including}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{separate access functions to the two sub-\/meshes: The "{}bulk"{} mesh that}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{contains the 2D solid elements, and a separate mesh in which we store}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{the 1D \(\backslash\)c SolidTractionElements that apply the }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{traction boundary condition on the beam's upper face.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{As usual, we remove these elements before adapting the bulk mesh}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{and re-\/attach them afterwards, using the functions}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)c Problem::actions\_before\_adapt() and }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{\(\backslash\)c Problem::actions\_after\_adapt().}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{\(\backslash\)skipline begin\_problem}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{\(\backslash\)until doc\_solution()}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{The creation/deletion of the  \(\backslash\)c SolidTractionElements is performed}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{by private helper functions. We also store a pointer to a node on the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{tip of the beam and will record its displacement as a function of the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{applied load in a trace file. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)section constructor The problem constructor}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{The constructor builds the bulk mesh (the standard }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)c RefineableRectangularQuadMesh that we already used in many previous}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{examples, upgraded to a \(\backslash\)c SolidMesh, via the procedure discussed in }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{the document <A HREF="{}../../solid\_theory/html/index.html\#solid\_mesh"{}>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{Solid mechanics: Theory and implementation</A>), }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{using the element type specified by the template parameter and the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{dimensions specified in the namespace \(\backslash\)c Global\_Physical\_Variables.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{\(\backslash\)until l\_x,l\_y,origin);}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{We employ the \(\backslash\)c Z2ErrorEstimator to assess the accuracy of the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{computed solution and to control the adaptive mesh refinement.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{When used with the \(\backslash\)c RefineableQPVDElements, the \(\backslash\)c Z2ErrorEstimator}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{uses the components of Green's strain tensor as "{}fluxes"{} in its}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{"{}flux recovery procedure"{}. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{\(\backslash\)skipline Set error}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{\(\backslash\)until Z2}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{Next, we pass the constitutive equations and the gravitational}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{body force to the elements, select a control node, }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{and perform one uniform mesh refinement.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{\(\backslash\)until refine\_uniformly();}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{We create a new mesh for the \(\backslash\)c SolidTractionElements and }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{build the elements using the helper function \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{create\_traction\_elements() before adding both submeshes to the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{problem and combining them into a global mesh. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{\(\backslash\)until build\_global\_mesh();}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{We pin the position of all nodes on the left boundary (boundary 3)}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{of the bulk mesh. The subsequent call to }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{\(\backslash\)c PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures()}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{is unnecessary (but harmless) for the solid elements used in}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{this driver code since \(\backslash\)c RefineableQPVDElements do not contain}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{pressure degrees of freedom. It is a good idea to include }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{this call anyway since our problem class is templated by the element type}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{and may therefore also be used with other elements (see \(\backslash\)ref ex ; we}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{refer to }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{<A HREF="{}../../../navier\_stokes/adaptive\_driven\_cavity/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{another tutorial</A> for a detailed discussion of the need to pin "{}redundant"{}}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{pressure degrees of freedom in computations with spatial adaptivity.)}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{\(\backslash\)until -\/>element\_pt()}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{Finally, we assign the equation numbers, create a \(\backslash\)c DocInfo object}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{and open a trace file in which we shall record the beam's load/displacement}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{characteristics. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{\(\backslash\)section before\_adapt Actions before adaptation}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{Following our usual procedure, we delete the \(\backslash\)c SolidTractionElements}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{before adapting the bulk mesh:}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{\(\backslash\)skipline start\_of\_actions\_before\_adapt}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{\(\backslash\)until end of actions\_before\_adapt}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{\(\backslash\)section after\_adapt Actions after adaptation}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{The \(\backslash\)c SolidTractionElements are re-\/attached after the }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{mesh adaptation. Again, the call to }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{\(\backslash\)c PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures()}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{is not strictly necessary for the elements used in the present}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{driver code but is included "{}for safety"{}.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)skipline start\_of\_actions\_after\_adapt}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{\(\backslash\)until end of actions\_after\_adapt}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{\(\backslash\)section set\_traction Setting the pointer to the traction function}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{The helper function \(\backslash\)c set\_traction\_pt() is used to }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{pass the pointer to the traction function to the }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{\(\backslash\)c SolidTractionElements.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{\(\backslash\)skipline start\_of\_set\_traction\_pt}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{\(\backslash\)until end of set traction pt}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{\(\backslash\)section create\_traction Creating the traction elements}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{The helper function \(\backslash\)c create\_traction\_elements() is used to }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{create the \(\backslash\)c SolidTractionElements and to store them }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{in the appropriate sub-\/mesh.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{\(\backslash\)skipline start\_of\_create\_traction}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{\(\backslash\)until end of create\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{\(\backslash\)section delete\_traction Deleting the traction elements}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{The helper function \(\backslash\)c delete\_traction\_elements() is used to }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{delete the \(\backslash\)c SolidTractionElements.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{\(\backslash\)skipline start\_of\_delete\_traction}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{\(\backslash\)until end of delete\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{The post-\/processing function \(\backslash\)c doc\_solution() outputs the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{finite-\/element solution, using the modified output function}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{defined in the wrapper class \(\backslash\)c MySolidElement, discussed below. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{\(\backslash\)skipline start\_doc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{\(\backslash\)until some\_file.close();}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{Next we output the approximate St. Venant solution at the same}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{plot points and write the load/displacement characteristics to the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{trace file.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{\(\backslash\)until end doc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{\(\backslash\)section exercises Comments and exercises}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{\(\backslash\)subsection ex Exercises}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{-\/\# Modify the driver code so that the cantilever beam is loaded by}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{   gravity rather than a pressure load.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{   Consult the document <A HREF="{}../../solid\_theory/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{   "{}Solid mechanics: Theory and implementation"{}</A> for details on }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{   the non-\/dimensionalisation of the body force. Verify that for modest}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{   deflections and for sufficiently thin beams, the macroscopic}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{   deformation due to a gravitational load is identical to that}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{   induced by an equivalent pressure load, equivalent meaning that}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{   the total force on the beam is the same for both cases. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{   \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{-\/\# Change the element type to a \(\backslash\)c RefineableQPVDElementWithPressure<2>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{   and \(\backslash\)c RefineableQPVDElementWithContinuousPressure<2> and compare}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{   the results. Both of these two elements are based on a}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{   pressure-\/displacement formulation, the former employing }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{   a discontinuous pressure representation (as in Crouzeix-\/Raviart }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{   Navier-\/Stokes elements), the }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{   latter employing a continuous pressure representation (as in }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{   Taylor-\/Hood elements). Confirm that calls to \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{   PVDEquationsBase<2>::pin\_redundant\_nodal\_solid\_pressures()}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{   are essential if a continuous pressure representation is used.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{   Explain the code's behaviour when you comment out the calls }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{   to this function.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{   \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{-\/\# Repeat the computation without adaptivity, by using the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{   non-\/refineable versions of the various solid mechanics elements}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{   discussed above, namely the \(\backslash\)c QPVDElement<2>, \(\backslash\)c QPVDElementWithPressure<2>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{   and \(\backslash\)c QPVDElementWithContinuousPressure<2>. This will require}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{   various changes to the code:}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{   -\/\# You will have to create a solid mechanics version of the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{      (non-\/refineable) \(\backslash\)c RectangularQuadMesh. This is necessary}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{      because non-\/refineable elements cannot be used with refineable }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{      meshes. Try it to find out why! [Note: You could, of course, use }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{      the existing driver code with its refineable mesh and the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{      refineable elements and simply not use the adaptive}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{      capabilities by omitting the \(\backslash\)c max\_adapt argument when calling }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{      the Newton solver. However, the main point of this exercise is to force}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{      you to understand how to upgrade an existing \(\backslash\)c Mesh to}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{      a \(\backslash\)c SolidMesh. It's easy: Simply follow the steps used to }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{      create a refineable \(\backslash\)c SolidMesh from the }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{      \(\backslash\)c RefineableRectangularQuadMesh, in }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{      <A HREF="{}../../../../src/meshes/rectangular\_quadmesh.template.h"{}>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{       src/meshes/rectangular\_quadmesh.template.h</A>. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{      Instead of inheriting the mesh from the \(\backslash\)c RefineableRectangularQuadMesh}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{      and the \(\backslash\)c SolidMesh classes, inherit from the non-\/refineable }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{      \(\backslash\)c RectangularQuadMesh and the \(\backslash\)c SolidMesh.]}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{   -\/\# You must not pass the pointer to the error estimator to the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{      non-\/refineable mesh -\/-\/ it has no use for it.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{   -\/\# You cannot call the adaptive Newton solver.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{   .}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{\(\backslash\)subsection com Comment: Customising an element's output function}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{In the driver code discussed above}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{we used the "{}wrapper"{} class \(\backslash\)c MySolidElement to customise the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{solid elements' output function so that each element outputs its}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{shape and the three independent components of the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{second Piola Kirchhoff stress, \(\backslash\)f\$ \(\backslash\)sigma\_\{11\},  \(\backslash\)sigma\_\{12\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{and \(\backslash\)f\$ \(\backslash\)sigma\_\{22\}. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{Here is the implementation: The "{}wrapping"{} element inherits from}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{the element type specified by the template parameter and calls its}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{constructor (recall that element constructors are always}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{argument-\/free!).}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{\(\backslash\)skipline start\_wrapper}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{\(\backslash\)until ELEMENT()}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{We then overload the (virtual) output function so that}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{the element outputs its shape, i.e. the \(\backslash\)f\$ x \(\backslash\)f\$ and \(\backslash\)f\$ y \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{coordinates of its plot points, and the three independent components of the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{second Piola Kirchhoff stress at those points. Other than that, the element}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{behaves exactly as the underlying "{}wrapped"{} element. }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{[\(\backslash\)b Note: Since this element is only defined and used in a 2D driver}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{code, there is little point in implementing the output for 1D or }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{3D elements. However, paranoid as we are, we check the}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{dimension of the element and throw an error if it is wrong.]}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{Finally we declare that the \(\backslash\)c FaceGeometry of the "{}wrapped"{}}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{element is the same as that of the underlying element. This step}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{is required to allow the automatic construction of}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{\(\backslash\)c SolidTractionElements in \(\backslash\)c create\_traction\_elements().}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{\(\backslash\)dontinclude airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{\(\backslash\)skipline start\_face\_geometry }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial }}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{<A HREF="{}}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{../../../../}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{demo\_drivers/solid/airy\_cantilever/}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{"{}>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{demo\_drivers/solid/airy\_cantilever/}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{<A HREF="{}}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{../../../../}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{demo\_drivers/solid/airy\_cantilever/airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{"{}>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{demo\_drivers/solid/airy\_cantilever/airy\_cantilever.cc}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{airy__cantilever_8txt__doxygenified_8h_source_l00445}00445 }
+
+\end{DoxyCode}

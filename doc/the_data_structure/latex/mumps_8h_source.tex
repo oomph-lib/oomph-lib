@@ -1,0 +1,118 @@
+\hypertarget{mumps_8h_source}{}\doxysection{mumps.\+h}
+\label{mumps_8h_source}\index{mumps.h@{mumps.h}}
+\mbox{\hyperlink{mumps_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00026}00026 \textcolor{comment}{/*cfortran.h headers for the mumps routines*/}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00029}\mbox{\hyperlink{mumps_8h_a85b119d035735c8c1f6661c34b50eed4}{00029}} \mbox{\hyperlink{mumps_8h_a85b119d035735c8c1f6661c34b50eed4}{PROTOCCALLSFSUB1}}(MUMPS\_SETUP\_SOLVER\_POOL, mumps\_setup\_solver\_pool, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00030}00030 \textcolor{preprocessor}{\#define mumps\_setup\_solver\_pool(N\_POOL) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00031}00031 \textcolor{preprocessor}{  CCALLSFSUB1(MUMPS\_SETUP\_SOLVER\_POOL, mumps\_setup\_solver\_pool, INT, N\_POOL)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00033}\mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{00033}} \mbox{\hyperlink{mumps_8h_a319f30661a915d1558463251cb9ac2ea}{PROTOCCALLSFSUB2}}(MUMPS\_SETUP, \mbox{\hyperlink{mumps_8h_a059465e6d09fcaa028fa8c3bd813466c}{mumps\_setup}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00034}00034 \textcolor{preprocessor}{\#define mumps\_setup(I\_POOL, S) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00035}00035 \textcolor{preprocessor}{  CCALLSFSUB2(MUMPS\_SETUP, mumps\_setup, INT, INT, I\_POOL, S)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00038}\mbox{\hyperlink{mumps_8h_a319f30661a915d1558463251cb9ac2ea}{00038}} \mbox{\hyperlink{mumps_8h_a319f30661a915d1558463251cb9ac2ea}{PROTOCCALLSFSUB2}}(MUMPS\_SET\_WORKSPACE\_SCALING\_FACTOR,}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00039}00039                  mumps\_set\_workspace\_scaling\_factor,}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00040}00040                  \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}},}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00041}00041                  \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00042}00042 \textcolor{preprocessor}{\#define mumps\_set\_workspace\_scaling\_factor(I\_POOL, S) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00043}00043 \textcolor{preprocessor}{  CCALLSFSUB2(MUMPS\_SET\_WORKSPACE\_SCALING\_FACTOR, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00044}00044 \textcolor{preprocessor}{              mumps\_set\_workspace\_scaling\_factor, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00045}00045 \textcolor{preprocessor}{              INT, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00046}00046 \textcolor{preprocessor}{              INT, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00047}00047 \textcolor{preprocessor}{              I\_POOL, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00048}00048 \textcolor{preprocessor}{              S)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00051}\mbox{\hyperlink{mumps_8h_a122a198f6deac1b343afd6b325160e05}{00051}} \mbox{\hyperlink{mumps_8h_a85b119d035735c8c1f6661c34b50eed4}{PROTOCCALLSFSUB1}}(MUMPS\_SWITCH\_ON\_DOC, \mbox{\hyperlink{mumps_8h_a122a198f6deac1b343afd6b325160e05}{mumps\_switch\_on\_doc}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00052}00052 \textcolor{preprocessor}{\#define mumps\_switch\_on\_doc(I\_POOL) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00053}00053 \textcolor{preprocessor}{  CCALLSFSUB1(MUMPS\_SWITCH\_ON\_DOC, mumps\_switch\_on\_doc, INT, I\_POOL)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00056}\mbox{\hyperlink{mumps_8h_a7bd0dac1f4ee89fb136d65042cb59746}{00056}} \mbox{\hyperlink{mumps_8h_a85b119d035735c8c1f6661c34b50eed4}{PROTOCCALLSFSUB1}}(MUMPS\_SWITCH\_OFF\_DOC, mumps\_switch\_off\_doc, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00057}00057 \textcolor{preprocessor}{\#define mumps\_switch\_off\_doc(I\_POOL) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00058}00058 \textcolor{preprocessor}{  CCALLSFSUB1(MUMPS\_SWITCH\_OFF\_DOC, mumps\_switch\_off\_doc, INT, I\_POOL)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00059}00059 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00061}00061 PROTOCCALLSFSUB6(}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00062}\mbox{\hyperlink{mumps_8h_abe41f5e30c598530e46fc079718e8f83}{00062}}   MUMPS\_FACTORISE, \mbox{\hyperlink{mumps_8h_abac3d13e84d3bab480e38172d9832d0e}{mumps\_factorise}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{mumps_8h_abe41f5e30c598530e46fc079718e8f83}{INTV}}, \mbox{\hyperlink{mumps_8h_abe41f5e30c598530e46fc079718e8f83}{INTV}}, \mbox{\hyperlink{arpack_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00063}00063 \textcolor{preprocessor}{\#define mumps\_factorise(I\_POOL, N, NZ\_LOC, IRN\_LOC, JCN\_LOC, A\_LOC) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00064}00064 \textcolor{preprocessor}{  CCALLSFSUB6(MUMPS\_FACTORISE, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00065}00065 \textcolor{preprocessor}{              mumps\_factorise, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00066}00066 \textcolor{preprocessor}{              INT, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00067}00067 \textcolor{preprocessor}{              INT, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00068}00068 \textcolor{preprocessor}{              INT, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00069}00069 \textcolor{preprocessor}{              INTV, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00070}00070 \textcolor{preprocessor}{              INTV, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00071}00071 \textcolor{preprocessor}{              DOUBLEV, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00072}00072 \textcolor{preprocessor}{              I\_POOL, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00073}00073 \textcolor{preprocessor}{              N, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00074}00074 \textcolor{preprocessor}{              NZ\_LOC, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00075}00075 \textcolor{preprocessor}{              IRN\_LOC, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00076}00076 \textcolor{preprocessor}{              JCN\_LOC, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00077}00077 \textcolor{preprocessor}{              A\_LOC)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00078}00078 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00079}\mbox{\hyperlink{mumps_8h_abb3a71a02a45a77419f20e8562f638d7}{00079}} \mbox{\hyperlink{mumps_8h_abb3a71a02a45a77419f20e8562f638d7}{PROTOCCALLSFSUB7}}(}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00080}00080   MUMPS\_SOLVE, mumps\_solve, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{mumps_8h_abe41f5e30c598530e46fc079718e8f83}{INTV}}, \mbox{\hyperlink{mumps_8h_abe41f5e30c598530e46fc079718e8f83}{INTV}}, \mbox{\hyperlink{arpack_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{arpack_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00081}00081 \textcolor{preprocessor}{\#define mumps\_solve(I\_POOL, N, NZ\_LOC, IRN\_LOC, JCN\_LOC, A\_LOC, RHS) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00082}00082 \textcolor{preprocessor}{  CCALLSFSUB7(MUMPS\_SOLVE, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00083}00083 \textcolor{preprocessor}{              mumps\_solve, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00084}00084 \textcolor{preprocessor}{              INT, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00085}00085 \textcolor{preprocessor}{              INT, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00086}00086 \textcolor{preprocessor}{              INT, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00087}00087 \textcolor{preprocessor}{              INTV, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00088}00088 \textcolor{preprocessor}{              INTV, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00089}00089 \textcolor{preprocessor}{              DOUBLEV, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00090}00090 \textcolor{preprocessor}{              DOUBLEV, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00091}00091 \textcolor{preprocessor}{              I\_POOL, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00092}00092 \textcolor{preprocessor}{              N, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00093}00093 \textcolor{preprocessor}{              NZ\_LOC, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00094}00094 \textcolor{preprocessor}{              IRN\_LOC, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00095}00095 \textcolor{preprocessor}{              JCN\_LOC, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00096}00096 \textcolor{preprocessor}{              A\_LOC, \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00097}00097 \textcolor{preprocessor}{              RHS)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00099}00099 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00100}\mbox{\hyperlink{mumps_8h_a454fe1c735e29910b3eea8093a154c80}{00100}} \mbox{\hyperlink{frontal_8h_ac5fa63f703da950b52ddf1a64131e691}{PROTOCCALLSFSUB3}}(MUMPS\_BACKSUB, \mbox{\hyperlink{mumps_8h_a454fe1c735e29910b3eea8093a154c80}{mumps\_backsub}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{arpack_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00101}00101 \textcolor{preprocessor}{\#define mumps\_backsub(I\_POOL, N, RHS) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00102}00102 \textcolor{preprocessor}{  CCALLSFSUB3(MUMPS\_BACKSUB, mumps\_backsub, INT, INT, DOUBLEV, I\_POOL, N, RHS)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00105}\mbox{\hyperlink{mumps_8h_a893da1c9717ac5b625078598d8f2ee84}{00105}} \mbox{\hyperlink{mumps_8h_a85b119d035735c8c1f6661c34b50eed4}{PROTOCCALLSFSUB1}}(MUMPS\_CLEANUP\_MEMORY, mumps\_cleanup\_memory, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00106}00106 \textcolor{preprocessor}{\#define mumps\_cleanup\_memory(I\_POOL) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00107}00107 \textcolor{preprocessor}{  CCALLSFSUB1(MUMPS\_CLEANUP\_MEMORY, mumps\_cleanup\_memory, INT, I\_POOL)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00109}00109 }
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00110}\mbox{\hyperlink{mumps_8h_ab20f4e8fc9653efcccdb1334d6e6e4c2}{00110}} \mbox{\hyperlink{mumps_8h_a85b119d035735c8c1f6661c34b50eed4}{PROTOCCALLSFSUB1}}(MUMPS\_SHUTDOWN, \mbox{\hyperlink{mumps_8h_ab20f4e8fc9653efcccdb1334d6e6e4c2}{mumps\_shutdown}}, \mbox{\hyperlink{mumps_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}})}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00111}00111 \textcolor{preprocessor}{\#define mumps\_shutdown(I\_POOL) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mumps_8h_source_l00112}00112 \textcolor{preprocessor}{  CCALLSFSUB1(MUMPS\_SHUTDOWN, mumps\_shutdown, INT, I\_POOL)}}
+
+\end{DoxyCode}

@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1PeriodicOrbitTemporalMesh}{}\doxysection{oomph\+::Periodic\+Orbit\+Temporal\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1PeriodicOrbitTemporalMesh}{}\doxysection{oomph\+::Periodic\+Orbit\+Temporal\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1PeriodicOrbitTemporalMesh}\index{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}}
 
 
@@ -9,7 +9,7 @@ A special temporal mesh class.
 
 {\ttfamily \#include $<$periodic\+\_\+orbit\+\_\+handler.\+h$>$}
 
-Inheritance diagram for oomph\+::Periodic\+Orbit\+Temporal\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Periodic\+Orbit\+Temporal\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.312431cm]{classoomph_1_1PeriodicOrbitTemporalMesh}
@@ -22,25 +22,24 @@ Inheritance diagram for oomph\+::Periodic\+Orbit\+Temporal\+Mesh$<$ E\+L\+E\+M\+
 \begin{DoxyCompactList}\small\item\em Constructor, create a 1D mesh from 0 to 1 that is periodic. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh_a8126152646e3eaed0ab5555794a20d49}{orbit\+\_\+output}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \item 
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh_af1829044fa15d410cbd5d340d9c9e458}{assemble\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&assembly\+\_\+handler\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh_af1829044fa15d410cbd5d340d9c9e458}{assemble\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&assembly\+\_\+handler\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \item 
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh_a5ca70a80e8673d43a0c5c15b021d10cd}{assemble\+\_\+residuals\+\_\+and\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&assembly\+\_\+handler\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh_a5ca70a80e8673d43a0c5c15b021d10cd}{assemble\+\_\+residuals\+\_\+and\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&assembly\+\_\+handler\+\_\+pt, \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
 \end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ }\\class \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh_a2cbe986bcd27c28d5de7ada068d3d94c}{Periodic\+Orbit\+Assembly\+Handler}}
+{\footnotesize template$<$unsigned NNODE\+\_\+1D$>$ }\\class \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh_a2cbe986bcd27c28d5de7ada068d3d94c}{Periodic\+Orbit\+Assembly\+Handler}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ ELEMENT $>$}
 A special temporal mesh class. 
 
-Definition at line 606 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00589}{589}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
@@ -49,8 +48,8 @@ Definition at line 606 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 \index{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}!PeriodicOrbitTemporalMesh@{PeriodicOrbitTemporalMesh}}
 \index{PeriodicOrbitTemporalMesh@{PeriodicOrbitTemporalMesh}!oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PeriodicOrbitTemporalMesh()}{PeriodicOrbitTemporalMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{Periodic\+Orbit\+Temporal\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{Periodic\+Orbit\+Temporal\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -58,7 +57,11 @@ Constructor, create a 1D mesh from 0 to 1 that is periodic.
 
 
 
-Definition at line 614 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00597}{597}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{mesh_8h_source_l00493}{oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt()}}.
 
 
 
@@ -67,38 +70,50 @@ Definition at line 614 of file periodic\+\_\+orbit\+\_\+handler.\+h.
 \index{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}!assemble\_residuals@{assemble\_residuals}}
 \index{assemble\_residuals@{assemble\_residuals}!oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{assemble\_residuals()}{assemble\_residuals()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::assemble\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&}]{assembly\+\_\+handler\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh}}$<$ ELEMENT $>$\+::assemble\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&}]{assembly\+\_\+handler\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 640 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00623}{623}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{Vector_8h_source_l00167}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise()}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTemporalMesh_a5ca70a80e8673d43a0c5c15b021d10cd}\label{classoomph_1_1PeriodicOrbitTemporalMesh_a5ca70a80e8673d43a0c5c15b021d10cd}} 
 \index{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}!assemble\_residuals\_and\_jacobian@{assemble\_residuals\_and\_jacobian}}
 \index{assemble\_residuals\_and\_jacobian@{assemble\_residuals\_and\_jacobian}!oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{assemble\_residuals\_and\_jacobian()}{assemble\_residuals\_and\_jacobian()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::assemble\+\_\+residuals\+\_\+and\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&}]{assembly\+\_\+handler\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh}}$<$ ELEMENT $>$\+::assemble\+\_\+residuals\+\_\+and\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandlerBase}{Periodic\+Orbit\+Assembly\+Handler\+Base}} $\ast$const \&}]{assembly\+\_\+handler\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 660 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00643}{643}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{Vector_8h_source_l00167}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise()}}, \mbox{\hyperlink{matrices_8h_source_l00514}{oomph\+::\+Dense\+Matrix$<$ T $>$\+::initialise()}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
 
 \mbox{\Hypertarget{classoomph_1_1PeriodicOrbitTemporalMesh_a8126152646e3eaed0ab5555794a20d49}\label{classoomph_1_1PeriodicOrbitTemporalMesh_a8126152646e3eaed0ab5555794a20d49}} 
 \index{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}!orbit\_output@{orbit\_output}}
 \index{orbit\_output@{orbit\_output}!oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{orbit\_output()}{orbit\_output()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::orbit\+\_\+output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PeriodicOrbitTemporalMesh}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh}}$<$ ELEMENT $>$\+::orbit\+\_\+output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt,  }\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 626 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00609}{609}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 
-Referenced by oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::orbit\+\_\+output().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00609}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ ELEMENT $>$\+::orbit\+\_\+output()}}.
+
+
+
+Referenced by \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00609}{oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ ELEMENT $>$\+::orbit\+\_\+output()}}.
 
 
 
@@ -107,13 +122,13 @@ Referenced by oomph\+::\+Periodic\+Orbit\+Temporal\+Mesh$<$ oomph\+::\+Spectral\
 \index{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}!PeriodicOrbitAssemblyHandler@{PeriodicOrbitAssemblyHandler}}
 \index{PeriodicOrbitAssemblyHandler@{PeriodicOrbitAssemblyHandler}!oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$@{oomph::PeriodicOrbitTemporalMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PeriodicOrbitAssemblyHandler}{PeriodicOrbitAssemblyHandler}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+template$<$unsigned NNODE\+\_\+1D$>$ \\
 friend class \mbox{\hyperlink{classoomph_1_1PeriodicOrbitAssemblyHandler}{Periodic\+Orbit\+Assembly\+Handler}}\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
-Definition at line 610 of file periodic\+\_\+orbit\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{periodic__orbit__handler_8h_source_l00593}{593}} of file \mbox{\hyperlink{periodic__orbit__handler_8h_source}{periodic\+\_\+orbit\+\_\+handler.\+h}}.
 
 
 

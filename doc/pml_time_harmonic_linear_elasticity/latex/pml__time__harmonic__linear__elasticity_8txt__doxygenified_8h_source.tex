@@ -1,0 +1,742 @@
+\hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source}{}\doxysection{pml\+\_\+time\+\_\+harmonic\+\_\+linear\+\_\+elasticity.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage The equations of time-\/harmonic linear elasticity and use of PMLs}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{The aim of this tutorial is to demonstrate the solution of the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{time-\/harmonic equations of linear elasticity in Cartesian}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{coordinates. These equations are useful to describe forced, time-\/harmonic}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{oscillations of elastic bodies.  The implementation extends}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{the standard formulation discussed in}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{<a href="{}../../time\_harmonic\_linear\_elasticity/elastic\_annulus/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{another tutorial,</a>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{which is modified to incorporate perfectly matched layers (PMLs) as an}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{alternative to classical absorbing/approximate boundary conditions or DtN maps.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{We first present details on the relevant theory and its extensions and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{proceed with an example problem of time-\/harmonic oscillations on an infinite}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{domain with an interior circular boundary.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{<TABLE BORDER=1, WIDTH=500px>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{<TD bgcolor="{}cornsilk"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{<B>Acknowledgement:</B>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{The implementation of the equations and the documentation }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{were developed jointly with }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{<a href="{}http://imperial.academia.edu/RaduCimpeanu"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{Radu Cimpeanu</a> (Imperial College London), with financial}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{support from Thales Underwater.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{</TABLE>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\)section theory Theory}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{Consider an infinite, linearly elastic body (of density \(\backslash\)f\$ \(\backslash\)rho \(\backslash\)f\$, Young's}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{modulus \(\backslash\)f\$ E \(\backslash\)f\$ and Poisson's ratio \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$), occupying }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{the region \(\backslash\)f\$ D \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{whose inner boundary is \(\backslash\)f\$ \(\backslash\)partial D\_d \(\backslash\)f\$.  Assuming that the body performs}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{time-\/harmonic oscillations of frequency of \(\backslash\)f\$ \(\backslash\)omega \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{its motion is governed by the equations of time-\/harmonic }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{linear elasticity}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{\{\(\backslash\)pmb\{\(\backslash\)nabla\}\string^*\}\(\backslash\)cdot\(\backslash\)pmb\{\(\backslash\)tau\}\string^*+}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{\(\backslash\)rho \(\backslash\)pmb\{F\}\string^*=\{\(\backslash\)rm -\/\(\backslash\)rho\(\backslash\)omega\string^2\}\(\backslash\)pmb\{u\}\string^*,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{where the \(\backslash\)f\$ x\_\{i\}\string^* \(\backslash\)f\$ are the Cartesian coordinates, and }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{the time-\/periodic stresses, body force and displacements are given by }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{\(\backslash\)pmb\{\(\backslash\)tau\string^*\}(x\_\{i\}\string^*)\{\(\backslash\)rm e\}\string^\{-\/\{\(\backslash\)rm i\}\(\backslash\)omega}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{t\string^*\}\(\backslash\)\} \(\backslash\)f\$, }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{\(\backslash\)mathbf\{F\}\string^*(x\_\{i\}\string^*)\{\(\backslash\)rm e\}\string^\{-\/\{\(\backslash\)rm i\}\(\backslash\)omega}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{t\string^*\}\(\backslash\)\} \(\backslash\)f\$ and \(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{\(\backslash\)mathbf\{u\}\string^*(x\_\{i\}\string^*)\{\(\backslash\)rm e\}\string^\{-\/\{\(\backslash\)rm i\}\(\backslash\)omega}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{t\string^*\}\(\backslash\)\} \(\backslash\)f\$ respectively.  Note that, as usual, the superscript}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{asterisk notation is used to distinguish dimensional quantities}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{from their non-\/dimensional counterparts where required.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{The body is subject to imposed time-\/harmonic displacements}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)f\$  \{\(\backslash\)rm Re\}\(\backslash\)\{\(\backslash\)mathbf\{\(\backslash\)hat\{u\}\}\string^* \{\(\backslash\)rm e\}\string^\{-\/\{\(\backslash\)rm i\}\(\backslash\)omega}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{t\string^*\}\(\backslash\)\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{along  \(\backslash\)f\$ \(\backslash\)partial D\_d \(\backslash\)f\$. This requires that}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{\(\backslash\)mathbf\{u\}\string^*=\(\backslash\)mathbf\{\(\backslash\)hat\{u\}\}\string^*\(\backslash\),\(\backslash\),\(\backslash\)textrm\{on \$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{\(\backslash\)partial D\_d. \$ \}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{The stresses and displacements are related by the constitutive equations}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)pmb\{\(\backslash\)tau\}\string^*=\(\backslash\)frac\{E\}\{1+\(\backslash\)nu\}\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)nu\}\{1-\/2\(\backslash\)nu\}(\(\backslash\)pmb\{\(\backslash\)nabla\}\string^*\(\backslash\)cdot\(\backslash\)mathbf\{u\}\string^*)\(\backslash\)textbf\{I\}+}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{\(\backslash\)frac\{1\}\{2\}(\(\backslash\)pmb\{\(\backslash\)nabla\}\string^*\(\backslash\)mathbf\{u\}\string^*+(\(\backslash\)pmb\{\(\backslash\)nabla\}\string^*\(\backslash\)mathbf\{u\}\string^*)\{\{\(\backslash\)rm T\}\})\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{where \(\backslash\)f\$ (\(\backslash\)pmb\{\(\backslash\)nabla\}\string^*\(\backslash\)mathbf\{u\}\string^*)\string^\{\{\(\backslash\)rm T\}\}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)f\$ represents the transpose of \(\backslash\)f\$ \(\backslash\)pmb\{\(\backslash\)nabla\}\string^*\(\backslash\)mathbf\{u\}\string^*.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{We non-\/dimensionalise the equations, using a problem specific reference}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{length, \(\backslash\)f\$ \{\(\backslash\)cal L\} \(\backslash\)f\$, and a timescale \(\backslash\)f\$ \(\backslash\)displaystyle \{\(\backslash\)cal T\}=\(\backslash\)frac\{1\}\{\(\backslash\)omega\} \(\backslash\)f\$, and  use}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{Young's modulus to non-\/dimensionalise the body force and the stress tensor:}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{\(\backslash\)pmb\{\(\backslash\)tau\}\string^* = E \(\backslash\), \(\backslash\)pmb\{\(\backslash\)tau\}, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{x\_\{i\}\string^* = \{\(\backslash\)cal L\}\(\backslash\), x\_\{i\}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)mathbf\{u\}\string^* = \{\(\backslash\)cal L\}\(\backslash\), \(\backslash\)mathbf\{u\}, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{\(\backslash\)mathbf\{F\}\string^* = \(\backslash\)frac\{E\}\{\(\backslash\)rho \(\backslash\)cal L\} \(\backslash\), \(\backslash\)mathbf\{F\},}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{t\string^* = \{\(\backslash\)cal T\}\(\backslash\), t.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{The non-\/dimensional form of the equations is then given by}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{\(\backslash\)pmb\{\(\backslash\)nabla\}\(\backslash\)cdot\(\backslash\)pmb\{\(\backslash\)tau\}+\(\backslash\)mathbf\{F\}=-\/\(\backslash\)Omega\string^2\(\backslash\)mathbf\{u\},}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{with the non-\/dimensional constitutive relation,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)pmb\{\(\backslash\)tau\}=\(\backslash\)frac\{1\}\{1+\(\backslash\)nu\}\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)nu\}\{1-\/2\(\backslash\)nu\}(\(\backslash\)pmb\{\(\backslash\)nabla\}\(\backslash\)cdot\(\backslash\)mathbf\{u\})\(\backslash\)textbf\{I\}+}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{\(\backslash\)frac\{1\}\{2\}(\(\backslash\)pmb\{\(\backslash\)nabla\}\(\backslash\)mathbf\{u\}+(\(\backslash\)pmb\{\(\backslash\)nabla\}\(\backslash\)mathbf\{u\})\string^\{\{\(\backslash\)rm T\}\})\(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{The non-\/dimensional parameter}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{\(\backslash\)Omega = \{\(\backslash\)cal L\}\(\backslash\)omega \(\backslash\)sqrt\{\(\backslash\)frac\{\(\backslash\)rho\}\{E\}\}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{is the ratio of the elastic body's intrinsic timescale,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{ \(\backslash\)f\$\(\backslash\)displaystyle \{\(\backslash\)cal L\} \(\backslash\)sqrt\{\(\backslash\)frac\{\(\backslash\)rho\}\{E\}\}\(\backslash\)f\$, to the problem-\/specific }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{timescale,\(\backslash\)f\$ \(\backslash\)displaystyle \{\(\backslash\)cal T\}=\(\backslash\)frac\{1\}\{\(\backslash\)omega\} \(\backslash\)f\$, that we }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{used to non-\/dimensionalise time. \(\backslash\)f\$ \(\backslash\)Omega \(\backslash\)f\$ can be interpreted as a}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{non-\/dimensional version of the excitation frequency; alternatively/equivalently }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)Omega\string^2 \(\backslash\)f\$ may be interpreted as a non-\/dimensional density.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{The boundary conditions are set as}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)mathbf\{u\}=\(\backslash\)mathbf\{\(\backslash\)hat\{u\}\}\(\backslash\),\(\backslash\),\(\backslash\)textrm\{on \$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{\(\backslash\)partial D\_d \$. \}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)section pml Perfectly matched layers}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{The idea behind perfectly matched layers is illustrated in the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{figure below. The actual physical/mathematical problem }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{has to be solved in the infinite domain \(\backslash\)f\$ D \(\backslash\)f\$ (shown on the left), }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{with a boundary condition at a certain distance }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{from the source of the waves ensuring the suitable decay }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{of the solution at large distances from the region of interest.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{If computations are performed in a finite computational domain, \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{D\_c \(\backslash\)f\$ , (shown in the middle), spurious wave reflections are likely to  }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{be generated at the artificial boundary \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{\(\backslash\)partial D\_c \(\backslash\)f\$ of the computational domain.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{The idea behind PML methods is to surround the actual computational}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{domain \(\backslash\)f\$ D\_c \(\backslash\)f\$ with a layer of "{}absorbing"{} material whose}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{properties are chosen such that the outgoing waves are absorbed }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{within it, without creating any artificial reflected waves at the interface}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{between the PML layer and the computational domain.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{\(\backslash\)image html pml.gif "{}Sketch illustrating the idea behind perfectly matched layers. "{} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)image latex pml.eps "{}Sketch illustrating the idea behind perfectly matched layers. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{Our implementation of the perfectly matched layers follows the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{development in }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{<a href="{}http://www.sciencedirect.com/science/article/pii/S0021999106004487"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{A. Bermudez, L. Hervella-\/Nieto, A. Prieto, and }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{R. Rodriguez "{}An optimal perfectly matched layer with unbounded }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{absorbing function for time-\/harmonic acoustic scattering problems"{}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{Journal of Computational Physics <b>223</b> 469-\/488 (2007)</a>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{and we assume the boundaries of the computational domain to be aligned}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{with the coordinate axes, as shown in the sketch above.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{The method requires a slight generalisation of the equations, }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{achieved by introducing the complex coordinate mapping }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial x\_j\} \(\backslash\)to \(\backslash\)frac\{1\}\{\(\backslash\)gamma\_j\} \(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial x\_j\} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{within the perfectly matched layers.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{The choice of \(\backslash\)f\$ \(\backslash\)gamma\_j \(\backslash\)f\$  depends on the orientation of the }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{PML layer. Since we are restricting ourselves to axis-\/aligned}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{mesh boundaries we need to distinguish three different cases, as }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{shown in the sketch below:}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)image html PMLDomain.gif "{}Sketch illustrating the geometry of the perfectly matched layers. "{} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{\(\backslash\)image latex PMLDomain.eps "{}Sketch illustrating the geometry of the perfectly matched layers. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{We follow the work of}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{<a href="{}http://www.sciencedirect.com/science/article/pii/S0045782502006424"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{U. Basu and A. Chopra "{}Perfectly matched layers for time-\/harmonic}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{elastodynamics of unbounded domains: theory and finite-\/element}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{implementation"{},}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{Computer Methods in Applied Mechanics and Engineering <b>192</b> }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{1337-\/1375(2003)</a> and choose: }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{-\/ For layers that are aligned with the y axis (such as the left}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{  and right PML layers in the sketch, with vertical stripes) we set }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{  \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{  \(\backslash\)gamma\_\{x\}(x)  = }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{  1 +i\(\backslash\)frac\{f\_0\}\{a\_0\}\(\backslash\) \(\backslash\)sigma\_\{x\}(x) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{  \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)mbox\{ \(\backslash\) \(\backslash\) \(\backslash\) with \(\backslash\) \(\backslash\) \(\backslash\) \}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{  \(\backslash\)sigma\_\{x\}(x)  =  \(\backslash\)frac\{1\}\{|X\_\{PML\_\{out\}\}-\/x|\}-\/\(\backslash\)frac\{1\}\{|X\_\{PML\_\{out\}\}-\/X\_\{PML\_\{in\}\}|\}, \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{  (4)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{  \(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{  where \(\backslash\)f\$ a\_0 = \(\backslash\)sqrt\{2.0(1.0+\(\backslash\)nu)\}\(\backslash\)Omega\(\backslash\)f\$, \(\backslash\)f\$ f\_0 \(\backslash\)f\$ is a}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{  constant to be tuned, \(\backslash\)f\$ X\_\{PML\_\{in\}\} \(\backslash\)f\$ is the x-\/coordinate}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{  of the inner boundary of the PML layer (the coordinate of the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{  interface with the physical domain), \(\backslash\)f\$ X\_\{PML\_\{out\}\} \(\backslash\)f\$ is the x-\/coordinate of the outer boundary}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{  of the PML layer , and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{  \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{   \(\backslash\)gamma\_y = 1.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{  \(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{-\/ For layers that are aligned with the x axis  (such as the top}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{  and bottom PML layers in the sketch, with horizontal stripes) we set }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{  \(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{  \(\backslash\)gamma\_x = 1,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{  \(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{  and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{  \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{  \(\backslash\)gamma\_\{y\}(y) = }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{  1+i\(\backslash\)frac\{f\_0\}\{a\_0\} \(\backslash\) \(\backslash\)sigma\_\{y\}(y) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{  \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)mbox\{ \(\backslash\) \(\backslash\) \(\backslash\) with \(\backslash\) \(\backslash\) \(\backslash\) \}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{  \(\backslash\)sigma\_\{y\}(y)  =  \(\backslash\)frac\{1\}\{|Y\_\{PML\_\{out\}\}-\/y|\}-\/\(\backslash\)frac\{1\}\{|Y\_\{PML\_\{out\}\}-\/Y\_\{PML\_\{in\}\}|\}, \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{  (5)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{  \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{  where \(\backslash\)f\$ Y\_\{PML\} \(\backslash\)f\$ is the y-\/coordinate of the outer boundary}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{  of the PML layer.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{-\/ In corner regions (diagonally striped) that are bounded by two}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{  axis-\/aligned PML layers (with outer coordinates \(\backslash\)f\$ X\_\{PML\} \(\backslash\)f\$ and  }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{  \(\backslash\)f\$ Y\_\{PML\} \(\backslash\)f\$) we set}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{  \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{  \(\backslash\)gamma\_\{x\}(x)  = }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{  1 +i\(\backslash\)frac\{f\_0\}\{a\_0\}\(\backslash\) \(\backslash\)sigma\_\{x\}(x) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{  \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)mbox\{ \(\backslash\) \(\backslash\) \(\backslash\) with \(\backslash\) \(\backslash\) \(\backslash\) \}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{  \(\backslash\)sigma\_\{x\}(x)  =  \(\backslash\)frac\{1\}\{|X\_\{PML\_\{out\}\}-\/x|\}-\/\(\backslash\)frac\{1\}\{|X\_\{PML\_\{out\}\}-\/X\_\{PML\_\{in\}\}|\} \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{  (6)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{  \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{  and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{  \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{  \(\backslash\)gamma\_\{y\}(y) = }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{  1+i\(\backslash\)frac\{f\_0\}\{a\_0\} \(\backslash\) \(\backslash\)sigma\_\{y\}(y) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{  \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)mbox\{ \(\backslash\) \(\backslash\) \(\backslash\) with \(\backslash\) \(\backslash\) \(\backslash\) \}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{  \(\backslash\)sigma\_\{y\}(y)  =  \(\backslash\)frac\{1\}\{|Y\_\{PML\_\{out\}\}-\/y|\}-\/\(\backslash\)frac\{1\}\{|Y\_\{PML\_\{out\}\}-\/Y\_\{PML\_\{in\}\}|\}. \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{  (7)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{  \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{-\/ Finally, in the actual computational domain (outside}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{  the PML layers) we set}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{  \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{  \(\backslash\)gamma\_\{x\}(x) =   \(\backslash\)gamma\_\{y\}(y) = 1.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{  \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{In our numerical experiments \(\backslash\)f\$ f\_0 = 20.0 \(\backslash\)f\$ was found to be an }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{appropriate value, which gives acceptable numerical behaviour.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{This is well aligned with the cited paper, where this parameter}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{ranges from roughly \(\backslash\)f\$ 10.0 \(\backslash\)f\$ to \(\backslash\)f\$ 50.0 \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{\(\backslash\)subsection impl Implementation of the perfectly matched layers within oomph-\/lib}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{The finite-\/element-\/discretised equations}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{(modified by the PML terms discussed above) are implemented in }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{the \(\backslash\)c PMLTimeHarmonicLinearElasticityEquations<DIM> class which is templated}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{by the spatial dimension, \(\backslash\)c DIM.  As usual, we provide }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{fully functional elements by combining these with geometric}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{finite elements (from the Q and T families -\/-\/ corresponding (in 2D)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{to triangles and quad elements). By default, the PML modifications}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{are disabled, i.e.  \(\backslash\)f\$ \(\backslash\)gamma\_\{x\}(x) \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)gamma\_\{y\}(y) \(\backslash\)f\$ are both}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{set to 1.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{  The generation of suitable 2D PML meshes along the axis-\/aligned}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{boundaries of a given bulk mesh is facilitated by helper}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{functions which automatically erect layers of (quadrilateral)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{PML elements. The layers are built from }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{\(\backslash\)c QPMLTimeHarmonicLinearElasticityElement<2,NNODE\_1D> elements and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{the parameter \(\backslash\)c NNODE\_1D is automatically chosen to match that of}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{the elements in the bulk mesh. The bulk mesh can contain quads or triangles}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{(as shown in the specific example presented below).}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{For instance, to erect a PML layer (of width \(\backslash\)c width, with \(\backslash\)c n\_pml elements}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{across the width of the layer) on the "{}right"{} boundary }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{(with boundary ID \(\backslash\)c b\_bulk) of the bulk mesh pointed to by \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{bulk\_mesh\_pt, a call to }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{  TwoDimensionalPMLHelper::create\_right\_pml\_mesh}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{  <PMLLayerElement<ELASTICITY\_ELEMENT> >}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{  (Solid\_mesh\_pt, right\_boundary\_id, }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{  Global\_Parameters::n\_x\_right\_pml, }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{  Global\_Parameters::width\_x\_right\_pml);}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{returns a pointer to a newly-\/created mesh that contains the }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{PML elements which are automatically attached to the }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{boundary of the bulk mesh (i.e. the \(\backslash\)c Nodes on the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{outer boundary of the bulk mesh are shared (pointed to), rather than}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{duplicated, by the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{elements in the PML mesh). The PML-\/ness of the elements is}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{automatically enabled, i.e. the functions \(\backslash\)f\$ \(\backslash\)gamma\_x(x) \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{and \(\backslash\)f\$ \(\backslash\)gamma\_y(y) \(\backslash\)f\$ are set as described above. Finally,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{zero Dirichlet boundary conditions are applied to the real and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{imaginary parts of the solution on the outer boundary of the }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{PML layer.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{Similar helper functions exist for PML layers on other axis-\/aligned}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{boundaries, and for corner PML meshes; see the code listings}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{provided below. Currently, we only provide this functionality for }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{convex 2D computational domains, but the generalisation to non-\/convex }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{boundaries and 3D is straightforward (if tedious) to implement }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{(Any volunteers?).}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{\(\backslash\)section element\_types Implementation }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{Within \(\backslash\)c oomph-\/lib, the non-\/dimensional version of equations }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{(1) with }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{the constitutive equations (2) are implemented }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{in the \(\backslash\)c PMLTimeHarmonicLinearElasticityEquations<DIM> equations }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{class, where the template parameter \(\backslash\)c DIM indicates the spatial dimension. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{Following our usual approach, discussed in the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{<A HREF="{}../../../doc/quick\_guide/html/index.html"{}> (Not-\/So-\/)Quick}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{Guide,</A> this equation class is then combined with a geometric finite}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{element to form a fully-\/functional finite element. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{For instance, the combination of the }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{\(\backslash\)c PMLTimeHarmonicLinearElasticityEquations<2>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{class with the geometric finite element \(\backslash\)c QElement<2,3> yields a nine-\/node }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{quadrilateral element. As usual, the mapping }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{between local and global (Eulerian) coordinates within an element is given by,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{x\_i = \(\backslash\)sum\_\{j=1\}\string^\{N\string^\{(E)\}\} X\string^\{(E)\}\_\{ij\} \(\backslash\), \(\backslash\)psi\_j, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{i=1,2,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{where \(\backslash\)f\$ N\string^\{(E)\} \(\backslash\)f\$ is the number of nodes in the element, \(\backslash\)f\$ X\string^\{(E)\}\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{\(\backslash\)f\$ is the \(\backslash\)f\$ i \(\backslash\)f\$-\/th global (Eulerian) coordinate of }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{the \(\backslash\)f\$ j \(\backslash\)f\$-\/th \(\backslash\)c Node }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{in the element, and the \(\backslash\)f\$ \(\backslash\)psi\_j \(\backslash\)f\$ are }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{the element's shape functions, defined in the geometric}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{finite element. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{All the constitutive parameters are real. The two}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{components of the displacement field have a real and imaginary part.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{We store the four real-\/valued nodal unknowns in the order}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{u\_x\(\backslash\)\}, \{\(\backslash\)rm Re\}\(\backslash\)\{u\_y\(\backslash\)\}, \{\(\backslash\)rm Im\}\(\backslash\)\{u\_x\(\backslash\)\}, \{\(\backslash\)rm Im\}\(\backslash\)\{u\_y\(\backslash\)\}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{\(\backslash\)f\$ and use the shape functions to interpolate the displacements as}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{u\_i\string^\{(n)\} = \(\backslash\)sum\_\{j=1\}\string^\{N\string^\{(E)\}\} U\string^\{(E)\}\_\{ij\} \(\backslash\), \(\backslash\)psi\_j, \(\backslash\)qquad }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{i=1,...4,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{where \(\backslash\)f\$  U\string^\{(E)\}\_\{ij\} \(\backslash\)f\$  is the \(\backslash\)f\$ i \(\backslash\)f\$-\/th displacement component }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{(enumerated as described above) at the \(\backslash\)f\$ j \(\backslash\)f\$-\/th \(\backslash\)c Node in the element.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{\(\backslash\)section test A specific example: outward propagation of elastic waves from the surface of a cylindrical object}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{We consider the time-\/harmonic deformation of}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{a 2D elastic body that occupies the region outside }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{a circle whose diameter we use as the lengthscale \(\backslash\)f\$ \(\backslash\)cal L \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{ We impose a displacement \(\backslash\)f\$ \{\(\backslash\)mathbf\{u\}\}(r,\(\backslash\)theta)=}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{ u\_0 \{\(\backslash\)mathbf\{e\}\}\_r + u\_1 \{\(\backslash\)mathbf\{e\}\}\_\{\(\backslash\)theta\} \(\backslash\)f\$ on the inner}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{ boundary (to generate a combination of pressure waves and shear waves) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{and allow for a formulation with perfectly matched layers on the outer}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{boundary of the computational domain, which should allow for a smooth propagation of the elastic}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{waves with no interference from the restriction of the problem to a}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{finite computational domain. \(\backslash\)f\$ \{\(\backslash\)mathbf\{e\}\}\_r \(\backslash\)f\$ is the unit}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{vector in the radial direction, whereas \(\backslash\)f\$ \{\(\backslash\)mathbf\{e\}\}\_\{\(\backslash\)theta\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{is the unit vector in azimuthal direction.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{It is easy to find an analytical solution of this problem by working}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{in polar coordinates and exploiting the axisymmetry of the solution by}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{writing the displacements as}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)displaystyle \{\(\backslash\)mathbf\{u\}\} = U(r) \{\(\backslash\)mathbf\{e\}\}\_r \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{or}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)displaystyle \{\(\backslash\)mathbf\{u\}\} = U(r) \{\(\backslash\)mathbf\{e\}\}\_\{\(\backslash\)theta\} \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{The displacement  \(\backslash\)f\$ U(r) \(\backslash\)f\$ is then governed in both cases by}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{an equation of type }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{\(\backslash\)frac\{d\}\{d r\}\(\backslash\)left(\(\backslash\)frac\{U\}\{r\}+\(\backslash\)frac\{dU\}\{dr\}\(\backslash\)right) + k\string^2 U=0,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)displaystyle k\string^2 = k\_\{r\}\string^2=}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)Omega\string^2\}\{\(\backslash\)lambda+2\(\backslash\)mu\}\(\backslash\)f\$ for the radial component and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)displaystyle k\string^2 = k\_\{\(\backslash\)theta\}\string^2=}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)Omega\string^2\}\{\(\backslash\)mu\}\(\backslash\)f\$ for the azimuthal component. We also note that}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{\(\backslash\)lambda = \(\backslash\)frac\{\(\backslash\)nu\}\{(1+\(\backslash\)nu)(1-\/2\(\backslash\)nu)\} \(\backslash\)qquad \(\backslash\)textrm\{and\} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{\(\backslash\)qquad \(\backslash\)mu = \(\backslash\)frac\{1\}\{2(1+\(\backslash\)nu)\}}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{are the non-\/dimensional Lame parameters.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{The solution of these equations is given in each case by:}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{U(r) = H\_1(kr).}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{where \(\backslash\)f\$ H\_1 \(\backslash\)f\$ is the Hankel function of first kind. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{The two solutions can then be converted to Cartesian coordinates and added}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{together in an appropriate manner.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{The details of the procedure can be found in }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{the <code> GlobalParameters::exact\_u() </code> function.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{We note that even though a relatively simple analytical solution}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{(in polar coordinates!) exists for this problem, it is a non-\/trivial}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{test case for our code which solves the governing equations in Cartesian}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{coordinates. It is also a highly relevant test case in the context of}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{testing perfectly matched layers, since the solution contains both}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{shear and compression waves.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{The discretised}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{geometry is shown below. We choose a circle of radius \(\backslash\)f\$ r=0.5\(\backslash\)f\$ in}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{a computational domain otherwise set to \(\backslash\)f\$ -\/2 \(\backslash\)le x \(\backslash\)le 2, -\/2 \(\backslash\)le y}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{\(\backslash\)le 2 \(\backslash\)f\$, with a PML thickness of \(\backslash\)f\$ 1.6 \(\backslash\)f\$ in each dimension, spanned by \(\backslash\)f\$ 16 \(\backslash\)f\$ elements. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{\(\backslash\)image html mesh.gif "{}Mesh used to resolve the geometry. "{} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{\(\backslash\)image latex mesh.eps "{}Mesh used to resolve the geometry. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{The figures below show "{}carpet plots"{} (on the left) of the real and imaginary }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{parts of the exact (green) and computed (blue) horizontal displacement }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{for \(\backslash\)f\$ \(\backslash\)Omega\string^2=30.0 \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)nu=0.3 \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{Comparing the two}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{solutions shows good agreement and hence an efficient damping}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{given by the perfectly matched layers. We can also observe this by}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{taking a one-\/dimensional slice from point \(\backslash\)f\$ (-\/2.0,0.0)\(\backslash\)f\$ to point}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{\(\backslash\)f\$ (2.0,0.0)\(\backslash\)f\$ and visualising the profiles of the exact and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{computed solutions, shown on the right. The green line represents the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{profile of the exact solution, whereas the blue dots are extracted}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{from the profile of the computed solution.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{\(\backslash\)image html result1.gif "{}Real part of the horizontal displacement. Exact and computed solution carpet plot (left) and (-\/2.0,0.0) to (2.0,0.0) one-\/dimensional slice (right). Green: exact; dark blue: computed; light blue: perfectly matched layers. "{} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{\(\backslash\)image latex result1.eps "{}Real part of the horizontal displacement. Exact and computed solution carpet plot (left) and (-\/2.0,0.0) to (2.0,0.0) one-\/dimensional slice (right). Green: exact; dark blue: computed; light blue: perfectly matched layers. "{} width=0.95\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{\(\backslash\)image html result2.gif "{}Imaginary part of the horizontal displacement. Exact and computed solution carpet plot (left) and (-\/2.0,0.0) to (2.0,0.0) one-\/dimensional slice (right). Green: exact; dark blue: computed; light blue: perfectly matched layers. "{} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{\(\backslash\)image latex result2.eps "{}Imaginary part of the horizontal displacement. Exact and computed solution carpet plot (left) and (-\/2.0,0.0) to (2.0,0.0) one-\/dimensional slice (right). Green: exact; dark blue: computed; light blue: perfectly matched layers. "{} width=0.95\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{To demonstrate that the resulting displacement field is indeed}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{axisymmetric, we present plots of the real and imaginary parts of the radial}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{displacement, \(\backslash\)f\$ (Re(u\_1)\string^2 + Re(u\_2)\string^2)\string^\{1/2\} \(\backslash\)f\$ and \(\backslash\)f\$ (Im(u\_1)\string^2}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{+ Im(u\_2)\string^2)\string^\{1/2\} \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{\(\backslash\)image html result3.gif "{}Real part of the computed radial displacement. "{} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{\(\backslash\)image latex result3.eps "{}Real part of the computed radial displacement. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{\(\backslash\)image html result4.gif "{}Imaginary part of the computed radial displacement. "{} }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{\(\backslash\)image latex result4.eps "{}Imaginary part of the computed radial displacement. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{\(\backslash\)section namespace Global parameters and functions}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{As usual, we define all non-\/dimensional parameters in a namespace}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{where we also define the exact solution which is imposed at the inner}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{boundary. We omit the (lengthy) listing of the exact solution.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{\(\backslash\)dontinclude time\_harmonic\_elasticity\_driver.cc}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{\(\backslash\)skipline start\_namespace}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{\(\backslash\)until Directory="{}RESLT"{};}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{We start by reading the command line arguments, which allow the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{specification of the perfectly matched layers in terms of number of}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{elements and thickness.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{\(\backslash\)dontinclude time\_harmonic\_elasticity\_driver.cc}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{\(\backslash\)until \&Global\_Parameters::Directory);}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{After extracting the relevant information from the command line we}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{continue by computing the dependent parameters.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{\(\backslash\)skipline // Validation run?}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{\(\backslash\)until doc\_info.set\_directory(Global\_Parameters::Directory);}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{Next, we create the elasticity tensor and set up the problem}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{(discretised with six-\/noded triangular elements). }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{\(\backslash\)skipline // Build elasticity tensor}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{\(\backslash\)until \#endif}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{and perform the actual computation and the post-\/processing of the results:}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{\(\backslash\)skipline // Solve the problem using}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{\(\backslash\)until newton\_solve();}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{\(\backslash\)skipline // End timing}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{\(\backslash\)until end of main }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{\(\backslash\)section problem The problem class }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{The \(\backslash\)c Problem class is very simple and is very similar to that employed for }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{the <a href="{}../../time\_harmonic\_linear\_elasticity/elastic\_annulus/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{solution of the classical time harmonic linear elasticity problem with}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{traction boundary conditions.</a> We provide helper functions to create the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{PML meshes and to apply the boundary conditions (mainly}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{because these tasks have to be performed repeatedly in }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{the spatially adaptive version this code which is not discussed}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{explicitly here; but see \(\backslash\)ref comm\_ex ).}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{\(\backslash\)dontinclude time\_harmonic\_elasticity\_driver.cc}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{\(\backslash\)skipline begin\_problem}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{\(\backslash\)until doc\_solution(DocInfo\& doc\_info);}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{The private member data includes pointers the bulk mesh}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{\(\backslash\)skipline Pointer to solid mesh}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{\(\backslash\)until Solid\_mesh\_pt}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{and to the various PML sub-\/meshes}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{\(\backslash\)skipline Pointer to the right PML mesh}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{\(\backslash\)until \}; }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{\(\backslash\)section constructor The problem constructor}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{We start by creating the \(\backslash\)c Circle object that defines the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{inner boundary of the domain. The radius has been defined as part of}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{the \(\backslash\)c Global\_Parameters definition:}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{\(\backslash\)dontinclude time\_harmonic\_elasticity\_driver.cc}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{\(\backslash\)until  Circle(x\_c,y\_c,a);}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{and define the polygonal outer boundary of the computational domain.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{\(\backslash\)until outer\_boundary\_pt = new TriangleMeshPolygon(outer\_boundary\_line\_pt);}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{Next we define the curvilinear inner boundary in terms of two}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{\(\backslash\)c TriangleMeshCurviLines which define the hole in the domain:}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{\(\backslash\)until hole\_coords);}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{We specify the mesh parameters (including a target element size)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{\(\backslash\)until Global\_Parameters::Element\_area;}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{and build the bulk mesh}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{\(\backslash\)skipline Build the mesh}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{\(\backslash\)until (triangle\_mesh\_parameters);}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{We create the PML meshes and add them (and the solid mesh) }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{to the Problem's collection of sub-\/meshes and build the global mesh.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{\(\backslash\)skipline Create the main triangular mesh}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{\(\backslash\)until  build\_global\_mesh();}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{Next we pass the problem parameters to all elements }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{via calling  }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{<code> ElasticAnnulusProblem<ELASTICITY\_ELEMENT>::complete\_problem\_setup() </code>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{discussed below (remember that}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{even the elements in the PML layers need to be told about these}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{since they adjust the \(\backslash\)f\$ \(\backslash\)gamma\_x \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)gamma\_y \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{functions in terms of these parameters), apply the boundary }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{conditions and assign the equation numbers.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{\(\backslash\)skipline // Complete problem setup}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{\(\backslash\)until \} //end\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{The setup of the problem is now complete.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{\(\backslash\)subsection complete\_setup Completing the problem setup}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{We pass the problem parameters to all elements,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{which are used in the equation construction and }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{perfectly matched layer definition.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{\(\backslash\)dontinclude time\_harmonic\_elasticity\_driver.cc}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{\(\backslash\)skipline start\_of\_complete\_problem\_setup}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{\(\backslash\)until // end\_of\_assignment}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{We pin all four nodal values (representing the real and imaginary}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{part of the two displacement components) on the inner boundaries (boundaries 0 and 1;}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{see enumeration of the boundaries in the constructor) and assign}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{the desired boundary values.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{\(\backslash\)skipline for(unsigned b=0;b<2;b++)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{\(\backslash\)until  // end\_of\_complete\_setup}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{As expected, the \(\backslash\)c doc\_solution(...) member function documents the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{computed solution. We are particularly interested in the computed}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{solution and the exact solution for comparison purposes}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{\(\backslash\)dontinclude time\_harmonic\_elasticity\_driver.cc}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{\(\backslash\)skipline // Output displacement field}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{\(\backslash\)until some\_file.close();}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00617}00617 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00618}00618 \textcolor{comment}{\(\backslash\)skipline // Output exact solution }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00619}00619 \textcolor{comment}{\(\backslash\)until some\_file.close();}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00620}00620 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00621}00621 \textcolor{comment}{We also output the solution in the perfectly matched}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00622}00622 \textcolor{comment}{layers themselves and document the norm of the solution, the wall}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00623}00623 \textcolor{comment}{clock time and number of degrees of freedom.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00624}00624 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00625}00625 \textcolor{comment}{\(\backslash\)skipline // Output runtime}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00626}00626 \textcolor{comment}{\(\backslash\)until //end doc}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00627}00627 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00628}00628 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00629}00629 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00630}00630 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00631}00631 \textcolor{comment}{\(\backslash\)section comm\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00632}00632 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00633}00633 \textcolor{comment}{\(\backslash\)subsection comments Comments}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00634}00634 \textcolor{comment}{-\/ If you inspect the <A HREF="{}../../../demo\_drivers/pml\_time\_harmonic\_linear\_elasticity/time\_harmonic\_elasticity\_driver.cc"{}>driver code</a>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00635}00635 \textcolor{comment}{  you will notice that it also contains relevant code to perform }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00636}00636 \textcolor{comment}{  spatially adaptive simulations of the problem -\/-\/ the adaptive}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00637}00637 \textcolor{comment}{  version of the code is selected with \(\backslash\)c \(\backslash\)\#ifdefs.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00638}00638 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00639}00639 \textcolor{comment}{-\/ The choice for the absorbing functions in our implementation of}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00640}00640 \textcolor{comment}{the PMLs is not unique. There are alternatives varying in both order and}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00641}00641 \textcolor{comment}{continuity properties. The current form is the result of several}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00642}00642 \textcolor{comment}{feasibility studies and comparisons found in}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00643}00643 \textcolor{comment}{<a href="{}http://www.sciencedirect.com/science/article/pii/S0021999106004487"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00644}00644 \textcolor{comment}{Bermudez et al.</a> For Helmholtz equations these damping functions produce an }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00645}00645 \textcolor{comment}{acceptable result in most practical situations without further }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00646}00646 \textcolor{comment}{modifications. For very specific applications, alternatives may }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00647}00647 \textcolor{comment}{need to be used and can easily be implemented within the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00648}00648 \textcolor{comment}{existing framework.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00649}00649 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00650}00650 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00651}00651 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00652}00652 \textcolor{comment}{\(\backslash\)subsection ex Exercises}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00653}00653 \textcolor{comment}{\(\backslash\)subsubsection pmlsize Changing perfectly matched layer parameters}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00654}00654 \textcolor{comment}{Confirm that only a relatively small number of PML elements (across the thickness}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00655}00655 \textcolor{comment}{of the PML layer) is required to effectively damp the outgoing waves.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00656}00656 \textcolor{comment}{It is also interesting to explore the effect of increasing the number}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00657}00657 \textcolor{comment}{of elements of the mesh inside the perfectly matched layers.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00658}00658 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00659}00659 \textcolor{comment}{Another parameter}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00660}00660 \textcolor{comment}{that can be adjusted is the geometrical thickness of the perfectly matched}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00661}00661 \textcolor{comment}{layers. In the case of linear elasticity (as opposed to for example}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00662}00662 \textcolor{comment}{the Helmholtz equation), the thickness of these layers must be}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00663}00663 \textcolor{comment}{relatively large to obtain the best results. Try to explain why and take}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00664}00664 \textcolor{comment}{note of the differences between the two mentioned problems.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00665}00665 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00666}00666 \textcolor{comment}{\(\backslash\)subsubsection adaptivity Spatial adaptivity}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00667}00667 \textcolor{comment}{The driver code discussed above already contains the straightforward}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00668}00668 \textcolor{comment}{modifications required to enable spatial adaptivity. Explore this }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00669}00669 \textcolor{comment}{(by recompiling the code with -\/DADAPTIVE) and explain why spatial}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00670}00670 \textcolor{comment}{adaptivity is not particularly helpful for the test problem}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00671}00671 \textcolor{comment}{discussed above.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00672}00672 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00673}00673 \textcolor{comment}{\(\backslash\)subsubsection diff\_order Linear and cubic finite elements}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00674}00674 \textcolor{comment}{The driver code also contains (commented out) modifications}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00675}00675 \textcolor{comment}{that allow the simulation to be performed with }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00676}00676 \textcolor{comment}{three-\/node (linear) and ten-\/node (cubic) triangles. Explore the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00677}00677 \textcolor{comment}{performance of these elements and confirm that the helper functions}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00678}00678 \textcolor{comment}{correctly create matching (four-\/node and sixteen-\/node) quad elements }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00679}00679 \textcolor{comment}{in the PML layers.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00680}00680 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00681}00681 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00682}00682 \textcolor{comment}{\(\backslash\)subsubsection default Default values for problem parameters}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00683}00683 \textcolor{comment}{Following our usual convention, we provide default values}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00684}00684 \textcolor{comment}{for problem parameters where this is sensible. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00685}00685 \textcolor{comment}{Some parameters, such as the elasticity tensor, do need to be set since there are no obvious}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00686}00686 \textcolor{comment}{defaults. If \(\backslash\)c oomph-\/lib is compiled in \(\backslash\)c PARANOID mode,}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00687}00687 \textcolor{comment}{an error is thrown if the relevant pointers haven't been set. }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00688}00688 \textcolor{comment}{Without paranoia, you get a segmentation fault...}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00689}00689 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00690}00690 \textcolor{comment}{Confirm that this is the case by commenting out the relevant}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00691}00691 \textcolor{comment}{assignments.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00692}00692 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00693}00693 \textcolor{comment}{\(\backslash\)subsubsection non\_convex Non-\/convex PML boundaries}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00694}00694 \textcolor{comment}{As discussed above, we currently provide helper functions to }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00695}00695 \textcolor{comment}{attach PML layers to axis-\/aligned boundaries of 2D meshes with}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00696}00696 \textcolor{comment}{convex outer boundaries. Essentially, this restricts us to }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00697}00697 \textcolor{comment}{rectangular computational domains. Extend this capability by developing}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00698}00698 \textcolor{comment}{methodologies to }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00699}00699 \textcolor{comment}{-\/ deal with non-\/convex domain boundaries. We suggest you}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00700}00700 \textcolor{comment}{  create PML meshes for the non-\/convex corners first, then}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00701}00701 \textcolor{comment}{  create the axis-\/aligned meshes (note that these have to }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00702}00702 \textcolor{comment}{  share nodes with the already-\/created elements that occupy the}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00703}00703 \textcolor{comment}{  non-\/convex corners), and then create the corner meshes}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00704}00704 \textcolor{comment}{  for the convex corners (as before). When you're done, let}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00705}00705 \textcolor{comment}{  us know -\/-\/ this would be a really useful addition to}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00706}00706 \textcolor{comment}{  oomph-\/lib's machinery. We're happy to help!}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00707}00707 \textcolor{comment}{-\/ Repeat the same exercise in 3D -\/-\/ somewhat less trivial}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00708}00708 \textcolor{comment}{  (so we're even keener for somebody to have a go!)}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00709}00709 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00710}00710 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00711}00711 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00712}00712 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00713}00713 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00714}00714 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00715}00715 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00716}00716 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00717}00717 \textcolor{comment}{<A HREF="{}../../../demo\_drivers/pml\_time\_harmonic\_linear\_elasticity/"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00718}00718 \textcolor{comment}{demo\_drivers/pml\_time\_harmonic\_linear\_elasticity/}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00719}00719 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00720}00720 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00721}00721 \textcolor{comment}{-\/ The driver code is: }}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00722}00722 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00723}00723 \textcolor{comment}{<A HREF="{}../../../demo\_drivers/pml\_time\_harmonic\_linear\_elasticity/time\_harmonic\_elasticity\_driver.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00724}00724 \textcolor{comment}{demo\_drivers/pml\_time\_harmonic\_linear\_elasticity/time\_harmonic\_elasticity\_driver.cc}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00725}00725 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00726}00726 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00727}00727 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00728}00728 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00729}00729 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00730}00730 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00731}00731 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00732}00732 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00733}00733 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00734}00734 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00735}00735 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00736}00736 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{pml__time__harmonic__linear__elasticity_8txt__doxygenified_8h_source_l00737}00737 }
+
+\end{DoxyCode}

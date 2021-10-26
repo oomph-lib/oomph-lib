@@ -7,12 +7,12 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classAxisymmetricLinearElasticityProblem}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$}}
+\begin{DoxyCompactList}\small\item\em Class to validate time harmonic linear elasticity (Fourier decomposed) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
 \begin{DoxyCompactList}\small\item\em Namespace for global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -42,7 +42,7 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_a2167fee22e8f4d63a51a39ace1e
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a902b0bba2b1393518a914330f30ee4c9}{Global\+\_\+\+Parameters\+::d2\+\_\+u\+\_\+theta\+\_\+dt2}} (const double \&time, const Vector$<$ double $>$ \&x)
 \begin{DoxyCompactList}\small\item\em Calculate the time dependent form of the theta-\/component of acceleration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_a7da914d64b7a62d35793172f6a0fd712}{Global\+\_\+\+Parameters\+::exact\+\_\+solution}} (const double \&time, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
-\item 
+\begin{DoxyCompactList}\small\item\em The exact solution in a vector\+: 0\+: u\+\_\+r, 1\+: u\+\_\+z, 2\+: u\+\_\+theta and their 1st and 2nd derivs. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
@@ -89,9 +89,9 @@ Driver code.
 
 
 
-Definition at line 714 of file cylinder.\+cc.
+Definition at line \mbox{\hyperlink{cylinder_8cc_source_l00714}{714}} of file \mbox{\hyperlink{cylinder_8cc_source}{cylinder.\+cc}}.
 
 
 
-References problem.
+References \mbox{\hyperlink{cylinder_8cc_source_l00416}{Axisymmetric\+Linear\+Elasticity\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+conditions()}}.
 

@@ -1,0 +1,578 @@
+\hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source}{}\doxysection{fsi\+\_\+channel\+\_\+segregated\+\_\+solver.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{fsi__channel__segregated__solver_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Segregated solvers for fluid-\/structure-\/interaction problems: Revisiting the flow in a 2D collapsible channel}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this document we discuss the implementation of segregated solution}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{strategies for multi-\/physics problems, in particular fluid-\/structure}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{interaction, within \(\backslash\)c oomph-\/lib. The method illustrated by}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{revisiting the fluid-\/structure interaction problem of}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{<A HREF="{}../../fsi\_collapsible\_channel/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{ finite-\/Reynolds-\/number flow in a 2D collapsible channel;</A> an}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{ example discussed in detail in <CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{<a href="{}http://www.springerlink.com/content/m3r6318701g338g4/"{}>Heil, M., Hazel, A.L. \& Boyle, J. (2008): Solvers for large-\/displacement fluid-\/structure interaction problems: Segregated vs. monolithic approaches. Computational Mechanics.</a>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{where we compare the relative performance of segregated and monolithic}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{solvers. Since the paper comes to the conclusion that, despite}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{various claims in the literature, segregated solvers are not}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{necessarily more efficient than fully-\/coupled monolithic schemes}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{(of the type employed in \(\backslash\)c oomph-\/lib) you should also consult}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{the <a href="{}../../../preconditioners/fsi/html/index.html"{}>related}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{tutorial on the monolithic solution of the problem}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{with \(\backslash\)c oomph-\/lib's FSI preconditioner.</A>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{\(\backslash\)section problem The problem }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{<TR> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{<B>Flow in a 2D collapsible channel </B>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{The figure below shows a sketch of the problem: }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{Flow is driven by a }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{prescribed Poiseuille flow \(\backslash\)f\$U\string^\{*\}\_\{p\}\(\backslash\)f\$ through a 2D channel of width }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{\(\backslash\)f\$ H\string^* \(\backslash\)f\$ and total length}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{\(\backslash\)f\$ L\string^*\_\{total\} = L\string^*\_\{up\} + L\string^*\_\{collapsible\} + L\string^*\_\{down\}. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{The upstream and downstream lengths of the channel are rigid, whereas}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{the upper wall in the central section is an elastic membrane whose}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{shape is parametrised by a Lagrangian coordinate, \(\backslash\)f\$ \(\backslash\)xi\string^* \(\backslash\)f\$ , so }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{that the position vector to the moving wall is given by }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf R\}\_w\string^*(\(\backslash\)xi\string^*,t\string^*) \(\backslash\)f\$ . The wall is loaded by the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{external pressure \(\backslash\)f\$ p\_\{ext\}\string^* \(\backslash\)f\$ and by the traction }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{that the viscous fluid exerts on it.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{\(\backslash\)image html collapsible\_channel\_sketch.gif "{}Sketch of the problem. "{} }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{\(\backslash\)image latex collapsible\_channel\_sketch.eps "{}Sketch of the problem. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{The non-\/dimensionalisation and governing equations have already been}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{discussed in the }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{<A HREF="{}../../fsi\_collapsible\_channel/html/index.html"{}> previous}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{(monolithic) example. </A>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{The problem is not quite the same, however, because the upstream}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{boundary condition is now one of prescribed flow, rather than prescribed}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{pressure:}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{-\/ Prescribed inflow, }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{  \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{  \{\(\backslash\)bf u\}(x\_1,x\_2) = \{\(\backslash\)bf u\}\_\{p\}(x\_1,x\_2) =   }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{  6 \(\backslash\) x\_2 \(\backslash\)  (1-\/x\_2) \(\backslash\) \{\(\backslash\)bf e\}\_1.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{  \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{  \(\backslash\)f] at \(\backslash\)f\$ x\_\{1\}=0\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{All other boundary conditions remain the same.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)section reslt Results}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{The behaviour of the system under the prescribed-\/inflow boundary}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{conditions is somewhat different to its behaviour when the pressure}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{drop is prescribed. In the first instance, we consider steady states,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{in which all time-\/derivatives are neglected. The figure below shows }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{steady flows at a Reynolds number of \(\backslash\)f\$ Re=500 \(\backslash\)f\$ and two values}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{of the fluid-\/structure-\/interaction parameter, \(\backslash\)f\$ Q =}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{10\string^\{-\/4\} \(\backslash\)f\$ (upper) and \(\backslash\)f\$ Q = 10\string^\{-\/2\}\(\backslash\)f\$ (lower). For low values of}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)f\$Q\(\backslash\)f\$, corresponding to weak fluid-\/structure interaction, the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{deformation of the wall is approximately symmetric, being dominated by}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{the external pressure. As \(\backslash\)f\$Q\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{increases, the influence of fluid traction can been seen in the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{asymmetric deformation of the elastic wall. The viscous pressure}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{drop along the tube leads to higher pressure upstream (causing an}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{outward deformation) and lower pressures downstream (causing an inward}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{deflection).}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{\(\backslash\)image html steady\_flows.gif "{}Steady flows at Re=500 and Q=10e-\/4 (upper), Q=10e-\/2 (lower). "{} }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{\(\backslash\)image latex steady\_flows.eps "{}Steady flows at Re=500 and Q=10e-\/4 (upper), Q=10e-\/2 (lower). "{} width=0.8\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{The overall behaviour of the system can be characterised by steady}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{load-\/displacement curves in which the vertical position of a }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{control point on the elastic}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{section of the channel wall is plotted as a function of the external}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{pressure. }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)image html steady\_trace.gif "{}Load-\/displacement curve: the vertical position of a control point on the elastic wall (located at 50, 50, 60 and 70 percent of its length for Q = 0, 10e-\/4, 10e-\/3 and 10e-\/2, respectively) as a function of the external pressure. "{} }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{\(\backslash\)image latex steady\_trace.eps "{}Load-\/displacement curve: the vertical position of a control point on the elastic wall (located at 50, 50, 60 and 70 percent of its length for Q = 0, 10e-\/4, 10e-\/3 and 10e-\/2, respectively) as a function of the external pressure. "{} width=0.5\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{ At low \(\backslash\)f\$Q\(\backslash\)f\$, the displacement is directly proportional to}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{the external pressure. As \(\backslash\)f\$Q\(\backslash\)f\$ increases the curves shift to the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{right because a large external pressure is required to keep the wall}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{in its undeformed position;  }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{a consequence of the increased viscous pressure drop \(\backslash\)em and the }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{boundary condition that \(\backslash\)f\$p=0\(\backslash\)f\$ at the outlet. A second consequence}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{of increasing \(\backslash\)f\$Q\(\backslash\)f\$ is that (at finite Reynolds number) a }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{smaller increase in external pressure is required to achieve }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{a given degree of collapse. This is because the Bernoulli}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{effect reduces the fluid pressure in the region that is}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{most strongly collapsed and therefore increases the compressive}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{load on the wall. For \(\backslash\)f\$Q = 10\string^\{-\/2\}\(\backslash\)f\$ two limit}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{points develop on the load-\/displacement curve, indicating that the wall}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{"{}snaps through"{} into a collapsed buckled configuration when}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{\(\backslash\)f\$p\_\{ext\}\(\backslash\)f\$ becomes sufficiently large. The appearance of the }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{limit points means that it is no longer possible to perform the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{steady parameter study by slowly increasing \(\backslash\)f\$p\_\{ext\}: \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{At sufficiently large values of \(\backslash\)f\$Q\(\backslash\)f\$ the displacement of the control }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{point is not a single-\/valued function of the external pressure }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)f\$ p\_\{ext\}\(\backslash\)f\$. However, the application of "{}displacement control"{},}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{described in the tutorial discussing the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{<A HREF="{}../../../beam/steady\_ring/html/index.html"{}> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{large-\/displacement post-\/buckling of an elastic ring</A> is sufficient}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{to circumvent this difficulty: We treat the external pressure as an unknown}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{and control the channel's collapse by prescribing the vertical position}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{of the control point, \(\backslash\)f\$ x\_2\string^\{[ctrl]\}.\(\backslash\)f\$ This resolves the problem}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{because the curve \(\backslash\)f\$ p\_\{ext\}(x\_2\string^\{[ctrl]\})\(\backslash\)f\$ is single-\/valued,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{allowing us to perform the parameter study by slowly increasing}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{the wall collapse by reducing \(\backslash\)f\$ x\_2\string^\{[ctrl]\}\(\backslash\)f\$, computing the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{pressure required to achieve this deformation as part of the solution.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{\(\backslash\)section overview Overview: Segregated solution strategies with oomph-\/lib}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{The general methodology for setting up fluid-\/structure-\/interaction}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{problems is discussed in }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{<A HREF="{}../../fsi\_collapsible\_channel/html/index.html\#overview"{}>another }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{tutorial; </A>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{and we shall assume that the standard monolithic problem has already}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{been written. In the present example, the monolithic problem class \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{FSICollapsibleChannelProblem is}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{specified in the header file }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/fsi\_chan\_problem.h"{}>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{fsi\_chan\_problem.h</A> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{Having specified the monolithic (fully-\/coupled) discretisation, our segregated}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{solution strategy proceeds by alternating between fluid and solid}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{solves: Initially, the degrees of freedom}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{associated with the (pure) solid mechanics problem are "{}pinned"{} and the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{global assembly procedure is modified to omit the corresponding }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{solid elements. The Newton solver will, therefore, solve the fluid}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{equations with a "{}frozen"{} wall shape. Next, the degrees of freedom}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{associated with the (pure) fluid  mechanics problem are pinned and the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{original boundary conditions for the solid mechanics problem are}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{re-\/assigned.  The assembly procedure}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{is now modified so that only solid elements contribute to the }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{global system. The Newton solver will then solve for a new wall shape}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{corresponding to the tractions exerted by the given flow}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{field. At this point we allow for under-\/relaxation, i.e. we provide}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{the option to increment the solid mechanics degrees of freedom}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{by a fraction of the change computed by the Newton solver.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{These two steps are repeated in a fixed-\/point iteration which}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{continues until a given convergence criterion is satisfied, or a}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{maximum number of iterations is exceeded. }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{We note that different linear solvers/preconditioners }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{may be specified for solution of the linear systems }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{arising during the Newton iteration for the isolated "{}fluid"{} and }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{"{}solid"{} problems, allowing the re-\/use of optimal solution methods }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{for individual sub-\/problems. This is generally perceived to be one}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{of the key advantages of segregated solvers.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{\(\backslash\)section how\_its\_done Brief discussion of the implementation}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{\(\backslash\)subsection seg\_problem The SegregatableFSIProblem}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{<b>a. Overall structure</b>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{The }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{<A HREF="{}../../../the\_data\_structure/html/classoomph\_1\_1SegregatableFSIProblem.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{ \(\backslash\)c SegregatableFSIProblem </A> class is used to implement our}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{segregated solution strategy within \(\backslash\)c oomph-\/lib. The most important}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{problem-\/specific task is to divide all the problem data }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{into distinct fluid and solid degrees of freedom}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{and to partition the monolithic mesh into a mesh of fluid}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{elements and a mesh of solid elements. The problem-\/specific}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{partitioning should be implemented in the (pure) virtual member}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{function}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{\(\backslash\)code }\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{ /// Identify fluid and solid data}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{} virtual void identify\_fluid\_and\_solid\_dofs(Vector<Data*>\& fluid\_data\_pt,}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00206}00206                                             Vector<Data*>\& solid\_data\_pt,}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00207}00207                                             Mesh*\& fluid\_mesh\_pt,}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00208}00208                                             Mesh*\& solid\_mesh\_pt)=0;}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00209}00209 \(\backslash\)endcode }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00210}00210  which returns vectors of fluid and solid data and the meshes of fluid}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00211}00211  and solid elements. This virtual function is called within the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00212}00212  member function }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00213}00213 \(\backslash\)code\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{  /// \(\backslash\)short Set up segregated solver. The optional boolean argument}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{  /// defaults to true and causes the identify\_fluid\_and\_solid\_dofs(...)}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{  /// to be called again. This is required, e.g. if any of the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{  /// meshes were adapted since the previous call to the segregated solver.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{}  void setup\_segregated\_solver(const bool \&full\_setup\_of\_fluid\_and\_solid\_dofs=true)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00219}00219 \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00220}00220  which \(\backslash\)em must be}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00221}00221  called immediately before every segregated solve. The optional boolean}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00222}00222  flag may be set to \(\backslash\)c false if the solid and fluid meshes }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00223}00223  have not changed between solves (i.e. if no spatial adaptation was}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00224}00224  performed since the last call to the segregated solver). }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00225}00225  The \(\backslash\)c setup\_segregated\_solver(...)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00226}00226  function must still be called, however, in order that }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00227}00227  data associated with convergence acceleration techniques is reset to}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00228}00228  its default values.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00229}00229 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00230}00230 <b>b. The segregated solvers</b>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00231}00231 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00232}00232  The class inherits from the standard \(\backslash\)c Problem}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00233}00233  class, which provides the standard (monolithic) \(\backslash\)c newton\_solve() and}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00234}00234  related functions. Thus any \(\backslash\)c SegregatedFSIProblem can be solved}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00235}00235  "{}monolithically"{} as normal and, moreover, it is straightforward to ensure that}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00236}00236  exactly the same system is being solved when comparing monolithic and}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00237}00237  segregated solutions. The segregated solution strategy is implemented in}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00238}00238  the analogous member functions:}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00239}00239  -\/ The equivalent of the monolithic \(\backslash\)c Problem::newton\_solve() is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00240}00240    \(\backslash\)code }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00241}00241    SegregatedFSIProblem::segregated\_solve();}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00242}00242    \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00243}00243  -\/ The equivalent of the monolithic \(\backslash\)c Problem::steady\_newton\_solve() is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00244}00244    \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00245}00245    SegregatedFSIProblem::steady\_segregated\_solve();}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00246}00246    \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00247}00247  -\/ Finally, the equivalent of  \(\backslash\)c Problem::unsteady\_newton\_solve(dt) is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00248}00248    \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00249}00249    PicardConvergenceData unsteady\_segregated\_solve(const double \&dt);}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00250}00250    \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00251}00251  .}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00252}00252 All three functions return an instance of a \(\backslash\)c PicardConvergenceData}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00253}00253 object which stores the convergence statistics of the segregated solve.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00254}00254 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00255}00255  In addition, the virtual member functions}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00256}00256  \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00257}00257  SegregatedFSIProblem::actions\_before\_segregated\_solve() }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00258}00258  \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00259}00259  \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00260}00260  SegregatedFSIProblem::actions\_after\_segregated\_solve() }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00261}00261  \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00262}00262  \(\backslash\)code SegregatedFSIProblem::actions\_before\_segregated\_convergence\_check() }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00263}00263  \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00264}00264  are provided to allow the user to specify any actions, such as }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00265}00265 initialisation of}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00266}00266  counters, mesh updates, output, etc, that should be performed before or after}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00267}00267  each complete segregated solve. Note that the \(\backslash\)c Problem member functions}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00268}00268  \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00269}00269  Problem::actions\_before\_newton\_solve() }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00270}00270 \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00271}00271 \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00272}00272  Problem::actions\_after\_newton\_solve() }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00273}00273 \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00274}00274 \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00275}00275  Problem::actions\_before\_newton\_convergence\_check() }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00276}00276  \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00277}00277  are called as usual during the Newton solve of each}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00278}00278  sub-\/problem and may be used for fine-\/grained operations that should}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00279}00279  be performed before or after each fluid or solid solve. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00280}00280  For this purpose, the \(\backslash\)c SegregatedFSIProblem provides a flag, }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00281}00281 \(\backslash\)c int \(\backslash\)c SegregatedFSIProblem::Solve\_type that indicates which}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00282}00282 (sub-\/)solve is currently being performed. The flag can take}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00283}00283 the (enumerated) values \(\backslash\)c SegregatedFSIProblem::Full\_solve, }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00284}00284 \(\backslash\)c SegregatedFSIProblem::Fluid\_solve and }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00285}00285 \(\backslash\)c SegregatedFSIProblem::Solid\_solve, allowing the user to perform}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00286}00286 specific actions during the distinct sub-\/solves.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00287}00287 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00288}00288 <b>c. Choosing the convergence criterion</b>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00289}00289 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00290}00290 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00291}00291  Other public member functions provided}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00292}00292  by the \(\backslash\)c SegregatedFSIProblem class are used to specify the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00293}00293  convergence criterion for the global fixed-\/point iteration: }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00294}00294  \(\backslash\)code\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{ /// Base convergence based on max. global residual}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{} void assess\_convergence\_based\_on\_max\_global\_residual(const double \&tol)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00297}00297  \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00298}00298  \(\backslash\)code\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{ /// Base convergence on maximum absolute change of solid degrees of freedom}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{} void assess\_convergence\_based\_on\_absolute\_solid\_change(const double \&tol)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00301}00301  \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00302}00302  \(\backslash\)code\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{ /// Base convergence on maximum relative change of solid degrees of freedom}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{} void assess\_convergence\_based\_on\_relative\_solid\_change(const double \&tol)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00305}00305  \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00306}00306  If a tolerance is not specified the default \(\backslash\)c}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00307}00307  Problem::Newton\_solver\_tolerance is used.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00308}00308 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00309}00309 <b>d. Under-\/relaxation</b>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00310}00310 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00311}00311  Finally, there are several member functions that are used to specify}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00312}00312  the convergence-\/acceleration techniques:}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00313}00313  -\/\# <b>Static under-\/relaxation:</b>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00314}00314     \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00315}00315     \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00316}00316     //Use under-\/relaxation for solid degrees of freedom and specify }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00317}00317     //the optional under-\/relaxation parameter. The default of 1.0 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00318}00318     //corresponds to no under-\/relaxation.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00319}00319     void use\_under\_relaxation (const double \&omega=1.0)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00320}00320     \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00321}00321     If this function is called, under-\/relaxation is performed after the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00322}00322     solid sub-\/solve, i.e. each solid degree of freedom, \(\backslash\)f\$ s \(\backslash\)f\$, say}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00323}00323     is updated via}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00324}00324     \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00325}00325     s = s\_\{new\} + (1-\/\(\backslash\)omega) (s\_\{old\} -\/ s\_\{new\})}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00326}00326     \(\backslash\)f]}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00327}00327     where \(\backslash\)f\$ s\_\{new\} \(\backslash\)f\$ is the new value computed by the Newton solver}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00328}00328     and \(\backslash\)f\$ s\_\{old\} \(\backslash\)f\$ is its previous value.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00329}00329  -\/\# <b>Adaptive under-\/relaxation:</b>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00330}00330     \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00331}00331     \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00332}00332     //Boolean flag that controls whether Irons \& Tuck extrapolation}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00333}00333     //is used to dynamically modify the under-\/relaxation parameter for}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00334}00334     //the under-\/relaxation of the solid degrees of freedom.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00335}00335     void enable\_irons\_and\_tuck\_extrapolation ()}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00336}00336     \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00337}00337     If this function is called (and if under-\/relaxation is enabled)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00338}00338     the under-\/relaxation parameter \(\backslash\)f\$ \(\backslash\)omega \(\backslash\)f\$ is adjusted}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00339}00339     throughout the fixed-\/point iteration, using Irons \& Tucks}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00340}00340     convergence acceleration procedure; see Irons, B.M. \& Tuck, R.C. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00341}00341     "{}A version of the Aitken accelerator for computer iteration"{}.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00342}00342     International Journal of Numerical Methods in Engineering <b>1</b>,}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00343}00343     275-\/277 (1969).}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00344}00344  -\/\# <b>Pointwise Aitken-\/acceleration:</b>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00345}00345     \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00346}00346     \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00347}00347     //Set a boolean flag that controls whether pointwise Aitken}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00348}00348     //extrapolation is used. The optional argument specifies the Picard}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00349}00349     //Iteration after which the extrapolation is to be used for the first}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00350}00350     //time. The default value is zero.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00351}00351     void enable\_pointwise\_aitken (const unsigned \&pointwise\_aitken\_start)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00352}00352     \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00353}00353     If this function is called,  the classical Aitken extrapolation is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00354}00354     used to accelerate the convergence of (individual) solid degrees of freedom}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00355}00355     after every three iterations.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00356}00356  .}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00357}00357 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00358}00358 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00359}00359 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00360}00360 \(\backslash\)section channel\_seg\_problem The SegregatedFSICollapsibleChannelProblem}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00361}00361 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00362}00362 We shall now briefly discuss the application of the segregated}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00363}00363 solver for the collapsible channel problem. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00364}00364 The \(\backslash\)c SegregatedFSICollapsibleChannelProblem is defined in the driver}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00365}00365 code <code><A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/simple\_segregated\_driver.cc"{}>simple\_segregated\_driver.cc</a> }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00366}00366 </code> and inherits from the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00367}00367 "{}monolithic"{} \(\backslash\)c FSICollapsibleChannelProblem and also from the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00368}00368 <A HREF="{}../../../the\_data\_structure/html/classoomph\_1\_1SegregatableFSIProblem.html"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00369}00369  \(\backslash\)c SegregatableFSIProblem </A> class. The code <code>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00370}00370  <A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/simple\_segregated\_driver.cc"{}>simple\_segregated\_driver.cc</a> </code>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00371}00371 is specifically designed for ease of}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00372}00372  exposition and does not contain any timing statements or}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00373}00373  documentation of convergence histories. The alternative driver code }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00374}00374  <code>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00375}00375  <A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/fsi\_chan\_seg\_driver.cc"{}>fsi\_chan\_seg\_driver.cc</a></code> contains complete}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00376}00376  timing and documentation statements and is the code that was used by}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00377}00377  <a href="{}http://www.springerlink.com/content/m3r6318701g338g4/"{}> Heil,}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00378}00378  Hazel \(\backslash\)\& Boyle (2008). </a>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00379}00379 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00380}00380 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00381}00381  The simplified \(\backslash\)c SegregatedFSICollapsibleChannelProblem  class }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00382}00382 contains six member functions}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00383}00383 -\/ The constructor}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00384}00384 -\/ The destructor}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00385}00385 -\/ \(\backslash\)c void \(\backslash\)c identify\_fluid\_and\_solid\_dofs(...)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00386}00386 -\/ \(\backslash\)c void \(\backslash\)c actions\_before\_newton\_convergence\_check()}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00387}00387 -\/ \(\backslash\)c void \(\backslash\)c actions\_before\_segregated\_convergence\_check()}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00388}00388 -\/ \(\backslash\)c void \(\backslash\)c steady\_run()}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00389}00389 -\/ \(\backslash\)c void \(\backslash\)c doc\_solution(DocInfo\& doc\_info)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00390}00390 .}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00391}00391 The \(\backslash\)c doc\_solution(...) function simply writes the bulk (fluid)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00392}00392 elements and wall (solid) elements to two separate files and the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00393}00393 destructor is empty. We discuss the other four member functions below.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00394}00394 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00395}00395 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00396}00396 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00397}00397 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00398}00398 \(\backslash\)subsection constructor The constructor}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00399}00399 The constructor calls the constructor of the underlying "{}monolithic"{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00400}00400 problem and then selects the convergence criterion and}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00401}00401 convergence-\/acceleration technique based on the values of control}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00402}00402 flags defined in the namespace \(\backslash\)c Flags.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00403}00403 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00404}00404 \(\backslash\)dontinclude simple\_segregated\_driver.cc}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00405}00405 \(\backslash\)skipline start\_of\_constructor}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00406}00406 \(\backslash\)until end\_of}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00407}00407 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00408}00408 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00409}00409 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00410}00410 \(\backslash\)subsection identify Identifying the fluid and solid degrees of freedom}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00411}00411 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00412}00412 The underlying monolithic problem provides pointers to the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00413}00413 fluid and solid (sub-\/)meshes via the member data}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00414}00414 \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00415}00415  AlgebraicCollapsibleChannelMesh<ELEMENT>* Bulk\_mesh\_pt;}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00416}00416 \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00417}00417 \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00418}00418  OneDLagrangianMesh<FSIHermiteBeamElement>* Wall\_mesh\_pt; }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00419}00419 \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00420}00420 which are accessible via the member functions  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00421}00421 \(\backslash\)c SegregatedFSICollapsibleChannelProblem::bulk\_mesh\_pt()}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00422}00422 and \(\backslash\)c SegregatedFSICollapsibleChannelProblem::wall\_mesh\_pt(),}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00423}00423 and so the identification of fluid and solid degrees of freedom is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00424}00424 reasonably straightforward. The only complication arises because we}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00425}00425 may, or may not, be using displacement control which introduces}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00426}00426 a further element into the global mesh. Displacement control}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00427}00427 affects the solid problem suggesting that the (variable) external }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00428}00428 pressure should be regarded as a solid degrees of freedom and the \(\backslash\)c}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00429}00429 DisplacementControlElement should be included in the solid mesh.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00430}00430 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00431}00431 \(\backslash\)dontinclude simple\_segregated\_driver.cc}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00432}00432 \(\backslash\)skipline start\_of\_identify\_fluid\_and\_solid}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00433}00433 \(\backslash\)until end\_of\_identify\_fluid\_and\_solid}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00434}00434 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00435}00435 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00436}00436 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00437}00437 \(\backslash\)subsection actions Actions before convergence checks}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00438}00438 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00439}00439 During a monolithic solve the function }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00440}00440 \(\backslash\)c actions\_before\_newton\_convergence\_check() must }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00441}00441 update the nodal positions in the bulk (fluid) mesh. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00442}00442 In principle, it should remain empty during a}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00443}00443 segregated solve, but we found it beneficial to update the bulk }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00444}00444 mesh, and hence the fluid load on the wall, during the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00445}00445 solution of the solid problem.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00446}00446 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00447}00447 The function \(\backslash\)c actions\_before\_segregated\_convergence\_check() }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00448}00448 contains an update of the nodal positions in the bulk mesh }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00449}00449 in order that the segregated solution is self-\/consistent.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00450}00450 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00451}00451 \(\backslash\)dontinclude simple\_segregated\_driver.cc}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00452}00452 \(\backslash\)skipline Update nodal positions in the fluid mesh in}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00453}00453 \(\backslash\)until end\_of\_convergence\_checks}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00454}00454 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00455}00455 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00456}00456 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00457}00457 \(\backslash\)subsection steady Solving a steady problem}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00458}00458 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00459}00459 The function \(\backslash\)c steady\_run() conducts a simple parameter study in}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00460}00460 which the external pressure (or prescribed displacement) is }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00461}00461 varied. After specification of the initial conditions, parameter}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00462}00462 increments and output directories, the parameter study is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00463}00463 straightforward}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00464}00464 \(\backslash\)dontinclude simple\_segregated\_driver.cc}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00465}00465 \(\backslash\)skipline Parameter study}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00466}00466 \(\backslash\)until End of parameter}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00467}00467 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00468}00468 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00469}00469 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00470}00470 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00471}00471 \(\backslash\)section main The driver code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00472}00472 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00473}00473  Having written our \(\backslash\)c SegregatedFSICollapsibleChannelProblem, the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00474}00474  driver code is extremely simple. We specify number of elements and}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00475}00475  dimensions of our computational domain, construct the problem and}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00476}00476  perform a steady parameter study.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00477}00477 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00478}00478 \(\backslash\)dontinclude simple\_segregated\_driver.cc}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00479}00479 \(\backslash\)skipline start\_of\_main}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00480}00480 \(\backslash\)until  end of main}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00481}00481 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00482}00482 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00483}00483 <hr> }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00484}00484 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00485}00485 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00486}00486 \(\backslash\)section comments\_and\_ex Comments and Exercises}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00487}00487 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00488}00488 \(\backslash\)subsection comments Comments}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00489}00489 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00490}00490 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00491}00491 -\/ <b>(In-\/)efficiency of \(\backslash\)c setup\_segregated\_solver()</b> \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00492}00492   In our simple example code, we did not employ spatial adaptivity. It is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00493}00493   not necessary, therefore, to (re-\/)identify the fluid and solid degrees of}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00494}00494   freedom before each solve, the default (safe) behaviour of \(\backslash\)c}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00495}00495   setup\_segregated\_solver(). Nonetheless, data associated with}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00496}00496   the techniques used to accelerate the convergence of the Picard}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00497}00497   iterations must be reset before each segregated solve. In the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00498}00498   more complex driver code, a boolean}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00499}00499   flag \(\backslash\)c bool \(\backslash\)c full\_setup is used as an argument to \(\backslash\)c}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00500}00500   setup\_segregated\_solver() which modifies the behaviour, as}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00501}00501   indicated below.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00502}00502   \(\backslash\)code }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00503}00503   // Boolean flag used to specify whether a full setup of solid and fluid dofs}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00504}00504   // is required}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00505}00505   bool full\_setup = true;}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00506}00506 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00507}00507   // Parameter study}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00508}00508   for (unsigned istep=0;istep<Flags::Nsteps;istep++)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00509}00509    \{}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00510}00510     // Setup segregated solver}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00511}00511     setup\_segregated\_solver(full\_setup);}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00512}00512  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00513}00513      [...]}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00514}00514    }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00515}00515     steady\_segregated\_solve()}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00516}00516   }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00517}00517      [...] }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00518}00518   }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00519}00519     //We no longer need a full setup of the dofs}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00520}00520     full\_setup = false;}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00521}00521    \}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00522}00522   \(\backslash\)endcode  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00523}00523 .  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00524}00524 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00525}00525 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00526}00526 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00527}00527 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00528}00528 \(\backslash\)subsection ex Exercises}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00529}00529 -\/\# Modify the control flags in <code><A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/simple\_segregated\_driver.cc"{}>simple\_segregated\_driver.cc</a></code> to}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00530}00530    verify that the monolithic solution is the same (to within finite}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00531}00531    precision) as the segregated solution.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00532}00532 -\/\# Modify the control flags in <code><A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/simple\_segregated\_driver.cc"{}>simple\_segregated\_driver.cc</a></code> to}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00533}00533    investigate the influence of the convergence acceleration}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00534}00534    techniques and convergence criterion on the segregated solution. Which}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00535}00535    combination of parameters gives convergence in the fewest Picard}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00536}00536    iterations? }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00537}00537 -\/\# Investigate the behaviour of the system if the fluid (bulk) mesh is \(\backslash\)em not}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00538}00538    updated after each Newton step in the solution of the solid}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00539}00539    problem. Can you obtain converged solutions?}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00540}00540 -\/\# Write your own \(\backslash\)c}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00541}00541    SegregatedFSICollapsibleChannelFlow::unsteady\_run()}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00542}00542    member function that computes the time evolution of the system after}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00543}00543    a perturbation to the external pressure. Compare your answer with}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00544}00544    the equivalent member function in the much more comprehensive}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00545}00545    driver code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00546}00546    <code><A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/fsi\_chan\_seg\_driver.cc"{}>fsi\_chan\_seg\_driver.cc</a></code> that was used in <a href="{}http://www.springerlink.com/content/m3r6318701g338g4/"{}> Heil, Hazel \(\backslash\)\& Boyle (2008). </a>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00547}00547 .   }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00548}00548 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00549}00549 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00550}00550 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00551}00551 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00552}00552 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00553}00553 \(\backslash\)section sources Source files for this tutorial}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00554}00554 -\/ The source files for this tutorial are located in the directory:}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00555}00555 <CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00556}00556 <A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00557}00557 demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00558}00558 </A>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00559}00559 </CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00560}00560 -\/ The driver code is: }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00561}00561 <CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00562}00562 <A HREF="{}../../../../demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/simple\_segregated\_driver.cc"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00563}00563 demo\_drivers/interaction/fsi\_channel\_seg\_and\_precond/simple\_segregated\_driver.cc}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00564}00564 </A>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00565}00565 </CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00566}00566 .}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00567}00567 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00568}00568 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00569}00569 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00570}00570 \(\backslash\)section pdf PDF file}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00571}00571 A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00572}00572 **/}
+\DoxyCodeLine{\Hypertarget{fsi__channel__segregated__solver_8txt__doxygenified_8h_source_l00573}00573 }
+
+\end{DoxyCode}

@@ -18,10 +18,10 @@ Here are some frequently asked questions (with assorted frequently given answers
 \item \mbox{\hyperlink{index_cygwin}{The build process fails under cygwin}} ~\newline
 ~\newline
 
-\item \mbox{\hyperlink{index_apple}{The build process fails under Apple\textquotesingle{}s Darwin (O\+SX) or other B\+SD Linux distributions}} ~\newline
+\item \mbox{\hyperlink{index_apple}{The build process fails under Apple\textquotesingle{}s Darwin (OSX) or other BSD Linux distributions}} ~\newline
 ~\newline
 
-\item \mbox{\hyperlink{index_apple_link}{The linking self-\/test fails under Apple\textquotesingle{}s O\+SX}} ~\newline
+\item \mbox{\hyperlink{index_apple_link}{The linking self-\/test fails under Apple\textquotesingle{}s OSX}} ~\newline
 ~\newline
 
 \item \mbox{\hyperlink{index_self_tests}{Some of the self tests fail}} ~\newline
@@ -42,7 +42,7 @@ Here are some frequently asked questions (with assorted frequently given answers
 \item \mbox{\hyperlink{index_link}{The oomph-\/lib distribution includes some third-\/party libraries. How do I get the code to link against optimised local versions of these libraries that are already installed on my machine?}} ~\newline
 ~\newline
 
-\item \mbox{\hyperlink{index_missing_this}{Missing \textquotesingle{}this-\/$>$\textquotesingle{}}} ~\newline
+\item \mbox{\hyperlink{index_missing_this}{Missing \textquotesingle{}this-\/\texorpdfstring{$>$}{>}\textquotesingle{}}} ~\newline
 ~\newline
 
 \end{DoxyItemize}
@@ -117,9 +117,10 @@ Here are some frequently asked questions (with assorted frequently given answers
 
 \item {\bfseries{Compiler flags/options for the compilation of individual (driver) codes}} ~\newline
 ~\newline
- Within the {\ttfamily autotools} framework, additional flags for the compilation of individual (driver) codes may be specified by setting the appropriate automake variables in the {\ttfamily Makefile}.{\ttfamily am}. For instance, to use the compiler flag {\ttfamily -\/D\+U\+S\+E\+\_\+\+T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+OD} during the compilation of the executable {\ttfamily test\+\_\+code}, add 
+ Within the {\ttfamily autotools} framework, additional flags for the compilation of individual (driver) codes may be specified by setting the appropriate automake variables in the {\ttfamily Makefile}.{\ttfamily am}. For instance, to use the compiler flag {\ttfamily -\/DUSE\+\_\+\+TAYLOR\+\_\+\+HOOD} during the compilation of the executable {\ttfamily test\+\_\+code}, add 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{test\_code\_CXXFLAGS = -\/DUSE\_TAYLOR\_HOOD}
+
 \end{DoxyCode}
  to the appropriate {\ttfamily Makefile}.{\ttfamily am}. The C++ section of the \href{http://www.gnu.org/software/automake/manual/automake.html}{\texttt{ automake manual}} provides more detail on other {\ttfamily automake} variables. ~\newline
 ~\newline
@@ -128,14 +129,14 @@ Here are some frequently asked questions (with assorted frequently given answers
 
 \DoxyHorRuler{0}
 \hypertarget{index_cpp11}{}\doxysubsection{My compiler doesn\textquotesingle{}t support C++11 by default}\label{index_cpp11}
-{\ttfamily oomph-\/lib} uses the C++11 standard and assumes that your compiler supports this. If you have an older version of the gcc compiler you can add the flag {\ttfamily -\/std=c++11} to the {\ttfamily g++} configure options by adding it to the {\ttfamily C\+X\+X\+F\+L\+A\+GS} in your configure options file. The one that\textquotesingle{}s used to build {\ttfamily oomph-\/lib} is \begin{center} {\ttfamily config/configure\+\_\+options/current}. \end{center}  ~\newline
+{\ttfamily oomph-\/lib} uses the C++11 standard and assumes that your compiler supports this. If you have an older version of the gcc compiler you can add the flag {\ttfamily -\/std=c++11} to the {\ttfamily g++} configure options by adding it to the {\ttfamily CXXFLAGS} in your configure options file. The one that\textquotesingle{}s used to build {\ttfamily oomph-\/lib} is \begin{center} {\ttfamily config/configure\+\_\+options/current}. \end{center}  ~\newline
  Note that the directory {\ttfamily config/configure\+\_\+options} also contains many other, generally sensibly named files that specify configure options for other configurations and compilers. You can choose from these when running {\ttfamily autogen.\+sh} or you can explore them yourself for further options.
 
 If you are using a different compiler check its man pages to find out what flag is needed to enable C++11.
 
 \DoxyHorRuler{0}
 \hypertarget{index_other_compilers}{}\doxysubsection{The compilation fails when I use my xxx \mbox{[}non gcc\mbox{]} compiler}\label{index_other_compilers}
-{\ttfamily oomph-\/lib} is developed in a G\+NU Linux environment, using the \href{http://gcc.gnu.org/}{\texttt{ gcc compiler suite}}. We believe (!) the source code complies with the ~\newline
+{\ttfamily oomph-\/lib} is developed in a GNU Linux environment, using the \href{http://gcc.gnu.org/}{\texttt{ gcc compiler suite}}. We believe (!) the source code complies with the ~\newline
  \href{http://www.open-std.org/jtc1/sc22/wg21/}{\texttt{ C++ standard}} and it compiles cleanly under the \href{http://gcc.gnu.org/}{\texttt{ gcc compilers}} that we have access to (version 3.\+2.\+3 and later). Some warning messages tend to be issued during the compilation of the third-\/party libraries distributed with {\ttfamily oomph-\/lib}, but these are not our responsibility!
 
 We occasionally compile (or get other people to compile) the library under other compilers and we generally try to rectify any problems that are flagged up in the process. If you encounter any problems (errors or warning messages) while compiling the library with your own (non-\/gcc) compiler we would \href{../../contact/html/index.html}{\texttt{ like to hear from you}}, especially if you suggest concrete bug fixes.
@@ -153,24 +154,24 @@ Here are a few things to check\+:
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
-\hypertarget{index_apple}{}\doxysubsection{The build process fails under Apple\textquotesingle{}s Darwin (\+O\+S\+X) or other B\+S\+D Linux distributions}\label{index_apple}
-Here are some general guidelines for installing under O\+SX, contributed by \href{http://hewitt.ddns.net/}{\texttt{ Rich Hewitt}}\+: ~\newline
+\hypertarget{index_apple}{}\doxysubsection{The build process fails under Apple\textquotesingle{}s Darwin (\+OSX) or other BSD Linux distributions}\label{index_apple}
+Here are some general guidelines for installing under OSX, contributed by \href{http://hewitt.ddns.net/}{\texttt{ Rich Hewitt}}\+: ~\newline
 ~\newline
 
 \begin{DoxyEnumerate}
-\item Make sure you have installed the development tools from the O\+SX install D\+V\+Ds. If your install media is fairly old, you may wish to look for an updated online version at\+: ~\newline
+\item Make sure you have installed the development tools from the OSX install DVDs. If your install media is fairly old, you may wish to look for an updated online version at\+: ~\newline
 ~\newline
 \begin{center} \href{http://developer.apple.com/tools/xcode/}{\texttt{ http\+://developer.\+apple.\+com/tools/xcode/}} \end{center}  ~\newline
-You do not need to use the Xcode I\+DE, but we do need the associated development kit tools (in particular G\+C\+C!) ~\newline
+You do not need to use the Xcode IDE, but we do need the associated development kit tools (in particular GCC!) ~\newline
 ~\newline
 
-\item Install a F\+O\+R\+T\+R\+AN compiler. Apple does not ship a F\+O\+R\+T\+R\+AN version, so the easiest way to do this is to install the relevant pre-\/packaged G\+NU F\+O\+R\+T\+R\+AN from here\+: ~\newline
+\item Install a FORTRAN compiler. Apple does not ship a FORTRAN version, so the easiest way to do this is to install the relevant pre-\/packaged GNU FORTRAN from here\+: ~\newline
 ~\newline
 \begin{center} \href{http://hpc.sourceforge.net/}{\texttt{ http\+://hpc.\+sourceforge.\+net/ }} \end{center}  ~\newline
-(I would recommend sticking with the version of G\+C\+C4 provided by Apple.) ~\newline
+(I would recommend sticking with the version of GCC4 provided by Apple.) ~\newline
 ~\newline
 
-\item Make sure the F\+O\+R\+T\+R\+AN compiler (\textquotesingle{}gfortran\textquotesingle{} in the packages pointed to above) is in the installing user\textquotesingle{}s path. ~\newline
+\item Make sure the FORTRAN compiler (\textquotesingle{}gfortran\textquotesingle{} in the packages pointed to above) is in the installing user\textquotesingle{}s path. ~\newline
 ~\newline
 
 \item Follow the \href{../../the_distribution/html/index.html}{\texttt{ oomph-\/lib install procedure}} as normal. ~\newline
@@ -181,8 +182,8 @@ You do not need to use the Xcode I\+DE, but we do need the associated developmen
 \begin{center} \href{https://www.macports.org/}{\texttt{ https\+://www.\+macports.\+org/}} \end{center}  ~\newline
 For example\+: \char`\"{}sudo port install gnuplot\char`\"{} etc.
 \end{DoxyEnumerate}\DoxyHorRuler{0}
-\hypertarget{index_apple_link}{}\doxysubsection{The linking self-\/test fails under Apple\textquotesingle{}s O\+SX}\label{index_apple_link}
-As discussed in the \href{../../the_distribution/html/index.html\#apple_linking}{\texttt{ installation instructions,}} Darwin (the B\+S\+D-\/derived U\+N\+IX core of Apple\textquotesingle{}s O\+SX operating system) requires a slight change to the default procedure for linking against {\ttfamily oomph-\/lib} from outside its autotools framework. As a result, the linking self-\/test tends to fail on machines with this operating system. Instructions on how to fix this problem are provided in \href{../../the_distribution/html/index.html\#apple_linking}{\texttt{ installation instructions}}.
+\hypertarget{index_apple_link}{}\doxysubsection{The linking self-\/test fails under Apple\textquotesingle{}s OSX}\label{index_apple_link}
+As discussed in the \href{../../the_distribution/html/index.html\#apple_linking}{\texttt{ installation instructions,}} Darwin (the BSD-\/derived UNIX core of Apple\textquotesingle{}s OSX operating system) requires a slight change to the default procedure for linking against {\ttfamily oomph-\/lib} from outside its autotools framework. As a result, the linking self-\/test tends to fail on machines with this operating system. Instructions on how to fix this problem are provided in \href{../../the_distribution/html/index.html\#apple_linking}{\texttt{ installation instructions}}.
 
 \DoxyHorRuler{0}
 \hypertarget{index_self_tests}{}\doxysubsection{Some of the self tests fail}\label{index_self_tests}
@@ -191,22 +192,25 @@ As discussed in the \href{../../the_distribution/html/index.html\#apple_linking}
  The full {\ttfamily oomph-\/lib} distribution contains a large number of demo codes in the sub-\/directory {\ttfamily demo\+\_\+drivers}. Primarily, these codes serve as demo codes for the {\ttfamily oomph-\/lib} documentation (contained in the sub-\/directory {\ttfamily doc}) but they are also used during the library\textquotesingle{}s self-\/test procedure which checks that {\ttfamily oomph-\/lib} was installed correctly. The self-\/tests can either be initiated at the end of the {\ttfamily autogen.\+sh} -\/ based installation or by typing 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{make check -\/k}
+
 \end{DoxyCode}
  in {\ttfamily oomph-\/lib\textquotesingle{}s} top-\/level directory. The self-\/test builds and runs all demo codes and compares their results against the reference data stored in the {\ttfamily validata} sub-\/directories. The comparison is performed with the python script {\ttfamily  bin/fpdiff.\+py} which tolerates small (machine-\/ and compiler-\/dependent) roundoff errors and suppresses the comparison of numbers whose absolute value falls below some threshold (to avoid the comparison of numerical zeroes).
 
 If any of the self-\/test fail, you should first check the output in the file {\ttfamily validation.\+log} to assess if the differences between the computed data and the reference data are significant. If the discrepancy appears to be due to larger-\/than-\/anticipated round-\/off errors (you\textquotesingle{}ll have to judge this yourself!), modify the {\ttfamily validate.\+sh} script to specify a larger relative tolerance and/or a larger value for the threshold below which {\ttfamily fpdiff.\+py} regards numbers as numerical zeroes and excludes them from the comparison. \mbox{[}Type 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{bin/fpdiff.py }
+
 \end{DoxyCode}
  in {\ttfamily oomph-\/lib\textquotesingle{}s} top-\/level directory for instructions on how to use the script\mbox{]}.
 
 {\bfseries{The self-\/test fails even though the output files produced by the code are correct}} ~\newline
 ~\newline
- This is an odd error that is usually caused by the use of wildcards in the validations scripts, or the comparison of data that is stored in certain S\+TL containers. Typically, the self-\/test is performed by the {\ttfamily validate.\+sh} shell script, which runs the executable and concatenates selected output files to a single file whose contents are compared against the reference file in the {\ttfamily validata} directory.
+ This is an odd error that is usually caused by the use of wildcards in the validations scripts, or the comparison of data that is stored in certain STL containers. Typically, the self-\/test is performed by the {\ttfamily validate.\+sh} shell script, which runs the executable and concatenates selected output files to a single file whose contents are compared against the reference file in the {\ttfamily validata} directory.
 
 While it is tempting to write 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{cat RESLT* /soln0.dat > results\_file.dat}
+
 \end{DoxyCode}
  it is important to realise that the order in which the files are concatenated is machine-\/ and/or operating-\/system dependent. If the above command is run in a directory with the following structure 
 \begin{DoxyCode}{0}
@@ -216,18 +220,21 @@ While it is tempting to write
 \DoxyCodeLine{|-\/-\/ RESLT\_elastic}
 \DoxyCodeLine{|   |-\/-\/ soln0.dat}
 \DoxyCodeLine{|   `-\/-\/ trace.dat}
+
 \end{DoxyCode}
  some operating systems will expand the command to 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{cat RESLT/soln0.dat RESLT\_elastic/soln0.dat > results\_file.dat}
+
 \end{DoxyCode}
  while others will execute 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{cat RESLT\_elastic/soln0.dat RESLT/soln0.dat > results\_file.dat}
+
 \end{DoxyCode}
  In this case the self-\/test will report a failure, even though the solution files are correct. The {\ttfamily validate.\+sh} scripts should therefore not contain any wildcards.
 
-Similar problems can arise if the validation data includes data that is stored in certain S\+TL containers such as sets. The order in which items are stored in such containers may vary from machine to machine and from compiler to compiler. If such data is to be included in a self-\/test the data should be sorted first, based on a user-\/controllable sorting criterion.
+Similar problems can arise if the validation data includes data that is stored in certain STL containers such as sets. The order in which items are stored in such containers may vary from machine to machine and from compiler to compiler. If such data is to be included in a self-\/test the data should be sorted first, based on a user-\/controllable sorting criterion.
 
 \DoxyHorRuler{0}
 \hypertarget{index_run1}{}\doxysubsection{How do I compile/run the demo driver codes?}\label{index_run1}
@@ -241,20 +248,24 @@ Assume you have followed our advice to explore {\ttfamily oomph-\/lib} by playin
 \DoxyCodeLine{-\/rw-\/rw-\/r-\/-\/ 1 mheil mheil  9638 2012-\/12-\/08 13:34 one\_d\_poisson.cc}
 \DoxyCodeLine{drwxrwxr-\/x 3 mheil mheil  4096 2012-\/12-\/08 13:34 validata}
 \DoxyCodeLine{-\/rwxrwxr-\/x 1 mheil mheil  2402 2012-\/12-\/08 13:34 validate.sh}
+
 \end{DoxyCode}
  The temptation is to compile the driver code {\ttfamily one\+\_\+d\+\_\+poisson.\+cc} with your favourite C++ compiler, e.\+g. {\ttfamily g++}\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{g++  one\_d\_poisson.cc}
+
 \end{DoxyCode}
  but this does {\bfseries{not}} work\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{mheil@biolaptop:\string~/version339/demo\_drivers/poisson/one\_d\_poisson\$ g++ one\_d\_poisson.cc }
 \DoxyCodeLine{one\_d\_poisson.cc:31:21: fatal error: \textcolor{keyword}{generic}.h: No such file or directory}
 \DoxyCodeLine{compilation terminated.}
+
 \end{DoxyCode}
  Why? If you look into the code, you notice that it \#includes {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily generic.\+h} header file, and {\ttfamily g++} obviously doesn\textquotesingle{}t know where to find this. You can, in principle, find out where it (and the associated library files themselves!) live but this is rather against the spirit of the \href{http://www.gnu.org/software/automake/}{\texttt{ automake}} machinery. What you should do instead is to use {\ttfamily make\+:} 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{make one\_d\_poisson}
+
 \end{DoxyCode}
  Note the omitted postfix! The argument to {\ttfamily make} is the name of the target, i.\+e. the executable that you wish to build -- which source code to compile, where to locate the required headers and which libraries to link against is all encoded in the {\ttfamily Makefile} (which has itself been created by \href{http://www.gnu.org/software/automake/}{\texttt{ automake}} (during the installation of the {\ttfamily oomph-\/lib}) from the {\ttfamily Makefile.\+am} file in the directory). As you see from the on-\/screen output, there is a lot of information that needs to be passed to the compiler/linker\+: 
 \begin{DoxyCode}{0}
@@ -297,6 +308,7 @@ Assume you have followed our advice to explore {\ttfamily oomph-\/lib} by playin
 \DoxyCodeLine{/usr/lib/openmpi/lib/libmpi.so /usr/lib/openmpi/lib/libopen-\/rte.so}
 \DoxyCodeLine{/usr/lib/openmpi/lib/libopen-\/pal.so -\/ldl -\/lnsl -\/lutil -\/lgfortran -\/lm}
 \DoxyCodeLine{-\/lquadmath -\/lpthread -\/pthread}
+
 \end{DoxyCode}
  Looking at the content of the directory again shows that the required executable has now been generated\+: 
 \begin{DoxyCode}{0}
@@ -310,6 +322,7 @@ Assume you have followed our advice to explore {\ttfamily oomph-\/lib} by playin
 \DoxyCodeLine{-\/rw-\/rw-\/r-\/-\/ 1 mheil mheil  548256 2012-\/12-\/31 15:14 one\_d\_poisson.o}
 \DoxyCodeLine{drwxrwxr-\/x 3 mheil mheil    4096 2012-\/12-\/08 13:34 validata}
 \DoxyCodeLine{-\/rwxrwxr-\/x 1 mheil mheil    2402 2012-\/12-\/08 13:34 validate.s}
+
 \end{DoxyCode}
 
 
@@ -321,16 +334,18 @@ If you are familiar with makefiles, you are unlikely to have fallen into the tra
 \begin{DoxyCode}{0}
 \DoxyCodeLine{mheil@biolaptop:\string~/version339/demo\_drivers/poisson/one\_d\_poisson\$ make}
 \DoxyCodeLine{make: Nothing to be done \textcolor{keywordflow}{for} `all\textcolor{stringliteral}{'.}}
+
 \end{DoxyCode}
  The reason for this is that
 \begin{DoxyEnumerate}
 \item \href{http://www.gnu.org/software/automake/}{\texttt{ automake}} distinguishes between several types of targets,
 \item the demo driver codes in the subdirectories of {\ttfamily demo\+\_\+drivers} double up as self-\/tests to assert the correct installation of {\ttfamily oomph-\/lib} when {\ttfamily make} {\ttfamily check} is run from the top-\/level directory.
-\end{DoxyEnumerate}The latter requires them to be declared (in the {\ttfamily Makefile.\+am}) in the {\ttfamily check\+\_\+\+P\+R\+O\+G\+R\+A\+MS} variable. You can either build (and automatically run) all executables in a {\ttfamily demo\+\_\+driver} directory by issuing the command 
+\end{DoxyEnumerate}The latter requires them to be declared (in the {\ttfamily Makefile.\+am}) in the {\ttfamily check\+\_\+\+PROGRAMS} variable. You can either build (and automatically run) all executables in a {\ttfamily demo\+\_\+driver} directory by issuing the command 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{make check -\/k}
+
 \end{DoxyCode}
- or you can inspect the {\ttfamily check\+\_\+\+P\+R\+O\+G\+R\+A\+MS} variable in the {\ttfamily Makefile.\+am} to find out which targets have been declared (and can therefore be built by {\ttfamily make}). For instance, in the {\ttfamily one\+\_\+d\+\_\+poisson} directory the first few lines of the {\ttfamily Makefile.\+am} are 
+ or you can inspect the {\ttfamily check\+\_\+\+PROGRAMS} variable in the {\ttfamily Makefile.\+am} to find out which targets have been declared (and can therefore be built by {\ttfamily make}). For instance, in the {\ttfamily one\+\_\+d\+\_\+poisson} directory the first few lines of the {\ttfamily Makefile.\+am} are 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{mheil@biolaptop:\string~/version339/demo\_drivers/poisson/one\_d\_poisson\$ more Makefile.am }
 \DoxyCodeLine{}
@@ -341,10 +356,12 @@ If you are familiar with makefiles, you are unlikely to have fallen into the tra
 \DoxyCodeLine{one\_d\_poisson\_SOURCES = one\_d\_poisson.cc }
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
+
 \end{DoxyCode}
  This declares the target (the executable called {\ttfamily one\+\_\+d\+\_\+poisson}) and specifies the source code to be compiled ({\ttfamily one\+\_\+d\+\_\+poisson.\+cc}). The build target needs to specified explicitly\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{make one\_d\_poisson}
+
 \end{DoxyCode}
  We note that the names of the executable and the source code do not have to be as closely related as in this example. While we usually create the name of the executable by dropping the postfix of the source file, this is not guaranteed! Inspect the {\ttfamily Makefile.\+am} if {\ttfamily make} doesn\textquotesingle{}t give you what you want.
 
@@ -353,14 +370,17 @@ If you are familiar with makefiles, you are unlikely to have fallen into the tra
 Issuing {\ttfamily make} {\ttfamily check} from the top level {\ttfamily oomph-\/lib} directory descends into all oomph-\/lib directories that contain demo driver codes, builds these and then runs them using the script {\ttfamily validate.\+sh} which typically also compares the output against some reference data that is stored in the {\ttfamily validata} sub-\/directories. This process (which allows for some tolerances in floating point data) assesses that the installation is working properly, but the entire procedure obviously takes a long time. As a developer, you may want to check (more) quickly if the changes you\textquotesingle{}ve made to any source code (in {\ttfamily src}) still compile without running any of the self-\/tests. It is easy to suppress the execution of the self tests because the {\ttfamily validate.\+sh} script is, in fact, run through the wrapper script 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{bin/wrapped\_validate.sh}
+
 \end{DoxyCode}
  which, by default, runs {\ttfamily validate.\+sh} through {\ttfamily time}, allowing us to report the run times. However, you can easily edit this file and make it do other things. For instance, if you put {\ttfamily exit} onto the first line it won\textquotesingle{}t do anything at all. Success! If you then issue 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{make check}
+
 \end{DoxyCode}
  (without the \char`\"{}-\/k\char`\"{}!) from the top level, the build machinery will descend through all the demo driver directories, build the executables and stop when it encounters the first error. If you want to continue with the compilation after encountering failures do 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{make -\/k check}
+
 \end{DoxyCode}
  You can assess all the failures at the same time by searching backwards through the on-\/screen output.
 
@@ -373,22 +393,24 @@ Issuing {\ttfamily make} {\ttfamily check} from the top level {\ttfamily oomph-\
 The script 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{bin/run\_selected\_self\_tests\_based\_on\_string.bash}
+
 \end{DoxyCode}
  will search through all demo driver directories and run the self tests in all directories where the source code of a demo driver contains a certain string. You can specify the string and the search directory in the script or via the command line. Run 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{bin/run\_selected\_self\_tests\_based\_on\_string.bash -\/-\/help}
+
 \end{DoxyCode}
  for details.
 
 \DoxyHorRuler{0}
 \hypertarget{index_link}{}\doxysubsection{The oomph-\/lib distribution includes some third-\/party libraries. How do I get the code to link against optimised local versions of these libraries that are already installed on my machine?}\label{index_link}
-To facilitate the installation, the oomph-\/lib distribution includes the relevant parts of certain third-\/party libraries, such as \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU}} and \href{http://www.netlib.org/blas/}{\texttt{ B\+L\+AS}}. These \char`\"{}external libraries\char`\"{} are built and installed along with {\ttfamily oomph-\/lib\textquotesingle{}s} own sub-\/libraries. To distinguish them from any already existing local versions of these libraries, their names are pre-\/fixed with the string {\ttfamily oomph\+\_\+}.
+To facilitate the installation, the oomph-\/lib distribution includes the relevant parts of certain third-\/party libraries, such as \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU}} and \href{http://www.netlib.org/blas/}{\texttt{ BLAS}}. These \char`\"{}external libraries\char`\"{} are built and installed along with {\ttfamily oomph-\/lib\textquotesingle{}s} own sub-\/libraries. To distinguish them from any already existing local versions of these libraries, their names are pre-\/fixed with the string {\ttfamily oomph\+\_\+}.
 
-All demo codes are automatically linked against these libraries. This is achieved by defining the variable {\ttfamily E\+X\+T\+E\+R\+N\+A\+L\+\_\+\+L\+I\+BS} in the {\ttfamily configure} script\+:
+All demo codes are automatically linked against these libraries. This is achieved by defining the variable {\ttfamily EXTERNAL\+\_\+\+LIBS} in the {\ttfamily configure} script\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\# Define "external" libraries}}
+\DoxyCodeLine{\textcolor{preprocessor}{\# Define "{}external"{}} libraries}
 \DoxyCodeLine{\textcolor{preprocessor}{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\textcolor{preprocessor}{\# These are the third-\/party libraries distributed with oomph-\/lib.}}
 \DoxyCodeLine{\textcolor{preprocessor}{\# Note: If you want to link against another, already existing local}}
@@ -398,20 +420,21 @@ All demo codes are automatically linked against these libraries. This is achieve
 \DoxyCodeLine{\textcolor{preprocessor}{\#}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#    g++ -\/o my\_code my\_code.cc -\/lblas}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#}}
-\DoxyCodeLine{\textcolor{preprocessor}{\# then replace "-\/loomph\_blas" by "-\/lblas" below:}}
+\DoxyCodeLine{\textcolor{preprocessor}{\# then replace "{}-\/loomph\_blas"{}} by "{}-\/lblas"{} below:}
 \DoxyCodeLine{\textcolor{preprocessor}{\#}}
 \DoxyCodeLine{\textcolor{preprocessor}{EXTERNAL\_LIBS='-\/loomph\_hsl -\/loomph\_superlu\_3.0 -\/loomph\_metis\_4.0 -\/loomph\_arpack -\/loomph\_lapack -\/loomph\_flapack -\/loomph\_blas'}}
+
 \end{DoxyCode}
 
 
-If you wish to link against some other version of the library, edit the {\ttfamily E\+X\+T\+E\+R\+N\+A\+L\+\_\+\+L\+I\+BS} variable accordingly.
+If you wish to link against some other version of the library, edit the {\ttfamily EXTERNAL\+\_\+\+LIBS} variable accordingly.
 
-{\bfseries{W\+A\+R\+N\+I\+NG\+:}} If you work within the autotools framework, remember that the {\ttfamily configure} script is generated by {\ttfamily autoconf}, using the file {\ttfamily  configure.\+ac}, which is itself (re-\/)generated whenever you run {\ttfamily autogen.\+sh}. If you use the autotools, you should edit the {\ttfamily E\+X\+T\+E\+R\+N\+A\+L\+\_\+\+L\+I\+BS} variable in the file {\ttfamily configure/configure.\+ac\+\_\+scripts/start} which forms one of the building blocks from which {\ttfamily  autogen.\+sh }assembles the {\ttfamily configure.\+ac } file. Once you have changed the {\ttfamily E\+X\+T\+E\+R\+N\+A\+L\+\_\+\+L\+I\+BS} variable in {\ttfamily configure/configure.\+ac\+\_\+scripts/start} you should (re-\/)run {\ttfamily autogen.\+sh} in {\ttfamily oomph-\/lib\textquotesingle{}s} top-\/level directory.
+{\bfseries{WARNING\+:}} If you work within the autotools framework, remember that the {\ttfamily configure} script is generated by {\ttfamily autoconf}, using the file {\ttfamily  configure.\+ac}, which is itself (re-\/)generated whenever you run {\ttfamily autogen.\+sh}. If you use the autotools, you should edit the {\ttfamily EXTERNAL\+\_\+\+LIBS} variable in the file {\ttfamily configure/configure.\+ac\+\_\+scripts/start} which forms one of the building blocks from which {\ttfamily  autogen.\+sh }assembles the {\ttfamily configure.\+ac } file. Once you have changed the {\ttfamily EXTERNAL\+\_\+\+LIBS} variable in {\ttfamily configure/configure.\+ac\+\_\+scripts/start} you should (re-\/)run {\ttfamily autogen.\+sh} in {\ttfamily oomph-\/lib\textquotesingle{}s} top-\/level directory.
 
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
 \hline
-\begin{center} {\bfseries{N\+EW (version 0.\+85)}} \end{center}  You can now use the {\ttfamily --with-\/blas} and {\ttfamily --with-\/lapack} configure flags to specify the location of your own blas and lapack libraries; see \href{../../the_distribution/html/index.html\#external_src}{\texttt{ the installation tutorial}} for details. Equivalent flags will soon be added for the other libraries.   \\\cline{1-1}
+\begin{center} {\bfseries{NEW (version 0.\+85)}} \end{center}  You can now use the {\ttfamily --with-\/blas} and {\ttfamily --with-\/lapack} configure flags to specify the location of your own blas and lapack libraries; see \href{../../the_distribution/html/index.html\#external_src}{\texttt{ the installation tutorial}} for details. Equivalent flags will soon be added for the other libraries.   \\\cline{1-1}
 \end{longtabu}
 \end{center} 
 
@@ -449,7 +472,7 @@ The most frequent problem arises in classes that are derived from a templated ba
 \DoxyCodeLine{\textcolor{comment}{//LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
 \DoxyCodeLine{\textcolor{comment}{//LIC// }}
 \DoxyCodeLine{\textcolor{comment}{//LIC//====================================================================}}
-\DoxyCodeLine{\textcolor{comment}{//Demo code to document problem with missing "this-\/>"}}
+\DoxyCodeLine{\textcolor{comment}{//Demo code to document problem with missing "{}this-\/>"{}}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include<iostream>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -471,7 +494,7 @@ The most frequent problem arises in classes that are derived from a templated ba
 \DoxyCodeLine{\textcolor{comment}{ /// Some member function}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} say\_hello\_world()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"Hello world from base class "} << std::endl;}
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}Hello world from base class "{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
@@ -496,7 +519,7 @@ The most frequent problem arises in classes that are derived from a templated ba
 \DoxyCodeLine{\textcolor{comment}{ /// Some member function}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} output\_template\_parameter()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"My template parameter is: "} }
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}My template parameter is: "{}} }
 \DoxyCodeLine{             << TEMPLATE\_PARAMETER << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Now call the function in the base class}}
@@ -532,14 +555,16 @@ The most frequent problem arises in classes that are derived from a templated ba
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 \DoxyCodeLine{}
+
 \end{DoxyCodeInclude}
 
 
-If you compile this with sufficiently recent versions of the \href{http://gcc.gnu.org/}{\texttt{ gcc compilers}}, using the flag {\ttfamily -\/D\+U\+S\+E\+\_\+\+B\+R\+O\+K\+E\+N\+\_\+\+V\+E\+R\+S\+I\+ON}, the compilation will fail with the following error\+: 
+If you compile this with sufficiently recent versions of the \href{http://gcc.gnu.org/}{\texttt{ gcc compilers}}, using the flag {\ttfamily -\/DUSE\+\_\+\+BROKEN\+\_\+\+VERSION}, the compilation will fail with the following error\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{broken\_this\_demo.cc: In member \textcolor{keyword}{function} \textcolor{stringliteral}{'void SomeDerivedClass<TEMPLATE\_PARAMETER>::output\_template\_parameter()'}:}
 \DoxyCodeLine{broken\_this\_demo.cc:55: error: there are no arguments to \textcolor{stringliteral}{'say\_hello\_world'} that depend on a \textcolor{keyword}{template} parameter, so a declaration of \textcolor{stringliteral}{'say\_hello\_world'} must be available}
 \DoxyCodeLine{broken\_this\_demo.cc:55: error: (\textcolor{keywordflow}{if} you use \textcolor{stringliteral}{'-\/fpermissive'}, G++ will accept your code, but allowing the use of an undeclared name is deprecated)}
+
 \end{DoxyCode}
 
 
@@ -556,6 +581,7 @@ When linking, some versions of the \href{http://gcc.gnu.org/}{\texttt{ gcc compi
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{/usr/bin/ld: `.gnu.linkonce.t.\_ZNK5oomph8QElementILj3ELj3EE14vertex\_node\_ptERKj\textcolor{stringliteral}{' referenced in section `.rodata'} of /home/mheil/version185/oomph/build/lib/libgeneric.a(Qelements.o): defined in discarded section `.gnu.linkonce.t.\_ZNK5oomph8QElementILj3ELj3EE14vertex\_node\_ptERKj\textcolor{stringliteral}{' of /home/mheil/version185/oomph/build/lib/libgeneric.a(Qelements.o)}}
+
 \end{DoxyCode}
 
 
@@ -568,10 +594,10 @@ Suggestions\+:
 \item Run {\ttfamily Problem\+::self\+\_\+test()} before solving the problem. This function performs a large number of sanity checks and reports any inconsistencies in the data structure. ~\newline
 ~\newline
 
-\item Recompile the relevant libraries with the P\+A\+R\+A\+N\+O\+ID and R\+A\+N\+G\+E\+\_\+\+C\+H\+E\+C\+K\+I\+NG flags set. Segmentation faults are often caused by out-\/of-\/bounds access to S\+TL containers. Since $>$ 95\% (?) of the containers used in {\ttfamily oomph-\/lib} are {\ttfamily Vectors} ({\ttfamily oomph-\/lib\textquotesingle{}s} wrapper to the S\+TL vector class, with optional range checking) they can easily be detected. Make sure to re-\/compile again with R\+A\+N\+G\+E\+\_\+\+C\+H\+E\+C\+K\+I\+NG switched off before you start any production runs -- the run-\/time overheads incurred by range-\/checking are significant! ~\newline
+\item Recompile the relevant libraries with the PARANOID and RANGE\+\_\+\+CHECKING flags set. Segmentation faults are often caused by out-\/of-\/bounds access to STL containers. Since \texorpdfstring{$>$}{>} 95\% (?) of the containers used in {\ttfamily oomph-\/lib} are {\ttfamily Vectors} ({\ttfamily oomph-\/lib\textquotesingle{}s} wrapper to the STL vector class, with optional range checking) they can easily be detected. Make sure to re-\/compile again with RANGE\+\_\+\+CHECKING switched off before you start any production runs -- the run-\/time overheads incurred by range-\/checking are significant! ~\newline
 ~\newline
 
-\item Recompile the relevant libraries and your driver code with the debugging flag (\char`\"{}-\/g\char`\"{} for the gnu compiler suite) switched on and all optimisation disabled. Re-\/run the code in a debugger ({\ttfamily gdb} or its G\+U\+I-\/based equivalent \href{http://www.gnu.org/software/ddd/}{\texttt{ ddd}}) to (try to!) find out where the segmentation fault occurred. \mbox{[}{\bfseries{Careful\+:}} If the segmentation fault is caused by a pointer problem, this naive inspection can be quite misleading -- tell-\/tale signs are that the traceback displays a non-\/sensical call stack, e.\+g. a function being called \char`\"{}out of nowhere\char`\"{}; variables that have just been given values not existing; etc.\mbox{]} ~\newline
+\item Recompile the relevant libraries and your driver code with the debugging flag (\char`\"{}-\/g\char`\"{} for the gnu compiler suite) switched on and all optimisation disabled. Re-\/run the code in a debugger ({\ttfamily gdb} or its GUI-\/based equivalent \href{http://www.gnu.org/software/ddd/}{\texttt{ ddd}}) to (try to!) find out where the segmentation fault occurred. \mbox{[}{\bfseries{Careful\+:}} If the segmentation fault is caused by a pointer problem, this naive inspection can be quite misleading -- tell-\/tale signs are that the traceback displays a non-\/sensical call stack, e.\+g. a function being called \char`\"{}out of nowhere\char`\"{}; variables that have just been given values not existing; etc.\mbox{]} ~\newline
 ~\newline
  \DoxyHorRuler{0}
 
@@ -584,7 +610,7 @@ Suggestions\+:
 \item Have you passed the required (function) pointers to the elements? Most element constructors assign default values for any physical parameters, e.\+g. the Reynolds number in the Navier-\/\+Stokes elements. Similarly, most source functions etc. default to zero. For instance {\ttfamily oomph-\/lib\textquotesingle{}s} Poisson elements solve the Laplace equation unless a function pointer to the source function is specified. ~\newline
 ~\newline
 
-\item In time-\/dependent problems, have you assigned suitable initial conditions? Note that, if you use elements that are based on the A\+LE formulation (and all time-\/dependent elements should be!) you must initialise the history values for the nodal positions, even if the mesh is stationary! See the discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping procedures in the context of \href{../../unsteady_heat/two_d_unsteady_heat/html/index.html}{\texttt{ the unsteady heat equation}} for details. ~\newline
+\item In time-\/dependent problems, have you assigned suitable initial conditions? Note that, if you use elements that are based on the ALE formulation (and all time-\/dependent elements should be!) you must initialise the history values for the nodal positions, even if the mesh is stationary! See the discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping procedures in the context of \href{../../unsteady_heat/two_d_unsteady_heat/html/index.html}{\texttt{ the unsteady heat equation}} for details. ~\newline
 ~\newline
 
 \item Have you implemented the relevant \char`\"{}action\char`\"{} functions, such as {\ttfamily Problem\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()} to update any time-\/dependent boundary conditions?
@@ -630,19 +656,21 @@ Suggestions\+:
 
 Angelo Simone has written a python script that converts {\ttfamily oomph-\/lib\textquotesingle{}s} output to the vtu format that can be read by \href{http://www.paraview.org}{\texttt{ paraview}}, an open-\/source 3D plotting package. The conversion script can currently deal with output from meshes that are composed of 2D quad elements -- the extension to 3D is work in progress. Use of the conversion script is documented \href{../../paraview/html/index.html}{\texttt{ in another tutorial.}}
 
-It is possible to display {\ttfamily oomph-\/lib\textquotesingle{}s} default output (in more elementary form, obviously) with \href{http://www.gnuplot.info}{\texttt{ gnuplot}}. The trick is to specify the {\ttfamily using} option in \href{http://www.gnuplot.info}{\texttt{ gnuplot}}\textquotesingle{}s plot commands -- in this mode \href{http://www.gnuplot.info}{\texttt{ gnuplot}} ignores tecplot\textquotesingle{}s \char`\"{}\+Z\+O\+N\+E\char`\"{} commands. For instance, trying to plot the x-\/y data created by \href{../../poisson/one_d_poisson/html/index.html}{\texttt{ the demo code for the solution of the 1D Poisson equation}} with 
+It is possible to display {\ttfamily oomph-\/lib\textquotesingle{}s} default output (in more elementary form, obviously) with \href{http://www.gnuplot.info}{\texttt{ gnuplot}}. The trick is to specify the {\ttfamily using} option in \href{http://www.gnuplot.info}{\texttt{ gnuplot}}\textquotesingle{}s plot commands -- in this mode \href{http://www.gnuplot.info}{\texttt{ gnuplot}} ignores tecplot\textquotesingle{}s \char`\"{}\+ZONE\char`\"{} commands. For instance, trying to plot the x-\/y data created by \href{../../poisson/one_d_poisson/html/index.html}{\texttt{ the demo code for the solution of the 1D Poisson equation}} with 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{plot \textcolor{stringliteral}{"RESLT/soln0.dat"}}
+\DoxyCodeLine{plot \textcolor{stringliteral}{"{}RESLT/soln0.dat"{}}}
+
 \end{DoxyCode}
- will fail because \href{http://www.gnuplot.info}{\texttt{ gnuplot}} gets confused by the {\ttfamily Z\+O\+NE} specifications required by \href{http://www.tecplot.com}{\texttt{ tecplot.}} However, 
+ will fail because \href{http://www.gnuplot.info}{\texttt{ gnuplot}} gets confused by the {\ttfamily ZONE} specifications required by \href{http://www.tecplot.com}{\texttt{ tecplot.}} However, 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{plot \textcolor{stringliteral}{"RESLT/soln0.dat"} \textcolor{keyword}{using} 1:2}
+\DoxyCodeLine{plot \textcolor{stringliteral}{"{}RESLT/soln0.dat"{}} \textcolor{keyword}{using} 1:2}
+
 \end{DoxyCode}
  works.
 
 If the data is too complex to be displayed by \href{http://www.gnuplot.info}{\texttt{ gnuplot}}, you may wish to customise the output for your preferred plotting package. This is easily done as {\ttfamily oomph-\/lib} creates its output element-\/by-\/element. The elements\textquotesingle{} various {\ttfamily output(...)} functions are virtual functions that can easily be overloaded in a user-\/defined wrapper class.
 
-Here is an example driver code that illustrates how to change the output from {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Q\+Poisson\+Element} family of 1D-\/line/2\+D-\/quad/3\+D-\/brick Poisson elements so that they output the string \char`\"{}\+Hello world\char`\"{}.
+Here is an example driver code that illustrates how to change the output from {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily QPoisson\+Element} family of 1D-\/line/2\+D-\/quad/3\+D-\/brick Poisson elements so that they output the string \char`\"{}\+Hello world\char`\"{}.
 
 We include {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily generic} and {\ttfamily poisson} library headers\+:  
 \begin{DoxyCodeInclude}{0}
@@ -674,13 +702,11 @@ We include {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily generic} and {\
 \DoxyCodeLine{\textcolor{comment}{//Demo code to document customisation of output}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// oomph-\/lib includes}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "poisson.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}poisson.h"{}}}
 
 \end{DoxyCodeInclude}
-
-
-and then create a customised version of the Poisson elements in which we overload the tecplot-\/based {\ttfamily Q\+Poisson\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$\+::output(...)} function, defined in the {\ttfamily poisson} library\+:
+ and then create a customised version of the Poisson elements in which we overload the tecplot-\/based {\ttfamily QPoisson\+Element$<$\+DIM,\+NNODE\+\_\+1\+D$>$\+::output(...)} function, defined in the {\ttfamily poisson} library\+:
 
  
 \begin{DoxyCodeInclude}{0}
@@ -708,7 +734,7 @@ and then create a customised version of the Poisson elements in which we overloa
 \DoxyCodeLine{\textcolor{comment}{ /// Overload output function}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} output(std::ostream\& output\_file)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   output\_file << \textcolor{stringliteral}{"Hello world"} << std::endl;}
+\DoxyCodeLine{   output\_file << \textcolor{stringliteral}{"{}Hello world"{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
@@ -716,9 +742,7 @@ and then create a customised version of the Poisson elements in which we overloa
 \DoxyCodeLine{\} \textcolor{comment}{//end extension of oomph-\/lib namespace}}
 
 \end{DoxyCodeInclude}
-
-
-If we now call the output function, the version defined in the customised element is used. The remaining implementation of the Poisson element remains unchanged.
+ If we now call the output function, the version defined in the customised element is used. The remaining implementation of the Poisson element remains unchanged.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -742,9 +766,7 @@ If we now call the output function, the version defined in the customised elemen
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-~\newline
+ ~\newline
 ~\newline
  \DoxyHorRuler{0}
 
@@ -752,7 +774,7 @@ If we now call the output function, the version defined in the customised elemen
 ~\newline
 ~\newline
  \hypertarget{index_element_too_general}{}\doxysubsection{oomph-\/lib\textquotesingle{}s implementation of the Navier-\/\+Stokes equations (say) is too general (and therefore too expensive) for my application. How do I change this?}\label{index_element_too_general}
-Many of {\ttfamily oomph-\/lib\textquotesingle{}s} equations classes (or elements) are implemented in great generality. For instance, our discretisation of the Navier-\/\+Stokes equations includes a source term in the continuity equation, and body force terms in the momentum equations; it allows switching between the stress-\/divergence and simplified forms of the viscous terms; it includes the mesh velocity into the A\+LE formulation of the time-\/derivatives; etc. This makes the elements very versatile and robust. However, the generality/robustness comes at a price\+: Even though we provide default values for most functions (e.\+g. the body force terms default to zero), their evaluation requires a finite amount of C\+PU time. If you wish to use the elements in a simple application in which the Navier-\/\+Stokes equations are solved in a fixed domain, without any body forces or other source terms, say, you may wish to disable the additional functionality.
+Many of {\ttfamily oomph-\/lib\textquotesingle{}s} equations classes (or elements) are implemented in great generality. For instance, our discretisation of the Navier-\/\+Stokes equations includes a source term in the continuity equation, and body force terms in the momentum equations; it allows switching between the stress-\/divergence and simplified forms of the viscous terms; it includes the mesh velocity into the ALE formulation of the time-\/derivatives; etc. This makes the elements very versatile and robust. However, the generality/robustness comes at a price\+: Even though we provide default values for most functions (e.\+g. the body force terms default to zero), their evaluation requires a finite amount of CPU time. If you wish to use the elements in a simple application in which the Navier-\/\+Stokes equations are solved in a fixed domain, without any body forces or other source terms, say, you may wish to disable the additional functionality.
 
 This is easily done\+: After all, {\ttfamily oomph-\/lib} is open-\/source software and you can therefore change anything you want! In principle, you could edit the source code in the {\ttfamily src/navier\+\_\+stokes} directory and delete (or at least comment out) all the functionality that you do not require. However, this is probably a risky step as it will break all demo codes (used during {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/test procedure) that use some of the features that you are not interested in. We therefore recommend copying the content of the directory {\ttfamily src/navier\+\_\+stokes} into a new directory, e.\+g. {\ttfamily user\+\_\+src/my\+\_\+navier\+\_\+stokes} and to edit the copied sources. Follow the instructions on the {\ttfamily oomph-\/lib} \href{../../the_distribution/html/index.html\#add_src}{\texttt{ installation page}} to turn these sources into a separate library against which you can link.
 
@@ -769,12 +791,13 @@ The default behaviour when using {\ttfamily make} {\ttfamily check} is to compil
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{make check -\/k TESTS\_ENVIRONMENT=\textcolor{keyword}{true}}
+
 \end{DoxyCode}
 
 
 and then once you are sure everything compiles run the self tests as normal.
 
-Note\+: this \char`\"{}trick\char`\"{} relies on undocumented behaviour in automake and so it is possible (but unlikely) that it will not work in new versions (tested and working with G\+NU automake 1.\+11.\+3).
+Note\+: this \char`\"{}trick\char`\"{} relies on undocumented behaviour in automake and so it is possible (but unlikely) that it will not work in new versions (tested and working with GNU automake 1.\+11.\+3).
 
 ~\newline
 ~\newline
@@ -826,7 +849,7 @@ Here are some possible \char`\"{}routemaps\char`\"{} around the library\+:
 \item Namespaces.
 \item Classes (private, protected and public members; inheritance and multiple inheritance; virtual and pure virtual functions; base classes and derived classes; static and dynamic casts).
 \item Templates and template instantiations.
-\item The standard template library (S\+TL).
+\item The standard template library (STL).
 \end{DoxyItemize}~\newline
 ~\newline
 
@@ -857,6 +880,7 @@ The included files themselves can either be located in the same directory as the
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{find . \(\backslash\)( -\/name \textcolor{stringliteral}{'*.h'} -\/o -\/name \textcolor{stringliteral}{'*.cc'} \(\backslash\)) -\/exec grep -\/H FiniteElement \{\} \(\backslash\);  }
+
 \end{DoxyCode}
 
 
@@ -875,10 +899,10 @@ If all else fails and you think you have found a bug in the library, make sure y
 \item Isolate the problem\+: Try to identify the shortest driver code that still produces the problem.~\newline
 ~\newline
 
-\item Double-\/check the \href{../../the_data_structure/html/index.html}{\texttt{ relevant documentation}}, the \href{../../the_distribution/html/index.html}{\texttt{ installation instructions}} and the other F\+A\+Qs listed here.~\newline
+\item Double-\/check the \href{../../the_data_structure/html/index.html}{\texttt{ relevant documentation}}, the \href{../../the_distribution/html/index.html}{\texttt{ installation instructions}} and the other FAQs listed here.~\newline
 ~\newline
 
-\item Does the problem persist when you compile the library and your test code without optimisation, and when the {\ttfamily R\+A\+N\+G\+E\+\_\+\+C\+H\+E\+C\+K\+I\+NG} and {\ttfamily P\+A\+R\+A\+N\+O\+ID} flags are set? ~\newline
+\item Does the problem persist when you compile the library and your test code without optimisation, and when the {\ttfamily RANGE\+\_\+\+CHECKING} and {\ttfamily PARANOID} flags are set? ~\newline
 ~\newline
 
 \item Does the problem occur with a sufficiently recent version of the \href{http://gcc.gnu.org/}{\texttt{ gcc compiler suite}} (version 3.\+2.\+3 and later)?~\newline
@@ -897,5 +921,5 @@ If all else fails and you think you have found a bug in the library, make sure y
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -1,0 +1,133 @@
+\hypertarget{axi__static__cap_8txt__doxygenified_8h_source}{}\doxysection{axi\+\_\+static\+\_\+cap.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{axi__static__cap_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: The (axisymmetric) static free surface bounding a layer of viscous fluid.}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{\(\backslash\)section overview Overview of the problem}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{ We consider an open circular container of unit radius}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{ containing a still viscous fluid of}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{ prescribed volume \(\backslash\)f\$ \(\backslash\)mathcal\{V\} \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{ that meets the wall of the container at a contact}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{ angle \(\backslash\)f\$ \(\backslash\)theta\_\{c\} \(\backslash\)f\$. The problem is extremely similar to that}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{ described in the  }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{ <a href="{}../../../navier\_stokes/static\_single\_layer/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{ two-\/dimensional static cap tutorial. </a>  The exact solution}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{ corresponds to a free surface of constant curvature that }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{ is the arc of a circle}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{ rotated about the axis to give a section of a sphere. }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{ The mean curvature of}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{ the interface in this problem is  \(\backslash\)f\$ \(\backslash\)kappa = 2/r = 4\(\backslash\)cos\(\backslash\)theta\_\{c\}}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{ \(\backslash\)f\$, which differs from the two-\/dimensional problem in which it was \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{ 2\(\backslash\)cos\(\backslash\)theta\_\{c\} \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{ The only differences between the axisymmetric and the }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{ <a href="{}../../../navier\_stokes/static\_single\_layer/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{ two-\/dimensional </a> driver codes are that:}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{-\/\# two-\/dimensional elements are replaced by the equivalent axisymmetric elements;\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{-\/\# specified volume is different;\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{-\/\# swirl (theta) component of velocity is pinned; \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{-\/\# analytic pressure drop is changed. \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{In other words we make the following changes:}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{ <center>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{ <table border="{}2"{} cellspacing="{}5"{}>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{ <tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{ <td> </td> <td> Two-\/dimensional problem </td> <td> Axisymmetric}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{ problem </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{</tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{ <tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{ <td> Bulk Fluid Element </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{ <td> QCrouzeixRaviartElement<2> </td> <td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{ AxisymmetricQCrouzeixRaviartElement </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{</tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{<tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{ <td> Pseudo-\/Solid Free Surface Face Element </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{ <td> ElasticLineFluidInterfaceElement </td> }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{ <td> ElasticAxisymmetricFluidInterfaceElement </td> }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{</tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{<tr> }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{<td>Spine Free Surface Face Element </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{<td> SpineLineFluidInterfaceElement </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{<td> SpineAxisymmetricFluidInterfaceElement </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{</tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{<tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{ <td> Pseudo-\/Solid Volume Constraint Face Element </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{ <td> ElasticLineVolumeConstraintBoundingElement </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{ <td> ElasticAxisymmetricVolumeConstraintBoundingElement </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{</tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{<tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{ <td> Spine Volume Constraint Face Element </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{ <td> SpineLineVolumeConstraintBoundingElement </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{ <td> SpineAxisymmetricVolumeConstraintBoundingElement </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{</tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{<tr> <td> Specific Volume </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{     <td> \(\backslash\)f\$ x h  = 0.5 \(\backslash\)f\$ </td> }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{     <td> \(\backslash\)f\$ r\string^\{2\} h /2 = 0.125 \(\backslash\)f\$ </td> </tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{<tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{    <td> Analytic pressure drop </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{    <td> \(\backslash\)f\$ 2\(\backslash\)cos\(\backslash\)theta\_\{c\} \(\backslash\)f\$ </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{    <td> \(\backslash\)f\$ 4\(\backslash\)cos\(\backslash\)theta\_\{c\} \(\backslash\)f\$ </td>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{</tr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{</table>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)subsection com Comments}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{-\/ The formula for the specified volume in the axisymmetric}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{case is the true volume \(\backslash\)f\$ \(\backslash\)mathcal\{V\} \(\backslash\)f\$ divided by \(\backslash\)f\$ 2\(\backslash\)pi \(\backslash\)f\$ because }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{all the axisymmetric equations are divided by the common factor }}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{of \(\backslash\)f\$ 2 \(\backslash\)pi \(\backslash\)f\$. The \(\backslash\)c AxisymmetricVolumeConstraintBoundingElement}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{class must be used so that the volume is correctly calculated.}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{-\/ The swirl velocity is pinned on the boundaries by including the}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{additional code}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{   Bulk\_mesh\_pt-\/>boundary\_node\_pt(b,n)-\/>pin(2);}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)subsection exercises Exercises}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{-\/\# Confirm that the computed pressure differences agree with the}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{   analytic expression. Verify that the interface shape is unaffected}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{   by the capillary number, but that the pressure difference}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{   across the interface changes in inverse proportion to it. Check}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{   that the pressure difference is unaffected by the choice of}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{   reference pressure.\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{-\/\# Investigate what happens when the two-\/dimensional volume constraint}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{   elements are used. Explain your result. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{-\/ Source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/axisym\_navier\_stokes/axi\_static\_cap/"{}>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{demo\_drivers/axisym\_navier\_stokes/axi\_static\_cap/}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/axisym\_navier\_stokes/axi\_static\_cap/axi\_static\_cap.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{demo\_drivers/axisym\_navier\_stokes/axi\_static\_cap/axi\_static\_cap.cc}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{axi__static__cap_8txt__doxygenified_8h_source_l00128}00128 }
+
+\end{DoxyCode}

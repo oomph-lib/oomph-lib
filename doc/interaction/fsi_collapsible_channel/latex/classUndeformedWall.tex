@@ -1,5 +1,10 @@
 \hypertarget{classUndeformedWall}{}\doxysection{Undeformed\+Wall Class Reference}
 \label{classUndeformedWall}\index{UndeformedWall@{UndeformedWall}}
+
+
+/////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////  
+
+
 Inheritance diagram for Undeformed\+Wall\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,35 +16,35 @@ Inheritance diagram for Undeformed\+Wall\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (const double \&x0, const double \&h)
 \begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}) const
+void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}) const
-\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_a6e25add1790f0de89bbe6840dae66a93}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
+void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUndeformedWall_a6e25add1790f0de89bbe6840dae66a93}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
 \begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (const double \&x0, const double \&h)
 \begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}) const
+void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}) const
-\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
+void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
 \begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (const double \&x0, const double \&h)
 \begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}) const
+void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}) const
-\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
+void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
 \begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}{Undeformed\+Wall}} (const double \&x0, const double \&h)
 \begin{DoxyCompactList}\small\item\em Constructor\+: arguments are the starting point and the height above y=0. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}) const
+void \mbox{\hyperlink{classUndeformedWall_ab0410681e2096091319a79e79937cba3}{position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Position vector at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}) const
-\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel_8txt_a8e7e207ad7181df3307ddb31d62de767}{r}}, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
+void \mbox{\hyperlink{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}{position}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r) const
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}{d2position}} (const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&r, Dense\+Matrix$<$ double $>$ \&drdzeta, Rank\+Three\+Tensor$<$ double $>$ \&ddrdzeta) const
 \begin{DoxyCompactList}\small\item\em Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -51,9 +56,11 @@ double \mbox{\hyperlink{classUndeformedWall_a4525dbe0b5d2108ee51f16bee9af88ef}{H
 
 
 \doxysubsection{Detailed Description}
+/////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////// 
+
 Undeformed wall is a steady, straight 1D line in 2D space \[ x = X_0 + \zeta \] \[ y = H \] 
 
-Definition at line 96 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00096}{96}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
@@ -70,11 +77,11 @@ Constructor\+: arguments are the starting point and the height above y=0.
 
 
 
-Definition at line 103 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00103}{103}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H.
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 \mbox{\Hypertarget{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}\label{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}} 
 \index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
@@ -88,11 +95,11 @@ Constructor\+: arguments are the starting point and the height above y=0.
 
 
 
-Definition at line 102 of file fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00102}{102}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H.
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 \mbox{\Hypertarget{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}\label{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}} 
 \index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
@@ -106,11 +113,11 @@ Constructor\+: arguments are the starting point and the height above y=0.
 
 
 
-Definition at line 142 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00142}{142}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H.
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 \mbox{\Hypertarget{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}\label{classUndeformedWall_ad09cfdcd234be0ab47eb97a8a470602a}} 
 \index{UndeformedWall@{UndeformedWall}!UndeformedWall@{UndeformedWall}}
@@ -124,37 +131,19 @@ Constructor\+: arguments are the starting point and the height above y=0.
 
 
 
-Definition at line 147 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00147}{147}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H.
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}\label{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}} 
-\index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
-\index{d2position@{d2position}!UndeformedWall@{UndeformedWall}}
-\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily virtual void Undeformed\+Wall\+::d2position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{drdzeta,  }\item[{Rank\+Three\+Tensor$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
-
-
-
-Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
-
-
-
-Definition at line 135 of file fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
-
-
-
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
-
 \mbox{\Hypertarget{classUndeformedWall_a6e25add1790f0de89bbe6840dae66a93}\label{classUndeformedWall_a6e25add1790f0de89bbe6840dae66a93}} 
 \index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
 \index{d2position@{d2position}!UndeformedWall@{UndeformedWall}}
-\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily void Undeformed\+Wall\+::d2position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{drdzeta,  }\item[{Rank\+Three\+Tensor$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -163,11 +152,29 @@ Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{
 
 
 
-Definition at line 136 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00136}{136}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+\mbox{\Hypertarget{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}\label{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}} 
+\index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
+\index{d2position@{d2position}!UndeformedWall@{UndeformedWall}}
+\doxysubsubsection{\texorpdfstring{d2position()}{d2position()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily virtual void Undeformed\+Wall\+::d2position (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{zeta,  }\item[{Vector$<$ double $>$ \&}]{r,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{drdzeta,  }\item[{Rank\+Three\+Tensor$<$ double $>$ \&}]{ddrdzeta }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{dR_i}{d \zeta_\alpha}$ = drdzeta(alpha,i). $ \frac{d^2R_i}{d \zeta_\alpha d \zeta_\beta}$ = ddrdzeta(alpha,beta,i). Evaluated at current time. 
+
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00135}{135}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 \mbox{\Hypertarget{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}\label{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}} 
 \index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
@@ -181,11 +188,11 @@ Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{
 
 
 
-Definition at line 175 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00175}{175}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 \mbox{\Hypertarget{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}\label{classUndeformedWall_a709e65fc95e9443a886125e455595e5d}} 
 \index{UndeformedWall@{UndeformedWall}!d2position@{d2position}}
@@ -199,11 +206,11 @@ Posn vector and its 1st \& 2nd derivatives w.\+r.\+t. to coordinates\+: $ \frac{
 
 
 
-Definition at line 180 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00180}{180}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 \mbox{\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -213,15 +220,15 @@ References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
 
 
 
-Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. 
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
 
 
 
-Definition at line 121 of file fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00122}{122}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References position(), and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}.
 
 \mbox{\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -231,15 +238,15 @@ References position(), and r().
 
 
 
-Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. 
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
 
 
 
-Definition at line 122 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00121}{121}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
 
 
 
-References position(), and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}.
 
 \mbox{\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -249,15 +256,15 @@ References position(), and r().
 
 
 
-Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. 
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
 
 
 
-Definition at line 161 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00161}{161}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References position(), and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}.
 
 \mbox{\Hypertarget{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}\label{classUndeformedWall_a9cbb52e30fd47d1841c1c3dc812f4b96}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -267,15 +274,15 @@ References position(), and r().
 
 
 
-Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Calls steady version. 
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Calls steady version. 
 
 
 
-Definition at line 166 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00166}{166}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
 
 
 
-References position(), and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}.
 
 \mbox{\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -289,11 +296,15 @@ Position vector at Lagrangian coordinate zeta.
 
 
 
-Definition at line 110 of file fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{111}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00122}{position()}}.
 
 \mbox{\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -307,11 +318,11 @@ Position vector at Lagrangian coordinate zeta.
 
 
 
-Definition at line 111 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00110}{110}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 \mbox{\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -325,11 +336,11 @@ Position vector at Lagrangian coordinate zeta.
 
 
 
-Definition at line 150 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source_l00150}{150}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 \mbox{\Hypertarget{classUndeformedWall_ab0410681e2096091319a79e79937cba3}\label{classUndeformedWall_ab0410681e2096091319a79e79937cba3}} 
 \index{UndeformedWall@{UndeformedWall}!position@{position}}
@@ -343,11 +354,11 @@ Position vector at Lagrangian coordinate zeta.
 
 
 
-Definition at line 155 of file fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
+Definition at line \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source_l00155}{155}} of file \mbox{\hyperlink{fsi__pseudo__solid__collapsible__channel__adapt_8cc_source}{fsi\+\_\+pseudo\+\_\+solid\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and r().
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{H}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{X0}}.
 
 
 
@@ -364,7 +375,11 @@ Height of the undeformed wall above y=0.
 
 
 
-Definition at line 161 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00161}{161}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00136}{d2position()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00103}{Undeformed\+Wall()}}.
 
 \mbox{\Hypertarget{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b}\label{classUndeformedWall_a7ab875c46fef905df33eb47e0336581b}} 
 \index{UndeformedWall@{UndeformedWall}!X0@{X0}}
@@ -378,7 +393,11 @@ x position of the undeformed beam\textquotesingle{}s left end.
 
 
 
-Definition at line 158 of file fsi\+\_\+collapsible\+\_\+channel.\+cc.
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00158}{158}} of file \mbox{\hyperlink{fsi__collapsible__channel_8cc_source}{fsi\+\_\+collapsible\+\_\+channel.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00136}{d2position()}}, \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00111}{position()}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00103}{Undeformed\+Wall()}}.
 
 
 

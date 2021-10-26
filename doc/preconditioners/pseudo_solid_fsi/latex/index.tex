@@ -1,4 +1,4 @@
-In this tutorial we re-\/visit the solution of fluid-\/structure interaction problems with (pseudo-\/)solid fluid mesh updates, focusing on the efficient solution of the governing equations by G\+M\+R\+ES, using the problem-\/specific block-\/preconditioner developed in \begin{center} Muddle, R.\+L., Mihajlovic, M. \& Heil, M. (2012) An efficient preconditioner for monolithically-\/coupled large-\/displacement fluid-\/structure interaction problems with pseudo-\/solid mesh updates. {\itshape Journal of Computational Physics} {\bfseries{231}}, 7315-\/7334. D\+OI\+: \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ 10.\+1016/j.jcp.\+2012.\+07.\+001}} \end{center}  where full details of the analysis and further results from a variety of other test problems can be found.
+In this tutorial we re-\/visit the solution of fluid-\/structure interaction problems with (pseudo-\/)solid fluid mesh updates, focusing on the efficient solution of the governing equations by GMRES, using the problem-\/specific block-\/preconditioner developed in \begin{center} Muddle, R.\+L., Mihajlovic, M. \& Heil, M. (2012) An efficient preconditioner for monolithically-\/coupled large-\/displacement fluid-\/structure interaction problems with pseudo-\/solid mesh updates. {\itshape Journal of Computational Physics} {\bfseries{231}}, 7315-\/7334. DOI\+: \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ 10.\+1016/j.jcp.\+2012.\+07.\+001}} \end{center}  where full details of the analysis and further results from a variety of other test problems can be found.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -14,12 +14,12 @@ We will demonstrate the development and application of the preconditioner using 
 
 Flow is driven (via an imposed parabolic inflow profile) through a 2D channel which is partially obstructed by a thin-\/walled elastic leaflet. The fluid leaves the domain at the far downstream end of the channel where we assume parallel, axially traction-\/free outflow.
 
-We use the same discretisation (2D quadrilateral Taylor-\/\+Hood elements for the fluid; 1D Hermite beam elements for the leaflet) as in the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ original tutorial}}. However, here we perform the fluid mesh update in response to the deformation of the elastic leaflet using a pseudo-\/elastic approach. This is done by \char`\"{}wrapping\char`\"{} the underlying {\ttfamily Q\+Taylor\+Hood\+Element} into a {\ttfamily Pseudo\+Solid\+Node\+Update\+Element} and employing {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} to impose the deformation of the elastic leaflet onto the (pseudo-\/solid) fluid mesh. The following tutorials discuss the relevant methodologies\+:
+We use the same discretisation (2D quadrilateral Taylor-\/\+Hood elements for the fluid; 1D Hermite beam elements for the leaflet) as in the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ original tutorial}}. However, here we perform the fluid mesh update in response to the deformation of the elastic leaflet using a pseudo-\/elastic approach. This is done by \char`\"{}wrapping\char`\"{} the underlying {\ttfamily QTaylor\+Hood\+Element} into a {\ttfamily Pseudo\+Solid\+Node\+Update\+Element} and employing {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} to impose the deformation of the elastic leaflet onto the (pseudo-\/solid) fluid mesh. The following tutorials discuss the relevant methodologies\+:
 \begin{DoxyItemize}
 \item \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ The use of Lagrange multipliers to impose displacement constraints onto (pseudo-\/)solids.}}~\newline
 ~\newline
 
-\item \href{../../../interaction/unstructured_fsi/html/index.html}{\texttt{ The use of pseudo-\/elasticity to deform the fluid mesh in F\+SI problems.}} ~\newline
+\item \href{../../../interaction/unstructured_fsi/html/index.html}{\texttt{ The use of pseudo-\/elasticity to deform the fluid mesh in FSI problems.}} ~\newline
 ~\newline
 
 \end{DoxyItemize}The discretised problem contains the following types of discrete unknowns\+:
@@ -33,10 +33,10 @@ We use the same discretisation (2D quadrilateral Taylor-\/\+Hood elements for th
 \item The nodal positions in the fluid mesh. ~\newline
 ~\newline
 
-\item The nodal values representing the components of the (vector-\/valued) Lagrange multipliers which impose the motion of the elastic leaflet on the pseudo-\/elastic fluid mesh. These unknowns only exist for the fluid nodes on the F\+SI boundary.
-\end{DoxyItemize}Using this classification of the unknowns, the linear system to be solved in the course of the Newton iteration can be re-\/ordered into the following block structure\+: \[ J_{\rm FSI} \ \Delta {\bf x} = \left[ \begin{array}{c|c|cc} F& &C_{\rm fx}&\\ \hline C_{\rm sf}&S&C_{\rm sx}&\\ \hline &&E&C_{\rm xl}\\ &C_{\rm ls}&C_{\rm lx}&\\ \end{array} \right] \left[ \begin{array}{c} \Delta {\bf F}\\ \hline \Delta {\bf S}\\ \hline \Delta {\bf X}\\ \Delta {\bf L}\\ \end{array} \right] =- \left[ \begin{array}{c} {\bf r}_{\rm f}\\ \hline {\bf r}_{\rm s}\\ \hline {\bf r}_{\rm x}\\ {\bf r}_{\rm l}\\ \end{array} \right] \ \ \ \ \ \ \ \ (1) \] where the vector ${\bf F}$ contains the Navier-\/\+Stokes (fluid) unknowns (velocities and pressure), ${\bf S}$ represents unknowns describing the deformation of the fluid-\/loaded solid, ${\bf X}$ represents the nodal positions in the fluid mesh, and ${\bf L}$ contains the discrete Lagrange multipliers which impose the deformation of the F\+SI boundary in the fluid mesh. The three diagonal blocks in the Jacobian matrix, $J_{\rm FSI}$, are the two \`{}`single-\/physics'\textquotesingle{} Jacobian matrices ( $F$, the Navier-\/\+Stokes Jacobian; $S$, the tangent stiffness matrix of the fluid-\/loaded solid) and the Jacobian, \[ J_{\rm PS} = \left[ \begin{array}{cc} E&C_{\rm xl}\\ C_{\rm lx}&\\ \end{array} \right] \] associated with the Lagrange-\/multiplier-\/constrained pseudo-\/elasticity problem governing the fluid mesh update, discussed in more detail in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}. The non-\/zero off-\/diagonal blocks arise through the interactions between the various single-\/physics problems\+: $C_{\rm fx}$ represents the effect of the pseudo-\/solid unknowns (the nodal positions in the fluid mesh) on the discretised Navier--Stokes equations -- this incorporates the so-\/called shape-\/derivatives and the time-\/discretised version of the no-\/slip condition on the F\+SI boundary which expresses the fluid velocities in terms of the nodal velocities of the fluid mesh. $C_{\rm sf}$ captures the effect of the fluid traction (pressure and shear stresses) on the fluid-\/loaded solid. Since the shear stresses depend on gradients of the fluid velocity, the traction is also affected by the nodal positions in the fluid mesh -- this dependency gives rise to the matrix $C_{\rm sx}$. Finally, $C_{\rm ls}$ arises because the prescribed boundary displacement of the fluid mesh depends on the displacement field in the fluid-\/loaded solid. The zero $ "fs" $ block reflects the fact that the discretised Navier-\/\+Stokes equations do not depend directly on the displacement field of the actual solid. The zero $ "xf" $ block indicates that the pseudo-\/solid equations are not affected by the fluid unknowns. The $ "xs"$ block is zero because the real solid affects the pseudo-\/solid only indirectly via the Lagrange multiplier constraint (which gives rise to $C_{\rm ls}$). Finally, the non-\/zero blocks in the last block column reflect the fact that the Lagrange multiplier is only used to enforce the displacement constraint in a one-\/way coupling in which the real solid affects the pseudo-\/solid but not vice versa. See \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ Muddle, Mihajlovic \& Heil (2012) }} for more detail.
+\item The nodal values representing the components of the (vector-\/valued) Lagrange multipliers which impose the motion of the elastic leaflet on the pseudo-\/elastic fluid mesh. These unknowns only exist for the fluid nodes on the FSI boundary.
+\end{DoxyItemize}Using this classification of the unknowns, the linear system to be solved in the course of the Newton iteration can be re-\/ordered into the following block structure\+: \[ J_{\rm FSI} \ \Delta {\bf x} = \left[ \begin{array}{c|c|cc} F& &C_{\rm fx}&\\ \hline C_{\rm sf}&S&C_{\rm sx}&\\ \hline &&E&C_{\rm xl}\\ &C_{\rm ls}&C_{\rm lx}&\\ \end{array} \right] \left[ \begin{array}{c} \Delta {\bf F}\\ \hline \Delta {\bf S}\\ \hline \Delta {\bf X}\\ \Delta {\bf L}\\ \end{array} \right] =- \left[ \begin{array}{c} {\bf r}_{\rm f}\\ \hline {\bf r}_{\rm s}\\ \hline {\bf r}_{\rm x}\\ {\bf r}_{\rm l}\\ \end{array} \right] \ \ \ \ \ \ \ \ (1) \] where the vector ${\bf F}$ contains the Navier-\/\+Stokes (fluid) unknowns (velocities and pressure), ${\bf S}$ represents unknowns describing the deformation of the fluid-\/loaded solid, ${\bf X}$ represents the nodal positions in the fluid mesh, and ${\bf L}$ contains the discrete Lagrange multipliers which impose the deformation of the FSI boundary in the fluid mesh. The three diagonal blocks in the Jacobian matrix, $J_{\rm FSI}$, are the two \`{}`single-\/physics'\textquotesingle{} Jacobian matrices ( $F$, the Navier-\/\+Stokes Jacobian; $S$, the tangent stiffness matrix of the fluid-\/loaded solid) and the Jacobian, \[ J_{\rm PS} = \left[ \begin{array}{cc} E&C_{\rm xl}\\ C_{\rm lx}&\\ \end{array} \right] \] associated with the Lagrange-\/multiplier-\/constrained pseudo-\/elasticity problem governing the fluid mesh update, discussed in more detail in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}. The non-\/zero off-\/diagonal blocks arise through the interactions between the various single-\/physics problems\+: $C_{\rm fx}$ represents the effect of the pseudo-\/solid unknowns (the nodal positions in the fluid mesh) on the discretised Navier--Stokes equations -- this incorporates the so-\/called shape-\/derivatives and the time-\/discretised version of the no-\/slip condition on the FSI boundary which expresses the fluid velocities in terms of the nodal velocities of the fluid mesh. $C_{\rm sf}$ captures the effect of the fluid traction (pressure and shear stresses) on the fluid-\/loaded solid. Since the shear stresses depend on gradients of the fluid velocity, the traction is also affected by the nodal positions in the fluid mesh -- this dependency gives rise to the matrix $C_{\rm sx}$. Finally, $C_{\rm ls}$ arises because the prescribed boundary displacement of the fluid mesh depends on the displacement field in the fluid-\/loaded solid. The zero $ "fs" $ block reflects the fact that the discretised Navier-\/\+Stokes equations do not depend directly on the displacement field of the actual solid. The zero $ "xf" $ block indicates that the pseudo-\/solid equations are not affected by the fluid unknowns. The $ "xs"$ block is zero because the real solid affects the pseudo-\/solid only indirectly via the Lagrange multiplier constraint (which gives rise to $C_{\rm ls}$). Finally, the non-\/zero blocks in the last block column reflect the fact that the Lagrange multiplier is only used to enforce the displacement constraint in a one-\/way coupling in which the real solid affects the pseudo-\/solid but not vice versa. See \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ Muddle, Mihajlovic \& Heil (2012) }} for more detail.
 
-To construct a preconditioner for the linear system (1) we replace the bottom-\/right $2 \times 2$ block in the Jacobian with the pseudo-\/solid preconditioner, \[ {\cal P}_{\rm PS} = \left[ \begin{array}{cc} E_{\rm aug}&\\ &W \end{array} \right] \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) \] which we discussed in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}. This yields the pseudo-\/solid F\+SI preconditioner \[ {\cal P}_{\rm FSI}=\left[ \begin{array}{c|c|cc} F& &C_{\rm fx}&\\ \hline C_{\rm sf}&S&C_{\rm sx}&\\ \hline &&E_{\rm aug}&\\ &C_{\rm ls}&&W \end{array} \right]. \ \ \ \ \ \ (3) \]
+To construct a preconditioner for the linear system (1) we replace the bottom-\/right $2 \times 2$ block in the Jacobian with the pseudo-\/solid preconditioner, \[ {\cal P}_{\rm PS} = \left[ \begin{array}{cc} E_{\rm aug}&\\ &W \end{array} \right] \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) \] which we discussed in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}. This yields the pseudo-\/solid FSI preconditioner \[ {\cal P}_{\rm FSI}=\left[ \begin{array}{c|c|cc} F& &C_{\rm fx}&\\ \hline C_{\rm sf}&S&C_{\rm sx}&\\ \hline &&E_{\rm aug}&\\ &C_{\rm ls}&&W \end{array} \right]. \ \ \ \ \ \ (3) \]
 
 The preconditioner can be shown to have a block triangular structure. Its application therefore requires the solution of four subsidiary linear systems involving the matrices $F$, $S$, $E_{\rm aug}$ and $W$ and four sparse matrix-\/vector products with the interaction matrices $C_{\rm fx}$, $C_{\rm sx}$, $C_{\rm sf}$ and $C_{ls}$.
 
@@ -45,10 +45,10 @@ Numerical experiments in \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\tex
 \item replacing the solution of the linear system involving ${\cal P}_{\rm PS}$ by the approximation $\widetilde{\cal P}_{\rm PS}$ discussed in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial,}} ~\newline
 ~\newline
 
-\item replacing the solution of the linear system involving the Navier-\/\+Stokes Jacobian $ F $ by an application of Elman, Silvester and Wathen\textquotesingle{}s \href{../../lsc_navier_stokes/html/index.html}{\texttt{ Least-\/\+Squares Commutator (L\+SC) preconditioner}},
-\end{DoxyItemize}and by replacing the remaining block-\/solves within these preconditioners by a small number of A\+MG cycles or CG iterations. We retain Super\+LU as the (exact) direct solver for the linear system involving the real solid\textquotesingle{}s tangent stiffness matrix $ S $.
+\item replacing the solution of the linear system involving the Navier-\/\+Stokes Jacobian $ F $ by an application of Elman, Silvester and Wathen\textquotesingle{}s \href{../../lsc_navier_stokes/html/index.html}{\texttt{ Least-\/\+Squares Commutator (LSC) preconditioner}},
+\end{DoxyItemize}and by replacing the remaining block-\/solves within these preconditioners by a small number of AMG cycles or CG iterations. We retain Super\+LU as the (exact) direct solver for the linear system involving the real solid\textquotesingle{}s tangent stiffness matrix $ S $.
 
-With these approximations, the computational cost of one application of the preconditioner is linear in the number of unknowns (see \mbox{\hyperlink{index_comm_and_ex}{Comments and Exercises}} for a more detailed discussion of this issue). The optimality of the preconditioner can therefore be assessed by demonstrating that the number of G\+M\+R\+ES iterations remains constant under mesh refinement.
+With these approximations, the computational cost of one application of the preconditioner is linear in the number of unknowns (see \mbox{\hyperlink{index_comm_and_ex}{Comments and Exercises}} for a more detailed discussion of this issue). The optimality of the preconditioner can therefore be assessed by demonstrating that the number of GMRES iterations remains constant under mesh refinement.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -61,48 +61,48 @@ The degrees of freedom within these sub-\/blocks are classified into \char`\"{}d
 \item {\ttfamily Generalised\+Element\+::get\+\_\+block\+\_\+numbers\+\_\+for\+\_\+unknowns(...)} which associates each degree of freedom (identified by its global equation number) with the dof type within its block. ~\newline
 ~\newline
 
-\end{DoxyItemize}The default implementation of these functions within the Navier-\/\+Stokes elements (which differentiate between the fluid velocity components and the pressure) and the beam elements (which do not distinguish between the different types of degree of freedom) is appropriate for the use with the (subsidiary) preconditioners employed here. The degrees of freedom representing the nodal positions in the (pseudo-\/solid) fluid mesh need to be sub-\/divided into those that are and are not constrained by the Lagrange multipliers that impose the deformation of the F\+SI boundary. This is most conveniently done by overloading the relevant functions in a templated wrapper element, {\ttfamily Pseudo\+Elastic\+Bulk\+Element$<$...$>$}, ~\newline
+\end{DoxyItemize}The default implementation of these functions within the Navier-\/\+Stokes elements (which differentiate between the fluid velocity components and the pressure) and the beam elements (which do not distinguish between the different types of degree of freedom) is appropriate for the use with the (subsidiary) preconditioners employed here. The degrees of freedom representing the nodal positions in the (pseudo-\/solid) fluid mesh need to be sub-\/divided into those that are and are not constrained by the Lagrange multipliers that impose the deformation of the FSI boundary. This is most conveniently done by overloading the relevant functions in a templated wrapper element, {\ttfamily Pseudo\+Elastic\+Bulk\+Element$<$...$>$}, ~\newline
  as discussed in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial.}}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_results}{}\doxysection{Results}\label{index_results}
-We examine the performance of the preconditioner in steady and unsteady test problems. First we perform a sequence of steady solves, incrementing the Reynolds number in steps of 25. The final steady solution is then used as the initial condition for an unsteady simulation in which the inflow is subjected to a time-\/periodic oscillation. The tables below show the G\+M\+R\+ES iteration counts (averaged over all linear solves performed in the course of all Newton iterations) as a function of the mesh refinement (represented by the total number of unknowns) for different implementations of the preconditioner.
+We examine the performance of the preconditioner in steady and unsteady test problems. First we perform a sequence of steady solves, incrementing the Reynolds number in steps of 25. The final steady solution is then used as the initial condition for an unsteady simulation in which the inflow is subjected to a time-\/periodic oscillation. The tables below show the GMRES iteration counts (averaged over all linear solves performed in the course of all Newton iterations) as a function of the mesh refinement (represented by the total number of unknowns) for different implementations of the preconditioner.
 
-\begin{center}Average G\+M\+R\+ES iteration counts (steady runs)\tabulinesep=1mm
+\begin{center}Average GMRES iteration counts (steady runs)\tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
 \hline
 {\ttfamily n\+\_\+dof}  &9570  &38724  &87462  &155784   \\\cline{1-5}
-G\+M\+R\+ES (blocks solved by Super\+LU) &5.\+88889  &5.\+88889  &5.\+88889  &6.\+11111   \\\cline{1-5}
-G\+M\+R\+ES (L\+SC; blocks solved by Super\+LU) &27.\+8889  &36.\+1111  &42.\+3333  &47.\+2222   \\\cline{1-5}
-G\+M\+R\+ES (L\+SC; pseudo-\/solid; blocks solved by Hypre/\+CG) &37.\+3333  &43.\+2222  &49.\+3333  &55.\+3333   \\\cline{1-5}
+GMRES (blocks solved by Super\+LU) &5.\+88889  &5.\+88889  &5.\+88889  &6.\+11111   \\\cline{1-5}
+GMRES (LSC; blocks solved by Super\+LU) &27.\+8889  &36.\+1111  &42.\+3333  &47.\+2222   \\\cline{1-5}
+GMRES (LSC; pseudo-\/solid; blocks solved by Hypre/\+CG) &37.\+3333  &43.\+2222  &49.\+3333  &55.\+3333   \\\cline{1-5}
 \end{longtabu}
 \end{center} 
 
 \begin{center}~\newline
 ~\newline
-Average G\+M\+R\+ES iteration counts (unsteady runs)\tabulinesep=1mm
+Average GMRES iteration counts (unsteady runs)\tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
 \hline
 {\ttfamily n\+\_\+dof}  &9570  &38724  &87462  &155784   \\\cline{1-5}
-G\+M\+R\+ES (blocks solved by Super\+LU) &6.\+5124  &6.\+95868  &7.\+15323  &7.\+2619   \\\cline{1-5}
-G\+M\+R\+ES (L\+SC; blocks solved by Super\+LU) &15  &15.\+9256  &16.\+2097  &16.\+6429   \\\cline{1-5}
-G\+M\+R\+ES (L\+SC; pseudo-\/solid; blocks solved by Hypre/\+CG) &22.\+2066  &25.\+3967  &27.\+0484  &27.\+9921   \\\cline{1-5}
+GMRES (blocks solved by Super\+LU) &6.\+5124  &6.\+95868  &7.\+15323  &7.\+2619   \\\cline{1-5}
+GMRES (LSC; blocks solved by Super\+LU) &15  &15.\+9256  &16.\+2097  &16.\+6429   \\\cline{1-5}
+GMRES (LSC; pseudo-\/solid; blocks solved by Hypre/\+CG) &22.\+2066  &25.\+3967  &27.\+0484  &27.\+9921   \\\cline{1-5}
 \end{longtabu}
 \end{center} 
 
-As expected from the theory (see \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ Muddle, Mihajlovic \& Heil (2012)}}), the G\+M\+R\+ES iteration counts are small and virtually mesh independent for the exact implementation of the preconditioner. Replacing the (costly) exact solves by (faster) approximate solves leads to a modest increase in the (absolute) number of G\+M\+R\+ES iterations. The most significant deterioration of the iteration counts results from the use of the L\+SC Navier Stokes preconditioner as the inexact solver (subsidiary preconditioner) for the Navier-\/\+Stokes block. The behaviour observed here (slight mesh dependence for steady solves; virtual mesh independence (once the mesh is sufficiently fine) for unsteady solves) mirrors that observed in single-\/physics Navier-\/\+Stokes problems.
+As expected from the theory (see \href{http://dx.doi.org/10.1016/j.jcp.2012.07.001}{\texttt{ Muddle, Mihajlovic \& Heil (2012)}}), the GMRES iteration counts are small and virtually mesh independent for the exact implementation of the preconditioner. Replacing the (costly) exact solves by (faster) approximate solves leads to a modest increase in the (absolute) number of GMRES iterations. The most significant deterioration of the iteration counts results from the use of the LSC Navier Stokes preconditioner as the inexact solver (subsidiary preconditioner) for the Navier-\/\+Stokes block. The behaviour observed here (slight mesh dependence for steady solves; virtual mesh independence (once the mesh is sufficiently fine) for unsteady solves) mirrors that observed in single-\/physics Navier-\/\+Stokes problems.
 
-The benefit of switching to the approximate solves becomes apparent in the next two tables which shows the average cpu times required for the solution of the linear systems by G\+M\+R\+ES. (For comparison the times labelled as {\bfseries{\char`\"{}\+Super\+L\+U\char`\"{}}} show the times when the linear systems (1) are solved directly by Super\+LU rather than by G\+M\+R\+ES; they illustrate how quickly direct solvers become uncompetitive.) For sufficiently fine discretisations the larger number of G\+M\+R\+ES iterations for the inexact solves is more than compensated for by the much lower cost of the preconditioning operations. The final implementation yields cpu times that (at least for unsteady problems) are proportional to the number of unknowns -- the hallmark of an optimal solver.
+The benefit of switching to the approximate solves becomes apparent in the next two tables which shows the average cpu times required for the solution of the linear systems by GMRES. (For comparison the times labelled as {\bfseries{\char`\"{}\+Super\+LU\char`\"{}}} show the times when the linear systems (1) are solved directly by Super\+LU rather than by GMRES; they illustrate how quickly direct solvers become uncompetitive.) For sufficiently fine discretisations the larger number of GMRES iterations for the inexact solves is more than compensated for by the much lower cost of the preconditioning operations. The final implementation yields cpu times that (at least for unsteady problems) are proportional to the number of unknowns -- the hallmark of an optimal solver.
 
 \begin{center}Average linear solver times (steady runs; sec)\tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
 \hline
 {\ttfamily n\+\_\+dof}  &9570  &38724  &87462  &155784   \\\cline{1-5}
 Super\+LU &2.\+71863  &33.\+7939  &129.\+248  &325.\+384   \\\cline{1-5}
-G\+M\+R\+ES (blocks solved by Super\+LU) &2.\+31567  &15.\+1042  &58.\+5491  &147.\+531   \\\cline{1-5}
-G\+M\+R\+ES (L\+SC; blocks solved by Super\+LU) &2.\+8051  &18.\+3197  &58.\+7335  &138.\+558   \\\cline{1-5}
-G\+M\+R\+ES (L\+SC; pseudo-\/solid; blocks solved by Hypre/\+CG) &3.\+47733  &15.\+1812  &37.\+6856  &73.\+0526   \\\cline{1-5}
+GMRES (blocks solved by Super\+LU) &2.\+31567  &15.\+1042  &58.\+5491  &147.\+531   \\\cline{1-5}
+GMRES (LSC; blocks solved by Super\+LU) &2.\+8051  &18.\+3197  &58.\+7335  &138.\+558   \\\cline{1-5}
+GMRES (LSC; pseudo-\/solid; blocks solved by Hypre/\+CG) &3.\+47733  &15.\+1812  &37.\+6856  &73.\+0526   \\\cline{1-5}
 \end{longtabu}
 \end{center} 
 
@@ -113,9 +113,9 @@ Average linear solver times (unsteady runs; sec)\tabulinesep=1mm
 \hline
 {\ttfamily n\+\_\+dof}  &9570  &38724  &87462  &155784   \\\cline{1-5}
 Super\+LU &2.\+06807  &25.\+7064  &99.\+7166  &248.\+082   \\\cline{1-5}
-G\+M\+R\+ES (blocks solved by Super\+LU) &1.\+73668  &11.\+1679  &42.\+2051  &105.\+97   \\\cline{1-5}
-G\+M\+R\+ES (L\+SC; blocks solved by Super\+LU) &1.\+87403  &11.\+0113  &34.\+2697  &81.\+4382   \\\cline{1-5}
-G\+M\+R\+ES (L\+SC; pseudo-\/solid; blocks solved by Hypre/\+CG) &2.\+26537  &9.\+40194  &22.\+5644  &41.\+8251   \\\cline{1-5}
+GMRES (blocks solved by Super\+LU) &1.\+73668  &11.\+1679  &42.\+2051  &105.\+97   \\\cline{1-5}
+GMRES (LSC; blocks solved by Super\+LU) &1.\+87403  &11.\+0113  &34.\+2697  &81.\+4382   \\\cline{1-5}
+GMRES (LSC; pseudo-\/solid; blocks solved by Hypre/\+CG) &2.\+26537  &9.\+40194  &22.\+5644  &41.\+8251   \\\cline{1-5}
 \end{longtabu}
 \end{center} 
 
@@ -127,25 +127,26 @@ Most of the driver code is unchanged from the implementation discussed in the \h
 \item to perform the fluid mesh update using (pseudo-\/)elasticity,
 \end{DoxyItemize}and
 \begin{DoxyItemize}
-\item to employ preconditioned G\+M\+R\+ES as the linear solver in the Newton method.
+\item to employ preconditioned GMRES as the linear solver in the Newton method.
 \end{DoxyItemize}\DoxyHorRuler{0}
 \hypertarget{index_pseudo-solid}{}\doxysubsection{Fluid-\/mesh udate by pseudo-\/elasticity}\label{index_pseudo-solid}
-To perform the node update in the fluid mesh in response to the deformation of the leaflet using the equations of large-\/displacement elasticity we \char`\"{}wrap\char`\"{} the Navier-\/\+Stokes element in the doubly-\/templated {\ttfamily Pseudo\+Solid\+Node\+Update\+Element$<$\+W\+R\+A\+P\+P\+E\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T$>$} class. The first template argument of this class, {\ttfamily W\+R\+A\+P\+P\+E\+D\+\_\+\+E\+L\+E\+M\+E\+NT}, specifies the type of the \char`\"{}wrapped\char`\"{} element -- here the nine-\/node, 2D quadrilateral {\ttfamily Q\+Taylor\+Hood\+Element$<$2$>$}. The second template argument, {\ttfamily S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}, specifies the {\ttfamily Solid\+Element} used to perform the node update -- here the nine-\/node, 2D quadrilateral {\ttfamily Q\+P\+V\+D\+Element$<$2,3$>$}. Since the preconditioner requires the (re-\/)classification of the pseudo-\/solid degrees of freedom into constrained and unconstrained nodal positions, we wrap this element too, using the {\ttfamily Pseudo\+Elastic\+Bulk\+Element} already discussed in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}. The full specification of the fluid element is therefore given by 
+To perform the node update in the fluid mesh in response to the deformation of the leaflet using the equations of large-\/displacement elasticity we \char`\"{}wrap\char`\"{} the Navier-\/\+Stokes element in the doubly-\/templated {\ttfamily Pseudo\+Solid\+Node\+Update\+Element$<$\+WRAPPED\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT$>$} class. The first template argument of this class, {\ttfamily WRAPPED\+\_\+\+ELEMENT}, specifies the type of the \char`\"{}wrapped\char`\"{} element -- here the nine-\/node, 2D quadrilateral {\ttfamily QTaylor\+Hood\+Element$<$2$>$}. The second template argument, {\ttfamily SOLID\+\_\+\+ELEMENT}, specifies the {\ttfamily Solid\+Element} used to perform the node update -- here the nine-\/node, 2D quadrilateral {\ttfamily QPVDElement$<$2,3$>$}. Since the preconditioner requires the (re-\/)classification of the pseudo-\/solid degrees of freedom into constrained and unconstrained nodal positions, we wrap this element too, using the {\ttfamily Pseudo\+Elastic\+Bulk\+Element} already discussed in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}. The full specification of the fluid element is therefore given by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{PseudoSolidNodeUpdateElement<QTaylorHoodElement<2>,}
 \DoxyCodeLine{                             PseudoElasticBulkElement<QPVDElement<2,3> > > }
+
 \end{DoxyCode}
 
 
 \DoxyHorRuler{0}
 \hypertarget{index_driver}{}\doxysubsection{Modifications to the main code}\label{index_driver}
-The main code only requires minor changes, all associated with the specification of different solver options. Since we provide the option to use Hypre and Trilinos solvers, we need to activate M\+PI if {\ttfamily oomph-\/lib} has been compiled with M\+PI support (even if the code is run in serial)\+:
+The main code only requires minor changes, all associated with the specification of different solver options. Since we provide the option to use Hypre and Trilinos solvers, we need to activate MPI if {\ttfamily oomph-\/lib} has been compiled with MPI support (even if the code is run in serial)\+:
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
@@ -153,9 +154,7 @@ The main code only requires minor changes, all associated with the specification
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-Next we define and process the possible command line flags which are used to select solver options and to specify the spatial resolution
+ Next we define and process the possible command line flags which are used to select solver options and to specify the spatial resolution
 
 
 \begin{DoxyCodeInclude}{0}
@@ -165,25 +164,23 @@ Next we define and process the possible command line flags which are used to sel
 \DoxyCodeLine{ \textcolor{comment}{// Multiplier for number of elements in coordinate directions.}}
 \DoxyCodeLine{ \textcolor{comment}{// Used for uniform mesh refinement studies.}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} mesh\_multiplier = 2; }
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/mesh\_multiplier"},}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/mesh\_multiplier"{}},}
 \DoxyCodeLine{                                            \&mesh\_multiplier);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Suppress use of LSC preconditioner for Navier Stokes block}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/suppress\_lsc"});}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/suppress\_lsc"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Use direct solver (SuperLU)}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/use\_direct\_solver"});}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/use\_direct\_solver"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Use SuperLU for all block solves}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/superlu\_for\_blocks"});}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/superlu\_for\_blocks"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Validation only?}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/validate"});}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/validate"{}});}
 
 \end{DoxyCodeInclude}
-
-
-We then assign the command line flags that were specified and document the ones that were recognised, before building the problem, specifying the heavily wrapped version of the {\ttfamily Navier-\/\+Stokes} element as the template parameter.
+ We then assign the command line flags that were specified and document the ones that were recognised, before building the problem, specifying the heavily wrapped version of the {\ttfamily Navier-\/\+Stokes} element as the template parameter.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -204,19 +201,17 @@ We then assign the command line flags that were specified and document the ones 
 \DoxyCodeLine{  (mesh\_multiplier);}
 
 \end{DoxyCodeInclude}
-
-
-The rest of the main code is very similar to the original version discussed in \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ another tutorial}} and is therefore omitted here.
+ The rest of the main code is very similar to the original version discussed in \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ another tutorial}} and is therefore omitted here.
 
 \DoxyHorRuler{0}
 \hypertarget{index_it_solve}{}\doxysubsection{Choosing the iterative solver and preconditioner}\label{index_it_solve}
-We provide a new function, {\ttfamily set\+\_\+iterative\+\_\+solver()} to switch the solver to G\+M\+R\+ES and to instantiate the F\+SI preconditioner. We start by creating the G\+M\+R\+ES solver, using Trilinos\textquotesingle{} implementation if it is available\+:
+We provide a new function, {\ttfamily set\+\_\+iterative\+\_\+solver()} to switch the solver to GMRES and to instantiate the FSI preconditioner. We start by creating the GMRES solver, using Trilinos\textquotesingle{} implementation if it is available\+:
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_iterative\_solver=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Set iterative solver }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a8ca939c0edc4194e4e5cb7d1404f27de}{FSIChannelWithLeafletProblem<ELEMENT>::set\_iterative\_solver}}()}
 \DoxyCodeLine{\{}
@@ -231,7 +226,7 @@ We provide a new function, {\ttfamily set\+\_\+iterative\+\_\+solver()} to switc
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Use GMRES}}
 \DoxyCodeLine{ \textcolor{keyword}{dynamic\_cast<}TrilinosAztecOOSolver*\textcolor{keyword}{>}(solver\_pt)-\/>solver\_type() }
-\DoxyCodeLine{  = \mbox{\hyperlink{pseudo__solid__fsi_8txt_a30847fef302f7f86c29a0cc1d6aed94f}{TrilinosAztecOOSolver::GMRES}};}
+\DoxyCodeLine{  = TrilinosAztecOOSolver::GMRES;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{ }
@@ -244,9 +239,7 @@ We provide a new function, {\ttfamily set\+\_\+iterative\+\_\+solver()} to switc
 \DoxyCodeLine{ linear\_solver\_pt() = solver\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-Next, we create an instance of the F\+SI preconditioner for a 2D problem and pass it to the solver\+:
+ Next, we create an instance of the FSI preconditioner for a 2D problem and pass it to the solver\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -260,9 +253,7 @@ Next, we create an instance of the F\+SI preconditioner for a 2D problem and pas
 \DoxyCodeLine{ solver\_pt-\/>preconditioner\_pt() = prec\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-The classification of the degrees of freedom within the block preconditioning framework requires the specification of the (pseudo-\/solid) fluid mesh, the \char`\"{}real\char`\"{} solid mesh and the mesh containing the Lagrange multiplier elements that impose the deformation of the F\+SI boundary in the fluid mesh\+:
+ The classification of the degrees of freedom within the block preconditioning framework requires the specification of the (pseudo-\/solid) fluid mesh, the \char`\"{}real\char`\"{} solid mesh and the mesh containing the Lagrange multiplier elements that impose the deformation of the FSI boundary in the fluid mesh\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -273,29 +264,25 @@ The classification of the degrees of freedom within the block preconditioning fr
 \DoxyCodeLine{ prec\_pt-\/>set\_lagrange\_multiplier\_mesh\_pt(Lagrange\_multiplier\_mesh\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-We provide the option to bypass the use of the L\+SC Schur complement preconditioner as the subsidiary preconditioner (inexact solver) for the Navier-\/\+Stokes block\+:
+ We provide the option to bypass the use of the LSC Schur complement preconditioner as the subsidiary preconditioner (inexact solver) for the Navier-\/\+Stokes block\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Use oomph-\/lib's Schur complement preconditioner as Navier-\/Stokes}}
 \DoxyCodeLine{ \textcolor{comment}{// subsidiary preconditioner}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (!CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/suppress\_lsc"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (!CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/suppress\_lsc"{}}))}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"Enabling LSC preconditioner\(\backslash\)n"};}
+\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"{}Enabling LSC preconditioner\(\backslash\)n"{}};}
 \DoxyCodeLine{   prec\_pt-\/>enable\_navier\_stokes\_schur\_complement\_preconditioner();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   prec\_pt-\/>disable\_navier\_stokes\_schur\_complement\_preconditioner();}
-\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"Not using LSC preconditioner\(\backslash\)n"};}
+\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"{}Not using LSC preconditioner\(\backslash\)n"{}};}
 \DoxyCodeLine{  \} \textcolor{comment}{// done disable lsc}}
 
 \end{DoxyCodeInclude}
-
-
-By default the preconditioner performs the preconditioning operations as described above, using Super\+LU for the block solves in (3). It is possible to specify alternative (approximate) solvers for these. For instance, the behaviour of the L\+SC preconditioner can be modified by following the pointer to the Schur complement preconditioner
+ By default the preconditioner performs the preconditioning operations as described above, using Super\+LU for the block solves in (3). It is possible to specify alternative (approximate) solvers for these. For instance, the behaviour of the LSC preconditioner can be modified by following the pointer to the Schur complement preconditioner
 
 
 \begin{DoxyCodeInclude}{0}
@@ -303,22 +290,20 @@ By default the preconditioner performs the preconditioning operations as describ
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Use approximate block solves?}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/superlu\_for\_blocks"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/superlu\_for\_blocks"{}}))}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"Use SuperLU for block solves\(\backslash\)n"};}
+\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"{}Use SuperLU for block solves\(\backslash\)n"{}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"Use optimal block solves\(\backslash\)n"};}
+\DoxyCodeLine{   oomph\_info << \textcolor{stringliteral}{"{}Use optimal block solves\(\backslash\)n"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Get pointer to Navier-\/Stokes Schur complement preconditioner}}
 \DoxyCodeLine{   NavierStokesSchurComplementPreconditioner* ns\_prec\_pt = }
 \DoxyCodeLine{    prec\_pt-\/>navier\_stokes\_schur\_complement\_preconditioner\_pt();}
 
 \end{DoxyCodeInclude}
-
-
-whose behaviour can be modified as discussed in \href{../../../preconditioners/lsc_navier_stokes/html/index.html}{\texttt{ L\+SC preconditioner tutorial}}. For instance, to use a block-\/triangular approximation for the Navier-\/\+Stokes momentum block we specify
+ whose behaviour can be modified as discussed in \href{../../../preconditioners/lsc_navier_stokes/html/index.html}{\texttt{ LSC preconditioner tutorial}}. For instance, to use a block-\/triangular approximation for the Navier-\/\+Stokes momentum block we specify
 
 
 \begin{DoxyCodeInclude}{0}
@@ -334,9 +319,7 @@ whose behaviour can be modified as discussed in \href{../../../preconditioners/l
 \DoxyCodeLine{   ns\_prec\_pt-\/>set\_f\_preconditioner(f\_prec\_pt);  }
 
 \end{DoxyCodeInclude}
-
-
-If Hypre is available, we can then (approximately) solve the diagonal blocks using a small number of A\+MG V-\/cycles (with settings specified in the helper function {\ttfamily \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3191fa949eda009c481fdf4f81516535}{L\+S\+C\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner}}})\+:
+ If Hypre is available, we can then (approximately) solve the diagonal blocks using a small number of AMG V-\/cycles (with settings specified in the helper function {\ttfamily \mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3ddbb4dc9864cc9ce3901001447560a0}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner}}})\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -345,7 +328,7 @@ If Hypre is available, we can then (approximately) solve the diagonal blocks usi
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Use Hypre for diagonal blocks}}
 \DoxyCodeLine{   f\_prec\_pt-\/>set\_subsidiary\_preconditioner\_function}
-\DoxyCodeLine{    (\mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3191fa949eda009c481fdf4f81516535}{LSC\_Preconditioner\_Helper::set\_hypre\_preconditioner}});}
+\DoxyCodeLine{    (\mbox{\hyperlink{namespaceLSC__Preconditioner__Helper_a3ddbb4dc9864cc9ce3901001447560a0}{LSC\_Preconditioner\_Helper::set\_hypre\_preconditioner}});}
 
 \end{DoxyCodeInclude}
 
@@ -368,9 +351,7 @@ Similarly, we can use Hypre (with settings appropriate for a 2D Poisson problem)
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-Approximate solvers for the diagonal blocks in the preconditioner (2) for the the Lagrange-\/multiplier constrained pseudo-\/elastic equations can be chosen as discussed in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}. For instance, we can employ a block-\/upper triangular approximation for the augmented pseudo-\/elastic block $E_{\rm aug}$\+:
+ Approximate solvers for the diagonal blocks in the preconditioner (2) for the the Lagrange-\/multiplier constrained pseudo-\/elastic equations can be chosen as discussed in \href{../../prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}. For instance, we can employ a block-\/upper triangular approximation for the augmented pseudo-\/elastic block $E_{\rm aug}$\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -383,9 +364,7 @@ Approximate solvers for the diagonal blocks in the preconditioner (2) for the th
 \DoxyCodeLine{    = PseudoElasticPreconditioner::Block\_upper\_triangular\_preconditioner;}
 
 \end{DoxyCodeInclude}
-
-
-Its diagonal blocks can then again be solved by Hypre,
+ Its diagonal blocks can then again be solved by Hypre,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -401,9 +380,7 @@ Its diagonal blocks can then again be solved by Hypre,
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-Similarly, the linear systems involving the mass matrices in $ W $ can be solved using diagonally preconditioned CG\+:
+ Similarly, the linear systems involving the mass matrices in $ W $ can be solved using diagonally preconditioned CG\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -437,6 +414,7 @@ Similarly, the linear systems involving the mass matrices in $ W $ can be solved
 \item Note that we retained Super\+LU as the solver for the linear system involving the tangent stiffness matrix $ S $ of the actual, fluid-\/load solid. In the present example this still leads to an optimal solver since the leaflet is modelled as a 1D beam structure whose number of unknowns increases much more slowly than the number of unknowns in the fluid mesh when the meshes are refined uniformly. If the solid is modelled as a \char`\"{}proper\char`\"{} solid, the use of a direct solver for the solution of the linear systems involving $ S $ becomes sub-\/optimal. The member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{PseudoElasticFSIPreconditioner::set\_solid\_preconditioner(...)}
+
 \end{DoxyCode}
  can then be used to specify a subsidiary preconditioner (inexact solver) for the linear systems involving $ S $. ~\newline
 ~\newline
@@ -461,5 +439,5 @@ Similarly, the linear systems involving the mass matrices in $ W $ can be solved
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

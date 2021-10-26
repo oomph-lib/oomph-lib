@@ -1,6 +1,6 @@
-In this example we consider the flow in a 2D channel which is partially obstructed by an elastic leaflet -- the F\+SI generalisation of the \href{../../../navier_stokes/channel_with_leaflet/html/index.html}{\texttt{ Navier-\/\+Stokes problem in which the motion of the leaflet is prescribed.}} A particular feature of this problem is that the leaflet (modelled as a thin-\/walled beam structure) is totally immersed in the fluid and is therefore exposed to the fluid traction from both sides.
+In this example we consider the flow in a 2D channel which is partially obstructed by an elastic leaflet -- the FSI generalisation of the \href{../../../navier_stokes/channel_with_leaflet/html/index.html}{\texttt{ Navier-\/\+Stokes problem in which the motion of the leaflet is prescribed.}} A particular feature of this problem is that the leaflet (modelled as a thin-\/walled beam structure) is totally immersed in the fluid and is therefore exposed to the fluid traction from both sides.
 
-The problem presented here was used as one of the test cases for {\ttfamily oomph-\/lib\textquotesingle{}s} F\+SI preconditioner; see ~\newline
+The problem presented here was used as one of the test cases for {\ttfamily oomph-\/lib\textquotesingle{}s} FSI preconditioner; see ~\newline
 ~\newline
  \begin{center} \href{http://www.maths.man.ac.uk/~mheil/oomph_lib_additional_material/HeilHazelBoyleCompMech/HeilHazelBoyleCompMech.pdf}{\texttt{ Heil, M., Hazel, A.\+L. \& Boyle, J. (2008)\+: Solvers for large-\/displacement fluid-\/structure interaction problems\+: Segregated vs. monolithic approaches. Computational Mechanics.}} \end{center} 
 
@@ -56,7 +56,7 @@ As usual we use a namespace to define the problem parameters\+: The Reynolds num
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==== start\_of\_global\_parameters================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===============================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===============================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -66,9 +66,7 @@ As usual we use a namespace to define the problem parameters\+: The Reynolds num
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}}=50.0;}
 
 \end{DoxyCodeInclude}
-
-
-the leaflet\textquotesingle{}s non-\/dimensional wall thickness, $ h = h^*/H^*_{tot} $, and the F\+SI parameter,
+ the leaflet\textquotesingle{}s non-\/dimensional wall thickness, $ h = h^*/H^*_{tot} $, and the FSI parameter,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -76,14 +74,12 @@ the leaflet\textquotesingle{}s non-\/dimensional wall thickness, $ h = h^*/H^*_{
 \DoxyCodeLine{\textcolor{comment}{ /// Non-\/dimensional wall thickness.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}}=0.05;}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Fluid structure interaction parameter: Ratio of stresses used for}}
+\DoxyCodeLine{\textcolor{comment}{ /// Fluid structure interaction parameter: Ratio of stresses used for}}
 \DoxyCodeLine{\textcolor{comment}{ /// non-\/dimensionalisation of fluid to solid stresses. }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a5b052db3a93fe3ee2945af0117375d3d}{Q}}=1.0e-\/6;}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}}=1.0e-\/6;}
 
 \end{DoxyCodeInclude}
-
-
-and the parameters that define the magnitude of the pulsating inflow.
+ and the parameters that define the magnitude of the pulsating inflow.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -97,7 +93,7 @@ and the parameters that define the magnitude of the pulsating inflow.
 \DoxyCodeLine{\textcolor{comment}{ /// Max. flux}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aee645139728fd3d01573b161c74e7e8a}{Max\_flux}}=2.0;}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Flux: Pulsatile flow fluctuating between Min\_flux and Max\_flux }}
+\DoxyCodeLine{\textcolor{comment}{ /// Flux: Pulsatile flow fluctuating between Min\_flux and Max\_flux }}
 \DoxyCodeLine{\textcolor{comment}{ /// with period Period}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad651484fe06209606bccefe6fe23be0c}{flux}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& t)}
 \DoxyCodeLine{ \{  }
@@ -119,8 +115,8 @@ We use a {\ttfamily Geom\+Object} to describe the initial, stress-\/free shape o
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_undeformed\_leaflet=================================}}
-\DoxyCodeLine{\textcolor{comment}{///GeomObject: Undeformed straight, vertical leaflet}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{\textcolor{comment}{/// GeomObject: Undeformed straight, vertical leaflet}}
+\DoxyCodeLine{\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUndeformedLeaflet}{UndeformedLeaflet}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -132,7 +128,7 @@ We use a {\ttfamily Geom\+Object} to describe the initial, stress-\/free shape o
 \DoxyCodeLine{   \mbox{\hyperlink{classUndeformedLeaflet_aa89fc695af9e53aa38894c9d875afd36}{X0}}=x0;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Position vector at Lagrangian coordinate zeta }}
+\DoxyCodeLine{\textcolor{comment}{ /// Position vector at Lagrangian coordinate zeta }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUndeformedLeaflet_a8e9b79702eb9a38e19886b84aeb47918}{position}}(\textcolor{keyword}{const} Vector<double>\& zeta, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Position Vector}}
@@ -141,7 +137,7 @@ We use a {\ttfamily Geom\+Object} to describe the initial, stress-\/free shape o
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Parametrised position on object: r(zeta). Evaluated at}}
+\DoxyCodeLine{\textcolor{comment}{ /// Parametrised position on object: r(zeta). Evaluated at}}
 \DoxyCodeLine{\textcolor{comment}{ /// previous timestep. t=0: current time; t>0: previous}}
 \DoxyCodeLine{\textcolor{comment}{ /// timestep. Calls steady version.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUndeformedLeaflet_a8e9b79702eb9a38e19886b84aeb47918}{position}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, \textcolor{keyword}{const} Vector<double>\& zeta,}
@@ -152,7 +148,7 @@ We use a {\ttfamily Geom\+Object} to describe the initial, stress-\/free shape o
 \DoxyCodeLine{  \} \textcolor{comment}{// end of position}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Posn vector and its  1st \& 2nd derivatives}}
+\DoxyCodeLine{\textcolor{comment}{ /// Posn vector and its  1st \& 2nd derivatives}}
 \DoxyCodeLine{\textcolor{comment}{ /// w.r.t. to coordinates:}}
 \DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)f\$ \(\backslash\)frac\{dR\_i\}\{d \(\backslash\)zeta\_\(\backslash\)alpha\}\(\backslash\)f\$ = drdzeta(alpha,i). }}
 \DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)f\$ \(\backslash\)frac\{d\string^2R\_i\}\{d \(\backslash\)zeta\_\(\backslash\)alpha d \(\backslash\)zeta\_\(\backslash\)beta\}\(\backslash\)f\$ = }}
@@ -186,9 +182,7 @@ We use a {\ttfamily Geom\+Object} to describe the initial, stress-\/free shape o
 \DoxyCodeLine{\}; \textcolor{comment}{//end\_of\_undeformed\_wall}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 As with most time-\/dependent demo codes, the specification of a non-\/zero number of command line arguments will be interpreted as the code being run as part of {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/test in which case only a few timesteps will be performed. Therefore we start by storing the command line arguments in the namespace {\ttfamily Command\+Line\+Args} to make them accessible throughout the code.
@@ -196,8 +190,8 @@ As with most time-\/dependent demo codes, the specification of a non-\/zero numb
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======= start\_of\_main================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code  -\/-\/ pass a command line argument if you want to run}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the code in validation mode where it only performs a few steps}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code  -\/-\/ pass a command line argument if you want to run}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// the code in validation mode where it only performs a few steps}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{fsi__channel__with__leaflet_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -205,9 +199,7 @@ As with most time-\/dependent demo codes, the specification of a non-\/zero numb
 \DoxyCodeLine{ CommandLineArgs::setup(argc,argv);}
 
 \end{DoxyCodeInclude}
-
-
-Next we specify the geometry and mesh parameters, and build the {\ttfamily Problem} object, using the {\ttfamily Algebraic\+Element} version of the two-\/dimensional {\ttfamily Refineable\+Q\+Taylor\+Hood\+Elements}.
+ Next we specify the geometry and mesh parameters, and build the {\ttfamily Problem} object, using the {\ttfamily Algebraic\+Element} version of the two-\/dimensional {\ttfamily Refineable\+QTaylor\+Hood\+Elements}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -231,31 +223,27 @@ Next we specify the geometry and mesh parameters, and build the {\ttfamily Probl
 \DoxyCodeLine{ \textcolor{comment}{//Build the problem}}
 \DoxyCodeLine{ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannelWithLeafletProblem}}<}
 \DoxyCodeLine{  AlgebraicElement<RefineableQTaylorHoodElement<2> > >}
-\DoxyCodeLine{  \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_abbb977d4712081610d3fbcc3962207ea}{problem}}(lleft,lright,hleaflet,}
+\DoxyCodeLine{  problem(lleft,lright,hleaflet,}
 \DoxyCodeLine{          htot,nleft,nright,ny1,ny2,x\_0); }
 
 \end{DoxyCodeInclude}
-
-
-We prepare a {\ttfamily Doc\+Info} object and open a trace file to document the system\textquotesingle{}s evolution.
+ We prepare a {\ttfamily Doc\+Info} object and open a trace file to document the system\textquotesingle{}s evolution.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set up doc info}}
 \DoxyCodeLine{ DocInfo doc\_info; }
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Trace file}}
 \DoxyCodeLine{ ofstream trace;}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ trace.open(filename);}
 
 \end{DoxyCodeInclude}
-
-
-Next we assign the timestepping parameters (using fewer timesteps if the code is run during a self-\/test) and document the system\textquotesingle{}s initial state which provides the initial guess for the Newton iteration in the subsequent steady solve.
+ Next we assign the timestepping parameters (using fewer timesteps if the code is run during a self-\/test) and document the system\textquotesingle{}s initial state which provides the initial guess for the Newton iteration in the subsequent steady solve.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -272,16 +260,14 @@ Next we assign the timestepping parameters (using fewer timesteps if the code is
 \DoxyCodeLine{ \textcolor{keywordtype}{double} dt=0.05;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Initialise timestep }}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_abbb977d4712081610d3fbcc3962207ea}{problem}}.initialise\_dt(dt);}
+\DoxyCodeLine{ problem.initialise\_dt(dt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc initial guess for steady solve}}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_abbb977d4712081610d3fbcc3962207ea}{problem}}.doc\_solution(doc\_info,trace);}
+\DoxyCodeLine{ problem.doc\_solution(doc\_info,trace);}
 \DoxyCodeLine{ doc\_info.number()++; }
 
 \end{DoxyCodeInclude}
-
-
-We wish to start the time-\/dependent simulation from an initial condition that corresponds to the steady solution of the problem with unit influx (i.\+e. the steady solution obtained if the time-\/dependent boundary condition that is applied at the inlet is held fixed at its value for $ t= 0 $). For the required Reynolds number of $ Re=200 $, the currently assigned initial guess (zero velocity and pressure, with the wall ~\newline
+ We wish to start the time-\/dependent simulation from an initial condition that corresponds to the steady solution of the problem with unit influx (i.\+e. the steady solution obtained if the time-\/dependent boundary condition that is applied at the inlet is held fixed at its value for $ t= 0 $). For the required Reynolds number of $ Re=200 $, the currently assigned initial guess (zero velocity and pressure, with the wall ~\newline
  in its undeformed position) is \char`\"{}too far\char`\"{} from the actual solution and the Newton method would diverge (try it!). Therefore we generate the initial steady solution in a preliminary sequence of steady computations in which we first compute the solution for a Reynolds number of $ Re=50 $ (for this value the Newton method does converge). This solution is then used as the initial guess for the computation at $ Re=100 $, etc. We allow for up to 3 mesh adaptations for each Reynolds number to allow the mesh to adapt itself to the flow conditions before starting the time-\/dependent run.
 
 
@@ -308,10 +294,10 @@ We wish to start the time-\/dependent simulation from an initial condition that 
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}}=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the steady problem }}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"Computing a steady solution for Re="} }
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}Computing a steady solution for Re="{}} }
 \DoxyCodeLine{             <<  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}} << std::endl;}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_abbb977d4712081610d3fbcc3962207ea}{problem}}.steady\_newton\_solve(max\_adapt);}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_abbb977d4712081610d3fbcc3962207ea}{problem}}.doc\_solution(doc\_info,trace);}
+\DoxyCodeLine{   problem.steady\_newton\_solve(max\_adapt);}
+\DoxyCodeLine{   problem.doc\_solution(doc\_info,trace);}
 \DoxyCodeLine{   doc\_info.number()++; }
 \DoxyCodeLine{  \} \textcolor{comment}{// reached final Reynolds number }}
 
@@ -338,10 +324,10 @@ Finally, we start the proper timestepping procedure, allowing for one mesh adapt
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_abbb977d4712081610d3fbcc3962207ea}{problem}}.unsteady\_newton\_solve(dt,max\_adapt,first);}
+\DoxyCodeLine{   problem.unsteady\_newton\_solve(dt,max\_adapt,first);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Output the solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_abbb977d4712081610d3fbcc3962207ea}{problem}}.doc\_solution(doc\_info,trace);}
+\DoxyCodeLine{   problem.doc\_solution(doc\_info,trace);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Step number}}
 \DoxyCodeLine{   doc\_info.number()++;}
@@ -351,9 +337,7 @@ Finally, we start the proper timestepping procedure, allowing for one mesh adapt
 \DoxyCodeLine{\}\textcolor{comment}{//end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The Problem class}\label{index_problem}
 The {\ttfamily Problem} class contains the usual member functions, most of which are either empty or explained in more detail below.
@@ -362,14 +346,14 @@ The {\ttfamily Problem} class contains the usual member functions, most of which
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_problem\_class========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// FSI leaflet in channel}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannelWithLeafletProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass the lenght of the domain at the left}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass the lenght of the domain at the left}}
 \DoxyCodeLine{\textcolor{comment}{ /// of the leaflet lleft,the lenght of the domain at the right of the}}
 \DoxyCodeLine{\textcolor{comment}{ /// leaflet lright,the height of the leaflet hleaflet, the total height}}
 \DoxyCodeLine{\textcolor{comment}{ /// of the domain htot, the number of macro-\/elements at the left of the}}
@@ -397,13 +381,13 @@ The {\ttfamily Problem} class contains the usual member functions, most of which
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_acc3f4745ea9b4524aebbc4f2556d1286}{actions\_after\_adapt}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function to the wall mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<FSIHermiteBeamElement>* \mbox{\hyperlink{classFSIChannelWithLeafletProblem_ab6a1c532882a71ddd576c752da389de0}{wall\_mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<FSIHermiteBeamElement>* \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a6505a8ecf982304b71b513dac4f47e89}{wall\_mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a943437726f0a54fa8f7fc9ffb12bc4cd}{Wall\_mesh\_pt}};}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function to fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{classFSIChannelWithLeafletProblem_aec9244497829f9a85cbca7307c4d4e10}{fluid\_mesh\_pt}}()}
+\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{classFSIChannelWithLeafletProblem_ad4408b6e1367fcbe976d48b55d9fd78e}{fluid\_mesh\_pt}}()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a40cee3652918bdcf67569afc89d3074d}{Fluid\_mesh\_pt}};}
 \DoxyCodeLine{  \}}
@@ -429,36 +413,32 @@ Two member functions are implemented here\+: The function {\ttfamily actions\+\_
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Update parabolic flow along boundary 3}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} ibound=3; }
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    \textcolor{keywordtype}{double} ycoord = \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound,inod)-\/>x(1); }
+\DoxyCodeLine{    \textcolor{keywordtype}{double} ycoord = Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>x(1); }
 \DoxyCodeLine{    \textcolor{keywordtype}{double} uy = ampl*6.0*ycoord/Htot*(1.0-\/ycoord/Htot);}
-\DoxyCodeLine{    \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,uy);}
-\DoxyCodeLine{    \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,0.0);    }
+\DoxyCodeLine{    Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,uy);}
+\DoxyCodeLine{    Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,0.0);    }
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of actions\_before\_implicit\_timestep}}
 
 \end{DoxyCodeInclude}
-
-
-Since the node-\/update is performed by an algebraic node-\/update procedure the nodal positions in the fluid mesh must be updated whenever any of the (solid) degrees-\/of-\/freedom change. This is done automatically during the computation of the shape derivatives (implemented in the {\ttfamily Algebraic\+Element} wrapper class described \href{../../fsi_collapsible_channel_algebraic/html/index.html}{\texttt{ another tutorial}}), but an additional node update must be performed when the unknowns are updated by the Newton solver. This is achieved by performing a further node-\/update in the function {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}\+:
+ Since the node-\/update is performed by an algebraic node-\/update procedure the nodal positions in the fluid mesh must be updated whenever any of the (solid) degrees-\/of-\/freedom change. This is done automatically during the computation of the shape derivatives (implemented in the {\ttfamily Algebraic\+Element} wrapper class described \href{../../fsi_collapsible_channel_algebraic/html/index.html}{\texttt{ another tutorial}}), but an additional node update must be performed when the unknowns are updated by the Newton solver. This is achieved by performing a further node-\/update in the function {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update before checking Newton convergence: Update the}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update before checking Newton convergence: Update the}}
 \DoxyCodeLine{\textcolor{comment}{ /// nodal positions in the fluid mesh in response to possible }}
 \DoxyCodeLine{\textcolor{comment}{ /// changes in the wall shape}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>node\_update();}
+\DoxyCodeLine{   Fluid\_mesh\_pt-\/>node\_update();}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-The private member data contains the usual pointers to the {\ttfamily Problem\textquotesingle{}s} two sub-\/meshes, the pointer to {\ttfamily Geom\+Object} that represents the leaflet, and the total height of the channel.
+ The private member data contains the usual pointers to the {\ttfamily Problem\textquotesingle{}s} two sub-\/meshes, the pointer to {\ttfamily Geom\+Object} that represents the leaflet, and the total height of the channel.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -466,10 +446,10 @@ The private member data contains the usual pointers to the {\ttfamily Problem\te
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* Fluid\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "wall" mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<FSIHermiteBeamElement>* \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}wall"{} mesh}}
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<FSIHermiteBeamElement>* Wall\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the GeomObject that represents the wall}}
 \DoxyCodeLine{\textcolor{comment}{} GeomObject* Leaflet\_pt;}
@@ -480,18 +460,16 @@ The private member data contains the usual pointers to the {\ttfamily Problem\te
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
-We start the problem construction by creating two timesteppers\+: A {\ttfamily B\+F\+D$<$2$>$} timestepper for the fluid and the fake timestepper {\ttfamily Steady$<$2$>$} for the (massless) solid. (\href{../../fsi_collapsible_channel_adapt/html/index.html}{\texttt{ Recall }} that timesteppers from the {\ttfamily Steady} family return zero time-\/derivatives but keep track of the past histories. These are needed during the adaptive refinement of the fluid mesh\+: when assigning the history of the previous nodal positions for newly created fluid nodes, we must evaluate the position of the leaflet at previous timesteps; this is discussed in more detail in \href{../../fsi_collapsible_channel_adapt/html/index.html}{\texttt{ another tutorial}}.)
+We start the problem construction by creating two timesteppers\+: A {\ttfamily BFD$<$2$>$} timestepper for the fluid and the fake timestepper {\ttfamily Steady$<$2$>$} for the (massless) solid. (\href{../../fsi_collapsible_channel_adapt/html/index.html}{\texttt{ Recall }} that timesteppers from the {\ttfamily Steady} family return zero time-\/derivatives but keep track of the past histories. These are needed during the adaptive refinement of the fluid mesh\+: when assigning the history of the previous nodal positions for newly created fluid nodes, we must evaluate the position of the leaflet at previous timesteps; this is discussed in more detail in \href{../../fsi_collapsible_channel_adapt/html/index.html}{\texttt{ another tutorial}}.)
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor==============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classFSIChannelWithLeafletProblem_aaa0a455e91c4fb2dd9696607b802d01b}{FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem}}(}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& lleft,}
@@ -509,16 +487,14 @@ We start the problem construction by creating two timesteppers\+: A {\ttfamily B
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Allocate the timestepper}}
 \DoxyCodeLine{ BDF<2>* fluid\_time\_stepper\_pt=\textcolor{keyword}{new} BDF<2>;}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a2686101caa40fa891e30660e3dacd6c7}{add\_time\_stepper\_pt}}(fluid\_time\_stepper\_pt);}
+\DoxyCodeLine{ add\_time\_stepper\_pt(fluid\_time\_stepper\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Allocate the wall timestepper}}
-\DoxyCodeLine{ Steady<2>* \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a554e2755ee0f2660c24d8053b1a26eba}{wall\_time\_stepper\_pt}}=\textcolor{keyword}{new} Steady<2>;}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a2686101caa40fa891e30660e3dacd6c7}{add\_time\_stepper\_pt}}(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a554e2755ee0f2660c24d8053b1a26eba}{wall\_time\_stepper\_pt}});}
+\DoxyCodeLine{ Steady<2>* wall\_time\_stepper\_pt=\textcolor{keyword}{new} Steady<2>;}
+\DoxyCodeLine{ add\_time\_stepper\_pt(wall\_time\_stepper\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-Next we create the mesh of 1D Hermite beam elements that represents the leaflet, passing a pointer to an instance of the {\ttfamily \mbox{\hyperlink{classUndeformedLeaflet}{Undeformed\+Leaflet}}} to its constructor.
+ Next we create the mesh of 1D Hermite beam elements that represents the leaflet, passing a pointer to an instance of the {\ttfamily \mbox{\hyperlink{classUndeformedLeaflet}{Undeformed\+Leaflet}}} to its constructor.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -528,17 +504,15 @@ Next we create the mesh of 1D Hermite beam elements that represents the leaflet,
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Geometric object that represents the undeformed leaflet}}
-\DoxyCodeLine{ \mbox{\hyperlink{classUndeformedLeaflet}{UndeformedLeaflet}}* \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa9c84a4ff4c6e8e4df583cc7720541fb}{undeformed\_wall\_pt}}=\textcolor{keyword}{new} \mbox{\hyperlink{classUndeformedLeaflet}{UndeformedLeaflet}}(x\_0);}
+\DoxyCodeLine{ \mbox{\hyperlink{classUndeformedLeaflet}{UndeformedLeaflet}}* undeformed\_wall\_pt=\textcolor{keyword}{new} \mbox{\hyperlink{classUndeformedLeaflet}{UndeformedLeaflet}}(x\_0);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{//Create the "wall" mesh with FSI Hermite beam elements}}
+\DoxyCodeLine{ \textcolor{comment}{//Create the "{}wall"{} mesh with FSI Hermite beam elements}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_wall\_el=5;}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}} = \textcolor{keyword}{new} OneDLagrangianMesh<FSIHermiteBeamElement>}
-\DoxyCodeLine{  (n\_wall\_el,hleaflet,\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa9c84a4ff4c6e8e4df583cc7720541fb}{undeformed\_wall\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a554e2755ee0f2660c24d8053b1a26eba}{wall\_time\_stepper\_pt}});}
+\DoxyCodeLine{ Wall\_mesh\_pt = \textcolor{keyword}{new} OneDLagrangianMesh<FSIHermiteBeamElement>}
+\DoxyCodeLine{  (n\_wall\_el,hleaflet,undeformed\_wall\_pt,wall\_time\_stepper\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-The wall mesh defines the geometry of the deformed leaflet, therefore we create a {\ttfamily Geom\+Object} representation of that mesh, using the {\ttfamily Mesh\+As\+Geom\+Object} class, and pass it to the constructor of the fluid mesh\+:
+ The wall mesh defines the geometry of the deformed leaflet, therefore we create a {\ttfamily Geom\+Object} representation of that mesh, using the {\ttfamily Mesh\+As\+Geom\+Object} class, and pass it to the constructor of the fluid mesh\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -550,10 +524,10 @@ The wall mesh defines the geometry of the deformed leaflet, therefore we create 
 \DoxyCodeLine{ \textcolor{comment}{// Build a geometric object (one Lagrangian, two Eulerian coordinates)}}
 \DoxyCodeLine{ \textcolor{comment}{// from the wall mesh}}
 \DoxyCodeLine{ MeshAsGeomObject* wall\_geom\_object\_pt=}
-\DoxyCodeLine{  \textcolor{keyword}{new} MeshAsGeomObject(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}}); }
+\DoxyCodeLine{  \textcolor{keyword}{new} MeshAsGeomObject(Wall\_mesh\_pt); }
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Build the mesh}}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}} =\textcolor{keyword}{new} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>(}
+\DoxyCodeLine{ Fluid\_mesh\_pt =\textcolor{keyword}{new} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>(}
 \DoxyCodeLine{  wall\_geom\_object\_pt,}
 \DoxyCodeLine{  lleft, lright,}
 \DoxyCodeLine{  hleaflet,}
@@ -562,16 +536,14 @@ The wall mesh defines the geometry of the deformed leaflet, therefore we create 
 \DoxyCodeLine{  fluid\_time\_stepper\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-We specify an error estimator for the fluid mesh and add both meshes to the {\ttfamily Problem} before combining them into a global mesh.
+ We specify an error estimator for the fluid mesh and add both meshes to the {\ttfamily Problem} before combining them into a global mesh.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set error estimator}}
 \DoxyCodeLine{ Z2ErrorEstimator* error\_estimator\_pt=\textcolor{keyword}{new} Z2ErrorEstimator;}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
+\DoxyCodeLine{ Fluid\_mesh\_pt-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -579,16 +551,14 @@ We specify an error estimator for the fluid mesh and add both meshes to the {\tt
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Add the sub meshes to the problem}}
-\DoxyCodeLine{ add\_sub\_mesh(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}});}
-\DoxyCodeLine{ add\_sub\_mesh(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}});}
+\DoxyCodeLine{ add\_sub\_mesh(Fluid\_mesh\_pt);}
+\DoxyCodeLine{ add\_sub\_mesh(Wall\_mesh\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Combine all submeshes into a single Mesh}}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a0ae549c3a1e99d9d4dd46a0443635590}{build\_global\_mesh}}();}
+\DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-Dirichlet conditions (prescribed velocity) are applied on virtually all boundaries of the fluid domain (prescribed inflow at the inlet; zero velocity on the rigid channel walls; fluid velocity prescribed by the wall motion on the leaflet), apart from the outflow (boundary 1; see the enumeration of the mesh boundaries in the \href{../../../meshes/mesh_list/html/index.html\#channel_with_leaflet}{\texttt{ {\ttfamily Channel\+With\+Leaflet\+Mesh}}}) where the axial velocity is unknown (and determined indirectly by the \char`\"{}axially-\/traction-\/free\char`\"{} condition) while the vertical velocity has to be set to zero to ensure parallel outflow.
+ Dirichlet conditions (prescribed velocity) are applied on virtually all boundaries of the fluid domain (prescribed inflow at the inlet; zero velocity on the rigid channel walls; fluid velocity prescribed by the wall motion on the leaflet), apart from the outflow (boundary 1; see the enumeration of the mesh boundaries in the \href{../../../meshes/mesh_list/html/index.html\#channel_with_leaflet}{\texttt{ {\ttfamily Channel\+With\+Leaflet\+Mesh}}}) where the axial velocity is unknown (and determined indirectly by the \char`\"{}axially-\/traction-\/free\char`\"{} condition) while the vertical velocity has to be set to zero to ensure parallel outflow.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -599,27 +569,25 @@ Dirichlet conditions (prescribed velocity) are applied on virtually all boundari
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Pin the boundary nodes of the fluid mesh}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} num\_bound = \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nboundary();}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} num\_bound = Fluid\_mesh\_pt-\/>nboundary();}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} ibound=0;ibound<num\_bound;ibound++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{      \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
+\DoxyCodeLine{      Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>pin(1);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{      \textcolor{comment}{// Do not pin the x velocity of the outflow}}
 \DoxyCodeLine{      \textcolor{keywordflow}{if}( ibound != 1)}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0); }
+\DoxyCodeLine{       Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>pin(0); }
 \DoxyCodeLine{      \}      }
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-Next we assign the parabolic velocity profile at the inlet (recall that all values are initialised to zero so no further action is required on any of the other Dirichlet boundaries).
+ Next we assign the parabolic velocity profile at the inlet (recall that all values are initialised to zero so no further action is required on any of the other Dirichlet boundaries).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -631,19 +599,17 @@ Next we assign the parabolic velocity profile at the inlet (recall that all valu
 \DoxyCodeLine{ \textcolor{comment}{// and this is interpolated correctly during mesh refinement so}}
 \DoxyCodeLine{ \textcolor{comment}{// no re-\/assignment necessary after adaptation.}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ibound=3; }
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} num\_nod= \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} num\_nod= Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} ycoord = \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound,inod)-\/>x(1); }
+\DoxyCodeLine{   \textcolor{keywordtype}{double} ycoord = Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>x(1); }
 \DoxyCodeLine{   \textcolor{keywordtype}{double} uy = 6.0*ycoord/htot*(1.0-\/ycoord/htot);}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,uy);}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,0.0);    }
+\DoxyCodeLine{   Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(0,uy);}
+\DoxyCodeLine{   Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(1,0.0);    }
 \DoxyCodeLine{  \}\textcolor{comment}{// end of setup boundary condition}}
 
 \end{DoxyCodeInclude}
-
-
-The leaflet is clamped at its lower end so we pin its $x_1$-\/ and $x_2$-\/positions, and impose a vertical slope by setting $ dx_1/ds = 0 $ (where s is the local coordinate along the element; see the discussion of the boundary conditions for beam elements in \href{../../../beam/tensioned_string/html/index.html}{\texttt{ another tutorial}} for details).
+ The leaflet is clamped at its lower end so we pin its $x_1$-\/ and $x_2$-\/positions, and impose a vertical slope by setting $ dx_1/ds = 0 $ (where s is the local coordinate along the element; see the discussion of the boundary conditions for beam elements in \href{../../../beam/tensioned_string/html/index.html}{\texttt{ another tutorial}} for details).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -664,9 +630,7 @@ The leaflet is clamped at its lower end so we pin its $x_1$-\/ and $x_2$-\/posit
 \DoxyCodeLine{ wall\_mesh\_pt()-\/>boundary\_node\_pt(b,0)-\/>pin\_position(1,0);}
 
 \end{DoxyCodeInclude}
-
-
-Next, we complete the build of the fluid elements by passing pointers to the relevant physical parameters to the elements and pinning any redundant pressure degrees of freedom; see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details.
+ Next, we complete the build of the fluid elements by passing pointers to the relevant physical parameters to the elements and pinning any redundant pressure degrees of freedom; see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -675,14 +639,14 @@ Next, we complete the build of the fluid elements by passing pointers to the rel
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Complete build of fluid elements}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element = \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element = Fluid\_mesh\_pt-\/>nelement();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Loop over the elements to set up element-\/specific }}
 \DoxyCodeLine{ \textcolor{comment}{// things that cannot be handled by constructor}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Upcast from GeneralisedElement to the present element}}
-\DoxyCodeLine{   ELEMENT* el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>element\_pt(e));}
+\DoxyCodeLine{   ELEMENT* el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Fluid\_mesh\_pt-\/>element\_pt(e));}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Set the Reynolds number}}
 \DoxyCodeLine{   el\_pt-\/>re\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}};}
@@ -695,12 +659,10 @@ Next, we complete the build of the fluid elements by passing pointers to the rel
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Pin redudant pressure dofs}}
 \DoxyCodeLine{ RefineableNavierStokesEquations<2>::}
-\DoxyCodeLine{  pin\_redundant\_nodal\_pressures(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>element\_pt());}
+\DoxyCodeLine{  pin\_redundant\_nodal\_pressures(Fluid\_mesh\_pt-\/>element\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-When completing the build of the wall elements we use the function {\ttfamily \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a27035711492dba4208e7e70832c8a269}{enable\+\_\+fluid\+\_\+loading\+\_\+on\+\_\+both\+\_\+sides()}}} to indicate that the leaflet is completely immersed in the fluid so that fluid tractions act on both of its faces. When setting up the fluid-\/structure interaction below, one of the two faces will have to be identified as the \char`\"{}front\char`\"{} (face 0) and the other one as the \char`\"{}back\char`\"{} (face 1). The function {\ttfamily normal\+\_\+points\+\_\+into\+\_\+fluid()} allows us to indicate if the outer unit normal on the leaflet (as computed by {\ttfamily F\+S\+I\+Hermite\+Beam\+Element\+::get\+\_\+normal(...)} points into the fluid, when viewed from the \char`\"{}front\char`\"{} face. Here it does not -- see \mbox{\hyperlink{index_comm}{Further comments}} for more details on this slightly subtle point).
+ When completing the build of the wall elements we use the function {\ttfamily enable\+\_\+fluid\+\_\+loading\+\_\+on\+\_\+both\+\_\+sides()} to indicate that the leaflet is completely immersed in the fluid so that fluid tractions act on both of its faces. When setting up the fluid-\/structure interaction below, one of the two faces will have to be identified as the \char`\"{}front\char`\"{} (face 0) and the other one as the \char`\"{}back\char`\"{} (face 1). The function {\ttfamily normal\+\_\+points\+\_\+into\+\_\+fluid()} allows us to indicate if the outer unit normal on the leaflet (as computed by {\ttfamily FSIHermite\+Beam\+Element\+::get\+\_\+normal(...)} points into the fluid, when viewed from the \char`\"{}front\char`\"{} face. Here it does not -- see \mbox{\hyperlink{index_comm}{Further comments}} for more details on this slightly subtle point).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -722,7 +684,7 @@ When completing the build of the wall elements we use the function {\ttfamily \m
 \DoxyCodeLine{   elem\_pt-\/>q\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Global\_Physical\_Variables::Q}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Set the undeformed shape for each element}}
-\DoxyCodeLine{   elem\_pt-\/>undeformed\_beam\_pt() = \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa9c84a4ff4c6e8e4df583cc7720541fb}{undeformed\_wall\_pt}};}
+\DoxyCodeLine{   elem\_pt-\/>undeformed\_beam\_pt() = undeformed\_wall\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Leaflet is immersed and loaded by fluid on both sides}}
 \DoxyCodeLine{   elem\_pt-\/>enable\_fluid\_loading\_on\_both\_sides();}
@@ -730,7 +692,7 @@ When completing the build of the wall elements we use the function {\ttfamily \m
 \DoxyCodeLine{   \textcolor{comment}{// The normal to the leaflet, as computed by the }}
 \DoxyCodeLine{   \textcolor{comment}{// FSIHermiteElements points away from the fluid rather than }}
 \DoxyCodeLine{   \textcolor{comment}{// into the fluid (as assumed by default) when viewed from}}
-\DoxyCodeLine{   \textcolor{comment}{// the "front" (face 0).}}
+\DoxyCodeLine{   \textcolor{comment}{// the "{}front"{} (face 0).}}
 \DoxyCodeLine{   elem\_pt-\/>set\_normal\_pointing\_out\_of\_fluid();}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of loop over elements}}
@@ -754,19 +716,17 @@ We can now set up the fluid structure interaction. The motion of the leaflet det
 \DoxyCodeLine{ \textcolor{comment}{// function specified by a function pointer:}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} ibound=4;ibound<6;ibound++ )}
 \DoxyCodeLine{  \{ }
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{    \{   }
-\DoxyCodeLine{     \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound, inod)-\/>}
+\DoxyCodeLine{     Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound, inod)-\/>}
 \DoxyCodeLine{      set\_auxiliary\_node\_update\_fct\_pt(}
 \DoxyCodeLine{       FSI\_functions::apply\_no\_slip\_on\_moving\_wall);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}\textcolor{comment}{// aux node update fct has been set}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we have to determine which fluid elements are adjacent to the two faces of the {\ttfamily F\+S\+I\+Hermite\+Beam\+Elements} to allow them to compute the fluid traction they are exposed to. This is done separately for the \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} faces. The \char`\"{}front\char`\"{} of the leaflet (face 0) is assumed to coincide with the fluid mesh boundary 4; the \char`\"{}back\char`\"{} (face 1) is assumed to coincide with the fluid mesh boundary 5.
+ Finally, we have to determine which fluid elements are adjacent to the two faces of the {\ttfamily FSIHermite\+Beam\+Elements} to allow them to compute the fluid traction they are exposed to. This is done separately for the \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} faces. The \char`\"{}front\char`\"{} of the leaflet (face 0) is assumed to coincide with the fluid mesh boundary 4; the \char`\"{}back\char`\"{} (face 1) is assumed to coincide with the fluid mesh boundary 5.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -778,14 +738,14 @@ Finally, we have to determine which fluid elements are adjacent to the two faces
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Front of leaflet: Set face=0 (which is also the default so this argument}}
 \DoxyCodeLine{ \textcolor{comment}{// could be omitted)}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}=0; }
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} face=0; }
 \DoxyCodeLine{ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<ELEMENT,2>}
-\DoxyCodeLine{  (\textcolor{keyword}{this},4,\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}); }
+\DoxyCodeLine{  (\textcolor{keyword}{this},4,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Back of leaflet: face 1, needs to be specified explicitly}}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}=1; }
+\DoxyCodeLine{ face=1; }
 \DoxyCodeLine{ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<ELEMENT,2>}
-\DoxyCodeLine{  (\textcolor{keyword}{this},5,\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}); }
+\DoxyCodeLine{  (\textcolor{keyword}{this},5,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
 
 \end{DoxyCodeInclude}
 
@@ -795,13 +755,11 @@ Following the setup of the fluid-\/structure interaction we assign the equation 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{\}\textcolor{comment}{//end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_adapt}{}\doxysection{Actions after the mesh adaptation}\label{index_adapt}
 Once the fluid mesh has been adapted we free all pressure degrees of freedom and then (re-\/)pin any redundant ones; see the discussion in \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details.
@@ -810,22 +768,20 @@ Once the fluid mesh has been adapted we free all pressure degrees of freedom and
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==== start\_of\_actions\_after\_adapt=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Actions\_after\_adapt()}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_acc3f4745ea9b4524aebbc4f2556d1286}{FSIChannelWithLeafletProblem<ELEMENT>::actions\_after\_adapt}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Unpin all pressure dofs}}
 \DoxyCodeLine{ RefineableNavierStokesEquations<2>::}
-\DoxyCodeLine{  unpin\_all\_pressure\_dofs(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>element\_pt());}
+\DoxyCodeLine{  unpin\_all\_pressure\_dofs(Fluid\_mesh\_pt-\/>element\_pt());}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Pin redundant pressure dofs}}
 \DoxyCodeLine{ RefineableNavierStokesEquations<2>::}
-\DoxyCodeLine{  pin\_redundant\_nodal\_pressures(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>element\_pt());}
+\DoxyCodeLine{  pin\_redundant\_nodal\_pressures(Fluid\_mesh\_pt-\/>element\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-Any newly created fluid nodes on the leaflet (i.\+e. on the fluid mesh boundaries 4 and 5) must be subjected to the automatic application of the no-\/slip condition. For simplicity we (re-\/)specify the auxiliary node update function pointer for all of the nodes on those boundaries.
+ Any newly created fluid nodes on the leaflet (i.\+e. on the fluid mesh boundaries 4 and 5) must be subjected to the automatic application of the no-\/slip condition. For simplicity we (re-\/)specify the auxiliary node update function pointer for all of the nodes on those boundaries.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -841,19 +797,17 @@ Any newly created fluid nodes on the leaflet (i.\+e. on the fluid mesh boundarie
 \DoxyCodeLine{ \textcolor{comment}{// function specified by a function pointer:}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} ibound=4;ibound<6;ibound++ )}
 \DoxyCodeLine{  \{ }
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} num\_nod= Fluid\_mesh\_pt-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{    \{   }
-\DoxyCodeLine{     \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_node\_pt(ibound, inod)-\/>}
+\DoxyCodeLine{     Fluid\_mesh\_pt-\/>boundary\_node\_pt(ibound, inod)-\/>}
 \DoxyCodeLine{      set\_auxiliary\_node\_update\_fct\_pt(}
 \DoxyCodeLine{       FSI\_functions::apply\_no\_slip\_on\_moving\_wall);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \} \textcolor{comment}{// aux node update fct has been (re-\/)set}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, the adaptation of the fluid mesh may change the fluid elements that are adjacent to the wall elements so we re-\/generate the corresponding F\+SI lookup schemes.
+ Finally, the adaptation of the fluid mesh may change the fluid elements that are adjacent to the wall elements so we re-\/generate the corresponding FSI lookup schemes.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -870,14 +824,14 @@ Finally, the adaptation of the fluid mesh may change the fluid elements that are
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Front of leaflet: Set face=0 (which is also the default so this argument}}
 \DoxyCodeLine{ \textcolor{comment}{// could be omitted)}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}=0; }
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} face=0; }
 \DoxyCodeLine{ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<ELEMENT,2>}
-\DoxyCodeLine{  (\textcolor{keyword}{this},4,\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}); }
+\DoxyCodeLine{  (\textcolor{keyword}{this},4,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Back of leaflet: face 1, needs to be specified explicitly}}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}=1; }
+\DoxyCodeLine{ face=1; }
 \DoxyCodeLine{ FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<ELEMENT,2>}
-\DoxyCodeLine{  (\textcolor{keyword}{this},5,\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}); }
+\DoxyCodeLine{  (\textcolor{keyword}{this},5,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
 \DoxyCodeLine{  }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_actions\_after\_adapt}}
 
@@ -893,7 +847,7 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results. We output
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a055f124f38dca43bc3ed36b80c5c0880}{FSIChannelWithLeafletProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info,}
 \DoxyCodeLine{                                                         ofstream\& trace)}
@@ -906,86 +860,84 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results. We output
 \DoxyCodeLine{ npts=5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output fluid solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>output(some\_file,npts);}
+\DoxyCodeLine{ Fluid\_mesh\_pt-\/>output(some\_file,npts);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output wall solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/wall\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/wall\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}}-\/>output(some\_file,npts);}
+\DoxyCodeLine{ Wall\_mesh\_pt-\/>output(some\_file,npts);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Get node at tip of leaflet}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_el\_wall=\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}}-\/>nelement();}
-\DoxyCodeLine{ Node* tip\_node\_pt=\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}}-\/>finite\_element\_pt(n\_el\_wall-\/1)-\/>node\_pt(1);}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_el\_wall=Wall\_mesh\_pt-\/>nelement();}
+\DoxyCodeLine{ Node* tip\_node\_pt=Wall\_mesh\_pt-\/>finite\_element\_pt(n\_el\_wall-\/1)-\/>node\_pt(1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Get time:}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} time=time\_pt()-\/>time();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write trace file}}
-\DoxyCodeLine{ trace << time << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad651484fe06209606bccefe6fe23be0c}{Global\_Physical\_Variables::flux}}(time) << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{       << tip\_node\_pt-\/>x(0) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{       << tip\_node\_pt-\/>x(1) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{       << tip\_node\_pt-\/>dposition\_dt(0) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{       << tip\_node\_pt-\/>dposition\_dt(1) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{       << doc\_info.number() << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ trace << time << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{       << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad651484fe06209606bccefe6fe23be0c}{Global\_Physical\_Variables::flux}}(time) << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{       << tip\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{       << tip\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{       << tip\_node\_pt-\/>dposition\_dt(0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{       << tip\_node\_pt-\/>dposition\_dt(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{       << doc\_info.number() << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{       << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-The remaining output is created to determine which elements are located next to the fluid mesh boundaries 4 and 5 (Yes, \href{../../../meshes/mesh_list/html/index.html\#channel_with_leaflet}{\texttt{ the documentation for the mesh}} illustrates the enumeration of the mesh boundaries but we generally prefer to be paranoid; see \mbox{\hyperlink{index_comm}{Further comments}} ), and to establish the direction of the unit normal on the beam.
+ The remaining output is created to determine which elements are located next to the fluid mesh boundaries 4 and 5 (Yes, \href{../../../meshes/mesh_list/html/index.html\#channel_with_leaflet}{\texttt{ the documentation for the mesh}} illustrates the enumeration of the mesh boundaries but we generally prefer to be paranoid; see \mbox{\hyperlink{index_comm}{Further comments}} ), and to establish the direction of the unit normal on the beam.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Help me figure out what the "front" and "back" faces of the leaflet are}}
+\DoxyCodeLine{ \textcolor{comment}{// Help me figure out what the "{}front"{} and "{}back"{} faces of the leaflet are}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output fluid elements on fluid mesh boundary 4 (associated with}}
-\DoxyCodeLine{ \textcolor{comment}{// the "front")}}
+\DoxyCodeLine{ \textcolor{comment}{// the "{}front"{})}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} bound=4;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fluid\_boundary\_elements\_front\_\%i.dat"},}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fluid\_boundary\_elements\_front\_\%i.dat"{}},}
 \DoxyCodeLine{         doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nel= \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nboundary\_element(bound);}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nel= Fluid\_mesh\_pt-\/>nboundary\_element(bound);}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<nel;e++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_element\_pt(bound,e))}
+\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Fluid\_mesh\_pt-\/>boundary\_element\_pt(bound,e))}
 \DoxyCodeLine{    -\/>output(some\_file,npts);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output fluid elements on fluid mesh boundary 5 (associated with}}
-\DoxyCodeLine{ \textcolor{comment}{// the "back")}}
+\DoxyCodeLine{ \textcolor{comment}{// the "{}back"{})}}
 \DoxyCodeLine{ bound=5;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fluid\_boundary\_elements\_back\_\%i.dat"},}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fluid\_boundary\_elements\_back\_\%i.dat"{}},}
 \DoxyCodeLine{         doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
-\DoxyCodeLine{ nel= \mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>nboundary\_element(bound);}
+\DoxyCodeLine{ nel= Fluid\_mesh\_pt-\/>nboundary\_element(bound);}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<nel;e++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}}-\/>boundary\_element\_pt(bound,e))}
+\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Fluid\_mesh\_pt-\/>boundary\_element\_pt(bound,e))}
 \DoxyCodeLine{    -\/>output(some\_file,npts);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output normal vector on wall elements}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/wall\_normal\_\%i.dat"},}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/wall\_normal\_\%i.dat"{}},}
 \DoxyCodeLine{         doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
-\DoxyCodeLine{ nel=\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}}-\/>nelement();}
+\DoxyCodeLine{ nel=Wall\_mesh\_pt-\/>nelement();}
 \DoxyCodeLine{ Vector<double> s(1);}
 \DoxyCodeLine{ Vector<double> x(2);}
 \DoxyCodeLine{ Vector<double> xi(1);}
@@ -994,7 +946,7 @@ The remaining output is created to determine which elements are located next to 
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Get pointer to element}}
 \DoxyCodeLine{   FSIHermiteBeamElement* el\_pt=}
-\DoxyCodeLine{    \textcolor{keyword}{dynamic\_cast<}FSIHermiteBeamElement*\textcolor{keyword}{>}(\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}}-\/>element\_pt(e));}
+\DoxyCodeLine{    \textcolor{keyword}{dynamic\_cast<}FSIHermiteBeamElement*\textcolor{keyword}{>}(Wall\_mesh\_pt-\/>element\_pt(e));}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Loop over plot points}}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<npts;i++)}
@@ -1010,8 +962,8 @@ The remaining output is created to determine which elements are located next to 
 \DoxyCodeLine{     \textcolor{comment}{// Get Lagrangian coordinate}}
 \DoxyCodeLine{     el\_pt-\/>interpolated\_xi(s,xi);}
 \DoxyCodeLine{     }
-\DoxyCodeLine{     some\_file << x[0] << \textcolor{stringliteral}{" "} << x[1] << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{               << N[0] << \textcolor{stringliteral}{" "} << N[1] << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{     some\_file << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{               << N[0] << \textcolor{stringliteral}{"{} "{}} << N[1] << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{               << xi[0] << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}}
@@ -1035,24 +987,24 @@ The remaining output is created to determine which elements are located next to 
 
 \begin{DoxyEnumerate}
 \item {\bfseries{Quick and dirty\+:}} ~\newline
- Set {\ttfamily F\+S\+I\+Hermite\+Beam\+Element\+::normal\+\_\+points\+\_\+into\+\_\+fluid()} to {\ttfamily true} and perform a steady computation. If the leaflet is sucked towards the high-\/pressure region you got it wrong. ~\newline
+ Set {\ttfamily FSIHermite\+Beam\+Element\+::normal\+\_\+points\+\_\+into\+\_\+fluid()} to {\ttfamily true} and perform a steady computation. If the leaflet is sucked towards the high-\/pressure region you got it wrong. ~\newline
 ~\newline
 
 \item {\bfseries{Do it properly\+:}} ~\newline
- Use the output generated in {\ttfamily doc\+\_\+solution(...)} to identify the elements adjacent to the fluid mesh boundaries 4 and 5 (i.\+e. the fluid elements next to the leaflet\textquotesingle{}s \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} faces), respectively, and the normal vector returned by {\ttfamily F\+S\+I\+Hermite\+Beam\+Element\+::get\+\_\+normal(...)} -- this is the normal that is used in the computation of the fluid traction. The figure below shows a plot of these within an adaptively refined fluid mesh. ~\newline
+ Use the output generated in {\ttfamily doc\+\_\+solution(...)} to identify the elements adjacent to the fluid mesh boundaries 4 and 5 (i.\+e. the fluid elements next to the leaflet\textquotesingle{}s \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} faces), respectively, and the normal vector returned by {\ttfamily FSIHermite\+Beam\+Element\+::get\+\_\+normal(...)} -- this is the normal that is used in the computation of the fluid traction. The figure below shows a plot of these within an adaptively refined fluid mesh. ~\newline
 ~\newline
  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{front_and_back}
 \doxyfigcaption{Elements near the \`{}front\textquotesingle{} (red) and \`{}back\textquotesingle{} (green) of the leaflet and the outer unit normal on the leaflet. }
 \end{DoxyImage}
- The red and green elements are the fluid elements adjacent to the fluid mesh boundaries 4 and 5 (i.\+e. the \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} of the leaflet), respectively. The normal vectors (shown in blue) point towards the upstream end of the channel so they point {\itshape away} {\itshape from} (rather than {\itshape into}) the fluid that is adjacent to the \char`\"{}front\char`\"{} (the red region). This is why we set {\ttfamily F\+S\+I\+Hermite\+Beam\+Element\+::normal\+\_\+points\+\_\+into\+\_\+fluid()=false} (Admittedly, we used the former method to get this right and only documented the proper way to do it when writing this tutorial...) ~\newline
+ The red and green elements are the fluid elements adjacent to the fluid mesh boundaries 4 and 5 (i.\+e. the \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} of the leaflet), respectively. The normal vectors (shown in blue) point towards the upstream end of the channel so they point {\itshape away} {\itshape from} (rather than {\itshape into}) the fluid that is adjacent to the \char`\"{}front\char`\"{} (the red region). This is why we set {\ttfamily FSIHermite\+Beam\+Element\+::normal\+\_\+points\+\_\+into\+\_\+fluid()=false} (Admittedly, we used the former method to get this right and only documented the proper way to do it when writing this tutorial...) ~\newline
 ~\newline
 
 \end{DoxyEnumerate}
-\item {\bfseries{Use of faster solvers\+: {\ttfamily oomph-\/lib\textquotesingle{}s} F\+SI preconditioner}} ~\newline
+\item {\bfseries{Use of faster solvers\+: {\ttfamily oomph-\/lib\textquotesingle{}s} FSI preconditioner}} ~\newline
 ~\newline
- The problem presented in this tutorial was used as one of the test cases for {\ttfamily oomph-\/lib\textquotesingle{}s} F\+SI preconditioner; see ~\newline
+ The problem presented in this tutorial was used as one of the test cases for {\ttfamily oomph-\/lib\textquotesingle{}s} FSI preconditioner; see ~\newline
 ~\newline
  \begin{center} \href{http://www.maths.man.ac.uk/~mheil/oomph_lib_additional_material/HeilHazelBoyleCompMech/HeilHazelBoyleCompMech.pdf}{\texttt{ Heil, M., Hazel, A.\+L. \& Boyle, J. (2008)\+: Solvers for large-\/displacement fluid-\/structure interaction problems\+: Segregated vs. monolithic approaches. Computational Mechanics.}} \end{center}  ~\newline
 ~\newline
@@ -1061,29 +1013,31 @@ The remaining output is created to determine which elements are located next to 
 
 \begin{DoxyEnumerate}
 \item Confirm that choosing the wrong value for the flag ~\newline
- {\ttfamily F\+S\+I\+Hermite\+Beam\+Element\+::normal\+\_\+points\+\_\+into\+\_\+fluid()} makes the leaflet move in the wrong direction as it perceives positive fluid tractions as negative ones and vice versa. Here is what you should get\+:  
+ {\ttfamily FSIHermite\+Beam\+Element\+::normal\+\_\+points\+\_\+into\+\_\+fluid()} makes the leaflet move in the wrong direction as it perceives positive fluid tractions as negative ones and vice versa. Here is what you should get\+:  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{normal_points_in_wrong_direction}
-\doxyfigcaption{Deformation of the leaflet with the wrong choice of F\+S\+I\+Hermite\+Beam\+Element\+::normal\+\_\+points\+\_\+into\+\_\+fluid()\+: The leaflet gets sucked towards the high-\/pressure region. }
+\doxyfigcaption{Deformation of the leaflet with the wrong choice of FSIHermite\+Beam\+Element\+::normal\+\_\+points\+\_\+into\+\_\+fluid()\+: The leaflet gets sucked towards the high-\/pressure region. }
 \end{DoxyImage}
  Clearly, the normal points in the wrong direction and the tractions have the wrong sign. This can be made \char`\"{}consistent\char`\"{}, however, by also swapping the association between the mesh boundaries and the leaflet\textquotesingle{}s faces. I.\+e. if we associate mesh boundary 5 with the \char`\"{}front\char`\"{} via ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Front of leaflet: face 0}}
-\DoxyCodeLine{\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}=0; }
+\DoxyCodeLine{face=0; }
 \DoxyCodeLine{FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<ELEMENT,2>}
-\DoxyCodeLine{ (\textcolor{keyword}{this},5,\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}); }
+\DoxyCodeLine{ (\textcolor{keyword}{this},5,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
+
 \end{DoxyCode}
  ~\newline
  and mesh boundary 4 with the \char`\"{}back\char`\"{} via ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Back of leaflet: face 1}}
-\DoxyCodeLine{\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}=1; }
+\DoxyCodeLine{face=1; }
 \DoxyCodeLine{FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<ELEMENT,2>}
-\DoxyCodeLine{ (\textcolor{keyword}{this},4,\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_a10ce8f652e1f7e37624e9c8e5dde94d5}{Fluid\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_adc77c86dbe31ae29b9c7082ea1fff7a4}{Wall\_mesh\_pt}},\mbox{\hyperlink{fsi__channel__with__leaflet_8txt_aa82ca9f1c5efd140c153e31d5c906c15}{face}}); }
+\DoxyCodeLine{ (\textcolor{keyword}{this},4,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
+
 \end{DoxyCode}
  ~\newline
  the code gives the right results again (make sure you change the code in the problem constructor and in the actions after adaptation!) -- sometimes two wrongs do cancel each other out! ~\newline
@@ -1128,5 +1082,5 @@ demo_drivers/interaction/fsi_channel_with_leaflet/fsi_channel_with_leaflet.cc
 }{\texttt{ demo\+\_\+drivers/interaction/fsi\+\_\+channel\+\_\+with\+\_\+leaflet/fsi\+\_\+channel\+\_\+with\+\_\+leaflet.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

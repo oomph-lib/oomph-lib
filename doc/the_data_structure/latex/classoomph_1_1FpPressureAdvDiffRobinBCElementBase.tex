@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1FpPressureAdvDiffRobinBCElementBase}{}\doxysection{oomph\+::Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base Class Reference}
+\hypertarget{classoomph_1_1FpPressureAdvDiffRobinBCElementBase}{}\doxysection{oomph\+::Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base Class Reference}
 \label{classoomph_1_1FpPressureAdvDiffRobinBCElementBase}\index{oomph::FpPressureAdvDiffRobinBCElementBase@{oomph::FpPressureAdvDiffRobinBCElementBase}}
+
+
+Helper class for elements that impose Robin boundary conditions on pressure advection diffusion problem required by Fp preconditioner (class used to get around some templating issues)  
+
+
 
 
 {\ttfamily \#include $<$navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.127764cm]{classoomph_1_1FpPressureAdvDiffRobinBCElementBase}
@@ -13,11 +18,11 @@ Inheritance diagram for oomph\+::Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_a046874815cbcb8bf367877a60a3ce170}{Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base}} ()
+\mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_a046874815cbcb8bf367877a60a3ce170}{Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_aa83b75a3502be930f57278fe728a316a}{$\sim$\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base}} ()
+virtual \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_aa83b75a3502be930f57278fe728a316a}{$\sim$\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_ac6851ef329737b8f9d8cb0e0d9ae15d5}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)=0
+virtual void \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_ac6851ef329737b8f9d8cb0e0d9ae15d5}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)=0
 \begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1 (or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -25,7 +30,7 @@ virtual void \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_
 \doxysubsection{Detailed Description}
 Helper class for elements that impose Robin boundary conditions on pressure advection diffusion problem required by Fp preconditioner (class used to get around some templating issues) 
 
-Definition at line 52 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l00052}{52}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
@@ -34,7 +39,7 @@ Definition at line 52 of file navier\+\_\+stokes\+\_\+elements.\+h.
 \index{oomph::FpPressureAdvDiffRobinBCElementBase@{oomph::FpPressureAdvDiffRobinBCElementBase}!FpPressureAdvDiffRobinBCElementBase@{FpPressureAdvDiffRobinBCElementBase}}
 \index{FpPressureAdvDiffRobinBCElementBase@{FpPressureAdvDiffRobinBCElementBase}!oomph::FpPressureAdvDiffRobinBCElementBase@{oomph::FpPressureAdvDiffRobinBCElementBase}}
 \doxysubsubsection{\texorpdfstring{FpPressureAdvDiffRobinBCElementBase()}{FpPressureAdvDiffRobinBCElementBase()}}
-{\footnotesize\ttfamily oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -42,13 +47,13 @@ Constructor.
 
 
 
-Definition at line 56 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l00056}{56}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_aa83b75a3502be930f57278fe728a316a}\label{classoomph_1_1FpPressureAdvDiffRobinBCElementBase_aa83b75a3502be930f57278fe728a316a}} 
 \index{oomph::FpPressureAdvDiffRobinBCElementBase@{oomph::FpPressureAdvDiffRobinBCElementBase}!````~FpPressureAdvDiffRobinBCElementBase@{$\sim$FpPressureAdvDiffRobinBCElementBase}}
 \index{````~FpPressureAdvDiffRobinBCElementBase@{$\sim$FpPressureAdvDiffRobinBCElementBase}!oomph::FpPressureAdvDiffRobinBCElementBase@{oomph::FpPressureAdvDiffRobinBCElementBase}}
 \doxysubsubsection{\texorpdfstring{$\sim$FpPressureAdvDiffRobinBCElementBase()}{~FpPressureAdvDiffRobinBCElementBase()}}
-{\footnotesize\ttfamily virtual oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base\+::$\sim$\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base\+::$\sim$\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -56,7 +61,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 59 of file navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__elements_8h_source_l00059}{59}} of file \mbox{\hyperlink{navier__stokes__elements_8h_source}{navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
@@ -65,7 +70,7 @@ Definition at line 59 of file navier\+\_\+stokes\+\_\+elements.\+h.
 \index{oomph::FpPressureAdvDiffRobinBCElementBase@{oomph::FpPressureAdvDiffRobinBCElementBase}!fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc@{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc}}
 \index{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc@{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc}!oomph::FpPressureAdvDiffRobinBCElementBase@{oomph::FpPressureAdvDiffRobinBCElementBase}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc()}{fill\_in\_generic\_residual\_contribution\_fp\_press\_adv\_diff\_robin\_bc()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element\+Base\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement\+Base\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fp\+\_\+press\+\_\+adv\+\_\+diff\+\_\+robin\+\_\+bc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -73,7 +78,7 @@ This function returns the residuals for the traction function. flag=1 (or 0)\+: 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElement_a6a902a30a8b1c2d4105a7c0639a81f58}{oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableFpPressureAdvDiffRobinBCElement_ae1c6ebf08fa0aa27847b963cb3bcd581}{oomph\+::\+Refineable\+Fp\+Pressure\+Adv\+Diff\+Robin\+B\+C\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1FpPressureAdvDiffRobinBCElement_a6a902a30a8b1c2d4105a7c0639a81f58}{oomph\+::\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableFpPressureAdvDiffRobinBCElement_ae1c6ebf08fa0aa27847b963cb3bcd581}{oomph\+::\+Refineable\+Fp\+Pressure\+Adv\+Diff\+Robin\+BCElement$<$ ELEMENT $>$}}.
 
 
 

@@ -32,15 +32,15 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{\textcolor{comment}{// allow conservation of volume (area).}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Oomph-\/lib includes}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "navier\_stokes.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}navier\_stokes.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Need to instantiate templated mesh}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/quarter\_circle\_sector\_mesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/quarter\_circle\_sector\_mesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Include namespace containing Sarah's asymptotics }}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "\mbox{\hyperlink{osc__ring__sarah__asymptotics_8h}{osc\_ring\_sarah\_asymptotics.h}}"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{osc__ring__sarah__asymptotics_8h}{osc\_ring\_sarah\_asymptotics.h}}"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
@@ -51,9 +51,9 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{  }
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}  }
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//==================================================}\textcolor{comment}{}}
@@ -73,9 +73,9 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//====================================================================}\textcolor{comment}{}}
@@ -91,43 +91,43 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass timestep and function pointer to the }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass timestep and function pointer to the }}
 \DoxyCodeLine{\textcolor{comment}{ /// solution that provides the initial conditions for the fluid}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classOscRingNStProblem}{OscRingNStProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& dt,}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classOscRingNStProblem_acd5f633c43eb4cfb43c45361ecf85e6b}{OscRingNStProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& dt,}
 \DoxyCodeLine{                   FiniteElement::UnsteadyExactSolutionFctPt IC\_fct\_pt);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \string~\mbox{\hyperlink{classOscRingNStProblem}{OscRingNStProblem}}()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classOscRingNStProblem_a96e43adf75d4e33270218ceb3397443c}{\string~OscRingNStProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Get pointer to wall as geometric object}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* wall\_pt()}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classOscRingNStProblem_a6a62e926867df3c85c87cf59691be0e1}{wall\_pt}}()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} Wall\_pt;}
+\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}{Wall\_pt}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update after solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve()\{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a6e4be6a46ab263941b76ab4e6706f63a}{actions\_after\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve()\{\}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a7d8ff9543c042752b649ed326d6c5915}{actions\_before\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before checking Newton}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before checking Newton}}
 \DoxyCodeLine{\textcolor{comment}{ /// convergence: Update the fluid mesh and re-\/set velocity}}
 \DoxyCodeLine{\textcolor{comment}{ ///  boundary conditions -\/-\/ no slip velocity on the wall means}}
 \DoxyCodeLine{\textcolor{comment}{ /// that the velocity on the wall is dependent.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check() }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a98d4c847cd9d53ab3569b8418ecb0c6b}{actions\_before\_newton\_convergence\_check}}() }
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Update the fluid mesh -\/-\/ auxiliary update function for algebraic}}
 \DoxyCodeLine{  \textcolor{comment}{// nodes automatically updates no slip condition.}}
-\DoxyCodeLine{  fluid\_mesh\_pt()-\/>node\_update(); }
+\DoxyCodeLine{  \mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()-\/>node\_update(); }
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs after adaptation:}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after adaptation:}}
 \DoxyCodeLine{\textcolor{comment}{ /// Set auxiliary update function that applies no slip on all }}
 \DoxyCodeLine{\textcolor{comment}{ /// boundary nodes and choose fluid pressure dof that drives}}
 \DoxyCodeLine{\textcolor{comment}{ /// the wall deformation}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt() }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a2dd1cb9b211f2cbd2ea9aea625685bcb}{actions\_after\_adapt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Ring boundary: No slip; this also implies that the velocity needs}}
 \DoxyCodeLine{   \textcolor{comment}{// to be updated in response to wall motion. This needs to be reset}}
@@ -137,70 +137,70 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{   \textcolor{comment}{// occur exclusively at boundaries)}}
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} ibound=1;}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod= fluid\_mesh\_pt()-\/>nboundary\_node(ibound);}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod= \mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{     \{}
-\DoxyCodeLine{      fluid\_mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>}
+\DoxyCodeLine{      \mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()-\/>boundary\_node\_pt(ibound,inod)-\/>}
 \DoxyCodeLine{       set\_auxiliary\_node\_update\_fct\_pt(}
 \DoxyCodeLine{        FSI\_functions::apply\_no\_slip\_on\_moving\_wall); }
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Set the reference pressure as the constant pressure in element 0}}
-\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}PseudoBucklingRingElement*\textcolor{keyword}{>}(Wall\_pt)}
-\DoxyCodeLine{    -\/>set\_reference\_pressure\_pt(fluid\_mesh\_pt()-\/>element\_pt(0)}
+\DoxyCodeLine{   \textcolor{keyword}{dynamic\_cast<}PseudoBucklingRingElement*\textcolor{keyword}{>}(\mbox{\hyperlink{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}{Wall\_pt}})}
+\DoxyCodeLine{    -\/>set\_reference\_pressure\_pt(\mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()-\/>element\_pt(0)}
 \DoxyCodeLine{                                -\/>internal\_data\_pt(0));}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{   \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Run the time integration for ntsteps steps}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} unsteady\_run(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ntsteps, \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& restarted,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a00e957fb6a313a9c1de784d0fa3a7a36}{unsteady\_run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ntsteps, \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& restarted,}
 \DoxyCodeLine{                   DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set initial condition (incl previous timesteps) according}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set initial condition (incl previous timesteps) according}}
 \DoxyCodeLine{\textcolor{comment}{ /// to specified function. }}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_initial\_condition();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_ab1f2083699d00da4b7f6116e10792e86}{set\_initial\_condition}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} AlgebraicRefineableQuarterCircleSectorMesh<ELEMENT>* fluid\_mesh\_pt()}
+\DoxyCodeLine{\textcolor{comment}{} AlgebraicRefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classOscRingNStProblem_a67d88d19c34d72a239cb26fcedd0b451}{fluid\_mesh\_pt}}()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} Fluid\_mesh\_pt; }
+\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classOscRingNStProblem_af9ccaa9a5c41ffadda773d704793c76e}{Fluid\_mesh\_pt}}; }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Dump problem data.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} dump\_it(ofstream\& dump\_file, DocInfo doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{ /// Dump problem data.}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_af32f94658174188b1f029446161755b2}{dump\_it}}(ofstream\& dump\_file, DocInfo doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Read problem data.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} restart(ifstream\& restart\_file);}
+\DoxyCodeLine{\textcolor{comment}{ /// Read problem data.}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a0cf01737b8d53213d644413e84251d0f}{restart}}(ifstream\& restart\_file);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Write header for trace file}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} write\_trace\_file\_header();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a96e12e5bb761d765ebe9065b9990112f}{write\_trace\_file\_header}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function pointer to set the intial condition}}
-\DoxyCodeLine{\textcolor{comment}{} FiniteElement::UnsteadyExactSolutionFctPt IC\_Fct\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} FiniteElement::UnsteadyExactSolutionFctPt \mbox{\hyperlink{classOscRingNStProblem_ad9b2810092588c7708660c5325c73256}{IC\_Fct\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to wall}}
-\DoxyCodeLine{\textcolor{comment}{} GeomObject* Wall\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} GeomObject* \mbox{\hyperlink{classOscRingNStProblem_a1349ecb860cacb34792fde6807d92905}{Wall\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to fluid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} AlgebraicRefineableQuarterCircleSectorMesh<ELEMENT>* Fluid\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} AlgebraicRefineableQuarterCircleSectorMesh<ELEMENT>* \mbox{\hyperlink{classOscRingNStProblem_af9ccaa9a5c41ffadda773d704793c76e}{Fluid\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to wall mesh (contains only a single GeneralisedElement)}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* Wall\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classOscRingNStProblem_aafee49228dbbee7178448da624b96c3f}{Wall\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
+\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classOscRingNStProblem_a37c1af48245859045bed1c3fc36be3da}{Trace\_file}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to node on coarsest mesh on which velocity is traced}}
-\DoxyCodeLine{\textcolor{comment}{} Node* Veloc\_trace\_node\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classOscRingNStProblem_aed51269a285ffdc064739d6d363b1179}{Veloc\_trace\_node\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to node in symmetry plane on coarsest mesh at }}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to node in symmetry plane on coarsest mesh at }}
 \DoxyCodeLine{\textcolor{comment}{ /// which velocity is traced}}
-\DoxyCodeLine{\textcolor{comment}{} Node* Sarah\_veloc\_trace\_node\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Node* \mbox{\hyperlink{classOscRingNStProblem_a6688cac5da1f4092a9cd343ad5fdfd53}{Sarah\_veloc\_trace\_node\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -280,8 +280,8 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{ Sarah\_veloc\_trace\_node\_pt=fluid\_mesh\_pt()-\/>}
 \DoxyCodeLine{  finite\_element\_pt(0)-\/>node\_pt(nnode\_1d-\/1);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// The "pseudo-\/elastic" wall element is "loaded" by a pressure.}}
-\DoxyCodeLine{ \textcolor{comment}{// Use the "constant" pressure component in Crouzeix Raviart}}
+\DoxyCodeLine{ \textcolor{comment}{// The "{}pseudo-\/elastic"{} wall element is "{}loaded"{} by a pressure.}}
+\DoxyCodeLine{ \textcolor{comment}{// Use the "{}constant"{} pressure component in Crouzeix Raviart}}
 \DoxyCodeLine{ \textcolor{comment}{// fluid element as that pressure. }}
 \DoxyCodeLine{ \textcolor{keyword}{dynamic\_cast<}PseudoBucklingRingElement*\textcolor{keyword}{>}(Wall\_pt)}
 \DoxyCodeLine{  -\/>set\_reference\_pressure\_pt(fluid\_mesh\_pt()}
@@ -364,7 +364,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Attach the boundary conditions to the mesh}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set parameters for Sarah's asymptotic solution}}
@@ -441,7 +441,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{   \textcolor{comment}{// to continous time }}
 \DoxyCodeLine{   time\_pt()-\/>time()=time;}
 \DoxyCodeLine{   }
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"setting IC at time ="} << time << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}setting IC at time ="{}} << time << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Update the fluid mesh for this value of the continuous time}}
 \DoxyCodeLine{   \textcolor{comment}{// (The wall object reads the continous time from the same}}
@@ -490,8 +490,8 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOscRingNStProblem_a7de5df21c2179db1c97cc83332dcc82c}{OscRingNStProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Doc-\/ing step "} <<  doc\_info.number()}
-\DoxyCodeLine{      << \textcolor{stringliteral}{" for time "} << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Doc-\/ing step "{}} <<  doc\_info.number()}
+\DoxyCodeLine{      << \textcolor{stringliteral}{"{} for time "{}} << time\_stepper\_pt()-\/>time\_pt()-\/>time() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ ofstream some\_file;}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
@@ -503,7 +503,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution on fluid mesh}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ \textcolor{comment}{//some\_file.precision(20);}}
 \DoxyCodeLine{ some\_file.open(filename);}
@@ -518,7 +518,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Plot wall posn}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/Wall\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/Wall\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ }
@@ -529,14 +529,14 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    xi\_wall[0]=0.5*Pi*double(iplot)/double(nplot-\/1);}
 \DoxyCodeLine{    Wall\_pt-\/>position(xi\_wall,r\_wall);}
-\DoxyCodeLine{    some\_file << r\_wall[0] << \textcolor{stringliteral}{" "} << r\_wall[1] << std::endl;}
+\DoxyCodeLine{    some\_file << r\_wall[0] << \textcolor{stringliteral}{"{} "{}} << r\_wall[1] << std::endl;}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc Sarah's asymptotic solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ fluid\_mesh\_pt()-\/>output\_fct(some\_file,npts,}
@@ -599,38 +599,38 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc}}
 \DoxyCodeLine{ Trace\_file << time\_pt()-\/>time() }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << r[1]}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << global\_kin }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << \mbox{\hyperlink{namespaceoomph_1_1SarahBL_a3cb8715d5fa21d7dbff8151e90df4200}{SarahBL::Kin\_energy\_sarah}}(time\_pt()-\/>time()) }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << \textcolor{keyword}{static\_cast<}PseudoBucklingRingElement*\textcolor{keyword}{>}(Wall\_pt)-\/>r\_0()}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << area  }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << press\_int/area }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << diss  }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << diss\_asympt}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << Veloc\_trace\_node\_pt-\/>x(0)}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << Veloc\_trace\_node\_pt-\/>x(1) }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << Veloc\_trace\_node\_pt-\/>value(0)}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << Veloc\_trace\_node\_pt-\/>value(1) }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << fluid\_mesh\_pt()-\/>nelement() }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << ndof()}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << min\_level }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << max\_level}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << fluid\_mesh\_pt()-\/>nrefinement\_overruled() }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << fluid\_mesh\_pt()-\/>max\_error()  }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << fluid\_mesh\_pt()-\/>min\_error()  }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << fluid\_mesh\_pt()-\/>max\_permitted\_error() }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << fluid\_mesh\_pt()-\/>min\_permitted\_error() }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << fluid\_mesh\_pt()-\/>max\_keep\_unrefined()}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << doc\_info.number()}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << Sarah\_veloc\_trace\_node\_pt-\/>x(0) }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << Sarah\_veloc\_trace\_node\_pt-\/>x(1) }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << Sarah\_veloc\_trace\_node\_pt-\/>value(0) }
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << Sarah\_veloc\_trace\_node\_pt-\/>value(1)}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << x\_sarah[0]}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << x\_sarah[1]}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << soln\_sarah[0]}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} << soln\_sarah[1]}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << r[1]}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << global\_kin }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{namespaceoomph_1_1SarahBL_a3cb8715d5fa21d7dbff8151e90df4200}{SarahBL::Kin\_energy\_sarah}}(time\_pt()-\/>time()) }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << \textcolor{keyword}{static\_cast<}PseudoBucklingRingElement*\textcolor{keyword}{>}(Wall\_pt)-\/>r\_0()}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << area  }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << press\_int/area }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << diss  }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << diss\_asympt}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << Veloc\_trace\_node\_pt-\/>x(0)}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << Veloc\_trace\_node\_pt-\/>x(1) }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << Veloc\_trace\_node\_pt-\/>value(0)}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << Veloc\_trace\_node\_pt-\/>value(1) }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << fluid\_mesh\_pt()-\/>nelement() }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << ndof()}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << min\_level }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << max\_level}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << fluid\_mesh\_pt()-\/>nrefinement\_overruled() }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << fluid\_mesh\_pt()-\/>max\_error()  }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << fluid\_mesh\_pt()-\/>min\_error()  }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << fluid\_mesh\_pt()-\/>max\_permitted\_error() }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << fluid\_mesh\_pt()-\/>min\_permitted\_error() }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << fluid\_mesh\_pt()-\/>max\_keep\_unrefined()}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << doc\_info.number()}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << Sarah\_veloc\_trace\_node\_pt-\/>x(0) }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << Sarah\_veloc\_trace\_node\_pt-\/>x(1) }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << Sarah\_veloc\_trace\_node\_pt-\/>value(0) }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << Sarah\_veloc\_trace\_node\_pt-\/>value(1)}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << x\_sarah[0]}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << x\_sarah[1]}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << soln\_sarah[0]}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} << soln\_sarah[1]}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << \textcolor{keyword}{static\_cast<}PseudoBucklingRingElement*\textcolor{keyword}{>}(Wall\_pt)-\/>r\_0()-\/1.0}
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{}
@@ -659,7 +659,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output fluid solution on coarse mesh}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/coarse\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/coarse\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ nelem=coarse\_mesh\_pt-\/>nelement();}
@@ -671,7 +671,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write restart file}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/restart\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/restart\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ dump\_it(some\_file,doc\_info);}
@@ -720,7 +720,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{\textcolor{comment}{//  finish\_problem\_setup();}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Assign equation numbers}}
-\DoxyCodeLine{ \textcolor{comment}{//cout <<"\(\backslash\)nNumber of equations: " << assign\_eqn\_numbers() }}
+\DoxyCodeLine{ \textcolor{comment}{//cout <<"{}\(\backslash\)nNumber of equations: "{} << assign\_eqn\_numbers() }}
 \DoxyCodeLine{ \textcolor{comment}{//     << std::endl<< std::endl; }}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
@@ -739,7 +739,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Max. number of adaptations per solve}}
@@ -776,8 +776,8 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{ fluid\_mesh\_pt()-\/>get\_refinement\_levels(min\_refinement\_level,}
 \DoxyCodeLine{                                        max\_refinement\_level);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)n Initial mesh: min/max refinement levels: "} }
-\DoxyCodeLine{      << min\_refinement\_level << \textcolor{stringliteral}{" "} << max\_refinement\_level << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)n Initial mesh: min/max refinement levels: "{}} }
+\DoxyCodeLine{      << min\_refinement\_level << \textcolor{stringliteral}{"{} "{}} << max\_refinement\_level << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc refinement targets}}
 \DoxyCodeLine{ fluid\_mesh\_pt()-\/>doc\_adaptivity\_targets(cout);}
@@ -861,48 +861,48 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc parameters in trace file}}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"\# err\_max "} << fluid\_mesh\_pt()-\/>max\_permitted\_error() << std::endl;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"\# err\_min "} << fluid\_mesh\_pt()-\/>min\_permitted\_error() << std::endl;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"\# Re "} << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}} << std::endl;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"\# St "} << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}}/}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}\# err\_max "{}} << fluid\_mesh\_pt()-\/>max\_permitted\_error() << std::endl;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}\# err\_min "{}} << fluid\_mesh\_pt()-\/>min\_permitted\_error() << std::endl;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}\# Re "{}} << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}} << std::endl;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}\# St "{}} << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\_Physical\_Variables::ReSt}}/}
 \DoxyCodeLine{                          \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\_Physical\_Variables::Re}} << std::endl;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"\# dt "} << time\_stepper\_pt()-\/>time\_pt()-\/>dt() << std::endl;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"\# initial \# elements "} << mesh\_pt()-\/>nelement() << std::endl;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"\# min\_refinement\_level "} }
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}\# dt "{}} << time\_stepper\_pt()-\/>time\_pt()-\/>dt() << std::endl;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}\# initial \# elements "{}} << mesh\_pt()-\/>nelement() << std::endl;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}\# min\_refinement\_level "{}} }
 \DoxyCodeLine{            << fluid\_mesh\_pt()-\/>min\_refinement\_level() << std::endl;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"\# max\_refinement\_level "} }
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}\# max\_refinement\_level "{}} }
 \DoxyCodeLine{            << fluid\_mesh\_pt()-\/>max\_refinement\_level() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"time\(\backslash\)",\(\backslash\)"V\_c\_t\_r\_l\(\backslash\)",\(\backslash\)"e\_k\_i\_n\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"e\_k\_i\_n\_(\_a\_s\_y\_m\_p\_t\_)\(\backslash\)",\(\backslash\)"R\_0\(\backslash\)",\(\backslash\)"Area\(\backslash\)""} ;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"Average pressure\(\backslash\)",\(\backslash\)"Total dissipation (quarter domain)\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"Asymptotic dissipation (quarter domain)\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"x<sub>1</sub><sup>(track)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"x<sub>2</sub><sup>(track)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"u<sub>1</sub><sup>(track)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"u<sub>2</sub><sup>(track)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"N<sub>element</sub>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"N<sub>dof</sub>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"max. refinement level\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"min. refinement level\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"\# of elements whose refinement was over-\/ruled\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"max. error\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"min. error\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"max. permitted error\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"min. permitted error\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"max. permitted \# of unrefined elements\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"doc number\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"x<sub>1</sub><sup>(track2 FE)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"x<sub>2</sub><sup>(track2 FE)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"u<sub>1</sub><sup>(track2 FE)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"u<sub>2</sub><sup>(track2 FE)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"x<sub>1</sub><sup>(track2 Sarah)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"x<sub>2</sub><sup>(track2 Sarah)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"u<sub>1</sub><sup>(track2 Sarah)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"u<sub>2</sub><sup>(track2 Sarah)</sup>\(\backslash\)""};}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{",\(\backslash\)"R<sub>0</sub>-\/1\(\backslash\)""};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}time\(\backslash\)"{},\(\backslash\)"{}V\_c\_t\_r\_l\(\backslash\)"{},\(\backslash\)"{}e\_k\_i\_n\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}e\_k\_i\_n\_(\_a\_s\_y\_m\_p\_t\_)\(\backslash\)"{},\(\backslash\)"{}R\_0\(\backslash\)"{},\(\backslash\)"{}Area\(\backslash\)"{}"{}} ;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}Average pressure\(\backslash\)"{},\(\backslash\)"{}Total dissipation (quarter domain)\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}Asymptotic dissipation (quarter domain)\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}x<sub>1</sub><sup>(track)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}x<sub>2</sub><sup>(track)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}u<sub>1</sub><sup>(track)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}u<sub>2</sub><sup>(track)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}N<sub>element</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}N<sub>dof</sub>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}max. refinement level\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}min. refinement level\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}\# of elements whose refinement was over-\/ruled\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}max. error\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}min. error\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}max. permitted error\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}min. permitted error\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}max. permitted \# of unrefined elements\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}doc number\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}x<sub>1</sub><sup>(track2 FE)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}x<sub>2</sub><sup>(track2 FE)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}u<sub>1</sub><sup>(track2 FE)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}u<sub>2</sub><sup>(track2 FE)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}x<sub>1</sub><sup>(track2 Sarah)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}x<sub>2</sub><sup>(track2 Sarah)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}u<sub>1</sub><sup>(track2 Sarah)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}u<sub>2</sub><sup>(track2 Sarah)</sup>\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{},\(\backslash\)"{}R<sub>0</sub>-\/1\(\backslash\)"{}"{}};}
 \DoxyCodeLine{ Trace\_file << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}}
@@ -910,9 +910,9 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// /////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -955,7 +955,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::Argc!=2)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"No restart"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}No restart"{}} << std::endl;}
 \DoxyCodeLine{   restarted=\textcolor{keyword}{false};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Refine uniformly}}
@@ -983,15 +983,15 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{   restart\_file\_pt=\textcolor{keyword}{new} ifstream(CommandLineArgs::Argv[1],ios\_base::in);}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (restart\_file\_pt!=0)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Have opened "} << CommandLineArgs::Argv[1] << }
-\DoxyCodeLine{      \textcolor{stringliteral}{" for restart. "} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Have opened "{}} << CommandLineArgs::Argv[1] << }
+\DoxyCodeLine{      \textcolor{stringliteral}{"{} for restart. "{}} << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     std::ostringstream error\_stream;}
-\DoxyCodeLine{     error\_stream << \textcolor{stringliteral}{"ERROR while trying to open "} }
+\DoxyCodeLine{     error\_stream << \textcolor{stringliteral}{"{}ERROR while trying to open "{}} }
 \DoxyCodeLine{                  << CommandLineArgs::Argv[2] }
-\DoxyCodeLine{                  << \textcolor{stringliteral}{" for restart."} << std::endl;}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"{} for restart."{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
 \DoxyCodeLine{                         OOMPH\_CURRENT\_FUNCTION,}
@@ -1006,7 +1006,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::Argc==3)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{    nstep=3;}
-\DoxyCodeLine{    cout << \textcolor{stringliteral}{"Only doing nstep steps for validation: "} << nstep << std::endl;}
+\DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}Only doing nstep steps for validation: "{}} << nstep << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -1016,7 +1016,7 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"}); }
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}}); }
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do unsteady run of the problem for nstep steps}}
@@ -1040,13 +1040,13 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{   DocInfo restarted\_doc\_info;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{   restarted\_doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_restarted"}); }
+\DoxyCodeLine{   restarted\_doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_restarted"{}}); }
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Step number}}
 \DoxyCodeLine{   restarted\_doc\_info.number()=0;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Copy by performing a restart from old problem}}
-\DoxyCodeLine{   restart\_file\_pt=\textcolor{keyword}{new} ifstream(\textcolor{stringliteral}{"RESLT/restart2.dat"});}
+\DoxyCodeLine{   restart\_file\_pt=\textcolor{keyword}{new} ifstream(\textcolor{stringliteral}{"{}RESLT/restart2.dat"{}});}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Do the actual restart}}
 \DoxyCodeLine{   restarted\_problem.restart(*restart\_file\_pt);}
@@ -1069,10 +1069,11 @@ We re-\/visit the simple fluid-\/structure interaction problem considered in the
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+
 \end{DoxyCodeInclude}
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -1,0 +1,62 @@
+\hypertarget{lapack__qz_8h_source}{}\doxysection{lapack\+\_\+qz.\+h}
+\label{lapack__qz_8h_source}\index{lapack\_qz.h@{lapack\_qz.h}}
+\mbox{\hyperlink{lapack__qz_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00001}00001 \textcolor{comment}{//LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00002}00002 \textcolor{comment}{//LIC// This file forms part of oomph-\/lib, the object-\/oriented, }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00003}00003 \textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00004}00004 \textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00005}00005 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00006}00006 \textcolor{comment}{//LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00007}00007 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00008}00008 \textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00009}00009 \textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00010}00010 \textcolor{comment}{//LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00011}00011 \textcolor{comment}{//LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00012}00012 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00013}00013 \textcolor{comment}{//LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00014}00014 \textcolor{comment}{//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00015}00015 \textcolor{comment}{//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00016}00016 \textcolor{comment}{//LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00017}00017 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00018}00018 \textcolor{comment}{//LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00019}00019 \textcolor{comment}{//LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00020}00020 \textcolor{comment}{//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00021}00021 \textcolor{comment}{//LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00022}00022 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00023}00023 \textcolor{comment}{//LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00024}00024 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00025}00025 \textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00026}00026 \textcolor{comment}{//QZ-\/ehader}}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00027}00027 \textcolor{comment}{// The BLAS DOUBLE dot-\/product }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00028}00028 \textcolor{comment}{// Fortran interface : FUNCTION DDOT(N,X,INCX,Y,INCY) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00029}00029 \textcolor{comment}{//PROTOCCALLSFFUN5( DOUBLE, DDOT, ddot, INT, DOUBLEV, INT, DOUBLEV, INT ) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00030}00030 \textcolor{comment}{//\#define BLAS\_DDOT(N,X,INCX,Y,INCY) CCALLSFFUN5(DDOT,ddot,INT,DOUBLEV,INT,DOUBLEV,INT,N,X,INCX,Y,INCY) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00032}00032 \textcolor{comment}{// The BLAS DOUBLE matrix multiplier }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00033}00033 \textcolor{comment}{// Fortran interface : SUBROUTINE DGEMM(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,LDC) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00034}00034 \textcolor{comment}{//PROTOCCALLSFSUB13( DGEMM, dgemm, STRING, STRING, INT, INT, INT, DOUBLE, DOUBLEV, INT, DOUBLEV, INT, DOUBLE, DOUBLEV, INT ) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00035}00035 \textcolor{comment}{//\#define BLAS\_DGEMM(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,LDC) CCALLSFSUB13(DGEMM,dgemm,STRING,STRING,INT,INT,INT,DOUBLE,DOUBLEV,INT,DOUBLEV,INT,DOUBLE,DOUBLEV,INT,TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,LDC) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00037}00037 \textcolor{comment}{// The LAPACK LU solver for a DOUBLE DENSE matrix }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00038}00038 \textcolor{comment}{// Fortran interface : SUBROUTINE DGESV(N,NRHS,A,LDA,IPIV,B,LDB,INFO ) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00039}00039 \textcolor{comment}{//PROTOCCALLSFSUB8( DGESV, dgesv, INT, INT, DOUBLEV, INT, INTV, DOUBLEV, INT, PINT ) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00040}00040 \textcolor{comment}{//\#define LAPACK\_DGESV(N,NRHS,A,LDA,IPIV,B,LDB,INFO) CCALLSFSUB8(DGESV,dgesv,INT,INT,DOUBLEV,INT,INTV,DOUBLEV,INT,PINT,N,NRHS,A,LDA,IPIV,B,LDB,INFO) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00041}00041 }
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00042}00042 \textcolor{comment}{// The LAPACK LU solver for a DOUBLE BANDED matrix }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00043}00043 \textcolor{comment}{//  Fortran interface : SUBROUTINE DGBSV(N,KL,KU,NRHS,AB,LDAB,IPIV,B,LDB,INFO) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00044}00044 \textcolor{comment}{//PROTOCCALLSFSUB10( DGBSV, dgbsv, INT, INT, INT, INT, DOUBLEV, INT, INTV, DOUBLEV, INT, PINT ) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00045}00045 \textcolor{comment}{//\#define LAPACK\_DGBSV(N,KL,KU,NRHS,AB,LDAB,IPIV,B,LDB,INFO) CCALLSFSUB10(DGBSV,dgbsv,INT,INT,INT,INT,DOUBLEV,INT,INTV,DOUBLEV,INT,PINT,N,KL,KU,NRHS,AB,LDAB,IPIV,B,LDB,INFO) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00047}00047 \textcolor{comment}{// The LAPACK DOUBLE GENERALISED eigenvalue solver }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00048}00048 \textcolor{comment}{// Fortran interface : SUBROUTINE DGGEV(JOBVL,JOBVR,N,A,LDA,B,LDB,ALPHAR,ALPHAI,BETA,VL,LDVL,VR,LDVR,WORK,LWORK,INFO) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00049}\mbox{\hyperlink{lapack__qz_8h_a51ce94e8f1515a32503b5fe67a3db757}{00049}} \mbox{\hyperlink{lapack__qz_8h_a51ce94e8f1515a32503b5fe67a3db757}{PROTOCCALLSFSUB17}}( DGGEV, dggev, \mbox{\hyperlink{lapack__qz_8h_ae158940723622f094459a31491a87336}{STRING}}, \mbox{\hyperlink{lapack__qz_8h_ae158940723622f094459a31491a87336}{STRING}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{frontal_8h_a3f2291edc03bb9ce2e52c8b893b4281d}{PINT}} ) }
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00050}00050 \textcolor{preprocessor}{\#define LAPACK\_DGGEV(JOBVL,JOBVR,N,A,LDA,B,LDB,ALPHAR,ALPHAI,BETA,VL,LDVL,VR,LDVR,WORK,LWORK,INFO) CCALLSFSUB17(DGGEV,dggev,STRING,STRING,INT,DOUBLEV,INT,DOUBLEV,INT,DOUBLEV,DOUBLEV,DOUBLEV,DOUBLEV,INT,DOUBLEV,INT,DOUBLEV,INT,PINT,JOBVL,JOBVR,N,A,LDA,B,LDB,ALPHAR,ALPHAI,BETA,VL,LDVL,VR,LDVR,WORK,LWORK,INFO) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00051}00051 }
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00052}00052 \textcolor{comment}{// The LAPACK COMPLEX GENERALISE eigenvalue solver }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00053}00053 \textcolor{comment}{// Fortran interface : SUBROUTINE ZGGEV(JOBVL,JOBVR,N,A,LDA,B,LDB,ALPHA,BETA,VL,LDVL,VR,LDVR,WORK,LWORK,RWORK,INFO) }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00054}\mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{00054}} \mbox{\hyperlink{lapack__qz_8h_a51ce94e8f1515a32503b5fe67a3db757}{PROTOCCALLSFSUB17}}( ZGGEV, \mbox{\hyperlink{lapack__qz_8h_a89ee487f88a8296314b55d6b242dd4ed}{zggev}}, \mbox{\hyperlink{lapack__qz_8h_ae158940723622f094459a31491a87336}{STRING}}, \mbox{\hyperlink{lapack__qz_8h_ae158940723622f094459a31491a87336}{STRING}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{lapack__qz_8h_a4cf9af43a95c45c3d469658098dfbe1a}{INT}}, \mbox{\hyperlink{lapack__qz_8h_ae19b22d0ea343b69f76b0a5b26c4eb97}{DOUBLEV}}, \mbox{\hyperlink{frontal_8h_a3f2291edc03bb9ce2e52c8b893b4281d}{PINT}} ) }
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00055}00055 \textcolor{comment}{// jobvl jobvr n a lda b ldb alpha beta vl ldvl vr ldvr work lwork rwork info }}
+\DoxyCodeLine{\Hypertarget{lapack__qz_8h_source_l00056}00056 \textcolor{preprocessor}{\#define LAPACK\_ZGGEV(JOBVL,JOBVR,N,A,LDA,B,LDB,ALPHA,BETA,VL,LDVL,VR,LDVR,WORK,LWORK,RWORK,INFO) CCALLSFSUB17(ZGGEV,zggev,STRING,STRING,INT,DOUBLEV,INT,DOUBLEV,INT,DOUBLEV,DOUBLEV,DOUBLEV,INT,DOUBLEV,INT,DOUBLEV,INT,DOUBLEV,PINT,JOBVL,JOBVR,N,A,LDA,B,LDB,ALPHA,BETA,VL,LDVL,VR,LDVR,WORK,LWORK,RWORK,INFO) }}
+
+\end{DoxyCode}

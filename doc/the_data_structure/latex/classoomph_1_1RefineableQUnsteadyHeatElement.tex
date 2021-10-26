@@ -1,27 +1,32 @@
-\hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement}{}\doxysection{oomph\+::Refineable\+Q\+Unsteady\+Heat\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement}{}\doxysection{oomph\+::Refineable\+QUnsteady\+Heat\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RefineableQUnsteadyHeatElement}\index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
+
+
+Refineable version of 2D \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{QUnsteady\+Heat\+Element}} elements.  
+
+
 
 
 {\ttfamily \#include $<$refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Q\+Unsteady\+Heat\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+QUnsteady\+Heat\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.108179cm]{classoomph_1_1RefineableQUnsteadyHeatElement}
+\includegraphics[height=1.055409cm]{classoomph_1_1RefineableQUnsteadyHeatElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_ae1769d1d3f4c15e57c3970b67930fe66}{Refineable\+Q\+Unsteady\+Heat\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_ae1769d1d3f4c15e57c3970b67930fe66}{Refineable\+QUnsteady\+Heat\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a7a49d849293f74b46dc261c89c6234b4}{Refineable\+Q\+Unsteady\+Heat\+Element}} (const \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_aa9bac32f088b72a25cf8042824ccd29a}{Refineable\+QUnsteady\+Heat\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a243ef941f45a040393b542992babdfcf}{ncont\+\_\+interpolated\+\_\+values}} () const
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a243ef941f45a040393b542992babdfcf}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a5492bc9cbf7a118fe4c707ba3c7e9685}{nvertex\+\_\+node}} () const
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a5492bc9cbf7a118fe4c707ba3c7e9685}{nvertex\+\_\+node}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Number of vertex nodes in the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a1d82313d60a69d06bf02e807e4718a7a}{vertex\+\_\+node\+\_\+pt}} (const unsigned \&j) const
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a06de953b6c4a43679f172327236212cf}{vertex\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Pointer to the j-\/th vertex node in the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_add4a7e0089818e439e156d1ed7c9fd6f}{rebuild\+\_\+from\+\_\+sons}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Rebuild from sons\+: empty. \end{DoxyCompactList}\item 
@@ -33,12 +38,11 @@ void \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement_a4a0c3c617a3b
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+Refineable\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
+Refineable version of 2D \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{QUnsteady\+Heat\+Element}} elements. 
 
-Refineable version of 2D \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{Q\+Unsteady\+Heat\+Element}} elements 
-
-Definition at line 199 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00193}{193}} of file \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source}{refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 
@@ -47,8 +51,8 @@ Definition at line 199 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.
 \index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!RefineableQUnsteadyHeatElement@{RefineableQUnsteadyHeatElement}}
 \index{RefineableQUnsteadyHeatElement@{RefineableQUnsteadyHeatElement}!oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableQUnsteadyHeatElement()}{RefineableQUnsteadyHeatElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{Refineable\+Q\+Unsteady\+Heat\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{Refineable\+QUnsteady\+Heat\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -56,26 +60,18 @@ Constructor.
 
 
 
-Definition at line 206 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source}{refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement_a7a49d849293f74b46dc261c89c6234b4}\label{classoomph_1_1RefineableQUnsteadyHeatElement_a7a49d849293f74b46dc261c89c6234b4}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement_aa9bac32f088b72a25cf8042824ccd29a}\label{classoomph_1_1RefineableQUnsteadyHeatElement_aa9bac32f088b72a25cf8042824ccd29a}} 
 \index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!RefineableQUnsteadyHeatElement@{RefineableQUnsteadyHeatElement}}
 \index{RefineableQUnsteadyHeatElement@{RefineableQUnsteadyHeatElement}!oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableQUnsteadyHeatElement()}{RefineableQUnsteadyHeatElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{Refineable\+Q\+Unsteady\+Heat\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{Refineable\+QUnsteady\+Heat\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 216 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -84,8 +80,8 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}}
 \index{further\_setup\_hanging\_nodes@{further\_setup\_hanging\_nodes}!oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{further\_setup\_hanging\_nodes()}{further\_setup\_hanging\_nodes()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::further\+\_\+setup\+\_\+hanging\+\_\+nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -97,14 +93,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a86ea01c485f
 
 
 
-Definition at line 258 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00247}{247}} of file \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source}{refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement_a243ef941f45a040393b542992babdfcf}\label{classoomph_1_1RefineableQUnsteadyHeatElement_a243ef941f45a040393b542992babdfcf}} 
 \index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
 \index{ncont\_interpolated\_values@{ncont\_interpolated\_values}!oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{ncont\_interpolated\_values()}{ncont\_interpolated\_values()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -116,14 +112,14 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line 229 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00218}{218}} of file \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source}{refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement_ae216355ba4c445c8d9b46fe4c799c482}\label{classoomph_1_1RefineableQUnsteadyHeatElement_ae216355ba4c445c8d9b46fe4c799c482}} 
 \index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!nrecovery\_order@{nrecovery\_order}}
 \index{nrecovery\_order@{nrecovery\_order}!oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{nrecovery\_order()}{nrecovery\_order()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::nrecovery\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -135,14 +131,14 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_af39480835
 
 
 
-Definition at line 251 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00240}{240}} of file \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source}{refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement_a5492bc9cbf7a118fe4c707ba3c7e9685}\label{classoomph_1_1RefineableQUnsteadyHeatElement_a5492bc9cbf7a118fe4c707ba3c7e9685}} 
 \index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!nvertex\_node@{nvertex\_node}}
 \index{nvertex\_node@{nvertex\_node}!oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{nvertex\_node()}{nvertex\_node()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::nvertex\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -154,18 +150,14 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a19495a0e7
 
 
 
-Definition at line 235 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::nvertex\+\_\+node().
+Definition at line \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00224}{224}} of file \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source}{refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement_add4a7e0089818e439e156d1ed7c9fd6f}\label{classoomph_1_1RefineableQUnsteadyHeatElement_add4a7e0089818e439e156d1ed7c9fd6f}} 
 \index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!rebuild\_from\_sons@{rebuild\_from\_sons}}
 \index{rebuild\_from\_sons@{rebuild\_from\_sons}!oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{rebuild\_from\_sons()}{rebuild\_from\_sons()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::rebuild\+\_\+from\+\_\+sons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::rebuild\+\_\+from\+\_\+sons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$\&}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -177,14 +169,14 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a33324be27833fa4b782
 
 
 
-Definition at line 247 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00236}{236}} of file \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source}{refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement_a1d82313d60a69d06bf02e807e4718a7a}\label{classoomph_1_1RefineableQUnsteadyHeatElement_a1d82313d60a69d06bf02e807e4718a7a}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableQUnsteadyHeatElement_a06de953b6c4a43679f172327236212cf}\label{classoomph_1_1RefineableQUnsteadyHeatElement_a06de953b6c4a43679f172327236212cf}} 
 \index{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}!vertex\_node\_pt@{vertex\_node\_pt}}
 \index{vertex\_node\_pt@{vertex\_node\_pt}!oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$@{oomph::RefineableQUnsteadyHeatElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{vertex\_node\_pt()}{vertex\_node\_pt()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+Q\+Unsteady\+Heat\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQUnsteadyHeatElement}{oomph\+::\+Refineable\+QUnsteady\+Heat\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::vertex\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -192,15 +184,11 @@ Pointer to the j-\/th vertex node in the element.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a0eedccc33519f852c5dc2055ddf2774b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
+Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a6d852edae3d9f6bddeb5aaf136ebbb8b}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
 
 
 
-Definition at line 241 of file refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt().
+Definition at line \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source_l00230}{230}} of file \mbox{\hyperlink{refineable__unsteady__heat__elements_8h_source}{refineable\+\_\+unsteady\+\_\+heat\+\_\+elements.\+h}}.
 
 
 

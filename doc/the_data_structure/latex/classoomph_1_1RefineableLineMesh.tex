@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1RefineableLineMesh}{}\doxysection{oomph\+::Refineable\+Line\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RefineableLineMesh}{}\doxysection{oomph\+::Refineable\+Line\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RefineableLineMesh}\index{oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}}
+
+
+Intermediate mesh class that implements the mesh adaptation functions specified in the Refineable\+Mesh class for meshes that contain the refineable variant of \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} s \mbox{[}The class ELEMENT provided as the template parameter must be of type \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_011_01_4}{Refineable\+QElement$<$1$>$}}\mbox{]}.  
+
+
 
 
 {\ttfamily \#include $<$refineable\+\_\+line\+\_\+mesh.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Line\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Line\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=6.468647cm]{classoomph_1_1RefineableLineMesh}
@@ -15,28 +20,27 @@ Inheritance diagram for oomph\+::Refineable\+Line\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableLineMesh_a971ed8cade766ab0d19aa35c2276f771}{Refineable\+Line\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Constructor\+: Set up static binary tree data. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RefineableLineMesh_aa630559ec1fe3cbf00f9bb94f815d723}{Refineable\+Line\+Mesh}} (const \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1RefineableLineMesh_a43fcc9d4a94b7419f249c14dd68ac54e}{Refineable\+Line\+Mesh}} (const \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh_a42040861eecb75e09f5e0401212d57a1}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} \&)
+void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh_ac1f0662342d3481ba472470c19013e52}{operator=}} (const \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1RefineableLineMesh_a7939a82970c7aa6ad2e3e8662e7e9fd1}{$\sim$\+Refineable\+Line\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh_a11ee25cace35f302fdf64b623906ea35}{setup\+\_\+tree\+\_\+forest}} ()
 \begin{DoxyCompactList}\small\item\em Set up the tree forest associated with the \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}. Forwards call to \mbox{\hyperlink{classoomph_1_1RefineableLineMesh_ac87ad1a1be6f9a9e444acea2e42598ff}{setup\+\_\+binary\+\_\+tree\+\_\+forest()}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh_ac87ad1a1be6f9a9e444acea2e42598ff}{setup\+\_\+binary\+\_\+tree\+\_\+forest}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set up \mbox{\hyperlink{classoomph_1_1BinaryTreeForest}{Binary\+Tree\+Forest}}. Wipes any existing tree structure and regards the currently active elements as the root trees in the forest. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Refineable\+Line\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
-Intermediate mesh class that implements the mesh adaptation functions specified in the Refineable\+Mesh class for meshes that contain the refineable variant of \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} s \mbox{[}The class E\+L\+E\+M\+E\+NT provided as the template parameter must be of type \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_011_01_4}{Refineable\+Q\+Element$<$1$>$}}\mbox{]}.
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Refineable\+Line\+Mesh$<$ ELEMENT $>$}
+Intermediate mesh class that implements the mesh adaptation functions specified in the Refineable\+Mesh class for meshes that contain the refineable variant of \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} s \mbox{[}The class ELEMENT provided as the template parameter must be of type \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_011_01_4}{Refineable\+QElement$<$1$>$}}\mbox{]}. 
 
 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} adaptation/refinement is implemented by \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} procedures and any concrete implementation of this class needs to provide a \mbox{\hyperlink{classoomph_1_1BinaryTreeForest}{Binary\+Tree\+Forest}} representation of the initial (coarse) mesh. 
 
-Definition at line 48 of file refineable\+\_\+line\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__line__mesh_8h_source_l00048}{48}} of file \mbox{\hyperlink{refineable__line__mesh_8h_source}{refineable\+\_\+line\+\_\+mesh.\+h}}.
 
 
 
@@ -45,8 +49,8 @@ Definition at line 48 of file refineable\+\_\+line\+\_\+mesh.\+h.
 \index{oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}!RefineableLineMesh@{RefineableLineMesh}}
 \index{RefineableLineMesh@{RefineableLineMesh}!oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableLineMesh()}{RefineableLineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -54,29 +58,29 @@ Constructor\+: Set up static binary tree data.
 
 
 
-Definition at line 53 of file refineable\+\_\+line\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__line__mesh_8h_source_l00053}{53}} of file \mbox{\hyperlink{refineable__line__mesh_8h_source}{refineable\+\_\+line\+\_\+mesh.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableLineMesh_aa630559ec1fe3cbf00f9bb94f815d723}\label{classoomph_1_1RefineableLineMesh_aa630559ec1fe3cbf00f9bb94f815d723}} 
+
+
+References \mbox{\hyperlink{binary__tree_8cc_source_l00086}{oomph\+::\+Binary\+Tree\+::setup\+\_\+static\+\_\+data()}}.
+
+\mbox{\Hypertarget{classoomph_1_1RefineableLineMesh_a43fcc9d4a94b7419f249c14dd68ac54e}\label{classoomph_1_1RefineableLineMesh_a43fcc9d4a94b7419f249c14dd68ac54e}} 
 \index{oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}!RefineableLineMesh@{RefineableLineMesh}}
 \index{RefineableLineMesh@{RefineableLineMesh}!oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableLineMesh()}{RefineableLineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
 
-
-
-Definition at line 61 of file refineable\+\_\+line\+\_\+mesh.\+h.
-
 \mbox{\Hypertarget{classoomph_1_1RefineableLineMesh_a7939a82970c7aa6ad2e3e8662e7e9fd1}\label{classoomph_1_1RefineableLineMesh_a7939a82970c7aa6ad2e3e8662e7e9fd1}} 
 \index{oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}!````~RefineableLineMesh@{$\sim$RefineableLineMesh}}
 \index{````~RefineableLineMesh@{$\sim$RefineableLineMesh}!oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$RefineableLineMesh()}{~RefineableLineMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -84,47 +88,51 @@ Destructor\+:
 
 
 
-Definition at line 73 of file refineable\+\_\+line\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__line__mesh_8h_source_l00067}{67}} of file \mbox{\hyperlink{refineable__line__mesh_8h_source}{refineable\+\_\+line\+\_\+mesh.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1RefineableLineMesh_a42040861eecb75e09f5e0401212d57a1}\label{classoomph_1_1RefineableLineMesh_a42040861eecb75e09f5e0401212d57a1}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableLineMesh_ac1f0662342d3481ba472470c19013e52}\label{classoomph_1_1RefineableLineMesh_ac1f0662342d3481ba472470c19013e52}} 
 \index{oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ ELEMENT $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{Refineable\+Line\+Mesh}}$<$ ELEMENT $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 67 of file refineable\+\_\+line\+\_\+mesh.\+h.
-
 \mbox{\Hypertarget{classoomph_1_1RefineableLineMesh_ac87ad1a1be6f9a9e444acea2e42598ff}\label{classoomph_1_1RefineableLineMesh_ac87ad1a1be6f9a9e444acea2e42598ff}} 
 \index{oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}!setup\_binary\_tree\_forest@{setup\_binary\_tree\_forest}}
 \index{setup\_binary\_tree\_forest@{setup\_binary\_tree\_forest}!oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{setup\_binary\_tree\_forest()}{setup\_binary\_tree\_forest()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::setup\+\_\+binary\+\_\+tree\+\_\+forest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ ELEMENT $>$\+::setup\+\_\+binary\+\_\+tree\+\_\+forest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Set up \mbox{\hyperlink{classoomph_1_1BinaryTreeForest}{Binary\+Tree\+Forest}}. Wipes any existing tree structure and regards the currently active elements as the root trees in the forest. 
 
-Definition at line 84 of file refineable\+\_\+line\+\_\+mesh.\+h.
+
+
+Definition at line \mbox{\hyperlink{refineable__line__mesh_8h_source_l00078}{78}} of file \mbox{\hyperlink{refineable__line__mesh_8h_source}{refineable\+\_\+line\+\_\+mesh.\+h}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+One\+D\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::\+Refineable\+One\+D\+Mesh(), and oomph\+::\+Refineable\+Line\+Mesh$<$ oomph\+::\+Spectral\+Periodic\+Orbit\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$\+::setup\+\_\+tree\+\_\+forest().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00768}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Forest\+\_\+pt}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
+
+
+
+Referenced by \mbox{\hyperlink{one__d__mesh_8template_8h_source_l00127}{oomph\+::\+Refineable\+One\+DMesh$<$ ELEMENT $>$\+::\+Refineable\+One\+DMesh()}}, and \mbox{\hyperlink{refineable__line__mesh_8h_source_l00071}{oomph\+::\+Refineable\+Line\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+tree\+\_\+forest()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableLineMesh_a11ee25cace35f302fdf64b623906ea35}\label{classoomph_1_1RefineableLineMesh_a11ee25cace35f302fdf64b623906ea35}} 
 \index{oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}!setup\_tree\_forest@{setup\_tree\_forest}}
 \index{setup\_tree\_forest@{setup\_tree\_forest}!oomph::RefineableLineMesh$<$ ELEMENT $>$@{oomph::RefineableLineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{setup\_tree\_forest()}{setup\_tree\_forest()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::setup\+\_\+tree\+\_\+forest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1RefineableLineMesh}{oomph\+::\+Refineable\+Line\+Mesh}}$<$ ELEMENT $>$\+::setup\+\_\+tree\+\_\+forest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -136,7 +144,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_aab7cbaa68
 
 
 
-Definition at line 77 of file refineable\+\_\+line\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__line__mesh_8h_source_l00071}{71}} of file \mbox{\hyperlink{refineable__line__mesh_8h_source}{refineable\+\_\+line\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{refineable__line__mesh_8h_source_l00078}{oomph\+::\+Refineable\+Line\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+binary\+\_\+tree\+\_\+forest()}}.
 
 
 

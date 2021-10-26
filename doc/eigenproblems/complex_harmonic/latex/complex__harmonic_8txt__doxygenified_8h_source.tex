@@ -1,0 +1,240 @@
+\hypertarget{complex__harmonic_8txt__doxygenified_8h_source}{}\doxysection{complex\+\_\+harmonic.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{complex__harmonic_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: A one-\/dimensional eigenproblem with complex eigenvalues}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{In this document, we demonstrate how to solve a 1D eigenproblem}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{(eigenvalues of the shifted 1D Laplace operator in a bounded domain) by}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{creating custom elements. The tutorial is related to the }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{<a href="{}../../harmonic/html/index.html"{}> harmonic eigenproblem </a>,}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{which you should read first. The fundamental difference in this case,}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{is that we treat the eigenproblem as two coupled first-\/order equations}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{which ensures that many of the eigenvalues are complex. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{<B>One-\/dimensional model eigenvalue problem with complex eigenvalues</B>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{x\} = (\(\backslash\)lambda -\/ \(\backslash\)mu) w, \(\backslash\)quad  \(\backslash\)frac\{\(\backslash\)partial w\}\{\(\backslash\)partial x\} = \(\backslash\)lambda u}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{in the domain \(\backslash\)f\$D =\(\backslash\)left\(\backslash\)\{ x\_1 \(\backslash\)in }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{[0,1] \(\backslash\)right\(\backslash\)\}\(\backslash\)f\$, }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{with homogeneous Dirichlet boundary conditions}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{\(\backslash\)left. u\(\backslash\)right|\_\{\(\backslash\)partial D\}=0. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{ We shall treat \(\backslash\)f\$ \(\backslash\)lambda\(\backslash\)f\$ as an eigenvalue (unknown), but the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{ other parameter \(\backslash\)f\$ \(\backslash\)mu \(\backslash\)f\$ is a \(\backslash\)b shift, which is used to modify}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{ the spectrum of the operator. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{ The two first-\/order equations may be combined into a single}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{ second-\/order equation}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)frac\{\(\backslash\)partial\string^\{2\} u\}\{\(\backslash\)partial x\string^\{2\}\} = (\(\backslash\)lambda -\/ \(\backslash\)mu)}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{ \(\backslash\)frac\{\(\backslash\)partial w\}\{\(\backslash\)partial x\} = (\(\backslash\)lambda -\/ \(\backslash\)mu) \(\backslash\)lambda u \(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{ \(\backslash\)Rightarrow\(\backslash\)quad  \(\backslash\)frac\{\(\backslash\)partial\string^\{2\} u\}\{\(\backslash\)partial x\string^\{2\}\} +}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{ (\(\backslash\)mu -\/ \(\backslash\)lambda) \(\backslash\)lambda u = 0, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{which is exactly the same equation as }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{the <a href="{}../../harmonic/html/index.html"{}> harmonic eigenproblem </a>,}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{ but with a redefinition of the eigenvalues. Hence, the exact}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{ solutions are given by the countably infinite set:}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{   u\_\{n\} = \(\backslash\)sin (\(\backslash\)Lambda\_\{n\} x\_\{1\}), \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{   \(\backslash\)Lambda\_\{n\} = n \(\backslash\)pi = \(\backslash\)sqrt\{\(\backslash\)lambda\_\{n\}(\(\backslash\)mu -\/ \(\backslash\)lambda\_\{n\})\},}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{  which yields}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)lambda\_\{n\} = \(\backslash\)frac\{\(\backslash\)mu\}\{2\} \(\backslash\)pm \(\backslash\)sqrt\{\(\backslash\)mu\string^\{2\}/4 -\/}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{ n\string^\{2\}\(\backslash\)pi\string^\{2\}\}. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3) \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{If the shift \(\backslash\)f\$\(\backslash\)mu = 0\(\backslash\)f\$, then the eigenvalues are all imaginary and}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{ consist of the complex conjugate pairs given by \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{ \(\backslash\)lambda\{n\} = \(\backslash\)pm n \(\backslash\)pi\(\backslash\), \(\backslash\)mbox\{i\} \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{ If \(\backslash\)f\$ \(\backslash\)mu\string^\{2\}/4 >}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{ \(\backslash\)pi\string^\{2\}\(\backslash\)f\$ \(\backslash\)f\$ \(\backslash\)Rightarrow \(\backslash\)f\$ \(\backslash\)f\$ \(\backslash\)mu > 2\(\backslash\)pi \(\backslash\)f\$, then the first complex}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{ conjugate pair of imaginary eigenvalues becomes two distinct real}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{ eigenvalues because the term under the square root in (3) becomes}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{ positive. As \(\backslash\)f\$ \(\backslash\)mu \(\backslash\)f\$ increases further subsequent complex}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{ eigenvalues merge to be real. Thus, we can control the spectrum by}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{ modifying the parameter \(\backslash\)f\$ \(\backslash\)mu \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{We now provide a detailed discussion of the driver code }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/eigenproblems/harmonic/complex\_harmonic.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{complex\_harmonic.cc</A> which solves the problem for the first four}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{eigenvalues, when \(\backslash\)f\$ \(\backslash\)mu = 6.5 > 2\(\backslash\)pi. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)section theory Overview of the theory}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{\(\backslash\)subsection weak Weak formulation of the problem}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{ If we wish to solve the problem (1) using finite elements,}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{we simply multiply each equation by a test function, but do not}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{integrate by parts. We shall use the same test functions for each}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{variable and thus our governing equations become}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)int\_\{D\} \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\} \(\backslash\)phi\string^\{(test)\} \(\backslash\),\(\backslash\)mbox\{d\} x = }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{ (\(\backslash\)lambda -\/\(\backslash\)mu) \(\backslash\)int\_\{D\} w\(\backslash\), \(\backslash\)phi\string^\{(test)\}\(\backslash\),\(\backslash\)mbox\{d\} x, \(\backslash\)quad\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{ \(\backslash\)int\_\{D\} \(\backslash\)frac\{\(\backslash\)partial w\}\{\(\backslash\)partial x\} \(\backslash\)phi\string^\{(test)\} \(\backslash\),\(\backslash\)mbox\{d\} x = }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{ \(\backslash\)lambda  \(\backslash\)int\_\{D\} u\(\backslash\), \(\backslash\)phi\string^\{(test)\}\(\backslash\),\(\backslash\)mbox\{d\} x, \(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{ \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{If we expand \(\backslash\)f\$ u(x) = U\_\{j\} \(\backslash\)psi\_\{j\}(x) \(\backslash\)f\$ and \(\backslash\)f\$ w(x) = W\_\{j\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)psi\_\{j\}(x) \(\backslash\)f\$ in terms of}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{known basis functions \(\backslash\)f\$ \(\backslash\)psi\_\{j\} \(\backslash\)f\$ and use}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{the same basis functions as our test functions (Galerkin method), then the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{weak form becomes}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)int\_\{D\} \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)psi\_\{j\}\}\{\(\backslash\)partial x\} \(\backslash\)psi\_\{i\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{\(\backslash\),\(\backslash\)mbox\{d\} x U\_\{j\} = (\(\backslash\)lambda -\/ \(\backslash\)mu)  \(\backslash\)int\_\{D\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{\(\backslash\)psi\_\{i\} \(\backslash\)psi\_\{j\}\(\backslash\),\(\backslash\)mbox\{d\} x W\_\{j\},\(\backslash\)quad\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{ \(\backslash\)int\_\{D\} \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)psi\_\{j\}\}\{\(\backslash\)partial x\} \(\backslash\)psi\_\{i\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{\(\backslash\),\(\backslash\)mbox\{d\} x W\_\{j\} = \(\backslash\)lambda \(\backslash\)int\_\{D\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{\(\backslash\)psi\_\{i\} \(\backslash\)psi\_\{j\}\(\backslash\),\(\backslash\)mbox\{d\} x U\_\{j\}.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{ \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{Thus, in order to form the discrete eigenproblem}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)f\$  J\_\{ij\} v\_\{j\} = \(\backslash\)lambda M\_\{ij\} v\_\{j\} \(\backslash\)f\$, we choose to order the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{unknowns in the form}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)f\$ v = [ U | W ]\string^\{T\} \(\backslash\)f\$, leading to the block Jacobian and mass matrices}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\(\backslash\)f[ J = \(\backslash\)left[\(\backslash\)begin\{array\}\{c|c\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{         0 \&  A  \(\backslash\)\(\backslash\)\(\backslash\)hline}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{         A \& \(\backslash\)mu B \(\backslash\)end\{array\}\(\backslash\)right],\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{ M = \(\backslash\)left[\(\backslash\)begin\{array\}\{c|c\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{         B \&  0  \(\backslash\)\(\backslash\)\(\backslash\)hline}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{         0 \& B \(\backslash\)end\{array\}\(\backslash\)right], \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{ where}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{ \(\backslash\)f[ A\_\{ij\} =  \(\backslash\)int\_\{D\} \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)psi\_\{j\}\}\{\(\backslash\)partial x\} \(\backslash\)psi\_\{i\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\),\(\backslash\)mbox\{d\} x , \(\backslash\)quad\(\backslash\)quad  B\_\{ij\} =  \(\backslash\)int\_\{D\}}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\)psi\_\{i\} \(\backslash\)psi\_\{j\}\(\backslash\),\(\backslash\)mbox\{d\} x. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{\(\backslash\)section impl Implementation}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{ The implementation closely follows that in the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{<a href="{}../../harmonic/html/index.html"{}> harmonic eigenproblem </a>,}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{and so we shall concentrate on the differences from that problem.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{\(\backslash\)subsection equations Creating the elements}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{ For generality, we implement the mathematics to assemble contributions to the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{Jacobian and mass matrices defined above in the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{class \(\backslash\)c ComplexHarmonicEquations that inherits from \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{FiniteElement. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{\(\backslash\)dontinclude complex\_harmonic.cc}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)skipline A class}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\(\backslash\)until ComplexHarmonicEquations()}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{The  unknowns that represent the discretised eigenfunction are assumed}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{to be stored at the nodes, but there are now two unknowns: \(\backslash\)f\$u\(\backslash\)f\$ is}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{assumed to be the first and \(\backslash\)f\$w\(\backslash\)f\$ is the second.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{\(\backslash\)skipline Access function}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{\(\backslash\)until nodal\_value(n,1)}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{As before, the key function is \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{ which implements the calculation of the equations. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{\(\backslash\)skipline fill\_in\_contribution}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{\(\backslash\)until end\_of\_fill\_in}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{ Note that the \(\backslash\)b shift \(\backslash\)f\$\(\backslash\)mu\(\backslash\)f\$ is implemented in a global namespace }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{ as \(\backslash\)c EigenproblemShift::Mu.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{ The shape functions are specified in the \(\backslash\)c QComplexHarmonicElement}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{class that inherits from our standard one-\/dimensional Lagrange elements}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{ \(\backslash\)c QElement<1,NNODE\_1D> as well as \(\backslash\)c HarmonicEquations.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{ The number of unknowns (two) is specified and the output functions}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{and shape functions are overloaded as required: the output functions are}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{ specified in the \(\backslash\)c ComplexHarmonicEquations class, whereas the shape}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{ functions are provided by the \(\backslash\)c QElement<1,NNODE\_1D> class.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{\(\backslash\)skipline template <unsigned}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{\(\backslash\)until end\_of\_QComplexHarmonic}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{The driver code is identical to that of the }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{<a href="{}../../harmonic/html/index.html"{}> harmonic eigenproblem </a>.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{\(\backslash\)section problem The problem class}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{The \(\backslash\)c ComplexHarmonicProblem is derived from \(\backslash\)c oomph-\/lib's generic}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{\(\backslash\)c Problem class and the specific element}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{type and eigensolver are specified as template parameters to make it easy for }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{the "{}user"{} to change either of these from the driver code. Once again,}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{it is very similar to the \(\backslash\)c HarmonicProblem class in the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{<a href="{}../../harmonic/html/index.html"{}> harmonic eigenproblem}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{</a>. The only member function with  any differences is the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{ \(\backslash\)c solve(...) function, which requests 7 rather than 4 eigenvalues to}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{ be computed and outputs the eigenfunction associated with eigenvalue}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{ of smallest magnitude (which is real).}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{\(\backslash\)section exercises Comments and exercises}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{-\/\# Modify the code to compute a different number of eigenvalues. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{   What is the maximum number of eigenvalues that could be computed? }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{-\/\# Confirm that the eigenvalues agree with the analytic result and}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{   that a transition from real to complex values occurs when \(\backslash\)f\$ \(\backslash\)mu}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{   = 2\(\backslash\)pi \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{-\/\# Explain why there are always two eigenvalues with the values}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{   \(\backslash\)f\$\(\backslash\)lambda = \(\backslash\)mu\(\backslash\)f\$. What are the corresponding eigenfunctions?}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{-\/\# When the output is a complex conjugate pair of eigenvalues, the two}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{   associated eigenvectors are the real and imaginary parts of the}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{   eigenvector corresponding to the first eigenvalue. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{   The complex conjugate eigenvalue has a complex}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{   conjugate eigenvector (can you prove this?), so no more information}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{   is required. Modify the output}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{   function to examine the real and imaginary parts of a complex}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{   eigenvalue. Are the results what you expect?}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/eigenproblems/harmonic/"{}>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{demo\_drivers/eigenproblems/harmonic/}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{-\/ The driver code is: }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/eigenproblems/harmonic/harmonic.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{demo\_drivers/eigenproblems/harmonic/harmonic.cc}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{complex__harmonic_8txt__doxygenified_8h_source_l00235}00235 }
+
+\end{DoxyCode}

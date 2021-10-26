@@ -1,10 +1,10 @@
-\hypertarget{classoomph_1_1QSpectralScalarAdvectionElement}{}\doxysection{oomph\+::Q\+Spectral\+Scalar\+Advection\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1QSpectralScalarAdvectionElement}{}\doxysection{oomph\+::QSpectral\+Scalar\+Advection\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1QSpectralScalarAdvectionElement}\index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}}
 
 
 {\ttfamily \#include $<$scalar\+\_\+advection\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Q\+Spectral\+Scalar\+Advection\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QSpectral\+Scalar\+Advection\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.443281cm]{classoomph_1_1QSpectralScalarAdvectionElement}
@@ -13,33 +13,32 @@ Inheritance diagram for oomph\+::Q\+Spectral\+Scalar\+Advection\+Element$<$ D\+I
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a63905ff4a980686e18711cc04498df94}{Q\+Spectral\+Scalar\+Advection\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Advection Diffusion equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a71dbb999674e05e7e45a0ccb95bdfea7}{Q\+Spectral\+Scalar\+Advection\+Element}} (const \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a63905ff4a980686e18711cc04498df94}{QSpectral\+Scalar\+Advection\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Advection Diffusion equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_acfff22cce6c949a5e2b5ad91486b8975}{QSpectral\+Scalar\+Advection\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a7467b1b382307bb0d40901519465b4b1}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a7467b1b382307bb0d40901519465b4b1}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_ad594e0a382ee5e10e50cedf75215f40e}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a5d4b75608288e93077aa3132e56a113b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a5d4b75608288e93077aa3132e56a113b}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a6cc8f352ebe569b0251345aa6e312729}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_ad6e292ae057d0ed3f3e9990fa35f9bcc}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_a6cc8f352ebe569b0251345aa6e312729}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement_ad6e292ae057d0ed3f3e9990fa35f9bcc}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+QSpectral\+Scalar\+Advection\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
 
 
-
-Definition at line 200 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 
 
@@ -48,31 +47,27 @@ Definition at line 200 of file scalar\+\_\+advection\+\_\+elements.\+h.
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!QSpectralScalarAdvectionElement@{QSpectralScalarAdvectionElement}}
 \index{QSpectralScalarAdvectionElement@{QSpectralScalarAdvectionElement}!oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QSpectralScalarAdvectionElement()}{QSpectralScalarAdvectionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{Q\+Spectral\+Scalar\+Advection\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{QSpectral\+Scalar\+Advection\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Advection Diffusion equations. 
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Advection Diffusion equations. 
 
 
 
-Definition at line 207 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00207}{207}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_a71dbb999674e05e7e45a0ccb95bdfea7}\label{classoomph_1_1QSpectralScalarAdvectionElement_a71dbb999674e05e7e45a0ccb95bdfea7}} 
+\mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_acfff22cce6c949a5e2b5ad91486b8975}\label{classoomph_1_1QSpectralScalarAdvectionElement_acfff22cce6c949a5e2b5ad91486b8975}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!QSpectralScalarAdvectionElement@{QSpectralScalarAdvectionElement}}
 \index{QSpectralScalarAdvectionElement@{QSpectralScalarAdvectionElement}!oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QSpectralScalarAdvectionElement()}{QSpectralScalarAdvectionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{Q\+Spectral\+Scalar\+Advection\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{QSpectral\+Scalar\+Advection\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 213 of file scalar\+\_\+advection\+\_\+elements.\+h.
 
 
 
@@ -81,8 +76,8 @@ Definition at line 213 of file scalar\+\_\+advection\+\_\+elements.\+h.
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport@{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport@{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport}!oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport()}{dshape\_and\_dtest\_eulerian\_at\_knot\_flux\_transport()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -92,39 +87,43 @@ Define the shape functions and test functions and derivatives w.\+r.\+t. global 
 
 Galerkin\+: Test functions = shape functions 
 
-Implements \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a21e7b05ac839ce2db818356ee6906e1c}{oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a21e7b05ac839ce2db818356ee6906e1c}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 354 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00347}{347}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_a6cc8f352ebe569b0251345aa6e312729}\label{classoomph_1_1QSpectralScalarAdvectionElement_a6cc8f352ebe569b0251345aa6e312729}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_flux\_transport@{dshape\_and\_dtest\_eulerian\_flux\_transport}}
 \index{dshape\_and\_dtest\_eulerian\_flux\_transport@{dshape\_and\_dtest\_eulerian\_flux\_transport}!oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_flux\_transport()}{dshape\_and\_dtest\_eulerian\_flux\_transport()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
 Galerkin\+: Test functions = shape functions 
 
-Implements \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a9bdf6ab17431bcac6eac11bce917cdde}{oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a9bdf6ab17431bcac6eac11bce917cdde}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 321 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00314}{314}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_ad594e0a382ee5e10e50cedf75215f40e}\label{classoomph_1_1QSpectralScalarAdvectionElement_ad594e0a382ee5e10e50cedf75215f40e}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -132,37 +131,45 @@ Output function\+: x,y,u or x,y,z,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_afd690f82a24bc20b686fc7d25a59f775}{oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_afd690f82a24bc20b686fc7d25a59f775}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 240 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00234}{234}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{flux__transport__elements_8h_source_l00176}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_a5d4b75608288e93077aa3132e56a113b}\label{classoomph_1_1QSpectralScalarAdvectionElement_a5d4b75608288e93077aa3132e56a113b}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6b9ea1eb9feb8c71c1d935c52e7d896f}{oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6b9ea1eb9feb8c71c1d935c52e7d896f}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 247 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00241}{241}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{flux__transport__elements_8h_source_l00176}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSpectralScalarAdvectionElement_a7467b1b382307bb0d40901519465b4b1}\label{classoomph_1_1QSpectralScalarAdvectionElement_a7467b1b382307bb0d40901519465b4b1}} 
 \index{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSpectralScalarAdvectionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+Q\+Spectral\+Scalar\+Advection\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1QSpectralScalarAdvectionElement}{oomph\+::\+QSpectral\+Scalar\+Advection\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -170,11 +177,11 @@ Broken assignment operator.
 
 Required \# of `values' (pinned or dofs) at node n 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_a71a3c28feb1156376cbf55e7043e27e8}{oomph\+::\+Scalar\+Advection\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1ScalarAdvectionEquations_a71a3c28feb1156376cbf55e7043e27e8}{oomph\+::\+Scalar\+Advection\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 233 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00227}{227}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 
 

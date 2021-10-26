@@ -1,0 +1,699 @@
+\hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source}{}\doxysection{acoustic\+\_\+fsi\+\_\+annulus.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{acoustic__fsi__annulus_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Time-\/harmonic acoustic fluid-\/structure interaction problems}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{In this document we discuss the solution of }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{time-\/harmonic acoustic fluid-\/structure interaction problems.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{ We start by reviewing the relevant theory and then }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{present the solution of a simple model problem -\/-\/ the sound radiation}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{from an oscillating circular cylinder that is coated with a compressible}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{elastic layer.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{This problem combines the problems discussed in the tutorials }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{illustrating}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{-\/ <a href="{}../../../time\_harmonic\_linear\_elasticity/elastic\_annulus/html/index.html"{}>the solution of the time-\/harmonic equations of linear elasticity</a>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{-\/ <a href="{}../../../helmholtz/scattering/html/index.html"{}>the Helmholtz}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{equation.</a>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{\(\backslash\)section theory Theory: Time-\/harmonic acoustic fluid-\/structure interaction problems}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{The figure below shows a sketch of a representative model problem:}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{a circular cylinder is immersed in an inviscid compressible fluid and}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{performs a prescribed two-\/dimensional harmonic oscillation of radian}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{frequency \(\backslash\)f\$\(\backslash\)omega\(\backslash\)f\$. The cylinder is coated with a compressible elastic }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{layer. We wish to compute the displacement field in the elastic coating}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{(assumed to be described by the <a href="{}../../../time\_harmonic\_linear\_elasticity/elastic\_annulus/html/index.html"{}>equations of}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{time-\/harmonic linear elasticity</a>) and the pressure distribution}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{in the fluid (governed by }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{<a href="{}../../../helmholtz/scattering/html/index.html"{}>the Helmholtz}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{equation</a>). The two sets of equations interact at the interface}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{between fluid and solid: the fluid pressure exerts a traction}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{onto the elastic layer, while the motion of the elastic layer}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{drives the fluid motion via the non-\/penetration condition.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)image html coated\_pipe.gif "{}Sketch of the model problem: Forced oscillations of a circular cylinder (black) deform an elastic coating layer (pink) which is surrounded by a compressible fluid. "{} }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{\(\backslash\)image latex coated\_pipe.eps "{}Sketch of the model problem: Forced oscillations of a circular cylinder (black) deform an elastic coating layer (pink) which is surrounded by a compressible fluid. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{\(\backslash\)subsection fluid The fluid model: the Helmholtz equation}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{We describe the behaviour of the fluid in terms of the displacement}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{field, \(\backslash\)f\$ d\_i\string^*(x\_j\string^*,t\string^*)\(\backslash\)f\$, of the fluid particles. As usual}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{we employ index notation and the summation convention, }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{and use asterisks to distinguish dimensional quantities from }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{their non-\/dimensional equivalents. The fluid is inviscid}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{and compressible, with a bulk modulus \(\backslash\)f\$ B \(\backslash\)f\$, such }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{that the acoustic pressure is given by }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\(\backslash\)f\$ P\string^* = -\/ B \(\backslash\) \(\backslash\)partial d\_j\string^*/}\(\backslash\)partial x\_j\string^* \(\backslash\)f\$ }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00052}00052 We assume that the fluid motion is irrotational and can be described by a}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00053}00053 displacement potential \(\backslash\)f\$\(\backslash\)Phi\string^*\(\backslash\)f\$, such that \(\backslash\)f\$ d\string^*\_j = \(\backslash\)partial}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00054}00054 \(\backslash\)Phi\string^*/\(\backslash\)partial x\_j\string^*. \(\backslash\)f\$  We consider steady-\/state time-\/harmonic }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00055}00055 oscillations and write the displacement potential and the pressure }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00056}00056 as \(\backslash\)f\$\(\backslash\)Phi\string^*(x\_j\string^*,t\string^*) =}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00057}00057 \(\backslash\)mbox\{Re\} \(\backslash\)\{\(\backslash\)phi\string^*(x\_j\string^*) \(\backslash\)exp(-\/\{\(\backslash\)rm i\} \(\backslash\)omega t\string^*)\(\backslash\)\} \(\backslash\)f\$ and}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00058}00058 \(\backslash\)f\$P\string^*(x\_j\string^*,t\string^*) = \(\backslash\)mbox\{Re\}\(\backslash\)\{p\string^*(x\_j\string^*) \(\backslash\)exp(-\/\{\(\backslash\)rm i\} \(\backslash\)omega}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00059}00059 t\string^*)\(\backslash\)\}\(\backslash\)f\$, respectively,}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00060}00060 where \(\backslash\)f\$\(\backslash\)mbox\{Re\}\(\backslash\)\{\(\backslash\)ldots \(\backslash\)\}\(\backslash\)f\$ denotes the real part.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00061}00061 For small disturbances, the linearised Euler equation reveals that the }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00062}00062 time-\/harmonic pressure is related to the displacement potential}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00063}00063 via \(\backslash\)f\$ p\string^* = \(\backslash\)rho\_\{\(\backslash\)rm f\} \(\backslash\)omega\string^2 \(\backslash\)phi\string^*\(\backslash\)f\$ where}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00064}00064 \(\backslash\)f\$ \(\backslash\)rho\_\{\(\backslash\)rm f\} \(\backslash\)f\$ is the ambient fluid density. }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00065}00065 We non-\/dimensionalise all lengths}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00066}00066 on a problem-\/specific lengthscale \(\backslash\)f\$ \{\(\backslash\)cal L\}\(\backslash\)f\$ (e.g. the }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00067}00067 outer radius of the coating layer) such that}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00068}00068 \(\backslash\)f\$x\_j\string^* = \{\(\backslash\)cal L\} x\_j,\(\backslash\) d\_j\string^* = \{\(\backslash\)cal L\} d\_j\(\backslash\)f\$ and \(\backslash\)f\$\(\backslash\)phi\string^*}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00069}00069 = \{\(\backslash\)cal L\}\string^2 \(\backslash\)phi\(\backslash\)f\$. The non-\/dimensional displacement potential \(\backslash\)f\$\(\backslash\)phi\(\backslash\)f\$}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00070}00070 is then governed by the Helmholtz equation}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00071}00071 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00072}00072 \(\backslash\)frac\{\(\backslash\)partial\string^2 \(\backslash\)phi\}\{\(\backslash\)partial x\_j\string^\{2\}\} + k\string^2 \(\backslash\)phi = 0,}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00073}00073 \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00074}00074 \(\backslash\)f]}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00075}00075 where the square of the non-\/dimensional wavenumber,}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00076}00076 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00077}00077 k\string^2 = \(\backslash\)frac\{\(\backslash\)rho\_f (\(\backslash\)omega \{\(\backslash\)cal L\})\string^2\}\{B\},}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00078}00078 \(\backslash\)f]}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00079}00079 represents the ratio of the typical}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00080}00080 inertial fluid pressure induced by the wall oscillation to the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00081}00081 `stiffness\textcolor{stringliteral}{' of the fluid.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00082}00082 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00083}00083 \textcolor{stringliteral}{\(\backslash\)subsection elastic The solid model: the time harmonic equations of linear elasticity}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00084}00084 \textcolor{stringliteral}{We model the coating layer as a linearly elastic solid, described}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00085}00085 \textcolor{stringliteral}{in terms of a displacement field \(\backslash\)f\$U\string^*\_i(x\_j\string^*,t\string^*)\(\backslash\)f\$, with stress tensor}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00086}00086 \textcolor{stringliteral}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00087}00087 \textcolor{stringliteral}{\(\backslash\)tau\_\{ij\}\string^* = E \(\backslash\)left[ \(\backslash\)frac\{\(\backslash\)nu\}\{(1+\(\backslash\)nu)(1-\/2\(\backslash\)nu)\} \(\backslash\), \(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00088}00088 \textcolor{stringliteral}{    U\_k\string^*\}\{\(\backslash\)partial x\_k\string^*\} \(\backslash\), \(\backslash\)delta\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00089}00089 \textcolor{stringliteral}{+\(\backslash\)frac\{1\}\{2(1+\(\backslash\)nu)\}\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00090}00090 \textcolor{stringliteral}{\(\backslash\)frac\{\(\backslash\)partial U\_i\string^*\}\{\(\backslash\)partial x\_j\string^*\}+}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00091}00091 \textcolor{stringliteral}{\(\backslash\)frac\{\(\backslash\)partial U\_j\string^*\}\{\(\backslash\)partial x\_i\string^*\}}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00092}00092 \textcolor{stringliteral}{\(\backslash\)right) \(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00093}00093 \textcolor{stringliteral}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00094}00094 \textcolor{stringliteral}{where \(\backslash\)f\$E\(\backslash\)f\$ and \(\backslash\)f\$\(\backslash\)nu\(\backslash\)f\$ are the material'}s Young\textcolor{stringliteral}{'s modulus and Poisson'}s}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00095}00095 ratio, respectively.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00096}00096 As before, we assume a time-\/harmonic solution with frequency}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00097}00097 \(\backslash\)f\$\(\backslash\)omega\(\backslash\)f\$ so that}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00098}00098 \(\backslash\)f\$U\_i\string^*(x\_j\string^*,t\string^*) = \{\(\backslash\)rm Re\} \(\backslash\)\{ u\_i\string^*(x\_j\string^*) \(\backslash\)exp(-\/\{\(\backslash\)rm i\}\(\backslash\)omega}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00099}00099 t\string^*)\(\backslash\)\}\(\backslash\)f\$,}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00100}00100 and we non-\/dimensionalise the displacements on \(\backslash\)f\$\{\(\backslash\)cal L\}\(\backslash\)f\$ and the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00101}00101 stress on Young\textcolor{stringliteral}{'s modulus, \(\backslash\)f\$E\(\backslash\)f\$, so that \(\backslash\)f\$u\_j\string^* = \{\(\backslash\)cal L\} u\_j\(\backslash\)f\$ and}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00102}00102 \textcolor{stringliteral}{\(\backslash\)f\$\(\backslash\)tau\_\{ij\}\string^* = E \(\backslash\)tau\_\{ij\}\(\backslash\)f\$. The deformation of the elastic coating}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00103}00103 \textcolor{stringliteral}{is then governed by the time-\/harmonic Navier-\/Lame equations}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00104}00104 \textcolor{stringliteral}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00105}00105 \textcolor{stringliteral}{\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{ij\}\}\{\(\backslash\)partial x\_j\} + \(\backslash\)Omega\string^2 u\_i = 0,}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00106}00106 \textcolor{stringliteral}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00107}00107 \textcolor{stringliteral}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00108}00108 \textcolor{stringliteral}{which depend (implicitly) on Poisson'}s ratio \(\backslash\)f\$\(\backslash\)nu\(\backslash\)f\$, and on}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00109}00109 the (square of the) non-\/dimensional wavenumber }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00110}00110 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00111}00111 \(\backslash\)Omega\string^2 = \(\backslash\)frac\{\(\backslash\)rho\_\{\(\backslash\)rm s\} (\(\backslash\)omega \{\(\backslash\)cal L\})\string^2\}\{\mbox{\hyperlink{namespaceGlobal__Parameters_aeeb26e11ef275bdfce14710e00290bb6}{E}}\},}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00112}00112 \(\backslash\)f]}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00113}00113 where \(\backslash\)f\$ \(\backslash\)rho\_\{\(\backslash\)rm s\} \(\backslash\)f\$ is the solid density.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00114}00114 The parameter \(\backslash\)f\$ \(\backslash\)Omega\string^2 \(\backslash\)f\$ represents the ratio of the typical}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00115}00115 inertial solid pressure induced by the wall oscillation to the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00116}00116 stiffness of the elastic coating. We note that \textcolor{keywordflow}{for} a `light\textcolor{stringliteral}{'}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00117}00117 \textcolor{stringliteral}{coating we have  \(\backslash\)f\$\(\backslash\)Omega \(\backslash\)ll 1\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00118}00118 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00119}00119 \textcolor{stringliteral}{ }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00120}00120 \textcolor{stringliteral}{\(\backslash\)subsection bc Boundary conditions}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00121}00121 \textcolor{stringliteral}{The inner surface of the elastic coating, \(\backslash\)f\$ \(\backslash\)partial D\_\{\(\backslash\)rm s\} \(\backslash\)f\$, }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00122}00122 \textcolor{stringliteral}{is subject to the prescribed}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00123}00123 \textcolor{stringliteral}{displacement imposed by the oscillating cylinder. For instance, if the inner}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00124}00124 \textcolor{stringliteral}{cylinder performs axisymmetric oscillations of non-\/dimensional}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00125}00125 \textcolor{stringliteral}{amplitude \(\backslash\)f\$ \(\backslash\)epsilon\(\backslash\)f\$, we have}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00126}00126 \textcolor{stringliteral}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00127}00127 \textcolor{stringliteral}{\(\backslash\)mbox\{\(\backslash\)bf u\} = \(\backslash\)epsilon \(\backslash\), \(\backslash\)mbox\{\(\backslash\)bf e\}\_r }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00128}00128 \textcolor{stringliteral}{\(\backslash\)mbox\{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) on \$\(\backslash\)partial D\_\{\(\backslash\)rm s\}\$\},}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00129}00129 \textcolor{stringliteral}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00130}00130 \textcolor{stringliteral}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00131}00131 \textcolor{stringliteral}{where \(\backslash\)f\$ \(\backslash\)mbox\{\(\backslash\)bf e\}\_r \(\backslash\)f\$ is the unit vector in the radial direction.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00132}00132 \textcolor{stringliteral}{The fluid-\/loaded surface of the elastic coating, \(\backslash\)f\$ \(\backslash\)partial D\_\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00133}00133 \textcolor{stringliteral}{f\} \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00134}00134 \textcolor{stringliteral}{is subject to the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00135}00135 \textcolor{stringliteral}{fluid pressure. The non-\/dimensional traction exerted by the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00136}00136 \textcolor{stringliteral}{fluid onto the solid (on the solid stress scale) is therefore given by}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00137}00137 \textcolor{stringliteral}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00138}00138 \textcolor{stringliteral}{t\_i\string^\{\(\backslash\)rm [solid]\} = \(\backslash\)tau\_\{ij\}\string^\{\(\backslash\)rm [solid]\} n\_j = -\/ \(\backslash\)phi \(\backslash\)  Q \(\backslash\) n\_i}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00139}00139 \textcolor{stringliteral}{\(\backslash\)mbox\{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) on \$\(\backslash\)partial D\_\{\(\backslash\)rm f\}\$\},}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00140}00140 \textcolor{stringliteral}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (4)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00141}00141 \textcolor{stringliteral}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00142}00142 \textcolor{stringliteral}{where the \(\backslash\)f\$n\_i\(\backslash\)f\$ are the components of the outer unit normal on the solid}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00143}00143 \textcolor{stringliteral}{boundary \(\backslash\)f\$\(\backslash\)partial D\_\{\(\backslash\)rm f\}\(\backslash\)f\$ and}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00144}00144 \textcolor{stringliteral}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00145}00145 \textcolor{stringliteral}{Q=\(\backslash\)frac\{\(\backslash\)rho\_\{\(\backslash\)rm f\}(\{\(\backslash\)cal L\}\(\backslash\)omega)\string^2\}\{E\}}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00146}00146 \textcolor{stringliteral}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00147}00147 \textcolor{stringliteral}{is the final non-\/dimensional parameter in the problem. It represents the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00148}00148 \textcolor{stringliteral}{ratio of the typical inertial fluid pressure induced by the wall}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00149}00149 \textcolor{stringliteral}{oscillation to the stiffness of the elastic coating. The parameter \(\backslash\)f\$Q\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00150}00150 \textcolor{stringliteral}{therefore provides a measure of the strength of the fluid-\/structure }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00151}00151 \textcolor{stringliteral}{interaction (FSI) in the sense that for \(\backslash\)f\$Q \(\backslash\)to 0\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00152}00152 \textcolor{stringliteral}{the elastic coating does not `feel'} the presence of the fluid.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00153}00153 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00154}00154 The fluid is forced by the normal displacement of the solid. Imposing}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00155}00155 the non-\/penetration condition \(\backslash\)f\$(d\_j -\/ u\_j) n\_j = 0\(\backslash\)f\$ on \(\backslash\)f\$\(\backslash\)partial}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00156}00156 D\_\{\(\backslash\)rm f\}\(\backslash\)f\$ yields a Neumann condition \textcolor{keywordflow}{for} the displacement}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00157}00157 potential,}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00158}00158 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00159}00159 \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)phi\}\{\(\backslash\)partial n\} = u\_j n\_j}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00160}00160 \(\backslash\)mbox\{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) on \$\(\backslash\)partial D\_\{\(\backslash\)rm f\}\$\}.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00161}00161 \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (5)}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00162}00162 \(\backslash\)f]}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00163}00163 Finally, the displacement potential \textcolor{keywordflow}{for} the fluid must satisfy the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00164}00164 Sommerfeld radiation condition}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00165}00165 \(\backslash\)f[}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00166}00166 \(\backslash\)lim\_\{r \(\backslash\)to \(\backslash\)infty\} \(\backslash\)sqrt\{r\}\(\backslash\)left( \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)phi\}\{\(\backslash\)partial r\} -\/}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00167}00167     \{\(\backslash\)rm i\} k \(\backslash\)phi \(\backslash\)right) = 0}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00168}00168 \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (6)}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00169}00169 \(\backslash\)f]}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00170}00170 which ensures that the oscillating cylinder does not generate any incoming}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00171}00171 waves.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00172}00172 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00173}00173 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00174}00174 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00175}00175 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00176}00176 \(\backslash\)section impl Implementation}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00177}00177 The implementation of the coupled problem follows the usual procedure }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00178}00178 \textcolor{keywordflow}{for} multi-\/domain problems in \(\backslash\)c oomph-\/lib. We discretise the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00179}00179 constituent single-\/physics problems \textcolor{keyword}{using} the existing single-\/physics}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00180}00180 elements, here \(\backslash\)c oomph-\/lib\textcolor{stringliteral}{'s}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00181}00181 \textcolor{stringliteral}{-\/ <a href="{}../../../helmholtz/scattering/html/index.html"{}>Helmholtz}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00182}00182 \textcolor{stringliteral}{elements</a>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00183}00183 \textcolor{stringliteral}{.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00184}00184 \textcolor{stringliteral}{and }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00185}00185 \textcolor{stringliteral}{-\/ <a href="{}../../../time\_harmonic\_linear\_elasticity/elastic\_annulus/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00186}00186 \textcolor{stringliteral}{  time-\/harmonic linear elasticity elements</a>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00187}00187 \textcolor{stringliteral}{.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00188}00188 \textcolor{stringliteral}{for the discretisation of the PDEs (1) and }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00189}00189 \textcolor{stringliteral}{(2), respectively.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00190}00190 \textcolor{stringliteral}{The displacement boundary condition (3) on the inner surface}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00191}00191 \textcolor{stringliteral}{of the elastic coating is imposed as usual by pinning}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00192}00192 \textcolor{stringliteral}{the relevant degrees of freedom, exactly as in a <a href="{}../../../time\_harmonic\_linear\_elasticity/elastic\_annulus/html/index.html"{}>single-\/physics}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00193}00193 \textcolor{stringliteral}{solid mechanics problem</a>. Similarly, the }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00194}00194 \textcolor{stringliteral}{Sommerfeld radiation condition (6) on the outer boundary}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00195}00195 \textcolor{stringliteral}{of the fluid domain can be imposed by any of the methods}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00196}00196 \textcolor{stringliteral}{available for the solution of the single-\/physics}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00197}00197 \textcolor{stringliteral}{Helmholtz equation, such as }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00198}00198 \textcolor{stringliteral}{<a href="{}../../../helmholtz/scattering/html/index.html\#ABCs"{}>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00199}00199 \textcolor{stringliteral}{ approximate/absorbing boundary conditions (ABCs)</a>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00200}00200 \textcolor{stringliteral}{or a <a href="{}../../../helmholtz/scattering/html/index.html\#DtN"{}>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00201}00201 \textcolor{stringliteral}{Dirichlet-\/to-\/Neumann mapping.</a>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00202}00202 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00203}00203 \textcolor{stringliteral}{The boundary conditions (4) and }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00204}00204 \textcolor{stringliteral}{(5) at the fluid-\/solid interface are }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00205}00205 \textcolor{stringliteral}{traction boundary conditions for the solid, and Neumann boundary}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00206}00206 \textcolor{stringliteral}{conditions for the Helmholtz equation, respectively. In a single-\/physics problem}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00207}00207 \textcolor{stringliteral}{we would impose such boundary conditions by attaching suitable \(\backslash\)c FaceElements}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00208}00208 \textcolor{stringliteral}{to the appropriate boundaries of the "{}bulk"{} elements, as shown in the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00209}00209 \textcolor{stringliteral}{sketch below: \(\backslash\)c TimeHarmonicLinearElasticityTractionElements could be used to}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00210}00210 \textcolor{stringliteral}{impose a (given) traction, \(\backslash\)f\$ \{\(\backslash\)bf t\}\_0\(\backslash\)f\$, onto the solid;}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00211}00211 \textcolor{stringliteral}{\(\backslash\)c HelmholtzFluxElements could be used to impose a (given) normal derivative,}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00212}00212 \textcolor{stringliteral}{\(\backslash\)f\$ f\_0\(\backslash\)f\$, on the displacement potential. Both \(\backslash\)f\$ \{\(\backslash\)bf t\}\_0\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00213}00213 \textcolor{stringliteral}{and \(\backslash\)f\$ f\_0 \(\backslash\)f\$ would usually be specified in a user-\/defined namespace}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00214}00214 \textcolor{stringliteral}{and accessed via function pointers as indicated in the right half of}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00215}00215 \textcolor{stringliteral}{the sketch.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00216}00216 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00217}00217 \textcolor{stringliteral}{\(\backslash\)image html single\_physics.gif "{}Sketch illustrating the imposition of flux and traction boundary conditions in single-\/physics problems. The continuous problems are shown on the left; the discretised ones on the right. "{} }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00218}00218 \textcolor{stringliteral}{\(\backslash\)image latex single\_physics.eps "{}Sketch illustrating the imposition of flux and traction boundary conditions in single-\/physics problems. The continuous problems are shown on the left; the discretised ones on the right. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00219}00219 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00220}00220 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00221}00221 \textcolor{stringliteral}{In the coupled problem, illustrated in the left half of the }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00222}00222 \textcolor{stringliteral}{next sketch, the traction acting on the solid becomes a function }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00223}00223 \textcolor{stringliteral}{of the displacement potential via the boundary condition }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00224}00224 \textcolor{stringliteral}{(4), while the normal derivative of the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00225}00225 \textcolor{stringliteral}{displacement potential is given in terms of the solid displacement via }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00226}00226 \textcolor{stringliteral}{equation (5). Note that corresponding points on the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00227}00227 \textcolor{stringliteral}{FSI boundary \(\backslash\)f\$ \(\backslash\)partial D\_\{\(\backslash\)rm f\}\(\backslash\)f\$ are }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00228}00228 \textcolor{stringliteral}{identified by matching values of the boundary}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00229}00229 \textcolor{stringliteral}{coordinate \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)f\$ which is assumed to be consistent between}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00230}00230 \textcolor{stringliteral}{the two domains. }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00231}00231 \textcolor{stringliteral}{ }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00232}00232 \textcolor{stringliteral}{The implementation of this interaction in the discretised problem }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00233}00233 \textcolor{stringliteral}{is illustrated in the right half of the sketch: We replace the single-\/physics }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00234}00234 \textcolor{stringliteral}{\(\backslash\)c HelmholtzFluxElements by \(\backslash\)c HelmholtzFluxFromNormalDisplacementBCElements,}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00235}00235 \textcolor{stringliteral}{and the \(\backslash\)c TimeHarmonicLinearElasticityTractionElements by}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00236}00236 \textcolor{stringliteral}{\(\backslash\)c TimeHarmonicLinElastLoadedByHelmholtzPressureBCElements.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00237}00237 \textcolor{stringliteral}{(Yes, we like to be verbose...).}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00238}00238 \textcolor{stringliteral}{Both of these \(\backslash\)c FaceElements are derived from the \(\backslash\)c ElementWithExternalElement}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00239}00239 \textcolor{stringliteral}{base class and can therefore store a pointer to an "{}external"{}}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00240}00240 \textcolor{stringliteral}{element that provides the information required to impose the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00241}00241 \textcolor{stringliteral}{appropriate boundary condition. Thus, the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00242}00242 \textcolor{stringliteral}{HelmholtzFluxFromNormalDisplacementBCElements store pointers to }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00243}00243 \textcolor{stringliteral}{the "{}adjacent"{} time-\/harmonic linear elasticity elements (from which}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00244}00244 \textcolor{stringliteral}{they obtain the boundary displacement required for the imposition of}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00245}00245 \textcolor{stringliteral}{(5)),}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00246}00246 \textcolor{stringliteral}{while the \(\backslash\)c TimeHarmonicLinElastLoadedByHelmholtzPressureBCElements}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00247}00247 \textcolor{stringliteral}{store pointers to the "{}adjacent"{} Helmholtz elements that provide the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00248}00248 \textcolor{stringliteral}{value of the displacement potential required for the evaluation of}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00249}00249 \textcolor{stringliteral}{(4).}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00250}00250 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00251}00251 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00252}00252 \textcolor{stringliteral}{\(\backslash\)image html multi\_physics.gif "{}Sketch illustrating the imposition of flux and traction boundary conditions in the coupled multi-\/physics problem. The continuous problems are shown on the left; the discretised ones on the right. "{} }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00253}00253 \textcolor{stringliteral}{\(\backslash\)image latex multi\_physics.eps "{}Sketch illustrating the imposition of flux and traction boundary conditions in the coupled multi-\/physics problem. The continuous problems are shown on the left; the discretised ones on the right. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00254}00254 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00255}00255 \textcolor{stringliteral}{The identification of the "{}adjacent"{} bulk elements can be performed using the }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00256}00256 \textcolor{stringliteral}{\(\backslash\)c Multi\_domain\_functions::setup\_bulk\_elements\_adjacent\_to\_face\_mesh(...)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00257}00257 \textcolor{stringliteral}{helper function. We note that, as suggested by the sketch above,}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00258}00258 \textcolor{stringliteral}{this  function does not require to the two adjacent meshes}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00259}00259 \textcolor{stringliteral}{to have a consistent discretisation -\/-\/ the identification of}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00260}00260 \textcolor{stringliteral}{adjacent elements is based entirely on the (assumed to be}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00261}00261 \textcolor{stringliteral}{consistent) boundary coordinate \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)f\$ in the two meshes.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00262}00262 \textcolor{stringliteral}{We refer to }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00263}00263 \textcolor{stringliteral}{<A HREF="{}../../../poisson/fish\_poisson2/html/index.html\#boundary\_coords"{}> }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00264}00264 \textcolor{stringliteral}{another tutorial</a> for a discussion of how to set up (or change)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00265}00265 \textcolor{stringliteral}{the parametrisation of mesh boundaries by boundary coordinates.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00266}00266 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00267}00267 \textcolor{stringliteral}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00268}00268 \textcolor{stringliteral}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00269}00269 \textcolor{stringliteral}{ }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00270}00270 \textcolor{stringliteral}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00271}00271 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00272}00272 \textcolor{stringliteral}{The animation below shows the deformation of the elastic}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00273}00273 \textcolor{stringliteral}{coating if a non-\/axisymmetric displacement }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00274}00274 \textcolor{stringliteral}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00275}00275 \textcolor{stringliteral}{\(\backslash\)mbox\{\(\backslash\)bf u\} = \(\backslash\)epsilon \(\backslash\), \(\backslash\)mbox\{\(\backslash\)bf e\}\_r \(\backslash\)cos (N\(\backslash\)varphi)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00276}00276 \textcolor{stringliteral}{\(\backslash\)mbox\{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) on \$\(\backslash\)partial D\_\{\(\backslash\)rm s\}\$\},}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00277}00277 \textcolor{stringliteral}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (7)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00278}00278 \textcolor{stringliteral}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00279}00279 \textcolor{stringliteral}{(for \(\backslash\)f\$ N=3 \(\backslash\)f\$) is imposed on the inner boundary of the }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00280}00280 \textcolor{stringliteral}{coating \(\backslash\)f\$\(\backslash\)partial D\_\{\(\backslash\)rm s\}\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00281}00281 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00282}00282 \textcolor{stringliteral}{\(\backslash\)image html anim.gif "{}Animation showing the time-\/harmonic oscillation of the elastic coating. (The pink region in the background shows the undeformed configuration.) "{} }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00283}00283 \textcolor{stringliteral}{\(\backslash\)image latex anim.eps "{}Animation showing the time-\/harmonic oscillation of the elastic coating. (The pink region in the background shows the undeformed configuration.) "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00284}00284 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00285}00285 \textcolor{stringliteral}{Here is a plot of the corresponding pressure field:}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00286}00286 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00287}00287 \textcolor{stringliteral}{\(\backslash\)image html potential.gif "{}Plot of the displacement potential (a measure of the fluid pressure). The elevation in the carpet plot indicates the real part; the colour contours represent the imaginary part. "{} }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00288}00288 \textcolor{stringliteral}{\(\backslash\)image latex potential.eps "{}Plot of the displacement potential (a measure of the fluid pressure). The elevation in the carpet plot indicates the real part; the colour contours represent the imaginary part. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00289}00289 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00290}00290 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00291}00291 \textcolor{stringliteral}{Finally, we provide some validation of the computational results by}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00292}00292 \textcolor{stringliteral}{comparing the non-\/dimensional time-\/average radiated power}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00293}00293 \textcolor{stringliteral}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00294}00294 \textcolor{stringliteral}{\(\backslash\)overline\{\(\backslash\)cal P\}  = }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00295}00295 \textcolor{stringliteral}{\(\backslash\)frac\{1\}\{2\}}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00296}00296 \textcolor{stringliteral}{\(\backslash\)oint\(\backslash\)bigg[Im\(\backslash\)bigg(\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)phi\}\{\(\backslash\)partial n\}\(\backslash\)bigg) \(\backslash\) Re(\(\backslash\)phi) -\/}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00297}00297 \textcolor{stringliteral}{           Re\(\backslash\)bigg(\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)phi\}\{\(\backslash\)partial n\}\(\backslash\)bigg) \(\backslash\) Im(\(\backslash\)phi)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00298}00298 \textcolor{stringliteral}{           \(\backslash\)bigg]}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00299}00299 \textcolor{stringliteral}{ \(\backslash\) dS}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00300}00300 \textcolor{stringliteral}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (8)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00301}00301 \textcolor{stringliteral}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00302}00302 \textcolor{stringliteral}{against the analytical solution for axisymmetric forcing (\(\backslash\)f\$ N=0}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00303}00303 \textcolor{stringliteral}{\(\backslash\)f\$) for the parameter values \(\backslash\)f\$ k\string^2 = 10 \(\backslash\)f\$, \(\backslash\)f\$ \(\backslash\)Omega\string^2 = 0 \(\backslash\)f\$, }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00304}00304 \textcolor{stringliteral}{\(\backslash\)f\$ \(\backslash\)nu =0.3 \(\backslash\)f\$ and a non-\/dimensional coating thickness of }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00305}00305 \textcolor{stringliteral}{\(\backslash\)f\$ h = 0.2; \(\backslash\)f\$ see <A HREF="{}http://dx.doi.org/10.1016/j.jsv.2012.05.029"{}>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00306}00306 \textcolor{stringliteral}{Heil, M., Kharrat, T., Cotterill, P.A. \& }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00307}00307 \textcolor{stringliteral}{Abrahams, I.D. (2012) Quasi-\/resonances in sound-\/insulating coatings.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00308}00308 \textcolor{stringliteral}{<EM>Journal of Sound and Vibration</EM>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00309}00309 \textcolor{stringliteral}{<b>331</B> 4774-\/4784</a> for details.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00310}00310 \textcolor{stringliteral}{In the computations the integral in (8) is evaluated }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00311}00311 \textcolor{stringliteral}{along the outer boundary of the computational domain. }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00312}00312 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00313}00313 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00314}00314 \textcolor{stringliteral}{\(\backslash\)image html trace.gif "{}Radiated power as function of the FSI parameter Q for an axisymmetrically oscillating coating. Markers: computed results; continuous line: analytical result. "{} }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00315}00315 \textcolor{stringliteral}{\(\backslash\)image latex trace.eps "{}Radiated power as function of the FSI parameter Q for an axisymmetrically oscillating coating. Markers: computed results; continuous line: analytical result. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00316}00316 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00317}00317 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00318}00318 \textcolor{stringliteral}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00319}00319 \textcolor{stringliteral}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00320}00320 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00321}00321 \textcolor{stringliteral}{\(\backslash\)section num\_soln The numerical solution}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00322}00322 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00323}00323 \textcolor{stringliteral}{\(\backslash\)subsection namespace The global namespace}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00324}00324 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00325}00325 \textcolor{stringliteral}{As usual we define the problem parameters in a namespace.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00326}00326 \textcolor{stringliteral}{\(\backslash\)dontinclude acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00327}00327 \textcolor{stringliteral}{\(\backslash\)skipline start\_namespace}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00328}00328 \textcolor{stringliteral}{\(\backslash\)until TimeHarmonicIsotropicElasticityTensor}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00329}00329 \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00330}00330 \textcolor{stringliteral}{We wish to perform parameter studies in which we vary the FSI parameter}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00331}00331 \textcolor{stringliteral}{\(\backslash\)f\$ Q \(\backslash\)f\$. To make this physically meaningful, we interpret }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00332}00332 \textcolor{stringliteral}{\(\backslash\)f\$ Q =(\(\backslash\)rho\_\{\(\backslash\)rm f\}(\{\(\backslash\)cal L\}\(\backslash\)omega)\string^2)/E \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00333}00333 \textcolor{stringliteral}{as a measure of the stiffness of the elastic coating}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00334}00334 \textcolor{stringliteral}{(so that an increase in \(\backslash\)f\$ Q \(\backslash\)f\$ corresponds to a reduction in the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00335}00335 \textcolor{stringliteral}{layer'}s elastic modulus \(\backslash\)f\$ E \(\backslash\)f\$). In that \textcolor{keywordflow}{case}, the frequency}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00336}00336 parameter \(\backslash\)f\$ \(\backslash\)Omega\string^2 = (\(\backslash\)rho\_\{\(\backslash\)rm s\} (\(\backslash\)omega \{\(\backslash\)cal L\})\string^2)/E \(\backslash\)f\$ }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00337}00337 in the time-\/harmonic linear elasticity}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00338}00338 equations becomes a dependent parameter and is given}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00339}00339 in terms of the density ratio \(\backslash\)f\$ \(\backslash\)rho\_\{\(\backslash\)rm solid\}/\(\backslash\)rho\_\{\(\backslash\)rm fluid\}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00340}00340 \(\backslash\)f\$ and \(\backslash\)f\$ Q \(\backslash\)f\$ by \(\backslash\)f\$ \(\backslash\)Omega\string^2 = (\(\backslash\)rho\_\{\(\backslash\)rm solid\}/\(\backslash\)rho\_\{\(\backslash\)rm fluid\}) \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}}\(\backslash\)f\$.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00341}00341 We therefore provide a helper \textcolor{keyword}{function} to update the dependent parameter}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00342}00342 following any change in the independent parameters.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00343}00343 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00344}00344 \(\backslash\)until \}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00345}00345 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00346}00346 We force the system by imposing a prescribed displacement}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00347}00347 on the inner surface of the elastic coating and allow \textcolor{keyword}{this} to vary}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00348}00348 in the azimuthal direction with wavenumber \(\backslash\)f\$ N \(\backslash\)f\$:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00349}00349 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00350}00350 \(\backslash\)until \} }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00351}00351 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00352}00352 The rest of the \textcolor{keyword}{namespace }contains lengthy expressions for}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00353}00353 various exact solutions and is omitted here.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00354}00354 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00355}00355 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00356}00356 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00357}00357 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00358}00358 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00359}00359 \(\backslash\)subsection \mbox{\hyperlink{acoustic__fsi_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} The driver code}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00360}00360 The driver code is very straightforward. We parse the command line}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00361}00361 to determine the parameters for the parameter study and build}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00362}00362 the problem object, using refineable nine-\/noded quadrilateral elements for}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00363}00363 the solution of the time-\/harmonic elasticity and Helmholtz}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00364}00364 equations. }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00365}00365 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00366}00366 \(\backslash\)dontinclude acoustic\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00367}00367 \(\backslash\)skipline start\_of\_main}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00368}00368 \(\backslash\)until > problem}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00369}00369 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00370}00370 We then solve the problem for various values of \(\backslash\)f\$ \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Q}} \(\backslash\)f\$, updating}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00371}00371 the dependent variables after every increment.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00372}00372 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00373}00373 \(\backslash\)until \} \textcolor{comment}{//end of main}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00374}00374 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00375}00375  }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00376}00376 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00377}00377 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00378}00378 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00379}00379 \(\backslash\)subsection class The problem class}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00380}00380 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00381}00381 The \(\backslash\)c Problem class is templated by the types of the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00382}00382 "{}bulk"{} elements used to discretise the time-\/harmonic linear elasticity}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00383}00383 and Helmholtz equations, respectively. It contains the }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00384}00384 usual member functions}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00385}00385 to detach and attach \(\backslash\)c FaceElements from the bulk meshes}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00386}00386 before and after any mesh adaptation, respectively. }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00387}00387 \(\backslash\)dontinclude acoustic\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00388}00388 \(\backslash\)skipline begin\_problem}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00389}00389 \(\backslash\)until create\_helmholtz\_DtN\_elements()}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00390}00390 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00391}00391 The private member data includes storage for the various meshes}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00392}00392 and objects that are used for outputting the results.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00393}00393 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00394}00394 \(\backslash\)until \}; }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00395}00395 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00396}00396 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00397}00397 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00398}00398 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00399}00399 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00400}00400 \(\backslash\)subsection constr The problem constructor}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00401}00401 We start by building the meshes \textcolor{keywordflow}{for} the elasticity and Helmholtz}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00402}00402 equations. Both domains are complete annular regions, so the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00403}00403 annular mesh (which is built from a rectangular quad mesh) is}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00404}00404 periodic. }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00405}00405 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00406}00406 \(\backslash\)dontinclude acoustic\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00407}00407 \(\backslash\)skipline start\_of\_constructor}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00408}00408 \(\backslash\)until azimuthal\_fraction}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00409}00409 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00410}00410 The solid mesh occupies the region between \(\backslash\)f\$ r = 1-\/h \(\backslash\)f\$ and \(\backslash\)f\$ r=1}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00411}00411 \(\backslash\)f\$ where \(\backslash\)f\$ h \(\backslash\)f\$ is the thickness of the elastic coating:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00412}00412 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00413}00413 \(\backslash\)until \mbox{\hyperlink{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}{H\_coating}});}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00414}00414 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00415}00415 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00416}00416 The Helmholtz mesh occupies the region between \(\backslash\)f\$ r = 1 \(\backslash\)f\$ and \(\backslash\)f\$}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00417}00417 r=R\_\{\(\backslash\)rm outer\} \(\backslash\)f\$ where \(\backslash\)f\$ R\_\{\(\backslash\)rm outer\}\(\backslash\)f\$ is the outer radius of }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00418}00418 the computational domain where we will apply the Sommerfeld radiation }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00419}00419 condition. Note that the two meshes are not matching -\/-\/ both meshes}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00420}00420 have 3 element layers in the radial direction but 10 and 11}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00421}00421 in the azimuthal direction, respectively. This is done mainly }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00422}00422 to illustrate our claim that the multi-\/domain setup functions}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00423}00423 can operate with non-\/matching meshes.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00424}00424 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00425}00425 \(\backslash\)until h\_thick\_helmholtz);}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00426}00426 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00427}00427 Both bulk meshes are adaptive so we create error estimators \textcolor{keywordflow}{for} them:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00428}00428 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00429}00429 \(\backslash\)until Helmholtz\_mesh\_pt-\/>spatial\_error\_estimator\_pt()}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00430}00430 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00431}00431 Next we create the mesh that will store the \(\backslash\)c FaceElements that}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00432}00432 will apply the Sommerfeld radiation condition, \textcolor{keyword}{using} the specified}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00433}00433 number of Fourier terms in the Dirichlet-\/to-\/Neumann mapping;}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00434}00434 see the <a href=\textcolor{stringliteral}{"{}../../../helmholtz/scattering/html/index.html\#DtN"{}}>Helmholtz}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00435}00435 tutorial</a> \textcolor{keywordflow}{for} details.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00436}00436 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00437}00437 \(\backslash\)until nfourier);}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00438}00438 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00439}00439 Next we pass the problem parameters to the bulk elements. The}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00440}00440 elasticity elements require a pointer to the elasticity tensor}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00441}00441 and the frequency parameter \(\backslash\)f\$ \(\backslash\)Omega\string^2 \(\backslash\)f\$:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00442}00442 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00443}00443 \(\backslash\)until \}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00444}00444 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00445}00445 The Helmholtz elements need a pointer to the (square of the)}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00446}00446 wavenumber, \(\backslash\)f\$ k\string^2 \(\backslash\)f\$:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00447}00447 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00448}00448 \(\backslash\)until \}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00449}00449 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00450}00450 It is always a good idea to check the enumeration of the mesh}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00451}00451 boundaries to facilitate the application of boundary conditions:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00452}00452 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00453}00453 \(\backslash\)until helmholtz\_mesh\_boundary.dat}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00454}00454 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00455}00455 Next we create the meshes containing the various \(\backslash\)c FaceElements}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00456}00456 used to apply to the FSI traction boundary condition}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00457}00457 (4), the FSI flux boundary condition (5)}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00458}00458 for the Helmholtz equation, and the Sommerfeld radiation condition }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00459}00459 (6), respectively, using helper functions discussed}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00460}00460 below.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00461}00461 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00462}00462 \(\backslash\)until create\_helmholtz\_DtN\_elements}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00463}00463 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00464}00464 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00465}00465 We add the various sub-\/meshes to the problem and build the global mesh}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00466}00466 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00467}00467 \(\backslash\)until build\_global\_mesh();}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00468}00468 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00469}00469 The solid displacements are prescribed on the inner boundary}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00470}00470 (boundary 0) of the solid mesh so we pin all four values }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00471}00471 (representing the real and imaginary parts of the displacements}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00472}00472 in the \(\backslash\)f\$ x\_1-\/ \(\backslash\)f\$ and \(\backslash\)f\$ x\_2-\/\(\backslash\)f\$ directions, respectively)}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00473}00473 and assign the boundary values using the function \(\backslash\)c}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00474}00474 \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}::\mbox{\hyperlink{namespaceGlobal__Parameters_ab51fa55d06d9963d363bcf966cfcc62b}{solid\_boundary\_displacement}}(...).}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00475}00475 (The enumeration of the unknowns is discussed in }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00476}00476 <a href="{}../../../time\_harmonic\_linear\_elasticity/elastic\_annulus/html/index.html\textcolor{preprocessor}{\#element\_types"{}>another tutorial</a>.)}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00477}00477 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00478}00478 \textcolor{preprocessor}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00479}00479 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00480}00480 \textcolor{preprocessor}{Finally, we set up the fluid-\/structure interaction, assign the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00481}00481 \textcolor{preprocessor}{equation numbers, define the output directory and open a trace}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00482}00482 \textcolor{preprocessor}{file to record the radiated power as a function of the FSI}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00483}00483 \textcolor{preprocessor}{parameter \(\backslash\)f\$ Q \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00484}00484 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00485}00485 \textcolor{preprocessor}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00486}00486 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00487}00487 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00488}00488 \textcolor{preprocessor}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00489}00489 \textcolor{preprocessor}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00490}00490 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00491}00491 \textcolor{preprocessor}{\(\backslash\)subsection before\_adapt Actions before adapt}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00492}00492 \textcolor{preprocessor}{The mesh adaptation is driven by the error estimates for the bulk}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00493}00493 \textcolor{preprocessor}{elements. The various \(\backslash\)c FaceElements must therefore be removed from}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00494}00494 \textcolor{preprocessor}{the global mesh before the adaptation takes place. We do this by }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00495}00495 \textcolor{preprocessor}{calling the helper function \(\backslash\)c delete\_face\_elements(...) (discussed}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00496}00496 \textcolor{preprocessor}{below) for the three face meshes, before rebuilding the Problem's global mesh.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00497}00497 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00498}00498 \textcolor{preprocessor}{\(\backslash\)dontinclude acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00499}00499 \textcolor{preprocessor}{\(\backslash\)skipline start\_of\_actions\_before\_adapt}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00500}00500 \textcolor{preprocessor}{\(\backslash\)until \}// end of actions\_before\_adapt}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00501}00501 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00502}00502 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00503}00503 \textcolor{preprocessor}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00504}00504 \textcolor{preprocessor}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00505}00505 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00506}00506 \textcolor{preprocessor}{\(\backslash\)subsection after\_adapt Actions after adapt}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00507}00507 \textcolor{preprocessor}{After the (bulk-\/)mesh has been adapted, the various \(\backslash\)c FaceElements must }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00508}00508 \textcolor{preprocessor}{be re-\/attached. We then (re-\/)setup the fluid-\/structure interaction}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00509}00509 \textcolor{preprocessor}{and rebuild the global mesh.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00510}00510 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00511}00511 \textcolor{preprocessor}{\(\backslash\)dontinclude acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00512}00512 \textcolor{preprocessor}{\(\backslash\)skipline start\_of\_actions\_after\_adapt}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00513}00513 \textcolor{preprocessor}{\(\backslash\)until \}// end of actions\_after\_adapt}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00514}00514 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00515}00515 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00516}00516 \textcolor{preprocessor}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00517}00517 \textcolor{preprocessor}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00518}00518 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00519}00519 \textcolor{preprocessor}{\(\backslash\)subsection delete Delete face elements}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00520}00520 \textcolor{preprocessor}{The helper function \(\backslash\)c delete\_face\_elements() is used}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00521}00521 \textcolor{preprocessor}{to delete all \(\backslash\)c FaceElements in a given surface mesh}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00522}00522 \textcolor{preprocessor}{before the mesh adaptation.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00523}00523 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00524}00524 \textcolor{preprocessor}{\(\backslash\)dontinclude acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00525}00525 \textcolor{preprocessor}{\(\backslash\)skipline start\_of\_delete}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00526}00526 \textcolor{preprocessor}{\(\backslash\)until \} // end of delete\_face\_elements}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00527}00527 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00528}00528 \textcolor{preprocessor}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00529}00529 \textcolor{preprocessor}{<HR>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00530}00530 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00531}00531 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00532}00532 \textcolor{preprocessor}{\(\backslash\)subsection create\_flux Creating the FSI traction elements (and the FSI flux and DtN elements) }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00533}00533 \textcolor{preprocessor}{The function \(\backslash\)c create\_fsi\_traction\_elements() creates the \(\backslash\)c FaceElements}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00534}00534 \textcolor{preprocessor}{required to apply the FSI traction boundary condition}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00535}00535 \textcolor{preprocessor}{(4) on the outer boundary (boundary 2) of the solid}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00536}00536 \textcolor{preprocessor}{mesh:}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00537}00537 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00538}00538 \textcolor{preprocessor}{\(\backslash\)dontinclude acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00539}00539 \textcolor{preprocessor}{\(\backslash\)skipline start\_of\_create\_fsi\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00540}00540 \textcolor{preprocessor}{\(\backslash\)until add\_element\_pt}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00541}00541 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00542}00542 \textcolor{preprocessor}{To function properly, the elements need to know the number of the}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00543}00543 \textcolor{preprocessor}{bulk mesh boundary they are attached to (this allows them to}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00544}00544 \textcolor{preprocessor}{determine the boundary coordinate \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)f\$ required to}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00545}00545 \textcolor{preprocessor}{set up the fluid-\/structure interaction; see \(\backslash\)ref impl ), and}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00546}00546 \textcolor{preprocessor}{the FSI parameter \(\backslash\)f\$ Q \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00547}00547 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00548}00548 \textcolor{preprocessor}{\(\backslash\)until \} // end of create\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00549}00549 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00550}00550 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00551}00551 \textcolor{preprocessor}{[\(\backslash\)b Note: We omit the listings of the functions}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00552}00552 \textcolor{preprocessor}{\(\backslash\)c create\_helmholtz\_fsi\_flux\_elements() and }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00553}00553 \textcolor{preprocessor}{\(\backslash\)c create\_helmholtz\_DtN\_elements()}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00554}00554 \textcolor{preprocessor}{which create the \(\backslash\)c FaceElements}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00555}00555 \textcolor{preprocessor}{required to apply the FSI flux boundary condition}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00556}00556 \textcolor{preprocessor}{(5) on the inner boundary (boundary 0),}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00557}00557 \textcolor{preprocessor}{and the Sommerfeld radiation condition (6) }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00558}00558 \textcolor{preprocessor}{on the outer boundary (boundary 2) of the Helmholtz mesh because }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00559}00559 \textcolor{preprocessor}{they are very similar.  Feel free to inspect the  }}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00560}00560 \textcolor{preprocessor}{<A HREF="{}}../../../../demo\_drivers/interaction/acoustic\_fsi/acoustic\_fsi.cc"{}>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00561}00561 source code.</A>]}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00562}00562 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00563}00563 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00564}00564 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00565}00565 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00566}00566 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00567}00567 \(\backslash\)subsection fsi Setting up the fluid-\/structure interaction}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00568}00568 The setup of the fluid-\/structure interaction requires }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00569}00569 the identification of the "{}bulk"{} Helmholtz elements that are }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00570}00570 adjacent to (the Gauss points of) the \(\backslash\)c FaceElements }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00571}00571 that impose the FSI traction boundary condition (4),}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00572}00572 in terms of the displacement potential \(\backslash\)f\$ \(\backslash\)phi \(\backslash\)f\$ computed by these}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00573}00573 "{}bulk"{} elements. This can be done using the helper function}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00574}00574 \(\backslash\)c Multi\_domain\_functions::setup\_bulk\_elements\_adjacent\_to\_face\_mesh(...)}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00575}00575 which is templated by the type of the "{}bulk"{} element and its spatial}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00576}00576 dimension, and takes as arguments:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00577}00577 -\/ a pointer to the \(\backslash\)c Problem, }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00578}00578 -\/ the boundary ID of the FSI boundary in the "{}bulk"{} mesh, }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00579}00579 -\/ a pointer to that mesh,}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00580}00580 -\/ a pointer to the mesh of \(\backslash\)c FaceElements.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00581}00581 .}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00582}00582 Nearly a one-\/liner:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00583}00583 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00584}00584 \(\backslash\)skipline start\_of\_setup\_interaction}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00585}00585 \(\backslash\)until FSI\_traction\_mesh\_pt);}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00586}00586 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00587}00587 Exactly the same method can be used for the identification }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00588}00588 of the "{}bulk"{} elasticity elements that are }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00589}00589 adjacent to (the Gauss points of) the \(\backslash\)c FaceElements }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00590}00590 that impose the FSI flux boundary condition (5),}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00591}00591 using the displacement \(\backslash\)f\$ \{\(\backslash\)bf u\} \(\backslash\)f\$ computed by these}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00592}00592 "{}bulk"{} elements:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00593}00593 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00594}00594 \(\backslash\)until \}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00595}00595 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00596}00596 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00597}00597 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00598}00598 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00599}00599 \(\backslash\)subsection doc Post-\/processing}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00600}00600 The post-\/processing function \(\backslash\)c doc\_solution(...) computes and outputs }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00601}00601 the total radiated power, and plots the computed and exact solutions}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00602}00602 (real and imaginary parts) for all fields.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00603}00603 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00604}00604 \(\backslash\)dontinclude acoustic\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00605}00605 \(\backslash\)skipline start\_doc}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00606}00606 \(\backslash\)until end doc}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00607}00607 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00608}00608 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00609}00609 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00610}00610 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00611}00611 \(\backslash\)section comm\_ex Comments and Exercises}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00612}00612 \(\backslash\)subsection comm Comments}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00613}00613 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00614}00614 -\/ This tutorial emerged from an actual research project }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00615}00615   in which we investigated how efficiently the acoustic power radiated}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00616}00616   from an oscillating cylinder is reduced when the cylinder}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00617}00617   is coated with an elastic layer, exactly as in the model problem}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00618}00618   considered here. The paper then went on to investigate the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00619}00619   effect of gaps in the coating and discovered some (rather nice)}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00620}00620   quasi-\/resonances -\/-\/ values of the FSI parameter \(\backslash\)f\$ Q \(\backslash\)f\$ at which}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00621}00621   the radiated acoustic power increases significantly. Read all}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00622}00622   about it in this paper:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00623}00623   \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00624}00624   -\/ Heil, M., Kharrat, T., Cotterill, P.A. \& Abrahams, I.D. (2012) }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00625}00625     Quasi-\/resonances in sound-\/insulating coatings.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00626}00626     <EM>Journal of Sound and Vibration</EM>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00627}00627     <b>331</B> 4774-\/4784. DOI: }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00628}00628     <A HREF="{}http:\textcolor{comment}{//dx.doi.org/10.1016/j.jsv.2012.05.029"{}>}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00629}00629     10.1016/j.sv.2012.05.029</a>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00630}00630   .}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00631}00631 .}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00632}00632 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00633}00633  }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00634}00634 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00635}00635 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00636}00636 \(\backslash\)subsection ex Exercises}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00637}00637 -\/ Equation (8) for the time-\/averaged radiated power }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00638}00638   shows that \(\backslash\)f\$ \(\backslash\)overline\{\(\backslash\)cal \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}\}\(\backslash\)f\$ depends }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00639}00639   on the derivatives of the displacement potential \(\backslash\)f\$ \(\backslash\)phi \(\backslash\)f\$. This}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00640}00640   implies that the value for \(\backslash\)f\$ \(\backslash\)overline\{\(\backslash\)cal \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}\}\(\backslash\)f\$ computed from the}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00641}00641   finite-\/element solution for \(\backslash\)f\$ \(\backslash\)phi \(\backslash\)f\$ is not}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00642}00642   as accurate as the displacement potential itself. Computing}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00643}00643   \(\backslash\)f\$ \(\backslash\)overline\{\(\backslash\)cal \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}\}\(\backslash\)f\$ to a certain tolerance (e.g. to }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00644}00644   \textcolor{stringliteral}{"{}graphical accuracy"{}} as in the plot shown above) therefore tends to}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00645}00645   require meshes that are much finer than would be required}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00646}00646   \textcolor{keywordflow}{if} we were only interested in \(\backslash\)f\$ \(\backslash\)phi \(\backslash\)f\$ itself.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00647}00647   \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00648}00648   Investigate the accuracy of the computational predictions for \(\backslash\)f\$}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00649}00649   \(\backslash\)overline\{\(\backslash\)cal \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}\}\(\backslash\)f\$ by:}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00650}00650   \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00651}00651   -\/ increasing the spatial resolution e.g. by \textcolor{keyword}{using}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00652}00652     the command line flag \(\backslash\)c -\/-\/el\_multiplier (which controls the number}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00653}00653     of elements in the mesh) and suppressing any automatic (un)refinement}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00654}00654     by setting the maximum number of adaptations to zero}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00655}00655     \textcolor{keyword}{using} the \(\backslash\)c -\/-\/max\_adapt command line flag.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00656}00656     \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00657}00657   -\/ reducing the outer radius of the computational domain, \textcolor{keyword}{using}}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00658}00658     the command line flag \(\backslash\)c -\/-\/outer\_radius, say.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00659}00659     \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00660}00660   -\/ varying the element type, from the bi-\/linear }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00661}00661     \(\backslash\)c RefineableQHelmholtzElement<2,2>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00662}00662     to the bi-\/cubic \(\backslash\)c RefineableQHelmholtzElement<2,4>, say.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00663}00663   .}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00664}00664   \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00665}00665  Which of these approaches gives you the \textcolor{stringliteral}{"{}most accuracy"{}} \textcolor{keywordflow}{for} a given number of}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00666}00666  degrees of freedom?}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00667}00667 .}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00668}00668 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00669}00669 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00670}00670 <HR>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00671}00671 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00672}00672 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00673}00673 \(\backslash\)section sources Source files \textcolor{keywordflow}{for} \textcolor{keyword}{this} tutorial}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00674}00674 -\/ The source files \textcolor{keywordflow}{for} \textcolor{keyword}{this} tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00675}00675   <CENTER>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00676}00676   <A HREF=\textcolor{stringliteral}{"{}../../../../demo\_drivers/interaction/acoustic\_fsi"{}}>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00677}00677   demo\_drivers/interaction/acoustic\_fsi/}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00678}00678   </A>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00679}00679   </CENTER>\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00680}00680 -\/ The driver code is: \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00681}00681   <CENTER>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00682}00682   <A HREF=\textcolor{stringliteral}{"{}../../../../demo\_drivers/interaction/acoustic\_fsi/acoustic\_fsi.cc"{}}>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00683}00683   demo\_drivers/interaction/acoustic\_fsi/acoustic\_fsi.cc}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00684}00684   </A>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00685}00685   </CENTER>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00686}00686 .}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00687}00687 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00688}00688 }
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00689}00689 <hr>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00690}00690 <hr>}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00691}00691 \(\backslash\)section pdf PDF file}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00692}00692 A <a href=\textcolor{stringliteral}{"{}../latex/refman.pdf"{}}>pdf version</a> of \textcolor{keyword}{this} document is available.}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00693}00693 **/}
+\DoxyCodeLine{\Hypertarget{acoustic__fsi__annulus_8txt__doxygenified_8h_source_l00694}00694 }
+
+\end{DoxyCode}

@@ -1,13 +1,18 @@
-\hypertarget{classoomph_1_1RefineableHelmholtzEquations}{}\doxysection{oomph\+::Refineable\+Helmholtz\+Equations$<$ D\+IM $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RefineableHelmholtzEquations}{}\doxysection{oomph\+::Refineable\+Helmholtz\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RefineableHelmholtzEquations}\index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
+
+
+////////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$refineable\+\_\+helmholtz\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Helmholtz\+Equations$<$ D\+IM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Helmholtz\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.314554cm]{classoomph_1_1RefineableHelmholtzEquations}
+\includegraphics[height=1.577465cm]{classoomph_1_1RefineableHelmholtzEquations}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -15,33 +20,34 @@ Inheritance diagram for oomph\+::Refineable\+Helmholtz\+Equations$<$ D\+IM $>$\+
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a7b33736187e9f98fcdae1c8187cd819b}{Refineable\+Helmholtz\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, simply call other constructors. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a307232bc956de2f2753cc016774d6b69}{Refineable\+Helmholtz\+Equations}} (const \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$ \&dummy)
+\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a826d0a2425567219e9d6d1cbc3bca37c}{Refineable\+Helmholtz\+Equations}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{Refineable\+Helmholtz\+Equations}}$<$ DIM $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a715bc9ef2960fd9246557e985c1eba7d}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_ae3981b8ad03d951b0d661d223ad8e560}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
-\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a6d3102c899dac5c4e18fee3564323509}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_ae3981b8ad03d951b0d661d223ad8e560}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+\begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Helmholtz equations. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a6d3102c899dac5c4e18fee3564323509}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_aa9296bdeeb5699a279afb3813c81024f}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_aa9296bdeeb5699a279afb3813c81024f}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em Get the function value u in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: Given the generality of the interface (this function is usually called from black-\/box documentation or interpolation routines), the values \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} sets its own size in here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a6b58f755f6ab936ab633ecee05998899}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build\+: Copy source function pointer from father element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a3762ea1eef3fa5e835686643c25e8cec}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations_a3762ea1eef3fa5e835686643c25e8cec}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em Add element\textquotesingle{}s contribution to elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM$>$\newline
-class oomph\+::\+Refineable\+Helmholtz\+Equations$<$ D\+I\+M $>$}
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+Refineable\+Helmholtz\+Equations$<$ DIM $>$}
+//////////////////////////////////////////////////////////////////////// 
 
 Refineable version of Helmholtz equations 
 
-Definition at line 57 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00057}{57}} of file \mbox{\hyperlink{refineable__helmholtz__elements_8h_source}{refineable\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
@@ -50,8 +56,8 @@ Definition at line 57 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
 \index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}!RefineableHelmholtzEquations@{RefineableHelmholtzEquations}}
 \index{RefineableHelmholtzEquations@{RefineableHelmholtzEquations}!oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableHelmholtzEquations()}{RefineableHelmholtzEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{Refineable\+Helmholtz\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{Refineable\+Helmholtz\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -59,26 +65,18 @@ Constructor, simply call other constructors.
 
 
 
-Definition at line 64 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00064}{64}} of file \mbox{\hyperlink{refineable__helmholtz__elements_8h_source}{refineable\+\_\+helmholtz\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableHelmholtzEquations_a307232bc956de2f2753cc016774d6b69}\label{classoomph_1_1RefineableHelmholtzEquations_a307232bc956de2f2753cc016774d6b69}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableHelmholtzEquations_a826d0a2425567219e9d6d1cbc3bca37c}\label{classoomph_1_1RefineableHelmholtzEquations_a826d0a2425567219e9d6d1cbc3bca37c}} 
 \index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}!RefineableHelmholtzEquations@{RefineableHelmholtzEquations}}
 \index{RefineableHelmholtzEquations@{RefineableHelmholtzEquations}!oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableHelmholtzEquations()}{RefineableHelmholtzEquations()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{Refineable\+Helmholtz\+Equations}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{Refineable\+Helmholtz\+Equations}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{Refineable\+Helmholtz\+Equations}}$<$ DIM $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 72 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -87,31 +85,27 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}!fill\_in\_generic\_residual\_contribution\_helmholtz@{fill\_in\_generic\_residual\_contribution\_helmholtz}}
 \index{fill\_in\_generic\_residual\_contribution\_helmholtz@{fill\_in\_generic\_residual\_contribution\_helmholtz}!oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_helmholtz()}{fill\_in\_generic\_residual\_contribution\_helmholtz()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Add element\textquotesingle{}s contribution to elemental residual vector and/or Jacobian matrix flag=1\+: compute both flag=0\+: compute only residual vector. 
 
-Add element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix. flag=1\+: compute both flag=0\+: compute only residual vector 
+Add element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix. flag=1\+: compute both flag=0\+: compute only residual vector. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1HelmholtzEquations_a24fbdea32fd24f0cef97d34cf99c36a3}{oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$}}.
-
-
-
-Definition at line 39 of file refineable\+\_\+helmholtz\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{refineable__helmholtz__elements_8cc_source_l00038}{38}} of file \mbox{\hyperlink{refineable__helmholtz__elements_8cc_source}{refineable\+\_\+helmholtz\+\_\+elements.\+cc}}.
 
 
 
-References i, interpolated\+\_\+u(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), residuals(), and oomph\+::\+Quad\+Tree\+Names\+::W.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableHelmholtzEquations_a6b58f755f6ab936ab633ecee05998899}\label{classoomph_1_1RefineableHelmholtzEquations_a6b58f755f6ab936ab633ecee05998899}} 
 \index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}!further\_build@{further\_build}}
 \index{further\_build@{further\_build}!oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{further\_build()}{further\_build()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::further\+\_\+build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ DIM $>$\+::further\+\_\+build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -123,18 +117,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Definition at line 167 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00162}{162}} of file \mbox{\hyperlink{refineable__helmholtz__elements_8h_source}{refineable\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::k\+\_\+squared\+\_\+pt(), oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::\+K\+\_\+squared\+\_\+pt, oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::source\+\_\+fct\+\_\+pt(), and oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::\+Source\+\_\+fct\+\_\+pt.
+References \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableHelmholtzEquations_aa9296bdeeb5699a279afb3813c81024f}\label{classoomph_1_1RefineableHelmholtzEquations_aa9296bdeeb5699a279afb3813c81024f}} 
 \index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -146,18 +140,18 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 143 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00138}{138}} of file \mbox{\hyperlink{refineable__helmholtz__elements_8h_source}{refineable\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Refineable\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::get\+\_\+interpolated\+\_\+values(), s, oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), t, and values.
+References \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00108}{oomph\+::\+Refineable\+Helmholtz\+Equations$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableHelmholtzEquations_a6d3102c899dac5c4e18fee3564323509}\label{classoomph_1_1RefineableHelmholtzEquations_a6d3102c899dac5c4e18fee3564323509}} 
 \index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -169,41 +163,45 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 113 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00108}{108}} of file \mbox{\hyperlink{refineable__helmholtz__elements_8h_source}{refineable\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), s, oomph\+::\+Finite\+Element\+::shape(), oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::u\+\_\+index\+\_\+helmholtz(), and values.
+References \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::get\+\_\+interpolated\+\_\+values().
+Referenced by \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00138}{oomph\+::\+Refineable\+Helmholtz\+Equations$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableHelmholtzEquations_ae3981b8ad03d951b0d661d223ad8e560}\label{classoomph_1_1RefineableHelmholtzEquations_ae3981b8ad03d951b0d661d223ad8e560}} 
 \index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Helmholtz equations 
+
+
+Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Standard flux.\+from Helmholtz equations. 
+
+
 
 Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f546d81771cabad82ca5a7556}{oomph\+::\+Element\+With\+Z2\+Error\+Estimator}}.
 
 
 
-Definition at line 96 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00091}{91}} of file \mbox{\hyperlink{refineable__helmholtz__elements_8h_source}{refineable\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Helmholtz\+Equations$<$ D\+I\+M $>$\+::get\+\_\+flux(), and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableHelmholtzEquations_a715bc9ef2960fd9246557e985c1eba7d}\label{classoomph_1_1RefineableHelmholtzEquations_a715bc9ef2960fd9246557e985c1eba7d}} 
 \index{oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
 \index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::RefineableHelmholtzEquations$<$ DIM $>$@{oomph::RefineableHelmholtzEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ D\+IM $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableHelmholtzEquations}{oomph\+::\+Refineable\+Helmholtz\+Equations}}$<$ DIM $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -215,7 +213,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 89 of file refineable\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__helmholtz__elements_8h_source_l00084}{84}} of file \mbox{\hyperlink{refineable__helmholtz__elements_8h_source}{refineable\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 

@@ -3,13 +3,13 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classCoatedDiskProblem}{Coated\+Disk\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T, H\+E\+L\+M\+H\+O\+L\+T\+Z\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Coated disk F\+SI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classCoatedDiskProblem}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Coated disk FSI. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
-\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,9 +19,9 @@ void \mbox{\hyperlink{namespaceGlobal__Parameters_ae0f9a80fb7510dbfbbef22582da23
 \begin{DoxyCompactList}\small\item\em Function to update dependent parameter values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_ab51fa55d06d9963d363bcf966cfcc62b}{Global\+\_\+\+Parameters\+::solid\+\_\+boundary\+\_\+displacement}} (const Vector$<$ double $>$ \&x, Vector$<$ std\+::complex$<$ double $>$ $>$ \&u)
 \begin{DoxyCompactList}\small\item\em Displacement field on inner boundary of solid. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a116765fbd117ec6199c9399af801d510}{Global\+\_\+\+Parameters\+::\+Hankel\+H1}} (const double \&k, const double \&x)
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_ad51a5fa9fa94f9d54ef26565b53a0e35}{Global\+\_\+\+Parameters\+::\+Hankel\+H1}} (const double \&k, const double \&x)
 \begin{DoxyCompactList}\small\item\em Interface to Hankel function in maple style. \end{DoxyCompactList}\item 
-std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a12dd327bc592b36ffd4abbab5018146f}{Global\+\_\+\+Parameters\+::axisym\+\_\+coefficient}} ()
+std\+::complex$<$ double $>$ \mbox{\hyperlink{namespaceGlobal__Parameters_a32b00967338a5749a740dfe1a62e5704}{Global\+\_\+\+Parameters\+::axisym\+\_\+coefficient}} ()
 \begin{DoxyCompactList}\small\item\em Coefficient in front of Hankel function for axisymmetric solution of Helmholtz potential. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_af95baf4096a1393ab06bfa9ff9a57a35}{Global\+\_\+\+Parameters\+::exact\+\_\+axisym\+\_\+potential}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Exact solution for Helmholtz potential for axisymmetric solution. \end{DoxyCompactList}\item 
@@ -37,7 +37,7 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_a91a3fa265abaf9e724c668ee800
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a88ded445ecd7bd89701409e68fd0b900}{Global\+\_\+\+Parameters\+::\+Outer\+\_\+radius}} =4.\+0
 \begin{DoxyCompactList}\small\item\em Radius of outer boundary of Helmholtz domain. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\+\_\+\+Parameters\+::Q}} =0.\+0
-\begin{DoxyCompactList}\small\item\em F\+SI parameter. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em FSI parameter. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_ae3cf8878ede839bffda01f79bbe3e819}{Global\+\_\+\+Parameters\+::\+H\+\_\+coating}} =0.\+3
 \begin{DoxyCompactList}\small\item\em Non-\/dim thickness of elastic coating. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\+\_\+\+Parameters\+::\+Nu}} = 0.\+3
@@ -47,9 +47,8 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266d
 double \mbox{\hyperlink{namespaceGlobal__Parameters_af9e1e178dfb7f5e35b452599bd4c4324}{Global\+\_\+\+Parameters\+::\+Omega\+\_\+sq}} =0.\+0
 \begin{DoxyCompactList}\small\item\em Non-\/dim square of frequency for solid -- dependent variable! \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_aff31353c09f439f3d537ad06ce868787}{Global\+\_\+\+Parameters\+::N}} =0
-\begin{DoxyCompactList}\small\item\em Azimuthal wavenumber for imposed displacement of coating on inner boundary ~\newline
- \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\+\_\+\+Parameters\+::\+Directory}} =\char`\"{}R\+E\+S\+LT\char`\"{}
+\begin{DoxyCompactList}\small\item\em Azimuthal wavenumber for imposed displacement of coating on inner boundary. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\+\_\+\+Parameters\+::\+Directory}} =\char`\"{}RESLT\char`\"{}
 \begin{DoxyCompactList}\small\item\em Output directory. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a35d5d2ecfff0cec6150a5dc79e5c1ad1}{Global\+\_\+\+Parameters\+::\+El\+\_\+multiplier}} =1
 \begin{DoxyCompactList}\small\item\em Multiplier for number of elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -68,9 +67,9 @@ Driver for acoustic fsi problem.
 
 
 
-Definition at line 845 of file acoustic\+\_\+fsi.\+cc.
+Definition at line \mbox{\hyperlink{acoustic__fsi_8cc_source_l00845}{845}} of file \mbox{\hyperlink{acoustic__fsi_8cc_source}{acoustic\+\_\+fsi.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Directory, Global\+\_\+\+Parameters\+::\+El\+\_\+multiplier, Global\+\_\+\+Parameters\+::N, Global\+\_\+\+Parameters\+::\+Outer\+\_\+radius, problem, Global\+\_\+\+Parameters\+::Q, and Global\+\_\+\+Parameters\+::update\+\_\+parameter\+\_\+values().
+References \mbox{\hyperlink{acoustic__fsi_8cc_source_l00101}{Global\+\_\+\+Parameters\+::\+Directory}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00727}{Coated\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT, HELMHOLTZ\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00104}{Global\+\_\+\+Parameters\+::\+El\+\_\+multiplier}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00083}{Global\+\_\+\+Parameters\+::N}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00055}{Global\+\_\+\+Parameters\+::\+Outer\+\_\+radius}}, \mbox{\hyperlink{acoustic__fsi_8cc_source_l00058}{Global\+\_\+\+Parameters\+::Q}}, and \mbox{\hyperlink{acoustic__fsi_8cc_source_l00076}{Global\+\_\+\+Parameters\+::update\+\_\+parameter\+\_\+values()}}.
 

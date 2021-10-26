@@ -1,0 +1,172 @@
+\hypertarget{third__party__meshes_8txt__doxygenified_8h_source}{}\doxysection{third\+\_\+party\+\_\+meshes.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{third__party__meshes_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Existing (unstructured) meshes: Wrappers to third-\/party mesh generators}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{\(\backslash\)c oomph-\/lib does not provide its own unstructured mesh generator}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{but has several mesh classes that generate unstructured meshes }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{from the output of third-\/party unstructured mesh generators.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{<B>Notes:</B>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{-\/\# The unstructured tet and triangle meshes listed below }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{   can \(\backslash\)b not be used with \(\backslash\)c oomph-\/lib's mesh adaptation or }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{   node-\/update procedures. A suitably fine mesh has to}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{   be generated offline by the third-\/party mesh generator.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{   If required, node-\/updates (in response to changes in the domain}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{   boundaries) have to be performed manually. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{-\/\# For some element types, the mesh generation process is not}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{   particularly efficient (yet!). A suitable warning message}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{   is issued in such cases. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{-\/\# Since the third-\/party mesh generators tend to triangulate the domain}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{   with simplex elements, curvilinear boundaries are not}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{   resolved more accurately by using higher-\/order elements unless}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{   some post-\/processing is performed. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{-\/\# The meshes have not been tested as extensively as \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{   structured meshes, described <A HREF="{}../../mesh\_list/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{   elsewhere.</A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{.  }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{\(\backslash\)section mesh\_list Mesh list}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{<B>Mesh</B>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{<B>Representative Mesh plot</B>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{<A HREF="{}../../mesh\_from\_triangle/html/index.html"{}><B>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{TriangleMesh<ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{</B></A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{-\/ This class creates \(\backslash\)c oomph-\/lib meshes based on the output from }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{  <A HREF="{}http://www.cs.cmu.edu/\string~jrs"{}>J.R.Shewchuk's</A>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{  Delaunay mesh generator }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{  <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{  <TT>Triangle</TT></A> }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{-\/ The mesh can be used with all \(\backslash\)c FiniteElements that are derived from}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{  the geometric finite element \(\backslash\)c TElement<2,NNODE\_1D>.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{<B>Example driver codes:</B> \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{-\/ The use of  <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{  <TT>Triangle</TT></A> and the \(\backslash\)c TriangleMesh class}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{  are explained in a }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{  <A HREF="{}../../mesh\_from\_triangle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{  separate tutorial.</A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{-\/ In <A HREF="{}../../mesh\_from\_xfig/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{  another tutorial</A> we demonstrate how the code }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{  <A  HREF="{}../../../../demo\_drivers/meshing/mesh\_from\_xfig\_triangle/fig2poly.cc"{}>fig2poly.cc</A> may be used to generate input files }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{  for <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{  <TT>Triangle</TT></A> based on the output from the open-\/source }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{  drawing program <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig.</A> }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)image html oomph\_mesh.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{\(\backslash\)image latex oomph\_mesh.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{<A HREF="{}../../mesh\_from\_tetgen/html/index.html"{}><B>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{TetgenMesh<ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{</B></A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{-\/ This class creates \(\backslash\)c oomph-\/lib meshes based on the output from }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{  <A HREF="{}http://www.wias-\/berlin.de/\string~si "{}>Hang Si's</A>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{  open-\/source mesh generator }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{  <A HREF="{}http://wias-\/berlin.de/software/tetgen//"{}> \(\backslash\)c Tetgen </A>.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{-\/ The mesh can be used with all \(\backslash\)c FiniteElements that are derived from}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{  the geometric finite element \(\backslash\)c TElement<3,NNODE\_1D>.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{<B>Example driver codes:</B> \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{-\/ The use of   <A HREF="{}http://wias-\/berlin.de/software/tetgen//"{}> \(\backslash\)c Tetgen </A>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{  and the \(\backslash\)c TetgenMesh class}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{  are explained in a <A HREF="{}../../mesh\_from\_tetgen/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{  separate tutorial.</A> }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)image html tetgen\_mesh.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{\(\backslash\)image latex tetgen\_mesh.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{<A HREF="{}../../mesh\_from\_vmtk/html/index.html"{}><B>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{Generating meshes from medical scans with VMTK}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{</B></A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{-\/ We provide the option to generate tetgen-\/based meshes}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{  for physiological fluid-\/structure interaction problems, }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{  using the  <a href="{}http://www.vmtk.org"{}>Vascular }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{  Modeling Toolkit (VMTK).</a>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{<B>Example driver codes and tutorials:</B> \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{-\/ We provide a <a href="{}../../mesh\_from\_vmtk/html/index.html"{}>separate }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{  tutorial</a> that shows how to generate \(\backslash\)c oomph-\/lib meshes}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{  from medical images.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{-\/ The methodology is used in the following driver codes:}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{  -\/ <a href="{}../../../solid/vmtk\_solid/html/index.html"{}>The inflation of a }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{    blood vessel.</a>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{    \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{  -\/ <a href="{}../../../navier\_stokes/vmtk\_fluid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{    Finite Reynolds number flow through a (rigid) iliac bifurcation.</a>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{    \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{  -\/ <a href="{}../../../interaction/vmtk\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{    Finite Reynolds number flow through an elastic iliac bifurcation.</a>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{    \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{  .}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{\(\backslash\)image html iliac.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)image latex iliac.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{<A HREF="{}../../mesh\_from\_geompack/html/index.html"{}><B>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{GeompackQuadMesh<ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{</B></A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{-\/ This class creates \(\backslash\)c oomph-\/lib meshes based on the output from }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{  Barry Joe's mesh generator }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{  <A HREF="{}http://members.shaw.ca/bjoe/"{}>\(\backslash\)c Geompack++, </A>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{  available as freeware at }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{  <A HREF="{}http://members.shaw.ca/bjoe/"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{  http://members.shaw.ca/bjoe/.</A>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{-\/ The mesh can be used with all \(\backslash\)c FiniteElements that are derived from}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{  the geometric finite element \(\backslash\)c QElement<2,2>.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{<B>Example driver codes:</B> \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{-\/ The use of }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{  <A HREF="{}http://members.shaw.ca/bjoe/"{}>\(\backslash\)c Geompack++ </A>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{  and the \(\backslash\)c GeompackQuadMesh class}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{  are explained in a <A HREF="{}../../mesh\_from\_geompack/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{  separate tutorial.</A> }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{\(\backslash\)image html geompack\_mesh.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{\(\backslash\)image latex geompack\_mesh.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{</TABLE> }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{</CENTER>    }}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{third__party__meshes_8txt__doxygenified_8h_source_l00167}00167 }
+
+\end{DoxyCode}

@@ -1,18 +1,23 @@
-\hypertarget{classInterfaceProblem}{}\doxysection{Interface\+Problem$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ Class Template Reference}
+\hypertarget{classInterfaceProblem}{}\doxysection{Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classInterfaceProblem}\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-Inheritance diagram for Interface\+Problem$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+:\begin{figure}[H]
+
+
+Single fluid interface problem including transport of an insoluble surfactant.  
+
+
+Inheritance diagram for Interface\+Problem\texorpdfstring{$<$}{<} ELEMENT, TIMESTEPPER \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{classInterfaceProblem}
+\includegraphics[height=1.282932cm]{classInterfaceProblem}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classInterfaceProblem_a2ecc265740dba1626344fc090fad5fa6}{Interface\+Problem}} (const unsigned \&n\+\_\+r, const unsigned \&n\+\_\+y, const unsigned \&n\+\_\+theta, const double \&r\+\_\+min, const double \&r\+\_\+max, const double \&l\+\_\+y, const double \&theta\+\_\+max)
-\begin{DoxyCompactList}\small\item\em Problem constructor. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x and y directions. Also lengths of the domain in x-\/ and y-\/directions and the height of the layer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a241f0290d26462badbe9bb0e1e0d10a5}{unsteady\+\_\+run}} (const unsigned \&nstep)
 \begin{DoxyCompactList}\small\item\em Run an unsteady simulation with specified number of steps. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
@@ -20,15 +25,15 @@ void \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{d
 double \mbox{\hyperlink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}{compute\+\_\+total\+\_\+mass}} ()
 \begin{DoxyCompactList}\small\item\em Compute the total mass. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}{Interface\+Problem}} (const unsigned \&n\+\_\+r, const unsigned \&n\+\_\+z, const double \&l\+\_\+z)
-\begin{DoxyCompactList}\small\item\em Constructor for single fluid interface problem. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}{$\sim$\+Interface\+Problem}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{set\+\_\+initial\+\_\+condition}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b}{global\+\_\+temporal\+\_\+error\+\_\+norm}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em The global temporal error norm, based on the movement of the nodes in the radial direction only (because that\textquotesingle{}s the only direction in which they move!) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
 \begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\+\_\+run}} (const double \&t\+\_\+max, const double \&dt)
@@ -36,13 +41,13 @@ void \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{u
 double \mbox{\hyperlink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}{compute\+\_\+total\+\_\+mass}} ()
 \begin{DoxyCompactList}\small\item\em Compute the total mass of the insoluble surfactant. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}{Interface\+Problem}} (const unsigned \&n\+\_\+r, const unsigned \&n\+\_\+z, const double \&l\+\_\+z)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}{$\sim$\+Interface\+Problem}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{set\+\_\+initial\+\_\+condition}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b}{global\+\_\+temporal\+\_\+error\+\_\+norm}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em The global temporal error norm, based on the movement of the nodes in the radial direction only (because that\textquotesingle{}s the only direction in which they move!) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
 \begin{DoxyCompactList}\small\item\em Doc the solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\+\_\+run}} (const double \&t\+\_\+max, const double \&dt)
@@ -52,11 +57,11 @@ double \mbox{\hyperlink{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{My\+Horizontal\+Single\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_a6df8c17d561715be1e6e7badfe339122}{Bulk\+\_\+mesh\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{My\+Horizontal\+Single\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_a6df8c17d561715be1e6e7badfe339122}{Bulk\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
 Mesh $\ast$ \mbox{\hyperlink{classInterfaceProblem_afd6b076362ccdb4ade0450fa3d3bf1ac}{Interface\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Mesh for the free surface (interface) elements. \end{DoxyCompactList}\item 
-Elastic\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2}{Bulk\+\_\+mesh\+\_\+pt}}
+Elastic\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2}{Bulk\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Access function for the specific mesh. \end{DoxyCompactList}\item 
 Constitutive\+Law $\ast$ \mbox{\hyperlink{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}{Constitutive\+\_\+law\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the constitutive law. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -76,7 +81,7 @@ double \mbox{\hyperlink{classInterfaceProblem_a9367afe223abf813838405a7d377767c}
 \begin{DoxyCompactList}\small\item\em Axial lengths of domain. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classInterfaceProblem_af05142e27af8078fdb544bef158ab83d}{L\+\_\+y}}
 \item 
-\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Annular\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_a444b33e2ccb3eacdc619abda73575a50}{Bulk\+\_\+mesh\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Annular\+Spine\+Mesh}}$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classInterfaceProblem_a444b33e2ccb3eacdc619abda73575a50}{Bulk\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to bulk mesh. \end{DoxyCompactList}\item 
 Mesh $\ast$ \mbox{\hyperlink{classInterfaceProblem_a1b373c6e9f49bef78404511c53e622bb}{Surface\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the surface mes. \end{DoxyCompactList}\item 
@@ -85,16 +90,15 @@ Node $\ast$ \mbox{\hyperlink{classInterfaceProblem_a852833a405566b7f08b852e7174c
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT, class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER$>$\newline
-class Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$}
+\subsubsection*{template$<$class ELEMENT, class TIMESTEPPER$>$\newline
+class Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$}
+Single fluid interface problem including transport of an insoluble surfactant. 
 
-Single fluid interface problem including transport of an insoluble surfactant.
+Single axisymmetric fluid interface problem including the transport of an soluble surfactant.
 
-Single axisymmetric fluid interface problem including the transport of an insoluble surfactant.
+Single axisymmetric fluid interface problem including the transport of an insoluble surfactant. 
 
-Single axisymmetric fluid interface problem including the transport of an soluble surfactant. 
-
-Definition at line 196 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00196}{196}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 
 
@@ -103,46 +107,46 @@ Definition at line 196 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
 \index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+r,  }\item[{const unsigned \&}]{n\+\_\+y,  }\item[{const unsigned \&}]{n\+\_\+theta,  }\item[{const double \&}]{r\+\_\+min,  }\item[{const double \&}]{r\+\_\+max,  }\item[{const double \&}]{l\+\_\+y,  }\item[{const double \&}]{theta\+\_\+max }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+r,  }\item[{const unsigned \&}]{n\+\_\+y,  }\item[{const unsigned \&}]{n\+\_\+theta,  }\item[{const double \&}]{r\+\_\+min,  }\item[{const double \&}]{r\+\_\+max,  }\item[{const double \&}]{l\+\_\+y,  }\item[{const double \&}]{theta\+\_\+max }\end{DoxyParamCaption})}
 
 
+
+Constructor\+: Pass number of elements in x and y directions. Also lengths of the domain in x-\/ and y-\/directions and the height of the layer. 
 
 Problem constructor. 
 
-Constructor\+: Pass number of elements in x and y directions. Also lengths of the domain in x-\/ and y-\/directions and the height of the layer 
-
-Definition at line 271 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00270}{270}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta, oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::beta\+\_\+pt(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca, oomph\+::\+Fluid\+Interface\+Element\+::ca\+\_\+pt(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+S, oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+s\+\_\+pt(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+\+St\+\_\+S, oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St, and oomph\+::\+Fluid\+Interface\+Element\+::set\+\_\+external\+\_\+pressure\+\_\+data().
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00078}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00153}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::beta\+\_\+pt()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{interface__elements_8h_source_l00492}{oomph\+::\+Fluid\+Interface\+Element\+::ca\+\_\+pt()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00261}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Document\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00081}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+S}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00159}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+s\+\_\+pt()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00084}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+\+St\+\_\+S}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00165}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00057}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00060}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, \mbox{\hyperlink{interface__elements_8h_source_l00539}{oomph\+::\+Fluid\+Interface\+Element\+::set\+\_\+external\+\_\+pressure\+\_\+data()}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00258}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}\label{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
 \index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+r,  }\item[{const unsigned \&}]{n\+\_\+z,  }\item[{const double \&}]{l\+\_\+z }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+r,  }\item[{const unsigned \&}]{n\+\_\+z,  }\item[{const double \&}]{l\+\_\+z }\end{DoxyParamCaption})}
 
 
-
-Constructor for single fluid interface problem. 
 
 Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) 
 
-Definition at line 916 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Constructor for single fluid interface problem. 
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00915}{915}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta, oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::beta\+\_\+pt(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca, oomph\+::\+Fluid\+Interface\+Element\+::ca\+\_\+pt(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+S, oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::peclet\+\_\+s\+\_\+pt(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+\+St\+\_\+S, oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St, and oomph\+::\+Fluid\+Interface\+Element\+::set\+\_\+external\+\_\+pressure\+\_\+data().
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00078}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00567}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::beta\+\_\+pt()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Ca}}, \mbox{\hyperlink{interface__elements_8h_source_l00492}{oomph\+::\+Fluid\+Interface\+Element\+::ca\+\_\+pt()}}, \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+G()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00074}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00081}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+S}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00570}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::peclet\+\_\+s\+\_\+pt()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00084}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Peclet\+\_\+\+St\+\_\+S}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00573}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00057}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00063}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+Inv\+Fr}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00060}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, and \mbox{\hyperlink{interface__elements_8h_source_l00539}{oomph\+::\+Fluid\+Interface\+Element\+::set\+\_\+external\+\_\+pressure\+\_\+data()}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~InterfaceProblem@{$\sim$InterfaceProblem}}
 \index{````~InterfaceProblem@{$\sim$InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$InterfaceProblem()}{~InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::$\sim$\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::$\sim$\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -150,21 +154,25 @@ Destructor (empty)
 
 
 
-Definition at line 761 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00761}{761}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}\label{classInterfaceProblem_af1ab49eb511b5a8db27e7b4e509a0c5c}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!InterfaceProblem@{InterfaceProblem}}
 \index{InterfaceProblem@{InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{InterfaceProblem()}{InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+r,  }\item[{const unsigned \&}]{n\+\_\+z,  }\item[{const double \&}]{l\+\_\+z }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+r,  }\item[{const unsigned \&}]{n\+\_\+z,  }\item[{const double \&}]{l\+\_\+z }\end{DoxyParamCaption})}
 
-Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) \mbox{\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}} 
+
+
+Constructor\+: Pass the number of elements in radial and axial directions and the length of the domain in the z direction) 
+
+\mbox{\Hypertarget{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}\label{classInterfaceProblem_a90c191f8046069099b199743e7ce7111}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!````~InterfaceProblem@{$\sim$InterfaceProblem}}
 \index{````~InterfaceProblem@{$\sim$InterfaceProblem}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$InterfaceProblem()}{~InterfaceProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::$\sim$\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::$\sim$\mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -172,7 +180,7 @@ Destructor (empty)
 
 
 
-Definition at line 424 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00424}{424}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
 
 
@@ -181,30 +189,46 @@ Definition at line 424 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfa
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them 
 
-Definition at line 213 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+
+Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them. 
+
+
+
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00213}{213}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}\label{classInterfaceProblem_ab4193771472aefce4cd67261491cc344}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Spine heights/lengths are unknowns in the problem so their values get corrected during each Newton step. However, changing their value does not automatically change the nodal positions, so we need to update all of them here. 
 
-Definition at line 767 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00767}{767}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}\label{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!compute\_total\_mass@{compute\_total\_mass}}
 \index{compute\_total\_mass@{compute\_total\_mass}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_total\_mass()}{compute\_total\_mass()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -212,18 +236,18 @@ Compute the total mass.
 
 
 
-Definition at line 222 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00222}{222}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 
 
-References oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::integrate\+\_\+c().
+References \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00358}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::integrate\+\_\+c()}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00258}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Surface\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}\label{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!compute\_total\_mass@{compute\_total\_mass}}
 \index{compute\_total\_mass@{compute\_total\_mass}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_total\_mass()}{compute\_total\_mass()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -231,18 +255,18 @@ Compute the total mass of the insoluble surfactant.
 
 
 
-Definition at line 517 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00855}{855}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-References oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::integrate\+\_\+c().
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00627}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::integrate\+\_\+c()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00846}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}\label{classInterfaceProblem_a9b19bc90667fe8c7885d8ee113812e27}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!compute\_total\_mass@{compute\_total\_mass}}
 \index{compute\_total\_mass@{compute\_total\_mass}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_total\_mass()}{compute\_total\_mass()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::compute\+\_\+total\+\_\+mass (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -250,18 +274,18 @@ Compute the total mass of the insoluble surfactant.
 
 
 
-Definition at line 855 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00517}{517}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
 
 
-References oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::integrate\+\_\+c().
+References \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00358}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::integrate\+\_\+c()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00846}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f}\label{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!deform\_free\_surface@{deform\_free\_surface}}
 \index{deform\_free\_surface@{deform\_free\_surface}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{deform\_free\_surface()}{deform\_free\_surface()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -269,18 +293,18 @@ Deform the mesh/free surface to a prescribed function.
 
 
 
-Definition at line 542 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00880}{880}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness.
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f}\label{classInterfaceProblem_a4514af9aa19dd50d10ca18f12039428f}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!deform\_free\_surface@{deform\_free\_surface}}
 \index{deform\_free\_surface@{deform\_free\_surface}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{deform\_free\_surface()}{deform\_free\_surface()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::deform\+\_\+free\+\_\+surface (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -288,18 +312,18 @@ Deform the mesh/free surface to a prescribed function.
 
 
 
-Definition at line 880 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00542}{542}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness.
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
 
 
 
@@ -307,14 +331,14 @@ Doc the solution.
 
 
 
-Definition at line 443 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00443}{443}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}\label{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
 
 
 
@@ -324,8 +348,8 @@ Doc the solution.
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
 
 
 
@@ -335,63 +359,84 @@ Doc the solution.
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!global\_temporal\_error\_norm@{global\_temporal\_error\_norm}}
 \index{global\_temporal\_error\_norm@{global\_temporal\_error\_norm}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{global\_temporal\_error\_norm()}{global\_temporal\_error\_norm()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::global\+\_\+temporal\+\_\+error\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::global\+\_\+temporal\+\_\+error\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 The global temporal error norm, based on the movement of the nodes in the radial direction only (because that\textquotesingle{}s the only direction in which they move!) 
 
-Definition at line 457 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00801}{801}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b}\label{classInterfaceProblem_a5eb5fa3bf4e7884984f285e24ba3ee7b}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!global\_temporal\_error\_norm@{global\_temporal\_error\_norm}}
 \index{global\_temporal\_error\_norm@{global\_temporal\_error\_norm}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{global\_temporal\_error\_norm()}{global\_temporal\_error\_norm()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::global\+\_\+temporal\+\_\+error\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::global\+\_\+temporal\+\_\+error\+\_\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 The global temporal error norm, based on the movement of the nodes in the radial direction only (because that\textquotesingle{}s the only direction in which they move!) 
 
-Definition at line 801 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00457}{457}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
 \index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start 
 
-Definition at line 429 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+
+Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00775}{775}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}\label{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!set\_initial\_condition@{set\_initial\_condition}}
 \index{set\_initial\_condition@{set\_initial\_condition}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start 
 
-Definition at line 775 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+
+Set initial conditions\+: Set all nodal velocities to zero and initialise the previous velocities to correspond to an impulsive start. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00429}{429}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
 \index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{t\+\_\+max,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})}
-
-
-
-Do unsteady run up to maximum time t\+\_\+max with given timestep dt. 
-
-\mbox{\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}} 
-\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
-\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{t\+\_\+max,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{t\+\_\+max,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})}
 
 
 
@@ -399,18 +444,29 @@ Do unsteady run up to maximum time t\+\_\+max with given timestep dt.
 
 Perform run up to specified time t\+\_\+max with given timestep dt. 
 
-Definition at line 1166 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l01165}{1165}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Epsilon, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pvd\+\_\+file.
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00075}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Epsilon}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00097}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pvd\+\_\+file}}.
+
+\mbox{\Hypertarget{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}\label{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
+\index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const double \&}]{t\+\_\+max,  }\item[{const double \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Do unsteady run up to maximum time t\+\_\+max with given timestep dt. 
 
 \mbox{\Hypertarget{classInterfaceProblem_a241f0290d26462badbe9bb0e1e0d10a5}\label{classInterfaceProblem_a241f0290d26462badbe9bb0e1e0d10a5}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!unsteady\_run@{unsteady\_run}}
 \index{unsteady\_run@{unsteady\_run}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{unsteady\_run()}{unsteady\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nstep }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+void \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::unsteady\+\_\+run (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nstep }\end{DoxyParamCaption})}
 
 
 
@@ -418,15 +474,15 @@ Run an unsteady simulation with specified number of steps.
 
 Unsteady run with specified number of steps. 
 
-Definition at line 484 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00484}{484}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Epsilon, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness.
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00072}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00075}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Epsilon}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00054}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Film\+\_\+\+Thickness}}.
 
 
 
-Referenced by main().
+Referenced by \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00553}{main()}}.
 
 
 
@@ -435,8 +491,8 @@ Referenced by main().
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
 \index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Annular\+Spine\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classoomph_1_1AnnularSpineMesh}{Annular\+Spine\+Mesh}}$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -444,29 +500,18 @@ Pointer to bulk mesh.
 
 
 
-Definition at line 255 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
-
-\mbox{\Hypertarget{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2}\label{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2}} 
-\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
-\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-Elastic\+Rectangular\+Quad\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Bulk\+\_\+mesh\+\_\+pt}
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00255}{255}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 
 
-Access function for the specific mesh. 
-
-
-
-Definition at line 499 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Referenced by \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00213}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00880}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::deform\+\_\+free\+\_\+surface()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00801}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::global\+\_\+temporal\+\_\+error\+\_\+norm()}}, \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00271}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00775}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::set\+\_\+initial\+\_\+condition()}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a6df8c17d561715be1e6e7badfe339122}\label{classInterfaceProblem_a6df8c17d561715be1e6e7badfe339122}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
 \index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
-\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{My\+Horizontal\+Single\+Layer\+Spine\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Bulk\+\_\+mesh\+\_\+pt}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+\mbox{\hyperlink{classoomph_1_1MyHorizontalSingleLayerSpineMesh}{My\+Horizontal\+Single\+Layer\+Spine\+Mesh}}$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Bulk\+\_\+mesh\+\_\+pt}
 
 
 
@@ -474,14 +519,29 @@ Access function for the specific mesh.
 
 
 
-Definition at line 843 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00843}{843}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+\mbox{\Hypertarget{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2}\label{classInterfaceProblem_af580057bd9cc1d05a67401c9e5e178c2}} 
+\index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
+\index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
+\doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Elastic\+Rectangular\+Quad\+Mesh$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Bulk\+\_\+mesh\+\_\+pt}
+
+
+
+Access function for the specific mesh. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00499}{499}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}\label{classInterfaceProblem_a5bf645cbdbf7775ab6438be324caf3c3}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
 \index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-Constitutive\+Law$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Constitutive\+\_\+law\+\_\+pt}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Constitutive\+Law$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Constitutive\+\_\+law\+\_\+pt}
 
 
 
@@ -489,14 +549,14 @@ Pointer to the constitutive law.
 
 
 
-Definition at line 505 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00505}{505}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a852833a405566b7f08b852e7174cfdeb}\label{classInterfaceProblem_a852833a405566b7f08b852e7174cfdeb}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Document\_node\_pt@{Document\_node\_pt}}
 \index{Document\_node\_pt@{Document\_node\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Document\_node\_pt}{Document\_node\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-Node $\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Document\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Node $\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Document\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -504,14 +564,18 @@ Pointer to a node for documentation purposes.
 
 Node for documentatin. 
 
-Definition at line 261 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00261}{261}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00271}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_afd6b076362ccdb4ade0450fa3d3bf1ac}\label{classInterfaceProblem_afd6b076362ccdb4ade0450fa3d3bf1ac}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Interface\_mesh\_pt@{Interface\_mesh\_pt}}
 \index{Interface\_mesh\_pt@{Interface\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Interface\_mesh\_pt}{Interface\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-Mesh $\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Interface\+\_\+mesh\+\_\+pt}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Mesh $\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Interface\+\_\+mesh\+\_\+pt}
 
 
 
@@ -519,25 +583,29 @@ Mesh for the free surface (interface) elements.
 
 
 
-Definition at line 846 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00846}{846}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00855}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::compute\+\_\+total\+\_\+mass()}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_af05142e27af8078fdb544bef158ab83d}\label{classInterfaceProblem_af05142e27af8078fdb544bef158ab83d}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!L\_y@{L\_y}}
 \index{L\_y@{L\_y}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{L\_y}{L\_y}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::L\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::L\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 252 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00252}{252}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a9367afe223abf813838405a7d377767c}\label{classInterfaceProblem_a9367afe223abf813838405a7d377767c}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!R\_max@{R\_max}}
 \index{R\_max@{R\_max}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{R\_max}{R\_max}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::R\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+double \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::R\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -545,14 +613,14 @@ Axial lengths of domain.
 
 
 
-Definition at line 250 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00250}{250}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a1b373c6e9f49bef78404511c53e622bb}\label{classInterfaceProblem_a1b373c6e9f49bef78404511c53e622bb}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Surface\_mesh\_pt@{Surface\_mesh\_pt}}
 \index{Surface\_mesh\_pt@{Surface\_mesh\_pt}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Surface\_mesh\_pt}{Surface\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-Mesh$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+Mesh$\ast$ \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Surface\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -560,14 +628,18 @@ Pointer to the surface mes.
 
 
 
-Definition at line 258 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00258}{258}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00222}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::compute\+\_\+total\+\_\+mass()}}, and \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00271}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
 
 \mbox{\Hypertarget{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}\label{classInterfaceProblem_a45e3bf3b44bcbeefab21a3598bef6179}} 
 \index{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}!Trace\_file@{Trace\_file}}
 \index{Trace\_file@{Trace\_file}!InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$@{InterfaceProblem$<$ ELEMENT, TIMESTEPPER $>$}}
 \doxysubsubsection{\texorpdfstring{Trace\_file}{Trace\_file}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , class T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$ \\
-ofstream \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ E\+L\+E\+M\+E\+NT, T\+I\+M\+E\+S\+T\+E\+P\+P\+ER $>$\+::Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , class TIMESTEPPER $>$ \\
+ofstream \mbox{\hyperlink{classInterfaceProblem}{Interface\+Problem}}$<$ ELEMENT, TIMESTEPPER $>$\+::Trace\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -575,7 +647,7 @@ Trace file.
 
 
 
-Definition at line 247 of file 3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00247}{247}} of file \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source}{3d\+\_\+rayleigh\+\_\+instability\+\_\+surfactant.\+cc}}.
 
 
 

@@ -39,7 +39,7 @@ Here is a plot of the domain specified by \href{../../../../demo_drivers/navier_
 \end{DoxyImage}
 
 
-Note that we have deliberately assigned a different boundary ID to each facet. This will make the assignment of the boundary condition somewhat tedious as the domain boundaries of interest tend to be represented by multiple, separate mesh boundaries. However, the assignment of distinct boundary I\+Ds for the different facets is essential for the automatic generation of boundary coordinates in the \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ corresponding fluid-\/structure interaction problem }} and is therefore {\bfseries{strongly recommended}}.
+Note that we have deliberately assigned a different boundary ID to each facet. This will make the assignment of the boundary condition somewhat tedious as the domain boundaries of interest tend to be represented by multiple, separate mesh boundaries. However, the assignment of distinct boundary IDs for the different facets is essential for the automatic generation of boundary coordinates in the \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ corresponding fluid-\/structure interaction problem }} and is therefore {\bfseries{strongly recommended}}.
 
 \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily Tetgen} }} generates an unstructured volumetric mesh from the information contained in the {\ttfamily $\ast$.poly} file and outputs the mesh\textquotesingle{}s nodes, elements and faces in the files
 \begin{DoxyItemize}
@@ -51,6 +51,7 @@ Note that we have deliberately assigned a different boundary ID to each facet. T
 The figure below shows a {\ttfamily tetview} plot of the mesh, created with a volume constraint of 0.\+2 (i.\+e. the maximum volume of each tetrahedron is guaranteed to be less than 0.\+2 units), using the command 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{tetgen -\/a0.2 fsi\_bifurcation\_fluid.poly }
+
 \end{DoxyCode}
 
 
@@ -61,7 +62,7 @@ The figure below shows a {\ttfamily tetview} plot of the mesh, created with a vo
 \end{DoxyImage}
 
 
-Note how \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} has subdivided each of the 15 original facets specified in the {\ttfamily $\ast$.poly} file into a surface triangulation. The nodes and tetrahedral elements that are located on (or adjacent to) the 15 original facets inherit their boundary I\+Ds. This is important when we assign the boundary conditions for the actual computation.
+Note how \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} has subdivided each of the 15 original facets specified in the {\ttfamily $\ast$.poly} file into a surface triangulation. The nodes and tetrahedral elements that are located on (or adjacent to) the 15 original facets inherit their boundary IDs. This is important when we assign the boundary conditions for the actual computation.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -84,7 +85,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -123,9 +124,7 @@ As usual we define the various problem parameters in a global namespace. We defi
 \DoxyCodeLine{\} \textcolor{comment}{//end namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We specify an output directory, create the {\ttfamily Problem} object using ten-\/node tetrahedral Taylor-\/\+Hood elements, and output the initial guess for the flow field\+:
@@ -134,7 +133,7 @@ We specify an output directory, create the {\ttfamily Problem} object using ten-
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_main=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unstructured 3D fluids problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__three__d__fluid_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -148,7 +147,7 @@ We specify an output directory, create the {\ttfamily Problem} object using ten-
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep=4;}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::Argc==2)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"Validation -\/-\/ only doing two steps"} << std::endl;}
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}Validation -\/-\/ only doing two steps"{}} << std::endl;}
 \DoxyCodeLine{   nstep=2;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
@@ -156,19 +155,17 @@ We specify an output directory, create the {\ttfamily Problem} object using ten-
 \DoxyCodeLine{ \textcolor{comment}{//Taylor-\/-\/Hood}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_TH"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classUnstructuredFluidProblem}{UnstructuredFluidProblem<TTaylorHoodElement<3>}} > \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classUnstructuredFluidProblem}{UnstructuredFluidProblem<TTaylorHoodElement<3>}} > problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Output initial guess}}
-\DoxyCodeLine{  \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classUnstructuredFluidProblem_abcc9f0065665ae5239988b1a812e3f78}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{  doc\_info.number()++;   }
 
 \end{DoxyCodeInclude}
-
-
-Next we perform a parameter study in which we increase the Reynolds number of the flow -- corresponding to an increase in the applied pressure drop. (As usual we perform a smaller number of steps in a validation run -- performed when the code is run with nonzero number of command-\/line arguments.)
+ Next we perform a parameter study in which we increase the Reynolds number of the flow -- corresponding to an increase in the applied pressure drop. (As usual we perform a smaller number of steps in a validation run -- performed when the code is run with nonzero number of command-\/line arguments.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -177,10 +174,10 @@ Next we perform a parameter study in which we increase the Reynolds number of th
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{    \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve();}
+\DoxyCodeLine{    problem.newton\_solve();}
 \DoxyCodeLine{    }
 \DoxyCodeLine{    \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{    \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{    problem.\mbox{\hyperlink{classUnstructuredFluidProblem_abcc9f0065665ae5239988b1a812e3f78}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{    doc\_info.number()++;}
 \DoxyCodeLine{    }
 \DoxyCodeLine{    \textcolor{comment}{// Bump up Reynolds number (equivalent to increasing the imposed pressure}}
@@ -198,23 +195,23 @@ Next we perform a parameter study in which we increase the Reynolds number of th
 \DoxyCodeLine{  doc\_info.number()=0;   }
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_CR"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_CR"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classUnstructuredFluidProblem}{UnstructuredFluidProblem<TCrouzeixRaviartElement<3>}} > \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classUnstructuredFluidProblem}{UnstructuredFluidProblem<TCrouzeixRaviartElement<3>}} > problem;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Output initial guess}}
-\DoxyCodeLine{  \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classUnstructuredFluidProblem_abcc9f0065665ae5239988b1a812e3f78}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{  doc\_info.number()++;   }
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Parameter study: Crank up the pressure drop along the vessel}}
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{    \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve();}
+\DoxyCodeLine{    problem.newton\_solve();}
 \DoxyCodeLine{    }
 \DoxyCodeLine{    \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{    \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{    problem.\mbox{\hyperlink{classUnstructuredFluidProblem_abcc9f0065665ae5239988b1a812e3f78}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{    doc\_info.number()++;}
 \DoxyCodeLine{    }
 \DoxyCodeLine{    \textcolor{comment}{// Bump up Reynolds number (equivalent to increasing the imposed pressure}}
@@ -231,13 +228,13 @@ Next we perform a parameter study in which we increase the Reynolds number of th
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_class}{}\doxysection{The Problem class}\label{index_class}
-The {\ttfamily Problem} class has the usual member functions and provides explicit storage for the fluid mesh and the meshes containing the {\ttfamily Face\+Elements} that apply the traction conditions at the in-\/ and outflow boundaries. We also provide storage for the I\+Ds of the mesh boundaries that constitute the in-\/ and outflow boundaries to facilitate the application of the boundary conditions.
+The {\ttfamily Problem} class has the usual member functions and provides explicit storage for the fluid mesh and the meshes containing the {\ttfamily Face\+Elements} that apply the traction conditions at the in-\/ and outflow boundaries. We also provide storage for the IDs of the mesh boundaries that constitute the in-\/ and outflow boundaries to facilitate the application of the boundary conditions.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_problem\_class===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured fluid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredFluidProblem}{UnstructuredFluidProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -282,11 +279,11 @@ The {\ttfamily Problem} class has the usual member functions and provides explic
 \DoxyCodeLine{\textcolor{comment}{ /// Meshes of fluid traction elements that apply pressure at in/outflow}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<Mesh*> \mbox{\hyperlink{classUnstructuredFluidProblem_ad2fd96c077dbc69077daaf20a314896c}{Fluid\_traction\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short IDs of fluid mesh boundaries along which inflow boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// IDs of fluid mesh boundaries along which inflow boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// are applied}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> \mbox{\hyperlink{classUnstructuredFluidProblem_a2923e009bcea7cdbdd7ea5788580a3f8}{Inflow\_boundary\_id}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short IDs of fluid mesh boundaries along which inflow boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// IDs of fluid mesh boundaries along which inflow boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// are applied}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> \mbox{\hyperlink{classUnstructuredFluidProblem_a9bace139103152045dfe88e3d0163811}{Outflow\_boundary\_id}};}
 \DoxyCodeLine{}
@@ -304,15 +301,15 @@ We start by building the fluid mesh, using the files created by \href{http://wia
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured 3D fluid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFluidProblem_a9751f4afac540e148b3d90ae43dd5187}{UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{//Create fluid bulk mesh, sub-\/dividing "corner" elements}}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_fluid.1.node"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_fluid.1.ele"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} face\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_fluid.1.face"};}
+\DoxyCodeLine{ \textcolor{comment}{//Create fluid bulk mesh, sub-\/dividing "{}corner"{} elements}}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_fluid.1.node"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_fluid.1.ele"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} face\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_fluid.1.face"{}};}
 \DoxyCodeLine{ \textcolor{keywordtype}{bool} split\_corner\_elements=\textcolor{keyword}{true};}
 \DoxyCodeLine{ Fluid\_mesh\_pt =  \textcolor{keyword}{new} TetgenMesh<ELEMENT>(node\_file\_name,}
 \DoxyCodeLine{                                          element\_file\_name,}
@@ -320,11 +317,9 @@ We start by building the fluid mesh, using the files created by \href{http://wia
 \DoxyCodeLine{                                          split\_corner\_elements);}
 
 \end{DoxyCodeInclude}
+ (We refer to the subsection \mbox{\hyperlink{index_split}{Splitting corner elements in unstructured meshes to avoid locking}} in the section \mbox{\hyperlink{index_comm_ex}{Comments and Exercises}} for a discussion of the {\ttfamily split\+\_\+corner\+\_\+elements} flag).
 
-
-(We refer to the subsection \mbox{\hyperlink{index_split}{Splitting corner elements in unstructured meshes to avoid locking}} in the section \mbox{\hyperlink{index_comm_ex}{Comments and Exercises}} for a discussion of the {\ttfamily split\+\_\+corner\+\_\+elements} flag).
-
-Next, we set up the boundary lookup schemes that determine which elements are located next to which domain boundaries, and specify the I\+Ds of the mesh boundaries that coincide with the in-\/ and outflow cross-\/sections. Note that this information reflects the specification of the boundary I\+Ds in the {\ttfamily tetgen} {\ttfamily $\ast$.poly} file.
+Next, we set up the boundary lookup schemes that determine which elements are located next to which domain boundaries, and specify the IDs of the mesh boundaries that coincide with the in-\/ and outflow cross-\/sections. Note that this information reflects the specification of the boundary IDs in the {\ttfamily tetgen} {\ttfamily $\ast$.poly} file.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -340,14 +335,12 @@ Next, we set up the boundary lookup schemes that determine which elements are lo
 \DoxyCodeLine{ Inflow\_boundary\_id[0]=0;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Fluid mesh has two outflow boundaries: Boundaries 1 and 2}}
-\DoxyCodeLine{ \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a6a1acc30347d87cb10a1490ea44ce046}{Outflow\_boundary\_id}}.resize(2);}
-\DoxyCodeLine{ \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a6a1acc30347d87cb10a1490ea44ce046}{Outflow\_boundary\_id}}[0]=1;}
-\DoxyCodeLine{ \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a6a1acc30347d87cb10a1490ea44ce046}{Outflow\_boundary\_id}}[1]=2;}
+\DoxyCodeLine{ Outflow\_boundary\_id.resize(2);}
+\DoxyCodeLine{ Outflow\_boundary\_id[0]=1;}
+\DoxyCodeLine{ Outflow\_boundary\_id[1]=2;}
 
 \end{DoxyCodeInclude}
-
-
-Next we apply the boundary conditions. We impose parallel in-\/ and outflow by pinning the transverse velocities at all nodes that are located on the in-\/ and outflow boundaries, identifying the nodes via the boundary I\+Ds just set up. We use the boolean map {\ttfamily done} to indicate which boundaries we have visited already.
+ Next we apply the boundary conditions. We impose parallel in-\/ and outflow by pinning the transverse velocities at all nodes that are located on the in-\/ and outflow boundaries, identifying the nodes via the boundary IDs just set up. We use the boolean map {\ttfamily done} to indicate which boundaries we have visited already.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -374,7 +367,7 @@ Next we apply the boundary conditions. We impose parallel in-\/ and outflow by p
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       b=\mbox{\hyperlink{unstructured__three__d__fluid_8txt_a6a1acc30347d87cb10a1490ea44ce046}{Outflow\_boundary\_id}}[i];}
+\DoxyCodeLine{       b=Outflow\_boundary\_id[i];}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Number of nodes on that boundary}}
@@ -396,9 +389,7 @@ Next we apply the boundary conditions. We impose parallel in-\/ and outflow by p
 \DoxyCodeLine{  \} \textcolor{comment}{// done in and outflow}}
 
 \end{DoxyCodeInclude}
-
-
-The nodes on all other boundaries (i.\+e. the ones for which {\ttfamily done}\mbox{[}b\mbox{]} is still {\ttfamily false}) are subjected to no-\/slip conditions by pinning all three velocity components. (This approach facilitates the \char`\"{}extension\char`\"{} of the mesh discussed in section \mbox{\hyperlink{index_finer_mesh}{Creating a finer mesh and applying more appropriate outflow boundary conditions}}, but we note that, in general, keeping track of the boundary I\+Ds associated with each physical boundary must be done \char`\"{}by hand\char`\"{}. )
+ The nodes on all other boundaries (i.\+e. the ones for which {\ttfamily done}\mbox{[}b\mbox{]} is still {\ttfamily false}) are subjected to no-\/slip conditions by pinning all three velocity components. (This approach facilitates the \char`\"{}extension\char`\"{} of the mesh discussed in section \mbox{\hyperlink{index_finer_mesh}{Creating a finer mesh and applying more appropriate outflow boundary conditions}}, but we note that, in general, keeping track of the boundary IDs associated with each physical boundary must be done \char`\"{}by hand\char`\"{}. )
 
 
 \begin{DoxyCodeInclude}{0}
@@ -430,9 +421,7 @@ The nodes on all other boundaries (i.\+e. the ones for which {\ttfamily done}\mb
 \DoxyCodeLine{  \} \textcolor{comment}{// done no slip elsewhere }}
 
 \end{DoxyCodeInclude}
-
-
-We complete the build of the Navier-\/\+Stokes elements by specifying the pointer to the Reynolds number,
+ We complete the build of the Navier-\/\+Stokes elements by specifying the pointer to the Reynolds number,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -453,9 +442,7 @@ We complete the build of the Navier-\/\+Stokes elements by specifying the pointe
 \DoxyCodeLine{  \} }
 
 \end{DoxyCodeInclude}
-
-
-and attach the {\ttfamily Face\+Elements} that apply the imposed in-\/ and outflow tractions to the appropriate faces of the elements on the in-\/ and outflow boundaries\+:
+ and attach the {\ttfamily Face\+Elements} that apply the imposed in-\/ and outflow tractions to the appropriate faces of the elements on the in-\/ and outflow boundaries\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -473,12 +460,10 @@ and attach the {\ttfamily Face\+Elements} that apply the imposed in-\/ and outfl
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Populate them with elements}}
-\DoxyCodeLine{ \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a2ff302c10f08896901a454f2cd0c6257}{create\_fluid\_traction\_elements}}();}
+\DoxyCodeLine{ create\_fluid\_traction\_elements();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we combine the various sub-\/meshes to a combined global mesh and assign the equation numbers.
+ Finally, we combine the various sub-\/meshes to a combined global mesh and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -503,7 +488,7 @@ Finally, we combine the various sub-\/meshes to a combined global mesh and assig
 \DoxyCodeLine{ build\_global\_mesh();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ std::cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ std::cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end constructor}}
 
@@ -513,13 +498,13 @@ Finally, we combine the various sub-\/meshes to a combined global mesh and assig
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_traction}{}\doxysection{Creating the fluid traction elements}\label{index_traction}
-The helper function {\ttfamily \mbox{\hyperlink{unstructured__three__d__fluid_8txt_a2ff302c10f08896901a454f2cd0c6257}{create\+\_\+fluid\+\_\+traction\+\_\+elements()}}} loops over the bulk elements that are adjacent to the in-\/ and outflow cross-\/sections and attaches {\ttfamily Navier\+Stokes\+Traction\+Elements} to the relevant faces. We store pointers to the newly-\/created elements in the appropriate meshes, and pass pointers to the functions that specify the imposed traction to the elements.
+The helper function {\ttfamily create\+\_\+fluid\+\_\+traction\+\_\+elements()} loops over the bulk elements that are adjacent to the in-\/ and outflow cross-\/sections and attaches {\ttfamily Navier\+Stokes\+Traction\+Elements} to the relevant faces. We store pointers to the newly-\/created elements in the appropriate meshes, and pass pointers to the functions that specify the imposed traction to the elements.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_fluid\_traction\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create fluid traction elements }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFluidProblem_ae95f1912572e8a5f0543eab9c0eb2634}{UnstructuredFluidProblem<ELEMENT>::create\_fluid\_traction\_elements}}()}
 \DoxyCodeLine{\{}
@@ -543,7 +528,7 @@ The helper function {\ttfamily \mbox{\hyperlink{unstructured__three__d__fluid_8t
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{     \textcolor{keywordflow}{else}}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       b=\mbox{\hyperlink{unstructured__three__d__fluid_8txt_a6a1acc30347d87cb10a1490ea44ce046}{Outflow\_boundary\_id}}[i];}
+\DoxyCodeLine{       b=Outflow\_boundary\_id[i];}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// How many bulk elements are adjacent to boundary b?}}
@@ -613,7 +598,7 @@ The post-\/processing routine outputs the flow field.
 \DoxyCodeLine{  }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output fluid solution}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fluid\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fluid\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Fluid\_mesh\_pt-\/>output(some\_file,npts);}
@@ -629,7 +614,7 @@ The post-\/processing routine outputs the flow field.
 \hypertarget{index_comm_ex}{}\doxysection{Comments and Exercises}\label{index_comm_ex}
 \DoxyHorRuler{0}
 \hypertarget{index_split}{}\doxysubsection{Splitting corner elements in unstructured meshes to avoid locking}\label{index_split}
-Meshes generated by \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} tend to be of very high quality and can usually be used without further modification. However, in Navier-\/\+Stokes computations (or other problems in which the elements have to satisfy an L\+B\+B-\/type stability constraint) problems can arise if too many of an element\textquotesingle{}s nodes are constrained by boundary conditions, causing the discretisation to \char`\"{}lock\char`\"{}. This tends to happen when three of the element\textquotesingle{}s four faces are located on domain boundaries, as in the case of the top-\/left and bottom-\/left elements in the inflow cross-\/section shown below.
+Meshes generated by \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} tend to be of very high quality and can usually be used without further modification. However, in Navier-\/\+Stokes computations (or other problems in which the elements have to satisfy an LBB-\/type stability constraint) problems can arise if too many of an element\textquotesingle{}s nodes are constrained by boundary conditions, causing the discretisation to \char`\"{}lock\char`\"{}. This tends to happen when three of the element\textquotesingle{}s four faces are located on domain boundaries, as in the case of the top-\/left and bottom-\/left elements in the inflow cross-\/section shown below.
 
  
 \begin{DoxyImage}
@@ -664,9 +649,10 @@ The flow field shown in the \mbox{\hyperlink{index_results}{Results}} section is
 ~\newline
  Create a finer mesh by specifying a smaller volume constraint for tetgen. For instance, using ~\newline
  ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{tetgen -\/a0.02 fsi\_bifurcation\_fluid.poly}
+
 \end{DoxyCode}
  ~\newline
  will generate a much finer mesh, containing 3345 tets. Note that the driver code can remain completely unchanged. ~\newline
@@ -708,5 +694,5 @@ The flow field shown in the \mbox{\hyperlink{index_results}{Results}} section is
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

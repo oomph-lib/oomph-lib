@@ -3,34 +3,37 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{oomph\+::\+Pseudo\+Elastic\+Bulk\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PseudoElasticBulkElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Pseudo\+Elastic\+Bulk\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement}{oomph\+::\+Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Pseudo-\/\+Elastic Solid element class to overload the block preconditioner methods \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement_a18674d52b96db8800d31e89ffd465175}{ndof\+\_\+types()}} and \mbox{\hyperlink{classoomph_1_1PseudoElasticBulkElement_a8f1dc2011100324953293470a18f3080}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()}} to differentiate between DOFs subject to Lagrange multiplier and those that are not. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01PseudoElasticBulkElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Pseudo\+Elastic\+Bulk\+Element$<$ ELEMENT $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face\+Geometry of wrapped element is the same as the underlying element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classFiniteElementComp}{Finite\+Element\+Comp}}
-\item 
+\begin{DoxyCompactList}\small\item\em Function-\/type-\/object to compare finite elements based on their x coordinate. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classWarpedLine}{Warped\+Line}}
 \begin{DoxyCompactList}\small\item\em Warped line in 2D space. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem}{Prescribed\+Boundary\+Displacement\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classPrescribedBoundaryDisplacementProblem}{Prescribed\+Boundary\+Displacement\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em Problem class for deformation of elastic block by prescribed boundary motion. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
 \item 
- \mbox{\hyperlink{namespaceDiagonalPreconditionerHelper}{Diagonal\+Preconditioner\+Helper}}
-\item 
- \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
-\begin{DoxyCompactList}\small\item\em Global parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceDiagonalPreconditionerHelper}{Diagonal\+Preconditioner\+Helper}}
+\begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-Preconditioner $\ast$ \mbox{\hyperlink{namespaceDiagonalPreconditionerHelper_a455a8314b4dc41c20c9859b8509cc740}{Diagonal\+Preconditioner\+Helper\+::get\+\_\+diagonal\+\_\+preconditioner}} ()
+Preconditioner $\ast$ \mbox{\hyperlink{namespaceDiagonalPreconditionerHelper_aa6417c25f4cdc434c198624739fb3d38}{Diagonal\+Preconditioner\+Helper\+::get\+\_\+diagonal\+\_\+preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Create a matrix-\/based diagonal preconditioner for subsidiary linear systems. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classWarpedLine}{Warped\+Line}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab0a184463cbaaa353f2235411adef3c4}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Boundary\+\_\+geom\+\_\+object}} (0.\+0)
-\begin{DoxyCompactList}\small\item\em Geom\+Object specifying the shape of the boundary\+: Initially it\textquotesingle{}s flat. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{prescribed__displ__lagr__mult__precond_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Driver code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classWarpedLine}{Warped\+Line}} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab0a184463cbaaa353f2235411adef3c4}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Boundary\+\_\+geom\+\_\+object}} (0.\+0)
+\begin{DoxyCompactList}\small\item\em Geom\+Object specifying the shape of the boundary\+: Initially it\textquotesingle{}s flat. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -46,9 +49,9 @@ Driver code.
 
 
 
-Definition at line 711 of file prescribed\+\_\+displ\+\_\+lagr\+\_\+mult\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{prescribed__displ__lagr__mult__precond_8cc_source_l00711}{711}} of file \mbox{\hyperlink{prescribed__displ__lagr__mult__precond_8cc_source}{prescribed\+\_\+displ\+\_\+lagr\+\_\+mult\+\_\+precond.\+cc}}.
 
 
 
-References Warped\+Line\+::ampl(), Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Boundary\+\_\+geom\+\_\+object, and problem.
+References \mbox{\hyperlink{prescribed__displ__lagr__mult_8cc_source_l00111}{Warped\+Line\+::ampl()}}, and \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab0a184463cbaaa353f2235411adef3c4}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Boundary\+\_\+geom\+\_\+object}}.
 

@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1IMRByBDF}{}\doxysection{oomph\+::I\+M\+R\+By\+B\+DF Class Reference}
+\hypertarget{classoomph_1_1IMRByBDF}{}\doxysection{oomph\+::IMRBy\+BDF Class Reference}
 \label{classoomph_1_1IMRByBDF}\index{oomph::IMRByBDF@{oomph::IMRByBDF}}
+
+
+Implementation of implicit midpoint rule by taking half a step of bdf1 then applying an update to all dofs. This implementation {\itshape should} work with any existing problem for which the \mbox{\hyperlink{classoomph_1_1BDF}{BDF}} methods work.  
+
+
 
 
 {\ttfamily \#include $<$implicit\+\_\+midpoint\+\_\+rule.\+h$>$}
 
-Inheritance diagram for oomph\+::I\+M\+R\+By\+B\+DF\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::IMRBy\+BDF\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1IMRByBDF}
@@ -13,9 +18,9 @@ Inheritance diagram for oomph\+::I\+M\+R\+By\+B\+DF\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1IMRByBDF_a9b39aef878c283d7e7c5ad23ac7c8213}{I\+M\+R\+By\+B\+DF}} (const bool \&adaptive=false)
+\mbox{\hyperlink{classoomph_1_1IMRByBDF_a9b39aef878c283d7e7c5ad23ac7c8213}{IMRBy\+BDF}} (const bool \&adaptive=false)
 \begin{DoxyCompactList}\small\item\em Constructor with initialisation. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1IMRByBDF_aaa70e7e8090f3e454bc392e733b3185a}{$\sim$\+I\+M\+R\+By\+B\+DF}} ()
+virtual \mbox{\hyperlink{classoomph_1_1IMRByBDF_aaa70e7e8090f3e454bc392e733b3185a}{$\sim$\+IMRBy\+BDF}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IMRByBDF_a6060b6098113085753083a2dc53723ee}{set\+\_\+weights}} ()
 \begin{DoxyCompactList}\small\item\em Setup weights for time derivative calculations. \end{DoxyCompactList}\item 
@@ -24,7 +29,7 @@ unsigned \mbox{\hyperlink{classoomph_1_1IMRByBDF_a4fb7f902b1a266b19cfdfe640d4c78
 void \mbox{\hyperlink{classoomph_1_1IMRByBDF_abc155a68889d297f732a083d911b4627}{actions\+\_\+before\+\_\+timestep}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Half the timestep before starting solve. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1IMRByBDF_a1eb1b47643bf37e27c478c6987c7716d}{actions\+\_\+after\+\_\+timestep}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Take problem from t=\{n+1/2\} to t=n+1 by algebraic update and restore time step. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -33,19 +38,19 @@ bool \mbox{\hyperlink{classoomph_1_1IMRByBDF_a1c2bf7b4272f4c5b28c2e6e9811b2e14}{
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1IMRByBDF_a736422b80df5286da0a56301da073b16}{I\+M\+R\+By\+B\+DF}} (const \mbox{\hyperlink{classoomph_1_1IMRByBDF}{I\+M\+R\+By\+B\+DF}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1IMRByBDF_a736422b80df5286da0a56301da073b16}{IMRBy\+BDF}} (const \mbox{\hyperlink{classoomph_1_1IMRByBDF}{IMRBy\+BDF}} \&dummy)
 \begin{DoxyCompactList}\small\item\em Inaccessible copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1IMRByBDF_a0a1aec8458acb8cd8285f7b6d69fca4a}{operator=}} (const \mbox{\hyperlink{classoomph_1_1IMRByBDF}{I\+M\+R\+By\+B\+DF}} \&dummy)
+void \mbox{\hyperlink{classoomph_1_1IMRByBDF_a0a1aec8458acb8cd8285f7b6d69fca4a}{operator=}} (const \mbox{\hyperlink{classoomph_1_1IMRByBDF}{IMRBy\+BDF}} \&dummy)
 \begin{DoxyCompactList}\small\item\em Inaccessible assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-Implementation of implicit midpoint rule by taking half a step of bdf1 then applying an update to all dofs. This implementation {\itshape should} work with any existing problem for which the \mbox{\hyperlink{classoomph_1_1BDF}{B\+DF}} methods work.
+Implementation of implicit midpoint rule by taking half a step of bdf1 then applying an update to all dofs. This implementation {\itshape should} work with any existing problem for which the \mbox{\hyperlink{classoomph_1_1BDF}{BDF}} methods work. 
 
-The exception is when multiple different time steppers are being used simultaneously for different parts of the problem. In this case the \mbox{\hyperlink{classoomph_1_1IMR}{I\+MR}} class should be used. 
+The exception is when multiple different time steppers are being used simultaneously for different parts of the problem. In this case the \mbox{\hyperlink{classoomph_1_1IMR}{IMR}} class should be used. 
 
-Definition at line 219 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00219}{219}} of file \mbox{\hyperlink{implicit__midpoint__rule_8h_source}{implicit\+\_\+midpoint\+\_\+rule.\+h}}.
 
 
 
@@ -54,7 +59,7 @@ Definition at line 219 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!IMRByBDF@{IMRByBDF}}
 \index{IMRByBDF@{IMRByBDF}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{IMRByBDF()}{IMRByBDF()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::\+I\+M\+R\+By\+B\+DF (\begin{DoxyParamCaption}\item[{const bool \&}]{adaptive = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+IMRBy\+BDF\+::\+IMRBy\+BDF (\begin{DoxyParamCaption}\item[{const bool \&}]{adaptive = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -62,17 +67,17 @@ Constructor with initialisation.
 
 
 
-Definition at line 223 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00223}{223}} of file \mbox{\hyperlink{implicit__midpoint__rule_8h_source}{implicit\+\_\+midpoint\+\_\+rule.\+h}}.
 
 
 
-References Update\+\_\+pinned.
+References \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00256}{Update\+\_\+pinned}}.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_aaa70e7e8090f3e454bc392e733b3185a}\label{classoomph_1_1IMRByBDF_aaa70e7e8090f3e454bc392e733b3185a}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!````~IMRByBDF@{$\sim$IMRByBDF}}
 \index{````~IMRByBDF@{$\sim$IMRByBDF}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{$\sim$IMRByBDF()}{~IMRByBDF()}}
-{\footnotesize\ttfamily virtual oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::$\sim$\+I\+M\+R\+By\+B\+DF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+IMRBy\+BDF\+::$\sim$\+IMRBy\+BDF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -80,13 +85,13 @@ Destructor.
 
 
 
-Definition at line 229 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00229}{229}} of file \mbox{\hyperlink{implicit__midpoint__rule_8h_source}{implicit\+\_\+midpoint\+\_\+rule.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_a736422b80df5286da0a56301da073b16}\label{classoomph_1_1IMRByBDF_a736422b80df5286da0a56301da073b16}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!IMRByBDF@{IMRByBDF}}
 \index{IMRByBDF@{IMRByBDF}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{IMRByBDF()}{IMRByBDF()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::\+I\+M\+R\+By\+B\+DF (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1IMRByBDF}{I\+M\+R\+By\+B\+DF}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily oomph\+::\+IMRBy\+BDF\+::\+IMRBy\+BDF (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1IMRByBDF}{IMRBy\+BDF}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -94,7 +99,7 @@ Inaccessible copy constructor.
 
 
 
-Definition at line 260 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00260}{260}} of file \mbox{\hyperlink{implicit__midpoint__rule_8h_source}{implicit\+\_\+midpoint\+\_\+rule.\+h}}.
 
 
 
@@ -103,25 +108,29 @@ Definition at line 260 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!actions\_after\_timestep@{actions\_after\_timestep}}
 \index{actions\_after\_timestep@{actions\_after\_timestep}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_timestep()}{actions\_after\_timestep()}}
-{\footnotesize\ttfamily void oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::actions\+\_\+after\+\_\+timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+IMRBy\+BDF\+::actions\+\_\+after\+\_\+timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
 
 Take problem from t=\{n+1/2\} to t=n+1 by algebraic update and restore time step. 
+
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a3a0fabf83f9bdc89800cd3501df2c586}{oomph\+::\+Time\+Stepper}}.
 
 
 
-Definition at line 204 of file implicit\+\_\+midpoint\+\_\+rule.\+cc.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8cc_source_l00204}{204}} of file \mbox{\hyperlink{implicit__midpoint__rule_8cc_source}{implicit\+\_\+midpoint\+\_\+rule.\+cc}}.
 
 
 
-References oomph\+::\+Time\+::dt(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Problem\+::get\+\_\+dofs(), oomph\+::\+Problem\+::global\+\_\+data\+\_\+pt(), i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Problem\+::mesh\+\_\+pt(), oomph\+::\+Problem\+::ndof(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Problem\+::nglobal\+\_\+data(), oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data(), oomph\+::\+Mesh\+::nnode(), oomph\+::\+Mesh\+::node\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::post\+\_\+midpoint\+\_\+update(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Time\+::time(), oomph\+::\+Problem\+::time\+\_\+pt(), oomph\+::\+String\+Conversion\+::to\+\_\+string(), and Update\+\_\+pinned.
+References \mbox{\hyperlink{timesteppers_8h_source_l00136}{oomph\+::\+Time\+::dt()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{problem_8cc_source_l02479}{oomph\+::\+Problem\+::get\+\_\+dofs()}}, \mbox{\hyperlink{problem_8h_source_l01647}{oomph\+::\+Problem\+::global\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01280}{oomph\+::\+Problem\+::mesh\+\_\+pt()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{problem_8h_source_l01686}{oomph\+::\+Problem\+::nglobal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l00823}{oomph\+::\+Generalised\+Element\+::ninternal\+\_\+data()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{implicit__midpoint__rule_8cc_source_l00186}{oomph\+::post\+\_\+midpoint\+\_\+update()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, \mbox{\hyperlink{problem_8h_source_l01504}{oomph\+::\+Problem\+::time\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00189}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}, and \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00256}{Update\+\_\+pinned}}.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_abc155a68889d297f732a083d911b4627}\label{classoomph_1_1IMRByBDF_abc155a68889d297f732a083d911b4627}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!actions\_before\_timestep@{actions\_before\_timestep}}
 \index{actions\_before\_timestep@{actions\_before\_timestep}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_timestep()}{actions\_before\_timestep()}}
-{\footnotesize\ttfamily void oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::actions\+\_\+before\+\_\+timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+IMRBy\+BDF\+::actions\+\_\+before\+\_\+timestep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -133,17 +142,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1TimeStepper_a36cbcee0c1127085b
 
 
 
-Definition at line 140 of file implicit\+\_\+midpoint\+\_\+rule.\+cc.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8cc_source_l00140}{140}} of file \mbox{\hyperlink{implicit__midpoint__rule_8cc_source}{implicit\+\_\+midpoint\+\_\+rule.\+cc}}.
 
 
 
-References oomph\+::\+Problem\+::dof(), oomph\+::\+Time\+::dt(), oomph\+::\+Problem\+::get\+\_\+dofs(), i, oomph\+::\+Problem\+::ndof(), oomph\+::\+Problem\+::ntime\+\_\+stepper(), set\+\_\+weights(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+pt(), and oomph\+::\+Problem\+::use\+\_\+predictor\+\_\+values\+\_\+as\+\_\+initial\+\_\+guess().
+References \mbox{\hyperlink{problem_8h_source_l01813}{oomph\+::\+Problem\+::dof()}}, \mbox{\hyperlink{timesteppers_8h_source_l00136}{oomph\+::\+Time\+::dt()}}, \mbox{\hyperlink{problem_8cc_source_l02479}{oomph\+::\+Problem\+::get\+\_\+dofs()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{problem_8h_source_l01680}{oomph\+::\+Problem\+::ntime\+\_\+stepper()}}, \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00232}{set\+\_\+weights()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{timesteppers_8h_source_l00123}{oomph\+::\+Time\+::time()}}, \mbox{\hyperlink{timesteppers_8h_source_l00572}{oomph\+::\+Time\+Stepper\+::time\+\_\+pt()}}, and \mbox{\hyperlink{problem_8h_source_l01994}{oomph\+::\+Problem\+::use\+\_\+predictor\+\_\+values\+\_\+as\+\_\+initial\+\_\+guess()}}.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_a4fb7f902b1a266b19cfdfe640d4c78d5}\label{classoomph_1_1IMRByBDF_a4fb7f902b1a266b19cfdfe640d4c78d5}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!nprev\_values\_for\_value\_at\_evaluation\_time@{nprev\_values\_for\_value\_at\_evaluation\_time}}
 \index{nprev\_values\_for\_value\_at\_evaluation\_time@{nprev\_values\_for\_value\_at\_evaluation\_time}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{nprev\_values\_for\_value\_at\_evaluation\_time()}{nprev\_values\_for\_value\_at\_evaluation\_time()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::nprev\+\_\+values\+\_\+for\+\_\+value\+\_\+at\+\_\+evaluation\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+IMRBy\+BDF\+::nprev\+\_\+values\+\_\+for\+\_\+value\+\_\+at\+\_\+evaluation\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -151,17 +160,17 @@ Number of history values to interpolate over to get the \char`\"{}current\char`\
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1IMRBase_a93df756c834f8ba27956b8efb2af3636}{oomph\+::\+I\+M\+R\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1IMRBase_a93df756c834f8ba27956b8efb2af3636}{oomph\+::\+IMRBase}}.
 
 
 
-Definition at line 243 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00243}{243}} of file \mbox{\hyperlink{implicit__midpoint__rule_8h_source}{implicit\+\_\+midpoint\+\_\+rule.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_a0a1aec8458acb8cd8285f7b6d69fca4a}\label{classoomph_1_1IMRByBDF_a0a1aec8458acb8cd8285f7b6d69fca4a}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1IMRByBDF}{I\+M\+R\+By\+B\+DF}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+IMRBy\+BDF\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1IMRByBDF}{IMRBy\+BDF}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -169,13 +178,13 @@ Inaccessible assignment operator.
 
 
 
-Definition at line 263 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00263}{263}} of file \mbox{\hyperlink{implicit__midpoint__rule_8h_source}{implicit\+\_\+midpoint\+\_\+rule.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1IMRByBDF_a6060b6098113085753083a2dc53723ee}\label{classoomph_1_1IMRByBDF_a6060b6098113085753083a2dc53723ee}} 
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!set\_weights@{set\_weights}}
 \index{set\_weights@{set\_weights}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{set\_weights()}{set\_weights()}}
-{\footnotesize\ttfamily void oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+IMRBy\+BDF\+::set\+\_\+weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -183,19 +192,19 @@ Setup weights for time derivative calculations.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1IMRBase_a36b8a37b4c0bb9e8cca821bfb74fd373}{oomph\+::\+I\+M\+R\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1IMRBase_a36b8a37b4c0bb9e8cca821bfb74fd373}{oomph\+::\+IMRBase}}.
 
 
 
-Definition at line 232 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00232}{232}} of file \mbox{\hyperlink{implicit__midpoint__rule_8h_source}{implicit\+\_\+midpoint\+\_\+rule.\+h}}.
 
 
 
-References oomph\+::\+Time\+::dt(), oomph\+::\+Time\+Stepper\+::\+Time\+\_\+pt, and oomph\+::\+Time\+Stepper\+::\+Weight.
+References \mbox{\hyperlink{timesteppers_8h_source_l00136}{oomph\+::\+Time\+::dt()}}, \mbox{\hyperlink{timesteppers_8h_source_l00234}{oomph\+::\+Time\+Stepper\+::\+Time\+\_\+pt}}, and \mbox{\hyperlink{timesteppers_8h_source_l00237}{oomph\+::\+Time\+Stepper\+::\+Weight}}.
 
 
 
-Referenced by actions\+\_\+before\+\_\+timestep().
+Referenced by \mbox{\hyperlink{implicit__midpoint__rule_8cc_source_l00140}{actions\+\_\+before\+\_\+timestep()}}.
 
 
 
@@ -204,7 +213,7 @@ Referenced by actions\+\_\+before\+\_\+timestep().
 \index{oomph::IMRByBDF@{oomph::IMRByBDF}!Update\_pinned@{Update\_pinned}}
 \index{Update\_pinned@{Update\_pinned}!oomph::IMRByBDF@{oomph::IMRByBDF}}
 \doxysubsubsection{\texorpdfstring{Update\_pinned}{Update\_pinned}}
-{\footnotesize\ttfamily bool oomph\+::\+I\+M\+R\+By\+B\+D\+F\+::\+Update\+\_\+pinned}
+{\footnotesize\ttfamily bool oomph\+::\+IMRBy\+BDF\+::\+Update\+\_\+pinned}
 
 
 
@@ -212,11 +221,11 @@ Should we update pinned variables after the half-\/step?
 
 
 
-Definition at line 256 of file implicit\+\_\+midpoint\+\_\+rule.\+h.
+Definition at line \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00256}{256}} of file \mbox{\hyperlink{implicit__midpoint__rule_8h_source}{implicit\+\_\+midpoint\+\_\+rule.\+h}}.
 
 
 
-Referenced by actions\+\_\+after\+\_\+timestep(), and I\+M\+R\+By\+B\+D\+F().
+Referenced by \mbox{\hyperlink{implicit__midpoint__rule_8cc_source_l00204}{actions\+\_\+after\+\_\+timestep()}}, and \mbox{\hyperlink{implicit__midpoint__rule_8h_source_l00223}{IMRBy\+BDF()}}.
 
 
 

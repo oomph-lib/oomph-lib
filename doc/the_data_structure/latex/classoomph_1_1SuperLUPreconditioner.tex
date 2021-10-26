@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1SuperLUPreconditioner}{}\doxysection{oomph\+::Super\+L\+U\+Preconditioner Class Reference}
+\hypertarget{classoomph_1_1SuperLUPreconditioner}{}\doxysection{oomph\+::Super\+LUPreconditioner Class Reference}
 \label{classoomph_1_1SuperLUPreconditioner}\index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 
 
@@ -7,9 +7,9 @@ An interface to allow Super\+LU to be used as an (exact) \mbox{\hyperlink{classo
 
 
 
-{\ttfamily \#include $<$Super\+L\+U\+\_\+preconditioner.\+h$>$}
+{\ttfamily \#include $<$Super\+LU\+\_\+preconditioner.\+h$>$}
 
-Inheritance diagram for oomph\+::Super\+L\+U\+Preconditioner\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Super\+LUPreconditioner\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1SuperLUPreconditioner}
@@ -18,16 +18,16 @@ Inheritance diagram for oomph\+::Super\+L\+U\+Preconditioner\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a60f0201dc7d7b4ca3aedcc07faf33d13}{Super\+L\+U\+Preconditioner}} ()
+\mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a60f0201dc7d7b4ca3aedcc07faf33d13}{Super\+LUPreconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a7a821938d3889f18d8d0050c34bc8d99}{$\sim$\+Super\+L\+U\+Preconditioner}} ()
+\mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a7a821938d3889f18d8d0050c34bc8d99}{$\sim$\+Super\+LUPreconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a580996fae2ff79cc2a2fae1fd0b748d9}{Super\+L\+U\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+L\+U\+Preconditioner}} \&)
+\mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a80d7f81d5c8842e3d8156a610299a7ea}{Super\+LUPreconditioner}} (const \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a3adff07af5fd101787ee1721a65f9a7c}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+L\+U\+Preconditioner}} \&)
+void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_aa8455757581525253f67e7ae9f377b05}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a7a53307202af7c06a2a6b336e943b1b4}{setup}} ()
-\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} or \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{CCDouble\+Matrix}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a687a7578834939a5ca70bd4871189ad0}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
 \begin{DoxyCompactList}\small\item\em Function applies Super\+LU to vector r for (exact) preconditioning, this requires a call to setup(...) first. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a6bc6b8f8664db06618ac4ace9c0a05cb}{preconditioner\+\_\+solve\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
@@ -37,9 +37,9 @@ virtual void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_aa0a50217f8416
 double \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a7316ae668d9c2a1e3ca60c3209d77974}{get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors}} ()
 \begin{DoxyCompactList}\small\item\em Get the amount of memory used to store the LU factors inside Super\+LU. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a404e0a7a8cd7092a35b87fc3f489b459}{get\+\_\+total\+\_\+memory\+\_\+needed\+\_\+for\+\_\+superlu}} ()
-\begin{DoxyCompactList}\small\item\em Get the total memory needed by Super\+LU to store A\+ND calculate the LU factors. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_abdb646f37a494b10ce373b52e6a65837}{get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu}} ()
-\begin{DoxyCompactList}\small\item\em Get the amount of memory taken up by Super\+LU. The first entry of the returned result contains the memory used to store the LU factors and the second entry contains the total memory used to store A\+ND calculate the LU factors. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get the total memory needed by Super\+LU to store AND calculate the LU factors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a74b764e1a4d9280d6358ecc61ca75fb6}{get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu}} ()
+\begin{DoxyCompactList}\small\item\em Get the amount of memory taken up by Super\+LU. The first entry of the returned result contains the memory used to store the LU factors and the second entry contains the total memory used to store AND calculate the LU factors. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a6c2cf028fc2f81b7ea3f78ad323f4c76}{enable\+\_\+doc\+\_\+stats}} ()
 \begin{DoxyCompactList}\small\item\em Enable documentation of solver statistics. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_ab98fa441f2edd2d7d6d6f2179e94e2d3}{disable\+\_\+doc\+\_\+stats}} ()
@@ -47,7 +47,7 @@ void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_ab98fa441f2edd2d7d6d6f
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}} \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a4da1fff0fd1a2a57d5dfe66e591cf19a}{Solver}}
+\mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+LUSolver}} \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_a4da1fff0fd1a2a57d5dfe66e591cf19a}{Solver}}
 \begin{DoxyCompactList}\small\item\em the Super\+LU solver emplyed by this preconditioner \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -55,7 +55,7 @@ void \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner_ab98fa441f2edd2d7d6d6f
 \doxysubsection{Detailed Description}
 An interface to allow Super\+LU to be used as an (exact) \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}. 
 
-Definition at line 39 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00039}{39}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
@@ -64,7 +64,7 @@ Definition at line 39 of file Super\+L\+U\+\_\+preconditioner.\+h.
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!SuperLUPreconditioner@{SuperLUPreconditioner}}
 \index{SuperLUPreconditioner@{SuperLUPreconditioner}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{SuperLUPreconditioner()}{SuperLUPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+Super\+L\+U\+Preconditioner\+::\+Super\+L\+U\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Super\+LUPreconditioner\+::\+Super\+LUPreconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -72,17 +72,17 @@ Constructor.
 
 
 
-Definition at line 43 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00043}{43}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::disable\+\_\+doc\+\_\+stats(), oomph\+::\+Linear\+Solver\+::disable\+\_\+doc\+\_\+time(), and Solver.
+References \mbox{\hyperlink{linear__solver_8h_source_l00609}{oomph\+::\+Super\+LUSolver\+::disable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{linear__solver_8h_source_l00116}{oomph\+::\+Linear\+Solver\+::disable\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a7a821938d3889f18d8d0050c34bc8d99}\label{classoomph_1_1SuperLUPreconditioner_a7a821938d3889f18d8d0050c34bc8d99}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!````~SuperLUPreconditioner@{$\sim$SuperLUPreconditioner}}
 \index{````~SuperLUPreconditioner@{$\sim$SuperLUPreconditioner}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{$\sim$SuperLUPreconditioner()}{~SuperLUPreconditioner()}}
-{\footnotesize\ttfamily oomph\+::\+Super\+L\+U\+Preconditioner\+::$\sim$\+Super\+L\+U\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Super\+LUPreconditioner\+::$\sim$\+Super\+LUPreconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -90,25 +90,17 @@ Destructor.
 
 
 
-Definition at line 50 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00050}{50}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a580996fae2ff79cc2a2fae1fd0b748d9}\label{classoomph_1_1SuperLUPreconditioner_a580996fae2ff79cc2a2fae1fd0b748d9}} 
+\mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a80d7f81d5c8842e3d8156a610299a7ea}\label{classoomph_1_1SuperLUPreconditioner_a80d7f81d5c8842e3d8156a610299a7ea}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!SuperLUPreconditioner@{SuperLUPreconditioner}}
 \index{SuperLUPreconditioner@{SuperLUPreconditioner}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{SuperLUPreconditioner()}{SuperLUPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Super\+L\+U\+Preconditioner\+::\+Super\+L\+U\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+L\+U\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Super\+LUPreconditioner\+::\+Super\+LUPreconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 53 of file Super\+L\+U\+\_\+preconditioner.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -117,7 +109,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Super\+L\+U\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Super\+LUPreconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -129,17 +121,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line 113 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00106}{106}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory(), and Solver.
+References \mbox{\hyperlink{linear__solver_8cc_source_l02645}{oomph\+::\+Super\+LUSolver\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_ab98fa441f2edd2d7d6d6f2179e94e2d3}\label{classoomph_1_1SuperLUPreconditioner_ab98fa441f2edd2d7d6d6f2179e94e2d3}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!disable\_doc\_stats@{disable\_doc\_stats}}
 \index{disable\_doc\_stats@{disable\_doc\_stats}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{disable\_doc\_stats()}{disable\_doc\_stats()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Preconditioner\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUPreconditioner\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -147,17 +139,17 @@ Enable documentation of solver statistics.
 
 
 
-Definition at line 165 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00158}{158}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::disable\+\_\+doc\+\_\+stats(), and Solver.
+References \mbox{\hyperlink{linear__solver_8h_source_l00609}{oomph\+::\+Super\+LUSolver\+::disable\+\_\+doc\+\_\+stats()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a6c2cf028fc2f81b7ea3f78ad323f4c76}\label{classoomph_1_1SuperLUPreconditioner_a6c2cf028fc2f81b7ea3f78ad323f4c76}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!enable\_doc\_stats@{enable\_doc\_stats}}
 \index{enable\_doc\_stats@{enable\_doc\_stats}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{enable\_doc\_stats()}{enable\_doc\_stats()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Preconditioner\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUPreconditioner\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -165,17 +157,17 @@ Enable documentation of solver statistics.
 
 
 
-Definition at line 158 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00151}{151}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::enable\+\_\+doc\+\_\+stats(), and Solver.
+References \mbox{\hyperlink{linear__solver_8h_source_l00603}{oomph\+::\+Super\+LUSolver\+::enable\+\_\+doc\+\_\+stats()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a7316ae668d9c2a1e3ca60c3209d77974}\label{classoomph_1_1SuperLUPreconditioner_a7316ae668d9c2a1e3ca60c3209d77974}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!get\_memory\_usage\_for\_lu\_factors@{get\_memory\_usage\_for\_lu\_factors}}
 \index{get\_memory\_usage\_for\_lu\_factors@{get\_memory\_usage\_for\_lu\_factors}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{get\_memory\_usage\_for\_lu\_factors()}{get\_memory\_usage\_for\_lu\_factors()}}
-{\footnotesize\ttfamily double oomph\+::\+Super\+L\+U\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Super\+LUPreconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -183,71 +175,63 @@ Get the amount of memory used to store the LU factors inside Super\+LU.
 
 
 
-Definition at line 120 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00113}{113}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors(), and Solver.
+References \mbox{\hyperlink{linear__solver_8cc_source_l00748}{oomph\+::\+Super\+LUSolver\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
-\mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_abdb646f37a494b10ce373b52e6a65837}\label{classoomph_1_1SuperLUPreconditioner_abdb646f37a494b10ce373b52e6a65837}} 
+\mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a74b764e1a4d9280d6358ecc61ca75fb6}\label{classoomph_1_1SuperLUPreconditioner_a74b764e1a4d9280d6358ecc61ca75fb6}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!get\_memory\_usage\_for\_superlu@{get\_memory\_usage\_for\_superlu}}
 \index{get\_memory\_usage\_for\_superlu@{get\_memory\_usage\_for\_superlu}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{get\_memory\_usage\_for\_superlu()}{get\_memory\_usage\_for\_superlu()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Super\+L\+U\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ oomph\+::\+Super\+LUPreconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Get the amount of memory taken up by Super\+LU. The first entry of the returned result contains the memory used to store the LU factors and the second entry contains the total memory used to store A\+ND calculate the LU factors. 
+Get the amount of memory taken up by Super\+LU. The first entry of the returned result contains the memory used to store the LU factors and the second entry contains the total memory used to store AND calculate the LU factors. 
 
 
 
-Definition at line 140 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00133}{133}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors(), oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+total\+\_\+needed\+\_\+memory(), and Solver.
+References \mbox{\hyperlink{linear__solver_8cc_source_l00748}{oomph\+::\+Super\+LUSolver\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00776}{oomph\+::\+Super\+LUSolver\+::get\+\_\+total\+\_\+needed\+\_\+memory()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a404e0a7a8cd7092a35b87fc3f489b459}\label{classoomph_1_1SuperLUPreconditioner_a404e0a7a8cd7092a35b87fc3f489b459}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!get\_total\_memory\_needed\_for\_superlu@{get\_total\_memory\_needed\_for\_superlu}}
 \index{get\_total\_memory\_needed\_for\_superlu@{get\_total\_memory\_needed\_for\_superlu}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{get\_total\_memory\_needed\_for\_superlu()}{get\_total\_memory\_needed\_for\_superlu()}}
-{\footnotesize\ttfamily double oomph\+::\+Super\+L\+U\+Preconditioner\+::get\+\_\+total\+\_\+memory\+\_\+needed\+\_\+for\+\_\+superlu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Super\+LUPreconditioner\+::get\+\_\+total\+\_\+memory\+\_\+needed\+\_\+for\+\_\+superlu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Get the total memory needed by Super\+LU to store A\+ND calculate the LU factors. 
+Get the total memory needed by Super\+LU to store AND calculate the LU factors. 
 
 
 
-Definition at line 129 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00122}{122}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+total\+\_\+needed\+\_\+memory(), and Solver.
+References \mbox{\hyperlink{linear__solver_8cc_source_l00776}{oomph\+::\+Super\+LUSolver\+::get\+\_\+total\+\_\+needed\+\_\+memory()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
-\mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a3adff07af5fd101787ee1721a65f9a7c}\label{classoomph_1_1SuperLUPreconditioner_a3adff07af5fd101787ee1721a65f9a7c}} 
+\mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_aa8455757581525253f67e7ae9f377b05}\label{classoomph_1_1SuperLUPreconditioner_aa8455757581525253f67e7ae9f377b05}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+L\+U\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUPreconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 60 of file Super\+L\+U\+\_\+preconditioner.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a687a7578834939a5ca70bd4871189ad0}\label{classoomph_1_1SuperLUPreconditioner_a687a7578834939a5ca70bd4871189ad0}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
 \index{preconditioner\_solve@{preconditioner\_solve}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUPreconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -259,17 +243,17 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 97 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00090}{90}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::resolve(), and Solver.
+References \mbox{\hyperlink{linear__solver_8cc_source_l01735}{oomph\+::\+Super\+LUSolver\+::resolve()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a6bc6b8f8664db06618ac4ace9c0a05cb}\label{classoomph_1_1SuperLUPreconditioner_a6bc6b8f8664db06618ac4ace9c0a05cb}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!preconditioner\_solve\_transpose@{preconditioner\_solve\_transpose}}
 \index{preconditioner\_solve\_transpose@{preconditioner\_solve\_transpose}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_solve\_transpose()}{preconditioner\_solve\_transpose()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Preconditioner\+::preconditioner\+\_\+solve\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUPreconditioner\+::preconditioner\+\_\+solve\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -281,21 +265,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a1e469ffc87f31f
 
 
 
-Definition at line 105 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00098}{98}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Super\+L\+U\+Solver\+::resolve\+\_\+transpose(), and Solver.
+References \mbox{\hyperlink{linear__solver_8cc_source_l01757}{oomph\+::\+Super\+LUSolver\+::resolve\+\_\+transpose()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUPreconditioner_a7a53307202af7c06a2a6b336e943b1b4}\label{classoomph_1_1SuperLUPreconditioner_a7a53307202af7c06a2a6b336e943b1b4}} 
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUPreconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}}. 
+Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} or \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{CCDouble\+Matrix}}. 
 
 
 
@@ -303,15 +287,15 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 70 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00063}{63}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Super\+L\+U\+Solver\+::factorise(), oomph\+::\+Preconditioner\+::matrix\+\_\+pt(), oomph\+::oomph\+\_\+info, and Solver.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01782}{oomph\+::\+Super\+LUSolver\+::factorise()}}, \mbox{\hyperlink{preconditioner_8h_source_l00150}{oomph\+::\+Preconditioner\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{Solver}}.
 
 
 
-Referenced by oomph\+::\+Simple\+F\+S\+I\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::setup().
+Referenced by \mbox{\hyperlink{fsi__preconditioners_8h_source_l00683}{oomph\+::\+Simple\+FSIPreconditioner$<$ MATRIX $>$\+::setup()}}.
 
 
 
@@ -320,7 +304,7 @@ Referenced by oomph\+::\+Simple\+F\+S\+I\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$
 \index{oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}!Solver@{Solver}}
 \index{Solver@{Solver}!oomph::SuperLUPreconditioner@{oomph::SuperLUPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Solver}{Solver}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}} oomph\+::\+Super\+L\+U\+Preconditioner\+::\+Solver\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+LUSolver}} oomph\+::\+Super\+LUPreconditioner\+::\+Solver\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -328,14 +312,14 @@ the Super\+LU solver emplyed by this preconditioner
 
 
 
-Definition at line 174 of file Super\+L\+U\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00167}{167}} of file \mbox{\hyperlink{SuperLU__preconditioner_8h_source}{Super\+LU\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), disable\+\_\+doc\+\_\+stats(), enable\+\_\+doc\+\_\+stats(), get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors(), get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu(), get\+\_\+total\+\_\+memory\+\_\+needed\+\_\+for\+\_\+superlu(), preconditioner\+\_\+solve(), preconditioner\+\_\+solve\+\_\+transpose(), setup(), and Super\+L\+U\+Preconditioner().
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00106}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00158}{disable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00151}{enable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00113}{get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00133}{get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00122}{get\+\_\+total\+\_\+memory\+\_\+needed\+\_\+for\+\_\+superlu()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00090}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00098}{preconditioner\+\_\+solve\+\_\+transpose()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00063}{setup()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00043}{Super\+LUPreconditioner()}}.
 
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{SuperLU__preconditioner_8h}{Super\+L\+U\+\_\+preconditioner.\+h}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{SuperLU__preconditioner_8h}{Super\+LU\+\_\+preconditioner.\+h}}\end{DoxyCompactItemize}

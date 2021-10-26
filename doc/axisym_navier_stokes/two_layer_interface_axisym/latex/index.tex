@@ -70,13 +70,11 @@ As in the \href{../../../navier_stokes/two_layer_interface/html/index.html\#name
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Direction of gravity}}
+\DoxyCodeLine{\textcolor{comment}{ /// Direction of gravity}}
 \DoxyCodeLine{ Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{G}}(3);}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 The first section of the driver code is identical to that of the \href{../../../navier_stokes/two_layer_interface/html/index.html\#main}{\texttt{ earlier example}}. We define a command line flag which allows us to run a `validation' version of the code (for {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/testing routines) and check that the non-\/dimensional quantities provided in the {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}} namespace are self-\/consistent. Next we specify the duration of the simulation and the size of the timestep. If we are running the code as a validation, we set the length of the simulation such that only two timesteps are taken. The direction in which gravity acts is defined to be vertically downwards.
@@ -89,9 +87,7 @@ The first section of the driver code is identical to that of the \href{../../../
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af5ae275cf339105b9a54821c034df470}{Global\_Physical\_Variables::G}}[2] = 0.0;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we build the problem using the `pseudo-\/solid' version of {\ttfamily Refineable\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Elements} and the {\ttfamily B\+D\+F$<$2$>$} timestepper, before calling {\ttfamily unsteady\+\_\+run(...)}. This function solves the system at each timestep using the {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} function before documenting the result.
+ Finally, we build the problem using the `pseudo-\/solid' version of {\ttfamily Refineable\+Axisymmetric\+QCrouzeix\+Raviart\+Elements} and the {\ttfamily BDF$<$2$>$} timestepper, before calling {\ttfamily unsteady\+\_\+run(...)}. This function solves the system at each timestep using the {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} function before documenting the result.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -99,17 +95,15 @@ Finally, we build the problem using the `pseudo-\/solid' version of {\ttfamily R
 \DoxyCodeLine{ \textcolor{comment}{// using the BDF<2> timestepper}}
 \DoxyCodeLine{ \mbox{\hyperlink{classInterfaceProblem}{InterfaceProblem}}<RefineablePseudoSolidNodeUpdateElement<}
 \DoxyCodeLine{ RefineableAxisymmetricQCrouzeixRaviartElement,}
-\DoxyCodeLine{  RefineableQPVDElement<2,3> >,BDF<2> > \mbox{\hyperlink{two__layer__interface__axisym_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  RefineableQPVDElement<2,3> >,BDF<2> > problem;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Run the unsteady simulation}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__layer__interface__axisym_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.unsteady\_run(t\_max,dt);}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\_run}}(t\_max,dt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// End of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_mesh}{}\doxysection{The mesh class}\label{index_mesh}
 The mesh class is almost identical to that in the \href{../../../navier_stokes/two_layer_interface/html/index.html\#mesh}{\texttt{ two-\/dimensional problem}}. The only difference is that, given that this (specific) mesh is to be used in an axisymmetric problem, it does not make sense to allow the mesh to be periodic in the horizontal direction.\hypertarget{index_problem_class}{}\doxysection{The problem class}\label{index_problem_class}
@@ -117,11 +111,11 @@ The problem class is almost identical to the \href{../../../navier_stokes/two_la
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Deform the mesh/free surface to a prescribed function}}
+\DoxyCodeLine{\textcolor{comment}{ /// Deform the mesh/free surface to a prescribed function}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} deform\_free\_surface(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&epsilon, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&k);}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
+ \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 The constructor starts by building the timestepper and setting the dimensions of the mesh. The number of elements in the $ r $ and $ z $ directions in both fluid layers are specified. The next section of the constructor is exactly as \href{../../../navier_stokes/two_layer_interface/html/index.html\#constructor}{\texttt{ before}}. We build the bulk mesh, create an error estimator and set the maximum refinement level. An empty surface mesh is created and populated with a call to {\ttfamily create\+\_\+interface\+\_\+elements}, before the two meshes are combined to form the global mesh. Next we define the boundary conditions. On the top and bottom boundaries ( $ z = 2.0 $ and $ z = 0.0 $) we apply the no-\/slip condition by pinning all three velocity components. On the outer (solid) wall ( $ r = 1.0 $) we pin the radial (no penetration) and azimuthal (no slip) components but not the axial component. This simulates the \char`\"{}slippery\char`\"{} outer wall. These conditions are also applied at the symmetry boundary ( $ r = 0.0 $). The vertical position of the nodes on the top and bottom boundaries are also pinned.
 
 
@@ -171,9 +165,7 @@ The constructor starts by building the timestepper and setting the dimensions of
 \DoxyCodeLine{  \} \textcolor{comment}{// End of loop over mesh boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-We pin the horizontal position of all nodes in the mesh as well as the azimuthal velocity components throughout the bulk of the domain (since in an axisymmetric problem these should remain zero always).
+ We pin the horizontal position of all nodes in the mesh as well as the azimuthal velocity components throughout the bulk of the domain (since in an axisymmetric problem these should remain zero always).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -189,9 +181,7 @@ We pin the horizontal position of all nodes in the mesh as well as the azimuthal
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-The remainder of the problem constructor is identical to that of the \href{../../../navier_stokes/two_layer_interface/html/index.html\#constructor}{\texttt{ two-\/dimensional problem}}. We create a generalised Hookean constitutive equation for the pseudo-\/solid mesh before looping over all elements in the bulk mesh and assigning pointers to the Reynolds and Womersley numbers, $ Re $ and $ Re\, St $, the product of the Reynolds number and the inverse of the Froude number, $ Re/Fr $, the direction of gravity, $ G $, the constitutive law and the global time object. For those elements which correspond to the upper fluid layer, we also assign pointers for the viscosity and density ratios, $ R_\mu $ and $ R_\rho $. We pin one degree of freedom and call the function which assigns the boundary conditions, before finally setting up the equation numbering scheme.
+ The remainder of the problem constructor is identical to that of the \href{../../../navier_stokes/two_layer_interface/html/index.html\#constructor}{\texttt{ two-\/dimensional problem}}. We create a generalised Hookean constitutive equation for the pseudo-\/solid mesh before looping over all elements in the bulk mesh and assigning pointers to the Reynolds and Womersley numbers, $ Re $ and $ Re\, St $, the product of the Reynolds number and the inverse of the Froude number, $ Re/Fr $, the direction of gravity, $ G $, the constitutive law and the global time object. For those elements which correspond to the upper fluid layer, we also assign pointers for the viscosity and density ratios, $ R_\mu $ and $ R_\rho $. We pin one degree of freedom and call the function which assigns the boundary conditions, before finally setting up the equation numbering scheme.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -201,9 +191,9 @@ The {\ttfamily set\+\_\+initial\+\_\+conditions()} function is very similar to t
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_initial\_condition========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set initial conditions: Set all nodal velocities to zero and}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// initialise the previous velocities and nodal positions to correspond}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to an impulsive start}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial conditions: Set all nodal velocities to zero and}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// initialise the previous velocities and nodal positions to correspond}}
+\DoxyCodeLine{\textcolor{comment}{/// to an impulsive start}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{InterfaceProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
@@ -229,9 +219,7 @@ The {\ttfamily set\+\_\+initial\+\_\+conditions()} function is very similar to t
 \DoxyCodeLine{\} \textcolor{comment}{// End of set\_initial\_condition}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_set_boundary_conditions}{}\doxysection{Boundary conditions}\label{index_set_boundary_conditions}
 The {\ttfamily set\+\_\+boundary\+\_\+conditions()} function is very similar to that in the \href{../../../navier_stokes/two_layer_interface/html/index.html\#set_boundary_conditions}{\texttt{ two-\/dimensional problem}}.
@@ -239,9 +227,9 @@ The {\ttfamily set\+\_\+boundary\+\_\+conditions()} function is very similar to 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_boundary\_conditions======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set boundary conditions: Set all velocity components to zero}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// on the top and bottom (solid) walls and the radial and azimuthal}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// components only to zero on the side boundaries}}
+\DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions: Set all velocity components to zero}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// on the top and bottom (solid) walls and the radial and azimuthal}}
+\DoxyCodeLine{\textcolor{comment}{/// components only to zero on the side boundaries}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}{InterfaceProblem<ELEMENT,TIMESTEPPER>::set\_boundary\_conditions}}()}
@@ -276,7 +264,7 @@ The {\ttfamily set\+\_\+boundary\+\_\+conditions()} function is very similar to 
 \DoxyCodeLine{\} \textcolor{comment}{// End of set\_boundary\_conditions}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_before_after_adapt}{}\doxysection{Actions before and after adaptation}\label{index_before_after_adapt}
+ \hypertarget{index_before_after_adapt}{}\doxysection{Actions before and after adaptation}\label{index_before_after_adapt}
 These functions follow exactly the same structure as those in the \href{../../../navier_stokes/two_layer_interface/html/index.html\#before_adapt}{\texttt{ two-\/dimensional problem}}.
 
 \DoxyHorRuler{0}
@@ -287,6 +275,7 @@ This function is identical to that in the \href{../../../navier_stokes/two_layer
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ElasticLineFluidInterfaceElement<ELEMENT>,}
+
 \end{DoxyCode}
 
 
@@ -295,10 +284,11 @@ we are creating interface elements of the type
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ElasticAxisymFluidInterfaceElement<ELEMENT>,}
+
 \end{DoxyCode}
 
 
-where {\ttfamily E\+L\+E\+M\+E\+NT} is the templated bulk element type.
+where {\ttfamily ELEMENT} is the templated bulk element type.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -314,7 +304,7 @@ At the beginning of the simulation the interface is deformed by a prescribed fun
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_deform\_free\_surface==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Deform the mesh/free surface to a prescribed function}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_aa93d492461ac53f0d9f88516bce322dc}{deform\_free\_surface}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&epsilon,\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&k)}
@@ -322,7 +312,7 @@ At the beginning of the simulation the interface is deformed by a prescribed fun
 \DoxyCodeLine{ \textcolor{comment}{// Initialise Bessel functions (only need the first!)}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} j0, j1, y0, y1, j0p, j1p, y0p, y1p;}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Determine number of nodes in the "bulk" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Determine number of nodes in the "{}bulk"{} mesh}}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = Bulk\_mesh\_pt-\/>nnode();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Loop over all nodes in mesh}}
@@ -345,9 +335,7 @@ At the beginning of the simulation the interface is deformed by a prescribed fun
 \DoxyCodeLine{\} \textcolor{comment}{// End of deform\_free\_surface}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 This function follows an identical structure to that in the \href{../../../navier_stokes/two_layer_interface/html/index.html\#doc}{\texttt{ two-\/dimensional problem}}.
@@ -369,9 +357,7 @@ The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepp
 \DoxyCodeLine{ deform\_free\_surface(epsilon,k\_bessel);}
 
 \end{DoxyCodeInclude}
-
-
-The rest of the function is identical to \href{../../../navier_stokes/two_layer_interface/html/index.html\#unsteady_run}{\texttt{ before}}.
+ The rest of the function is identical to \href{../../../navier_stokes/two_layer_interface/html/index.html\#unsteady_run}{\texttt{ before}}.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -384,5 +370,5 @@ The rest of the function is identical to \href{../../../navier_stokes/two_layer_
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

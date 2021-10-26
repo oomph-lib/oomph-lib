@@ -79,7 +79,7 @@ public:
  /// Destructor to clean up memory
  ~RefineableSphereConvectionProblem();
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
+ /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
@@ -89,7 +89,7 @@ public:
   } // end of fix_pressure
 
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions(const double &time);
  
  void actions_before_implicit_timestep()
@@ -248,7 +248,7 @@ RefineableSphereConvectionProblem<ELEMENT>::RefineableSphereConvectionProblem()
 
 
 //=========start of set_boundary_conditions===============================
-/// \short Set the boundary conditions so that the inner sphere has
+/// Set the boundary conditions so that the inner sphere has
 /// a constant angular rotation of angular velocity one.
 //========================================================================
 template<class ELEMENT>
@@ -340,9 +340,9 @@ void RefineableSphereConvectionProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 } // end_of_doc_solution
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main======================================================

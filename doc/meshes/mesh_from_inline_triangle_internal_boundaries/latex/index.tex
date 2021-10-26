@@ -159,9 +159,7 @@ The first task is to define the outer boundary which we represent by a {\ttfamil
 \DoxyCodeLine{  \textcolor{comment}{// End -\/ Outer boundary}}
 
 \end{DoxyCodeInclude}
-
-
-Note that we defined additional vertices along the two boundaries to allow the creation of connections to the outer boundary, see figure below.
+ Note that we defined additional vertices along the two boundaries to allow the creation of connections to the outer boundary, see figure below.
 
  
 \begin{DoxyImage}
@@ -181,9 +179,7 @@ We create a {\ttfamily Vector} of five {\ttfamily Triangle\+Mesh\+Open\+Curves} 
 \DoxyCodeLine{  Vector<TriangleMeshOpenCurve *> inner\_open\_boundaries\_pt(n\_open\_curves);}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 
 
 {\bfseries{ Simple internal boundaries without connections }}
@@ -253,9 +249,7 @@ Our domain has two unconnected internal boundaries\+: a straight line, represent
 \DoxyCodeLine{      \textcolor{keyword}{new} TriangleMeshOpenCurve(internal\_curve\_section2\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 
 
 {\bfseries{ Adding an internal boundary connected to an outer boundary }}
@@ -312,8 +306,6 @@ Consider the creation of the internal boundary 4 shown on the sketch of the doma
 
 \end{DoxyCodeInclude}
 
-
-
 \begin{DoxyItemize}
 \item Specify connections using the destination boundary and the vertex number
 \end{DoxyItemize}
@@ -334,8 +326,6 @@ Consider the creation of the internal boundary 4 shown on the sketch of the doma
 
 \end{DoxyCodeInclude}
 
-
-
 \begin{DoxyItemize}
 \item Finally, create the {\ttfamily Triangle\+Mesh\+Open\+Curve} object as usual
 \end{DoxyItemize}
@@ -348,9 +338,7 @@ Consider the creation of the internal boundary 4 shown on the sketch of the doma
 \DoxyCodeLine{      \textcolor{keyword}{new} TriangleMeshOpenCurve(internal\_curve\_section3\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 
 
 {\bfseries{ Adding an internal boundary connected with another internal boundary }}
@@ -418,9 +406,7 @@ The initial end of the boundary is connected to the outer boundary therefore we 
 \DoxyCodeLine{      \textcolor{keyword}{new} TriangleMeshOpenCurve(internal\_curve\_section4\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-{\bfseries{ Adding an internal boundary connected with another internal boundary (the last one from our example) }}
+ {\bfseries{ Adding an internal boundary connected with another internal boundary (the last one from our example) }}
 
 The fifth internal boundary is connected to two internal boundaries. The initial end of the new internal boundary is connected to a {\ttfamily Triangle\+Mesh\+Poly\+Line} and the final end is connected to a {\ttfamily Triangle\+Mesh\+Curvi\+Line}. The vertex number for connection with the {\ttfamily Triangle\+Mesh\+Poly\+Line} was established in the definition of the previous internal boundary, vertex \#1. The circles defining boundaries 4 and 6 meet each other at $(x, y) = (\frac{3}{4}, \frac{\sqrt(7)}{4})$ which corresponds to the intrinsic coordinate $ s = arctan(\frac{\sqrt{7}}{3}) $ on the {\ttfamily Triangle\+Mesh\+Curvi\+Line} object representing boundary 4.
 
@@ -478,7 +464,7 @@ The fifth internal boundary is connected to two internal boundaries. The initial
 \DoxyCodeLine{      \textcolor{keyword}{new} TriangleMeshOpenCurve(internal\_curve\_section5\_pt);}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_create_mesh}{}\doxysubsubsection{Build the mesh}\label{index_create_mesh}
+ \hypertarget{index_create_mesh}{}\doxysubsubsection{Build the mesh}\label{index_create_mesh}
 We build the mesh specific parameters using a {\ttfamily Triangle\+Mesh\+Parameters} object.
 
  
@@ -504,9 +490,7 @@ We build the mesh specific parameters using a {\ttfamily Triangle\+Mesh\+Paramet
 \DoxyCodeLine{  Problem::mesh\_pt() = \textcolor{keyword}{new} TriangleMesh<ELEMENT>(triangle\_mesh\_parameters);}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_def_extra}{}\doxysubsection{Defining additional holes and regions}\label{index_def_extra}
 It is possible to define holes in the domain using the methods discussed in \href{../../../../doc/meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial}}; where we explained how to create holes by using closed curves. Holes could also be created by specifying additional parameters on the {\ttfamily Triangle\+Mesh\+Parameters} object. The specification of regions or layers follows the same principle.\hypertarget{index_def_extra_holes}{}\doxysubsubsection{Defining additional holes}\label{index_def_extra_holes}
@@ -531,17 +515,11 @@ For defining holes it is only necessary to specify a point that lies inside a cl
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Pass information about the additional holes coordinates}}
 \DoxyCodeLine{  triangle\_mesh\_parameters.extra\_holes\_coordinates() = additional\_hole;}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{// Pass the TriangleMeshParameters object to the TriangleMesh one}}
 \DoxyCodeLine{  Problem::mesh\_pt() = \textcolor{keyword}{new} TriangleMesh<ELEMENT>(triangle\_mesh\_parameters);}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_def_extra_regions}{}\doxysubsubsection{Defining regions}\label{index_def_extra_regions}
+ \hypertarget{index_def_extra_regions}{}\doxysubsubsection{Defining regions}\label{index_def_extra_regions}
 The definition of regions follows the same principle that defining holes, it means, one only need to specify the coordinates of a point that lies inside a region. If we would like to define the region showed on light grey on the figure below we use the method {\ttfamily add\+\_\+region\+\_\+coordinates} of the {\ttfamily Triangle\+Mesh\+Parameters} object. You can specify any region id for the defined region.
 
  
@@ -570,9 +548,7 @@ The definition of regions follows the same principle that defining holes, it mea
 \DoxyCodeLine{  Problem::mesh\_pt() = \textcolor{keyword}{new} TriangleMesh<ELEMENT>(triangle\_mesh\_parameters);}
 
 \end{DoxyCodeInclude}
-
-
-By default the complete domain belongs to region zero. Therefore, one could leave parts of the domain without a defined region or explicitly define all the regions on the domain. N\+O\+TE\+: Be sure to use the region ids when documenting the solution by its specified regions.
+ By default the complete domain belongs to region zero. Therefore, one could leave parts of the domain without a defined region or explicitly define all the regions on the domain. NOTE\+: Be sure to use the region ids when documenting the solution by its specified regions.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -610,5 +586,5 @@ shows how to define a hole by connecting internal boundaries.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -8,49 +8,49 @@ class \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{oomph\+::\+Generalised\
 class \mbox{\hyperlink{classoomph_1_1FiniteElement}{oomph\+::\+Finite\+Element}}
 \begin{DoxyCompactList}\small\item\em A general Finite Element class. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1PointElement}{oomph\+::\+Point\+Element}}
-\item 
+\begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{oomph\+::\+Solid\+Initial\+Condition}}
 \begin{DoxyCompactList}\small\item\em A class to specify the initial conditions for a solid body. Solid bodies are often discretised with Hermite-\/type elements, for which the assignment of the generalised nodal values is nontrivial since they represent derivatives w.\+r.\+t. to the local coordinates. A \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object specifies initial position (i.\+e. shape), velocity and acceleration of the structure with a geometric object. An integer specifies which time-\/derivative derivative is currently assigned. See example codes for a demonstration of its use. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{oomph\+::\+Solid\+Finite\+Element}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}} class. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em ////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceElement}{oomph\+::\+Face\+Element}}
-\item 
+\begin{DoxyCompactList}\small\item\em Face\+Elements are elements that coincide with the faces of higher-\/dimensional \char`\"{}bulk\char`\"{} elements. They are used on boundaries where additional non-\/trivial boundary conditions need to be applied. Examples include free surfaces, and applied traction conditions. In many cases, Face\+Elements need to evaluate to quantities in the associated bulk elements. For instance, the evaluation of a shear stresses on 2D \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} requires the evaluation of velocity derivatives in the associated 3D volume element etc. Therefore we store a pointer to the associated bulk element, and information about the relation between the local coordinates in the face and bulk elements. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1SolidFaceElement}{oomph\+::\+Solid\+Face\+Element}}
-\item 
+\begin{DoxyCompactList}\small\item\em Solid\+Face\+Elements combine Face\+Elements and Solid\+Finite\+Elements and overload various functions so they work properly in the \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} context. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1SolidPointElement}{oomph\+::\+Solid\+Point\+Element}}
-\begin{DoxyCompactList}\small\item\em Solid point element. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry}{oomph\+::\+Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\item 
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry}{oomph\+::\+Face\+Geometry$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1DummyFaceElement}{oomph\+::\+Dummy\+Face\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1ElementWithDragFunction}{oomph\+::\+Element\+With\+Drag\+Function}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\item 
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1SolidElementWithDiagonalMassMatrix}{oomph\+::\+Solid\+Element\+With\+Diagonal\+Mass\+Matrix}}
-\item 
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1NavierStokesElementWithDiagonalMassMatrices}{oomph\+::\+Navier\+Stokes\+Element\+With\+Diagonal\+Mass\+Matrices}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry}{oomph\+::\+Element\+Geometry}}
-\item 
- \mbox{\hyperlink{namespaceoomph_1_1Locate__zeta__helpers}{oomph\+::\+Locate\+\_\+zeta\+\_\+helpers}}
-\begin{DoxyCompactList}\small\item\em Helper namespace for tolerances and iterations within the Newton method used in the locate\+\_\+zeta function in Finite\+Elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry}{oomph\+::\+Element\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Enumeration a finite element\textquotesingle{}s geometry \char`\"{}type\char`\"{}. Either \char`\"{}\+Q\char`\"{} (square, cubeoid like) or \char`\"{}\+T\char`\"{} (triangle, tetrahedron). \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Locate__zeta__helpers}{oomph\+::\+Locate\+\_\+zeta\+\_\+helpers}}
+\begin{DoxyCompactList}\small\item\em Helper namespace for tolerances, number of iterations, etc used in the locate\+\_\+zeta function in \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{namespaceoomph_afa5c7a93cae1917e874b392601be0bde}{oomph\+::\+Coordinate\+Mapping\+Fct\+Pt}}) (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, Vector$<$ double $>$ \&s\+\_\+bulk)
+typedef void($\ast$ \mbox{\hyperlink{namespaceoomph_afa5c7a93cae1917e874b392601be0bde}{oomph\+::\+Coordinate\+Mapping\+Fct\+Pt}}) (const Vector$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, Vector$<$ double $>$ \&s\+\_\+bulk)
 \begin{DoxyCompactList}\small\item\em Typedef for the function that translates the face coordinate to the coordinate in the bulk element. \end{DoxyCompactList}\item 
-typedef void($\ast$ \mbox{\hyperlink{namespaceoomph_a0a75fbfa1139f00cf88adeee835c8fe5}{oomph\+::\+Bulk\+Coordinate\+Derivatives\+Fct\+Pt}}) (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, Dense\+Matrix$<$ double $>$ \&ds\+\_\+bulk\+\_\+dsface, unsigned \&interior\+\_\+direction)
+typedef void($\ast$ \mbox{\hyperlink{namespaceoomph_a0a75fbfa1139f00cf88adeee835c8fe5}{oomph\+::\+Bulk\+Coordinate\+Derivatives\+Fct\+Pt}}) (const Vector$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, Dense\+Matrix$<$ double $>$ \&ds\+\_\+bulk\+\_\+dsface, unsigned \&interior\+\_\+direction)
 \begin{DoxyCompactList}\small\item\em Typedef for the function that returns the partial derivative of the local coordinates in the bulk element with respect to the coordinates along the face. In addition this function returns an index of one of the bulk local coordinates that varies away from the edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182a}{oomph\+::\+Element\+Geometry\+::\+Element\+Geometry}} \{ \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182aa950f376990cc80d475d36570d59f3ac3}{oomph\+::\+Element\+Geometry\+::Q}}, 
-\mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182aa9c3705b667836ab13e1b3b81a3eb28b8}{oomph\+::\+Element\+Geometry\+::T}}
+enum \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182a}{oomph\+::\+Element\+Geometry\+::\+Element\+Geometry}} \{ \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182aa950f376990cc80d475d36570d59f3ac3}{oomph\+::\+Element\+Geometry\+::Q}}
+, \mbox{\hyperlink{namespaceoomph_1_1ElementGeometry_a86ff99972b0205d7524e294c58c1182aa9c3705b667836ab13e1b3b81a3eb28b8}{oomph\+::\+Element\+Geometry\+::T}}
  \}
 \end{DoxyCompactItemize}

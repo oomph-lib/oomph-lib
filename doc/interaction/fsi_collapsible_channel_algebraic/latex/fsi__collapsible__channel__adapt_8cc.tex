@@ -4,27 +4,27 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classUndeformedWall}{Undeformed\+Wall}}
-\item 
-class \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+\begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceBL__Squash}{B\+L\+\_\+\+Squash}}
-\item 
- \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+namespace \mbox{\hyperlink{namespaceBL__Squash}{BL\+\_\+\+Squash}}
+\begin{DoxyCompactList}\small\item\em Namespace to define the mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
 \begin{DoxyCompactList}\small\item\em Namespace for phyical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{namespaceBL__Squash_a0fdaf7661591150041b7102dbe578cdc}{B\+L\+\_\+\+Squash\+::squash\+\_\+fct}} (const double \&s)
-\begin{DoxyCompactList}\small\item\em Mapping \mbox{[}0,1\mbox{]} -\/$>$ \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceBL__Squash_a0fdaf7661591150041b7102dbe578cdc}{BL\+\_\+\+Squash\+::squash\+\_\+fct}} (const double \&s)
+\begin{DoxyCompactList}\small\item\em Mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}{Global\+\_\+\+Physical\+\_\+\+Variables\+::prescribed\+\_\+traction}} (const double \&t, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Traction applied on the fluid at the left (inflow) boundary. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{Global\+\_\+\+Physical\+\_\+\+Variables\+::load}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__chan__alg_8txt_a0728ecef1ef280a6dcb336cd142dc907}{xi}}, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
-\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by F\+S\+I\+Wall\+Element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{Global\+\_\+\+Physical\+\_\+\+Variables\+::load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
+\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by FSIWall\+Element. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Driver code for a collapsible channel problem with FSI. Presence of command line arguments indicates validation run with coarse resolution and small number of timesteps. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -34,11 +34,15 @@ int \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_a0ddf1224851353fc92bfb
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
-Driver code for a collapsible channel problem with F\+SI. Presence of command line arguments indicates validation run with coarse resolution and small number of timesteps. 
-
-Definition at line 971 of file fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc.
 
 
+Driver code for a collapsible channel problem with FSI. Presence of command line arguments indicates validation run with coarse resolution and small number of timesteps. 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+up.
+
+
+Definition at line \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source_l00971}{971}} of file \mbox{\hyperlink{fsi__collapsible__channel__adapt_8cc_source}{fsi\+\_\+collapsible\+\_\+channel\+\_\+adapt.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00204}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext}}, and \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00183}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+up}}.
 

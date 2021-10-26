@@ -1,82 +1,82 @@
-\_form#0:$ r^* $
-\_form#1:$ z^* $
-\_form#2:$ \theta $
-\_form#3:\[ \rho \left[ \frac{\partial u_r^*}{\partial t^*} + {u_r^*}\frac{\partial u_r^*}{\partial r^*} - \frac{{u_{\theta}^*}^2}{r^*} + {u_z^*}\frac{\partial u_r^*}{\partial z^*} \right] = B_r^*\left(r^*,z^*,t^*\right) + \rho G_r^* + \frac{\partial \tau_{rr}^*}{\partial r^*} + \frac{\tau_{rr}^*}{r^*} - \frac{\tau_{\theta\theta}^*}{r^*} + \frac{\partial\tau_{rz}^*}{\partial z^*}, \]
-\_form#4:\[ \rho \left[ \frac{\partial u_z^*}{\partial t^*} + {u_r^*}\frac{\partial u_z^*}{\partial r^*} + {u_z^*}\frac{\partial u_z^*}{\partial z^*} \right] = B_z^*\left(r^*,z^*,t^*\right) + \rho G_z^* + \frac{\partial \tau_{zr}^*}{\partial r^*} + \frac{\tau_{zr}^*}{r^*} + \frac{\partial\tau_{zz}^*}{\partial z^*}, \]
-\_form#5:\[ \rho \left[ \frac{\partial u_{\theta}^*}{\partial t^*} + {u_r^*}\frac{\partial u_{\theta}^*}{\partial r^*} + \frac{u_r^* u_{\theta}^*}{r^*} + u_z^* \frac{\partial u_{\theta}^*}{\partial z^*} \right] = B_\theta^*\left(r^*,z^*,t^*\right) + \rho G_\theta^* + \frac{\partial \tau_{\theta r}^*}{\partial r^*} + \frac{\tau_{\theta r}^*}{r^*} + \frac{\tau_{r\theta}^*}{r^*} + \frac{\partial\tau_{\theta z}^*}{\partial z^*}, \]
-\_form#6:\[ \frac{\partial u_r^*}{\partial r^*} + \frac{u_r^*}{r^*} + \frac{\partial u_z^*}{\partial z^*} = Q^*, \]
-\_form#7:$ u_r^* $
-\_form#8:$ u_z^* $
-\_form#9:$ u_{\theta}^* $
-\_form#10:$ p^* $
-\_form#11:$ t^* $
-\_form#12:$ \rho \ G_i^* $
-\_form#13:$ i = r, z, \theta $
-\_form#14:$ B_i^*(r^*,z^*,t^*) $
-\_form#15:$ Q^*(r^*,z^*,t^*) $
-\_form#16:$ \tau_{ij}^* $
-\_form#17:\[ \tau_{rr}^* = -p^* + \mu (1+\Gamma) \frac{\partial u_r^*}{\partial r^*}, \qquad \tau_{\theta\theta}^* = -p^* + \mu (1+\Gamma) \frac{u_r^*}{r^*}, \qquad \tau_{zz}^* = -p^* + \mu (1+\Gamma) \frac{\partial u_z^*}{\partial z^*}, \]
-\_form#18:\[ \tau_{rz}^* = \mu \left( \frac{\partial u_r^*}{\partial z^*} + \Gamma \frac{\partial u_z^*}{\partial r^*} \right), \qquad \tau_{zr}^* = \mu \left( \frac{\partial u_z^*}{\partial r^*} + \Gamma \frac{\partial u_r^*}{\partial z^*} \right), \]
-\_form#19:\[ \tau_{r \theta}^* = \mu \left( \Gamma \frac{\partial u_{\theta}^*}{\partial r^*} - \frac{u_{\theta}^*}{r^*} \right), \qquad \tau_{\theta r}^* = \mu \left( \frac{\partial u_{\theta}^*}{\partial r^*} - \Gamma \frac{u_{\theta}^*}{r^*} \right), \]
-\_form#20:\[ \tau_{\theta z}^* = \mu \frac{\partial u_{\theta}^*}{\partial z^*}, \qquad \tau_{z \theta}^* = \mu \Gamma \frac{\partial u_{\theta}^*}{\partial z^*}. \]
-\_form#21:$ \Gamma=1 $
-\_form#22:$ \Gamma=0 $
-\_form#23:$ {\cal U},$
-\_form#24:$ {\cal L}, $
-\_form#25:${\cal T},$
-\_form#26:$ g, $
-\_form#27:\[ u_r^* = {\cal U} \, u_r, \qquad u_z^* = {\cal U} \, u_z, \qquad u_\theta^* = {\cal U} \, u_\theta, \]
-\_form#28:\[ r^* = {\cal L} \, r, \qquad z^* = {\cal L} \, z, \qquad t^* = {\cal T} \, t, \qquad G_i^* = g \, G_i, \]
-\_form#29:\[ p^* = \frac{\mu_{ref} {\cal U}}{{\cal L}} \, p, \qquad B_i^* = \frac{{\cal U}\mu_{ref}}{{\cal L}^2} \, B_i, \qquad Q^* = \frac{{\cal U}}{{\cal L}}\, Q, \]
-\_form#30:$ \mu_{ref} $
-\_form#31:$ \rho_{ref} $
-\_form#32:$ \mu $
-\_form#33:$ \rho $
-\_form#34:\[ R_{\rho} Re \left[ St \frac{\partial u_r}{\partial t} + u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r} + u_z \frac{\partial u_r}{\partial z} \right] = B_r\left(r,z,t\right) + R_\rho \frac{Re}{Fr} G_r + \frac{\partial \tau_{rr}}{\partial r} + \frac{\tau_{rr}}{r} - \frac{\tau_{\theta\theta}}{r} + \frac{\partial \tau_{rz}}{\partial z}, \]
-\_form#35:\[ R_{\rho} Re \left[ St \frac{\partial u_z}{\partial t} + u_r \frac{\partial u_z}{\partial r} + u_z \frac{\partial u_z}{\partial z} \right] = B_z\left(r,z,t\right) + R_\rho \frac{Re}{Fr} G_z + \frac{\partial \tau_{zr}}{\partial r} + \frac{\tau_{zr}}{r} + \frac{\partial \tau_{zz}}{\partial z}, \]
-\_form#36:\[ R_{\rho} Re \left[ St \frac{\partial u_\theta}{\partial t} + u_r \frac{\partial u_\theta}{\partial r} + \frac{u_r u_\theta}{r} + u_z \frac{\partial u_\theta}{\partial z} \right] = B_\theta\left(r,z,t\right) + R_\rho \frac{Re}{Fr} G_\theta + \frac{\partial \tau_{\theta r}}{\partial r} + \frac{\tau_{\theta r}}{r} + \frac{\tau_{r \theta}}{r} + \frac{\partial \tau_{\theta z}}{\partial z}, \]
-\_form#37:\[ \frac{\partial u_r}{\partial r} + \frac{u_r}{r} + \frac{\partial u_z}{\partial z} = Q. \]
-\_form#38:$ \tau_{ij} $
-\_form#39:\[ \tau_{rr} = -p + R_\mu (1+\Gamma) \frac{\partial u_r}{\partial r}, \qquad \tau_{\theta\theta} = -p + R_\mu (1+\Gamma) \frac{u_r}{r}, \qquad \tau_{zz} = -p + R_\mu (1+\Gamma) \frac{\partial u_z}{\partial z}, \]
-\_form#40:\[ \tau_{rz} = R_\mu \left( \frac{\partial u_r}{\partial z} + \Gamma \frac{\partial u_z}{\partial r} \right), \qquad \tau_{zr} = R_\mu \left( \frac{\partial u_z}{\partial r} + \Gamma \frac{\partial u_r}{\partial z} \right), \]
-\_form#41:\[ \tau_{r \theta} = R_\mu \left( \Gamma \frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r} \right), \qquad \tau_{\theta r} = R_\mu \left( \frac{\partial u_\theta}{\partial r} - \Gamma \frac{u_\theta}{r} \right), \]
-\_form#42:\[ \tau_{\theta z} = R_\mu \frac{\partial u_\theta}{\partial z} \qquad \tau_{z \theta} = R_\mu \Gamma \frac{\partial u_\theta}{\partial z}. \]
-\_form#43:\[ Re = \frac{{\cal U}{\cal L}\rho_{ref}}{\mu_{ref}}, \qquad St = \frac{{\cal L}}{{\cal U}{\cal T}}, \qquad Fr = \frac{{\cal U}^2}{g{\cal L}}, \]
-\_form#44:$ R_\rho=\rho/\rho_{ref} $
-\_form#45:$ R_\mu =\mu/\mu_{ref}$
-\_form#46:$ R_\rho = R_\mu = 1 $
-\_form#47:$ t_i = 0 $
-\_form#48:$ z $
-\_form#49:$ t_z $
-\_form#50:$ p $
-\_form#51:$ r $
-\_form#52:$ u_r $
-\_form#53:$ u_z $
-\_form#54:$ u_\theta $
-\_form#55:$ R $
-\_form#56:$ H $
-\_form#57:$ t=0 $
-\_form#58:$ \Omega $
-\_form#59:$ {\cal L} $
-\_form#60:$ {\cal U} $
-\_form#61:$ R \, \Omega $
-\_form#62:$ {\cal T} $
-\_form#63:$ {\cal L}/{\cal U} $
-\_form#64:$ H = 1.4 R $
-\_form#65:$ D $
-\_form#66:\[ D = \{ r \in [0.0,1.0], \; z \in [0.0,1.4] \}. \]
-\_form#67:\[ u_r = 0, \qquad u_z = 0, \qquad u_\theta = r \]
-\_form#68:\[ u_r = 0, \qquad u_\theta = 0 \]
-\_form#69:$ r=0 $
-\_form#70:$ \partial u_z /\partial r = 0 $
-\_form#71:$ Re = Re \, St = 5.0 $
-\_form#72:$ Re $
-\_form#73:$ Re\, St $
-\_form#74:$ \partial u /\partial t $
-\_form#75:$ t \leq 0 $
-\_form#76:$ r = 1.0 $
-\_form#77:$ z = 0.0 $
-\_form#78:$ z = 1.4 $
-\_form#79:$ r = 0 $
-\_form#80:$ t_z = 0 $
-\_form#81:$ dt $
+\_form#0=11x10:$ r^* $
+\_form#1=11x10:$ z^* $
+\_form#2=6x10:$ \theta $
+\_form#3=436x33:\[ \rho \left[ \frac{\partial u_r^*}{\partial t^*} + {u_r^*}\frac{\partial u_r^*}{\partial r^*} - \frac{{u_{\theta}^*}^2}{r^*} + {u_z^*}\frac{\partial u_r^*}{\partial z^*} \right] = B_r^*\left(r^*,z^*,t^*\right) + \rho G_r^* + \frac{\partial \tau_{rr}^*}{\partial r^*} + \frac{\tau_{rr}^*}{r^*} - \frac{\tau_{\theta\theta}^*}{r^*} + \frac{\partial\tau_{rz}^*}{\partial z^*}, \]
+\_form#4=395x31:\[ \rho \left[ \frac{\partial u_z^*}{\partial t^*} + {u_r^*}\frac{\partial u_z^*}{\partial r^*} + {u_z^*}\frac{\partial u_z^*}{\partial z^*} \right] = B_z^*\left(r^*,z^*,t^*\right) + \rho G_z^* + \frac{\partial \tau_{zr}^*}{\partial r^*} + \frac{\tau_{zr}^*}{r^*} + \frac{\partial\tau_{zz}^*}{\partial z^*}, \]
+\_form#5=444x31:\[ \rho \left[ \frac{\partial u_{\theta}^*}{\partial t^*} + {u_r^*}\frac{\partial u_{\theta}^*}{\partial r^*} + \frac{u_r^* u_{\theta}^*}{r^*} + u_z^* \frac{\partial u_{\theta}^*}{\partial z^*} \right] = B_\theta^*\left(r^*,z^*,t^*\right) + \rho G_\theta^* + \frac{\partial \tau_{\theta r}^*}{\partial r^*} + \frac{\tau_{\theta r}^*}{r^*} + \frac{\tau_{r\theta}^*}{r^*} + \frac{\partial\tau_{\theta z}^*}{\partial z^*}, \]
+\_form#6=128x28:\[ \frac{\partial u_r^*}{\partial r^*} + \frac{u_r^*}{r^*} + \frac{\partial u_z^*}{\partial z^*} = Q^*, \]
+\_form#7=14x14:$ u_r^* $
+\_form#8=14x14:$ u_z^* $
+\_form#9=13x14:$ u_{\theta}^* $
+\_form#10=13x13:$ p^* $
+\_form#11=10x10:$ t^* $
+\_form#12=26x14:$ \rho \ G_i^* $
+\_form#13=51x13:$ i = r, z, \theta $
+\_form#14=70x14:$ B_i^*(r^*,z^*,t^*) $
+\_form#15=69x14:$ Q^*(r^*,z^*,t^*) $
+\_form#16=14x15:$ \tau_{ij}^* $
+\_form#17=441x28:\[ \tau_{rr}^* = -p^* + \mu (1+\Gamma) \frac{\partial u_r^*}{\partial r^*}, \qquad \tau_{\theta\theta}^* = -p^* + \mu (1+\Gamma) \frac{u_r^*}{r^*}, \qquad \tau_{zz}^* = -p^* + \mu (1+\Gamma) \frac{\partial u_z^*}{\partial z^*}, \]
+\_form#18=299x31:\[ \tau_{rz}^* = \mu \left( \frac{\partial u_r^*}{\partial z^*} + \Gamma \frac{\partial u_z^*}{\partial r^*} \right), \qquad \tau_{zr}^* = \mu \left( \frac{\partial u_z^*}{\partial r^*} + \Gamma \frac{\partial u_r^*}{\partial z^*} \right), \]
+\_form#19=284x31:\[ \tau_{r \theta}^* = \mu \left( \Gamma \frac{\partial u_{\theta}^*}{\partial r^*} - \frac{u_{\theta}^*}{r^*} \right), \qquad \tau_{\theta r}^* = \mu \left( \frac{\partial u_{\theta}^*}{\partial r^*} - \Gamma \frac{u_{\theta}^*}{r^*} \right), \]
+\_form#20=169x28:\[ \tau_{\theta z}^* = \mu \frac{\partial u_{\theta}^*}{\partial z^*}, \qquad \tau_{z \theta}^* = \mu \Gamma \frac{\partial u_{\theta}^*}{\partial z^*}. \]
+\_form#21=31x9:$ \Gamma=1 $
+\_form#22=31x9:$ \Gamma=0 $
+\_form#23=13x13:$ {\cal U},$
+\_form#24=13x13:$ {\cal L}, $
+\_form#25=14x13:${\cal T},$
+\_form#26=10x9:$ g, $
+\_form#27=224x14:\[ u_r^* = {\cal U} \, u_r, \qquad u_z^* = {\cal U} \, u_z, \qquad u_\theta^* = {\cal U} \, u_\theta, \]
+\_form#28=283x14:\[ r^* = {\cal L} \, r, \qquad z^* = {\cal L} \, z, \qquad t^* = {\cal T} \, t, \qquad G_i^* = g \, G_i, \]
+\_form#29=278x28:\[ p^* = \frac{\mu_{ref} {\cal U}}{{\cal L}} \, p, \qquad B_i^* = \frac{{\cal U}\mu_{ref}}{{\cal L}^2} \, B_i, \qquad Q^* = \frac{{\cal U}}{{\cal L}}\, Q, \]
+\_form#30=24x10:$ \mu_{ref} $
+\_form#31=23x10:$ \rho_{ref} $
+\_form#32=9x9:$ \mu $
+\_form#33=8x9:$ \rho $
+\_form#34=476x31:\[ R_{\rho} Re \left[ St \frac{\partial u_r}{\partial t} + u_r \frac{\partial u_r}{\partial r} - \frac{u_\theta^2}{r} + u_z \frac{\partial u_r}{\partial z} \right] = B_r\left(r,z,t\right) + R_\rho \frac{Re}{Fr} G_r + \frac{\partial \tau_{rr}}{\partial r} + \frac{\tau_{rr}}{r} - \frac{\tau_{\theta\theta}}{r} + \frac{\partial \tau_{rz}}{\partial z}, \]
+\_form#35=429x31:\[ R_{\rho} Re \left[ St \frac{\partial u_z}{\partial t} + u_r \frac{\partial u_z}{\partial r} + u_z \frac{\partial u_z}{\partial z} \right] = B_z\left(r,z,t\right) + R_\rho \frac{Re}{Fr} G_z + \frac{\partial \tau_{zr}}{\partial r} + \frac{\tau_{zr}}{r} + \frac{\partial \tau_{zz}}{\partial z}, \]
+\_form#36=489x31:\[ R_{\rho} Re \left[ St \frac{\partial u_\theta}{\partial t} + u_r \frac{\partial u_\theta}{\partial r} + \frac{u_r u_\theta}{r} + u_z \frac{\partial u_\theta}{\partial z} \right] = B_\theta\left(r,z,t\right) + R_\rho \frac{Re}{Fr} G_\theta + \frac{\partial \tau_{\theta r}}{\partial r} + \frac{\tau_{\theta r}}{r} + \frac{\tau_{r \theta}}{r} + \frac{\partial \tau_{\theta z}}{\partial z}, \]
+\_form#37=121x28:\[ \frac{\partial u_r}{\partial r} + \frac{u_r}{r} + \frac{\partial u_z}{\partial z} = Q. \]
+\_form#38=14x10:$ \tau_{ij} $
+\_form#39=449x28:\[ \tau_{rr} = -p + R_\mu (1+\Gamma) \frac{\partial u_r}{\partial r}, \qquad \tau_{\theta\theta} = -p + R_\mu (1+\Gamma) \frac{u_r}{r}, \qquad \tau_{zz} = -p + R_\mu (1+\Gamma) \frac{\partial u_z}{\partial z}, \]
+\_form#40=315x31:\[ \tau_{rz} = R_\mu \left( \frac{\partial u_r}{\partial z} + \Gamma \frac{\partial u_z}{\partial r} \right), \qquad \tau_{zr} = R_\mu \left( \frac{\partial u_z}{\partial r} + \Gamma \frac{\partial u_r}{\partial z} \right), \]
+\_form#41=300x31:\[ \tau_{r \theta} = R_\mu \left( \Gamma \frac{\partial u_\theta}{\partial r} - \frac{u_\theta}{r} \right), \qquad \tau_{\theta r} = R_\mu \left( \frac{\partial u_\theta}{\partial r} - \Gamma \frac{u_\theta}{r} \right), \]
+\_form#42=180x28:\[ \tau_{\theta z} = R_\mu \frac{\partial u_\theta}{\partial z} \qquad \tau_{z \theta} = R_\mu \Gamma \frac{\partial u_\theta}{\partial z}. \]
+\_form#43=241x33:\[ Re = \frac{{\cal U}{\cal L}\rho_{ref}}{\mu_{ref}}, \qquad St = \frac{{\cal L}}{{\cal U}{\cal T}}, \qquad Fr = \frac{{\cal U}^2}{g{\cal L}}, \]
+\_form#44=66x14:$ R_\rho=\rho/\rho_{ref} $
+\_form#45=69x14:$ R_\mu =\mu/\mu_{ref}$
+\_form#46=70x14:$ R_\rho = R_\mu = 1 $
+\_form#47=33x11:$ t_i = 0 $
+\_form#48=6x6:$ z $
+\_form#49=10x11:$ t_z $
+\_form#50=8x9:$ p $
+\_form#51=8x6:$ r $
+\_form#52=14x9:$ u_r $
+\_form#53=14x9:$ u_z $
+\_form#54=13x9:$ u_\theta $
+\_form#55=10x10:$ R $
+\_form#56=11x10:$ H $
+\_form#57=29x9:$ t=0 $
+\_form#58=9x10:$ \Omega $
+\_form#59=10x10:$ {\cal L} $
+\_form#60=10x11:$ {\cal U} $
+\_form#61=20x10:$ R \, \Omega $
+\_form#62=11x11:$ {\cal T} $
+\_form#63=25x14:$ {\cal L}/{\cal U} $
+\_form#64=54x10:$ H = 1.4 R $
+\_form#65=10x10:$ D $
+\_form#66=184x14:\[ D = \{ r \in [0.0,1.0], \; z \in [0.0,1.4] \}. \]
+\_form#67=169x11:\[ u_r = 0, \qquad u_z = 0, \qquad u_\theta = r \]
+\_form#68=101x11:\[ u_r = 0, \qquad u_\theta = 0 \]
+\_form#69=30x9:$ r=0 $
+\_form#70=63x14:$ \partial u_z /\partial r = 0 $
+\_form#71=95x10:$ Re = Re \, St = 5.0 $
+\_form#72=15x10:$ Re $
+\_form#73=30x10:$ Re\, St $
+\_form#74=33x14:$ \partial u /\partial t $
+\_form#75=29x11:$ t \leq 0 $
+\_form#76=40x9:$ r = 1.0 $
+\_form#77=39x9:$ z = 0.0 $
+\_form#78=39x9:$ z = 1.4 $
+\_form#79=30x9:$ r = 0 $
+\_form#80=34x11:$ t_z = 0 $
+\_form#81=11x10:$ dt $

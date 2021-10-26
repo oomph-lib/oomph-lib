@@ -4,15 +4,15 @@ Most of the driver code is identical to its serial counterpart and we only discu
 
 \DoxyHorRuler{0}
 \hypertarget{index_main_body}{}\doxysection{The main function}\label{index_main_body}
-As described in the \href{../../general_mpi/html/index.html}{\texttt{ parallel processing document }} all parallel driver codes must initialise and shutdown oomph-\/lib\textquotesingle{}s M\+PI routines by calling {\ttfamily M\+P\+I\+\_\+\+Helpers\+::init(...)} and {\ttfamily M\+P\+I\+\_\+\+Helpers\+::finalize()}. The functions {\ttfamily M\+P\+I\+\_\+\+Helpers\+::init(...)} and {\ttfamily M\+P\+I\+\_\+\+Helpers\+::finalize()} call their M\+PI counterparts, {\ttfamily M\+P\+I\+\_\+\+Init(...)} and {\ttfamily M\+P\+I\+\_\+\+Finalize()}, which must {\bfseries{not}} be called again.
+As described in the \href{../../general_mpi/html/index.html}{\texttt{ parallel processing document }} all parallel driver codes must initialise and shutdown oomph-\/lib\textquotesingle{}s MPI routines by calling {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()}. The functions {\ttfamily MPI\+\_\+\+Helpers\+::init(...)} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()} call their MPI counterparts, {\ttfamily MPI\+\_\+\+Init(...)} and {\ttfamily MPI\+\_\+\+Finalize()}, which must {\bfseries{not}} be called again.
 
-In our demo driver codes, we surround all parallel sections of code with {\ttfamily \#ifdefs} to ensure that the code remains functional if compiled without parallel support (in which case the macro {\ttfamily O\+O\+M\+P\+H\+\_\+\+H\+A\+S\+\_\+\+M\+PI} is undefined), for example.
+In our demo driver codes, we surround all parallel sections of code with {\ttfamily \#ifdefs} to ensure that the code remains functional if compiled without parallel support (in which case the macro {\ttfamily OOMPH\+\_\+\+HAS\+\_\+\+MPI} is undefined), for example.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for RefineableDrivenCavity test problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -24,16 +24,14 @@ In our demo driver codes, we surround all parallel sections of code with {\ttfam
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-In order to distribute the problem over multiple processors a single call to the function {\ttfamily Problem\+::distribute()} is all that is required. Thus, a minimally-\/changed serial driver code would be 
+ In order to distribute the problem over multiple processors a single call to the function {\ttfamily Problem\+::distribute()} is all that is required. Thus, a minimally-\/changed serial driver code would be 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Set output directory}}
 \DoxyCodeLine{DocInfo doc\_info;}
-\DoxyCodeLine{doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Set max. number of black-\/box adaptation}}
-\DoxyCodeLine{\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{adaptive__driven__cavity_8txt_aa4165c0479da2600f28861e56babbcc7}{max\_adapt}}=3;}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned} max\_adapt=3;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Solve problem with Taylor Hood elements}}
 \DoxyCodeLine{\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -45,15 +43,16 @@ In order to distribute the problem over multiple processors a single call to the
 \DoxyCodeLine{ problem.distribute();         }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Solve the problem with automatic adaptation}}
-\DoxyCodeLine{ problem.newton\_solve(\mbox{\hyperlink{adaptive__driven__cavity_8txt_aa4165c0479da2600f28861e56babbcc7}{max\_adapt}});}
+\DoxyCodeLine{ problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output solution}}
 \DoxyCodeLine{ problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{\}}
+
 \end{DoxyCode}
 
 
-Finally, we must call {\ttfamily \mbox{\hyperlink{adaptive__driven__cavity_8txt_ab24ac0c852b9ce23e90f9bed9cab6a7c}{M\+P\+I\+\_\+finalize()}}} before the end of the main function  
+Finally, we must call {\ttfamily MPI\+\_\+finalize()} before the end of the main function  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{// Finalise MPI}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef OOMPH\_HAS\_MPI}}
@@ -65,9 +64,7 @@ Finally, we must call {\ttfamily \mbox{\hyperlink{adaptive__driven__cavity_8txt_
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_main}}
 
 \end{DoxyCodeInclude}
-
-
-The actual driver code is slightly more complicated that the version shown above because it also acts as a self-\/test. The distribution of individual elements over the processors is determined by {\ttfamily M\+E\+T\+IS} and we have found that {\ttfamily M\+E\+T\+IS} occasionally gives slightly different results on different machines. To ensure reproducible results when acting as a self-\/test, the code (like all our parallel test codes) reads a predetermined element distribution from the disk; see \href{\#distribution}{\texttt{ below }} for more details.
+ The actual driver code is slightly more complicated that the version shown above because it also acts as a self-\/test. The distribution of individual elements over the processors is determined by {\ttfamily METIS} and we have found that {\ttfamily METIS} occasionally gives slightly different results on different machines. To ensure reproducible results when acting as a self-\/test, the code (like all our parallel test codes) reads a predetermined element distribution from the disk; see \href{\#distribution}{\texttt{ below }} for more details.
 
 \DoxyHorRuler{0}
 \hypertarget{index_problem_class}{}\doxysection{Changes to the problem class}\label{index_problem_class}
@@ -75,7 +72,7 @@ A particular feature of the \href{../../../navier_stokes/adaptive_driven_cavity/
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// After adaptation: Unpin pressure and pin redundant pressure dofs.}}
+\DoxyCodeLine{\textcolor{comment}{ /// After adaptation: Unpin pressure and pin redundant pressure dofs.}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Unpin all pressure dofs}}
@@ -97,7 +94,7 @@ A particular feature of the \href{../../../navier_stokes/adaptive_driven_cavity/
 \DoxyCodeLine{     \textcolor{keywordflow}{if} (mesh\_pt()-\/>finite\_element\_pt(e)-\/>node\_pt(0)-\/>x(0)==0.0 \&\& }
 \DoxyCodeLine{         mesh\_pt()-\/>finite\_element\_pt(e)-\/>node\_pt(0)-\/>x(1)==0.0) \textcolor{comment}{// 2d problem}}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       oomph\_info << \textcolor{stringliteral}{"I'm fixing the pressure "} << std::endl;}
+\DoxyCodeLine{       oomph\_info << \textcolor{stringliteral}{"{}I'm fixing the pressure "{}} << std::endl;}
 \DoxyCodeLine{       \textcolor{comment}{// Fix the pressure in element e at pdof=0 to 0.0}}
 \DoxyCodeLine{       \textcolor{keywordtype}{unsigned} pdof=0;}
 \DoxyCodeLine{       fix\_pressure(e,pdof,0.0);}
@@ -107,23 +104,21 @@ A particular feature of the \href{../../../navier_stokes/adaptive_driven_cavity/
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_of\_actions\_after\_adapt}}
 
 \end{DoxyCodeInclude}
-
-
-This change ensures that every processor that holds the element containing the node at position (0,0) (i.\+e. the first element) fixes the pressure for that element. The floating-\/point comparison does not cause any problems in this case because the {\ttfamily Node\textquotesingle{}s} position is explicitly set to \char`\"{}exactly\char`\"{} (0.\+0,0.\+0) in the Mesh constructor and never changes.
+ This change ensures that every processor that holds the element containing the node at position (0,0) (i.\+e. the first element) fixes the pressure for that element. The floating-\/point comparison does not cause any problems in this case because the {\ttfamily Node\textquotesingle{}s} position is explicitly set to \char`\"{}exactly\char`\"{} (0.\+0,0.\+0) in the Mesh constructor and never changes.
 
 It is not necessary to change the corresponding statements in the problem constructor because the problem distribution occurs after the problem has been constructed. In fact, the problem constructor is unchanged from the serial version.
 
 \DoxyHorRuler{0}
 \hypertarget{index_doc_solution}{}\doxysection{Changes to doc\+\_\+solution}\label{index_doc_solution}
-The {\ttfamily \mbox{\hyperlink{adaptive__driven__cavity_8txt_a72e73fc4b8becce181c42c7dff8c7aad}{doc\+\_\+solution()}}} routine requires a slight modification to ensure that the output from different processors can be distinguished; this is achieved by including the current processor number in the filename of the solution\+:
+The {\ttfamily doc\+\_\+solution()} routine requires a slight modification to ensure that the output from different processors can be distinguished; this is achieved by including the current processor number in the filename of the solution\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{adaptive__driven__cavity_8txt_a72e73fc4b8becce181c42c7dff8c7aad}{RefineableDrivenCavityProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} RefineableDrivenCavityProblem<ELEMENT>::doc\_solution(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{ ofstream some\_file;}
@@ -136,7 +131,7 @@ The {\ttfamily \mbox{\hyperlink{adaptive__driven__cavity_8txt_a72e73fc4b8becce18
 \DoxyCodeLine{ \textcolor{keywordtype}{int} my\_rank=this-\/>communicator\_pt()-\/>my\_rank();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i\_on\_proc\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i\_on\_proc\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number(),my\_rank);}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -145,9 +140,7 @@ The {\ttfamily \mbox{\hyperlink{adaptive__driven__cavity_8txt_a72e73fc4b8becce18
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 
 
 The figure below shows the mesh after the final solution of this problem, distributed across two processors, with the two colours indicating which processor the elements belong to.
@@ -161,8 +154,8 @@ The figure below shows the mesh after the final solution of this problem, distri
 
 \DoxyHorRuler{0}
 \hypertarget{index_distribution}{}\doxysection{Customising the distribution}\label{index_distribution}
-The actual driver code demonstrates two of the different options available for the {\ttfamily Problem\+::distribute()} function, selected by the presence or absence of command line arguments.\hypertarget{index_no_disk}{}\doxysubsection{Option I\+: Distributing a problem using M\+E\+T\+I\+S and documenting its distribution}\label{index_no_disk}
-If no command line arguments are specified we determine the problem distribution using {\ttfamily M\+E\+T\+IS}, and write the distribution to a file.
+The actual driver code demonstrates two of the different options available for the {\ttfamily Problem\+::distribute()} function, selected by the presence or absence of command line arguments.\hypertarget{index_no_disk}{}\doxysubsection{Option I\+: Distributing a problem using METIS and documenting its distribution}\label{index_no_disk}
+If no command line arguments are specified we determine the problem distribution using {\ttfamily METIS}, and write the distribution to a file.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -171,9 +164,7 @@ If no command line arguments are specified we determine the problem distribution
 \DoxyCodeLine{   \{}
 
 \end{DoxyCodeInclude}
-
-
-The distribution is represented by a vector of unsigneds whose values indicate the processor on which the corresponding element is stored.
+ The distribution is represented by a vector of unsigneds whose values indicate the processor on which the corresponding element is stored.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -185,9 +176,7 @@ The distribution is represented by a vector of unsigneds whose values indicate t
 \DoxyCodeLine{    Vector<unsigned> out\_element\_partition(n\_element);}
 
 \end{DoxyCodeInclude}
-
-
-We distribute the problem with a call to {\ttfamily Problem\+::distribute(...)}, using the boolean flag to request that the relevant statistics are displayed on screen. The distribution chosen for the elements is returned in the vector created earlier.
+ We distribute the problem with a call to {\ttfamily Problem\+::distribute(...)}, using the boolean flag to request that the relevant statistics are displayed on screen. The distribution chosen for the elements is returned in the vector created earlier.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -197,9 +186,7 @@ We distribute the problem with a call to {\ttfamily Problem\+::distribute(...)},
 \DoxyCodeLine{    out\_element\_partition=problem.distribute(report\_stats);}
 
 \end{DoxyCodeInclude}
-
-
-We document the distribution by writing the distribution vector to a file.
+ We document the distribution by writing the distribution vector to a file.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -207,7 +194,7 @@ We document the distribution by writing the distribution vector to a file.
 \DoxyCodeLine{    \textcolor{comment}{// Write partition to disk}}
 \DoxyCodeLine{    std::ofstream output\_file;}
 \DoxyCodeLine{    \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{    sprintf(filename,\textcolor{stringliteral}{"out\_adaptive\_cavity\_1\_partition.dat"});}
+\DoxyCodeLine{    sprintf(filename,\textcolor{stringliteral}{"{}out\_adaptive\_cavity\_1\_partition.dat"{}});}
 \DoxyCodeLine{    output\_file.open(filename);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
 \DoxyCodeLine{     \{}
@@ -215,9 +202,7 @@ We document the distribution by writing the distribution vector to a file.
 \DoxyCodeLine{     \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we perform an optional self-\/test of the halo-\/haloed lookup schemes.
+ Finally, we perform an optional self-\/test of the halo-\/haloed lookup schemes.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -228,11 +213,9 @@ Finally, we perform an optional self-\/test of the halo-\/haloed lookup schemes.
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
-\hypertarget{index_from_disk}{}\doxysubsection{Option I\+I\+: Using a pre-\/determined distribution}\label{index_from_disk}
-If command line arguments are specified (typically when the code is run in validation mode) we read the distribution from disk, using a file that was written using the procedure shown above. (This is useful because in our experience {\ttfamily M\+E\+T\+IS} may produce slightly different distribution on different machines. This would cause the self-\/tests to fail even though the computed results would be correct).
+ \DoxyHorRuler{0}
+\hypertarget{index_from_disk}{}\doxysubsection{Option II\+: Using a pre-\/determined distribution}\label{index_from_disk}
+If command line arguments are specified (typically when the code is run in validation mode) we read the distribution from disk, using a file that was written using the procedure shown above. (This is useful because in our experience {\ttfamily METIS} may produce slightly different distribution on different machines. This would cause the self-\/tests to fail even though the computed results would be correct).
 
 We start by creating a {\ttfamily Doc\+Info} object that specifies the directory in which the problem distribution will be documented and by reading in the vector that represents the distribution
 
@@ -247,7 +230,7 @@ We start by creating a {\ttfamily Doc\+Info} object that specifies the directory
 \DoxyCodeLine{    \textcolor{comment}{// DocInfo object specifies directory in which we document}}
 \DoxyCodeLine{    \textcolor{comment}{// the distribution}}
 \DoxyCodeLine{    DocInfo mesh\_doc\_info;}
-\DoxyCodeLine{    mesh\_doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_TH\_MESH"});}
+\DoxyCodeLine{    mesh\_doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH\_MESH"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{comment}{// Create storage for pre-\/determined partitioning}}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_element=problem.mesh\_pt()-\/>nelement();}
@@ -256,7 +239,7 @@ We start by creating a {\ttfamily Doc\+Info} object that specifies the directory
 \DoxyCodeLine{    \textcolor{comment}{// Read in partitioning from disk}}
 \DoxyCodeLine{    std::ifstream input\_file;}
 \DoxyCodeLine{    \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{    sprintf(filename,\textcolor{stringliteral}{"adaptive\_cavity\_1\_partition.dat"});}
+\DoxyCodeLine{    sprintf(filename,\textcolor{stringliteral}{"{}adaptive\_cavity\_1\_partition.dat"{}});}
 \DoxyCodeLine{    input\_file.open(filename);}
 \DoxyCodeLine{    std::string input\_string;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
@@ -266,9 +249,7 @@ We start by creating a {\ttfamily Doc\+Info} object that specifies the directory
 \DoxyCodeLine{     \}}
 
 \end{DoxyCodeInclude}
-
-
-We pass the distribution vector to {\ttfamily Problem\+::distribute(...)} and thus bypass the partitioning by {\ttfamily M\+E\+T\+IS}.
+ We pass the distribution vector to {\ttfamily Problem\+::distribute(...)} and thus bypass the partitioning by {\ttfamily METIS}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -280,15 +261,13 @@ We pass the distribution vector to {\ttfamily Problem\+::distribute(...)} and th
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-We note that it is possible to document a mesh\textquotesingle{}s distribution at any point, using the {\ttfamily Mesh\+::doc\+\_\+mesh\+\_\+distribution(...)} function, as indicated here
+ We note that it is possible to document a mesh\textquotesingle{}s distribution at any point, using the {\ttfamily Mesh\+::doc\+\_\+mesh\+\_\+distribution(...)} function, as indicated here
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{comment}{// solve with adaptation}}
-\DoxyCodeLine{    problem.newton\_solve(\mbox{\hyperlink{adaptive__driven__cavity_8txt_aa4165c0479da2600f28861e56babbcc7}{max\_adapt}});}
+\DoxyCodeLine{    problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{comment}{//Output solution}}
 \DoxyCodeLine{    problem.doc\_solution(doc\_info);}
@@ -303,20 +282,18 @@ We note that it is possible to document a mesh\textquotesingle{}s distribution a
 \DoxyCodeLine{ \} \textcolor{comment}{// end of Taylor Hood elements}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_sources}{}\doxysection{Source files for this tutorial}\label{index_sources}
 The driver code from which this example is taken also solves the same distributed problem using Crouzeix-\/\+Raviart elements. The fully modified parallel driver code can be found at
 
 \begin{center} \href{../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc}{\texttt{ demo\+\_\+drivers/mpi/distribution/adaptive\+\_\+driven\+\_\+cavity/adaptive\+\_\+driven\+\_\+cavity.\+cc }} \end{center} 
 
-For further examples of using the {\ttfamily \mbox{\hyperlink{adaptive__driven__cavity_8txt_a9c1ab6e1e8c4c9479be1d95df66f792b}{distribute()}}} function for both two-\/dimensional and three-\/dimensional single-\/domain problems, see the directory
+For further examples of using the {\ttfamily distribute()} function for both two-\/dimensional and three-\/dimensional single-\/domain problems, see the directory
 
 \begin{center} \href{../../../../demo_drivers/mpi/distribution/}{\texttt{ demo\+\_\+drivers/mpi/distribution/ }} \end{center} 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

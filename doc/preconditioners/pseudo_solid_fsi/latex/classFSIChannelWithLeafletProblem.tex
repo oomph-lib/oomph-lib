@@ -1,6 +1,11 @@
-\hypertarget{classFSIChannelWithLeafletProblem}{}\doxysection{F\+S\+I\+Channel\+With\+Leaflet\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classFSIChannelWithLeafletProblem}{}\doxysection{FSIChannel\+With\+Leaflet\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classFSIChannelWithLeafletProblem}\index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
-Inheritance diagram for F\+S\+I\+Channel\+With\+Leaflet\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+
+
+///////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////  
+
+
+Inheritance diagram for FSIChannel\+With\+Leaflet\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classFSIChannelWithLeafletProblem}
@@ -9,9 +14,9 @@ Inheritance diagram for F\+S\+I\+Channel\+With\+Leaflet\+Problem$<$ E\+L\+E\+M\+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classFSIChannelWithLeafletProblem_a886599acf388d3ad5a2ec8c418c77280}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}} (const unsigned \&mesh\+\_\+multiplier)
+\mbox{\hyperlink{classFSIChannelWithLeafletProblem_a886599acf388d3ad5a2ec8c418c77280}{FSIChannel\+With\+Leaflet\+Problem}} (const unsigned \&mesh\+\_\+multiplier)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass multiplier for uniform mesh refinement. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classFSIChannelWithLeafletProblem_a5df1d8f7229314a92ffb48ec61f56fe0}{$\sim$\+F\+S\+I\+Channel\+With\+Leaflet\+Problem}} ()
+\mbox{\hyperlink{classFSIChannelWithLeafletProblem_a5df1d8f7229314a92ffb48ec61f56fe0}{$\sim$\+FSIChannel\+With\+Leaflet\+Problem}} ()
 \begin{DoxyCompactList}\small\item\em Destructor empty. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSIChannelWithLeafletProblem_abff6e46a940263c9255a61f649bb4239}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
 \begin{DoxyCompactList}\small\item\em Actions after solve (empty) \end{DoxyCompactList}\item 
@@ -28,22 +33,22 @@ void \mbox{\hyperlink{classFSIChannelWithLeafletProblem_adca46cd909199b5721b6e17
 void \mbox{\hyperlink{classFSIChannelWithLeafletProblem_aa21f42ff019a517d94dbefdfc270c562}{create\+\_\+lagrange\+\_\+multiplier\+\_\+elements}} ()
 \begin{DoxyCompactList}\small\item\em Create elements that enforce prescribed boundary motion by Lagrange multipliers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSIChannelWithLeafletProblem_aeab2d2d99741e64d83792003db758c38}{delete\+\_\+lagrange\+\_\+multiplier\+\_\+elements}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Delete elements that enforce prescribed boundary motion by Lagrange multipliers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a27548bcf25ba14dca9f80ffcbc5792b0}{doc\+\_\+parameters}} ()
 \begin{DoxyCompactList}\small\item\em Doc parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-Node $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a00605fef274ac93454d59b525ba4d923}{tip\+\_\+node\+\_\+pt}} ()
+Node $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a6508082335b30ba8cca08342b6d406a4}{tip\+\_\+node\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Helper fct; returns the node at the tip of the wall mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Pseudo\+Elastic\+Channel\+With\+Leaflet\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a336bdec3a8b90ac09feb89e5bb3539e8}{Bulk\+\_\+mesh\+\_\+pt}}
+Pseudo\+Elastic\+Channel\+With\+Leaflet\+Mesh$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a336bdec3a8b90ac09feb89e5bb3539e8}{Bulk\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the fluid mesh. \end{DoxyCompactList}\item 
-One\+D\+Lagrangian\+Mesh$<$ F\+S\+I\+Hermite\+Beam\+Element $>$ $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a943437726f0a54fa8f7fc9ffb12bc4cd}{Wall\+\_\+mesh\+\_\+pt}}
+One\+DLagrangian\+Mesh$<$ FSIHermite\+Beam\+Element $>$ $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_a943437726f0a54fa8f7fc9ffb12bc4cd}{Wall\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the \char`\"{}wall\char`\"{} mesh. \end{DoxyCompactList}\item 
-B\+DF$<$ 2 $>$ $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_ac58840d4c2fefae931eb55358099c28d}{Bulk\+\_\+time\+\_\+stepper\+\_\+pt}}
+BDF$<$ 2 $>$ $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_ac58840d4c2fefae931eb55358099c28d}{Bulk\+\_\+time\+\_\+stepper\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Bulk timestepper. \end{DoxyCompactList}\item 
 Newmark$<$ 2 $>$ $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem_ace55d5753b8a32fcac448b8a45690afb}{Wall\+\_\+time\+\_\+stepper\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Wall time stepper pt. \end{DoxyCompactList}\item 
@@ -58,12 +63,13 @@ Mesh\+As\+Geom\+Object $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class F\+S\+I\+Channel\+With\+Leaflet\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$}
+///////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////// 
 
-F\+SI leaflet in channel. Mesh update with pseudo-\/elasticity and solved with pseudo-\/elastic fsi preconditioner. 
+FSI leaflet in channel. Mesh update with pseudo-\/elasticity and solved with pseudo-\/elastic fsi preconditioner. 
 
-Definition at line 347 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00347}{347}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 
 
@@ -72,8 +78,8 @@ Definition at line 347 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+prec
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!FSIChannelWithLeafletProblem@{FSIChannelWithLeafletProblem}}
 \index{FSIChannelWithLeafletProblem@{FSIChannelWithLeafletProblem}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{FSIChannelWithLeafletProblem()}{FSIChannelWithLeafletProblem()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{mesh\+\_\+multiplier }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{mesh\+\_\+multiplier }\end{DoxyParamCaption})}
 
 
 
@@ -81,18 +87,18 @@ Constructor\+: Pass multiplier for uniform mesh refinement.
 
 Constructor. 
 
-Definition at line 490 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00489}{489}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Fluid\+\_\+height, Global\+\_\+\+Parameters\+::\+Fluid\+\_\+length\+\_\+left, Global\+\_\+\+Parameters\+::\+Fluid\+\_\+length\+\_\+right, Global\+\_\+\+Parameters\+::H, Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq, Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq\+\_\+beam, Global\+\_\+\+Parameters\+::\+Leaflet\+\_\+height, Global\+\_\+\+Parameters\+::\+Leaflet\+\_\+x0, Global\+\_\+\+Parameters\+::\+Mesh\+\_\+nleft, Global\+\_\+\+Parameters\+::\+Mesh\+\_\+nright, Global\+\_\+\+Parameters\+::\+Mesh\+\_\+ny1, Global\+\_\+\+Parameters\+::\+Mesh\+\_\+ny2, Global\+\_\+\+Parameters\+::\+Nu, Global\+\_\+\+Parameters\+::Q, Global\+\_\+\+Parameters\+::\+Re, and Global\+\_\+\+Parameters\+::\+Re\+St.
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00207}{Global\+\_\+\+Parameters\+::\+Fluid\+\_\+height}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00201}{Global\+\_\+\+Parameters\+::\+Fluid\+\_\+length\+\_\+left}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00204}{Global\+\_\+\+Parameters\+::\+Fluid\+\_\+length\+\_\+right}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00228}{Global\+\_\+\+Parameters\+::H}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00250}{Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00253}{Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq\+\_\+beam}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00198}{Global\+\_\+\+Parameters\+::\+Leaflet\+\_\+height}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00195}{Global\+\_\+\+Parameters\+::\+Leaflet\+\_\+x0}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00210}{Global\+\_\+\+Parameters\+::\+Mesh\+\_\+nleft}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00213}{Global\+\_\+\+Parameters\+::\+Mesh\+\_\+nright}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00216}{Global\+\_\+\+Parameters\+::\+Mesh\+\_\+ny1}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00219}{Global\+\_\+\+Parameters\+::\+Mesh\+\_\+ny2}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00256}{Global\+\_\+\+Parameters\+::\+Nu}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00232}{Global\+\_\+\+Parameters\+::Q}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00222}{Global\+\_\+\+Parameters\+::\+Re}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00225}{Global\+\_\+\+Parameters\+::\+Re\+St}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a5df1d8f7229314a92ffb48ec61f56fe0}\label{classFSIChannelWithLeafletProblem_a5df1d8f7229314a92ffb48ec61f56fe0}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!````~FSIChannelWithLeafletProblem@{$\sim$FSIChannelWithLeafletProblem}}
 \index{````~FSIChannelWithLeafletProblem@{$\sim$FSIChannelWithLeafletProblem}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$FSIChannelWithLeafletProblem()}{~FSIChannelWithLeafletProblem()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -100,7 +106,11 @@ Destructor empty.
 
 
 
-Definition at line 356 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{356}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00459}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00465}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00474}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00471}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00480}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Undeformed\+\_\+wall\+\_\+pt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00477}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Wall\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00462}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Wall\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00468}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Wall\+\_\+time\+\_\+stepper\+\_\+pt}}.
 
 
 
@@ -109,8 +119,8 @@ Definition at line 356 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+prec
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -118,14 +128,14 @@ Actions after solve (empty)
 
 
 
-Definition at line 369 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00369}{369}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_ac73220fa534cf2409bb0ebcf2fb5e1d5}\label{classFSIChannelWithLeafletProblem_ac73220fa534cf2409bb0ebcf2fb5e1d5}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}}
 \index{actions\_before\_implicit\_timestep@{actions\_before\_implicit\_timestep}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_implicit\_timestep()}{actions\_before\_implicit\_timestep()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -133,18 +143,18 @@ Actions before implicit timestep\+: Update the inflow velocity.
 
 
 
-Definition at line 392 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00392}{392}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Fluid\+\_\+height, and Global\+\_\+\+Parameters\+::flux().
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00459}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00207}{Global\+\_\+\+Parameters\+::\+Fluid\+\_\+height}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00244}{Global\+\_\+\+Parameters\+::flux()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_aff02228eddae18ef3d57306ba1e61495}\label{classFSIChannelWithLeafletProblem_aff02228eddae18ef3d57306ba1e61495}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -152,14 +162,18 @@ Update no slip before Newton convergence check.
 
 
 
-Definition at line 380 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00380}{380}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00459}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a8a32ef77f32b3283b4b509669deb0a11}\label{classFSIChannelWithLeafletProblem_a8a32ef77f32b3283b4b509669deb0a11}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -167,42 +181,48 @@ Actions before Newton solve\+: Reset the pseudo-\/elastic undeformed configurati
 
 
 
-Definition at line 373 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00373}{373}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00459}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_aa21f42ff019a517d94dbefdfc270c562}\label{classFSIChannelWithLeafletProblem_aa21f42ff019a517d94dbefdfc270c562}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!create\_lagrange\_multiplier\_elements@{create\_lagrange\_multiplier\_elements}}
 \index{create\_lagrange\_multiplier\_elements@{create\_lagrange\_multiplier\_elements}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{create\_lagrange\_multiplier\_elements()}{create\_lagrange\_multiplier\_elements()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::create\+\_\+lagrange\+\_\+multiplier\+\_\+elements}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::create\+\_\+lagrange\+\_\+multiplier\+\_\+elements}
 
 
 
 Create elements that enforce prescribed boundary motion by Lagrange multipliers. 
 
-Create elements that impose the prescribed boundary displacement by Lagrange multipliers 
+Create elements that impose the prescribed boundary displacement by Lagrange multipliers. 
 
-Definition at line 868 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00867}{867}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_aeab2d2d99741e64d83792003db758c38}\label{classFSIChannelWithLeafletProblem_aeab2d2d99741e64d83792003db758c38}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!delete\_lagrange\_multiplier\_elements@{delete\_lagrange\_multiplier\_elements}}
 \index{delete\_lagrange\_multiplier\_elements@{delete\_lagrange\_multiplier\_elements}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{delete\_lagrange\_multiplier\_elements()}{delete\_lagrange\_multiplier\_elements()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::delete\+\_\+lagrange\+\_\+multiplier\+\_\+elements}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::delete\+\_\+lagrange\+\_\+multiplier\+\_\+elements}
 
-Delete elements that enforce prescribed boundary motion by Lagrange multipliers
 
-Delete elements that impose the prescribed boundary displacement and wipe the associated mesh 
 
-Definition at line 943 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Delete elements that enforce prescribed boundary motion by Lagrange multipliers. 
+
+Delete elements that impose the prescribed boundary displacement and wipe the associated mesh. 
+
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00942}{942}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a27548bcf25ba14dca9f80ffcbc5792b0}\label{classFSIChannelWithLeafletProblem_a27548bcf25ba14dca9f80ffcbc5792b0}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!doc\_parameters@{doc\_parameters}}
 \index{doc\_parameters@{doc\_parameters}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_parameters()}{doc\_parameters()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -210,18 +230,18 @@ Doc parameters.
 
 
 
-Definition at line 428 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00428}{428}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq\+\_\+beam, Global\+\_\+\+Parameters\+::Q, Global\+\_\+\+Parameters\+::\+Re, and Global\+\_\+\+Parameters\+::T.
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00253}{Global\+\_\+\+Parameters\+::\+Lambda\+\_\+sq\+\_\+beam}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00232}{Global\+\_\+\+Parameters\+::Q}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00222}{Global\+\_\+\+Parameters\+::\+Re}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00235}{Global\+\_\+\+Parameters\+::T}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00451}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::tip\+\_\+node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_adca46cd909199b5721b6e17c15caae02}\label{classFSIChannelWithLeafletProblem_adca46cd909199b5721b6e17c15caae02}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
 
 
 
@@ -229,14 +249,14 @@ Doc the solution.
 
 
 
-Definition at line 966 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00966}{966}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a8ca939c0edc4194e4e5cb7d1404f27de}\label{classFSIChannelWithLeafletProblem_a8ca939c0edc4194e4e5cb7d1404f27de}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!set\_iterative\_solver@{set\_iterative\_solver}}
 \index{set\_iterative\_solver@{set\_iterative\_solver}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{set\_iterative\_solver()}{set\_iterative\_solver()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+iterative\+\_\+solver}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::set\+\_\+iterative\+\_\+solver}
 
 
 
@@ -244,18 +264,18 @@ Set iterative solver.
 
 
 
-Definition at line 733 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00733}{733}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
 
 
 
-References G\+M\+R\+ES, and L\+S\+C\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner().
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00165}{LSC\+\_\+\+Preconditioner\+\_\+\+Helper\+::set\+\_\+hypre\+\_\+preconditioner()}}.
 
-\mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a00605fef274ac93454d59b525ba4d923}\label{classFSIChannelWithLeafletProblem_a00605fef274ac93454d59b525ba4d923}} 
+\mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a6508082335b30ba8cca08342b6d406a4}\label{classFSIChannelWithLeafletProblem_a6508082335b30ba8cca08342b6d406a4}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!tip\_node\_pt@{tip\_node\_pt}}
 \index{tip\_node\_pt@{tip\_node\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{tip\_node\_pt()}{tip\_node\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Node$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::tip\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Node $\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::tip\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -263,7 +283,15 @@ Helper fct; returns the node at the tip of the wall mesh.
 
 
 
-Definition at line 451 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00451}{451}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00462}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::\+Wall\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00428}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::doc\+\_\+parameters()}}.
 
 
 
@@ -272,8 +300,8 @@ Definition at line 451 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+prec
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!Bulk\_mesh\_pt@{Bulk\_mesh\_pt}}
 \index{Bulk\_mesh\_pt@{Bulk\_mesh\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Bulk\_mesh\_pt}{Bulk\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Pseudo\+Elastic\+Channel\+With\+Leaflet\+Mesh$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Pseudo\+Elastic\+Channel\+With\+Leaflet\+Mesh$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::Bulk\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -281,14 +309,18 @@ Pointer to the fluid mesh.
 
 
 
-Definition at line 459 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00459}{459}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00392}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00380}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00373}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::$\sim$\+FSIChannel\+With\+Leaflet\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_ac58840d4c2fefae931eb55358099c28d}\label{classFSIChannelWithLeafletProblem_ac58840d4c2fefae931eb55358099c28d}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!Bulk\_time\_stepper\_pt@{Bulk\_time\_stepper\_pt}}
 \index{Bulk\_time\_stepper\_pt@{Bulk\_time\_stepper\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Bulk\_time\_stepper\_pt}{Bulk\_time\_stepper\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-B\+DF$<$2$>$$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Bulk\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+BDF$<$2$>$$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::Bulk\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -296,14 +328,18 @@ Bulk timestepper.
 
 
 
-Definition at line 465 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00465}{465}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::$\sim$\+FSIChannel\+With\+Leaflet\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a745553864433ae6c0f1971776249193a}\label{classFSIChannelWithLeafletProblem_a745553864433ae6c0f1971776249193a}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
 \index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Constitutive\+Law$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Constitutive\+Law$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -311,14 +347,18 @@ Constitutive law used to determine the mesh deformation.
 
 
 
-Definition at line 474 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00474}{474}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::$\sim$\+FSIChannel\+With\+Leaflet\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_aab28704c88d14a2f0975ffcdfbe913e4}\label{classFSIChannelWithLeafletProblem_aab28704c88d14a2f0975ffcdfbe913e4}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!Lagrange\_multiplier\_mesh\_pt@{Lagrange\_multiplier\_mesh\_pt}}
 \index{Lagrange\_multiplier\_mesh\_pt@{Lagrange\_multiplier\_mesh\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Lagrange\_multiplier\_mesh\_pt}{Lagrange\_multiplier\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Solid\+Mesh$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Solid\+Mesh$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::Lagrange\+\_\+multiplier\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -326,14 +366,18 @@ Pointers to mesh of Lagrange multiplier elements.
 
 
 
-Definition at line 471 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00471}{471}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::$\sim$\+FSIChannel\+With\+Leaflet\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_adb1d2ebc1379fac8b99cc61379d2b211}\label{classFSIChannelWithLeafletProblem_adb1d2ebc1379fac8b99cc61379d2b211}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!Undeformed\_wall\_pt@{Undeformed\_wall\_pt}}
 \index{Undeformed\_wall\_pt@{Undeformed\_wall\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Undeformed\_wall\_pt}{Undeformed\_wall\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classUndeformedLeaflet}{Undeformed\+Leaflet}}$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Undeformed\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classUndeformedLeaflet}{Undeformed\+Leaflet}}$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::Undeformed\+\_\+wall\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -341,14 +385,18 @@ Geom object for the leaflet.
 
 
 
-Definition at line 480 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00480}{480}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::$\sim$\+FSIChannel\+With\+Leaflet\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a2c6f28af7e78288f5b6d60f69036c8ee}\label{classFSIChannelWithLeafletProblem_a2c6f28af7e78288f5b6d60f69036c8ee}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!Wall\_geom\_object\_pt@{Wall\_geom\_object\_pt}}
 \index{Wall\_geom\_object\_pt@{Wall\_geom\_object\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Wall\_geom\_object\_pt}{Wall\_geom\_object\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Mesh\+As\+Geom\+Object$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Mesh\+As\+Geom\+Object$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::Wall\+\_\+geom\+\_\+object\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -356,14 +404,18 @@ Geometric object for the leaflet (to apply lagrange mult)
 
 
 
-Definition at line 477 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00477}{477}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::$\sim$\+FSIChannel\+With\+Leaflet\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_a943437726f0a54fa8f7fc9ffb12bc4cd}\label{classFSIChannelWithLeafletProblem_a943437726f0a54fa8f7fc9ffb12bc4cd}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!Wall\_mesh\_pt@{Wall\_mesh\_pt}}
 \index{Wall\_mesh\_pt@{Wall\_mesh\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Wall\_mesh\_pt}{Wall\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-One\+D\+Lagrangian\+Mesh$<$F\+S\+I\+Hermite\+Beam\+Element$>$$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+One\+DLagrangian\+Mesh$<$FSIHermite\+Beam\+Element$>$$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -371,14 +423,18 @@ Pointer to the \char`\"{}wall\char`\"{} mesh.
 
 
 
-Definition at line 462 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00462}{462}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00451}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::tip\+\_\+node\+\_\+pt()}}, and \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::$\sim$\+FSIChannel\+With\+Leaflet\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIChannelWithLeafletProblem_ace55d5753b8a32fcac448b8a45690afb}\label{classFSIChannelWithLeafletProblem_ace55d5753b8a32fcac448b8a45690afb}} 
 \index{FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}!Wall\_time\_stepper\_pt@{Wall\_time\_stepper\_pt}}
 \index{Wall\_time\_stepper\_pt@{Wall\_time\_stepper\_pt}!FSIChannelWithLeafletProblem$<$ ELEMENT $>$@{FSIChannelWithLeafletProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Wall\_time\_stepper\_pt}{Wall\_time\_stepper\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Newmark$<$2$>$$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{F\+S\+I\+Channel\+With\+Leaflet\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Wall\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Newmark$<$2$>$$\ast$ \mbox{\hyperlink{classFSIChannelWithLeafletProblem}{FSIChannel\+With\+Leaflet\+Problem}}$<$ ELEMENT $>$\+::Wall\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -386,7 +442,11 @@ Wall time stepper pt.
 
 
 
-Definition at line 468 of file fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc.
+Definition at line \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00468}{468}} of file \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source}{fsi\+\_\+channel\+\_\+with\+\_\+leaflet\+\_\+precond.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__channel__with__leaflet__precond_8cc_source_l00356}{FSIChannel\+With\+Leaflet\+Problem$<$ ELEMENT $>$\+::$\sim$\+FSIChannel\+With\+Leaflet\+Problem()}}.
 
 
 

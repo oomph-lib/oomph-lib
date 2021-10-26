@@ -1,0 +1,800 @@
+\hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source}{}\doxysection{multi\+\_\+domain\+\_\+ref\+\_\+b\+\_\+convect.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{multi__domain__ref__b__convect_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Refineable Boussinesq Convection using a multi-\/domain approach: Combining (Refineable) Navier-\/-\/Stokes and Advection-\/Diffusion domains}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this tutorial we present an alternative approach to the solution}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{of multi-\/physics problems, using what we call a "{}multi-\/domain"{}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{approach. We illustrate the methodology }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{by re-\/considering the <a href="{}../../b\_convection/html/index.html"{}> }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{previously-\/described, </a>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{two-\/dimensional Boussinesq convection problem in}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{which an incompressible, Newtonian fluid is heated from below.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{The tutorial is quite long but comprises four relatively self-\/contained parts. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{Feel free to skip the theory if you want to jump straight in...}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{-\/ <a href="{}\#setting\_up"{}><b>Part I</b></a> provides an overview of \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{  overall framework for setting up multi-\/domain interactions.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{-\/ <a href="{}\#implement\_boussinesq"{}><b>Part II</b></a> illustrates the general}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{  procedure for the specific example of a Boussinesq convection problem. We }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{  demonstrate how to implement a two-\/way, multi-\/domain interaction between }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{  the Navier-\/Stokes equations in which the body force is affected by thermal}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{  buoyancy effects, and the advection-\/diffusion equations for the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{  temperature, in which the "{}wind"{} is given by fluid velocity.  }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{-\/ <a href="{}\#multi\_domain\_boussinesq"{}><b>Part III</b></a> discusses the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{  driver code to solve the Boussinesq problem, using the elements developed }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{  in Part II.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{-\/ <a href="{}\#optimise"{}><b>Part IV</b></a> discusses how to optimise}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{  multi-\/domain interactions. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{\(\backslash\)section setting\_up Part I: The overall framework for handling multi-\/domain interactions}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{When two or more physical processes interact within the same spatial}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{domain there are three different approaches to setting up the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{interaction within \(\backslash\)c oomph-\/lib. One approach is to write a completely}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{new element that discretises all the PDEs involved in the problem. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{The second approach, described in the tutorials discussing the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{<a  href="{}../../b\_convection/html/index.html"{}> the non-\/refineable  </a> and }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{<a href="{}../../refine\_b\_convect/html/index.html"{}>refineable </a> }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{solution of the Boussinesq convection problem, is to create a }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{combined multi-\/physics element using inheritance from two, or more, existing}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{elements. In both these cases, the physical processes and their}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{associated fields interact within a single element and we refer}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{to this methodology as a \(\backslash\)b multi-\/field approach.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{In this tutorial we describe a third approach to multi-\/physics}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{problems, in which we solve the problem using two different types of elements }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{on two different meshes (domains), each occupying the same }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{physical space.  Rather than interacting locally }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{within elements, the different physical processes interact }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{directly between the two domains, so that, in }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{the Boussinesq convection problem considered here, each }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{advection-\/diffusion element obtains the "{}wind"{} from the (separate) }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{Navier-\/Stokes element that occupies the same position, while }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{the Navier-\/Stokes elements obtain the temperature}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{required for the computation of the buoyancy force from the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{corresponding advection-\/diffusion element.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{One benefit of this \(\backslash\)b multi-\/domain approach, compared to a \(\backslash\)b}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{multi-\/field approach, is that different error estimators can be }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{used on each domain and there is no longer a need to construct }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{a combined multi-\/physics error estimator; see the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{<a href="{}../../refine\_b\_convect/html/index.html"{}>tutorial for the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{adaptive solution of the Boussinesq convection problem</a> for more}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{details on this issue. Moreover, the meshes do not}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{have to have the same refinement pattern, which can be}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{advantageous if the different physical processes act over different}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{spatial scales. The figure below shows that in the Boussinesq }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{convection problem the Navier-\/-\/Stokes mesh (panel (a)) requires much more}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{refinement than the advection-\/diffusion mesh (panel (b)).}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{\(\backslash\)image html two\_domains.gif "{}Steady Convection Rolls: (a) contours of x-\/velocity and corresponding element boundaries in Navier-\/-\/Stokes mesh, (b) contours of temperature and corresponding element boundaries in advection-\/diffusion mesh. "{} }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{\(\backslash\)image latex two\_domains.eps "{}Steady Convection Rolls: (a) contours of x-\/velocity and corresponding element boundaries in Navier-\/-\/Stokes mesh, (b) contours of temperature and corresponding element boundaries in advection-\/diffusion mesh. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{\(\backslash\)subsection external\_elements The ElementWithExternalElement class}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{ Interaction between different elements in different domains is a}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{fundamental feature of many multi-\/physics problems and the generic}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{functionality to deal with such interactions is provided by the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{ElementWithExternalElement class.  Any element that requires }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{information from an "{}external element"{} should therefore inherit from the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{base class \(\backslash\)c ElementWithExternalElement.  }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{"{}External elements"{} typically provide source-\/like terms for the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{\(\backslash\)c ElementWithExternalElement. For instance, in the Boussinesq}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{convection problem studied here,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{the advection-\/diffusion element is the "{}external element"{} for}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{the Navier-\/Stokes element because it affects the body force}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{in the Navier-\/Stokes equations; in a fluid-\/structure interaction }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{problem, the Navier-\/Stokes elements that are adjacent to the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{fluid-\/loaded elastic wall act as the "{}external elements"{} for the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)c FSIWallElement because they determine the traction that the fluid}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{exerts onto the wall; etc.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{ Within a finite-\/element context, the effect of the "{}external element"{} }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{onto the \(\backslash\)c ElementWithExternalElement typically has to be evaluated}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{at the integration points of the \(\backslash\)c ElementWithExternalElement.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{Therefore, the \(\backslash\)c ElementWithExternalElement base class provides}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{storage for a pointer to an "{}external element"{} (and the local coordinate}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{within it) for each integration point. Access to this information}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{is provided via the member functions}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{FiniteElement*\& ElementWithExternalElement::external\_element\_pt(}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{                                const unsigned\& interaction, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{                                const unsigned\& ipt);}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{Vector<double>\& ElementWithExternalElement::external\_element\_local\_coord(}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{                      const unsigned\& interaction, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{                      const unsigned\& ipt);}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{For a given integration point, \(\backslash\)c ipt, within the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{ElementWithExternalElement, these functions }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{identify the corresponding point in the "{}external element"{} by}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{returning a pointer to the "{}external element"{} and the local coordinate }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{within it, respectively.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{The unsigned parameter \(\backslash\)c interaction denotes the interaction}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{index, required to allow for cases where an element interacts with more}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{than one "{}external element"{}. This occurs, for instance, in double-\/diffusive}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{convection problems (discussed in  <a href="{}../../../../demo\_drivers/multi\_physics/double\_diffusive\_convection/multimesh\_dd\_convection.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{a separate demo driver code </a>), in which the body force }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{in the Navier-\/Stokes equations is affected by two physical properties,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{<em> e.g.</em> temperature and salinity, both of which are transported by}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{separate advection-\/diffusion processes; }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{or in FSI problems where a beam or shell element is}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{affected by a fluid load on both its "{}front"{} and "{}back"{} (see, e.g., the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{<a href="{}../../../interaction/fsi\_channel\_with\_leaflet/html/index.html"{}>FSI }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{channel with leaflet problem</a>).}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{\(\backslash\)c Data that affects the fields in the "{}external elements"{} }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{must be specified so that the off-\/diagonal blocks in the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{\(\backslash\)c ElementWithExternalElement's Jacobian matrix (representing the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{derivatives of the \(\backslash\)c ElementWithExternalElement's residual vector}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{with respect to the \(\backslash\)c Data in the "{}external elements"{})}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{can be calculated. We divide such data into two categories:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{-\/ <em> External field data: </em> all \(\backslash\)c Data that affects the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{fields through which the "{}external element"{} interacts with the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{\(\backslash\)c ElementWithExternalElement.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{-\/ <em> External geometric data: </em> all geometric \(\backslash\)c Data that affects}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{the shape and position of the "{}external element"{} and, therefore, spatial }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{derivatives of its fields. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{The rationale for this division is that in many cases the field }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{data's contribution to the interaction blocks in the Jacobian matrix}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{can be found analytically, whereas the geometric}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{data is more easily handled by finite differencing.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{Both types of external data are determined (automatically) by two member}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{functions of the \(\backslash\)c ElementWithExternalElement. The first one,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{virtual void  ElementWithExternalElement::identify\_all\_field\_data\_for\_external\_interaction(}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{    Vector<std::set<FiniteElement*> > const \&external\_elements\_pt,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{    std::set<std::pair<Data*,unsigned> > \&paired\_interaction\_data); }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{determines the external field data that affect the (possibly multiple) }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{interactions in the \(\backslash\)c ElementWithExternalElement. Given the vector }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{\(\backslash\)c external\_elements\_pt (within which  <code> external\_elements\_pt[i] </code>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{contains the set of pointers to the "{}external elements"{}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{involved in the \(\backslash\)c ElementWithExternalElement's \(\backslash\)c i -\/th interaction), the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{function returns a set of pairs, each of which comprises a}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{pointer to a \(\backslash\)c Data object and an unsigned that identifies a value}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{within it. The default implementation of this function includes}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{\(\backslash\)b all field data of \(\backslash\)b all "{}external elements"{}, using calls to}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{void FiniteElement::identify\_field\_data\_for\_interactions(...)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{for each "{}external element"{}. Similarly, the function}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{virtual void  ElementWithExternalElement::identify\_all\_geometric\_data\_for\_external\_interaction(}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{    Vector<std::set<FiniteElement*> >  const \&external\_elements\_pt,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{    std::set<Data*> \&external\_geometric\_data\_pt);}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)endcode   }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{returns the set of \(\backslash\)b all \(\backslash\)c Data that affect the shape or position of any}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{of the "{}external elements"{} specified by the vector \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{external\_elements\_pt. Again, this function has a default}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{implementation that determines \(\backslash\)b all geometric Data associated}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{with "{}external elements"{} by calling}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{void FiniteElement::identify\_geometric\_data(..)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{for each "{}external element"{}.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{We note that the default implementation of these functions can }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{(and, where possible, should) be overloaded to exclude data values}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{that do not actually contribute to the interaction. For instance,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{in the Boussinesq convection problem considered here, the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{advection-\/diffusion elements are only affected by the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{velocity degrees of freedom in the Navier-\/Stokes elements but}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{not by the pressures. Our re-\/implementation of \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{ElementWithExternalElement::identify\_all\_field\_data\_for\_external\_interaction(...)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{in the multi-\/domain advection-\/diffusion element for the Boussinesq problem}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{therefore excludes the pressure degrees of freedom, see}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{<a href="{}\#optimise"{}><b>Part IV</b></a>.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{\(\backslash\)subsection off\_diag\_jac Computation of the Jacobian matrix}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{Most single-\/physics elements already provide functions }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{to compute their own Jacobians analytically. These functions compute the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{derivatives of the element's residual vector with respect to the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{element's "{}own"{} degrees of freedom (e.g. the fluid velocity and pressure in a}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{Navier-\/Stokes element). The interaction with the "{}external element"{}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{introduces additional dependencies because the element's residual vector}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{now also depends on the unknowns associated with the "{}external}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{elements"{}. The derivatives of the element's residual}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{vector with respect to these unknowns must therefore be included into the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{computation of the element's Jacobian matrix. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{To maximise code re-\/use, we follow the approach discussed in }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{the <a href="{}../../b\_convection/html/index.html\#comments"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{comments </a> section of the single-\/domain version of the problem }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{and re-\/use the underlying element's \(\backslash\)c fill\_in\_contribution\_to\_jacobian(...) }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{function, while employing finite-\/differencing to evaluate the derivatives}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{of the element's residual vector with respect to the unknowns}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{associated with the "{}external elements"{}. This is done most easily by}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{using the function}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{ElementWithExternalElement::fill\_in\_jacobian\_from\_external\_interaction\_by\_fd(..)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{which computes the derivatives of the element's}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{residual vector with respect to external field and external geometric}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{data by calls to the two functions}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{ElementWithExternalElement::fill\_in\_jacobian\_from\_external\_interaction\_field\_by\_fd(..)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{ElementWithExternalElement::fill\_in\_jacobian\_from\_external\_interaction\_geometric\_by\_fd(..)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{If, in a particular problem, it is known that the interaction is not}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{affected by the position or shape of the "{}external elements"{} (<em>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{i.e. </em>  if}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{the interaction terms do not involve spatial derivatives of the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{"{}external element's"{} field variables) the unnecessary computation of the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{derivatives with respect to the "{}external element's"{} geometric data}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{may be suppressed using a call to}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{ElementWithExternalElement::ignore\_external\_geometric\_data();}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{Depending on the complexity of the interaction terms, it may be}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{worthwhile to provide a function that computes the off-\/diagonal}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{blocks analytically. This is discussed in more detail in}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{<a href="{}\#optimise"{}><b>Part IV</b></a>.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{\(\backslash\)subsection setting\_up\_interaction Setting up the interaction}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{The namespace \(\backslash\)c Multi\_domain\_functions provides numerous helper}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{functions that facilitate the setup of multi-\/domain interactions.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{Specifically, the function }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{\(\backslash\)c Multi\_domain\_functions::setup\_multi\_domain\_interactions(...)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{can be used to identify the "{}external elements"{} in a two-\/way}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{interaction between two meshes. The function has the following}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{interface:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{  template<class ELEMENT\_0,class ELEMENT\_1>     }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{  void setup\_multi\_domain\_interactions(Problem* problem\_pt, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{                                       Mesh* const \&first\_mesh\_pt,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{                                       Mesh* const \&second\_mesh\_pt,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{                                       const unsigned\& first\_interaction=0,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{                                       const unsigned\& second\_interaction=0);}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{Here \(\backslash\)c first\_mesh\_pt and \(\backslash\)c second\_mesh\_pt point to the two}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{interacting meshes whose elements (of type \(\backslash\)c ELEMENT\_0 and}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{\(\backslash\)c ELEMENT\_1, respectively), must be derived}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{from the \(\backslash\)c ElementWithExternalElement class. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{The optional interaction parameters may be used to specify }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{which interaction is set up in each mesh. If the parameter is not specified}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{it defaults to zero, appropriate if there is}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{only a single interaction.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{The function must be called prior to the assignment of the equation }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{numbers, and then again whenever either of the two meshes has changed, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{<em> e.g.</em> after a mesh adaptation.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{\(\backslash\)section implement\_boussinesq Part II: Implementing multi-\/domain interaction elements for the Boussinesq convection problem }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{We illustrate the general procedures discussed above}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{by demonstrating how to upgrade existing single-\/physics}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{Navier-\/Stokes and advection-\/diffusion elements to \(\backslash\)c ElementWithExternalElements}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{that can be used for the multi-\/domain-\/based solution of the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{Boussinesq convection problem. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{\(\backslash\)subsection nst Upgrading the Navier-\/Stokes element to an ElementWithExternalElement }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{We use multiple inheritance to upgrade an existing refineable }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{Navier-\/Stokes element to a \(\backslash\)c RefineableNavierStokesBoussinesqElement}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{in which the temperature that affects the body force is given by}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{an "{}external"{} advection-\/diffusion element. To facilitate code reuse}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{we employ templating to specify the types of the Navier-\/Stokes and}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{advection diffusion elements. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_boussinesq\_elements.h}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{\(\backslash\)skipline nst\_bous\_class}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{\(\backslash\)until}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{\{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{The constructor calls the constructors of the underlying elements, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{initialises the pointer to the Rayleigh number (stored as private}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{member data in the class) and sets the number of interactions to one,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{indicating that the residuals of the Navier-\/Stokes element are only}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{affected by a single type of "{}external element"{} -\/-\/ the advection-\/diffusion}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{element that determines the temperature distribution. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{We provide access functions to the Rayleigh number}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{and, given that we are dealing with a refineable element, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{make sure that the pointer to the Rayleigh number is passed to the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{"{}son"{} elements when the element is refined. Furthermore, if}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{the external geometric data could safely be ignored in the "{}father"{}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{elements we assume that the same is true for the "{}sons"{}:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{The most important step is to overload the function }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{that computes the body force in the Navier-\/Stokes equations so that}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{it depends on the temperature at the \(\backslash\)c ipt -\/th integration }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{point, as computed by the "{}external element"{}: }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_boussinesq\_elements.h}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{\(\backslash\)skipline  Overload get\_body\_force\_nst}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{\(\backslash\)until end overloaded body force}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{There is only one external interaction so the interaction index is}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{set to zero and the value of the temperature at the integration point}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{is obtained by casting the external element to an advection diffusion}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{element and finding its interpolated field at the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{appropriate stored local coordinate. Once the temperature has been}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{obtained, the code is identical to that discussed in the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{ <a href="{}../../b\_convection/html/index.html"{}>tutorial for }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{the corresponding multi-\/field implementation</a>; in that}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{implementation the temperature could be found from a member function }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{because the interaction is internal to the element.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{Finally, we have to compute the element's Jacobian matrix. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{The easiest (although potentially inefficient) }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{way to do this is to recycle the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{analytical computation of the derivatives of the Navier-\/Stokes }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{residuals with respect to the fluid degrees of}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{freedom, as implemented in  }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)c NST\_ELEMENT::fill\_in\_contribution\_to\_jacobian(...),}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_boussinesq\_elements.h}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{\(\backslash\)skipline Compute the element's residual vector and }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{\(\backslash\)until fill\_in\_contribution\_to\_jacobian(residuals, jacobian);}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{and then fill in the derivatives with respect to }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{the degrees of freedom associated with the "{}external}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{elements"{} by finite differencing:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{\(\backslash\)until else}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{If this is deemed to be too inefficient, we can provide a function}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{that computes the required entries in the Jacobian analytically:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{(The code illustrates both approaches and employs}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{the macro  \(\backslash\)c }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{USE\_FD\_FOR\_DERIVATIVES\_WRT\_EXTERNAL\_DATA\_IN\_MULTI\_DOMAIN\_BOUSSINESQ}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{to choose which one to use.)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{We}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{refer to <a href="{}\#optimise"{}><b>Part IV</b></a>  for a discussion of how to}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{implement the fully-\/analytic computation of the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{Jacobian matrix in the function \(\backslash\)c fill\_in\_off\_diagonal\_block\_analytic(...).}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{\(\backslash\)subsection ad Upgrading the advection-\/diffusion element to an ElementWithExternalElement }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{Upgrading the advection-\/diffusion element to an \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{ElementWithExternalElement in which the wind is given by the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{"{}external"{} Navier Stokes element follows the same procedure.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{We use multiple inheritance to construct the element and}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{set the number of interactions to one:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_boussinesq\_elements.h}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{\(\backslash\)skipline ad\_bous\_class}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{We overload the function that computes the "{}wind"{} for the advection}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{diffusion equations so that it is given by the fluid}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{velocity at the \(\backslash\)c ipt -\/th integration point, as computed by }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{the "{}external element"{}: }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_boussinesq\_elements.h}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{\(\backslash\)skipline  Overload the wind}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{\(\backslash\)until \} // end of get\_wind\_adv\_diff}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{Again, there is only one external interaction so the interaction index}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{is set to zero and the external element}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{must be cast to a Navier-\/Stokes element so that the interpolated}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{velocity field can be found. The code is similar to that used in the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{<a href="{}../../b\_convection/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{multi-\/field implementation</a>, which uses internal, rather than external, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{interaction.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{The element's Jacobian matrix can be computed by the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{same methods discussed for the Navier-\/Stokes elements:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{\(\backslash\)skipline Compute the element}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{\(\backslash\)section multi\_domain\_boussinesq Part III: The driver code for the multi-\/domain Boussinesq problem}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{Using the upgraded elements discussed above, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/multi\_physics/boussinesq\_convection/multi\_domain\_ref\_b\_convection.cc"{}>the driver code </a>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{for the multi-\/domain-\/based solution of the Boussinesq convection}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{problem is very similar to that of the }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{<a href="{}../../refine\_b\_convect/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{single-\/domain example.</a> Indeed, the \(\backslash\)c main() functions are virtually}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{identical. The only difference is that the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{RefineableConvectionProblem takes two template arguments (specifying}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{the two different element types) instead of one (specifying the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{type of the single, combined element).}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{\(\backslash\)subsection problem\_class The problem class}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{The problem class is similar to that of the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{<a href="{}../../refine\_b\_convect/html/index.html"{}>single-\/domain example}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{</a> and many of the functions are the same. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{There are now two meshes, however, one for the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{fluid elements and one for the advection-\/diffusion elements:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_ref\_b\_convection.cc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{\(\backslash\)skipline Access function to the NST mesh}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{\(\backslash\)until end\_of\_nst\_mesh}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{\(\backslash\)skipline Access function to the AD mesh}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{\(\backslash\)until  end\_of\_ad\_mesh}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{and after any mesh adaptation, the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{interaction between the two meshes must be set up again.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{\(\backslash\)skipline Actions after adapt}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{\(\backslash\)until end\_of\_actions\_after\_adapt}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{\(\backslash\)subsection constructor The Problem constructor}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{The problem constructor is slightly different from the equivalent}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{single-\/domain version, mainly because there are two meshes instead of}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{one. Firstly, we build two coarse meshes with the same number of}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{elements (\(\backslash\)f\$ 9 \(\backslash\)times 8 \(\backslash\)f\$, as in the original single-\/domain problem) and}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{dimensions for each mesh. Error estimators and error targets are set}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{separately for each mesh. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_ref\_b\_convection.cc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{\(\backslash\)until Adv\_diff\_mesh\_pt-\/>min\_permitted\_error}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{The boundary constraints are applied to each mesh in turn; firstly on}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{the Navier-\/-\/Stokes mesh, where we must also pin a single pressure:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{\(\backslash\)skipline Set the boundary conditions}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{\(\backslash\)until fix\_pressure}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{We then apply boundary constraints to the advection-\/diffusion mesh:}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{\(\backslash\)skipline Loop over the boundaries of the AD mesh}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{\(\backslash\)until end of loop over AD mesh boundaries}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{and complete the build of all elements in each mesh by setting the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{pointers to the required physical parameters in each domain.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{Since neither of the interaction terms involves spatial derivatives}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{of the field variables in the "{}external elements"{}, we can ignore}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{the derivatives with respect to the external geometric data}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{when computing the element's Jacobian matrix. This is done}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{by the calls to \(\backslash\)c ElementWithExternalElement::ignore\_external\_geometric\_data();}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{\(\backslash\)skipline Complete the build of all elements}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{\(\backslash\)until end of setup for all AD elements}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{Finally we combine the submeshes,}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{set up the interaction between the two meshes, and}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{assign the equation numbers.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{\(\backslash\)skipline combine the submeshes}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{\(\backslash\)subsection actions\_before\_newton\_solve The function actions\_before\_newton\_solve(...)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{In this function we update the problem specifications before a}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{solution by re-\/applying the specific values of the Dirichlet boundary}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{conditions for each mesh, and ensuring that the mass-\/conserving}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{imperfection is applied to the velocity boundary conditions on the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{Navier-\/-\/Stokes mesh if required. The boundary conditions are exactly}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{the same as for the  <a href="{}../../b\_convection/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{single-\/domain version of the problem</a>, but they}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{must be applied differently because there are now two meshes instead}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{of one.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_ref\_b\_convection.cc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{\(\backslash\)skipline start\_actions\_before\_newton\_solve}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{\(\backslash\)until end of actions before solve}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{\(\backslash\)subsection doc\_solution The function doc\_solution(...)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{This function outputs all fields to the specified solution file in the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{directory pointed to by the \(\backslash\)c DocInfo object.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_ref\_b\_convection.cc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{\(\backslash\)skipline start\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{\(\backslash\)until end of doc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{\(\backslash\)section optimise Part IV: Optimising multi-\/domain interactions}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{We showed in <a href="{}\#implement\_boussinesq"{}><b>Part II</b></a>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{that only a small number of functions <b> must </b> be implemented to upgrade}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{an existing single-\/physics element to an \(\backslash\)c ElementWithExternalElement}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{that can interact with another element in a different domain. This is}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{because much of the required functionality is already implemented }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{in the \(\backslash\)c ElementWithExternalElement base class, which makes}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{the implementation of multi-\/physics interactions very easy. The }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{use of general-\/purpose functions may incur unnecessary computational}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{cost, however. Hence, a better efficiency can be achieved by}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{overloading certain functions when implementing a specific }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{\(\backslash\)c ElementWithExternalElement.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{\(\backslash\)subsection restricting\_field\_data Ignoring field data that does not participate in the interaction }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{The function}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{\(\backslash\)c ElementWithExternalElement::identify\_all\_field\_data\_for\_external\_interaction(...)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{assumes that \(\backslash\)b all data values in the external elements affect}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{the interaction with the \(\backslash\)c ElementWithExternalElement. In many}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{cases this assumption is overly pessimistic (and costly). For}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{instance in the Boussinesq convection problem only the velocity }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{degrees of freedom in the (external) Navier-\/Stokes element affect}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{the the advection-\/diffusion equations via the "{}wind"{}. It is therefore}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{sensible to exclude the pressure degrees of freedom from the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{interaction by re-\/implementing }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{\(\backslash\)c identify\_all\_field\_data\_for\_external\_interaction(...) as follows}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{\(\backslash\)dontinclude multi\_domain\_boussinesq\_elements.h}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{\(\backslash\)skipline optimised\_identification\_of\_field\_data}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{\(\backslash\)until // done}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00617}00617 \textcolor{comment}{Similar approaches can be used to ignore selected (weak) interactions }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00618}00618 \textcolor{comment}{when computing the element's Jacobian matrix. For instance, }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00619}00619 \textcolor{comment}{the \(\backslash\)c FSIWallElement is an \(\backslash\)c ElementWithExternalElement}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00620}00620 \textcolor{comment}{for which the adjacent fluid elements that apply the fluid}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00621}00621 \textcolor{comment}{traction to the FSI boundary act as "{}external elements"{}. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00622}00622 \textcolor{comment}{In high-\/Reynolds-\/number flows, the fluid traction is dominated}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00623}00623 \textcolor{comment}{by the pressure while shear stresses tend to be small. The \(\backslash\)c FSIWallElement}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00624}00624 \textcolor{comment}{therefore uses the same mechanism as illustrated above to (optionally)}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00625}00625 \textcolor{comment}{neglect the derivatives of its residuals with respect to the fluid}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00626}00626 \textcolor{comment}{velocity degrees of freedom. We stress that this does not exclude}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00627}00627 \textcolor{comment}{the shear stress from the computation -\/-\/ it simply replaces the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00628}00628 \textcolor{comment}{exact Jacobian by an approximate version in which the effect}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00629}00629 \textcolor{comment}{of the velocity degrees of freedom on the residuals of the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00630}00630 \textcolor{comment}{FSIWallElement are neglected. This may lead to a slight degradation }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00631}00631 \textcolor{comment}{in the convergence rate of the Newton iteration but this may be}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00632}00632 \textcolor{comment}{more than compensated for by the reduction in the CPU times required to}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00633}00633 \textcolor{comment}{compute the Jacobian matrix.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00634}00634 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00635}00635 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00636}00636 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00637}00637 \textcolor{comment}{\(\backslash\)subsection restricting\_geom\_data Ignoring geometric data}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00638}00638 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00639}00639 \textcolor{comment}{If the interaction with the "{}external element"{} does not involve}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00640}00640 \textcolor{comment}{spatial derivatives of the fields represented by the "{}external element"{}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00641}00641 \textcolor{comment}{or if the mesh containing the "{}external elements"{} is fixed, the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00642}00642 \textcolor{comment}{external geometric data associated with the "{}external elements"{} can}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00643}00643 \textcolor{comment}{be ignored when computing the \(\backslash\)c ElementWithExternalElement's }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00644}00644 \textcolor{comment}{Jacobian. This may be achieved by calling}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00645}00645 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00646}00646 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00647}00647 \textcolor{comment}{ElementWithExternalElement::ignore\_external\_geometric\_data();}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00648}00648 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00649}00649 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00650}00650 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00651}00651 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00652}00652 \textcolor{comment}{\(\backslash\)subsection analytical\_jacobian Computing the off-\/diagonal blocks in the Jacobian analytically}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00653}00653 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00654}00654 \textcolor{comment}{The setup of the Jacobian matrix can be made much more efficient}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00655}00655 \textcolor{comment}{by computing the derivatives of the \(\backslash\)c ElementWithExternalElements'}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00656}00656 \textcolor{comment}{residual vector with respect to the field data in the associated}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00657}00657 \textcolor{comment}{"{}external elements"{} analytically. The multi-\/domain driver codes in }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00658}00658 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00659}00659 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00660}00660 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/multi\_physics/boussinesq\_convection"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00661}00661 \textcolor{comment}{demo\_drivers/multi\_physics/boussinesq\_convection}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00662}00662 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00663}00663 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00664}00664 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00665}00665 \textcolor{comment}{demonstrate a possible implementation. The key challenge for the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00666}00666 \textcolor{comment}{implementation is that the \(\backslash\)c ElementWithExternalElement must label the entries}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00667}00667 \textcolor{comment}{in its elemental Jacobian matrix by its local equation }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00668}00668 \textcolor{comment}{numbers, whereas the "{}external element"{} can only compute the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00669}00669 \textcolor{comment}{derivative of its fields with respect to its own (differently numbered) }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00670}00670 \textcolor{comment}{local degrees of freedom (d.o.f.s). To establish which local d.o.f. in the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00671}00671 \textcolor{comment}{"{}external element"{} corresponds to a given local d.o.f.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00672}00672 \textcolor{comment}{in the \(\backslash\)c ElementWithExternalElement we exchange the (unique) global}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00673}00673 \textcolor{comment}{equation numbers associated with each d.o.f. Using this trick, the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00674}00674 \textcolor{comment}{computation of the derivatives becomes relatively straightforward.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00675}00675 \textcolor{comment}{Mathematically, it involves repeated applications of the chain rule. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00676}00676 \textcolor{comment}{In the cases we considered, the fully-\/analytic computation of the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00677}00677 \textcolor{comment}{elemental Jacobian matrix was about 3 to 4 times faster than }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00678}00678 \textcolor{comment}{finite-\/difference-\/based computation implemented in the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00679}00679 \textcolor{comment}{\(\backslash\)c ElementWithExternalElement base class. Whether the speedup is}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00680}00680 \textcolor{comment}{worth the additional (human) time required to implement the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00681}00681 \textcolor{comment}{analytic computation of the off-\/diagonal entries depends on }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00682}00682 \textcolor{comment}{the application (and you!). If nothing else, the availability of a}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00683}00683 \textcolor{comment}{finite-\/difference based routine helps in the validation of any}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00684}00684 \textcolor{comment}{newly-\/developed analytic re-\/implementation. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00685}00685 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00686}00686 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00687}00687 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00688}00688 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00689}00689 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00690}00690 \textcolor{comment}{\(\backslash\)section comm\_and\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00691}00691 \textcolor{comment}{\(\backslash\)subsection comments Comments}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00692}00692 \textcolor{comment}{-\/ The use of two separate meshes with different error estimators means}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00693}00693 \textcolor{comment}{that, in principle, a more accurate solution can be obtained with}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00694}00694 \textcolor{comment}{fewer degrees of freedom than using a combined error estimator on a}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00695}00695 \textcolor{comment}{single mesh. The combined error estimator implemented in the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00696}00696 \textcolor{comment}{<a href="{}../../refine\_b\_convect/html/index.html"{}>single-\/domain}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00697}00697 \textcolor{comment}{version of the problem </a> will cause refinement if either the fluid}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00698}00698 \textcolor{comment}{error or the advection-\/diffusion error is above the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00699}00699 \textcolor{comment}{specified tolerance. Thus, a fully-\/converged solution in the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00700}00700 \textcolor{comment}{single-\/domain problem is one in which the estimated error in }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00701}00701 \textcolor{comment}{all field variables is below the tolerance, but this may be at the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00702}00702 \textcolor{comment}{cost of some over-\/refinement in one or more of the field variables. In}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00703}00703 \textcolor{comment}{the present multi-\/domain approach, if the solution is converged on}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00704}00704 \textcolor{comment}{both meshes then the estimated error in all field variables is again}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00705}00705 \textcolor{comment}{below the tolerance. Hence, it is fair, in some sense, to }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00706}00706 \textcolor{comment}{compare the results between fully-\/converged}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00707}00707 \textcolor{comment}{solutions for the single-\/ and multi-\/domain problems. As suggested by}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00708}00708 \textcolor{comment}{the figure above, for the Boussinesq convection problem}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00709}00709 \textcolor{comment}{considered here we do obtain fully-\/converged solutions}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00710}00710 \textcolor{comment}{with fewer degrees of freedom using the multi-\/domain approach because}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00711}00711 \textcolor{comment}{the temperature field is over-\/refined in the single-\/domain}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00712}00712 \textcolor{comment}{case. Of course, the multi-\/domain solution includes the extra overhead}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00713}00713 \textcolor{comment}{of setting up the interaction, but, in general, this cost is}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00714}00714 \textcolor{comment}{negligible compared to the solution of the linear systems.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00715}00715 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00716}00716 \textcolor{comment}{-\/ The general procedures described in this tutorial can be used to}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00717}00717 \textcolor{comment}{set up any interaction between different types of elements using}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00718}00718 \textcolor{comment}{multiple meshes. }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00719}00719 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00720}00720 \textcolor{comment}{-\/ Before any refinements take place the combined Jacobian}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00721}00721 \textcolor{comment}{is exactly the same as that in the single-\/domain problem and}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00722}00722 \textcolor{comment}{so the residuals at each Newton step will be exactly the same. You can}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00723}00723 \textcolor{comment}{verify this by comparing the appropriate output files in the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00724}00724 \textcolor{comment}{\(\backslash\)c Validation  directory.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00725}00725 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00726}00726 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00727}00727 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00728}00728 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00729}00729 \textcolor{comment}{\(\backslash\)subsection exercises Exercises}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00730}00730 \textcolor{comment}{-\/\# Investigate the difference between the solutions for the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00731}00731 \textcolor{comment}{   multi-\/domain and single-\/domain problems by continuing to refine until}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00732}00732 \textcolor{comment}{   the solutions are fully-\/converged to a given error tolerance. What is}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00733}00733 \textcolor{comment}{   the difference in total number of degrees of freedom? What is the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00734}00734 \textcolor{comment}{   difference in solution time? What is the difference between the two}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00735}00735 \textcolor{comment}{   solutions?  }}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00736}00736 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00737}00737 \textcolor{comment}{-\/\# Investigate double-\/diffusive convection by adding another}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00738}00738 \textcolor{comment}{   advection-\/diffusion mesh to the problem that interpolates a}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00739}00739 \textcolor{comment}{   concentration field. Examples may be found in the <a href="{}../../../../demo\_drivers/multi\_physics/double\_diffusive\_convection"{}> double\_diffusive\_convection </a> directory.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00740}00740 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00741}00741 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00742}00742 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00743}00743 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00744}00744 \textcolor{comment}{-\/  The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00745}00745 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00746}00746 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/multi\_physics/boussinesq\_convection"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00747}00747 \textcolor{comment}{demo\_drivers/multi\_physics/boussinesq\_convection}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00748}00748 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00749}00749 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00750}00750 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00751}00751 \textcolor{comment}{ which contains refineable and non-\/refineable multi-\/domain}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00752}00752 \textcolor{comment}{versions of the Boussinesq convection problem.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00753}00753 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00754}00754 \textcolor{comment}{-\/ The full driver code for the problem described in this tutorial is:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00755}00755 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00756}00756 \textcolor{comment}{<A HREF="{}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00757}00757 \textcolor{comment}{../../../../}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00758}00758 \textcolor{comment}{demo\_drivers/multi\_physics/boussinesq\_convection/multi\_domain\_ref\_b\_convection.cc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00759}00759 \textcolor{comment}{"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00760}00760 \textcolor{comment}{demo\_drivers/multi\_physics/boussinesq\_convection/multi\_domain\_ref\_b\_convection.cc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00761}00761 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00762}00762 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00763}00763 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00764}00764 \textcolor{comment}{-\/ The corresponding driver code for the non-\/refineable version of the}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00765}00765 \textcolor{comment}{  problem is:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00766}00766 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00767}00767 \textcolor{comment}{<A HREF="{}}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00768}00768 \textcolor{comment}{../../../../}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00769}00769 \textcolor{comment}{demo\_drivers/multi\_physics/boussinesq\_convection/multi\_domain\_boussinesq\_convection.cc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00770}00770 \textcolor{comment}{"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00771}00771 \textcolor{comment}{demo\_drivers/multi\_physics/boussinesq\_convection/multi\_domain\_boussinesq\_convection.cc}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00772}00772 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00773}00773 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00774}00774 \textcolor{comment}{-\/ The source code for the elements is in: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00775}00775 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00776}00776 \textcolor{comment}{<A HREF="{}../../../../src/multi\_physics/multi\_domain\_boussinesq\_elements.h"{}>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00777}00777 \textcolor{comment}{src/multi\_physics/multi\_domain\_boussinesq\_elements.h</A>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00778}00778 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00779}00779 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00780}00780 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00781}00781 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00782}00782 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00783}00783 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00784}00784 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00785}00785 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00786}00786 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00787}00787 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00788}00788 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00789}00789 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00790}00790 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00791}00791 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00792}00792 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00793}00793 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00794}00794 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{multi__domain__ref__b__convect_8txt__doxygenified_8h_source_l00795}00795 }
+
+\end{DoxyCode}

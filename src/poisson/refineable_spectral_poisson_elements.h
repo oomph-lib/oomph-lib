@@ -54,7 +54,7 @@ namespace oomph
       public virtual RefineableQSpectralElement<DIM>
   {
   public:
-    /// \short Constructor: Pass refinement level to refineable quad element
+    /// Constructor: Pass refinement level to refineable quad element
     /// (default 0 = root)
     RefineableQSpectralPoissonElement()
       : RefineableElement(),
@@ -67,10 +67,7 @@ namespace oomph
 
     /// Broken copy constructor
     RefineableQSpectralPoissonElement(
-      const RefineableQSpectralPoissonElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("RefineableQuadPoissonElement");
-    }
+      const RefineableQSpectralPoissonElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -78,10 +75,8 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const RefineableQSpectralPoissonElement<DIM,NNODE_1D>&)
-     {
-      BrokenCopy::broken_assign("RefineableQuadPoissonElement");
-      }*/
+    /*void operator=(const RefineableQSpectralPoissonElement<DIM,NNODE_1D>&) =
+     * delete;*/
 
     /// Number of continuously interpolated values: 1
     unsigned ncont_interpolated_values() const
@@ -89,13 +84,13 @@ namespace oomph
       return 1;
     }
 
-    /// \short Number of vertex nodes in the element
+    /// Number of vertex nodes in the element
     unsigned nvertex_node() const
     {
       return QSpectralPoissonElement<DIM, NNODE_1D>::nvertex_node();
     }
 
-    /// \short Pointer to the j-th vertex node in the element
+    /// Pointer to the j-th vertex node in the element
     Node* vertex_node_pt(const unsigned& j) const
     {
       return QSpectralPoissonElement<DIM, NNODE_1D>::vertex_node_pt(j);
@@ -107,7 +102,7 @@ namespace oomph
         store_local_dof_pt);
     }
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    /// Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -121,7 +116,7 @@ namespace oomph
       RefineableElement::describe_local_dofs(out, current_string);
     }
 
-    /// \short Order of recovery shape functions for Z2 error estimation:
+    /// Order of recovery shape functions for Z2 error estimation:
     /// Same order as shape functions.
     unsigned nrecovery_order()
     {
@@ -135,7 +130,7 @@ namespace oomph
       }
     }
 
-    ///  \short Perform additional hanging node procedures for variables
+    ///  Perform additional hanging node procedures for variables
     /// that are not interpolated by all nodes. Empty.
     void further_setup_hanging_nodes() {}
   };
@@ -152,7 +147,7 @@ namespace oomph
     : public virtual QSpectralElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional QElement
     FaceGeometry() : QSpectralElement<DIM - 1, NNODE_1D>() {}
   };

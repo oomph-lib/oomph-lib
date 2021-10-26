@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1MGProblem}{}\doxysection{oomph\+::M\+G\+Problem Class Reference}
+\hypertarget{classoomph_1_1MGProblem}{}\doxysection{oomph\+::MGProblem Class Reference}
 \label{classoomph_1_1MGProblem}\index{oomph::MGProblem@{oomph::MGProblem}}
 
 
-\mbox{\hyperlink{classoomph_1_1MGProblem}{M\+G\+Problem}} class; subclass of \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}.  
+\mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} class; subclass of \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}.  
 
 
 
 
 {\ttfamily \#include $<$geometric\+\_\+multigrid.\+h$>$}
 
-Inheritance diagram for oomph\+::M\+G\+Problem\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::MGProblem\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1MGProblem}
@@ -18,21 +18,21 @@ Inheritance diagram for oomph\+::M\+G\+Problem\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1MGProblem_a6e66372fd671f1229868616091fa25f4}{M\+G\+Problem}} ()
+\mbox{\hyperlink{classoomph_1_1MGProblem_a6e66372fd671f1229868616091fa25f4}{MGProblem}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. Initialise pointers to coarser and finer levels. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1MGProblem_aefc32d5105fc72b8367891794d087a93}{$\sim$\+M\+G\+Problem}} ()
+virtual \mbox{\hyperlink{classoomph_1_1MGProblem_aefc32d5105fc72b8367891794d087a93}{$\sim$\+MGProblem}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1MGProblem}{M\+G\+Problem}} $\ast$ \mbox{\hyperlink{classoomph_1_1MGProblem_a8698cbc94e6cb46df5c2c189fab81196}{make\+\_\+new\+\_\+problem}} ()=0
+virtual \mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} $\ast$ \mbox{\hyperlink{classoomph_1_1MGProblem_ad4915d5a571798060f2f7724a2c8b9c8}{make\+\_\+new\+\_\+problem}} ()=0
 \begin{DoxyCompactList}\small\item\em This function needs to be implemented in the derived problem\+: Returns a pointer to a new object of the same type as the derived problem. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase}{Tree\+Based\+Refineable\+Mesh\+Base}} $\ast$ \mbox{\hyperlink{classoomph_1_1MGProblem_a491bcf30805006f4b976de8ebaf5afd3}{mg\+\_\+bulk\+\_\+mesh\+\_\+pt}} ()=0
+virtual \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase}{Tree\+Based\+Refineable\+Mesh\+Base}} $\ast$ \mbox{\hyperlink{classoomph_1_1MGProblem_a46ef71045e3624fefc312d10f1da9a92}{mg\+\_\+bulk\+\_\+mesh\+\_\+pt}} ()=0
 \begin{DoxyCompactList}\small\item\em Function to get a pointer to the mesh we will be working with. If there are flux elements present in the mesh this will be overloaded to return a pointer to the bulk mesh otherwise it can be overloaded to point to the global mesh but it must be of type \mbox{\hyperlink{classoomph_1_1RefineableMeshBase}{Refineable\+Mesh\+Base}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\mbox{\hyperlink{classoomph_1_1MGProblem}{M\+G\+Problem}} class; subclass of \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}. 
+\mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} class; subclass of \mbox{\hyperlink{classoomph_1_1Problem}{Problem}}. 
 
-Definition at line 56 of file geometric\+\_\+multigrid.\+h.
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00056}{56}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
 
 
 
@@ -41,7 +41,7 @@ Definition at line 56 of file geometric\+\_\+multigrid.\+h.
 \index{oomph::MGProblem@{oomph::MGProblem}!MGProblem@{MGProblem}}
 \index{MGProblem@{MGProblem}!oomph::MGProblem@{oomph::MGProblem}}
 \doxysubsubsection{\texorpdfstring{MGProblem()}{MGProblem()}}
-{\footnotesize\ttfamily oomph\+::\+M\+G\+Problem\+::\+M\+G\+Problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+MGProblem\+::\+MGProblem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -49,13 +49,13 @@ Constructor. Initialise pointers to coarser and finer levels.
 
 
 
-Definition at line 60 of file geometric\+\_\+multigrid.\+h.
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00060}{60}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1MGProblem_aefc32d5105fc72b8367891794d087a93}\label{classoomph_1_1MGProblem_aefc32d5105fc72b8367891794d087a93}} 
 \index{oomph::MGProblem@{oomph::MGProblem}!````~MGProblem@{$\sim$MGProblem}}
 \index{````~MGProblem@{$\sim$MGProblem}!oomph::MGProblem@{oomph::MGProblem}}
 \doxysubsubsection{\texorpdfstring{$\sim$MGProblem()}{~MGProblem()}}
-{\footnotesize\ttfamily virtual oomph\+::\+M\+G\+Problem\+::$\sim$\+M\+G\+Problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+MGProblem\+::$\sim$\+MGProblem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -63,16 +63,16 @@ Destructor (empty)
 
 
 
-Definition at line 63 of file geometric\+\_\+multigrid.\+h.
+Definition at line \mbox{\hyperlink{geometric__multigrid_8h_source_l00063}{63}} of file \mbox{\hyperlink{geometric__multigrid_8h_source}{geometric\+\_\+multigrid.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1MGProblem_a8698cbc94e6cb46df5c2c189fab81196}\label{classoomph_1_1MGProblem_a8698cbc94e6cb46df5c2c189fab81196}} 
+\mbox{\Hypertarget{classoomph_1_1MGProblem_ad4915d5a571798060f2f7724a2c8b9c8}\label{classoomph_1_1MGProblem_ad4915d5a571798060f2f7724a2c8b9c8}} 
 \index{oomph::MGProblem@{oomph::MGProblem}!make\_new\_problem@{make\_new\_problem}}
 \index{make\_new\_problem@{make\_new\_problem}!oomph::MGProblem@{oomph::MGProblem}}
 \doxysubsubsection{\texorpdfstring{make\_new\_problem()}{make\_new\_problem()}}
-{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1MGProblem}{M\+G\+Problem}}$\ast$ oomph\+::\+M\+G\+Problem\+::make\+\_\+new\+\_\+problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1MGProblem}{MGProblem}} $\ast$ oomph\+::\+MGProblem\+::make\+\_\+new\+\_\+problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -80,13 +80,13 @@ This function needs to be implemented in the derived problem\+: Returns a pointe
 
 
 
-Referenced by oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+hierarchy().
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00968}{oomph\+::\+MGSolver$<$ DIM $>$\+::setup\+\_\+mg\+\_\+hierarchy()}}.
 
-\mbox{\Hypertarget{classoomph_1_1MGProblem_a491bcf30805006f4b976de8ebaf5afd3}\label{classoomph_1_1MGProblem_a491bcf30805006f4b976de8ebaf5afd3}} 
+\mbox{\Hypertarget{classoomph_1_1MGProblem_a46ef71045e3624fefc312d10f1da9a92}\label{classoomph_1_1MGProblem_a46ef71045e3624fefc312d10f1da9a92}} 
 \index{oomph::MGProblem@{oomph::MGProblem}!mg\_bulk\_mesh\_pt@{mg\_bulk\_mesh\_pt}}
 \index{mg\_bulk\_mesh\_pt@{mg\_bulk\_mesh\_pt}!oomph::MGProblem@{oomph::MGProblem}}
 \doxysubsubsection{\texorpdfstring{mg\_bulk\_mesh\_pt()}{mg\_bulk\_mesh\_pt()}}
-{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase}{Tree\+Based\+Refineable\+Mesh\+Base}}$\ast$ oomph\+::\+M\+G\+Problem\+::mg\+\_\+bulk\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase}{Tree\+Based\+Refineable\+Mesh\+Base}} $\ast$ oomph\+::\+MGProblem\+::mg\+\_\+bulk\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -94,7 +94,7 @@ Function to get a pointer to the mesh we will be working with. If there are flux
 
 
 
-Referenced by oomph\+::\+M\+G\+Solver$<$ D\+I\+M $>$\+::setup\+\_\+mg\+\_\+hierarchy().
+Referenced by \mbox{\hyperlink{geometric__multigrid_8h_source_l00968}{oomph\+::\+MGSolver$<$ DIM $>$\+::setup\+\_\+mg\+\_\+hierarchy()}}.
 
 
 

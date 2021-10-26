@@ -1,0 +1,769 @@
+\hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source}{}\doxysection{mesh\+\_\+from\+\_\+vmtk.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{mesh__from__vmtk_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Linking VMTK with oomph-\/lib }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{The <a href="{}http://www.vmtk.org"{}>Vascular }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{Modeling Toolkit</a> is a collection of libraries }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{and tools for the 3D reconstruction, geometric analysis, mesh }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{generation and surface data analysis for image-\/based modelling }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{of blood vessels.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{This tutorial demonstrates how to open your dataset in VMTK; navigate}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{around a 3D volume; reconstruct the 3D surface of a vascular segment from}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{CT or MR images; process a surface model to generate a mesh; and}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{how to extract the surface mesh. Finally, we demonstrate}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{how to use \(\backslash\)c oomph-\/lib's conversion code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{\(\backslash\)c create\_fluid\_and\_solid\_surface\_mesh\_from\_fluid\_xda\_mesh}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{to generate fluid and solid meshes that allow the simulation of}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{physiological fluid-\/structure interaction problems in which the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{(assumed constant thickness) vessel wall deforms in response to the fluid}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{traction.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{Before starting, make sure that you have VMTK installed on your machine }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{and that you have your DICOM (Digital Imaging and Communications in Medicine) }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{images. Note that this tutorial describes the use of VMTK version 0.8.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{For further information on VMTK, please refer to VMTK's }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{<a href="{}http://www.vmtk.org"{}>home page</a>.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{<TABLE BORDER=1, WIDTH=500px>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{<TD bgcolor="{}cornsilk"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{<B>Acknowledgement:</B>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{This tutorial and the associated driver codes were developed jointly}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{with Amine Massit (ENSTA, Paris).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{</TABLE>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{<TABLE BORDER=1, WIDTH=500px>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{<TD bgcolor="{}cornsilk"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{<B>Disclaimer:</B>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{The generation of high-\/quality computational meshes from medical}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{images is a non-\/trivial task. The}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{<a href="{}http://www.vmtk.org"{}> Vascular Modeling}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{Toolkit</a>  greatly simplifies this task but}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{it is important to remember that (intelligent) user input is required}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{at various stages of the process. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{ This tutorial does \(\backslash\)b not provide}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{any guidance on this aspect. We simply demonstrate \(\backslash\)b how to generate}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{meshes that can be used in \(\backslash\)c oomph-\/lib -\/ based  }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{physiological flow (or fluid-\/structure interaction) simulations.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{If you smooth the vessels walls too much, you may lose essential}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{features; if you smooth too little, the shape of the vessel wall}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{may be polluted by imaging artifacts; etc. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{</TABLE>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{\(\backslash\)section vmtk Using VMTK: From the MR/CT images to the fluid mesh}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)subsection voi Volume of interest}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{VMTK is capable of reading DICOM directories (which contain the files }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{with .dcm extension). You can open your dataset in VMTK and navigate around}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{the 3D volume with:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{ vmtkimagereader -\/f dicom -\/d dicom\_directory -\/-\/pipe vmtkimageviewer}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{where \(\backslash\)c dicom\_directory is the path to the directory containing the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{.dcm files.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{\(\backslash\)image html scan.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)image latex scan.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{Once the viewer pops up, you can:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{ -\/ Rotate the volume by left-\/clicking anywhere on the render window }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{(outside the image).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{ -\/ Translate the volume by middle-\/clicking anywhere on the render}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{ window (outside the image).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{ -\/ Zoom the volume by right-\/clicking anywhere on the render window}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{(outside the image).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{ -\/ Probe the image planes (coordinates and graylevel) by left-\/clicking}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{   on them.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{ -\/ Move through the image planes by middle-\/clicking on them.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{ -\/ Change the window-\/level by right-\/clicking on image planes.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{ -\/ Quit the viewer by pressing \(\backslash\)c q or \(\backslash\)c e.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{You can extract a volume of interest (VOI) from a dataset with :}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{ vmtkimagereader -\/f dicom -\/d dicom\_directory -\/-\/pipe \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{vmtkimagevoiselector -\/ofile image\_volume\_voi.vti}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{where the argument to the \(\backslash\)c -\/ofile option specifies the output file name.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{When the render window pops up, pressing \(\backslash\)c i will activate the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{"{}interactor"{}: a yellowish cube will appear that is used to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{select the VOI.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{\(\backslash\)image html voi\_cube.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{\(\backslash\)image latex voi\_cube.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{    -\/ Translate the cube by middle-\/clicking on it.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{    -\/ Resize the cube by left-\/clicking and dragging the little spheres }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{(handles) on the faces of the cube.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{    -\/ Normal interaction with the image is still active, so you }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{can still navigate in the image as explained before. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{\(\backslash\)image html voi\_cube2.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)image latex voi\_cube2.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{When satisfied with the VOI, press \(\backslash\)c q or \(\backslash\)c e. The new volume is}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{displayed in the render window. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{\(\backslash\)image html voi.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{\(\backslash\)image latex voi.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{You can quit by pressing \(\backslash\)c q or \(\backslash\)c e, or you can define another VOI }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{by pressing \(\backslash\)c i once again.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)subsection surface The 3D surface reconstruction of a vascular segment}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{VMTK is capable of generating an image based surface model from a \(\backslash\)c vti}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{file (obtained using the procedure explained in the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{section \(\backslash\)ref voi above), using the Level Set method and can then}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{extract the surface model using a Marching Cubes algorithm.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{First, enter:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{vmtklevelsetsegmentation -\/ifile image\_volume\_voi.vti -\/ofile level\_sets.vti}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{\(\backslash\)image html voi\_display.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{\(\backslash\)image latex voi\_display.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{When the VOI is displayed in a render window, press \(\backslash\)c q or \(\backslash\)c e to proceed.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{A message will appear on your terminal:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{ Please choose initialization type: (0: colliding fronts; 1: fast}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{ marching; 2: threshold; 3: isosurface)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{This lets you choose the initialization method used to create the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{model of the blood vessel. In this tutorial, we will only demonstrate}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{the \(\backslash\)c colliding \(\backslash\)c fronts method. In this method two seeds are placed on}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{the image. Two fronts are then propagated from the seeds (one front}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{from each) with their speeds proportional to the image intensity. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{The region where the two fronts cross (or collide), defines the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{"{}deformable model"{} -\/-\/ the initial representation of the vessel }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{volume. For further information on this and the other}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{initialization methods, please refer to VMTK's }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{<a href="{}http://www.vmtk.org"{}>tutorial page</a>.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{Now, enter \(\backslash\)c 0 to initialise with \(\backslash\)c colliding \(\backslash\)c fronts. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{A message will then appear on the terminal:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{ Please input lower threshold ('i' to activate image, 'n' for none):}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{Wave propagation, used in the \(\backslash\)c colliding \(\backslash\)c fronts method, can be }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{restricted to a set of intensity levels between two thresholds.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{Enter the lower threshold, if you want to use}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{one, otherwise enter \(\backslash\)c n. Note that if you don't know the appropriate}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{threshold value you can press \(\backslash\)c i to activate the image }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{and probe it, then quit }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{with \(\backslash\)c q or \(\backslash\)c e when probing is done.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{For our example there is no need for thresholds. Therefore enter \(\backslash\)c n.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{The next message is:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{ Please input upper threshold ('i' to activate image, 'n' for none):}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{We repeat the same steps as for the lower threshold.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{Next, this message appears:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{ Please place two seeds (click on the image while pressing Ctrl).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{The render window is now activated. Place the two seeds, one }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{at each of the two ends of a branch. (The geometry of the entire bifurcation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{is created by "{}merging"{} the surfaces of individual branches.)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{Interact with the image planes to find where you want to place your }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{first seed. When}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{satisfied, left-\/click on the image while pressing \(\backslash\)c Ctrl. A red sphere}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{will then appear. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{\(\backslash\)image html seed1.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{\(\backslash\)image latex seed1.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{Repeat this procedure for the second seed.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{Press \(\backslash\)c q or \(\backslash\)c e when done.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{\(\backslash\)image html seed2.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{\(\backslash\)image latex seed2.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{Provided everything went OK, a translucent surface will appear in the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{render window between the two seeds. This is your initial deformable}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{model. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{\(\backslash\)image html deformable\_model1.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{\(\backslash\)image latex deformable\_model1.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{Press \(\backslash\)c q or \(\backslash\)c e to proceed. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{Next, you will be prompted with:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{ Accept initialization? (y/n):}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{If you are not satisfied with your initialisation, enter \(\backslash\)c n to perform}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{it once again, otherwise enter \(\backslash\)c y.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{Now press \(\backslash\)c q or \(\backslash\)c e again (in fact, you should do this whenever}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{the system appears to be frozen and the message "{}Displaying"{} is }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{shown on the terminal.). }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{You are now prompted if you want to initialise another branch:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{Initialize another branch? (y/n): }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{Press \(\backslash\)c n -\/-\/ we will add the other branches later.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{The following message will now appear: }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{Please input parameters (type return to accept current values, 'e' to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{end, 'q' to quit):}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{ NumberOfIterations(0) [PropagationScaling(1.0) CurvatureScaling(0.0) }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{AdvectionScaling(0.0)]:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{These parameters control the deformation of your Level Set:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{-\/ Number of iterations is the number of deformation steps }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{  the model will perform.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{-\/ Propagation scaling is the weight you assign to model inflation.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{-\/ Curvature scaling is the weight you assign to model surface}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{  regularisation (this will eventually make the model collapse and}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{  vanish if it is too large).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{-\/ Advection scaling regulates the attraction of the surface of the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{  image gradient modulus ridges.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{Based on our limited experience, we recommended that propagation and curvature}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{should be set to \(\backslash\)c 0.0, and advection to \(\backslash\)c 1.0. The number of iterations }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{should be set large enough for the level set not to move anymore }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{(if the region is not too big, try with \(\backslash\)c 300). We encourage you to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{experiment with these parameters yourself.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{Therefore, enter:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{ 300 0 0 1}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{The level set will then evolve until the maximum number of iterations is}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{reached. Then the render window will activate, displaying the final}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{model.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{\(\backslash\)image html curvature0x0.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{\(\backslash\)image latex curvature0x0.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{To quit the render window press \(\backslash\)c q or \(\backslash\)c e as usual.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{You will then be asked:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{ Accept result? (y/n)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{If you are not satisfied with your final model, enter \(\backslash\)c n to go back to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{the level set parameter question. Otherwise, enter \(\backslash\)c y.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{Let us assume we are not satisfied, therefore enter \(\backslash\)c n. You will}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{then go back to:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{Please input parameters (type return to accept current values, 'e' to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{end, 'q' to quit):}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{ NumberOfIterations(0) [PropagationScaling(1.0) CurvatureScaling(0.0) }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{AdvectionScaling(0.0)]:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{Try again with a bigger curvature scaling:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{ 300 0 0.5 1}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{This yields the following surface:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{\(\backslash\)image html curvature0x05.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{\(\backslash\)image latex curvature0x05.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{To quit the render window press \(\backslash\)c q or \(\backslash\)c e as usual.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{You will then be asked once again:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{ Accept result? (y/n)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{Assuming we are now satisfied, we enter \(\backslash\)c y .}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{Next, we receive the prompt:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{Merge branch? (y/n)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{If you are (still) satisfied with this final model, enter \(\backslash\)c y and this branch }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{will be merged with any branches you segmented before. Otherwise,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{enter \(\backslash\)c n and this branch will be discarded. (\(\backslash\)b Important: Since}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{this is our first branch we enter \(\backslash\)c y even though no previous }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{branches exist yet!)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{The render window will activate, showing you the merged result. To quit }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{the render window press \(\backslash\)c q or \(\backslash\)c e as usual.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{Then you will be prompted with:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{Segment another branch? (y/n)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{If you want to segment another branch enter \(\backslash\)c y, otherwise }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{enter \(\backslash\)c n.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{Let's segment another branch and enter \(\backslash\)c y. You will go back to :}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{ Please choose initialization type: (0: colliding fronts; 1: fast}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{ marching; 2: threshold; 3: isosurface)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{Exactly the same procedure as described above can be used again.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{Start by placing your two seeds:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{\(\backslash\)image html seed4.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{\(\backslash\)image latex seed4.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{This yields the following deformable model:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{\(\backslash\)image html deformable\_model2.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{\(\backslash\)image latex deformable\_model2.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{Deform it as before, until you reach the final model:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{\(\backslash\)image html curvature1x05.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{\(\backslash\)image latex curvature1x05.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{Then when you merge the branches, we obtain this:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{\(\backslash\)image html merge\_branches.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{\(\backslash\)image latex merge\_branches.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{Continue until you have segmented all branches. In our case, we have three}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{branches (we are extracting the surface model of an iliac bifurcation). The}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{final result is:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)image html merge\_branches2.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{\(\backslash\)image latex merge\_branches2.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{Now you have a file named \(\backslash\)c level\_sets.vti which contains an image. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{The zero level of this image is the surface you generated. Now we  }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{extract a polygonal surface from it with :}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{ vmtkmarchingcubes -\/ifile level\_sets.vti -\/ofile model.vtp}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{The final surface model is \(\backslash\)c model.vtp which you can display with :}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{vmtksurfacereader -\/ifile model.vtp -\/-\/pipe vmtksurfaceviewer}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{\(\backslash\)image html surfaceviewer1.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{\(\backslash\)image latex surfaceviewer1.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{\(\backslash\)image html surfaceviewer2.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{\(\backslash\)image latex surfaceviewer2.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{We note that you can add further branches to the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{\(\backslash\)c level\_sets.vti file by using the command}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{ vmtklevelsetsegmentation -\/ifile image\_volume\_voi.vti -\/levelsetsfile \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{level\_sets.vti -\/ofile level\_sets2.vti}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{\(\backslash\)subsection smooth Smoothing the surface}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{At this point, we have our surface model and we want to generate a }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{computational mesh. In most cases, the surface model has bumpy}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{surfaces, especially if the image quality is not high and if we didn't}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{use the curvature term in the level set evolution. Artificial}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{bumps in the surface can result in spurious flow features and will affect}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{the wall shear stress distribution, so one may want to increase surface}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{smoothness before building the mesh.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{You can do this in VMTK with :}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{ vmtksurfacesmoothing -\/ifile model.vtp -\/passband 0.1 -\/iterations 30 \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{-\/ofile model\_sm.vtp}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{There are two parameters controlling the amount of smoothing:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{passband, which is the cut-\/off spatial frequency of the low pass}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{filter, and iterations, which is the number of smoothing passes. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{For typical vessels, a passband of 0.1 and a number of iteration of 30}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{should be OK. For example, for the surface model obtained in the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{section \(\backslash\)ref surface above, the resulting surface is:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{\(\backslash\)image html smooth0130.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{\(\backslash\)image latex smooth0130.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{Remember that we can display the surfaces with :}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{vmtksurfacereader -\/ifile model\_sm.vtp -\/-\/pipe vmtksurfaceviewer}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{Smoothing with a passband of 0.01 turns this into:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{\(\backslash\)image html smooth00130.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{\(\backslash\)image latex smooth00130.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{If you want more smoothing, you can increase the passband and/or the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{number of iterations, but be careful not to remove all surface features }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{by smoothing too much. Also, watch the apex of bifurcations since}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{its curvature may decrease resulting in a shallower apex, affecting }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{the simulated haemodynamics. For example, with a passband of \(\backslash\)c 0.001 and}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{a number of iterations of \(\backslash\)c 100, the result is:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{\(\backslash\)image html smooth0001100.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{\(\backslash\)image latex smooth0001100.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{\(\backslash\)subsection clip Clipping the endcaps}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{Once we have created our smooth model, the next step is to open the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{inlets and outlets, as they are normally closed with a blobby}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{appearance. We proceed by clipping the blobby endcaps with:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{vmtksurfaceclipper -\/ifile model\_sm.vtp -\/ofile model\_cl.vtp}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{When the render window pops up, pressing \(\backslash\)c i will activate the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{"{}interactor"{}. A cube will appear (as in \(\backslash\)c vmtkimagevoiselector in the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{section \(\backslash\)ref voi). Position the cube in such a way that the portion }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{of the surface you want to clip lies inside the cube.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{\(\backslash\)image html clip0.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{\(\backslash\)image latex clip0.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{Press the space bar to proceed with clipping.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{\(\backslash\)image html clip1.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{\(\backslash\)image latex clip1.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{Press i again if you want to clip another piece, or q if you want to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{quit.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{The final result should look like this:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{\(\backslash\)image html clip2.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{\(\backslash\)image latex clip2.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{Note that it is possible to clip the endcaps automatically with}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{VMTK. For more information, please refer to VMTK's own}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{<a href="{}http://www.vmtk.org"{}>tutorial pages</a>.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{\(\backslash\)subsection add\_extensions Adding flow extensions}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{VMTK provides the option to generate cylindrical extensions to the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{inlet and outlet cross-\/sections. These are typically used to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{ensure that in the numerical simulation, the boundary conditions }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{are applied at a reasonable distance from the region of interest}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{and do not have a strong effect on the flow field. Exactly what sort}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{of boundary conditions to apply and where to apply them is, of course,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{a non-\/trivial problem. Nonetheless, the appropriate}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{VMTK command to add the cylindrical extensions is:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{vmtksurfacereader -\/ifile model\_cl.vtp -\/-\/pipe vmtkcenterlines \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{-\/seedselector openprofiles -\/-\/pipe vmtkflowextensions -\/adaptivelength 1 \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{-\/extensionratio 8 -\/normalestimationratio 1 -\/interactive 0 -\/-\/pipe \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{vmtksurfacewriter -\/ofile model\_ex.vtp}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{where the control parameters are:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{-\/ \(\backslash\)c adaptivelength (here set to 1) is a boolean flag. If set}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{  to 1, the length of each flow extension is made proportional to the mean }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{  radius of the vessel}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{-\/ \(\backslash\)c extensionratio (here set to 8) is the proportionality factor of}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{the length of each flow extension. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{-\/ \(\backslash\)c normalestimationratio: We suggest setting this parameter to 1. For further}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{  information, please refer to VMTK's }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{  <a href="{}http://www.vmtk.org"{}>tutorial page</a>.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{-\/ The flag \(\backslash\)c -\/interactive was set to \(\backslash\)c 0: This means that}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{  \(\backslash\)c vmtkflowextensions will not prompt the user about what inlet or outlet }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{  to extend, but it will perform the task on all the available open}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{  boundaries. If you use  \(\backslash\)c -\/interactive \(\backslash\)c 1, VMTK prompts the user }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{  to specify which boundaries to extend through a graphical window.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{When the render window pops up, before pressing \(\backslash\)c q, make sure you note}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{the different ids of the inlets and outlets. For our example, we see}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{in the figure below that we have one inlet with an id 0 and two}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{outlets with the ids 1 and 2.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{\(\backslash\)image html extension1.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{\(\backslash\)image latex extension1.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{A message will appear on your terminal:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{Please input list of inlet profile ids:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{Enter the list of ids with a space between them. In our example enter}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{\(\backslash\)c 0 . Next you will receive:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{Please input list of outlet profile ids:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{Enter the list of ids with a space separating them. In our}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{example enter:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{1 2}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{You can display the resulting surface using:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{vmtksurfacereader -\/ifile model\_ex.vtp -\/-\/pipe vmtksurfaceviewer}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{The result is:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{\(\backslash\)image html extenstion\_display.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{\(\backslash\)image latex extenstion\_display.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{\(\backslash\)subsection vmtk\_mesh The mesh generation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{Finally, we can generate our mesh using the command line:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{vmtkmeshgenerator -\/ifile model\_ex.vtp -\/ofile mesh.vtu -\/edgelength 0.5}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{where the edgelength parameter expresses the nominal edge length of a }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{surface triangle, in physical units. Note that the surface remeshing}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{may fail if you specify a large edge length.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{\(\backslash\)section  oomph\_mesh Creating an oomph-\/lib mesh based on output files generated by VMTK}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{VMTK exports the mesh for different solvers. The one we chose is the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{"{}.xda"{} format (of <a href="{}http://libmesh.sourceforge.net/"{}>LibMesh</a>). }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{To export the mesh in this format enter:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00617}00617 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00618}00618 \textcolor{comment}{ vmtkmeshwriter -\/ifile mesh.vtu -\/entityidsarray CellEntityIds -\/ofile \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00619}00619 \textcolor{comment}{iliac.xda}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00620}00620 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00621}00621 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00622}00622 \textcolor{comment}{\(\backslash\)c oomph-\/lib provides a conversion code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00623}00623 \textcolor{comment}{\(\backslash\)code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00624}00624 \textcolor{comment}{bin/create\_fluid\_and\_solid\_surface\_mesh\_from\_fluid\_xda\_mesh}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00625}00625 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00626}00626 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00627}00627 \textcolor{comment}{which uses the VMTK output mesh in "{}*.xda"{} format to generate a file }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00628}00628 \textcolor{comment}{"{}fluid\_*.poly"{} that can be used to generate the fluid mesh }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00629}00629 \textcolor{comment}{using the open-\/source mesh generator }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00630}00630 \textcolor{comment}{<a href="{}http://wias-\/berlin.de/software/tetgen//"{}>TetGen</a>.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00631}00631 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00632}00632 \textcolor{comment}{When executing the conversion code you will be prompted with:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00633}00633 \textcolor{comment}{\(\backslash\)code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00634}00634 \textcolor{comment}{Please enter the file name without the file extension '.xda':}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00635}00635 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00636}00636 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00637}00637 \textcolor{comment}{In our example, enter \(\backslash\)c iliac .}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00638}00638 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00639}00639 \textcolor{comment}{To facilitate the simulation of physiological fluid-\/structure }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00640}00640 \textcolor{comment}{interaction problems in which the vessel walls deform elastically }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00641}00641 \textcolor{comment}{in response to the fluid traction, the conversion }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00642}00642 \textcolor{comment}{code also generates a file "{}solid\_*.poly"{} that can be used to }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00643}00643 \textcolor{comment}{to generate a mesh for the 3D vessel wall which is assumed to be of}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00644}00644 \textcolor{comment}{constant thickness.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00645}00645 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00646}00646 \textcolor{comment}{The conversion code therefore requests the wall thickness:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00647}00647 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00648}00648 \textcolor{comment}{\(\backslash\)code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00649}00649 \textcolor{comment}{Enter the (uniform) wall thickness}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00650}00650 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00651}00651 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00652}00652 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00653}00653 \textcolor{comment}{As explained in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00654}00654 \textcolor{comment}{<a href="{}../../../interaction/unstructured\_three\_d\_fsi/html/index.html"{}>another}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00655}00655 \textcolor{comment}{tutorial</a>, the consistent generation of surface coordinates in FSI problems}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00656}00656 \textcolor{comment}{requires that all faces with the same boundary ID should be co-\/planar. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00657}00657 \textcolor{comment}{For this reason the conversion code provides the option to assign a distinct}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00658}00658 \textcolor{comment}{boundary ID to each surface triangle on the fluid-\/structure}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00659}00659 \textcolor{comment}{interaction boundary and ensures the IDs are consistent for the fluid and the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00660}00660 \textcolor{comment}{solid meshes. (The "{}*.poly"{} files generated by the conversion code list}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00661}00661 \textcolor{comment}{the relation between the old and boundary IDs at the end.)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00662}00662 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00663}00663 \textcolor{comment}{\(\backslash\)code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00664}00664 \textcolor{comment}{Do you want to create a separate ID for each planar facet}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00665}00665 \textcolor{comment}{on the fluid-\/structure interaction boundary?}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00666}00666 \textcolor{comment}{Enter y or n: }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00667}00667 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00668}00668 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00669}00669 \textcolor{comment}{For single-\/physics problem, however, it is much easier to assign a}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00670}00670 \textcolor{comment}{single boundary ID to each "{}physical"{} surface (<em> i.e. </em> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00671}00671 \textcolor{comment}{inlet, outlet, vessel boundary). Assuming that we are solving such a}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00672}00672 \textcolor{comment}{single-\/physics problem we enter \(\backslash\)c n. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00673}00673 \textcolor{comment}{Two files are now generated : \(\backslash\)c fluid\_iliac.poly }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00674}00674 \textcolor{comment}{which contains the fluid domain and \(\backslash\)c solid\_iliac.poly containing the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00675}00675 \textcolor{comment}{solid one.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00676}00676 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00677}00677 \textcolor{comment}{<a href="{}http://wias-\/berlin.de/software/tetgen//tetview.html"{}>Tetgen's</a> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00678}00678 \textcolor{comment}{mesh viewer \(\backslash\)c tetview can now be used to }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00679}00679 \textcolor{comment}{display the surface meshes: }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00680}00680 \textcolor{comment}{\(\backslash\)code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00681}00681 \textcolor{comment}{tetview fluid\_iliac.poly}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00682}00682 \textcolor{comment}{\(\backslash\)endcode  }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00683}00683 \textcolor{comment}{displays the fluid surface mesh with its four boundaries }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00684}00684 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00685}00685 \textcolor{comment}{\(\backslash\)image html fluid1.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00686}00686 \textcolor{comment}{\(\backslash\)image latex fluid1.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00687}00687 \textcolor{comment}{\(\backslash\)image html fluid2.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00688}00688 \textcolor{comment}{\(\backslash\)image latex fluid2.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00689}00689 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00690}00690 \textcolor{comment}{While}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00691}00691 \textcolor{comment}{\(\backslash\)code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00692}00692 \textcolor{comment}{tetview fluid\_iliac.poly}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00693}00693 \textcolor{comment}{\(\backslash\)endcode  }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00694}00694 \textcolor{comment}{displays the solid surface mesh (for a wall thickness of 2mm):}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00695}00695 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00696}00696 \textcolor{comment}{\(\backslash\)image html solid1.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00697}00697 \textcolor{comment}{\(\backslash\)image latex solid1.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00698}00698 \textcolor{comment}{\(\backslash\)image html solid2.gif "{} "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00699}00699 \textcolor{comment}{\(\backslash\)image latex solid2.eps "{} "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00700}00700 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00701}00701 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00702}00702 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00703}00703 \textcolor{comment}{If multiple boundary IDs are requested, the surface meshes}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00704}00704 \textcolor{comment}{are:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00705}00705 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00706}00706 \textcolor{comment}{\(\backslash\)image html fluid\_mult\_ids.gif "{}The fluid surface with multiple boundary IDs "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00707}00707 \textcolor{comment}{\(\backslash\)image latex fluid\_mult\_ids.eps "{}The fluid surface with multiple boundary IDs "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00708}00708 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00709}00709 \textcolor{comment}{\(\backslash\)image html solid\_mult\_ids.gif "{}The solid surface with multiple boundary IDs for a wall thickness of 2mm "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00710}00710 \textcolor{comment}{\(\backslash\)image latex solid\_mult\_ids.eps "{}The solid surface with multiple boundary IDs for a wall thickness of 2mm "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00711}00711 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00712}00712 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00713}00713 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00714}00714 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00715}00715 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00716}00716 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00717}00717 \textcolor{comment}{\(\backslash\)section comm\_and\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00718}00718 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00719}00719 \textcolor{comment}{-\/ In its current form, the conversion code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00720}00720 \textcolor{comment}{   <CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00721}00721 \textcolor{comment}{  <a href="{}../../../../demo\_drivers/meshing/mesh\_from\_vmtk/create\_fluid\_and\_solid\_surface\_mesh\_from\_fluid\_xda\_mesh.cc"{}>demo\_drivers/interaction/create\_fluid\_and\_solid\_surface\_mesh\_from\_fluid\_xda\_mesh.cc</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00722}00722 \textcolor{comment}{  </CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00723}00723 \textcolor{comment}{  is restricted to bifurcation-\/like geometries, and makes certain }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00724}00724 \textcolor{comment}{  assumptions about the enumeration of the boundaries. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00725}00725 \textcolor{comment}{  Furthermore, it can only deal with constant thickness vessel}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00726}00726 \textcolor{comment}{  walls: the outer surface of the blood vessel is assumed to be}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00727}00727 \textcolor{comment}{  parallel to the FSI interface, with the wall thickness being}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00728}00728 \textcolor{comment}{  measured in the direction normal to that interface. This simplistic}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00729}00729 \textcolor{comment}{  construction can easily create overlapping elements if the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00730}00730 \textcolor{comment}{  apex of the bifurcation is highly curved and/or if a large}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00731}00731 \textcolor{comment}{  wall thickness is requested. If this happens tetgen will be}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00732}00732 \textcolor{comment}{  unable to generate the solid mesh. It should be easy to modify the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00733}00733 \textcolor{comment}{  code to deal with such cases, however. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00734}00734 \textcolor{comment}{  <a href="{}../../../contact/html/index.html"{}>Get in touch</a> if you }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00735}00735 \textcolor{comment}{  need help with this (and feel free to share any improvements}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00736}00736 \textcolor{comment}{  with us).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00737}00737 \textcolor{comment}{-\/ We provide three separate tutorials to demonstrate the use of}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00738}00738 \textcolor{comment}{  VMTK-\/based meshes in \(\backslash\)c oomph-\/lib driver codes:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00739}00739 \textcolor{comment}{  -\/ <a href="{}../../../solid/vmtk\_solid/html/index.html"{}>The inflation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00740}00740 \textcolor{comment}{    of the arterial bifurcation by a constant pressure -\/-\/ a pure solid}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00741}00741 \textcolor{comment}{    mechanics problem.</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00742}00742 \textcolor{comment}{  -\/ <a href="{}../../../navier\_stokes/vmtk\_fluid/html/index.html"{}>Steady}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00743}00743 \textcolor{comment}{    finite-\/Reynolds number flow through the (rigid) arterial bifurcation -\/-\/}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00744}00744 \textcolor{comment}{    a pure fluid-\/mechanics mechanics problem.</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00745}00745 \textcolor{comment}{  -\/ <a href="{}../../../interaction/vmtk\_fsi/html/index.html"{}>Steady }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00746}00746 \textcolor{comment}{    finite-\/Reynolds-\/number flow through an elastic}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00747}00747 \textcolor{comment}{    arterial bifurcation -\/-\/ a fluid-\/structure interaction}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00748}00748 \textcolor{comment}{    problem.</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00749}00749 \textcolor{comment}{  .}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00750}00750 \textcolor{comment}{-\/ To facilitate experimentation with the methodology we distribute the  }}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00751}00751 \textcolor{comment}{  \(\backslash\)c xda file that was used to create the meshes in the above}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00752}00752 \textcolor{comment}{  examples. It is available at:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00753}00753 \textcolor{comment}{  <center>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00754}00754 \textcolor{comment}{  <a href="{}../../../../demo\_drivers/interaction/vmtk\_fsi/iliac.xda"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00755}00755 \textcolor{comment}{  demo\_drivers/interaction/vmtk\_fsi/iliac.xda</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00756}00756 \textcolor{comment}{  </center>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00757}00757 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00758}00758 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00759}00759 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00760}00760 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00761}00761 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00762}00762 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00763}00763 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{mesh__from__vmtk_8txt__doxygenified_8h_source_l00764}00764 }
+
+\end{DoxyCode}

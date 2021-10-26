@@ -42,9 +42,9 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <cstdio>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Include files from the finite-\/element library}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "shell.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/rectangular\_quadmesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}shell.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/rectangular\_quadmesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
 \DoxyCodeLine{}
@@ -59,7 +59,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{\textcolor{comment}{ /// Prescribed position of control point}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Prescribed\_y}} = 1.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to pressure load (stored in Data so it can }}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to pressure load (stored in Data so it can }}
 \DoxyCodeLine{\textcolor{comment}{ /// become an unknown in the problem when displacement control is used}}
 \DoxyCodeLine{\textcolor{comment}{} Data* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Pext\_data\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -67,7 +67,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}=1.0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Return a reference to the external pressure }}
+\DoxyCodeLine{\textcolor{comment}{ /// Return a reference to the external pressure }}
 \DoxyCodeLine{\textcolor{comment}{ /// load on the elastic tube.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{external\_pressure}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} (*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae5107b48f68b31302f3d37b038739904}{Pext\_data\_pt}}-\/>value\_pt(0))*pow(0.05,3)/12.0;\}}
@@ -77,13 +77,13 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{press\_load}}(\textcolor{keyword}{const} Vector<double> \&xi,}
 \DoxyCodeLine{                 \textcolor{keyword}{const} Vector<double> \&x,}
 \DoxyCodeLine{                 \textcolor{keyword}{const} Vector<double> \&N,}
-\DoxyCodeLine{                 Vector<double>\& \mbox{\hyperlink{clamped__shell__buckling_8txt_a018f990526757b6bf7c8020a8ca96f1b}{load}})}
+\DoxyCodeLine{                 Vector<double>\& load)}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  \textcolor{comment}{//std::cout << N[0] << " " << N[1] << " " << N[2] << std::endl;}}
-\DoxyCodeLine{  \textcolor{comment}{//std::cout << xi[0] << " " << xi[1] << std::endl;}}
+\DoxyCodeLine{  \textcolor{comment}{//std::cout << N[0] << "{} "{} << N[1] << "{} "{} << N[2] << std::endl;}}
+\DoxyCodeLine{  \textcolor{comment}{//std::cout << xi[0] << "{} "{} << xi[1] << std::endl;}}
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<3;i++) }
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    \mbox{\hyperlink{clamped__shell__buckling_8txt_a018f990526757b6bf7c8020a8ca96f1b}{load}}[i] = (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{external\_pressure}}() -\/ }
+\DoxyCodeLine{    load[i] = (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{external\_pressure}}() -\/ }
 \DoxyCodeLine{               \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}*pow(0.05,3)/12.0*cos(2.0*xi[1]))*N[i];}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{ \}}
@@ -102,15 +102,15 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Constructor for the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh}{ShellMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor for the mesh}}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh_a6ce8404f69fa3f4c10dac5c18cff0699}{ShellMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
 \DoxyCodeLine{           \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short In all elastic problems, the nodes must be assigned an undeformed,}}
+\DoxyCodeLine{\textcolor{comment}{ /// In all elastic problems, the nodes must be assigned an undeformed,}}
 \DoxyCodeLine{\textcolor{comment}{ /// or reference, position, corresponding to the stress-\/free state}}
 \DoxyCodeLine{\textcolor{comment}{ /// of the elastic body. This function assigns the undeformed position }}
 \DoxyCodeLine{\textcolor{comment}{ /// for the nodes on the elastic tube}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} assign\_undeformed\_positions(GeomObject* \textcolor{keyword}{const} \&undeformed\_midplane\_pt);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classShellMesh_a3576870121fad30d0f99588ea8082ca1}{assign\_undeformed\_positions}}(GeomObject* \textcolor{keyword}{const} \&undeformed\_midplane\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -227,7 +227,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{              \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overload Access function for the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}* \mbox{\hyperlink{classShellProblem_a1905a1b913469ed54f7c8f55d133ff57}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}* \mbox{\hyperlink{classShellProblem_afc9aeb3cac98033db75b8963f8304928}{mesh\_pt}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classShellMesh}{ShellMesh<ELEMENT>}}*\textcolor{keyword}{>}(Problem::mesh\_pt());\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after solve empty}}
@@ -357,7 +357,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//  //Setup displacement control}}
-\DoxyCodeLine{\textcolor{comment}{//  //Fix the displacement at the mid-\/point of the tube in the "vertical"}}
+\DoxyCodeLine{\textcolor{comment}{//  //Fix the displacement at the mid-\/point of the tube in the "{}vertical"{}}}
 \DoxyCodeLine{\textcolor{comment}{//  //(y) direction.}}
 \DoxyCodeLine{\textcolor{comment}{//  //Set the displacement control element (located halfway along the tube)}}
 \DoxyCodeLine{\textcolor{comment}{// Disp\_ctl\_element\_pt = dynamic\_cast<ELEMENT*>(mesh\_pt()-\/>element\_pt(3*Ny-\/1));}}
@@ -415,11 +415,11 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{ controlled\_element\_pt-\/>interpolated\_xi(s\_displ\_control,xi);}
 \DoxyCodeLine{ controlled\_element\_pt-\/>interpolated\_x(s\_displ\_control,x);}
 \DoxyCodeLine{ std::cout << std::endl;}
-\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"Controlled element: "} << nel\_ctrl << std::endl;}
-\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"Displacement control applied at xi = ("} }
-\DoxyCodeLine{           << xi[0] << \textcolor{stringliteral}{", "} << xi[1] << \textcolor{stringliteral}{")"} << std::endl;}
-\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"Corresponding to                x  = ("} }
-\DoxyCodeLine{           << x[0] << \textcolor{stringliteral}{", "} << x[1] << \textcolor{stringliteral}{", "} << x[2] << \textcolor{stringliteral}{")"} << std::endl;}
+\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"{}Controlled element: "{}} << nel\_ctrl << std::endl;}
+\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"{}Displacement control applied at xi = ("{}} }
+\DoxyCodeLine{           << xi[0] << \textcolor{stringliteral}{"{}, "{}} << xi[1] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
+\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"{}Corresponding to                x  = ("{}} }
+\DoxyCodeLine{           << x[0] << \textcolor{stringliteral}{"{}, "{}} << x[1] << \textcolor{stringliteral}{"{}, "{}} << x[2] << \textcolor{stringliteral}{"{})"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// The constructor of the  DisplacementControlElement has created}}
@@ -478,7 +478,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
 \DoxyCodeLine{ cout << std::endl;}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\# of dofs "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\# of dofs "{}} << assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{ cout << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}}
@@ -499,7 +499,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Open an output trace file}}
-\DoxyCodeLine{ ofstream trace(\textcolor{stringliteral}{"trace.dat"});}
+\DoxyCodeLine{ ofstream trace(\textcolor{stringliteral}{"{}trace.dat"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Gradually compress the tube by decreasing the value of the prescribed}}
@@ -509,7 +509,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Global\_Physical\_Variables::Prescribed\_y}} -\/= 0.05;}
 \DoxyCodeLine{}
-\DoxyCodeLine{   cout << std::endl << \textcolor{stringliteral}{"Increasing displacement: Prescribed\_y is "} }
+\DoxyCodeLine{   cout << std::endl << \textcolor{stringliteral}{"{}Increasing displacement: Prescribed\_y is "{}} }
 \DoxyCodeLine{        << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2f7ea98cb8462b3920a026bed5f6099}{Global\_Physical\_Variables::Prescribed\_y}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve}}
@@ -518,11 +518,11 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Output the pressure (on the bending scale)}}
 \DoxyCodeLine{   trace << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{Global\_Physical\_Variables::external\_pressure}}()/(pow(0.05,3)/12.0) }
-\DoxyCodeLine{         << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{         << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{         \textcolor{comment}{//Position of first trace node}}
-\DoxyCodeLine{         << Trace\_node\_pt-\/>x(0) << \textcolor{stringliteral}{" "} << Trace\_node\_pt-\/>x(1) << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{         << Trace\_node\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}} << Trace\_node\_pt-\/>x(1) << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{          \textcolor{comment}{//Position of second trace node}}
-\DoxyCodeLine{         << Trace\_node2\_pt-\/>x(0) << \textcolor{stringliteral}{" "} << Trace\_node2\_pt-\/>x(1) << std::endl;}
+\DoxyCodeLine{         << Trace\_node2\_pt-\/>x(0) << \textcolor{stringliteral}{"{} "{}} << Trace\_node2\_pt-\/>x(1) << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Reset perturbation}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Global\_Physical\_Variables::Pcos}}=0.0;}
@@ -532,7 +532,7 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{ trace.close();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Output the tube shape in the most strongly collapsed configuration}}
-\DoxyCodeLine{ ofstream file(\textcolor{stringliteral}{"final\_shape.dat"});}
+\DoxyCodeLine{ ofstream file(\textcolor{stringliteral}{"{}final\_shape.dat"{}});}
 \DoxyCodeLine{ mesh\_pt()-\/>output(file,5);}
 \DoxyCodeLine{ file.close();}
 \DoxyCodeLine{}
@@ -552,10 +552,10 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem}}
 \DoxyCodeLine{ \mbox{\hyperlink{classShellProblem}{ShellProblem<StorableShapeSolidElement<DiagHermiteShellElement>}} > }
-\DoxyCodeLine{  \mbox{\hyperlink{clamped__shell__buckling_8txt_a02b6a4d549a097d9fb1c023e5f07eb4b}{problem}}(5,3,L,L\_phi);}
+\DoxyCodeLine{  problem(5,3,L,L\_phi);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Solve the problem}}
-\DoxyCodeLine{ \mbox{\hyperlink{clamped__shell__buckling_8txt_a02b6a4d549a097d9fb1c023e5f07eb4b}{problem}}.solve();}
+\DoxyCodeLine{ problem.solve();}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -563,10 +563,11 @@ In this document, we discuss the solution of the buckling of a cylindrical shell
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+
 \end{DoxyCodeInclude}
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

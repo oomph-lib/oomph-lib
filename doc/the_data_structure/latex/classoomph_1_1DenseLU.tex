@@ -2,7 +2,7 @@
 \label{classoomph_1_1DenseLU}\index{oomph::DenseLU@{oomph::DenseLU}}
 
 
-Dense LU decomposition-\/based solve of full assembled linear system. V\+E\+RY inefficient but useful to illustrate the principle. Only suitable for use with Serial matrices and vectors. This solver will only work with non-\/distributed matrices and vectors (note\+: \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} is not distributable)  
+Dense LU decomposition-\/based solve of full assembled linear system. VERY inefficient but useful to illustrate the principle. Only suitable for use with Serial matrices and vectors. This solver will only work with non-\/distributed matrices and vectors (note\+: \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} is not distributable)  
 
 
 
@@ -20,9 +20,9 @@ Inheritance diagram for oomph\+::Dense\+LU\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1DenseLU_a7d8217ef310a5c5ad224e4e6aa40d923}{Dense\+LU}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, initialise storage. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DenseLU_a5f0c2eb1cbe142498d12ae14e3cadca2}{Dense\+LU}} (const \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1DenseLU_ae3b4f2e06409180d9833058a52aa3a10}{Dense\+LU}} (const \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DenseLU_a90c01b2a2471b4e038c6d5138c86c378}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} \&)
+void \mbox{\hyperlink{classoomph_1_1DenseLU_a9d26161eb3767e708584e2cf6b703c40}{operator=}} (const \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1DenseLU_a012d934c8dec17f2ca3ad504939ab29d}{$\sim$\+Dense\+LU}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, clean up the stored LU factors. \end{DoxyCompactList}\item 
@@ -61,7 +61,7 @@ int \mbox{\hyperlink{classoomph_1_1DenseLU_aea4118f8ead9e3f89f8d234f572766d1}{Si
 \item 
 long $\ast$ \mbox{\hyperlink{classoomph_1_1DenseLU_a66730f6a64112fe29601fefb08f4dc4f}{Index}}
 \begin{DoxyCompactList}\small\item\em Pointer to storage for the index of permutations in the LU solve. \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{classoomph_1_1DenseLU_a9b393b33667887cfdafa6290c7b3e209}{L\+U\+\_\+factors}}
+double $\ast$ \mbox{\hyperlink{classoomph_1_1DenseLU_a9b393b33667887cfdafa6290c7b3e209}{LU\+\_\+factors}}
 \begin{DoxyCompactList}\small\item\em Pointer to storage for the LU decomposition. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -71,9 +71,9 @@ class \mbox{\hyperlink{classoomph_1_1DenseLU_a6140531810d729d53113b6ac65193197}{
 
 
 \doxysubsection{Detailed Description}
-Dense LU decomposition-\/based solve of full assembled linear system. V\+E\+RY inefficient but useful to illustrate the principle. Only suitable for use with Serial matrices and vectors. This solver will only work with non-\/distributed matrices and vectors (note\+: \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} is not distributable) 
+Dense LU decomposition-\/based solve of full assembled linear system. VERY inefficient but useful to illustrate the principle. Only suitable for use with Serial matrices and vectors. This solver will only work with non-\/distributed matrices and vectors (note\+: \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} is not distributable) 
 
-Definition at line 339 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00333}{333}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
@@ -82,7 +82,7 @@ Definition at line 339 of file linear\+\_\+solver.\+h.
 \index{oomph::DenseLU@{oomph::DenseLU}!DenseLU@{DenseLU}}
 \index{DenseLU@{DenseLU}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{DenseLU()}{DenseLU()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+Dense\+L\+U\+::\+Dense\+LU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Dense\+LU\+::\+Dense\+LU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -90,35 +90,27 @@ Constructor, initialise storage.
 
 
 
-Definition at line 346 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00340}{340}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time.
+References \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}.
 
-\mbox{\Hypertarget{classoomph_1_1DenseLU_a5f0c2eb1cbe142498d12ae14e3cadca2}\label{classoomph_1_1DenseLU_a5f0c2eb1cbe142498d12ae14e3cadca2}} 
+\mbox{\Hypertarget{classoomph_1_1DenseLU_ae3b4f2e06409180d9833058a52aa3a10}\label{classoomph_1_1DenseLU_ae3b4f2e06409180d9833058a52aa3a10}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!DenseLU@{DenseLU}}
 \index{DenseLU@{DenseLU}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{DenseLU()}{DenseLU()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Dense\+L\+U\+::\+Dense\+LU (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Dense\+LU\+::\+Dense\+LU (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
 
-
-
-Definition at line 358 of file linear\+\_\+solver.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
-
 \mbox{\Hypertarget{classoomph_1_1DenseLU_a012d934c8dec17f2ca3ad504939ab29d}\label{classoomph_1_1DenseLU_a012d934c8dec17f2ca3ad504939ab29d}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!````~DenseLU@{$\sim$DenseLU}}
 \index{````~DenseLU@{$\sim$DenseLU}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{$\sim$DenseLU()}{~DenseLU()}}
-{\footnotesize\ttfamily oomph\+::\+Dense\+L\+U\+::$\sim$\+Dense\+LU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Dense\+LU\+::$\sim$\+Dense\+LU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -126,11 +118,11 @@ Destructor, clean up the stored LU factors.
 
 
 
-Definition at line 370 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00358}{358}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{linear__solver_8cc_source_l00103}{clean\+\_\+up\+\_\+memory()}}.
 
 
 
@@ -139,47 +131,47 @@ References clean\+\_\+up\+\_\+memory().
 \index{oomph::DenseLU@{oomph::DenseLU}!backsub@{backsub}}
 \index{backsub@{backsub}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{backsub()}{backsub()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+L\+U\+::backsub (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+LU\+::backsub (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
 Do the backsubstitution step to solve the system LU result = rhs. 
 
-Do the backsubstitution for the \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} solver. W\+A\+R\+N\+I\+NG\+: this class does not perform any P\+A\+R\+A\+N\+O\+ID checks on the vectors -\/ these are all performed in the solve(...) method. 
+Do the backsubstitution for the \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} solver. WARNING\+: this class does not perform any PARANOID checks on the vectors -\/ these are all performed in the solve(...) method. 
 
-Definition at line 317 of file linear\+\_\+solver.\+cc.
-
-
-
-References i, Index, L\+U\+\_\+factors, n, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00317}{317}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-Referenced by solve().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__solver_8h_source_l00419}{Index}}, \mbox{\hyperlink{linear__solver_8h_source_l00422}{LU\+\_\+factors}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00416}{solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_acef3a68bf4e28465a7c316dba135f504}\label{classoomph_1_1DenseLU_acef3a68bf4e28465a7c316dba135f504}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!backsub@{backsub}}
 \index{backsub@{backsub}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{backsub()}{backsub()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+L\+U\+::backsub (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+LU\+::backsub (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
 perform back substitution using \mbox{\hyperlink{classoomph_1_1Vector}{Vector$<$double$>$}} 
 
-Do the backsubstitution for the \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} solver. W\+A\+R\+N\+I\+NG\+: this class does not perform any P\+A\+R\+A\+N\+O\+ID checks on the vectors -\/ these are all performed in the solve(...) method. So, if you call backsub directly, you have been warned... 
+Do the backsubstitution for the \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} solver. WARNING\+: this class does not perform any PARANOID checks on the vectors -\/ these are all performed in the solve(...) method. So, if you call backsub directly, you have been warned... 
 
-Definition at line 369 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00369}{369}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References i, Index, L\+U\+\_\+factors, and n.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__solver_8h_source_l00419}{Index}}, and \mbox{\hyperlink{linear__solver_8h_source_l00422}{LU\+\_\+factors}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_a5d4d454874476adadb3bc23913b1190b}\label{classoomph_1_1DenseLU_a5d4d454874476adadb3bc23913b1190b}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+L\+U\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+LU\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -191,43 +183,43 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 103 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00103}{103}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution(), Index, and L\+U\+\_\+factors.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{linear__solver_8h_source_l00419}{Index}}, and \mbox{\hyperlink{linear__solver_8h_source_l00422}{LU\+\_\+factors}}.
 
 
 
-Referenced by factorise(), solve(), and $\sim$\+Dense\+L\+U().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00128}{factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00416}{solve()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00358}{$\sim$\+Dense\+LU()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_a943a629a67289120473855bc96766dfc}\label{classoomph_1_1DenseLU_a943a629a67289120473855bc96766dfc}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!factorise@{factorise}}
 \index{factorise@{factorise}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{factorise()}{factorise()}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+L\+U\+::factorise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+LU\+::factorise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
 Perform the LU decomposition of the matrix. 
 
-LU decompose the matrix. W\+A\+R\+N\+I\+NG\+: this class does not perform any P\+A\+R\+A\+N\+O\+ID checks on the vectors -\/ these are all performed in the solve(...) method. 
+LU decompose the matrix. WARNING\+: this class does not perform any PARANOID checks on the vectors -\/ these are all performed in the solve(...) method. 
 
-Definition at line 128 of file linear\+\_\+solver.\+cc.
-
-
-
-References clean\+\_\+up\+\_\+memory(), i, Index, L\+U\+\_\+factors, n, oomph\+::\+Double\+Matrix\+Base\+::nrow(), and Sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00128}{128}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-Referenced by solve().
+References \mbox{\hyperlink{linear__solver_8cc_source_l00103}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__solver_8h_source_l00419}{Index}}, \mbox{\hyperlink{linear__solver_8h_source_l00422}{LU\+\_\+factors}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00415}{Sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00416}{solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_a4605ec2ca02ff0b30f4cefc2458dfb66}\label{classoomph_1_1DenseLU_a4605ec2ca02ff0b30f4cefc2458dfb66}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!jacobian\_setup\_time@{jacobian\_setup\_time}}
 \index{jacobian\_setup\_time@{jacobian\_setup\_time}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{jacobian\_setup\_time()}{jacobian\_setup\_time()}}
-{\footnotesize\ttfamily double oomph\+::\+Dense\+L\+U\+::jacobian\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Dense\+LU\+::jacobian\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -239,17 +231,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e9
 
 
 
-Definition at line 394 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00382}{382}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Jacobian\+\_\+setup\+\_\+time.
+References \mbox{\hyperlink{linear__solver_8h_source_l00408}{Jacobian\+\_\+setup\+\_\+time}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_aabe93cf400bb488f0bc08755ee0dfde4}\label{classoomph_1_1DenseLU_aabe93cf400bb488f0bc08755ee0dfde4}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!linear\_solver\_solution\_time@{linear\_solver\_solution\_time}}
 \index{linear\_solver\_solution\_time@{linear\_solver\_solution\_time}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_solution\_time()}{linear\_solver\_solution\_time()}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Dense\+L\+U\+::linear\+\_\+solver\+\_\+solution\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Dense\+LU\+::linear\+\_\+solver\+\_\+solution\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -261,35 +253,27 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c1
 
 
 
-Definition at line 401 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00389}{389}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Solution\+\_\+time.
+References \mbox{\hyperlink{linear__solver_8h_source_l00411}{Solution\+\_\+time}}.
 
-\mbox{\Hypertarget{classoomph_1_1DenseLU_a90c01b2a2471b4e038c6d5138c86c378}\label{classoomph_1_1DenseLU_a90c01b2a2471b4e038c6d5138c86c378}} 
+\mbox{\Hypertarget{classoomph_1_1DenseLU_a9d26161eb3767e708584e2cf6b703c40}\label{classoomph_1_1DenseLU_a9d26161eb3767e708584e2cf6b703c40}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+L\+U\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+LU\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseLU}{Dense\+LU}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 364 of file linear\+\_\+solver.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1DenseLU_ae82e044bb5a1173b8105b6fedd904801}\label{classoomph_1_1DenseLU_ae82e044bb5a1173b8105b6fedd904801}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!solve@{solve}}
 \index{solve@{solve}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+L\+U\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+LU\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -301,21 +285,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191d
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_ab8c9d6006352d0ea61a721b9c58cd523}{oomph\+::\+F\+D\+\_\+\+LU}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_ab8c9d6006352d0ea61a721b9c58cd523}{oomph\+::\+FD\+\_\+\+LU}}.
 
 
 
-Definition at line 416 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00416}{416}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References backsub(), oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, factorise(), oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::oomph\+\_\+info, Solution\+\_\+time, and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{linear__solver_8cc_source_l00317}{backsub()}}, \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00103}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{linear__solver_8cc_source_l00128}{factorise()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00411}{Solution\+\_\+time}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_a1d79cf13a269733d655e3e90c447f84d}\label{classoomph_1_1DenseLU_a1d79cf13a269733d655e3e90c447f84d}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!solve@{solve}}
 \index{solve@{solve}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+L\+U\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+LU\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -327,45 +311,45 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a1f7a2ee2cd18d3da
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}{oomph\+::\+F\+D\+\_\+\+LU}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_a2a44542b29faa39f1b816dc80da9eba1}{oomph\+::\+FD\+\_\+\+LU}}.
 
 
 
-Definition at line 536 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00536}{536}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References backsub(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, factorise(), oomph\+::oomph\+\_\+info, and Solution\+\_\+time.
+References \mbox{\hyperlink{linear__solver_8cc_source_l00317}{backsub()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00103}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{linear__solver_8cc_source_l00128}{factorise()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{linear__solver_8h_source_l00411}{Solution\+\_\+time}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_ac354b224819146618ce8a1396f8f980e}\label{classoomph_1_1DenseLU_ac354b224819146618ce8a1396f8f980e}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!solve@{solve}}
 \index{solve@{solve}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily void oomph\+::\+Dense\+L\+U\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Dense\+LU\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
 
-Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
 
 Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f005eda2f}{oomph\+::\+F\+D\+\_\+\+LU}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FD__LU_a6fd251bef9cdb7efbed4927f005eda2f}{oomph\+::\+FD\+\_\+\+LU}}.
 
 
 
-Definition at line 51 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00051}{51}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Problem\+::get\+\_\+jacobian(), Jacobian\+\_\+setup\+\_\+time, oomph\+::\+Problem\+::ndof(), oomph\+::oomph\+\_\+info, residuals(), Sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix, oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian(), and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{linear__solver_8h_source_l00408}{Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00415}{Sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix}}, \mbox{\hyperlink{problem_8h_source_l02424}{oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00051}{solve()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 
 
-Referenced by oomph\+::\+F\+D\+\_\+\+L\+U\+::solve().
+Referenced by \mbox{\hyperlink{linear__solver_8h_source_l00450}{oomph\+::\+FD\+\_\+\+LU\+::solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l00051}{solve()}}.
 
 
 
@@ -382,7 +366,7 @@ The \mbox{\hyperlink{classoomph_1_1DenseDoubleMatrix}{Dense\+Double\+Matrix}} cl
 
 
 
-Definition at line 342 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00336}{336}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
@@ -391,7 +375,7 @@ Definition at line 342 of file linear\+\_\+solver.\+h.
 \index{oomph::DenseLU@{oomph::DenseLU}!Index@{Index}}
 \index{Index@{Index}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{Index}{Index}}
-{\footnotesize\ttfamily long$\ast$ oomph\+::\+Dense\+L\+U\+::\+Index\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily long$\ast$ oomph\+::\+Dense\+LU\+::\+Index\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -399,17 +383,17 @@ Pointer to storage for the index of permutations in the LU solve.
 
 
 
-Definition at line 431 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00419}{419}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub(), clean\+\_\+up\+\_\+memory(), and factorise().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00317}{backsub()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00103}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l00128}{factorise()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_a3618b27ae286e468251f52091ddf1e70}\label{classoomph_1_1DenseLU_a3618b27ae286e468251f52091ddf1e70}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!Jacobian\_setup\_time@{Jacobian\_setup\_time}}
 \index{Jacobian\_setup\_time@{Jacobian\_setup\_time}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{Jacobian\_setup\_time}{Jacobian\_setup\_time}}
-{\footnotesize\ttfamily double oomph\+::\+Dense\+L\+U\+::\+Jacobian\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Dense\+LU\+::\+Jacobian\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -417,17 +401,17 @@ Jacobian setup time.
 
 
 
-Definition at line 420 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00408}{408}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by jacobian\+\_\+setup\+\_\+time(), solve(), and oomph\+::\+F\+D\+\_\+\+L\+U\+::solve().
+Referenced by \mbox{\hyperlink{linear__solver_8h_source_l00382}{jacobian\+\_\+setup\+\_\+time()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00051}{solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l00568}{oomph\+::\+FD\+\_\+\+LU\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_a9b393b33667887cfdafa6290c7b3e209}\label{classoomph_1_1DenseLU_a9b393b33667887cfdafa6290c7b3e209}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!LU\_factors@{LU\_factors}}
 \index{LU\_factors@{LU\_factors}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{LU\_factors}{LU\_factors}}
-{\footnotesize\ttfamily double$\ast$ oomph\+::\+Dense\+L\+U\+::\+L\+U\+\_\+factors\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Dense\+LU\+::\+LU\+\_\+factors\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -435,17 +419,17 @@ Pointer to storage for the LU decomposition.
 
 
 
-Definition at line 434 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00422}{422}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub(), clean\+\_\+up\+\_\+memory(), and factorise().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00317}{backsub()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00103}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l00128}{factorise()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_aea4118f8ead9e3f89f8d234f572766d1}\label{classoomph_1_1DenseLU_aea4118f8ead9e3f89f8d234f572766d1}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!Sign\_of\_determinant\_of\_matrix@{Sign\_of\_determinant\_of\_matrix}}
 \index{Sign\_of\_determinant\_of\_matrix@{Sign\_of\_determinant\_of\_matrix}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{Sign\_of\_determinant\_of\_matrix}{Sign\_of\_determinant\_of\_matrix}}
-{\footnotesize\ttfamily int oomph\+::\+Dense\+L\+U\+::\+Sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily int oomph\+::\+Dense\+LU\+::\+Sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -453,17 +437,17 @@ Sign of the determinant of the matrix (obtained during the LU decomposition)
 
 
 
-Definition at line 427 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00415}{415}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by factorise(), solve(), and oomph\+::\+F\+D\+\_\+\+L\+U\+::solve().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00128}{factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00051}{solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l00568}{oomph\+::\+FD\+\_\+\+LU\+::solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DenseLU_abd10caf6beabb9c81fb7a8072212c6ad}\label{classoomph_1_1DenseLU_abd10caf6beabb9c81fb7a8072212c6ad}} 
 \index{oomph::DenseLU@{oomph::DenseLU}!Solution\_time@{Solution\_time}}
 \index{Solution\_time@{Solution\_time}!oomph::DenseLU@{oomph::DenseLU}}
 \doxysubsubsection{\texorpdfstring{Solution\_time}{Solution\_time}}
-{\footnotesize\ttfamily double oomph\+::\+Dense\+L\+U\+::\+Solution\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Dense\+LU\+::\+Solution\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -471,11 +455,11 @@ Solution time.
 
 
 
-Definition at line 423 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00411}{411}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by linear\+\_\+solver\+\_\+solution\+\_\+time(), and solve().
+Referenced by \mbox{\hyperlink{linear__solver_8h_source_l00389}{linear\+\_\+solver\+\_\+solution\+\_\+time()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l00416}{solve()}}.
 
 
 

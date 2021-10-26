@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1BlockAntiDiagonalPreconditioner}{}\doxysection{oomph\+::Block\+Anti\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+IX $>$ Class Template Reference}
+\hypertarget{classoomph_1_1BlockAntiDiagonalPreconditioner}{}\doxysection{oomph\+::Block\+Anti\+Diagonal\+Preconditioner\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1BlockAntiDiagonalPreconditioner}\index{oomph::BlockAntiDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockAntiDiagonalPreconditioner$<$ MATRIX $>$}}
 
 
@@ -9,7 +9,7 @@ Block \char`\"{}anti-\/diagonal\char`\"{} preconditioner, i.\+e. same as block d
 
 {\ttfamily \#include $<$general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h$>$}
 
-Inheritance diagram for oomph\+::Block\+Anti\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+IX $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Block\+Anti\+Diagonal\+Preconditioner\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=6.000000cm]{classoomph_1_1BlockAntiDiagonalPreconditioner}
@@ -19,17 +19,16 @@ Inheritance diagram for oomph\+::Block\+Anti\+Diagonal\+Preconditioner$<$ M\+A\+
 \begin{DoxyCompactItemize}
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1BlockAntiDiagonalPreconditioner_a880a182c7aca041992146d559c109fdb}{get\+\_\+other\+\_\+diag\+\_\+ds}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&nblock) const
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This is a helper function to allow us to implement Block\+Anti\+Diagonal using Block\+Diagonal preconditioner and only changing this function. Get the second index for block number i. Obviously for a diagonal preconditioner we want the blocks (i,i). For anti diagonal we will want blocks (i, nblock -\/ i -\/ 1). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename M\+A\+T\+R\+IX$>$\newline
-class oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}
-
+\subsubsection*{template$<$typename MATRIX$>$\newline
+class oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner$<$ MATRIX $>$}
 Block \char`\"{}anti-\/diagonal\char`\"{} preconditioner, i.\+e. same as block diagonal but along the other diagonal of the matrix (top-\/right to bottom-\/left). 
 
-Definition at line 599 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00577}{577}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
 
 
 
@@ -38,20 +37,24 @@ Definition at line 599 of file general\+\_\+purpose\+\_\+block\+\_\+precondition
 \index{oomph::BlockAntiDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockAntiDiagonalPreconditioner$<$ MATRIX $>$}!get\_other\_diag\_ds@{get\_other\_diag\_ds}}
 \index{get\_other\_diag\_ds@{get\_other\_diag\_ds}!oomph::BlockAntiDiagonalPreconditioner$<$ MATRIX $>$@{oomph::BlockAntiDiagonalPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{get\_other\_diag\_ds()}{get\_other\_diag\_ds()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1BlockAntiDiagonalPreconditioner}{oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::get\+\_\+other\+\_\+diag\+\_\+ds (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{nblock }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1BlockAntiDiagonalPreconditioner}{oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner}}$<$ MATRIX $>$\+::get\+\_\+other\+\_\+diag\+\_\+ds (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{nblock }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
 
 This is a helper function to allow us to implement Block\+Anti\+Diagonal using Block\+Diagonal preconditioner and only changing this function. Get the second index for block number i. Obviously for a diagonal preconditioner we want the blocks (i,i). For anti diagonal we will want blocks (i, nblock -\/ i -\/ 1). 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_acb723bba0b200adc25c9df9003c09205}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}.
+
+
+Reimplemented from \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner_acb723bba0b200adc25c9df9003c09205}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$}}.
 
 
 
-Definition at line 608 of file general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00586}{586}} of file \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source}{general\+\_\+purpose\+\_\+block\+\_\+preconditioners.\+h}}.
 
 
 
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 

@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{}\doxysection{oomph\+::Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{}\doxysection{oomph\+::Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}\index{oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
+
+
+//////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.430556cm]{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}
@@ -13,7 +18,7 @@ Inheritance diagram for oomph\+::Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh_a123b12382b582eb20dd2749d9f85cd8c}{Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a4ff7678ec433180e2245ea2147f222b7}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a45011f22dedd480392b1f376e4269921}{ny}}, const double \&lx, const double \&ly, const double \&gap\+\_\+fraction, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$wall\+\_\+pt, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh_a123b12382b582eb20dd2749d9f85cd8c}{Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a84f59d74c6d9038231fb138c29420ed7}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1SimpleRectangularQuadMesh_a2fb0d63a354817c162e37507673e26e9}{ny}}, const double \&lx, const double \&ly, const double \&gap\+\_\+fraction, Geom\+Object $\ast$wall\+\_\+pt, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements, lengths, pointer to Geom\+Object that defines the collapsible segment and pointer to Time\+Stepper (defaults to the default timestepper, Steady). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh_aa68685323573763e1ded0cceed5ad14f}{update\+\_\+node\+\_\+update}} (Algebraic\+Node $\ast$\&node\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Update the node update data for specified node following any mesh adapation. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -21,10 +26,11 @@ void \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh_aa686
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh$<$ ELEMENT $>$}
+//////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
-Refineable version algebraic \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh}{F\+S\+I\+Driven\+Cavity\+Mesh}}.
+Refineable version algebraic \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh}{FSIDriven\+Cavity\+Mesh}}.
 \begin{DoxyItemize}
 \item Boundary 0 is the moving lid.
 \item Boundary 1 is the gap above the moving lid on the right wall
@@ -34,7 +40,7 @@ Refineable version algebraic \mbox{\hyperlink{classoomph_1_1FSIDrivenCavityMesh}
 \item Boundary 5 is the gap above the moving lid on the left wall 
 \end{DoxyItemize}
 
-Definition at line 217 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00217}{217}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -43,8 +49,8 @@ Definition at line 217 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.
 \index{oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}!RefineableAlgebraicFSIDrivenCavityMesh@{RefineableAlgebraicFSIDrivenCavityMesh}}
 \index{RefineableAlgebraicFSIDrivenCavityMesh@{RefineableAlgebraicFSIDrivenCavityMesh}!oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableAlgebraicFSIDrivenCavityMesh()}{RefineableAlgebraicFSIDrivenCavityMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{ly,  }\item[{const double \&}]{gap\+\_\+fraction,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$}]{wall\+\_\+pt,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{oomph\+::\+Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{ly,  }\item[{const double \&}]{gap\+\_\+fraction,  }\item[{Geom\+Object $\ast$}]{wall\+\_\+pt,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -52,7 +58,7 @@ Constructor\+: Pass number of elements, lengths, pointer to Geom\+Object that de
 
 
 
-Definition at line 225 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source_l00225}{225}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8h_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -61,20 +67,18 @@ Definition at line 225 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.
 \index{oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}!update\_node\_update@{update\_node\_update}}
 \index{update\_node\_update@{update\_node\_update}!oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$@{oomph::RefineableAlgebraicFSIDrivenCavityMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{update\_node\_update()}{update\_node\_update()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{oomph\+::\+Refineable\+Algebraic\+F\+S\+I\+Driven\+Cavity\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::update\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{Algebraic\+Node $\ast$\&}]{node\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableAlgebraicFSIDrivenCavityMesh}{oomph\+::\+Refineable\+Algebraic\+FSIDriven\+Cavity\+Mesh}}$<$ ELEMENT $>$\+::update\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{Algebraic\+Node $\ast$\&}]{node\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
 Update the node update data for specified node following any mesh adapation. 
 
+///////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////
+
 Update the geometric references that are used to update node after mesh adaptation. 
 
-Definition at line 388 of file fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc.
-
-
-
-References Geom\+Object, and s.
+Definition at line \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source_l00388}{388}} of file \mbox{\hyperlink{fsi__driven__cavity__mesh_8template_8cc_source}{fsi\+\_\+driven\+\_\+cavity\+\_\+mesh.\+template.\+cc}}.
 
 
 

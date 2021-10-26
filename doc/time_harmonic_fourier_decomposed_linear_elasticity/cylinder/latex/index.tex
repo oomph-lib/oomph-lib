@@ -3,7 +3,7 @@ The aim of this tutorial is to demonstrate the solution of the time-\/harmonic e
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
 \hline
-\begin{center} {\bfseries{Acknowledgement\+:}} This implementation of the equations and the documentation were developed jointly with Robert Harter (Thales Underwater Systems Ltd) with financial support from a K\+TA Secondment grant from University of Manchester\textquotesingle{}s E\+P\+S\+R\+C-\/funded Knowledge Transfer Account. \end{center}    \\\cline{1-1}
+\begin{center} {\bfseries{Acknowledgement\+:}} This implementation of the equations and the documentation were developed jointly with Robert Harter (Thales Underwater Systems Ltd) with financial support from a KTA Secondment grant from University of Manchester\textquotesingle{}s EPSRC-\/funded Knowledge Transfer Account. \end{center}    \\\cline{1-1}
 \end{longtabu}
 \end{center} 
 
@@ -25,7 +25,7 @@ Given the assumed axisymmetry of the body we expand all quantities in a Fourier 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_element_types}{}\doxysection{Implementation}\label{index_element_types}
-Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of the two-\/dimensional Fourier-\/decomposed equations (1) with the constitutive equations (2) are implemented in the {\ttfamily Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations} equations class. Following our usual approach, discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations} class with the geometric finite element {\ttfamily Q\+Element$<$2,3$>$} yields a nine-\/node quadrilateral element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center} \[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2, \] \end{center}  where the coordinates are enumerated as $ x_1=r, \ x_2 = z$. $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate (enumerated as above) of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
+Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of the two-\/dimensional Fourier-\/decomposed equations (1) with the constitutive equations (2) are implemented in the {\ttfamily Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations} equations class. Following our usual approach, discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Equations} class with the geometric finite element {\ttfamily QElement$<$2,3$>$} yields a nine-\/node quadrilateral element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center} \[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2, \] \end{center}  where the coordinates are enumerated as $ x_1=r, \ x_2 = z$. $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate (enumerated as above) of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
 
 We allow for the presence of damping by allowing the constitutive parameters and forcing frequency to be complex-\/valued. The three components of the displacement field therefore have real and imaginary parts and we store the six real-\/valued nodal unknowns in the order $ Re\{u_r^{(n)}\}, Re\{u_z^{(n)}\}, Re\{u_\theta^{(n)}\}, Im\{u_r^{(n)}\}, Im\{u_z^{(n)}\}, Im\{u_\theta^{(n)}\} $ and use the shape functions to interpolate the displacements as \begin{center} \[ u_i^{(n)} = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad i=1,...6, \] \end{center}  where $ U^{(E)}_{ij} $ is the $ i $-\/th displacement component (enumerated as indicated above) at the $ j $-\/th {\ttfamily Node} in the element.
 
@@ -73,7 +73,7 @@ As usual, we define all non-\/dimensional parameters in a namespace. In this nam
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Define Poisson's ratio Nu}}
@@ -89,7 +89,7 @@ As usual, we define all non-\/dimensional parameters in a namespace. In this nam
 \DoxyCodeLine{\textcolor{comment}{ /// Define Fourier wavenumber}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespaceGlobal__Parameters_ae1198385d90f52c4ed921520ae43a9e7}{Fourier\_wavenumber}} = 3;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Define the non-\/dimensional square angular frequency of }}
+\DoxyCodeLine{\textcolor{comment}{ /// Define the non-\/dimensional square angular frequency of }}
 \DoxyCodeLine{\textcolor{comment}{ /// time-\/harmonic motion}}
 \DoxyCodeLine{\textcolor{comment}{} std::complex<double> \mbox{\hyperlink{namespaceGlobal__Parameters_aa7f960ed4311ccf6e3dbf9371f13876a}{Omega\_sq}} (10.0,5.0);}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -122,7 +122,7 @@ As usual, we define all non-\/dimensional parameters in a namespace. In this nam
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short The body force function; returns vector of complex doubles}}
+\DoxyCodeLine{\textcolor{comment}{ /// The body force function; returns vector of complex doubles}}
 \DoxyCodeLine{\textcolor{comment}{ /// in the order (b\_r, b\_z, b\_theta)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Parameters_a8d30973505eeb753023936398bce5bcc}{body\_force}}(\textcolor{keyword}{const} Vector<double> \&x,}
 \DoxyCodeLine{                 Vector<std::complex<double> > \&result)}
@@ -160,9 +160,7 @@ As usual, we define all non-\/dimensional parameters in a namespace. In this nam
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We start by setting the number of elements in each of the two coordinate directions before creating a {\ttfamily Doc\+Info} object to store the output directory.
@@ -171,7 +169,7 @@ We start by setting the number of elements in each of the two coordinate directi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{cylinder_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Number of elements in r-\/direction}}
@@ -184,12 +182,10 @@ We start by setting the number of elements in each of the two coordinate directi
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 
 \end{DoxyCodeInclude}
-
-
-We build the problem using two-\/dimensional {\ttfamily Q\+Time\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Elements}, solve using the {\ttfamily Problem\+::newton\+\_\+solve()} function, and document the results.
+ We build the problem using two-\/dimensional {\ttfamily QTime\+Harmonic\+Fourier\+Decomposed\+Linear\+Elasticity\+Elements}, solve using the {\ttfamily Problem\+::newton\+\_\+solve()} function, and document the results.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -218,15 +214,15 @@ The {\ttfamily Problem} class is very simple. As in other problems with Neumann 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Class to validate time harmonic linear elasticity (Fourier }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// decomposed)}}
+\DoxyCodeLine{\textcolor{comment}{/// Class to validate time harmonic linear elasticity (Fourier }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// decomposed)}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem}{FourierDecomposedTimeHarmonicLinearElasticityProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass number of elements in r and z directions }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass number of elements in r and z directions }}
 \DoxyCodeLine{\textcolor{comment}{ /// and boundary locations}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_a52597ec969cbd2aaa9fde263594c1c32}{FourierDecomposedTimeHarmonicLinearElasticityProblem}}(}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nr, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nz,}
@@ -266,8 +262,8 @@ We begin by building the meshes and pin the displacements on the appropriate bou
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in coordinate}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// directions and size of domain.}}
+\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in coordinate}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// directions and size of domain.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_a52597ec969cbd2aaa9fde263594c1c32}{FourierDecomposedTimeHarmonicLinearElasticityProblem<ELEMENT>::}}}
@@ -328,9 +324,7 @@ We begin by building the meshes and pin the displacements on the appropriate bou
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_of\_loop\_over\_boundary\_nodes}}
 
 \end{DoxyCodeInclude}
-
-
-Next we loop over the bulk mesh elements and assign the constitutive parameters, the body force, the Fourier wavenumber and the non-\/dimensional frequency to each element.
+ Next we loop over the bulk mesh elements and assign the constitutive parameters, the body force, the Fourier wavenumber and the non-\/dimensional frequency to each element.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -361,9 +355,7 @@ Next we loop over the bulk mesh elements and assign the constitutive parameters,
 \DoxyCodeLine{  \}\textcolor{comment}{// end loop over elements}}
 
 \end{DoxyCodeInclude}
-
-
-We then loop over the traction elements and specify the applied traction.
+ We then loop over the traction elements and specify the applied traction.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -383,9 +375,7 @@ We then loop over the traction elements and specify the applied traction.
 \DoxyCodeLine{  \}\textcolor{comment}{// end loop over traction elements}}
 
 \end{DoxyCodeInclude}
-
-
-The two sub-\/meshes are now added to the problem and a global mesh is constructed before the equation numbering scheme is set up, using the function {\ttfamily assign\+\_\+eqn\+\_\+numbers()}.
+ The two sub-\/meshes are now added to the problem and a global mesh is constructed before the equation numbering scheme is set up, using the function {\ttfamily assign\+\_\+eqn\+\_\+numbers()}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -397,7 +387,7 @@ The two sub-\/meshes are now added to the problem and a global mesh is construct
 \DoxyCodeLine{ build\_global\_mesh();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Assign equation numbers}}
-\DoxyCodeLine{ cout << assign\_eqn\_numbers() << \textcolor{stringliteral}{" equations assigned"} << std::endl; }
+\DoxyCodeLine{ cout << assign\_eqn\_numbers() << \textcolor{stringliteral}{"{} equations assigned"{}} << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
@@ -413,7 +403,7 @@ We create the face elements that apply the traction to the boundary $ r=r_{\rm m
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_traction===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Make traction elements along the boundary r=rmin}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_ab995077cbd92377b726d0ea0de81720e}{FourierDecomposedTimeHarmonicLinearElasticityProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_ab995077cbd92377b726d0ea0de81720e}{assign\_traction\_elements}}()}
@@ -451,7 +441,7 @@ As expected, this member function documents the computed solution.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_af328e5b2260377fa7df04b727ca130bd}{FourierDecomposedTimeHarmonicLinearElasticityProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_af328e5b2260377fa7df04b727ca130bd}{doc\_solution}}(DocInfo\& doc\_info)}
@@ -463,13 +453,13 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output\_fct(some\_file,npts,}
 \DoxyCodeLine{                          \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\_Parameters::exact\_solution}});}
@@ -478,7 +468,7 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{ \textcolor{comment}{// Doc error}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error=0.0;}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} norm=0.0;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>compute\_error(some\_file,}
 \DoxyCodeLine{                             \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\_Parameters::exact\_solution}}, }
@@ -486,16 +476,14 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc error norm:}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)nNorm of error:    "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Norm of solution: "} << sqrt(norm) << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)nNorm of error:    "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Norm of solution: "{}} << sqrt(norm) << std::endl << std::endl;}
 \DoxyCodeLine{ cout << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_doc\_solution   }}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_conclusion}{}\doxysection{Comments and Exercises}\label{index_conclusion}
 \hypertarget{index_comments}{}\doxysubsection{Comments}\label{index_comments}
@@ -521,5 +509,5 @@ As expected, this member function documents the computed solution.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1ExactDGPBlockPreconditioner}{}\doxysection{oomph\+::Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+IX $>$ Class Template Reference}
+\hypertarget{classoomph_1_1ExactDGPBlockPreconditioner}{}\doxysection{oomph\+::Exact\+DGPBlock\+Preconditioner\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1ExactDGPBlockPreconditioner}\index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 
 
-General purpose block tridiagonal preconditioner. By default \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+L\+U\+Preconditioner}} (or Super\+L\+U\+Dist\+Preconditioner) is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt().  
+General purpose block tridiagonal preconditioner. By default \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} (or Super\+LUDist\+Preconditioner) is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt().  
 
 
 
 
 {\ttfamily \#include $<$general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h$>$}
 
-Inheritance diagram for oomph\+::Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+IX $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Exact\+DGPBlock\+Preconditioner\texorpdfstring{$<$}{<} MATRIX \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.000000cm]{classoomph_1_1ExactDGPBlockPreconditioner}
@@ -18,15 +18,15 @@ Inheritance diagram for oomph\+::Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_a153015082f36146082a18bcf0527f0d9}{Exact\+D\+G\+P\+Block\+Preconditioner}} ()
+\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_a153015082f36146082a18bcf0527f0d9}{Exact\+DGPBlock\+Preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. (By default this preconditioner is upper triangular). \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_a6e719e0032729b63eae8d1a5a9f367f3}{$\sim$\+Exact\+D\+G\+P\+Block\+Preconditioner}} ()
+virtual \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_a6e719e0032729b63eae8d1a5a9f367f3}{$\sim$\+Exact\+DGPBlock\+Preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Destructor -\/ delete the preconditioner matrices. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_a40cb81573a55fbbf95df774ba5ab27a0}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Clean up the memory. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_a5361a4354b710843e51a96296d8220ca}{Exact\+D\+G\+P\+Block\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+D\+G\+P\+Block\+Preconditioner}} \&)
+\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_aca9426fafefc0b0e3a4ce76c3af50a84}{Exact\+DGPBlock\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+DGPBlock\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_a96c85a982f358b44a12844cc2b3edbac}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+D\+G\+P\+Block\+Preconditioner}} \&)
+void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_a15c9a95ced255c5450733d6ff8faa073}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+DGPBlock\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_aa94879739ec1c39b2671cffeb8b72114}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
 \begin{DoxyCompactList}\small\item\em Apply preconditioner to r. \end{DoxyCompactList}\item 
@@ -51,12 +51,11 @@ double \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner_adb4ed98934817
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename M\+A\+T\+R\+IX$>$\newline
-class oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}
+\subsubsection*{template$<$typename MATRIX$>$\newline
+class oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$}
+General purpose block tridiagonal preconditioner. By default \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+LUPreconditioner}} (or Super\+LUDist\+Preconditioner) is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). 
 
-General purpose block tridiagonal preconditioner. By default \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+L\+U\+Preconditioner}} (or Super\+L\+U\+Dist\+Preconditioner) is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). 
-
-Definition at line 57 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00057}{57}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -65,8 +64,8 @@ Definition at line 57 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+blo
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!ExactDGPBlockPreconditioner@{ExactDGPBlockPreconditioner}}
 \index{ExactDGPBlockPreconditioner@{ExactDGPBlockPreconditioner}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{ExactDGPBlockPreconditioner()}{ExactDGPBlockPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+D\+G\+P\+Block\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+DGPBlock\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -74,18 +73,18 @@ Constructor. (By default this preconditioner is upper triangular).
 
 
 
-Definition at line 62 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00062}{62}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Compute\+\_\+memory\+\_\+statistics, oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Memory\+\_\+usage\+\_\+in\+\_\+bytes, and oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
+References \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00180}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00184}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00176}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_a6e719e0032729b63eae8d1a5a9f367f3}\label{classoomph_1_1ExactDGPBlockPreconditioner_a6e719e0032729b63eae8d1a5a9f367f3}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!````~ExactDGPBlockPreconditioner@{$\sim$ExactDGPBlockPreconditioner}}
 \index{````~ExactDGPBlockPreconditioner@{$\sim$ExactDGPBlockPreconditioner}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$ExactDGPBlockPreconditioner()}{~ExactDGPBlockPreconditioner()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+D\+G\+P\+Block\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+DGPBlock\+Preconditioner}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -93,30 +92,22 @@ Destructor -\/ delete the preconditioner matrices.
 
 
 
-Definition at line 76 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00076}{76}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00084}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
 
-\mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_a5361a4354b710843e51a96296d8220ca}\label{classoomph_1_1ExactDGPBlockPreconditioner_a5361a4354b710843e51a96296d8220ca}} 
+\mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_aca9426fafefc0b0e3a4ce76c3af50a84}\label{classoomph_1_1ExactDGPBlockPreconditioner_aca9426fafefc0b0e3a4ce76c3af50a84}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!ExactDGPBlockPreconditioner@{ExactDGPBlockPreconditioner}}
 \index{ExactDGPBlockPreconditioner@{ExactDGPBlockPreconditioner}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{ExactDGPBlockPreconditioner()}{ExactDGPBlockPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+D\+G\+P\+Block\+Preconditioner}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::\mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+DGPBlock\+Preconditioner}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 92 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -125,8 +116,8 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -134,26 +125,26 @@ Clean up the memory.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner_a3272742d3c7f86327d33c5647af874e6}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner_a3272742d3c7f86327d33c5647af874e6}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$}}.
 
 
 
-Definition at line 84 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00084}{84}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{general__purpose__block__preconditioners_8h_source_l00112}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$\+::clean\+\_\+up\+\_\+memory()}}.
 
 
 
-Referenced by oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::$\sim$\+Exact\+D\+G\+P\+Block\+Preconditioner().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00076}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::$\sim$\+Exact\+DGPBlock\+Preconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_a42948139c092ef48c2007770f316637a}\label{classoomph_1_1ExactDGPBlockPreconditioner_a42948139c092ef48c2007770f316637a}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!disable\_doc\_memory\_usage@{disable\_doc\_memory\_usage}}
 \index{disable\_doc\_memory\_usage@{disable\_doc\_memory\_usage}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{disable\_doc\_memory\_usage()}{disable\_doc\_memory\_usage()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::disable\+\_\+doc\+\_\+memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::disable\+\_\+doc\+\_\+memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -161,18 +152,18 @@ Don\textquotesingle{}t document the memory usage!
 
 Set the appropriate flag to false
 
-Definition at line 122 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00114}{114}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Compute\+\_\+memory\+\_\+statistics.
+References \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00180}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_a14985cf64fd8b1841e57b381d877602d}\label{classoomph_1_1ExactDGPBlockPreconditioner_a14985cf64fd8b1841e57b381d877602d}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!enable\_doc\_memory\_usage@{enable\_doc\_memory\_usage}}
 \index{enable\_doc\_memory\_usage@{enable\_doc\_memory\_usage}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{enable\_doc\_memory\_usage()}{enable\_doc\_memory\_usage()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::enable\+\_\+doc\+\_\+memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::enable\+\_\+doc\+\_\+memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -180,18 +171,18 @@ Document the memory usage.
 
 Set the appropriate flag to true
 
-Definition at line 114 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00106}{106}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Compute\+\_\+memory\+\_\+statistics.
+References \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00180}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_aca8e7f1c8aa8f8e22a227dae8a9d463f}\label{classoomph_1_1ExactDGPBlockPreconditioner_aca8e7f1c8aa8f8e22a227dae8a9d463f}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}}
 \index{get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{get\_memory\_usage\_in\_bytes()}{get\_memory\_usage\_in\_bytes()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -199,37 +190,29 @@ Get the memory statistics.
 
 
 
-Definition at line 130 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00122}{122}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Compute\+\_\+memory\+\_\+statistics, oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Memory\+\_\+usage\+\_\+in\+\_\+bytes, and oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
+References \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00180}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00184}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00176}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
-\mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_a96c85a982f358b44a12844cc2b3edbac}\label{classoomph_1_1ExactDGPBlockPreconditioner_a96c85a982f358b44a12844cc2b3edbac}} 
+\mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_a15c9a95ced255c5450733d6ff8faa073}\label{classoomph_1_1ExactDGPBlockPreconditioner_a15c9a95ced255c5450733d6ff8faa073}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 99 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_aa94879739ec1c39b2671cffeb8b72114}\label{classoomph_1_1ExactDGPBlockPreconditioner_aa94879739ec1c39b2671cffeb8b72114}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!preconditioner\_solve@{preconditioner\_solve}}
 \index{preconditioner\_solve@{preconditioner\_solve}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -241,18 +224,18 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 181 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+cc.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00181}{181}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+Helpers\+::concatenate(), and oomph\+::\+Double\+Vector\+Helpers\+::split().
+References \mbox{\hyperlink{double__vector_8cc_source_l00993}{oomph\+::\+Double\+Vector\+Helpers\+::concatenate()}}, and \mbox{\hyperlink{double__vector_8cc_source_l01413}{oomph\+::\+Double\+Vector\+Helpers\+::split()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_a5ade06c588d51b5fb90085addaaf901d}\label{classoomph_1_1ExactDGPBlockPreconditioner_a5ade06c588d51b5fb90085addaaf901d}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!setup@{setup}}
 \index{setup@{setup}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::setup\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::setup\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -264,11 +247,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 42 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+cc.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00042}{42}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+cc}}.
 
 
 
-References oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory(), i, oomph\+::oomph\+\_\+info, oomph\+::oomph\+\_\+nullstream, oomph\+::\+Oomph\+Info\+::stream\+\_\+pt(), and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00086}{oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00313}{oomph\+::oomph\+\_\+nullstream}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00464}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 
 
@@ -277,8 +260,8 @@ References oomph\+::\+Terminate\+Helper\+::clean\+\_\+up\+\_\+memory(), i, oomph
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!Compute\_memory\_statistics@{Compute\_memory\_statistics}}
 \index{Compute\_memory\_statistics@{Compute\_memory\_statistics}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Compute\_memory\_statistics}{Compute\_memory\_statistics}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Compute\+\_\+memory\+\_\+statistics\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::Compute\+\_\+memory\+\_\+statistics\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -286,18 +269,18 @@ Flag to indicate whether or not to record the memory statistics this preconditio
 
 
 
-Definition at line 188 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00180}{180}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::disable\+\_\+doc\+\_\+memory\+\_\+usage(), oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::enable\+\_\+doc\+\_\+memory\+\_\+usage(), oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Exact\+D\+G\+P\+Block\+Preconditioner(), and oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00114}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::disable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00106}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::enable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00062}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Exact\+DGPBlock\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00122}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_adb4ed989348176fc670e76cfb54e0924}\label{classoomph_1_1ExactDGPBlockPreconditioner_adb4ed989348176fc670e76cfb54e0924}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!Memory\_usage\_in\_bytes@{Memory\_usage\_in\_bytes}}
 \index{Memory\_usage\_in\_bytes@{Memory\_usage\_in\_bytes}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Memory\_usage\_in\_bytes}{Memory\_usage\_in\_bytes}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-double \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Memory\+\_\+usage\+\_\+in\+\_\+bytes\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+double \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::Memory\+\_\+usage\+\_\+in\+\_\+bytes\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -305,18 +288,18 @@ Storage for the memory usage of the solver if the flag above is set to true (in 
 
 
 
-Definition at line 192 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00184}{184}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Exact\+D\+G\+P\+Block\+Preconditioner(), and oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00062}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Exact\+DGPBlock\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00122}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExactDGPBlockPreconditioner_a48224146c5ec0366e2b3e590888e11b2}\label{classoomph_1_1ExactDGPBlockPreconditioner_a48224146c5ec0366e2b3e590888e11b2}} 
 \index{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}!Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}}
 \index{Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}!oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$@{oomph::ExactDGPBlockPreconditioner$<$ MATRIX $>$}}
 \doxysubsubsection{\texorpdfstring{Preconditioner\_has\_been\_setup}{Preconditioner\_has\_been\_setup}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner}}$<$ M\+A\+T\+R\+IX $>$\+::Preconditioner\+\_\+has\+\_\+been\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1ExactDGPBlockPreconditioner}{oomph\+::\+Exact\+DGPBlock\+Preconditioner}}$<$ MATRIX $>$\+::Preconditioner\+\_\+has\+\_\+been\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -324,11 +307,11 @@ Control flag is true if the preconditioner has been setup (used so we can wipe t
 
 
 
-Definition at line 184 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00176}{176}} of file \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::\+Exact\+D\+G\+P\+Block\+Preconditioner(), and oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00062}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::\+Exact\+DGPBlock\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8h_source_l00122}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}.
 
 
 

@@ -16,7 +16,7 @@ The only differences between the axisymmetric and the \href{../../../navier_stok
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 &Two-\/dimensional problem  &Axisymmetric problem   \\\cline{1-3}
-Bulk Fluid Element  &Q\+Crouzeix\+Raviart\+Element$<$2$>$  &Axisymmetric\+Q\+Crouzeix\+Raviart\+Element   \\\cline{1-3}
+Bulk Fluid Element  &QCrouzeix\+Raviart\+Element$<$2$>$  &Axisymmetric\+QCrouzeix\+Raviart\+Element   \\\cline{1-3}
 Pseudo-\/\+Solid Free Surface Face Element  &Elastic\+Line\+Fluid\+Interface\+Element  &Elastic\+Axisymmetric\+Fluid\+Interface\+Element   \\\cline{1-3}
 Spine Free Surface Face Element  &Spine\+Line\+Fluid\+Interface\+Element  &Spine\+Axisymmetric\+Fluid\+Interface\+Element   \\\cline{1-3}
 Pseudo-\/\+Solid Volume Constraint Face Element  &Elastic\+Line\+Volume\+Constraint\+Bounding\+Element  &Elastic\+Axisymmetric\+Volume\+Constraint\+Bounding\+Element   \\\cline{1-3}
@@ -32,6 +32,7 @@ Analytic pressure drop  &$ 2\cos\theta_{c} $  &$ 4\cos\theta_{c} $   \\\cline{1-
 \item The swirl velocity is pinned on the boundaries by including the additional code 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Bulk\_mesh\_pt-\/>boundary\_node\_pt(b,n)-\/>pin(2);}
+
 \end{DoxyCode}
 
 \end{DoxyItemize}\hypertarget{index_exercises}{}\doxysubsection{Exercises}\label{index_exercises}
@@ -57,5 +58,5 @@ Analytic pressure drop  &$ 2\cos\theta_{c} $  &$ 4\cos\theta_{c} $   \\\cline{1-
 \begin{center} \href{../../../../demo_drivers/axisym_navier_stokes/axi_static_cap/axi_static_cap.cc}{\texttt{ demo\+\_\+drivers/axisym\+\_\+navier\+\_\+stokes/axi\+\_\+static\+\_\+cap/axi\+\_\+static\+\_\+cap.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -4,17 +4,24 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations}{oomph\+::\+Kirchhoff\+Love\+Beam\+Equations}}
-\item 
+\begin{DoxyCompactList}\small\item\em where $ \partial^i {\bf R}_{IC}/\partial t^i$ is implemented by the \mbox{\hyperlink{classoomph_1_1SolidInitialCondition}{Solid\+Initial\+Condition}} object, pointed to by {\ttfamily Solid\+Finite\+Element\+::shell\+\_\+ic\+\_\+pt()}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1HermiteBeamElement}{oomph\+::\+Hermite\+Beam\+Element}}
 \begin{DoxyCompactList}\small\item\em Hermite Kirchhoff Love beam. Implements \mbox{\hyperlink{classoomph_1_1KirchhoffLoveBeamEquations}{Kirchhoff\+Love\+Beam\+Equations}} using 2-\/node Hermite elements as the underlying geometrical elements. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1FSIHermiteBeamElement}{oomph\+::\+F\+S\+I\+Hermite\+Beam\+Element}}
-\item 
+class \mbox{\hyperlink{classoomph_1_1FSIHermiteBeamElement}{oomph\+::\+FSIHermite\+Beam\+Element}}
+\begin{DoxyCompactList}\small\item\em Hermite Kirchhoff Love beam \char`\"{}upgraded\char`\"{} to a \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}), so it can be used in FSI. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01HermiteBeamElement_01_4}{oomph\+::\+Face\+Geometry$<$ Hermite\+Beam\+Element $>$}}
-\begin{DoxyCompactList}\small\item\em Face geometry for the Hermite\+Beam elements\+: Solid point element. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1ClampedSlidingHermiteBeamBoundaryConditionElement}{oomph\+::\+Clamped\+Sliding\+Hermite\+Beam\+Boundary\+Condition\+Element}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceoomph_ae776ac53a2026959aeef7ac6a2fcf5f0}{oomph\+::int\+\_\+0}}
+\begin{DoxyCompactList}\small\item\em A class for elements that solve the equations of Kirchhoff-\/\+Love large-\/displacement (but linearly-\/elastic) thin-\/beam theory. \end{DoxyCompactList}\item 
+f \mbox{\hyperlink{namespaceoomph_a4d210785111dc7153f716866a99cb13a}{oomph\+::\+Lambda}} = \textbackslash{}frac\{a\}\{T\} \textbackslash{}sqrt\{\textbackslash{}frac\{\textbackslash{}rho\}\{E\+\_\+\{eff\}\}\}
+\begin{DoxyCompactList}\small\item\em where all lengths have been non-\/dimensionalised w.\+r.\+t. $ R_0 $. The strain and and bending \char`\"{}tensors\char`\"{} $\gamma$ and $\kappa$ are computed relative to the shape of the beam\textquotesingle{}s undeformed shape which is specified as a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}. \end{DoxyCompactList}\end{DoxyCompactItemize}

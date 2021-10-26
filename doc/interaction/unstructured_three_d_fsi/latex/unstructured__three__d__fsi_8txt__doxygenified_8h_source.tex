@@ -1,0 +1,913 @@
+\hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source}{}\doxysection{unstructured\+\_\+three\+\_\+d\+\_\+fsi.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{unstructured__three__d__fsi_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: 3D FSI on unstructured meshes}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{This tutorial demonstrates the use of unstructured meshes}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{in 3D fluid-\/structure interaction problems. We combine two }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{single-\/physics problems, namely}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{-\/ <a href="{}../../../solid/unstructured\_three\_d\_solid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{  Large deformations of an elastic 3D bifurcating tube, loaded}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{  by an internal pressure</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{-\/ <a href="{}../../../navier\_stokes/unstructured\_three\_d\_fluid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{  Flow through a rigid 3D bifurcating tube</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{for which we have already created unstructured 3D meshes, }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{using <A HREF="{}http://www.wias-\/berlin.de/\string~si "{}>Hang Si's</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{open-\/source mesh generator  <A HREF="{}http://wias-\/berlin.de/software/tetgen//"{}> \(\backslash\)c tetgen </A>.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{\(\backslash\)section the\_problem The problem}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{The two figures below show a sketch of the problem. An applied pressure}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{drop drives fluid through an elastic, bifurcating tube whose}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{branches have approximately rectangular cross-\/sections. We solve this}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{problem as a fully-\/coupled fluid-\/structure interaction problem}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{in which the fluid provides the traction onto the solid whose}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{deformation changes the fluid domain. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{\(\backslash\)image html problem\_sketch\_forward.gif "{}Sketch of the problem. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{\(\backslash\)image latex problem\_sketch\_forward.eps "{}Sketch of the problem. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{\(\backslash\)image html problem\_sketch\_backward.gif "{}Sketch of the problem (reverse view). "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)image latex problem\_sketch\_backward.eps "{}Sketch of the problem (reverse view). "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{As usual, we formulate the problem in non-\/dimensional form. For this}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{purpose we non-\/dimensionalise all lengths on the half-\/width, \(\backslash\)f\$ W}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{\(\backslash\)f\$, of the square inflow cross-\/section, and use the overall pressure drop,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)Delta P\string^* = P\_\{in\}\string^* -\/ P\_\{out\}\string^* \(\backslash\)f\$ to define the (viscous) }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{velocity scale }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{\{\(\backslash\)cal U\} = \(\backslash\)frac\{\(\backslash\)Delta P\string^*\(\backslash\)  W\}\{\(\backslash\)mu\}.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{With this choice the Reynolds number becomes}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{Re = \(\backslash\)frac\{\(\backslash\)rho \{\(\backslash\)cal U\} W \}\{\(\backslash\)mu\} = \(\backslash\)frac\{ \(\backslash\)Delta P\string^* \(\backslash\)rho W\string^2 \}\{\(\backslash\)mu\string^2\},}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{and we choose to drive the flow by a dimensionless pressure drop of}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)Delta P = 1. \(\backslash\)f\$ Using this non-\/dimensionalisation an }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{increase in the Reynolds number may be interpreted as in increase }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{in the applied (dimensional) pressure drop along the vessel. Note that}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{all pressures are defined relative to an external pressure, which we set}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{to zero.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{We assume that the solid's constitutive equation is given by}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{\(\backslash\)c oomph-\/lib's generalised Hookean constitutive law and}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{non-\/dimensionalise the solid-\/mechanics stresses and tractions}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{with the Young's modulus \(\backslash\)f\$ E \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{The FSI interaction parameter \(\backslash\)f\$ Q, \(\backslash\)f\$ which represents the ratio}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{of the (viscous) fluid stress scale to the reference stress used}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{to non-\/dimensionalise the solid stresses, is therefore given by}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{Q = \(\backslash\)frac\{\(\backslash\)mu \{\(\backslash\)cal U\}\}\{\{\(\backslash\)cal L\} E\} = \(\backslash\)frac\{\(\backslash\)Delta P\string^*\}\{E\} \(\backslash\) . }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{The animation below illustrates the system's behaviour in a parameter}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{study in which we keep the Reynolds number fixed at \(\backslash\)f\$ Re=100 \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{while increasing the FSI parameter \(\backslash\)f\$ Q \(\backslash\)f\$ in small increments. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{The increase in  \(\backslash\)f\$ Q \(\backslash\)f\$ may be interpreted as a reduction in the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{tube's stiffness and the animation shows clearly how this increases }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{the flow-\/induced deformation: the upstream end bulges and}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{the downstream end is compressed.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{\(\backslash\)image html unstructured\_fluid.gif "{}Animation of the flow field (pressure contours and velocity vectors). "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{\(\backslash\)image latex unstructured\_fluid.eps "{}Animation of the flow field (pressure contours and velocity vectors). "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{\(\backslash\)image html unstructured\_solid.gif "{}Animation of the wall deformation -\/-\/ the vectors indicate the fluid load. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)image latex unstructured\_solid.eps "{}Animation of the wall deformation -\/-\/ the vectors indicate the fluid load. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{\(\backslash\)section overview\_implementation Overview of the implementation}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{The general procedure described below is essentially the same as}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{that discussed in the <a href="{}../../unstructured\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{two-\/dimensional unstructured FSI tutorial. </a>  The use of }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{an unstructured mesh }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{means that the most convenient node-\/update strategy for the fluid mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{is to treat it as a pseudo-\/elastic solid. Nonetheless,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{the majority of the steps described below are the same as for}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{other fluid-\/structure-\/interaction problems.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{ We reiterate that an}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{ important prerequisite for the use of the automatic \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{ FSI\_functions is that each boundary between fluid and solid}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{ meshes must be parametrised by boundary coordinates. Moreover, the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{ boundary-\/coordinate representations <b> must </b> be the same in both}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{ the fluid and solid meshes. This use of a continuous-\/coordinate }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{ representation of the boundaries means that the fluid and solid}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{ meshes do not need to match at the boundaries; see the section \(\backslash\)ref}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{ matching\_fluid\_and\_solid. Unfortunately, the construction of a global}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{ surface parametrisation of a general surface is a non-\/trivial}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{ problem. We side-\/step this problem by making use of the fact that any}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{ third-\/party tetrahedral mesh generator represents domain}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{ boundaries using a surface triangulation, or planar}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{ surface facets. As the mesh is}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{ imported into \(\backslash\)c oomph-\/lib, each surface facet is treated as a}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{ separate boundary and given a unique boundary identifier. The surface}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{ parametrisation of each facet is then simply }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{ given by local coordinates of the plane; see \(\backslash\)ref boundary\_coord.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{ A consequence of this}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{ approach is that the physical boundaries will consist of several}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{ mesh "{}boundaries"{}, as already discussed in the single-\/physics problems.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{Since the driver code, discussed in detail below, is somewhat lengthy}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{(partly because of the large number of self-\/tests and diagnostics}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{included), we provide a brief overview of the main steps}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{required to solve this problem:}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{-\/\# Use the unstructured 3D mesh generator <A HREF="{}http://wias-\/berlin.de/software/tetgen//"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{   \(\backslash\)c tetgen </A> to generate the solid mesh, using the procedure discussed in }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{   <a href="{}../../../solid/unstructured\_three\_d\_solid/html/index.html\#mesh"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{   another tutorial.</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{-\/\# Use the same procedure to generate the fluid mesh, as discussed in }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{   <a href="{}../../../navier\_stokes/unstructured\_three\_d\_fluid/html/index.html\#mesh"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{   the single-\/physics fluids tutorial.</a> Make sure that the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{   fluid mesh is derived from the \(\backslash\)c SolidMesh base class to allow the use of}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{   pseudo-\/elasticity to update the nodal positions in response}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{   to the deformation of the domain boundary.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{-\/\# Ensure that boundary coordinates are set up (consistently) on the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{   FSI interface between the two meshes. For meshes derived from }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{   \(\backslash\)c oomph-\/lib's \(\backslash\)c TetgenMesh class, this may be done }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{   by calling the function \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{   TetgenMesh::setup\_boundary\_coordinates(); see the section}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{   \(\backslash\)ref boundary\_coord for details.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{-\/\# Attach \(\backslash\)c FSISolidTractionElements to the faces of the "{}bulk"{}}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{   solid elements that are exposed to the fluid flow. These}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{   elements will apply the fluid traction to the solid.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{-\/\# Combine the \(\backslash\)c FSISolidTractionElements to a compound \(\backslash\)c GeomObject}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{   that provides a continuous representation of the solid's FSI }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{   boundary, required by the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{   ImposeDisplacementByLagrangeMultiplierElements described below.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{-\/\# Attach  \(\backslash\)c ImposeDisplacementByLagrangeMultiplierElements to the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{   faces of the "{}bulk"{} fluid elements that are adjacent to the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{   solid. These elements will employ Lagrange multipliers}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{   to deform the pseudo-\/solid fluid mesh so that its shape remains}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{   consistent with the motion of the solid's FSI boundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{   (as described by the compound \(\backslash\)c GeomObject created in the previous}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{   step).}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{-\/\# Determine the "{}bulk"{} fluid elements that are adjacent to the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{   integration points of the  \(\backslash\)c FSISolidTractionElements,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{   using the function \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{   FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements(...).}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{In our experience, just as in two-\/dimensions, }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{the most error-\/prone part of this procedure is the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{identification of the mesh boundaries. In particular, if the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{description of the FSI interface as viewed from the fluid and solid}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{meshes is inconsistent, the automatic matching of the unstructured }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{fluid and solid meshes will not work (see \(\backslash\)ref boundary\_coord for details). For }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{this reason, the driver code presented below generates a lot of }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{output that can be used to identify and fix such problems. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{See also the section \(\backslash\)ref go\_wrong at the end of this tutorial. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)section namespace Problem Parameters}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{As usual we define the various problem parameters in a }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{global namespace. We define the Reynolds number, \(\backslash\)f\$ Re \(\backslash\)f\$, and}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{the FSI interaction parameter \(\backslash\)f\$ Q \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_three\_d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)skipline start\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{\(\backslash\)until Q=}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{We provide a pointer to the constitutive equation for the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{solid. For simplicity, the same constitutive equation will also be used for }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{the (pseudo-\/)solid elements that determine the deformation of }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{the fluid mesh. In general, of course, a different constitutive}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{equation can (and probably should) be used to control the mesh motion.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{\(\backslash\)until Nu=}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{Finally, we define the tractions that act on the fluid}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{at the in-\/ and outflow cross-\/sections. We enforce the non-\/dimensional }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{pressure drop of \(\backslash\)f\$ \(\backslash\)Delta P = 1\(\backslash\)f\$ (on the viscous scale) by }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{setting \(\backslash\)f\$ P\_\{in\} = -\/P\_\{out\}=0.5 \(\backslash\)f\$, thus pressurising the tube's }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{upstream end  while applying an equal and opposite "{}suction"{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{downstream. (Note that in the  }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{<a href="{}../../../navier\_stokes/unstructured\_three\_d\_fluid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{corresponding single-\/physics fluids problem</a> the actual pressure}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{values were irrelevant because the vessel walls were rigid. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{In the FSI problem considered here it obviously makes a big difference }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{if the fluid pressure is positive or negative because the external}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{reference pressure is set to zero.) }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{\(\backslash\)until end\_of\_namespace }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{\(\backslash\)section mesh\_code Creating the meshes}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{\(\backslash\)subsection solid\_mesh The solid mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{Following the procedure discussed in the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{<a href="{}../../../solid/unstructured\_three\_d\_solid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{single-\/physics solid mechanics problem</a> we create the mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{for the elastic tube using multiple inheritance }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{from \(\backslash\)c oomph-\/lib's \(\backslash\)c TetgenMesh and the \(\backslash\)c SolidMesh base}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{class.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_three\_d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\)skipline start\_solid\_mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)until \{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{As before, we set the Lagrangian coordinates to the current}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{nodal positions to make the initial configuration stress-\/free. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{Next, we identify the elements next to the various boundaries}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{(<a href="{}../../../solid/unstructured\_three\_d\_solid/html/index.html"{}>recall}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{</a> that the domain boundaries are specified in the tetgen }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{<code>*.poly</code> file), and set up the boundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{coordinates. Adopting our usual state of continuous paranoia, we document these}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{elements to facilitate debugging; see the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{section \(\backslash\)ref boundary\_coord for details.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{\(\backslash\)subsection fluid\_mesh The fluid mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{The creation of the fluid mesh follows the same process but uses}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{the mesh created for the  }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{<a href="{}../../../navier\_stokes/unstructured\_three\_d\_fluid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{single-\/physics fluids problem.</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{The use of multiple inheritance from the \(\backslash\)c TetgenMesh and \(\backslash\)c SolidMesh base}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{classes is required to use pseudo-\/solid node-\/update techniques }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{to move the fluid nodes in response to changes }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{in the domain boundary. We refer to the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{<a href="{}../../../navier\_stokes/unstructured\_three\_d\_fluid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{fluids tutorial</a> for a discussion of the \(\backslash\)c split\_corner\_elements flag.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{\(\backslash\)skipline start\_fluid\_mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{\(\backslash\)until setup\_boundary\_element\_info()}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{We create boundary coordinates along all mesh boundaries. To ensure}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{that fluid and solid boundary coordinates are aligned properly,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{we use the flag \(\backslash\)c switch\_normal to change the direction of the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{normal vector for the fluid mesh; see \(\backslash\)ref boundary\_coord for details.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{We specify an output directory and instantiate the constitutive }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{equation (\(\backslash\)c oomph-\/lib's generalisation of Hooke's law), specifying a }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{Poisson ratio of 0.3. As discussed above, }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{this constitutive equation will be used for the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{"{}proper"{} solid mechanics that determines the deformation of }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{the elastic vessel walls, and for the pseudo-\/solid that determines }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{the deformation of the fluid mesh. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_three\_d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{\(\backslash\)until Nu);}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{We create the \(\backslash\)c Problem object and output the initial guess }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{for the solution.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{\(\backslash\)until ()++;}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{Finally, we perform a parameter study in which we compute the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{solution of the fully-\/coupled FSI problem for increasing }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{values of the FSI parameter \(\backslash\)f\$ Q \(\backslash\)f\$ -\/-\/ physically, an increase}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{in \(\backslash\)f\$ Q \(\backslash\)f\$ can be interpreted as a reduction in the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{stiffness of the tube walls while keeping the fluid }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{properties and the driving pressure drop constant.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{\(\backslash\)until end\_of\_main}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{\(\backslash\)section class The Problem class}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{The \(\backslash\)c Problem class has the usual members,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{with access functions to the fluid and solid meshes,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{and a post-\/processing routine.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_three\_d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{\(\backslash\)until doc\_solution}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{We provide several helper functions to create the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{\(\backslash\)c FaceElements that (i) apply the applied traction on the fluid}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{at the in-\/ and outflow cross-\/sections; (ii) apply the fluid traction onto }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{the solid, and (iii) create the Lagrange multipliers that}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{apply the solid displacement onto the pseudo-\/solid fluid mesh.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{\(\backslash\)until create\_lagrange}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{We also provide a helper function that documents the boundary coordinates}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{on the solid mesh.  }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{\(\backslash\)until doc\_solid\_boundary\_coordinates(}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{Finally we provide a large number of additional helper functions that}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{specify the various mesh boundaries (as }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{defined in the tetgen <code>*.poly</code> file) that make up }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{the physical boundaries of interest: the in-\/ and outflow boundaries }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{in the fluid domain; the FSI boundaries of the fluid and solid domains }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{and the boundaries along which the tube wall is held in a fixed position.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{\(\backslash\)until end npinned\_solid\_boundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{The private member data includes pointers to the various}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{meshes and the \(\backslash\)c GeomObject representation of the FSI boundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{(created from the \(\backslash\)c FaceElements attached to the solid mesh).}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{\(\backslash\)until Solid\_fsi\_boundary\_pt;}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{Finally, here are the vectors that store the mesh boundary IDs }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{associated with the various domain boundaries of interest.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{\(\backslash\)section constructor The Problem constructor}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{We start by building the fluid mesh, using the files created}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{by <A HREF="{}http://wias-\/berlin.de/software/tetgen//"{}> \(\backslash\)c tetgen </A>; see the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{discussion in the corresponding }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{<a href="{}../../../navier\_stokes/unstructured\_three\_d\_fluid/html/index.html\#mesh"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{single-\/physics fluids problem.</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{\(\backslash\)until split\_corner\_elements);}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{Next we associated the \(\backslash\)c tetgen boundary IDs with the various}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{boundaries of interest: The inflow boundary is represented by }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)c tetgen boundary 0, and the two outflow boundaries}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{have IDs 1 and 2. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{\(\backslash\)until Outflow\_boundary\_id[1]=2;}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{The FSI boundary (i.e. the boundary of the fluid mesh that is}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{exposed to the elastic vessel wall) comprises 12 separate}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{tetgen facets which were numbered 3 to 14 in the <code>*.poly</code> }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{that describes the fluid mesh. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{Next, we create the solid mesh, using the files created}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{by <A HREF="{}http://wias-\/berlin.de/software/tetgen//"{}> \(\backslash\)c tetgen </A>; }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{see the discussion in the corresponding}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{<a href="{}../../../solid/unstructured\_three\_d\_solid/html/index.html\#mesh"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{single-\/physics solids problem.</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{\(\backslash\)skipline Define solid mesh and its}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{\(\backslash\)until face\_file\_name);}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{Following the procedure used for the fluid mesh, we identify the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{mesh boundaries that make up the (pinned) ends of the tube}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{(boundaries 0, 1 and 2, as defined in the tetgen <code>*.poly</code>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{file) and the FSI boundary (boundaries 3 to 14 -\/-\/ note that this enumeration}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{matches that in the fluid mesh; see \(\backslash\)ref boundary\_coord}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{for further details of how the fluid and solid meshes are matched). }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{We create the fluid traction elements that impose}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{the applied pressures in the in-\/ and outflow cross-\/sections.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{\(\backslash\)until create\_fluid\_traction\_elements();}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{Next, we create the \(\backslash\)c FaceElements that apply the fluid traction}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{to the solid,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{\(\backslash\)until create\_fsi\_traction\_elements();}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{and the \(\backslash\)c FaceElements that use Lagrange multipliers to deform}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{the fluid mesh to keep it aligned with the FSI boundary.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{\(\backslash\)until create\_lagrange\_multiplier\_elements();}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{We combine the various sub-\/meshes to a global mesh.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{\(\backslash\)until build\_global\_mesh();}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{Next, we apply the boundary conditions for the fluid mesh:}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{We impose parallel in-\/ and outflow at the in-\/ and outflow}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{boundaries and apply boundary conditions}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{for the pseudo-\/elastic deformation of the fluid mesh. Since}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{the in-\/ and outflow cross-\/sections of the elastic tube are}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{held in place, we pin the position of the fluid nodes}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{in these cross-\/sections too. To facilitate debugging we }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{document the position of the fluid nodes whose }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{(pseudo-\/solid) displacements we suppressed.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{\(\backslash\)until pseudo\_solid\_bc\_file.close();}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{We apply the no-\/slip condition on the fluid nodes}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{that are located on the FSI boundary. In addition, we }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{apply boundary conditions for the Lagrange multipliers.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{We pin the Lagrange multipliers for nodes that are located on }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{the in-\/ and outflow boundaries where the nodal positions are }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{pinned.  <a href="{}../../../solid/prescribed\_displ\_lagr\_mult/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{Recall</a> that the Lagrange multipliers are additional degrees of}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{freedom that are added to the "{}bulk"{} degrees of freedom that were}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{originally created by the "{}bulk"{} element. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{The storage for the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{Lagrange multipliers is added to the Nodes by the FaceElements and}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{the values at which the Lagrange multipliers are stored are found}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{using the function }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{\(\backslash\)c BoundaryNodeBase::index\_of\_first\_value\_assigned\_by\_face\_element().}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{The documentation of the position of}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{the pinned Lagrange multiplier nodes in }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{\(\backslash\)c RESLT/pinned\_lagrange\_multiplier\_nodes.dat is here to}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{facilitate the debugging of the code and is highly recommended.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{\(\backslash\)until pinned\_file.close();}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{We complete the build of the fluid elements by specifying}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{the Reynolds number and the constitutive equation for the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{pseudo-\/solid equations; recall that we use the same constitutive }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{equation as used for the tube wall.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{We apply the "{}solid"{} boundary conditions by }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{pinning the positions of the nodes that are located at the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{ends of the elastic tube, and, just to be on the safe side,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{document their positions to allow for debugging and sanity-\/checking.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{\(\backslash\)until bc\_file.close();}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{We complete the build of the solid elements by passing the pointer}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{to the constitutive equation.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{Finally, we set up the fluid-\/structure interaction by determining}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{which "{}bulk"{} fluid elements are located next to the FSI traction elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{that apply the fluid load to the solid. This must be done separately for}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{each of the mesh boundaries that make up the physical FSI boundary. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{To facilitate debugging,  we document the boundary }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{coordinates along the FSI interface (as seen by the fluid) by opening }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{the  \(\backslash\)c Multi\_domain\_functions::Doc\_boundary\_coordinate\_file stream before}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{calling  \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements(...).}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{If this stream is open, the setup routine writes the Eulerian }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{coordinates of the points on the FSI interface and their }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{intrinsic surface coordinate \(\backslash\)f\$ [ x, y, z, \(\backslash\)zeta\_1, \(\backslash\)zeta\_2  ] \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{to the specified file. This may be compared against the corresponding data for}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{the solid's view of the FSI interface, documented in }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{\(\backslash\)c doc\_solid\_boundary\_coordinates().}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{All that's now left to do is to set up the equation numbering scheme and }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{the problem is ready to be solved.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{\(\backslash\)section fsi\_traction Creating the FSI traction elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{The creation of the FSI traction elements that apply the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{fluid traction to the solid elements that are adjacent to the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{FSI boundary follows the usual procedure: We loop over the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{relevant 3D "{}bulk"{} solid elements and attach the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{\(\backslash\)c FSISolidTractionElements to the appropriate faces. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{\(\backslash\)skipline start\_of\_create\_fsi\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{\(\backslash\)until new FSISolidTractionElement<SOLID\_ELEMENT,3>(bulk\_elem\_pt,face\_index);}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{Next we add the newly-\/created \(\backslash\)c FaceElement to the mesh of traction}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{elements, specify which boundary of the bulk mesh it is attached to,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{and pass the FSI interaction parameter \(\backslash\)f\$ Q \(\backslash\)f\$ to the element. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{\(\backslash\)until  end of create\_fsi\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{\(\backslash\)section create\_lagr Creating the Lagrange multiplier elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{The creation of the \(\backslash\)c FaceElements that use Lagrange multipliers}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{to impose the boundary displacement of the pseudo-\/solid fluid mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{is again fairly straightforward (the use of Lagrange multipliers}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{for the imposition of boundary displacements is explained}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{in <a href="{}../../../solid/prescribed\_displ\_lagr\_mult/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{another tutorial</a>). The only complication is that we must loop over}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{the different parts of the FSI boundary. In each case we }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{combine the \(\backslash\)c FSISolidTractionElements attached to the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{solid mesh into a compound \(\backslash\)c GeomObject. Each \(\backslash\)c GeomObject}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{provides a continuous representation of the relevant part of the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{FSI boundary, parametrised by the boundary coordinate assigned }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{earlier while its shape is determined by the deformation of }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{the 3D solid elements that the \(\backslash\)c FSISolidTractionElements are}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{attached to.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{\(\backslash\)until (Solid\_fsi\_traction\_mesh\_pt[i]);}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{Having represented the boundary by a (compound) \(\backslash\)c GeomObject,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{we now attach \(\backslash\)c ImposeDisplacementByLagrangeMultiplierElements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{to the appropriate faces of the "{}bulk"{} fluid elements that are }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{adjacent to the FSI interface and add them to their own mesh:}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{\(\backslash\)until add\_element\_pt}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{Finally, we pass a pointer to the compound \(\backslash\)c GeomObject that defines}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{the shape of the FSI interface and specify which boundary in the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{"{}bulk"{} fluid mesh the \(\backslash\)c ImposeDisplacementByLagrangeMultiplierElement}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{is attached to.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{\(\backslash\)until end of create\_lagrange\_multiplier\_elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{\(\backslash\)section fluid\_traction Attaching the fluid traction elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{The helper function \(\backslash\)c create\_fluid\_traction\_elements() }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{attaches \(\backslash\)c  NavierStokesTractionElements to the in-\/ and outflow}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{cross-\/sections of the fluid mesh and thus imposes the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{prescribed pressure drop onto the fluid.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{\(\backslash\)skipline start\_of\_fluid\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{\(\backslash\)until end of create\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{\(\backslash\)section doc\_solution Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{The post-\/processing routine simply executes the output functions for }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{the fluid and solid meshes and documents their mesh boundaries. We }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{also document the FSI traction that the fluid exerts onto the solid.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{\(\backslash\)skipline start\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{\(\backslash\)until end\_of\_doc}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00617}00617 \textcolor{comment}{\(\backslash\)section doc\_solid\_zeta Sanity check: Documenting the solid boundary coordinates}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00618}00618 \textcolor{comment}{The function \(\backslash\)c doc\_solid\_boundary\_coordinates() }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00619}00619 \textcolor{comment}{documents the parametrisation of the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00620}00620 \textcolor{comment}{solid's FSI boundary by writing into a file the solid's }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00621}00621 \textcolor{comment}{counterpart of the \(\backslash\)f\$ [ x, y, z, \(\backslash\)zeta\_1, \(\backslash\)zeta\_2 ] \(\backslash\)f\$ data }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00622}00622 \textcolor{comment}{that we created for the fluid side of the FSI interface}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00623}00623 \textcolor{comment}{when setting up the fluid-\/structure interaction with }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00624}00624 \textcolor{comment}{\(\backslash\)c FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements(...).}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00625}00625 \textcolor{comment}{The two parametrisations should be consistent; see}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00626}00626 \textcolor{comment}{\(\backslash\)ref go\_wrong for more details. The implementation is straightforward}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00627}00627 \textcolor{comment}{and is suppressed for brevity; see the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00628}00628 \textcolor{comment}{<a href=}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00629}00629 \textcolor{comment}{"{}../../../../demo\_drivers/interaction/unstructured\_three\_d\_fsi/unstructured\_three\_d\_fsi.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00630}00630 \textcolor{comment}{source code </a> if you want to know}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00631}00631 \textcolor{comment}{how it works.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00632}00632 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00633}00633 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00634}00634 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00635}00635 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00636}00636 \textcolor{comment}{\(\backslash\)section comm\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00637}00637 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00638}00638 \textcolor{comment}{\(\backslash\)subsection boundary\_coord How the boundary coordinates are generated}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00639}00639 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00640}00640 \textcolor{comment}{The use of pseudo-\/elasticity for the node update in the fluid mesh }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00641}00641 \textcolor{comment}{makes the solution of FSI problems extremely straightforward. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00642}00642 \textcolor{comment}{They key feature that allows the "{}automatic"{} coupling of the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00643}00643 \textcolor{comment}{unstructured fluid and solid meshes is the (consistent!) generation }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00644}00644 \textcolor{comment}{of the boundary coordinates  \(\backslash\)f\$ (\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) \(\backslash\)f\$ along }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00645}00645 \textcolor{comment}{the FSI interface. For reasons already mentioned, the procedure is more}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00646}00646 \textcolor{comment}{involved than in the equivalent two-\/dimensional problem.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00647}00647 \textcolor{comment}{The implementation of this functionality in }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00648}00648 \textcolor{comment}{\(\backslash\)c TetgenMesh::setup\_boundary\_coordinates(...) exploits the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00649}00649 \textcolor{comment}{fact that}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00650}00650 \textcolor{comment}{-\/\# Meshes generated}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00651}00651 \textcolor{comment}{   by  <A HREF="{}http://wias-\/berlin.de/software/tetgen//"{}> \(\backslash\)c tetgen </A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00652}00652 \textcolor{comment}{   are bounded by planar facets, and \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00653}00653 \textcolor{comment}{-\/\# We insist that all facets are given distinct boundary IDs  }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00654}00654 \textcolor{comment}{   when defining the domain in the tetgen <code>*.poly</code> file. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00655}00655 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00656}00656 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00657}00657 \textcolor{comment}{  The figure below illustrates the generation of the boundary }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00658}00658 \textcolor{comment}{coordinates within a representative planar facet (shown in cyan) }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00659}00659 \textcolor{comment}{that defines a particular mesh boundary. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00660}00660 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00661}00661 \textcolor{comment}{\(\backslash\)image html boundary\_coords\_with\_mesh.gif "{}Sketch illustrating the generation of boundary coordinates on a mesh boundary that is defined by a planar facet (shown in cyan). "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00662}00662 \textcolor{comment}{\(\backslash\)image latex boundary\_coords\_with\_mesh.eps "{}Sketch illustrating the generation of boundary coordinates on a mesh boundary that is defined by a planar facet (shown in cyan). "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00663}00663 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00664}00664 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00665}00665 \textcolor{comment}{Here is how we generate the boundary coordinates:}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00666}00666 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00667}00667 \textcolor{comment}{-\/\# We start by attaching \(\backslash\)c FaceElements to the appropriate faces of }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00668}00668 \textcolor{comment}{   the "{}bulk"{} elements that are adjacent to the mesh boundary defined}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00669}00669 \textcolor{comment}{   by the facet. These \(\backslash\)c FaceElements provide a surface triangulation }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00670}00670 \textcolor{comment}{   of the boundary. In the sketch above, the surface triangulation}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00671}00671 \textcolor{comment}{   is represented by the blue surface mesh. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00672}00672 \textcolor{comment}{-\/\# We locate the "{}lower left"{} and "{}upper right"{} nodes}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00673}00673 \textcolor{comment}{   within the surface mesh, based on a lexicographical }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00674}00674 \textcolor{comment}{   ordering of the nodes' 3D coordinates. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00675}00675 \textcolor{comment}{-\/\# The straight line from the "{}lower left"{} to the "{}upper right"{}}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00676}00676 \textcolor{comment}{   node (shown by the dashed red line) defines a direction that }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00677}00677 \textcolor{comment}{   is co-\/planar with the facet and therefore allows us to define }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00678}00678 \textcolor{comment}{   an in-\/plane unit vector, \(\backslash\)f\$ \{\(\backslash\)bf T\}\_1\(\backslash\)f\$, shown in red. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00679}00679 \textcolor{comment}{-\/\# A second in-\/plane unit vector, \(\backslash\)f\$ \{\(\backslash\)bf T\}\_2\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00680}00680 \textcolor{comment}{   (shown in yellow), can then be constructed by taking the cross-\/product}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00681}00681 \textcolor{comment}{   of \(\backslash\)f\$ \{\(\backslash\)bf T\}\_1\(\backslash\)f\$ and the outer unit normal \(\backslash\)f\$ \{\(\backslash\)bf N\} \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00682}00682 \textcolor{comment}{   (The outer unit normal can be obtained from any of the adjacent }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00683}00683 \textcolor{comment}{   bulk elements.) \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00684}00684 \textcolor{comment}{-\/\# The orthonormal in-\/plane vectors \(\backslash\)f\$ \{\(\backslash\)bf T\}\_1\(\backslash\)f\$ and \(\backslash\)f\$ \{\(\backslash\)bf T\}\_2\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00685}00685 \textcolor{comment}{   define a unique parametrisation of the boundary in terms of }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00686}00686 \textcolor{comment}{   the boundary coordinates \(\backslash\)f\$ (\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) \(\backslash\)f\$, if we }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00687}00687 \textcolor{comment}{   insist that for every point on the boundary we have}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00688}00688 \textcolor{comment}{   \(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00689}00689 \textcolor{comment}{   \{\(\backslash\)bf R\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) = \{\(\backslash\)bf R\}\_\{\(\backslash\)mbox\{lower left\}\} + }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00690}00690 \textcolor{comment}{   \(\backslash\)zeta\_1 \{\(\backslash\)bf T\}\_1 + \(\backslash\)zeta\_2 \{\(\backslash\)bf T\}\_2.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00691}00691 \textcolor{comment}{   \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00692}00692 \textcolor{comment}{   This allows the assignment of boundary coordinates for each}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00693}00693 \textcolor{comment}{   of the nodes on this boundary. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00694}00694 \textcolor{comment}{-\/\# Once this is done we can delete the \(\backslash\)c FaceElements that defined}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00695}00695 \textcolor{comment}{   the surface triangulation. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00696}00696 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00697}00697 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00698}00698 \textcolor{comment}{Since the generation of the boundary coordinates by the above}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00699}00699 \textcolor{comment}{procedure only relies on the position of the "{}lower left"{} and }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00700}00700 \textcolor{comment}{"{}upper right"{} vertices (which are}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00701}00701 \textcolor{comment}{properties of the facet rather than the \(\backslash\)c tetgen mesh) the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00702}00702 \textcolor{comment}{boundary coordinates are unique, regardless of the actual}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00703}00703 \textcolor{comment}{discretisation generated by \(\backslash\)c tetgen. Furthermore, }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00704}00704 \textcolor{comment}{the boundary coordinates created from the fluid and solid meshes}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00705}00705 \textcolor{comment}{will be consistent \(\backslash\)e provided we reverse the direction of the outer}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00706}00706 \textcolor{comment}{unit normal in one of the meshes. This is exactly what the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00707}00707 \textcolor{comment}{\(\backslash\)c switch\_normal flag in \(\backslash\)c TetgenMesh::setup\_boundary\_coordinates(...)}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00708}00708 \textcolor{comment}{is for. When generating the boundary coordinates for }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00709}00709 \textcolor{comment}{our problem, we switched the direction of the normal}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00710}00710 \textcolor{comment}{in the fluid mesh;  see the section \(\backslash\)ref fluid\_mesh, above.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00711}00711 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00712}00712 \textcolor{comment}{Here is an animation of the automatically-\/generated boundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00713}00713 \textcolor{comment}{coordinates along the 12 mesh boundaries that constitute the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00714}00714 \textcolor{comment}{FSI boundary, when viewed from the fluid and the solid, respectively.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00715}00715 \textcolor{comment}{In each of the frames the contours indicate the value of  }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00716}00716 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)zeta\_1 \(\backslash\)f\$ within the respective boundary. Note that the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00717}00717 \textcolor{comment}{boundary coordinates established in the two meshes match, even }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00718}00718 \textcolor{comment}{though the discretisations do not.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00719}00719 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00720}00720 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00721}00721 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00722}00722 \textcolor{comment}{\(\backslash\)image html fluid\_boundary\_test.gif "{}Contour plot of the automatically-\/generated boundary coordinates on the FSI boundary, viewed from the fluid mesh. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00723}00723 \textcolor{comment}{\(\backslash\)image latex fluid\_boundary\_test.eps "{}Contour plot of the automatically-\/generated boundary coordinates on the FSI boundary, viewed from the fluid mesh. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00724}00724 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00725}00725 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00726}00726 \textcolor{comment}{\(\backslash\)image html solid\_boundary\_test.gif "{}Contour plot of the automatically-\/generated boundary coordinates on the FSI boundary, viewed from the solid mesh. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00727}00727 \textcolor{comment}{\(\backslash\)image latex solid\_boundary\_test.eps "{}Contour plot of the automatically-\/generated boundary coordinates on the FSI boundary, viewed from the solid mesh. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00728}00728 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00729}00729 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00730}00730 \textcolor{comment}{You should explore this procedure yourself as an \(\backslash\)b exercise: For}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00731}00731 \textcolor{comment}{instance you may want to explore what happens}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00732}00732 \textcolor{comment}{if you don't switch the direction of the normal in the fluid mesh when }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00733}00733 \textcolor{comment}{generating the boundary coordinates. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00734}00734 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00735}00735 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00736}00736 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00737}00737 \textcolor{comment}{\(\backslash\)subsection matching\_fluid\_and\_solid Fluid and solid meshes do not have to be matching}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00738}00738 \textcolor{comment}{The mesh shown in the problem sketch at the beginning of this }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00739}00739 \textcolor{comment}{tutorial already suggested that the fluid and solid meshes do not have to }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00740}00740 \textcolor{comment}{match across the FSI interface. To illustrate this point more clearly, here }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00741}00741 \textcolor{comment}{is the result of another computation for which we generated }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00742}00742 \textcolor{comment}{a much finer fluid mesh, using}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00743}00743 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00744}00744 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00745}00745 \textcolor{comment}{tetgen -\/a0.05 fsi\_bifurcation\_fluid.poly}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00746}00746 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00747}00747 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00748}00748 \textcolor{comment}{The resulting tetgen <code>*.ele</code>,  <code>*.node</code> and}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00749}00749 \textcolor{comment}{<code>*.face</code> files can be used with same driver code.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00750}00750 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00751}00751 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00752}00752 \textcolor{comment}{\(\backslash\)image html finer\_fluid\_mesh.gif "{}Solution computed with a finer fluid mesh. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00753}00753 \textcolor{comment}{\(\backslash\)image latex finer\_fluid\_mesh.eps "{}Solution computed with a finer fluid mesh. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00754}00754 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00755}00755 \textcolor{comment}{As an \(\backslash\)b exercise, generate some finer fluid and solid meshes yourself}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00756}00756 \textcolor{comment}{and confirm that they may be used without having to change the driver}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00757}00757 \textcolor{comment}{code.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00758}00758 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00759}00759 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00760}00760 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00761}00761 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00762}00762 \textcolor{comment}{\(\backslash\)subsection go\_wrong What can go wrong?}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00763}00763 \textcolor{comment}{Here are a few things that can (and often do) go wrong in}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00764}00764 \textcolor{comment}{unstructured, three-\/dimensional FSI problems. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00765}00765 \textcolor{comment}{-\/ <b>The facets that define the FSI boundary don't match:</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00766}00766 \textcolor{comment}{  This tends to happen if the <code>*.poly</code> files }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00767}00767 \textcolor{comment}{  describing the fluid and solid meshes do not use}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00768}00768 \textcolor{comment}{  the same facets to describe the FSI interface. While we}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00769}00769 \textcolor{comment}{  do not expect the fluid and solid meshes themselves}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00770}00770 \textcolor{comment}{  to match, the representation of the FSI interface via}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00771}00771 \textcolor{comment}{  facets \(\backslash\)c must be consistent. A simple way to ensure consistency }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00772}00772 \textcolor{comment}{  is to use the following procedure:}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00773}00773 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00774}00774 \textcolor{comment}{  -\/\# Write the <code>*.poly</code> file for the fluid mesh.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00775}00775 \textcolor{comment}{     Make sure that each facet is given a separate boundary ID}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00776}00776 \textcolor{comment}{     (at least for the facets describing the FSI interface). }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00777}00777 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00778}00778 \textcolor{comment}{  -\/\# Solve a single-\/physics fluids problem on this mesh to check the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00779}00779 \textcolor{comment}{     integrity of the mesh -\/-\/ the solution of this problem will}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00780}00780 \textcolor{comment}{     also give you some insight into the expected flow field.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00781}00781 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00782}00782 \textcolor{comment}{  -\/\# Make a copy of the <code>*.poly</code> file for the fluid mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00783}00783 \textcolor{comment}{     and modify it to describe the solid mesh, leaving the facets}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00784}00784 \textcolor{comment}{     that define the FSI interface unchanged. This automatically}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00785}00785 \textcolor{comment}{     ensures that the representation of the FSI boundary from the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00786}00786 \textcolor{comment}{     fluid's and the solid's point of view is consistent.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00787}00787 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00788}00788 \textcolor{comment}{  -\/\# Solve a single-\/physics solids problem on this mesh to check the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00789}00789 \textcolor{comment}{     integrity of the mesh, e.g. by applying some pressure loading on }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00790}00790 \textcolor{comment}{     the future FSI boundary  -\/-\/ the solution of this problem will}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00791}00791 \textcolor{comment}{     also give you some insight into the expected wall deformation.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00792}00792 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00793}00793 \textcolor{comment}{  -\/\# Couple the two problems, as shown in this tutorial.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00794}00794 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00795}00795 \textcolor{comment}{  .}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00796}00796 \textcolor{comment}{  As an \(\backslash\)b exercise, modify the tetgen <code>*.poly</code> files}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00797}00797 \textcolor{comment}{  and the driver code so that it can handle the extended domain}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00798}00798 \textcolor{comment}{  considered in the }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00799}00799 \textcolor{comment}{  <a href="{}../../../navier\_stokes/unstructured\_three\_d\_fluid/html/index.html\#finer\_mesh"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00800}00800 \textcolor{comment}{  single-\/physics fluids problem.</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00801}00801 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00802}00802 \textcolor{comment}{-\/ <b> An FSI (sub-\/)boundary is not planar:</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00803}00803 \textcolor{comment}{  In an unstructured mesh, the FSI boundary will usually be }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00804}00804 \textcolor{comment}{  represented by a large number of distinct mesh boundaries. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00805}00805 \textcolor{comment}{  The automatic setup of the boundary coordinates on these}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00806}00806 \textcolor{comment}{  mesh boundaries requires them to be (individually) planar -\/-\/ at least in the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00807}00807 \textcolor{comment}{  problem's initial configuration. Provided you have followed our advice}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00808}00808 \textcolor{comment}{  and associated each of the facets that define the FSI boundary }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00809}00809 \textcolor{comment}{  with a different boundary ID, you should not have any problems as}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00810}00810 \textcolor{comment}{  \(\backslash\)c tetgen does not allow non-\/planar facets.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00811}00811 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00812}00812 \textcolor{comment}{-\/ <b> The solver does not converge:</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00813}00813 \textcolor{comment}{  A large-\/displacement FSI problem is a highly nonlinear problem and the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00814}00814 \textcolor{comment}{  provision of a good initial guess for the Newton iteration}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00815}00815 \textcolor{comment}{  is essential. We tend to proceed as follows:}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00816}00816 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00817}00817 \textcolor{comment}{  -\/\# Follow the steps outlined above, to study the constituent}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00818}00818 \textcolor{comment}{     single-\/physics problems first. This will already give you}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00819}00819 \textcolor{comment}{     some insight into the behaviour of the problem. For instance,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00820}00820 \textcolor{comment}{     the solution of the single-\/physics Navier-\/Stokes equations at }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00821}00821 \textcolor{comment}{     the desired Reynolds number may have to be computed via a parameter}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00822}00822 \textcolor{comment}{     incrementation, starting from Stokes flow. Similarly, the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00823}00823 \textcolor{comment}{     study of the single-\/physics solid problem will reveal what}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00824}00824 \textcolor{comment}{     load increments can be accommodated without causing the}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00825}00825 \textcolor{comment}{     Newton iteration to diverge.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00826}00826 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00827}00827 \textcolor{comment}{  -\/\# Combine the two single-\/physics problems }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00828}00828 \textcolor{comment}{     using the steps described in this tutorial. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00829}00829 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00830}00830 \textcolor{comment}{  -\/\# Switch off the fluid-\/structure interaction by }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00831}00831 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00832}00832 \textcolor{comment}{     -\/\# setting the FSI parameter to zero, \(\backslash\)f\$ Q = 0, \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00833}00833 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00834}00834 \textcolor{comment}{     -\/\# commenting out the call to }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00835}00835 \textcolor{comment}{        \(\backslash\)c FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements(...),}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00836}00836 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00837}00837 \textcolor{comment}{     -\/\# not creating the Lagrange-\/multiplier elements that}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00838}00838 \textcolor{comment}{        enforce the solid displacements onto the fluid mesh.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00839}00839 \textcolor{comment}{     .}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00840}00840 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00841}00841 \textcolor{comment}{     This completely uncouples the two problems, although they will be}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00842}00842 \textcolor{comment}{     solved simultaneously, allowing you}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00843}00843 \textcolor{comment}{     to replicate the single-\/physics parameter studies already}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00844}00844 \textcolor{comment}{     performed. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00845}00845 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00846}00846 \textcolor{comment}{  -\/\# Now switch on the various interactions, one-\/by-\/one, while}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00847}00847 \textcolor{comment}{     carefully validating the results at each stage. We tend to }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00848}00848 \textcolor{comment}{     proceed as follows:}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00849}00849 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00850}00850 \textcolor{comment}{     -\/\# Solve the uncoupled problem at zero Reynolds number.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00851}00851 \textcolor{comment}{        \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00852}00852 \textcolor{comment}{     -\/\# Increase the Reynolds number in small increments to its}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00853}00853 \textcolor{comment}{        target value.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00854}00854 \textcolor{comment}{        \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00855}00855 \textcolor{comment}{     -\/\# Re-\/enable the call to }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00856}00856 \textcolor{comment}{        \(\backslash\)c FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements(...)}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00857}00857 \textcolor{comment}{        and attach the Lagrange multiplier elements but keep }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00858}00858 \textcolor{comment}{        \(\backslash\)f\$ Q = 0. \(\backslash\)f\$ If the solid is not loaded by any }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00859}00859 \textcolor{comment}{        forces/tractions other than those arising from the fluid,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00860}00860 \textcolor{comment}{        the solution should not change as the solid remains unloaded.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00861}00861 \textcolor{comment}{        \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00862}00862 \textcolor{comment}{     -\/\# Gently increase the value of the FSI parameter, \(\backslash\)f\$ Q \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00863}00863 \textcolor{comment}{        remembering that it represents the ratio of the typical}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00864}00864 \textcolor{comment}{        viscous fluid stresses to the stiffness of the solid.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00865}00865 \textcolor{comment}{        Hence, even relatively small values of \(\backslash\)f\$ Q \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00866}00866 \textcolor{comment}{        tend to lead to relatively large solid displacements. }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00867}00867 \textcolor{comment}{        Be gentle!}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00868}00868 \textcolor{comment}{     .}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00869}00869 \textcolor{comment}{  .}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00870}00870 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00871}00871 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00872}00872 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00873}00873 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00874}00874 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00875}00875 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00876}00876 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00877}00877 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00878}00878 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00879}00879 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00880}00880 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00881}00881 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/interaction/unstructured\_three\_d\_fsi"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00882}00882 \textcolor{comment}{demo\_drivers/interaction/unstructured\_three\_d\_fsi}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00883}00883 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00884}00884 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00885}00885 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00886}00886 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00887}00887 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/interaction/unstructured\_three\_d\_fsi/unstructured\_three\_d\_fsi.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00888}00888 \textcolor{comment}{demo\_drivers/interaction/unstructured\_three\_d\_fsi/unstructured\_three\_d\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00889}00889 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00890}00890 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00891}00891 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00892}00892 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00893}00893 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00894}00894 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00895}00895 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00896}00896 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00897}00897 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00898}00898 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00899}00899 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00900}00900 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00901}00901 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00902}00902 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00903}00903 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00904}00904 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00905}00905 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00906}00906 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00907}00907 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{unstructured__three__d__fsi_8txt__doxygenified_8h_source_l00908}00908 }
+
+\end{DoxyCode}

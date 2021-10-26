@@ -43,9 +43,9 @@
 
 namespace oomph
 {
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
@@ -57,37 +57,31 @@ namespace oomph
                             public virtual WomersleyEquations<DIM>
   {
   private:
-    /// \short Static array of ints to hold number of variables at
+    /// Static array of ints to hold number of variables at
     /// nodes: Initial_Nvalue[n]
     static const unsigned Initial_Nvalue;
 
   public:
-    ///\short  Constructor: Call constructors for TElement and
+    /// Constructor: Call constructors for TElement and
     /// Womersley equations
     TWomersleyElement() : TElement<DIM, NNODE_1D>(), WomersleyEquations<DIM>()
     {
     }
 
     /// Broken copy constructor
-    TWomersleyElement(const TWomersleyElement<DIM, NNODE_1D>& dummy)
-    {
-      BrokenCopy::broken_copy("TWomersleyElement");
-    }
+    TWomersleyElement(const TWomersleyElement<DIM, NNODE_1D>& dummy) = delete;
 
     /// Broken assignment operator
-    void operator=(const TWomersleyElement<DIM, NNODE_1D>&)
-    {
-      BrokenCopy::broken_assign("TWomersleyElement");
-    }
+    void operator=(const TWomersleyElement<DIM, NNODE_1D>&) = delete;
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///  Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
       return Initial_Nvalue;
     }
 
-    /// \short Output function:
+    /// Output function:
     ///  x,y,u   or    x,y,z,u
     void output(std::ostream& outfile)
     {
@@ -95,7 +89,7 @@ namespace oomph
     }
 
 
-    ///  \short Output function:
+    ///  Output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -103,7 +97,7 @@ namespace oomph
     }
 
 
-    /// \short C-style output function:
+    /// C-style output function:
     ///  x,y,u   or    x,y,z,u
     void output(FILE* file_pt)
     {
@@ -111,7 +105,7 @@ namespace oomph
     }
 
 
-    ///  \short C-style output function:
+    ///  C-style output function:
     ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
     void output(FILE* file_pt, const unsigned& n_plot)
     {
@@ -119,7 +113,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for an exact solution:
+    /// Output function for an exact solution:
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     void output_fct(std::ostream& outfile,
                     const unsigned& n_plot,
@@ -129,7 +123,7 @@ namespace oomph
     }
 
 
-    /// \short Output function for a time-dependent exact solution.
+    /// Output function for a time-dependent exact solution.
     ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
     /// (Calls the steady version)
     void output_fct(std::ostream& outfile,
@@ -151,7 +145,7 @@ namespace oomph
                                                       DShape& dtestdx) const;
 
 
-    /// \short Shape/test functions and derivs w.r.t. to global coords at
+    /// Shape/test functions and derivs w.r.t. to global coords at
     /// integration point ipt; return  Jacobian of mapping
     inline double dshape_and_dtest_eulerian_at_knot_womersley(
       const unsigned& ipt,
@@ -162,9 +156,9 @@ namespace oomph
   };
 
 
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
 
 
   //======================================================================
@@ -227,8 +221,8 @@ namespace oomph
   }
 
 
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
 
 
   //=======================================================================
@@ -242,15 +236,15 @@ namespace oomph
     : public virtual TElement<DIM - 1, NNODE_1D>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : TElement<DIM - 1, NNODE_1D>() {}
   };
 
 
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////
 
 
   //=======================================================================
@@ -261,7 +255,7 @@ namespace oomph
     : public virtual PointElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional TElement
     FaceGeometry() : PointElement() {}
   };

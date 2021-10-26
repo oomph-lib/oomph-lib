@@ -21,14 +21,14 @@ For capillary-\/static problems, the fluid velocity field is zero and the contin
 
 \[ \frac{1}{2} \oint \mbox{\boldmath$x\cdot n$} \mbox{d} s = \frac{1}{2} \int \hspace{-0.25cm} \int \mbox{\boldmath$\nabla\cdot x$} \mbox{d} A = \int \hspace{-0.25cm} \int \mbox{d} A = \mathcal{V}. \]
 
-M\+A\+T\+T\+H\+I\+AS, see also the droplet/bubble problems.
+MATTHIAS, see also the droplet/bubble problems.
 
 Perhaps the most natural implementation in the present problem is to fix a reference pressure value within the fluid and then to treat the external pressure as a degree of freedom with the volume constraint as the associated equation. Alternatively, the external pressure can be fixed at a reference pressure and an internal fluid pressure degree of freedom is then associated with the volume constraint. We shall demonstrate both methods in the driver code below.
 
 Computation of the above equation associated with the volume constraint is performed by specialised {\ttfamily Line\+Volume\+Constraint\+Bounding\+Elements} that must be attached to all boundaries that enclose the fluid.\hypertarget{index_contact_angle}{}\doxysection{Enforcing the contact angle constraint}\label{index_contact_angle}
 Here the \`{}`natural'\textquotesingle{} contact-\/angle boundary condition arises from the weak form of the dynamic boundary condition after integration using the surface divergence theorem. This leads to a term of the form
 
-\[ \frac{1}{Ca} \left[m_{i}\psi\right]_{\mbox{\boldmath$x$}_l}^{\mbox{\boldmath$x$}_{r}} \] ~\newline
+\[ \frac{1}{Ca} \left[m_{i}\psi\right]_{\mbox{\boldmath$x$}_l}^{\mbox{\boldmath$x$}_{r}} \]~\newline
 
 
 in the momentum equations associated with the boundaries of the free surface, where $ \mbox{\boldmath$m$} $ is a unit vector tangential to the free surface at those boundaries.
@@ -50,17 +50,17 @@ We use a namespace to define the parameters for the pseudo-\/solid mesh constitu
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====start\_of\_namespace=================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for phyical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pseudo-\/solid Poisson ratio}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Nu}}=0.1;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Direction of the wall normal vector}}
+\DoxyCodeLine{\textcolor{comment}{ /// Direction of the wall normal vector}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af3a3b98f9f5b354d01228884e49c5bf0}{Wall\_normal}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Function that specifies the wall unit normal}}
+\DoxyCodeLine{\textcolor{comment}{ /// Function that specifies the wall unit normal}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0d48e8726fa485de2b2df2d5031ec41b}{wall\_unit\_normal\_fct}}(\textcolor{keyword}{const} Vector<double> \&x, }
 \DoxyCodeLine{                      Vector<double> \&normal)}
 \DoxyCodeLine{ \{}
@@ -76,8 +76,8 @@ We shall solve the problem twice, once using the external pressure as the degree
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main=======================================================}}
-\DoxyCodeLine{\textcolor{comment}{///Main driver: Build problem and initiate parameter study}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{/// Main driver: Build problem and initiate parameter study}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{static__single__layer_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{  \textcolor{comment}{// Solve the pseudosolid problem twice, once hijacking an internal, once}}
@@ -89,37 +89,35 @@ We shall solve the problem twice, once using the external pressure as the degree
 \DoxyCodeLine{   \textcolor{comment}{//Construct the problem}}
 \DoxyCodeLine{   \mbox{\hyperlink{classPseudoSolidCapProblem}{PseudoSolidCapProblem}}<Hijacked<}
 \DoxyCodeLine{     PseudoSolidNodeUpdateElement<QCrouzeixRaviartElement<2>,}
-\DoxyCodeLine{    QPVDElementWithPressure<2> > > >  \mbox{\hyperlink{static__single__layer_8txt_ad5a3a79ccd456b86a8784d9f501d4588}{problem}}(hijack\_internal);}
+\DoxyCodeLine{    QPVDElementWithPressure<2> > > >  problem(hijack\_internal);}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{keywordtype}{string} dir\_name=\textcolor{stringliteral}{"RESLT\_elastic\_hijacked\_external"};}
-\DoxyCodeLine{   \textcolor{keywordflow}{if} (i==1) dir\_name=\textcolor{stringliteral}{"RESLT\_elastic\_hijacked\_internal"};}
+\DoxyCodeLine{   \textcolor{keywordtype}{string} dir\_name=\textcolor{stringliteral}{"{}RESLT\_elastic\_hijacked\_external"{}};}
+\DoxyCodeLine{   \textcolor{keywordflow}{if} (i==1) dir\_name=\textcolor{stringliteral}{"{}RESLT\_elastic\_hijacked\_internal"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Do parameter study}}
-\DoxyCodeLine{   \mbox{\hyperlink{static__single__layer_8txt_ad5a3a79ccd456b86a8784d9f501d4588}{problem}}.parameter\_study(dir\_name);}
+\DoxyCodeLine{   problem.parameter\_study(dir\_name);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_main}}
 
 \end{DoxyCodeInclude}
-
-
-The elements are {\ttfamily Hijacked} {\ttfamily Pseudo\+Solid\+Node\+Update} {\ttfamily Q\+Crouzeix\+Raviart} type elements, where the {\ttfamily Hijacked} actually required only in the case when an internal pressure degree of freedom is to be used to enforce the volume constraint, see below.\hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
+ The elements are {\ttfamily Hijacked} {\ttfamily Pseudo\+Solid\+Node\+Update} {\ttfamily QCrouzeix\+Raviart} type elements, where the {\ttfamily Hijacked} actually required only in the case when an internal pressure degree of freedom is to be used to enforce the volume constraint, see below.\hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The problem class consists of a constructor that takes the aforementioned boolean flag to determine which pressure degree of freedom to use for the volume constraint; a destructor to clean up all memory allocated during the problem construction; a function that performs a parameter study, decreasing the contact angle from $ \theta_{c} = 90^{\circ} $ in steps of $ 5^{\circ} $; and a function that documents the solution.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_pseudo\_elastic\_class====================================}}
-\DoxyCodeLine{\textcolor{comment}{///\(\backslash\)short A class that solves the Navier-\/-\/Stokes equations}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///to compute the shape of a static interface in a rectangular container}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///with imposed contact angle at the boundary.}}
+\DoxyCodeLine{\textcolor{comment}{/// A class that solves the Navier-\/-\/Stokes equations}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// to compute the shape of a static interface in a rectangular container}}
+\DoxyCodeLine{\textcolor{comment}{/// with imposed contact angle at the boundary.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classPseudoSolidCapProblem}{PseudoSolidCapProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Constructor: Boolean flag indicates if volume constraint is}}
-\DoxyCodeLine{\textcolor{comment}{ ///applied by hijacking internal or external pressure}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Boolean flag indicates if volume constraint is}}
+\DoxyCodeLine{\textcolor{comment}{ /// applied by hijacking internal or external pressure}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classPseudoSolidCapProblem_a4ac05a07dd55950bb67f7f79cb9fbb77}{PseudoSolidCapProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& hijack\_internal);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor: clean up memory allocated by the object}}
@@ -133,9 +131,7 @@ The problem class consists of a constructor that takes the aforementioned boolea
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classPseudoSolidCapProblem_a2fb98a37bde5742cbdf3c91cb1f5eb2f}{doc\_solution}}(DocInfo\& doc\_info);}
 
 \end{DoxyCodeInclude}
-
-
-There are also three helper functions that are used to create the {\ttfamily Face\+Elements} used to enforce the additional boundary conditions and constraints. The function {\ttfamily create\+\_\+free\+\_\+surface\+\_\+elements()} adds {\ttfamily Elastic\+Line\+Fluid\+Interface\+Elements} to the upper boundary (boundary 2) of the mesh, exactly as in \href{../../single_layer_free_surface/html/index.html}{\texttt{ another tutorial }}. The function {\ttfamily create\+\_\+volume\+\_\+constraint\+\_\+elements()} constructs the elements required to enforce the volume constraint. Finally, the function {\ttfamily create\+\_\+contact\+\_\+angle\+\_\+element()} constructs the {\ttfamily Point\+Element} that enforces the contact angle condition at the solid wall of the container.
+ There are also three helper functions that are used to create the {\ttfamily Face\+Elements} used to enforce the additional boundary conditions and constraints. The function {\ttfamily create\+\_\+free\+\_\+surface\+\_\+elements()} adds {\ttfamily Elastic\+Line\+Fluid\+Interface\+Elements} to the upper boundary (boundary 2) of the mesh, exactly as in \href{../../single_layer_free_surface/html/index.html}{\texttt{ another tutorial }}. The function {\ttfamily create\+\_\+volume\+\_\+constraint\+\_\+elements()} constructs the elements required to enforce the volume constraint. Finally, the function {\ttfamily create\+\_\+contact\+\_\+angle\+\_\+element()} constructs the {\ttfamily Point\+Element} that enforces the contact angle condition at the solid wall of the container.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -152,9 +148,7 @@ There are also three helper functions that are used to create the {\ttfamily Fac
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_contact\_angle\_element();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, the class has member data corresponding to the physical variables of the problem and provides permanent storage for pointers to the data that stores the external pressure and the data for the pressure degree of freedom that will be \char`\"{}traded\char`\"{} for the volume constraint. In additional, an output stream and pointers to the different meshes that will be assembled in the problem are also included.
+ Finally, the class has member data corresponding to the physical variables of the problem and provides permanent storage for pointers to the data that stores the external pressure and the data for the pressure degree of freedom that will be \char`\"{}traded\char`\"{} for the volume constraint. In additional, an output stream and pointers to the different meshes that will be assembled in the problem are also included.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -185,7 +179,7 @@ Finally, the class has member data corresponding to the physical variables of th
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
 \DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Storage for the bulk mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Storage for the bulk mesh}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* Bulk\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Storage for the free surface mesh}}
@@ -203,15 +197,15 @@ Finally, the class has member data corresponding to the physical variables of th
 \DoxyCodeLine{\}; \textcolor{comment}{//end\_of\_pseudo\_solid\_problem\_class}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
+ \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 The constructor first initialises the member data and sets the outer unit normal to the wall to be $ (1,0) $. The initial contact angle is set to be $ 90^{\circ} $, so that the interface will be horizontal.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_constructor=====================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass boolean flag to indicate if the volume}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// constraint is applied by hijacking an internal pressure}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// or the external pressure}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor: Pass boolean flag to indicate if the volume}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// constraint is applied by hijacking an internal pressure}}
+\DoxyCodeLine{\textcolor{comment}{/// or the external pressure}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classPseudoSolidCapProblem_a4ac05a07dd55950bb67f7f79cb9fbb77}{PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& hijack\_internal) :}
@@ -226,9 +220,7 @@ The constructor first initialises the member data and sets the outer unit normal
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af3a3b98f9f5b354d01228884e49c5bf0}{Global\_Physical\_Variables::Wall\_normal}}[1] = 0.0;}
 
 \end{DoxyCodeInclude}
-
-
-Next, a $ 4 \times 4 $ element rectangular mesh is constructed on the undeformed domain.
+ Next, a $ 4 \times 4 $ element rectangular mesh is constructed on the undeformed domain.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -246,9 +238,7 @@ Next, a $ 4 \times 4 $ element rectangular mesh is constructed on the undeformed
 \DoxyCodeLine{ Bulk\_mesh\_pt = \textcolor{keyword}{new} ElasticRectangularQuadMesh<ELEMENT>(nx,nh,half\_width,1.0);}
 
 \end{DoxyCodeInclude}
-
-
-A {\ttfamily Data} object containing a single value is constructed to store the external pressure and the initial value is set.
+ A {\ttfamily Data} object containing a single value is constructed to store the external pressure and the initial value is set.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -265,7 +255,7 @@ A {\ttfamily Data} object containing a single value is constructed to store the 
 
 \label{index_hijack}%
 \Hypertarget{index_hijack}%
- We next setup the reference pressure and traded pressure. If we are using the external pressure as the reference pressure, then we pin it and set an internal pressure degree of freedom as the \char`\"{}traded\char`\"{} pressure. In order to use an internal pressure degree of freedom as the \char`\"{}traded\char`\"{} pressure, we must ensure that the original associated (continuity) equation is not assembled, but that the degree of freedom is still treated a fluid pressure variable when assembling the other residuals within the element. In addition, we will also need direct access to the data and its global equation number. The appropriate machinery is provided by the {\ttfamily Hijacked} wrapper class which allows variables within an underlying element to be \char`\"{}hijacked\char`\"{}. The bulk elements are of {\ttfamily Q\+Crouzeix\+Raviart} type, which means that the pressure variables are internal data and we hijack the first of these in the first element (although any would do). The function {\ttfamily hijack\+\_\+internal\+\_\+value}(..) instructs the bulk element to null out any contributions to the residuals and Jacobian matrix associated with that global equation number and returns a \char`\"{}custom\char`\"{} {\ttfamily Data} object that consists of a single value corresponding to the \char`\"{}hijacked\char`\"{} value and its global equation number. The \char`\"{}custom\char`\"{} {\ttfamily Data} object can then be used as external data in other elements that assemble the new residuals. It is important that any hijacked degrees of freedom must have residual contributions provided by another element otherwise the system Jacobian matrix will be singular. For more details about \char`\"{}hijacking\char`\"{} see \href{../../../hijacking/html/index.html}{\texttt{ this document. }}
+ We next setup the reference pressure and traded pressure. If we are using the external pressure as the reference pressure, then we pin it and set an internal pressure degree of freedom as the \char`\"{}traded\char`\"{} pressure. In order to use an internal pressure degree of freedom as the \char`\"{}traded\char`\"{} pressure, we must ensure that the original associated (continuity) equation is not assembled, but that the degree of freedom is still treated a fluid pressure variable when assembling the other residuals within the element. In addition, we will also need direct access to the data and its global equation number. The appropriate machinery is provided by the {\ttfamily Hijacked} wrapper class which allows variables within an underlying element to be \char`\"{}hijacked\char`\"{}. The bulk elements are of {\ttfamily QCrouzeix\+Raviart} type, which means that the pressure variables are internal data and we hijack the first of these in the first element (although any would do). The function {\ttfamily hijack\+\_\+internal\+\_\+value}(..) instructs the bulk element to null out any contributions to the residuals and Jacobian matrix associated with that global equation number and returns a \char`\"{}custom\char`\"{} {\ttfamily Data} object that consists of a single value corresponding to the \char`\"{}hijacked\char`\"{} value and its global equation number. The \char`\"{}custom\char`\"{} {\ttfamily Data} object can then be used as external data in other elements that assemble the new residuals. It is important that any hijacked degrees of freedom must have residual contributions provided by another element otherwise the system Jacobian matrix will be singular. For more details about \char`\"{}hijacking\char`\"{} see \href{../../../hijacking/html/index.html}{\texttt{ this document. }}
 
 
 \begin{DoxyCodeInclude}{0}
@@ -288,9 +278,7 @@ A {\ttfamily Data} object containing a single value is constructed to store the 
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-If we are using an internal pressure as the reference pressure then the external pressure is a degree of freedom and must be added as global data of the problem. The \char`\"{}traded\char`\"{} pressure is the external pressure and an internal fluid pressure is fixed to have the value zero.
+ If we are using an internal pressure as the reference pressure then the external pressure is a degree of freedom and must be added as global data of the problem. The \char`\"{}traded\char`\"{} pressure is the external pressure and an internal fluid pressure is fixed to have the value zero.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -303,10 +291,10 @@ If we are using an internal pressure as the reference pressure then the external
 \DoxyCodeLine{   add\_global\_data(External\_pressure\_data\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Declare the external pressure to be the pressure determined}}
-\DoxyCodeLine{   \textcolor{comment}{// by the volume constraint, i.e. the pressure that's "traded":}}
+\DoxyCodeLine{   \textcolor{comment}{// by the volume constraint, i.e. the pressure that's "{}traded"{}:}}
 \DoxyCodeLine{   Traded\_pressure\_data\_pt = External\_pressure\_data\_pt;}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{// Since the external pressure is "traded" for the volume constraint,}}
+\DoxyCodeLine{   \textcolor{comment}{// Since the external pressure is "{}traded"{} for the volume constraint,}}
 \DoxyCodeLine{   \textcolor{comment}{// it no longer sets the overall pressure, and we }}
 \DoxyCodeLine{   \textcolor{comment}{// can add an arbitrary constant to all pressures. To make }}
 \DoxyCodeLine{   \textcolor{comment}{// the solution unique, we pin a single pressure value in the bulk: }}
@@ -315,9 +303,7 @@ If we are using an internal pressure as the reference pressure then the external
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We then build the constitutive law that determines the fluid mesh motion and assign it to the bulk elements.
+ We then build the constitutive law that determines the fluid mesh motion and assign it to the bulk elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -337,9 +323,7 @@ We then build the constitutive law that determines the fluid mesh motion and ass
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We next set the fluid boundary conditions by pinning both velocity components on the base and side of the container (boundaries 0 and 1) and the horizontal velocity only on the symmetry line (boundary 3). The upper free surface (boundary 2) remains free.
+ We next set the fluid boundary conditions by pinning both velocity components on the base and side of the container (boundaries 0 and 1) and the horizontal velocity only on the symmetry line (boundary 3). The upper free surface (boundary 2) remains free.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -370,9 +354,7 @@ We next set the fluid boundary conditions by pinning both velocity components on
 \DoxyCodeLine{  \} \textcolor{comment}{//end\_of\_fluid\_boundary\_conditions}}
 
 \end{DoxyCodeInclude}
-
-
-The boundary conditions for the pseudo-\/solid mesh have a certain amount of ambiguity. We choose the least restrictive boundary conditions and enforce that the nodes cannot move away from the container boundaries, but can slide tangentially. Thus the vertical displacement is pinned on boundary 0 and the horizontal displacement is pinned on boundaries 1 and 3.
+ The boundary conditions for the pseudo-\/solid mesh have a certain amount of ambiguity. We choose the least restrictive boundary conditions and enforce that the nodes cannot move away from the container boundaries, but can slide tangentially. Thus the vertical displacement is pinned on boundary 0 and the horizontal displacement is pinned on boundaries 1 and 3.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -403,9 +385,7 @@ The boundary conditions for the pseudo-\/solid mesh have a certain amount of amb
 \DoxyCodeLine{    \} \textcolor{comment}{//end\_of\_solid\_boundary\_conditions}}
 
 \end{DoxyCodeInclude}
-
-
-In order to reduce the number of degrees of freedom we further constrain the nodes to move only in the vertical direction by pinning all horizontal displacements.
+ In order to reduce the number of degrees of freedom we further constrain the nodes to move only in the vertical direction by pinning all horizontal displacements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -421,9 +401,7 @@ In order to reduce the number of degrees of freedom we further constrain the nod
 \DoxyCodeLine{ \} \textcolor{comment}{//end\_of\_constraint}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we call the helper functions to construct the additional elements, add all sub meshes to the problem, build the global mesh and assign equation numbers.
+ Finally, we call the helper functions to construct the additional elements, add all sub meshes to the problem, build the global mesh and assign equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -448,12 +426,12 @@ Finally, we call the helper functions to construct the additional elements, add 
 \DoxyCodeLine{ this-\/>build\_global\_mesh();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Setup all the equation numbering and look-\/up schemes }}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Number of unknowns: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Number of unknowns: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_constructor}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_elements}{}\doxysection{Creating the additional elements}\label{index_elements}
+ \hypertarget{index_elements}{}\doxysection{Creating the additional elements}\label{index_elements}
 \hypertarget{index_free}{}\doxysubsection{Free surface elements}\label{index_free}
 The free surface elements are created in exactly the same way as in \href{../../single_layer_free_surface/html/index.html}{\texttt{ another tutorial }}. The only difference is that the construction takes place within the function {\ttfamily create\+\_\+free\+\_\+surface\+\_\+elements()} rather than within the constructor directly.\hypertarget{index_vol}{}\doxysubsection{Volume constraint elements}\label{index_vol}
 The volume constraint condition is enforced by two different types of element. A single {\ttfamily Generalised\+Element} that stores the prescribed volume and the {\ttfamily Data} that is traded for the volume constraint. We first create this {\ttfamily Volume\+Constraint\+Element} and add it to the {\ttfamily Mesh} addressed by the {\ttfamily Volume\+\_\+constraint\+\_\+mesh\+\_\+pt}.
@@ -462,7 +440,7 @@ The volume constraint condition is enforced by two different types of element. A
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_volume\_constraint\_elements==================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create the volume constraint elements}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPseudoSolidCapProblem_a0289801610e2bc864c67d4d8557d56b1}{PseudoSolidCapProblem<ELEMENT>::create\_volume\_constraint\_elements}}()}
 \DoxyCodeLine{\{}
@@ -473,9 +451,7 @@ The volume constraint condition is enforced by two different types of element. A
 \DoxyCodeLine{ Volume\_constraint\_mesh\_pt-\/>add\_element\_pt(vol\_constraint\_element);}
 
 \end{DoxyCodeInclude}
-
-
-We next build and attach {\ttfamily Elastic\+Line\+Volume\+Constraint\+Bounding\+Elements} to all the boundaries of the domain. These elements compute the contribution to the boundary integral with integrand $ \mbox{\boldmath$x\cdot n$} $, described above. The sign convention is chosen so that these element will return a positive volume. The \char`\"{}master\char`\"{} {\ttfamily Volume\+Constraint\+Element} must be passed to each {\ttfamily Face\+Element} so that the {\ttfamily Data} traded for the volume constraint is consistent between all elements.
+ We next build and attach {\ttfamily Elastic\+Line\+Volume\+Constraint\+Bounding\+Elements} to all the boundaries of the domain. These elements compute the contribution to the boundary integral with integrand $ \mbox{\boldmath$x\cdot n$} $, described above. The sign convention is chosen so that these element will return a positive volume. The \char`\"{}master\char`\"{} {\ttfamily Volume\+Constraint\+Element} must be passed to each {\ttfamily Face\+Element} so that the {\ttfamily Data} traded for the volume constraint is consistent between all elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -505,7 +481,7 @@ We next build and attach {\ttfamily Elastic\+Line\+Volume\+Constraint\+Bounding\
 \DoxyCodeLine{       \textcolor{keyword}{new} ElasticLineVolumeConstraintBoundingElement<ELEMENT>(}
 \DoxyCodeLine{        bulk\_elem\_pt,face\_index);   }
 \DoxyCodeLine{}
-\DoxyCodeLine{      \textcolor{comment}{//Set the "master" volume control element}}
+\DoxyCodeLine{      \textcolor{comment}{//Set the "{}master"{} volume control element}}
 \DoxyCodeLine{      el\_pt-\/>set\_volume\_constraint\_element(vol\_constraint\_element);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{      \textcolor{comment}{// Add it to the mesh}}
@@ -515,7 +491,7 @@ We next build and attach {\ttfamily Elastic\+Line\+Volume\+Constraint\+Bounding\
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_create\_volume\_constraint\_elements}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_contact}{}\doxysubsection{Contact angle elements}\label{index_contact}
+ \hypertarget{index_contact}{}\doxysubsection{Contact angle elements}\label{index_contact}
 The single contact angle (point) element is constructed from the free surface element via the function {\ttfamily make\+\_\+bounding\+\_\+element}(..) which takes an integer specifying which face to use. In this problem, the right-\/hand-\/side (face 1) of the final free surface element is the contact point. The contact angle, capillary number and wall normal must be passed to the element which is then added to the appropriate {\ttfamily Mesh}. In general the wall normal can very with position, so it is passed as a function pointer.
 
 
@@ -556,14 +532,14 @@ The single contact angle (point) element is constructed from the free surface el
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_create\_contact\_angle\_element}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_parameter}{}\doxysection{The parameter study}\label{index_parameter}
+ \hypertarget{index_parameter}{}\doxysection{The parameter study}\label{index_parameter}
 The {\ttfamily parameter\+\_\+study}(..) function creates a {\ttfamily Doc\+Info} object and opens a filestream for the trace file using the directory name specified by the input string argument.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//================start\_of\_parameter\_study===========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Perform a parameter study. Pass name of output directory as }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// a string}}
+\DoxyCodeLine{\textcolor{comment}{/// Perform a parameter study. Pass name of output directory as }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// a string}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPseudoSolidCapProblem_ae86ecaf62fa0920f5d14bf82a7f83b0e}{PseudoSolidCapProblem<ELEMENT>::parameter\_study}}(\textcolor{keyword}{const} \textcolor{keywordtype}{string}\& dir\_name)}
@@ -575,13 +551,11 @@ The {\ttfamily parameter\+\_\+study}(..) function creates a {\ttfamily Doc\+Info
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 
 \end{DoxyCodeInclude}
-
-
-We then solve the problem six times, decreasing the contact angle between each solution and documenting the solution after each solve.
+ We then solve the problem six times, decreasing the contact angle between each solution and documenting the solution after each solve.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -601,14 +575,14 @@ We then solve the problem six times, decreasing the contact angle between each s
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
+ \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 The {\ttfamily doc\+\_\+solution} function writes the bulk fluid mesh into an output file and then writes data into the trace file. The final two entries in the trace file are the computed pressure drop across the interface and the corresponding analytic prediction. Thus, comparison of these two entries determines the accuracy of the computation.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_of\_doc\_solution=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPseudoSolidCapProblem_a2fb98a37bde5742cbdf3c91cb1f5eb2f}{PseudoSolidCapProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -620,7 +594,7 @@ The {\ttfamily doc\+\_\+solution} function writes the bulk fluid mesh into an ou
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output domain}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
@@ -636,23 +610,21 @@ The {\ttfamily doc\+\_\+solution} function writes the bulk fluid mesh into an ou
 \DoxyCodeLine{ \textcolor{comment}{// pressure drop across the interface and }}
 \DoxyCodeLine{ \textcolor{comment}{// the analytic prediction of the pressure drop.}}
 \DoxyCodeLine{ Trace\_file << Angle*180.0/MathematicalConstants::Pi;}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{" "}  << Free\_surface\_mesh\_pt-\/>finite\_element\_pt(0)}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{} "{}}  << Free\_surface\_mesh\_pt-\/>finite\_element\_pt(0)}
 \DoxyCodeLine{  -\/>node\_pt(0)-\/>x(1)}
-\DoxyCodeLine{            << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << Free\_surface\_mesh\_pt-\/>finite\_element\_pt(ninterface-\/1)}
 \DoxyCodeLine{  -\/>node\_pt(np-\/1)-\/>x(1);}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(Bulk\_mesh\_pt-\/>element\_pt(0))-\/>p\_nst(0)-\/}
 \DoxyCodeLine{               External\_pressure\_data\_pt-\/>value(0);}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{" "} << -\/2.0*cos(Angle)/Ca;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{} "{}} << -\/2.0*cos(Angle)/Ca;}
 \DoxyCodeLine{ Trace\_file << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_com}{}\doxysubsection{Comments}\label{index_com}
@@ -662,6 +634,7 @@ The {\ttfamily doc\+\_\+solution} function writes the bulk fluid mesh into an ou
 \item The weak imposition of the contact angle condition is enabled by passing an optional boolean flag when setting the contact angle 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{el\_pt-\/>set\_contact\_angle(\&Angle,\textcolor{keyword}{false});}
+
 \end{DoxyCode}
  If a contact angle is not set then the {\ttfamily Fluid\+Interface\+Bounding\+Element} will construct and add the appropriate boundary term to the momentum equation which may be required if another equation is used to prescribe the contact angle indirectly.
 \item An equivalent problem using \href{../../../axisym_navier_stokes/axi_static_cap/html/index.html}{\texttt{ an axisymmetric formulation }} of the governing equations is also included within the library. The only physical difference is that the pressure drop in the axisymmetric problem is twice that of the two-\/dimensional problem because the mean curvature of the sphere is twice that of a circle of equivalent radius.
@@ -697,5 +670,5 @@ The {\ttfamily doc\+\_\+solution} function writes the bulk fluid mesh into an ou
 \begin{center} \href{../../../../demo_drivers/navier_stokes/static_cap/static_single_layer.cc}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/static\+\_\+cap/static\+\_\+single\+\_\+layer.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

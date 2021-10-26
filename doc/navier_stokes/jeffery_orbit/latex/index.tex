@@ -36,7 +36,7 @@ The problem is a fluid-\/structure interaction problem in which the structural d
 \begin{DoxyEnumerate}
 \item The position of the free boundary depends on the position of the rigid body.
 \item The rigid body is loaded by the fluid traction.
-\end{DoxyEnumerate}As in other \href{../../../../doc/interaction/unstructured_fsi/html/index.html}{\texttt{ 2D unstructured F\+SI }} problems, we treat the fluid mesh as a pseudo-\/solid body and determine the position of the boundary nodes on the fluid-\/solid interface using ~\newline
+\end{DoxyEnumerate}As in other \href{../../../../doc/interaction/unstructured_fsi/html/index.html}{\texttt{ 2D unstructured FSI }} problems, we treat the fluid mesh as a pseudo-\/solid body and determine the position of the boundary nodes on the fluid-\/solid interface using ~\newline
  {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements}.
 
 The rigid body mechanics is handled by using a {\ttfamily Geom\+Object} that represents the perimeter of the rigid body to create an {\ttfamily Immersed\+Rigid\+Body\+Element} that solves the three equations of motion for a rigid body; and the load is applied to the rigid body using {\ttfamily Navier\+Stokes\+Surface\+Drag\+Torque\+Elements}.
@@ -50,7 +50,7 @@ We use a namespace to define the parameters used in the problem
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for Problem Parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{ \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceProblem__Parameter}{Problem\_Parameter}}}
 \DoxyCodeLine{ \{    \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Reynolds number}}
@@ -59,7 +59,7 @@ We use a namespace to define the parameters used in the problem
 \DoxyCodeLine{\textcolor{comment}{  /// Strouhal number}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_a8d9b76e390569bac0095bd0952281a30}{St}} = 1.0;}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Density ratio (Solid density / Fluid density)}}
+\DoxyCodeLine{\textcolor{comment}{  /// Density ratio (Solid density / Fluid density)}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_a7fcb9a415485247d626190923235be2a}{Density\_ratio}} = 1.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{  /// Initial axis of the elliptical solid in x-\/direction}}
@@ -72,7 +72,7 @@ We use a namespace to define the parameters used in the problem
 \DoxyCodeLine{\textcolor{comment}{  /// Pseudo-\/solid (mesh) Poisson ratio}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_abec2e733c8f2d3c18ebc702b3f80cc17}{Nu}}=0.3;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Pseudo-\/solid (mesh) "density" }}
+\DoxyCodeLine{\textcolor{comment}{  /// Pseudo-\/solid (mesh) "{}density"{} }}
 \DoxyCodeLine{\textcolor{comment}{  /// Set to zero because we don't want inertia in the node update!}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_a20ea33c391abd96d43f79913377c1e12}{Lambda\_sq}}=0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -83,9 +83,7 @@ We use a namespace to define the parameters used in the problem
 \DoxyCodeLine{ \} \textcolor{comment}{// end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_ellipse}{}\doxysection{Defining the ellipse as a Geom\+Object}\label{index_ellipse}
 We create a basic {\ttfamily Geom\+Object} to represent the ellipse whose boundary we parametrise by the polar angle, measured from its centre of mass.
@@ -93,10 +91,10 @@ We create a basic {\ttfamily Geom\+Object} to represent the ellipse whose bounda
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===================start\_of\_general\_ellipse=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short A geometric object for an ellipse with initial centre of mass at}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// (centre\_x, centre\_y) with axis in the x direction given by 2a}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// and in the y-\/direction given by 2b. The boundary of the ellipse is}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// parametrised by its angle.}}
+\DoxyCodeLine{\textcolor{comment}{/// A geometric object for an ellipse with initial centre of mass at}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// (centre\_x, centre\_y) with axis in the x direction given by 2a}}
+\DoxyCodeLine{\textcolor{comment}{/// and in the y-\/direction given by 2b. The boundary of the ellipse is}}
+\DoxyCodeLine{\textcolor{comment}{/// parametrised by its angle.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
@@ -107,7 +105,7 @@ We create a basic {\ttfamily Geom\+Object} to represent the ellipse whose bounda
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Simple Constructor that transfers appropriate geometric }}
+\DoxyCodeLine{\textcolor{comment}{ /// Simple Constructor that transfers appropriate geometric }}
 \DoxyCodeLine{\textcolor{comment}{ /// parameters into internal data}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classGeneralEllipse_a50dc036d709bcd1d53eafb62b5548f67}{GeneralEllipse}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&centre\_x, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&centre\_y,}
 \DoxyCodeLine{                \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&a, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&b)}
@@ -117,8 +115,8 @@ We create a basic {\ttfamily Geom\+Object} to represent the ellipse whose bounda
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classGeneralEllipse_a3ac5c17cf8c4998f1b74913860cb3bb9}{\string~GeneralEllipse}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Return the position of the ellipse boundary as a function of }}
-\DoxyCodeLine{\textcolor{comment}{ ///the angle xi[0]}}
+\DoxyCodeLine{\textcolor{comment}{ /// Return the position of the ellipse boundary as a function of }}
+\DoxyCodeLine{\textcolor{comment}{ /// the angle xi[0]}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classGeneralEllipse_a85e975c70441a9c9c711b5e27d124bff}{position}}(\textcolor{keyword}{const} Vector<double> \&xi, Vector<double> \&r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   r[0] = \mbox{\hyperlink{classGeneralEllipse_aeb974769f58d136a12ac1532506304cc}{Centre\_x}} + \mbox{\hyperlink{classGeneralEllipse_ae583e1437da6ad4eb228dda60b61808a}{A}}*cos(xi[0]);}
@@ -136,9 +134,7 @@ We create a basic {\ttfamily Geom\+Object} to represent the ellipse whose bounda
 \DoxyCodeLine{\textcolor{comment}{//end\_of\_general\_ellipse}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_driver}{}\doxysection{The driver code}\label{index_driver}
 After parsing the command-\/line arguments, which are used to modify certain parameters for validation runs, a single instance of the {\ttfamily \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem}{Unstructured\+Immersed\+Ellipse\+Problem}}} (described below) is constructed using Taylor Hood elements.
@@ -147,7 +143,7 @@ After parsing the command-\/line arguments, which are used to modify certain par
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_of\_main======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for immersed ellipse problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================}}
+\DoxyCodeLine{\textcolor{comment}{//============================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{jeffery__orbit_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -157,7 +153,7 @@ After parsing the command-\/line arguments, which are used to modify certain par
 \DoxyCodeLine{ \textcolor{comment}{// were actually specified}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Validation?}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/validation"});}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/validation"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Parse command line}}
 \DoxyCodeLine{ CommandLineArgs::parse\_and\_assign(); }
@@ -170,9 +166,7 @@ After parsing the command-\/line arguments, which are used to modify certain par
 \DoxyCodeLine{ ProjectableTaylorHoodElement<MyTaylorHoodElement> > problem;  }
 
 \end{DoxyCodeInclude}
-
-
-After construction the {\ttfamily Nodes} on the boundary of the ellipse will have been directly mapped onto the curvilinear surface using a strong (collocation) condition, $ x_{i} = R_{i}$, where $R_{i}$ is the corresponding boundary of the ellipse. In the full problem the displacement boundary condition is enforced weakly via Lagrange multipliers $ \oint \left\{x_{i} - R_{i}\right\}\psi \mbox{d} s = 0$. In order to ensure consistency, we initially solve the problem in which the rigid body is pinned so that the boundary nodes are adjusted to be consistent with the weak form of the boundary condition. We note that for sufficiently fine initial meshes the difference is minimal.
+ After construction the {\ttfamily Nodes} on the boundary of the ellipse will have been directly mapped onto the curvilinear surface using a strong (collocation) condition, $ x_{i} = R_{i}$, where $R_{i}$ is the corresponding boundary of the ellipse. In the full problem the displacement boundary condition is enforced weakly via Lagrange multipliers $ \oint \left\{x_{i} - R_{i}\right\}\psi \mbox{d} s = 0$. In order to ensure consistency, we initially solve the problem in which the rigid body is pinned so that the boundary nodes are adjusted to be consistent with the weak form of the boundary condition. We note that for sufficiently fine initial meshes the difference is minimal.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -182,9 +176,7 @@ After construction the {\ttfamily Nodes} on the boundary of the ellipse will hav
 \DoxyCodeLine{ problem.solve\_for\_consistent\_nodal\_positions();}
 
 \end{DoxyCodeInclude}
-
-
-Now that we have a consistent initial condition, we initialise the timestepper and set conditions consistent with a impulsive start from rest.
+ Now that we have a consistent initial condition, we initialise the timestepper and set conditions consistent with a impulsive start from rest.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -200,16 +192,14 @@ Now that we have a consistent initial condition, we initialise the timestepper a
 \DoxyCodeLine{ problem.doc\_solution();}
 
 \end{DoxyCodeInclude}
-
-
-We then take a fixed number of timesteps on the initial mesh, documenting the solution after each solve.
+ We then take a fixed number of timesteps on the initial mesh, documenting the solution after each solve.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Solve problem a few times on given mesh}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep=3;}
-\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}=0;\mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}<nstep;\mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}++)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<nstep;i++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem}}
 \DoxyCodeLine{   problem.unsteady\_newton\_solve(dt);    }
@@ -217,9 +207,7 @@ We then take a fixed number of timesteps on the initial mesh, documenting the so
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we loop over a number of \`{}`cycles'\textquotesingle{} in which we adapt the problem and then solve for a fixed number of time steps on the each mesh.
+ Finally, we loop over a number of \`{}`cycles'\textquotesingle{} in which we adapt the problem and then solve for a fixed number of time steps on the each mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -229,7 +217,7 @@ Finally, we loop over a number of \`{}`cycles'\textquotesingle{} in which we ada
 \DoxyCodeLine{   problem.adapt();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Solve problem a few times}}
-\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}=0;\mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}<nstep;\mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}++)}
+\DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<nstep;i++)}
 \DoxyCodeLine{    \{     }
 \DoxyCodeLine{     \textcolor{comment}{// Solve the problem}}
 \DoxyCodeLine{     problem.unsteady\_newton\_solve(dt);}
@@ -240,12 +228,10 @@ Finally, we loop over a number of \`{}`cycles'\textquotesingle{} in which we ada
 \DoxyCodeLine{\} \textcolor{comment}{//end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
  \hypertarget{index_problem}{}\doxysection{The Problem class}\label{index_problem}
-The Problem class follows the usual pattern. The time-\/dependent boundary conditions are applied using the {\ttfamily \mbox{\hyperlink{jeffery__orbit_8txt_acd9001d2071e1dbd52cc19d22af55204}{actions\+\_\+before\+\_\+implicit\+\_\+timestep()}}} function and the no-\/slip boundary condition is applied in {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} via an auxiliary node update function.
+The Problem class follows the usual pattern. The time-\/dependent boundary conditions are applied using the {\ttfamily actions\+\_\+before\+\_\+implicit\+\_\+timestep()} function and the no-\/slip boundary condition is applied in {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} via an auxiliary node update function.
 
 \href{../../../../doc/meshes/mesh_from_inline_triangle/html/index.html\#adapt}{\texttt{ Recall}} that when adapting an unstructured mesh, its constituent elements are completely re-\/generated. Physical parameters and boundary conditions must therefore be reassigned, which is the task of the {\ttfamily complete\+\_\+problem\+\_\+setup()} function, called in {\ttfamily actions\+\_\+after\+\_\+adapt()}. Helper functions are also provided to solve the initial problem to move the boundary nodes \mbox{[}{\ttfamily solve\+\_\+for\+\_\+consistent\+\_\+nodal\+\_\+positions()}\mbox{]}; to apply the boundary conditions \mbox{[}{\ttfamily set\+\_\+boundary\+\_\+velocity()}\mbox{]}; and to construct and delete the surface elements that impose the Lagrange multiplier constraints and compute the load on the rigid body \mbox{[}{\ttfamily create\+\_\+lagrange\+\_\+multiplier\+\_\+elements()}, {\ttfamily delete\+\_\+lagrange\+\_\+multiplier\+\_\+elements()}, {\ttfamily create\+\_\+drag\+\_\+elements()}, {\ttfamily delete\+\_\+drag\+\_\+elements()}\mbox{]}.
 
@@ -254,8 +240,8 @@ The class also provides storage for the meshes, the rigid body and file handles 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Unstructured Navier-\/Stokes ALE Problem for a rigid ellipse }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// immersed within a viscous fluid}}
+\DoxyCodeLine{\textcolor{comment}{/// Unstructured Navier-\/Stokes ALE Problem for a rigid ellipse }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// immersed within a viscous fluid}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredImmersedEllipseProblem}{UnstructuredImmersedEllipseProblem}} : \textcolor{keyword}{public} Problem}
@@ -281,7 +267,7 @@ The class also provides storage for the meshes, the rigid body and file handles 
 \DoxyCodeLine{\textcolor{comment}{ /// Rebuild the meshes of Lagrange multiplier and drag elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_ab1558b409285aea617f4abf7d3a64b3d}{actions\_after\_adapt}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Re-\/apply the no slip condition (imposed indirectly via dependent}}
+\DoxyCodeLine{\textcolor{comment}{ /// Re-\/apply the no slip condition (imposed indirectly via dependent}}
 \DoxyCodeLine{\textcolor{comment}{ /// velocities)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_afa51876a2af9dd7640ff1f5a434804bf}{actions\_before\_newton\_convergence\_check}}()}
 \DoxyCodeLine{  \{}
@@ -289,17 +275,17 @@ The class also provides storage for the meshes, the rigid body and file handles 
 \DoxyCodeLine{   \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a0ba79ccde26b781b66d9839460f08bd3}{Fluid\_mesh\_pt}}-\/>node\_update();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set boundary condition, assign auxiliary node update fct.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set boundary condition, assign auxiliary node update fct.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Complete the build of all elements, attach power elements that allow}}
 \DoxyCodeLine{\textcolor{comment}{ /// computation of drag vector}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a42b13e3306ff2a94053907644ba17c8d}{complete\_problem\_setup}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Set the boundary velocity}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set the boundary velocity}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_ab201b187b240105fd8d444d943f6dada}{set\_boundary\_velocity}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Function that solves a simplified problem to ensure that }}
-\DoxyCodeLine{\textcolor{comment}{ ///the positions of the boundary nodes are initially consistent with}}
-\DoxyCodeLine{\textcolor{comment}{ ///the lagrange multiplier formulation}}
+\DoxyCodeLine{\textcolor{comment}{ /// Function that solves a simplified problem to ensure that }}
+\DoxyCodeLine{\textcolor{comment}{ /// the positions of the boundary nodes are initially consistent with}}
+\DoxyCodeLine{\textcolor{comment}{ /// the lagrange multiplier formulation}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a2a88b40ff1988de0fc696f1eb755ea54}{solve\_for\_consistent\_nodal\_positions}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
@@ -310,26 +296,26 @@ The class also provides storage for the meshes, the rigid body and file handles 
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create elements that enforce prescribed boundary motion}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create elements that enforce prescribed boundary motion}}
 \DoxyCodeLine{\textcolor{comment}{ /// for the pseudo-\/solid fluid mesh by Lagrange multipliers}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a3b4a4e279a11b37d79d040b348008765}{create\_lagrange\_multiplier\_elements}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Delete elements that impose the prescribed boundary displacement}}
+\DoxyCodeLine{\textcolor{comment}{ /// Delete elements that impose the prescribed boundary displacement}}
 \DoxyCodeLine{\textcolor{comment}{ /// and wipe the associated mesh}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a51555f77dc360c94591ee68c3fc9928a}{delete\_lagrange\_multiplier\_elements}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create elements that calculate the drag and torque on}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create elements that calculate the drag and torque on}}
 \DoxyCodeLine{\textcolor{comment}{ /// the boundaries}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a16a7c6022867f709ebdd59b8fee2004a}{create\_drag\_elements}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Delete elements that calculate the drag and torque on the }}
+\DoxyCodeLine{\textcolor{comment}{ /// Delete elements that calculate the drag and torque on the }}
 \DoxyCodeLine{\textcolor{comment}{ /// boundaries}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a7d7b84968988d37091b29957b0af5bfa}{delete\_drag\_elements}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Pin the degrees of freedom associated with the solid bodies}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pin the degrees of freedom associated with the solid bodies}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a07dc16909c0223fe4b656fd270f27c11}{pin\_rigid\_body}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Unpin the degrees of freedom associated with the solid bodies}}
+\DoxyCodeLine{\textcolor{comment}{ /// Unpin the degrees of freedom associated with the solid bodies}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a4f8c7e7e4d626084f6515a152b165567}{unpin\_rigid\_body}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointers to mesh of Lagrange multiplier elements}}
@@ -365,9 +351,7 @@ The class also provides storage for the meshes, the rigid body and file handles 
 \DoxyCodeLine{\}; \textcolor{comment}{// end\_of\_problem\_class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
  \hypertarget{index_constructor}{}\doxysection{The Problem Constructor}\label{index_constructor}
 We begin by opening the output files and allocating two time steppers, one for the fluid problem and one for the rigid body problem.
@@ -375,24 +359,24 @@ We begin by opening the output files and allocating two time steppers, one for t
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_constructor=====================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor: Open output files, construct time steppers, build }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///  fluid mesh, immersed rigid body and combine to form the problem}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor: Open output files, construct time steppers, build }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///  fluid mesh, immersed rigid body and combine to form the problem}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a544a35f261200bb4a4e29a88faa1a69c}{UnstructuredImmersedEllipseProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a544a35f261200bb4a4e29a88faa1a69c}{UnstructuredImmersedEllipseProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ this-\/>Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ this-\/>Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open norm file}}
-\DoxyCodeLine{ this-\/>Norm\_file.open(\textcolor{stringliteral}{"RESLT/norm.dat"});}
+\DoxyCodeLine{ this-\/>Norm\_file.open(\textcolor{stringliteral}{"{}RESLT/norm.dat"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open file to trace the centre of gravity}}
-\DoxyCodeLine{ this-\/>Cog\_file.open(\textcolor{stringliteral}{"RESLT/cog\_trace.dat"});}
+\DoxyCodeLine{ this-\/>Cog\_file.open(\textcolor{stringliteral}{"{}RESLT/cog\_trace.dat"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open file to document the exact motion of the centre of gravity}}
-\DoxyCodeLine{ this-\/>Cog\_exact\_file.open(\textcolor{stringliteral}{"RESLT/cog\_exact\_trace.dat"});}
+\DoxyCodeLine{ this-\/>Cog\_exact\_file.open(\textcolor{stringliteral}{"{}RESLT/cog\_exact\_trace.dat"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Allocate the timestepper -\/-\/ this constructs the Problem's }}
 \DoxyCodeLine{ \textcolor{comment}{// time object with a sufficient amount of storage to store the}}
@@ -403,9 +387,7 @@ We begin by opening the output files and allocating two time steppers, one for t
 \DoxyCodeLine{ this-\/>add\_time\_stepper\_pt(\textcolor{keyword}{new} Newmark<2>);}
 
 \end{DoxyCodeInclude}
-
-
-We then define the geometry that defines the outer boundary of the unstructured mesh by constructing a {\ttfamily Triangle\+Mesh\+Polygon} that consists of four straight-\/line boundaries.
+ We then define the geometry that defines the outer boundary of the unstructured mesh by constructing a {\ttfamily Triangle\+Mesh\+Polygon} that consists of four straight-\/line boundaries.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -425,7 +407,7 @@ We then define the geometry that defines the outer boundary of the unstructured 
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Initialize boundary segment}}
 \DoxyCodeLine{ Vector<Vector<double> > bound\_seg(2);}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}=0;\mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}<2;\mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}++) \{bound\_seg[\mbox{\hyperlink{jeffery__orbit_8txt_aae2ffd3b558049dc27a164ca7b150509}{i}}].resize(2);\}}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<2;i++) \{bound\_seg[i].resize(2);\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// First boundary segment}}
 \DoxyCodeLine{ bound\_seg[0][0]=-\/half\_length;}
@@ -479,9 +461,7 @@ We then define the geometry that defines the outer boundary of the unstructured 
 \DoxyCodeLine{ Outer\_boundary\_polygon\_pt = \textcolor{keyword}{new} TriangleMeshPolygon(boundary\_segment\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-Next we build the single {\ttfamily Immersed\+Rigid\+Body\+Element} from an instantiation of a {\ttfamily \mbox{\hyperlink{classGeneralEllipse}{General\+Ellipse}}} geometric object.
+ Next we build the single {\ttfamily Immersed\+Rigid\+Body\+Element} from an instantiation of a {\ttfamily \mbox{\hyperlink{classGeneralEllipse}{General\+Ellipse}}} geometric object.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -501,12 +481,10 @@ Next we build the single {\ttfamily Immersed\+Rigid\+Body\+Element} from an inst
 \DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_ac2362a46222574a21338a113e2bee27e}{B}} = \mbox{\hyperlink{namespaceProblem__Parameter_ac2362a46222574a21338a113e2bee27e}{Problem\_Parameter::B}};}
 \DoxyCodeLine{ GeomObject* temp\_hole\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{classGeneralEllipse}{GeneralEllipse}}(x\_center,y\_center,\mbox{\hyperlink{namespaceProblem__Parameter_a23071148de0fea3597c2a7eb848320b6}{A}},\mbox{\hyperlink{namespaceProblem__Parameter_ac2362a46222574a21338a113e2bee27e}{B}});}
 \DoxyCodeLine{ Rigid\_body\_pt[0] = \textcolor{keyword}{new} ImmersedRigidBodyElement(temp\_hole\_pt,}
-\DoxyCodeLine{                                                 this-\/>\mbox{\hyperlink{jeffery__orbit_8txt_a4e766b209b7fbcc1bf8cd431947fa412}{time\_stepper\_pt}}(1));}
+\DoxyCodeLine{                                                 this-\/>time\_stepper\_pt(1));}
 
 \end{DoxyCodeInclude}
-
-
-The {\ttfamily Immersed\+Rigid\+Body\+Element} is used to define a {\ttfamily Triangle\+Mesh\+Curvilinear\+Closed\+Curve} in exactly the same way as if it were simply a (passive) {\ttfamily Geom\+Object}, as discussed in \href{../../../../doc/meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial. }}
+ The {\ttfamily Immersed\+Rigid\+Body\+Element} is used to define a {\ttfamily Triangle\+Mesh\+Curvilinear\+Closed\+Curve} in exactly the same way as if it were simply a (passive) {\ttfamily Geom\+Object}, as discussed in \href{../../../../doc/meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial. }}
 
 
 \begin{DoxyCodeInclude}{0}
@@ -541,9 +519,7 @@ The {\ttfamily Immersed\+Rigid\+Body\+Element} is used to define a {\ttfamily Tr
 \DoxyCodeLine{   curvilinear\_boundary\_pt,hole\_coords);}
 
 \end{DoxyCodeInclude}
-
-
-We then build the unstructured fluid mesh using the boundary information, set a spatial error estimator and complete the setup of the problem
+ We then build the unstructured fluid mesh using the boundary information, set a spatial error estimator and complete the setup of the problem
 
 
 \begin{DoxyCodeInclude}{0}
@@ -573,7 +549,7 @@ We then build the unstructured fluid mesh using the boundary information, set a 
 \DoxyCodeLine{ \textcolor{comment}{// Create the mesh}}
 \DoxyCodeLine{ Fluid\_mesh\_pt =}
 \DoxyCodeLine{   \textcolor{keyword}{new} RefineableSolidTriangleMesh<ELEMENT>(}
-\DoxyCodeLine{     triangle\_mesh\_parameters, this-\/>\mbox{\hyperlink{jeffery__orbit_8txt_a4e766b209b7fbcc1bf8cd431947fa412}{time\_stepper\_pt}}());}
+\DoxyCodeLine{     triangle\_mesh\_parameters, this-\/>time\_stepper\_pt());}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set error estimator for bulk mesh}}
 \DoxyCodeLine{ Z2ErrorEstimator* error\_estimator\_pt=\textcolor{keyword}{new} Z2ErrorEstimator;}
@@ -586,7 +562,7 @@ We then build the unstructured fluid mesh using the boundary information, set a 
 \DoxyCodeLine{ Fluid\_mesh\_pt-\/>min\_element\_size()=0.001; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Use coarser mesh during validation}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/validation"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/validation"{}}))}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   Fluid\_mesh\_pt-\/>min\_element\_size()=0.01; }
 \DoxyCodeLine{  \}}
@@ -597,9 +573,7 @@ We then build the unstructured fluid mesh using the boundary information, set a 
 \DoxyCodeLine{ complete\_problem\_setup();}
 
 \end{DoxyCodeInclude}
-
-
-The {\ttfamily Immersed\+Rigid\+Body\+Element} is not deleted during the adaptation process and so its physical parameters can be set once in the constructor. We set the initial position of the centre of mass, as well as the non-\/dimensional mass and moment of inertia shape, the Reynolds and Strouhal numbers, and the density ratio, which appear in the governing equations above. For this problem, we also fix the location of the centre of mass. (The section \mbox{\hyperlink{index_comments}{Comments and Exercises}} contains an exercise that asks you to explore what happens when you omit this step).
+ The {\ttfamily Immersed\+Rigid\+Body\+Element} is not deleted during the adaptation process and so its physical parameters can be set once in the constructor. We set the initial position of the centre of mass, as well as the non-\/dimensional mass and moment of inertia shape, the Reynolds and Strouhal numbers, and the density ratio, which appear in the governing equations above. For this problem, we also fix the location of the centre of mass. (The section \mbox{\hyperlink{index_comments}{Comments and Exercises}} contains an exercise that asks you to explore what happens when you omit this step).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -621,9 +595,7 @@ The {\ttfamily Immersed\+Rigid\+Body\+Element} is not deleted during the adaptat
 \DoxyCodeLine{ rigid\_element1\_pt-\/>pin\_centre\_of\_mass\_coordinate(1);}
 
 \end{DoxyCodeInclude}
-
-
-For later reference, we store the single {\ttfamily Immersed\+Rigid\+Body\+Element} in a mesh
+ For later reference, we store the single {\ttfamily Immersed\+Rigid\+Body\+Element} in a mesh
 
 
 \begin{DoxyCodeInclude}{0}
@@ -633,9 +605,7 @@ For later reference, we store the single {\ttfamily Immersed\+Rigid\+Body\+Eleme
 \DoxyCodeLine{ Rigid\_body\_mesh\_pt-\/>add\_element\_pt(rigid\_element1\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-We then create the elements that apply the load on the rigid body and pass the entire mesh of elements to the rigid body. This is the equivalent of the function {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements}(..), but here the procedure is very simple because {\bfseries{ all }} the surface elements affect the single rigid body.
+ We then create the elements that apply the load on the rigid body and pass the entire mesh of elements to the rigid body. This is the equivalent of the function {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements}(..), but here the procedure is very simple because {\bfseries{ all }} the surface elements affect the single rigid body.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -649,9 +619,7 @@ We then create the elements that apply the load on the rigid body and pass the e
 \DoxyCodeLine{ rigid\_element1\_pt-\/>set\_drag\_mesh(Drag\_mesh\_pt[0]);}
 
 \end{DoxyCodeInclude}
-
-
-We next create the mesh of Lagrange-\/multiplier elements that drive the deformation of the fluid mesh in response to the motion of the ellipse
+ We next create the mesh of Lagrange-\/multiplier elements that drive the deformation of the fluid mesh in response to the motion of the ellipse
 
 
 \begin{DoxyCodeInclude}{0}
@@ -666,9 +634,7 @@ We next create the mesh of Lagrange-\/multiplier elements that drive the deforma
 \DoxyCodeLine{ create\_lagrange\_multiplier\_elements();}
 
 \end{DoxyCodeInclude}
-
-
-and then construct the global mesh and assign equation numbers.
+ and then construct the global mesh and assign equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -689,14 +655,12 @@ and then construct the global mesh and assign equation numbers.
 \DoxyCodeLine{ this-\/>build\_global\_mesh();}
 \DoxyCodeLine{    }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << this-\/>assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << this-\/>assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_constructor}}
 
 \end{DoxyCodeInclude}
-
-
-Note that the {\ttfamily Drag\+\_\+mesh\+\_\+pt} does not need to be added as a sub-\/mesh because its elements do not contribute {\itshape  directly } to the residuals and Jacobian.
+ Note that the {\ttfamily Drag\+\_\+mesh\+\_\+pt} does not need to be added as a sub-\/mesh because its elements do not contribute {\itshape  directly } to the residuals and Jacobian.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -706,9 +670,9 @@ The helper function {\ttfamily complete\+\_\+problem\+\_\+setup()} starts by (re
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_complete\_problem\_setup=================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set boundary condition, assign auxiliary node update fct.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Complete the build of all elements, attach power elements that allow}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// computation of drag vector}}
+\DoxyCodeLine{\textcolor{comment}{/// Set boundary condition, assign auxiliary node update fct.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Complete the build of all elements, attach power elements that allow}}
+\DoxyCodeLine{\textcolor{comment}{/// computation of drag vector}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a42b13e3306ff2a94053907644ba17c8d}{UnstructuredImmersedEllipseProblem<ELEMENT>::complete\_problem\_setup}}()}
@@ -732,9 +696,7 @@ The helper function {\ttfamily complete\+\_\+problem\+\_\+setup()} starts by (re
 \DoxyCodeLine{     nod\_pt-\/>pin(1);}
 
 \end{DoxyCodeInclude}
-
-
-The boundary conditions for the solid degrees of freedom that describe the mesh deformation are assigned next by pinning the nodal positions on the fixed domain boundaries (boundaries 0, 1, 2, 3)\+:
+ The boundary conditions for the solid degrees of freedom that describe the mesh deformation are assigned next by pinning the nodal positions on the fixed domain boundaries (boundaries 0, 1, 2, 3)\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -752,9 +714,7 @@ The boundary conditions for the solid degrees of freedom that describe the mesh 
 \DoxyCodeLine{      \}}
 
 \end{DoxyCodeInclude}
-
-
-The nodes on the boundary of the rigid body should be free to move, so they are unpinned and an auxiliary node update function is set to apply the no-\/slip boundary condition from the {\ttfamily Node\textquotesingle{}s} positional history values.
+ The nodes on the boundary of the rigid body should be free to move, so they are unpinned and an auxiliary node update function is set to apply the no-\/slip boundary condition from the {\ttfamily Node\textquotesingle{}s} positional history values.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -779,9 +739,7 @@ The nodes on the boundary of the rigid body should be free to move, so they are 
 \DoxyCodeLine{  \} \textcolor{comment}{// End loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-We then loop over the fluid elements and set pointers to the physical parameters and the apply the velocity boundary conditions
+ We then loop over the fluid elements and set pointers to the physical parameters and the apply the velocity boundary conditions
 
 
 \begin{DoxyCodeInclude}{0}
@@ -802,7 +760,7 @@ We then loop over the fluid elements and set pointers to the physical parameters
 \DoxyCodeLine{   \textcolor{comment}{// Set the constitutive law for pseudo-\/elastic mesh deformation}}
 \DoxyCodeLine{   el\_pt-\/>constitutive\_law\_pt()=\mbox{\hyperlink{namespaceProblem__Parameter_a9852a6077458693983628319d429f11f}{Problem\_Parameter::Constitutive\_law\_pt}};}
 \DoxyCodeLine{   }
-\DoxyCodeLine{   \textcolor{comment}{// Set the "density" for pseudo-\/elastic mesh deformation}}
+\DoxyCodeLine{   \textcolor{comment}{// Set the "{}density"{} for pseudo-\/elastic mesh deformation}}
 \DoxyCodeLine{   el\_pt-\/>lambda\_sq\_pt()=\&\mbox{\hyperlink{namespaceProblem__Parameter_a20ea33c391abd96d43f79913377c1e12}{Problem\_Parameter::Lambda\_sq}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
@@ -813,9 +771,7 @@ We then loop over the fluid elements and set pointers to the physical parameters
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_complete\_problem\_setup}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_surface}{}\doxysection{Creating and destroying the surface elements}\label{index_surface}
 The general procedure for creating, attaching and deleting{\ttfamily Face\+Elements} is exactly the same as described \href{../../../../doc/poisson/two_d_poisson_flux_bc/html/index.html}{\texttt{ in another tutorial, }} so is not described in detail here.
@@ -835,10 +791,10 @@ The initial nodal positions are made consistent with the weakly-\/imposed displa
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_solve\_for\_consistent\_nodal\_positions================}}
-\DoxyCodeLine{\textcolor{comment}{///Assemble and solve a simplified problem that ensures that the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///positions of the boundary nodes are consistent with the weak }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///imposition of the displacement boundary conditions on the surface}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///of the ellipse.}}
+\DoxyCodeLine{\textcolor{comment}{/// Assemble and solve a simplified problem that ensures that the }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// positions of the boundary nodes are consistent with the weak }}
+\DoxyCodeLine{\textcolor{comment}{/// imposition of the displacement boundary conditions on the surface}}
+\DoxyCodeLine{\textcolor{comment}{/// of the ellipse.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredImmersedEllipseProblem_a2a88b40ff1988de0fc696f1eb755ea54}{UnstructuredImmersedEllipseProblem<ELEMENT>::}}}
@@ -868,9 +824,7 @@ The initial nodal positions are made consistent with the weakly-\/imposed displa
 \DoxyCodeLine{\} \textcolor{comment}{//end\_solve\_for\_consistent\_nodal\_positions}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_exercises}{}\doxysubsection{Exercises}\label{index_exercises}
@@ -902,5 +856,5 @@ The initial nodal positions are made consistent with the weakly-\/imposed displa
 \begin{center} \href{../../../../demo_drivers/navier_stokes/jeffery_orbit/jeffery_orbit.cc}{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/jeffery\+\_\+orbit/jeffery\+\_\+orbit.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

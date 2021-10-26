@@ -1,0 +1,1314 @@
+\hypertarget{tetgen__scaffold__mesh_8cc_source}{}\doxysection{tetgen\+\_\+scaffold\+\_\+mesh.\+cc}
+\label{tetgen__scaffold__mesh_8cc_source}\index{tetgen\_scaffold\_mesh.cc@{tetgen\_scaffold\_mesh.cc}}
+\mbox{\hyperlink{tetgen__scaffold__mesh_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00026}00026 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mesh_8h}{mesh.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00027}00027 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{Telements_8h}{Telements.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00028}00028 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tetgen__scaffold__mesh_8h}{tetgen\_scaffold\_mesh.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00030}00030 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00031}00031 \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00032}00032   \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00033}00033 \textcolor{comment}{  /// Constructor: Pass the filename of the tetrahedra file}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00034}00034 \textcolor{comment}{  /// The assumptions are that the nodes have been assigned boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00035}00035 \textcolor{comment}{  /// information which is used in the nodal construction to make sure}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00036}00036 \textcolor{comment}{  /// that BoundaryNodes are constructed. Any additional boundaries are}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00037}00037 \textcolor{comment}{  /// determined from the face boundary information.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00038}00038 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00039}\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abeb97f979ddf97f8b7690c9a53082e13}{00039}}   \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a2262991306aa1fa98463e2bdf85ac518}{TetgenScaffoldMesh::TetgenScaffoldMesh}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& node\_file\_name,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00040}00040                                          \textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& element\_file\_name,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00041}00041                                          \textcolor{keyword}{const} \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}}\& face\_file\_name)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00042}00042   \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00043}00043     \textcolor{comment}{// Process the element file}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00044}00044     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00045}00045     std::ifstream element\_file(element\_file\_name.c\_str(), std::ios\_base::in);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00047}00047     \textcolor{comment}{// Check that the file actually opened correctly}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00048}00048 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00049}00049     \textcolor{keywordflow}{if} (!element\_file.is\_open())}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00050}00050     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00051}00051       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_msg(\textcolor{stringliteral}{"{}Failed to open element file: "{}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00052}00052       error\_msg += \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}} + element\_file\_name + \textcolor{stringliteral}{"{}\(\backslash\)"{}."{}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00053}00053       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00054}00054         error\_msg, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00055}00055     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00056}00056 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00059}00059     \textcolor{comment}{// Read in number of elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00060}00060     \textcolor{keywordtype}{unsigned} n\_element;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00061}00061     element\_file >> n\_element;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00063}00063     \textcolor{comment}{// Read in number of nodes per element}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00064}00064     \textcolor{keywordtype}{unsigned} n\_local\_node;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00065}00065     element\_file >> n\_local\_node;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00067}00067     \textcolor{comment}{// Throw an error if we have anything but linear simplices}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00068}00068     \textcolor{keywordflow}{if} (n\_local\_node != 4)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00069}00069     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00070}00070       std::ostringstream error\_stream;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00071}00071       error\_stream}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00072}00072         << \textcolor{stringliteral}{"{}Tetgen should only be used to generate 4-\/noded tetrahedra!\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00073}00073         << \textcolor{stringliteral}{"{}Your tetgen input file, contains data for "{}} << n\_local\_node}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00074}00074         << \textcolor{stringliteral}{"{}-\/noded tetrahedra"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00076}00076       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00077}00077         error\_stream.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00078}00078     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00080}00080     \textcolor{comment}{// Dummy nodal attributes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00081}00081     \textcolor{keywordtype}{unsigned} dummy\_attribute;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00083}00083     \textcolor{comment}{// Element attributes may be used to distinguish internal regions}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00084}00084     \textcolor{comment}{// NOTE: This stores doubles because tetgen forces us to!}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00085}00085     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a47b01372fe4cf5c305169fdb57fc5e5a}{Element\_attribute}}.resize(n\_element, 0.0);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00087}00087     \textcolor{comment}{// Dummy storage for element numbers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00088}00088     \textcolor{keywordtype}{unsigned} dummy\_element\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00089}00089 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00090}00090     \textcolor{comment}{// Resize storage for the global node numbers listed element-\/by-\/element}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00091}00091     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}.resize(n\_element * n\_local\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00093}00093     \textcolor{comment}{// Initialise (global) node counter}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00094}00094     \textcolor{keywordtype}{unsigned} k = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00095}00095     \textcolor{comment}{// Are there attributes?}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00096}00096     \textcolor{keywordtype}{unsigned} attribute\_flag;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00097}00097     element\_file >> attribute\_flag;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00099}00099     \textcolor{comment}{// If no attributes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00100}00100     \textcolor{keywordflow}{if} (attribute\_flag == 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00101}00101     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00102}00102       \textcolor{comment}{// Read in global node numbers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00103}00103       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_element; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00104}00104       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00105}00105         element\_file >> dummy\_element\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00106}00106         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_local\_node; j++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00107}00107         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00108}00108           element\_file >> \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[k];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00109}00109           k++;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00110}00110         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00111}00111       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00112}00112     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00113}00113     \textcolor{comment}{// Otherwise read in the attributes as well}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00114}00114     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00115}00115     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00116}00116       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_element; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00117}00117       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00118}00118         element\_file >> dummy\_element\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00119}00119         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_local\_node; j++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00120}00120         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00121}00121           element\_file >> \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[k];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00122}00122           k++;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00123}00123         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00124}00124         element\_file >> \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a47b01372fe4cf5c305169fdb57fc5e5a}{Element\_attribute}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00125}00125       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00126}00126     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00127}00127     element\_file.close();}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00128}00128 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00129}00129     \textcolor{comment}{// Resize the Element vector}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00130}00130     \mbox{\hyperlink{classoomph_1_1Mesh_aca12acfe655a4d5c4a4eab4a7b970812}{Element\_pt}}.resize(n\_element);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00131}00131 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00132}00132     \textcolor{comment}{// Process node file}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00133}00133     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00134}00134     std::ifstream node\_file(node\_file\_name.c\_str(), std::ios\_base::in);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00135}00135 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00136}00136     \textcolor{comment}{// Check that the file actually opened correctly}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00137}00137 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00138}00138     \textcolor{keywordflow}{if} (!node\_file.is\_open())}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00139}00139     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00140}00140       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_msg(\textcolor{stringliteral}{"{}Failed to open node file: "{}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00141}00141       error\_msg += \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}} + node\_file\_name + \textcolor{stringliteral}{"{}\(\backslash\)"{}."{}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00142}00142       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00143}00143         error\_msg, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00144}00144     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00145}00145 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00147}00147 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00148}00148     \textcolor{comment}{// Read in the number of nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00149}00149     \textcolor{keywordtype}{unsigned} n\_node;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00150}00150     node\_file >> n\_node;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00152}00152     \textcolor{comment}{// Create a vector of boolean so as not to create the same node twice}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00153}00153     std::vector<bool> done(n\_node, \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00155}00155     \textcolor{comment}{// Resize the Node vector}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00156}00156     \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}.resize(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00158}00158     \textcolor{comment}{// Set the spatial dimension of the nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00159}00159     \textcolor{keywordtype}{unsigned} dimension;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00160}00160     node\_file >> dimension;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00161}00161 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00162}00162 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00163}00163     \textcolor{keywordflow}{if} (dimension != 3)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00164}00164     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00165}00165       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(\textcolor{stringliteral}{"{}The dimesion of the nodes must be 3\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00166}00166                           OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00167}00167                           OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00168}00168     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00169}00169 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00170}00170 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00171}00171     \textcolor{comment}{// Flag for attributes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00172}00172     node\_file >> attribute\_flag;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00173}00173 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00174}00174     \textcolor{comment}{// Flag for boundary markers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00175}00175     \textcolor{keywordtype}{unsigned} boundary\_markers\_flag;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00176}00176     node\_file >> boundary\_markers\_flag;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00177}00177 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00178}00178     \textcolor{comment}{// Dummy storage for the node number}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00179}00179     \textcolor{keywordtype}{unsigned} dummy\_node\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00180}00180 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00181}00181     \textcolor{comment}{// Create storage for nodal positions and boundary markers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00182}00182     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x\_node(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00183}00183     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} y\_node(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00184}00184     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} z\_node(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00185}00185     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} bound(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00186}00186 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00187}00187     \textcolor{comment}{// Check if there are attributes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00188}00188     \textcolor{comment}{// If not}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00189}00189     \textcolor{keywordflow}{if} (attribute\_flag == 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00190}00190     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00191}00191       \textcolor{comment}{// Are there boundary markers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00192}00192       \textcolor{keywordflow}{if} (boundary\_markers\_flag == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00193}00193       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00194}00194         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00195}00195         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00196}00196           node\_file >> dummy\_node\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00197}00197           node\_file >> x\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00198}00198           node\_file >> y\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00199}00199           node\_file >> z\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00200}00200           node\_file >> bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00201}00201         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00202}00202         node\_file.close();}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00203}00203       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00204}00204       \textcolor{comment}{// Otherwise no boundary markers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00205}00205       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00206}00206       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00207}00207         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00208}00208         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00209}00209           node\_file >> dummy\_node\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00210}00210           node\_file >> x\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00211}00211           node\_file >> y\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00212}00212           node\_file >> z\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00213}00213           bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00214}00214         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00215}00215         node\_file.close();}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00216}00216       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00217}00217     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00218}00218     \textcolor{comment}{// Otherwise there are attributes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00219}00219     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00220}00220     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00221}00221       \textcolor{keywordflow}{if} (boundary\_markers\_flag == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00222}00222       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00223}00223         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00224}00224         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00225}00225           node\_file >> dummy\_node\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00226}00226           node\_file >> x\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00227}00227           node\_file >> y\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00228}00228           node\_file >> z\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00229}00229           node\_file >> dummy\_attribute;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00230}00230           node\_file >> bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00231}00231         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00232}00232         node\_file.close();}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00233}00233       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00234}00234       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00235}00235       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00236}00236         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00237}00237         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00238}00238           node\_file >> dummy\_node\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00239}00239           node\_file >> x\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00240}00240           node\_file >> y\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00241}00241           node\_file >> z\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00242}00242           node\_file >> dummy\_attribute;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00243}00243           bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00244}00244         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00245}00245         node\_file.close();}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00246}00246       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00247}00247     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00248}00248 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00249}00249     \textcolor{comment}{// Determine highest boundary index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00250}00250     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00251}00251     \textcolor{keywordtype}{unsigned} n\_bound = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00252}00252     \textcolor{keywordflow}{if} (boundary\_markers\_flag == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00253}00253     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00254}00254       n\_bound = bound[0];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00255}00255       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00256}00256       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00257}00257         \textcolor{keywordflow}{if} (bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] > n\_bound)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00258}00258         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00259}00259           n\_bound = bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00260}00260         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00261}00261       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00262}00262     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00263}00263 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00264}00264     \textcolor{comment}{// Process face file to extract boundary faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00265}00265     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00266}00266 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00267}00267     \textcolor{comment}{// Open face file}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00268}00268     std::ifstream face\_file(face\_file\_name.c\_str(), std::ios\_base::in);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00269}00269 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00270}00270     \textcolor{comment}{// Check that the file actually opened correctly}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00271}00271 \textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00272}00272     \textcolor{keywordflow}{if} (!face\_file.is\_open())}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00273}00273     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00274}00274       \mbox{\hyperlink{namespaceoomph_1_1Global__string__for__annotation_ac5379de2fa7fe44f2cb31785fc208135}{std::string}} error\_msg(\textcolor{stringliteral}{"{}Failed to open face file: "{}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00275}00275       error\_msg += \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}} + face\_file\_name + \textcolor{stringliteral}{"{}\(\backslash\)"{}."{}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00276}00276       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00277}00277         error\_msg, OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00278}00278     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00279}00279 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00280}00280 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00281}00281     \textcolor{comment}{// Number of faces in face file}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00282}00282     \textcolor{keywordtype}{unsigned} n\_face;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00283}00283     face\_file >> n\_face;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00284}00284 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00285}00285     \textcolor{comment}{// Boundary markers flag}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00286}00286     face\_file >> boundary\_markers\_flag;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00287}00287 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00288}00288     \textcolor{comment}{// Storage for the global node numbers (in the tetgen 1-\/based}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00289}00289     \textcolor{comment}{// numbering scheme!) of the first, second and third  node in}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00290}00290     \textcolor{comment}{//  each segment}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00291}00291     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} first\_node(n\_face);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00292}00292     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} second\_node(n\_face);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00293}00293     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} third\_node(n\_face);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00294}00294 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00295}00295     \textcolor{comment}{// Storage for the boundary marker for each face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00296}00296     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}(n\_face);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00297}00297 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00298}00298     \textcolor{comment}{// Dummy for global face number}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00299}00299     \textcolor{keywordtype}{unsigned} dummy\_face\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00300}00300 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00301}00301     \textcolor{comment}{// Storage for the (boundary) faces associated with each node.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00302}00302     \textcolor{comment}{// Nodes are indexed using Tetgen's 1-\/based scheme, which is why}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00303}00303     \textcolor{comment}{// there is a +1 here}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00304}00304     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::set<unsigned>}}> node\_on\_faces(n\_node + 1);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00305}00305 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00306}00306     \textcolor{comment}{// Extract information for each segment}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00307}00307     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_face; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00308}00308     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00309}00309       face\_file >> dummy\_face\_number;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00310}00310       face\_file >> first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00311}00311       face\_file >> second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00312}00312       face\_file >> third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00313}00313       face\_file >> \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00314}00314       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] > n\_bound)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00315}00315       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00316}00316         n\_bound = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00317}00317       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00318}00318       \textcolor{comment}{// Add the face index to each node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00319}00319       node\_on\_faces[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].insert(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00320}00320       node\_on\_faces[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].insert(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00321}00321       node\_on\_faces[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].insert(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00322}00322     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00323}00323     face\_file.close();}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00324}00324 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00325}00325     \textcolor{comment}{// Set number of boundaries}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00326}00326     \textcolor{keywordflow}{if} (n\_bound > 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00327}00327     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00328}00328       this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a6667f4ddc6e9357a9a7d53160db8161e}{set\_nboundary}}(n\_bound);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00329}00329     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00330}00330 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00331}00331     \textcolor{comment}{// Create the elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00332}00332     \textcolor{keywordtype}{unsigned} counter = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00333}00333     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = 0; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} < n\_element; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00334}00334     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00335}00335       \mbox{\hyperlink{classoomph_1_1Mesh_aca12acfe655a4d5c4a4eab4a7b970812}{Element\_pt}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}] = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1TElement}{TElement<3, 2>}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00336}00336       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[counter];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00337}00337       \textcolor{keywordflow}{if} (done[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] == \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00338}00338       \textcolor{comment}{// ... -\/1 because node number begins at 1 in tetgen}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00339}00339       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00340}00340         \textcolor{comment}{// If the node is on a boundary, construct a boundary node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00341}00341         \textcolor{keywordflow}{if} ((boundary\_markers\_flag == 1) \&\& (bound[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] > 0))}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00342}00342         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00343}00343           \textcolor{comment}{// Construct the boundary ndoe}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00344}00344           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00345}00345             \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a88a427f24deee1be92d6e63eac0fb36f}{construct\_boundary\_node}}(3);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00346}00346 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00347}00347           \textcolor{comment}{// Add to the boundary lookup scheme}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00348}00348           \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(bound[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] -\/ 1,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00349}00349                             \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00350}00350         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00351}00351         \textcolor{comment}{// Otherwise just construct a normal node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00352}00352         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00353}00353         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00354}00354           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00355}00355             \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a54676a4e37813f207d53ef9a7d16fd41}{construct\_node}}(3);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00356}00356         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00357}00357 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00358}00358         done[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00359}00359         \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(0) = x\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00360}00360         \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(1) = y\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00361}00361         \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(2) = z\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00362}00362       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00363}00363       \textcolor{comment}{// Otherwise just copy the node numbr accross}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00364}00364       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00365}00365       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00366}00366         \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3) = \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00367}00367       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00368}00368       counter++;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00369}00369 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00370}00370       \textcolor{comment}{// Loop over the other nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00371}00371       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < (n\_local\_node -\/ 1); j++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00372}00372       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00373}00373         \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[counter];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00374}00374         \textcolor{keywordflow}{if} (done[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] == \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00375}00375         \textcolor{comment}{// ... -\/1 because node number begins at 1 in tetgen}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00376}00376         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00377}00377           \textcolor{comment}{// If we're on a boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00378}00378           \textcolor{keywordflow}{if} ((boundary\_markers\_flag == 1) \&\&}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00379}00379               (bound[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] > 0))}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00380}00380           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00381}00381             \textcolor{comment}{// Construct the boundary ndoe}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00382}00382             \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00383}00383               \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a88a427f24deee1be92d6e63eac0fb36f}{construct\_boundary\_node}}(j);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00384}00384 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00385}00385             \textcolor{comment}{// Add to the boundary lookup scheme}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00386}00386             \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(bound[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] -\/ 1,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00387}00387                               \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00388}00388           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00389}00389           \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00390}00390           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00391}00391             \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00392}00392               \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a54676a4e37813f207d53ef9a7d16fd41}{construct\_node}}(j);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00393}00393           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00394}00394           done[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00395}00395           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(0) =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00396}00396             x\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00397}00397           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(1) =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00398}00398             y\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00399}00399           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(2) =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00400}00400             z\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00401}00401         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00402}00402         \textcolor{comment}{// Otherwise copy the pointer over}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00403}00403         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00404}00404         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00405}00405           \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j) = \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00406}00406         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00407}00407         counter++;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00408}00408       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00409}00409     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00410}00410 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00411}00411 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00412}00412     \textcolor{comment}{// Resize the "{}matrix"{} that stores the boundary id for each}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00413}00413     \textcolor{comment}{// face in each element.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00414}00414     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aefb3cd9a27c4c507ae2e7ca2da8217bd}{Face\_boundary}}.resize(n\_element);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00415}00415     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a92a09461106996546e69d14ec5168278}{Face\_index}}.resize(n\_element);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00416}00416     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abfe6528465bcfd20119a23a397f846b0}{Edge\_index}}.resize(n\_element);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00417}00417 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00418}00418 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00419}00419     \textcolor{comment}{// 0-\/based index scheme used to construct a global lookup for}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00420}00420     \textcolor{comment}{// each face that will be used to uniquely construct interior}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00421}00421     \textcolor{comment}{// face nodes.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00422}00422     \textcolor{comment}{// The faces that lie on boundaries will have already been allocated so}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00423}00423     \textcolor{comment}{// we can start from there}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00424}00424     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a0439e81af29a84043e68d107c71a66c4}{Nglobal\_face}} = n\_face;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00425}00425 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00426}00426     \textcolor{comment}{// Storage for the edges associated with each node.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00427}00427     \textcolor{comment}{// Nodes are indexed using Tetgen's 1-\/based scheme, which is why}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00428}00428     \textcolor{comment}{// there is a +1 here}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00429}00429     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::set<unsigned>}}> node\_on\_edges(n\_node + 1);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00430}00430 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00431}00431     \textcolor{comment}{// 0-\/based index scheme used to construct a global lookup for each}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00432}00432     \textcolor{comment}{// edge that will be used to uniquely construct interior edge nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00433}00433     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}} = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00434}00434 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00435}00435     \textcolor{comment}{// Conversion from the edge numbers to the nodes at the end}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00436}00436     \textcolor{comment}{// of each each edge}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00437}00437     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} first\_local\_edge\_node[6] = \{0, 0, 0, 1, 2, 1\};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00438}00438     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} second\_local\_edge\_node[6] = \{1, 2, 3, 2, 3, 3\};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00439}00439 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00440}00440     \textcolor{comment}{// Loop over the elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00441}00441     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = 0; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} < n\_element; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00442}00442     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00443}00443       \textcolor{comment}{// Each element has four faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00444}00444       \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aefb3cd9a27c4c507ae2e7ca2da8217bd}{Face\_boundary}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}].resize(4);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00445}00445       \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a92a09461106996546e69d14ec5168278}{Face\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}].resize(4);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00446}00446       \textcolor{comment}{// By default each face is NOT on a boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00447}00447       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 4; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00448}00448       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00449}00449         \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aefb3cd9a27c4c507ae2e7ca2da8217bd}{Face\_boundary}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00450}00450       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00451}00451 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00452}00452       \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abfe6528465bcfd20119a23a397f846b0}{Edge\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}].resize(6);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00453}00453 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00454}00454       \textcolor{comment}{// Read out the global node numbers of the nodes from}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00455}00455       \textcolor{comment}{// tetgen's 1-\/based numbering.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00456}00456       \textcolor{comment}{// The offset is to match the offset used above}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00457}00457       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} element\_offset = \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} * n\_local\_node;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00458}00458       \textcolor{keywordtype}{unsigned} glob\_num[4] = \{0, 0, 0, 0\};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00459}00459       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 4; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00460}00460       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00461}00461         glob\_num[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[element\_offset + ((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 4)];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00462}00462       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00463}00463 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00464}00464       \textcolor{comment}{// Now we know the global node numbers of the elements' four nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00465}00465       \textcolor{comment}{// in tetgen's 1-\/based numbering.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00466}00466 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00467}00467       \textcolor{comment}{// Determine whether any of the element faces have already been allocated}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00468}00468       \textcolor{comment}{// an index. This may be because they are located on boundaries, or have}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00469}00469       \textcolor{comment}{// already been visited The global index for the i-\/th face will be stored}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00470}00470       \textcolor{comment}{// in Face\_index[i]}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00471}00471 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00472}00472       \textcolor{comment}{// Loop over the local faces in the element}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00473}00473       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 4; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00474}00474       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00475}00475         \textcolor{comment}{// On the i-\/th face, our numbering convention is such that}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00476}00476         \textcolor{comment}{// it is the (3-\/i)th node of the element that is omitted}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00477}00477         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} omitted\_node = 3 -\/ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00478}00478 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00479}00479         \textcolor{comment}{// Start with the set of global faces associated with the i-\/th node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00480}00480         \textcolor{comment}{// which is always on the i-\/th face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00481}00481         std::set<unsigned> input = node\_on\_faces[glob\_num[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00482}00482 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00483}00483         \textcolor{comment}{// If there is no data yet, not point doing intersections}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00484}00484         \textcolor{comment}{// the face has not been set up}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00485}00485         \textcolor{keywordflow}{if} (input.size() > 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00486}00486         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00487}00487           \textcolor{comment}{// Loop over the other nodes on the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00488}00488           \textcolor{keywordtype}{unsigned} local\_node = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00489}00489           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i2 = 0; i2 < 3; ++i2)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00490}00490           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00491}00491             \textcolor{comment}{// Create the next node index (mod 4)}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00492}00492             local\_node = (local\_node + 1) \% 4;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00493}00493             \textcolor{comment}{// Only take the intersection of nodes on the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00494}00494             \textcolor{comment}{// i.e. not 3-\/i}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00495}00495             \textcolor{keywordflow}{if} (local\_node != omitted\_node)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00496}00496             \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00497}00497               \textcolor{comment}{// Local storage for the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00498}00498               std::set<unsigned> intersection\_result;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00499}00499               \textcolor{comment}{// Calculate the intersection of the current input}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00500}00500               \textcolor{comment}{// and next node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00501}00501               std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00502}00502                 input.begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00503}00503                 input.end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00504}00504                 node\_on\_faces[glob\_num[local\_node]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00505}00505                 node\_on\_faces[glob\_num[local\_node]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00506}00506                 std::insert\_iterator<std::set<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00507}00507                   intersection\_result, intersection\_result.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00508}00508               \textcolor{comment}{// Let the result be the next input}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00509}00509               input = intersection\_result;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00510}00510             \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00511}00511           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00512}00512         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00513}00513 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00514}00514         \textcolor{comment}{// If the nodes share more than one global face index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00515}00515         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00516}00516         \textcolor{keywordflow}{if} (input.size() > 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00517}00517         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00518}00518           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00519}00519             \textcolor{stringliteral}{"{}Nodes in scaffold mesh share more than one global face"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00520}00520             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00521}00521             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00522}00522         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00523}00523 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00524}00524         \textcolor{comment}{// If the element's face is not already allocated, the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00525}00525         \textcolor{comment}{// will be empty}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00526}00526         \textcolor{keywordflow}{if} (input.size() == 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00527}00527         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00528}00528           \textcolor{comment}{// Allocate the next global index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00529}00529           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a92a09461106996546e69d14ec5168278}{Face\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a0439e81af29a84043e68d107c71a66c4}{Nglobal\_face}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00530}00530           \textcolor{comment}{// Associate the new face index with the nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00531}00531           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i2 = 0; i2 < 4; ++i2)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00532}00532           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00533}00533             \textcolor{comment}{// Don't add the omitted node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00534}00534             \textcolor{keywordflow}{if} (i2 != omitted\_node)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00535}00535             \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00536}00536               node\_on\_faces[glob\_num[i2]].insert(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a0439e81af29a84043e68d107c71a66c4}{Nglobal\_face}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00537}00537             \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00538}00538           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00539}00539           \textcolor{comment}{// Increment the global face index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00540}00540           ++\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a0439e81af29a84043e68d107c71a66c4}{Nglobal\_face}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00541}00541         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00542}00542         \textcolor{comment}{// Otherwise we already have a face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00543}00543         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (input.size() == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00544}00544         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00545}00545           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} global\_face\_index = *input.begin();}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00546}00546           \textcolor{comment}{// Set the face index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00547}00547           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a92a09461106996546e69d14ec5168278}{Face\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = global\_face\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00548}00548           \textcolor{comment}{// Allocate the boundary index, if it's a boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00549}00549           \textcolor{keywordflow}{if} (global\_face\_index < n\_face)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00550}00550           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00551}00551             \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aefb3cd9a27c4c507ae2e7ca2da8217bd}{Face\_boundary}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[global\_face\_index];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00552}00552             \textcolor{comment}{// Add the nodes to the boundary look-\/up scheme in}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00553}00553             \textcolor{comment}{// oomph-\/lib (0-\/based) index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00554}00554             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i2 = 0; i2 < 4; ++i2)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00555}00555             \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00556}00556               \textcolor{comment}{// Don't add the omitted node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00557}00557               \textcolor{keywordflow}{if} (i2 != omitted\_node)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00558}00558               \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00559}00559                 \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[global\_face\_index] -\/ 1,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00560}00560                                   \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[glob\_num[i2] -\/ 1]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00561}00561               \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00562}00562             \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00563}00563           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00564}00564         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00565}00565       \} \textcolor{comment}{// end of loop over the faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00566}00566 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00567}00567 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00568}00568       \textcolor{comment}{// Loop over the element edges and assign global edge numbers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00569}00569       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 6; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00570}00570       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00571}00571         \textcolor{comment}{// Storage for the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00572}00572         std::vector<unsigned> local\_edge\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00573}00573 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00574}00574         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} first\_global\_num = glob\_num[first\_local\_edge\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00575}00575         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} second\_global\_num = glob\_num[second\_local\_edge\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00576}00576 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00577}00577         \textcolor{comment}{// Find the common global edge index for the nodes on}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00578}00578         \textcolor{comment}{// the i-\/th element edge}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00579}00579         std::set\_intersection(node\_on\_edges[first\_global\_num].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00580}00580                               node\_on\_edges[first\_global\_num].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00581}00581                               node\_on\_edges[second\_global\_num].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00582}00582                               node\_on\_edges[second\_global\_num].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00583}00583                               std::insert\_iterator<std::vector<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00584}00584                                 local\_edge\_index, local\_edge\_index.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00585}00585 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00586}00586         \textcolor{comment}{// If the nodes share more than one global edge index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00587}00587         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00588}00588         \textcolor{keywordflow}{if} (local\_edge\_index.size() > 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00589}00589         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00590}00590           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00591}00591             \textcolor{stringliteral}{"{}Nodes in scaffold mesh share more than one global edge"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00592}00592             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00593}00593             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00594}00594         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00595}00595 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00596}00596         \textcolor{comment}{// If the element's edge is not already allocated, the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00597}00597         \textcolor{comment}{// will be empty}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00598}00598         \textcolor{keywordflow}{if} (local\_edge\_index.size() == 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00599}00599         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00600}00600           \textcolor{comment}{// Allocate the next global index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00601}00601           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abfe6528465bcfd20119a23a397f846b0}{Edge\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00602}00602           \textcolor{comment}{// Associate the new edge index with the nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00603}00603           node\_on\_edges[first\_global\_num].insert(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00604}00604           node\_on\_edges[second\_global\_num].insert(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00605}00605           \textcolor{comment}{// Increment the global edge index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00606}00606           ++\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00607}00607         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00608}00608         \textcolor{comment}{// Otherwise we already have an edge}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00609}00609         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (local\_edge\_index.size() == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00610}00610         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00611}00611           \textcolor{comment}{// Set the edge index from the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00612}00612           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abfe6528465bcfd20119a23a397f846b0}{Edge\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = local\_edge\_index[0];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00613}00613         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00614}00614       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00615}00615 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00616}00616     \} \textcolor{comment}{// end for e}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00617}00617 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00618}00618 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00619}00619     \textcolor{comment}{// Now determine whether any edges lie on boundaries by using the}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00620}00620     \textcolor{comment}{// face boundary scheme and}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00621}00621 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00622}00622     \textcolor{comment}{// Resize the storage}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00623}00623     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a023c244b1bac044abbb0d52a25f26d89}{Edge\_boundary}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00624}00624 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00625}00625     \textcolor{comment}{// Now loop over all the boundary faces and mark that all edges}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00626}00626     \textcolor{comment}{// must also lie on the bounadry}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00627}00627     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_face; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00628}00628     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00629}00629       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00630}00630         \textcolor{comment}{// Storage for the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00631}00631         std::vector<unsigned> local\_edge\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00632}00632 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00633}00633         \textcolor{comment}{// Find the common global edge index for first edge of the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00634}00634         std::set\_intersection(node\_on\_edges[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00635}00635                               node\_on\_edges[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00636}00636                               node\_on\_edges[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00637}00637                               node\_on\_edges[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00638}00638                               std::insert\_iterator<std::vector<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00639}00639                                 local\_edge\_index, local\_edge\_index.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00640}00640 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00641}00641         \textcolor{comment}{// If the nodes do not share exactly one global edge index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00642}00642         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00643}00643         \textcolor{keywordflow}{if} (local\_edge\_index.size() != 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00644}00644         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00645}00645           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00646}00646             \textcolor{stringliteral}{"{}Nodes in scaffold mesh face do not share exactly one global edge"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00647}00647             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00648}00648             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00649}00649         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00650}00650         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00651}00651         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00652}00652           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a023c244b1bac044abbb0d52a25f26d89}{Edge\_boundary}}[local\_edge\_index[0]] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00653}00653         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00654}00654       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00655}00655 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00656}00656       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00657}00657         \textcolor{comment}{// Storage for the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00658}00658         std::vector<unsigned> local\_edge\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00659}00659 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00660}00660         \textcolor{comment}{// Find the common global edge index for second edge of the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00661}00661         std::set\_intersection(node\_on\_edges[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00662}00662                               node\_on\_edges[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00663}00663                               node\_on\_edges[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00664}00664                               node\_on\_edges[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00665}00665                               std::insert\_iterator<std::vector<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00666}00666                                 local\_edge\_index, local\_edge\_index.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00667}00667 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00668}00668         \textcolor{comment}{// If the nodes do not share exactly one global edge index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00669}00669         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00670}00670         \textcolor{keywordflow}{if} (local\_edge\_index.size() != 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00671}00671         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00672}00672           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00673}00673             \textcolor{stringliteral}{"{}Nodes in scaffold mesh face do not share exactly one global edge"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00674}00674             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00675}00675             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00676}00676         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00677}00677         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00678}00678         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00679}00679           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a023c244b1bac044abbb0d52a25f26d89}{Edge\_boundary}}[local\_edge\_index[0]] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00680}00680         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00681}00681       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00682}00682 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00683}00683       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00684}00684         \textcolor{comment}{// Storage for the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00685}00685         std::vector<unsigned> local\_edge\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00686}00686 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00687}00687         \textcolor{comment}{// Find the common global edge index for third edge of the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00688}00688         std::set\_intersection(node\_on\_edges[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00689}00689                               node\_on\_edges[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00690}00690                               node\_on\_edges[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00691}00691                               node\_on\_edges[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00692}00692                               std::insert\_iterator<std::vector<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00693}00693                                 local\_edge\_index, local\_edge\_index.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00694}00694 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00695}00695         \textcolor{comment}{// If the nodes do not share exactly one global edge index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00696}00696         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00697}00697         \textcolor{keywordflow}{if} (local\_edge\_index.size() != 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00698}00698         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00699}00699           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00700}00700             \textcolor{stringliteral}{"{}Nodes in scaffold mesh face do not share exactly one global edge"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00701}00701             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00702}00702             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00703}00703         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00704}00704         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00705}00705         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00706}00706           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a023c244b1bac044abbb0d52a25f26d89}{Edge\_boundary}}[local\_edge\_index[0]] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00707}00707         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00708}00708       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00709}00709     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00710}00710 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00711}00711 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00712}00712   \} \textcolor{comment}{// end of constructor}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00713}00713 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00714}00714 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00715}00715   \textcolor{comment}{//======================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00716}00716 \textcolor{comment}{  /// Constructor: Pass a tetgenio data structure that represents}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00717}00717 \textcolor{comment}{  /// the input data of the mesh.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00718}00718 \textcolor{comment}{  /// The assumptions are that the nodes have been assigned boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00719}00719 \textcolor{comment}{  /// information which is used in the nodal construction to make sure}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00720}00720 \textcolor{comment}{  /// that BoundaryNodes are constructed. Any additional boundaries are}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00721}00721 \textcolor{comment}{  /// determined from the face boundary information.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00722}00722 \textcolor{comment}{}  \textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00723}\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aaafa633cb5bb15366edcfe49804b5f6f}{00723}}   \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a2262991306aa1fa98463e2bdf85ac518}{TetgenScaffoldMesh::TetgenScaffoldMesh}}(tetgenio\& tetgen\_data)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00724}00724   \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00725}00725     \textcolor{comment}{// Find the number of elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00726}00726     \textcolor{keywordtype}{unsigned} n\_element = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.numberoftetrahedra);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00727}00727 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00728}00728     \textcolor{comment}{// Read in number of nodes per element}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00729}00729     \textcolor{keywordtype}{unsigned} n\_local\_node = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.numberofcorners);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00730}00730 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00731}00731     \textcolor{comment}{// Throw an error if we have anything but linear simplices}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00732}00732     \textcolor{keywordflow}{if} (n\_local\_node != 4)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00733}00733     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00734}00734       std::ostringstream error\_stream;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00735}00735       error\_stream}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00736}00736         << \textcolor{stringliteral}{"{}Tetgen should only be used to generate 4-\/noded tetrahedra!\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00737}00737         << \textcolor{stringliteral}{"{}Your tetgen input data, contains data for "{}} << n\_local\_node}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00738}00738         << \textcolor{stringliteral}{"{}-\/noded tetrahedra"{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00739}00739 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00740}00740       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00741}00741         error\_stream.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00742}00742     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00743}00743 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00744}00744     \textcolor{comment}{// Element attributes may be used to distinguish internal regions}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00745}00745     \textcolor{comment}{// NOTE: This stores doubles because tetgen forces us to!}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00746}00746     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a47b01372fe4cf5c305169fdb57fc5e5a}{Element\_attribute}}.resize(n\_element, 0.0);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00747}00747 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00748}00748     \textcolor{comment}{// Resize storage for the global node numbers listed element-\/by-\/element}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00749}00749     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}.resize(n\_element * n\_local\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00750}00750 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00751}00751     \textcolor{comment}{// Initialise (global) node counter}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00752}00752     \textcolor{keywordtype}{unsigned} k = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00753}00753     \textcolor{comment}{// Are there attributes?}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00754}00754     \textcolor{keywordtype}{unsigned} attribute\_flag =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00755}00755       \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.numberoftetrahedronattributes);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00756}00756 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00757}00757     \textcolor{comment}{// Read global node numbers for all elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00758}00758     \textcolor{keywordflow}{if} (attribute\_flag == 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00759}00759     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00760}00760       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_element; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00761}00761       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00762}00762         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_local\_node; j++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00763}00763         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00764}00764           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[k] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00765}00765             \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.tetrahedronlist[k]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00766}00766           k++;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00767}00767         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00768}00768       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00769}00769     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00770}00770     \textcolor{comment}{// Otherwise read in the attributes as well}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00771}00771     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00772}00772     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00773}00773       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_element; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00774}00774       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00775}00775         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < n\_local\_node; j++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00776}00776         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00777}00777           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[k] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00778}00778             \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.tetrahedronlist[k]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00779}00779           k++;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00780}00780         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00781}00781         \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a47b01372fe4cf5c305169fdb57fc5e5a}{Element\_attribute}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = tetgen\_data.tetrahedronattributelist[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00782}00782       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00783}00783     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00784}00784 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00785}00785     \textcolor{comment}{// Resize the Element vector}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00786}00786     \mbox{\hyperlink{classoomph_1_1Mesh_aca12acfe655a4d5c4a4eab4a7b970812}{Element\_pt}}.resize(n\_element);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00787}00787 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00788}00788     \textcolor{comment}{// Read in the number of nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00789}00789     \textcolor{keywordtype}{unsigned} n\_node = tetgen\_data.numberofpoints;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00790}00790 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00791}00791     \textcolor{comment}{// Create a vector of boolean so as not to create the same node twice}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00792}00792     std::vector<bool> done(n\_node, \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00793}00793 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00794}00794     \textcolor{comment}{// Resize the Node vector}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00795}00795     \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}.resize(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00796}00796 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00797}00797     \textcolor{comment}{// Flag for boundary markers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00798}00798     \textcolor{keywordtype}{unsigned} boundary\_markers\_flag = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00799}00799     \textcolor{keywordflow}{if} (tetgen\_data.pointmarkerlist != 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00800}00800     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00801}00801       boundary\_markers\_flag = 1;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00802}00802     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00803}00803 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00804}00804     \textcolor{comment}{// Create storage for nodal positions and boundary markers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00805}00805     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} x\_node(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00806}00806     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} y\_node(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00807}00807     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<double>}} z\_node(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00808}00808     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} bound(n\_node);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00809}00809 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00810}00810     \textcolor{comment}{// We shall ignore all point attributes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00811}00811     \textcolor{keywordflow}{if} (boundary\_markers\_flag == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00812}00812     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00813}00813       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00814}00814       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00815}00815         x\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = tetgen\_data.pointlist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00816}00816         y\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = tetgen\_data.pointlist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00817}00817         z\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = tetgen\_data.pointlist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 2];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00818}00818         bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.pointmarkerlist[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00819}00819       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00820}00820     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00821}00821     \textcolor{comment}{// Otherwise no boundary markers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00822}00822     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00823}00823     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00824}00824       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00825}00825       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00826}00826         x\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = tetgen\_data.pointlist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00827}00827         y\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = tetgen\_data.pointlist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00828}00828         z\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = tetgen\_data.pointlist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 2];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00829}00829         bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00830}00830       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00831}00831     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00832}00832 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00833}00833 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00834}00834     \textcolor{comment}{// Determine highest boundary index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00835}00835     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00836}00836     \textcolor{keywordtype}{unsigned} n\_bound = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00837}00837     \textcolor{keywordflow}{if} (boundary\_markers\_flag == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00838}00838     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00839}00839       n\_bound = bound[0];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00840}00840       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_node; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00841}00841       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00842}00842         \textcolor{keywordflow}{if} (bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] > n\_bound)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00843}00843         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00844}00844           n\_bound = bound[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00845}00845         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00846}00846       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00847}00847     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00848}00848 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00849}00849     \textcolor{comment}{// Now extract face information}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00850}00850     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00851}00851 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00852}00852     \textcolor{comment}{// Number of faces in face file}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00853}00853     \textcolor{keywordtype}{unsigned} n\_face = tetgen\_data.numberoftrifaces;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00854}00854 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00855}00855     \textcolor{comment}{// Storage for the global node numbers (in the tetgen 1-\/based}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00856}00856     \textcolor{comment}{// numbering scheme!) of the first, second and third  node in}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00857}00857     \textcolor{comment}{//  each segment}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00858}00858     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} first\_node(n\_face);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00859}00859     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} second\_node(n\_face);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00860}00860     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} third\_node(n\_face);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00861}00861 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00862}00862     \textcolor{comment}{// Storage for the boundary marker for each face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00863}00863     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<unsigned>}} \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}(n\_face);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00864}00864 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00865}00865     \textcolor{comment}{// Storage for the (boundary) faces associated with each node.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00866}00866     \textcolor{comment}{// Nodes are indexed using Tetgen's 1-\/based scheme, which is why}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00867}00867     \textcolor{comment}{// there is a +1 here}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00868}00868     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::set<unsigned>}}> node\_on\_faces(n\_node + 1);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00869}00869 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00870}00870     \textcolor{comment}{// Extract information for each segment}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00871}00871     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_face; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00872}00872     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00873}00873       first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.trifacelist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00874}00874       second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00875}00875         \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.trifacelist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00876}00876       third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.trifacelist[3 * \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 2]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00877}00877       \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00878}00878         \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\textcolor{keyword}{>}(tetgen\_data.trifacemarkerlist[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00879}00879       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] > n\_bound)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00880}00880       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00881}00881         n\_bound = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00882}00882       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00883}00883       \textcolor{comment}{// Add the face index to each node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00884}00884       node\_on\_faces[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].insert(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00885}00885       node\_on\_faces[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].insert(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00886}00886       node\_on\_faces[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].insert(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00887}00887     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00888}00888 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00889}00889     \textcolor{comment}{// Extract hole center information}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00890}00890     \textcolor{comment}{// unsigned nhole=tetgen\_data.numberofholes;}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00891}00891     \textcolor{comment}{/*if(nhole!=0)}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00892}00892 \textcolor{comment}{     \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00893}00893 \textcolor{comment}{      Hole\_centre.resize(nhole);}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00894}00894 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00895}00895 \textcolor{comment}{      // Coords counter}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00896}00896 \textcolor{comment}{      unsigned count\_coords=0;}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00897}00897 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00898}00898 \textcolor{comment}{      // Loop over the holes to get centre coords}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00899}00899 \textcolor{comment}{      for(unsigned ihole=0;ihole<nhole;ihole++)}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00900}00900 \textcolor{comment}{       \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00901}00901 \textcolor{comment}{        Hole\_centre[ihole].resize(3);}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00902}00902 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00903}00903 \textcolor{comment}{        // Read the centre value}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00904}00904 \textcolor{comment}{        Hole\_centre[ihole][0]=triangle\_data.holelist[count\_coords];}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00905}00905 \textcolor{comment}{        Hole\_centre[ihole][1]=triangle\_data.holelist[count\_coords+1];}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00906}00906 \textcolor{comment}{        Hole\_centre[ihole][2]=triangle\_data.holelist[count\_coords+2];}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00907}00907 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00908}00908 \textcolor{comment}{        // Increment coords counter}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00909}00909 \textcolor{comment}{        count\_coords+=3;}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00910}00910 \textcolor{comment}{       \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00911}00911 \textcolor{comment}{     \}}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00912}00912 \textcolor{comment}{    else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00913}00913 \textcolor{comment}{     \{}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00914}00914 \textcolor{comment}{      Hole\_centre.resize(0);}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00915}00915 \textcolor{comment}{      \}*/}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00916}00916 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00917}00917 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00918}00918     \textcolor{comment}{// Set number of boundaries}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00919}00919     \textcolor{keywordflow}{if} (n\_bound > 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00920}00920     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00921}00921       this-\/>\mbox{\hyperlink{classoomph_1_1Mesh_a6667f4ddc6e9357a9a7d53160db8161e}{set\_nboundary}}(n\_bound);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00922}00922     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00923}00923 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00924}00924     \textcolor{comment}{// Create the elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00925}00925     \textcolor{keywordtype}{unsigned} counter = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00926}00926     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = 0; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} < n\_element; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00927}00927     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00928}00928       \mbox{\hyperlink{classoomph_1_1Mesh_aca12acfe655a4d5c4a4eab4a7b970812}{Element\_pt}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}] = \textcolor{keyword}{new} \mbox{\hyperlink{classoomph_1_1TElement}{TElement<3, 2>}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00929}00929       \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[counter];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00930}00930       \textcolor{keywordflow}{if} (done[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] == \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00931}00931       \textcolor{comment}{// ... -\/1 because node number begins at 1 in tetgen}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00932}00932       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00933}00933         \textcolor{comment}{// If the node is on a boundary, construct a boundary node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00934}00934         \textcolor{keywordflow}{if} ((boundary\_markers\_flag == 1) \&\& (bound[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] > 0))}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00935}00935         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00936}00936           \textcolor{comment}{// Construct the boundary ndoe}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00937}00937           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00938}00938             \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a88a427f24deee1be92d6e63eac0fb36f}{construct\_boundary\_node}}(3);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00939}00939 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00940}00940           \textcolor{comment}{// Add to the boundary lookup scheme}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00941}00941           \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(bound[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] -\/ 1,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00942}00942                             \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00943}00943         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00944}00944         \textcolor{comment}{// Otherwise just construct a normal node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00945}00945         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00946}00946         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00947}00947           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00948}00948             \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a54676a4e37813f207d53ef9a7d16fd41}{construct\_node}}(3);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00949}00949         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00950}00950 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00951}00951         done[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00952}00952         \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(0) = x\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00953}00953         \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(1) = y\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00954}00954         \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(2) = z\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00955}00955       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00956}00956       \textcolor{comment}{// Otherwise just copy the node numbr accross}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00957}00957       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00958}00958       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00959}00959         \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(3) = \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00960}00960       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00961}00961       counter++;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00962}00962 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00963}00963       \textcolor{comment}{// Loop over the other nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00964}00964       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j = 0; j < (n\_local\_node -\/ 1); j++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00965}00965       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00966}00966         \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[counter];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00967}00967         \textcolor{keywordflow}{if} (done[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] == \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00968}00968         \textcolor{comment}{// ... -\/1 because node number begins at 1 in tetgen}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00969}00969         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00970}00970           \textcolor{comment}{// If we're on a boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00971}00971           \textcolor{keywordflow}{if} ((boundary\_markers\_flag == 1) \&\&}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00972}00972               (bound[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] > 0))}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00973}00973           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00974}00974             \textcolor{comment}{// Construct the boundary ndoe}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00975}00975             \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00976}00976               \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a88a427f24deee1be92d6e63eac0fb36f}{construct\_boundary\_node}}(j);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00977}00977 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00978}00978             \textcolor{comment}{// Add to the boundary lookup scheme}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00979}00979             \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(bound[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] -\/ 1,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00980}00980                               \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00981}00981           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00982}00982           \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00983}00983           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00984}00984             \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00985}00985               \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a54676a4e37813f207d53ef9a7d16fd41}{construct\_node}}(j);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00986}00986           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00987}00987           done[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00988}00988           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(0) =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00989}00989             x\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00990}00990           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(1) =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00991}00991             y\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00992}00992           \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1]-\/>x(2) =}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00993}00993             z\_node[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00994}00994         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00995}00995         \textcolor{comment}{// Otherwise copy the pointer over}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00996}00996         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00997}00997         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00998}00998           \mbox{\hyperlink{classoomph_1_1Mesh_a479059b0964826a8cee6eb506b57268a}{finite\_element\_pt}}(\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}})-\/>\mbox{\hyperlink{classoomph_1_1FiniteElement_a9addfe893ab8205619963aa96204cdc4}{node\_pt}}(j) = \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aa608b06d59df775fa51924d1c68e9d2b}{global\_node\_number}} -\/ 1];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l00999}00999         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01000}01000         counter++;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01001}01001       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01002}01002     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01003}01003 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01004}01004 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01005}01005     \textcolor{comment}{// Resize the "{}matrix"{} that stores the boundary id for each}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01006}01006     \textcolor{comment}{// face in each element.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01007}01007     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aefb3cd9a27c4c507ae2e7ca2da8217bd}{Face\_boundary}}.resize(n\_element);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01008}01008     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a92a09461106996546e69d14ec5168278}{Face\_index}}.resize(n\_element);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01009}01009     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abfe6528465bcfd20119a23a397f846b0}{Edge\_index}}.resize(n\_element);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01010}01010 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01011}01011 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01012}01012     \textcolor{comment}{// 0-\/based index scheme used to construct a global lookup for}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01013}01013     \textcolor{comment}{// each face that will be used to uniquely construct interior}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01014}01014     \textcolor{comment}{// face nodes.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01015}01015     \textcolor{comment}{// The faces that lie on boundaries will have already been allocated so}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01016}01016     \textcolor{comment}{// we can start from there}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01017}01017     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a0439e81af29a84043e68d107c71a66c4}{Nglobal\_face}} = n\_face;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01018}01018 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01019}01019     \textcolor{comment}{// Storage for the edges associated with each node.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01020}01020     \textcolor{comment}{// Nodes are indexed using Tetgen's 1-\/based scheme, which is why}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01021}01021     \textcolor{comment}{// there is a +1 here}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01022}01022     \mbox{\hyperlink{classoomph_1_1Vector}{Vector<std::set<unsigned>}}> node\_on\_edges(n\_node + 1);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01023}01023 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01024}01024     \textcolor{comment}{// 0-\/based index scheme used to construct a global lookup for each}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01025}01025     \textcolor{comment}{// edge that will be used to uniquely construct interior edge nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01026}01026     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}} = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01027}01027 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01028}01028     \textcolor{comment}{// Conversion from the edge numbers to the nodes at the end}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01029}01029     \textcolor{comment}{// of each each edge}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01030}01030     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} first\_local\_edge\_node[6] = \{0, 0, 0, 1, 2, 1\};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01031}01031     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} second\_local\_edge\_node[6] = \{1, 2, 3, 2, 3, 3\};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01032}01032 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01033}01033     \textcolor{comment}{// Loop over the elements}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01034}01034     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} = 0; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} < n\_element; \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01035}01035     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01036}01036       \textcolor{comment}{// Each element has four faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01037}01037       \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aefb3cd9a27c4c507ae2e7ca2da8217bd}{Face\_boundary}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}].resize(4);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01038}01038       \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a92a09461106996546e69d14ec5168278}{Face\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}].resize(4);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01039}01039       \textcolor{comment}{// By default each face is NOT on a boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01040}01040       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 4; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01041}01041       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01042}01042         \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aefb3cd9a27c4c507ae2e7ca2da8217bd}{Face\_boundary}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = 0;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01043}01043       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01044}01044 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01045}01045       \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abfe6528465bcfd20119a23a397f846b0}{Edge\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}].resize(6);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01046}01046 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01047}01047       \textcolor{comment}{// Read out the global node numbers of the nodes from}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01048}01048       \textcolor{comment}{// tetgen's 1-\/based numbering.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01049}01049       \textcolor{comment}{// The offset is to match the offset used above}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01050}01050       \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} element\_offset = \mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}} * n\_local\_node;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01051}01051       \textcolor{keywordtype}{unsigned} glob\_num[4] = \{0, 0, 0, 0\};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01052}01052       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 4; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01053}01053       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01054}01054         glob\_num[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_ada16a9ad5226a937365e6d88e40e7af4}{Global\_node}}[element\_offset + ((\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} + 1) \% 4)];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01055}01055       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01056}01056 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01057}01057       \textcolor{comment}{// Now we know the global node numbers of the elements' four nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01058}01058       \textcolor{comment}{// in tetgen's 1-\/based numbering.}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01059}01059 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01060}01060       \textcolor{comment}{// Determine whether any of the element faces have already been allocated}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01061}01061       \textcolor{comment}{// an index. This may be because they are located on boundaries, or have}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01062}01062       \textcolor{comment}{// already been visited The global index for the i-\/th face will be stored}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01063}01063       \textcolor{comment}{// in Face\_index[i]}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01064}01064 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01065}01065       \textcolor{comment}{// Loop over the local faces in the element}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01066}01066       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 4; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01067}01067       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01068}01068         \textcolor{comment}{// On the i-\/th face, our numbering convention is such that}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01069}01069         \textcolor{comment}{// it is the (3-\/i)th node of the element that is omitted}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01070}01070         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} omitted\_node = 3 -\/ \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01071}01071 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01072}01072         \textcolor{comment}{// Start with the set of global faces associated with the i-\/th node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01073}01073         \textcolor{comment}{// which is always on the i-\/th face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01074}01074         std::set<unsigned> input = node\_on\_faces[glob\_num[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01075}01075 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01076}01076         \textcolor{comment}{// If there is no data yet, not point doing intersections}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01077}01077         \textcolor{comment}{// the face has not been set up}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01078}01078         \textcolor{keywordflow}{if} (input.size() > 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01079}01079         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01080}01080           \textcolor{comment}{// Loop over the other nodes on the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01081}01081           \textcolor{keywordtype}{unsigned} local\_node = \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01082}01082           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i2 = 0; i2 < 3; ++i2)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01083}01083           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01084}01084             \textcolor{comment}{// Create the next node index (mod 4)}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01085}01085             local\_node = (local\_node + 1) \% 4;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01086}01086             \textcolor{comment}{// Only take the intersection of nodes on the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01087}01087             \textcolor{comment}{// i.e. not 3-\/i}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01088}01088             \textcolor{keywordflow}{if} (local\_node != omitted\_node)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01089}01089             \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01090}01090               \textcolor{comment}{// Local storage for the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01091}01091               std::set<unsigned> intersection\_result;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01092}01092               \textcolor{comment}{// Calculate the intersection of the current input}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01093}01093               \textcolor{comment}{// and next node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01094}01094               std::set\_intersection(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01095}01095                 input.begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01096}01096                 input.end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01097}01097                 node\_on\_faces[glob\_num[local\_node]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01098}01098                 node\_on\_faces[glob\_num[local\_node]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01099}01099                 std::insert\_iterator<std::set<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01100}01100                   intersection\_result, intersection\_result.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01101}01101               \textcolor{comment}{// Let the result be the next input}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01102}01102               input = intersection\_result;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01103}01103             \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01104}01104           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01105}01105         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01106}01106 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01107}01107         \textcolor{comment}{// If the nodes share more than one global face index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01108}01108         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01109}01109         \textcolor{keywordflow}{if} (input.size() > 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01110}01110         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01111}01111           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01112}01112             \textcolor{stringliteral}{"{}Nodes in scaffold mesh share more than one global face"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01113}01113             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01114}01114             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01115}01115         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01116}01116 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01117}01117         \textcolor{comment}{// If the element's face is not already allocated, the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01118}01118         \textcolor{comment}{// will be empty}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01119}01119         \textcolor{keywordflow}{if} (input.size() == 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01120}01120         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01121}01121           \textcolor{comment}{// Allocate the next global index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01122}01122           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a92a09461106996546e69d14ec5168278}{Face\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a0439e81af29a84043e68d107c71a66c4}{Nglobal\_face}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01123}01123           \textcolor{comment}{// Associate the new face index with the nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01124}01124           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i2 = 0; i2 < 4; ++i2)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01125}01125           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01126}01126             \textcolor{comment}{// Don't add the omitted node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01127}01127             \textcolor{keywordflow}{if} (i2 != omitted\_node)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01128}01128             \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01129}01129               node\_on\_faces[glob\_num[i2]].insert(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a0439e81af29a84043e68d107c71a66c4}{Nglobal\_face}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01130}01130             \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01131}01131           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01132}01132           \textcolor{comment}{// Increment the global face index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01133}01133           ++\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a0439e81af29a84043e68d107c71a66c4}{Nglobal\_face}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01134}01134         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01135}01135         \textcolor{comment}{// Otherwise we already have a face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01136}01136         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (input.size() == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01137}01137         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01138}01138           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} global\_face\_index = *input.begin();}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01139}01139           \textcolor{comment}{// Set the face index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01140}01140           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a92a09461106996546e69d14ec5168278}{Face\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = global\_face\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01141}01141           \textcolor{comment}{// Allocate the boundary index, if it's a boundary}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01142}01142           \textcolor{keywordflow}{if} (global\_face\_index < n\_face)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01143}01143           \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01144}01144             \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aefb3cd9a27c4c507ae2e7ca2da8217bd}{Face\_boundary}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[global\_face\_index];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01145}01145             \textcolor{comment}{// Add the nodes to the boundary look-\/up scheme in}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01146}01146             \textcolor{comment}{// oomph-\/lib (0-\/based) index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01147}01147             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i2 = 0; i2 < 4; ++i2)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01148}01148             \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01149}01149               \textcolor{comment}{// Don't add the omitted node}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01150}01150               \textcolor{keywordflow}{if} (i2 != omitted\_node)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01151}01151               \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01152}01152                 \mbox{\hyperlink{classoomph_1_1Mesh_a007b102ac8e42328872ad658d7110bfc}{add\_boundary\_node}}(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a44fcd8871bd1441ed353fd86fac7015c}{face\_boundary}}[global\_face\_index] -\/ 1,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01153}01153                                   \mbox{\hyperlink{classoomph_1_1Mesh_a0a42111e7eb200e5831f8b73c018b7dc}{Node\_pt}}[glob\_num[i2] -\/ 1]);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01154}01154               \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01155}01155             \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01156}01156           \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01157}01157         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01158}01158       \} \textcolor{comment}{// end of loop over the faces}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01159}01159 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01160}01160 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01161}01161       \textcolor{comment}{// Loop over the element edges and assign global edge numbers}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01162}01162       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < 6; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01163}01163       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01164}01164         \textcolor{comment}{// Storage for the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01165}01165         std::vector<unsigned> local\_edge\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01166}01166 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01167}01167         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} first\_global\_num = glob\_num[first\_local\_edge\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01168}01168         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} second\_global\_num = glob\_num[second\_local\_edge\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01169}01169 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01170}01170         \textcolor{comment}{// Find the common global edge index for the nodes on}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01171}01171         \textcolor{comment}{// the i-\/th element edge}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01172}01172         std::set\_intersection(node\_on\_edges[first\_global\_num].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01173}01173                               node\_on\_edges[first\_global\_num].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01174}01174                               node\_on\_edges[second\_global\_num].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01175}01175                               node\_on\_edges[second\_global\_num].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01176}01176                               std::insert\_iterator<std::vector<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01177}01177                                 local\_edge\_index, local\_edge\_index.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01178}01178 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01179}01179         \textcolor{comment}{// If the nodes share more than one global edge index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01180}01180         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01181}01181         \textcolor{keywordflow}{if} (local\_edge\_index.size() > 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01182}01182         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01183}01183           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01184}01184             \textcolor{stringliteral}{"{}Nodes in scaffold mesh share more than one global edge"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01185}01185             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01186}01186             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01187}01187         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01188}01188 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01189}01189         \textcolor{comment}{// If the element's edge is not already allocated, the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01190}01190         \textcolor{comment}{// will be empty}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01191}01191         \textcolor{keywordflow}{if} (local\_edge\_index.size() == 0)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01192}01192         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01193}01193           \textcolor{comment}{// Allocate the next global index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01194}01194           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abfe6528465bcfd20119a23a397f846b0}{Edge\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01195}01195           \textcolor{comment}{// Associate the new edge index with the nodes}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01196}01196           node\_on\_edges[first\_global\_num].insert(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01197}01197           node\_on\_edges[second\_global\_num].insert(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01198}01198           \textcolor{comment}{// Increment the global edge index}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01199}01199           ++\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01200}01200         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01201}01201         \textcolor{comment}{// Otherwise we already have an edge}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01202}01202         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (local\_edge\_index.size() == 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01203}01203         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01204}01204           \textcolor{comment}{// Set the edge index from the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01205}01205           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_abfe6528465bcfd20119a23a397f846b0}{Edge\_index}}[\mbox{\hyperlink{cfortran_8h_a37cd013acc76697829c324bdd8562d82}{e}}][\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = local\_edge\_index[0];}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01206}01206         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01207}01207       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01208}01208 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01209}01209     \} \textcolor{comment}{// end for e}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01210}01210 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01211}01211 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01212}01212     \textcolor{comment}{// Now determine whether any edges lie on boundaries by using the}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01213}01213     \textcolor{comment}{// face boundary scheme and}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01214}01214 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01215}01215     \textcolor{comment}{// Resize the storage}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01216}01216     \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a023c244b1bac044abbb0d52a25f26d89}{Edge\_boundary}}.resize(\mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_aafa53fcb1ac09cc8667783a0d514def3}{Nglobal\_edge}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01217}01217 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01218}01218     \textcolor{comment}{// Now loop over all the boundary faces and mark that all edges}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01219}01219     \textcolor{comment}{// must also lie on the bounadry}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01220}01220     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 0; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < n\_face; ++\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01221}01221     \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01222}01222       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01223}01223         \textcolor{comment}{// Storage for the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01224}01224         std::vector<unsigned> local\_edge\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01225}01225 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01226}01226         \textcolor{comment}{// Find the common global edge index for first edge of the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01227}01227         std::set\_intersection(node\_on\_edges[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01228}01228                               node\_on\_edges[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01229}01229                               node\_on\_edges[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01230}01230                               node\_on\_edges[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01231}01231                               std::insert\_iterator<std::vector<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01232}01232                                 local\_edge\_index, local\_edge\_index.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01233}01233 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01234}01234         \textcolor{comment}{// If the nodes do not share exactly one global edge index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01235}01235         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01236}01236         \textcolor{keywordflow}{if} (local\_edge\_index.size() != 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01237}01237         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01238}01238           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01239}01239             \textcolor{stringliteral}{"{}Nodes in scaffold mesh face do not share exactly one global edge"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01240}01240             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01241}01241             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01242}01242         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01243}01243         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01244}01244         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01245}01245           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a023c244b1bac044abbb0d52a25f26d89}{Edge\_boundary}}[local\_edge\_index[0]] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01246}01246         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01247}01247       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01248}01248 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01249}01249       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01250}01250         \textcolor{comment}{// Storage for the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01251}01251         std::vector<unsigned> local\_edge\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01252}01252 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01253}01253         \textcolor{comment}{// Find the common global edge index for second edge of the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01254}01254         std::set\_intersection(node\_on\_edges[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01255}01255                               node\_on\_edges[second\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01256}01256                               node\_on\_edges[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01257}01257                               node\_on\_edges[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01258}01258                               std::insert\_iterator<std::vector<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01259}01259                                 local\_edge\_index, local\_edge\_index.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01260}01260 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01261}01261         \textcolor{comment}{// If the nodes do not share exactly one global edge index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01262}01262         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01263}01263         \textcolor{keywordflow}{if} (local\_edge\_index.size() != 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01264}01264         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01265}01265           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01266}01266             \textcolor{stringliteral}{"{}Nodes in scaffold mesh face do not share exactly one global edge"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01267}01267             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01268}01268             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01269}01269         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01270}01270         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01271}01271         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01272}01272           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a023c244b1bac044abbb0d52a25f26d89}{Edge\_boundary}}[local\_edge\_index[0]] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01273}01273         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01274}01274       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01275}01275 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01276}01276       \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01277}01277         \textcolor{comment}{// Storage for the result of the intersection}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01278}01278         std::vector<unsigned> local\_edge\_index;}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01279}01279 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01280}01280         \textcolor{comment}{// Find the common global edge index for third edge of the face}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01281}01281         std::set\_intersection(node\_on\_edges[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01282}01282                               node\_on\_edges[first\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01283}01283                               node\_on\_edges[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].begin(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01284}01284                               node\_on\_edges[third\_node[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]].end(),}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01285}01285                               std::insert\_iterator<std::vector<unsigned>>(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01286}01286                                 local\_edge\_index, local\_edge\_index.begin()));}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01287}01287 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01288}01288         \textcolor{comment}{// If the nodes do not share exactly one global edge index, then}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01289}01289         \textcolor{comment}{// we have a problem}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01290}01290         \textcolor{keywordflow}{if} (local\_edge\_index.size() != 1)}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01291}01291         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01292}01292           \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1OomphLibError}{OomphLibError}}(}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01293}01293             \textcolor{stringliteral}{"{}Nodes in scaffold mesh face do not share exactly one global edge"{}},}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01294}01294             OOMPH\_CURRENT\_FUNCTION,}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01295}01295             OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01296}01296         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01297}01297         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01298}01298         \{}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01299}01299           \mbox{\hyperlink{classoomph_1_1TetgenScaffoldMesh_a023c244b1bac044abbb0d52a25f26d89}{Edge\_boundary}}[local\_edge\_index[0]] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01300}01300         \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01301}01301       \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01302}01302     \}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01303}01303 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01304}01304 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01305}01305   \} \textcolor{comment}{// end of constructor}}
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01306}01306 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01307}01307 }
+\DoxyCodeLine{\Hypertarget{tetgen__scaffold__mesh_8cc_source_l01308}01308 \} \textcolor{comment}{// namespace oomph}}
+
+\end{DoxyCode}

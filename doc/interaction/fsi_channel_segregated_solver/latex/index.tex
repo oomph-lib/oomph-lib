@@ -1,6 +1,6 @@
 In this document we discuss the implementation of segregated solution strategies for multi-\/physics problems, in particular fluid-\/structure interaction, within {\ttfamily oomph-\/lib}. The method illustrated by revisiting the fluid-\/structure interaction problem of \href{../../fsi_collapsible_channel/html/index.html}{\texttt{ finite-\/\+Reynolds-\/number flow in a 2D collapsible channel;}} an example discussed in detail in \begin{center} \href{http://www.springerlink.com/content/m3r6318701g338g4/}{\texttt{ Heil, M., Hazel, A.\+L. \& Boyle, J. (2008)\+: Solvers for large-\/displacement fluid-\/structure interaction problems\+: Segregated vs. monolithic approaches. Computational Mechanics.}} \end{center} 
 
-where we compare the relative performance of segregated and monolithic solvers. Since the paper comes to the conclusion that, despite various claims in the literature, segregated solvers are not necessarily more efficient than fully-\/coupled monolithic schemes (of the type employed in {\ttfamily oomph-\/lib}) you should also consult the \href{../../../preconditioners/fsi/html/index.html}{\texttt{ related tutorial on the monolithic solution of the problem with {\ttfamily oomph-\/lib\textquotesingle{}s} F\+SI preconditioner.}}
+where we compare the relative performance of segregated and monolithic solvers. Since the paper comes to the conclusion that, despite various claims in the literature, segregated solvers are not necessarily more efficient than fully-\/coupled monolithic schemes (of the type employed in {\ttfamily oomph-\/lib}) you should also consult the \href{../../../preconditioners/fsi/html/index.html}{\texttt{ related tutorial on the monolithic solution of the problem with {\ttfamily oomph-\/lib\textquotesingle{}s} FSI preconditioner.}}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -56,51 +56,56 @@ At low $Q$, the displacement is directly proportional to the external pressure. 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_overview}{}\doxysection{Overview\+: Segregated solution strategies with oomph-\/lib}\label{index_overview}
-The general methodology for setting up fluid-\/structure-\/interaction problems is discussed in \href{../../fsi_collapsible_channel/html/index.html\#overview}{\texttt{ another tutorial; }} and we shall assume that the standard monolithic problem has already been written. In the present example, the monolithic problem class {\ttfamily \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}} is specified in the header file \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_problem.h}{\texttt{ fsi\+\_\+chan\+\_\+problem.\+h}}
+The general methodology for setting up fluid-\/structure-\/interaction problems is discussed in \href{../../fsi_collapsible_channel/html/index.html\#overview}{\texttt{ another tutorial; }} and we shall assume that the standard monolithic problem has already been written. In the present example, the monolithic problem class {\ttfamily \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}} is specified in the header file \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_problem.h}{\texttt{ fsi\+\_\+chan\+\_\+problem.\+h}}
 
 Having specified the monolithic (fully-\/coupled) discretisation, our segregated solution strategy proceeds by alternating between fluid and solid solves\+: Initially, the degrees of freedom associated with the (pure) solid mechanics problem are \char`\"{}pinned\char`\"{} and the global assembly procedure is modified to omit the corresponding solid elements. The Newton solver will, therefore, solve the fluid equations with a \char`\"{}frozen\char`\"{} wall shape. Next, the degrees of freedom associated with the (pure) fluid mechanics problem are pinned and the original boundary conditions for the solid mechanics problem are re-\/assigned. The assembly procedure is now modified so that only solid elements contribute to the global system. The Newton solver will then solve for a new wall shape corresponding to the tractions exerted by the given flow field. At this point we allow for under-\/relaxation, i.\+e. we provide the option to increment the solid mechanics degrees of freedom by a fraction of the change computed by the Newton solver. These two steps are repeated in a fixed-\/point iteration which continues until a given convergence criterion is satisfied, or a maximum number of iterations is exceeded. We note that different linear solvers/preconditioners may be specified for solution of the linear systems arising during the Newton iteration for the isolated \char`\"{}fluid\char`\"{} and \char`\"{}solid\char`\"{} problems, allowing the re-\/use of optimal solution methods for individual sub-\/problems. This is generally perceived to be one of the key advantages of segregated solvers.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_how_its_done}{}\doxysection{Brief discussion of the implementation}\label{index_how_its_done}
-\hypertarget{index_seg_problem}{}\doxysubsection{The Segregatable\+F\+S\+I\+Problem}\label{index_seg_problem}
+\hypertarget{index_seg_problem}{}\doxysubsection{The Segregatable\+FSIProblem}\label{index_seg_problem}
 {\bfseries{a. Overall structure}}
 
-The \href{../../../the_data_structure/html/classoomph_1_1SegregatableFSIProblem.html}{\texttt{ {\ttfamily Segregatable\+F\+S\+I\+Problem} }} class is used to implement our segregated solution strategy within {\ttfamily oomph-\/lib}. The most important problem-\/specific task is to divide all the problem data into distinct fluid and solid degrees of freedom and to partition the monolithic mesh into a mesh of fluid elements and a mesh of solid elements. The problem-\/specific partitioning should be implemented in the (pure) virtual member function 
+The \href{../../../the_data_structure/html/classoomph_1_1SegregatableFSIProblem.html}{\texttt{ {\ttfamily Segregatable\+FSIProblem} }} class is used to implement our segregated solution strategy within {\ttfamily oomph-\/lib}. The most important problem-\/specific task is to divide all the problem data into distinct fluid and solid degrees of freedom and to partition the monolithic mesh into a mesh of fluid elements and a mesh of solid elements. The problem-\/specific partitioning should be implemented in the (pure) virtual member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Identify fluid and solid data}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} identify\_fluid\_and\_solid\_dofs(Vector<Data*>\& fluid\_data\_pt,}
-\DoxyCodeLine{                                           Vector<Data*>\& \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a47a833f5612182bfbef339f78a1f71b3}{solid\_data\_pt}},}
-\DoxyCodeLine{                                           Mesh*\& \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a82a0bb94ec85811cb7be74852c922714}{fluid\_mesh\_pt}},}
-\DoxyCodeLine{                                           Mesh*\& \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a37d0fc0ef332d4eae72596e277d5acdd}{solid\_mesh\_pt}})=0;}
+\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} identify\_fluid\_and\_solid\_dofs(Vector<Data*>\& fluid\_data\_pt,}
+\DoxyCodeLine{                                           Vector<Data*>\& solid\_data\_pt,}
+\DoxyCodeLine{                                           Mesh*\& fluid\_mesh\_pt,}
+\DoxyCodeLine{                                           Mesh*\& solid\_mesh\_pt)=0;}
+
 \end{DoxyCode}
  which returns vectors of fluid and solid data and the meshes of fluid and solid elements. This virtual function is called within the member function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set up segregated solver. The optional boolean argument}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// defaults to true and causes the identify\_fluid\_and\_solid\_dofs(...)}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to be called again. This is required, e.g. if any of the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// meshes were adapted since the previous call to the segregated solver.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a7db15b3153f424f5d06f38eb669ec399}{setup\_segregated\_solver}}(\textcolor{keyword}{const} \textcolor{keywordtype}{bool} \&full\_setup\_of\_fluid\_and\_solid\_dofs=\textcolor{keyword}{true})}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set up segregated solver. The optional boolean argument}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// defaults to true and causes the identify\_fluid\_and\_solid\_dofs(...)}}
+\DoxyCodeLine{\textcolor{comment}{/// to be called again. This is required, e.g. if any of the}}
+\DoxyCodeLine{\textcolor{comment}{/// meshes were adapted since the previous call to the segregated solver.}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} setup\_segregated\_solver(\textcolor{keyword}{const} \textcolor{keywordtype}{bool} \&full\_setup\_of\_fluid\_and\_solid\_dofs=\textcolor{keyword}{true})}
+
 \end{DoxyCode}
  which {\itshape must} be called immediately before every segregated solve. The optional boolean flag may be set to {\ttfamily false} if the solid and fluid meshes have not changed between solves (i.\+e. if no spatial adaptation was performed since the last call to the segregated solver). The {\ttfamily setup\+\_\+segregated\+\_\+solver(...)} function must still be called, however, in order that data associated with convergence acceleration techniques is reset to its default values.
 
 {\bfseries{b. The segregated solvers}}
 
-The class inherits from the standard {\ttfamily Problem} class, which provides the standard (monolithic) {\ttfamily newton\+\_\+solve()} and related functions. Thus any {\ttfamily Segregated\+F\+S\+I\+Problem} can be solved \char`\"{}monolithically\char`\"{} as normal and, moreover, it is straightforward to ensure that exactly the same system is being solved when comparing monolithic and segregated solutions. The segregated solution strategy is implemented in the analogous member functions\+:
+The class inherits from the standard {\ttfamily Problem} class, which provides the standard (monolithic) {\ttfamily newton\+\_\+solve()} and related functions. Thus any {\ttfamily Segregated\+FSIProblem} can be solved \char`\"{}monolithically\char`\"{} as normal and, moreover, it is straightforward to ensure that exactly the same system is being solved when comparing monolithic and segregated solutions. The segregated solution strategy is implemented in the analogous member functions\+:
 \begin{DoxyItemize}
 \item The equivalent of the monolithic {\ttfamily Problem\+::newton\+\_\+solve()} is 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SegregatedFSIProblem::segregated\_solve();}
+
 \end{DoxyCode}
 
 \item The equivalent of the monolithic {\ttfamily Problem\+::steady\+\_\+newton\+\_\+solve()} is 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SegregatedFSIProblem::steady\_segregated\_solve();}
+
 \end{DoxyCode}
 
 \item Finally, the equivalent of {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(dt)} is 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{PicardConvergenceData unsteady\_segregated\_solve(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&dt);}
+
 \end{DoxyCode}
 
 \end{DoxyItemize}All three functions return an instance of a {\ttfamily Picard\+Convergence\+Data} object which stores the convergence statistics of the segregated solve.
@@ -108,45 +113,54 @@ The class inherits from the standard {\ttfamily Problem} class, which provides t
 In addition, the virtual member functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SegregatedFSIProblem::actions\_before\_segregated\_solve() }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SegregatedFSIProblem::actions\_after\_segregated\_solve() }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SegregatedFSIProblem::actions\_before\_segregated\_convergence\_check() }
+
 \end{DoxyCode}
  are provided to allow the user to specify any actions, such as initialisation of counters, mesh updates, output, etc, that should be performed before or after each complete segregated solve. Note that the {\ttfamily Problem} member functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_solve() }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_newton\_solve() }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_convergence\_check() }
+
 \end{DoxyCode}
- are called as usual during the Newton solve of each sub-\/problem and may be used for fine-\/grained operations that should be performed before or after each fluid or solid solve. For this purpose, the {\ttfamily Segregated\+F\+S\+I\+Problem} provides a flag, {\ttfamily int} {\ttfamily Segregated\+F\+S\+I\+Problem\+::\+Solve\+\_\+type} that indicates which (sub-\/)solve is currently being performed. The flag can take the (enumerated) values {\ttfamily Segregated\+F\+S\+I\+Problem\+::\+Full\+\_\+solve}, {\ttfamily Segregated\+F\+S\+I\+Problem\+::\+Fluid\+\_\+solve} and {\ttfamily Segregated\+F\+S\+I\+Problem\+::\+Solid\+\_\+solve}, allowing the user to perform specific actions during the distinct sub-\/solves.
+ are called as usual during the Newton solve of each sub-\/problem and may be used for fine-\/grained operations that should be performed before or after each fluid or solid solve. For this purpose, the {\ttfamily Segregated\+FSIProblem} provides a flag, {\ttfamily int} {\ttfamily Segregated\+FSIProblem\+::\+Solve\+\_\+type} that indicates which (sub-\/)solve is currently being performed. The flag can take the (enumerated) values {\ttfamily Segregated\+FSIProblem\+::\+Full\+\_\+solve}, {\ttfamily Segregated\+FSIProblem\+::\+Fluid\+\_\+solve} and {\ttfamily Segregated\+FSIProblem\+::\+Solid\+\_\+solve}, allowing the user to perform specific actions during the distinct sub-\/solves.
 
 {\bfseries{c. Choosing the convergence criterion}}
 
-Other public member functions provided by the {\ttfamily Segregated\+F\+S\+I\+Problem} class are used to specify the convergence criterion for the global fixed-\/point iteration\+: 
+Other public member functions provided by the {\ttfamily Segregated\+FSIProblem} class are used to specify the convergence criterion for the global fixed-\/point iteration\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Base convergence based on max. global residual}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} assess\_convergence\_based\_on\_max\_global\_residual(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&tol)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} assess\_convergence\_based\_on\_max\_global\_residual(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&tol)}
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Base convergence on maximum absolute change of solid degrees of freedom}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} assess\_convergence\_based\_on\_absolute\_solid\_change(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&tol)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} assess\_convergence\_based\_on\_absolute\_solid\_change(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&tol)}
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Base convergence on maximum relative change of solid degrees of freedom}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} assess\_convergence\_based\_on\_relative\_solid\_change(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&tol)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} assess\_convergence\_based\_on\_relative\_solid\_change(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&tol)}
+
 \end{DoxyCode}
  If a tolerance is not specified the default {\ttfamily Problem\+::\+Newton\+\_\+solver\+\_\+tolerance} is used.
 
@@ -156,41 +170,44 @@ Finally, there are several member functions that are used to specify the converg
 \begin{DoxyEnumerate}
 \item {\bfseries{Static under-\/relaxation\+:}} ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//Use under-\/relaxation for solid degrees of freedom and specify }}
 \DoxyCodeLine{\textcolor{comment}{//the optional under-\/relaxation parameter. The default of 1.0 }}
 \DoxyCodeLine{\textcolor{comment}{//corresponds to no under-\/relaxation.}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} use\_under\_relaxation (\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&omega=1.0)}
+
 \end{DoxyCode}
  If this function is called, under-\/relaxation is performed after the solid sub-\/solve, i.\+e. each solid degree of freedom, $ s $, say is updated via \[ s = s_{new} + (1-\omega) (s_{old} - s_{new}) \] where $ s_{new} $ is the new value computed by the Newton solver and $ s_{old} $ is its previous value.
 \item {\bfseries{Adaptive under-\/relaxation\+:}} ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//Boolean flag that controls whether Irons \& Tuck extrapolation}}
 \DoxyCodeLine{\textcolor{comment}{//is used to dynamically modify the under-\/relaxation parameter for}}
 \DoxyCodeLine{\textcolor{comment}{//the under-\/relaxation of the solid degrees of freedom.}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} enable\_irons\_and\_tuck\_extrapolation ()}
+
 \end{DoxyCode}
  If this function is called (and if under-\/relaxation is enabled) the under-\/relaxation parameter $ \omega $ is adjusted throughout the fixed-\/point iteration, using Irons \& Tucks convergence acceleration procedure; see Irons, B.\+M. \& Tuck, R.\+C. \char`\"{}\+A version of the Aitken accelerator for computer iteration\char`\"{}. International Journal of Numerical Methods in Engineering {\bfseries{1}}, 275-\/277 (1969).
 \item {\bfseries{Pointwise Aitken-\/acceleration\+:}} ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//Set a boolean flag that controls whether pointwise Aitken}}
 \DoxyCodeLine{\textcolor{comment}{//extrapolation is used. The optional argument specifies the Picard}}
 \DoxyCodeLine{\textcolor{comment}{//Iteration after which the extrapolation is to be used for the first}}
 \DoxyCodeLine{\textcolor{comment}{//time. The default value is zero.}}
-\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_ab4ad2ae336b426e1442b38e7e9ffd6b7}{enable\_pointwise\_aitken}} (\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&pointwise\_aitken\_start)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} enable\_pointwise\_aitken (\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&pointwise\_aitken\_start)}
+
 \end{DoxyCode}
  If this function is called, the classical Aitken extrapolation is used to accelerate the convergence of (individual) solid degrees of freedom after every three iterations.
 \end{DoxyEnumerate}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_channel_seg_problem}{}\doxysection{The Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}\label{index_channel_seg_problem}
-We shall now briefly discuss the application of the segregated solver for the collapsible channel problem. The {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}} is defined in the driver code {\ttfamily \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc}{\texttt{ simple\+\_\+segregated\+\_\+driver.\+cc}} } and inherits from the \char`\"{}monolithic\char`\"{} {\ttfamily \mbox{\hyperlink{classFSICollapsibleChannelProblem}{F\+S\+I\+Collapsible\+Channel\+Problem}}} and also from the \href{../../../the_data_structure/html/classoomph_1_1SegregatableFSIProblem.html}{\texttt{ {\ttfamily Segregatable\+F\+S\+I\+Problem} }} class. The code {\ttfamily  \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc}{\texttt{ simple\+\_\+segregated\+\_\+driver.\+cc}} } is specifically designed for ease of exposition and does not contain any timing statements or documentation of convergence histories. The alternative driver code {\ttfamily  \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_seg_driver.cc}{\texttt{ fsi\+\_\+chan\+\_\+seg\+\_\+driver.\+cc}}} contains complete timing and documentation statements and is the code that was used by \href{http://www.springerlink.com/content/m3r6318701g338g4/}{\texttt{ Heil, Hazel \& Boyle (2008). }}
+\hypertarget{index_channel_seg_problem}{}\doxysection{The Segregated\+FSICollapsible\+Channel\+Problem}\label{index_channel_seg_problem}
+We shall now briefly discuss the application of the segregated solver for the collapsible channel problem. The {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}} is defined in the driver code {\ttfamily \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc}{\texttt{ simple\+\_\+segregated\+\_\+driver.\+cc}} } and inherits from the \char`\"{}monolithic\char`\"{} {\ttfamily \mbox{\hyperlink{classFSICollapsibleChannelProblem}{FSICollapsible\+Channel\+Problem}}} and also from the \href{../../../the_data_structure/html/classoomph_1_1SegregatableFSIProblem.html}{\texttt{ {\ttfamily Segregatable\+FSIProblem} }} class. The code {\ttfamily  \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc}{\texttt{ simple\+\_\+segregated\+\_\+driver.\+cc}} } is specifically designed for ease of exposition and does not contain any timing statements or documentation of convergence histories. The alternative driver code {\ttfamily  \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_seg_driver.cc}{\texttt{ fsi\+\_\+chan\+\_\+seg\+\_\+driver.\+cc}}} contains complete timing and documentation statements and is the code that was used by \href{http://www.springerlink.com/content/m3r6318701g338g4/}{\texttt{ Heil, Hazel \& Boyle (2008). }}
 
-The simplified {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}} class contains six member functions
+The simplified {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}} class contains six member functions
 \begin{DoxyItemize}
 \item The constructor
 \item The destructor
@@ -209,7 +226,7 @@ The constructor calls the constructor of the underlying \char`\"{}monolithic\cha
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for the collapsible channel problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===============================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===============================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_ac762b472c2baafa23dae6b9ce38f31da}{SegregatedFSICollapsibleChannelProblem< ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_ac762b472c2baafa23dae6b9ce38f31da}{SegregatedFSICollapsibleChannelProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nup, }
@@ -256,7 +273,7 @@ The constructor calls the constructor of the underlying \char`\"{}monolithic\cha
 \DoxyCodeLine{ \textcolor{comment}{// Pointwise Aitken extrapolation}}
 \DoxyCodeLine{ \textcolor{keywordflow}{if}(\mbox{\hyperlink{namespaceFlags_aabfbfdb3e91e4df3fc2ec6e2a2e3567d}{Flags::Use\_pointwise\_aitken}})}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   this-\/>\mbox{\hyperlink{fsi__channel__segregated__solver_8txt_ab4ad2ae336b426e1442b38e7e9ffd6b7}{enable\_pointwise\_aitken}}();}
+\DoxyCodeLine{   this-\/>enable\_pointwise\_aitken();}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
@@ -279,35 +296,35 @@ The constructor calls the constructor of the underlying \char`\"{}monolithic\cha
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_identify}{}\doxysubsection{Identifying the fluid and solid degrees of freedom}\label{index_identify}
 The underlying monolithic problem provides pointers to the fluid and solid (sub-\/)meshes via the member data 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{AlgebraicCollapsibleChannelMesh<ELEMENT>* Bulk\_mesh\_pt;}
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
-\DoxyCodeLine{OneDLagrangianMesh<FSIHermiteBeamElement>* \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_af56fc5dfdc55bac88cd99d6ffa02f618}{Wall\_mesh\_pt}}; }
+\DoxyCodeLine{OneDLagrangianMesh<FSIHermiteBeamElement>* Wall\_mesh\_pt; }
+
 \end{DoxyCode}
  which are accessible via the member functions ~\newline
- {\ttfamily \mbox{\hyperlink{classFSICollapsibleChannelProblem_a9b461f3afef3185ea0b461714675ef8f}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem\+::bulk\+\_\+mesh\+\_\+pt()}}} and {\ttfamily \mbox{\hyperlink{classFSICollapsibleChannelProblem_ae8b71da8da82f3c52387052ce400b930}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem\+::wall\+\_\+mesh\+\_\+pt()}}}, and so the identification of fluid and solid degrees of freedom is reasonably straightforward. The only complication arises because we may, or may not, be using displacement control which introduces a further element into the global mesh. Displacement control affects the solid problem suggesting that the (variable) external pressure should be regarded as a solid degrees of freedom and the {\ttfamily Displacement\+Control\+Element} should be included in the solid mesh.
+ {\ttfamily \mbox{\hyperlink{classFSICollapsibleChannelProblem_ae9ad9667460168fa74f8ec8e3ab9e988}{Segregated\+FSICollapsible\+Channel\+Problem\+::bulk\+\_\+mesh\+\_\+pt()}}} and {\ttfamily \mbox{\hyperlink{classFSICollapsibleChannelProblem_aec24d3eb06747f8429cf14857aed29a1}{Segregated\+FSICollapsible\+Channel\+Problem\+::wall\+\_\+mesh\+\_\+pt()}}}, and so the identification of fluid and solid degrees of freedom is reasonably straightforward. The only complication arises because we may, or may not, be using displacement control which introduces a further element into the global mesh. Displacement control affects the solid problem suggesting that the (variable) external pressure should be regarded as a solid degrees of freedom and the {\ttfamily Displacement\+Control\+Element} should be included in the solid mesh.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_identify\_fluid\_and\_solid======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Identify the fluid and solid Data and the meshes that}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// contain only elements that are involved in the respective sub-\/problems. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// This implements a pure virtual function in the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// SegregatableFSIProblem base class.}}
+\DoxyCodeLine{\textcolor{comment}{/// Identify the fluid and solid Data and the meshes that}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// contain only elements that are involved in the respective sub-\/problems. }}
+\DoxyCodeLine{\textcolor{comment}{/// This implements a pure virtual function in the }}
+\DoxyCodeLine{\textcolor{comment}{/// SegregatableFSIProblem base class.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a7b277b9583bb10e72655010dc653023e}{SegregatedFSICollapsibleChannelProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a7b277b9583bb10e72655010dc653023e}{identify\_fluid\_and\_solid\_dofs}}(Vector<Data*>\& fluid\_data\_pt,}
-\DoxyCodeLine{                              Vector<Data*>\& \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a47a833f5612182bfbef339f78a1f71b3}{solid\_data\_pt}},}
-\DoxyCodeLine{                              Mesh*\& \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a82a0bb94ec85811cb7be74852c922714}{fluid\_mesh\_pt}},}
-\DoxyCodeLine{                              Mesh*\& \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a37d0fc0ef332d4eae72596e277d5acdd}{solid\_mesh\_pt}})}
+\DoxyCodeLine{                              Vector<Data*>\& solid\_data\_pt,}
+\DoxyCodeLine{                              Mesh*\& fluid\_mesh\_pt,}
+\DoxyCodeLine{                              Mesh*\& solid\_mesh\_pt)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//FLUID DATA: }}
@@ -338,21 +355,21 @@ The underlying monolithic problem provides pointers to the fluid and solid (sub-
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// The bulk\_mesh\_pt() is a mesh that contains only fluid elements}}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a82a0bb94ec85811cb7be74852c922714}{fluid\_mesh\_pt}} = this-\/>bulk\_mesh\_pt(); }
+\DoxyCodeLine{ fluid\_mesh\_pt = this-\/>bulk\_mesh\_pt(); }
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//SOLID DATA}}
 \DoxyCodeLine{ \textcolor{comment}{//All solid elements are stored in the Mesh addressed by wall\_mesh\_pt()}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Reset the storage}}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a47a833f5612182bfbef339f78a1f71b3}{solid\_data\_pt}}.clear();}
+\DoxyCodeLine{ solid\_data\_pt.clear();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Find number of nodes in the solid mesh}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_solid\_node=this-\/>wall\_mesh\_pt()-\/>nnode();}
 \DoxyCodeLine{ \textcolor{comment}{//Loop over nodes and add nodal position data to solid\_data\_pt}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<n\_solid\_node;n++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a47a833f5612182bfbef339f78a1f71b3}{solid\_data\_pt}}.push\_back(}
+\DoxyCodeLine{   solid\_data\_pt.push\_back(}
 \DoxyCodeLine{    this-\/>wall\_mesh\_pt()-\/>node\_pt(n)-\/>variable\_position\_pt());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{   }
@@ -370,21 +387,19 @@ The underlying monolithic problem provides pointers to the fluid and solid (sub-
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (this-\/>Displ\_control)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Add the external pressure data to solid\_data\_pt}}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a47a833f5612182bfbef339f78a1f71b3}{solid\_data\_pt}}.push\_back(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad31ed4ea9a7fce4c20c2230d26047f6f}{Global\_Physical\_Variables::P\_ext\_data\_pt}});}
+\DoxyCodeLine{   solid\_data\_pt.push\_back(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad31ed4ea9a7fce4c20c2230d26047f6f}{Global\_Physical\_Variables::P\_ext\_data\_pt}});}
 \DoxyCodeLine{   \textcolor{comment}{//Add a pointer to a Mesh containing the displacement control element}}
 \DoxyCodeLine{   \textcolor{comment}{//to the vector of pointers to meshes}}
 \DoxyCodeLine{   s\_mesh\_pt.push\_back(this-\/>Displ\_control\_mesh\_pt);}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Build "combined" mesh from our vector of solid meshes}}
-\DoxyCodeLine{ \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a37d0fc0ef332d4eae72596e277d5acdd}{solid\_mesh\_pt}} = \textcolor{keyword}{new} Mesh(s\_mesh\_pt);}
+\DoxyCodeLine{ \textcolor{comment}{// Build "{}combined"{} mesh from our vector of solid meshes}}
+\DoxyCodeLine{ solid\_mesh\_pt = \textcolor{keyword}{new} Mesh(s\_mesh\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{//end\_of\_identify\_fluid\_and\_solid}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_actions}{}\doxysubsection{Actions before convergence checks}\label{index_actions}
 During a monolithic solve the function {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} must update the nodal positions in the bulk (fluid) mesh. In principle, it should remain empty during a segregated solve, but we found it beneficial to update the bulk mesh, and hence the fluid load on the wall, during the solution of the solid problem.
 
@@ -392,16 +407,16 @@ The function {\ttfamily actions\+\_\+before\+\_\+segregated\+\_\+convergence\+\_
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Update nodal positions in the fluid mesh in}}
-\DoxyCodeLine{\textcolor{comment}{ /// response to changes in the wall displacement field after every}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// Newton step in a monolithic or segregated solid solve. Note}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// the use of the (protected) flag Solve\_type, which can take the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// values Full\_solve, Fluid\_solve or Solid\_solve. This flag is used}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// to allow specification of different actions depending on the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// precise solve taking place.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update nodal positions in the fluid mesh in}}
+\DoxyCodeLine{\textcolor{comment}{ /// response to changes in the wall displacement field after every}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// Newton step in a monolithic or segregated solid solve. Note}}
+\DoxyCodeLine{\textcolor{comment}{ /// the use of the (protected) flag Solve\_type, which can take the}}
+\DoxyCodeLine{\textcolor{comment}{ /// values Full\_solve, Fluid\_solve or Solid\_solve. This flag is used}}
+\DoxyCodeLine{\textcolor{comment}{ /// to allow specification of different actions depending on the}}
+\DoxyCodeLine{\textcolor{comment}{ /// precise solve taking place.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check()}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{comment}{//For a "true" segregated solver, we would not do this in fluid or solid}}
+\DoxyCodeLine{   \textcolor{comment}{//For a "{}true"{} segregated solver, we would not do this in fluid or solid}}
 \DoxyCodeLine{   \textcolor{comment}{//solves, but adding the bulk node update to the solid solve phase aids}}
 \DoxyCodeLine{   \textcolor{comment}{//convergence and makes it possible for larger values of Q. Of course,}}
 \DoxyCodeLine{   \textcolor{comment}{//there is a small cost associated with doing this.}}
@@ -425,9 +440,7 @@ The function {\ttfamily actions\+\_\+before\+\_\+segregated\+\_\+convergence\+\_
 \DoxyCodeLine{ \textcolor{comment}{// end\_of\_convergence\_checks}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_steady}{}\doxysubsection{Solving a steady problem}\label{index_steady}
 The function {\ttfamily steady\+\_\+run()} conducts a simple parameter study in which the external pressure (or prescribed displacement) is varied. After specification of the initial conditions, parameter increments and output directories, the parameter study is straightforward  
 \begin{DoxyCodeInclude}{0}
@@ -438,7 +451,7 @@ The function {\ttfamily steady\+\_\+run()} conducts a simple parameter study in 
 \DoxyCodeLine{   \textcolor{comment}{//(Default behaviour will identify the fluid and solid dofs and}}
 \DoxyCodeLine{   \textcolor{comment}{// allocate memory, etc every time. This is a bit inefficient in }}
 \DoxyCodeLine{   \textcolor{comment}{// this case, but it is safe and will always work)}}
-\DoxyCodeLine{   \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a7db15b3153f424f5d06f38eb669ec399}{setup\_segregated\_solver}}();}
+\DoxyCodeLine{   setup\_segregated\_solver();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// SEGREGATED SOLVER}}
 \DoxyCodeLine{   \textcolor{keywordflow}{if}(\mbox{\hyperlink{namespaceFlags_a2cdfa6b776b959a060a1f2e8d4918789}{Flags::Use\_segregated\_solver}})}
@@ -478,18 +491,16 @@ The function {\ttfamily steady\+\_\+run()} conducts a simple parameter study in 
 \DoxyCodeLine{  \} \textcolor{comment}{// End of parameter study}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
-Having written our {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}}, the driver code is extremely simple. We specify number of elements and dimensions of our computational domain, construct the problem and perform a steady parameter study.
+Having written our {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}}, the driver code is extremely simple. We specify number of elements and dimensions of our computational domain, construct the problem and perform a steady parameter study.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_main====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for a segregated collapsible channel problem with FSI.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{simple__segregated__driver_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Number of elements in the domain}}
@@ -523,17 +534,15 @@ Having written our {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChan
 \DoxyCodeLine{\}\textcolor{comment}{//end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments_and_ex}{}\doxysection{Comments and Exercises}\label{index_comments_and_ex}
 \hypertarget{index_comments}{}\doxysubsection{Comments}\label{index_comments}
 
 \begin{DoxyItemize}
-\item {\bfseries{(In-\/)efficiency of {\ttfamily \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a7db15b3153f424f5d06f38eb669ec399}{setup\+\_\+segregated\+\_\+solver()}}}}} ~\newline
+\item {\bfseries{(In-\/)efficiency of {\ttfamily setup\+\_\+segregated\+\_\+solver()}}} ~\newline
 ~\newline
- In our simple example code, we did not employ spatial adaptivity. It is not necessary, therefore, to (re-\/)identify the fluid and solid degrees of freedom before each solve, the default (safe) behaviour of {\ttfamily \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a7db15b3153f424f5d06f38eb669ec399}{setup\+\_\+segregated\+\_\+solver()}}}. Nonetheless, data associated with the techniques used to accelerate the convergence of the Picard iterations must be reset before each segregated solve. In the more complex driver code, a boolean flag {\ttfamily bool} {\ttfamily full\+\_\+setup} is used as an argument to {\ttfamily \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a7db15b3153f424f5d06f38eb669ec399}{setup\+\_\+segregated\+\_\+solver()}}} which modifies the behaviour, as indicated below. 
+ In our simple example code, we did not employ spatial adaptivity. It is not necessary, therefore, to (re-\/)identify the fluid and solid degrees of freedom before each solve, the default (safe) behaviour of {\ttfamily setup\+\_\+segregated\+\_\+solver()}. Nonetheless, data associated with the techniques used to accelerate the convergence of the Picard iterations must be reset before each segregated solve. In the more complex driver code, a boolean flag {\ttfamily bool} {\ttfamily full\+\_\+setup} is used as an argument to {\ttfamily setup\+\_\+segregated\+\_\+solver()} which modifies the behaviour, as indicated below. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Boolean flag used to specify whether a full setup of solid and fluid dofs}}
 \DoxyCodeLine{\textcolor{comment}{// is required}}
@@ -543,7 +552,7 @@ Having written our {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChan
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<\mbox{\hyperlink{namespaceFlags_a8a6ffdb261330ef89965624209ab7b00}{Flags::Nsteps}};istep++)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Setup segregated solver}}
-\DoxyCodeLine{  \mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a7db15b3153f424f5d06f38eb669ec399}{setup\_segregated\_solver}}(full\_setup);}
+\DoxyCodeLine{  setup\_segregated\_solver(full\_setup);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   [...]}
 \DoxyCodeLine{ }
@@ -554,10 +563,11 @@ Having written our {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChan
 \DoxyCodeLine{  \textcolor{comment}{//We no longer need a full setup of the dofs}}
 \DoxyCodeLine{  full\_setup = \textcolor{keyword}{false};}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
+ . ~\newline
 
-\end{DoxyItemize}~\newline
-
+\end{DoxyItemize}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -567,9 +577,9 @@ Having written our {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChan
 \item Modify the control flags in {\ttfamily \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc}{\texttt{ simple\+\_\+segregated\+\_\+driver.\+cc}}} to verify that the monolithic solution is the same (to within finite precision) as the segregated solution.
 \item Modify the control flags in {\ttfamily \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc}{\texttt{ simple\+\_\+segregated\+\_\+driver.\+cc}}} to investigate the influence of the convergence acceleration techniques and convergence criterion on the segregated solution. Which combination of parameters gives convergence in the fewest Picard iterations?
 \item Investigate the behaviour of the system if the fluid (bulk) mesh is {\itshape not} updated after each Newton step in the solution of the solid problem. Can you obtain converged solutions?
-\item Write your own {\ttfamily Segregated\+F\+S\+I\+Collapsible\+Channel\+Flow\+::unsteady\+\_\+run()} member function that computes the time evolution of the system after a perturbation to the external pressure. Compare your answer with the equivalent member function in the much more comprehensive driver code {\ttfamily \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_seg_driver.cc}{\texttt{ fsi\+\_\+chan\+\_\+seg\+\_\+driver.\+cc}}} that was used in \href{http://www.springerlink.com/content/m3r6318701g338g4/}{\texttt{ Heil, Hazel \& Boyle (2008). }}
-\end{DoxyEnumerate}~\newline
+\item Write your own {\ttfamily Segregated\+FSICollapsible\+Channel\+Flow\+::unsteady\+\_\+run()} member function that computes the time evolution of the system after a perturbation to the external pressure. Compare your answer with the equivalent member function in the much more comprehensive driver code {\ttfamily \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/fsi_chan_seg_driver.cc}{\texttt{ fsi\+\_\+chan\+\_\+seg\+\_\+driver.\+cc}}} that was used in \href{http://www.springerlink.com/content/m3r6318701g338g4/}{\texttt{ Heil, Hazel \& Boyle (2008). }} . ~\newline
 
+\end{DoxyEnumerate}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -580,5 +590,5 @@ Having written our {\ttfamily \mbox{\hyperlink{classSegregatedFSICollapsibleChan
 \item The driver code is\+: \begin{center} \href{../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc}{\texttt{ demo\+\_\+drivers/interaction/fsi\+\_\+channel\+\_\+seg\+\_\+and\+\_\+precond/simple\+\_\+segregated\+\_\+driver.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

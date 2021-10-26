@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{}\doxysection{oomph\+::Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+IM $>$ Class Template Reference}
+\hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{}\doxysection{oomph\+::Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}\index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
+
+
+A \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation}} class defining a Herschel-\/\+Bulkley fluid using Tanner and Milthorpe\textquotesingle{}s (1983) regularisation with a smooth transition using a quadratic.  
+
+
 
 
 {\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h$>$}
 
-Inheritance diagram for oomph\+::Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+IM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}
@@ -16,7 +21,7 @@ Inheritance diagram for oomph\+::Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blendin
 \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a2d0011d44b05f948caa84c2ad0e8e907}{Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}} (double $\ast$yield\+\_\+stress\+\_\+pt, double $\ast$flow\+\_\+index\+\_\+pt, double $\ast$critical\+\_\+second\+\_\+invariant\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em \char`\"{}\+Cutoff regularised\char`\"{} Herschel Bulkley constitutive equation \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a505f8b8eba6c70c101087c8809953e51}{calculate\+\_\+cutoff\+\_\+viscosity}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Function that calculates the viscosity at the cutoff invariant Note\+: this is NOT the viscosity at zero I2. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_abdb90aeb25f63f03cef5e0a070da0cd5}{calculate\+\_\+zero\+\_\+shear\+\_\+viscosity}} ()
 \begin{DoxyCompactList}\small\item\em Function that calculates the viscosity at zero I2. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_aa53287839852e8fe36575cc593327499}{report\+\_\+cut\+\_\+off\+\_\+values}} (double \&cut\+\_\+off\+\_\+invariant, double \&cut\+\_\+off\+\_\+viscosity, double \&zero\+\_\+shear\+\_\+viscosity)
@@ -33,24 +38,23 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendin
 double $\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a2e1af77859cb590e608fd0d47d5ce366}{Flow\+\_\+index\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em power law index n \end{DoxyCompactList}\item 
 double $\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a2fcbea7454274274c607039540a3da49}{Critical\+\_\+second\+\_\+invariant\+\_\+pt}}
-\item 
+\begin{DoxyCompactList}\small\item\em value of the second invariant below which we have constant (Newtonian) viscosity -- assumed to be always positive \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a9a5f7c5ceb537eb307ef35c1a46e23f5}{a}}
-\item 
+\begin{DoxyCompactList}\small\item\em We use a quadratic function to smoothly blend from the Herschel Bulkley model at the cut-\/off to a constant viscosity as the strain rate /approaches zero; this way we avoid the discontinuity of the gradient at the cut-\/off, which is present in the classic Tanner Milthorpe regularisation. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_ad4d1279adf2dd40a3b7ec23dc091a40a}{b}}
 \item 
 double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_ad4f68871469f8e9b63dea77341cbcf68}{c}}
 \item 
 double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a9e24b69a4f0da4b8d6a5b874c47fde39}{alpha}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fraction of the cut-\/off strain rate below which the viscosity is constant 0 \texorpdfstring{$<$}{<}= \textbackslash{}alpha \texorpdfstring{$<$}{<} 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM$>$\newline
-class oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$}
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$}
+A \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation}} class defining a Herschel-\/\+Bulkley fluid using Tanner and Milthorpe\textquotesingle{}s (1983) regularisation with a smooth transition using a quadratic. 
 
-A \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation}{Generalised\+Newtonian\+Constitutive\+Equation}} class defining a Herschel-\/\+Bulkley fluid using Tanner and Milthorpe\textquotesingle{}s (1983) regularisation with a smooth transition using a quadratic 
-
-Definition at line 358 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00358}{358}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
@@ -59,8 +63,8 @@ Definition at line 358 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation@{HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}}
 \index{HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation@{HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation()}{HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}} (\begin{DoxyParamCaption}\item[{double $\ast$}]{yield\+\_\+stress\+\_\+pt,  }\item[{double $\ast$}]{flow\+\_\+index\+\_\+pt,  }\item[{double $\ast$}]{critical\+\_\+second\+\_\+invariant\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}} (\begin{DoxyParamCaption}\item[{double $\ast$}]{yield\+\_\+stress\+\_\+pt,  }\item[{double $\ast$}]{flow\+\_\+index\+\_\+pt,  }\item[{double $\ast$}]{critical\+\_\+second\+\_\+invariant\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -74,11 +78,11 @@ get the cutoff viscosity
 
 get the zero shear viscosity
 
-Definition at line 388 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{388}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-References oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::a, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::alpha, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::b, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::c, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+cutoff\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Flow\+\_\+index\+\_\+pt, and oomph\+::oomph\+\_\+info.
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00377}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::a}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00383}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::alpha}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00378}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::b}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00379}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::c}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00441}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00370}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00366}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Flow\+\_\+index\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}.
 
 
 
@@ -87,27 +91,31 @@ References oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitu
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_cutoff\_viscosity@{calculate\_cutoff\_viscosity}}
 \index{calculate\_cutoff\_viscosity@{calculate\_cutoff\_viscosity}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{calculate\_cutoff\_viscosity()}{calculate\_cutoff\_viscosity()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Function that calculates the viscosity at the cutoff invariant Note\+: this is N\+OT the viscosity at zero I2 
-
-Definition at line 441 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Flow\+\_\+index\+\_\+pt, and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Yield\+\_\+stress\+\_\+pt.
+Function that calculates the viscosity at the cutoff invariant Note\+: this is NOT the viscosity at zero I2. 
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::report\+\_\+cut\+\_\+off\+\_\+values().
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00441}{441}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00370}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00366}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Flow\+\_\+index\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00363}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Yield\+\_\+stress\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00465}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_abdb90aeb25f63f03cef5e0a070da0cd5}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_abdb90aeb25f63f03cef5e0a070da0cd5}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!calculate\_zero\_shear\_viscosity@{calculate\_zero\_shear\_viscosity}}
 \index{calculate\_zero\_shear\_viscosity@{calculate\_zero\_shear\_viscosity}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{calculate\_zero\_shear\_viscosity()}{calculate\_zero\_shear\_viscosity()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -115,22 +123,22 @@ Function that calculates the viscosity at zero I2.
 
 
 
-Definition at line 454 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{454}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-References oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::a, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::alpha, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::b, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::c, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+cutoff\+\_\+viscosity(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt.
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00377}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::a}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00383}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::alpha}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00378}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::b}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00379}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::c}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00441}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00370}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::report\+\_\+cut\+\_\+off\+\_\+values(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00465}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a62a903bc649a75dd1042923e624e2ea4}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a62a903bc649a75dd1042923e624e2ea4}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!dviscosity\_dinvariant@{dviscosity\_dinvariant}}
 \index{dviscosity\_dinvariant@{dviscosity\_dinvariant}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dviscosity\_dinvariant()}{dviscosity\_dinvariant()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::dviscosity\+\_\+dinvariant (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -138,22 +146,22 @@ Deriv of viscosity w.\+r.\+t. strain rate invariant.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_ad0164e6ca57cc986048346e12c4d353a}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ D\+I\+M $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_ad0164e6ca57cc986048346e12c4d353a}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
 
 
 
-Definition at line 496 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00496}{496}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-References oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::a, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::alpha, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::b, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt, and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Flow\+\_\+index\+\_\+pt.
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00377}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::a}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00383}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::alpha}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00378}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::b}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00370}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00366}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Flow\+\_\+index\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_aa53287839852e8fe36575cc593327499}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_aa53287839852e8fe36575cc593327499}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!report\_cut\_off\_values@{report\_cut\_off\_values}}
 \index{report\_cut\_off\_values@{report\_cut\_off\_values}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{report\_cut\_off\_values()}{report\_cut\_off\_values()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values (\begin{DoxyParamCaption}\item[{double \&}]{cut\+\_\+off\+\_\+invariant,  }\item[{double \&}]{cut\+\_\+off\+\_\+viscosity,  }\item[{double \&}]{zero\+\_\+shear\+\_\+viscosity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values (\begin{DoxyParamCaption}\item[{double \&}]{cut\+\_\+off\+\_\+invariant,  }\item[{double \&}]{cut\+\_\+off\+\_\+viscosity,  }\item[{double \&}]{zero\+\_\+shear\+\_\+viscosity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -161,18 +169,18 @@ Report cutoff values.
 
 
 
-Definition at line 465 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00465}{465}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-References oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+cutoff\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt.
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00441}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00370}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_acd0153be4f3e8177b21c5fe0f9a31b11}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_acd0153be4f3e8177b21c5fe0f9a31b11}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!viscosity@{viscosity}}
 \index{viscosity@{viscosity}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{viscosity()}{viscosity()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::viscosity (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::viscosity (\begin{DoxyParamCaption}\item[{const double \&}]{second\+\_\+invariant\+\_\+of\+\_\+rate\+\_\+of\+\_\+strain\+\_\+tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -180,15 +188,15 @@ Viscosity ratio as a fct of strain rate invariant.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a3e6d811786e39ca3c3a9b1c46249442f}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ D\+I\+M $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianConstitutiveEquation_a3e6d811786e39ca3c3a9b1c46249442f}{oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ DIM $>$}}.
 
 
 
-Definition at line 475 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{475}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-References oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::a, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::alpha, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::b, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::c, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt, oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Flow\+\_\+index\+\_\+pt, and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Yield\+\_\+stress\+\_\+pt.
+References \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00377}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::a}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00383}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::alpha}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00378}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::b}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00379}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::c}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00370}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Critical\+\_\+second\+\_\+invariant\+\_\+pt}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00366}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Flow\+\_\+index\+\_\+pt}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00363}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Yield\+\_\+stress\+\_\+pt}}.
 
 
 
@@ -197,83 +205,95 @@ References oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitu
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!a@{a}}
 \index{a@{a}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{a}{a}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::a\hspace{0.3cm}{\ttfamily [private]}}
-
-We use a quadratic function to smoothly blend from the Herschel Bulkley model at the cut-\/off to a constant viscosity as the strain rate approaches zero; this way we avoid the discontinuity of the gradient at the cut-\/off, which is present in the classic Tanner Milthorpe regularisation 
-
-Definition at line 377 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::a\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+We use a quadratic function to smoothly blend from the Herschel Bulkley model at the cut-\/off to a constant viscosity as the strain rate /approaches zero; this way we avoid the discontinuity of the gradient at the cut-\/off, which is present in the classic Tanner Milthorpe regularisation. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00377}{377}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00496}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a9e24b69a4f0da4b8d6a5b874c47fde39}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a9e24b69a4f0da4b8d6a5b874c47fde39}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!alpha@{alpha}}
 \index{alpha@{alpha}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{alpha}{alpha}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}
-
-Fraction of the cut-\/off strain rate below which the viscosity is constant 0 $<$= \textbackslash{}alpha $<$ 1 
-
-Definition at line 383 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::alpha\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+Fraction of the cut-\/off strain rate below which the viscosity is constant 0 \texorpdfstring{$<$}{<}= \textbackslash{}alpha \texorpdfstring{$<$}{<} 1. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00383}{383}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00496}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_ad4d1279adf2dd40a3b7ec23dc091a40a}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_ad4d1279adf2dd40a3b7ec23dc091a40a}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!b@{b}}
 \index{b@{b}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{b}{b}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::b\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::b\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 378 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00378}{378}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00496}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_ad4f68871469f8e9b63dea77341cbcf68}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_ad4f68871469f8e9b63dea77341cbcf68}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!c@{c}}
 \index{c@{c}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{c}{c}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::c\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::c\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 379 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00379}{379}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a2fcbea7454274274c607039540a3da49}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a2fcbea7454274274c607039540a3da49}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!Critical\_second\_invariant\_pt@{Critical\_second\_invariant\_pt}}
 \index{Critical\_second\_invariant\_pt@{Critical\_second\_invariant\_pt}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Critical\_second\_invariant\_pt}{Critical\_second\_invariant\_pt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Critical\+\_\+second\+\_\+invariant\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::Critical\+\_\+second\+\_\+invariant\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+
+
 
 value of the second invariant below which we have constant (Newtonian) viscosity -- assumed to be always positive 
 
-Definition at line 370 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00370}{370}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+cutoff\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::report\+\_\+cut\+\_\+off\+\_\+values(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00441}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00454}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+zero\+\_\+shear\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00496}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00465}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::report\+\_\+cut\+\_\+off\+\_\+values()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a2e1af77859cb590e608fd0d47d5ce366}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_a2e1af77859cb590e608fd0d47d5ce366}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!Flow\_index\_pt@{Flow\_index\_pt}}
 \index{Flow\_index\_pt@{Flow\_index\_pt}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Flow\_index\_pt}{Flow\_index\_pt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Flow\+\_\+index\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::Flow\+\_\+index\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -281,18 +301,18 @@ power law index n
 
 
 
-Definition at line 366 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00366}{366}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+cutoff\+\_\+viscosity(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00441}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00496}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::dviscosity\+\_\+dinvariant()}}, \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00388}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_ae1cc26fc86dfffdc1b38910aa8dfc6d9}\label{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation_ae1cc26fc86dfffdc1b38910aa8dfc6d9}} 
 \index{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}!Yield\_stress\_pt@{Yield\_stress\_pt}}
 \index{Yield\_stress\_pt@{Yield\_stress\_pt}!oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$@{oomph::HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Yield\_stress\_pt}{Yield\_stress\_pt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ D\+IM $>$\+::Yield\+\_\+stress\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1HerschelBulkleyTanMilRegWithBlendingConstitutiveEquation}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation}}$<$ DIM $>$\+::Yield\+\_\+stress\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -300,11 +320,11 @@ yield stress tau\+\_\+y
 
 
 
-Definition at line 363 of file generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00363}{363}} of file \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source}{generalised\+\_\+newtonian\+\_\+constitutive\+\_\+models.\+h}}.
 
 
 
-Referenced by oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::calculate\+\_\+cutoff\+\_\+viscosity(), and oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity().
+Referenced by \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00441}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::calculate\+\_\+cutoff\+\_\+viscosity()}}, and \mbox{\hyperlink{generalised__newtonian__constitutive__models_8h_source_l00475}{oomph\+::\+Herschel\+Bulkley\+Tan\+Mil\+Reg\+With\+Blending\+Constitutive\+Equation$<$ DIM $>$\+::viscosity()}}.
 
 
 

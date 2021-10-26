@@ -4,11 +4,11 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1DoubleVectorHaloScheme}{oomph\+::\+Double\+Vector\+Halo\+Scheme}}
-\item 
+\begin{DoxyCompactList}\small\item\em A class that stores the halo/haloed entries required when using a \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{Double\+Vector\+With\+Halo\+Entries}}. This is a separate class so thay many different Vectors can share the same object. The constructor requires the distribution of the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} (if you pass in a different distribution things will go badly wrong) and a vector that specifies which GLOBAL eqn numbers are required on each processor. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries}{oomph\+::\+Double\+Vector\+With\+Halo\+Entries}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em ===================================================================== An extension of \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} that allows access to certain global entries that are not stored locally. Synchronisation of these values must be performed manually by calling the \mbox{\hyperlink{classoomph_1_1DoubleVectorWithHaloEntries_a6d5b6e2c1c80d4fb468c851030d62492}{synchronise()}} function. Synchronisation can only be from the haloed to the halo, but the local halo entries can all be summed and stored in the \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}

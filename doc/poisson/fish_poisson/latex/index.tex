@@ -34,7 +34,7 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============ start\_of\_namespace=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for const source term in Poisson equation}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceConstSourceForPoisson}{ConstSourceForPoisson}}}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ \textcolor{comment}{}}
@@ -68,8 +68,8 @@ The main code is very short and calls two functions that illustrate two differen
 \end{DoxyItemize} 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=================start\_of\_main==========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve 2D Poisson problem in }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// fish-\/shaped domain with mesh adaptation.}}
+\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve 2D Poisson problem in }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// fish-\/shaped domain with mesh adaptation.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{fish__poisson_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
@@ -82,23 +82,21 @@ The main code is very short and calls two functions that illustrate two differen
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_black_box}{}\doxysubsection{Black-\/box adaptation}\label{index_black_box}
-We start by creating the Problem object, using the refineable equivalent of the {\ttfamily Q\+Poisson\+Element} -- the {\ttfamily Refineable\+Q\+Poisson\+Element}, which is templated by the dimension and the number of nodes along the element\textquotesingle{}s edges; the {\ttfamily Refineable\+Q\+Poisson\+Element$<$2,3$>$} is a nine-\/node (bi-\/quadratic) quad element.
+We start by creating the Problem object, using the refineable equivalent of the {\ttfamily QPoisson\+Element} -- the {\ttfamily Refineable\+QPoisson\+Element}, which is templated by the dimension and the number of nodes along the element\textquotesingle{}s edges; the {\ttfamily Refineable\+QPoisson\+Element$<$2,3$>$} is a nine-\/node (bi-\/quadratic) quad element.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//================================start\_black\_box=========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve 2D Poisson problem in }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// fish-\/shaped domain with fully automatic mesh adaptation}}
+\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve 2D Poisson problem in }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// fish-\/shaped domain with fully automatic mesh adaptation}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{fish__poisson_8cc_a79a1cfcdcd821bd277276d163b85acfb}{solve\_with\_fully\_automatic\_adaptation}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem with nine-\/node refineable Poisson elements}}
-\DoxyCodeLine{  \mbox{\hyperlink{classRefineableFishPoissonProblem}{RefineableFishPoissonProblem<RefineableQPoissonElement<2,3>}} > \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classRefineableFishPoissonProblem}{RefineableFishPoissonProblem<RefineableQPoissonElement<2,3>}} > problem;}
 
 \end{DoxyCodeInclude}
 
@@ -112,7 +110,7 @@ After creating the {\ttfamily Doc\+Info} object, we document the (default) adapt
 \DoxyCodeLine{  DocInfo doc\_info;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_fully\_automatic"}); }
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_fully\_automatic"{}}); }
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()=0;}
@@ -120,12 +118,10 @@ After creating the {\ttfamily Doc\+Info} object, we document the (default) adapt
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Doc (default) refinement targets}}
 \DoxyCodeLine{  \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{  \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.mesh\_pt()-\/>doc\_adaptivity\_targets(cout);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_a6331b79c5c77d3f2fa7c37c3bb5308d9}{mesh\_pt}}()-\/>doc\_adaptivity\_targets(cout);}
 
 \end{DoxyCodeInclude}
-
-
-These include
+ These include
 \begin{DoxyItemize}
 \item {\bfseries{The target for the maximum error\+:}} Any elements whose error estimate exceed this value will be split into four \char`\"{}sons\char`\"{}.
 \item {\bfseries{The target for the minimum error\+: }} Any elements whose error estimate lies below this value are deemed to be unnecessarily small and are scheduled for (possible) unrefinement. \mbox{[}Elements can only be unrefined (i.\+e. merged with their \char`\"{}brothers\char`\"{}) if their \char`\"{}brothers\char`\"{} are also scheduled for unrefinement.\mbox{]}
@@ -149,17 +145,15 @@ The fully-\/adaptive solution of the problem is very simple. We simply pass the 
 \DoxyCodeLine{  \textcolor{keywordtype}{unsigned} max\_adapt=5;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem; perform up to specified number of adaptations.}}
-\DoxyCodeLine{  \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.newton\_solve(max\_adapt);}
+\DoxyCodeLine{  problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.doc\_solution(doc\_info);   }
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_aeee1bf23216971b50b8822c45e62c48b}{doc\_solution}}(doc\_info);   }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end black box}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_incremental}{}\doxysubsection{Incremental adaptation}\label{index_incremental}
 To allow the user more control over the mesh adaptation process, {\ttfamily oomph-\/lib} provides a number of functions that perform individual adaptation steps without re-\/computing the solution immediately. This allows the user to
 \begin{DoxyItemize}
@@ -171,23 +165,23 @@ To allow the user more control over the mesh adaptation process, {\ttfamily oomp
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_incremental===============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve 2D Poisson problem in }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// fish-\/shaped domain with mesh adaptation. First we solve on the original}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// coarse mesh. Next we do a few uniform refinement steps and re-\/solve.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Finally, we enter into an automatic adapation loop.}}
+\DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve 2D Poisson problem in }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// fish-\/shaped domain with mesh adaptation. First we solve on the original}}
+\DoxyCodeLine{\textcolor{comment}{/// coarse mesh. Next we do a few uniform refinement steps and re-\/solve.}}
+\DoxyCodeLine{\textcolor{comment}{/// Finally, we enter into an automatic adapation loop.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{fish__poisson_8cc_a9f5ae2c03a7f02e61857d322177ce5d5}{solve\_with\_incremental\_adaptation}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem with nine-\/node refineable Poisson elements}}
-\DoxyCodeLine{ \mbox{\hyperlink{classRefineableFishPoissonProblem}{RefineableFishPoissonProblem<RefineableQPoissonElement<2,3>}} > \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}};}
+\DoxyCodeLine{ \mbox{\hyperlink{classRefineableFishPoissonProblem}{RefineableFishPoissonProblem<RefineableQPoissonElement<2,3>}} > problem;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Setup labels for output}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_incremental"}); }
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_incremental"{}}); }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
@@ -195,12 +189,10 @@ To allow the user more control over the mesh adaptation process, {\ttfamily oomp
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Doc (default) refinement targets}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.mesh\_pt()-\/>doc\_adaptivity\_targets(cout);}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_a6331b79c5c77d3f2fa7c37c3bb5308d9}{mesh\_pt}}()-\/>doc\_adaptivity\_targets(cout);}
 
 \end{DoxyCodeInclude}
-
-
-Next, we solve the problem on the original, very coarse mesh and document the result\+:
+ Next, we solve the problem on the original, very coarse mesh and document the result\+:
 
  
 \begin{DoxyCodeInclude}{0}
@@ -208,10 +200,10 @@ Next, we solve the problem on the original, very coarse mesh and document the re
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.newton\_solve();}
+\DoxyCodeLine{ problem.newton\_solve();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_aeee1bf23216971b50b8822c45e62c48b}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{ doc\_info.number()++;}
@@ -225,23 +217,21 @@ We know that the result is unlikely to be very accurate, so we apply three level
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Do three rounds of uniform mesh refinement and re-\/solve}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.refine\_uniformly();}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.refine\_uniformly();}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.refine\_uniformly();}
+\DoxyCodeLine{ problem.refine\_uniformly();}
+\DoxyCodeLine{ problem.refine\_uniformly();}
+\DoxyCodeLine{ problem.refine\_uniformly();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Solve the problem }}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.newton\_solve();}
+\DoxyCodeLine{ problem.newton\_solve();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_aeee1bf23216971b50b8822c45e62c48b}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{ doc\_info.number()++;}
 
 \end{DoxyCodeInclude}
-
-
-The solution looks much smoother but we suspect that the corner regions are still under-\/resolved. Therefore, we call the {\ttfamily Problem\+::adapt()} function which computes an error estimate for all elements and automatically performs a single mesh adaptation (refinement/unrefinement) step. If this adaptation changes the mesh, we recompute the solution, using the \char`\"{}normal\char`\"{} Newton solver without automatic adaptation. We document the solution and continue the adaptation cycle until {\ttfamily Problem\+::adapt()} ceases to change the mesh\+:
+ The solution looks much smoother but we suspect that the corner regions are still under-\/resolved. Therefore, we call the {\ttfamily Problem\+::adapt()} function which computes an error estimate for all elements and automatically performs a single mesh adaptation (refinement/unrefinement) step. If this adaptation changes the mesh, we recompute the solution, using the \char`\"{}normal\char`\"{} Newton solver without automatic adaptation. We document the solution and continue the adaptation cycle until {\ttfamily Problem\+::adapt()} ceases to change the mesh\+:
 
  
 \begin{DoxyCodeInclude}{0}
@@ -253,22 +243,22 @@ The solution looks much smoother but we suspect that the corner regions are stil
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} isolve=0;isolve<max\_solve;isolve++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Adapt problem/mesh}}
-\DoxyCodeLine{   \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.adapt(); }
+\DoxyCodeLine{   problem.adapt(); }
 \DoxyCodeLine{         }
 \DoxyCodeLine{   \textcolor{comment}{// Re-\/solve the problem if the adaptation has changed anything}}
-\DoxyCodeLine{   \textcolor{keywordflow}{if} ((\mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.mesh\_pt()-\/>nrefined()  !=0)||}
-\DoxyCodeLine{       (\mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.mesh\_pt()-\/>nunrefined()!=0))}
+\DoxyCodeLine{   \textcolor{keywordflow}{if} ((problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_a6331b79c5c77d3f2fa7c37c3bb5308d9}{mesh\_pt}}()-\/>nrefined()  !=0)||}
+\DoxyCodeLine{       (problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_a6331b79c5c77d3f2fa7c37c3bb5308d9}{mesh\_pt}}()-\/>nunrefined()!=0))}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.newton\_solve();}
+\DoxyCodeLine{     problem.newton\_solve();}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{     cout << \textcolor{stringliteral}{"Mesh wasn't adapted -\/-\/> we'll stop here"} << std::endl;}
+\DoxyCodeLine{     cout << \textcolor{stringliteral}{"{}Mesh wasn't adapted -\/-\/> we'll stop here"{}} << std::endl;}
 \DoxyCodeLine{     \textcolor{keywordflow}{break};}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{   problem.\mbox{\hyperlink{classRefineableFishPoissonProblem_aeee1bf23216971b50b8822c45e62c48b}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{   doc\_info.number()++;}
@@ -278,20 +268,18 @@ The solution looks much smoother but we suspect that the corner regions are stil
 \DoxyCodeLine{\} \textcolor{comment}{// end of incremental}}
 
 \end{DoxyCodeInclude}
-
-
-The progress of the adaptation is illustrated in the animated gif at the beginning of this document. The first frame displays the solution on the original four-\/element mesh; the next frame shows the solution on the uniformly refined mesh; the final two frames show the progress of the subsequent, error-\/estimate-\/driven mesh adaptation.
+ The progress of the adaptation is illustrated in the animated gif at the beginning of this document. The first frame displays the solution on the original four-\/element mesh; the next frame shows the solution on the uniformly refined mesh; the final two frames show the progress of the subsequent, error-\/estimate-\/driven mesh adaptation.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
-The problem class is virtually identical to that used in the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ 2D Poisson problem without mesh refinement}}. In the present problem, we leave the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} empty because the boundary conditions do not change. The function {\ttfamily \mbox{\hyperlink{classRefineableFishPoissonProblem_a803c9050b07b35aba22f08a5a9e59f2c}{Refineable\+Fish\+Poisson\+Problem\+::mesh\+\_\+pt()}}} overloads the (virtual) function {\ttfamily Problem\+::mesh\+\_\+pt()} since it returns a pointer to a generic {\ttfamily Mesh} object, rather than a pointer to the specific mesh used in this problem. This avoids explicit re-\/casts in the rest of the code where member functions of the specific mesh need to be accessed.
+The problem class is virtually identical to that used in the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ 2D Poisson problem without mesh refinement}}. In the present problem, we leave the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} empty because the boundary conditions do not change. The function {\ttfamily \mbox{\hyperlink{classRefineableFishPoissonProblem_a6331b79c5c77d3f2fa7c37c3bb5308d9}{Refineable\+Fish\+Poisson\+Problem\+::mesh\+\_\+pt()}}} overloads the (virtual) function {\ttfamily Problem\+::mesh\+\_\+pt()} since it returns a pointer to a generic {\ttfamily Mesh} object, rather than a pointer to the specific mesh used in this problem. This avoids explicit re-\/casts in the rest of the code where member functions of the specific mesh need to be accessed.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_problem\_class========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Refineable Poisson problem in fish-\/shaped domain.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Template parameter identifies the element type.}}
+\DoxyCodeLine{\textcolor{comment}{/// Refineable Poisson problem in fish-\/shaped domain.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Template parameter identifies the element type.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableFishPoissonProblem}{RefineableFishPoissonProblem}} : \textcolor{keyword}{public} Problem}
@@ -311,24 +299,22 @@ The problem class is virtually identical to that used in the \href{../../../pois
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableFishPoissonProblem_a58098181f3b88c2fc65f24fb15c1a529}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Overloaded version of the problem's access function to }}
+\DoxyCodeLine{\textcolor{comment}{ /// Overloaded version of the problem's access function to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the mesh. Recasts the pointer to the base Mesh object to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableFishMesh<ELEMENT>* \mbox{\hyperlink{classRefineableFishPoissonProblem_a803c9050b07b35aba22f08a5a9e59f2c}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RefineableFishMesh<ELEMENT>* \mbox{\hyperlink{classRefineableFishPoissonProblem_a6331b79c5c77d3f2fa7c37c3bb5308d9}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableFishMesh<ELEMENT>*\textcolor{keyword}{>}(\mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{Problem::mesh\_pt}}());}
+\DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableFishMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution. Output directory and labels are specified }}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution. Output directory and labels are specified }}
 \DoxyCodeLine{\textcolor{comment}{ /// by DocInfo object}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableFishPoissonProblem_aeee1bf23216971b50b8822c45e62c48b}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The Problem constructor}\label{index_constructor}
 We start by creating the mesh, using {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Refineable\+Fish\+Mesh} object\+:
@@ -336,13 +322,8 @@ We start by creating the mesh, using {\ttfamily oomph-\/lib\textquotesingle{}s} 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor=========================================}}
-
-\end{DoxyCodeInclude}
- ~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for adaptive Poisson problem in fish-\/shaped}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// domain.}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for adaptive Poisson problem in fish-\/shaped}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// domain.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableFishPoissonProblem_a7a9c8258a867de6b3c8b9d00a7c965f1}{RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem}}()}
@@ -350,22 +331,18 @@ We start by creating the mesh, using {\ttfamily oomph-\/lib\textquotesingle{}s} 
 \DoxyCodeLine{    }
 \DoxyCodeLine{ \textcolor{comment}{// Build fish mesh -\/-\/ this is a coarse base mesh consisting }}
 \DoxyCodeLine{ \textcolor{comment}{// of four elements. We'll refine/adapt the mesh later.}}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{Problem::mesh\_pt}}()=\textcolor{keyword}{new} RefineableFishMesh<ELEMENT>;}
+\DoxyCodeLine{ Problem::mesh\_pt()=\textcolor{keyword}{new} RefineableFishMesh<ELEMENT>;}
 
 \end{DoxyCodeInclude}
-
-
-Next, we create an error estimator for the problem. The {\ttfamily Z2\+Error\+Estimator} is based on Zhu and Zienkiewicz\textquotesingle{}s flux recovery technique and can be used with all elements that are derived from the {\ttfamily Element\+With\+Z2\+Error\+Estimator} base class (or with functions that implement the pure virtual functions that are defined in this class) -- the {\ttfamily Refineable\+Q\+Poisson\+Element} is an element of this type.
+ Next, we create an error estimator for the problem. The {\ttfamily Z2\+Error\+Estimator} is based on Zhu and Zienkiewicz\textquotesingle{}s flux recovery technique and can be used with all elements that are derived from the {\ttfamily Element\+With\+Z2\+Error\+Estimator} base class (or with functions that implement the pure virtual functions that are defined in this class) -- the {\ttfamily Refineable\+QPoisson\+Element} is an element of this type.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Create/set error estimator}}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{mesh\_pt}}()-\/>spatial\_error\_estimator\_pt()=\textcolor{keyword}{new} Z2ErrorEstimator;}
+\DoxyCodeLine{ mesh\_pt()-\/>spatial\_error\_estimator\_pt()=\textcolor{keyword}{new} Z2ErrorEstimator;}
 
 \end{DoxyCodeInclude}
-
-
-Next we pin the nodal values on all boundaries, apply the homogeneous Dirichlet boundary conditions, pass the pointer to the source function to the elements, and set up the equation numbering scheme.
+ Next we pin the nodal values on all boundaries, apply the homogeneous Dirichlet boundary conditions, pass the pointer to the source function to the elements, and set up the equation numbering scheme.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -373,34 +350,34 @@ Next we pin the nodal values on all boundaries, apply the homogeneous Dirichlet 
 \DoxyCodeLine{ \textcolor{comment}{// free by default -\/-\/ just pin the ones that have Dirichlet conditions}}
 \DoxyCodeLine{ \textcolor{comment}{// here. Since the boundary values are never changed, we set}}
 \DoxyCodeLine{ \textcolor{comment}{// them here rather than in actions\_before\_newton\_solve(). }}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_bound = \mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{mesh\_pt}}()-\/>nboundary();}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{fish__poisson_8txt_a436f9ebe697a55199971d74a0c654c17}{i}}=0;\mbox{\hyperlink{fish__poisson_8txt_a436f9ebe697a55199971d74a0c654c17}{i}}<n\_bound;\mbox{\hyperlink{fish__poisson_8txt_a436f9ebe697a55199971d74a0c654c17}{i}}++)}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_bound = mesh\_pt()-\/>nboundary();}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_bound;i++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node = \mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{mesh\_pt}}()-\/>nboundary\_node(\mbox{\hyperlink{fish__poisson_8txt_a436f9ebe697a55199971d74a0c654c17}{i}});}
+\DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node = mesh\_pt()-\/>nboundary\_node(i);}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Pin the single scalar value at this node}}
-\DoxyCodeLine{     \mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{mesh\_pt}}()-\/>boundary\_node\_pt(\mbox{\hyperlink{fish__poisson_8txt_a436f9ebe697a55199971d74a0c654c17}{i}},n)-\/>pin(0); }
+\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(i,n)-\/>pin(0); }
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Assign the homogenous boundary condition for the one and only}}
 \DoxyCodeLine{     \textcolor{comment}{// nodal value}}
-\DoxyCodeLine{     \mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{mesh\_pt}}()-\/>boundary\_node\_pt(\mbox{\hyperlink{fish__poisson_8txt_a436f9ebe697a55199971d74a0c654c17}{i}},n)-\/>set\_value(0,0.0); }
+\DoxyCodeLine{     mesh\_pt()-\/>boundary\_node\_pt(i,n)-\/>set\_value(0,0.0); }
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Loop over elements and set pointers to source function}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element = \mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{mesh\_pt}}()-\/>nelement();}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element = mesh\_pt()-\/>nelement();}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Upcast from FiniteElement to the present element}}
-\DoxyCodeLine{   ELEMENT *el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(\mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{mesh\_pt}}()-\/>element\_pt(e));}
+\DoxyCodeLine{   ELEMENT *el\_pt = \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Set the source function pointer}}
 \DoxyCodeLine{   el\_pt-\/>source\_fct\_pt() = \&\mbox{\hyperlink{namespaceConstSourceForPoisson_aeaa1153817bde9598372b803342f3299}{ConstSourceForPoisson::source\_function}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup the equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
@@ -416,7 +393,7 @@ The post-\/processing routine writes the computed result to an output file, labe
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_doc=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution in tecplot format.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableFishPoissonProblem_aeee1bf23216971b50b8822c45e62c48b}{RefineableFishPoissonProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -429,10 +406,10 @@ The post-\/processing routine writes the computed result to an output file, labe
 \DoxyCodeLine{ npts=5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
-\DoxyCodeLine{ \mbox{\hyperlink{fish__poisson_8txt_ad51d9050c0316447d4756629f0f17ed1}{mesh\_pt}}()-\/>output(some\_file,npts);}
+\DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc}}
@@ -445,7 +422,7 @@ The post-\/processing routine writes the computed result to an output file, labe
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 The purpose of this example was to provide a high-\/level overview of {\ttfamily oomph-\/lib\textquotesingle{}s} mesh adaptation procedures. We demonstrated that the implementation of full adaptivity only required us to
 \begin{DoxyItemize}
-\item replace the {\ttfamily Fish\+Mesh} and the {\ttfamily Q\+Poisson\+Element} objects by their refineable equivalents, {\ttfamily Refineable\+Fish\+Mesh} and {\ttfamily Refineable\+Q\+Poisson\+Element}, respectively
+\item replace the {\ttfamily Fish\+Mesh} and the {\ttfamily QPoisson\+Element} objects by their refineable equivalents, {\ttfamily Refineable\+Fish\+Mesh} and {\ttfamily Refineable\+QPoisson\+Element}, respectively
 \item specify the error estimator, and
 \item specify the maximum number of adaptations for the black-\/box adaptive Newton solver.
 \end{DoxyItemize}(Compare the Problem specification for the current problem to that of its non-\/refineable equivalent, contained in the alternative driver code \href{../../../../demo_drivers/poisson/fish_poisson/fish_poisson_no_adapt.cc}{\texttt{ fish\+\_\+poisson\+\_\+no\+\_\+adapt.\+cc.}})
@@ -456,10 +433,12 @@ The {\ttfamily Problem\+::adapt()} function automatically determines the correct
 In some special cases, certain actions may need to be performed before or after the mesh adaptation (e.\+g. if flux boundary conditions are applied by {\ttfamily Face\+Elements}; this is explained in \href{../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ another example}}). To ensure that these steps are performed when the adaptation is controlled by the \char`\"{}black-\/box\char`\"{} adaptive Newton solver, the {\ttfamily Problem} class provides the two empty virtual functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_adapt()}
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_adapt()}
+
 \end{DoxyCode}
  which are called automatically before and after the adaptation. The \char`\"{}user\char`\"{} can overload these in his/her specific {\ttfamily Problem} class to implement such actions.\hypertarget{index_how_to}{}\doxysubsection{Automatic mesh adaptation in domains with curvilinear boundaries}\label{index_how_to}
 The mesh adaptation not only increases the number of elements but also produces a more accurate representation of the curvilinear domain boundary -- new boundary nodes are placed exactly onto the analytically-\/defined, curvilinear boundary, rather than on the boundaries of the \char`\"{}father\char`\"{} element, which only provides an approximate representation of the exact domain boundary. This is achieved by employing a {\ttfamily Macro\+Element-\/based} representation of the {\ttfamily Domain} -- we will discuss this in more detail in \href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ another example.}}\hypertarget{index_problem_vs_mesh}{}\doxysubsection{Problem adaptation vs. Mesh adaptation}\label{index_problem_vs_mesh}
@@ -471,11 +450,13 @@ To familiarise yourself with {\ttfamily oomph-\/lib\textquotesingle{}s} mesh ada
 \begin{DoxyEnumerate}
 \item When the Poisson problem is solved with the default refinement targets, no elements are unrefined. Increase the minimum permitted error from its default value of $ 10^{-5} $ to $ 10^{-4} $ by adding the statement 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.mesh\_pt()-\/>min\_permitted\_error()=1.0e-\/4;}
+\DoxyCodeLine{problem.mesh\_pt()-\/>min\_permitted\_error()=1.0e-\/4;}
+
 \end{DoxyCode}
  before 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{fish__poisson_8txt_afb579f8a629fcc14bd8f7635af4c3866}{problem}}.mesh\_pt()-\/>doc\_adaptivity\_targets(cout);}
+\DoxyCodeLine{problem.mesh\_pt()-\/>doc\_adaptivity\_targets(cout);}
+
 \end{DoxyCode}
  This value forces an unrefinement of several elements in the mesh\+:  
 \begin{DoxyImage}
@@ -503,5 +484,5 @@ To familiarise yourself with {\ttfamily oomph-\/lib\textquotesingle{}s} mesh ada
 \item The driver code is\+: \begin{center} \href{../../../../demo_drivers/poisson/fish_poisson/fish_poisson.cc}{\texttt{ demo\+\_\+drivers/poisson/fish\+\_\+poisson/fish\+\_\+poisson.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

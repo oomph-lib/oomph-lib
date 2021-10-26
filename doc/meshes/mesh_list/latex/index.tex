@@ -5,30 +5,30 @@ We stress that the {\bfseries{key feature of any given mesh}} is {\bfseries{its 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_conventions}{}\doxysection{Reminder\+: General conventions to facilitate the re-\/use of meshes}\label{index_conventions}
-Since mesh generation tends to be most tedious part of any numerical simulation, {\ttfamily oomph-\/lib\textquotesingle{}s} overall data structure, described in detail \href{../../../the_data_structure/html/index.html}{\texttt{ elsewhere, }} aims to facilitate the re-\/use of meshes in many different applications. For this purpose most specific {\ttfamily Finite\+Elements} in {\ttfamily oomph-\/lib} are derived by multiple inheritance, combining a \char`\"{}geometric\char`\"{} {\ttfamily Finite\+Element} (e.\+g. a line/quadrilateral/brick-\/shaped element from the {\ttfamily Q\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} family) with an equations class (such as {\ttfamily Poisson\+Equations$<$\+D\+I\+M$>$}) that implements the weak form of a specific P\+DE. For instance, {\ttfamily oomph-\/lib\textquotesingle{}s} quadrilateral nine-\/node Poisson element, {\ttfamily Q\+Poisson\+Element$<$2,3$>$}, is derived from the {\ttfamily Poisson\+Equations$<$2$>$} equations class and the {\ttfamily Q\+Element$<$2,3$>$} geometric {\ttfamily Finite\+Element}.
+Since mesh generation tends to be most tedious part of any numerical simulation, {\ttfamily oomph-\/lib\textquotesingle{}s} overall data structure, described in detail \href{../../../the_data_structure/html/index.html}{\texttt{ elsewhere, }} aims to facilitate the re-\/use of meshes in many different applications. For this purpose most specific {\ttfamily Finite\+Elements} in {\ttfamily oomph-\/lib} are derived by multiple inheritance, combining a \char`\"{}geometric\char`\"{} {\ttfamily Finite\+Element} (e.\+g. a line/quadrilateral/brick-\/shaped element from the {\ttfamily QElement$<$\+DIM,\+NNODE\+\_\+1\+D$>$} family) with an equations class (such as {\ttfamily Poisson\+Equations$<$\+DIM$>$}) that implements the weak form of a specific PDE. For instance, {\ttfamily oomph-\/lib\textquotesingle{}s} quadrilateral nine-\/node Poisson element, {\ttfamily QPoisson\+Element$<$2,3$>$}, is derived from the {\ttfamily Poisson\+Equations$<$2$>$} equations class and the {\ttfamily QElement$<$2,3$>$} geometric {\ttfamily Finite\+Element}.
 
-The mesh generation process is mainly concerned with the geometric properties of the mesh\textquotesingle{}s constituent {\ttfamily Finite\+Elements} (their topology, number of nodes, etc.) which are defined by the geometric {\ttfamily Finite\+Element}. This makes it possible to use a mesh that was originally developed for the solution of a Poisson equation with a {\ttfamily Q\+Poisson\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}, say, for the solution of an advection-\/diffusion problem with a {\ttfamily Q\+Advction\+Diffusion\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} since both elements are derived from the same geometric {\ttfamily Finite\+Element}. Only two aspects of the mesh generation process require information that is not provided by the geometric {\ttfamily Finite\+Element\+:} 
+The mesh generation process is mainly concerned with the geometric properties of the mesh\textquotesingle{}s constituent {\ttfamily Finite\+Elements} (their topology, number of nodes, etc.) which are defined by the geometric {\ttfamily Finite\+Element}. This makes it possible to use a mesh that was originally developed for the solution of a Poisson equation with a {\ttfamily QPoisson\+Element$<$2,\+NNODE\+\_\+1\+D$>$}, say, for the solution of an advection-\/diffusion problem with a {\ttfamily QAdvction\+Diffusion\+Element$<$2,\+NNODE\+\_\+1\+D$>$} since both elements are derived from the same geometric {\ttfamily Finite\+Element}. Only two aspects of the mesh generation process require information that is not provided by the geometric {\ttfamily Finite\+Element\+:} 
 \begin{DoxyItemize}
-\item {\bfseries{The number of values to be stored at the various nodes in the mesh\+:}} For instance, if a mesh that is designed for quadrilateral elements from the {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} family of geometric elements is used to solve a (scalar) Poisson equation with nine-\/noded elements, each {\ttfamily Node} has to store a single value. However, if the same mesh is used for the solution of the 2D Navier-\/\+Stokes equations with a nine-\/node quadrilateral elements of type {\ttfamily Q\+Taylor\+Hood\+Element$<$2$>$}, nodes located at the elements\textquotesingle{} four vertices have to store three values (two velocity components and one pressure) whereas nodes located at the elements\textquotesingle{} interior and on their edges only have to store two values (the two velocity components). ~\newline
+\item {\bfseries{The number of values to be stored at the various nodes in the mesh\+:}} For instance, if a mesh that is designed for quadrilateral elements from the {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$} family of geometric elements is used to solve a (scalar) Poisson equation with nine-\/noded elements, each {\ttfamily Node} has to store a single value. However, if the same mesh is used for the solution of the 2D Navier-\/\+Stokes equations with a nine-\/node quadrilateral elements of type {\ttfamily QTaylor\+Hood\+Element$<$2$>$}, nodes located at the elements\textquotesingle{} four vertices have to store three values (two velocity components and one pressure) whereas nodes located at the elements\textquotesingle{} interior and on their edges only have to store two values (the two velocity components). ~\newline
 ~\newline
 
 \item {\bfseries{The number of \char`\"{}history values\char`\"{} required by the timestepping procedure (if any)\+:}} For instance, if the mesh is used for the solution of a Poisson problem, no \char`\"{}history\char`\"{} values are required. If the same mesh is used for the solution of an unsteady heat problem, the number of history values required is determined by the {\ttfamily Time\+Stepper} used to approximate the time-\/derivative of the nodal values.
 \end{DoxyItemize}The meshes used in our example codes (and all the meshes listed below) have a common structure that allows the required information to be become available to the mesh constructor\+:
 \begin{DoxyEnumerate}
-\item All meshes are templated by the element type, {\ttfamily E\+L\+E\+M\+E\+NT}.~\newline
+\item All meshes are templated by the element type, {\ttfamily ELEMENT}.~\newline
 ~\newline
 
 \item The final argument of all mesh constructors is a pointer to a {\ttfamily Time\+Stepper}. We provide a default for this argument -- a pointer to the {\ttfamily Steady$<$0$>$} timestepper, defined (as static member data) in the {\ttfamily Mesh} base class.
 \end{DoxyEnumerate}The availability of the template parameter allows the mesh generator to build elements of the required type. {\ttfamily Nodes} are generally built by the {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} function whose arguments are the {\ttfamily Node\textquotesingle{}s} local node number within the current element, and a pointer to the timestepper. These arguments provide all the information that is required to build {\ttfamily Nodes} with the right number of values (as required by the element) and history values (as required by the {\ttfamily Time\+Stepper}). When the function {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} is called, it creates the new {\ttfamily Node}, stores a pointer to the newly created {\ttfamily Node} in the {\ttfamily Finite\+Element\textquotesingle{}s} own lookup scheme, and returns that pointer. This allows the pointer to the newly created {\ttfamily Node} to be stored in the {\ttfamily Mesh\textquotesingle{}s} own lookup scheme for its constituent {\ttfamily Nodes}. The \href{../../../quick_guide/html/index.html\#mesh}{\texttt{ (Not-\/\+So-\/)Quick-\/\+Guide}} contains a section that explains how to write simple meshes. \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_faq}{}\doxysection{Mesh F\+AQ}\label{index_faq}
+\hypertarget{index_faq}{}\doxysection{Mesh FAQ}\label{index_faq}
 When using a mesh that was originally developed for a different application, it is sometimes necessary establish the node/element/boundary numbering scheme employed by the mesh writer. While we generally assume that the mesh writer will have carefully documented his/her code, here is what to do if he/she hasn\textquotesingle{}t\+: ~\newline
 ~\newline
 
 \begin{DoxyItemize}
 \item {\bfseries{How do I find out how the elements are numbered?}} ~\newline
 ~\newline
- The function {\ttfamily Mesh\+::output(...)} outputs the elements in the order in which they are stored internally. If you prefer a different element numbering scheme you can re-\/number the elements; see e.\+g. the member function {\ttfamily \mbox{\hyperlink{mesh__list_8txt_ae29a37d88beb9197e55d98cd39170fdd}{element\+\_\+reorder()}}} in the \href{classoomph_1_1RectangularQuadMesh.html}{\texttt{ {\bfseries{ Rectangular\+Quad\+Mesh}}}} class. ~\newline
+ The function {\ttfamily Mesh\+::output(...)} outputs the elements in the order in which they are stored internally. If you prefer a different element numbering scheme you can re-\/number the elements; see e.\+g. the member function {\ttfamily element\+\_\+reorder()} in the \href{classoomph_1_1RectangularQuadMesh.html}{\texttt{ {\bfseries{ Rectangular\+Quad\+Mesh}}}} class. ~\newline
 ~\newline
  ~\newline
 
@@ -51,11 +51,11 @@ When using a mesh that was originally developed for a different application, it 
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
 {\bfseries{Mesh}}  &{\bfseries{Representative Mesh plot}}   \\\cline{1-2}
-\href{classoomph_1_1OneDMesh.html}{\texttt{ {\bfseries{ One\+D\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\href{classoomph_1_1OneDMesh.html}{\texttt{ {\bfseries{ One\+DMesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$1,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$1,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes.
 \item A refineable version of this mesh exists.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
@@ -67,11 +67,11 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{one_d_mesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1SimpleRectangularQuadMesh.html}{\texttt{ {\bfseries{ Simple\+Rectangular\+Quad\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\href{classoomph_1_1SimpleRectangularQuadMesh.html}{\texttt{ {\bfseries{ Simple\+Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
@@ -82,12 +82,12 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{simple_rectangular_quadmesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1RectangularQuadMesh.html}{\texttt{ {\bfseries{ Rectangular\+Quad\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\href{classoomph_1_1RectangularQuadMesh.html}{\texttt{ {\bfseries{ Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
 \item This is a slightly more sophisticated version of the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} discussed above; it allows for non-\/uniform spacing of the nodes, and periodicity in the x and y-\/directions.
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes.
 \item A refineable version of this mesh exists.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
@@ -99,12 +99,12 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{simple_rectangular_quadmesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1TwoDAnnularMesh.html}{\texttt{ {\bfseries{ Two\+D\+Annular\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\href{classoomph_1_1TwoDAnnularMesh.html}{\texttt{ {\bfseries{ Two\+DAnnular\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
 \item This is a \char`\"{}wrapped around\char`\"{} version of {\ttfamily Rectangular\+Quad\+Mesh} discussed above. It can either be used as a complete annulus (in which case periodicity is enforced) or a gap can appear in the annulus.
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \item A refineable version of this mesh exists.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
@@ -116,31 +116,31 @@ When using a mesh that was originally developed for a different application, it 
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
 \label{_channel_with_leaflet}%
- \href{classoomph_1_1ChannelWithLeafletMesh.html}{\texttt{ {\bfseries{ Channel\+With\+Leaflet\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+ \href{classoomph_1_1ChannelWithLeafletMesh.html}{\texttt{ {\bfseries{ Channel\+With\+Leaflet\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
 \item Mesh for the simulation of flow in a 2D channel that is partially occluded by a moving leaflet.
 \item Leaflet must be represented by a {\ttfamily Geom\+Object} 
 \item Nodes along the leaflet are duplicated to allow for a pressure jump across the leaflet even for discretisations that impose continuous pressure distributions across element boundaries.
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes.
 \item A refineable version of this mesh exists.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
-\item The refineable variant of this mesh with an algebraic node update is used in the driver code for \href{../../../navier_stokes/channel_with_leaflet/html/index.html}{\texttt{ the simulation of flow in a 2D channel that is partially occluded by a moving leaflet}} and also in \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ corresponding F\+SI problem. }}
+\item The refineable variant of this mesh with an algebraic node update is used in the driver code for \href{../../../navier_stokes/channel_with_leaflet/html/index.html}{\texttt{ the simulation of flow in a 2D channel that is partially occluded by a moving leaflet}} and also in \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ corresponding FSI problem. }}
 \end{DoxyItemize}& 
 \begin{DoxyImageNoCaption}
   \mbox{\includegraphics[width=0.75\textwidth]{channel_with_leaflet_mesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1SimpleRectangularTriMesh.html}{\texttt{ {\bfseries{ Simple\+Rectangular\+Tri\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\href{classoomph_1_1SimpleRectangularTriMesh.html}{\texttt{ {\bfseries{ Simple\+Rectangular\+Tri\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
 \item This is a simple structured mesh made of triangular elements.
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily T\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily TElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
@@ -150,11 +150,11 @@ When using a mesh that was originally developed for a different application, it 
   \mbox{\includegraphics[width=0.75\textwidth]{simple_rectangular_trimesh}}
 \end{DoxyImageNoCaption}
    \\\cline{1-2}
-\href{classoomph_1_1FishMesh.html}{\texttt{ {\bfseries{ Fish\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\href{classoomph_1_1FishMesh.html}{\texttt{ {\bfseries{ Fish\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes.
 \item The curvilinear boundaries are represented by a {\ttfamily Geom\+Object} and the mesh has a {\ttfamily Domain} representation, allowing a {\ttfamily Macro\+Element} -\/ based node update.
 \item There is also a version of the mesh that performs the node update in response to changes in the domain boundary by an algebraic node update.
@@ -174,11 +174,11 @@ When using a mesh that was originally developed for a different application, it 
  \end{center} 
 
 \begin{center} \label{_collapsible_channel}%
- \href{classoomph_1_1CollapsibleChannelMesh.html}{\texttt{ {\bfseries{ Collapsible\+Channel\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+ \href{classoomph_1_1CollapsibleChannelMesh.html}{\texttt{ {\bfseries{ Collapsible\+Channel\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes
 \item The curvilinear boundary is represented by a {\ttfamily Geom\+Object} and the mesh has a {\ttfamily Domain} representation, allowing a {\ttfamily Macro\+Element} -\/ based node update.
 \item There is also a version of the mesh that performs the node update in response to changes in the domain boundary by an algebraic node update. ~\newline
@@ -198,18 +198,18 @@ When using a mesh that was originally developed for a different application, it 
 
 \begin{center} \end{center} 
 
-\begin{center} \href{classoomph_1_1CylinderWithFlagMesh.html}{\texttt{ {\bfseries{ Cylinder\+With\+Flag\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1CylinderWithFlagMesh.html}{\texttt{ {\bfseries{ Cylinder\+With\+Flag\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This {\ttfamily Mesh} was mainly developed for the solution of Turek \& Hron\textquotesingle{}s F\+SI benchmark problems. The curvilinear boundaries of the cylinder and the \char`\"{}flag\char`\"{} are represented by {\ttfamily Geom\+Objects}.
+\item This {\ttfamily Mesh} was mainly developed for the solution of Turek \& Hron\textquotesingle{}s FSI benchmark problems. The curvilinear boundaries of the cylinder and the \char`\"{}flag\char`\"{} are represented by {\ttfamily Geom\+Objects}.
 \item A refineable version of the mesh exists.
 \item The node-\/update in response to changes in the shape of the \char`\"{}flag\char`\"{} can be performed by a version based on an {\ttfamily Algebraic\+Mesh} or using a {\ttfamily Domain/\+Macro\+Element} -\/ based node update.
-\item The bulk elements have to be derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item The bulk elements have to be derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
-\item This mesh is used in the driver code for \href{../../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s F\+SI benchmark problems }} and their \href{../../../navier_stokes/turek_flag_non_fsi/html/index.html}{\texttt{ non-\/\+F\+SI equivalents.}}
+\item This mesh is used in the driver code for \href{../../../interaction/turek_flag/html/index.html}{\texttt{ Turek \& Hron\textquotesingle{}s FSI benchmark problems }} and their \href{../../../navier_stokes/turek_flag_non_fsi/html/index.html}{\texttt{ non-\/\+FSI equivalents.}}
 \end{DoxyItemize}\end{center} 
 
 \begin{center}  
@@ -220,12 +220,12 @@ When using a mesh that was originally developed for a different application, it 
 
 \begin{center} \end{center} 
 
-\begin{center} \href{classoomph_1_1BrethertonSpineMesh.html}{\texttt{ {\bfseries{ Bretherton\+Spine\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1BrethertonSpineMesh.html}{\texttt{ {\bfseries{ Bretherton\+Spine\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
 \item This {\ttfamily Spine\+Mesh} was mainly developed for the simulation of the Bretherton problem but it can, of course, also be used in other problems. The mesh topology would be suitable for the simulation of flows in a bifurcating channel, say.
-\item The bulk elements have to be derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item The bulk elements have to be derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
@@ -241,11 +241,11 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1QuarterCircleSectorMesh.html}{\texttt{ {\bfseries{ Quarter\+Circle\+Sector\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1QuarterCircleSectorMesh.html}{\texttt{ {\bfseries{ Quarter\+Circle\+Sector\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes
 \item The curvilinear boundary is represented by a {\ttfamily Geom\+Object} and the mesh has a {\ttfamily Domain} representation, allowing a {\ttfamily Macro\+Element} -\/ based node update.
 \item There is also a version of the mesh that performs the node update in response to changes in the domain boundary by an algebraic node update. ~\newline
@@ -266,11 +266,11 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1SimpleCubicMesh.html}{\texttt{ {\bfseries{ Simple\+Cubic\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1SimpleCubicMesh.html}{\texttt{ {\bfseries{ Simple\+Cubic\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$3,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$3,\+NNODE\+\_\+1\+D$>$}.
 \item A refineable version of this mesh exists.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
@@ -287,12 +287,12 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1SimpleCubicTetMesh.html}{\texttt{ {\bfseries{ Simple\+Cubic\+Tet\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1SimpleCubicTetMesh.html}{\texttt{ {\bfseries{ Simple\+Cubic\+Tet\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
 \item This is a simple structured mesh for tet elements.
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily T\+Element$<$3,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily TElement$<$3,\+NNODE\+\_\+1\+D$>$}.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
 \begin{DoxyItemize}
@@ -308,11 +308,11 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1QuarterTubeMesh.html}{\texttt{ {\bfseries{ Quarter\+Tube\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1QuarterTubeMesh.html}{\texttt{ {\bfseries{ Quarter\+Tube\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$3,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$3,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes
 \item The curvilinear boundary is represented by a {\ttfamily Geom\+Object} and the mesh has a {\ttfamily Domain} representation, allowing a {\ttfamily Macro\+Element} -\/ based node update.
 \item There is also a version of the mesh that performs the node update in response to changes in the domain boundary by an algebraic node update. ~\newline
@@ -333,11 +333,11 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1TubeMesh.html}{\texttt{ {\bfseries{ Tube\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1TubeMesh.html}{\texttt{ {\bfseries{ Tube\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$3,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$3,\+NNODE\+\_\+1\+D$>$}.
 \item This mesh forms the basis for numerous derived meshes that describe topologically-\/tube-\/shaped domains.
 \item The entire domain is represented by a {\ttfamily Geom\+Object} and the mesh has a {\ttfamily Domain} representation, allowing a {\ttfamily Macro\+Element} -\/ based node update.
 \item A refineable version of this mesh exists.
@@ -356,11 +356,11 @@ When using a mesh that was originally developed for a different application, it 
 \begin{center} ~\newline
  \end{center} 
 
-\begin{center} \href{classoomph_1_1EighthSphereMesh.html}{\texttt{ {\bfseries{ Eighth\+Sphere\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ }}}} ~\newline
+\begin{center} \href{classoomph_1_1EighthSphereMesh.html}{\texttt{ {\bfseries{ Eighth\+Sphere\+Mesh$<$\+ELEMENT$>$ }}}} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily Q\+Element$<$3,\+N\+N\+O\+D\+E\+\_\+1\+D$>$}.
+\item This mesh can be used with all {\ttfamily Finite\+Elements} that are derived from the geometric finite element {\ttfamily QElement$<$3,\+NNODE\+\_\+1\+D$>$}.
 \item A refineable version of this mesh exists.
 \end{DoxyItemize}{\bfseries{Example driver code\+:}} ~\newline
 
@@ -379,5 +379,5 @@ When using a mesh that was originally developed for a different application, it 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

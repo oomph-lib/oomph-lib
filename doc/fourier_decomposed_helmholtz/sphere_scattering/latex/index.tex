@@ -10,7 +10,7 @@ In this document we discuss the finite-\/element-\/based solution of the Helmhol
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_theory}{}\doxysection{Theory\+: The Fourier-\/decomposed Helmholtz equation}\label{index_theory}
-The Helmholtz equation governs time-\/harmonic solutions of problems governed by the linear wave equation \[ \nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ (1) \] where $ c $ is the wavespeed. Assuming that $ U(x,y,z,t) $ is time-\/harmonic, with frequency $ \omega $, we write the real function $ U(x,y,z,t) $ as \[ U(x,y,z,t) = Re ({\tt U}(x,y,z) \ e^{-i \omega t}) \ \ \ \ \ \ \ \ \ \ \ \ (2) \] where $ {\tt U}(x,y,z) $ is complex-\/valued. This transforms (1) into the Helmholtz equation \[ \nabla^2 {\tt U}(x,y,z) + k^2 {\tt U} = 0 \ \ \ \ \ \ \ \ \ \ \ \ (3) \] where \[ k = \frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ (4) \] is the wave number. Like other elliptic P\+D\+Es the Helmholtz equation admits Dirichlet, Neumann (flux) and Robin boundary conditions.
+The Helmholtz equation governs time-\/harmonic solutions of problems governed by the linear wave equation \[ \nabla^2 U(x,y,z,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,z,t)}{\partial t^2}, \ \ \ \ \ \ \ \ \ \ \ \ (1) \] where $ c $ is the wavespeed. Assuming that $ U(x,y,z,t) $ is time-\/harmonic, with frequency $ \omega $, we write the real function $ U(x,y,z,t) $ as \[ U(x,y,z,t) = Re ({\tt U}(x,y,z) \ e^{-i \omega t}) \ \ \ \ \ \ \ \ \ \ \ \ (2) \] where $ {\tt U}(x,y,z) $ is complex-\/valued. This transforms (1) into the Helmholtz equation \[ \nabla^2 {\tt U}(x,y,z) + k^2 {\tt U} = 0 \ \ \ \ \ \ \ \ \ \ \ \ (3) \] where \[ k = \frac{\omega}{c} \ \ \ \ \ \ \ \ \ \ \ \ (4) \] is the wave number. Like other elliptic PDEs the Helmholtz equation admits Dirichlet, Neumann (flux) and Robin boundary conditions.
 
 If the equation is solved in an infinite domain (e.\+g. in scattering problems) the solution must satisfy the so-\/called \href{http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition}{\texttt{ Sommerfeld radiation condition}} which in 3D has the form \[ \lim_{r\to \infty} r \left(\frac{\partial {\tt U}}{\partial r} - ik{\tt U} \right) =0. \] Mathematically, this conditions is required to ensure the uniqueness of the solution (and hence the well-\/posedness of the problem). In a physical context, such as a scattering problem, the condition ensures that scattering of an incoming wave only produces outgoing not incoming waves from infinity.
 
@@ -34,11 +34,11 @@ Assuming that the artificial outer boundary $ \Gamma $is sufficiently far from t
 
 The solution on (and near) $ \Gamma $ is therefore given by \[ {\tt U}(\rho,\theta,\phi)= \sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \ a_{ln}\ h_{l}^{(1)}(k\rho) \ P_{l}^{n}(\cos\theta) \ \exp({\rm i}n\varphi). \] Restricting ourselves to the single azimuthal Fourier mode $ n=N $ to be determined by (5), we have \[ u_N(\rho,\theta)=\sum_{l=N}^{+\infty} a_{l} \ h_{l}^{(1)}(k\rho)\ P_{l}^{N}(\cos\theta). \ \ \ \ \ \ \ (7) \] We multiply this equation by $ P_{n}^{N}(\cos\theta) \sin(\theta)$, integrate over $ \theta $, and exploit the orthogonality of the Legendre functions, to show that \[ a_{l}=\frac{2l+1}{2 h_{l}^{(1)}(kR)} \frac{(l-N)!}{(l+N)!}\int_{0}^{\pi} u(R,\theta)\ P_{l}^{N}(\cos\theta) \ \sin(\theta) \ d\theta. \] Using these coefficients, we can differentiate (7) to obtain the normal derivative of the solution on the (spherical) artificial outer boundary $ \Gamma $ in terms of the solution itself\+: \[ \left. \frac{\partial u}{\partial n} \right|_{\rho=R} = \left. \frac{\partial u}{\partial \rho} \right|_{\rho=R} = \gamma(u) = k\sum_{n=N}^{\infty}a_{n} \ h_{n}^{(1)\textnormal{\textquotesingle}}(kR)\ P_{n}^{N}(\cos \theta) \] i.\+e. \[ \gamma(u(R,\theta))= k \sum_{n=N}^{\infty} h_{n}^{(1)\textnormal{\textquotesingle}}(kR) \ P_{n}^{N}(\cos \theta) \ \frac{2n+1}{2h_{n}^{(1)}(kR)}\frac{(n-N)!}{(n+N)!} \int_{0}^{\pi} u(R,\overline{\theta}) \ P_{n}^{N}(\cos\overline{\theta}) \ \sin(\overline{\theta}) \; d\overline{\theta}, \ \ \ \ \ \ \ \ \ \ (8) \] a Dirichlet-\/to-\/\+Neumann mapping.
 
-Equation (8) provides a condition on the normal derivative of the solution along the artificial boundary and is implemented in the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element} class. Since $ \gamma $ depends on the solution everywhere along the artificial boundary, the application of the Sommerfeld radiation condition via (8) introduces a non-\/local coupling between all the degrees of freedom located on that boundary. This is handled by classifying the unknowns that affect $ \gamma $ but are not associated with an element\textquotesingle{}s own nodes as its external {\ttfamily Data}.
+Equation (8) provides a condition on the normal derivative of the solution along the artificial boundary and is implemented in the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Element} class. Since $ \gamma $ depends on the solution everywhere along the artificial boundary, the application of the Sommerfeld radiation condition via (8) introduces a non-\/local coupling between all the degrees of freedom located on that boundary. This is handled by classifying the unknowns that affect $ \gamma $ but are not associated with an element\textquotesingle{}s own nodes as its external {\ttfamily Data}.
 
-To facilitate the setup of the interaction between the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Elements}, {\ttfamily oomph-\/lib} provides the class {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh} which provides storage for (the pointers to) the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Elements} that discretise the artificial boundary. The member function {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh\+::setup\+\_\+gamma()} pre-\/computes the $ \gamma $ values required for the imposition of equation (8). The radius $ R $ of the artificial boundary and the (finite) upper limit for the sum in (8) are specified as arguments to the constructor of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}.
+To facilitate the setup of the interaction between the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Elements}, {\ttfamily oomph-\/lib} provides the class {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh} which provides storage for (the pointers to) the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Elements} that discretise the artificial boundary. The member function {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh\+::setup\+\_\+gamma()} pre-\/computes the $ \gamma $ values required for the imposition of equation (8). The radius $ R $ of the artificial boundary and the (finite) upper limit for the sum in (8) are specified as arguments to the constructor of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh}.
 
-{\bfseries{N\+O\+TE\+:}} Since $ \gamma $ depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh\+::setup\+\_\+gamma()} to {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}. \mbox{[}If Helmholtz\textquotesingle{}s equation is solved in isolation (or within a coupled, but linear problem), Newton\textquotesingle{}s method will converge in one iteration. In such cases the unnecessary recomputation of $ \gamma $ after the one-\/and-\/only Newton iteration can be suppressed by setting {\ttfamily Problem\+::\+Problem\+\_\+is\+\_\+nonlinear} to {\ttfamily false}.\mbox{]}
+{\bfseries{NOTE\+:}} Since $ \gamma $ depends on the solution, it must be recomputed whenever the unknowns are updated during the Newton iteration. This is best done by adding a call to {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh\+::setup\+\_\+gamma()} to {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}. \mbox{[}If Helmholtz\textquotesingle{}s equation is solved in isolation (or within a coupled, but linear problem), Newton\textquotesingle{}s method will converge in one iteration. In such cases the unnecessary recomputation of $ \gamma $ after the one-\/and-\/only Newton iteration can be suppressed by setting {\ttfamily Problem\+::\+Problem\+\_\+is\+\_\+nonlinear} to {\ttfamily false}.\mbox{]}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -73,10 +73,10 @@ As usual, we define the problem parameters in a global namespace. The main param
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_namespace=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for the Fourier decomposed Helmholtz problem parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceProblemParameters}{ProblemParameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Square of the wavenumber}}
+\DoxyCodeLine{\textcolor{comment}{ /// Square of the wavenumber}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{K\_squared}}=10.0;}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Fourier wave number}}
@@ -86,9 +86,7 @@ As usual, we define the problem parameters in a global namespace. The main param
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Nterms\_for\_DtN}}=6;}
 
 \end{DoxyCodeInclude}
-
-
-Next we define the coefficients
+ Next we define the coefficients
 
 
 \begin{DoxyCodeInclude}{0}
@@ -103,59 +101,51 @@ Next we define the coefficients
 \DoxyCodeLine{\textcolor{comment}{} std::complex<double> \mbox{\hyperlink{namespaceProblemParameters_acfe6a3fe73272672d596ebe2afd0092e}{I}}(0.0,1.0); }
 
 \end{DoxyCodeInclude}
-
-
-required for the specification of the exact solution
+ required for the specification of the exact solution
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Exact solution as a Vector of size 2, containing real and imag parts}}
+\DoxyCodeLine{\textcolor{comment}{ /// Exact solution as a Vector of size 2, containing real and imag parts}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{get\_exact\_u}}(\textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 
 \end{DoxyCodeInclude}
-
-
-and its derivative,
+ and its derivative,
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Get -\/du/dr (spherical r) for exact solution. Equal to prescribed}}
+\DoxyCodeLine{\textcolor{comment}{ /// Get -\/du/dr (spherical r) for exact solution. Equal to prescribed}}
 \DoxyCodeLine{\textcolor{comment}{ /// flux on inner boundary.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\_minus\_dudr}}(\textcolor{keyword}{const} Vector<double>\& x, std::complex<double>\& flux)}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceProblemParameters_aa544d1f3e384d3283f7113512931ea8f}{exact\_minus\_dudr}}(\textcolor{keyword}{const} Vector<double>\& x, std::complex<double>\& flux)}
 
 \end{DoxyCodeInclude}
-
-
-whose listings we omit here.
+ whose listings we omit here.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
  ~\newline
 \hypertarget{index_main}{}\doxysubsection{The driver code}\label{index_main}
-The driver code is very straightforward. We create the problem object, discretising the domain with 3x3-\/noded {\ttfamily Q\+Fourier\+Decomposed\+Helmholtz\+Elements} and set up the output directory.
+The driver code is very straightforward. We create the problem object, discretising the domain with 3x3-\/noded {\ttfamily QFourier\+Decomposed\+Helmholtz\+Elements} and set up the output directory.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for Fourier decomposed Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{sphere__scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Create the problem with 2D nine-\/node elements from the}}
 \DoxyCodeLine{ \textcolor{comment}{// QFourierDecomposedHelmholtzElement family. }}
 \DoxyCodeLine{ \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{FourierDecomposedHelmholtzProblem<QFourierDecomposedHelmholtzElement<3>}} > }
-\DoxyCodeLine{  \mbox{\hyperlink{sphere__scattering_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
+\DoxyCodeLine{  problem;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Create label for output}}
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 
 \end{DoxyCodeInclude}
-
-
-We solve the problem for a range of Fourier wavenumbers and document the results.
+ We solve the problem for a range of Fourier wavenumbers and document the results.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -168,10 +158,10 @@ We solve the problem for a range of Fourier wavenumbers and document the results
 \DoxyCodeLine{   doc\_info.number()=\mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}};}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{   \mbox{\hyperlink{sphere__scattering_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{   problem.newton\_solve();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output the solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{sphere__scattering_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{   problem.\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{//end of main}}
@@ -184,13 +174,13 @@ We solve the problem for a range of Fourier wavenumbers and document the results
 \hypertarget{index_class}{}\doxysubsection{The problem class}\label{index_class}
 The problem class is very similar to that employed for the \href{../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ solution of the 2D Poisson equation with flux boundary conditions}} or, of course, the 2D cartesian Helmholtz problem discussed in \href{../../../helmholtz/scattering/html/index.html}{\texttt{ another tutorial.}}
 
-We provide two separate meshes of {\ttfamily Face\+Elements\+:} one for the inner boundary where the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Elements} apply the Neumann condition, and one for the outer boundary where we apply the (approximate) Sommerfeld radiation condition. As discussed in section \mbox{\hyperlink{index_DtN}{The Dirichlet-\/to-\/\+Neumann mapping (DtN)}} , we use the function {\ttfamily \mbox{\hyperlink{sphere__scattering_8txt_affc4feabe54e674d239116538628c210}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}} to recompute the $ \gamma $ integral whenever the unknowns are updated during the Newton iteration.
+We provide two separate meshes of {\ttfamily Face\+Elements\+:} one for the inner boundary where the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Elements} apply the Neumann condition, and one for the outer boundary where we apply the (approximate) Sommerfeld radiation condition. As discussed in section \mbox{\hyperlink{index_DtN}{The Dirichlet-\/to-\/\+Neumann mapping (DtN)}} , we use the function {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} to recompute the $ \gamma $ integral whenever the unknowns are updated during the Newton iteration.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========= start\_of\_problem\_class=====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem}{FourierDecomposedHelmholtzProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -209,7 +199,7 @@ We provide two separate meshes of {\ttfamily Face\+Elements\+:} one for the inne
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a5a37ba3fcf8563764f80108c9a657929}{actions\_after\_newton\_solve}}()\{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution. DocInfo object stores flags/labels for where the}}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution. DocInfo object stores flags/labels for where the}}
 \DoxyCodeLine{\textcolor{comment}{ /// output gets written to}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{  \textcolor{comment}{}}
@@ -224,7 +214,7 @@ We provide two separate meshes of {\ttfamily Face\+Elements\+:} one for the inne
 \DoxyCodeLine{  }
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create BC elements on outer boundary}}
+\DoxyCodeLine{\textcolor{comment}{ /// Create BC elements on outer boundary}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a359d402bb4aed7d83973248d82085efb}{create\_outer\_bc\_elements}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Create flux elements on inner boundary}}
@@ -233,11 +223,11 @@ We provide two separate meshes of {\ttfamily Face\+Elements\+:} one for the inne
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to bulk mesh}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classAnnularQuadMesh}{AnnularQuadMesh<ELEMENT>}}* \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ad5927e4a2156e96c55ebce044c6f9653}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{  \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to mesh containing the DtN boundary}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh containing the DtN boundary}}
 \DoxyCodeLine{\textcolor{comment}{ /// condition elements}}
 \DoxyCodeLine{\textcolor{comment}{} FourierDecomposedHelmholtzDtNMesh<ELEMENT>* \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab7aafa9c0ab982d9e1fdc31d802d309b}{Helmholtz\_outer\_boundary\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Mesh of face elements that apply the prescribed flux}}
+\DoxyCodeLine{\textcolor{comment}{ /// Mesh of face elements that apply the prescribed flux}}
 \DoxyCodeLine{\textcolor{comment}{ /// on the inner boundary}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a3ecc5a3fc3407de8985ed9a61402f2f0}{Helmholtz\_inner\_boundary\_mesh\_pt}};}
 \DoxyCodeLine{}
@@ -249,13 +239,13 @@ We provide two separate meshes of {\ttfamily Face\+Elements\+:} one for the inne
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constr}{}\doxysubsection{The problem constructor}\label{index_constr}
-We start by building the bulk mesh, using the {\ttfamily Two\+D\+Annular\+Mesh}.
+We start by building the bulk mesh, using the {\ttfamily Two\+DAnnular\+Mesh}.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Fourier-\/decomposed Helmholtz problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_ab368ed8fe04d4e3db67d13bab9e7b52e}{FourierDecomposedHelmholtzProblem}}()}
@@ -282,9 +272,7 @@ We start by building the bulk mesh, using the {\ttfamily Two\+D\+Annular\+Mesh}.
 \DoxyCodeLine{  \textcolor{keyword}{new} \mbox{\hyperlink{classAnnularQuadMesh}{AnnularQuadMesh<ELEMENT>}}(n\_r,n\_theta,r\_min,r\_max,theta\_min,theta\_max);}
 
 \end{DoxyCodeInclude}
-
-
-Next we create and populate the mesh of elements containing the DtN boundary elements on the artificial outer boundary,
+ Next we create and populate the mesh of elements containing the DtN boundary elements on the artificial outer boundary,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -298,9 +286,7 @@ Next we create and populate the mesh of elements containing the DtN boundary ele
 \DoxyCodeLine{ create\_outer\_bc\_elements();}
 
 \end{DoxyCodeInclude}
-
-
-and attach flux elements to the inner boundary\+:
+ and attach flux elements to the inner boundary\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -310,9 +296,7 @@ and attach flux elements to the inner boundary\+:
 \DoxyCodeLine{ create\_flux\_elements\_on\_inner\_boundary();}
 
 \end{DoxyCodeInclude}
-
-
-We combine the various meshes to a global mesh,
+ We combine the various meshes to a global mesh,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -326,9 +310,7 @@ We combine the various meshes to a global mesh,
 \DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-pass the problem parameters to the bulk elements,
+ pass the problem parameters to the bulk elements,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -348,22 +330,18 @@ pass the problem parameters to the bulk elements,
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-and set up the equation numbering scheme\+:
+ and set up the equation numbering scheme\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-The problem is now ready to be solved.
+ The problem is now ready to be solved.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -374,7 +352,7 @@ The functions {\ttfamily create\+\_\+flux\+\_\+elements(...)} and {\ttfamily cre
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_outer\_bc\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create BC elements on outer boundary}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a359d402bb4aed7d83973248d82085efb}{FourierDecomposedHelmholtzProblem<ELEMENT>::create\_outer\_bc\_elements}}()}
 \DoxyCodeLine{\{}
@@ -409,9 +387,7 @@ The functions {\ttfamily create\+\_\+flux\+\_\+elements(...)} and {\ttfamily cre
 \DoxyCodeLine{\} \textcolor{comment}{// end of create\_outer\_bc\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-(We omit the listing of the function {\ttfamily create\+\_\+flux\+\_\+elements(...)} because it is very similar. Feel free to inspect in the \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc}{\texttt{ source code.}})
+ (We omit the listing of the function {\ttfamily create\+\_\+flux\+\_\+elements(...)} because it is very similar. Feel free to inspect in the \href{../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc}{\texttt{ source code.}})
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -422,7 +398,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} plots the comp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_of\_doc=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedHelmholtzProblem_a893efb01f8f1d254315201121766d882}{FourierDecomposedHelmholtzProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -435,7 +411,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} plots the comp
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
@@ -444,7 +420,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} plots the comp
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output\_fct(some\_file,npts,\mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{ProblemParameters::get\_exact\_u}}); }
@@ -454,7 +430,7 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} plots the comp
 \DoxyCodeLine{ \textcolor{comment}{// Doc error and return of the square of the L2 error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>compute\_error(some\_file,\mbox{\hyperlink{namespaceProblemParameters_af750b29069b29bd38b5220ecf534e7f7}{ProblemParameters::get\_exact\_u}},}
@@ -462,13 +438,11 @@ The post-\/processing function {\ttfamily doc\+\_\+solution(...)} plots the comp
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Doc L2 error and norm of solution}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)nNorm of error   : "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Norm of solution: "} << sqrt(norm) << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)nNorm of error   : "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Norm of solution: "{}} << sqrt(norm) << std::endl << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily check\+\_\+gamma(...)} is used to check the computation of the $ \gamma $ integral. If computed correctly, its values (pre-\/computed at the Gauss points of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Element}) ought to agree (well) with the derivative of the exact solution. They do; see \mbox{\hyperlink{index_acc}{The accuracy of the boundary condition elements}}.
+ The function {\ttfamily check\+\_\+gamma(...)} is used to check the computation of the $ \gamma $ integral. If computed correctly, its values (pre-\/computed at the Gauss points of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Flux\+Element}) ought to agree (well) with the derivative of the exact solution. They do; see \mbox{\hyperlink{index_acc}{The accuracy of the boundary condition elements}}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -477,9 +451,7 @@ The function {\ttfamily check\+\_\+gamma(...)} is used to check the computation 
 \DoxyCodeLine{ check\_gamma(doc\_info);}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we output the time-\/averaged power radiated over the outer boundary of the domain, defined as \[ \overline{\cal P }_N = \pi R^2 \int_0^\pi \left. \bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta. \] We refer to \href{../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html\#appendix}{\texttt{ another tutorial}} for the derivation which shows (in the context of an acoustic fluid-\/structure interaction problem) why this is a sensible definition of the radiated power.
+ Finally, we output the time-\/averaged power radiated over the outer boundary of the domain, defined as \[ \overline{\cal P }_N = \pi R^2 \int_0^\pi \left. \bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} - Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} \bigg)\right|_{\rho=R} \sin(\theta) \ d\theta. \] We refer to \href{../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html\#appendix}{\texttt{ another tutorial}} for the derivation which shows (in the context of an acoustic fluid-\/structure interaction problem) why this is a sensible definition of the radiated power.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -487,10 +459,10 @@ Finally, we output the time-\/averaged power radiated over the outer boundary of
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Compute/output the radiated power}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/power\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/power\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/total\_power\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/total\_power\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Accumulate contribution from elements}}
@@ -506,13 +478,13 @@ Finally, we output the time-\/averaged power radiated over the outer boundary of
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output total power}}
-\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"Radiated power: "} }
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}} << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}} << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ oomph\_info << \textcolor{stringliteral}{"{}Radiated power: "{}} }
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}} << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}} << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{            << power << std::endl;}
 \DoxyCodeLine{ some\_file.open(filename); }
-\DoxyCodeLine{ some\_file << \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}} << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{           << \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}} << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ some\_file << \mbox{\hyperlink{namespaceProblemParameters_aaa674958a1ca6ee0b99de3377288c93f}{ProblemParameters::N\_fourier}} << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{           << \mbox{\hyperlink{namespaceProblemParameters_aa5362de1af9e257fde4317c367158a93}{ProblemParameters::K\_squared}} << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{           << power << std::endl;}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
@@ -528,20 +500,21 @@ Finally, we output the time-\/averaged power radiated over the outer boundary of
 As discussed in the introduction, most practically relevant solutions of the Helmholtz equation are complex valued. Since {\ttfamily oomph-\/lib\textquotesingle{}s} solvers only deal with real (double precision) unknowns, the equations are separated into their real and imaginary parts. In the implementation of the Helmholtz elements, we store the real and imaginary parts of the solution as two separate values at each node. By default, the real and imaginary parts are accessible via {\ttfamily Node\+::value(0)} and {\ttfamily Node\+::value(1)}. However, to facilitate the use of the elements in multi-\/physics problems we avoid accessing the unknowns directly in this manner but provide the virtual function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::complex<unsigned> FourierDecomposedHelmholtzEquations<DIM>::u\_index\_fourier\_decomposed\_helmholtz()}
+
 \end{DoxyCode}
  which returns a complex number made of the two unsigneds that indicate which nodal value represents the real and imaginary parts of the solution. This function may be overloaded in combined multi-\/physics elements in which a Helmholtz element is combined (by multiple inheritance) with another element, using the strategy described in \href{../../../multi_physics/b_convection/html/index.html}{\texttt{ the Boussinesq convection tutorial}}.\hypertarget{index_acc}{}\doxysubsubsection{The accuracy of the boundary condition elements}\label{index_acc}
 As discussed above, the Dirichlet-\/to-\/\+Neumann mapping allows an \char`\"{}exact\char`\"{} implementation of the Sommerfeld radiation condition, provided the artificial outer boundary is sufficiently far from the scatterer that any near field effects have decayed. The actual accuracy of the computational results depends on various factors\+:
 \begin{DoxyItemize}
-\item The number of {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Boundary\+Element} along the artificial domain boundary. Since these elements are attached to the \char`\"{}bulk\char`\"{} {\ttfamily Fourier\+Decomposed\+Helmholtz\+Elements} it is important that the bulk mesh is sufficiently fine to resolve the relevant features of the solution throughout the domain.
-\item The number of terms included in the sum (8) -- specified in the call to the constructor of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+N\+Mesh}.
+\item The number of {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NBoundary\+Element} along the artificial domain boundary. Since these elements are attached to the \char`\"{}bulk\char`\"{} {\ttfamily Fourier\+Decomposed\+Helmholtz\+Elements} it is important that the bulk mesh is sufficiently fine to resolve the relevant features of the solution throughout the domain.
+\item The number of terms included in the sum (8) -- specified in the call to the constructor of the {\ttfamily Fourier\+Decomposed\+Helmholtz\+Dt\+NMesh}.
 \item The accuracy of the integration scheme used to evaluate the integral in (8).
 \end{DoxyItemize}\DoxyHorRuler{0}
 \hypertarget{index_ex}{}\doxysubsection{Exercises}\label{index_ex}
 \hypertarget{index_lin}{}\doxysubsubsection{Exploiting linearity}\label{index_lin}
-Confirm that the (costly) re-\/computation of the $ \gamma $ integral in {\ttfamily \mbox{\hyperlink{sphere__scattering_8txt_affc4feabe54e674d239116538628c210}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}} after the first (and only) linear solve in the Newton iteration can be avoided by declaring the problem to be linear.\hypertarget{index_acc_ex}{}\doxysubsubsection{The accuracy of the boundary condition elements}\label{index_acc_ex}
+Confirm that the (costly) re-\/computation of the $ \gamma $ integral in {\ttfamily actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} after the first (and only) linear solve in the Newton iteration can be avoided by declaring the problem to be linear.\hypertarget{index_acc_ex}{}\doxysubsubsection{The accuracy of the boundary condition elements}\label{index_acc_ex}
 
 \begin{DoxyItemize}
-\item Explore the accuracy (and computational cost) of the application of the DtN boundary condition by varying the number of terms included in the sum (8). Specifically, confirm that an obviously wrong result is obtained if we choose {\ttfamily \mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Problem\+Parameters\+::\+Nterms\+\_\+for\+\_\+\+DtN}}} $<$ {\ttfamily Problem\+Parameters\+::\+Nterms}. ~\newline
+\item Explore the accuracy (and computational cost) of the application of the DtN boundary condition by varying the number of terms included in the sum (8). Specifically, confirm that an obviously wrong result is obtained if we choose {\ttfamily \mbox{\hyperlink{namespaceProblemParameters_aa529b33b7feb959e0c044447bf0f6c6f}{Problem\+Parameters\+::\+Nterms\+\_\+for\+\_\+\+DtN}}} \texorpdfstring{$<$}{<} {\ttfamily Problem\+Parameters\+::\+Nterms}. ~\newline
 
 \item Explore the function {\ttfamily check\+\_\+gamma()} and confirm that the computed value for the $ \gamma $ integral provides a good approximation to the derivative of the exact solution. Here is a representative comparison obtained with the parameters used in the driver code listed above\+:
 \end{DoxyItemize} 
@@ -563,5 +536,5 @@ Modify the driver code to compute the sound field created when a planar acoustic
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

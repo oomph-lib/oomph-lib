@@ -1,6 +1,11 @@
-\hypertarget{classSegregatedFSICollapsibleChannelProblem}{}\doxysection{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classSegregatedFSICollapsibleChannelProblem}{}\doxysection{Segregated\+FSICollapsible\+Channel\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classSegregatedFSICollapsibleChannelProblem}\index{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}}
-Inheritance diagram for Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+
+
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
+Inheritance diagram for Segregated\+FSICollapsible\+Channel\+Problem\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.463343cm]{classSegregatedFSICollapsibleChannelProblem}
@@ -9,16 +14,16 @@ Inheritance diagram for Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_ac762b472c2baafa23dae6b9ce38f31da}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}} (const unsigned \&nup, const unsigned \&ncollapsible, const unsigned \&ndown, const unsigned \&ny, const double \&lup, const double \&lcollapsible, const double \&ldown, const double \&ly, const bool \&displ\+\_\+control, const bool \&steady\+\_\+flag)
+\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_ac762b472c2baafa23dae6b9ce38f31da}{Segregated\+FSICollapsible\+Channel\+Problem}} (const unsigned \&nup, const unsigned \&ncollapsible, const unsigned \&ndown, const unsigned \&ny, const double \&lup, const double \&lcollapsible, const double \&ldown, const double \&ly, const bool \&displ\+\_\+control, const bool \&steady\+\_\+flag)
 \begin{DoxyCompactList}\small\item\em Constructor\+: The arguments are the same as the original (non-\/segregated) problem, namely, numbers of elements and lengths of different sections of the domain. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_aa51bac3f0323fafcc86ff0bf0f6c010c}{$\sim$\+Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}} ()
+\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_aa51bac3f0323fafcc86ff0bf0f6c010c}{$\sim$\+Segregated\+FSICollapsible\+Channel\+Problem}} ()
 \begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a7b277b9583bb10e72655010dc653023e}{identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs}} (Vector$<$ Data $\ast$ $>$ \&fluid\+\_\+data\+\_\+pt, Vector$<$ Data $\ast$ $>$ \&\mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a47a833f5612182bfbef339f78a1f71b3}{solid\+\_\+data\+\_\+pt}}, Mesh $\ast$\&\mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a82a0bb94ec85811cb7be74852c922714}{fluid\+\_\+mesh\+\_\+pt}}, Mesh $\ast$\&\mbox{\hyperlink{fsi__channel__segregated__solver_8txt_a37d0fc0ef332d4eae72596e277d5acdd}{solid\+\_\+mesh\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em Identify the fluid and solid Data and meshes that contain only elements involved in the respective sub-\/problems. This is a specific implementation of a pure virtual function in the Segregatable\+F\+S\+I\+Problem base class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a7b277b9583bb10e72655010dc653023e}{identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs}} (Vector$<$ Data $\ast$ $>$ \&fluid\+\_\+data\+\_\+pt, Vector$<$ Data $\ast$ $>$ \&solid\+\_\+data\+\_\+pt, Mesh $\ast$\&fluid\+\_\+mesh\+\_\+pt, Mesh $\ast$\&solid\+\_\+mesh\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Identify the fluid and solid Data and meshes that contain only elements involved in the respective sub-\/problems. This is a specific implementation of a pure virtual function in the Segregatable\+FSIProblem base class. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a2613090b2abf3809de381da12f1cd0d2}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check}} ()
 \begin{DoxyCompactList}\small\item\em Update nodal positions in the fluid mesh in response to changes in the wall displacement field after every Newton step in a monolithic or segregated solid solve. Note the use of the (protected) flag Solve\+\_\+type, which can take the values Full\+\_\+solve, Fluid\+\_\+solve or Solid\+\_\+solve. This flag is used to allow specification of different actions depending on the precise solve taking place. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a8ee14a1d4ab159c9b28dfcb177dc7c57}{actions\+\_\+before\+\_\+segregated\+\_\+convergence\+\_\+check}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Update nodal positions in the fluid mesh in response to any changes in the wall displacement field after every segregated solve. This is not strictly necessary because we do the solid solve last, which performs its own node update before the convergence check of the sub problem. It remains here because if we were solving in a completely segregated fashion a node update would be required for the fluid mesh in the final converged solution to be consistent with the solid positions. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a0f7364ea880f2e740e1960830246e028}{doc\+\_\+solution}} (Doc\+Info \&doc\+\_\+info)
 \begin{DoxyCompactList}\small\item\em Document the solution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a9a6b0dfeda9eb0d4c50e195768c93e37}{steady\+\_\+run}} ()
@@ -27,12 +32,13 @@ void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem_a9a6b0dfeda9eb
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$}
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 Problem class -- add segregated solver capability to an existing problem. 
 
-Definition at line 86 of file simple\+\_\+segregated\+\_\+driver.\+cc.
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00086}{86}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
 
 
 
@@ -41,8 +47,8 @@ Definition at line 86 of file simple\+\_\+segregated\+\_\+driver.\+cc.
 \index{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}!SegregatedFSICollapsibleChannelProblem@{SegregatedFSICollapsibleChannelProblem}}
 \index{SegregatedFSICollapsibleChannelProblem@{SegregatedFSICollapsibleChannelProblem}!SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{SegregatedFSICollapsibleChannelProblem()}{SegregatedFSICollapsibleChannelProblem()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nup,  }\item[{const unsigned \&}]{ncollapsible,  }\item[{const unsigned \&}]{ndown,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lup,  }\item[{const double \&}]{lcollapsible,  }\item[{const double \&}]{ldown,  }\item[{const double \&}]{ly,  }\item[{const bool \&}]{displ\+\_\+control,  }\item[{const bool \&}]{steady\+\_\+flag }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nup,  }\item[{const unsigned \&}]{ncollapsible,  }\item[{const unsigned \&}]{ndown,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lup,  }\item[{const double \&}]{lcollapsible,  }\item[{const double \&}]{ldown,  }\item[{const double \&}]{ly,  }\item[{const bool \&}]{displ\+\_\+control,  }\item[{const bool \&}]{steady\+\_\+flag }\end{DoxyParamCaption})}
 
 
 
@@ -50,18 +56,18 @@ Constructor\+: The arguments are the same as the original (non-\/segregated) pro
 
 Constructor for the collapsible channel problem. 
 
-Definition at line 168 of file simple\+\_\+segregated\+\_\+driver.\+cc.
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00167}{167}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
 
 
 
-References Flags\+::\+Convergence\+\_\+criterion, Flags\+::\+Convergence\+\_\+tolerance, enable\+\_\+pointwise\+\_\+aitken(), Flags\+::\+Omega\+\_\+under\+\_\+relax, Flags\+::\+Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation, and Flags\+::\+Use\+\_\+pointwise\+\_\+aitken.
+References \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00066}{Flags\+::\+Convergence\+\_\+criterion}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00069}{Flags\+::\+Convergence\+\_\+tolerance}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00060}{Flags\+::\+Omega\+\_\+under\+\_\+relax}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00063}{Flags\+::\+Use\+\_\+irons\+\_\+and\+\_\+tuck\+\_\+extrapolation}}, and \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00057}{Flags\+::\+Use\+\_\+pointwise\+\_\+aitken}}.
 
 \mbox{\Hypertarget{classSegregatedFSICollapsibleChannelProblem_aa51bac3f0323fafcc86ff0bf0f6c010c}\label{classSegregatedFSICollapsibleChannelProblem_aa51bac3f0323fafcc86ff0bf0f6c010c}} 
 \index{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}!````~SegregatedFSICollapsibleChannelProblem@{$\sim$SegregatedFSICollapsibleChannelProblem}}
 \index{````~SegregatedFSICollapsibleChannelProblem@{$\sim$SegregatedFSICollapsibleChannelProblem}!SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$SegregatedFSICollapsibleChannelProblem()}{~SegregatedFSICollapsibleChannelProblem()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -69,7 +75,7 @@ Empty Destructor.
 
 
 
-Definition at line 108 of file simple\+\_\+segregated\+\_\+driver.\+cc.
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00108}{108}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
 
 
 
@@ -78,8 +84,8 @@ Definition at line 108 of file simple\+\_\+segregated\+\_\+driver.\+cc.
 \index{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -87,25 +93,37 @@ Update nodal positions in the fluid mesh in response to changes in the wall disp
 
 
 
-Definition at line 129 of file simple\+\_\+segregated\+\_\+driver.\+cc.
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00129}{129}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00433}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classSegregatedFSICollapsibleChannelProblem_a8ee14a1d4ab159c9b28dfcb177dc7c57}\label{classSegregatedFSICollapsibleChannelProblem_a8ee14a1d4ab159c9b28dfcb177dc7c57}} 
 \index{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}!actions\_before\_segregated\_convergence\_check@{actions\_before\_segregated\_convergence\_check}}
 \index{actions\_before\_segregated\_convergence\_check@{actions\_before\_segregated\_convergence\_check}!SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_segregated\_convergence\_check()}{actions\_before\_segregated\_convergence\_check()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::actions\+\_\+before\+\_\+segregated\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::actions\+\_\+before\+\_\+segregated\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Update nodal positions in the fluid mesh in response to any changes in the wall displacement field after every segregated solve. This is not strictly necessary because we do the solid solve last, which performs its own node update before the convergence check of the sub problem. It remains here because if we were solving in a completely segregated fashion a node update would be required for the fluid mesh in the final converged solution to be consistent with the solid positions. 
 
-Definition at line 147 of file simple\+\_\+segregated\+\_\+driver.\+cc.
+
+
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00147}{147}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00433}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+Bulk\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classSegregatedFSICollapsibleChannelProblem_a0f7364ea880f2e740e1960830246e028}\label{classSegregatedFSICollapsibleChannelProblem_a0f7364ea880f2e740e1960830246e028}} 
 \index{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})}
 
 
 
@@ -113,33 +131,33 @@ Document the solution.
 
 
 
-Definition at line 326 of file simple\+\_\+segregated\+\_\+driver.\+cc.
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00326}{326}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
 
 \mbox{\Hypertarget{classSegregatedFSICollapsibleChannelProblem_a7b277b9583bb10e72655010dc653023e}\label{classSegregatedFSICollapsibleChannelProblem_a7b277b9583bb10e72655010dc653023e}} 
 \index{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}!identify\_fluid\_and\_solid\_dofs@{identify\_fluid\_and\_solid\_dofs}}
 \index{identify\_fluid\_and\_solid\_dofs@{identify\_fluid\_and\_solid\_dofs}!SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{identify\_fluid\_and\_solid\_dofs()}{identify\_fluid\_and\_solid\_dofs()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs (\begin{DoxyParamCaption}\item[{Vector$<$ Data $\ast$ $>$ \&}]{fluid\+\_\+data\+\_\+pt,  }\item[{Vector$<$ Data $\ast$ $>$ \&}]{solid\+\_\+data\+\_\+pt,  }\item[{Mesh $\ast$\&}]{fluid\+\_\+mesh\+\_\+pt,  }\item[{Mesh $\ast$\&}]{solid\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs (\begin{DoxyParamCaption}\item[{Vector$<$ Data $\ast$ $>$ \&}]{fluid\+\_\+data\+\_\+pt,  }\item[{Vector$<$ Data $\ast$ $>$ \&}]{solid\+\_\+data\+\_\+pt,  }\item[{Mesh $\ast$\&}]{fluid\+\_\+mesh\+\_\+pt,  }\item[{Mesh $\ast$\&}]{solid\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
-Identify the fluid and solid Data and meshes that contain only elements involved in the respective sub-\/problems. This is a specific implementation of a pure virtual function in the Segregatable\+F\+S\+I\+Problem base class. 
+Identify the fluid and solid Data and meshes that contain only elements involved in the respective sub-\/problems. This is a specific implementation of a pure virtual function in the Segregatable\+FSIProblem base class. 
 
-Identify the fluid and solid Data and the meshes that contain only elements that are involved in the respective sub-\/problems. This implements a pure virtual function in the Segregatable\+F\+S\+I\+Problem base class. 
+Identify the fluid and solid Data and the meshes that contain only elements that are involved in the respective sub-\/problems. This implements a pure virtual function in the Segregatable\+FSIProblem base class. 
 
-Definition at line 244 of file simple\+\_\+segregated\+\_\+driver.\+cc.
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00243}{243}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
 
 
 
-References fluid\+\_\+mesh\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt, solid\+\_\+data\+\_\+pt, and solid\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}}.
 
 \mbox{\Hypertarget{classSegregatedFSICollapsibleChannelProblem_a9a6b0dfeda9eb0d4c50e195768c93e37}\label{classSegregatedFSICollapsibleChannelProblem_a9a6b0dfeda9eb0d4c50e195768c93e37}} 
 \index{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}!steady\_run@{steady\_run}}
 \index{steady\_run@{steady\_run}!SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$@{SegregatedFSICollapsibleChannelProblem$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{steady\_run()}{steady\_run()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem}}$<$ E\+L\+E\+M\+E\+NT $>$\+::steady\+\_\+run\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classSegregatedFSICollapsibleChannelProblem}{Segregated\+FSICollapsible\+Channel\+Problem}}$<$ ELEMENT $>$\+::steady\+\_\+run\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -147,15 +165,15 @@ Perform a steady run.
 
 Perform a steady run in which the external pressure (or presribed displacement) is varied causing the channel to collapse. 
 
-Reimplemented from \mbox{\hyperlink{classFSICollapsibleChannelProblem_a299ba7d5819e7871eae7e331d1abab8b}{F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented from \mbox{\hyperlink{classFSICollapsibleChannelProblem_a299ba7d5819e7871eae7e331d1abab8b}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 359 of file simple\+\_\+segregated\+\_\+driver.\+cc.
+Definition at line \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00359}{359}} of file \mbox{\hyperlink{simple__segregated__driver_8cc_source}{simple\+\_\+segregated\+\_\+driver.\+cc}}.
 
 
 
-References Flags\+::\+Nsteps, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmax, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmin, setup\+\_\+segregated\+\_\+solver(), Flags\+::\+Use\+\_\+segregated\+\_\+solver, and Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00245}{Flags\+::\+Nsteps}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+ext\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00058}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmax}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00053}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pmin}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00054}{Flags\+::\+Use\+\_\+segregated\+\_\+solver}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00066}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr}}.
 
 
 

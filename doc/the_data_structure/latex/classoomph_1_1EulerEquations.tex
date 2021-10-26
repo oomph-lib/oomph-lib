@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1EulerEquations}{}\doxysection{oomph\+::Euler\+Equations$<$ D\+IM $>$ Class Template Reference}
+\hypertarget{classoomph_1_1EulerEquations}{}\doxysection{oomph\+::Euler\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1EulerEquations}\index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@ Base class for \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} equations.
 
 {\ttfamily \#include $<$euler\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Euler\+Equations$<$ D\+IM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Euler\+Equations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.522013cm]{classoomph_1_1EulerEquations}
@@ -22,40 +22,40 @@ Inheritance diagram for oomph\+::Euler\+Equations$<$ D\+IM $>$\+:\begin{figure}[
 \begin{DoxyCompactList}\small\item\em Return the flux derivatives as a function of the unknowns. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1EulerEquations_a0c60500b3b841a4065b588b55e6dfc49}{$\sim$\+Euler\+Equations}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}{pressure}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}}) const
+double \mbox{\hyperlink{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}{pressure}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Calculate the pressure from the unknowns. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1EulerEquations_a51f474519ebab18d4b8504fa4b414d16}{gamma}} () const
+double \mbox{\hyperlink{classoomph_1_1EulerEquations_a51f474519ebab18d4b8504fa4b414d16}{gamma}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Return the value of gamma. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1EulerEquations_afa267c8b6e4a6ed4938d572ae90cd5de}{gamma\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1EulerEquations_a7b9d6d2983c168febd4a94c25b0d6101}{gamma\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to gamma. \end{DoxyCompactList}\item 
-double $\ast$const  \& \mbox{\hyperlink{classoomph_1_1EulerEquations_aec33261b153f07968bdc4277ca1aa5ad}{gamma\+\_\+pt}} () const
+double $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \& \mbox{\hyperlink{classoomph_1_1EulerEquations_acbb973f7c9f4f269925d31a62f1eb0fe}{gamma\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Access function for the pointer to gamma (const version) \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations_a94116a7673c825ab36ed1d57f3cb8a62}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations_a94116a7673c825ab36ed1d57f3cb8a62}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em The number of unknowns at each node is the number of flux components. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EulerEquations_a3e277760413c4b27b3eae150b1d212b1}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+solution\+\_\+pt, const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
-\item 
+void \mbox{\hyperlink{classoomph_1_1EulerEquations_a3e277760413c4b27b3eae150b1d212b1}{compute\+\_\+error}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+solution\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&error, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&norm)
+\begin{DoxyCompactList}\small\item\em Compute the error and norm of solution integrated over the element Does not plot the error in the outfile. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1EulerEquations_a4478d473edbda3529602c75f70cafe30}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EulerEquations_a9d51d5bcc096341b6f73353d87def5b3}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1EulerEquations_a9d51d5bcc096341b6f73353d87def5b3}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1EulerEquations_aee507c1b94ee9a6bdfd77db410ca85e8}{allocate\+\_\+memory\+\_\+for\+\_\+averages}} ()
 \item 
-double \& \mbox{\hyperlink{classoomph_1_1EulerEquations_a0e83b231a00250adc6da3069b9936cc1}{average\+\_\+gradient}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j)
+double \& \mbox{\hyperlink{classoomph_1_1EulerEquations_a58c9d72a6407b3bc1fcf95a8e01b86ea}{average\+\_\+gradient}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&j)
 \begin{DoxyCompactList}\small\item\em Return access to the average gradient. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1EulerEquations_adc564d7d1f93e710167b9aa8c089da0c}{average\+\_\+prim\+\_\+value}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+double \& \mbox{\hyperlink{classoomph_1_1EulerEquations_a2195a9447f5e5b81779e7d681b68d916}{average\+\_\+prim\+\_\+value}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Return the average values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations_a6bf35d53c8c306df8865192ef85cc08f}{nflux}} () const
-\begin{DoxyCompactList}\small\item\em D\+IM momentum-\/components, a density and an energy are transported. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}{flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&f)
+unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations_a6bf35d53c8c306df8865192ef85cc08f}{nflux}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\begin{DoxyCompactList}\small\item\em DIM momentum-\/components, a density and an energy are transported. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}{flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
 \begin{DoxyCompactList}\small\item\em Return the flux as a function of the unknown. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1EulerEquations_a48786dc00ef6c17c264871b700a45aef}{Default\+\_\+\+Gamma\+\_\+\+Value}}
-\item 
+\begin{DoxyCompactList}\small\item\em Set the default value of Gamma to be 1.\+4 in all three dimension specialisations. This form seems to be required for gcc 4.\+4.\+4, rather than a more general templated version. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1EulerEquations_aff0b7eb721c766bb0cdb3ad6d2e70840}{Default\+\_\+\+Gamma\+\_\+\+Value}}
 \item 
 double \mbox{\hyperlink{classoomph_1_1EulerEquations_ac97dd8908ab76fab97fb0dba0c7b9a43}{Default\+\_\+\+Gamma\+\_\+\+Value}}
@@ -78,12 +78,11 @@ static double \mbox{\hyperlink{classoomph_1_1EulerEquations_ae5afff2a26816dd2303
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM$>$\newline
-class oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$}
-
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+Euler\+Equations$<$ DIM $>$}
 Base class for \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} equations. 
 
-Definition at line 46 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00046}{46}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
@@ -92,8 +91,8 @@ Definition at line 46 of file euler\+\_\+elements.\+h.
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!EulerEquations@{EulerEquations}}
 \index{EulerEquations@{EulerEquations}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{EulerEquations()}{EulerEquations()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1EulerEquations}{Euler\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1EulerEquations}{Euler\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -101,18 +100,18 @@ Return the flux derivatives as a function of the unknowns.
 
 Constructor 
 
-Definition at line 75 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00075}{75}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Default\+\_\+\+Gamma\+\_\+\+Value, and oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Gamma\+\_\+pt.
+References \mbox{\hyperlink{euler__elements_8h_source_l00049}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Default\+\_\+\+Gamma\+\_\+\+Value}}, and \mbox{\hyperlink{euler__elements_8h_source_l00052}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Gamma\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a0c60500b3b841a4065b588b55e6dfc49}\label{classoomph_1_1EulerEquations_a0c60500b3b841a4065b588b55e6dfc49}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!````~EulerEquations@{$\sim$EulerEquations}}
 \index{````~EulerEquations@{$\sim$EulerEquations}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$EulerEquations()}{~EulerEquations()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1EulerEquations}{Euler\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1EulerEquations}{Euler\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -120,11 +119,11 @@ Destructor.
 
 
 
-Definition at line 85 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00085}{85}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Average\+\_\+gradient, and oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Average\+\_\+prim\+\_\+value.
+References \mbox{\hyperlink{euler__elements_8h_source_l00058}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Average\+\_\+gradient}}, and \mbox{\hyperlink{euler__elements_8h_source_l00055}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Average\+\_\+prim\+\_\+value}}.
 
 
 
@@ -133,23 +132,23 @@ References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Average\+\_\+gradient
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!allocate\_memory\_for\_averages@{allocate\_memory\_for\_averages}}
 \index{allocate\_memory\_for\_averages@{allocate\_memory\_for\_averages}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{allocate\_memory\_for\_averages()}{allocate\_memory\_for\_averages()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::allocate\+\_\+memory\+\_\+for\+\_\+averages (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::allocate\+\_\+memory\+\_\+for\+\_\+averages (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 213 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00213}{213}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::nflux().
+References \mbox{\hyperlink{euler__elements_8h_source_l00062}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::nflux()}}.
 
-\mbox{\Hypertarget{classoomph_1_1EulerEquations_a0e83b231a00250adc6da3069b9936cc1}\label{classoomph_1_1EulerEquations_a0e83b231a00250adc6da3069b9936cc1}} 
+\mbox{\Hypertarget{classoomph_1_1EulerEquations_a58c9d72a6407b3bc1fcf95a8e01b86ea}\label{classoomph_1_1EulerEquations_a58c9d72a6407b3bc1fcf95a8e01b86ea}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!average\_gradient@{average\_gradient}}
 \index{average\_gradient@{average\_gradient}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{average\_gradient()}{average\_gradient()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double\& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::average\+\_\+gradient (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::average\+\_\+gradient (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -157,18 +156,18 @@ Return access to the average gradient.
 
 
 
-Definition at line 230 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00230}{230}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Average\+\_\+gradient, and i.
+References \mbox{\hyperlink{euler__elements_8h_source_l00058}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Average\+\_\+gradient}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
-\mbox{\Hypertarget{classoomph_1_1EulerEquations_adc564d7d1f93e710167b9aa8c089da0c}\label{classoomph_1_1EulerEquations_adc564d7d1f93e710167b9aa8c089da0c}} 
+\mbox{\Hypertarget{classoomph_1_1EulerEquations_a2195a9447f5e5b81779e7d681b68d916}\label{classoomph_1_1EulerEquations_a2195a9447f5e5b81779e7d681b68d916}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!average\_prim\_value@{average\_prim\_value}}
 \index{average\_prim\_value@{average\_prim\_value}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{average\_prim\_value()}{average\_prim\_value()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double\& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::average\+\_\+prim\+\_\+value (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::average\+\_\+prim\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -176,30 +175,34 @@ Return the average values.
 
 
 
-Definition at line 242 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00242}{242}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Average\+\_\+prim\+\_\+value, and i.
+References \mbox{\hyperlink{euler__elements_8h_source_l00055}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Average\+\_\+prim\+\_\+value}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a3e277760413c4b27b3eae150b1d212b1}\label{classoomph_1_1EulerEquations_a3e277760413c4b27b3eae150b1d212b1}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!compute\_error@{compute\_error}}
 \index{compute\_error@{compute\_error}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_error()}{compute\_error()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+solution\+\_\+pt,  }\item[{const double \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{error,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
-
-Compute the error and norm of solution integrated over the element Does not plot the error in the outfile 
-
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a6c1220af04b60c1a1c34b44495188daf}{oomph\+::\+Finite\+Element}}.
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::compute\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+solution\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{error,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{norm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 129 of file euler\+\_\+elements.\+h.
+Compute the error and norm of solution integrated over the element Does not plot the error in the outfile. 
 
 
 
-References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::nflux(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Integral\+::nweight(), s, t, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ac24e1a51acd6a8629d6067277e7f0d2c}{oomph\+::\+Finite\+Element}}.
+
+
+
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00129}{129}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a837c4849f68842295ab5e77c8ecb8b93}{oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{euler__elements_8h_source_l00062}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::nflux()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{nodes_8h_source_l00891}{oomph\+::psi\+\_\+}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a48786dc00ef6c17c264871b700a45aef}\label{classoomph_1_1EulerEquations_a48786dc00ef6c17c264871b700a45aef}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!Default\_Gamma\_Value@{Default\_Gamma\_Value}}
@@ -207,9 +210,13 @@ References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(
 \doxysubsubsection{\texorpdfstring{Default\_Gamma\_Value()}{Default\_Gamma\_Value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ 1 $>$\+::Default\+\_\+\+Gamma\+\_\+\+Value\hspace{0.3cm}{\ttfamily [private]}}
 
+
+
 Set the default value of Gamma to be 1.\+4 in all three dimension specialisations. This form seems to be required for gcc 4.\+4.\+4, rather than a more general templated version. 
 
-Definition at line 38 of file euler\+\_\+elements.\+cc.
+
+
+Definition at line \mbox{\hyperlink{euler__elements_8cc_source_l00038}{38}} of file \mbox{\hyperlink{euler__elements_8cc_source}{euler\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_aff0b7eb721c766bb0cdb3ad6d2e70840}\label{classoomph_1_1EulerEquations_aff0b7eb721c766bb0cdb3ad6d2e70840}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!Default\_Gamma\_Value@{Default\_Gamma\_Value}}
@@ -219,7 +226,7 @@ Definition at line 38 of file euler\+\_\+elements.\+cc.
 
 
 
-Definition at line 40 of file euler\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{euler__elements_8cc_source_l00040}{40}} of file \mbox{\hyperlink{euler__elements_8cc_source}{euler\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_ac97dd8908ab76fab97fb0dba0c7b9a43}\label{classoomph_1_1EulerEquations_ac97dd8908ab76fab97fb0dba0c7b9a43}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!Default\_Gamma\_Value@{Default\_Gamma\_Value}}
@@ -229,14 +236,14 @@ Definition at line 40 of file euler\+\_\+elements.\+cc.
 
 
 
-Definition at line 42 of file euler\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{euler__elements_8cc_source_l00042}{42}} of file \mbox{\hyperlink{euler__elements_8cc_source}{euler\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}\label{classoomph_1_1EulerEquations_a2596b0523e6e40d3ece23f9fd0c6d97c}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!flux@{flux}}
 \index{flux@{flux}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{flux()}{flux()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -244,22 +251,22 @@ Return the flux as a function of the unknown.
 
 Return the flux as a function of the unknowns The unknowns are stored as density, energy and then the velocity components. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ab6ed40337620462e5c6e992081c1612a}{oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ab6ed40337620462e5c6e992081c1612a}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 76 of file euler\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{euler__elements_8cc_source_l00076}{76}} of file \mbox{\hyperlink{euler__elements_8cc_source}{euler\+\_\+elements.\+cc}}.
 
 
 
-References i, and u().
+References \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{oomph\+::f()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a51f474519ebab18d4b8504fa4b414d16}\label{classoomph_1_1EulerEquations_a51f474519ebab18d4b8504fa4b414d16}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!gamma@{gamma}}
 \index{gamma@{gamma}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{gamma()}{gamma()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::gamma (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::gamma (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -267,18 +274,18 @@ Return the value of gamma.
 
 
 
-Definition at line 103 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00103}{103}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Gamma\+\_\+pt.
+References \mbox{\hyperlink{euler__elements_8h_source_l00052}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Gamma\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1EulerEquations_afa267c8b6e4a6ed4938d572ae90cd5de}\label{classoomph_1_1EulerEquations_afa267c8b6e4a6ed4938d572ae90cd5de}} 
+\mbox{\Hypertarget{classoomph_1_1EulerEquations_a7b9d6d2983c168febd4a94c25b0d6101}\label{classoomph_1_1EulerEquations_a7b9d6d2983c168febd4a94c25b0d6101}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!gamma\_pt@{gamma\_pt}}
 \index{gamma\_pt@{gamma\_pt}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{gamma\_pt()}{gamma\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$\& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -286,18 +293,18 @@ Access function for the pointer to gamma.
 
 
 
-Definition at line 109 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00109}{109}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Gamma\+\_\+pt.
+References \mbox{\hyperlink{euler__elements_8h_source_l00052}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Gamma\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1EulerEquations_aec33261b153f07968bdc4277ca1aa5ad}\label{classoomph_1_1EulerEquations_aec33261b153f07968bdc4277ca1aa5ad}} 
+\mbox{\Hypertarget{classoomph_1_1EulerEquations_acbb973f7c9f4f269925d31a62f1eb0fe}\label{classoomph_1_1EulerEquations_acbb973f7c9f4f269925d31a62f1eb0fe}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!gamma\_pt@{gamma\_pt}}
 \index{gamma\_pt@{gamma\_pt}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{gamma\_pt()}{gamma\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ const\& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}  \& \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::gamma\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -305,41 +312,41 @@ Access function for the pointer to gamma (const version)
 
 
 
-Definition at line 115 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00115}{115}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Gamma\+\_\+pt.
+References \mbox{\hyperlink{euler__elements_8h_source_l00052}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Gamma\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a6bf35d53c8c306df8865192ef85cc08f}\label{classoomph_1_1EulerEquations_a6bf35d53c8c306df8865192ef85cc08f}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!nflux@{nflux}}
 \index{nflux@{nflux}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{nflux()}{nflux()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::nflux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::nflux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-D\+IM momentum-\/components, a density and an energy are transported. 
+DIM momentum-\/components, a density and an energy are transported. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ae77531d3bdd9241f450fdb360e7a5cc9}{oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_ae77531d3bdd9241f450fdb360e7a5cc9}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 62 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00062}{62}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::allocate\+\_\+memory\+\_\+for\+\_\+averages(), and oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::compute\+\_\+error().
+Referenced by \mbox{\hyperlink{euler__elements_8h_source_l00213}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::allocate\+\_\+memory\+\_\+for\+\_\+averages()}}, and \mbox{\hyperlink{euler__elements_8h_source_l00129}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::compute\+\_\+error()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a4478d473edbda3529602c75f70cafe30}\label{classoomph_1_1EulerEquations_a4478d473edbda3529602c75f70cafe30}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!output@{output}}
 \index{output@{output}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -351,26 +358,30 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}{oomph\+::\+Q\+Spectral\+Euler\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}{oomph\+::\+Q\+Spectral\+Euler\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}{oomph\+::\+Q\+Spectral\+Euler\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}{oomph\+::\+QSpectral\+Euler\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}{oomph\+::\+QSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_ae3771a5f57f21d3a97595856b089e467}{oomph\+::\+QSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line 203 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00203}{203}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Q\+Spectral\+Euler\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::output().
+References \mbox{\hyperlink{euler__elements_8h_source_l00203}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::output()}}.
+
+
+
+Referenced by \mbox{\hyperlink{euler__elements_8h_source_l00203}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::output()}}, and \mbox{\hyperlink{euler__elements_8h_source_l00283}{oomph\+::\+QSpectral\+Euler\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a9d51d5bcc096341b6f73353d87def5b3}\label{classoomph_1_1EulerEquations_a9d51d5bcc096341b6f73353d87def5b3}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!output@{output}}
 \index{output@{output}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. 
 
 Output function, print the values of all unknowns. 
 
@@ -378,22 +389,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{oomph\+::\+Q\+Spectral\+Euler\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{oomph\+::\+Q\+Spectral\+Euler\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{oomph\+::\+Q\+Spectral\+Euler\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{oomph\+::\+QSpectral\+Euler\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}, \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{oomph\+::\+QSpectral\+Euler\+Element$<$ 1, NNODE\+\_\+1\+D $>$}}, and \mbox{\hyperlink{classoomph_1_1QSpectralEulerElement_a026cdb8f38d01e15906db12ae1e4c4f1}{oomph\+::\+QSpectral\+Euler\+Element$<$ 2, NNODE\+\_\+1\+D $>$}}.
 
 
 
-Definition at line 112 of file euler\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{euler__elements_8cc_source_l00112}{112}} of file \mbox{\hyperlink{euler__elements_8cc_source}{euler\+\_\+elements.\+cc}}.
 
 
 
-References i, s, and u().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}\label{classoomph_1_1EulerEquations_a227a4ad24989e3d1e50e41815436791f}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!pressure@{pressure}}
 \index{pressure@{pressure}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{pressure()}{pressure()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::pressure (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption}) const}
 
 
 
@@ -401,18 +412,18 @@ Calculate the pressure from the unknowns.
 
 Calculate the pressure value from the unknowns. 
 
-Definition at line 49 of file euler\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{euler__elements_8cc_source_l00049}{49}} of file \mbox{\hyperlink{euler__elements_8cc_source}{euler\+\_\+elements.\+cc}}.
 
 
 
-References u().
+References \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a94116a7673c825ab36ed1d57f3cb8a62}\label{classoomph_1_1EulerEquations_a94116a7673c825ab36ed1d57f3cb8a62}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -424,7 +435,7 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 122 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00122}{122}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
@@ -433,8 +444,8 @@ Definition at line 122 of file euler\+\_\+elements.\+h.
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!Average\_gradient@{Average\_gradient}}
 \index{Average\_gradient@{Average\_gradient}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Average\_gradient}{Average\_gradient}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::Average\+\_\+gradient\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::Average\+\_\+gradient\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -442,18 +453,18 @@ Storage for the approximated gradients.
 
 
 
-Definition at line 58 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00058}{58}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::average\+\_\+gradient(), and oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::$\sim$\+Euler\+Equations().
+Referenced by \mbox{\hyperlink{euler__elements_8h_source_l00230}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::average\+\_\+gradient()}}, and \mbox{\hyperlink{euler__elements_8h_source_l00085}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::$\sim$\+Euler\+Equations()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a2a0682d90bb2ae74a2e6cb1ef0e106db}\label{classoomph_1_1EulerEquations_a2a0682d90bb2ae74a2e6cb1ef0e106db}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!Average\_prim\_value@{Average\_prim\_value}}
 \index{Average\_prim\_value@{Average\_prim\_value}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Average\_prim\_value}{Average\_prim\_value}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::Average\+\_\+prim\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::Average\+\_\+prim\+\_\+value\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -461,41 +472,41 @@ Storage for the average primitive values.
 
 
 
-Definition at line 55 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00055}{55}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::average\+\_\+prim\+\_\+value(), and oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::$\sim$\+Euler\+Equations().
+Referenced by \mbox{\hyperlink{euler__elements_8h_source_l00242}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::average\+\_\+prim\+\_\+value()}}, and \mbox{\hyperlink{euler__elements_8h_source_l00085}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::$\sim$\+Euler\+Equations()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_ae5afff2a26816dd230386b3c1b15d7dd}\label{classoomph_1_1EulerEquations_ae5afff2a26816dd230386b3c1b15d7dd}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!Default\_Gamma\_Value@{Default\_Gamma\_Value}}
 \index{Default\_Gamma\_Value@{Default\_Gamma\_Value}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_Gamma\_Value}{Default\_Gamma\_Value}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::Default\+\_\+\+Gamma\+\_\+\+Value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::Default\+\_\+\+Gamma\+\_\+\+Value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
-Definition at line 49 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00049}{49}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Euler\+Equations().
+Referenced by \mbox{\hyperlink{euler__elements_8h_source_l00075}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Euler\+Equations()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EulerEquations_a5dd362769200e19bd966d85c883beaa0}\label{classoomph_1_1EulerEquations_a5dd362769200e19bd966d85c883beaa0}} 
 \index{oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}!Gamma\_pt@{Gamma\_pt}}
 \index{Gamma\_pt@{Gamma\_pt}!oomph::EulerEquations$<$ DIM $>$@{oomph::EulerEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Gamma\_pt}{Gamma\_pt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ D\+IM $>$\+::Gamma\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1EulerEquations}{oomph\+::\+Euler\+Equations}}$<$ DIM $>$\+::Gamma\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 52 of file euler\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{euler__elements_8h_source_l00052}{52}} of file \mbox{\hyperlink{euler__elements_8h_source}{euler\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::\+Euler\+Equations(), oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::gamma(), and oomph\+::\+Euler\+Equations$<$ D\+I\+M $>$\+::gamma\+\_\+pt().
+Referenced by \mbox{\hyperlink{euler__elements_8h_source_l00075}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::\+Euler\+Equations()}}, \mbox{\hyperlink{euler__elements_8h_source_l00103}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::gamma()}}, and \mbox{\hyperlink{euler__elements_8h_source_l00109}{oomph\+::\+Euler\+Equations$<$ DIM $>$\+::gamma\+\_\+pt()}}.
 
 
 

@@ -1,59 +1,59 @@
-\_form#0:$\Omega^{[\alpha]} \in \mathbb{R}^2$
-\_form#1:$\alpha$
-\_form#2:$\Omega^{[\alpha]}$
-\_form#3:$(x_1,x_2)$
-\_form#4:$\Omega = [0,1]^2$
-\_form#5:\[ R(\alpha)= \left( \begin{array}{cc} {\cos(\alpha)} & {-\sin(\alpha)} \\ {\sin(\alpha)} & {\cos(\alpha)} \end{array} \right), \ \ \ \ \ \ \ \ \ \ (1) \]
-\_form#6:$\alpha=30^\circ $
-\_form#7:$ Re = 100 $
-\_form#8:$\alpha = 0^{\circ}$
-\_form#9:$\alpha \ne 0^\circ$
-\_form#10:$\Omega_I$
-\_form#11:$\Omega_C$
-\_form#12:$u_i = 0$
-\_form#13:$i = 1,2$
-\_form#14:$\Omega_O$
-\_form#15:\[ {\bf u}\cdot {\bf t}_{} = 0 \mbox{\ \ \ \ on $\Omega_{O}$,} \ \ \ \ \ \ \ \ \ \ (2) \]
-\_form#16:$ {\bf t}$
-\_form#17:$ \Omega_{O}$
-\_form#18:\[ r_{il}^{u} = \int_\Omega \left[ Re \left( St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j} \right) \psi_l + \tau_{ij}\frac{\partial \psi_l}{\partial x_j} \right] d\Omega - \int_{\partial\Omega} \tau_{ij} n_j\psi_l dS + \delta \Pi_{constraint} = 0, \ \ \ \ \ \ \ \ \ \ (3) \]
-\_form#19:\[ \Pi_{constraint} = \int_{\partial \Omega} \lambda u_i t_i dS, \ \ \ \ \ \ \ \ \ \ (4) \]
-\_form#20:$\lambda$
-\_form#21:\[ r_{il}^{u} = \int_\Omega \left[ Re \left( St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j} \right) \psi_l + \tau_{ij}\frac{\partial \psi_l}{\partial x_j} \right] d\Omega - \int_{\partial\Omega} \tau_{ij} n_j\psi_l dS + \int_{\partial\Omega} \lambda\psi_l t_i = 0. \ \ \ \ \ \ \ \ \ \ (5) \]
-\_form#22:\[ r_{l}^{\lambda} = \int_\Omega u_i t_i \psi^\lambda dS = 0, \ \ \ \ \ \ \ \ \ \ (6) \]
-\_form#23:$\psi^\lambda$
-\_form#24:$(\lambda = -{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})$
-\_form#25:$\partial\Omega_{O}$
-\_form#26:$ \partial \Omega_O $
-\_form#27:$ \partial \Omega_O$
-\_form#28:\[ \left[ \begin{array}{ccccc|c} { F_{\rm xx}}&{ F_{\rm x\bar{\rm x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}&{ B_{\rm x}^{T}}&\\ { F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}&{ B_{\bar{\rm x}}^{T}}&{ M_{\rm x}}\\ { F_{\rm yx}}&{ F_{\rm y\bar{\rm x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}&{ B_{\rm y}^{T}}&\\ { F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ F_{\bar{\rm y}\bar{\rm y}}}&{ B_{\bar{\rm y}}^{T}}&{ M_{\rm y}}\\ { B_{\rm x}}&{ B_{\bar{\rm x}}}&{ B_{\rm y}}&{ B_{\bar{\rm y}}}&\\ \hline &{ M_{\rm x}}&&{ M_{\rm y}}&& \end{array} \right] \left[ \begin{array}{c} \Delta \mathbf{U}_{\rm x}\\ \Delta \mathbf{\overline{U}}_{\rm x}\\ \Delta \mathbf{U}_{\rm y}\\ \Delta \mathbf{\overline{U}}_{\rm y}\\ \Delta \mathbf{P}\\ \Delta \mathbf{\Lambda} \end{array} \right] = - \left[ \begin{array}{c} \mathbf{r}_{\rm x}\\ \mathbf{r}_{\bar{\rm x}}\\ \mathbf{r}_{\rm y}\\ \mathbf{r}_{\bar{\rm y}}\\ \mathbf{r}_{\rm p}\\ \mathbf{r}_{\rm \Lambda} \end{array} \right]. \ \ \ \ \ \ (7) \]
-\_form#29:${\bf U}_{\rm x}$
-\_form#30:${\bf U}_{\rm y}$
-\_form#31:${\bf P}$
-\_form#32:${\bf \Lambda}$
-\_form#33:$x$
-\_form#34:$y$
-\_form#35:$M_{\rm x}$
-\_form#36:$M_{\rm y}$
-\_form#37:$[M_{{\rm x}}]_{ij} = \int_{\partial \Omega_{O}} t_x {\psi_i} \ {\psi_j} \ dS $
-\_form#38:\[ J_{\rm NS} = \left[ \begin{array}{ccccc} { F_{\rm xx}}&{ F_{\rm x\bar{\rm x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}&{ B_{\rm x}^{T}}\\ { F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}&{ B_{\bar{\rm x}}^{T}}\\ { F_{\rm yx}}&{ F_{\rm y\bar{\rm x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}&{ B_{\rm y}^{T}}\\ { F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ F_{\bar{\rm y}\bar{\rm y}}}&{ B_{\bar{\rm y}}^{T}}\\ { B_{\rm x}}&{ B_{\bar{\rm x}}}&{ B_{\rm y}}&{ B_{\bar{\rm y}}} \end{array} \right], \ \ \ L = \left[ \begin{array}{ccccc} &{M_{\rm x}}& &{ M_{\rm x}} & \end{array} \right], \ \ \ \Delta \mathbf{X}_{\rm NS} = \left[ \begin{array}{c} \Delta \mathbf{U}_{\rm x}\\ \Delta \mathbf{\overline{U}}_{\rm x}\\ \Delta \mathbf{U}_{\rm y}\\ \Delta \mathbf{\overline{U}}_{\rm y}\\ \Delta \mathbf{P} \end{array} \right],\mbox{\ \ \ \ and } \ \ \ \mathbf{r}_{\rm NS} = \left[ \begin{array}{c} \mathbf{r}_{\rm x}\\ \mathbf{r}_{\bar{\rm x}}\\ \mathbf{r}_{\rm y}\\ \mathbf{r}_{\bar{\rm y}}\\ \mathbf{r}_{\rm p} \end{array} \right]. \]
-\_form#39:\[ \left[ \begin{array}{cc} { J_{\rm NS}}&L^{T}\\ L& \end{array} \right] \left[ \begin{array}{c} \Delta \mathbf{X}_{\rm NS}\\ \Delta \mathbf{\Lambda} \end{array} \right] = - \left[ \begin{array}{c} \mathbf{r}_{\rm NS}\\ \mathbf{r}_{\rm \Lambda} \end{array} \right]. \ \ \ \ \ \ (8) \]
-\_form#40:\[ P= \left[ \begin{array}{cc} { J_{\rm NS}} + L^{T}W^{-1} L& \\ & W \end{array} \right], \ \ \ \ \ \ (9) \]
-\_form#41:$W = \frac{1}{\sigma}LL^{T}$
-\_form#42:$ \sigma=\|F\|_{\infty} $
-\_form#43:$F$
-\_form#44:$4\times 4$
-\_form#45:\[ F = \left[ \begin{array}{ccccc} { F_{\rm xx}}&{ F_{\rm x\bar{\rm x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}\\ { F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}\\ { F_{\rm yx}}&{ F_{\rm y\bar{\rm x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}\\ { F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ F_{\bar{\rm y}\bar{\rm y}}} \end{array} \right] \]
-\_form#46:$P$
-\_form#47:${J_{\rm NS}} + L^{T}W^{-1} L$
-\_form#48:$W$
-\_form#49:$W^{-1} = \sigma (LL^{T})^{-1} = \sigma ({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}$
-\_form#50:\[ \sigma L^{T}(LL^{T})^{-1}L = \sigma \left[ \begin{array}{ccccc} \cal O &\cal O &\cal O &\cal O &\cal O \\ \cal O&{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&\cal O &{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}&\cal O \\ \cal O&\cal O &\cal O &\cal O &\cal O \\ \cal O&{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&\cal O &{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}& \cal O\\ \cal O&\cal O &\cal O &\cal O &\cal O \end{array} \right]. \]
-\_form#51:$\widehat{W} = \mbox{diag}(M_{\rm x}^{2}+M_{\rm y}^{2})$
-\_form#52:$L^{T}{\widehat{W}}^{-1}L$
-\_form#53:$J_{\rm NS}$
-\_form#54:\[ \tilde{P} = \left[ \begin{array}{cc} { \tilde{J}_{\rm NS}}& \\ & \widehat{W} \end{array} \right], \ \ \ \ \ \ (10) \]
-\_form#55:$\tilde{J}_{\rm NS} =J_{\rm NS}+ L^{T}{\widehat{W}}^{-1}L$
-\_form#56:$\tilde{J}_{\rm NS}$
-\_form#57:$ \tilde{J}_{\rm NS} $
-\_form#58:$\tilde P$
+\_form#0=51x14:$\Omega^{[\alpha]} \in \mathbb{R}^2$
+\_form#1=8x6:$\alpha$
+\_form#2=20x13:$\Omega^{[\alpha]}$
+\_form#3=40x14:$(x_1,x_2)$
+\_form#4=55x15:$\Omega = [0,1]^2$
+\_form#5=231x31:\[ R(\alpha)= \left( \begin{array}{cc} {\cos(\alpha)} & {-\sin(\alpha)} \\ {\sin(\alpha)} & {\cos(\alpha)} \end{array} \right), \ \ \ \ \ \ \ \ \ \ (1) \]
+\_form#6=41x10:$\alpha=30^\circ $
+\_form#7=50x10:$ Re = 100 $
+\_form#8=35x10:$\alpha = 0^{\circ}$
+\_form#9=35x13:$\alpha \ne 0^\circ$
+\_form#10=14x13:$\Omega_I$
+\_form#11=16x13:$\Omega_C$
+\_form#12=35x11:$u_i = 0$
+\_form#13=40x11:$i = 1,2$
+\_form#14=16x13:$\Omega_O$
+\_form#15=158x14:\[ {\bf u}\cdot {\bf t}_{} = 0 \mbox{\ \ \ \ on $\Omega_{O}$,} \ \ \ \ \ \ \ \ \ \ (2) \]
+\_form#16=6x9:$ {\bf t}$
+\_form#17=16x13:$ \Omega_{O}$
+\_form#18=494x31:\[ r_{il}^{u} = \int_\Omega \left[ Re \left( St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j} \right) \psi_l + \tau_{ij}\frac{\partial \psi_l}{\partial x_j} \right] d\Omega - \int_{\partial\Omega} \tau_{ij} n_j\psi_l dS + \delta \Pi_{constraint} = 0, \ \ \ \ \ \ \ \ \ \ (3) \]
+\_form#19=201x30:\[ \Pi_{constraint} = \int_{\partial \Omega} \lambda u_i t_i dS, \ \ \ \ \ \ \ \ \ \ (4) \]
+\_form#20=8x10:$\lambda$
+\_form#21=479x31:\[ r_{il}^{u} = \int_\Omega \left[ Re \left( St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j} \right) \psi_l + \tau_{ij}\frac{\partial \psi_l}{\partial x_j} \right] d\Omega - \int_{\partial\Omega} \tau_{ij} n_j\psi_l dS + \int_{\partial\Omega} \lambda\psi_l t_i = 0. \ \ \ \ \ \ \ \ \ \ (5) \]
+\_form#22=181x30:\[ r_{l}^{\lambda} = \int_\Omega u_i t_i \psi^\lambda dS = 0, \ \ \ \ \ \ \ \ \ \ (6) \]
+\_form#23=15x14:$\psi^\lambda$
+\_form#24=70x15:$(\lambda = -{\mathbf{n}}^T{\mathbf{\tau}}{\mathbf{t}})$
+\_form#25=24x13:$\partial\Omega_{O}$
+\_form#26=24x13:$ \partial \Omega_O $
+\_form#27=24x13:$ \partial \Omega_O$
+\_form#28=376x93:\[ \left[ \begin{array}{ccccc|c} { F_{\rm xx}}&{ F_{\rm x\bar{\rm x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}&{ B_{\rm x}^{T}}&\\ { F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}&{ B_{\bar{\rm x}}^{T}}&{ M_{\rm x}}\\ { F_{\rm yx}}&{ F_{\rm y\bar{\rm x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}&{ B_{\rm y}^{T}}&\\ { F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ F_{\bar{\rm y}\bar{\rm y}}}&{ B_{\bar{\rm y}}^{T}}&{ M_{\rm y}}\\ { B_{\rm x}}&{ B_{\bar{\rm x}}}&{ B_{\rm y}}&{ B_{\bar{\rm y}}}&\\ \hline &{ M_{\rm x}}&&{ M_{\rm y}}&& \end{array} \right] \left[ \begin{array}{c} \Delta \mathbf{U}_{\rm x}\\ \Delta \mathbf{\overline{U}}_{\rm x}\\ \Delta \mathbf{U}_{\rm y}\\ \Delta \mathbf{\overline{U}}_{\rm y}\\ \Delta \mathbf{P}\\ \Delta \mathbf{\Lambda} \end{array} \right] = - \left[ \begin{array}{c} \mathbf{r}_{\rm x}\\ \mathbf{r}_{\bar{\rm x}}\\ \mathbf{r}_{\rm y}\\ \mathbf{r}_{\bar{\rm y}}\\ \mathbf{r}_{\rm p}\\ \mathbf{r}_{\rm \Lambda} \end{array} \right]. \ \ \ \ \ \ (7) \]
+\_form#29=18x13:${\bf U}_{\rm x}$
+\_form#30=18x14:${\bf U}_{\rm y}$
+\_form#31=10x10:${\bf P}$
+\_form#32=11x10:${\bf \Lambda}$
+\_form#33=8x6:$x$
+\_form#34=8x9:$y$
+\_form#35=18x13:$M_{\rm x}$
+\_form#36=18x14:$M_{\rm y}$
+\_form#37=139x18:$[M_{{\rm x}}]_{ij} = \int_{\partial \Omega_{O}} t_x {\psi_i} \ {\psi_j} \ dS $
+\_form#38=598x75:\[ J_{\rm NS} = \left[ \begin{array}{ccccc} { F_{\rm xx}}&{ F_{\rm x\bar{\rm x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}&{ B_{\rm x}^{T}}\\ { F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}&{ B_{\bar{\rm x}}^{T}}\\ { F_{\rm yx}}&{ F_{\rm y\bar{\rm x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}&{ B_{\rm y}^{T}}\\ { F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ F_{\bar{\rm y}\bar{\rm y}}}&{ B_{\bar{\rm y}}^{T}}\\ { B_{\rm x}}&{ B_{\bar{\rm x}}}&{ B_{\rm y}}&{ B_{\bar{\rm y}}} \end{array} \right], \ \ \ L = \left[ \begin{array}{ccccc} &{M_{\rm x}}& &{ M_{\rm x}} & \end{array} \right], \ \ \ \Delta \mathbf{X}_{\rm NS} = \left[ \begin{array}{c} \Delta \mathbf{U}_{\rm x}\\ \Delta \mathbf{\overline{U}}_{\rm x}\\ \Delta \mathbf{U}_{\rm y}\\ \Delta \mathbf{\overline{U}}_{\rm y}\\ \Delta \mathbf{P} \end{array} \right],\mbox{\ \ \ \ and } \ \ \ \mathbf{r}_{\rm NS} = \left[ \begin{array}{c} \mathbf{r}_{\rm x}\\ \mathbf{r}_{\bar{\rm x}}\\ \mathbf{r}_{\rm y}\\ \mathbf{r}_{\bar{\rm y}}\\ \mathbf{r}_{\rm p} \end{array} \right]. \]
+\_form#39=254x31:\[ \left[ \begin{array}{cc} { J_{\rm NS}}&L^{T}\\ L& \end{array} \right] \left[ \begin{array}{c} \Delta \mathbf{X}_{\rm NS}\\ \Delta \mathbf{\Lambda} \end{array} \right] = - \left[ \begin{array}{c} \mathbf{r}_{\rm NS}\\ \mathbf{r}_{\rm \Lambda} \end{array} \right]. \ \ \ \ \ \ (8) \]
+\_form#40=214x31:\[ P= \left[ \begin{array}{cc} { J_{\rm NS}} + L^{T}W^{-1} L& \\ & W \end{array} \right], \ \ \ \ \ \ (9) \]
+\_form#41=64x16:$W = \frac{1}{\sigma}LL^{T}$
+\_form#42=56x14:$ \sigma=\|F\|_{\infty} $
+\_form#43=10x9:$F$
+\_form#44=29x9:$4\times 4$
+\_form#45=168x61:\[ F = \left[ \begin{array}{ccccc} { F_{\rm xx}}&{ F_{\rm x\bar{\rm x}}}&{ F_{\rm xy}}&{ F_{\rm x\bar{\rm y}}}\\ { F_{\bar{\rm x}\rm x}}&{ F_{\bar{\rm x}\bar{\rm x}}}&{ F_{\bar{\rm x}\rm y}}&{ F_{\bar{\rm x}\bar{\rm y}}}\\ { F_{\rm yx}}&{ F_{\rm y\bar{\rm x}}}&{ F_{\rm yy}}&{ F_{\rm y\bar{\rm y}}}\\ { F_{\bar{\rm y}\rm x}}&{ F_{\bar{\rm y}\bar{\rm x}}}&{ F_{\bar{\rm y}\rm y}}&{ F_{\bar{\rm y}\bar{\rm y}}} \end{array} \right] \]
+\_form#46=10x10:$P$
+\_form#47=88x14:${J_{\rm NS}} + L^{T}W^{-1} L$
+\_form#48=14x10:$W$
+\_form#49=203x18:$W^{-1} = \sigma (LL^{T})^{-1} = \sigma ({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}$
+\_form#50=455x76:\[ \sigma L^{T}(LL^{T})^{-1}L = \sigma \left[ \begin{array}{ccccc} \cal O &\cal O &\cal O &\cal O &\cal O \\ \cal O&{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&\cal O &{M_{\rm x}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}&\cal O \\ \cal O&\cal O &\cal O &\cal O &\cal O \\ \cal O&{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm x}}&\cal O &{M_{\rm y}}({M_{\rm x}}^{2}+{M_{\rm y}^{2}})^{-1}{M_{\rm y}}& \cal O\\ \cal O&\cal O &\cal O &\cal O &\cal O \end{array} \right]. \]
+\_form#51=115x19:$\widehat{W} = \mbox{diag}(M_{\rm x}^{2}+M_{\rm y}^{2})$
+\_form#52=51x14:$L^{T}{\widehat{W}}^{-1}L$
+\_form#53=19x13:$J_{\rm NS}$
+\_form#54=153x33:\[ \tilde{P} = \left[ \begin{array}{cc} { \tilde{J}_{\rm NS}}& \\ & \widehat{W} \end{array} \right], \ \ \ \ \ \ (10) \]
+\_form#55=124x16:$\tilde{J}_{\rm NS} =J_{\rm NS}+ L^{T}{\widehat{W}}^{-1}L$
+\_form#56=19x15:$\tilde{J}_{\rm NS}$
+\_form#57=19x15:$ \tilde{J}_{\rm NS} $
+\_form#58=10x13:$\tilde P$

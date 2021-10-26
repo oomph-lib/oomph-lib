@@ -11,19 +11,19 @@ Namespace for helper functions for Double\+Vectors.
 void \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_acf43b80ace3f8a4633190ab36136083b}{concatenate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $\ast$ $>$ \&in\+\_\+vector\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&out\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em Concatenate Double\+Vectors. Takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of Double\+Vectors. If the out vector is built, we will not build a new distribution. Otherwise we build a uniform distribution. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_ae2e2b5728675ea85a48158f5d93f6593}{concatenate}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&in\+\_\+vector, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&out\+\_\+vector)
-\begin{DoxyCompactList}\small\item\em Wrapper around the other concatenate(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete A\+ND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Wrapper around the other concatenate(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete AND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_a3c0fa6de2c35301c556b9530c9ab2bc4}{split}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&in\+\_\+vector, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $\ast$ $>$ \&out\+\_\+vector\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Split a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} into the out Double\+Vectors. Let vec\+\_\+A be the in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}, and let vec\+\_\+B and vec\+\_\+C be the out vectors. Then the splitting of vec\+\_\+A is depicted below\+: vec\+\_\+A\+: \mbox{[}a0 (on p0) a1\mbox{]} (on p0) \mbox{[}a2 (on p1) a3\mbox{]} (on p1) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_a111654d0a7b7bfaae9cdd8101c8005ca}{split}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&in\+\_\+vector, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&out\+\_\+vector)
-\begin{DoxyCompactList}\small\item\em Wrapper around the other split(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete A\+ND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Wrapper around the other split(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete AND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_a3ea9f7c40548e1a88402312e6f15d1fc}{concatenate\+\_\+without\+\_\+communication}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $\ast$ $>$ \&in\+\_\+vector\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&out\+\_\+vector)
 \begin{DoxyCompactList}\small\item\em Concatenate Double\+Vectors. Takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of Double\+Vectors. If the out vector is built, we will not build a new distribution. Otherwise a new distribution will be built using Linear\+Algebra\+Distribution\+::concatenate(...). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_a568db46f65c1d234ac6f96ab54fafe60}{concatenate\+\_\+without\+\_\+communication}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&in\+\_\+vector, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&out\+\_\+vector)
-\begin{DoxyCompactList}\small\item\em Wrapper around the other concatenate\+\_\+without\+\_\+communication(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete A\+ND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Wrapper around the other concatenate\+\_\+without\+\_\+communication(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete AND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_aa87594da930b3eed12a27838972f10f8}{split\+\_\+without\+\_\+communication}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&in\+\_\+vector, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $\ast$ $>$ \&out\+\_\+vector\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Split a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} into the out Double\+Vectors. \mbox{\hyperlink{classoomph_1_1Data}{Data}} stays on its current processor, no data is sent between processors. This results in our vectors which are a permutation of the in vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1DoubleVectorHelpers_a66afcc493558424fb89f26bc23dd5bf2}{split\+\_\+without\+\_\+communication}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&in\+\_\+vector, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&out\+\_\+vector)
-\begin{DoxyCompactList}\small\item\em Wrapper around the other split\+\_\+without\+\_\+communication(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete A\+ND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Wrapper around the other split\+\_\+without\+\_\+communication(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete AND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -50,15 +50,15 @@ then the out\+\_\+vector is
 
 Communication is required between processors. The sum of the global number of rows in the in vectors must equal to the global number of rows in the out vector. This condition must be met if one is to supply an out vector with a distribution, otherwise we can let the function generate the out vector distribution itself. 
 
-Definition at line 983 of file double\+\_\+vector.\+cc.
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l00993}{993}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row(), i, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Linear\+Algebra\+Distribution\+::rank\+\_\+of\+\_\+global\+\_\+row(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00261}{oomph\+::\+Linear\+Algebra\+Distribution\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00387}{oomph\+::\+Linear\+Algebra\+Distribution\+::rank\+\_\+of\+\_\+global\+\_\+row()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 
 
-Referenced by concatenate(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::direct\+\_\+solve(), and oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve().
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l01381}{concatenate()}}, \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l00375}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00181}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_ae2e2b5728675ea85a48158f5d93f6593}\label{namespaceoomph_1_1DoubleVectorHelpers_ae2e2b5728675ea85a48158f5d93f6593}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!concatenate@{concatenate}}
@@ -68,15 +68,15 @@ Referenced by concatenate(), oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\
 
 
 
-Wrapper around the other concatenate(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete A\+ND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! 
+Wrapper around the other concatenate(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete AND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! 
 
 
 
-Definition at line 1371 of file double\+\_\+vector.\+cc.
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l01381}{1381}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
 
 
 
-References concatenate(), and i.
+References \mbox{\hyperlink{double__vector_8cc_source_l00993}{concatenate()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a3ea9f7c40548e1a88402312e6f15d1fc}\label{namespaceoomph_1_1DoubleVectorHelpers_a3ea9f7c40548e1a88402312e6f15d1fc}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!concatenate\_without\_communication@{concatenate\_without\_communication}}
@@ -102,7 +102,7 @@ as opposed to
 
 Note (1)\+: The out vector may not be uniformly distributed even if the in vectors have uniform distributions. The nrow\+\_\+local of the out vector will be the sum of the nrow\+\_\+local of the in vectors. Try this out with two distributions of global rows 3 and 5, uniformly distributed across two processors. Compare this against a distribution of global row 8 distributed across two processors.
 
-There are no M\+PI send and receive, the data stays on the processor as defined by the distributions from the in vectors.
+There are no MPI send and receive, the data stays on the processor as defined by the distributions from the in vectors.
 
 The out vector has its rows permuted according to the individual distributions of the in vectors. For example, if we have Double\+Vectors with distributions A and B, distributed across two processors (p0 and p1),
 
@@ -118,17 +118,17 @@ as opposed to
 
 Note (1)\+: The out vector may not be uniformly distributed even if the the in vectors have uniform distributions. The nrow\+\_\+local of the out vector will be the sum of the nrow\+\_\+local of the in vectors. Try this out with two distributions of global rows 3 and 5, uniformly distributed across two processors. Compare this against a distribution of global row 8 distributed across two processors.
 
-There are no M\+PI send and receive, the data stays on the processor as defined by the distributions from the in vectors. 
+There are no MPI send and receive, the data stays on the processor as defined by the distributions from the in vectors. 
 
-Definition at line 1846 of file double\+\_\+vector.\+cc.
-
-
-
-References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::clear(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l01856}{1856}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
 
 
 
-Referenced by concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+concatenated\+\_\+block\+\_\+vector(), and oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+dof\+\_\+level\+\_\+block().
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00171}{oomph\+::\+Linear\+Algebra\+Distribution\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{double__vector_8cc_source_l02039}{concatenate\+\_\+without\+\_\+communication()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02939}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01134}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+concatenated\+\_\+block()}}, and \mbox{\hyperlink{block__preconditioner_8cc_source_l05671}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::get\+\_\+dof\+\_\+level\+\_\+block()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a568db46f65c1d234ac6f96ab54fafe60}\label{namespaceoomph_1_1DoubleVectorHelpers_a568db46f65c1d234ac6f96ab54fafe60}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!concatenate\_without\_communication@{concatenate\_without\_communication}}
@@ -138,15 +138,15 @@ Referenced by concatenate\+\_\+without\+\_\+communication(), oomph\+::\+Block\+P
 
 
 
-Wrapper around the other concatenate\+\_\+without\+\_\+communication(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete A\+ND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! 
+Wrapper around the other concatenate\+\_\+without\+\_\+communication(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete AND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! 
 
 
 
-Definition at line 2029 of file double\+\_\+vector.\+cc.
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l02039}{2039}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
 
 
 
-References concatenate\+\_\+without\+\_\+communication(), and i.
+References \mbox{\hyperlink{double__vector_8cc_source_l01856}{concatenate\+\_\+without\+\_\+communication()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a3c0fa6de2c35301c556b9530c9ab2bc4}\label{namespaceoomph_1_1DoubleVectorHelpers_a3c0fa6de2c35301c556b9530c9ab2bc4}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!split@{split}}
@@ -166,15 +166,15 @@ vec\+\_\+B\+: \mbox{[}a0\mbox{]} (on p0) vec\+\_\+C\+: \mbox{[}a2\mbox{]} (on p0
 
 Communication is required between processors. The out\+\_\+vector\+\_\+pt must contain pointers to \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} which has already been built with the correct distribution; the sum of the number of global row of the out vectors must be the same the the number of global rows of the in vector. 
 
-Definition at line 1403 of file double\+\_\+vector.\+cc.
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l01413}{1413}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::direct\+\_\+solve(), oomph\+::\+Exact\+D\+G\+P\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::preconditioner\+\_\+solve(), and split().
+Referenced by \mbox{\hyperlink{helmholtz__geometric__multigrid_8h_source_l00375}{oomph\+::\+Helmholtz\+MGPreconditioner$<$ DIM $>$\+::direct\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00181}{oomph\+::\+Exact\+DGPBlock\+Preconditioner$<$ MATRIX $>$\+::preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{double__vector_8cc_source_l01805}{split()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a111654d0a7b7bfaae9cdd8101c8005ca}\label{namespaceoomph_1_1DoubleVectorHelpers_a111654d0a7b7bfaae9cdd8101c8005ca}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!split@{split}}
@@ -184,15 +184,15 @@ Referenced by oomph\+::\+Helmholtz\+M\+G\+Preconditioner$<$ D\+I\+M $>$\+::direc
 
 
 
-Wrapper around the other split(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete A\+ND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! 
+Wrapper around the other split(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete AND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! 
 
 
 
-Definition at line 1795 of file double\+\_\+vector.\+cc.
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l01805}{1805}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
 
 
 
-References i, and split().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__vector_8cc_source_l01413}{split()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_aa87594da930b3eed12a27838972f10f8}\label{namespaceoomph_1_1DoubleVectorHelpers_aa87594da930b3eed12a27838972f10f8}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!split\_without\_communication@{split\_without\_communication}}
@@ -208,17 +208,17 @@ Let vec\+\_\+A be the in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}, and le
 
 vec\+\_\+B\+: \mbox{[}a0\mbox{]} (on p0) vec\+\_\+C\+: \mbox{[}a1\mbox{]} (on p0) \mbox{[}a2\mbox{]} (on p1) \mbox{[}a3\mbox{]} (on p1).
 
-This means that the distribution of the in vector M\+U\+ST be a concatenation of the out vector distributions, refer to Linear\+Algebra\+Distribution\+Helpers\+::concatenate(...) to concatenate distributions. 
+This means that the distribution of the in vector MUST be a concatenation of the out vector distributions, refer to Linear\+Algebra\+Distribution\+Helpers\+::concatenate(...) to concatenate distributions. 
 
-Definition at line 2065 of file double\+\_\+vector.\+cc.
-
-
-
-References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::clear(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l02075}{2075}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vectors(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+concatenated\+\_\+block\+\_\+vector(), and split\+\_\+without\+\_\+communication().
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00171}{oomph\+::\+Linear\+Algebra\+Distribution\+::clear()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8cc_source_l00367}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers\+::concatenate()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l03443}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::return\+\_\+block\+\_\+vectors()}}, and \mbox{\hyperlink{double__vector_8cc_source_l02216}{split\+\_\+without\+\_\+communication()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1DoubleVectorHelpers_a66afcc493558424fb89f26bc23dd5bf2}\label{namespaceoomph_1_1DoubleVectorHelpers_a66afcc493558424fb89f26bc23dd5bf2}} 
 \index{oomph::DoubleVectorHelpers@{oomph::DoubleVectorHelpers}!split\_without\_communication@{split\_without\_communication}}
@@ -228,13 +228,13 @@ Referenced by oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::re
 
 
 
-Wrapper around the other split\+\_\+without\+\_\+communication(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete A\+ND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! 
+Wrapper around the other split\+\_\+without\+\_\+communication(...) function. Be careful with \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of vectors. If the Double\+Vectors are resized, there could be reallocation of memory. If we wanted to use the function which takes a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of pointers to Double\+Vectors, we would either have to invoke new and remember to delete, or create a temporary \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} to store pointers to the \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} objects. This wrapper is meant to make life easier for the user by avoiding calls to new/delete AND without creating a temporary vector of pointers to Double\+Vectors. If we had C++ 11, this would be so much nicer since we can use smart pointers which will delete themselves, so we do not have to remember to delete! 
 
 
 
-Definition at line 2206 of file double\+\_\+vector.\+cc.
+Definition at line \mbox{\hyperlink{double__vector_8cc_source_l02216}{2216}} of file \mbox{\hyperlink{double__vector_8cc_source}{double\+\_\+vector.\+cc}}.
 
 
 
-References i, and split\+\_\+without\+\_\+communication().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{double__vector_8cc_source_l02075}{split\+\_\+without\+\_\+communication()}}.
 

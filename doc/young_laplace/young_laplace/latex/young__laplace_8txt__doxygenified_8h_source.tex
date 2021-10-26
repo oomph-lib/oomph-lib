@@ -1,0 +1,611 @@
+\hypertarget{young__laplace_8txt__doxygenified_8h_source}{}\doxysection{young\+\_\+laplace.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{young__laplace_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Example problem: The Young Laplace equation}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{This document discusses the finite-\/element-\/based solution of the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{<A HREF="{}http://en.wikipedia.org/wiki/Young-\/Laplace\_equation"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{Young Laplace equation</A>, a nonlinear PDE that determines the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{static equilibrium shapes of droplets or bubbles. We start by }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{reviewing the relevant theory and then present the solution of a }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{simple model problem.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{<TABLE BORDER=1, WIDTH=500px>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{<TD bgcolor="{}cornsilk"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{<B>Acknowledgement:</B>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{This tutorial and the associated driver codes were developed jointly}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{with Cedric Ody (Ecole Polytechnique, Paris; now Rennes).}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{</TABLE>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{\(\backslash\)section theory Theory}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{The figure below illustrates a representative problem: A small }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{droplet is extruded slowly from the outlet of a cylindrical tube. The }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{air-\/liquid interface is pinned at the end of the tube. We assume that the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{size of the droplet and the rate of extrusion are so small that}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{gravitational, viscous and inertial forces may be neglected compared}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{to the interfacial forces acting at the air-\/liquid interface.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\)image html spherical\_cap.gif "{}A typical problem: The extrusion of a small droplet from a cylindrical tube. "{} }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)image latex spherical\_cap.eps "{}A typical problem: The extrusion of a small droplet from a cylindrical tube. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{The shape of the air-\/liquid interface (the meniscus) is then determined}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{by  Laplace's law which expresses the balance between the (spatially}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{constant) pressure }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{drop across the meniscus, \(\backslash\)f\$ \(\backslash\)Delta p\string^* \(\backslash\)f\$, and the surface }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{tension forces acting at the air-\/liquid interface,}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{\(\backslash\)Delta p\string^* = \(\backslash\)sigma \(\backslash\)kappa\string^*,}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{where  \(\backslash\)f\$ \(\backslash\)kappa\string^* \(\backslash\)f\$ is the mean curvature}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{and \(\backslash\)f\$ \(\backslash\)sigma \(\backslash\)f\$ the surface tension.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{Non-\/dimensionalising all lengths on some problem-\/specific lengthscale}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)cal L\} \(\backslash\)f\$ (e.g. the radius of the cylindrical tube) and }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{scaling the pressure on the associated capillary scale, }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)Delta p\string^* = \(\backslash\)sigma/\{\(\backslash\)cal L\} \(\backslash\) \(\backslash\)Delta p \(\backslash\)f\$, yields }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{the non-\/dimensional form of the Young-\/Laplace equation }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{\(\backslash\)Delta p =  \(\backslash\)kappa.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{This must be augmented by suitable boundary conditions, to be applied}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{at the contact line -\/-\/ the line along which the meniscus}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{meets the solid surface. We can either "{}pin"{} the position of the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{contact line (as in the above example), or prescribe the  }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{<A HREF="{}http://en.wikipedia.org/wiki/Contact\_angle"{}>contact}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{angle</A> at which the air-\/liquid interface meets the solid surface.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{The mathematical problem may be interpreted as follows: }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{Given the prescribed pressure drop \(\backslash\)f\$ \(\backslash\)Delta p \(\backslash\)f\$ (and thus }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)kappa \(\backslash\)f\$),  we wish to determine an interface shape of }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{the required mean curvature \(\backslash\)f\$ \(\backslash\)kappa \(\backslash\)f\$ that satisfies the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{boundary conditions along the contact line.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{\(\backslash\)subsection cartesian Cartesian PDE-\/based formulation}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{Expressing the (non-\/dimensional) height }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{of the interface above the \(\backslash\)f\$ (x\_1, x\_2) \(\backslash\)f\$-\/plane as }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{\(\backslash\)f\$ x\_3 = u(x\_1,x\_2) \(\backslash\)f\$ yields the cartesian form of the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{Young-\/Laplace equation:}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)Delta p =  \(\backslash\)kappa = -\/ \(\backslash\)nabla \(\backslash\)cdot \(\backslash\)frac\{\(\backslash\)nabla u\}\{\(\backslash\)sqrt\{1+|\(\backslash\)nabla u|\string^2\}\},}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)nabla = (\(\backslash\)partial/\(\backslash\)partial x\_1,\(\backslash\)partial/\(\backslash\)partial x\_2)\string^T \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{Given the imposed pressure drop across the interface, this equation }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{must be solved for \(\backslash\)f\$ u(x\_1, x\_2) \(\backslash\)f\$. Note that this is only possible}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{if the interface can be projected onto the \(\backslash\)f\$ (x\_1, x\_2) \(\backslash\)f\$-\/plane. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)subsection pvd The principle of virtual displacements}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{The interface shape can also be determined}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{from the <A HREF="{}http://en.wikipedia.org/wiki/Virtual\_displacement"{}> }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{principle of virtual displacements</A>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{\(\backslash\)delta \(\backslash\)left( \(\backslash\)int\_S  \(\backslash\)mathit\{\(\backslash\), d\} s \(\backslash\)right)= \(\backslash\)int\_S \(\backslash\)Delta p \{\(\backslash\)bf N\}}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{\(\backslash\)cdot \(\backslash\)delta \{\(\backslash\)bf N\} \(\backslash\)mathit\{\(\backslash\), d\} s + \(\backslash\)oint\_\{L\} \(\backslash\) \(\backslash\) \{\(\backslash\)bf T\}\_n \(\backslash\)cdot}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{\(\backslash\)delta \{\(\backslash\)bf R \} \(\backslash\)mathit\{\(\backslash\), d\} l \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{\(\backslash\)f]  }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{which may be derived from energetic considerations. Here the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{symbol \(\backslash\)f\$ \(\backslash\)delta \(\backslash\)f\$ denotes a variation, \(\backslash\)f\$ \{\(\backslash\)bf R \} \(\backslash\)f\$ is the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{position vector to the interface, and the vector \(\backslash\)f\$ \{\(\backslash\)bf N\}}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)f\$ is the unit normal to the meniscus. The left}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{hand side of this equation represents the variation of the interfacial energy }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{during a virtual displacement, and \(\backslash\)f\$ ds \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{is an infinitesimal element of the meniscus surface, \(\backslash\)f\$S\(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{The terms on the right hand side represent the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{virtual work done by the pressure and the virtual work done by the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{surface tension forces acting at the free contact line, respectively. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\)f\$ dl \(\backslash\)f\$ is the length of an element of the contact line}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{\(\backslash\)f\$L\(\backslash\)f\$, and \(\backslash\)f\$ \{\(\backslash\)bf T\}\_n \(\backslash\)f\$ is the vector tangent to the interface}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{and normal to the contact line. Note that, if the contact line is }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{pinned, the variation of its position is zero, \(\backslash\)f\$ \(\backslash\)delta \{\(\backslash\)bf R\} = }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{\{\(\backslash\)bf 0\} \(\backslash\)f\$, and the line integral vanishes.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{The variational formulation of the problem is particularly }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{convenient for a finite-\/element-\/based solution; see, e.g. the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{<a href="{}../../../solid/solid\_theory/html/index.html\#CartesianLagrangian"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{Solid Mechanics Theory document</a> for a discussion of how}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{to discretise variational principles with finite elements. The}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{variational and PDE-\/based formulations are, of course, related to each}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{other: The Young-\/Laplace equation is the Euler-\/Lagrange equation of the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{variational principle.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{\(\backslash\)subsection intrinsic Parametric representation }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{To deal with cases in which the interface cannot be projected }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{onto the  \(\backslash\)f\$ (x\_1, x\_2) \(\backslash\)f\$-\/plane, we parametrise the meniscus }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{by two intrinsic coordinates as }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf R\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) \(\backslash\)in \{ R\}\string^3\(\backslash\)f\$, where }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)f\$(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) \(\backslash\)in D \(\backslash\)in \{ R\}\string^2\(\backslash\)f\$.  Furthermore, }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{we parametrise the domain boundary, \(\backslash\)f\$\(\backslash\)partial D\(\backslash\)f\$, by a }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{scalar coordinate \(\backslash\)f\$\(\backslash\)xi\(\backslash\)f\$ so that, }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{\{\(\backslash\)partial D\} = \(\backslash\)bigg\(\backslash\)\{ (\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) \(\backslash\) \(\backslash\)bigg| \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{ (\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) = \(\backslash\)left( \(\backslash\)zeta\_1\string^\{[\(\backslash\)partial D]\}(\(\backslash\)xi), \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{\(\backslash\)zeta\_2\string^\{[\(\backslash\)partial D]\}(\(\backslash\)xi) \(\backslash\)right) \(\backslash\)bigg\(\backslash\)\}. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{The normal to the meniscus is then given by }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{\(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{\{\(\backslash\)bf N\} = \(\backslash\)frac\{\{\(\backslash\)bf R\}\_\{,1\} \(\backslash\)times \{\(\backslash\)bf R\}\_\{,2\} \}}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{\{\(\backslash\)mathcal\{A\}\string^\{1/2\}\}, }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{where the commas denote partial differentiation with respect to the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{intrinsic coordinates, and }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)mathcal\{A\}\string^\{1/2\}= |\{\(\backslash\)bf R\}\_\{,1\} \(\backslash\)times \{\(\backslash\)bf R\}\_\{,2\}| \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{is the square root of the surface metric tensor.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{The area and length differentials required in variational principle}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{are}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{\(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{d s=\(\backslash\)mathcal\{A\}\string^\{1/2\} d \(\backslash\)zeta\_1 d \(\backslash\)zeta\_2 }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{and }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{\(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{d l=\(\backslash\)left| \(\backslash\)frac\{d \{\(\backslash\)bf R\}\(\backslash\)left( \(\backslash\)zeta\_1\string^\{[\(\backslash\)partial D]\}(\(\backslash\)xi), \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)zeta\_2\string^\{[\(\backslash\)partial D]\}(\(\backslash\)xi) \(\backslash\)right)\}\{d \(\backslash\)xi\} \(\backslash\)right| d \(\backslash\)xi,}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{allowing us to write the principle of virtual displacements as}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{\(\backslash\)int\_S \(\backslash\)left( \(\backslash\)frac\{\(\backslash\)delta \(\backslash\)mathcal\{A\}\string^\{1/2\}\}\{\(\backslash\)mathcal\{A\}\string^\{1/2\}\} -\/}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{\(\backslash\)kappa \(\backslash\) \{\(\backslash\)bf N\} \(\backslash\)cdot \(\backslash\)delta \{\(\backslash\)bf R\} \(\backslash\)right) \(\backslash\)mathcal\{A\}\string^\{1/2\} d \(\backslash\)zeta\_1 d \(\backslash\)zeta\_2 =}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{\(\backslash\)oint\_\{L\} \{\(\backslash\)bf T\}\_n \(\backslash\)cdot \(\backslash\)delta \{\(\backslash\)bf R\} \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{\(\backslash\)left| \(\backslash\)frac\{d \{\(\backslash\)bf R\}\(\backslash\)left( \(\backslash\)zeta\_1\string^\{[\(\backslash\)partial D]\}(\(\backslash\)xi), \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{\(\backslash\)zeta\_2\string^\{[\(\backslash\)partial D]\}(\(\backslash\)xi) \(\backslash\)right)\}\{d \(\backslash\)xi\} \(\backslash\)right| d \(\backslash\)xi.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{\(\backslash\)subsection spines The method of spines}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{In the current form, the variational principle cannot yield}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{a unique solution because there are infinitely many }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{vector fields  \(\backslash\)f\$ \{\(\backslash\)bf R\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) \(\backslash\)f\$ that parametrise}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{the same interface shape. To remove this ambiguity, and to }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{allow for interface shapes that cannot be projected onto the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{\(\backslash\)f\$ (x\_1,x\_2) \(\backslash\)f\$-\/plane, we employ the so-\/called "{}Method of Spines"{}.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{This method was originally proposed by Kistler and Scriven}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{for the computation of free surface flows. We decompose }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{the vector \(\backslash\)f\$ \{\(\backslash\)bf R\} \(\backslash\)f\$ into two parts by writing it as }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{\(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{\{\(\backslash\)bf R\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) = \{\(\backslash\)bf B\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) + }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{\(\backslash\)mathit\{u\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) \(\backslash\) \{\(\backslash\)bf S\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2). }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{Here the "{}spine basis"{} \(\backslash\)f\$\{\(\backslash\)bf B\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2)\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{and the "{}spines"{} \(\backslash\)f\$\{\(\backslash\)bf S\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2)\(\backslash\)f\$ are pre-\/determined vector}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{fields that must be chosen by the user. Using this}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{decomposition, the meniscus shape is determined by the scalar function}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)f\$\(\backslash\)mathit\{u\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2)\(\backslash\)f\$ which represents the meniscus' displacement }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{along the spines \(\backslash\)f\$\{\(\backslash\)bf S\}\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{The idea is illustrated in the simple 2D sketch below: the spine}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{basis vectors, \(\backslash\)f\$ \{\(\backslash\)bf B\}(\(\backslash\)zeta), \(\backslash\)f\$  parametrise the straight line }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{corresponding to a flat meniscus. Positive values of \(\backslash\)f\$ u \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{displace the meniscus along the spines, \(\backslash\)f\$ \{\(\backslash\)bf S\}(\(\backslash\)zeta) \(\backslash\)f\$ (the red }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{vectors), whose orientation allows the representation  of meniscus }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{shapes that cannot be represented in cartesian form as }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{\(\backslash\)f\$ x\_2 = u(x\_1). \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)image html spine\_sketch.gif "{}Sketch illustrating the parametrisation of the meniscus by the Method of Spines. "{} }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)image latex spine\_sketch.eps "{}Sketch illustrating the parametrisation of the meniscus by the Method of Spines. "{} width=0.35\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{The spine basis and the spines themselves must be chosen such that the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{mapping from \(\backslash\)f\$(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2)\(\backslash\)f\$ to \(\backslash\)f\$\{\(\backslash\)bf R\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2)\(\backslash\)f\$ is}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{one-\/to-\/one, at least for the meniscus shapes}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{of interest. Pinned boundary conditions of the form}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)left. \{\(\backslash\)bf R\}\(\backslash\)right|\_\{\(\backslash\)partial D\} = \{\(\backslash\)bf R\}\_\{\(\backslash\)rm pinned\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{are most easily imposed by choosing the spine basis such that \(\backslash\)f\$ \(\backslash\)left. \{\(\backslash\)bf}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{B\}\(\backslash\)right|\_\{\(\backslash\)partial D\} = \{\(\backslash\)bf R\}\_\{\(\backslash\)rm pinned\}, \(\backslash\)f\$ implying}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{that \(\backslash\)f\$ \(\backslash\)left. u\(\backslash\)right|\_\{\(\backslash\)partial D\} = 0. \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{The simplest possible choice for the spines and spine basis}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{is one that returns the problem to its original cartesian formulation.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{This is achieved by setting \(\backslash\)f\$ \{\(\backslash\)bf B\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) = }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2,0)\string^T \(\backslash\)f\$ and \(\backslash\)f\$ \{\(\backslash\)bf S\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) = (0,0,1)\string^T. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\)subsection displ Displacement Control}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{The Young-\/Laplace equation is a highly nonlinear PDE. We therefore }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{require a good initial guess for the solution in order to ensure the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{convergence of the Newton iteration. In many cases good initial guesses can be}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{provided by a simple, physically motivated continuation method.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{For instance in the model problem shown above, the computation was}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{started by computing the solution for \(\backslash\)f\$ \(\backslash\)Delta p = \(\backslash\)kappa = 0 \(\backslash\)f\$ -\/-\/}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{a flat interface. This solution was then used as the initial guess for }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{the solution at a small positive value of \(\backslash\)f\$ \(\backslash\)Delta p \(\backslash\)f\$. This process}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{was continued, allowing us to compute strongly deformed}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{meniscus shapes. This method works well, provided small increments in }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{the control parameter \(\backslash\)f\$ \(\backslash\)Delta p \(\backslash\)f\$ (or equivalently, \(\backslash\)f\$ \(\backslash\)kappa \(\backslash\)f\$)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{create small changes in the interface shape. This is not always}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{the case, however, as we shall see in the example below. In }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{such cases it is often possible to re-\/formulate the problem, using the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{displacement control method discussed in the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{<a href="{}../../../beam/steady\_ring/html/index.html"{}>solid}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{mechanics tutorials</a>. Rather than prescribing the pressure }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{drop \(\backslash\)f\$ \(\backslash\)Delta p \(\backslash\)f\$ we prescribe the displacement of a control }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{point on the meniscus and}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{regard the pressure drop required to achieve this displacement}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{as an unknown. Since the implementation of the method is very similar}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{to that used for solid mechanics problems, we shall not}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{discuss it in detail here but refer to the appropriate }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{<a href="{}../../../beam/steady\_ring/html/index.html"{}>solid mechanics }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{tutorial.</a>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{\(\backslash\)section barrel An example problem: A barrel-\/shaped meniscus}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{As an example, we consider the following problem: Fluid is extruded}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{from an infinitely long, parallel-\/sided slot of width \(\backslash\)f\$ 2a \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{If we assume that the air-\/liquid interface is pinned at the edges of}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{the slot, as shown in the sketch below, the problem has an }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{obvious exact solution. The air-\/liquid interface }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{must have constant mean curvature, so, assuming that its shape does }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{not vary along the slot, the meniscus must be a circular}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{cylinder. If we characterise the meniscus' shape by its vertical}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{displacement along the centreline, \(\backslash\)f\$ H \(\backslash\)f\$, the (dimensional) }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{curvature of the air-\/liquid interface is given by}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{\(\backslash\)kappa\string^*  = \(\backslash\)frac\{2/a\}\{H/a + a/H\}.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{The plot of this function, shown in the right half of the figure}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{below, may be interpreted as a "{}load-\/displacement}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{diagram"{} as it shows the deflection of the meniscus as a function }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{of the imposed non-\/dimensional pressure drop across the air-\/liquid interface, }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)Delta p = a \(\backslash\)kappa\string^*. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{\(\backslash\)image html meniscus\_sketch\_and\_limit\_point.gif "{}Sketch of the meniscus above a slot of width 2a. The figure on the right illustrates the relation between the meniscus curvature and its vertical displacement along the centreline. "{} }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{\(\backslash\)image latex meniscus\_sketch\_and\_limit\_point.eps "{}Sketch of the meniscus above a slot of width 2a. The figure on the right illustrates the relation between the meniscus curvature and its vertical displacement along the centreline. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{The plot shows that the load-\/displacement curve is }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{not single-\/valued. Furthermore, the presence of a limit point }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{at \(\backslash\)f\$ a \(\backslash\)kappa\string^* = 1 \(\backslash\)f\$ indicates that the maximum curvature of }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{the meniscus is given by \(\backslash\)f\$ \(\backslash\)kappa\_\{max\}\string^* = 1/a. \(\backslash\)f\$ This implies }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{that the maximum (dimensional) pressure that the meniscus can}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{withstand is given by \(\backslash\)f\$ \(\backslash\)Delta p\string^*\_\{max\} = \(\backslash\)sigma \(\backslash\)kappa\_\{max\}\string^* = }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{\(\backslash\)sigma/a \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{The presence of the limit point makes it impossible to compute the entire }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{solution curve by simply increasing \(\backslash\)f\$ \(\backslash\)kappa \(\backslash\)f\$ in small increments. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{However, use of a displacement control approach, by prescribing }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{\(\backslash\)f\$ H \(\backslash\)f\$ while regarding \(\backslash\)f\$ \(\backslash\)Delta p \(\backslash\)f\$ (and }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{thus \(\backslash\)f\$\(\backslash\)kappa\(\backslash\)f\$) as an unknown, yields a single-\/valued function }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{that can be computed by a straightforward continuation method in }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{which \(\backslash\)f\$ H \(\backslash\)f\$ is increased in small increments. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{This approach was employed to compute the meniscus shapes shown }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{in the plot below. The initial, zero-\/curvature configuration}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{of the meniscus (corresponding to a vanishing pressure drop across the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{air-\/liquid interface) is the unit square. The meniscus is pinned along }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{the lines \(\backslash\)f\$ y=0 \(\backslash\)f\$ and \(\backslash\)f\$ y=1 \(\backslash\)f\$, and symmetry (natural) }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{boundary conditions were applied along the lines \(\backslash\)f\$ x=0 \(\backslash\)f\$ and \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{x=1; \(\backslash\)f\$ see \(\backslash\)ref comm\_ex for further details on the natural }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{boundary conditions.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{As the pressure drop increases, the meniscus is deflected upwards}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{until it reaches the configuration of maximum curvature when }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{\(\backslash\)f\$ H/a=1 \(\backslash\)f\$. Beyond this point, the pressure drop has to be reduced}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{to compute the "{}bulging"{} meniscus shapes obtained for \(\backslash\)f\$ H/a > 1. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{\(\backslash\)image html barrel.gif "{}Deformation of a meniscus that is pinned along the lines y=0 and y=1. "{} }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{\(\backslash\)image latex barrel.eps "{}Deformation of a meniscus that is pinned along the lines y=0 and y=1. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{The comparison of the computed "{}load-\/displacement curve"{} }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{against the exact solution, shown below, indicates that the two agree}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{to within plotting accuracy. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{\(\backslash\)image html trace.gif "{}Load-\/displacement diagram for a meniscus that is pinned along the lines y=0 and y=1. "{} }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{\(\backslash\)image latex trace.eps "{}Load-\/displacement diagram for a meniscus that is pinned along the lines y=0 and y=1. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{\(\backslash\)section impl Implementation}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{We shall now discuss the solution of the above problem with}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{\(\backslash\)c oomph-\/lib's  Young Laplace elements.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{\(\backslash\)subsection namespace The global namespace}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{As usual we define the problem parameters in a global namespace.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{The key parameter is the value of the prescribed control displacement}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{which we initialise to zero.  The function \(\backslash\)c get\_exact\_kappa()}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{returns the exact solution for the mean curvature of the meniscus.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{We will use this function for the validation of our results.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{\(\backslash\)dontinclude barrel.cc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{\(\backslash\)skipline start\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{\(\backslash\)until end exact kappa }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{Next we define the orientation of the spines. Anticipating the shape}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{of the meniscus, we set \(\backslash\)f\$ \{\(\backslash\)bf B\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2)=}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2,0) \(\backslash\)f\$ so that \(\backslash\)f\$ u=0 \(\backslash\)f\$ corresponds to a flat}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{meniscus in the \(\backslash\)f\$ (x,y) \(\backslash\)f\$-\/plane,}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{\(\backslash\)until bspine functions}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{and rotate the spines in the \(\backslash\)f\$ y \(\backslash\)f\$ direction by setting}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{\(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{\{\(\backslash\)bf S\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) = }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{0 \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{-\/\(\backslash\)sin\(\backslash\)big(\(\backslash\)alpha(\(\backslash\)zeta\_2)\(\backslash\)big) \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\)cos\(\backslash\)big(\(\backslash\)alpha(\(\backslash\)zeta\_2)\(\backslash\)big) \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)alpha(\(\backslash\)zeta\_2) = \(\backslash\)alpha\_\{min\} + (\(\backslash\)alpha\_\{max\}-\/\(\backslash\)alpha\_\{min\})}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{\(\backslash\)zeta\_2 \(\backslash\)f\$. With this choice, the spines are unit vectors that}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{form an angle \(\backslash\)f\$ \(\backslash\)alpha \(\backslash\)f\$ (varying between \(\backslash\)f\$ \(\backslash\)alpha\_\{min\} \(\backslash\)f\$ and}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)alpha\_\{max\} \(\backslash\)f\$) with the y-\/axis.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{\(\backslash\)until spine function}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{\(\backslash\)subsection main The driver code}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{We start by preparing an output directory and open a trace file to }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{record the control displacement, and the computed and}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{exact values of the interface curvature \(\backslash\)f\$ \(\backslash\)kappa \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{\(\backslash\)dontinclude barrel.cc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{\(\backslash\)skipline start\_of\_main }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{\(\backslash\)until ZONE}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{Next we build the problem object and document the initial}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{configuration: a flat meniscus. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{\(\backslash\)until doc\_info.number()++;}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{Finally, we perform a parameter study by increasing the control}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{displacement in small increments and re-\/computing the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{meniscus shapes and the associated interface curvatures.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{\(\backslash\)until end of main}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{\(\backslash\)subsection class The problem class}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{The problem class has the usual member functions. (Ignore the lines}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{in \(\backslash\)c actions\_before\_newton\_solve() as they are irrelevant in the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{current context. They are discussed in one of the exercises in }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{\(\backslash\)ref comm\_ex.) The problem's private member}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{data include a pointer to the node at which the meniscus displacement}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{is controlled by the displacement control element, and a pointer to }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{the \(\backslash\)c Data object whose one-\/and-\/only value contains the unknown}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{interface curvature, \(\backslash\)f\$ \(\backslash\)kappa. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{\(\backslash\)dontinclude barrel.cc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{\(\backslash\)until end of problem}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{\(\backslash\)subsection constr The problem constructor}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{We start by building the mesh, discretising the two-\/dimensional}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{parameter space \(\backslash\)f\$ (\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) \(\backslash\)in [0,1] \(\backslash\)times [0,1]\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{with 8x8 elements.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{\(\backslash\)until mesh\_pt()}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{Next, we choose the central node in the mesh as the node whose}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{displacement is imposed by the displacement control method. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{\(\backslash\)until Control\_node\_pt-\/>x(1)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{We pass the pointer to that node and the pointer to the double}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{that specifies the imposed displacement to the constructor}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{of the displacement control element. The constructor automatically creates}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{a \(\backslash\)c Data object whose one-\/and-\/only value stores the unknown}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{curvature, \(\backslash\)f\$ \(\backslash\)kappa. \(\backslash\)f\$ We store the pointer to this \(\backslash\)c Data}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{object in the private member data to facilitate its output.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{\(\backslash\)until Kappa\_pt=}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{The meniscus is pinned along mesh boundaries 0 and 2:}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{\(\backslash\)skipline Boundary conditions}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{\(\backslash\)until end bc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{We complete the build of the Young Laplace elements by passing the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{pointer to the spine functions, and the prescribed curvature. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{Finally, we add the displacement control element to the mesh}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{and assign the equation numbers.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{\(\backslash\)subsection post Postprocessing}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{We document the exact and computed meniscus curvatures in the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{trace file and output the meniscus shape.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{\(\backslash\)skipline start\_of\_doc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{\(\backslash\)until end of doc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{\(\backslash\)section comm\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{-\/\# <b>Choice of spines:</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{   We discussed earlier that the spine basis and the spines themselves }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{   must be chosen such that the mapping from \(\backslash\)f\$(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2)\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{   to \(\backslash\)f\$\{\(\backslash\)bf R\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2)\(\backslash\)f\$ is one-\/to-\/one, at least for }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{   the meniscus shapes of interest. This requires some prior knowledge}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{   of the expected interface shapes.  \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{   The spine basis and the spines must be defined via function pointers}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{   that are passed to the Young Laplace elements. If the function}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{   pointers are not specified, the Young-\/Laplace elements revert to }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{   a cartesian formulation. \(\backslash\)n\(\backslash\)n }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{   Experiment with different spine orientations and explore the}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{   interface shapes that are obtained if no spines are specified (by commenting}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{   out the lines in the constructor that pass the relevant function}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{   pointers to the Young Laplace elements).  }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{-\/\# <b>Natural boundary conditions:</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{   As usual in any finite-\/element computation, we only enforced the }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{   essential boundary conditions by pinning the meniscus displacement}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{   along the "{}pinned contact lines"{} at \(\backslash\)f\$ y=0 \(\backslash\)f\$ and  \(\backslash\)f\$ y=1. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{   No constraints were applied along the two other domain boundaries}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{   (at \(\backslash\)f\$ x=0 \(\backslash\)f\$ and  \(\backslash\)f\$ x=1 \(\backslash\)f\$), indicating that these boundaries}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{   are controlled by implied, "{}natural"{} boundary conditions. The}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{   variational principle (1) shows what these are: since}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{   we neglected the boundary integral on the right hand side of}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{   equation (1), }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{   the meniscus shape must satisfy }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{   \(\backslash\)f\$ \{\(\backslash\)bf T\}\_n \(\backslash\)cdot \(\backslash\)delta \{\(\backslash\)bf R\} = \(\backslash\)delta u \(\backslash\) \{\(\backslash\)bf T\}\_n \(\backslash\)cdot}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{   \{\(\backslash\)bf S\} = 0, \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{   implying that outer unit normal to the meniscus boundary, }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{   \(\backslash\)f\$ \{\(\backslash\)bf T\}\_n, \(\backslash\)f\$ must be orthogonal to the direction of the spines.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{   Since the spines do not have an}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{   \(\backslash\)f\$ x \(\backslash\)f\$ -\/ component, the meniscus must therefore have}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{   zero slope in that direction -\/-\/ just what we need for our problem. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{   To convince yourself that the this argument is correct, rotate }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{   the spines in the  \(\backslash\)f\$ x \(\backslash\)f\$ -\/direction, e.g. by changing}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{   their definition to}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{   \(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{   \{\(\backslash\)bf S\}(\(\backslash\)zeta\_1,\(\backslash\)zeta\_2) = }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{   \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{   \(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{   1/2 \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{   -\/\(\backslash\)sin\(\backslash\)big(\(\backslash\)alpha(\(\backslash\)zeta\_2)\(\backslash\)big) \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{   \(\backslash\) \(\backslash\) \(\backslash\)cos\(\backslash\)big(\(\backslash\)alpha(\(\backslash\)zeta\_2)\(\backslash\)big) \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{   \(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{   \(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{   \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{   The natural boundary condition will still force the meniscus to be }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{   normal to the spines along the "{}free"{} contact line, resulting in }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{   interface shapes similar to the one shown in the figure below.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{\(\backslash\)image html funky\_meniscus.gif "{}Meniscus shape created by the natural boundary conditions when the spines (shown as vectors) are rotated in the x-\/direction. "{} }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{\(\backslash\)image latex funky\_meniscus.eps "{}Meniscus shape created by the natural boundary conditions when the spines (shown as vectors) are rotated in the x-\/direction. "{} width=0.6\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{   This demonstrates yet again that the orientation of spines must }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{   reflect the relevant features of the problem. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{   We refer to <a href="{}../../contact\_angle/html/index.html"{}>another}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{   tutorial</a> for a more detailed discussion }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{   of the boundary condition and its relation to contact angles.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{-\/\# <b>Displacement control:</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{   Explore what happens if you disable displacement control and}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{   prescribe the pressure drop (i.e. \(\backslash\)f\$ \(\backslash\)kappa \(\backslash\)f\$) directly. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{   The relevant code is already contained in the driver code.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{   You'll have to comment out the lines in the problem constructor }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{   that create the displacement control element and the line that adds }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{   it to the problem's mesh.  Replace them by the lines}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{   \(\backslash\)dontinclude barrel.cc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{   \(\backslash\)skipline Comment out the pre}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{   \(\backslash\)until pin(0);}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{   which create the \(\backslash\)c Data object that stores the prescribed curvature. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{   (Note that the value of \(\backslash\)f\$ \(\backslash\)kappa \(\backslash\)f\$ is already incremented in \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{   actions\_before\_newton\_step(). With displacement control this }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{   step has no real effect as the Newton method will overwrite this}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{   assignment). Check what happens if the prescribed}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{   curvature exceeds the maximum possible curvature of the meniscus. }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{-\/\# <b>Inefficient implementation:</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{   Note that the current implementation of the Young Laplace elements   }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{   is inefficient as the elemental Jacobian matrices are computed by}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{   finite-\/differencing. You are invited to implement the analytical}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{   computation of the Jacobian matrix as an exercise.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{-\/\# <b>Other problems:</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{   We provide a number of additional demo driver codes that}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{   demonstrate the solution of other, related problems.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{   -\/ The code \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{     <CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{     <A HREF="{}../../../../demo\_drivers/young\_laplace/young\_laplace.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{     demo\_drivers/young\_laplace/young\_laplace.cc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{     </A>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{     </CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{     and its adaptive counterpart}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{     <CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{     <A HREF="{}../../../../demo\_drivers/young\_laplace/refineable\_young\_laplace.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{     demo\_drivers/young\_laplace/refineable\_young\_laplace.cc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{     </A>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{     </CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{     demonstrate the solution of three problems: (i) the barrel-\/shaped meniscus}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{     problem already discussed above; (ii) the deformation of a meniscus that }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{     is pinned at all four edges of a square tube; and (iii) the solution of}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{     a problem with contact-\/angle boundary conditions. The latter one}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{     is discussed in a <a href="{}../../contact\_angle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{     separate tutorial.</a>     }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{   -\/ The spherical meniscus that emanates from a circular tube, shown }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{     in the animation at the beginning of current document, was computed with:}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{      \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{     <CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{     <A HREF="{}../../../../demo\_drivers/young\_laplace/spherical\_cap\_in\_cylinder.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{     demo\_drivers/young\_laplace/spherical\_cap\_in\_cylinder.cc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{     </A>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{     </CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{     \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{   .}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{  <CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{  <A HREF="{}../../../../demo\_drivers/young\_laplace/"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{  demo\_drivers/young\_laplace/}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{  </A>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{  </CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{  <CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{  <A HREF="{}../../../../demo\_drivers/young\_laplace/barrel.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{  demo\_drivers/young\_laplace/barrel.cc}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{  </A>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{  </CENTER>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{young__laplace_8txt__doxygenified_8h_source_l00606}00606 }
+
+\end{DoxyCode}

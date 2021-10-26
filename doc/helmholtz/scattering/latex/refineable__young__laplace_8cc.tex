@@ -3,15 +3,15 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classRefineableYoungLaplaceProblem}{Refineable\+Young\+Laplace\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classRefineableYoungLaplaceProblem}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em 2D Refineable\+Young\+Laplace problem on rectangular domain, discretised with 2D QRefineable\+Young\+Laplace elements. The specific type of element is specified via the template parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{refineable__young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2}{run\+\_\+it}} (const string \&output\+\_\+directory)
-\item 
+\begin{DoxyCompactList}\small\item\em Run code for current setting of parameter values -- specify name of output directory. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{refineable__young__laplace_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Driver code for 2D Refineable\+Young\+Laplace problem. Input arguments\+: none (for validation) or case (0,1,2,3 for all pinned, barrel with spines, barrel without spines, and T junction), and number of steps. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -21,13 +21,17 @@ int \mbox{\hyperlink{refineable__young__laplace_8cc_a0ddf1224851353fc92bfbff6f49
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
+
+
 Driver code for 2D Refineable\+Young\+Laplace problem. Input arguments\+: none (for validation) or case (0,1,2,3 for all pinned, barrel with spines, barrel without spines, and T junction), and number of steps. 
 
-Definition at line 616 of file refineable\+\_\+young\+\_\+laplace.\+cc.
+
+
+Definition at line \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{616}} of file \mbox{\hyperlink{refineable__young__laplace_8cc_source}{refineable\+\_\+young\+\_\+laplace.\+cc}}.
 
 
 
-References Global\+Parameters\+::\+All\+\_\+pinned, Global\+Parameters\+::\+Barrel\+\_\+shape, Global\+Parameters\+::\+Case, Global\+Parameters\+::\+Controlled\+\_\+height\+\_\+increment, Global\+Parameters\+::\+Gamma, Global\+Parameters\+::\+L\+\_\+x, Global\+Parameters\+::\+L\+\_\+y, Global\+Parameters\+::\+Nsteps, run\+\_\+it(), Global\+Parameters\+::\+T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle, and Global\+Parameters\+::\+Use\+\_\+spines.
+References \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00047}{Global\+Parameters\+::\+All\+\_\+pinned}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00048}{Global\+Parameters\+::\+Barrel\+\_\+shape}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00053}{Global\+Parameters\+::\+Case}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00085}{Global\+Parameters\+::\+Controlled\+\_\+height\+\_\+increment}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00060}{Global\+Parameters\+::\+Gamma}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00096}{Global\+Parameters\+::\+L\+\_\+x}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00097}{Global\+Parameters\+::\+L\+\_\+y}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00079}{Global\+Parameters\+::\+Nsteps}}, \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00541}{run\+\_\+it()}}, \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00049}{Global\+Parameters\+::\+T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00040}{Global\+Parameters\+::\+Use\+\_\+spines}}.
 
 \mbox{\Hypertarget{refineable__young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2}\label{refineable__young__laplace_8cc_ae164cec5b3a54dd85b4b4f36ad5cb1e2}} 
 \index{refineable\_young\_laplace.cc@{refineable\_young\_laplace.cc}!run\_it@{run\_it}}
@@ -35,15 +39,19 @@ References Global\+Parameters\+::\+All\+\_\+pinned, Global\+Parameters\+::\+Barr
 \doxysubsubsection{\texorpdfstring{run\_it()}{run\_it()}}
 {\footnotesize\ttfamily void run\+\_\+it (\begin{DoxyParamCaption}\item[{const string \&}]{output\+\_\+directory }\end{DoxyParamCaption})}
 
-Run code for current setting of parameter values -- specify name of output directory 
-
-Definition at line 541 of file refineable\+\_\+young\+\_\+laplace.\+cc.
 
 
-
-References Global\+Parameters\+::\+Nsteps, and problem.
+Run code for current setting of parameter values -- specify name of output directory. 
 
 
 
-Referenced by main().
+Definition at line \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00541}{541}} of file \mbox{\hyperlink{refineable__young__laplace_8cc_source}{refineable\+\_\+young\+\_\+laplace.\+cc}}.
+
+
+
+References \mbox{\hyperlink{refineable__t__junction_8cc_source_l00430}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00391}{Refineable\+Young\+Laplace\+Problem$<$ ELEMENT $>$\+::increment\+\_\+parameters()}}, and \mbox{\hyperlink{common__young__laplace__stuff_8h_source_l00079}{Global\+Parameters\+::\+Nsteps}}.
+
+
+
+Referenced by \mbox{\hyperlink{refineable__young__laplace_8cc_source_l00616}{main()}}.
 

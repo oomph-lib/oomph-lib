@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1RefineablePVDEquations}{}\doxysection{oomph\+::Refineable\+P\+V\+D\+Equations$<$ D\+IM $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RefineablePVDEquations}{}\doxysection{oomph\+::Refineable\+PVDEquations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RefineablePVDEquations}\index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 
 
-Class for Refineable P\+VD equations.  
+Class for Refineable PVD equations.  
 
 
 
 
 {\ttfamily \#include $<$refineable\+\_\+solid\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+P\+V\+D\+Equations$<$ D\+IM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+PVDEquations\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.712538cm]{classoomph_1_1RefineablePVDEquations}
@@ -18,21 +18,21 @@ Inheritance diagram for oomph\+::Refineable\+P\+V\+D\+Equations$<$ D\+IM $>$\+:\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a048037883cc058f0b34950af08ef841f}{Refineable\+P\+V\+D\+Equations}} ()
+\mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a048037883cc058f0b34950af08ef841f}{Refineable\+PVDEquations}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_ace1bda5ddd0cecac296f8b5c3a053a21}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_ace1bda5ddd0cecac296f8b5c3a053a21}{fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em Call the residuals including hanging node cases. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a94defe5e7d281500b191d8bae6cfb2f1}{get\+\_\+interpolated\+\_\+values}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a94defe5e7d281500b191d8bae6cfb2f1}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em No values are interpolated in this element (pure solid) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a2e49057699c62727015cdbf1343be157}{get\+\_\+interpolated\+\_\+values}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a0666fd57a269ed17fd3cc7a808bd31ec}{values}})
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a2e49057699c62727015cdbf1343be157}{get\+\_\+interpolated\+\_\+values}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&values)
 \begin{DoxyCompactList}\small\item\em No values are interpolated in this element (pure solid) \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a1c3251344b800eff097da2ce76a127fc}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a1e51d4ea46f49c62441425bc3883a589}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a1e51d4ea46f49c62441425bc3883a589}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain tensor. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_af30374314ac9d9805702d9fde7cb1cef}{ncont\+\_\+interpolated\+\_\+values}} () const
+unsigned \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_af30374314ac9d9805702d9fde7cb1cef}{ncont\+\_\+interpolated\+\_\+values}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Number of continuously interpolated values\+: 0 (pure solid problem) \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a765247d85587d85802c656ca5d8d9180}{solid\+\_\+pressure\+\_\+node\+\_\+pt}} (const unsigned \&l)
+virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a2f124b041ca2138ce030d6474861e8a7}{solid\+\_\+pressure\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&l)
 \item 
 void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a936bab952ddbad5093cb7ee80d0019b5}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build function, pass the pointers down to the sons. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -40,12 +40,11 @@ void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations_a936bab952ddbad5093cb
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM$>$\newline
-class oomph\+::\+Refineable\+P\+V\+D\+Equations$<$ D\+I\+M $>$}
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+Refineable\+PVDEquations$<$ DIM $>$}
+Class for Refineable PVD equations. 
 
-Class for Refineable P\+VD equations. 
-
-Definition at line 44 of file refineable\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00044}{44}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
@@ -54,8 +53,8 @@ Definition at line 44 of file refineable\+\_\+solid\+\_\+elements.\+h.
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!RefineablePVDEquations@{RefineablePVDEquations}}
 \index{RefineablePVDEquations@{RefineablePVDEquations}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{RefineablePVDEquations()}{RefineablePVDEquations()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{Refineable\+P\+V\+D\+Equations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{Refineable\+PVDEquations}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -63,7 +62,7 @@ Constructor.
 
 
 
-Definition at line 50 of file refineable\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00050}{50}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
@@ -72,31 +71,31 @@ Definition at line 50 of file refineable\+\_\+solid\+\_\+elements.\+h.
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!fill\_in\_generic\_contribution\_to\_residuals\_pvd@{fill\_in\_generic\_contribution\_to\_residuals\_pvd}}
 \index{fill\_in\_generic\_contribution\_to\_residuals\_pvd@{fill\_in\_generic\_contribution\_to\_residuals\_pvd}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_contribution\_to\_residuals\_pvd()}{fill\_in\_generic\_contribution\_to\_residuals\_pvd()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+contribution\+\_\+to\+\_\+residuals\+\_\+pvd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Call the residuals including hanging node cases. 
 
-Residuals for Refineable Q\+P\+V\+D\+Elements. 
+Residuals for Refineable QPVDElements. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_a2e169e572d3715f08e571cb29779a754}{oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$}}.
-
-
-
-Definition at line 38 of file refineable\+\_\+solid\+\_\+elements.\+cc.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_a2e169e572d3715f08e571cb29779a754}{oomph\+::\+PVDEquations$<$ DIM $>$}}.
 
 
 
-References a(), oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+D\+Shape\+::offset(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset(), oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset(), oomph\+::\+D\+Shape\+::raw\+\_\+direct\+\_\+access(), oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access(), oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access(), oomph\+::\+Constitutive\+Law\+::requires\+\_\+incompressibility\+\_\+constraint(), residuals(), s, and oomph\+::\+Quad\+Tree\+Names\+::W.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8cc_source_l00037}{37}} of file \mbox{\hyperlink{refineable__solid__elements_8cc_source}{refineable\+\_\+solid\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{mesh__smooth_8h_source_l00055}{oomph\+::\+Helper\+\_\+namespace\+\_\+for\+\_\+mesh\+\_\+smoothing\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{matrices_8h_source_l02096}{oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{shape_8h_source_l00487}{oomph\+::\+DShape\+::offset()}}, \mbox{\hyperlink{matrices_8h_source_l02564}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::offset()}}, \mbox{\hyperlink{nodes_8h_source_l00891}{oomph\+::psi\+\_\+}}, \mbox{\hyperlink{matrices_8h_source_l02078}{oomph\+::\+Rank\+Four\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{matrices_8h_source_l02545}{oomph\+::\+Rank\+Five\+Tensor$<$ T $>$\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{shape_8h_source_l00469}{oomph\+::\+DShape\+::raw\+\_\+direct\+\_\+access()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePVDEquations_a936bab952ddbad5093cb7ee80d0019b5}\label{classoomph_1_1RefineablePVDEquations_a936bab952ddbad5093cb7ee80d0019b5}} 
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!further\_build@{further\_build}}
 \index{further\_build@{further\_build}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{further\_build()}{further\_build()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::further\+\_\+build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::further\+\_\+build (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -108,18 +107,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableSolidElement_a159967
 
 
 
-Definition at line 144 of file refineable\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00144}{144}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::constitutive\+\_\+law\+\_\+pt(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Constitutive\+\_\+law\+\_\+pt, oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Evaluate\+\_\+jacobian\+\_\+by\+\_\+fd, oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Refineable\+Solid\+Element\+::further\+\_\+build(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::is\+\_\+inertia\+\_\+enabled(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::is\+\_\+jacobian\+\_\+evaluated\+\_\+by\+\_\+fd(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::isotropic\+\_\+growth\+\_\+fct\+\_\+pt(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Isotropic\+\_\+growth\+\_\+fct\+\_\+pt, oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::lambda\+\_\+sq\+\_\+pt(), oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Lambda\+\_\+sq\+\_\+pt, and oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::\+Unsteady.
+References \mbox{\hyperlink{solid__elements_8h_source_l00140}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::body\+\_\+force\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{solid__elements_8h_source_l00424}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{solid__elements_8h_source_l00101}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::constitutive\+\_\+law\+\_\+pt()}}, \mbox{\hyperlink{solid__elements_8h_source_l00415}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{solid__elements_8h_source_l00430}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Evaluate\+\_\+jacobian\+\_\+by\+\_\+fd}}, \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{refineable__elements_8h_source_l01014}{oomph\+::\+Refineable\+Solid\+Element\+::further\+\_\+build()}}, \mbox{\hyperlink{solid__elements_8h_source_l00164}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::is\+\_\+inertia\+\_\+enabled()}}, \mbox{\hyperlink{solid__elements_8h_source_l00386}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::is\+\_\+jacobian\+\_\+evaluated\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{solid__elements_8h_source_l00122}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::isotropic\+\_\+growth\+\_\+fct\+\_\+pt()}}, \mbox{\hyperlink{solid__elements_8h_source_l00409}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Isotropic\+\_\+growth\+\_\+fct\+\_\+pt}}, \mbox{\hyperlink{solid__elements_8h_source_l00115}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::lambda\+\_\+sq\+\_\+pt()}}, \mbox{\hyperlink{solid__elements_8h_source_l00418}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Lambda\+\_\+sq\+\_\+pt}}, and \mbox{\hyperlink{solid__elements_8h_source_l00421}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::\+Unsteady}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePVDEquations_a94defe5e7d281500b191d8bae6cfb2f1}\label{classoomph_1_1RefineablePVDEquations_a94defe5e7d281500b191d8bae6cfb2f1}} 
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const unsigned \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{t,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -131,18 +130,14 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_ada6f0efe831ffefb1d2
 
 
 
-Definition at line 65 of file refineable\+\_\+solid\+\_\+elements.\+h.
-
-
-
-References values.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00065}{65}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePVDEquations_a2e49057699c62727015cdbf1343be157}\label{classoomph_1_1RefineablePVDEquations_a2e49057699c62727015cdbf1343be157}} 
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!get\_interpolated\_values@{get\_interpolated\_values}}
 \index{get\_interpolated\_values@{get\_interpolated\_values}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_interpolated\_values()}{get\_interpolated\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -154,18 +149,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_ad9a4f928806
 
 
 
-Definition at line 73 of file refineable\+\_\+solid\+\_\+elements.\+h.
-
-
-
-References values.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00073}{73}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePVDEquations_a1e51d4ea46f49c62441425bc3883a589}\label{classoomph_1_1RefineablePVDEquations_a1e51d4ea46f49c62441425bc3883a589}} 
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!get\_Z2\_flux@{get\_Z2\_flux}}
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -177,18 +168,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 88 of file refineable\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00088}{88}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations\+Base$<$ D\+I\+M $>$\+::get\+\_\+strain(), and i.
+References \mbox{\hyperlink{solid__elements_8cc_source_l00047}{oomph\+::\+PVDEquations\+Base$<$ DIM $>$\+::get\+\_\+strain()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePVDEquations_af30374314ac9d9805702d9fde7cb1cef}\label{classoomph_1_1RefineablePVDEquations_af30374314ac9d9805702d9fde7cb1cef}} 
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!ncont\_interpolated\_values@{ncont\_interpolated\_values}}
 \index{ncont\_interpolated\_values@{ncont\_interpolated\_values}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ncont\_interpolated\_values()}{ncont\_interpolated\_values()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::ncont\+\_\+interpolated\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -200,14 +191,14 @@ Implements \mbox{\hyperlink{classoomph_1_1RefineableElement_a53e171a18c9f43f1db9
 
 
 
-Definition at line 130 of file refineable\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00130}{130}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineablePVDEquations_a1c3251344b800eff097da2ce76a127fc}\label{classoomph_1_1RefineablePVDEquations_a1c3251344b800eff097da2ce76a127fc}} 
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
 \index{num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{num\_Z2\_flux\_terms()}{num\_Z2\_flux\_terms()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::num\+\_\+\+Z2\+\_\+flux\+\_\+terms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -219,18 +210,18 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 80 of file refineable\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00080}{80}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1RefineablePVDEquations_a765247d85587d85802c656ca5d8d9180}\label{classoomph_1_1RefineablePVDEquations_a765247d85587d85802c656ca5d8d9180}} 
+\mbox{\Hypertarget{classoomph_1_1RefineablePVDEquations_a2f124b041ca2138ce030d6474861e8a7}\label{classoomph_1_1RefineablePVDEquations_a2f124b041ca2138ce030d6474861e8a7}} 
 \index{oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}!solid\_pressure\_node\_pt@{solid\_pressure\_node\_pt}}
 \index{solid\_pressure\_node\_pt@{solid\_pressure\_node\_pt}!oomph::RefineablePVDEquations$<$ DIM $>$@{oomph::RefineablePVDEquations$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{solid\_pressure\_node\_pt()}{solid\_pressure\_node\_pt()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+P\+V\+D\+Equations}}$<$ D\+IM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineablePVDEquations}{oomph\+::\+Refineable\+PVDEquations}}$<$ DIM $>$\+::solid\+\_\+pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 138 of file refineable\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{refineable__solid__elements_8h_source_l00138}{138}} of file \mbox{\hyperlink{refineable__solid__elements_8h_source}{refineable\+\_\+solid\+\_\+elements.\+h}}.
 
 
 

@@ -1,26 +1,26 @@
-\hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement}{}\doxysection{oomph\+::Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement}{}\doxysection{oomph\+::QSUPGAdvection\+Diffusion\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1QSUPGAdvectionDiffusionElement}\index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 
 
-Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are S\+U\+P\+G-\/stabilised Advection Diffusion elements with N\+N\+O\+D\+E\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} and overwrites their test functions.  
+QSUPGAdvection\+Diffusion\+Element$<$\+DIM,\+NNODE\+\_\+1\+D$>$ elements are SUPG-\/stabilised Advection Diffusion elements with NNODE\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvection\+Diffusion\+Element}} and overwrites their test functions.  
 
 
 
 
 {\ttfamily \#include $<$supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QSUPGAdvection\+Diffusion\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.539682cm]{classoomph_1_1QSUPGAdvectionDiffusionElement}
+\includegraphics[height=2.539683cm]{classoomph_1_1QSUPGAdvectionDiffusionElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_ad5b142914b89f193f32967997e42d1a2}{Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for underlying Q\+Advection\+Diffusion element. Initialise stabilisation parameter to zero. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a43b3c4aecd65d3c2f5bd710c56bf98dd}{get\+\_\+\+Tau\+\_\+\+S\+U\+PG}} ()
+\mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_ad5b142914b89f193f32967997e42d1a2}{QSUPGAdvection\+Diffusion\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for underlying QAdvection\+Diffusion element. Initialise stabilisation parameter to zero. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a43b3c4aecd65d3c2f5bd710c56bf98dd}{get\+\_\+\+Tau\+\_\+\+SUPG}} ()
 \begin{DoxyCompactList}\small\item\em Get stabilisation parameter for the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a23b79fb4702c948646eade4261a8a281}{switch\+\_\+off\+\_\+stabilisation}} ()
 \begin{DoxyCompactList}\small\item\em Set stabilisation parameter for the element to zero. \end{DoxyCompactList}\item 
@@ -30,32 +30,30 @@ void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a9055a63b9b8c
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u,w\+\_\+x,w\+\_\+y,tau\+\_\+supg or x,y,z,u,w\+\_\+x,w\+\_\+y,w\+\_\+z,tau\+\_\+supg nplot points in each coordinate direction. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a13469ca1c2520461e62374e600ecf84d}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output at default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a57517d0b9c06ffee384f70fe587076c2}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a57517d0b9c06ffee384f70fe587076c2}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_ac567806bf5318e95b1517cb80e8a3b78}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_ac567806bf5318e95b1517cb80e8a3b78}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C\+\_\+style output at n\+\_\+plot points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a07f5aafc7171048c0237574bf74ab265}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are S\+U\+P\+G-\/stabilised Advection Diffusion elements with N\+N\+O\+D\+E\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} and overwrites their test functions. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_af77acfc13df8c460118d2c1bfbf0d74d}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\end{DoxyCompactItemize}
+double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_a07f5aafc7171048c0237574bf74ab265}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_af77acfc13df8c460118d2c1bfbf0d74d}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_aa1caa73d77fcc84d91c531cb71a4f27e}{Tau\+\_\+\+S\+U\+PG}}
-\begin{DoxyCompactList}\small\item\em S\+U\+PG stabilisation parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
+double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement_aa1caa73d77fcc84d91c531cb71a4f27e}{Tau\+\_\+\+SUPG}}
+\begin{DoxyCompactList}\small\item\em SUPG stabilisation parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
+QSUPGAdvection\+Diffusion\+Element$<$\+DIM,\+NNODE\+\_\+1\+D$>$ elements are SUPG-\/stabilised Advection Diffusion elements with NNODE\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvection\+Diffusion\+Element}} and overwrites their test functions. 
 
-Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are S\+U\+P\+G-\/stabilised Advection Diffusion elements with N\+N\+O\+D\+E\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} and overwrites their test functions. 
-
-Definition at line 42 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00042}{42}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
@@ -64,20 +62,20 @@ Definition at line 42 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!QSUPGAdvectionDiffusionElement@{QSUPGAdvectionDiffusionElement}}
 \index{QSUPGAdvectionDiffusionElement@{QSUPGAdvectionDiffusionElement}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QSUPGAdvectionDiffusionElement()}{QSUPGAdvectionDiffusionElement()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{QSUPGAdvection\+Diffusion\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for underlying Q\+Advection\+Diffusion element. Initialise stabilisation parameter to zero. 
+Constructor\+: Call constructors for underlying QAdvection\+Diffusion element. Initialise stabilisation parameter to zero. 
 
 
 
-Definition at line 49 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00049}{49}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Tau\+\_\+\+S\+U\+PG.
+References \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00250}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Tau\+\_\+\+SUPG}}.
 
 
 
@@ -86,8 +84,8 @@ References oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!compute\_stabilisation\_parameter@{compute\_stabilisation\_parameter}}
 \index{compute\_stabilisation\_parameter@{compute\_stabilisation\_parameter}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_stabilisation\_parameter()}{compute\_stabilisation\_parameter()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::compute\+\_\+stabilisation\+\_\+parameter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::compute\+\_\+stabilisation\+\_\+parameter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -95,70 +93,62 @@ Compute stabilisation parameter for the element.
 
 
 
-Definition at line 70 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00070}{70}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff(), i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::pe(), s, oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Tau\+\_\+\+S\+U\+PG, and oomph\+::\+Finite\+Element\+::vertex\+\_\+node\+\_\+pt().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00250}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Tau\+\_\+\+SUPG}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement_a07f5aafc7171048c0237574bf74ab265}\label{classoomph_1_1QSUPGAdvectionDiffusionElement_a07f5aafc7171048c0237574bf74ab265}} 
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_adv\_diff@{dshape\_and\_dtest\_eulerian\_adv\_diff}}
 \index{dshape\_and\_dtest\_eulerian\_adv\_diff@{dshape\_and\_dtest\_eulerian\_adv\_diff}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_adv\_diff()}{dshape\_and\_dtest\_eulerian\_adv\_diff()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$ elements are S\+U\+P\+G-\/stabilised Advection Diffusion elements with N\+N\+O\+D\+E\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{Q\+Advection\+Diffusion\+Element}} and overwrites their test functions. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
+QSUPGAdvection\+Diffusion\+Element$<$\+DIM,\+NNODE\+\_\+1\+D$>$ elements are SUPG-\/stabilised Advection Diffusion elements with NNODE\+\_\+1D nodal points in each coordinate direction. Inherits from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement}{QAdvection\+Diffusion\+Element}} and overwrites their test functions.
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
-S\+U\+PG stabilisation\+: Petrov-\/\+Galerkin, i.\+e. test functions $ \ne $ shape functions 
+SUPG stabilisation\+: Petrov-\/\+Galerkin, i.\+e. test functions $ \ne $ shape functions 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a968920ec8057c9b5a49154c5845c7dbd}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
-
-
-
-Definition at line 49 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8cc_source_l00048}{48}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8cc_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
 
 
 
-References i, and s.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement_af77acfc13df8c460118d2c1bfbf0d74d}\label{classoomph_1_1QSUPGAdvectionDiffusionElement_af77acfc13df8c460118d2c1bfbf0d74d}} 
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff@{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff@{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff()}{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
-S\+U\+PG stabilisation\+: Petrov-\/\+Galerkin, i.\+e. test functions $ \ne $ shape functions 
+SUPG stabilisation\+: Petrov-\/\+Galerkin, i.\+e. test functions $ \ne $ shape functions 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_afc66bf00b79622cc6580787b9d86f215}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
-
-
-
-Definition at line 107 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8cc_source_l00106}{106}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8cc_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, i, and s.
+References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement_a43b3c4aecd65d3c2f5bd710c56bf98dd}\label{classoomph_1_1QSUPGAdvectionDiffusionElement_a43b3c4aecd65d3c2f5bd710c56bf98dd}} 
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!get\_Tau\_SUPG@{get\_Tau\_SUPG}}
 \index{get\_Tau\_SUPG@{get\_Tau\_SUPG}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{get\_Tau\_SUPG()}{get\_Tau\_SUPG()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::get\+\_\+\+Tau\+\_\+\+S\+U\+PG (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::get\+\_\+\+Tau\+\_\+\+SUPG (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -166,18 +156,18 @@ Get stabilisation parameter for the element.
 
 
 
-Definition at line 56 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00056}{56}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Tau\+\_\+\+S\+U\+PG.
+References \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00250}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Tau\+\_\+\+SUPG}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement_a57517d0b9c06ffee384f70fe587076c2}\label{classoomph_1_1QSUPGAdvectionDiffusionElement_a57517d0b9c06ffee384f70fe587076c2}} 
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -185,22 +175,18 @@ C-\/style output.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a792f83bb2d8c22365cce60c43853396c}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00219}{219}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-Definition at line 219 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement_ac567806bf5318e95b1517cb80e8a3b78}\label{classoomph_1_1QSUPGAdvectionDiffusionElement_ac567806bf5318e95b1517cb80e8a3b78}} 
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -208,22 +194,18 @@ C\+\_\+style output at n\+\_\+plot points.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a891cdaba60a0cd6b3438f161fb537933}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00225}{225}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-Definition at line 225 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement_a13469ca1c2520461e62374e600ecf84d}\label{classoomph_1_1QSUPGAdvectionDiffusionElement_a13469ca1c2520461e62374e600ecf84d}} 
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -231,22 +213,18 @@ Output at default number of plot points.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_af30152cc8ea671b103239fc6b3e506ce}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00213}{213}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-Definition at line 213 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement_a9055a63b9b8c9f3bf606192e52413326}\label{classoomph_1_1QSUPGAdvectionDiffusionElement_a9055a63b9b8c9f3bf606192e52413326}} 
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -254,22 +232,18 @@ Output function\+: x,y,u,w\+\_\+x,w\+\_\+y,tau\+\_\+supg or x,y,z,u,w\+\_\+x,w\+
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionElement_a248d31c455b267075d437ae2833540c6}{oomph\+::\+Q\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00169}{169}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-Definition at line 169 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::get\+\_\+s\+\_\+plot(), oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::get\+\_\+wind\+\_\+adv\+\_\+diff(), i, oomph\+::\+Advection\+Diffusion\+Equations$<$ D\+I\+M $>$\+::interpolated\+\_\+u\+\_\+adv\+\_\+diff(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Finite\+Element\+::nplot\+\_\+points(), s, oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Tau\+\_\+\+S\+U\+PG, oomph\+::\+Finite\+Element\+::tecplot\+\_\+zone\+\_\+string(), and oomph\+::\+Finite\+Element\+::write\+\_\+tecplot\+\_\+zone\+\_\+footer().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00250}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Tau\+\_\+\+SUPG}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1QSUPGAdvectionDiffusionElement_a23b79fb4702c948646eade4261a8a281}\label{classoomph_1_1QSUPGAdvectionDiffusionElement_a23b79fb4702c948646eade4261a8a281}} 
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!switch\_off\_stabilisation@{switch\_off\_stabilisation}}
 \index{switch\_off\_stabilisation@{switch\_off\_stabilisation}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{switch\_off\_stabilisation()}{switch\_off\_stabilisation()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::switch\+\_\+off\+\_\+stabilisation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::switch\+\_\+off\+\_\+stabilisation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -277,11 +251,11 @@ Set stabilisation parameter for the element to zero.
 
 
 
-Definition at line 63 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00063}{63}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Tau\+\_\+\+S\+U\+PG.
+References \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00250}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Tau\+\_\+\+SUPG}}.
 
 
 
@@ -290,20 +264,20 @@ References oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N
 \index{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}!Tau\_SUPG@{Tau\_SUPG}}
 \index{Tau\_SUPG@{Tau\_SUPG}!oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$@{oomph::QSUPGAdvectionDiffusionElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Tau\_SUPG}{Tau\_SUPG}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::Tau\+\_\+\+S\+U\+PG\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QSUPGAdvectionDiffusionElement}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::Tau\+\_\+\+SUPG\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-S\+U\+PG stabilisation parameter. 
+SUPG stabilisation parameter. 
 
 
 
-Definition at line 250 of file supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00250}{250}} of file \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source}{supg\+\_\+advection\+\_\+diffusion\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::compute\+\_\+stabilisation\+\_\+parameter(), oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::get\+\_\+\+Tau\+\_\+\+S\+U\+P\+G(), oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::output(), oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element(), and oomph\+::\+Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::switch\+\_\+off\+\_\+stabilisation().
+Referenced by \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00070}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::compute\+\_\+stabilisation\+\_\+parameter()}}, \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00056}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::get\+\_\+\+Tau\+\_\+\+SUPG()}}, \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00169}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::output()}}, \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00049}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+QSUPGAdvection\+Diffusion\+Element()}}, and \mbox{\hyperlink{supg__advection__diffusion__elements_8h_source_l00063}{oomph\+::\+QSUPGAdvection\+Diffusion\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::switch\+\_\+off\+\_\+stabilisation()}}.
 
 
 

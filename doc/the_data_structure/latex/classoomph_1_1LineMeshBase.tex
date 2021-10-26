@@ -12,7 +12,7 @@ Base class for line meshes (meshes made of 1D line elements)
 Inheritance diagram for oomph\+::Line\+Mesh\+Base\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.025641cm]{classoomph_1_1LineMeshBase}
+\includegraphics[height=3.080308cm]{classoomph_1_1LineMeshBase}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -20,14 +20,14 @@ Inheritance diagram for oomph\+::Line\+Mesh\+Base\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1LineMeshBase_a17ac7e4db35e550c05c12368132b48df}{Line\+Mesh\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1LineMeshBase_ae1fc7877845a06c7f23bafdf2fd9954b}{Line\+Mesh\+Base}} (const \mbox{\hyperlink{classoomph_1_1LineMeshBase}{Line\+Mesh\+Base}} \&\mbox{\hyperlink{the__data__structure_8txt_ae56499a02d89f315ab025070e7a0058f}{node}})
+\mbox{\hyperlink{classoomph_1_1LineMeshBase_a39add8100bce664988c684e1c47193c8}{Line\+Mesh\+Base}} (const \mbox{\hyperlink{classoomph_1_1LineMeshBase}{Line\+Mesh\+Base}} \&node)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LineMeshBase_a31bcd5dc1a4c81e95ad21b15865561f1}{operator=}} (const \mbox{\hyperlink{classoomph_1_1LineMeshBase}{Line\+Mesh\+Base}} \&)
+void \mbox{\hyperlink{classoomph_1_1LineMeshBase_a4dcc6d552f38f3dcfe84dfaecd0e3f7c}{operator=}} (const \mbox{\hyperlink{classoomph_1_1LineMeshBase}{Line\+Mesh\+Base}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1LineMeshBase_a1716fa6bd365f1a4fa852ee99ab9b46b}{$\sim$\+Line\+Mesh\+Base}} ()
 \begin{DoxyCompactList}\small\item\em Destructor (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LineMeshBase_ac630cc88daeec61aff7335c2b1d77d91}{setup\+\_\+boundary\+\_\+element\+\_\+info}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Set up lookup schemes which establish which elements are located next to mesh\textquotesingle{}s boundaries (wrapper to suppress doc) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LineMeshBase_a309fc1aa6fe508a32cd6c0e863d5b1c6}{setup\+\_\+boundary\+\_\+element\+\_\+info}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Set up lookup schemes which establish which elements are located next to mesh\textquotesingle{}s boundaries. Doc in outfile (if it\textquotesingle{}s open). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
@@ -36,7 +36,7 @@ void \mbox{\hyperlink{classoomph_1_1LineMeshBase_a309fc1aa6fe508a32cd6c0e863d5b1
 \doxysubsection{Detailed Description}
 Base class for line meshes (meshes made of 1D line elements) 
 
-Definition at line 53 of file line\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{line__mesh_8h_source_l00053}{53}} of file \mbox{\hyperlink{line__mesh_8h_source}{line\+\_\+mesh.\+h}}.
 
 
 
@@ -53,25 +53,17 @@ Constructor (empty)
 
 
 
-Definition at line 57 of file line\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{line__mesh_8h_source_l00057}{57}} of file \mbox{\hyperlink{line__mesh_8h_source}{line\+\_\+mesh.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1LineMeshBase_ae1fc7877845a06c7f23bafdf2fd9954b}\label{classoomph_1_1LineMeshBase_ae1fc7877845a06c7f23bafdf2fd9954b}} 
+\mbox{\Hypertarget{classoomph_1_1LineMeshBase_a39add8100bce664988c684e1c47193c8}\label{classoomph_1_1LineMeshBase_a39add8100bce664988c684e1c47193c8}} 
 \index{oomph::LineMeshBase@{oomph::LineMeshBase}!LineMeshBase@{LineMeshBase}}
 \index{LineMeshBase@{LineMeshBase}!oomph::LineMeshBase@{oomph::LineMeshBase}}
 \doxysubsubsection{\texorpdfstring{LineMeshBase()}{LineMeshBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Line\+Mesh\+Base\+::\+Line\+Mesh\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LineMeshBase}{Line\+Mesh\+Base}} \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Line\+Mesh\+Base\+::\+Line\+Mesh\+Base (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LineMeshBase}{Line\+Mesh\+Base}} \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 60 of file line\+\_\+mesh.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 \mbox{\Hypertarget{classoomph_1_1LineMeshBase_a1716fa6bd365f1a4fa852ee99ab9b46b}\label{classoomph_1_1LineMeshBase_a1716fa6bd365f1a4fa852ee99ab9b46b}} 
 \index{oomph::LineMeshBase@{oomph::LineMeshBase}!````~LineMeshBase@{$\sim$LineMeshBase}}
@@ -85,28 +77,20 @@ Destructor (empty)
 
 
 
-Definition at line 72 of file line\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{line__mesh_8h_source_l00066}{66}} of file \mbox{\hyperlink{line__mesh_8h_source}{line\+\_\+mesh.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1LineMeshBase_a31bcd5dc1a4c81e95ad21b15865561f1}\label{classoomph_1_1LineMeshBase_a31bcd5dc1a4c81e95ad21b15865561f1}} 
+\mbox{\Hypertarget{classoomph_1_1LineMeshBase_a4dcc6d552f38f3dcfe84dfaecd0e3f7c}\label{classoomph_1_1LineMeshBase_a4dcc6d552f38f3dcfe84dfaecd0e3f7c}} 
 \index{oomph::LineMeshBase@{oomph::LineMeshBase}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::LineMeshBase@{oomph::LineMeshBase}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Line\+Mesh\+Base\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LineMeshBase}{Line\+Mesh\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Line\+Mesh\+Base\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1LineMeshBase}{Line\+Mesh\+Base}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 66 of file line\+\_\+mesh.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 \mbox{\Hypertarget{classoomph_1_1LineMeshBase_ac630cc88daeec61aff7335c2b1d77d91}\label{classoomph_1_1LineMeshBase_ac630cc88daeec61aff7335c2b1d77d91}} 
 \index{oomph::LineMeshBase@{oomph::LineMeshBase}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -114,13 +98,25 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 \doxysubsubsection{\texorpdfstring{setup\_boundary\_element\_info()}{setup\_boundary\_element\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void oomph\+::\+Line\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+element\+\_\+info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
+
+
 Set up lookup schemes which establish which elements are located next to mesh\textquotesingle{}s boundaries (wrapper to suppress doc) 
+
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a6cc8bcd6b41209f0e9295cc993d9c6bb}{oomph\+::\+Mesh}}.
 
 
 
-Definition at line 76 of file line\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{line__mesh_8h_source_l00070}{70}} of file \mbox{\hyperlink{line__mesh_8h_source}{line\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{line__mesh_8h_source_l00070}{setup\+\_\+boundary\+\_\+element\+\_\+info()}}.
+
+
+
+Referenced by \mbox{\hyperlink{line__mesh_8h_source_l00070}{setup\+\_\+boundary\+\_\+element\+\_\+info()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LineMeshBase_a309fc1aa6fe508a32cd6c0e863d5b1c6}\label{classoomph_1_1LineMeshBase_a309fc1aa6fe508a32cd6c0e863d5b1c6}} 
 \index{oomph::LineMeshBase@{oomph::LineMeshBase}!setup\_boundary\_element\_info@{setup\_boundary\_element\_info}}
@@ -138,11 +134,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Mesh_a413cbcbea4fb1111703da9ee
 
 
 
-Definition at line 36 of file line\+\_\+mesh.\+cc.
+Definition at line \mbox{\hyperlink{line__mesh_8cc_source_l00036}{36}} of file \mbox{\hyperlink{line__mesh_8cc_source}{line\+\_\+mesh.\+cc}}.
 
 
 
-References oomph\+::\+Mesh\+::\+Boundary\+\_\+element\+\_\+pt, oomph\+::\+Mesh\+::\+Comm\+\_\+pt, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Leak\+Check\+Names\+::doc(), e, oomph\+::\+Mesh\+::\+Face\+\_\+index\+\_\+at\+\_\+boundary, oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt(), oomph\+::\+Mesh\+::\+Lookup\+\_\+for\+\_\+elements\+\_\+next\+\_\+boundary\+\_\+is\+\_\+setup, n, oomph\+::\+Mesh\+::nboundary(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References \mbox{\hyperlink{mesh_8h_source_l00091}{oomph\+::\+Mesh\+::\+Boundary\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00119}{oomph\+::\+Mesh\+::\+Comm\+\_\+pt}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00095}{oomph\+::\+Mesh\+::\+Face\+\_\+index\+\_\+at\+\_\+boundary}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00087}{oomph\+::\+Mesh\+::\+Lookup\+\_\+for\+\_\+elements\+\_\+next\+\_\+boundary\+\_\+is\+\_\+setup}}, \mbox{\hyperlink{mesh_8h_source_l00827}{oomph\+::\+Mesh\+::nboundary()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 

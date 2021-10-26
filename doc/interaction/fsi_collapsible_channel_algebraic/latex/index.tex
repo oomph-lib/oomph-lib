@@ -4,13 +4,13 @@ In an \href{../../fsi_collapsible_channel/html/index.html}{\texttt{ earlier exam
  wall are identified by their Lagrangian coordinate, $ \xi $ , which doubles as the {\ttfamily Geom\+Object\textquotesingle{}s} intrinsic coordinate, $ \zeta $ . ~\newline
 ~\newline
 
-\item Use the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object} to represent the moving boundary of the fluid mesh. \char`\"{}\+Upgrade\char`\"{} the fluid elements (of type {\ttfamily F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}, say) to the \char`\"{}wrapped\char`\"{} version {\ttfamily Macro\+Element\+Node\+Update\+Element$<$\+F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T$>$} to allow the the node-\/update to be performed node-\/by-\/node, and to automatically evaluate the \char`\"{}shape derivatives\char`\"{} -- the derivatives of the fluid equations with respect to the (solid mechanics) degrees of freedom that determine their nodal positions. ~\newline
+\item Use the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object} to represent the moving boundary of the fluid mesh. \char`\"{}\+Upgrade\char`\"{} the fluid elements (of type {\ttfamily FLUID\+\_\+\+ELEMENT}, say) to the \char`\"{}wrapped\char`\"{} version {\ttfamily Macro\+Element\+Node\+Update\+Element$<$\+FLUID\+\_\+\+ELEMENT$>$} to allow the the node-\/update to be performed node-\/by-\/node, and to automatically evaluate the \char`\"{}shape derivatives\char`\"{} -- the derivatives of the fluid equations with respect to the (solid mechanics) degrees of freedom that determine their nodal positions. ~\newline
 ~\newline
 
-\end{DoxyEnumerate}While the implementation of these steps is very straightforward, we pointed out that the resulting code was not particularly efficient as the fluid-\/node update is not as sparse as it could (should!) be\+: Since it is impossible to distinguish between the various sub-\/objects in the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object}, we can do no better than to assume the worst-\/case scenario, namely that the positional degrees of freedom of all {\ttfamily Solid\+Nodes} in the wall mesh potentially affect the nodal position in all fluid elements. This dramatically increases the size of the elemental Jacobian matrices, and creates many nonzero entries in the off-\/diagonal blocks in the global Jacobian matrix.\hypertarget{index_alg_sparse}{}\doxysection{Sparse algebraic node updates in F\+S\+I problems}\label{index_alg_sparse}
-To avoid this problem we need a node-\/update strategy in which the position of each fluid node is determined by only a small number of solid mechanics degrees of freedom. The algebraic node-\/update strategy discussed in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+F\+SI version of the collapsible channel problem,}} provides an ideal framework for this, as it allows each node to update its own position, using a node-\/specific update function. Recall that in the {\ttfamily Algebraic\+Mesh} -\/ version of the {\ttfamily Collapsible\+Channel\+Mesh}, each {\ttfamily Algebraic\+Node} stored a pointer to the (single) {\ttfamily Geom\+Object} that represented the moving curvilinear boundary, and the Lagrangian coordinate of a reference point on this {\ttfamily Geom\+Object}. The node\textquotesingle{}s node-\/update function then placed the node at a fixed vertical fraction on the line connecting the reference point on the \char`\"{}elastic\char`\"{} wall to a second reference point on the fixed lower channel wall. Furthermore, the \char`\"{}wrapped\char`\"{} element, {\ttfamily Algebraic\+Element$<$\+F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T$>$}, automatically computes the \char`\"{}shape derivatives\char`\"{} by finite-\/differencing the fluid residuals with respect to the degrees of freedom stored in the {\ttfamily Geom\+Object\textquotesingle{}s} geometric {\ttfamily Data}, just as in the case of the {\ttfamily Macro\+Element} -\/ based node-\/update procedure.
+\end{DoxyEnumerate}While the implementation of these steps is very straightforward, we pointed out that the resulting code was not particularly efficient as the fluid-\/node update is not as sparse as it could (should!) be\+: Since it is impossible to distinguish between the various sub-\/objects in the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object}, we can do no better than to assume the worst-\/case scenario, namely that the positional degrees of freedom of all {\ttfamily Solid\+Nodes} in the wall mesh potentially affect the nodal position in all fluid elements. This dramatically increases the size of the elemental Jacobian matrices, and creates many nonzero entries in the off-\/diagonal blocks in the global Jacobian matrix.\hypertarget{index_alg_sparse}{}\doxysection{Sparse algebraic node updates in FSI problems}\label{index_alg_sparse}
+To avoid this problem we need a node-\/update strategy in which the position of each fluid node is determined by only a small number of solid mechanics degrees of freedom. The algebraic node-\/update strategy discussed in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+FSI version of the collapsible channel problem,}} provides an ideal framework for this, as it allows each node to update its own position, using a node-\/specific update function. Recall that in the {\ttfamily Algebraic\+Mesh} -\/ version of the {\ttfamily Collapsible\+Channel\+Mesh}, each {\ttfamily Algebraic\+Node} stored a pointer to the (single) {\ttfamily Geom\+Object} that represented the moving curvilinear boundary, and the Lagrangian coordinate of a reference point on this {\ttfamily Geom\+Object}. The node\textquotesingle{}s node-\/update function then placed the node at a fixed vertical fraction on the line connecting the reference point on the \char`\"{}elastic\char`\"{} wall to a second reference point on the fixed lower channel wall. Furthermore, the \char`\"{}wrapped\char`\"{} element, {\ttfamily Algebraic\+Element$<$\+FLUID\+\_\+\+ELEMENT$>$}, automatically computes the \char`\"{}shape derivatives\char`\"{} by finite-\/differencing the fluid residuals with respect to the degrees of freedom stored in the {\ttfamily Geom\+Object\textquotesingle{}s} geometric {\ttfamily Data}, just as in the case of the {\ttfamily Macro\+Element} -\/ based node-\/update procedure.
 
-If used in the form discussed in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ earlier example,}} this methodology does not (yet!) improve the sparsity of the node update\+: The geometric {\ttfamily Data} of the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object} that represents the wall still contains the positional degrees of freedom of {\itshape all} of the mesh\textquotesingle{}s constituent {\ttfamily F\+S\+I\+Hermite\+Beam\+Elements}. This is wasteful because the position of a material point on the (discretised) wall depends only on the positional degrees of freedom of the element that this point is located in. The (costly-\/to-\/compute) derivatives with respect to all other solid mechanics degree of freedom are zero. We will therefore modify the node-\/update procedure as follows\+: Each {\ttfamily Algebraic\+Node} stores a pointer to the {\ttfamily F\+S\+I\+Hermite\+Beam\+Element} that its reference point is located in. This is possible because {\ttfamily F\+S\+I\+Hermite\+Beam\+Elements} are derived from the {\ttfamily Finite\+Element} class which, in turn, is derived from the {\ttfamily Geom\+Object} class. In other words, the sub-\/objects of the compound {\ttfamily Mesh\+As\+Geom\+Object} are {\ttfamily Geom\+Objects} themselves. Their shape is parametrised by the {\ttfamily F\+S\+I\+Hermite\+Beam\+Element\textquotesingle{}s} local coordinate, $ s $ , which acts as the (sub-\/){\ttfamily Geom\+Object\textquotesingle{}s} intrinsic coordinate, $ \zeta $ .
+If used in the form discussed in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ earlier example,}} this methodology does not (yet!) improve the sparsity of the node update\+: The geometric {\ttfamily Data} of the \char`\"{}compound\char`\"{} {\ttfamily Geom\+Object} that represents the wall still contains the positional degrees of freedom of {\itshape all} of the mesh\textquotesingle{}s constituent {\ttfamily FSIHermite\+Beam\+Elements}. This is wasteful because the position of a material point on the (discretised) wall depends only on the positional degrees of freedom of the element that this point is located in. The (costly-\/to-\/compute) derivatives with respect to all other solid mechanics degree of freedom are zero. We will therefore modify the node-\/update procedure as follows\+: Each {\ttfamily Algebraic\+Node} stores a pointer to the {\ttfamily FSIHermite\+Beam\+Element} that its reference point is located in. This is possible because {\ttfamily FSIHermite\+Beam\+Elements} are derived from the {\ttfamily Finite\+Element} class which, in turn, is derived from the {\ttfamily Geom\+Object} class. In other words, the sub-\/objects of the compound {\ttfamily Mesh\+As\+Geom\+Object} are {\ttfamily Geom\+Objects} themselves. Their shape is parametrised by the {\ttfamily FSIHermite\+Beam\+Element\textquotesingle{}s} local coordinate, $ s $ , which acts as the (sub-\/){\ttfamily Geom\+Object\textquotesingle{}s} intrinsic coordinate, $ \zeta $ .
 
 Given a pointer to a compound {\ttfamily Geom\+Object}, {\ttfamily geom\+\_\+obj\+\_\+pt}, say, and the intrinsic coordinate $ \zeta_{compound} $ = {\ttfamily zeta\+\_\+compound} of a point in that {\ttfamily Geom\+Object}, the function {\ttfamily Geom\+Object\+::locate\+\_\+zeta(...)} may be used to determine a pointer, {\ttfamily sub\+\_\+obj\+\_\+pt}, to the sub-\/object that this point is located in, and the vector of intrinsic coordinates {\ttfamily zeta\+\_\+sub\+\_\+obj} of the point in this sub-\/object. This procedure is illustrated in this code fragment\+:
 
@@ -20,35 +20,36 @@ Given a pointer to a compound {\ttfamily Geom\+Object}, {\ttfamily geom\+\_\+obj
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Vector containing the (1D) intrinsic coordinate in the }}
 \DoxyCodeLine{\textcolor{comment}{// compound GeomObject:}}
-\DoxyCodeLine{Vector<double> \mbox{\hyperlink{fsi__chan__alg_8txt_a16fef6cd1987967ced451b0496a690bd}{zeta\_compound}}(1);}
-\DoxyCodeLine{\mbox{\hyperlink{fsi__chan__alg_8txt_a16fef6cd1987967ced451b0496a690bd}{zeta\_compound}}[0]=0.3;}
+\DoxyCodeLine{Vector<double> zeta\_compound(1);}
+\DoxyCodeLine{zeta\_compound[0]=0.3;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Pointer to the sub-\/GeomObject:}}
-\DoxyCodeLine{GeomObject* \mbox{\hyperlink{fsi__chan__alg_8txt_a49a7da910a72a527e23d6b33b01d817b}{sub\_geom\_obj\_pt}};}
+\DoxyCodeLine{GeomObject* sub\_geom\_obj\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Vector containing the (1D) intrinsic coordinate in the }}
 \DoxyCodeLine{\textcolor{comment}{// sub-\/GeomObject:}}
-\DoxyCodeLine{Vector<double> \mbox{\hyperlink{fsi__chan__alg_8txt_a73dc4d7a158acc2ebc9f736aafcb28bd}{zeta\_sub\_obj}}(1);}
+\DoxyCodeLine{Vector<double> zeta\_sub\_obj(1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Get it...}}
-\DoxyCodeLine{geom\_obj\_pt-\/>locate\_zeta(\mbox{\hyperlink{fsi__chan__alg_8txt_a16fef6cd1987967ced451b0496a690bd}{zeta\_compound}}, \mbox{\hyperlink{fsi__chan__alg_8txt_a49a7da910a72a527e23d6b33b01d817b}{sub\_geom\_obj\_pt}}, \mbox{\hyperlink{fsi__chan__alg_8txt_a73dc4d7a158acc2ebc9f736aafcb28bd}{zeta\_sub\_obj}});}
+\DoxyCodeLine{geom\_obj\_pt-\/>locate\_zeta(zeta\_compound, sub\_geom\_obj\_pt, zeta\_sub\_obj);}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Check the result: }}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Position vector to the point when viewed from}}
 \DoxyCodeLine{\textcolor{comment}{// the compound GeomObject}}
-\DoxyCodeLine{Vector<double> \mbox{\hyperlink{fsi__chan__alg_8txt_a2dc95730cea9740281d7b3a7a90137df}{r\_compound}}(2);}
-\DoxyCodeLine{geom\_obj\_pt-\/>position(\mbox{\hyperlink{fsi__chan__alg_8txt_a16fef6cd1987967ced451b0496a690bd}{zeta\_compound}},\mbox{\hyperlink{fsi__chan__alg_8txt_a2dc95730cea9740281d7b3a7a90137df}{r\_compound}});}
+\DoxyCodeLine{Vector<double> r\_compound(2);}
+\DoxyCodeLine{geom\_obj\_pt-\/>position(zeta\_compound,r\_compound);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Position vector to the point when viewed from}}
 \DoxyCodeLine{\textcolor{comment}{// the sub-\/GeomObject}}
-\DoxyCodeLine{Vector<double> \mbox{\hyperlink{fsi__chan__alg_8txt_ae2974d93e2656a48c371c6aca495ddf4}{r\_sub}}(2);}
-\DoxyCodeLine{\mbox{\hyperlink{fsi__chan__alg_8txt_a49a7da910a72a527e23d6b33b01d817b}{sub\_geom\_obj\_pt}}-\/>position(zeta\_sub,\mbox{\hyperlink{fsi__chan__alg_8txt_ae2974d93e2656a48c371c6aca495ddf4}{r\_sub}});}
+\DoxyCodeLine{Vector<double> r\_sub(2);}
+\DoxyCodeLine{sub\_geom\_obj\_pt-\/>position(zeta\_sub,r\_sub);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// With a bit of luck we should now have r\_sub == r\_compound...}}
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
+
 \end{DoxyCode}
 
 
@@ -57,7 +58,7 @@ Here is an illustration of the relation between the various coordinates and {\tt
  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{locate_zeta}
-\doxyfigcaption{Sketch of the various coordinates and Geom\+Objects. The (continuous) beam is parametrised by its Lagrangian coordinate xi which doubles as the intrinsic coordinate zeta for its role as a Geom\+Object. The (discretised) beam is a compound Geom\+Object, parametrised by the Lagrangian coordinate xi; its constituent F\+SI beam elements are sub-\/\+Geom\+Objects that are parametrised by their local coordinates, s. }
+\doxyfigcaption{Sketch of the various coordinates and Geom\+Objects. The (continuous) beam is parametrised by its Lagrangian coordinate xi which doubles as the intrinsic coordinate zeta for its role as a Geom\+Object. The (discretised) beam is a compound Geom\+Object, parametrised by the Lagrangian coordinate xi; its constituent FSI beam elements are sub-\/\+Geom\+Objects that are parametrised by their local coordinates, s. }
 \end{DoxyImage}
 
 
@@ -66,7 +67,7 @@ We note that the {\ttfamily Geom\+Object} base class provides a default implemen
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_impl}{}\doxysection{The implementation}\label{index_impl}
-The implementation of the sparse node-\/update strategy requires only a few minor modifications to the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, first discussed in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+F\+SI example.}}
+The implementation of the sparse node-\/update strategy requires only a few minor modifications to the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, first discussed in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+FSI example.}}
 
 \DoxyHorRuler{0}
 \hypertarget{index_mesh}{}\doxysubsection{The Algebraic\+Collapsible\+Channel\+Mesh}\label{index_mesh}
@@ -76,27 +77,25 @@ We construct the mesh by multiple inheritance, combining the already existing {\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//========start\_of\_algebraic\_collapsible\_channel\_mesh==============}}
 \DoxyCodeLine{\textcolor{comment}{  /// Collapsible channel mesh with algebraic node update}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
+\DoxyCodeLine{  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{  \textcolor{keyword}{class }\mbox{\hyperlink{fsi__chan__alg_8txt_a2eb1f6b91aaf3fcc2ea27a0b39ab52fe}{AlgebraicCollapsibleChannelMesh}}}
+\DoxyCodeLine{  \textcolor{keyword}{class }AlgebraicCollapsibleChannelMesh}
 \DoxyCodeLine{    : \textcolor{keyword}{public} \textcolor{keyword}{virtual} CollapsibleChannelMesh<ELEMENT>,}
 \DoxyCodeLine{      \textcolor{keyword}{public} AlgebraicMesh}
 \DoxyCodeLine{  \{}
 
 \end{DoxyCodeInclude}
-
-
-The constructor calls the constructor of the underlying {\ttfamily Collapsible\+Channel\+Mesh} and then calls the private member function {\ttfamily setup\+\_\+algebraic\+\_\+node\+\_\+update()} to initialise the data for the algebraic node update procedures. (The initialisation is implemented in a separate function so it can be called from additional mesh constructors that are not discussed here.) The destructor remains empty.
+ The constructor calls the constructor of the underlying {\ttfamily Collapsible\+Channel\+Mesh} and then calls the private member function {\ttfamily setup\+\_\+algebraic\+\_\+node\+\_\+update()} to initialise the data for the algebraic node update procedures. (The initialisation is implemented in a separate function so it can be called from additional mesh constructors that are not discussed here.) The destructor remains empty.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor: Pass number of elements in upstream/collapsible/}}
+\DoxyCodeLine{\textcolor{comment}{    /// Constructor: Pass number of elements in upstream/collapsible/}}
 \DoxyCodeLine{\textcolor{comment}{    /// downstream segment and across the channel; lengths of upstream/}}
 \DoxyCodeLine{\textcolor{comment}{    /// collapsible/downstream segments and width of channel, pointer to}}
 \DoxyCodeLine{\textcolor{comment}{    /// GeomObject that defines the collapsible segment and pointer to}}
 \DoxyCodeLine{\textcolor{comment}{    /// TimeStepper (defaults to the default timestepper, Steady).}}
-\DoxyCodeLine{\textcolor{comment}{}    \mbox{\hyperlink{fsi__chan__alg_8txt_a2eb1f6b91aaf3fcc2ea27a0b39ab52fe}{AlgebraicCollapsibleChannelMesh}}(}
+\DoxyCodeLine{\textcolor{comment}{}    AlgebraicCollapsibleChannelMesh(}
 \DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nup,}
 \DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ncollapsible,}
 \DoxyCodeLine{      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ndown,}
@@ -125,21 +124,19 @@ The constructor calls the constructor of the underlying {\ttfamily Collapsible\+
 \DoxyCodeLine{      setup\_algebraic\_node\_update();}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Destructor: empty}}
-\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{fsi__chan__alg_8txt_a2eb1f6b91aaf3fcc2ea27a0b39ab52fe}{AlgebraicCollapsibleChannelMesh}}() \{\}}
+\DoxyCodeLine{\textcolor{comment}{    /// Destructor: empty}}
+\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{virtual} \string~AlgebraicCollapsibleChannelMesh() \{\}}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily algebraic\+\_\+node\+\_\+update(...)} is defined as a pure virtual function in the {\ttfamily Algebraic\+Mesh} base class and therefore must be implemented, whereas the virtual function {\ttfamily update\+\_\+node\+\_\+update(...)} is only required for refineable meshes and can remain empty.
+ The function {\ttfamily algebraic\+\_\+node\+\_\+update(...)} is defined as a pure virtual function in the {\ttfamily Algebraic\+Mesh} base class and therefore must be implemented, whereas the virtual function {\ttfamily update\+\_\+node\+\_\+update(...)} is only required for refineable meshes and can remain empty.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Update nodal position at time level t (t=0: present;}}
+\DoxyCodeLine{\textcolor{comment}{    /// Update nodal position at time level t (t=0: present;}}
 \DoxyCodeLine{\textcolor{comment}{    /// t>0: previous)}}
-\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} algebraic\_node\_update(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, AlgebraicNode*\& node\_pt);}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} algebraic\_node\_update(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, AlgebraicNode*\& node\_pt);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Update the node-\/udate data after mesh adaptation.}}
+\DoxyCodeLine{\textcolor{comment}{    /// Update the node-\/udate data after mesh adaptation.}}
 \DoxyCodeLine{\textcolor{comment}{    /// Empty -\/-\/ no update of node update required as this is}}
 \DoxyCodeLine{\textcolor{comment}{    /// non-\/refineable mesh.}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} update\_node\_update(AlgebraicNode*\& node\_pt) \{\}}
@@ -155,15 +152,15 @@ The function {\ttfamily algebraic\+\_\+node\+\_\+update(...)} is defined as a pu
 \end{DoxyCodeInclude}
 
 
-The setup of the algebraic node update is very similar to that used in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+F\+SI example discussed earlier.}} The main difference between the two versions of the mesh is that we use the function {\ttfamily Geom\+Object\+::locate\+\_\+zeta(...)} to determine the sub-\/{\ttfamily Geom\+Object} within which the reference point on the wall is located. As discussed above, the default implementation of this function in the {\ttfamily Geom\+Object} base class ensures that the mesh can be used with compound and non-\/compound {\ttfamily Geom\+Objects}.
+The setup of the algebraic node update is very similar to that used in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+FSI example discussed earlier.}} The main difference between the two versions of the mesh is that we use the function {\ttfamily Geom\+Object\+::locate\+\_\+zeta(...)} to determine the sub-\/{\ttfamily Geom\+Object} within which the reference point on the wall is located. As discussed above, the default implementation of this function in the {\ttfamily Geom\+Object} base class ensures that the mesh can be used with compound and non-\/compound {\ttfamily Geom\+Objects}.
 
-We start by determining the x and y-\/coordinates of the nodes and decide if they are located in the collapsible part of the mesh. (The positions of nodes that are located in the rigid upstream and downstream channel segments do not have to be updated; for such nodes we skip the assignment of the node-\/update data. See the discussion in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+F\+SI example}} for details.)
+We start by determining the x and y-\/coordinates of the nodes and decide if they are located in the collapsible part of the mesh. (The positions of nodes that are located in the rigid upstream and downstream channel segments do not have to be updated; for such nodes we skip the assignment of the node-\/update data. See the discussion in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+FSI example}} for details.)
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//=====start\_setup=================================================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Setup algebraic mesh update -\/-\/ assumes that mesh has}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// initially been set up with a flush upper wall}}
+\DoxyCodeLine{\textcolor{comment}{  /// Setup algebraic mesh update -\/-\/ assumes that mesh has}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{  /// initially been set up with a flush upper wall}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} AlgebraicCollapsibleChannelMesh<ELEMENT>::setup\_algebraic\_node\_update()}
@@ -189,10 +186,7 @@ We start by determining the x and y-\/coordinates of the nodes and decide if the
 \DoxyCodeLine{      \textcolor{keywordflow}{if} ((x >= l\_up) \&\& (x <= (l\_up + l\_collapsible)))}
 
 \end{DoxyCodeInclude}
- ~\newline
-
-
-Assuming that the wall is in its undeformed position (we\textquotesingle{}ll check this in a second...), we determine the intrinsic coordinate of the reference point on the upper wall (taking the offset between $ x$ and $ \zeta$ into account\+: The left end of the elastic wall is located at $ \zeta=0$ and at $ x = L_{up} $ ), and identify the sub -\/ {\ttfamily Geom\+Object} within which the reference point is located.
+ Assuming that the wall is in its undeformed position (we\textquotesingle{}ll check this in a second...), we determine the intrinsic coordinate of the reference point on the upper wall (taking the offset between $ x$ and $ \zeta$ into account\+: The left end of the elastic wall is located at $ \zeta=0$ and at $ x = L_{up} $ ), and identify the sub -\/ {\ttfamily Geom\+Object} within which the reference point is located.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -214,9 +208,7 @@ Assuming that the wall is in its undeformed position (we\textquotesingle{}ll che
 \DoxyCodeLine{        this-\/>Wall\_pt-\/>locate\_zeta(zeta, geom\_obj\_pt, s);}
 
 \end{DoxyCodeInclude}
-
-
-Just to be on the safe side, we double check that the wall is still in its undeformed position\+:
+ Just to be on the safe side, we double check that the wall is still in its undeformed position\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -231,11 +223,11 @@ Just to be on the safe side, we double check that the wall is still in its undef
 \DoxyCodeLine{            (std::fabs(r\_wall[1] -\/ y) > 1.0e-\/15))}
 \DoxyCodeLine{        \{}
 \DoxyCodeLine{          std::ostringstream error\_stream;}
-\DoxyCodeLine{          error\_stream << \textcolor{stringliteral}{"Wall must be in its undeformed position when\(\backslash\)n"}}
-\DoxyCodeLine{                       << \textcolor{stringliteral}{"algebraic node update information is set up!\(\backslash\)n "}}
-\DoxyCodeLine{                       << \textcolor{stringliteral}{"x-\/discrepancy: "} << std::fabs(r\_wall[0] -\/ x)}
+\DoxyCodeLine{          error\_stream << \textcolor{stringliteral}{"{}Wall must be in its undeformed position when\(\backslash\)n"{}}}
+\DoxyCodeLine{                       << \textcolor{stringliteral}{"{}algebraic node update information is set up!\(\backslash\)n "{}}}
+\DoxyCodeLine{                       << \textcolor{stringliteral}{"{}x-\/discrepancy: "{}} << std::fabs(r\_wall[0] -\/ x)}
 \DoxyCodeLine{                       << std::endl}
-\DoxyCodeLine{                       << \textcolor{stringliteral}{"y-\/discrepancy: "} << std::fabs(r\_wall[1] -\/ y)}
+\DoxyCodeLine{                       << \textcolor{stringliteral}{"{}y-\/discrepancy: "{}} << std::fabs(r\_wall[1] -\/ y)}
 \DoxyCodeLine{                       << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{          \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
@@ -245,9 +237,7 @@ Just to be on the safe side, we double check that the wall is still in its undef
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-Now we can create the node update data for the present {\ttfamily Algebraic\+Node}. The node update function involves a single {\ttfamily Geom\+Object\+:} The (sub-\/){\ttfamily Geom\+Object} within which the reference point on the upper wall is located.
+ Now we can create the node update data for the present {\ttfamily Algebraic\+Node}. The node update function involves a single {\ttfamily Geom\+Object\+:} The (sub-\/){\ttfamily Geom\+Object} within which the reference point on the upper wall is located.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -262,9 +252,7 @@ Now we can create the node update data for the present {\ttfamily Algebraic\+Nod
 \DoxyCodeLine{        geom\_object\_pt[0] = geom\_obj\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-As in the mesh used in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+F\+SI example}} we store the x-\/coordinate of the reference point on the lower wall, the fractional height of the node, and its intrinsic coordinate in the (sub-\/){\ttfamily Geom\+Object} on the upper wall. We also store the intrinsic coordinate of the reference point in the compound {\ttfamily Geom\+Object} (i.\+e. the Lagrangian coordinate of the reference point in the continuous beam). This will turn out to be useful in the refineable version of this mesh, to be discussed in \href{../../fsi_collapsible_channel_adapt/html/index.html}{\texttt{ the next example.}}
+ As in the mesh used in the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+FSI example}} we store the x-\/coordinate of the reference point on the lower wall, the fractional height of the node, and its intrinsic coordinate in the (sub-\/){\ttfamily Geom\+Object} on the upper wall. We also store the intrinsic coordinate of the reference point in the compound {\ttfamily Geom\+Object} (i.\+e. the Lagrangian coordinate of the reference point in the continuous beam). This will turn out to be useful in the refineable version of this mesh, to be discussed in \href{../../fsi_collapsible_channel_adapt/html/index.html}{\texttt{ the next example.}}
 
 
 \begin{DoxyCodeInclude}{0}
@@ -293,9 +281,7 @@ As in the mesh used in the \href{../../../navier_stokes/algebraic_collapsible_ch
 \DoxyCodeLine{        ref\_value[3] = zeta[0];}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we create the node update information by passing the pointer to the mesh, the pointer to the {\ttfamily Geom\+Object} and the reference values to the {\ttfamily Algebraic\+Node}.
+ Finally, we create the node update information by passing the pointer to the mesh, the pointer to the {\ttfamily Geom\+Object} and the reference values to the {\ttfamily Algebraic\+Node}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -314,7 +300,7 @@ Finally, we create the node update information by passing the pointer to the mes
 
 \DoxyHorRuler{0}
 \hypertarget{index_driver}{}\doxysection{The driver code}\label{index_driver}
-Since {\ttfamily oomph-\/lib\textquotesingle{}s} various node update procedures use the same interfaces, changing the node update strategy from the {\ttfamily Domain/\+Macro\+Element} -\/ based procedure, discussed in the \href{../../fsi_collapsible_channel/html/index.html}{\texttt{ previous example,}} to the procedure implemented in the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, only requires minimal changes to the driver code. In fact, the changes are so trivial, that both versions are implemented in the same driver code, \href{../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc}{\texttt{ fsi\+\_\+collapsible\+\_\+channel.\+cc}}, using compiler flags to switch from one version to the other. If the code is compiled with the flag {\ttfamily -\/D\+M\+A\+C\+R\+O\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+N\+O\+D\+E\+\_\+\+U\+P\+D\+A\+TE} the {\ttfamily Domain/\+Macro\+Element} -\/ based node-\/update procedure, implemented in the {\ttfamily Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh} is used, otherwise the code uses the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, discussed above. Here is one of the few portions of the code where the distinction between the two versions is required\+: The access function to the \char`\"{}bulk\char`\"{} (fluid) mesh in the problem class.
+Since {\ttfamily oomph-\/lib\textquotesingle{}s} various node update procedures use the same interfaces, changing the node update strategy from the {\ttfamily Domain/\+Macro\+Element} -\/ based procedure, discussed in the \href{../../fsi_collapsible_channel/html/index.html}{\texttt{ previous example,}} to the procedure implemented in the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, only requires minimal changes to the driver code. In fact, the changes are so trivial, that both versions are implemented in the same driver code, \href{../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc}{\texttt{ fsi\+\_\+collapsible\+\_\+channel.\+cc}}, using compiler flags to switch from one version to the other. If the code is compiled with the flag {\ttfamily -\/DMACRO\+\_\+\+ELEMENT\+\_\+\+NODE\+\_\+\+UPDATE} the {\ttfamily Domain/\+Macro\+Element} -\/ based node-\/update procedure, implemented in the {\ttfamily Macro\+Element\+Node\+Update\+Collapsible\+Channel\+Mesh} is used, otherwise the code uses the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, discussed above. Here is one of the few portions of the code where the distinction between the two versions is required\+: The access function to the \char`\"{}bulk\char`\"{} (fluid) mesh in the problem class.
 
  
 \begin{DoxyCodeInclude}{0}
@@ -345,19 +331,17 @@ Since {\ttfamily oomph-\/lib\textquotesingle{}s} various node update procedures 
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCodeInclude}
-
-
-Incidentally, the driver code also uses compiler flags to switch between Crouzeix-\/\+Raviart and Taylor-\/\+Hood elements for the discretisation of the Navier-\/\+Stokes equations. By default, Crouzeix-\/\+Raviart elements are used; Taylor-\/\+Hood elements are used if the code is compiled with with the flag {\ttfamily -\/D\+T\+A\+Y\+L\+O\+R\+\_\+\+H\+O\+OD}.
+ Incidentally, the driver code also uses compiler flags to switch between Crouzeix-\/\+Raviart and Taylor-\/\+Hood elements for the discretisation of the Navier-\/\+Stokes equations. By default, Crouzeix-\/\+Raviart elements are used; Taylor-\/\+Hood elements are used if the code is compiled with with the flag {\ttfamily -\/DTAYLOR\+\_\+\+HOOD}.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_results}{}\doxysection{Results}\label{index_results}
-The animations shown below illustrate the interaction between fluid and solid mechanics degrees of freedom in the computations with the algebraic node update. Comparison with the corresponding animations for the {\ttfamily Domain/\+Macro\+Element} -\/ based procedures, shown in the \href{../../fsi_collapsible_channel/html/index.html\#comments}{\texttt{ earlier example}} demonstrates the greatly improved sparsity of the node update. With the algebraic node-\/update procedures, the residuals of the {\ttfamily F\+S\+I\+Hermite\+Beam\+Elements} now only depend on the fluid degrees of freedom in the adjacent fluid elements and on the solid mechanics degree of freedom in the {\ttfamily F\+S\+I\+Hermite\+Beam\+Elements} that affect the nodal position in these fluid elements.
+The animations shown below illustrate the interaction between fluid and solid mechanics degrees of freedom in the computations with the algebraic node update. Comparison with the corresponding animations for the {\ttfamily Domain/\+Macro\+Element} -\/ based procedures, shown in the \href{../../fsi_collapsible_channel/html/index.html\#comments}{\texttt{ earlier example}} demonstrates the greatly improved sparsity of the node update. With the algebraic node-\/update procedures, the residuals of the {\ttfamily FSIHermite\+Beam\+Elements} now only depend on the fluid degrees of freedom in the adjacent fluid elements and on the solid mechanics degree of freedom in the {\ttfamily FSIHermite\+Beam\+Elements} that affect the nodal position in these fluid elements.
 
  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{cr_alg}
-\doxyfigcaption{Animation of the Data values that affect the fluid traction that the adjacent fluid elements exert onto the various F\+S\+I\+Hermite\+Beam\+Elements in the wall mesh. (The fluid elements are 2D Crouzeix-\/\+Raviart elements.) }
+\doxyfigcaption{Animation of the Data values that affect the fluid traction that the adjacent fluid elements exert onto the various FSIHermite\+Beam\+Elements in the wall mesh. (The fluid elements are 2D Crouzeix-\/\+Raviart elements.) }
 \end{DoxyImage}
 
 
@@ -366,11 +350,11 @@ Here is the corresponding animation for a discretisation with 2D Taylor-\/\+Hood
  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{th_alg}
-\doxyfigcaption{Animation of the Data values that affect the fluid traction that the adjacent fluid elements exert onto the various F\+S\+I\+Hermite\+Beam\+Elements in the wall mesh. (The fluid elements are 2D Taylor-\/\+Hood elements.) }
+\doxyfigcaption{Animation of the Data values that affect the fluid traction that the adjacent fluid elements exert onto the various FSIHermite\+Beam\+Elements in the wall mesh. (The fluid elements are 2D Taylor-\/\+Hood elements.) }
 \end{DoxyImage}
 
 
-Finally, here is an animation that shows the (solid mechanics) degrees of freedom that affect the node-\/update of a given fluid node. The red square marker shows the fluid node; the green numbers show the number of the degrees of freedom at the {\ttfamily Solid\+Nodes} that are involved that fluid node\textquotesingle{}s node update. With the algebraic node update, the position of each fluid node is only affected by the solid mechanics degree of freedom in the {\ttfamily F\+S\+I\+Hermite\+Beam\+Element} that contains its reference point.
+Finally, here is an animation that shows the (solid mechanics) degrees of freedom that affect the node-\/update of a given fluid node. The red square marker shows the fluid node; the green numbers show the number of the degrees of freedom at the {\ttfamily Solid\+Nodes} that are involved that fluid node\textquotesingle{}s node update. With the algebraic node update, the position of each fluid node is only affected by the solid mechanics degree of freedom in the {\ttfamily FSIHermite\+Beam\+Element} that contains its reference point.
 
  
 \begin{DoxyImage}
@@ -388,19 +372,21 @@ The improved sparsity leads to a very significant speedup compared to the {\ttfa
 \begin{DoxyEnumerate}
 \item Demonstrate that the dramatically improved execution speed achieved with the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh} is mainly due to the improved sparsity of the node update, achieved by using the {\ttfamily Geom\+Object\+::locate\+\_\+zeta(...)} function. ~\newline
 ~\newline
- {\bfseries{Hint\+:}} You can either copy the basic {\ttfamily My\+Algebraic\+Collapsible\+Channel\+Mesh} in the file \href{../../../../demo_drivers/navier_stokes/collapsible_channel/my_alg_channel_mesh.h}{\texttt{ my\+\_\+algebraic\+\_\+collapsible\+\_\+channel\+\_\+mesh.\+h}}, developed for the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+F\+SI version of the collapsible channel problem,}} into the F\+SI driver code \href{../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc}{\texttt{ fsi\+\_\+collapsible\+\_\+channel.\+cc}} and use that mesh instead of the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, or replace the line ~\newline
+ {\bfseries{Hint\+:}} You can either copy the basic {\ttfamily My\+Algebraic\+Collapsible\+Channel\+Mesh} in the file \href{../../../../demo_drivers/navier_stokes/collapsible_channel/my_alg_channel_mesh.h}{\texttt{ my\+\_\+algebraic\+\_\+collapsible\+\_\+channel\+\_\+mesh.\+h}}, developed for the \href{../../../navier_stokes/algebraic_collapsible_channel/html/index.html}{\texttt{ non-\/\+FSI version of the collapsible channel problem,}} into the FSI driver code \href{../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc}{\texttt{ fsi\+\_\+collapsible\+\_\+channel.\+cc}} and use that mesh instead of the {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh}, or replace the line ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{this-\/>Wall\_pt-\/>locate\_zeta(zeta,geom\_obj\_pt,s);}
+
 \end{DoxyCode}
  ~\newline
 ~\newline
- in the function {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()} in \href{../../../../src/meshes/collapsible_channel_mesh.template.cc}{\texttt{ collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc}} by ~\newline
+ in the function {\ttfamily Algebraic\+Collapsible\+Channel\+Mesh$<$\+ELEMENT$>$\+::setup\+\_\+algebraic\+\_\+node\+\_\+update()} in \href{../../../../src/meshes/collapsible_channel_mesh.template.cc}{\texttt{ collapsible\+\_\+channel\+\_\+mesh.\+template.\+cc}} by ~\newline
 ~\newline
-
+ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{this-\/>Wall\_pt-\/>GeomObject::locate\_zeta(zeta,geom\_obj\_pt,s);}
+
 \end{DoxyCode}
  ~\newline
 ~\newline
@@ -427,5 +413,5 @@ The improved sparsity leads to a very significant speedup compared to the {\ttfa
 \begin{center} \href{../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc}{\texttt{ demo\+\_\+drivers/interaction/fsi\+\_\+collapsible\+\_\+channel/fsi\+\_\+collapsible\+\_\+channel.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

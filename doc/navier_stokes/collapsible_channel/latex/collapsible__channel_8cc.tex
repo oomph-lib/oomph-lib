@@ -1,55 +1,38 @@
 \hypertarget{collapsible__channel_8cc}{}\doxysection{collapsible\+\_\+channel.\+cc File Reference}
 \label{collapsible__channel_8cc}\index{collapsible\_channel.cc@{collapsible\_channel.cc}}
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-class \mbox{\hyperlink{classOscillatingWall}{Oscillating\+Wall}}
-\item 
-class \mbox{\hyperlink{classCollapsibleChannelProblem}{Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceBL__Squash}{B\+L\+\_\+\+Squash}}
-\item 
- \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
-\begin{DoxyCompactList}\small\item\em Namespace for phyical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceBL__Squash}{BL\+\_\+\+Squash}}
+\begin{DoxyCompactList}\small\item\em Namespace to define the mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{namespaceBL__Squash_a0fdaf7661591150041b7102dbe578cdc}{B\+L\+\_\+\+Squash\+::squash\+\_\+fct}} (const double \&s)
-\begin{DoxyCompactList}\small\item\em Mapping \mbox{[}0,1\mbox{]} -\/$>$ \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0de42ee6d39e85c77c16a04c3a05f7a2}{Global\+\_\+\+Physical\+\_\+\+Variables\+::prescribed\+\_\+traction}} (const double \&t, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ double $>$ \&traction)
-\begin{DoxyCompactList}\small\item\em Traction required at the left boundary. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{collapsible__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\end{DoxyCompactItemize}
+double \mbox{\hyperlink{namespaceBL__Squash_a0fdaf7661591150041b7102dbe578cdc}{BL\+\_\+\+Squash\+::squash\+\_\+fct}} (const double \&s)
+\begin{DoxyCompactList}\small\item\em Mapping \mbox{[}0,1\mbox{]} -\/\texorpdfstring{$>$}{>} \mbox{[}0,1\mbox{]} that re-\/distributes nodal points across the channel width. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{collapsible__channel_8cc_a67d881165eb1930a17ae5f70761d150b}{left}} (\textbackslash{}begin\{array\}\{c\} L\+\_\+\{up\}+\textbackslash{}zeta \textbackslash{}\textbackslash{} 1 \textbackslash{}end\{array\} \textbackslash{}right)+A \textbackslash{}left(\textbackslash{}begin
+\begin{DoxyCompactList}\small\item\em Straight, horizontal channel wall at $ y=H $ deforms into an oscillating parabola. The amplitude of the oscillation $ A $ and its period is $ T $. The position vector to a point on the wall, parametrised by the Lagrangian coordinate $ \zeta \in [0,L]$, is therefore given by. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{namespaceBL__Squash_a3c4183891049bca81f3a011db24fc579}{B\+L\+\_\+\+Squash\+::\+Delta}} =0.\+1
+double \mbox{\hyperlink{namespaceBL__Squash_a3c4183891049bca81f3a011db24fc579}{BL\+\_\+\+Squash\+::\+Delta}} =0.\+1
 \begin{DoxyCompactList}\small\item\em Boundary layer width. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceBL__Squash_af84bda39008884cd2b01e630957573df}{B\+L\+\_\+\+Squash\+::\+Fract\+\_\+in\+\_\+\+BL}} =0.\+5
-\begin{DoxyCompactList}\small\item\em Fraction of points in boundary layer. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}} =50.\+0
-\begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}} =50.\+0
-\begin{DoxyCompactList}\small\item\em Womersley = Reynolds times Strouhal. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae1a493695b7f4619af32f405b0b28861}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+up}} =0.\+0
-\begin{DoxyCompactList}\small\item\em Default pressure on the left boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+double \mbox{\hyperlink{namespaceBL__Squash_af84bda39008884cd2b01e630957573df}{BL\+\_\+\+Squash\+::\+Fract\+\_\+in\+\_\+\+BL}} =0.\+5
+\begin{DoxyCompactList}\small\item\em Fraction of points in boundary layer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{collapsible__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{collapsible__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
-\index{collapsible\_channel.cc@{collapsible\_channel.cc}!main@{main}}
-\index{main@{main}!collapsible\_channel.cc@{collapsible\_channel.cc}}
-\doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
-
-Driver code for an unsteady adaptive collapsible channel problem with prescribed wall motion. Presence of command line arguments indicates validation run with coarse resolution and small number of timesteps. 
-
-Definition at line 772 of file collapsible\+\_\+channel.\+cc.
+\mbox{\Hypertarget{collapsible__channel_8cc_a67d881165eb1930a17ae5f70761d150b}\label{collapsible__channel_8cc_a67d881165eb1930a17ae5f70761d150b}} 
+\index{collapsible\_channel.cc@{collapsible\_channel.cc}!left@{left}}
+\index{left@{left}!collapsible\_channel.cc@{collapsible\_channel.cc}}
+\doxysubsubsection{\texorpdfstring{left()}{left()}}
+{\footnotesize\ttfamily left (\begin{DoxyParamCaption}\item[{\textbackslash{}begin\{array\}\{c\} L\+\_\+\{up\}+\textbackslash{}zeta \textbackslash{}\textbackslash{} 1 \textbackslash{}end\{array\} \textbackslash{}}]{right }\end{DoxyParamCaption})}
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+P\+\_\+up, and problem.
+Straight, horizontal channel wall at $ y=H $ deforms into an oscillating parabola. The amplitude of the oscillation $ A $ and its period is $ T $. The position vector to a point on the wall, parametrised by the Lagrangian coordinate $ \zeta \in [0,L]$, is therefore given by. 
+
+
+
+Definition at line \mbox{\hyperlink{collapsible__channel_8cc_source_l00089}{89}} of file \mbox{\hyperlink{collapsible__channel_8cc_source}{collapsible\+\_\+channel.\+cc}}.
 

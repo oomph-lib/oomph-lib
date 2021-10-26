@@ -14,8 +14,7 @@
 This rest of this document provides a \char`\"{}bottom up\char`\"{} overview of the data structure in {\ttfamily oomph-\/lib} and discusses how the various objects interact. For brevity, we usually replace the list of arguments to functions by `(...)' and explain the main input and output parameters in words. The full specifications of the interfaces may be found in the individual class documentation, accessible via the links at the top of this page.\hypertarget{index_technical_terms}{}\doxysubsection{Technical terms}\label{index_technical_terms}
 Throughout this document, certain commonly used terms have a specific technical meaning\+:
 \begin{DoxyItemize}
-\item {\bfseries{Value\+:}} A {\itshape value} is a (double precision) number (e.\+g. a \char`\"{}nodal 
-   value\char`\"{}). A value can either be an {\itshape unknown} in the problem or be determined by a boundary condition.
+\item {\bfseries{Value\+:}} A {\itshape value} is a (double precision) number (e.\+g. a \char`\"{}nodal     value\char`\"{}). A value can either be an {\itshape unknown} in the problem or be determined by a boundary condition.
 \item {\bfseries{Unknown\+:}} An {\itshape unknown} is a {\itshape value} that is not determined by a boundary condition.
 \item {\bfseries{Degree}} {\bfseries{of}} {\bfseries{freedom\+:}} Synonym for {\itshape unknown}; often abbreviated as \char`\"{}dof\char`\"{}.
 \item {\bfseries{History}} {\bfseries{value\+:}} {\itshape History} {\itshape values} are (double precision) numbers that are used by {\ttfamily Time\+Steppers} to calculate time-\/derivatives of values. For instance, history values are often, but {\bfseries{not}} {\bfseries{always}}, the values at previous timesteps.
@@ -25,7 +24,7 @@ Throughout this document, certain commonly used terms have a specific technical 
 The main components of {\ttfamily oomph-\/lib} are {\ttfamily Data}, {\ttfamily Node}, {\ttfamily Generalised\+Element}, {\ttfamily Mesh} and {\ttfamily Problem}.\hypertarget{index_data}{}\doxysubsection{Data}\label{index_data}
 The most elementary data structure in {\ttfamily oomph-\/lib} is {\ttfamily Data} (ha!).
 
-Consider the solution of a scalar P\+DE (e.\+g. a Poisson equation) with certain boundary conditions. The numerical solution of this problem requires the computation of the function values (double precision numbers) at a finite number of spatial positions (the {\ttfamily Nodes}). Typically, these values fall into two categories\+: those that are known {\itshape a} {\itshape priori} (i.\+e. are enforced by boundary conditions), and those that must be determined as part of the solution.
+Consider the solution of a scalar PDE (e.\+g. a Poisson equation) with certain boundary conditions. The numerical solution of this problem requires the computation of the function values (double precision numbers) at a finite number of spatial positions (the {\ttfamily Nodes}). Typically, these values fall into two categories\+: those that are known {\itshape a} {\itshape priori} (i.\+e. are enforced by boundary conditions), and those that must be determined as part of the solution.
 
 {\ttfamily Data} stores a value --- a double precision number. Typically, the values of the unknowns are determined by the solution of a system of algebraic equations. The solution of this system usually requires a (linear) numbering of the unknowns and associated equations. Hence, {\ttfamily Data} also stores a (long) integer that represents the number of the unknown in the global numbering scheme. {\bfseries{Convention\+:}} If the {\ttfamily Data} value is pinned, we set the equation number to the static member data {\ttfamily Data\+::\+Is\+\_\+pinned}, a negative number.
 
@@ -41,75 +40,88 @@ Two observations motivate a straightforward extension of this basic data structu
 
 Therefore, {\ttfamily Data} allows the storage of multiple values (all of which can either be pinned or free, and all of which have their own global equation number); {\ttfamily Data} can also store a certain number of auxiliary (history) values used for timestepping. Finally, {\ttfamily Data} stores a pointer to a {\ttfamily Time\+Stepper} whose member functions relate the history values to the values\textquotesingle{} time-\/derivatives.
 
-Direct, pointer-\/based read/write access to the {\ttfamily Data} values is provided by the functions
+Direct, pointer-\/based read/write access to the {\ttfamily Data} values is provided by the functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Data::value\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+
 \end{DoxyCode}
  which returns a pointer to the i-\/th value at the present time, and by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Data::value\_pt(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+
 \end{DoxyCode}
  which returns a pointer to the {\ttfamily t} -\/th history value associated with value {\ttfamily i}. Read-\/only access is also provided by the functions 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_a3b0d20781021ec2f0e788713f8b0fec8}{Data::value}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{Data::value(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+
 \end{DoxyCode}
  and its time-\/dependent counterpart 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_a3b0d20781021ec2f0e788713f8b0fec8}{Data::value}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+\DoxyCodeLine{Data::value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})}
+
 \end{DoxyCode}
  We recommend using these functions instead of the pointer-\/based access functions for read access because the two {\ttfamily Data\+::value(...)} functions are overloaded in the {\ttfamily Node} class (discussed below) so that they return suitably constrained nodal values if a {\ttfamily Node} is hanging. The {\ttfamily Data\+::value(...)} functions cannot be used to set {\ttfamily Data} values. For this purpose we provide the functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Data::set\_value(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},val)}
+
 \end{DoxyCode}
  which sets the {\ttfamily i} -\/th {\ttfamily Data} value to the double precision number {\ttfamily val}; and its time-\/dependent counterpart 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Data::set\_value(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},val)}
+
 \end{DoxyCode}
  which sets the {\ttfamily t} -\/th history value associated with the {\ttfamily i} -\/th {\ttfamily Data} value to the double precision number {\ttfamily val}.
 
-The general convention for all time-\/dependent data is that the index t=0 refers to values at the present time, whereas the values associated with t$>$0 correspond to history values. In many cases (e.\+g. B\+DF schemes) these history values are simply the values at previous timesteps, but this is not guaranteed. See the section \mbox{\hyperlink{index_timestepping}{Time-\/stepping}} for further details.\hypertarget{index_nodes}{}\doxysubsection{Nodes}\label{index_nodes}
+The general convention for all time-\/dependent data is that the index t=0 refers to values at the present time, whereas the values associated with t\texorpdfstring{$>$}{>}0 correspond to history values. In many cases (e.\+g. BDF schemes) these history values are simply the values at previous timesteps, but this is not guaranteed. See the section \mbox{\hyperlink{index_timestepping}{Time-\/stepping}} for further details.\hypertarget{index_nodes}{}\doxysubsection{Nodes}\label{index_nodes}
 In FE computations, most (but not all; see below) {\ttfamily Data} are associated with nodal points. Conversely, all {\ttfamily Nodes} in a finite element mesh have {\ttfamily Data} associated with them. {\ttfamily Nodes} are therefore derived from {\ttfamily Data}, but also store a spatial position, specified by a certain number of spatial (Eulerian) coordinates.
 
 The nodal positions are accessed by the member function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Node::x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+\DoxyCodeLine{\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{Node::x}}(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+
 \end{DoxyCode}
  which returns the current value of i-\/th nodal coordinate or 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Node::x(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+\DoxyCodeLine{\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{Node::x}}(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+
 \end{DoxyCode}
- which returns the value of i-\/th nodal coordinate at the present (t=0) timestep or a history value, if (t$>$0); again, note that the history values are not necessarily positions at previous timesteps.\hypertarget{index_advanced_features_of_nodes}{}\doxysubsubsection{Advanced features\+:}\label{index_advanced_features_of_nodes}
+ which returns the value of i-\/th nodal coordinate at the present (t=0) timestep or a history value, if (t\texorpdfstring{$>$}{>}0); again, note that the history values are not necessarily positions at previous timesteps.\hypertarget{index_advanced_features_of_nodes}{}\doxysubsubsection{Advanced features\+:}\label{index_advanced_features_of_nodes}
 {\ttfamily Nodes} have the following additional features\+:
 
 
 \begin{DoxyItemize}
-\item In moving-\/mesh problems, we must evaluate mesh velocities, which requires the storage of the nodal position at a number of previous timesteps. Storage for the positional history values is allocated by the {\ttfamily Node} constructor. A different {\ttfamily Time\+Stepper} may be used to represent time-\/derivatives of nodal position, so {\ttfamily Nodes} store a separate pointer to a positional {\ttfamily Time\+Stepper}. \mbox{[}Note\+: By default, we allocate the same amount of storage for the history of the nodal positions as we do for the history of the nodal values; e.\+g. if a {\ttfamily B\+D\+F$<$2$>$} scheme is used to evaluate the time-\/derivatives of the fluid velocities, we assume that the same timestepping scheme is used (and the same amount of storage required) to determine the mesh velocities from the nodal positions.\mbox{]}
-\item For finite elements in which the global position of a point in an element is determined by interpolation from the position of the element\textquotesingle{}s {\ttfamily Nodes} (Lagrange-\/type elements), we need only store the spatial position of the {\ttfamily Nodes}. In many other elements (e.\+g. Hermite-\/type elements), the interpolation of the geometry requires additional quantities, representing, e.\+g. the derivative of the mapping between local and global coordinates. Therefore, we allow the storage of additional positional variables at each {\ttfamily Node}, so that, in general, every {\ttfamily Node} has a number of {\itshape generalised} coordinates for each spatial coordinate direction. For instance, for nodes in 1D Hermite elements, the nodal coordinate of type \textquotesingle{}0\textquotesingle{} stores the global position at the node; the nodal coordinate of type \textquotesingle{}1\textquotesingle{} stores the derivative of the global position w.\+r.\+t. to the element\textquotesingle{}s local coordinate. The member function
+\item In moving-\/mesh problems, we must evaluate mesh velocities, which requires the storage of the nodal position at a number of previous timesteps. Storage for the positional history values is allocated by the {\ttfamily Node} constructor. A different {\ttfamily Time\+Stepper} may be used to represent time-\/derivatives of nodal position, so {\ttfamily Nodes} store a separate pointer to a positional {\ttfamily Time\+Stepper}. \mbox{[}Note\+: By default, we allocate the same amount of storage for the history of the nodal positions as we do for the history of the nodal values; e.\+g. if a {\ttfamily BDF$<$2$>$} scheme is used to evaluate the time-\/derivatives of the fluid velocities, we assume that the same timestepping scheme is used (and the same amount of storage required) to determine the mesh velocities from the nodal positions.\mbox{]}
+\item For finite elements in which the global position of a point in an element is determined by interpolation from the position of the element\textquotesingle{}s {\ttfamily Nodes} (Lagrange-\/type elements), we need only store the spatial position of the {\ttfamily Nodes}. In many other elements (e.\+g. Hermite-\/type elements), the interpolation of the geometry requires additional quantities, representing, e.\+g. the derivative of the mapping between local and global coordinates. Therefore, we allow the storage of additional positional variables at each {\ttfamily Node}, so that, in general, every {\ttfamily Node} has a number of {\itshape generalised} coordinates for each spatial coordinate direction. For instance, for nodes in 1D Hermite elements, the nodal coordinate of type \textquotesingle{}0\textquotesingle{} stores the global position at the node; the nodal coordinate of type \textquotesingle{}1\textquotesingle{} stores the derivative of the global position w.\+r.\+t. to the element\textquotesingle{}s local coordinate. The member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::x\_gen(k,\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+
 \end{DoxyCode}
  returns the {\ttfamily i} -\/th coordinate of the {\ttfamily k} -\/th coordinate type.
-\item In the context of mesh refinement, nodes can become hanging nodes (i.\+e. nodes on an element\textquotesingle{}s edge/face that are not shared by the adjacent element). The \char`\"{}hanging\char`\"{} status of a {\ttfamily Node} is indicated by the pointer to its {\ttfamily Hang\+Info} object. For ordinary (non-\/hanging) {\ttfamily Nodes} this pointer is N\+U\+LL, the default setting; see the section \mbox{\hyperlink{index_Hanging_Nodes}{Hanging Nodes}} for a more detailed discussion of hanging nodes; in particular, the role of the member functions {\ttfamily Node\+::position()} and {\ttfamily Node\+::value()} 
+\item In the context of mesh refinement, nodes can become hanging nodes (i.\+e. nodes on an element\textquotesingle{}s edge/face that are not shared by the adjacent element). The \char`\"{}hanging\char`\"{} status of a {\ttfamily Node} is indicated by the pointer to its {\ttfamily Hang\+Info} object. For ordinary (non-\/hanging) {\ttfamily Nodes} this pointer is NULL, the default setting; see the section \mbox{\hyperlink{index_Hanging_Nodes}{Hanging Nodes}} for a more detailed discussion of hanging nodes; in particular, the role of the member functions {\ttfamily Node\+::position()} and {\ttfamily Node\+::value()} 
 \item Mesh unrefinement can render nodes obsolete and we use a boolean flag to indicate this status. By default, {\ttfamily Nodes} are not obsolete.
 \item {\bfseries{Boundary\+Nodes\+:}} {\ttfamily Nodes} \char`\"{}know\char`\"{} the domain/mesh boundaries on which they are located. A {\ttfamily Node} can be located on none, one or multiple boundaries; the latter case arises if the {\ttfamily Node} is located on edges and corners of the mesh. ~\newline
  Storage of this information facilitates the automatic determination of boundary conditions for new {\ttfamily Nodes} that are created during mesh refinement.~\newline
  The majority of the {\ttfamily Nodes} will {\bfseries{not}} be located on boundaries, however, and providing storage for the boundary information in every {\ttfamily Node} object is rather wasteful. The derived class {\ttfamily Boundary\+Node} adds the required additional storage to the {\ttfamily Node} class and it follows that ~\newline
  all {\ttfamily Nodes} that could lie on boundaries must be {\ttfamily Boundary\+Nodes}; see \mbox{\hyperlink{index_meshes}{Meshes}} for further details.
-\item {\bfseries{Solid\+Nodes\+:}} Many solid mechanics problems are formulated in Lagrangian coordinates. In this case, the governing equations are discretised in a fixed Lagrangian domain; the nodal coordinates represent the {\ttfamily Nodes\textquotesingle{}} fixed positions in this domain. When the elastic body deforms, material points (and hence the {\ttfamily Nodes}) are displaced to new Eulerian positions. The {\ttfamily Solid\+Node} class is derived from {\ttfamily Node} and contains storage for the {\ttfamily Nodes\textquotesingle{}} {\bfseries{fixed}} positions (i.\+e. the Lagrangian coordinates) A\+ND their {\bfseries{variable}} positions (i.\+e. the Eulerian coordinates), which can be unknowns in the problem. To avoid confusion between the two, the access function for the nodal position,
+\item {\bfseries{Solid\+Nodes\+:}} Many solid mechanics problems are formulated in Lagrangian coordinates. In this case, the governing equations are discretised in a fixed Lagrangian domain; the nodal coordinates represent the {\ttfamily Nodes\textquotesingle{}} fixed positions in this domain. When the elastic body deforms, material points (and hence the {\ttfamily Nodes}) are displaced to new Eulerian positions. The {\ttfamily Solid\+Node} class is derived from {\ttfamily Node} and contains storage for the {\ttfamily Nodes\textquotesingle{}} {\bfseries{fixed}} positions (i.\+e. the Lagrangian coordinates) AND their {\bfseries{variable}} positions (i.\+e. the Eulerian coordinates), which can be unknowns in the problem. To avoid confusion between the two, the access function for the nodal position, 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Node::x(...) }
+\DoxyCodeLine{\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{Node::x}}(...) }
+
 \end{DoxyCode}
- {\bfseries{always}} refers to a {\ttfamily Node\textquotesingle{}s} Eulerian position/coordinate. In {\ttfamily Solid\+Nodes}, we provide a wrapper
+ {\bfseries{always}} refers to a {\ttfamily Node\textquotesingle{}s} Eulerian position/coordinate. In {\ttfamily Solid\+Nodes}, we provide a wrapper 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SolidNode::xi(..) }
+
 \end{DoxyCode}
- that provides access to the Lagrangian coordinates. Similarly, in the case of generalised coordinates
+ that provides access to the Lagrangian coordinates. Similarly, in the case of generalised coordinates 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::x\_gen(...) }
+
 \end{DoxyCode}
- always refers to the generalised Eulerian position and
+ always refers to the generalised Eulerian position and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SolidNode::xi\_gen(...)}
+
 \end{DoxyCode}
  refers to the generalised Lagrangian position.
 \end{DoxyItemize}\hypertarget{index_elements}{}\doxysubsection{Elements}\label{index_elements}
@@ -125,82 +137,89 @@ The class {\ttfamily Generalised\+Element} forms the base class for all elements
 
 The main role of elements is to provide contributions to a global residual vector and to the global Jacobian matrix. The two virtual functions 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{the__data__structure_8txt_a80f7344c0300e389acecd2d048f2bb58}{GeneralisedElement::get\_residuals}}(...) }
+\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} GeneralisedElement::get\_residuals(...) }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} GeneralisedElement::get\_jacobian(...) }
+
 \end{DoxyCode}
  specify the appropriate interfaces.
 
 In multi-\/physics problems, the elemental residuals and Jacobian will be a combination of the residuals vectors and Jacobian matrices of the constituent single-\/physics elements. An obvious implementation is to use multiple inheritance and function overloading 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMultiPhysicsElement}{MultiPhysicsElement}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} SinglePhysicsOneElement,}
+\DoxyCodeLine{\textcolor{keyword}{class }MultiPhysicsElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} SinglePhysicsOneElement,}
 \DoxyCodeLine{                            \textcolor{keyword}{public} \textcolor{keyword}{virtual} SinglePhysicsTwoElement}
 \DoxyCodeLine{ \{   }
 \DoxyCodeLine{}
 \DoxyCodeLine{  [...]}
 \DoxyCodeLine{                     }
-\DoxyCodeLine{  \textcolor{keywordtype}{void} \mbox{\hyperlink{classMultiPhysicsElement_a0d83f4f387363474e0912b4e892ad4f1}{get\_residuals}}(...) }
+\DoxyCodeLine{  \textcolor{keywordtype}{void} get\_residuals(...) }
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    \mbox{\hyperlink{the__data__structure_8txt_a80f7344c0300e389acecd2d048f2bb58}{SinglePhysicsOneElement::get\_residuals}}(...);}
-\DoxyCodeLine{    \mbox{\hyperlink{the__data__structure_8txt_a80f7344c0300e389acecd2d048f2bb58}{SinglePhysicsTwoElement::get\_residuals}}(...);}
+\DoxyCodeLine{    SinglePhysicsOneElement::get\_residuals(...);}
+\DoxyCodeLine{    SinglePhysicsTwoElement::get\_residuals(...);}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{  [...]}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \};}
-\end{DoxyCode}
- where the {\ttfamily \mbox{\hyperlink{classMultiPhysicsElement}{Multi\+Physics\+Element}}} inherits from {\ttfamily Single\+Physics\+One\+Element} and {\ttfamily Single\+Physics\+Two\+Element}.
 
-A problem with this implementation arises when we consider where to initialise the residuals vector. If the second single-\/physics {\ttfamily \mbox{\hyperlink{the__data__structure_8txt_a80f7344c0300e389acecd2d048f2bb58}{get\+\_\+residuals(...)}}} function initialises the residuals vector, then the contribution of the first single-\/physics element will be negated. When writing a single-\/physics element, however, we cannot know whether it will ever be used as part of a multi-\/physics element and, if so, in which order the {\ttfamily \mbox{\hyperlink{the__data__structure_8txt_a80f7344c0300e389acecd2d048f2bb58}{get\+\_\+residuals(...)}}} functions will be called. The solution adopted in {\ttfamily oomph-\/lib} is to provide the two additional virtual functions 
+\end{DoxyCode}
+ where the {\ttfamily Multi\+Physics\+Element} inherits from {\ttfamily Single\+Physics\+One\+Element} and {\ttfamily Single\+Physics\+Two\+Element}.
+
+A problem with this implementation arises when we consider where to initialise the residuals vector. If the second single-\/physics {\ttfamily get\+\_\+residuals(...)} function initialises the residuals vector, then the contribution of the first single-\/physics element will be negated. When writing a single-\/physics element, however, we cannot know whether it will ever be used as part of a multi-\/physics element and, if so, in which order the {\ttfamily get\+\_\+residuals(...)} functions will be called. The solution adopted in {\ttfamily oomph-\/lib} is to provide the two additional virtual functions 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{the__data__structure_8txt_a74a99b2ddb5919974c6edd5550b6d953}{GeneralisedElement::fill\_in\_contribution\_to\_residuals}}(...)}
+\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} GeneralisedElement::fill\_in\_contribution\_to\_residuals(...)}
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{the__data__structure_8txt_af81c63b6a6a317202ae084901ea01119}{GeneralisedElement::fill\_in\_contribution\_to\_jacobian}}(...)}
+\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} GeneralisedElement::fill\_in\_contribution\_to\_jacobian(...)}
+
 \end{DoxyCode}
  which {\bfseries{must}} {\bfseries{not}} initialise the residuals or Jacobian, but merely add the contribution of the element to the vector or matrix.
 
 We then use the default implementation 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{the__data__structure_8txt_a80f7344c0300e389acecd2d048f2bb58}{GeneralisedElement::get\_residuals}}(Vector<double> \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}) }
+\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} GeneralisedElement::get\_residuals(Vector<double> \&residuals) }
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Zero the residuals vector}}
-\DoxyCodeLine{  \mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}.initialise(0.0);}
+\DoxyCodeLine{  residuals.initialise(0.0);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Add the elemental contribution to the residuals vector}}
-\DoxyCodeLine{  \mbox{\hyperlink{the__data__structure_8txt_a74a99b2ddb5919974c6edd5550b6d953}{fill\_in\_contribution\_to\_residuals}}(\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}});}
+\DoxyCodeLine{  fill\_in\_contribution\_to\_residuals(residuals);}
 \DoxyCodeLine{  \}}
+
 \end{DoxyCode}
  which permits a simple multi-\/physics re-\/implementation 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMultiPhysicsElement}{MultiPhysicsElement}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} SinglePhysicsOneElement,}
+\DoxyCodeLine{\textcolor{keyword}{class }MultiPhysicsElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} SinglePhysicsOneElement,}
 \DoxyCodeLine{                            \textcolor{keyword}{public} \textcolor{keyword}{virtual} SinglePhysicsTwoElement}
 \DoxyCodeLine{ \{   }
 \DoxyCodeLine{}
 \DoxyCodeLine{  [...]}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{classMultiPhysicsElement_a0d83f4f387363474e0912b4e892ad4f1}{get\_residuals}}(Vector<double> \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}) }
+\DoxyCodeLine{ \textcolor{keywordtype}{void} get\_residuals(Vector<double> \&residuals) }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Zero the residuals vector}}
-\DoxyCodeLine{   \mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}.initialise(0.0);}
+\DoxyCodeLine{   residuals.initialise(0.0);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Add the first elemental contribution to the residuals vector}}
-\DoxyCodeLine{   \mbox{\hyperlink{the__data__structure_8txt_a74a99b2ddb5919974c6edd5550b6d953}{SinglePhysicsOneElement::fill\_in\_contribution\_to\_residuals}}(\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}});}
+\DoxyCodeLine{   SinglePhysicsOneElement::fill\_in\_contribution\_to\_residuals(residuals);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Add the second elemental contribution to the residuals vector   }}
-\DoxyCodeLine{   \mbox{\hyperlink{the__data__structure_8txt_a74a99b2ddb5919974c6edd5550b6d953}{SinglePhysicsTwoElement::fill\_in\_contribution\_to\_residuals}}(\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}); }
+\DoxyCodeLine{   SinglePhysicsTwoElement::fill\_in\_contribution\_to\_residuals(residuals); }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{  [...]}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
+
 \end{DoxyCode}
 
 
-The default implementation of {\ttfamily \mbox{\hyperlink{the__data__structure_8txt_af81c63b6a6a317202ae084901ea01119}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)}}} uses finite differences to calculate the Jacobian matrix. Hence, the simplest possible implementation of a new element requires only the specification of {\ttfamily \mbox{\hyperlink{the__data__structure_8txt_a74a99b2ddb5919974c6edd5550b6d953}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(...)}}}.
+The default implementation of {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)} uses finite differences to calculate the Jacobian matrix. Hence, the simplest possible implementation of a new element requires only the specification of {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(...)}.
 
 
 \begin{DoxyItemize}
@@ -212,15 +231,17 @@ The default implementation of {\ttfamily \mbox{\hyperlink{the__data__structure_8
 \item As discussed above, all {\ttfamily Data} contains values that are either free (i.\+e. unknown) or pinned (i.\+e. prescribed by boundary conditions). Free/unknown values have a non-\/negative global (equation) number. When assembling an element\textquotesingle{}s local contribution to the global residual vector and the Jacobian matrix, we refer to the unknowns by their local (equation) numbers. In order to add the elemental contribution to the appropriate global degree of freedom, every element has a lookup table that establishes the relation between local and global equation numbers. This lookup table is automatically generated by the element\textquotesingle{}s member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{GeneralisedElement::assign\_local\_eqn\_numbers() }
+
 \end{DoxyCode}
  Access to the lookup scheme is provided by the member function {\ttfamily eqn\+\_\+number(...)} so that 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{unsigned} i\_local;}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_a92944c1c6b9eca60b38b22831f47da95}{GeneralisedElement}} \mbox{\hyperlink{the__data__structure_8txt_af1ac6d88153e383bbb0a0d9f2dd78e60}{el}};}
+\DoxyCodeLine{GeneralisedElement el;}
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{the__data__structure_8txt_a0ca71de52c9f65466ea6eefc4f332736}{i\_global}}=\mbox{\hyperlink{the__data__structure_8txt_af1ac6d88153e383bbb0a0d9f2dd78e60}{el}}.eqn\_number(i\_local); }
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned} i\_global=el.eqn\_number(i\_local); }
+
 \end{DoxyCode}
  returns the global equation number {\ttfamily i\+\_\+global} corresponding to the local equation number {\ttfamily i\+\_\+local}. The local equation numbers of the internal and external {\ttfamily Data} are stored in the private arrays {\ttfamily Internal\+\_\+local\+\_\+eqn} and {\ttfamily External\+\_\+local\+\_\+eqn}, accessed by the functions {\ttfamily Generalised\+Element\+::internal\+\_\+local\+\_\+eqn(...)} and {\ttfamily Generalised\+Element\+::external\+\_\+local\+\_\+eqn(...)}, respectively. Thus, {\ttfamily Generalised\+Element\+::internal\+\_\+local\+\_\+eqn(i\+\_\+internal,i\+\_\+value)} returns the local equation number of the {\ttfamily i\+\_\+value} -\/th value stored in the {\ttfamily i\+\_\+internal} -\/th internal {\ttfamily Data} object.
 \item All elements have a pointer to a global {\ttfamily Time} object which allows the evaluation of time-\/dependent coefficients.
@@ -232,27 +253,32 @@ The class {\ttfamily Finite\+Element} is derived from {\ttfamily Generalised\+El
 \begin{DoxyItemize}
 \item All {\ttfamily Finite\+Elements} have a certain number of {\ttfamily Nodes}. We access the {\ttfamily Nodes} (and their associated values) via pointers and identify them via their (local) node numbers so that 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{FiniteElement::Node\_pt[\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}] }
+\DoxyCodeLine{FiniteElement::Node\_pt[n] }
+
 \end{DoxyCode}
  or the access function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{FiniteElement::node\_pt(\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) }
+\DoxyCodeLine{FiniteElement::node\_pt(n) }
+
 \end{DoxyCode}
  returns a pointer to the element\textquotesingle{}s {\ttfamily n} -\/th local {\ttfamily Node}.
 \begin{DoxyItemize}
 \item The {\ttfamily Finite\+Element} class provides wrapper functions that give direct access to an element\textquotesingle{}s (possibly generalised) nodal positions at the present timestep or, where appropriate, its positional history values, so that rather than 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{FiniteElement::Node\_pt[\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}]-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+\DoxyCodeLine{FiniteElement::Node\_pt[n]-\/>x(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+
 \end{DoxyCode}
  we can write 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{FiniteElement::nodal\_position(\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}},\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+\DoxyCodeLine{FiniteElement::nodal\_position(n,\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+
 \end{DoxyCode}
  Not only does this make the code more readable but also allows us to formulate the \char`\"{}mathematics\char`\"{} in general terms.~\newline
  \mbox{[}Furthermore, the function {\ttfamily Finite\+Element\+::nodal\+\_\+position(n,i)} accesses the nodal positions indirectly via {\ttfamily Node\+::position(...)} which ensures that the nodal position is consistent with any constraints associated with the {\ttfamily Node\textquotesingle{}s} hanging status; see section \mbox{\hyperlink{index_Hanging_Nodes}{Hanging Nodes}} for further details.\mbox{]}
 \item When {\ttfamily Nodes} are created in a (templated) finite element mesh, it is important that {\ttfamily Nodes} of the correct type with the appropriate amount of storage are created. For instance, Poisson elements require {\ttfamily Nodes} that provide storage for a single value at each {\ttfamily Node}, whereas 2D Taylor-\/\+Hood, Navier-\/\+Stokes elements require storage for three values (two velocities and one pressure) at the corner {\ttfamily Nodes}, but only two values (the two velocities) at all others. The member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::construct\_node(...) }
+
 \end{DoxyCode}
  creates a {\ttfamily Node}, stores a pointer to the {\ttfamily Node} in the {\ttfamily Finite\+Element\+::\+Node\+\_\+pt} vector and returns a pointer to the newly created {\ttfamily Node}. The function is overloaded in elements that require a different type of {\ttfamily Node}, for example {\ttfamily Solid\+Element\+::construct\+\_\+node(...)} creates a {\ttfamily Solid\+Node} rather than a {\ttfamily Node}. ~\newline
  The function {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} determines the necessary parameters for the node construction from virtual functions or internal data that must have been set during construction of the particular element. \label{index_set_commands}%
@@ -260,22 +286,27 @@ The class {\ttfamily Finite\+Element} is derived from {\ttfamily Generalised\+El
  The spatial dimension of the {\ttfamily Node} and the number of generalised coordinates must be set in the constructor of a geometric {\ttfamily Finite\+Element} (level 2 in the element hierarchy) by using the appropriate protected member functions. The only function that {\bfseries{must}} be called is 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_dimension(dim), }
+
 \end{DoxyCode}
  which sets the spatial dimension of the element; by default the spatial dimension of the {\ttfamily Finite\+Element\textquotesingle{}s} {\ttfamily Nodes} is assumed to be the same. For example, 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_dimension(2) }
+
 \end{DoxyCode}
  sets both the spatial dimension of the element and the spatial dimension of its {\ttfamily Nodes} to be two. If the nodal dimension is not the same as the dimension of the element the member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_nodal\_dimension(dim\_node) }
+
 \end{DoxyCode}
  should be used to change the value of the nodal dimension. By default, {\ttfamily Finite\+Elements} interpolate a single position type, the position itself. If generalised coordinates are used, the number of generalised coordinates should be set using the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_n\_nodal\_position\_type(n\_pos\_type). }
+
 \end{DoxyCode}
  The number of values stored at each {\ttfamily Node} is determined from the virtual member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::required\_nvalue(...)  }
+
 \end{DoxyCode}
  In its default implementation this function returns zero so the function must be overloaded in specific derived {\ttfamily Finite\+Elements} that require storage for some values at its {\ttfamily Nodes}.
 
@@ -283,28 +314,33 @@ See section \mbox{\hyperlink{index_meshes}{Meshes}} for a full explanation of ho
 \item The {\ttfamily Finite\+Element} class also defines standard interfaces for member functions that compute the shape functions and their derivatives with respect to the local and global (Eulerian) coordinates, 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\mbox{\hyperlink{namespaceoomph_1_1OneDimLagrange_a117f8b892dc89989ecdad99ff261e120}{FiniteElement::shape}}(...) }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::dshape\_local(...) }
+
 \end{DoxyCode}
  The mappings from local to global Eulerian coordinates are implemented in complete generality in the class. The function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::interpolated\_x(...) }
+
 \end{DoxyCode}
  returns the interpolated Eulerian position within the element; 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::dshape\_eulerian(...), }
+
 \end{DoxyCode}
  returns the derivative of the shape functions with respect to the Eulerian coordinates; and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::J\_eulerian(...) }
+
 \end{DoxyCode}
  returns the Jacobian of the mapping from Eulerian coordinates to local coordinates.
 \item The function {\ttfamily Generalised\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()} is overloaded in the {\ttfamily Finite\+Element} class to ensure that local equation numbers are also assigned to the nodal {\ttfamily Data} (which does not necessarily exist in all {\ttfamily Generalised\+Elements}). These local equation numbers are stored in the private array {\ttfamily Finite\+Element\+::\+Nodal\+\_\+local\+\_\+eqn}, accessed by the function {\ttfamily {\ttfamily Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(...)}.} 
 \end{DoxyItemize}
 \end{DoxyItemize}\hypertarget{index_Geometric_Element}{}\doxysubsubsection{Level 2\+: Geometric Elements}\label{index_Geometric_Element}
-At this level, we specify the element geometry and the mapping between local and global coordinates. Wherever possible, templating has been (and, for any newly developed elements, should be) used to formulate the elements in a dimension-\/independent way. For instance, Lagrange-\/type 1D line, 2D quad and 3D brick elements are implemented in the doubly-\/templated {\ttfamily Q\+Element$<$\+D\+I\+M,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} class. The template parameters indicate the spatial dimension of the element and the number of nodes along the element\textquotesingle{}s one-\/dimensional edges. Hence, {\ttfamily \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element$<$1,3$>$}}} is a three-\/node line element with a quadratic mapping between local and global coordinates; {\ttfamily \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element$<$3,2$>$}}} is an 8 node brick element with a trilinear mapping between local and global coordinates. The dimension and the number of {\ttfamily Nodes} must be set by calling the appropriate {\ttfamily set\+\_\+} functions in the constructor, see \mbox{\hyperlink{index_set_commands}{above}}.
+At this level, we specify the element geometry and the mapping between local and global coordinates. Wherever possible, templating has been (and, for any newly developed elements, should be) used to formulate the elements in a dimension-\/independent way. For instance, Lagrange-\/type 1D line, 2D quad and 3D brick elements are implemented in the doubly-\/templated {\ttfamily QElement$<$\+DIM,\+NNODE\+\_\+1\+D$>$} class. The template parameters indicate the spatial dimension of the element and the number of nodes along the element\textquotesingle{}s one-\/dimensional edges. Hence, {\ttfamily \mbox{\hyperlink{classoomph_1_1QElement}{QElement$<$1,3$>$}}} is a three-\/node line element with a quadratic mapping between local and global coordinates; {\ttfamily \mbox{\hyperlink{classoomph_1_1QElement}{QElement$<$3,2$>$}}} is an 8 node brick element with a trilinear mapping between local and global coordinates. The dimension and the number of {\ttfamily Nodes} must be set by calling the appropriate {\ttfamily set\+\_\+} functions in the constructor, see \mbox{\hyperlink{index_set_commands}{above}}.
 
 The most important member functions implemented at this level include
 \begin{DoxyItemize}
@@ -312,10 +348,10 @@ The most important member functions implemented at this level include
 \item Functions that specify the position of each {\ttfamily Node} inside its {\ttfamily Finite\+Element}, in terms of the {\ttfamily Finite\+Element\textquotesingle{}s} local coordinates and, conversely, functions that determine whether a {\ttfamily Node} is located at a particular local coordinate.
 \item Output functions that allow the element shapes to be plotted.
 \end{DoxyItemize}Finally, we specify a pointer to a spatial integration scheme (usually a Gauss rule). The order of the integration scheme is based on the order of the interpolation in the isoparametric mapping. If this is inappropriate for an element that is derived from a given geometric element, the default assignment can be over-\/written at a higher level. This is discussed in more detail in a \href{../../optimisation/html/index.html}{\texttt{ separate document.}}\hypertarget{index_Maths_Element}{}\doxysubsubsection{Level 3\+: ‘\+The Maths’}\label{index_Maths_Element}
-At this level, we implement the equations that are represented by the specific element. We implement the \mbox{\hyperlink{the__data__structure_8txt_a0dbf3ebf11b527f1f8f1b9f494ba38e9}{interpolation(s)}} for the unknown function(s), employing either the geometric shape functions that already exist on level 2, or employing additional shape functions defined at this level. This allows us to write further member functions such as {\ttfamily \mbox{\hyperlink{the__data__structure_8txt_a5448c72da3359c7796cf0c5f800732a1}{interpolated\+\_\+u(...)}}}, say, which compute the i-\/th velocity component at the local coordinate {\ttfamily s} like this 
+At this level, we implement the equations that are represented by the specific element. We implement the interpolation(s) for the unknown function(s), employing either the geometric shape functions that already exist on level 2, or employing additional shape functions defined at this level. This allows us to write further member functions such as {\ttfamily interpolated\+\_\+u(...)}, say, which compute the i-\/th velocity component at the local coordinate {\ttfamily s} like this 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Create fluid element}}
-\DoxyCodeLine{SomeFluidElement \mbox{\hyperlink{the__data__structure_8txt_a5a99a6499dd6ccc7755850eca7bb334b}{fluid\_element}};}
+\DoxyCodeLine{SomeFluidElement fluid\_element;}
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}
@@ -323,62 +359,73 @@ At this level, we implement the equations that are represented by the specific e
 \DoxyCodeLine{Vector<double> \mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}(3);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Vector of velocity components}}
-\DoxyCodeLine{Vector<double> \mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}}(3);}
+\DoxyCodeLine{Vector<double> \mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}}(3);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Compute the velocity at local coordinate s}}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_a5a99a6499dd6ccc7755850eca7bb334b}{fluid\_element}}.interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}});}
+\DoxyCodeLine{fluid\_element.interpolated\_u(\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}},\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}});}
+
 \end{DoxyCode}
  We introduce wrapper functions to access function values, so that we can formulate \char`\"{}\+The Maths\char`\"{} in generic terms. Rather than referring to the pressure at node {\ttfamily n}, via 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}};}
-\DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{the__data__structure_8txt_a15043ffc2013f4797ce93c4d1cc7a9ba}{press}} = Node\_pt[\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}]-\/>value(3);}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned} n;}
+\DoxyCodeLine{\textcolor{keywordtype}{double} press = Node\_pt[n]-\/>value(3);}
+
 \end{DoxyCode}
- (which forces us to remember that in this particular 3D fluid element, the pressure is stored as the fourth value at all nodes...), say, we provide an access function {\ttfamily \mbox{\hyperlink{the__data__structure_8txt_ac3335dcd8d8a94bd04fa5fcf4ca57d44}{p\+\_\+fluid(...)}}} which allows us to write 
+ (which forces us to remember that in this particular 3D fluid element, the pressure is stored as the fourth value at all nodes...), say, we provide an access function {\ttfamily p\+\_\+fluid(...)} which allows us to write 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}};}
-\DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{the__data__structure_8txt_a15043ffc2013f4797ce93c4d1cc7a9ba}{press}} = \mbox{\hyperlink{the__data__structure_8txt_a5a99a6499dd6ccc7755850eca7bb334b}{fluid\_element}}.p\_fluid(\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}});}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned} n;}
+\DoxyCodeLine{\textcolor{keywordtype}{double} press = fluid\_element.p\_fluid(n);}
+
 \end{DoxyCode}
  When writing these wrapper functions, direct access to the nodal values should be avoided to ensure that the element remains functional in the presence of hanging nodes. Hence, the wrapper functions should make use of the {\ttfamily Node\+::value(...)} functions as in this example 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{the__data__structure_8txt_ac3335dcd8d8a94bd04fa5fcf4ca57d44}{SomeFluidElement::p\_fluid}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})}
-\DoxyCodeLine{ \{ \textcolor{keywordflow}{return} Node\_pt[\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}]-\/>value(3);\}}
+\DoxyCodeLine{\textcolor{keywordtype}{double} SomeFluidElement::p\_fluid(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n)}
+\DoxyCodeLine{ \{ \textcolor{keywordflow}{return} Node\_pt[n]-\/>value(3);\}}
+
 \end{DoxyCode}
  \mbox{[}See section \mbox{\hyperlink{index_Hanging_Nodes}{Hanging Nodes}} for a full description of hanging nodes.\mbox{]}
 
 The functions 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_a0da96ee19f5f052118b3538e2a5e043a}{FiniteElement::assign\_additional\_local\_eqn\_numbers}}()  }
+\DoxyCodeLine{FiniteElement::assign\_additional\_local\_eqn\_numbers()  }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_a80f7344c0300e389acecd2d048f2bb58}{FiniteElement::get\_residuals}}(...) }
+\DoxyCodeLine{FiniteElement::get\_residuals(...) }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::get\_jacobian(...) }
+
 \end{DoxyCode}
 
 
-that were defined (as virtual functions) in {\ttfamily Finite\+Element} can now be implemented for the specific system of equations that are represented by this element. The function {\ttfamily \mbox{\hyperlink{the__data__structure_8txt_a0da96ee19f5f052118b3538e2a5e043a}{assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers()}}} is called by {\ttfamily Finite\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()} and may be used to assign local equation numbers that correspond to particular physical variables. For example, in Q\+Crouzeix\+Raviart \char`\"{}fluid\char`\"{} elements, the pressure is stored as \textquotesingle{}internal {\ttfamily Data\textquotesingle{}}, so an internal array {\ttfamily P\+\_\+local\+\_\+eqn} could be defined by 
+that were defined (as virtual functions) in {\ttfamily Finite\+Element} can now be implemented for the specific system of equations that are represented by this element. The function {\ttfamily assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers()} is called by {\ttfamily Finite\+Element\+::assign\+\_\+local\+\_\+eqn\+\_\+numbers()} and may be used to assign local equation numbers that correspond to particular physical variables. For example, in QCrouzeix\+Raviart \char`\"{}fluid\char`\"{} elements, the pressure is stored as \textquotesingle{}internal {\ttfamily Data\textquotesingle{}}, so an internal array {\ttfamily P\+\_\+local\+\_\+eqn} could be defined by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{P\_local\_eqn[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = internal\_local\_eqn(0,\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) }
+
 \end{DoxyCode}
- but in Q\+Taylor\+Hood \char`\"{}fluid\char`\"{} elements, the pressure is stored as nodal {\ttfamily Data}, so that 
+ but in QTaylor\+Hood \char`\"{}fluid\char`\"{} elements, the pressure is stored as nodal {\ttfamily Data}, so that 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{P\_local\_eqn[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] = nodal\_local\_eqn(Pconv[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}],DIM+1) }
+
 \end{DoxyCode}
- In the above, {\ttfamily Pconv}\mbox{[}i\mbox{]} is an array that returns the local node number at which the {\ttfamily i} -\/th pressure freedom is stored and {\ttfamily D\+IM} is the dimension of the element. The use of such an array introduces a memory overhead, however, because each element must permanently store these additional integers. In general, we prefer to use member functions for this purpose. In Q\+Crouzeix\+Raviart elements, for example, 
+ In the above, {\ttfamily Pconv}\mbox{[}i\mbox{]} is an array that returns the local node number at which the {\ttfamily i} -\/th pressure freedom is stored and {\ttfamily DIM} is the dimension of the element. The use of such an array introduces a memory overhead, however, because each element must permanently store these additional integers. In general, we prefer to use member functions for this purpose. In QCrouzeix\+Raviart elements, for example, 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{int} p\_local\_eqn(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) }
+\DoxyCodeLine{\textcolor{keywordtype}{int} p\_local\_eqn(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n) }
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  \textcolor{keywordflow}{return} internal\_local\_eqn(0,\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}});}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} internal\_local\_eqn(0,n);}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
- Thus, in our standard equations the function {\ttfamily \mbox{\hyperlink{the__data__structure_8txt_a0da96ee19f5f052118b3538e2a5e043a}{assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers()}}} is not used.
+ Thus, in our standard equations the function {\ttfamily assign\+\_\+additional\+\_\+local\+\_\+eqn\+\_\+numbers()} is not used.
 
 Finally, the virtual function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::required\_nvalue(...)  }
+
 \end{DoxyCode}
  should be implemented to specify the number of values that are stored at each of the element\textquotesingle{}s local {\ttfamily Nodes}. The default number of values stored at a {\ttfamily Node} is zero.\hypertarget{index_advanced_features_of_elements}{}\doxysubsubsection{‘\+Advanced’ features for the ‘\+Maths’ level\+:}\label{index_advanced_features_of_elements}
 It often makes sense to subdivide the `Maths' level further into
@@ -387,11 +434,12 @@ It often makes sense to subdivide the `Maths' level further into
 \item A class that combines the mathematical formulation with a specific geometrical element.
 \end{DoxyEnumerate}
 
-An example is given by the {\ttfamily Q\+Poisson\+Elements} which inherit their maths from {\ttfamily Poisson\+Equations} (templated by the spatial dimension) and their geometry from {\ttfamily Q\+Element} (templated by the spatial dimension and the number of nodes). {\ttfamily Poisson\+Equations} specifies the weak form of the Poisson equation in terms of (virtual) shape and test functions. The {\ttfamily Q\+Poisson\+Elements} turn this abstract formulation into a specific (isoparametric) element, by specifying both test and shape functions as the geometric shape functions defined in {\ttfamily Q\+Element}.\hypertarget{index_no_args_for_element_constructors}{}\doxysubsubsection{Important convention regarding element constructors}\label{index_no_args_for_element_constructors}
+An example is given by the {\ttfamily QPoisson\+Elements} which inherit their maths from {\ttfamily Poisson\+Equations} (templated by the spatial dimension) and their geometry from {\ttfamily QElement} (templated by the spatial dimension and the number of nodes). {\ttfamily Poisson\+Equations} specifies the weak form of the Poisson equation in terms of (virtual) shape and test functions. The {\ttfamily QPoisson\+Elements} turn this abstract formulation into a specific (isoparametric) element, by specifying both test and shape functions as the geometric shape functions defined in {\ttfamily QElement}.\hypertarget{index_no_args_for_element_constructors}{}\doxysubsubsection{Important convention regarding element constructors}\label{index_no_args_for_element_constructors}
 To facilitate mesh generation and adaptation it is important that element constructors should {\bfseries{not}} have {\bfseries{any}} arguments! If arguments must be passed to an element (e.\+g. function pointers to source functions, etc.), this should be done {\bfseries{after}} the mesh generation, usually in the {\ttfamily Problem} constructor. In adaptive mesh refinement procedures any function/data pointers in newly created elements are set to be the same as those of the father element. If this is not the desired behaviour, arguments should be passed to the elements in the function {\ttfamily Problem\+::actions\+\_\+after\+\_\+adapt()}.\hypertarget{index_meshes}{}\doxysubsection{Meshes}\label{index_meshes}
 At its most basic level, a {\ttfamily Mesh} is simply a collection of elements and {\ttfamily Nodes}, accessed by the vectors of pointers, {\ttfamily Mesh\+::\+Element\+\_\+pt} and {\ttfamily Mesh\+::\+Node\+\_\+pt}, respectively. To facilitate the application of boundary conditions, we also store vectors of pointers to the ({\ttfamily Boundary}){\ttfamily Nodes} that lie on the boundaries of the mesh. They are accessible via the member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::boundary\_node\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},j) }
+
 \end{DoxyCode}
  which returns a pointer to the {\ttfamily j} -\/th node on the {\ttfamily i} -\/th boundary of the mesh.\hypertarget{index_Mesh_generation}{}\doxysubsubsection{Mesh generation}\label{index_Mesh_generation}
 The {\ttfamily oomph-\/lib} data structure is designed to make the mesh generation process generic so that meshes developed for one particular problem can easily be re-\/used in others. For this reason, it is generally assumed that a {\ttfamily Mesh} contains only elements of a single type and that this element type is passed to the {\ttfamily Mesh} constructor as a template parameter. Problems that require multiple element types should use multiple meshes, which are discussed in more detail below. It is possible to mix types of elements within a single {\ttfamily Mesh}, if desired; this can be advantageous when the element types are very closely related, for example \char`\"{}free surface\char`\"{} elements in a mesh of \char`\"{}\+Fluid\char`\"{} elements.
@@ -401,9 +449,10 @@ Mesh generation (usually performed in the {\ttfamily Mesh} \textquotesingle{}s c
 \item Create the first element and add the pointer to it to the {\ttfamily Mesh\+::\+Element\+\_\+pt} vector. (We know which element to build because we have passed its type as a template parameter.) Since element constructors do not take any arguments, this step is completely generic and ensures that a {\ttfamily Mesh} that was originally created to solve a Poisson equation, say, can also be used to solve Navier-\/\+Stokes equations (provided the element topology is the same, i.\+e. provided the elements are derived from the same type of geometric element (e.\+g. quad or triangle). The element now exists but does not know anything about its {\ttfamily Nodes} etc.
 \item Loop over the element\textquotesingle{}s {\ttfamily Nodes} and for each Node\+:
 \begin{DoxyEnumerate}
-\item Create the {\ttfamily Node} using the element\textquotesingle{}s
+\item Create the {\ttfamily Node} using the element\textquotesingle{}s 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::construct\_node(...) }
+
 \end{DoxyCode}
  member function. As discussed above, this function creates {\ttfamily Nodes} of exactly the right type and fills in the element\textquotesingle{}s own {\ttfamily Node\+\_\+pt} vector.
 \item {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} returns a pointer to the newly created {\ttfamily Node}; add this to the {\ttfamily Mesh\+::\+Node\+\_\+pt} vector.
@@ -412,19 +461,22 @@ Mesh generation (usually performed in the {\ttfamily Mesh} \textquotesingle{}s c
 \item If the {\ttfamily Node} is located on a mesh boundary then it must be a {\ttfamily Boundary\+Node}. {\ttfamily Boundary\+Nodes} can be created using the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::construct\_boundary\_node(...) }
+
 \end{DoxyCode}
  in place of {\ttfamily Finite\+Element\+::construct\+\_\+node(...)}. Alternatively, if the {\ttfamily Node} has already been created, it can be upgraded to a {\ttfamily Boundary\+Node} by using the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::convert\_to\_boundary\_node(...) }
+
 \end{DoxyCode}
  The function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Mesh::add\_boundary\_node(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\&\mbox{\hyperlink{the__data__structure_8txt_ae56499a02d89f315ab025070e7a0058f}{node}}) }
+\DoxyCodeLine{Mesh::add\_boundary\_node(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}},\&node) }
+
 \end{DoxyCode}
  should then be used to add (a pointer to) the {\ttfamily Boundary\+Node} to the {\ttfamily Mesh\textquotesingle{}s} boundary-\/storage scheme. In addition, the function {\ttfamily Mesh\+::add\+\_\+boundary\+\_\+node()} passes boundary information to the {\ttfamily Node} itself.
 \item Create the next element and loop over its {\ttfamily Nodes}. Some {\ttfamily Nodes} will already exist (because they have been created by the first element). For such {\ttfamily Nodes}, we merely add the pointer to the existing {\ttfamily Nodes} to the element\textquotesingle{}s {\ttfamily Node\+\_\+pt} vector. If a {\ttfamily Node} does not exist yet, we create it, as discussed above.
 \item Keep going until all the elements and {\ttfamily Nodes} have been built.
-\end{DoxyEnumerate}\hypertarget{index_Node_DOF_numbering}{}\doxysubsubsection{Equation/\+D\+O\+F numbering at the mesh level}\label{index_Node_DOF_numbering}
+\end{DoxyEnumerate}\hypertarget{index_Node_DOF_numbering}{}\doxysubsubsection{Equation/\+DOF numbering at the mesh level}\label{index_Node_DOF_numbering}
 Now that the {\ttfamily Mesh} is assembled, we can set up the numbering scheme for the unknowns that are associated with the {\ttfamily Nodes} and with the elements\textquotesingle{} `internal {\ttfamily Data} '. (For problems that involve `external {\ttfamily Data} ', i.\+e. {\ttfamily Data} that is not associated with {\ttfamily Nodes} and elements, a further step is required; see section \mbox{\hyperlink{index_problems}{Problems}} below). As discussed above, whenever a {\ttfamily Data} object is created (either as part of a {\ttfamily Node} in the mesh or as `internal {\ttfamily Data} ' inside an element), its values are assumed to be free (i.\+e. not pinned). Before we can set up the equation numbering scheme, we must pin all those {\ttfamily Data} values that are prescribed by boundary conditions. This is generally done at the {\ttfamily Problem} level (see below) and for the subsequent discussion, we assume that this step has already taken place.
 
 The equation numbering scheme must achieve two things\+:
@@ -436,6 +488,7 @@ The equation numbering scheme must achieve two things\+:
 These tasks are performed in two steps. The function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::assign\_global\_eqn\_numbers(...) }
+
 \end{DoxyCode}
  whose argument is a vector of pointers to doubles, {\ttfamily dof\+\_\+pt}, assigns the (global) equation numbers for the element\textquotesingle{}s internal {\ttfamily Data} and for all {\ttfamily Data} associated with the {\ttfamily Mesh\textquotesingle{}s} {\ttfamily Nodes}. On return from this function, {\ttfamily dof\+\_\+pt}\mbox{[}i\mbox{]} points to the value of the i-\/th global degree of freedom. ~\newline
  The setup scheme (which is fully implemented in {\ttfamily oomph-\/lib}) works as follows\+:
@@ -460,10 +513,12 @@ These tasks are performed in two steps. The function
 \end{DoxyEnumerate}Once this has been done (for all {\ttfamily Meshes}, if there are multiple ones), the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::assign\_local\_eqn\_numbers(...) }
+
 \end{DoxyCode}
  loops over all elements and executes their 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::assign\_local\_eqn\_numbers(); }
+
 \end{DoxyCode}
  member function to set up the elements\textquotesingle{} lookup table that translates between local and global equation numbers.\hypertarget{index_problems}{}\doxysubsection{Problems}\label{index_problems}
 Finally, we reach the highest level of the {\ttfamily oomph-\/lib} hierarchy, the {\ttfamily Problem} itself. The generic components of {\ttfamily Problem}, provided in the base class of that name, are\+:
@@ -478,31 +533,36 @@ Finally, we reach the highest level of the {\ttfamily oomph-\/lib} hierarchy, th
 {\bfseries{Multiple}} {\bfseries{Meshes}} 
 
 The mesh generation process previously described was for meshes that contain only elements of a single type. The process could easily be generalised to meshes that contain multiple element types by providing multiple template parameters. ~\newline
- When solving a fluid-\/structure interaction (F\+SI) problem we could, therefore, create a single mesh that discretises both the fluid and the solid domains with appropriate elements. However, to facilitate code re-\/use it is desirable to keep meshes as simple as possible so that a mesh that was originally developed for a pure fluids problem can also be used in an F\+SI context. For this reason, the {\ttfamily Problem} class allows a problem to have multiple (sub-\/)meshes. Pointers to each sub-\/mesh must be stored in Problem\textquotesingle{}s {\ttfamily Sub\+\_\+mesh\+\_\+pt} vector by using the function 
+ When solving a fluid-\/structure interaction (FSI) problem we could, therefore, create a single mesh that discretises both the fluid and the solid domains with appropriate elements. However, to facilitate code re-\/use it is desirable to keep meshes as simple as possible so that a mesh that was originally developed for a pure fluids problem can also be used in an FSI context. For this reason, the {\ttfamily Problem} class allows a problem to have multiple (sub-\/)meshes. Pointers to each sub-\/mesh must be stored in Problem\textquotesingle{}s {\ttfamily Sub\+\_\+mesh\+\_\+pt} vector by using the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::add\_sub\_mesh(Mesh* \textcolor{keyword}{const} \&mesh\_pt) }
+
 \end{DoxyCode}
  However, many of the generic operations within {\ttfamily oomph-\/lib} (equation numbering, solving, output of solutions,...) involve looping over {\bfseries{all}} elements and {\ttfamily Nodes} in the problem. Therefore, if a {\ttfamily Problem} contains multiple (sub-\/)meshes, the sub-\/meshes must be combined into a single global {\ttfamily Mesh} whose {\ttfamily Element\+\_\+pt} and {\ttfamily Node\+\_\+pt} vectors provide ordered access to the elements and {\ttfamily Nodes} in {\bfseries{all}} submeshes. The function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::build\_global\_mesh() }
+
 \end{DoxyCode}
  combines the sub-\/meshes into the global {\ttfamily Mesh} and must be called once all the sub-\/meshes have been constructed and \char`\"{}added\char`\"{} to the {\ttfamily Problem}.
 
-{\bfseries{Important\+:}} Many operations (such as the shifting of history values in time-\/stepping) must be performed exactly once for each {\ttfamily Node} (or {\ttfamily Data}). Therefore, the vector of (pointers to) nodes in the global {\ttfamily Mesh} must not contain any duplicate entries. When copying (pointer to) {\ttfamily Nodes} from the submeshes into the global {\ttfamily Mesh}, the function {\ttfamily Problem\+::build\+\_\+global\+\_\+mesh()} ignores any {\ttfamily Nodes} that have already been copied from a previous submesh. \mbox{[}The {\ttfamily \mbox{\hyperlink{namespaceoomph_a6a5cfce839009bef49cce08492ec6aeb}{Mesh\+::self\+\_\+test()}}} function checks for duplicates in the {\ttfamily Mesh\+::\+Node\+\_\+pt} vector.\mbox{]}
+{\bfseries{Important\+:}} Many operations (such as the shifting of history values in time-\/stepping) must be performed exactly once for each {\ttfamily Node} (or {\ttfamily Data}). Therefore, the vector of (pointers to) nodes in the global {\ttfamily Mesh} must not contain any duplicate entries. When copying (pointer to) {\ttfamily Nodes} from the submeshes into the global {\ttfamily Mesh}, the function {\ttfamily Problem\+::build\+\_\+global\+\_\+mesh()} ignores any {\ttfamily Nodes} that have already been copied from a previous submesh. \mbox{[}The {\ttfamily Mesh\+::self\+\_\+test()} function checks for duplicates in the {\ttfamily Mesh\+::\+Node\+\_\+pt} vector.\mbox{]}
 
 {\bfseries{Convention\+:}} Recall that ({\ttfamily Boundary})Nodes are `told' about the number of the boundary they live on when the (sub-\/)meshes are constructed. In the context of multiple meshes, this raises the question if this number should continue to refer to the boundary number within the submesh or be updated to a boundary number within the global {\ttfamily Mesh}. We adopt the convention that boundary numbers remain those that were originally assigned when the submeshes were constructed.
 
 {\bfseries{Multiple}} {\bfseries{meshes}} {\bfseries{and}} {\bfseries{adaptivity\+:}} Mesh adaptation is performed separately for each submesh. Following the adaptation of one or more submeshes (in the process of which various {\ttfamily Nodes/elements} will have been created/deleted), we must also update the global {\ttfamily Mesh}. This is done by calling 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::rebuild\_global\_mesh(); }
+
 \end{DoxyCode}
  and this function is executed automatically if the mesh adaptation/refinement is performed by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::refine\_uniformly(); }
+
 \end{DoxyCode}
  or 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::adapt(); }
+
 \end{DoxyCode}
 \hypertarget{index_prob_setup}{}\doxysubsubsection{Problem Construction}\label{index_prob_setup}
 Here\textquotesingle{}s an overview of how {\ttfamily Problems} are set up and solved in {\ttfamily oomph-\/lib}. For simplicity, we illustrate the process for a problem with a single {\ttfamily Mesh} that contains elements of a single type.
@@ -515,6 +575,7 @@ Here\textquotesingle{}s an overview of how {\ttfamily Problems} are set up and s
 \item Assign the equation numbers to all unknowns in the problem. This is accomplished in a two-\/stage process by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::assign\_eqn\_numbers(...) }
+
 \end{DoxyCode}
  which
 \begin{DoxyEnumerate}
@@ -523,29 +584,34 @@ Here\textquotesingle{}s an overview of how {\ttfamily Problems} are set up and s
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::assign\_global\_eqn\_numbers(...) }
+
 \end{DoxyCode}
 
 \item Loops over the submeshes again to perform the local equation numbering for all elements associated with the meshes using ~\newline
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::assign\_local\_eqn\_numbers(...) }
+
 \end{DoxyCode}
 
 \end{DoxyEnumerate}\mbox{[}Note that we have to assign the global equation numbers for all meshes before we assign any local equation numbers. This is because the external {\ttfamily Data} of elements in one mesh might be nodal {\ttfamily Data} in another mesh -- think of fluid-\/structure interaction problems\mbox{]}. At the end of this step, we will have filled in the {\ttfamily Problem\textquotesingle{}s} {\ttfamily Dof\+\_\+pt} vector which holds the pointers to the unknowns. \mbox{[}Note\+: The equation numbering scheme that is generated by the above procedure is unlikely to be optimal; it can (and in the interest of efficiency probably should) be changed afterwards by a problem-\/specific renumbering function.\mbox{]}
 \item Before we can solve the {\ttfamily Problem} we will usually have to perform a few additional (problem-\/dependent) initialisation steps. For instance, we might want to assign initial and/or boundary conditions and provide initial guesses for the unknowns. For time-\/dependent problems, the {\ttfamily Problem} class provides a member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::assign\_initial\_values\_impulsive() }
+
 \end{DoxyCode}
  which creates a past history for all time-\/dependent unknowns, assuming an impulsive start. If you want a `smooth' start from a given previous time-\/history, you will have to implement this yourself; in this case, consult the section \mbox{\hyperlink{index_timestepping}{Time-\/stepping}} which outlines the time-\/stepping procedures in {\ttfamily oomph-\/lib}.
 \item Now we can solve the {\ttfamily Problem} by calling 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::newton\_solve() }
+
 \end{DoxyCode}
  which employs the Newton-\/\+Raphson method to solve the nonlinear system of equations that is specified (formally) by the global Jacobian matrix and the global residual vectors. The function {\ttfamily Problem\+::newton\+\_\+solve()} employs a linear solver which may be specified by {\ttfamily Problem\+::linear\+\_\+solver\+\_\+pt()}. The default linear solver is \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ Super\+LU }}. The Newton iteration proceeds until the maximum residual falls below {\ttfamily Problem\+::\+Newton\+\_\+solver\+\_\+tolerance}. \mbox{[}If the number of iterations exceeds {\ttfamily Problem\+::\+Max\+\_\+newton\+\_\+iterations} or if the the maximum residual exceeds {\ttfamily Problem\+::\+Max\+\_\+residuals}, the Newton solver throws an error\mbox{]}. When a solution has been found, all unknowns in the problem (which are accessible to the {\ttfamily Problem} via its {\ttfamily Dof\+\_\+pt} vector) are up-\/to-\/date. The {\ttfamily Problem} class also provides the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::unsteady\_newton\_solve(...) }
+
 \end{DoxyCode}
- for time-\/dependent problems. Given the current values of the unknowns (at time {\ttfamily t} = {\ttfamily Problem\+::\+Time\+\_\+pt-\/$>$time()} ) and their past histories, this function determines the solution at the advanced time {\ttfamily t+dt}. See section \mbox{\hyperlink{index_timestepping}{Time-\/stepping}} for more details on the conventions used in timestepping.
+ for time-\/dependent problems. Given the current values of the unknowns (at time {\ttfamily t} = {\ttfamily Problem\+::\+Time\+\_\+pt-\/\texorpdfstring{$>$}{>}time()} ) and their past histories, this function determines the solution at the advanced time {\ttfamily t+dt}. See section \mbox{\hyperlink{index_timestepping}{Time-\/stepping}} for more details on the conventions used in timestepping.
 \end{DoxyEnumerate}The {\ttfamily Problem} class also has member functions which assemble the global residual vector and the global Jacobian matrix.
 
 {\bfseries{Important\+:}} ~\newline
@@ -553,22 +619,27 @@ Here\textquotesingle{}s an overview of how {\ttfamily Problems} are set up and s
  Since the unknowns in the {\ttfamily Problem} are accessed directly via pointers, their values are automatically updated during the Newton iteration. If the {\ttfamily Problem} has any auxiliary parameters that depend on the unknowns, their values need to be updated whenever an unknown might have changed (i.\+e. after every step of the Newton iteration). For such cases, the {\ttfamily Problem} class provides the four (empty) virtual functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_step() }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_newton\_step() }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_solve() }
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_newton\_solve() }
+
 \end{DoxyCode}
  which are executed before/after every step of the Newton iteration and before/after the nonlinear solve itself, respectively. In addition, the virtual function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_convergence\_check() }
+
 \end{DoxyCode}
  is executed before the residuals are calculated in the Newton solver.
 
@@ -576,9 +647,10 @@ When you formulate your own {\ttfamily Problem}, you will have to decide what (i
 
 In many cases, only the {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} function is required. On entry to the Newton solver, the initial residuals are computed and checked, so the function is executed {\bfseries{before}} any Newton steps are taken. After each Newton step, the residuals vector is recomputed and checked, so the function is also called after every Newton step (or before the next Newton step). Nonetheless, we provide all five functions for the greatest possible flexibility.\hypertarget{index_timestepping}{}\doxysection{Time-\/stepping}\label{index_timestepping}
 \hypertarget{index_time}{}\doxysubsection{Time}\label{index_time}
-Time-\/derivatives are generally evaluated by finite difference expressions, e.\+g. by B\+DF schemes. Hence, within the code, functions are only ever evaluated at discrete time levels. The class {\ttfamily Time} contains (a pointer to) the `current' value of the continuous time and a vector of current and previous timesteps so that the value of the continuous time at any previous timestep can easily be reconstructed. This is useful/necessary if there are any explicitly time-\/dependent parameters in the problem. The general convention within all timestepping procedures is to associate the values at the `present' time (i.\+e. the time for which a solution is sought) with time level `0', those at the previous time level (where the solution is already known) with time levels `1', `2' etc. The function 
+Time-\/derivatives are generally evaluated by finite difference expressions, e.\+g. by BDF schemes. Hence, within the code, functions are only ever evaluated at discrete time levels. The class {\ttfamily Time} contains (a pointer to) the `current' value of the continuous time and a vector of current and previous timesteps so that the value of the continuous time at any previous timestep can easily be reconstructed. This is useful/necessary if there are any explicitly time-\/dependent parameters in the problem. The general convention within all timestepping procedures is to associate the values at the `present' time (i.\+e. the time for which a solution is sought) with time level `0', those at the previous time level (where the solution is already known) with time levels `1', `2' etc. The function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Time::time(\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}) }
+
 \end{DoxyCode}
  therefore returns the `current' value of the continuous time if t=0, the continuous time before the previous timestep if t=1, etc.\hypertarget{index_basic_timestepping}{}\doxysubsection{Basic Time-\/stepping}\label{index_basic_timestepping}
 The base class {\ttfamily Time\+Stepper} provides the basic functionality required to evaluate time derivatives, and to keep track of the time histories of the unknowns. Primarily, a {\ttfamily Time\+Stepper} stores the coefficients (weights) that allow the evaluation of time-\/derivatives (up to a certain order) in terms of the history values stored in {\ttfamily Data}. Synchronisation of multiple {\ttfamily Time\+Stepper} s is ensured by providing them with pointers to the {\ttfamily Problem\textquotesingle{}s} (single) {\ttfamily Time} object.
@@ -598,59 +670,68 @@ Here\textquotesingle{}s an illustration of the time-\/stepping procedure for an 
  A timestep is performed by using the 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::unsteady\_newton\_solve(...) }
+
 \end{DoxyCode}
  function, which implements the following steps\+:
 \begin{DoxyEnumerate}
 \item Shift the time values back using 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::shift\_time\_values() }
+
 \end{DoxyCode}
- (For B\+DF timesteppers, this simply moves the history values back by one level; see below for a detailed discussion of how the shifting of the history values is performed).
+ (For BDF timesteppers, this simply moves the history values back by one level; see below for a detailed discussion of how the shifting of the history values is performed).
 \item Solve the {\ttfamily Problem} at the advanced time by performing the following steps
 \begin{DoxyEnumerate}
 \item Choose a timestep {\ttfamily dt}.
 \item Advance the {\ttfamily Problem\textquotesingle{}s} global time and (re-\/)calculate the weights for the {\ttfamily Time\+Stepper(s)}.
-\item Update any time-\/dependent boundary conditions etc., usually via
+\item Update any time-\/dependent boundary conditions etc., usually via 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_solve() }
+
 \end{DoxyCode}
- or
+ or 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_implicit\_timestep()}
+
 \end{DoxyCode}
 
 \item Call the nonlinear solver to find the unknowns at the current (advanced) time.
 \end{DoxyEnumerate}
 \end{DoxyEnumerate}
 \item {\bfseries{Stage\+:}} {\bfseries{3}} {\bfseries{Document}} {\bfseries{the}} {\bfseries{solution}} ~\newline
- We now have a completely consistent representation of the current and history values of the system\textquotesingle{}s unknowns for the current value of {\ttfamily Time\+::time()}. This is an excellent moment to dump the solutions to disk or do any other post-\/processing. These steps may be included in
+ We now have a completely consistent representation of the current and history values of the system\textquotesingle{}s unknowns for the current value of {\ttfamily Time\+::time()}. This is an excellent moment to dump the solutions to disk or do any other post-\/processing. These steps may be included in 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_newton\_solve() }
+
 \end{DoxyCode}
- or
+ or 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_implicit\_timestep() }
+
 \end{DoxyCode}
 
 \item Now return to {\bfseries{Stage}} {\bfseries{2}} for the next timestep.
 \end{DoxyItemize}
 
-It is important to understand how the shifting of the timesteps (in preparation for the next timestep) is performed because certain default operations will not be appropriate for all {\ttfamily Elements/} {\ttfamily Problems}. Recall that in time-\/dependent problems, {\ttfamily Data\+::value\+\_\+pt(i)} points to the current (and, as yet, unknown) {\ttfamily Data} values, while {\ttfamily Data\+::value\+\_\+pt(t,i)} for t$>$0 points to the history values that the {\ttfamily Time\+Stepper} uses to work out time-\/derivatives. When we move to the next timestep, the history values need to be adjusted in the manner that is appropriate for the timestepping scheme. For instance, for B\+DF schemes, all values need to be pushed back by one time level. This operation is performed by the function 
+It is important to understand how the shifting of the timesteps (in preparation for the next timestep) is performed because certain default operations will not be appropriate for all {\ttfamily Elements/} {\ttfamily Problems}. Recall that in time-\/dependent problems, {\ttfamily Data\+::value\+\_\+pt(i)} points to the current (and, as yet, unknown) {\ttfamily Data} values, while {\ttfamily Data\+::value\+\_\+pt(t,i)} for t\texorpdfstring{$>$}{>}0 points to the history values that the {\ttfamily Time\+Stepper} uses to work out time-\/derivatives. When we move to the next timestep, the history values need to be adjusted in the manner that is appropriate for the timestepping scheme. For instance, for BDF schemes, all values need to be pushed back by one time level. This operation is performed by the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TimeStepper::shift\_time\_values(...) }
+
 \end{DoxyCode}
  In the case of {\ttfamily Nodes}, the shifting of values associated with the nodal positions is performed by the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TimeStepper::shift\_time\_positions(...) }
+
 \end{DoxyCode}
  To ensure that all {\ttfamily Data} in the {\ttfamily Problem} is shifted once (and only once!) {\ttfamily Problem\+::shift\+\_\+time\+\_\+values()} performs the following operations\+:
 \begin{DoxyEnumerate}
 \item Shift the values of the time history stored in the {\ttfamily Time} object.
 \item Shift the time values in the global {\ttfamily Mesh}. This involves the following steps\+:
 \begin{DoxyEnumerate}
-\item Loop over all elements and call {\ttfamily Time\+Stepper\+::shift\+\_\+time\+\_\+values(...)} for the {\ttfamily Time\+Stepper} corresponding to each internal {\ttfamily Data} value. This leads to the slightly ugly construction
+\item Loop over all elements and call {\ttfamily Time\+Stepper\+::shift\+\_\+time\+\_\+values(...)} for the {\ttfamily Time\+Stepper} corresponding to each internal {\ttfamily Data} value. This leads to the slightly ugly construction 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{internal\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})-\/>time\_stepper\_pt()-\/>shift\_time\_values(internal\_pt(\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}))}
+
 \end{DoxyCode}
  but there appears to be no way to avoid this.
 \item Loop over all {\ttfamily Nodes} in the mesh and
@@ -664,14 +745,17 @@ It is important to understand how the shifting of the timesteps (in preparation 
 In adaptive time-\/stepping, the size of the timestep is adjusted automatically, so that the global (temporal) error estimate, computed by the Problem member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::global\_error\_norm() }
+
 \end{DoxyCode}
  remains below a preset threshold. However, the function {\ttfamily Problem\+::global\+\_\+error\+\_\+norm()} must be implemented for each specific problem. The error norm is usually constructed from the (estimated) errors of individual {\ttfamily Data} values. Estimates for these quantities are given by the differences between the actual value and a predicted value, as determined by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TimeStepper::error\_in\_value(...) }
+
 \end{DoxyCode}
  and the errors in positional {\ttfamily Data} values, found by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{TimeStepper::error\_in\_position(...) }
+
 \end{DoxyCode}
 
 
@@ -680,6 +764,7 @@ In moving mesh problems, a suitable norm is the root-\/mean-\/square of the erro
 Once a suitable norm has been chosen, a single adaptive timestep is taken by the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::adaptive\_unsteady\_newton\_solve(...) }
+
 \end{DoxyCode}
  This function returns a double precision number that is the value of {\ttfamily dt} that should be taken at the next timestep. A typical calling loop is thus 
 \begin{DoxyCode}{0}
@@ -694,6 +779,7 @@ Once a suitable norm has been chosen, a single adaptive timestep is taken by the
 \DoxyCodeLine{  \textcolor{keywordtype}{double} dt\_next = adaptive\_unsteady\_newton\_solve(dt,...);}
 \DoxyCodeLine{  dt = dt\_next;}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -701,10 +787,12 @@ Within the {\ttfamily Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve}(
 Time-\/dependent simulations can consume a lot of computer time, and it is essential to be able to restart simulations rather than having to re-\/do them from scratch if a computer crashes during the code execution. For this purpose the {\ttfamily Problem} class provides the two member functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::dump(...) }
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::read(...) }
+
 \end{DoxyCode}
  which write/read the generic {\ttfamily Problem} components (i.\+e. the {\ttfamily Data} values and history values, the history of previous timestep increments, etc) to/from disk. These generic functions are typically called from within a specific {\ttfamily Problem\textquotesingle{}s} own dump/read functions which also deal with any additional, problem-\/specific data that has to be recorded/reset to allow a proper restart.\hypertarget{index_mesh_refinement}{}\doxysection{Problem/\+Mesh adaptation}\label{index_mesh_refinement}
 \hypertarget{index_RefineableProblems}{}\doxysubsection{Adaptation at the Problem level}\label{index_RefineableProblems}
@@ -721,39 +809,46 @@ The ability to adaptively refine/unrefine the {\ttfamily Problem\textquotesingle
 The {\ttfamily Problem} class provides several functions that perform these tasks completely automatically. For instance, the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::refine\_uniformly() }
+
 \end{DoxyCode}
  performs one uniform mesh refinement step for all (refineable) submeshes in the {\ttfamily Problem}. Similarly, the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::adapt(...) }
+
 \end{DoxyCode}
  performs one mesh adaptation step. In both functions, mesh adaptation is followed by the update of the global {\ttfamily Mesh} and the re-\/assignment of the equation numbers so that, on return from these functions, the {\ttfamily Problem} can immediately be solved again.
 
 The {\ttfamily Problem} class also provides overloaded versions of the steady and unsteady Newton solvers 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::newton\_solve(...) }
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::unsteady\_newton\_solve(...) }
+
 \end{DoxyCode}
  that automatically perform mesh adaptations until the computed solution satisfies the specified error bounds on all submeshes (or until a max. number of adaptations has been performed). The (empty) virtual member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::set\_initial\_condition() }
+
 \end{DoxyCode}
  establishes the interface to the function that sets all {\ttfamily Data} to their initial conditions. This function must be overloaded if nontrivial initial conditions are to be applied. (If mesh adaptations are performed while the first timestep is computed, the initial conditions on the adapted mesh can usually be represented more accurately by re-\/assigning them, rather than by interpolation from the coarse initial mesh).\hypertarget{index_RefineableMeshes}{}\doxysubsection{Adaptation at the Mesh level}\label{index_RefineableMeshes}
 The ability to perform the adaptation at the {\ttfamily Problem} level relies on the availability of standardised interfaces to functions that handle the adaptation on the {\ttfamily Mesh} level. These interfaces are provided in the class {\ttfamily Refineable\+Mesh\+Base}. {\ttfamily Refineable\+Mesh\+Base} is derived from {\ttfamily Mesh} and stores a pointer to a spatial error estimator, as well as double precision numbers representing the target error levels for the adaptation. The member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableMeshBase::refine\_uniformly(...) }
+
 \end{DoxyCode}
  performs one uniform mesh refinement step. Similarly, 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableMeshBase::adapt(...) }
+
 \end{DoxyCode}
  adapts the mesh according to the specified error bounds, using the mesh\textquotesingle{}s spatial error estimator to compute the elemental errors.
 
-The details of the mesh adaptation process depend on the mesh topology; currently the virtual functions in {\ttfamily Refineable\+Mesh\+Base} are implemented in a general form for quad and brick elements. We shall discuss the mesh adaptation process in detail for meshes of a particular type\+: The {\ttfamily Refineable\+Quad\+Mesh} class implements the mesh adaptation procedures for two-\/dimensional, block-\/structured meshes which consist of the refineable variant of 2D {\ttfamily Q\+Elements}. The description provides a template for the development of mesh refinement procedures for meshes with different element topologies (e.\+g. triangular elements, or 3D {\ttfamily Q\+Elements}).\hypertarget{index_RefineableQuadMesh_section}{}\doxysubsection{Mesh adaptation for 2\+D quadrilateral meshes}\label{index_RefineableQuadMesh_section}
-\hypertarget{index_RefineableQElementsInmeshes}{}\doxysubsubsection{Refineable Q\+Elements}\label{index_RefineableQElementsInmeshes}
-The abstract base class {\ttfamily Refineable\+Q\+Element$<$2$>$} `upgrades' existing elements of (geometric) type {\ttfamily Q\+Element$<$2,\+N\+N\+O\+D\+E\+\_\+1\+D$>$} to versions that are suitable for use in adaptive computations. \textquotesingle{}Upgrading\textquotesingle{} is achieved via inheritance so that, e.\+g., refineable Poisson elements are defined as\+: 
+The details of the mesh adaptation process depend on the mesh topology; currently the virtual functions in {\ttfamily Refineable\+Mesh\+Base} are implemented in a general form for quad and brick elements. We shall discuss the mesh adaptation process in detail for meshes of a particular type\+: The {\ttfamily Refineable\+Quad\+Mesh} class implements the mesh adaptation procedures for two-\/dimensional, block-\/structured meshes which consist of the refineable variant of 2D {\ttfamily QElements}. The description provides a template for the development of mesh refinement procedures for meshes with different element topologies (e.\+g. triangular elements, or 3D {\ttfamily QElements}).\hypertarget{index_RefineableQuadMesh_section}{}\doxysubsection{Mesh adaptation for 2\+D quadrilateral meshes}\label{index_RefineableQuadMesh_section}
+\hypertarget{index_RefineableQElementsInmeshes}{}\doxysubsubsection{Refineable QElements}\label{index_RefineableQElementsInmeshes}
+The abstract base class {\ttfamily Refineable\+QElement$<$2$>$} `upgrades' existing elements of (geometric) type {\ttfamily QElement$<$2,\+NNODE\+\_\+1\+D$>$} to versions that are suitable for use in adaptive computations. \textquotesingle{}Upgrading\textquotesingle{} is achieved via inheritance so that, e.\+g., refineable Poisson elements are defined as\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{unsigned} DIM, \textcolor{keywordtype}{unsigned} NNODE\_1D>}
 \DoxyCodeLine{\textcolor{keyword}{class }RefineableQPoissonElement : \textcolor{keyword}{public} QPoissonElement<DIM,NNODE\_1D>,}
@@ -762,34 +857,34 @@ The abstract base class {\ttfamily Refineable\+Q\+Element$<$2$>$} `upgrades' exi
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ [...]}
 \DoxyCodeLine{\}}
-\end{DoxyCode}
- The abstract base class {\ttfamily Refineable\+Q\+Element$<$2$>$} defines virtual interfaces for those {\ttfamily Finite\+Element} member functions that might have to be overloaded in the refineable version. In most cases, these member functions must be re-\/implemented to deal with the possible presence of hanging nodes, see below.\hypertarget{index_QuadTreeInMeshes}{}\doxysubsubsection{Quad\+Tree procedures for mesh refinement}\label{index_QuadTreeInMeshes}
-Many of the mesh adaptation procedures for meshes of type {\ttfamily Refineable\+Quad\+Mesh} use quadtree representations of the mesh. The quadtree navigation and search algorithms are based on those described in H. Samet\textquotesingle{}s \char`\"{}\+The 
- design and analysis of spatial data structures\char`\"{} (Addison-\/\+Wesley, 1990). \mbox{[}Note\+: Unfortunately, in the usual tree terminology, quadtrees are made of {\itshape \char`\"{}nodes\char`\"{}} which are, of course, completely unrelated to the {\ttfamily Nodes} in the finite element mesh! The context and -- within this document -- the different typefaces should make it clear which is which...\mbox{]} It is important to understand that each {\ttfamily Refineable\+Q\+Element$<$2$>$} has an associated {\ttfamily Quad\+Tree} and each {\ttfamily Quad\+Tree} has an associated {\ttfamily Refineable\+Q\+Element$<$2$>$}. This two-\/way \char`\"{}has a\char`\"{} relationship permits a \char`\"{}clean\char`\"{} implementation of the (generic) {\ttfamily Quad\+Tree} algorithms, although it does incur the cost of two additional pointers.
 
-To illustrate the way in which {\ttfamily Refineable\+Quad\+Meshes} are represented by {\ttfamily Quad\+Trees}, the figure below shows a simple finite element mesh together with its quadtree-\/representation. There are two different types of quadtree classes\+: {\ttfamily Quad\+Trees} and {\ttfamily Quad\+Tree\+Roots}, which inherit from {\ttfamily Quad\+Trees}. The overall structure of the quadtree is defined by pointers between its {\itshape \char`\"{}nodes\char`\"{}}. Each {\itshape \char`\"{}node\char`\"{}} (an object of type {\ttfamily Quad\+Tree}, shown in pink) in the quadtree has a pointer to its {\itshape \char`\"{}father\char`\"{}} (if this pointer is N\+U\+LL, the {\itshape \char`\"{}node\char`\"{}} is the {\itshape \char`\"{}root node\char`\"{}}) and a vector of pointers to its four {\itshape \char`\"{}sons\char`\"{}} (if the vector is empty, the \char`\"{}node\char`\"{} is a {\itshape \char`\"{}leaf 
- \textbackslash{}e node\char`\"{}}). This data structure is sufficient to navigate the quadtree (e.\+g. identify the quadtree\textquotesingle{}s {\itshape \char`\"{}leaf nodes\char`\"{}}, determine a {\itshape \char`\"{}node\char`\"{}\textquotesingle{}s} neighbours, etc.) Each {\ttfamily Quad\+Tree} also stores a pointer to an associated {\itshape \char`\"{}object\char`\"{}} of type {\ttfamily Refineable\+Element} (shown in light blue). The finite element mesh that is used in the computations only comprises those {\ttfamily Refineable\+Elements} that are associated with {\itshape \char`\"{}leaf nodes\char`\"{}}. We refer to these elements as \char`\"{}active elements\char`\"{}. In the diagram below, the active elements are identified by thick blue boundaries and the blue element numbers correspond to those in the mesh.
+\end{DoxyCode}
+ The abstract base class {\ttfamily Refineable\+QElement$<$2$>$} defines virtual interfaces for those {\ttfamily Finite\+Element} member functions that might have to be overloaded in the refineable version. In most cases, these member functions must be re-\/implemented to deal with the possible presence of hanging nodes, see below.\hypertarget{index_QuadTreeInMeshes}{}\doxysubsubsection{Quad\+Tree procedures for mesh refinement}\label{index_QuadTreeInMeshes}
+Many of the mesh adaptation procedures for meshes of type {\ttfamily Refineable\+Quad\+Mesh} use quadtree representations of the mesh. The quadtree navigation and search algorithms are based on those described in H. Samet\textquotesingle{}s \char`\"{}\+The   design and analysis of spatial data structures\char`\"{} (Addison-\/\+Wesley, 1990). \mbox{[}Note\+: Unfortunately, in the usual tree terminology, quadtrees are made of {\itshape \char`\"{}nodes\char`\"{}} which are, of course, completely unrelated to the {\ttfamily Nodes} in the finite element mesh! The context and -- within this document -- the different typefaces should make it clear which is which...\mbox{]} It is important to understand that each {\ttfamily Refineable\+QElement$<$2$>$} has an associated {\ttfamily Quad\+Tree} and each {\ttfamily Quad\+Tree} has an associated {\ttfamily Refineable\+QElement$<$2$>$}. This two-\/way \char`\"{}has a\char`\"{} relationship permits a \char`\"{}clean\char`\"{} implementation of the (generic) {\ttfamily Quad\+Tree} algorithms, although it does incur the cost of two additional pointers.
+
+To illustrate the way in which {\ttfamily Refineable\+Quad\+Meshes} are represented by {\ttfamily Quad\+Trees}, the figure below shows a simple finite element mesh together with its quadtree-\/representation. There are two different types of quadtree classes\+: {\ttfamily Quad\+Trees} and {\ttfamily Quad\+Tree\+Roots}, which inherit from {\ttfamily Quad\+Trees}. The overall structure of the quadtree is defined by pointers between its {\itshape \char`\"{}nodes\char`\"{}}. Each {\itshape \char`\"{}node\char`\"{}} (an object of type {\ttfamily Quad\+Tree}, shown in pink) in the quadtree has a pointer to its {\itshape \char`\"{}father\char`\"{}} (if this pointer is NULL, the {\itshape \char`\"{}node\char`\"{}} is the {\itshape \char`\"{}root node\char`\"{}}) and a vector of pointers to its four {\itshape \char`\"{}sons\char`\"{}} (if the vector is empty, the \char`\"{}node\char`\"{} is a {\itshape \char`\"{}leaf   \textbackslash{}e node\char`\"{}}). This data structure is sufficient to navigate the quadtree (e.\+g. identify the quadtree\textquotesingle{}s {\itshape \char`\"{}leaf nodes\char`\"{}}, determine a {\itshape \char`\"{}node\char`\"{}\textquotesingle{}s} neighbours, etc.) Each {\ttfamily Quad\+Tree} also stores a pointer to an associated {\itshape \char`\"{}object\char`\"{}} of type {\ttfamily Refineable\+Element} (shown in light blue). The finite element mesh that is used in the computations only comprises those {\ttfamily Refineable\+Elements} that are associated with {\itshape \char`\"{}leaf nodes\char`\"{}}. We refer to these elements as \char`\"{}active elements\char`\"{}. In the diagram below, the active elements are identified by thick blue boundaries and the blue element numbers correspond to those in the mesh.
 
 \hypertarget{index_RefineableQuadMesh_setup_section}{}\doxysubsubsection{Mesh generation}\label{index_RefineableQuadMesh_setup_section}
-Any {\ttfamily Mesh} that is designed to contain 2D {\ttfamily Q\+Element} s forms a suitable basis for a {\ttfamily Refineable\+Quad\+Mesh} mesh and the initial stages of the mesh generation process can be performed exactly as described in section \mbox{\hyperlink{index_meshes}{Meshes}} above. Typically, the constructor for a {\ttfamily Refineable\+Quad\+Mesh} will produce a relatively coarse background mesh (sometimes referred to as a \char`\"{}root mesh\char`\"{}) which can subsequently be refined as required. As discussed before, the type of element will typically be passed as a template parameter and it is assumed that in any concrete instantiation of the {\ttfamily Refineable\+Quad\+Mesh} class, the element is derived from the class {\ttfamily Refineable\+Q\+Element$<$2$>$}.
+Any {\ttfamily Mesh} that is designed to contain 2D {\ttfamily QElement} s forms a suitable basis for a {\ttfamily Refineable\+Quad\+Mesh} mesh and the initial stages of the mesh generation process can be performed exactly as described in section \mbox{\hyperlink{index_meshes}{Meshes}} above. Typically, the constructor for a {\ttfamily Refineable\+Quad\+Mesh} will produce a relatively coarse background mesh (sometimes referred to as a \char`\"{}root mesh\char`\"{}) which can subsequently be refined as required. As discussed before, the type of element will typically be passed as a template parameter and it is assumed that in any concrete instantiation of the {\ttfamily Refineable\+Quad\+Mesh} class, the element is derived from the class {\ttfamily Refineable\+QElement$<$2$>$}.
 
-Following the generic setup of the mesh (creating elements, {\ttfamily Nodes}, etc), the constructor of the {\ttfamily Refineable\+Quad\+Mesh} must associate each {\ttfamily Refineable\+Q\+Element$<$2$>$} in the mesh with a {\ttfamily Quad\+Tree\+Root} and vice versa. The association between {\ttfamily Refineable\+Q\+Element$<$2$>$s} and {\ttfamily Quad\+Tree\+Roots} is established by the {\ttfamily Quad\+Tree\+Root} constructor which takes the pointer to the {\ttfamily Refineable\+Q\+Element$<$2$>$} as its argument. The different {\ttfamily Quad\+Trees} must then be combined into a {\ttfamily Quad\+Tree\+Forest}, whose constructor establishes each {\ttfamily Quad\+Tree} \textquotesingle{}s N/\+S/\+W/E neighbours and their relative orientation. Here is an illustration\+:
+Following the generic setup of the mesh (creating elements, {\ttfamily Nodes}, etc), the constructor of the {\ttfamily Refineable\+Quad\+Mesh} must associate each {\ttfamily Refineable\+QElement$<$2$>$} in the mesh with a {\ttfamily Quad\+Tree\+Root} and vice versa. The association between {\ttfamily Refineable\+QElement$<$2$>$s} and {\ttfamily Quad\+Tree\+Roots} is established by the {\ttfamily Quad\+Tree\+Root} constructor which takes the pointer to the {\ttfamily Refineable\+QElement$<$2$>$} as its argument. The different {\ttfamily Quad\+Trees} must then be combined into a {\ttfamily Quad\+Tree\+Forest}, whose constructor establishes each {\ttfamily Quad\+Tree} \textquotesingle{}s N/\+S/\+W/E neighbours and their relative orientation. Here is an illustration\+:
 
 
 
 
 \begin{DoxyImage}
 \includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{QuarterCircleMesh}
-\doxyfigcaption{Mesh consisting of three Refineable\+Q\+Elements$<$2$>$/ Quad\+Trees. Element/\+Quad\+Tree numbers are blue, and the Quad\+Tree\textquotesingle{}s \`{}northern\textquotesingle{} direction is indicated by the red arrows. The Quad\+Trees are combined into a Quad\+Tree\+Forest, which establishes their adjacency (Quad\+Tree 2 is Quad\+Tree 0\textquotesingle{}s northern neighbour etc.) and their relative orientation (Quad\+Tree 1\textquotesingle{}s North coincides with Quad\+Tree 2\textquotesingle{}s West, etc.) Note that the Refineable\+Q\+Element$<$2$>$\textquotesingle{}s local coordinates s\+\_\+0 and s\+\_\+1 are aligned with the Quad\+Tree \textquotesingle{}s W-\/-\/$>$E and S-\/-\/$>$N directions, respectively.}
+\doxyfigcaption{Mesh consisting of three Refineable\+QElements\texorpdfstring{$<$}{<}2\texorpdfstring{$>$}{>}/ Quad\+Trees. Element/\+Quad\+Tree numbers are blue, and the Quad\+Tree\textquotesingle{}s \`{}northern\textquotesingle{} direction is indicated by the red arrows. The Quad\+Trees are combined into a Quad\+Tree\+Forest, which establishes their adjacency (Quad\+Tree 2 is Quad\+Tree 0\textquotesingle{}s northern neighbour etc.) and their relative orientation (Quad\+Tree 1\textquotesingle{}s North coincides with Quad\+Tree 2\textquotesingle{}s West, etc.) Note that the Refineable\+QElement\texorpdfstring{$<$}{<}2\texorpdfstring{$>$}{>}\textquotesingle{}s local coordinates s\+\_\+0 and s\+\_\+1 are aligned with the Quad\+Tree \textquotesingle{}s W-\/-\/\texorpdfstring{$>$}{>}E and S-\/-\/\texorpdfstring{$>$}{>}N directions, respectively.}
 \end{DoxyImage}
 
 
 The virtual member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableQuadMesh::setup\_quadtree\_forest() }
+
 \end{DoxyCode}
  creates the {\ttfamily Quad\+Tree\+Forest} automatically and should be called at the end of the {\ttfamily Refineable\+Quad\+Mesh\textquotesingle{}s} constructor. Finally, the mesh must be given a pointer to a spatial error estimator.\hypertarget{index_Hanging_Nodes}{}\doxysubsubsection{Hanging Nodes}\label{index_Hanging_Nodes}
-Before explaining the details of the mesh adaptation process we discuss how hanging nodes are treated in {\ttfamily oomph-\/lib}. The figure below shows a {\ttfamily Refineable\+Quad\+Mesh} that originally consisted of four 4-\/node {\ttfamily Refineable\+Q\+Elements} and nine nodes (nodes 0 to 8). The mesh was adapted twice\+: During the first adaptation, the top right element was subdivided into four son elements and five new {\ttfamily Nodes} (nodes 9 to 13) were created. Then one of the newly created elements was subdivided again and in the process {\ttfamily Nodes} 14 to 18 were created. ~\newline
+Before explaining the details of the mesh adaptation process we discuss how hanging nodes are treated in {\ttfamily oomph-\/lib}. The figure below shows a {\ttfamily Refineable\+Quad\+Mesh} that originally consisted of four 4-\/node {\ttfamily Refineable\+QElements} and nine nodes (nodes 0 to 8). The mesh was adapted twice\+: During the first adaptation, the top right element was subdivided into four son elements and five new {\ttfamily Nodes} (nodes 9 to 13) were created. Then one of the newly created elements was subdivided again and in the process {\ttfamily Nodes} 14 to 18 were created. ~\newline
  On this mesh, inter-\/element continuity is not ensured unless the hanging {\ttfamily Nodes} (=internal {\ttfamily Nodes} not shared by an adjacent element -- here {\ttfamily Nodes} 9, 10, 14, 15, 17 and 18) are suitably constrained. For instance, the nodal values at {\ttfamily Node} 10 must be linear combinations of the values at nodes 4 and 7 if the solution is to remain continuous across the eastern edge of element 2. We refer to nodes 4 and 7 as the \char`\"{}master nodes\char`\"{} of {\ttfamily Node} 
 \begin{DoxyEnumerate}
 \item ~\newline
@@ -823,33 +918,38 @@ For simply hanging nodes (e.\+g. {\ttfamily Nodes} 9, 10, 14 and 15 in the above
 \item Find the neighbour element {\bfseries{N}} that faces the hanging node $ J $.
 \item Let $ s_J $ be the local coordinate of hanging node $ J $ in the neighbour element {\bfseries{N}}.
 \item For each master node $ K $ in {\bfseries{N}}, the weight $ \omega_{JK} $ is then given by the shape function associated with master node $ K $, evaluated at $ s_J $, evaluated in element {\bfseries{N}}. \[ \omega_{JK} = \psi_K(s_J) \]
-\end{DoxyItemize}For multiply hanging nodes ({\ttfamily Nodes} 17 and 18 in the above sketch), the weights of the ultimate master nodes are determined recursively, e.\+g. $ \omega_{17\ 4} = \omega_{17\ 9} \times \omega_{9 \ 4}. $ ~\newline
+\end{DoxyItemize}For multiply hanging nodes ({\ttfamily Nodes} 17 and 18 in the above sketch), the weights of the ultimate master nodes are determined recursively, e.\+g. $ \omega_{17\ 4} = \omega_{17\ 9} \times \omega_{9 \ 4}. $~\newline
 
 
 For {\ttfamily Refineable\+Quad\+Mesh} meshes, the above procedures are fully implemented. Executing the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableQElement<2>::setup\_hanging\_nodes() }
+
 \end{DoxyCode}
  for each element in the mesh establishes which of the elements\textquotesingle{} {\ttfamily Nodes} are hanging and determines their primary master nodes and weights. Furthermore, it pins the values at the hanging nodes -- because the values are constrained, they cannot be unknowns in the problem. When this function has been executed for all elements in the mesh, the recursive elimination of hanging master nodes is performed by calling 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableMesh::complete\_hanging\_nodes(); }
+
 \end{DoxyCode}
 
 
-As mentioned above, the possible occurrence of hanging nodes needs to be reflected in the element\textquotesingle{}s equation numbering scheme and in the functions that compute the elemental Jacobian matrix because the element residuals now potentially depend on {\ttfamily Nodes} outside the element. Therefore, {\ttfamily Refineable\+Q\+Element$<$2$>$s} must re-\/implement various {\ttfamily Finite\+Element} member functions, e.\+g., by re-\/implementing the virtual functions 
+As mentioned above, the possible occurrence of hanging nodes needs to be reflected in the element\textquotesingle{}s equation numbering scheme and in the functions that compute the elemental Jacobian matrix because the element residuals now potentially depend on {\ttfamily Nodes} outside the element. Therefore, {\ttfamily Refineable\+QElement$<$2$>$s} must re-\/implement various {\ttfamily Finite\+Element} member functions, e.\+g., by re-\/implementing the virtual functions 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_a80f7344c0300e389acecd2d048f2bb58}{RefineableQElement<2>::get\_residuals}}() }
+\DoxyCodeLine{RefineableQElement<2>::get\_residuals() }
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableQElement<2>::get\_jacobian(...) }
-\end{DoxyCode}
- and various others, as specified in the {\ttfamily Refineable\+Q\+Element$<$2$>$} class.
 
-In practice, we again distinguish between the \char`\"{}geometry\char`\"{} and the \char`\"{}maths\char`\"{} by writing a general {\ttfamily Refineable\+Poisson\+Equations$<$\+D\+I\+M$>$} class that inherits from {\ttfamily Poisson\+Equations$<$\+D\+I\+M$>$} and re-\/implements the appropriate member functions.\hypertarget{index_RefineableQuadMesh_adaption_section}{}\doxysubsubsection{Mesh adaptation}\label{index_RefineableQuadMesh_adaption_section}
+\end{DoxyCode}
+ and various others, as specified in the {\ttfamily Refineable\+QElement$<$2$>$} class.
+
+In practice, we again distinguish between the \char`\"{}geometry\char`\"{} and the \char`\"{}maths\char`\"{} by writing a general {\ttfamily Refineable\+Poisson\+Equations$<$\+DIM$>$} class that inherits from {\ttfamily Poisson\+Equations$<$\+DIM$>$} and re-\/implements the appropriate member functions.\hypertarget{index_RefineableQuadMesh_adaption_section}{}\doxysubsubsection{Mesh adaptation}\label{index_RefineableQuadMesh_adaption_section}
 We can now discuss the details of the mesh adaptation process for {\ttfamily Refineable\+Quad\+Mesh} meshes, although the general procedure is, in fact, generic\+: Once a solution has been computed, {\ttfamily Problem\+::adapt()} loops over all refineable submeshes, and uses their error estimator functions to compute the vector of elemental errors. The vector of errors is then passed to the submeshes\textquotesingle{} 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableMesh::adapt(...) }
+
 \end{DoxyCode}
  function which performs the actual mesh adaptation and entails the following steps\+:
 \begin{DoxyItemize}
@@ -865,16 +965,18 @@ We can now discuss the details of the mesh adaptation process for {\ttfamily Ref
 \begin{DoxyItemize}
 \item Create new {\ttfamily Refineable\+Elements} of the same type as the father element.
 \item Create new {\ttfamily Quad\+Trees} --- as in the original setup, we pass the pointers to the newly created {\ttfamily Refineable\+Elements} to the {\ttfamily Quad\+Tree} constructors to establish the association between each {\ttfamily Quad\+Tree} and its {\ttfamily Refineable\+Element}.
-\item Declare the newly created {\ttfamily Quad\+Trees} to be the sons of the current {\ttfamily Quad\+Tree}. This transforms the current {\ttfamily Quad\+Tree} into a {\itshape \char`\"{}non-\/leaf node\char`\"{}} in the {\ttfamily Quad\+Tree\+Forest}. Note that the {\ttfamily Refineable\+Element} is not deleted when it is split -- it retains its full functionality (e.\+g. its pointers to its {\ttfamily Nodes}, etc). This ensures that the element is fully functional should its sons become scheduled for unrefinement at a later stage. Note that in cases when the {\ttfamily Nodes} are not uniformly-\/spaced, certain {\ttfamily Nodes} in the father will not be used by the sons. These {\ttfamily Nodes} will be marked as obsolete and deleted from the {\ttfamily Mesh}. The pointers to these {\ttfamily Nodes} must be set to N\+U\+LL in the father element, but this cannot be done until after the hanging node procedures have been completed, see below.
+\item Declare the newly created {\ttfamily Quad\+Trees} to be the sons of the current {\ttfamily Quad\+Tree}. This transforms the current {\ttfamily Quad\+Tree} into a {\itshape \char`\"{}non-\/leaf node\char`\"{}} in the {\ttfamily Quad\+Tree\+Forest}. Note that the {\ttfamily Refineable\+Element} is not deleted when it is split -- it retains its full functionality (e.\+g. its pointers to its {\ttfamily Nodes}, etc). This ensures that the element is fully functional should its sons become scheduled for unrefinement at a later stage. Note that in cases when the {\ttfamily Nodes} are not uniformly-\/spaced, certain {\ttfamily Nodes} in the father will not be used by the sons. These {\ttfamily Nodes} will be marked as obsolete and deleted from the {\ttfamily Mesh}. The pointers to these {\ttfamily Nodes} must be set to NULL in the father element, but this cannot be done until after the hanging node procedures have been completed, see below.
 \end{DoxyItemize}
 \item The newly-\/created elements now exist (and are accessible via the leaves of the {\ttfamily Quad\+Tree\+Forest}) but they have not been `built' i.\+e. they do not have pointers to {\ttfamily Nodes} etc. We now loop over the {\itshape \char`\"{}leaf nodes\char`\"{}} in the {\ttfamily Quad\+Tree\+Forest} and execute the virtual function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableElement::build() }
+
 \end{DoxyCode}
- for all newly created elements. In the specific case of a 2D {\ttfamily Quad\+Mesh}, the {\ttfamily Refineable\+Q\+Element$<$2$>$\+::build()} function will be called. \mbox{[}{\bfseries{Note\+:}} Elements that have not been built yet are identified by the fact that the entries in their {\ttfamily Node\+\_\+pt} vector point to N\+U\+LL. All other elements are ignored by the {\ttfamily Refineable\+Element\+::build()} function.\mbox{]} ~\newline
- The {\ttfamily Refineable\+Element\+::build()} function establishes the element\textquotesingle{}s pointers to its {\ttfamily Nodes} and creates new {\ttfamily Nodes} as and when required\+: some {\ttfamily Nodes} will already have existed in the old mesh; some new {\ttfamily Nodes} might already have been created by a neighbouring element, etc. If a new {\ttfamily Node} needs to be created, it is allocated with the element\textquotesingle{}s {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} or {\ttfamily Finite\+Element\+::construct\+\_\+boundary\+\_\+node(...)} functions. By default, the current and previous positions of the new {\ttfamily Nodes} are determined via the father element\textquotesingle{}s geometric mapping. However, rather than referring directly to {\ttfamily Q\+Element\+::interpolated\+\_\+x(...)}, we determine the position with 
+ for all newly created elements. In the specific case of a 2D {\ttfamily Quad\+Mesh}, the {\ttfamily Refineable\+QElement$<$2$>$\+::build()} function will be called. \mbox{[}{\bfseries{Note\+:}} Elements that have not been built yet are identified by the fact that the entries in their {\ttfamily Node\+\_\+pt} vector point to NULL. All other elements are ignored by the {\ttfamily Refineable\+Element\+::build()} function.\mbox{]} ~\newline
+ The {\ttfamily Refineable\+Element\+::build()} function establishes the element\textquotesingle{}s pointers to its {\ttfamily Nodes} and creates new {\ttfamily Nodes} as and when required\+: some {\ttfamily Nodes} will already have existed in the old mesh; some new {\ttfamily Nodes} might already have been created by a neighbouring element, etc. If a new {\ttfamily Node} needs to be created, it is allocated with the element\textquotesingle{}s {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} or {\ttfamily Finite\+Element\+::construct\+\_\+boundary\+\_\+node(...)} functions. By default, the current and previous positions of the new {\ttfamily Nodes} are determined via the father element\textquotesingle{}s geometric mapping. However, rather than referring directly to {\ttfamily QElement\+::interpolated\+\_\+x(...)}, we determine the position with 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::get\_x(...) }
+
 \end{DoxyCode}
  which determines the nodal positions based on the father element\textquotesingle{}s macro-\/element representation if it exists; see section \mbox{\hyperlink{index_MacroElements}{Domains and Macro Elements}} for a discussion of macro elements for mesh refinement in domains with curvilinear boundaries. ~\newline
  By default, all values at a newly created {\ttfamily Node} are free (not pinned). If a new {\ttfamily Node} is located on the edge of the father element, we apply the same boundary conditions (if any) that apply along the father element\textquotesingle{}s edge. ~\newline
@@ -882,11 +984,13 @@ We can now discuss the details of the mesh adaptation process for {\ttfamily Ref
  Finally, the values (and the history values) at the newly created {\ttfamily Nodes} must be assigned. This is done by using the interpolated values from the father element. Since the way in which values are interpolated inside an element is element-\/specific (e.\+g. in Taylor-\/\+Hood Navier-\/\+Stokes elements, different interpolations are used for the pressure and for the velocities), interpolated values are obtained from a call to the father element\textquotesingle{}s 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableQElement<2>::get\_interpolated\_values(...) }
+
 \end{DoxyCode}
  function which returns the vector of interpolated values (or history values) at a given local coordinate. This pure virtual function must be implemented for every specific {\ttfamily Refineable\+Element}. ~\newline
  At this point, the generic steps in the build process are completed, but many particular {\ttfamily Refineable\+Elements} now require further build operations. For instance, in Crouzeix-\/\+Raviart Navier-\/\+Stokes elements, the pressure interpolation is not based on nodal values but on internal {\ttfamily Data} which must be suitably initialised. For this purpose, we provide the interface 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableElement::further\_build(...) }
+
 \end{DoxyCode}
  which is executed at the end of {\ttfamily Refineable\+Element\+::build(...)} and can be used to perform any element-\/specific further build operations.
 \item All new {\ttfamily Nodes} and elements have now been created. In the course of the mesh refinement, some of the previously existing {\ttfamily Nodes} that are (still) marked as hanging might have become non-\/hanging. Therefore, we now update the hanging nodes\textquotesingle{} values and coordinates so that their entries are consistent with their current hanging-\/node constraints and then reset their hanging-\/node status to non-\/hanging. Finally, we free (unpin) their nodal values. The hanging-\/node status of all {\ttfamily Nodes} will be re-\/assessed later, when the de-\/refinement phase is completed.
@@ -895,6 +999,7 @@ We can now discuss the details of the mesh adaptation process for {\ttfamily Ref
 \item First we execute the father element\textquotesingle{}s 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableElement::rebuild\_from\_sons() }
+
 \end{DoxyCode}
  member function, which can be used, e.\+g., to determine suitable values for the father element\textquotesingle{}s internal {\ttfamily Data} from the values of its sons. In addition, if any of the father\textquotesingle{}s {\ttfamily Nodes} have been deleted during refinement, they must be re-\/created during the merge procedure.
 \item Next, we \textquotesingle{}unbuild\textquotesingle{} the son elements by marking those of its {\ttfamily Nodes} that do not exist in their father element as obsolete (this classification can later be over-\/ruled by other elements that need to retain the {\ttfamily Node}).
@@ -906,11 +1011,13 @@ We can now discuss the details of the mesh adaptation process for {\ttfamily Ref
 \item We loop over all non-\/leaf elements in the {\ttfamily Quad\+Tree\+Forest} and call their {\ttfamily deactivate\+\_\+object()} function, which sets {\ttfamily Finite\+Element\+::\+Node\+\_\+pt}\mbox{[}n\mbox{]} to zero for any obsolete {\ttfamily Nodes}. Any {\ttfamily Nodes} in the {\ttfamily Mesh\+::\+Node\+\_\+pt} vector that are still labelled as obsolete are truly obsolete and are deleted by calling 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::prune\_dead\_nodes() }
+
 \end{DoxyCode}
 
 \item Finally, in order to facilitate dump and restart operations we sort the {\ttfamily Nodes} into a standard order using 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh::reorder\_nodes() }
+
 \end{DoxyCode}
 
 \end{DoxyItemize}\hypertarget{index_Macro_element_meshes}{}\doxysection{Mesh adaptation in domains with curved boundaries}\label{index_Macro_element_meshes}
@@ -920,16 +1027,18 @@ To facilitate these steps, we now introduce the concept of {\ttfamily Geom\+Obje
 Here are two examples of curvilinear boundaries that are frequently encountered in computations on moving domains\+:
 \begin{DoxyItemize}
 \item In many problems the boundary $\partial D$ of the moving domain $D$ is given explicitly in terms of a position vector \[ {\bf r}_{_{\partial D}}(\boldmath{\xi},t), \] where $ t $ is the (continuous) time and the components of the vector $ \boldmath{\xi} $ parametrise the boundary. We have $DIM({\bf r}_{_{\partial D}}) = DIM(\boldmath{\xi}) + 1$. For instance, the surface of a cylinder $C$ with time-\/dependent radius $R(t)$ can be represented as \[ {\bf r}_{_{\partial C}} = \left( \begin{array}{c} R(t) \cos(\xi_2) \\ R(t) \sin(\xi_2) \\ \xi_1 \\ \end{array} \right). \]
-\item In fluid problems with free surfaces or in fluid-\/structure interaction (F\+SI) problems, the domain boundary might have to be determined as part of the solution. In such cases, the boundary will have some computational representation. For instance, in an F\+SI computation in which a shell structure bounds the fluid domain, each shell finite element defines a small part of the fluid domain boundary and the shell element\textquotesingle{}s local coordinates provide a parametrisation of some part of the boundary in a form similar to the one shown above.
+\item In fluid problems with free surfaces or in fluid-\/structure interaction (FSI) problems, the domain boundary might have to be determined as part of the solution. In such cases, the boundary will have some computational representation. For instance, in an FSI computation in which a shell structure bounds the fluid domain, each shell finite element defines a small part of the fluid domain boundary and the shell element\textquotesingle{}s local coordinates provide a parametrisation of some part of the boundary in a form similar to the one shown above.
 \end{DoxyItemize}
 
 The common feature of these two examples is that, in both cases, the boundary is represented by a parametrised position vector. The {\ttfamily Geom\+Object} base class provides an abstract interface for such situations. In its most basic form, a `geometric object' simply provides a parametrisation of its shape by implementing the {\ttfamily Geom\+Object\textquotesingle{}s} pure virtual member function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_aecdcb19250d339765d0095e975875b2a}{GeomObject::position}}(xi,r)}
+\DoxyCodeLine{GeomObject::position(xi,r)}
+
 \end{DoxyCode}
  which computes the position vector {\ttfamily r} at the coordinates specified by the vector {\ttfamily xi}. {\ttfamily Geom\+Object} also provides a large number of additional interfaces in the form of (broken) virtual functions. The most important of these is the time-\/dependent version of the above function 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{the__data__structure_8txt_aecdcb19250d339765d0095e975875b2a}{GeomObject::position}}(xi,\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},r)}
+\DoxyCodeLine{GeomObject::position(xi,\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}},r)}
+
 \end{DoxyCode}
  which computes the position vector {\ttfamily r} at the coordinates specified by the vector {\ttfamily xi} at the {\bfseries{previous}} {\bfseries{discrete}} time level {\ttfamily t}. We follow the usual convention that
 \begin{DoxyItemize}
@@ -943,14 +1052,15 @@ Further virtual member functions provide interfaces for the determination of the
 Typically, the shape of a {\ttfamily Geom\+Object} depends on a certain number of parameters (in the above examples, the radius $ R(t) $ of the cylinder and the displacements of the shell element, respectively) which can be unknowns in the problem. We therefore store these parameters as (geometric) {\ttfamily Data}, whose values can be pinned or free.\hypertarget{index_MacroElements}{}\doxysubsection{Domains and Macro Elements}\label{index_MacroElements}
 For the purposes of mesh generation, we represent curvilinear domains by objects that are derived from the base class {\ttfamily Domain} and use {\ttfamily Geom\+Objects} to represent the curvilinear boundaries. For instance, the {\ttfamily Quarter\+Circle\+Sector\+Domain} sketched in the figure below is bounded by the geometric object {\ttfamily Ellipse} that parametrises the domain\textquotesingle{}s curved boundary, shown in red.
 
-Consider the coarse discretisation of the domain shown in the Fig. (a) and assume that element 2 (a four-\/node quad element from the {\ttfamily Q\+Element} family) is scheduled for refinement into four son elements. As discussed above, by default the {\ttfamily Nodes} of the son elements are established/created as follows\+:
+Consider the coarse discretisation of the domain shown in the Fig. (a) and assume that element 2 (a four-\/node quad element from the {\ttfamily QElement} family) is scheduled for refinement into four son elements. As discussed above, by default the {\ttfamily Nodes} of the son elements are established/created as follows\+:
 \begin{DoxyItemize}
 \item If a {\ttfamily Node} already exists in the father element we store the pointer to the existing {\ttfamily Node} in the son element\textquotesingle{}s {\ttfamily Node\+\_\+pt} vector.
 \item If a {\ttfamily Node} needs to be created, we determine its position from the geometric mapping of the father element. Thus the five new {\ttfamily Nodes} that need to be created when element 2 is refined, are placed at their father element\textquotesingle{}s (i.\+e. element 2\textquotesingle{}s) local coordinates (0,0), (0,1), (0,-\/1), (1,0) and (-\/1,0). The father element\textquotesingle{}s 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableQElement<2>::get\_x(...) }
+
 \end{DoxyCode}
- determines the nodal position via a call to {\ttfamily Q\+Element\+::interpolated\+\_\+x(...)}. Similarly, the nodal values of the new {\ttfamily Nodes} are determined by using the interpolated values in the father element.
+ determines the nodal position via a call to {\ttfamily QElement\+::interpolated\+\_\+x(...)}. Similarly, the nodal values of the new {\ttfamily Nodes} are determined by using the interpolated values in the father element.
 \end{DoxyItemize}
 
 
@@ -960,29 +1070,31 @@ For the element 0, this procedure would be perfectly adequate, as the domain bou
 To overcome this problem, objects of type {\ttfamily Domain} provide a decomposition of the domain into a number of so-\/called {\ttfamily Macro\+Elements}, as sketched in Fig. (c). Boundaries of the {\ttfamily Macro\+Elements} are either given by (parts of) the (exact) curvilinear boundaries (as specified by the {\ttfamily Domain\textquotesingle{}s} {\ttfamily Geom\+Objects}) or by (arbitrary and usually straight) internal edges (or, in 3D, faces). In 2D, {\ttfamily Macro\+Elements} provide a mapping $ {\bf r}(S_0,S_1) $ from a local coordinate system $ (S_0, S_1) $, with $ S_i \in [-1..1]^2 $, to the points inside the {\ttfamily Macro\+Element} via their member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{MacroElement::macro\_map(\mbox{\hyperlink{namespaceoomph_1_1QuadTreeNames_a8954a5947b19986b8c4b755bc7639f7da85b07d6c087e0cb66bac32a0b6a45198}{S}},r) }
-\end{DoxyCode}
- The mapping needs to be chosen such that for $ S_1\in [-1..1]$ the position vector $ {\bf r}(S_0=-1,S_1) $ sweeps along the `southern' edge of the {\ttfamily Macro\+Element}, etc.; see Fig. (e). The form of the macro-\/element mapping is obviously not unique and it depends on the {\ttfamily Macro\+Element\textquotesingle{}s} topology. The class {\ttfamily Q\+Macro\+Element$<$2$>$} provides a mapping that is suitable for 2D quadrilateral elements and can therefore be used with {\ttfamily Refineable\+Q\+Element$<$2$>$} s.
 
-The constructors for objects of type {\ttfamily Domain} typically require a vector of pointers to the {\ttfamily Geom\+Objects} that define its boundaries. The {\ttfamily Domain} constructor then usually employs function pointers to the {\ttfamily Geom\+Object\+::position(...)} function to define the {\ttfamily Macro\+Element} boundaries. Once built, the {\ttfamily Macro\+Elements} are accessible via the member function
+\end{DoxyCode}
+ The mapping needs to be chosen such that for $ S_1\in [-1..1]$ the position vector $ {\bf r}(S_0=-1,S_1) $ sweeps along the `southern' edge of the {\ttfamily Macro\+Element}, etc.; see Fig. (e). The form of the macro-\/element mapping is obviously not unique and it depends on the {\ttfamily Macro\+Element\textquotesingle{}s} topology. The class {\ttfamily QMacro\+Element$<$2$>$} provides a mapping that is suitable for 2D quadrilateral elements and can therefore be used with {\ttfamily Refineable\+QElement$<$2$>$} s.
+
+The constructors for objects of type {\ttfamily Domain} typically require a vector of pointers to the {\ttfamily Geom\+Objects} that define its boundaries. The {\ttfamily Domain} constructor then usually employs function pointers to the {\ttfamily Geom\+Object\+::position(...)} function to define the {\ttfamily Macro\+Element} boundaries. Once built, the {\ttfamily Macro\+Elements} are accessible via the member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Domain::macro\_element\_pt(...). }
+
 \end{DoxyCode}
 
 
-We illustrate the macro-\/element based mesh generation and adaptation process for the case of {\ttfamily Refineable\+Quad\+Mesh} meshes. Assume that the domain is represented by an object of type {\ttfamily Domain}. We build a coarse initial mesh which contains as many {\ttfamily Refineable\+Q\+Element$<$2$>$s} as there are {\ttfamily Q\+Macro\+Elements} in the {\ttfamily Domain}. We associate each {\ttfamily Refineable\+Q\+Element$<$2$>$} with one of the {\ttfamily Q\+Macro\+Elements} by storing a pointer to the {\ttfamily Q\+Macro\+Element} in {\ttfamily Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt}. Next, we use the {\ttfamily Q\+Macro\+Elements\textquotesingle{}} macro map to determine the {\ttfamily Refineable\+Q\+Element$<$2$>$\textquotesingle{}s} nodal positions such that, e.\+g., the {\ttfamily Refineable\+Q\+Element$<$2$>$\textquotesingle{}s} SW node is placed at the {\ttfamily Q\+Macro\+Element} \textquotesingle{}s local coordinates $(S_0,S_1)=(-1,-1)$, etc. The fraction of the {\ttfamily Q\+Macro\+Element} that is spanned by each {\ttfamily Refineable\+Q\+Element$<$2$>$} is represented by the maximum and minimum values of the {\ttfamily Q\+Macro\+Element\textquotesingle{}s} local coordinates; the {\ttfamily Refineable\+Q\+Element$<$2$>$} constructor initially sets these values to the defaults of +1.\+0 and -\/1.\+0, respectively, indicating that the {\ttfamily Refineable\+Q\+Element$<$2$>$} spans the entire area of the corresponding {\ttfamily Q\+Macro\+Element}.
+We illustrate the macro-\/element based mesh generation and adaptation process for the case of {\ttfamily Refineable\+Quad\+Mesh} meshes. Assume that the domain is represented by an object of type {\ttfamily Domain}. We build a coarse initial mesh which contains as many {\ttfamily Refineable\+QElement$<$2$>$s} as there are {\ttfamily QMacro\+Elements} in the {\ttfamily Domain}. We associate each {\ttfamily Refineable\+QElement$<$2$>$} with one of the {\ttfamily QMacro\+Elements} by storing a pointer to the {\ttfamily QMacro\+Element} in {\ttfamily Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt}. Next, we use the {\ttfamily QMacro\+Elements\textquotesingle{}} macro map to determine the {\ttfamily Refineable\+QElement$<$2$>$\textquotesingle{}s} nodal positions such that, e.\+g., the {\ttfamily Refineable\+QElement$<$2$>$\textquotesingle{}s} SW node is placed at the {\ttfamily QMacro\+Element} \textquotesingle{}s local coordinates $(S_0,S_1)=(-1,-1)$, etc. The fraction of the {\ttfamily QMacro\+Element} that is spanned by each {\ttfamily Refineable\+QElement$<$2$>$} is represented by the maximum and minimum values of the {\ttfamily QMacro\+Element\textquotesingle{}s} local coordinates; the {\ttfamily Refineable\+QElement$<$2$>$} constructor initially sets these values to the defaults of +1.\+0 and -\/1.\+0, respectively, indicating that the {\ttfamily Refineable\+QElement$<$2$>$} spans the entire area of the corresponding {\ttfamily QMacro\+Element}.
 
 With this additional information, we modify the ~\newline
- {\ttfamily Refineable\+Q\+Element$<$2$>$\+::build()} process as follows\+:
+ {\ttfamily Refineable\+QElement$<$2$>$\+::build()} process as follows\+:
 \begin{DoxyItemize}
 \item After creating the son elements, we set their {\ttfamily Finite\+Element\+::\+Macro\+\_\+elem\+\_\+pt} to that of their father.
 \item We adjust the son\textquotesingle{}s maximum and minimum {\ttfamily Macro\+Element} coordinates so that they span the appropriate fraction of the {\ttfamily Macro\+Element}. For instance, for the SW son element of element 2 in the above sketch, we set $ S_0^{min}=-1, \ S_0^{max}=0, \ S_1^{min}=-1, \ S_1^{max}=0 $. Should this element get refined again, we set its NW son element\textquotesingle{}s coordinates to $ S_0^{min}=-1, \ S_0^{max}=-0.5, \ S_1^{min}=-0.5, \ S_1^{max}=0 $, etc.
-\item The nodal positions of newly created {\ttfamily Nodes} are determined via calls to the father element\textquotesingle{}s {\ttfamily Refineable\+Q\+Element$<$2$>$\+::get\+\_\+x(...)} function. If the father element is associated with a {\ttfamily Macro\+Element} (indicated by a non-\/\+N\+U\+LL {\ttfamily Refineable\+Q\+Element$<$2$>$\+::\+Macro\+\_\+elem\+\_\+pt} pointer), this function does not refer to {\ttfamily Q\+Element\+::interpolated\+\_\+x(...)} (i.\+e. the FE mapping) but places the new {\ttfamily Node} at the appropriate point inside the father\textquotesingle{}s {\ttfamily Macro\+Element}. This ensures that {\ttfamily Nodes} that are created on the {\ttfamily Mesh} boundaries get placed on the {\ttfamily Domain} boundary, as shown in Fig. (d).
-\item In time-\/dependent, moving mesh problems, the history of the new {\ttfamily Nodes\textquotesingle{}} position is established by calls to the time-\/dependent version of the {\ttfamily Macro\+Element\+::macro\+\_\+map(...)} function, which in turn refers to the time-\/dependent {\ttfamily Geom\+Object\+::position(...)} function of the {\ttfamily Geom\+Objects} that define the {\ttfamily Domain} boundaries. Hence for all new {\ttfamily Nodes}, {\ttfamily Node\+::x(t,i)} for {\ttfamily t$>$0}, returns the position the {\ttfamily Node} would have had if it had already existed at the previous time level t.
+\item The nodal positions of newly created {\ttfamily Nodes} are determined via calls to the father element\textquotesingle{}s {\ttfamily Refineable\+QElement$<$2$>$\+::get\+\_\+x(...)} function. If the father element is associated with a {\ttfamily Macro\+Element} (indicated by a non-\/\+NULL {\ttfamily Refineable\+QElement$<$2$>$\+::\+Macro\+\_\+elem\+\_\+pt} pointer), this function does not refer to {\ttfamily QElement\+::interpolated\+\_\+x(...)} (i.\+e. the FE mapping) but places the new {\ttfamily Node} at the appropriate point inside the father\textquotesingle{}s {\ttfamily Macro\+Element}. This ensures that {\ttfamily Nodes} that are created on the {\ttfamily Mesh} boundaries get placed on the {\ttfamily Domain} boundary, as shown in Fig. (d).
+\item In time-\/dependent, moving mesh problems, the history of the new {\ttfamily Nodes\textquotesingle{}} position is established by calls to the time-\/dependent version of the {\ttfamily Macro\+Element\+::macro\+\_\+map(...)} function, which in turn refers to the time-\/dependent {\ttfamily Geom\+Object\+::position(...)} function of the {\ttfamily Geom\+Objects} that define the {\ttfamily Domain} boundaries. Hence for all new {\ttfamily Nodes}, {\ttfamily Node\+::x(t,i)} for {\ttfamily t\texorpdfstring{$>$}{>}0}, returns the position the {\ttfamily Node} would have had if it had already existed at the previous time level t.
 \item We retain the original procedure for initialising the current and previous values at the new {\ttfamily Nodes} and continue to determine them by interpolation from the father element, based on the father element\textquotesingle{}s local coordinates. (We cannot determine the function values at the exact new nodal positions because new {\ttfamily Nodes} can be located outside their father elements.)
 \end{DoxyItemize}\hypertarget{index_moving_mesh}{}\doxysubsection{Macro-\/element-\/based node updates in moving mesh problems}\label{index_moving_mesh}
 Once a {\ttfamily Mesh} is associated with a {\ttfamily Domain}, the function {\ttfamily Mesh\+::node\+\_\+update()} updates the nodal positions in response to a change in the shape of the {\ttfamily Geom\+Objects} that define the {\ttfamily Domain} boundaries. \mbox{[}Note\+: This function updates all nodal positions first and then updates the positions of the hanging nodes to subject them to the hanging node constraints.\mbox{]} Alternative procedures for the update of the nodal positions in response to changes in the domain boundary are implemented in the {\ttfamily Algebraic\+Mesh}, {\ttfamily Spine\+Mesh} and {\ttfamily Solid\+Mesh} classes.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -1,91 +1,96 @@
-\hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement}{}\doxysection{oomph\+::Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement}{}\doxysection{oomph\+::Navier\+Stokes\+Space\+Time\+Traction\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1NavierStokesSpaceTimeTractionElement}\index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
+
+
+A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class.  
+
+
 
 
 {\ttfamily \#include $<$discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Navier\+Stokes\+Space\+Time\+Traction\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.160494cm]{classoomph_1_1NavierStokesSpaceTimeTractionElement}
+\includegraphics[height=0.925926cm]{classoomph_1_1NavierStokesSpaceTimeTractionElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}}, const bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
-\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
+\begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}{$\sim$\+Navier\+Stokes\+Space\+Time\+Traction\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor should not delete anything. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
 \begin{DoxyCompactList}\small\item\em This function returns the residuals and the jacobian. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}}, const bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
-\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
+\begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}{$\sim$\+Navier\+Stokes\+Space\+Time\+Traction\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor should not delete anything. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
 \begin{DoxyCompactList}\small\item\em This function returns the residuals and the jacobian. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}}, const bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
-\item 
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
+\begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}{$\sim$\+Navier\+Stokes\+Space\+Time\+Traction\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor should not delete anything. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
 \begin{DoxyCompactList}\small\item\em This function returns the residuals and the jacobian. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}{output}} (std\+::ostream \&outfile, const unsigned \&nplot)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&nplot)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,\mbox{[}z\mbox{]},u,v,\mbox{[}w\mbox{]},p in tecplot format. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$\&)(const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_aebaff35493b9c48411dd684f02ff2946}{traction\+\_\+fct\+\_\+pt}} ()
+void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae0ab2b788a0c8f62106637f883215f4d}{traction\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for the imposed traction pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
-\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
-\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}{zeta\+\_\+nodal}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&k, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em The \char`\"{}global\char`\"{} intrinsic coordinate of the element when viewed as part of a geometric object should be given by the Face\+Space\+Time\+Element representation, by default. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
-\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}{u\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}{get\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Function to calculate the traction applied to the fluid. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -95,18 +100,17 @@ unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_a2c
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void($\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_aac86292b4e051a59922fd7a7032e361b}{Traction\+\_\+fct\+\_\+pt}} )(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
+void($\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement_aac86292b4e051a59922fd7a7032e361b}{Traction\+\_\+fct\+\_\+pt}} )(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)
 \begin{DoxyCompactList}\small\item\em Pointer to an imposed traction function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}
+A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometry$<$\+ELEMENT$>$ class and and thus, we can be generic enough without the need to have a separate equations class. 
 
-A class for elements that allow the imposition of an applied traction to the Navier--Stokes equations The geometrical information can be read from the Face\+Geometry$<$\+E\+L\+E\+M\+E\+N\+T$>$ class and and thus, we can be generic enough without the need to have a separate equations class 
-
-Definition at line 51 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00051}{51}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
@@ -115,23 +119,27 @@ Definition at line 51 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!NavierStokesSpaceTimeTractionElement@{NavierStokesSpaceTimeTractionElement}}
 \index{NavierStokesSpaceTimeTractionElement@{NavierStokesSpaceTimeTractionElement}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{NavierStokesSpaceTimeTractionElement()}{NavierStokesSpaceTimeTractionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
-
-Definition at line 65 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. 
+
+
+
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00065}{65}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00300}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00057}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!````~NavierStokesSpaceTimeTractionElement@{$\sim$NavierStokesSpaceTimeTractionElement}}
 \index{````~NavierStokesSpaceTimeTractionElement@{$\sim$NavierStokesSpaceTimeTractionElement}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$NavierStokesSpaceTimeTractionElement()}{~NavierStokesSpaceTimeTractionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -139,29 +147,33 @@ Destructor should not delete anything.
 
 
 
-Definition at line 121 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00121}{121}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!NavierStokesSpaceTimeTractionElement@{NavierStokesSpaceTimeTractionElement}}
 \index{NavierStokesSpaceTimeTractionElement@{NavierStokesSpaceTimeTractionElement}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{NavierStokesSpaceTimeTractionElement()}{NavierStokesSpaceTimeTractionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
-
-Definition at line 65 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. 
+
+
+
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00065}{65}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00300}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00057}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!````~NavierStokesSpaceTimeTractionElement@{$\sim$NavierStokesSpaceTimeTractionElement}}
 \index{````~NavierStokesSpaceTimeTractionElement@{$\sim$NavierStokesSpaceTimeTractionElement}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$NavierStokesSpaceTimeTractionElement()}{~NavierStokesSpaceTimeTractionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -169,29 +181,33 @@ Destructor should not delete anything.
 
 
 
-Definition at line 121 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00121}{121}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a543c1106496641fb176742d5d132db1b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!NavierStokesSpaceTimeTractionElement@{NavierStokesSpaceTimeTractionElement}}
 \index{NavierStokesSpaceTimeTractionElement@{NavierStokesSpaceTimeTractionElement}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{NavierStokesSpaceTimeTractionElement()}{NavierStokesSpaceTimeTractionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit 
-
-Definition at line 66 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element(), oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+Face\+Element\+::face\+\_\+index(), oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes(), oomph\+::\+Node\+::ndim(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+Constructor, which takes a \char`\"{}bulk\char`\"{} element and the value of the index and its limit. 
+
+
+
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00066}{66}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a025ab56ef9c6eea66fb34416fdf19152}{oomph\+::\+Finite\+Element\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00300}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l04654}{oomph\+::\+Face\+Element\+::face\+\_\+index()}}, \mbox{\hyperlink{elements_8h_source_l02475}{oomph\+::\+Finite\+Element\+::has\+\_\+hanging\+\_\+nodes()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00057}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a971585ae7fb14d6c2a102e6d1b858e86}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!````~NavierStokesSpaceTimeTractionElement@{$\sim$NavierStokesSpaceTimeTractionElement}}
 \index{````~NavierStokesSpaceTimeTractionElement@{$\sim$NavierStokesSpaceTimeTractionElement}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$NavierStokesSpaceTimeTractionElement()}{~NavierStokesSpaceTimeTractionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{Navier\+Stokes\+Space\+Time\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -199,7 +215,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 122 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00122}{122}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
@@ -208,8 +224,8 @@ Definition at line 122 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -221,22 +237,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 146 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00146}{146}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00313}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -248,22 +264,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 146 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00146}{146}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00313}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a680bbb03346811e4f0eaf3952fe32e22}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -275,22 +291,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_a0f21b27dc15cd4d357d285671b44b21b}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 147 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00147}{147}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00313}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -302,22 +318,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 136 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00136}{136}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00313}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -329,22 +345,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 136 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00136}{136}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00313}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a3b0bf4dec133e6f124f772c33c9d5089}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -356,45 +372,47 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesSpaceTimeTractionElement_acf0a78988a5212c1c436983311815a0c}{oomph\+::\+Refineable\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 137 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00137}{137}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00313}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}
 \index{fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
 This function returns the residuals for the traction function. flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. 
 
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////
+
 Function that returns the residuals for the imposed traction Navier-\/\+Stokes equations 
 
-Definition at line 313 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00312}{312}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, e, i, residuals(), and oomph\+::\+Quad\+Tree\+Names\+::W.
+References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00146}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00136}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a9c9b7f6387f5973d10777cdfdd0c5b2b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}
 \index{fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -404,8 +422,8 @@ This function returns the residuals for the traction function. flag=1(or 0)\+: d
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}
 \index{fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -415,8 +433,8 @@ This function returns the residuals for the traction function. flag=1(or 0)\+: d
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!get\_traction@{get\_traction}}
 \index{get\_traction@{get\_traction}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -424,18 +442,18 @@ Function to calculate the traction applied to the fluid.
 
 
 
-Definition at line 217 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00275}{275}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, i, n, and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00300}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00057}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!get\_traction@{get\_traction}}
 \index{get\_traction@{get\_traction}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -443,18 +461,18 @@ Function to calculate the traction applied to the fluid.
 
 
 
-Definition at line 275 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00275}{275}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, i, n, and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00300}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00057}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae8e882137a22b091d65822159695bd7e}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!get\_traction@{get\_traction}}
 \index{get\_traction@{get\_traction}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const double \&}]{time,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -462,18 +480,18 @@ Function to calculate the traction applied to the fluid.
 
 
 
-Definition at line 275 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00217}{217}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, i, n, and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Traction\+\_\+fct\+\_\+pt.
+References \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00300}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00057}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Traction\+\_\+fct\+\_\+pt}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -485,18 +503,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 156 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00156}{156}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -508,18 +526,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 156 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00156}{156}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a6a082aec93b42989f31c1e689f0e7d27}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -531,18 +549,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Definition at line 157 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00157}{157}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -554,18 +572,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 163 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00163}{163}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -577,18 +595,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 163 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00163}{163}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a5dfdd2f61e43d3d57dbfb67f9f63d283}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{nplot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -600,18 +618,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Definition at line 164 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00164}{164}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
 \index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -619,18 +637,18 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 200 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), s, oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$(), oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+::shape$<$ 3 $>$(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
+References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05332}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00635}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$()}}, \mbox{\hyperlink{shape_8h_source_l00810}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+::shape$<$ 3 $>$()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
 \index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -638,18 +656,18 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 200 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00200}{200}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::dim(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Integral\+::knot(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), s, oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$(), oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+::shape$<$ 3 $>$(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
+References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l05332}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{shape_8h_source_l00635}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 3 $>$()}}, \mbox{\hyperlink{shape_8h_source_l00810}{oomph\+::\+One\+Dim\+Discontinuous\+Galerkin\+::shape$<$ 3 $>$()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a67b87ad6f98f0e035a16b51585d7f304}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
 \index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -657,75 +675,75 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 201 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00201}{201}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
+References \mbox{\hyperlink{elements_8cc_source_l05332}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!u\_local\_eqn@{u\_local\_eqn}}
 \index{u\_local\_eqn@{u\_local\_eqn}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_local\_eqn()}{u\_local\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
+Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
 
 
 
-Definition at line 193 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00193}{193}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References i, n, and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!u\_local\_eqn@{u\_local\_eqn}}
 \index{u\_local\_eqn@{u\_local\_eqn}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_local\_eqn()}{u\_local\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
+Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
 
 
 
-Definition at line 193 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00193}{193}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References i, n, and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a0795bea10d5b810761206675bf3e4140}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!u\_local\_eqn@{u\_local\_eqn}}
 \index{u\_local\_eqn@{u\_local\_eqn}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_local\_eqn()}{u\_local\_eqn()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
+Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i)=local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
 
 
 
-Definition at line 194 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00194}{194}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References i, n, and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -737,18 +755,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 180 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00180}{180}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -760,18 +778,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 180 of file discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source_l00180}{180}} of file \mbox{\hyperlink{discontinuous__galerkin__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_a85b6799c24c6eca02544c2d3e8f44410}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{k,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -783,11 +801,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FaceElement_a58c9f93705c7741f7
 
 
 
-Definition at line 181 of file spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source_l00181}{181}} of file \mbox{\hyperlink{spacetime__fluid__traction__elements_8h_source}{spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l04525}{oomph\+::\+Face\+Element\+::zeta\+\_\+nodal()}}.
 
 
 
@@ -796,8 +814,8 @@ References i, n, and oomph\+::\+Face\+Element\+::zeta\+\_\+nodal().
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!Dim@{Dim}}
 \index{Dim@{Dim}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Dim}{Dim}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Dim\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::Dim\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -805,18 +823,18 @@ The highest dimension of the problem.
 
 
 
-Definition at line 300 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00300}{300}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element().
+Referenced by \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00275}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00065}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element()}}.
 
-\mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_aebaff35493b9c48411dd684f02ff2946}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_aebaff35493b9c48411dd684f02ff2946}} 
+\mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae0ab2b788a0c8f62106637f883215f4d}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_ae0ab2b788a0c8f62106637f883215f4d}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!traction\_fct\_pt@{traction\_fct\_pt}}
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void($\ast$\&)(const double\& \mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& result) \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result) \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -824,14 +842,14 @@ Access function for the imposed traction pointer.
 
 
 
-Definition at line 125 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00125}{125}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesSpaceTimeTractionElement_aac86292b4e051a59922fd7a7032e361b}\label{classoomph_1_1NavierStokesSpaceTimeTractionElement_aac86292b4e051a59922fd7a7032e361b}} 
 \index{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}!Traction\_fct\_pt@{Traction\_fct\_pt}}
 \index{Traction\_fct\_pt@{Traction\_fct\_pt}!oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$@{oomph::NavierStokesSpaceTimeTractionElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Traction\_fct\_pt}{Traction\_fct\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void($\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Traction\+\_\+fct\+\_\+pt)(const double \&time, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void($\ast$ \mbox{\hyperlink{classoomph_1_1NavierStokesSpaceTimeTractionElement}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element}}$<$ ELEMENT $>$\+::Traction\+\_\+fct\+\_\+pt)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&result)\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -839,11 +857,11 @@ Pointer to an imposed traction function.
 
 
 
-Definition at line 57 of file discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00057}{57}} of file \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source}{discontinuous\+\_\+galerkin\+\_\+equal\+\_\+order\+\_\+pressure\+\_\+spacetime\+\_\+fluid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+traction(), and oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element().
+Referenced by \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00275}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::get\+\_\+traction()}}, and \mbox{\hyperlink{discontinuous__galerkin__equal__order__pressure__spacetime__fluid__traction__elements_8h_source_l00065}{oomph\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element$<$ ELEMENT $>$\+::\+Navier\+Stokes\+Space\+Time\+Traction\+Element()}}.
 
 
 

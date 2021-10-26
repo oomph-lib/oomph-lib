@@ -2,7 +2,7 @@
 \label{classoomph_1_1LineVisualiser}\index{oomph::LineVisualiser@{oomph::LineVisualiser}}
 
 
-Class to aid visualisation of the values on a set of points. N\+O\+TE\+: in a distributed problem, output is only done on processor 0.  
+Class to aid visualisation of the values on a set of points. NOTE\+: in a distributed problem, output is only done on processor 0.  
 
 
 
@@ -12,32 +12,32 @@ Class to aid visualisation of the values on a set of points. N\+O\+TE\+: in a di
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1LineVisualiser_acc4998289fb2e682ad7eb307702b6be3}{Line\+Visualiser}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&coord\+\_\+vec, const double \&max\+\_\+search\+\_\+radius=D\+B\+L\+\_\+\+M\+AX)
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to mesh and coordinates of desired plot points\+: coord\+\_\+vec\mbox{[}j\mbox{]}\mbox{[}i\mbox{]} is the i-\/th coordinate of the j-\/th plot point. Optional final parameter specifies the maximum search radius in bin when locating the plot points. Defaults to D\+B\+L\+\_\+\+M\+AX and will therefore keep searching through the entire bin structure if a point cannot be found. It\textquotesingle{}s worth limiting this to the order of the size of a typical element in the mesh in parallel computations with fine meshes, otherwise the setup can take forever. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1LineVisualiser_a4b309f24ea1bd65b6d4324ca564f3b0d}{Line\+Visualiser}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&coord\+\_\+vec, const double \&max\+\_\+search\+\_\+radius=DBL\+\_\+\+MAX)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to mesh and coordinates of desired plot points\+: coord\+\_\+vec\mbox{[}j\mbox{]}\mbox{[}i\mbox{]} is the i-\/th coordinate of the j-\/th plot point. Optional final parameter specifies the maximum search radius in bin when locating the plot points. Defaults to DBL\+\_\+\+MAX and will therefore keep searching through the entire bin structure if a point cannot be found. It\textquotesingle{}s worth limiting this to the order of the size of a typical element in the mesh in parallel computations with fine meshes, otherwise the setup can take forever. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1LineVisualiser_a3eb2567997926ed29a6c8731d1e677c0}{Line\+Visualiser}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const std\+::string file\+\_\+name, const double \&scale=1.\+0)
 \begin{DoxyCompactList}\small\item\em Constructor reading centerline file. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1LineVisualiser_ab299c77effef14974955204e43457812}{Line\+Visualiser}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const double \&max\+\_\+search\+\_\+radius, const std\+::string file\+\_\+name, const double \&scale=1.\+0)
 \begin{DoxyCompactList}\small\item\em Constructor reading centerline file. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1LineVisualiser_adafda17eaa1c034ff7236e1f7dcbc771}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output function\+: output each plot point. N\+O\+TE\+: in a distributed problem, output is only done on processor 0. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LineVisualiser_aae14488400c1428663d0c42951cad439}{get\+\_\+output\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&data)
+\begin{DoxyCompactList}\small\item\em Output function\+: output each plot point. NOTE\+: in a distributed problem, output is only done on processor 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1LineVisualiser_af2fadf8f1270a15a912cadfea152891e}{get\+\_\+output\+\_\+data}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&data)
 \begin{DoxyCompactList}\small\item\em Output data function\+: store data associated with each plot point in data array. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LineVisualiser_a6538fb5c75bff293dc9482d4c2c102cd}{update\+\_\+plot\+\_\+points\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&coord\+\_\+vec)
+void \mbox{\hyperlink{classoomph_1_1LineVisualiser_a88beccc9e1770c7acb14a7e088999ab0}{update\+\_\+plot\+\_\+points\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&coord\+\_\+vec)
 \begin{DoxyCompactList}\small\item\em Update plot points coordinates (in preparation of remesh, say). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1LineVisualiser_adfa22f79f20d300d045f2ef730f466ce}{setup\+\_\+from\+\_\+file}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const std\+::string file\+\_\+name, const double \&scale)
 \begin{DoxyCompactList}\small\item\em Helper function to setup from file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LineVisualiser_a9522013a2e84c25c0aa90496cab12a19}{setup}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&coord\+\_\+vec)
+void \mbox{\hyperlink{classoomph_1_1LineVisualiser_a8989cffc2b0ed7c32d9bd8a02c170de4}{setup}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&coord\+\_\+vec)
 \begin{DoxyCompactList}\small\item\em Helper function to setup the output structures. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1LineVisualiser_acfe0c8f984f63707959ff4dc2713ee3a}{get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&data)
+void \mbox{\hyperlink{classoomph_1_1LineVisualiser_aa1aad15408d65e8ee48dbff02fc97928}{get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&data)
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classoomph_1_1LineVisualiser_abfcd8512571fba22e22b1952823c8744}{Max\+\_\+search\+\_\+radius}}
-\begin{DoxyCompactList}\small\item\em Max radius beyond which we stop searching the bin. Initialised to D\+B\+L\+\_\+\+M\+AX so keep going until the point is found or until we\textquotesingle{}ve searched every single bin. Overwriting this means we won\textquotesingle{}t search in bins whose closest vertex is at a distance greater than Max\+\_\+search\+\_\+radius from the point to be located. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Max radius beyond which we stop searching the bin. Initialised to DBL\+\_\+\+MAX so keep going until the point is found or until we\textquotesingle{}ve searched every single bin. Overwriting this means we won\textquotesingle{}t search in bins whose closest vertex is at a distance greater than Max\+\_\+search\+\_\+radius from the point to be located. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} $\ast$ \mbox{\hyperlink{classoomph_1_1LineVisualiser_a0c950d1578a20b271a1a51f58e469128}{Comm\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to communicator -- allows us to collect data on processor 0 if the mesh is distributed. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ std\+::pair$<$ \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ $>$ \mbox{\hyperlink{classoomph_1_1LineVisualiser_a3b43813947f4a58381ce6e940a17b21f}{Plot\+\_\+point}}
@@ -47,30 +47,30 @@ unsigned \mbox{\hyperlink{classoomph_1_1LineVisualiser_a6786384d0c0c0de6df02b2b9
 
 
 \doxysubsection{Detailed Description}
-Class to aid visualisation of the values on a set of points. N\+O\+TE\+: in a distributed problem, output is only done on processor 0. 
+Class to aid visualisation of the values on a set of points. NOTE\+: in a distributed problem, output is only done on processor 0. 
 
-Definition at line 48 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00048}{48}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1LineVisualiser_acc4998289fb2e682ad7eb307702b6be3}\label{classoomph_1_1LineVisualiser_acc4998289fb2e682ad7eb307702b6be3}} 
+\mbox{\Hypertarget{classoomph_1_1LineVisualiser_a4b309f24ea1bd65b6d4324ca564f3b0d}\label{classoomph_1_1LineVisualiser_a4b309f24ea1bd65b6d4324ca564f3b0d}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!LineVisualiser@{LineVisualiser}}
 \index{LineVisualiser@{LineVisualiser}!oomph::LineVisualiser@{oomph::LineVisualiser}}
 \doxysubsubsection{\texorpdfstring{LineVisualiser()}{LineVisualiser()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily oomph\+::\+Line\+Visualiser\+::\+Line\+Visualiser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{coord\+\_\+vec,  }\item[{const double \&}]{max\+\_\+search\+\_\+radius = {\ttfamily DBL\+\_\+MAX} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Line\+Visualiser\+::\+Line\+Visualiser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{coord\+\_\+vec,  }\item[{const double \&}]{max\+\_\+search\+\_\+radius = {\ttfamily DBL\+\_\+MAX} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Pass pointer to mesh and coordinates of desired plot points\+: coord\+\_\+vec\mbox{[}j\mbox{]}\mbox{[}i\mbox{]} is the i-\/th coordinate of the j-\/th plot point. Optional final parameter specifies the maximum search radius in bin when locating the plot points. Defaults to D\+B\+L\+\_\+\+M\+AX and will therefore keep searching through the entire bin structure if a point cannot be found. It\textquotesingle{}s worth limiting this to the order of the size of a typical element in the mesh in parallel computations with fine meshes, otherwise the setup can take forever. 
+Constructor\+: Pass pointer to mesh and coordinates of desired plot points\+: coord\+\_\+vec\mbox{[}j\mbox{]}\mbox{[}i\mbox{]} is the i-\/th coordinate of the j-\/th plot point. Optional final parameter specifies the maximum search radius in bin when locating the plot points. Defaults to DBL\+\_\+\+MAX and will therefore keep searching through the entire bin structure if a point cannot be found. It\textquotesingle{}s worth limiting this to the order of the size of a typical element in the mesh in parallel computations with fine meshes, otherwise the setup can take forever. 
 
 
 
-Definition at line 60 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00060}{60}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References setup().
+References \mbox{\hyperlink{line__visualiser_8h_source_l00668}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LineVisualiser_a3eb2567997926ed29a6c8731d1e677c0}\label{classoomph_1_1LineVisualiser_a3eb2567997926ed29a6c8731d1e677c0}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!LineVisualiser@{LineVisualiser}}
@@ -88,11 +88,11 @@ Constructor reading centerline file.
 \item Skip lines which does not begin with a number. Scaling factor allows points defined in input file to be scaled. 
 \end{DoxyItemize}
 
-Definition at line 75 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00075}{75}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References setup\+\_\+from\+\_\+file().
+References \mbox{\hyperlink{line__visualiser_8h_source_l00603}{setup\+\_\+from\+\_\+file()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LineVisualiser_ab299c77effef14974955204e43457812}\label{classoomph_1_1LineVisualiser_ab299c77effef14974955204e43457812}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!LineVisualiser@{LineVisualiser}}
@@ -110,38 +110,38 @@ Constructor reading centerline file.
 \item Skip lines which does not begin with a number. Scaling factor allows points defined in input file to be scaled. Second parameter specifies the maximum search radius in bin when locating the plot points. It\textquotesingle{}s worth setting this to the order of the size of a typical element in the mesh in parallel computations with fine meshes, otherwise the setup can take forever. 
 \end{DoxyItemize}
 
-Definition at line 93 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00093}{93}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References setup\+\_\+from\+\_\+file().
+References \mbox{\hyperlink{line__visualiser_8h_source_l00603}{setup\+\_\+from\+\_\+file()}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1LineVisualiser_acfe0c8f984f63707959ff4dc2713ee3a}\label{classoomph_1_1LineVisualiser_acfe0c8f984f63707959ff4dc2713ee3a}} 
+\mbox{\Hypertarget{classoomph_1_1LineVisualiser_aa1aad15408d65e8ee48dbff02fc97928}\label{classoomph_1_1LineVisualiser_aa1aad15408d65e8ee48dbff02fc97928}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!get\_local\_plot\_points\_coordinates@{get\_local\_plot\_points\_coordinates}}
 \index{get\_local\_plot\_points\_coordinates@{get\_local\_plot\_points\_coordinates}!oomph::LineVisualiser@{oomph::LineVisualiser}}
 \doxysubsubsection{\texorpdfstring{get\_local\_plot\_points\_coordinates()}{get\_local\_plot\_points\_coordinates()}}
-{\footnotesize\ttfamily void oomph\+::\+Line\+Visualiser\+::get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Line\+Visualiser\+::get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Definition at line 801 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00801}{801}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References i, Nplot\+\_\+points, and Plot\+\_\+point.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{line__visualiser_8h_source_l00827}{Nplot\+\_\+points}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00824}{Plot\+\_\+point}}.
 
 
 
-Referenced by update\+\_\+plot\+\_\+points\+\_\+coordinates().
+Referenced by \mbox{\hyperlink{line__visualiser_8h_source_l00370}{update\+\_\+plot\+\_\+points\+\_\+coordinates()}}.
 
-\mbox{\Hypertarget{classoomph_1_1LineVisualiser_aae14488400c1428663d0c42951cad439}\label{classoomph_1_1LineVisualiser_aae14488400c1428663d0c42951cad439}} 
+\mbox{\Hypertarget{classoomph_1_1LineVisualiser_af2fadf8f1270a15a912cadfea152891e}\label{classoomph_1_1LineVisualiser_af2fadf8f1270a15a912cadfea152891e}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!get\_output\_data@{get\_output\_data}}
 \index{get\_output\_data@{get\_output\_data}!oomph::LineVisualiser@{oomph::LineVisualiser}}
 \doxysubsubsection{\texorpdfstring{get\_output\_data()}{get\_output\_data()}}
-{\footnotesize\ttfamily void oomph\+::\+Line\+Visualiser\+::get\+\_\+output\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Line\+Visualiser\+::get\+\_\+output\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -149,15 +149,15 @@ Output data function\+: store data associated with each plot point in data array
 
 
 
-Definition at line 134 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00134}{134}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References Comm\+\_\+pt, i, Nplot\+\_\+points, and Plot\+\_\+point.
+References \mbox{\hyperlink{line__visualiser_8h_source_l00600}{Comm\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{line__visualiser_8h_source_l00827}{Nplot\+\_\+points}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00824}{Plot\+\_\+point}}.
 
 
 
-Referenced by output().
+Referenced by \mbox{\hyperlink{line__visualiser_8h_source_l00107}{output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LineVisualiser_adafda17eaa1c034ff7236e1f7dcbc771}\label{classoomph_1_1LineVisualiser_adafda17eaa1c034ff7236e1f7dcbc771}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!output@{output}}
@@ -167,21 +167,21 @@ Referenced by output().
 
 
 
-Output function\+: output each plot point. N\+O\+TE\+: in a distributed problem, output is only done on processor 0. 
+Output function\+: output each plot point. NOTE\+: in a distributed problem, output is only done on processor 0. 
 
 
 
-Definition at line 107 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00107}{107}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References get\+\_\+output\+\_\+data(), i, n, and Nplot\+\_\+points.
+References \mbox{\hyperlink{line__visualiser_8h_source_l00134}{get\+\_\+output\+\_\+data()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00827}{Nplot\+\_\+points}}.
 
-\mbox{\Hypertarget{classoomph_1_1LineVisualiser_a9522013a2e84c25c0aa90496cab12a19}\label{classoomph_1_1LineVisualiser_a9522013a2e84c25c0aa90496cab12a19}} 
+\mbox{\Hypertarget{classoomph_1_1LineVisualiser_a8989cffc2b0ed7c32d9bd8a02c170de4}\label{classoomph_1_1LineVisualiser_a8989cffc2b0ed7c32d9bd8a02c170de4}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!setup@{setup}}
 \index{setup@{setup}!oomph::LineVisualiser@{oomph::LineVisualiser}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
-{\footnotesize\ttfamily void oomph\+::\+Line\+Visualiser\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{coord\+\_\+vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Line\+Visualiser\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{coord\+\_\+vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -189,15 +189,15 @@ Helper function to setup the output structures.
 
 
 
-Definition at line 668 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00668}{668}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References Comm\+\_\+pt, i, oomph\+::\+Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta(), Sample\+Point\+Container\+::max\+\_\+search\+\_\+radius(), Max\+\_\+search\+\_\+radius, Nplot\+\_\+points, oomph\+::oomph\+\_\+info, Plot\+\_\+point, s, oomph\+::\+Mesh\+As\+Geom\+Object\+::sample\+\_\+point\+\_\+container\+\_\+pt(), and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{line__visualiser_8h_source_l00600}{Comm\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00373}{oomph\+::\+Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta()}}, \mbox{\hyperlink{line__visualiser_8h_source_l00596}{Max\+\_\+search\+\_\+radius}}, \mbox{\hyperlink{sample__point__container_8h_source_l00327}{Sample\+Point\+Container\+::max\+\_\+search\+\_\+radius()}}, \mbox{\hyperlink{line__visualiser_8h_source_l00827}{Nplot\+\_\+points}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{line__visualiser_8h_source_l00824}{Plot\+\_\+point}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{mesh__as__geometric__object_8h_source_l00288}{oomph\+::\+Mesh\+As\+Geom\+Object\+::sample\+\_\+point\+\_\+container\+\_\+pt()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 
 
-Referenced by Line\+Visualiser(), and setup\+\_\+from\+\_\+file().
+Referenced by \mbox{\hyperlink{line__visualiser_8h_source_l00060}{Line\+Visualiser()}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00603}{setup\+\_\+from\+\_\+file()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LineVisualiser_adfa22f79f20d300d045f2ef730f466ce}\label{classoomph_1_1LineVisualiser_adfa22f79f20d300d045f2ef730f466ce}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!setup\_from\_file@{setup\_from\_file}}
@@ -211,21 +211,21 @@ Helper function to setup from file.
 
 
 
-Definition at line 603 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00603}{603}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References i, n, oomph\+::oomph\+\_\+info, setup(), and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{line__visualiser_8h_source_l00668}{setup()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 
-Referenced by Line\+Visualiser().
+Referenced by \mbox{\hyperlink{line__visualiser_8h_source_l00075}{Line\+Visualiser()}}.
 
-\mbox{\Hypertarget{classoomph_1_1LineVisualiser_a6538fb5c75bff293dc9482d4c2c102cd}\label{classoomph_1_1LineVisualiser_a6538fb5c75bff293dc9482d4c2c102cd}} 
+\mbox{\Hypertarget{classoomph_1_1LineVisualiser_a88beccc9e1770c7acb14a7e088999ab0}\label{classoomph_1_1LineVisualiser_a88beccc9e1770c7acb14a7e088999ab0}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!update\_plot\_points\_coordinates@{update\_plot\_points\_coordinates}}
 \index{update\_plot\_points\_coordinates@{update\_plot\_points\_coordinates}!oomph::LineVisualiser@{oomph::LineVisualiser}}
 \doxysubsubsection{\texorpdfstring{update\_plot\_points\_coordinates()}{update\_plot\_points\_coordinates()}}
-{\footnotesize\ttfamily void oomph\+::\+Line\+Visualiser\+::update\+\_\+plot\+\_\+points\+\_\+coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{coord\+\_\+vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Line\+Visualiser\+::update\+\_\+plot\+\_\+points\+\_\+coordinates (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{coord\+\_\+vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -233,11 +233,11 @@ Update plot points coordinates (in preparation of remesh, say).
 
 
 
-Definition at line 370 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00370}{370}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-References Comm\+\_\+pt, get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates(), i, Nplot\+\_\+points, and Plot\+\_\+point.
+References \mbox{\hyperlink{line__visualiser_8h_source_l00600}{Comm\+\_\+pt}}, \mbox{\hyperlink{line__visualiser_8h_source_l00801}{get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{line__visualiser_8h_source_l00827}{Nplot\+\_\+points}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00824}{Plot\+\_\+point}}.
 
 
 
@@ -254,11 +254,11 @@ Pointer to communicator -- allows us to collect data on processor 0 if the mesh 
 
 
 
-Definition at line 600 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00600}{600}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-Referenced by get\+\_\+output\+\_\+data(), setup(), and update\+\_\+plot\+\_\+points\+\_\+coordinates().
+Referenced by \mbox{\hyperlink{line__visualiser_8h_source_l00134}{get\+\_\+output\+\_\+data()}}, \mbox{\hyperlink{line__visualiser_8h_source_l00668}{setup()}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00370}{update\+\_\+plot\+\_\+points\+\_\+coordinates()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LineVisualiser_abfcd8512571fba22e22b1952823c8744}\label{classoomph_1_1LineVisualiser_abfcd8512571fba22e22b1952823c8744}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!Max\_search\_radius@{Max\_search\_radius}}
@@ -268,15 +268,15 @@ Referenced by get\+\_\+output\+\_\+data(), setup(), and update\+\_\+plot\+\_\+po
 
 
 
-Max radius beyond which we stop searching the bin. Initialised to D\+B\+L\+\_\+\+M\+AX so keep going until the point is found or until we\textquotesingle{}ve searched every single bin. Overwriting this means we won\textquotesingle{}t search in bins whose closest vertex is at a distance greater than Max\+\_\+search\+\_\+radius from the point to be located. 
+Max radius beyond which we stop searching the bin. Initialised to DBL\+\_\+\+MAX so keep going until the point is found or until we\textquotesingle{}ve searched every single bin. Overwriting this means we won\textquotesingle{}t search in bins whose closest vertex is at a distance greater than Max\+\_\+search\+\_\+radius from the point to be located. 
 
 
 
-Definition at line 596 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00596}{596}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-Referenced by setup().
+Referenced by \mbox{\hyperlink{line__visualiser_8h_source_l00668}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LineVisualiser_a6786384d0c0c0de6df02b2b9a34a298a}\label{classoomph_1_1LineVisualiser_a6786384d0c0c0de6df02b2b9a34a298a}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!Nplot\_points@{Nplot\_points}}
@@ -290,11 +290,11 @@ Number of plot points.
 
 
 
-Definition at line 827 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00827}{827}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-Referenced by get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates(), get\+\_\+output\+\_\+data(), output(), setup(), and update\+\_\+plot\+\_\+points\+\_\+coordinates().
+Referenced by \mbox{\hyperlink{line__visualiser_8h_source_l00801}{get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates()}}, \mbox{\hyperlink{line__visualiser_8h_source_l00134}{get\+\_\+output\+\_\+data()}}, \mbox{\hyperlink{line__visualiser_8h_source_l00107}{output()}}, \mbox{\hyperlink{line__visualiser_8h_source_l00668}{setup()}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00370}{update\+\_\+plot\+\_\+points\+\_\+coordinates()}}.
 
 \mbox{\Hypertarget{classoomph_1_1LineVisualiser_a3b43813947f4a58381ce6e940a17b21f}\label{classoomph_1_1LineVisualiser_a3b43813947f4a58381ce6e940a17b21f}} 
 \index{oomph::LineVisualiser@{oomph::LineVisualiser}!Plot\_point@{Plot\_point}}
@@ -308,11 +308,11 @@ Referenced by get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates(), get\+\_\+
 
 
 
-Definition at line 824 of file line\+\_\+visualiser.\+h.
+Definition at line \mbox{\hyperlink{line__visualiser_8h_source_l00824}{824}} of file \mbox{\hyperlink{line__visualiser_8h_source}{line\+\_\+visualiser.\+h}}.
 
 
 
-Referenced by get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates(), get\+\_\+output\+\_\+data(), setup(), and update\+\_\+plot\+\_\+points\+\_\+coordinates().
+Referenced by \mbox{\hyperlink{line__visualiser_8h_source_l00801}{get\+\_\+local\+\_\+plot\+\_\+points\+\_\+coordinates()}}, \mbox{\hyperlink{line__visualiser_8h_source_l00134}{get\+\_\+output\+\_\+data()}}, \mbox{\hyperlink{line__visualiser_8h_source_l00668}{setup()}}, and \mbox{\hyperlink{line__visualiser_8h_source_l00370}{update\+\_\+plot\+\_\+points\+\_\+coordinates()}}.
 
 
 

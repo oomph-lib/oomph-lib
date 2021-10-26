@@ -4,23 +4,21 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquationsBase}{oomph\+::\+Unsteady\+Heat\+Equations\+Base}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1UnsteadyHeatEquations}{oomph\+::\+Unsteady\+Heat\+Equations$<$ D\+I\+M $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{oomph\+::\+Q\+Unsteady\+Heat\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Q\+Unsteady\+Heat\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Q\+Unsteady\+Heat\+Element$<$ 1, N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$}}
-\begin{DoxyCompactList}\small\item\em Face geometry for the 1D \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{Q\+Unsteady\+Heat\+Element}} elements\+: Point elements. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ U\+N\+S\+T\+E\+A\+D\+Y\+\_\+\+H\+E\+A\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Unsteady\+Heat upgraded to become projectable. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Projectable\+Unsteady\+Heat\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Unsteady\+Heat\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Base class so that we don\textquotesingle{}t need to know the dimension just to set the source function! \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1QUnsteadyHeatElement}{oomph\+::\+QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_01DIM_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QUnsteady\+Heat\+Element$<$ DIM, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QUnsteadyHeatElement_3_011_00_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QUnsteady\+Heat\+Element$<$ 1, NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ProjectableUnsteadyHeatElement}{oomph\+::\+Projectable\+Unsteady\+Heat\+Element$<$ UNSTEADY\+\_\+\+HEAT\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Projectable\+Unsteady\+Heat\+Element$<$ ELEMENT $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01ProjectableUnsteadyHeatElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Projectable\+Unsteady\+Heat\+Element$<$ ELEMENT $>$ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Face geometry of the Face Geometry for element is the same as that for the underlying wrapped element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}

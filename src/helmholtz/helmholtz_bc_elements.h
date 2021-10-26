@@ -42,11 +42,11 @@
 
 namespace oomph
 {
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
   // Collection of the  Bessel functions used in the Helmholtz problem
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
   //====================================================================
   /// Namespace to provide Hankel function of the first kind
@@ -151,13 +151,13 @@ namespace oomph
   } // namespace Hankel_functions_for_helmholtz_problem
 
 
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
 
 
   //======================================================================
-  /// \short A class for elements that allow the approximation of the
+  /// A class for elements that allow the approximation of the
   /// Sommerfeld radiation BC.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class.
@@ -167,12 +167,12 @@ namespace oomph
                                  public virtual FaceElement
   {
   public:
-    /// \short Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     HelmholtzBCElementBase(FiniteElement* const& bulk_el_pt,
                            const int& face_index);
 
-    ///\short  Broken empty constructor
+    /// Broken empty constructor
     HelmholtzBCElementBase()
     {
       throw OomphLibError(
@@ -182,10 +182,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzBCElementBase(const HelmholtzBCElementBase& dummy)
-    {
-      BrokenCopy::broken_copy("HelmholtzBCElementBase");
-    }
+    HelmholtzBCElementBase(const HelmholtzBCElementBase& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -193,13 +190,10 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const HelmholtzBCElementBase&)
-     {
-      BrokenCopy::broken_assign("HelmholtzBCElementBase");
-      }*/
+    /*void operator=(const HelmholtzBCElementBase&) = delete;*/
 
 
-    /// \short Specify the value of nodal zeta from the face geometry
+    /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
@@ -219,7 +213,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    /// \short Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -233,7 +227,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    /// \short C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -241,7 +235,7 @@ namespace oomph
       FiniteElement::output(file_pt, n_plot);
     }
 
-    /// \short Return the index at which the real/imag unknown value
+    /// Return the index at which the real/imag unknown value
     /// is stored.
     virtual inline std::complex<unsigned> u_index_helmholtz() const
     {
@@ -249,7 +243,7 @@ namespace oomph
                                     U_index_helmholtz.imag());
     }
 
-    /// \short Compute the element's contribution to the time-averaged
+    /// Compute the element's contribution to the time-averaged
     /// radiated power over the artificial boundary
     double global_power_contribution()
     {
@@ -258,7 +252,7 @@ namespace oomph
       return global_power_contribution(outfile);
     }
 
-    /// \short Compute the element's contribution to the time-averaged
+    /// Compute the element's contribution to the time-averaged
     /// radiated power over the artificial boundary. Also output the
     /// power density as a fct of the polar angle in the specified
     /// output file if it's open.
@@ -390,7 +384,7 @@ namespace oomph
     }
 
 
-    /// \short Compute element's contribution to Fourier components of the
+    /// Compute element's contribution to Fourier components of the
     /// solution -- length of vector indicates number of terms to be computed.
     void compute_contribution_to_fourier_components(
       Vector<std::complex<double>>& a_coeff_pos,
@@ -504,7 +498,7 @@ namespace oomph
 
 
   protected:
-    /// \short Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double test_only(const Vector<double>& s, Shape& test) const
@@ -516,7 +510,7 @@ namespace oomph
       return J_eulerian(s);
     }
 
-    /// \short Function to compute the shape, test functions and derivates
+    /// Function to compute the shape, test functions and derivates
     /// and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
@@ -545,7 +539,7 @@ namespace oomph
       return J_eulerian(s);
     }
 
-    /// \short The index at which the real and imag part of the unknown is
+    /// The index at which the real and imag part of the unknown is
     /// stored at the nodes
     std::complex<unsigned> U_index_helmholtz;
 
@@ -553,16 +547,16 @@ namespace oomph
     unsigned Dim;
   };
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
-  ///=================================================================
+  /// =================================================================
   /// Mesh for DtN boundary condition elements -- provides
   /// functionality to apply Sommerfeld radiation condtion
   /// via DtN BC
-  ///=================================================================
+  /// =================================================================
   template<class ELEMENT>
   class HelmholtzDtNMesh : public virtual Mesh
   {
@@ -574,23 +568,23 @@ namespace oomph
     {
     }
 
-    /// \short Compute and store the gamma integral at all integration
+    /// Compute and store the gamma integral at all integration
     /// points of the constituent elements.
     void setup_gamma();
 
-    /// \short Compute Fourier components of the solution -- length of
+    /// Compute Fourier components of the solution -- length of
     /// vector indicates number of terms to be computed.
     void compute_fourier_components(Vector<std::complex<double>>& a_coeff_pos,
                                     Vector<std::complex<double>>& a_coeff_neg);
 
-    /// \short Gamma integral evaluated at Gauss points
+    /// Gamma integral evaluated at Gauss points
     /// for specified element
     Vector<std::complex<double>>& gamma_at_gauss_point(FiniteElement* el_pt)
     {
       return Gamma_at_gauss_point[el_pt];
     }
 
-    /// \short Derivative of Gamma integral w.r.t global unknown, evaluated
+    /// Derivative of Gamma integral w.r.t global unknown, evaluated
     /// at Gauss points for specified element
     Vector<std::map<unsigned, std::complex<double>>>& d_gamma_at_gauss_point(
       FiniteElement* el_pt)
@@ -598,13 +592,13 @@ namespace oomph
       return D_Gamma_at_gauss_point[el_pt];
     }
 
-    /// \short The outer radius
+    /// The outer radius
     double& outer_radius()
     {
       return Outer_radius;
     }
 
-    /// \short Number of Fourier terms used in the computation of the
+    /// Number of Fourier terms used in the computation of the
     /// gamma integral
     unsigned& nfourier_terms()
     {
@@ -619,21 +613,21 @@ namespace oomph
     unsigned Nfourier_terms;
 
 
-    /// \short Container to store the gamma integral for given Gauss point
+    /// Container to store the gamma integral for given Gauss point
     /// and element
     std::map<FiniteElement*, Vector<std::complex<double>>> Gamma_at_gauss_point;
 
 
-    /// \short Container to store the derivate of Gamma integral w.r.t
+    /// Container to store the derivate of Gamma integral w.r.t
     /// global unknown evaluated at Gauss points for specified element
     std::map<FiniteElement*, Vector<std::map<unsigned, std::complex<double>>>>
       D_Gamma_at_gauss_point;
   };
 
 
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
 
 
   //=============================================================
@@ -644,7 +638,7 @@ namespace oomph
   class HelmholtzAbsorbingBCElement : public HelmholtzBCElementBase<ELEMENT>
   {
   public:
-    /// \short Construct element from specification of bulk element and
+    /// Construct element from specification of bulk element and
     /// face index.
     HelmholtzAbsorbingBCElement(FiniteElement* const& bulk_el_pt,
                                 const int& face_index)
@@ -673,7 +667,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    /// \short Add the element's contribution to its residual vector and its
+    /// Add the element's contribution to its residual vector and its
     /// Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -691,7 +685,7 @@ namespace oomph
     }
 
   private:
-    /// \short Compute the element's residual vector and the (
+    /// Compute the element's residual vector and the (
     /// Jacobian matrix.
     /// Overloaded version, using the abc approximation
     void fill_in_generic_residual_contribution_helmholtz_abc(
@@ -1126,7 +1120,7 @@ namespace oomph
   class HelmholtzDtNBoundaryElement : public HelmholtzBCElementBase<ELEMENT>
   {
   public:
-    /// \short Construct element from specification of bulk element and
+    /// Construct element from specification of bulk element and
     /// face index.
     HelmholtzDtNBoundaryElement(FiniteElement* const& bulk_el_pt,
                                 const int& face_index)
@@ -1143,7 +1137,7 @@ namespace oomph
         residuals, GeneralisedElement::Dummy_matrix, 0);
     }
 
-    /// \short Add the element's contribution to its residual vector and its
+    /// Add the element's contribution to its residual vector and its
     /// Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -1153,7 +1147,7 @@ namespace oomph
         residuals, jacobian, 1);
     }
 
-    /// \short Compute the contribution of the element
+    /// Compute the contribution of the element
     /// to the Gamma integral and its derivates w.r.t
     /// to global unknows; the function takes the wavenumber and the polar
     /// angle phi as input
@@ -1164,21 +1158,21 @@ namespace oomph
       std::map<unsigned, std::complex<double>>& d_gamma_con);
 
 
-    /// \short Access function to mesh of all DtN boundary condition elements
+    /// Access function to mesh of all DtN boundary condition elements
     /// (needed to get access to gamma values)
     HelmholtzDtNMesh<ELEMENT>* outer_boundary_mesh_pt() const
     {
       return Outer_boundary_mesh_pt;
     }
 
-    /// \short Set mesh of all DtN boundary condition elements
+    /// Set mesh of all DtN boundary condition elements
     void set_outer_boundary_mesh_pt(HelmholtzDtNMesh<ELEMENT>* mesh_pt)
     {
       Outer_boundary_mesh_pt = mesh_pt;
     }
 
 
-    /// \short Complete the setup of additional dependencies arising
+    /// Complete the setup of additional dependencies arising
     /// through the far-away interaction with other nodes in
     /// Outer_boundary_mesh_pt.
     void complete_setup_of_dependencies()
@@ -1228,7 +1222,7 @@ namespace oomph
 
 
   private:
-    /// \short Compute the element's residual vector
+    /// Compute the element's residual vector
     /// Jacobian matrix.
     /// Overloaded version, using the gamma computed in the mesh
     void fill_in_generic_residual_contribution_helmholtz_DtN_bc(
@@ -1444,19 +1438,19 @@ namespace oomph
     } // End of fill_in_generic_residual_contribution_helmholtz_flux
 
 
-    /// \short Pointer to mesh of all DtN boundary condition elements
+    /// Pointer to mesh of all DtN boundary condition elements
     /// (needed to get access to gamma values)
     HelmholtzDtNMesh<ELEMENT>* Outer_boundary_mesh_pt;
   };
 
 
-  ////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////
 
 
   //===========start_compute_gamma_contribution==================
-  /// \short compute the contribution of the element
+  /// compute the contribution of the element
   /// to the Gamma integral and its derivates w.r.t
   /// to global unknows; the function takes wavenumber n
   /// and polar angle phi as input.
@@ -1584,18 +1578,18 @@ namespace oomph
   }
 
 
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
 
 
   //===========================================================================
-  /// \short Namespace for checking radius of nodes on (assumed to be circular)
+  /// Namespace for checking radius of nodes on (assumed to be circular)
   /// DtN boundary
   //===========================================================================
   namespace ToleranceForHelmholtzOuterBoundary
   {
-    /// \short Relative tolerance to within radius of points on DtN boundary
+    /// Relative tolerance to within radius of points on DtN boundary
     /// are allowed to deviate from specified value
     extern double Tol;
 
@@ -1603,26 +1597,26 @@ namespace oomph
 
 
   //===========================================================================
-  /// \short Namespace for checking radius of nodes on (assumed to be circular)
+  /// Namespace for checking radius of nodes on (assumed to be circular)
   /// DtN boundary
   //===========================================================================
   namespace ToleranceForHelmholtzOuterBoundary
   {
-    /// \short Relative tolerance to within radius of points on DtN boundary
+    /// Relative tolerance to within radius of points on DtN boundary
     /// are allowed to deviate from specified value
     double Tol = 1.0e-3;
 
   } // namespace ToleranceForHelmholtzOuterBoundary
 
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
+  /// //////////////////////////////////////////////////////////////////
 
 
-  ///================================================================
-  /// \short Compute Fourier components of the solution -- length of
+  /// ================================================================
+  /// Compute Fourier components of the solution -- length of
   /// vector indicates number of terms to be computed.
-  ///================================================================
+  /// ================================================================
   template<class ELEMENT>
   void HelmholtzDtNMesh<ELEMENT>::compute_fourier_components(
     Vector<std::complex<double>>& a_coeff_pos,
@@ -1671,7 +1665,7 @@ namespace oomph
   }
 
 
-  ///================================================================
+  /// ================================================================
   /// Compute and store the gamma integral and derivates
   // /w.r.t global unknows at all integration  points
   /// of the mesh's constituent elements

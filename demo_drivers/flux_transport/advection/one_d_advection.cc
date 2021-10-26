@@ -162,7 +162,7 @@ public:
 
  } // End of constructor
 
- ///Output the face element
+ /// Output the face element
  void output_faces(std::ostream &outfile)
   {
    //Loop over the elements
@@ -270,7 +270,7 @@ class AdvectionProblem : public Problem
    delete this->explicit_time_stepper_pt();
   }
 
- ///Compute the complete errors in the problem
+ /// Compute the complete errors in the problem
  void compute_error(const double &t, Vector<double> &error)
   {
    error[0] = 0.0;

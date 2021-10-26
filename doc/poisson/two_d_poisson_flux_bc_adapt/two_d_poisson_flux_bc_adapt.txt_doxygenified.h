@@ -141,7 +141,8 @@ We create the bulk mesh and surface mesh as
 before</A>. Next we create the spatial error estimator and
 pass it to the bulk mesh.
 
-\skipline start_of_constructor   
+\dontinclude two_d_poisson_flux_bc_adapt.cc
+\skipline start_of_constructor
 \until new Z2ErrorEstimator
 
 Apart from this, the problem is constructed as in the 

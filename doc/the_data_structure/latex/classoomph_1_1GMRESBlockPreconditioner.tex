@@ -1,32 +1,32 @@
-\hypertarget{classoomph_1_1GMRESBlockPreconditioner}{}\doxysection{oomph\+::G\+M\+R\+E\+S\+Block\+Preconditioner Class Reference}
+\hypertarget{classoomph_1_1GMRESBlockPreconditioner}{}\doxysection{oomph\+::GMRESBlock\+Preconditioner Class Reference}
 \label{classoomph_1_1GMRESBlockPreconditioner}\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 
 
-The block preconditioner form of \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}}. This version extracts the blocks from the global systems and assembles the system by concatenating all the matrices together.  
+The block preconditioner form of \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}}. This version extracts the blocks from the global systems and assembles the system by concatenating all the matrices together.  
 
 
 
 
 {\ttfamily \#include $<$general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h$>$}
 
-Inheritance diagram for oomph\+::G\+M\+R\+E\+S\+Block\+Preconditioner\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::GMRESBlock\+Preconditioner\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.822526cm]{classoomph_1_1GMRESBlockPreconditioner}
+\includegraphics[height=1.911263cm]{classoomph_1_1GMRESBlockPreconditioner}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8f02edf93c0501aeba98723d803472b4}{G\+M\+R\+E\+S\+Block\+Preconditioner}} ()
+\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8f02edf93c0501aeba98723d803472b4}{GMRESBlock\+Preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}{$\sim$\+G\+M\+R\+E\+S\+Block\+Preconditioner}} ()
+virtual \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}{$\sim$\+GMRESBlock\+Preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Clean up the memory (empty for now...) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ac562b0a15c670ced02a7bcf823f45376}{G\+M\+R\+E\+S\+Block\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{G\+M\+R\+E\+S\+Block\+Preconditioner}} \&)
+\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a2c8357563bced2b13686f33d1ba0aa55}{GMRESBlock\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{GMRESBlock\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a71e4f114b907c8bf48fc62bdbc0bd2f4}{operator=}} (const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{G\+M\+R\+E\+S\+Block\+Preconditioner}} \&)
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05c6d079c89252723c700fb62aa0cee5}{operator=}} (const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{GMRESBlock\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}{setup}} ()
 \begin{DoxyCompactList}\small\item\em Setup the preconditioner. \end{DoxyCompactList}\item 
@@ -36,9 +36,9 @@ void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242
 \begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}{iterations}} () const
 \begin{DoxyCompactList}\small\item\em Handle to the number of iterations taken. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_abb48a9b05565e396e648fe80511f6e39}{set\+\_\+preconditioner\+\_\+\+L\+HS}} ()
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_abb48a9b05565e396e648fe80511f6e39}{set\+\_\+preconditioner\+\_\+\+LHS}} ()
 \begin{DoxyCompactList}\small\item\em Set left preconditioning (the default) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}{set\+\_\+preconditioner\+\_\+\+R\+HS}} ()
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}{set\+\_\+preconditioner\+\_\+\+RHS}} ()
 \begin{DoxyCompactList}\small\item\em Enable right preconditioning. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a506c5872b121bf6f316e1e04ba5fa814}{enable\+\_\+doc\+\_\+memory\+\_\+usage}} ()
 \begin{DoxyCompactList}\small\item\em Document the memory usage. \end{DoxyCompactList}\item 
@@ -46,17 +46,17 @@ void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a152b3c76e82d9f9d71
 \begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t document the memory usage! \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab1958769d26d3ca293fa908168e7ceea}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes}} ()
 \begin{DoxyCompactList}\small\item\em Get the memory statistics. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8c5a6adfdec82dfdd8aca763651f76ab}{navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}} () const
-\item 
-\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8f02edf93c0501aeba98723d803472b4}{G\+M\+R\+E\+S\+Block\+Preconditioner}} ()
+\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a887660e1e255b8f70fa268ff98ac5cfe}{navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Handle to the Navier-\/\+Stokes subsidiary block preconditioner DRAIG\+: Make sure the desired const-\/ness is correct later... \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8f02edf93c0501aeba98723d803472b4}{GMRESBlock\+Preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Constructor (empty) \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}{$\sim$\+G\+M\+R\+E\+S\+Block\+Preconditioner}} ()
+virtual \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}{$\sim$\+GMRESBlock\+Preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Clean up the memory (empty for now...) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ac562b0a15c670ced02a7bcf823f45376}{G\+M\+R\+E\+S\+Block\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{G\+M\+R\+E\+S\+Block\+Preconditioner}} \&)
+\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a2c8357563bced2b13686f33d1ba0aa55}{GMRESBlock\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{GMRESBlock\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a71e4f114b907c8bf48fc62bdbc0bd2f4}{operator=}} (const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{G\+M\+R\+E\+S\+Block\+Preconditioner}} \&)
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05c6d079c89252723c700fb62aa0cee5}{operator=}} (const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{GMRESBlock\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}{setup}} ()
 \begin{DoxyCompactList}\small\item\em Setup the preconditioner. \end{DoxyCompactList}\item 
@@ -66,9 +66,9 @@ void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242
 \begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results vector which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual vector. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}{iterations}} () const
 \begin{DoxyCompactList}\small\item\em Handle to the number of iterations taken. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_abb48a9b05565e396e648fe80511f6e39}{set\+\_\+preconditioner\+\_\+\+L\+HS}} ()
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_abb48a9b05565e396e648fe80511f6e39}{set\+\_\+preconditioner\+\_\+\+LHS}} ()
 \begin{DoxyCompactList}\small\item\em Set left preconditioning (the default) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}{set\+\_\+preconditioner\+\_\+\+R\+HS}} ()
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}{set\+\_\+preconditioner\+\_\+\+RHS}} ()
 \begin{DoxyCompactList}\small\item\em Enable right preconditioning. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a63b84d8b40146a96ef4c49c8f23983c5}{enable\+\_\+doc\+\_\+memory\+\_\+statistics}} ()
 \begin{DoxyCompactList}\small\item\em Document the memory usage. \end{DoxyCompactList}\item 
@@ -76,42 +76,34 @@ void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a3a0ea82368302a802a
 \begin{DoxyCompactList}\small\item\em Don\textquotesingle{}t document the memory usage! \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab1958769d26d3ca293fa908168e7ceea}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes}} ()
 \begin{DoxyCompactList}\small\item\em Get the memory statistics. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a8c5a6adfdec82dfdd8aca763651f76ab}{navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}} () const
-\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a887660e1e255b8f70fa268ff98ac5cfe}{navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}} () const
+\begin{DoxyCompactList}\small\item\em Handle to the Navier-\/\+Stokes subsidiary block preconditioner DRAIG\+: Make sure the desired const-\/ness is correct later... \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_af4886f4efe510e5c9b0eb19422943588}{setup}} ()=0
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}{setup}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_a9aac48fd53e579e6db8eeed58933a14b}{matrix\+\_\+pt}})
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}{setup}} (const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$\mbox{\hyperlink{classoomph_1_1BlockPreconditioner_aec1a6eda2d78d1e3b41ced805534d72d}{matrix\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_af4886f4efe510e5c9b0eb19422943588}{setup}} ()=0
 \begin{DoxyCompactList}\small\item\em For some reason we need to remind the compiler that there is also a function named setup in the base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ae81e1899f9c754b52fd49fcb31813c22}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x)
-\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}{generate\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
-\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{apply\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
-\begin{DoxyCompactList}\small\item\em Helper function\+: Apply plane rotation. This is done using the update\+: \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ae81e1899f9c754b52fd49fcb31813c22}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&x)
-\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}{generate\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
-\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}{apply\+\_\+plane\+\_\+rotation}} (double \&dx, double \&dy, double \&cs, double \&sn)
-\begin{DoxyCompactList}\small\item\em Helper function\+: Apply plane rotation. This is done using the update\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+\begin{DoxyCompactList}\small\item\em Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}{update}} (const unsigned \&k, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&H, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&v, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+\begin{DoxyCompactList}\small\item\em Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}{Matrix\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to matrix. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to the preconditioner for the block matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}{begin}}
+\begin{DoxyCompactList}\small\item\em Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} cos theta \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} sin theta \&\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}
+\begin{DoxyCompactList}\small\item\em and \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}{Iterations}}
 \begin{DoxyCompactList}\small\item\em Number of iterations taken. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}{Compute\+\_\+memory\+\_\+statistics}}
@@ -120,15 +112,15 @@ double \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787
 \begin{DoxyCompactList}\small\item\em Storage for the memory usage of the solver if the flag above is set to true (in bytes) \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}
 \begin{DoxyCompactList}\small\item\em Control flag is true if the preconditioner has been setup (used so we can wipe the data when the preconditioner is called again) \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{Preconditioner\+\_\+\+L\+HS}}
+bool \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}{Preconditioner\+\_\+\+LHS}}
 \begin{DoxyCompactList}\small\item\em boolean indicating use of left hand preconditioning (if true) or right hand preconditioning (if false) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-The block preconditioner form of \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}}. This version extracts the blocks from the global systems and assembles the system by concatenating all the matrices together. 
+The block preconditioner form of \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}}. This version extracts the blocks from the global systems and assembles the system by concatenating all the matrices together. 
 
-Definition at line 250 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00244}{244}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
@@ -137,7 +129,7 @@ Definition at line 250 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+su
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!GMRESBlockPreconditioner@{GMRESBlockPreconditioner}}
 \index{GMRESBlockPreconditioner@{GMRESBlockPreconditioner}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{GMRESBlockPreconditioner()}{GMRESBlockPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+GMRESBlock\+Preconditioner\+::\+GMRESBlock\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -145,17 +137,17 @@ Constructor (empty)
 
 
 
-Definition at line 256 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00250}{250}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Compute\+\_\+memory\+\_\+statistics, and Memory\+\_\+usage\+\_\+in\+\_\+bytes.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}\label{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!````~GMRESBlockPreconditioner@{$\sim$GMRESBlockPreconditioner}}
 \index{````~GMRESBlockPreconditioner@{$\sim$GMRESBlockPreconditioner}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{$\sim$GMRESBlockPreconditioner()}{~GMRESBlockPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::$\sim$\+G\+M\+R\+E\+S\+Block\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+GMRESBlock\+Preconditioner\+::$\sim$\+GMRESBlock\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -163,35 +155,27 @@ Destructor.
 
 
 
-Definition at line 272 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00266}{266}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{clean\+\_\+up\+\_\+memory()}}.
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ac562b0a15c670ced02a7bcf823f45376}\label{classoomph_1_1GMRESBlockPreconditioner_ac562b0a15c670ced02a7bcf823f45376}} 
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a2c8357563bced2b13686f33d1ba0aa55}\label{classoomph_1_1GMRESBlockPreconditioner_a2c8357563bced2b13686f33d1ba0aa55}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!GMRESBlockPreconditioner@{GMRESBlockPreconditioner}}
 \index{GMRESBlockPreconditioner@{GMRESBlockPreconditioner}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{GMRESBlockPreconditioner()}{GMRESBlockPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{G\+M\+R\+E\+S\+Block\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+GMRESBlock\+Preconditioner\+::\+GMRESBlock\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{GMRESBlock\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
 
-
-
-Definition at line 299 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
-
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a8f02edf93c0501aeba98723d803472b4}\label{classoomph_1_1GMRESBlockPreconditioner_a8f02edf93c0501aeba98723d803472b4}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!GMRESBlockPreconditioner@{GMRESBlockPreconditioner}}
 \index{GMRESBlockPreconditioner@{GMRESBlockPreconditioner}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{GMRESBlockPreconditioner()}{GMRESBlockPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+GMRESBlock\+Preconditioner\+::\+GMRESBlock\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -199,17 +183,17 @@ Constructor (empty)
 
 
 
-Definition at line 263 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00257}{257}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Compute\+\_\+memory\+\_\+statistics, and Memory\+\_\+usage\+\_\+in\+\_\+bytes.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}\label{classoomph_1_1GMRESBlockPreconditioner_afa46854dcbd026d9457240e17e2c209a}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!````~GMRESBlockPreconditioner@{$\sim$GMRESBlockPreconditioner}}
 \index{````~GMRESBlockPreconditioner@{$\sim$GMRESBlockPreconditioner}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{$\sim$GMRESBlockPreconditioner()}{~GMRESBlockPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily virtual oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::$\sim$\+G\+M\+R\+E\+S\+Block\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+GMRESBlock\+Preconditioner\+::$\sim$\+GMRESBlock\+Preconditioner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -217,17 +201,17 @@ Destructor.
 
 
 
-Definition at line 279 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00273}{273}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{clean\+\_\+up\+\_\+memory()}}.
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ac562b0a15c670ced02a7bcf823f45376}\label{classoomph_1_1GMRESBlockPreconditioner_ac562b0a15c670ced02a7bcf823f45376}} 
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a2c8357563bced2b13686f33d1ba0aa55}\label{classoomph_1_1GMRESBlockPreconditioner_a2c8357563bced2b13686f33d1ba0aa55}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!GMRESBlockPreconditioner@{GMRESBlockPreconditioner}}
 \index{GMRESBlockPreconditioner@{GMRESBlockPreconditioner}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{GMRESBlockPreconditioner()}{GMRESBlockPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{G\+M\+R\+E\+S\+Block\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+GMRESBlock\+Preconditioner\+::\+GMRESBlock\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{GMRESBlock\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
@@ -235,52 +219,12 @@ Broken copy constructor.
 
 
 
-Definition at line 306 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
-
-
-
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}\label{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}} 
-\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!apply\_plane\_rotation@{apply\_plane\_rotation}}
-\index{apply\_plane\_rotation@{apply\_plane\_rotation}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
-\doxysubsubsection{\texorpdfstring{apply\_plane\_rotation()}{apply\_plane\_rotation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::apply\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{double \&}]{dx,  }\item[{double \&}]{dy,  }\item[{double \&}]{cs,  }\item[{double \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Helper function\+: Apply plane rotation. This is done using the update\+: 
-
-\[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \] 
-
-Definition at line 606 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-Referenced by preconditioner\+\_\+solve().
-
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}\label{classoomph_1_1GMRESBlockPreconditioner_a08f44c37760a84bcae876aaca5a406f5}} 
-\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!apply\_plane\_rotation@{apply\_plane\_rotation}}
-\index{apply\_plane\_rotation@{apply\_plane\_rotation}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
-\doxysubsubsection{\texorpdfstring{apply\_plane\_rotation()}{apply\_plane\_rotation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::apply\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{double \&}]{dx,  }\item[{double \&}]{dy,  }\item[{double \&}]{cs,  }\item[{double \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Helper function\+: Apply plane rotation. This is done using the update\+: 
-
-\[ \begin{bmatrix} dx \newline dy \end{bmatrix} \leftarrow \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix}. \] 
-
-Definition at line 613 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
-
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}\label{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+GMRESBlock\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -292,21 +236,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 279 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{273}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Matrix\+\_\+pt, Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt, and Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
+References \mbox{\hyperlink{preconditioner_8h_source_l00236}{oomph\+::\+Preconditioner\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 
 
-Referenced by setup(), and $\sim$\+G\+M\+R\+E\+S\+Block\+Preconditioner().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00266}{$\sim$\+GMRESBlock\+Preconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}\label{classoomph_1_1GMRESBlockPreconditioner_a5c84148e23cb54f31de835df112deb4f}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+GMRESBlock\+Preconditioner\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -318,17 +262,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 286 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00280}{280}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Matrix\+\_\+pt, Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt, and Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
+References \mbox{\hyperlink{preconditioner_8h_source_l00236}{oomph\+::\+Preconditioner\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a3a0ea82368302a802ad2ab891cd478c6}\label{classoomph_1_1GMRESBlockPreconditioner_a3a0ea82368302a802ad2ab891cd478c6}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!disable\_doc\_memory\_statistics@{disable\_doc\_memory\_statistics}}
 \index{disable\_doc\_memory\_statistics@{disable\_doc\_memory\_statistics}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{disable\_doc\_memory\_statistics()}{disable\_doc\_memory\_statistics()}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::disable\+\_\+doc\+\_\+memory\+\_\+statistics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::disable\+\_\+doc\+\_\+memory\+\_\+statistics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -336,17 +280,17 @@ Don\textquotesingle{}t document the memory usage!
 
 Set the appropriate flag to false
 
-Definition at line 367 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00355}{355}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Compute\+\_\+memory\+\_\+statistics.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a152b3c76e82d9f9d719163d8167b9a0b}\label{classoomph_1_1GMRESBlockPreconditioner_a152b3c76e82d9f9d719163d8167b9a0b}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!disable\_doc\_memory\_usage@{disable\_doc\_memory\_usage}}
 \index{disable\_doc\_memory\_usage@{disable\_doc\_memory\_usage}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{disable\_doc\_memory\_usage()}{disable\_doc\_memory\_usage()}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::disable\+\_\+doc\+\_\+memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::disable\+\_\+doc\+\_\+memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -354,17 +298,17 @@ Don\textquotesingle{}t document the memory usage!
 
 Set the appropriate flag to false
 
-Definition at line 360 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00348}{348}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Compute\+\_\+memory\+\_\+statistics.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a63b84d8b40146a96ef4c49c8f23983c5}\label{classoomph_1_1GMRESBlockPreconditioner_a63b84d8b40146a96ef4c49c8f23983c5}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!enable\_doc\_memory\_statistics@{enable\_doc\_memory\_statistics}}
 \index{enable\_doc\_memory\_statistics@{enable\_doc\_memory\_statistics}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{enable\_doc\_memory\_statistics()}{enable\_doc\_memory\_statistics()}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::enable\+\_\+doc\+\_\+memory\+\_\+statistics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::enable\+\_\+doc\+\_\+memory\+\_\+statistics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -372,17 +316,17 @@ Document the memory usage.
 
 Set the appropriate flag to true
 
-Definition at line 359 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00347}{347}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Compute\+\_\+memory\+\_\+statistics.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a506c5872b121bf6f316e1e04ba5fa814}\label{classoomph_1_1GMRESBlockPreconditioner_a506c5872b121bf6f316e1e04ba5fa814}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!enable\_doc\_memory\_usage@{enable\_doc\_memory\_usage}}
 \index{enable\_doc\_memory\_usage@{enable\_doc\_memory\_usage}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{enable\_doc\_memory\_usage()}{enable\_doc\_memory\_usage()}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::enable\+\_\+doc\+\_\+memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::enable\+\_\+doc\+\_\+memory\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -390,49 +334,17 @@ Document the memory usage.
 
 Set the appropriate flag to true
 
-Definition at line 352 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00340}{340}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Compute\+\_\+memory\+\_\+statistics.
-
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}\label{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}} 
-\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!generate\_plane\_rotation@{generate\_plane\_rotation}}
-\index{generate\_plane\_rotation@{generate\_plane\_rotation}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
-\doxysubsubsection{\texorpdfstring{generate\_plane\_rotation()}{generate\_plane\_rotation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::generate\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{double \&}]{dx,  }\item[{double \&}]{dy,  }\item[{double \&}]{cs,  }\item[{double \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: 
-
-\[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \] where $ r=\sqrt{pow(dx,2)+pow(dy,2)} $. The values of a and b are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+192 
-
-Definition at line 547 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-Referenced by preconditioner\+\_\+solve().
-
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}\label{classoomph_1_1GMRESBlockPreconditioner_aeb5c45d896251c829edd2e214d441187}} 
-\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!generate\_plane\_rotation@{generate\_plane\_rotation}}
-\index{generate\_plane\_rotation@{generate\_plane\_rotation}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
-\doxysubsubsection{\texorpdfstring{generate\_plane\_rotation()}{generate\_plane\_rotation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::generate\+\_\+plane\+\_\+rotation (\begin{DoxyParamCaption}\item[{double \&}]{dx,  }\item[{double \&}]{dy,  }\item[{double \&}]{cs,  }\item[{double \&}]{sn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: 
-
-\[ \begin{bmatrix} \cos\theta & \sin\theta \newline -\sin\theta & \cos\theta \end{bmatrix} \begin{bmatrix} dx \newline dy \end{bmatrix} = \begin{bmatrix} r \newline 0 \end{bmatrix}, \] where $ r=\sqrt{pow(dx,2)+pow(dy,2)} $. The values of a and b are given by\+: \[ \cos\theta&=\dfrac{dx}{\sqrt{pow(dx,2)+pow(dy,2)}}, \] and \[ \sin\theta&=\dfrac{dy}{\sqrt{pow(dx,2)+pow(dy,2)}}. \] Taken from\+: Saad Y.\char`\"{}\+Iterative methods for sparse linear systems\char`\"{}, p.\+192 
-
-Definition at line 554 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ab1958769d26d3ca293fa908168e7ceea}\label{classoomph_1_1GMRESBlockPreconditioner_ab1958769d26d3ca293fa908168e7ceea}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}}
 \index{get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{get\_memory\_usage\_in\_bytes()}{get\_memory\_usage\_in\_bytes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+GMRESBlock\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -440,21 +352,21 @@ Get the memory statistics.
 
 
 
-Definition at line 368 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00356}{356}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Compute\+\_\+memory\+\_\+statistics, Memory\+\_\+usage\+\_\+in\+\_\+bytes, and Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 
 
-Referenced by oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::setup().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00218}{oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$\+::setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ab1958769d26d3ca293fa908168e7ceea}\label{classoomph_1_1GMRESBlockPreconditioner_ab1958769d26d3ca293fa908168e7ceea}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}}
 \index{get\_memory\_usage\_in\_bytes@{get\_memory\_usage\_in\_bytes}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{get\_memory\_usage\_in\_bytes()}{get\_memory\_usage\_in\_bytes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily double oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+GMRESBlock\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -462,17 +374,17 @@ Get the memory statistics.
 
 
 
-Definition at line 375 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00363}{363}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Compute\+\_\+memory\+\_\+statistics, Memory\+\_\+usage\+\_\+in\+\_\+bytes, and Preconditioner\+\_\+has\+\_\+been\+\_\+setup.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}\label{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!iterations@{iterations}}
 \index{iterations@{iterations}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{iterations()}{iterations()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily unsigned oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+GMRESBlock\+Preconditioner\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -484,17 +396,17 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line 332 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00320}{320}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Iterations.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}{Iterations}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}\label{classoomph_1_1GMRESBlockPreconditioner_a164a5a09a67705a08017e8832dd78316}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!iterations@{iterations}}
 \index{iterations@{iterations}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{iterations()}{iterations()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily unsigned oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+GMRESBlock\+Preconditioner\+::iterations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -506,107 +418,99 @@ Implements \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver_a5fe7f7b5e4847fd
 
 
 
-Definition at line 339 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00327}{327}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Iterations.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}{Iterations}}.
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a8c5a6adfdec82dfdd8aca763651f76ab}\label{classoomph_1_1GMRESBlockPreconditioner_a8c5a6adfdec82dfdd8aca763651f76ab}} 
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a887660e1e255b8f70fa268ff98ac5cfe}\label{classoomph_1_1GMRESBlockPreconditioner_a887660e1e255b8f70fa268ff98ac5cfe}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!navier\_stokes\_subsidiary\_preconditioner\_pt@{navier\_stokes\_subsidiary\_preconditioner\_pt}}
 \index{navier\_stokes\_subsidiary\_preconditioner\_pt@{navier\_stokes\_subsidiary\_preconditioner\_pt}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{navier\_stokes\_subsidiary\_preconditioner\_pt()}{navier\_stokes\_subsidiary\_preconditioner\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}}$\ast$ oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-Handle to the Navier-\/\+Stokes subsidiary block preconditioner D\+R\+A\+IG\+: Make sure the desired const-\/ness is correct later... 
-
-Definition at line 422 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ oomph\+::\+GMRESBlock\+Preconditioner\+::navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt.
+Handle to the Navier-\/\+Stokes subsidiary block preconditioner DRAIG\+: Make sure the desired const-\/ness is correct later... 
 
 
 
-Referenced by oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::setup().
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00410}{410}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a8c5a6adfdec82dfdd8aca763651f76ab}\label{classoomph_1_1GMRESBlockPreconditioner_a8c5a6adfdec82dfdd8aca763651f76ab}} 
+
+
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__space__time__block__preconditioner_8cc_source_l00218}{oomph\+::\+Banded\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$\+::setup()}}.
+
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a887660e1e255b8f70fa268ff98ac5cfe}\label{classoomph_1_1GMRESBlockPreconditioner_a887660e1e255b8f70fa268ff98ac5cfe}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!navier\_stokes\_subsidiary\_preconditioner\_pt@{navier\_stokes\_subsidiary\_preconditioner\_pt}}
 \index{navier\_stokes\_subsidiary\_preconditioner\_pt@{navier\_stokes\_subsidiary\_preconditioner\_pt}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{navier\_stokes\_subsidiary\_preconditioner\_pt()}{navier\_stokes\_subsidiary\_preconditioner\_pt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}}$\ast$ oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-Handle to the Navier-\/\+Stokes subsidiary block preconditioner D\+R\+A\+IG\+: Make sure the desired const-\/ness is correct later... 
-
-Definition at line 429 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ oomph\+::\+GMRESBlock\+Preconditioner\+::navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt.
+Handle to the Navier-\/\+Stokes subsidiary block preconditioner DRAIG\+: Make sure the desired const-\/ness is correct later... 
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a71e4f114b907c8bf48fc62bdbc0bd2f4}\label{classoomph_1_1GMRESBlockPreconditioner_a71e4f114b907c8bf48fc62bdbc0bd2f4}} 
+
+
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00417}{417}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+
+
+
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a05c6d079c89252723c700fb62aa0cee5}\label{classoomph_1_1GMRESBlockPreconditioner_a05c6d079c89252723c700fb62aa0cee5}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{G\+M\+R\+E\+S\+Block\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{GMRESBlock\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 305 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a71e4f114b907c8bf48fc62bdbc0bd2f4}\label{classoomph_1_1GMRESBlockPreconditioner_a71e4f114b907c8bf48fc62bdbc0bd2f4}} 
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a05c6d079c89252723c700fb62aa0cee5}\label{classoomph_1_1GMRESBlockPreconditioner_a05c6d079c89252723c700fb62aa0cee5}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{G\+M\+R\+E\+S\+Block\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner}{GMRESBlock\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 312 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a73f8298ef0dee62de0eabd28ac78a53b}\label{classoomph_1_1GMRESBlockPreconditioner_a73f8298ef0dee62de0eabd28ac78a53b}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
 \index{preconditioner\_solve@{preconditioner\_solve}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Apply preconditioner to r. 
 
-\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} solve for the \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} block preconditioner. 
+\mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} solve for the \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} block preconditioner. 
 
 Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34884bb64ec8}{oomph\+::\+Preconditioner}}.
 
 
 
-Definition at line 729 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+cc.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{729}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+cc}}.
 
 
 
-References apply\+\_\+plane\+\_\+rotation(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Doc\+\_\+convergence\+\_\+history, oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Double\+Vector\+::dot(), generate\+\_\+plane\+\_\+rotation(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vectors(), i, oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise(), Iterations, Matrix\+\_\+pt, oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter, oomph\+::\+C\+R\+Double\+Matrix\+::multiply(), Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::nblock\+\_\+types(), oomph\+::\+Double\+Vector\+::norm(), oomph\+::oomph\+\_\+info, oomph\+::\+Iterative\+Linear\+Solver\+::\+Output\+\_\+file\+\_\+stream, Preconditioner\+\_\+\+L\+HS, oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Double\+Matrix\+Base\+::residual(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), s, oomph\+::\+Iterative\+Linear\+Solver\+::\+Solution\+\_\+time, oomph\+::\+Iterative\+Linear\+Solver\+::\+Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter, oomph\+::\+Timing\+Helpers\+::timer(), oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance, update(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00228}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Doc\+\_\+convergence\+\_\+history}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{double__vector_8cc_source_l00805}{oomph\+::\+Double\+Vector\+::dot()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l02939}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vectors()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{Vector_8h_source_l00167}{oomph\+::\+Vector$<$ \+\_\+\+Tp $>$\+::initialise()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}{Iterations}}, \mbox{\hyperlink{preconditioner_8h_source_l00236}{oomph\+::\+Preconditioner\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00242}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Max\+\_\+iter}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a78204eab557e0dc99618e41a28a5c092}{oomph\+::\+Double\+Matrix\+Base\+::multiply()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{double__vector_8cc_source_l00867}{oomph\+::\+Double\+Vector\+::norm()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00231}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Output\+\_\+file\+\_\+stream}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{matrices_8h_source_l00326}{oomph\+::\+Double\+Matrix\+Base\+::residual()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00251}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Solution\+\_\+time}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00262}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Throw\+\_\+error\+\_\+after\+\_\+max\+\_\+iter}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, \mbox{\hyperlink{iterative__linear__solver_8h_source_l00239}{oomph\+::\+Iterative\+Linear\+Solver\+::\+Tolerance}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00420}{update()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a73f8298ef0dee62de0eabd28ac78a53b}\label{classoomph_1_1GMRESBlockPreconditioner_a73f8298ef0dee62de0eabd28ac78a53b}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
 \index{preconditioner\_solve@{preconditioner\_solve}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{preconditioner\_solve()}{preconditioner\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::preconditioner\+\_\+solve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{r,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -620,7 +524,7 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!set\_preconditioner\_LHS@{set\_preconditioner\_LHS}}
 \index{set\_preconditioner\_LHS@{set\_preconditioner\_LHS}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{set\_preconditioner\_LHS()}{set\_preconditioner\_LHS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::set\+\_\+preconditioner\+\_\+\+L\+HS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::set\+\_\+preconditioner\+\_\+\+LHS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -628,17 +532,17 @@ Set left preconditioning (the default)
 
 
 
-Definition at line 339 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00327}{327}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Preconditioner\+\_\+\+L\+HS.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_abb48a9b05565e396e648fe80511f6e39}\label{classoomph_1_1GMRESBlockPreconditioner_abb48a9b05565e396e648fe80511f6e39}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!set\_preconditioner\_LHS@{set\_preconditioner\_LHS}}
 \index{set\_preconditioner\_LHS@{set\_preconditioner\_LHS}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{set\_preconditioner\_LHS()}{set\_preconditioner\_LHS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::set\+\_\+preconditioner\+\_\+\+L\+HS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::set\+\_\+preconditioner\+\_\+\+LHS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -646,17 +550,17 @@ Set left preconditioning (the default)
 
 
 
-Definition at line 346 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00334}{334}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Preconditioner\+\_\+\+L\+HS.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}\label{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!set\_preconditioner\_RHS@{set\_preconditioner\_RHS}}
 \index{set\_preconditioner\_RHS@{set\_preconditioner\_RHS}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{set\_preconditioner\_RHS()}{set\_preconditioner\_RHS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::set\+\_\+preconditioner\+\_\+\+R\+HS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::set\+\_\+preconditioner\+\_\+\+RHS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -664,17 +568,17 @@ Enable right preconditioning.
 
 
 
-Definition at line 345 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00333}{333}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Preconditioner\+\_\+\+L\+HS.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}\label{classoomph_1_1GMRESBlockPreconditioner_a8dd8043bbb27b1ca1e0d652fd723d681}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!set\_preconditioner\_RHS@{set\_preconditioner\_RHS}}
 \index{set\_preconditioner\_RHS@{set\_preconditioner\_RHS}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{set\_preconditioner\_RHS()}{set\_preconditioner\_RHS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::set\+\_\+preconditioner\+\_\+\+R\+HS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::set\+\_\+preconditioner\+\_\+\+RHS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -682,39 +586,39 @@ Enable right preconditioning.
 
 
 
-Definition at line 352 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00340}{340}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-References Preconditioner\+\_\+\+L\+HS.
+References \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}\label{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Setup the preconditioner. 
 
-Setup for the \mbox{\hyperlink{classoomph_1_1GMRES}{G\+M\+R\+ES}} block preconditioner. 
+Setup for the \mbox{\hyperlink{classoomph_1_1GMRES}{GMRES}} block preconditioner. 
 
 Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
 
 
 
-Definition at line 575 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+cc.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{575}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+cc}}.
 
 
 
-References oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::block\+\_\+setup(), clean\+\_\+up\+\_\+memory(), Compute\+\_\+memory\+\_\+statistics, oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::enable\+\_\+doc\+\_\+memory\+\_\+usage(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block(), i, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::matrix\+\_\+pt(), Matrix\+\_\+pt, Memory\+\_\+usage\+\_\+in\+\_\+bytes, Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt, oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::nblock\+\_\+types(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::ndof\+\_\+types(), oomph\+::\+C\+R\+Double\+Matrix\+::nnz(), oomph\+::\+C\+R\+Double\+Matrix\+::nrow(), oomph\+::oomph\+\_\+info, oomph\+::oomph\+\_\+nullstream, Preconditioner\+\_\+has\+\_\+been\+\_\+setup, oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup(), oomph\+::\+Preconditioner\+::\+Silent\+\_\+preconditioner\+\_\+setup, oomph\+::\+Preconditioner\+::\+Stream\+\_\+pt, oomph\+::\+Oomph\+Info\+::stream\+\_\+pt(), oomph\+::\+Timing\+Helpers\+::timer(), and oomph\+::\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner().
+References \mbox{\hyperlink{block__preconditioner_8cc_source_l02483}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::block\+\_\+setup()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{Compute\+\_\+memory\+\_\+statistics}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00139}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::enable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00673}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{block__preconditioner_8h_source_l02061}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::is\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l00520}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00236}{oomph\+::\+Preconditioner\+::\+Matrix\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{Memory\+\_\+usage\+\_\+in\+\_\+bytes}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01670}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::nblock\+\_\+types()}}, \mbox{\hyperlink{block__preconditioner_8h_source_l01694}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::ndof\+\_\+types()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00313}{oomph\+::oomph\+\_\+nullstream}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{Preconditioner\+\_\+has\+\_\+been\+\_\+setup}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00061}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::setup()}}, \mbox{\hyperlink{preconditioner_8h_source_l00229}{oomph\+::\+Preconditioner\+::\+Silent\+\_\+preconditioner\+\_\+setup}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00464}{oomph\+::\+Oomph\+Info\+::stream\+\_\+pt()}}, \mbox{\hyperlink{preconditioner_8h_source_l00232}{oomph\+::\+Preconditioner\+::\+Stream\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}, and \mbox{\hyperlink{block__preconditioner_8cc_source_l02376}{oomph\+::\+Block\+Preconditioner$<$ MATRIX $>$\+::turn\+\_\+into\+\_\+subsidiary\+\_\+block\+\_\+preconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}\label{classoomph_1_1GMRESBlockPreconditioner_ae517d83cf8eddba9f9e2ed709f503da2}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -728,27 +632,35 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup}
+{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 For some reason we need to remind the compiler that there is also a function named setup in the base class. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_af4886f4efe510e5c9b0eb19422943588}\label{classoomph_1_1GMRESBlockPreconditioner_af4886f4efe510e5c9b0eb19422943588}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup}
+{\footnotesize\ttfamily virtual void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 For some reason we need to remind the compiler that there is also a function named setup in the base class. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{oomph\+::\+Preconditioner}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}\label{classoomph_1_1GMRESBlockPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -756,13 +668,13 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line 126 of file preconditioner.\+h.
+Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00120}{120}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}\label{classoomph_1_1GMRESBlockPreconditioner_a783fae97e4b898f8de72b504a4f4bec6}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -770,13 +682,13 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line 126 of file preconditioner.\+h.
+Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00120}{120}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}\label{classoomph_1_1GMRESBlockPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -784,13 +696,13 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line 100 of file preconditioner.\+h.
+Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00094}{94}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}\label{classoomph_1_1GMRESBlockPreconditioner_a0b95e7159585b5151f9e5dc1d1713655}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!setup@{setup}}
 \index{setup@{setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
-{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Preconditioner\+::setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -798,13 +710,13 @@ For some reason we need to remind the compiler that there is also a function nam
 
 
 
-Definition at line 100 of file preconditioner.\+h.
+Definition at line \mbox{\hyperlink{preconditioner_8h_source_l00094}{94}} of file \mbox{\hyperlink{preconditioner_8h_source}{preconditioner.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242ac21a4987da62a}\label{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242ac21a4987da62a}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!solve@{solve}}
 \index{solve@{solve}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -816,13 +728,13 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 323 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00311}{311}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242ac21a4987da62a}\label{classoomph_1_1GMRESBlockPreconditioner_aa78c872858c5cf7242ac21a4987da62a}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!solve@{solve}}
 \index{solve@{solve}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -834,48 +746,87 @@ Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485e
 
 
 
-Definition at line 330 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00318}{318}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ae81e1899f9c754b52fd49fcb31813c22}\label{classoomph_1_1GMRESBlockPreconditioner_ae81e1899f9c754b52fd49fcb31813c22}} 
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}\label{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!update@{update}}
 \index{update@{update}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{H,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{v,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y 
-
-Definition at line 432 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{H,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{v,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), i, Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), Preconditioner\+\_\+\+L\+HS, oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), s, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. 
 
 
 
-Referenced by preconditioner\+\_\+solve().
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00420}{420}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ae81e1899f9c754b52fd49fcb31813c22}\label{classoomph_1_1GMRESBlockPreconditioner_ae81e1899f9c754b52fd49fcb31813c22}} 
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
+
+
+
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{preconditioner\+\_\+solve()}}.
+
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}\label{classoomph_1_1GMRESBlockPreconditioner_acfd2e00c4bba75db1705378d8920c9f2}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!update@{update}}
 \index{update@{update}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$$>$ \&}]{H,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{v,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y 
-
-Definition at line 439 of file spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h.
+{\footnotesize\ttfamily void oomph\+::\+GMRESBlock\+Preconditioner\+::update (\begin{DoxyParamCaption}\item[{const unsigned \&}]{k,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ $>$ \&}]{H,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{v,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{block\+\_\+x\+\_\+with\+\_\+size\+\_\+of\+\_\+full\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::get\+\_\+block\+\_\+vector(), i, Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), Preconditioner\+\_\+\+L\+HS, oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve(), oomph\+::\+Block\+Preconditioner$<$ C\+R\+Double\+Matrix $>$\+::return\+\_\+block\+\_\+vector(), s, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+Helper function to update the result vector using the result, x=x\+\_\+0+\+V\+\_\+m$\ast$y. 
+
+
+
+Definition at line \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00427}{427}} of file \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source}{spacetime\+\_\+navier\+\_\+stokes\+\_\+block\+\_\+preconditioner.\+h}}.
+
+
+
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04186}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::get\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00532}{Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{Preconditioner\+\_\+\+LHS}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00482}{oomph\+::\+Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner\+::preconditioner\+\_\+solve()}}, \mbox{\hyperlink{block__preconditioner_8cc_source_l04489}{oomph\+::\+Block\+Preconditioner$<$ CRDouble\+Matrix $>$\+::return\+\_\+block\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}\label{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}} 
+\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!begin@{begin}}
+\index{begin@{begin}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
+\doxysubsubsection{\texorpdfstring{begin}{begin}}
+{\footnotesize\ttfamily oomph\+::\+GMRESBlock\+Preconditioner\+::begin\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{bmatrix\}}
+\DoxyCodeLine{        \(\backslash\)cos\(\backslash\)theta \& \(\backslash\)sin\(\backslash\)theta \(\backslash\)newline}
+\DoxyCodeLine{        -\/\(\backslash\)sin\(\backslash\)theta \& \(\backslash\)cos\(\backslash\)theta}
+\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
+\DoxyCodeLine{        \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}{\(\backslash\)begin}}\{bmatrix\}}
+\DoxyCodeLine{        dx \(\backslash\)newline}
+\DoxyCodeLine{        dy}
+\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
+\DoxyCodeLine{        =}
+\DoxyCodeLine{        \mbox{\hyperlink{classoomph_1_1GMRESBlockPreconditioner_afa1a6124234cb3adf8766c88971d7f78}{\(\backslash\)begin}}\{bmatrix\}}
+\DoxyCodeLine{        r \(\backslash\)newline}
+\DoxyCodeLine{        0}
+\DoxyCodeLine{        \(\backslash\)end\{bmatrix\}}
+
+\end{DoxyCode}
+
+
+Helper function\+: Generate a plane rotation. This is done by finding the values of $ \cos(\theta) $ (i.\+e. cs) and \textbackslash{}sin(\textbackslash{}theta) (i.\+e. sn) such that\+: 
+
+
+
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00511}{511}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
+
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}\label{classoomph_1_1GMRESBlockPreconditioner_a727af6ccb23868b93a074e07f885b5e8}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Compute\_memory\_statistics@{Compute\_memory\_statistics}}
 \index{Compute\_memory\_statistics@{Compute\_memory\_statistics}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Compute\_memory\_statistics}{Compute\_memory\_statistics}}
-{\footnotesize\ttfamily bool oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+Compute\+\_\+memory\+\_\+statistics\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+GMRESBlock\+Preconditioner\+::\+Compute\+\_\+memory\+\_\+statistics\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -883,17 +834,17 @@ Flag to indicate whether or not to record the memory statistics this preconditio
 
 
 
-Definition at line 630 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00618}{618}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by disable\+\_\+doc\+\_\+memory\+\_\+statistics(), disable\+\_\+doc\+\_\+memory\+\_\+usage(), enable\+\_\+doc\+\_\+memory\+\_\+statistics(), enable\+\_\+doc\+\_\+memory\+\_\+usage(), get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), G\+M\+R\+E\+S\+Block\+Preconditioner(), and setup().
+Referenced by \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00355}{disable\+\_\+doc\+\_\+memory\+\_\+statistics()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00348}{disable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{spacetime__navier__stokes__block__preconditioner_8h_source_l00347}{enable\+\_\+doc\+\_\+memory\+\_\+statistics()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00340}{enable\+\_\+doc\+\_\+memory\+\_\+usage()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00356}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00250}{GMRESBlock\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}\label{classoomph_1_1GMRESBlockPreconditioner_a86f6eb1dbc5b96eab510bda26e3e579b}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Iterations@{Iterations}}
 \index{Iterations@{Iterations}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Iterations}{Iterations}}
-{\footnotesize\ttfamily unsigned oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+Iterations\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+GMRESBlock\+Preconditioner\+::\+Iterations\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -901,35 +852,17 @@ Number of iterations taken.
 
 
 
-Definition at line 626 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00614}{614}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by iterations(), and preconditioner\+\_\+solve().
-
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}\label{classoomph_1_1GMRESBlockPreconditioner_ab4b84bc2dec36b26196f466a43ced299}} 
-\index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Matrix\_pt@{Matrix\_pt}}
-\index{Matrix\_pt@{Matrix\_pt}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
-\doxysubsubsection{\texorpdfstring{Matrix\_pt}{Matrix\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+Matrix\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Pointer to matrix. 
-
-
-
-Definition at line 619 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-Referenced by clean\+\_\+up\+\_\+memory(), preconditioner\+\_\+solve(), and setup().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00320}{iterations()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{preconditioner\+\_\+solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787179386eb514ca77a}\label{classoomph_1_1GMRESBlockPreconditioner_a06aa85a7eb7a1787179386eb514ca77a}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Memory\_usage\_in\_bytes@{Memory\_usage\_in\_bytes}}
 \index{Memory\_usage\_in\_bytes@{Memory\_usage\_in\_bytes}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Memory\_usage\_in\_bytes}{Memory\_usage\_in\_bytes}}
-{\footnotesize\ttfamily double oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+Memory\+\_\+usage\+\_\+in\+\_\+bytes\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double oomph\+::\+GMRESBlock\+Preconditioner\+::\+Memory\+\_\+usage\+\_\+in\+\_\+bytes\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -937,35 +870,35 @@ Storage for the memory usage of the solver if the flag above is set to true (in 
 
 
 
-Definition at line 634 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00622}{622}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), G\+M\+R\+E\+S\+Block\+Preconditioner(), and setup().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00356}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00250}{GMRESBlock\+Preconditioner()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{setup()}}.
 
-\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}\label{classoomph_1_1GMRESBlockPreconditioner_a66b8ac42169d3247d5e3d9678e905b88}} 
+\mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}\label{classoomph_1_1GMRESBlockPreconditioner_a05385552adb400003801a8468a2186ae}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Navier\_stokes\_subsidiary\_preconditioner\_pt@{Navier\_stokes\_subsidiary\_preconditioner\_pt}}
 \index{Navier\_stokes\_subsidiary\_preconditioner\_pt@{Navier\_stokes\_subsidiary\_preconditioner\_pt}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Navier\_stokes\_subsidiary\_preconditioner\_pt}{Navier\_stokes\_subsidiary\_preconditioner\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} cos theta \mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}} sin theta \&\mbox{\hyperlink{classoomph_1_1SpaceTimeNavierStokesSubsidiaryPreconditioner}{Space\+Time\+Navier\+Stokes\+Subsidiary\+Preconditioner}} $\ast$ oomph\+::\+GMRESBlock\+Preconditioner\+::\+Navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Pointer to the preconditioner for the block matrix. 
+and 
+
+Pointer to the preconditioner for the block matrix 
+
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00611}{611}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Definition at line 623 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
-
-
-
-Referenced by clean\+\_\+up\+\_\+memory(), navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt(), preconditioner\+\_\+solve(), setup(), and update().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00410}{navier\+\_\+stokes\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{setup()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00420}{update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}\label{classoomph_1_1GMRESBlockPreconditioner_a7662244571d832c4dece39100bc0a118}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}}
 \index{Preconditioner\_has\_been\_setup@{Preconditioner\_has\_been\_setup}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Preconditioner\_has\_been\_setup}{Preconditioner\_has\_been\_setup}}
-{\footnotesize\ttfamily bool oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+GMRESBlock\+Preconditioner\+::\+Preconditioner\+\_\+has\+\_\+been\+\_\+setup\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -973,17 +906,17 @@ Control flag is true if the preconditioner has been setup (used so we can wipe t
 
 
 
-Definition at line 638 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00626}{626}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), and setup().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00273}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00356}{get\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00575}{setup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}\label{classoomph_1_1GMRESBlockPreconditioner_a9cd47798800f479265b762b8ce48dfdb}} 
 \index{oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}!Preconditioner\_LHS@{Preconditioner\_LHS}}
 \index{Preconditioner\_LHS@{Preconditioner\_LHS}!oomph::GMRESBlockPreconditioner@{oomph::GMRESBlockPreconditioner}}
 \doxysubsubsection{\texorpdfstring{Preconditioner\_LHS}{Preconditioner\_LHS}}
-{\footnotesize\ttfamily bool oomph\+::\+G\+M\+R\+E\+S\+Block\+Preconditioner\+::\+Preconditioner\+\_\+\+L\+HS\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+GMRESBlock\+Preconditioner\+::\+Preconditioner\+\_\+\+LHS\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -991,11 +924,11 @@ boolean indicating use of left hand preconditioning (if true) or right hand prec
 
 
 
-Definition at line 642 of file general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h.
+Definition at line \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00630}{630}} of file \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source}{general\+\_\+purpose\+\_\+space\+\_\+time\+\_\+subsidiary\+\_\+block\+\_\+preconditioner.\+h}}.
 
 
 
-Referenced by preconditioner\+\_\+solve(), set\+\_\+preconditioner\+\_\+\+L\+H\+S(), set\+\_\+preconditioner\+\_\+\+R\+H\+S(), and update().
+Referenced by \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8cc_source_l00729}{preconditioner\+\_\+solve()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00327}{set\+\_\+preconditioner\+\_\+\+LHS()}}, \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00333}{set\+\_\+preconditioner\+\_\+\+RHS()}}, and \mbox{\hyperlink{general__purpose__space__time__subsidiary__block__preconditioner_8h_source_l00420}{update()}}.
 
 
 

@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1QPVDElement}{}\doxysection{oomph\+::Q\+P\+V\+D\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1QPVDElement}{}\doxysection{oomph\+::QPVDElement\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1QPVDElement}\index{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}}
+
+
+An Element that solves the solid mechanics equations, based on the principle of virtual displacements in Cartesian coordinates, using Solid\+QElements for the interpolation of the variable positions.  
+
+
 
 
 {\ttfamily \#include $<$solid\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Q\+P\+V\+D\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QPVDElement\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.995923cm]{classoomph_1_1QPVDElement}
@@ -13,26 +18,25 @@ Inheritance diagram for oomph\+::Q\+P\+V\+D\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QPVDElement_a892b8c37cf64adffc8fedff55a13d1d1}{Q\+P\+V\+D\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1QPVDElement_a892b8c37cf64adffc8fedff55a13d1d1}{QPVDElement}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, there are no internal data points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QPVDElement_a038336073cf2e0ffb368e2c95feab324}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElement_a15611416b32a40e0aa67261e8c0a1188}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1QPVDElement_a15611416b32a40e0aa67261e8c0a1188}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElement_a5955081a120c29aafbfc23a3b40b0c12}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1QPVDElement_a5955081a120c29aafbfc23a3b40b0c12}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QPVDElement_a063b9d709dc2476ed53c9a6ca7d7af22}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1QPVDElement_a063b9d709dc2476ed53c9a6ca7d7af22}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Q\+P\+V\+D\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+QPVDElement$<$ DIM, NNODE\+\_\+1\+D $>$}
+An Element that solves the solid mechanics equations, based on the principle of virtual displacements in Cartesian coordinates, using Solid\+QElements for the interpolation of the variable positions. 
 
-An Element that solves the solid mechanics equations, based on the principle of virtual displacements in Cartesian coordinates, using Solid\+Q\+Elements for the interpolation of the variable positions. 
-
-Definition at line 606 of file solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00606}{606}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
 
 
 
@@ -41,8 +45,8 @@ Definition at line 606 of file solid\+\_\+elements.\+h.
 \index{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}!QPVDElement@{QPVDElement}}
 \index{QPVDElement@{QPVDElement}!oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QPVDElement()}{QPVDElement()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+Q\+P\+V\+D\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QPVDElement}{Q\+P\+V\+D\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+QPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QPVDElement}{QPVDElement}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -50,7 +54,7 @@ Constructor, there are no internal data points.
 
 
 
-Definition at line 611 of file solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00611}{611}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
 
 
 
@@ -59,8 +63,8 @@ Definition at line 611 of file solid\+\_\+elements.\+h.
 \index{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+Q\+P\+V\+D\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+QPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -68,22 +72,22 @@ C-\/style output function.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ae5cf4a0254fbb7db5d255db69cfb810e}{oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ae5cf4a0254fbb7db5d255db69cfb810e}{oomph\+::\+PVDEquations$<$ DIM $>$}}.
 
 
 
-Definition at line 627 of file solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00627}{627}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEquations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QPVDElement_a063b9d709dc2476ed53c9a6ca7d7af22}\label{classoomph_1_1QPVDElement_a063b9d709dc2476ed53c9a6ca7d7af22}} 
 \index{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+Q\+P\+V\+D\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+QPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -91,22 +95,22 @@ C-\/style output function.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ac35042c495411ffc96501d6705b8fa7a}{oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ac35042c495411ffc96501d6705b8fa7a}{oomph\+::\+PVDEquations$<$ DIM $>$}}.
 
 
 
-Definition at line 633 of file solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00633}{633}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEquations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QPVDElement_a038336073cf2e0ffb368e2c95feab324}\label{classoomph_1_1QPVDElement_a038336073cf2e0ffb368e2c95feab324}} 
 \index{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+Q\+P\+V\+D\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+QPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -114,22 +118,22 @@ Output function.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ab9e919921934cfe7433420bd2e4482f5}{oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_ab9e919921934cfe7433420bd2e4482f5}{oomph\+::\+PVDEquations$<$ DIM $>$}}.
 
 
 
-Definition at line 614 of file solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00614}{614}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEquations$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QPVDElement_a15611416b32a40e0aa67261e8c0a1188}\label{classoomph_1_1QPVDElement_a15611416b32a40e0aa67261e8c0a1188}} 
 \index{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QPVDElement$<$ DIM, NNODE\_1D $>$@{oomph::QPVDElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+Q\+P\+V\+D\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QPVDElement}{oomph\+::\+QPVDElement}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -137,15 +141,15 @@ Output function.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_a5e3a09d059ced1ee9f9e1a7923171ab7}{oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1PVDEquations_a5e3a09d059ced1ee9f9e1a7923171ab7}{oomph\+::\+PVDEquations$<$ DIM $>$}}.
 
 
 
-Definition at line 620 of file solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__elements_8h_source_l00620}{620}} of file \mbox{\hyperlink{solid__elements_8h_source}{solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+P\+V\+D\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{solid__elements_8h_source_l00506}{oomph\+::\+PVDEquations$<$ DIM $>$\+::output()}}.
 
 
 

@@ -4,23 +4,23 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1Spine}{oomph\+::\+Spine}}
-\item 
+\begin{DoxyCompactList}\small\item\em Spines are used for algebraic node update operations in free-\/surface fluid problems\+: They form the back-\/bones along which nodes in a a free-\/surface mesh are located. Typically, the free surface is located at the \char`\"{}end\char`\"{} of the spine; the nodes in the interior of the mesh are located at fixed fractions along the spine. The key \mbox{\hyperlink{classoomph_1_1Data}{Data}} member of the \mbox{\hyperlink{classoomph_1_1Spine}{Spine}} object is its \char`\"{}height\char`\"{} -- usually an unknown in the problem -- which is used by the \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}\textquotesingle{}s node update function to update the \mbox{\hyperlink{classoomph_1_1SpineNode}{Spine\+Node}}\textquotesingle{}s position. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1SpineNode}{oomph\+::\+Spine\+Node}}
-\item 
+\begin{DoxyCompactList}\small\item\em Class for nodes that live on spines. The assumption is that each Node lies at a fixed fraction on a single spine (although more complex behaviour could be included by adding more variables to the spine). In general, more complex node updating should be handled by the classes implemented for algebraic node updates. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1SpineFiniteElement}{oomph\+::\+Spine\+Finite\+Element}}
-\begin{DoxyCompactList}\small\item\em A policy class that serves only to establish the interface for assigning the spine equation numbers. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em The Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class takes an existing element as a template parameter and adds the necessary additional functionality to allow the element to be update using the Method of Spines. A vector of pointers to spines and storage for the local equation numbers associated with the spines are added to the element. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01SpineElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Spine\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1SpineElement}{oomph\+::\+Spine\+Element$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em The Spine\+Element$<$\+ELEMENT$>$ class takes an existing element as a template parameter and adds the necessary additional functionality to allow the element to be update using the Method of Spines. A vector of pointers to spines and storage for the local equation numbers associated with the spines are added to the element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01SpineElement_3_01ELEMENT_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Spine\+Element$<$ ELEMENT $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry for spine elements\+: The same as the face geometry of the underlying element. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01SpineElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Spine\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01SpineElement_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Spine\+Element$<$ ELEMENT $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry for spine elements\+: The same as the face geometry of the underlying element. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01SpineElement_3_01FaceGeometry_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Spine\+Element$<$ Face\+Geometry$<$ E\+L\+E\+M\+E\+N\+T $>$ $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01SpineElement_3_01FaceGeometry_3_01ELEMENT_01_4_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Spine\+Element$<$ Face\+Geometry$<$ ELEMENT $>$ $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Explicit definition of the face geometry for spine elements\+: The same as the face geometry of the underlying element. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1SpineMesh}{oomph\+::\+Spine\+Mesh}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}

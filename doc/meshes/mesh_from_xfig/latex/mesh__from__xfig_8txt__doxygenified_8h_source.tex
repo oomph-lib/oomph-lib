@@ -1,0 +1,200 @@
+\hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source}{}\doxysection{mesh\+\_\+from\+\_\+xfig.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{mesh__from__xfig_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Unstructured 2D Delaunay mesh generation with xfig and Triangle}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this document we demonstrate how to use \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{conversion routine \(\backslash\)c fig2poly (a C++-\/based stand-\/alone executable,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{generated from the source code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/meshing/mesh\_from\_xfig\_triangle/fig2poly.cc"{}>fig2poly.cc</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{to create \(\backslash\)c *.\(\backslash\)c poly files for <A HREF="{}http://www.cs.berkeley.edu/\string~jrs/"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{Jonathan Shewchuk's</A> open-\/source mesh generator }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{</A>, based on the output from the open-\/source }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{drawing program <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig.</A> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{\(\backslash\)section xfig\_input Mesh generation with xfig, fig2poly and Triangle}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{Mesh generation with <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A>, \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{fig2poly and <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{</A> is extremely straightforward.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{-\/\# Draw the (piecewise linear) domain boundaries, using }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{   <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig's</A> polyline}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{   drawing tool. Each polyline represents a distinct mesh}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{   boundary. The start and end points of the polyline}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{   should not coincide -\/-\/ \(\backslash\)c fig2poly}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{   will automatically "{}fill in"{} the missing line segment.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{-\/\# If the domain has any holes, place a single circle}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{   (drawn with <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig's</A> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{   circle/ellipse drawing tool) into each hole. Use the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{   circle/ellipse drawing tool that requires}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{   the specification of the radius. The radius of the circle is }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{   irrelevant.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{-\/\# Save the figure as a \(\backslash\)c *. \(\backslash\)c fig file. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{-\/\# Use \(\backslash\)c fig2poly to convert the \(\backslash\)c *. \(\backslash\)c fig file into a \(\backslash\)c *. \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{   fig. \(\backslash\)c poly file. For instance,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{   \(\backslash\)code }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{   ./fig2poly some\_figure.fig}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{   \(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{   will generate a file \(\backslash\)c some\_figure.\(\backslash\)c fig. \(\backslash\)c poly. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{-\/\# Process the \(\backslash\)c *. \(\backslash\)c fig. \(\backslash\)c poly file produced by \(\backslash\)c fig2poly with }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{   <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>Triangle</A> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{   and use the resulting \(\backslash\)c *.poly, \(\backslash\)c *.ele and}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{   \(\backslash\)c *.node files as input to \(\backslash\)c oomph-\/lib's \(\backslash\)c TriangleMesh,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{   as described in <A HREF="{}../../mesh\_from\_triangle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{   another example.</A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{-\/\# Done! }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{\(\backslash\)subsection xfig\_comments Comments:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{-\/ \(\backslash\)c fig2poly expects the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{  <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A> output file to conform}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{  to "{}Fig format 3.2"{} and checks for the presence of the string }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{  "{}\#FIG 3.2"{} in the first line of the \(\backslash\)c *. \(\backslash\)c fig file. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{  below. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{-\/ The figure must contain only polylines and circles. The presence}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{  of any other objects will spawn an error message and cause \(\backslash\)c fig2poly}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{  to terminate.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{-\/ The figure must not contain any "{}compound objects"{}. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{  Compound objects may, of course, be used while drawing but}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{  you should break them up before saving the figure. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)section hole\_poisson Example 1: Solution of Poisson's equation on a rectangular domain with a hole}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{Here is a screen shot from an xfig session. The figure defines}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{a quadrilateral domain with a quadrilateral hole. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)image html hole\_screen\_shot.gif "{}Screen shot of xfig session. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)image latex hole\_screen\_shot.eps "{}Screen shot of xfig session. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{Here is a plot of the resulting mesh. It was generated by converting the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{file \(\backslash\)c hole.fig generated by xfig, to \(\backslash\)c hole.fig.poly, using}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{\(\backslash\)c fig2poly and processing the resulting file with}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{triangle -\/pq -\/a0.02 hole.fig.poly}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)image html hole\_mesh.gif "{}The mesh. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{\(\backslash\)image latex hole\_mesh.eps "{}The mesh. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{Finally, the figure below shows a plot of the computed solution }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{of a Poisson equation with a unit source function, obtained }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{with three-\/noded (red) and six-\/noded (green) triangular Poisson }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{elements:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)image html hole\_poisson.gif "{}Solution of Poisson's equation on the mesh generated from the xfig output. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)image latex hole\_poisson.eps "{}Solution of Poisson's equation on the mesh generated from the xfig output. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{This solution was computed with the driver code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/meshing/mesh\_from\_xfig\_triangle/mesh\_from\_xfig\_poisson.cc"{}>mesh\_from\_xfig\_poisson.cc.</A> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)section oomph\_nst Example 2: Finite-\/Reynolds-\/number flow past the oomph-\/lib logo}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{Here is a screen shot from another xfig session. The figure defines}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{a quadrilateral domain containing the oomph-\/lib logo whose }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{letters create holes in the domain. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{\(\backslash\)image html oomph\_screen\_shot.gif "{}Screen shot of xfig session "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{\(\backslash\)image latex oomph\_screen\_shot.eps "{}Screen shot of xfig session "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{Here is a plot of the mesh generated with the same procedure}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{discussed above.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{\(\backslash\)image html oomph\_mesh.gif "{}The mesh. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{\(\backslash\)image latex oomph\_mesh.eps "{}The mesh. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{Finally, the figure below shows a plot of the solution of the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{steady Navier-\/Stokes equations (velocity}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{vectors and pressure contours) in this domain. No-\/slip conditions were}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{applied on all boundaries. Zero velocities were imposed on }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{all boundaries apart from the outer bounding box (boundary 1) where }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{we set }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{\{\(\backslash\)bf u\} = }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{-\/1 \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{-\/1}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{\(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{The plot may therefore be interpreted as showing the flow field that is}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{generated when the rigid quadrilateral box that surrounds the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{oomph-\/lib logo moves in the north-\/westerly direction while the logo itself}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{remains stationary. This was computed with the driver code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/meshing/mesh\_from\_xfig\_triangle/mesh\_from\_xfig\_navier\_stokes.cc"{}>mesh\_from\_xfig\_navier\_stokes.cc</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{which is very similar}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{to that for the <A HREF="{}../../../navier\_stokes/driven\_cavity/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{driven cavity problem,</A> so we shall not discuss in in detail. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)image html oomph\_flow.gif "{}Flow past the oomph-\/lib logo. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{\(\backslash\)image latex oomph\_flow.eps "{}Flow past the oomph-\/lib logo. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)subsection bound Numbering of the mesh boundaries}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{-\/\# Each polyline in the <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A>-\/generated }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{   figure represents a distinct mesh boundary. \(\backslash\)c fig2poly}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{   assigns boundary numbers to these, depending on the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{   order in which the polylines are listed in the \(\backslash\)c *. \(\backslash\)c fig file.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{   Since this is not always obvious, it is usually necessary to }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{   examine the mesh boundaries by calling \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{   Mesh::output\_boundaries(...) before assigning boundary conditions. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{-\/\# Since boundaries are defined by closed polygons, }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{   all nodes that are located on a specific polygon have the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{   same boundary number. In cases where a finer sub-\/division of the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{   boundary is required (e.g. to identify inflow boundaries)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{   some post-\/processing of the mesh may be required.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{\(\backslash\)subsection ex Exercises}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{-\/\# Download and install <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{   (if you work in a linux environment, <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{   is likely to be available already as it is part of many linux}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{   distributions) and create your own meshes.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{-\/\# Think of a way to modify the <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A>-\/based}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{   mesh generation procedure so that a closed boundary can contain }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{   several sub-\/boundaries so that in-\/ and outflow boundaries}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{   can be identified separately. [This is an "{}advanced"{} exercise}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{   and one to which no solution exists as yet -\/-\/ please let us have}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{   your code if you find an easy way to do this!]. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{   }}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{mesh__from__xfig_8txt__doxygenified_8h_source_l00195}00195 }
+
+\end{DoxyCode}

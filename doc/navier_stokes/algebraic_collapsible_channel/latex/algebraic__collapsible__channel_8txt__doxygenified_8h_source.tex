@@ -1,0 +1,552 @@
+\hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source}{}\doxysection{algebraic\+\_\+collapsible\+\_\+channel.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{algebraic__collapsible__channel_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: Flow in a 2D channel with an oscillating wall revisited -\/-\/ AlgebraicElements: How to customise the mesh update}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In many previous examples we illustrated how \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{\(\backslash\)c Domain  and \(\backslash\)c MacroElement objects facilitate the generation of}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{refineable (and non-\/refineable) meshes in domains with moving, }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{curvilinear boundaries. Consult, for instance:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{-\/ The tutorial <A HREF="{}../../../poisson/fish\_poisson2/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{  "{}How to create refineable meshes in domains with curvilinear and/or}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{  moving boundaries"{}</A> for a general discussion of the methodology. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{-\/ The tutorial }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{  <A HREF="{}../../../unsteady\_heat/two\_d\_unsteady\_heat\_ALE/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{  "{}Spatially adaptive solution of the 2D unsteady heat equation with }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{  flux boundary conditions in a moving domain: ALE methods"{}</A>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{  for an example involving the unsteady heat equation. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{-\/ The tutorials \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{  -\/ <A HREF="{}../../../navier\_stokes/osc\_ellipse/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{    "{}Finite-\/Reynolds-\/number flow inside an oscillating ellipse"{}</A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{  .}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{  or }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{  -\/ <A HREF="{}../../../navier\_stokes/collapsible\_channel/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{     "{}Flow in a 2D channel with an oscillating wall"{}</A> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{  .}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{  for examples involving the Navier-\/Stokes equations.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{The two main features of the \(\backslash\)c MacroElement/Domain -\/ based}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{node-\/update are that, once the curvilinear domain}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{is represented by a \(\backslash\)c Domain object}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{-\/\# Any subsequent mesh refinement will respect the curvilinear }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{   domain boundaries. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{-\/\# The udate of the nodal positions in response to a change}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{   in the position of the domain's curvilinear boundaries}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{   may be performed by the "{}black-\/box"{} function }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{   \(\backslash\)c Mesh::node\_update().}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{The availability of a "{}black-\/box"{} node-\/update procedure is}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{very convenient but in some applications it may be desirable (or}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{even necessary) to provide a customised node-\/update function, either}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{because the mesh deformation generated by the "{}black-\/box"{} procedure}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{is not appropriate or because it is not efficient. The latter problem}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{arises particularly in fluid-\/structure interaction problems. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{In this tutorial we shall demonstrate an alternative}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{node-\/update technique, based on \(\backslash\)c oomph-\/lib's \(\backslash\)c AlgebraicNode,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{\(\backslash\)c AlgebraicElement, and \(\backslash\)c AlgebraicMesh classes. The key feature}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{of this approach is that it allows "{}each node to update its own}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{position"{}. This is in contrast to the \(\backslash\)c Domain/MacroElement-\/based approach }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{in which we can only update the nodal positions of \(\backslash\)e all nodes in the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{mesh simultaneously -\/-\/ not a particularly sparse operation!}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{[We note that the \(\backslash\)c Node and \(\backslash\)c FiniteElement base classes}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{provide the virtual functions \(\backslash\)c Node::node\_update()}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{and \(\backslash\)c FiniteElement::node\_update(). These functions are intended}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{to be used for node-\/by-\/node or element-\/by-\/element node-\/updates but}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{in their default implementations they are empty. Hence no node-\/update is}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{performed unless these functions are overloaded in derived classes}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{such as \(\backslash\)c AlgebraicNode and \(\backslash\)c AlgebraicElement.]}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{\(\backslash\)section overview Overview}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{The idea behind the algebraic node-\/updates is simple: The \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{AlgebraicMesh class (the base class for meshes containing \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{AlgebraicElements and \(\backslash\)c AlgebraicNodes) contains the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{pure virtual function}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{void AlgebraicMesh::algebraic\_node\_update(..., AlgebraicNode* node\_pt)=0;}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{which must be implemented in every specific \(\backslash\)c AlgebraicMesh.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{Its task is to update the position of the node specified by }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{the pointer-\/valued argument. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{The specific implementation of the node-\/update operation is obviously }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{problem-\/dependent but it is easy to illustrate the general }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{procedure  by considering the collapsible channel mesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{sketched below:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{\(\backslash\)image html alg\_node\_update\_sketch.gif "{}Sketch of the algebraic node-\/update procedure for the collapsible channel mesh. "{} }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{\(\backslash\)image latex alg\_node\_update\_sketch.eps "{}Sketch of the algebraic node-\/update procedure for the collapsible channel mesh. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{  The upper figure shows the mesh in the undeformed domain}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{in which wall shape is parametrised by the intrinsic (Lagrangian)}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{coordinate \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)f\$ as \(\backslash\)f\$ \{\(\backslash\)bf R\}(\(\backslash\)zeta,t=0) =}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{(L\_\{up\} + \(\backslash\)zeta, 1) \string^T. \(\backslash\)f\$  In this}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{configuration each node is located at a certain fraction along the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{vertical lines across the channel. For instance, the \(\backslash\)f\$ j\(\backslash\)f\$-\/th}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{node (drawn in blue) is located at a fraction of \(\backslash\)f\$ \(\backslash\)omega\_j = 1/3}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)f\$ along the straight line}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{that connects reference point \(\backslash\)f\$ \{\(\backslash\)bf A\}\_j \(\backslash\)f\$ on the bottom wall to}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{reference point \(\backslash\)f\$ \{\(\backslash\)bf B\}\_j \(\backslash\)f\$ on the flexible upper wall.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{We note that reference point  \(\backslash\)f\$ \{\(\backslash\)bf B\}\_j \(\backslash\)f\$ may be identified by }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{its Lagrangian coordinate \(\backslash\)f\$ \(\backslash\)zeta\_j \(\backslash\)f\$ on the wall.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{The lower figure shows a sketch of the deformed domain and }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{illustrates a possible algebraic node-\/update strategy: Given the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{new wall shape, described by \(\backslash\)f\$ \{\(\backslash\)bf R\}(\(\backslash\)zeta,t) \(\backslash\)f\$, we position each node }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{on the straight line that connects its reference point }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf A\}'\_j = \{\(\backslash\)bf A\}\_j \(\backslash\)f\$ on the lower wall to the reference}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{point \(\backslash\)f\$ \{\(\backslash\)bf B\}'\_j = \{\(\backslash\)bf R\}(\(\backslash\)zeta\_j,t) \(\backslash\)f\$  on the deformable upper wall.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{To perform this node-\/update procedure for a specific node, we}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{generally have to store}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{-\/ A pointer to one (or more) \(\backslash\)c GeomObject(s) that define the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{  curvilinear domain boundaries. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{-\/ A number of node-\/specific reference values (such as \(\backslash\)f\$ \(\backslash\)omega\_j, \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{  \(\backslash\)zeta\_j \(\backslash\)f\$, and the \(\backslash\)f\$ x\_1 \(\backslash\)f\$ -\/coordinate of point \(\backslash\)f\$ \{\(\backslash\)bf A\}\_j}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{  \(\backslash\)f\$, \(\backslash\)f\$ X\string^\{(A)\}\_j \(\backslash\)f\$, say)}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{  that establish the node's position relative to these \(\backslash\)c GeomObjects.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{-\/ A pointer to the \(\backslash\)c AlgebraicMesh that implements }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{  the node-\/update procedure.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{Since the node-\/update data is node-\/specific, we provide storage}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{for it in the \(\backslash\)c AlgebraicNode class -\/-\/ a class that is derived from}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{the \(\backslash\)c Node class. The node-\/update function itself is shared by }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{many nodes in the mesh and is implemented in }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{\(\backslash\)c AlgebraicMesh::algebraic\_node\_update(...).}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{This function extracts the node-\/update parameters, \(\backslash\)f\$ \(\backslash\)omega\_j, \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{\(\backslash\)zeta\_j \(\backslash\)f\$, and \(\backslash\)f\$ X\string^\{(A)\}\_j \(\backslash\)f\$ and the pointer to the \(\backslash\)c GeomObject}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{that parametrises the wall, \(\backslash\)c wall\_pt, say, from the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)c AlgebraicNode passed to it. With these parameters, the position }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{of reference point\(\backslash\)f\$\{\(\backslash\)bf A\}'\_j \(\backslash\)f\$ is given by }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf A\}'\_j = (X\_j\string^\{(A)\},0)\string^T \(\backslash\)f\$ while the coordinates of}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{reference point  \(\backslash\)f\$ \{\(\backslash\)bf B\}'\_j = \{\(\backslash\)bf R\}(\(\backslash\)zeta\_j,t)\(\backslash\)f\$ may be}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{obtained from a call to \(\backslash\)c wall\_pt-\/>position(...). The nodal }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{position  \(\backslash\)f\$ \{\(\backslash\)bf r\}\_j \(\backslash\)f\$ may then be updated via}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\{\(\backslash\)bf r\}\_j = }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{\{\(\backslash\)bf A\}\_j' }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{+ \(\backslash\)omega\_j}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{\{\(\backslash\)bf B\}\_j'-\/\{\(\backslash\)bf A\}\_j'}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{\(\backslash\)section how\_to\_use How to use existing AlgebraicMeshes}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{To use the algebraic node-\/update capabilities of an existing }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{\(\backslash\)c AlgebraicMesh, all \(\backslash\)c Nodes must be replaced by \(\backslash\)c AlgebraicNodes}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{to allow the storage of the node-\/specific node-\/update parameters. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{Recall that within \(\backslash\)c oomph-\/lib \(\backslash\)c Nodes are usually created by the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{elements, using the function \(\backslash\)c FiniteElement::construct\_node(...)}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{whose argument specifies the local node number of the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{newly created \(\backslash\)c Node within the element that creates it. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{(The specification of the local node number is required to allow the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{\(\backslash\)c FiniteElement::construct\_node(...) function to create a \(\backslash\)c Node}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{with the appropriate number of values and history values. For instance,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{in 2D Taylor-\/Hood Navier-\/Stokes elements, the elements' vertex nodes have}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{to store three values, representing the two velocity components and}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{the pressure, whereas all other nodes only require storage for the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{two velocity components.) }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{  To ensure that the \(\backslash\)c FiniteElement::construct\_node(...) function creates}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{\(\backslash\)c AlgebraicNodes rather than "{}ordinary"{} \(\backslash\)c Nodes, we provide}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{the templated wrapper class}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{template<ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{class AlgebraicElement<ELEMENT> : public ELEMENT}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{which overloads the \(\backslash\)c FiniteElement::construct\_node(...) function so that it}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{creates \(\backslash\)c AlgebraicNodes instead. In most other respects, the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{"{}wrapped"{} element behaves exactly as the underlying \(\backslash\)c ELEMENT itself.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{To use an existing \(\backslash\)c AlgebraicMesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{with a certain element type, \(\backslash\)c QTaylorHoodElement<2>, say, we }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{simply "{}upgrade"{} the element to an \(\backslash\)c AlgebraicElement by }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{specifying the element type as \(\backslash\)c AlgebraicElement<QTaylorHoodElement<2> >.  }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{The changes to an existing driver code that performs the node update}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{by the default \(\backslash\)c Domain/MacroElement methodology are therefore}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{completely trivial. You may wish to compare the driver code}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/collapsible\_channel/collapsible\_channel.cc"{}>collapsible\_channel.cc</A>, discussed in }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{<A HREF="{}../../collapsible\_channel/html/index.html"{}>an}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{earlier example</A>, to the driver code <A HREF="{}../../../../demo\_drivers/navier\_stokes/collapsible\_channel/collapsible\_channel\_algebraic.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{collapsible\_channel\_algebraic.cc</A> in which the fluid domain is}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{discretised by the \(\backslash\)c MyAlgebraicCollapsibleChannelMesh, discussed}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{below.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)section how\_to\_write How to create a new AlgebraicMesh -\/-\/ a basic example}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{To illustrate how to create a new \(\backslash\)c AlgebraicMesh, we will now}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{discuss the implementation of the \(\backslash\)c MyAlgebraicCollapsibleChannelMesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{-\/-\/ an \(\backslash\)c AlgebraicMesh -\/ version of the \(\backslash\)c CollapsibleChannelMesh,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{used in <A HREF="{}../../collapsible\_channel/html/index.html"{}> the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{earlier example</A>. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)subsection class The class definition}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{We construct the mesh by multiple inheritance from the \(\backslash\)c AlgebraicMesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{base class, and the already-\/existing \(\backslash\)c CollapsibleChannelMesh.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{The constructor first calls the constructor of the underlying }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{\(\backslash\)c CollapsibleChannelMesh (thus "{}recycling"{} the basic mesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{generation process, i.e. the generation of nodes and elements etc.) }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{and then adds the algebraic node-\/update information }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{by calling the function \(\backslash\)c setup\_algebraic\_node\_update().}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)dontinclude my\_alg\_channel\_mesh.h}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{\(\backslash\)skipline start\_algebraic\_mesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{We declare the interface for the pure virtual function }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\)c algebraic\_node\_update(...), to be discussed below, and}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{implement a second pure virtual function,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{\(\backslash\)c AlgebraicMesh::update\_node\_update(), that may be used to update}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{reference values following a mesh adaptation. Since the current}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{mesh is not refineable, we leave this function empty and refer to}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{<A HREF="{}../../../interaction/fsi\_collapsible\_channel\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{another example</A> for a more detailed discussion of its role.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{\(\backslash\)skipline Update nodal}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{\(\backslash\)until update\_node\_update}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{The protected member function  \(\backslash\)c setup\_algebraic\_node\_update() }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{will be discussed below.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{\(\backslash\)skipline protected:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{\(\backslash\)subsection setting\_up Setting up the algebraic node update }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{When the function \(\backslash\)c setup\_algebraic\_node\_update() is called,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{the constructor of the underlying \(\backslash\)c CollapsibleChannelMesh will }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{already have created the mesh's elements and nodes, and the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{nodes will be located at their initial positions in the undeformed}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{domain.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{To set up the algebraic node-\/update data, we start by extracting the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{lengths of the upstream rigid section, \(\backslash\)f\$ L\_\{up\} \(\backslash\)f\$, and the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{length of the collapsible segment,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{\(\backslash\)f\$ L\_\{collapsible\} \(\backslash\)f\$, from the \(\backslash\)c CollapsibleChannelDomain:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{\(\backslash\)skipline start\_setup}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{\(\backslash\)until l\_collapsible}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{Next, we loop over all \(\backslash\)c AlgebraicNodes in the mesh and}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{determine their current positions:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{\(\backslash\)skipline Loop over}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{\(\backslash\)until y=}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{If the \(\backslash\)c j -\/th node is located in the "{}collapsible"{} section of the mesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{we determine its reference coordinate, \(\backslash\)f\$ \(\backslash\)zeta\_j \(\backslash\)f\$, on the wall}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{and determine the coordinates of its reference point \(\backslash\)f\$ \{\(\backslash\)bf B\}\_j}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{\(\backslash\)f\$ from the \(\backslash\)c GeomObject that represents the moving wall.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{\(\backslash\)skipline Check}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{\(\backslash\)until -\/>position(}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{Just to be on the safe side, we check that the wall is actually in its}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{undeformed configuration, as assumed.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{\(\backslash\)skipline Confirm that}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{\(\backslash\)until endif}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{Next, we package the data required for the node-\/update}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{operations (the pointers to \(\backslash\)c GeomObject(s) and the reference }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{values) into vectors. In the present example, the node-\/update}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{operation only involves a single \(\backslash\)c GeomObject:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{\(\backslash\)skipline Only a single}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{\(\backslash\)until =this-\/>Wall\_pt;}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{We have three reference values: The \(\backslash\)f\$ x\_1 \(\backslash\)f\$ -\/ coordinate of}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{point \(\backslash\)f\$ \{\(\backslash\)bf A\}\_j \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{\(\backslash\)skipline The update }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{\(\backslash\)until r\_wall[0];}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{as well as the fractional height, \(\backslash\)f\$ \(\backslash\)omega\_j \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{\(\backslash\)skipline Second}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{\(\backslash\)until r\_wall[1];}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{and the reference coordinate, \(\backslash\)f\$ \(\backslash\)zeta\_j \(\backslash\)f\$, along the wall:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{\(\backslash\)skipline Third}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{\(\backslash\)until zeta[0];}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{The vectors of reference values and geometric objects are then}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{passed to the node, together with the pointer to the mesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{(\(\backslash\)c this) that implements the node-\/update function. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{\(\backslash\)until end of }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{\(\backslash\)subsection node\_update The node-\/update function}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{The function \(\backslash\)c algebraic\_node\_update(...) reverses the setup process:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{It extracts the node-\/update data from the \(\backslash\)c AlgebraicNode and}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{updates its position at the \(\backslash\)c t -\/th previous time-\/level:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{\(\backslash\)skipline start\_of\_algebraic}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{\(\backslash\)until \{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{We start by extracting the vectors of reference values and \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{GeomObjects involved in this node's node-\/update, using the functions}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{\(\backslash\)c AlgebraicNode::vector\_ref\_value() which returns a Vector}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{of reference values, and the function  }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{\(\backslash\)c AlgebraicNode::vector\_geom\_object\_pt() which returns a Vector of}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{pointers to \(\backslash\)c GeomObjects. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{\(\backslash\)skipline Extract}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{\(\backslash\)until Vector<GeomObject*>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{Next, we translate these into local variables,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{\(\backslash\)skipline First reference}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{\(\backslash\)until GeomObject*}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{and obtain the current wall position from the wall \(\backslash\)c GeomObject.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{\(\backslash\)skipline Get position vector}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{\(\backslash\)until wall\_pt}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{Finally, we update the nodal position:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{\(\backslash\)skipline Assign}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{Done!}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{\(\backslash\)subsection comm Comments}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{-\/ <B>Element-\/by-\/element and global node updates:</B> \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{  As explained above, the re-\/implementation of the (empty) }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{  \(\backslash\)c Node::node\_update() function }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{  by \(\backslash\)c AlgebraicNode::node\_update() allows each node to "{}update its }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{  own position"{}. The \(\backslash\)c AlgebraicMesh and }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{  \(\backslash\)c AlgebraicElement classes provide their own re-\/implementation}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{  of the \(\backslash\)c node\_update() functions in the \(\backslash\)c Mesh and \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{  FiniteElement classes, and perform the node-\/updates by executing}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{  the \(\backslash\)c AlgebraicNode::node\_update() function of their constituent}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{  nodes. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{-\/ <B>Default node-\/update function:</B> \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{  We stress that, in the above example, it was only necessary to set }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{  up the node-\/update data for the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{  nodes in the central "{}collapsible"{} part of the mesh as they are}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{  the only modes whose position is affected by the motion of the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{  curvilinear boundary. This is possible because the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{  AlgebraicNode constructor provides default assignments for }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{  the node-\/update data. In particular, the pointer to the Mesh that}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{  performs the node update is initialised by a pointer to the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{  (static instantiation of a) \(\backslash\)c DummyMesh whose }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{  \(\backslash\)c AlgebraicMesh::algebraic\_node\_update(...) and}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{  \(\backslash\)c AlgebraicMesh::update\_node\_update(...) functions are empty. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{  This ensures that nodes for which these default assignments are not}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{  overwritten stay at their original position when the node udate}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{  is performed. This implementation provides a sensible}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{  default behaviour for the node update. \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{-\/ <B>Multiple node-\/update functions:</B> \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{  In the simple example considered here, a single node-\/update function}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{  was sufficient to update the positions of all moving nodes in}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{  the mesh. In more complicated meshes, it may be be necessary to}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{  provide different node-\/update functions for nodes that are located}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{  in different parts of the mesh. To facilitate the implementation of}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{  such cases, it is possible to specify an identifier for the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{  node-\/update function when calling the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{  \(\backslash\)c AlgebraicNode::add\_node\_update\_info(...) function, using its}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{  alternative interface}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{  \(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{  void AlgebraicNode::add\_node\_update\_info(}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{      const int\& id,                              // ID of the node-\/update fct}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{      AlgebraicMesh* mesh\_pt,                     // pointer to mesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{      const Vector<GeomObject*>\& geom\_object\_pt,  // vector of geom objects}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{      const Vector<double>\& ref\_value);           // vector of ref. values}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{  \(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{  When implementing the \(\backslash\)c AlgebraicMesh::algebraic\_node\_update(...)}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{  function for a mesh that contains multiple node-\/update functions,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{  the ID of the node-\/update function associated with a particular}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{  node can be obtained from \(\backslash\)c AlgebraicNode::node\_update\_fct\_id(),}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{  allowing the node-\/update function to take the appropriate}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{  action. (As an example, consider the implementation of the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{  algebraic node-\/update function for the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{  RefineableAlgebraicFishMesh in which different node-\/update}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{  functions are used to update the position of nodes in the fish's "{}body"{}}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{  and in its "{}tail"{}.)  If the  \(\backslash\)c AlgebraicNode::add\_node\_update\_info(...) }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{  function is called without specifying an ID, a default ID of 0 is assigned. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{-\/ <B>Consistency between multiple node-\/update functions:</B> \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{  If a mesh contains multiple node-\/update functions, it is likely}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{  that some nodes are located at the interface between }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{  regions that are updated by different node-\/update functions.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{  As indicated by the \(\backslash\)c "{}add\_..."{} in the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{  \(\backslash\)c AlgebraicNode::add\_node\_update\_info(...) function,}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{  \(\backslash\)c AlgebraicNodes may be associated with}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{  multiple node-\/update functions, though the different node-\/update functions}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{  associated with a node must, of course, give the same result. This}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{  may be verified by calling the \(\backslash\)c AlgebraicNode::self\_test() }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{  function for all nodes in an \(\backslash\)c AlgebraicMesh.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{  \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{  \(\backslash\)b Note: In refineable \(\backslash\)c AlgebraicMeshes (discussed in more detail}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{  below), \(\backslash\)c AlgebraicNodes \(\backslash\)b must be associated with all possible }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{  node-\/update functions to ensure that the reference values for}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{  newly created nodes are determined correctly during the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{  adaptive mesh refinement.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{-\/ <B>Adaptivity:</B> \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{  Refineable \(\backslash\)c AlgebraicMeshes may be created by multiple inheritance}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{  from a suitable \(\backslash\)c RefineableMesh base class (e.g. the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{  RefineableQuadMesh class), and setting up the required tree}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{  representation of the coarse initial mesh, exactly }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{  as for "{}ordinary"{} meshes (see the tutorial }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{  <A HREF="{}../../../poisson/two\_d\_poisson\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{  "{}How to create simple refineable meshes"{}</A> for details).}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{  As an example, here is the class definition for a refineable}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{  version of the \(\backslash\)c MyAlgebraicCollapsibleChannelMesh discussed above:}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{  \(\backslash\)n \(\backslash\)n }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{  \(\backslash\)dontinclude my\_alg\_channel\_mesh.h}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{  \(\backslash\)skipline start\_refineable\_algebraic\_collapsible\_channel\_mesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{  \(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{  \(\backslash\)skipline \};}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{  \(\backslash\)n }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{  Note that none of the functions defined in the non-\/refineable}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{  version of this mesh have to be re-\/implemented. This raises the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{  question of how the node-\/update data for any newly created nodes}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{  are determined when the mesh is refined. By default, }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{  the reference values for any newly created }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{  \(\backslash\)c AlgebraicNodes are determined by interpolation from}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{  the node's "{}father element"{}. Furthermore, it is assumed  }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{  that the same \(\backslash\)c GeomObjects are involved}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{  in the node-\/update function for the newly created node.  }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{  This default behaviour is appropriate for the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{  mesh considered here. In other cases, (e.g. in the corresponding }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{  <A HREF="{}../../../interaction/fsi\_collapsible\_channel\_algebraic/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{  fluid-\/structure interaction problem</A>), some or all of the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{  node-\/update data may have to be recomputed when the mesh}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{  is adapted. Such updates may be performed by }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{  the \(\backslash\)c AlgebraicMesh::update\_node\_update(...) function}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{  which is executed automatically whenever a refineable}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{  \(\backslash\)c AlgebraicMesh is adapted.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{-\/ <B>Node updates for hanging nodes:</B> \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{  Recall that refineable meshes may contain hanging nodes whose }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{  position is constrained by its "{}master nodes"{}.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{  When the \(\backslash\)c AlgebraicNode::node\_update(...) function is}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{  called for a hanging node, it first updates the position }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{  of its master nodes (using their own node-\/update functions)}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{  and then updates its own constrained position accordingly.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{-\/ <B>Automatic finite-\/differencing with respect to geometric Data:</B> }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{  Algebraic node updates are particularly useful in fluid-\/structure }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{  interaction problems since they allow the development of "{}sparse"{}}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{  node update procedures in which each (solid mechanics) degree of}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{  freedom only affects the position of a small number of nodes in the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{  fluid mesh. We will discuss fluid-\/structure interaction problems}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{  in more detail }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{  <A HREF="{}../../../interaction/fsi\_collapsible\_channel\_algebraic/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{elsewhere</A> but stress already that one of }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{  the major complications in such problems (and, in fact, in any}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{  free-\/boundary problem) is the need to evaluate the so-\/called}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{  shape derivatives -\/-\/ the derivatives of the "{}bulk"{} (here the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{  Navier-\/Stokes) equations with respect to the degrees of freedom}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{  (here the nodal positions in the wall mesh) that affect the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{  position of the nodes in the "{}bulk"{} mesh.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{  The algebraic node update procedures discussed above are }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{  sufficiently general to handle such interactions. The }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{  shape/position of the \(\backslash\)c GeomObjects that are involved in an }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{  \(\backslash\)c AlgebraicNode's node update, may depend on unknowns in the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{  overall problem. Such unknowns constitute a \(\backslash\)c GeomObject's}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{  geometric \(\backslash\)c Data which may be obtained from its member function }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{  \(\backslash\)c GeomObject::geom\_data\_pt(...).}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{  \(\backslash\)c AlgebraicElements use finite differencing to include the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{  shape derivatives (i.e. the derivatives}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{  of the residuals of the underlying (wrapped) element with respect}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{  to the geometric \(\backslash\)c Data involved in the element's node update)}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{  into the element's Jacobian matrix.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{-\/ <B>Additional sanity checks and other generalisations:</B> \(\backslash\)n \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{  The \(\backslash\)c MyAlgebraicCollapsibleChannelMesh and its refineable }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{  equivalent are slightly simplified versions of the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{  meshes in \(\backslash\)c oomph-\/lib's \(\backslash\)c src/meshes directory. These meshes}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{  contain a number of additional sanity checks that we omitted}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{  here for the sake of brevity. Furthermore, these meshes}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{  can be used with \(\backslash\)c GeomObjects that comprise "{}sub-\/"{}\(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{  GeomObjects, a feature that is essential in problems with}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{  proper fluid-\/structure interaction. We will discuss this in }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{  <A HREF="{}../../../interaction/fsi\_collapsible\_channel\_algebraic/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{  another example.</A>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{\(\backslash\)subsection exx Exercises}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{-\/\# If you inspect the  }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{   <A HREF="{}../../../../demo\_drivers/navier\_stokes/collapsible\_channel/my\_alg\_channel\_mesh.h"{}>source}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{code</A> }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{   for the \(\backslash\)c MyAlgebraicCollapsibleChannelMesh, you will notice that}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{   the mesh has an additional constructor that allows the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{   specification of the "{}boundary layer squash function"{} first }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{   introduced in the original \(\backslash\)c CollapsibleChannelMesh. }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{   Explain why in the \(\backslash\)c AlgebraicMesh version of this mesh, the}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{   function pointer to the "{}boundary layer}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{   squash function"{} can only be specified via the constructor -\/-\/ the }}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{   access function is deliberately broken.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/collapsible\_channel/"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{demo\_drivers/navier\_stokes/collapsible\_channel/}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/collapsible\_channel/collapsible\_channel\_algebraic.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{demo\_drivers/navier\_stokes/collapsible\_channel/collapsible\_channel\_algebraic.cc}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{algebraic__collapsible__channel_8txt__doxygenified_8h_source_l00547}00547 }
+
+\end{DoxyCode}

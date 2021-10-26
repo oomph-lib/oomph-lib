@@ -3,13 +3,13 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem$<$ E\+L\+A\+S\+T\+I\+C\+I\+T\+Y\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classAnnularDiskProblem}{Annular\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Annular disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
-\begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+\begin{DoxyCompactList}\small\item\em /////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -17,7 +17,7 @@ Time\+Harmonic\+Isotropic\+Elasticity\+Tensor \mbox{\hyperlink{namespaceGlobal__
 \begin{DoxyCompactList}\small\item\em The elasticity tensor. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_a95af753fa152ac6013bc4f640816f7ce}{Global\+\_\+\+Parameters\+::solid\+\_\+boundary\+\_\+displacement}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&u)
 \begin{DoxyCompactList}\small\item\em Real-\/valued, radial displacement field on inner boundary. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Parameters_a8363ab9f8687e9f7802f801f6dcab6e6}{Global\+\_\+\+Parameters\+::constant\+\_\+pressure}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&\mbox{\hyperlink{elastic__annulus_8txt_a1d14d265e44897eec22cff52a1fbd05b}{traction}})
+void \mbox{\hyperlink{namespaceGlobal__Parameters_a8363ab9f8687e9f7802f801f6dcab6e6}{Global\+\_\+\+Parameters\+::constant\+\_\+pressure}} (const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&n, Vector$<$ std\+::complex$<$ double $>$ $>$ \&traction)
 \begin{DoxyCompactList}\small\item\em Constant pressure load (real and imag part) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a51c78ffbd213fe1293eef5d048abcc5a}{Global\+\_\+\+Parameters\+::\+BesselY}} (const double \&n, const double \&x)
 \begin{DoxyCompactList}\small\item\em Helper function to evaluate Y\+\_\+n(x) from bloody maple output. \end{DoxyCompactList}\item 
@@ -40,7 +40,7 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_a0138eb659958d7d7d1afd12577b
 \begin{DoxyCompactList}\small\item\em Displacement amplitude on inner radius. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\+\_\+\+Parameters\+::P}} = 0.\+0
 \begin{DoxyCompactList}\small\item\em Uniform pressure. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\+\_\+\+Parameters\+::\+Directory}} =\char`\"{}R\+E\+S\+LT\char`\"{}
+string \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Global\+\_\+\+Parameters\+::\+Directory}} =\char`\"{}RESLT\char`\"{}
 \begin{DoxyCompactList}\small\item\em Output directory. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobal__Parameters_a1f67286edeb13ef67687fd483e105b5e}{Global\+\_\+\+Parameters\+::\+Ntheta}} =20
 \begin{DoxyCompactList}\small\item\em Number of elements in azimuthal direction. \end{DoxyCompactList}\item 
@@ -61,9 +61,9 @@ Driver for annular disk loaded by pressure.
 
 
 
-Definition at line 646 of file time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc.
+Definition at line \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_source_l00646}{646}} of file \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_source}{time\+\_\+harmonic\+\_\+elastic\+\_\+annulus.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Nr, Global\+\_\+\+Parameters\+::\+Ntheta, Global\+\_\+\+Parameters\+::P, and problem().
+References \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_source_l00602}{Annular\+Disk\+Problem$<$ ELASTICITY\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_source_l00103}{Global\+\_\+\+Parameters\+::\+Nr}}, \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_source_l00100}{Global\+\_\+\+Parameters\+::\+Ntheta}}, and \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_source_l00081}{Global\+\_\+\+Parameters\+::P}}.
 

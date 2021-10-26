@@ -3,15 +3,15 @@
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobalParameters}{Global\+Parameters}}
+namespace \mbox{\hyperlink{namespaceGlobalParameters}{Global\+Parameters}}
 \begin{DoxyCompactList}\small\item\em Namespace for \char`\"{}global\char`\"{} problem parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bf}{Global\+Parameters\+::\+Cases}} \{ \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfac08080f634c714da38f1122301eafda7}{Global\+Parameters\+::\+Spherical\+\_\+cap\+\_\+in\+\_\+cylinder\+\_\+pinned}}, 
-\mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558}{Global\+Parameters\+::\+All\+\_\+pinned}}, 
-\mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa1e6d2261f2fa0541d57b5a0a8c044ddc}{Global\+Parameters\+::\+Barrel\+\_\+shape}}, 
-\mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa89cfbba408c0774e0b9024baa187dfb8}{Global\+Parameters\+::\+T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle}}
+enum \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bf}{Global\+Parameters\+::\+Cases}} \{ \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfac08080f634c714da38f1122301eafda7}{Global\+Parameters\+::\+Spherical\+\_\+cap\+\_\+in\+\_\+cylinder\+\_\+pinned}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa28147edc9cfc06038f2a7deaf8890558}{Global\+Parameters\+::\+All\+\_\+pinned}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa1e6d2261f2fa0541d57b5a0a8c044ddc}{Global\+Parameters\+::\+Barrel\+\_\+shape}}
+, \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6bfa89cfbba408c0774e0b9024baa187dfb8}{Global\+Parameters\+::\+T\+\_\+junction\+\_\+with\+\_\+nonzero\+\_\+contact\+\_\+angle}}
  \}
 \begin{DoxyCompactList}\small\item\em Enumeration for the possible cases. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
@@ -19,9 +19,9 @@ enum \mbox{\hyperlink{namespaceGlobalParameters_adde04e4243b82e3d4bd2f82d37a2d6b
 \item 
 void \mbox{\hyperlink{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}{Global\+Parameters\+::setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check}} ()
 \begin{DoxyCompactList}\small\item\em Setup dependent parameters and perform sanity check. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}{Global\+Parameters\+::spine\+\_\+base\+\_\+function}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{young__laplace_8txt_a972796dc0dbb3f5b13cbc503572d2a26}{x}}, Vector$<$ double $>$ \&spine\+\_\+B, Vector$<$ Vector$<$ double $>$ $>$ \&dspine\+\_\+B)
+void \mbox{\hyperlink{namespaceGlobalParameters_ac81daf87f8d3f075d9fd108427e70c4f}{Global\+Parameters\+::spine\+\_\+base\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine\+\_\+B, Vector$<$ Vector$<$ double $>$ $>$ \&dspine\+\_\+B)
 \begin{DoxyCompactList}\small\item\em Spine basis\+: The position vector to the basis of the spine as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates. dspine\+\_\+B\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\+\_\+B\mbox{[}j\mbox{]} / dx\+\_\+i Spines start in the (x\+\_\+1,x\+\_\+2) plane at (x\+\_\+1,x\+\_\+2). \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}{Global\+Parameters\+::spine\+\_\+function}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{young__laplace_8txt_a972796dc0dbb3f5b13cbc503572d2a26}{x}}, Vector$<$ double $>$ \&spine, Vector$<$ Vector$<$ double $>$ $>$ \&dspine)
+void \mbox{\hyperlink{namespaceGlobalParameters_a82df8c67f58e78a236fb6a0cc8bf8284}{Global\+Parameters\+::spine\+\_\+function}} (const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&spine, Vector$<$ Vector$<$ double $>$ $>$ \&dspine)
 \begin{DoxyCompactList}\small\item\em Spine\+: The spine vector field as a function of the two coordinates x\+\_\+1 and x\+\_\+2, and its derivatives w.\+r.\+t. to these coordinates\+: dspine\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = d spine\mbox{[}j\mbox{]} / dx\+\_\+i. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobalParameters_a4571d41514b16946dd31d075d44c5593}{Global\+Parameters\+::get\+\_\+exact\+\_\+kappa}} ()
 \begin{DoxyCompactList}\small\item\em Exact kappa. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -51,7 +51,7 @@ double \mbox{\hyperlink{namespaceGlobalParameters_a74cc88d6dc206cd556fb12e7e3101
 double \mbox{\hyperlink{namespaceGlobalParameters_a65fe7fd6c6c54d7ba89fab47cd4a9141}{Global\+Parameters\+::\+Controlled\+\_\+height\+\_\+increment}} = 0.\+1
 \begin{DoxyCompactList}\small\item\em Increment for height control. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{namespaceGlobalParameters_a3a90a762edbce6d2a95456df26e85cea}{Global\+Parameters\+::\+Control\+\_\+element}} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em Number of element in bulk mesh at which height control is applied. Initialise to 0 -- will be overwritte in \mbox{\hyperlink{namespaceGlobalParameters_aedbc21f2c81d445634badfc5cdd77436}{setup\+\_\+dependent\+\_\+parameters\+\_\+and\+\_\+sanity\+\_\+check()}} \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobalParameters_a36ebf514fdd1e78fff69907b39e25af6}{Global\+Parameters\+::\+L\+\_\+x}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Length and width of the domain. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobalParameters_ac8774b3418c4551091d64ec72c169b2e}{Global\+Parameters\+::\+L\+\_\+y}} = 1.\+0

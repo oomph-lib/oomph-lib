@@ -2,6 +2,11 @@
 \label{classoomph_1_1LineDerivatives}\index{oomph::LineDerivatives@{oomph::LineDerivatives}}
 
 
+Class that establishes the surface derivative functions for Line\+Elements. These are defined in a separate class so that they can be used by other interface equation-\/type classes.  
+
+
+
+
 {\ttfamily \#include $<$interface\+\_\+elements.\+h$>$}
 
 Inheritance diagram for oomph\+::Line\+Derivatives\+:\begin{figure}[H]
@@ -18,14 +23,14 @@ Inheritance diagram for oomph\+::Line\+Derivatives\+:\begin{figure}[H]
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1LineDerivatives_aa50209ce504b25d255f9f0a6df36c0e3}{compute\+\_\+surface\+\_\+derivatives}} (const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, const \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&interpolated\+\_\+t, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&interpolated\+\_\+x, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&surface\+\_\+gradient, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&surface\+\_\+divergence)
+double \mbox{\hyperlink{classoomph_1_1LineDerivatives_aa50209ce504b25d255f9f0a6df36c0e3}{compute\+\_\+surface\+\_\+derivatives}} (const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&interpolated\+\_\+t, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&interpolated\+\_\+x, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&surface\+\_\+gradient, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&surface\+\_\+divergence)
 \begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class that establishes the surface derivative functions for Line\+Elements. These are defined in a separate class so that they can be used by other interface equation-\/type classes. 
 
-Definition at line 660 of file interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00660}{660}} of file \mbox{\hyperlink{interface__elements_8h_source}{interface\+\_\+elements.\+h}}.
 
 
 
@@ -38,7 +43,7 @@ Definition at line 660 of file interface\+\_\+elements.\+h.
 
 
 
-Definition at line 664 of file interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00664}{664}} of file \mbox{\hyperlink{interface__elements_8h_source}{interface\+\_\+elements.\+h}}.
 
 
 
@@ -47,19 +52,21 @@ Definition at line 664 of file interface\+\_\+elements.\+h.
 \index{oomph::LineDerivatives@{oomph::LineDerivatives}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
 \index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::LineDerivatives@{oomph::LineDerivatives}}
 \doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
-{\footnotesize\ttfamily double oomph\+::\+Line\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{interpolated\+\_\+t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{surface\+\_\+gradient,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Line\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{const \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{interpolated\+\_\+t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidS,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsid\+S\+\_\+div }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
 Fill in the specific surface derivative calculations. 
 
-Specialise the surface derivatives for the line interface case. 
+////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////
 
-Definition at line 757 of file interface\+\_\+elements.\+cc.
+Specialise the surface derivatives for the line interface case 
+
+Definition at line \mbox{\hyperlink{interface__elements_8cc_source_l00757}{757}} of file \mbox{\hyperlink{interface__elements_8cc_source}{interface\+\_\+elements.\+cc}}.
 
 
 
-References i, and oomph\+::\+Shape\+::nindex1().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{shape_8h_source_l00259}{oomph\+::\+Shape\+::nindex1()}}.
 
 
 

@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate}{}\doxysection{oomph\+::P\+M\+L\+Mapping\+And\+Transformed\+Coordinate Class Reference}
+\hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate}{}\doxysection{oomph\+::PMLMapping\+And\+Transformed\+Coordinate Class Reference}
 \label{classoomph_1_1PMLMappingAndTransformedCoordinate}\index{oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}}
+
+
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::P\+M\+L\+Mapping\+And\+Transformed\+Coordinate\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PMLMapping\+And\+Transformed\+Coordinate\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1PMLMappingAndTransformedCoordinate}
@@ -13,18 +18,20 @@ Inheritance diagram for oomph\+::P\+M\+L\+Mapping\+And\+Transformed\+Coordinate\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a48dcef4398f40ea5fea58153d5de74f0}{P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}} ()
+\mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a48dcef4398f40ea5fea58153d5de74f0}{PMLMapping\+And\+Transformed\+Coordinate}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a230b0df052d95ba0d9e1c6d0082a6ab4}{gamma}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&k\+\_\+squared)=0
-\begin{DoxyCompactList}\small\item\em Pure virtual to return P\+ML mapping gamma, where gamma is the $d\tilde x / d x$ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the P\+ML. \end{DoxyCompactList}\item 
-virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa793ab5eb360d14deb408ef32266b8}{transformed\+\_\+coordinate}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&pml\+\_\+inner\+\_\+boundary, const double \&k\+\_\+squared)=0
-\begin{DoxyCompactList}\small\item\em Pure virtual to return P\+ML transformed coordinate, also known as $d\tilde x $ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the P\+ML. \end{DoxyCompactList}\end{DoxyCompactItemize}
+virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa777dd66ec1e2c0bf15c68446148ac}{gamma}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&k\+\_\+squared)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual to return PML mapping gamma, where gamma is the $d\tilde x / d x$ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the PML. \end{DoxyCompactList}\item 
+virtual std\+::complex$<$ double $>$ \mbox{\hyperlink{classoomph_1_1PMLMappingAndTransformedCoordinate_a462de87e501ec68731181d87c0faf473}{transformed\+\_\+coordinate}} (const double \&nu\+\_\+i, const double \&pml\+\_\+width\+\_\+i, const double \&pml\+\_\+inner\+\_\+boundary, const double \&k\+\_\+squared)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual to return PML transformed coordinate, also known as $d\tilde x $ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the PML. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Class to hold the mapping function for the P\+ML 
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
-Definition at line 79 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Class to hold the mapping function for the PML 
+
+Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00079}{79}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
@@ -33,7 +40,7 @@ Definition at line 79 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\
 \index{oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}!PMLMappingAndTransformedCoordinate@{PMLMappingAndTransformedCoordinate}}
 \index{PMLMappingAndTransformedCoordinate@{PMLMappingAndTransformedCoordinate}!oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}}
 \doxysubsubsection{\texorpdfstring{PMLMappingAndTransformedCoordinate()}{PMLMappingAndTransformedCoordinate()}}
-{\footnotesize\ttfamily oomph\+::\+P\+M\+L\+Mapping\+And\+Transformed\+Coordinate\+::\+P\+M\+L\+Mapping\+And\+Transformed\+Coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate\+::\+PMLMapping\+And\+Transformed\+Coordinate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -41,46 +48,38 @@ Default constructor (empty)
 
 
 
-Definition at line 83 of file pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source_l00083}{83}} of file \mbox{\hyperlink{pml__fourier__decomposed__helmholtz__elements_8h_source}{pml\+\_\+fourier\+\_\+decomposed\+\_\+helmholtz\+\_\+elements.\+h}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate_a230b0df052d95ba0d9e1c6d0082a6ab4}\label{classoomph_1_1PMLMappingAndTransformedCoordinate_a230b0df052d95ba0d9e1c6d0082a6ab4}} 
+\mbox{\Hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa777dd66ec1e2c0bf15c68446148ac}\label{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa777dd66ec1e2c0bf15c68446148ac}} 
 \index{oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}!gamma@{gamma}}
 \index{gamma@{gamma}!oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}}
 \doxysubsubsection{\texorpdfstring{gamma()}{gamma()}}
-{\footnotesize\ttfamily virtual std\+::complex$<$double$>$ oomph\+::\+P\+M\+L\+Mapping\+And\+Transformed\+Coordinate\+::gamma (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual std\+::complex$<$ double $>$ oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate\+::gamma (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Pure virtual to return P\+ML mapping gamma, where gamma is the $d\tilde x / d x$ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the P\+ML. 
+Pure virtual to return PML mapping gamma, where gamma is the $d\tilde x / d x$ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the PML. 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a06fc613059c82b59dc45c2125347ec6a}{oomph\+::\+Bermudez\+P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a55856d2c1fb1793830a170570228d9f6}{oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate}}.
 
-
-
-Referenced by oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::compute\+\_\+pml\+\_\+coefficients().
-
-\mbox{\Hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa793ab5eb360d14deb408ef32266b8}\label{classoomph_1_1PMLMappingAndTransformedCoordinate_a4aa793ab5eb360d14deb408ef32266b8}} 
+\mbox{\Hypertarget{classoomph_1_1PMLMappingAndTransformedCoordinate_a462de87e501ec68731181d87c0faf473}\label{classoomph_1_1PMLMappingAndTransformedCoordinate_a462de87e501ec68731181d87c0faf473}} 
 \index{oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}!transformed\_coordinate@{transformed\_coordinate}}
 \index{transformed\_coordinate@{transformed\_coordinate}!oomph::PMLMappingAndTransformedCoordinate@{oomph::PMLMappingAndTransformedCoordinate}}
 \doxysubsubsection{\texorpdfstring{transformed\_coordinate()}{transformed\_coordinate()}}
-{\footnotesize\ttfamily virtual std\+::complex$<$double$>$ oomph\+::\+P\+M\+L\+Mapping\+And\+Transformed\+Coordinate\+::transformed\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{pml\+\_\+inner\+\_\+boundary,  }\item[{const double \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual std\+::complex$<$ double $>$ oomph\+::\+PMLMapping\+And\+Transformed\+Coordinate\+::transformed\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const double \&}]{nu\+\_\+i,  }\item[{const double \&}]{pml\+\_\+width\+\_\+i,  }\item[{const double \&}]{pml\+\_\+inner\+\_\+boundary,  }\item[{const double \&}]{k\+\_\+squared }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Pure virtual to return P\+ML transformed coordinate, also known as $d\tilde x $ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the P\+ML. 
+Pure virtual to return PML transformed coordinate, also known as $d\tilde x $ as function of $\nu$ where $\nu = x - h$ where h is the vector from the origin to the start of the PML. 
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a29d87b67e0894297f752141e67ae6e0e}{oomph\+::\+Bermudez\+P\+M\+L\+Mapping\+And\+Transformed\+Coordinate}}.
-
-
-
-Referenced by oomph\+::\+P\+M\+L\+Fourier\+Decomposed\+Helmholtz\+Equations\+::compute\+\_\+complex\+\_\+r().
+Implemented in \mbox{\hyperlink{classoomph_1_1BermudezPMLMappingAndTransformedCoordinate_a3664f16b314b4d72a82d5c0acc8a36de}{oomph\+::\+Bermudez\+PMLMapping\+And\+Transformed\+Coordinate}}.
 
 
 

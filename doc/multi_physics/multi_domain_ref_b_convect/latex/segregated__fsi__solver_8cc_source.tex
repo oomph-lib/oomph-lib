@@ -1,0 +1,1289 @@
+\hypertarget{segregated__fsi__solver_8cc_source}{}\doxysection{segregated\+\_\+fsi\+\_\+solver.\+cc}
+\label{segregated__fsi__solver_8cc_source}\index{segregated\_fsi\_solver.cc@{segregated\_fsi\_solver.cc}}
+\mbox{\hyperlink{segregated__fsi__solver_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00027}00027 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00029}00029 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{segregated__fsi__solver_8h}{segregated\_fsi\_solver.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00030}00030 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00032}00032 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00033}00033 \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00034}00034   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00035}00035 \textcolor{comment}{  /// Extrapolate solid data and update fluid mesh. Extrapolation is based}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00036}00036 \textcolor{comment}{  /// on previous history values and is therefore only called in}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00037}00037 \textcolor{comment}{  /// time-\/dependent runs.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00038}00038 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00039}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef97e5e768aa60a}{00039}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef97e5e768aa60a}{SegregatableFSIProblem::extrapolate\_solid\_data}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00040}00040   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00041}00041     \textcolor{comment}{// Number of solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00042}00042     \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00044}00044     \textcolor{comment}{// Loop over all solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00045}00045     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00046}00046     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00047}00047       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00048}00048       \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00050}00050       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00051}00051       \textcolor{keywordtype}{unsigned} n\_prev = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>time\_stepper\_pt()-\/>nprev\_values();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00053}00053       \textcolor{comment}{// Can't use this extrapolation if we don't have at least two}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00054}00054       \textcolor{comment}{// history values; may be able to do better for higher order}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00055}00055       \textcolor{comment}{// timesteppers, though.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00056}00056       \textcolor{keywordflow}{if} (n\_prev >= 2)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00057}00057       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00058}00058         \textcolor{comment}{// Extrapolate all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00059}00059         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00060}00060         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00061}00061           \textcolor{comment}{// Linear extrapolation based on previous two values,}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00062}00062           \textcolor{comment}{// assuming constant timestep.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00063}00063           \textcolor{keywordtype}{double} new\_value =}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00064}00064             2.0 * \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value(1, k) -\/ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value(2, k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00065}00065           *(\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value\_pt(0, k)) = new\_value;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00066}00066         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00067}00067       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00068}00068     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00070}00070     \textcolor{comment}{// Update fluid node position in response to changes in wall shape}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00071}00071     \textcolor{comment}{// (If fluid mesh was specified via non-\/NULL Fluid\_mesh\_pt}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00072}00072     \textcolor{comment}{// this node update will only act on the fluid nodes).}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00073}00073     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}{Fluid\_mesh\_pt}} != 0)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00074}00074     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00075}00075       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}{Fluid\_mesh\_pt}}-\/>node\_update();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00076}00076     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00077}00077     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00078}00078     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00079}00079       mesh\_pt()-\/>node\_update();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00080}00080     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00081}00081   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00084}00084   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00085}00085 \textcolor{comment}{  /// Rebuild global mesh for monolithic problem}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00086}00086 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00087}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73}{00087}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73}{SegregatableFSIProblem::rebuild\_monolithic\_mesh}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00088}00088   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00089}00089     \textcolor{comment}{// Get rid of the previous submeshes}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00090}00090     flush\_sub\_meshes();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00092}00092     \textcolor{comment}{// Add original submeshes}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00093}00093     \textcolor{keywordtype}{unsigned} orig\_n\_sub\_mesh = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}{Orig\_sub\_mesh\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00094}00094     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < orig\_n\_sub\_mesh; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00095}00095     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00096}00096       add\_sub\_mesh(\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}{Orig\_sub\_mesh\_pt}}[i]);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00097}00097     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00099}00099     \textcolor{comment}{// Rebuild global mesh}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00100}00100     rebuild\_global\_mesh();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00101}00101   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00104}00104   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00105}00105 \textcolor{comment}{  /// Only include solid elements in the Problem's mesh. This is}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00106}00106 \textcolor{comment}{  /// called before the segregated solid solve. The solid elements are}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00107}00107 \textcolor{comment}{  /// identified by the user via the solid\_mesh\_pt argument}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00108}00108 \textcolor{comment}{  /// in the pure virtual function identify\_fluid\_and\_solid\_dofs(...).}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00109}00109 \textcolor{comment}{  /// If a NULL pointer is returned by this function (i.e. if the user}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00110}00110 \textcolor{comment}{  /// hasn't bothered to identify the solids elements in a submesh, then}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00111}00111 \textcolor{comment}{  /// no stripping of non-\/solid elements is performed. The result}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00112}00112 \textcolor{comment}{  /// of the computation will be correct but}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00113}00113 \textcolor{comment}{  /// it won't be very efficient.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00114}00114 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00115}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bfed62b54dcf62}{00115}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bfed62b54dcf62}{SegregatableFSIProblem::use\_only\_solid\_elements}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00116}00116   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00117}00117     \textcolor{comment}{// Wipe global mesh and rebuild it with just the solid elements in it}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00118}00118     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}{Solid\_mesh\_pt}} != 0)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00119}00119     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00120}00120       flush\_sub\_meshes();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00121}00121       add\_sub\_mesh(\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}{Solid\_mesh\_pt}});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00122}00122       rebuild\_global\_mesh();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00123}00123     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00124}00124   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00127}00127   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00128}00128 \textcolor{comment}{  /// Only include fluid elements in the Problem's mesh. This is}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00129}00129 \textcolor{comment}{  /// called before the segregated fluid solve. The fluid elements are}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00130}00130 \textcolor{comment}{  /// identified by the user via the fluid\_mesh\_pt argument}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00131}00131 \textcolor{comment}{  /// in the pure virtual function identify\_fluid\_and\_solid\_dofs(...).}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00132}00132 \textcolor{comment}{  /// If a NULL pointer is returned by this function (i.e. if the user}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00133}00133 \textcolor{comment}{  /// hasn't bothered to identify the fluids elements in a submesh, then}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00134}00134 \textcolor{comment}{  /// no stripping of non-\/fluid elements is performed. The result}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00135}00135 \textcolor{comment}{  /// of the computation will be correct but}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00136}00136 \textcolor{comment}{  /// it won't be very efficient.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00137}00137 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00138}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13a9841e0aa05bf57ec228b49b311a26}{00138}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13a9841e0aa05bf57ec228b49b311a26}{SegregatableFSIProblem::use\_only\_fluid\_elements}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00139}00139   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00140}00140     \textcolor{comment}{// Wipe global mesh and rebuild it with just the fluid elements in it}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00141}00141     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}{Fluid\_mesh\_pt}} != 0)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00142}00142     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00143}00143       flush\_sub\_meshes();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00144}00144       add\_sub\_mesh(\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}{Fluid\_mesh\_pt}});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00145}00145       rebuild\_global\_mesh();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00146}00146     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00147}00147   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00148}00148 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00149}00149 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00150}00150   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00151}00151 \textcolor{comment}{  /// Pin all fluid dofs}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00152}00152 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00153}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0}{00153}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0}{SegregatableFSIProblem::pin\_fluid\_dofs}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00154}00154   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00155}00155     \textcolor{comment}{// Number of fluid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00156}00156     \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00158}00158     \textcolor{comment}{// Loop over all fluid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00159}00159     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00160}00160     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00161}00161       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00162}00162       \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00163}00163 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00164}00164       \textcolor{comment}{// Pin all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00165}00165       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00166}00166       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00167}00167         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}[i]-\/>pin(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00168}00168       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00169}00169     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00170}00170   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00171}00171 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00172}00172 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00173}00173   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00174}00174 \textcolor{comment}{  /// Restore the pinned status of all fluid dofs}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00175}00175 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00176}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}{00176}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}{SegregatableFSIProblem::restore\_fluid\_dofs}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00177}00177   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00178}00178     \textcolor{comment}{// Number of fluid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00179}00179     \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00180}00180 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00181}00181     \textcolor{comment}{// Loop over all fluid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00182}00182     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00183}00183     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00184}00184       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00185}00185       \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00186}00186 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00187}00187       \textcolor{comment}{// Pin all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00188}00188       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00189}00189       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00190}00190         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}{Fluid\_value\_is\_pinned}}[i][k])}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00191}00191         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00192}00192           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}[i]-\/>pin(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00193}00193         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00194}00194         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00195}00195         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00196}00196           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}[i]-\/>unpin(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00197}00197         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00198}00198       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00199}00199     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00200}00200   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00201}00201 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00202}00202 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00203}00203   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00204}00204 \textcolor{comment}{  /// Pin all solid dofs}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00205}00205 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00206}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_acf28573efb54e2b33101ba8cb503a5b8}{00206}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_acf28573efb54e2b33101ba8cb503a5b8}{SegregatableFSIProblem::pin\_solid\_dofs}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00207}00207   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00208}00208     \textcolor{comment}{// Number of solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00209}00209     \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00210}00210 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00211}00211     \textcolor{comment}{// Loop over all solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00212}00212     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00213}00213     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00214}00214       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00215}00215       \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00216}00216 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00217}00217       \textcolor{comment}{// Pin all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00218}00218       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00219}00219       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00220}00220         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>pin(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00221}00221       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00222}00222     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00223}00223   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00224}00224 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00225}00225 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00226}00226   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00227}00227 \textcolor{comment}{  /// Restore the pinned status of all solid dofs}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00228}00228 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00229}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}{00229}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}{SegregatableFSIProblem::restore\_solid\_dofs}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00230}00230   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00231}00231     \textcolor{comment}{// Number of solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00232}00232     \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00234}00234     \textcolor{comment}{// Loop over all solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00235}00235     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00236}00236     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00237}00237       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00238}00238       \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00239}00239 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00240}00240       \textcolor{comment}{// Pin all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00241}00241       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00242}00242       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00243}00243         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}{Solid\_value\_is\_pinned}}[i][k])}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00244}00244         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00245}00245           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>pin(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00246}00246         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00247}00247         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00248}00248         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00249}00249           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>unpin(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00250}00250         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00251}00251       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00252}00252     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00253}00253   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00254}00254 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00255}00255 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00256}00256   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00257}00257 \textcolor{comment}{  /// Store the current solid values as reference values for future}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00258}00258 \textcolor{comment}{  /// convergence check. Also add another entry to pointwise Aitken history.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00259}00259 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00260}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{00260}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{SegregatableFSIProblem::store\_solid\_dofs}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00261}00261   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00262}00262     \textcolor{comment}{// Counter for the number of values:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00263}00263     \textcolor{keywordtype}{unsigned} value\_count = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00264}00264 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00265}00265     \textcolor{comment}{// Number of solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00266}00266     \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00267}00267 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00268}00268     \textcolor{comment}{// Loop over all solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00269}00269     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00270}00270     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00271}00271       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00272}00272       \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00273}00273 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00274}00274       \textcolor{comment}{// Loop over all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00275}00275       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00276}00276       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00277}00277         \textcolor{comment}{// Make backup}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00278}00278         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}{Previous\_solid\_value}}[value\_count] = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00279}00279 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00280}00280         \textcolor{comment}{// Store in pointwise Aitken history}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00281}00281         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a16f0551d5e9dbe5b211bb3b05e80f276}{Use\_pointwise\_aitken}} \&\& (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}{Pointwise\_aitken\_counter}} >= 0))}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00282}00282         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00283}00283           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}{Pointwise\_aitken\_solid\_value}}[value\_count][\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}{Pointwise\_aitken\_counter}}] =}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00284}00284             \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00285}00285         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00286}00286 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00287}00287         \textcolor{comment}{// Increment counter}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00288}00288         value\_count++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00289}00289       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00290}00290     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00291}00291 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00292}00292     \textcolor{comment}{// We stored another level of Aitken history values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00293}00293     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}{Pointwise\_aitken\_counter}}++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00294}00294   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00295}00295 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00296}00296 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00297}00297   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00298}00298 \textcolor{comment}{  /// Get rms of change in the solid dofs; the max. change of the}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00299}00299 \textcolor{comment}{  /// solid dofs and the rms norm of the solid dofs themselves.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00300}00300 \textcolor{comment}{  /// Change is computed relative to the reference values stored when}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00301}00301 \textcolor{comment}{  /// store\_solid\_dofs() was last called.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00302}00302 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00303}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad0792ffce87f26d8963846c472f13d08}{00303}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad0792ffce87f26d8963846c472f13d08}{SegregatableFSIProblem::get\_solid\_change}}(\textcolor{keywordtype}{double}\& rms\_change,}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00304}00304                                                 \textcolor{keywordtype}{double}\& max\_change,}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00305}00305                                                 \textcolor{keywordtype}{double}\& rms\_norm)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00306}00306   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00307}00307     \textcolor{comment}{// Initialise}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00308}00308     rms\_change = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00309}00309     max\_change = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00310}00310     rms\_norm = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00311}00311 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00312}00312     \textcolor{comment}{// Counter for the number of values:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00313}00313     \textcolor{keywordtype}{unsigned} value\_count = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00314}00314 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00315}00315     \textcolor{comment}{// Number of solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00316}00316     \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00317}00317 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00318}00318     \textcolor{comment}{// Loop over all solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00319}00319     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00320}00320     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00321}00321       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00322}00322       \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00323}00323 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00324}00324       \textcolor{comment}{// Loop over all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00325}00325       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00326}00326       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00327}00327         \textcolor{comment}{// Change}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00328}00328         \textcolor{keywordtype}{double} change =}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00329}00329           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}{Previous\_solid\_value}}[value\_count] -\/ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00330}00330 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00331}00331         \textcolor{comment}{// Max change?}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00332}00332         \textcolor{keywordflow}{if} (std::fabs(change) > max\_change) max\_change = std::fabs(change);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00333}00333 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00334}00334         \textcolor{comment}{// Add square of change relative to previous value}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00335}00335         rms\_change += pow(change, 2);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00336}00336 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00337}00337         \textcolor{comment}{// Add square of previous value}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00338}00338         rms\_norm += pow(\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}{Previous\_solid\_value}}[value\_count], 2);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00339}00339 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00340}00340         \textcolor{comment}{// Increment counter}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00341}00341         value\_count++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00342}00342       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00343}00343     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00344}00344 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00345}00345     \textcolor{comment}{// Turn into rms:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00346}00346     rms\_change = sqrt(rms\_change / \textcolor{keywordtype}{double}(value\_count));}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00347}00347     rms\_norm = sqrt(rms\_norm / \textcolor{keywordtype}{double}(value\_count));}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00348}00348   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00349}00349 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00350}00350 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00351}00351   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00352}00352 \textcolor{comment}{  /// Under-\/relax solid, either by classical relaxation or by Irons \& Tuck.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00353}00353 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00354}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a9da3017952982a64496ff9c16ca7024c}{00354}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a9da3017952982a64496ff9c16ca7024c}{SegregatableFSIProblem::under\_relax\_solid}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00355}00355   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00356}00356     \textcolor{comment}{// Irons and Tuck extrapolation/relaxation; an extension of Aitken's method}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00357}00357     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00358}00358     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a23930085f18e43926b6afcbbdd2a0509}{Use\_irons\_and\_tuck\_extrapolation}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00359}00359     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00360}00360       \textcolor{keywordtype}{double} top = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00361}00361       \textcolor{keywordtype}{double} den = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00362}00362       \textcolor{keywordtype}{double} crit = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00363}00363 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00364}00364       \textcolor{comment}{// Counter for the number of values:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00365}00365       \textcolor{keywordtype}{unsigned} value\_count = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00366}00366 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00367}00367       \textcolor{comment}{// Number of solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00368}00368       \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00369}00369 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00370}00370       \textcolor{comment}{// Loop over all solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00371}00371       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00372}00372       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00373}00373         \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00374}00374         \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00375}00375 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00376}00376         \textcolor{comment}{// Loop over all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00377}00377         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00378}00378         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00379}00379           \textcolor{comment}{// Prediction from solid solver}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00380}00380           \textcolor{keywordtype}{double} new\_solid\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00381}00381 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00382}00382           \textcolor{comment}{// Previus value}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00383}00383           \textcolor{keywordtype}{double} old\_solid\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}{Previous\_solid\_value}}[value\_count];}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00384}00384 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00385}00385           \textcolor{comment}{// Change}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00386}00386           \textcolor{keywordtype}{double} change = old\_solid\_value -\/ new\_solid\_value;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00387}00387 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00388}00388           \textcolor{comment}{// Change of change}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00389}00389           \textcolor{keywordtype}{double} del2 = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}{Del\_irons\_and\_tuck}}[value\_count] -\/ change;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00390}00390 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00391}00391           \textcolor{comment}{// Update change}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00392}00392           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}{Del\_irons\_and\_tuck}}[value\_count] = change;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00393}00393 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00394}00394           \textcolor{comment}{// Update top}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00395}00395           top += del2 * change;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00396}00396 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00397}00397           \textcolor{comment}{// Update denominator}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00398}00398           den += del2 * del2;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00399}00399 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00400}00400           \textcolor{comment}{// Update convergence criterion}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00401}00401           crit += std::fabs(change);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00402}00402 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00403}00403           \textcolor{comment}{// Increment counter}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00404}00404           value\_count++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00405}00405         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00406}00406       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00407}00407 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00408}00408       \textcolor{comment}{// Update relaxation factor. The if buffers the case in which}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00409}00409       \textcolor{comment}{// we haven't realised that we've converged (so that den=0).}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00410}00410       \textcolor{comment}{// This can happen, e.g. if the convergence assessment is based on the}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00411}00411       \textcolor{comment}{// global residual or during validation. In that case we}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00412}00412       \textcolor{comment}{// obviously don't want any changes to the iterates.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00413}00413       \textcolor{keywordflow}{if} (den != 0.0)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00414}00414       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00415}00415         \textcolor{keywordtype}{double} new\_r = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}{R\_irons\_and\_tuck}} + (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}{R\_irons\_and\_tuck}} -\/ 1.0) * top / den;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00416}00416         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}{R\_irons\_and\_tuck}} = new\_r;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00417}00417       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00418}00418       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00419}00419       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00420}00420         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}{R\_irons\_and\_tuck}} = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00421}00421       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00422}00422 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00423}00423       \textcolor{comment}{// Loop over all solid Data items for update}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00424}00424       value\_count = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00425}00425       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00426}00426       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00427}00427         \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00428}00428         \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00429}00429 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00430}00430         \textcolor{comment}{// Loop over all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00431}00431         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00432}00432         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00433}00433           \textcolor{comment}{// Compute relaxed/extrapolated value}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00434}00434           \textcolor{keywordtype}{double} new\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value(k) +}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00435}00435                              \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}{R\_irons\_and\_tuck}} * \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}{Del\_irons\_and\_tuck}}[value\_count];}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00436}00436 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00437}00437           \textcolor{comment}{// Assign}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00438}00438           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>set\_value(k, new\_value);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00439}00439 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00440}00440           \textcolor{comment}{// Increment counter}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00441}00441           value\_count++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00442}00442         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00443}00443       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00444}00444       \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00445}00445     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00446}00446 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00447}00447     \textcolor{comment}{// Standard relaxation}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00448}00448     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00449}00449     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00450}00450     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00451}00451       \textcolor{comment}{// No relaxation: Can return immediately}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00452}00452       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed}{Omega\_relax}} == 1.0) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00453}00453 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00454}00454       \textcolor{comment}{// Counter for the number of values:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00455}00455       \textcolor{keywordtype}{unsigned} value\_count = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00456}00456 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00457}00457       \textcolor{comment}{// Number of solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00458}00458       \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00459}00459 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00460}00460       \textcolor{comment}{// Loop over all solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00461}00461       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00462}00462       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00463}00463         \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00464}00464         \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00465}00465 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00466}00466         \textcolor{comment}{// Loop over all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00467}00467         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00468}00468         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00469}00469           \textcolor{comment}{// Prediction from solid solver}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00470}00470           \textcolor{keywordtype}{double} new\_solid\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>value(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00471}00471 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00472}00472           \textcolor{comment}{// Previus value}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00473}00473           \textcolor{keywordtype}{double} old\_solid\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}{Previous\_solid\_value}}[value\_count];}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00474}00474 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00475}00475           \textcolor{comment}{// Relax}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00476}00476           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>set\_value(k,}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00477}00477                                       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed}{Omega\_relax}} * new\_solid\_value +}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00478}00478                                         (1.0 -\/ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed}{Omega\_relax}}) * old\_solid\_value);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00479}00479 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00480}00480           \textcolor{comment}{// Increment counter}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00481}00481           value\_count++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00482}00482         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00483}00483       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00484}00484     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00485}00485   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00486}00486 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00487}00487   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00488}00488 \textcolor{comment}{  /// Pointwise Aitken extrapolation for solid variables}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00489}00489 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00490}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a99a457e1b3c17e9a08590db163eb7118}{00490}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a99a457e1b3c17e9a08590db163eb7118}{SegregatableFSIProblem::pointwise\_aitken\_extrapolate}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00491}00491   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00492}00492     \textcolor{comment}{// Counter for the number of values:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00493}00493     \textcolor{keywordtype}{unsigned} value\_count = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00494}00494 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00495}00495     \textcolor{comment}{// Number of solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00496}00496     \textcolor{keywordtype}{unsigned} n\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00497}00497 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00498}00498     \textcolor{comment}{// Loop over all solid Data items:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00499}00499     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00500}00500     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00501}00501       \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00502}00502       \textcolor{keywordtype}{unsigned} n\_value = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00503}00503 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00504}00504       \textcolor{comment}{// Loop over all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00505}00505       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00506}00506       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00507}00507         \textcolor{comment}{// Shorthand}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00508}00508         \textcolor{keywordtype}{double} v0 = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}{Pointwise\_aitken\_solid\_value}}[value\_count][0];}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00509}00509         \textcolor{keywordtype}{double} v1 = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}{Pointwise\_aitken\_solid\_value}}[value\_count][1];}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00510}00510         \textcolor{keywordtype}{double} v2 = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}{Pointwise\_aitken\_solid\_value}}[value\_count][2];}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00511}00511 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00512}00512         \textcolor{keywordtype}{double} new\_value = v2;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00513}00513 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00514}00514         \textcolor{keywordtype}{double} max\_diff = std::max(std::fabs(v1 -\/ v0), std::fabs(v2 -\/ v1));}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00515}00515         \textcolor{keywordflow}{if} (max\_diff > 1.0e-\/10)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00516}00516         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00517}00517           new\_value = v2 -\/ std::pow((v2 -\/ v1), \textcolor{keywordtype}{int}(2)) / (v2 -\/ 2.0 * v1 + v0);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00518}00518         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00519}00519         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i]-\/>set\_value(k, new\_value);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00520}00520 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00521}00521         \textcolor{comment}{// Increment counter}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00522}00522         value\_count++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00523}00523       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00524}00524     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00525}00525 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00526}00526     \textcolor{comment}{// Reset the counter for the Aitken convergence check}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00527}00527     \textcolor{comment}{// (setting counter to -\/1 forces three new genuine}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00528}00528     \textcolor{comment}{// iterates to be computed).}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00529}00529     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}{Pointwise\_aitken\_counter}} = -\/1;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00530}00530   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00531}00531 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00532}00532 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00533}00533   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00534}00534 \textcolor{comment}{  /// Segregated fixed point solver with optional pointwise Aitken acceleration}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00535}00535 \textcolor{comment}{  /// on selected solid dofs. Returns PicardConvergenceData object}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00536}00536 \textcolor{comment}{  /// that contains the vital stats of the iteration.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00537}00537 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00538}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}{00538}}   \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{PicardConvergenceData}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}{SegregatableFSIProblem::segregated\_solve}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00539}00539   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00540}00540     \textcolor{comment}{// Initialise timer for essential bits of code}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00541}00541     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a61ae984ed6baba413b7577ce1d1b5dc3}{reset\_timer}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00542}00542     \textcolor{comment}{// Start timer for overall solve}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00543}00543     clock\_t t\_total\_start = clock();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00544}00544 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00545}00545     \textcolor{comment}{// If convergence is based on max. global residual we may as well}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00546}00546     \textcolor{comment}{// document it...}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00547}00547     \textcolor{keywordtype}{bool} get\_max\_global\_residual = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aadc0d46511ee90dad36d0d00a8c2d7ad}{Doc\_max\_global\_residual}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00548}00548     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a971ddd09518a1771ae3a6ed85a51514e}{Convergence\_criterion}} ==}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00549}00549         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd}{Assess\_convergence\_based\_on\_max\_global\_residual}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00550}00550     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00551}00551       get\_max\_global\_residual = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00552}00552     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00553}00553 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00554}00554     \textcolor{comment}{// Create object to doc convergence stats}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00555}00555     \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{PicardConvergenceData}} conv\_data;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00556}00556 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00557}00557     \textcolor{comment}{// Initialise total time for computation of global residuals}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00558}00558     \textcolor{keywordtype}{double} cpu\_for\_global\_residual = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00559}00559 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00560}00560     \textcolor{comment}{// Update anything that needs updating}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00561}00561     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ae8c920185dc95ab3be243276fd4253b0}{actions\_before\_segregated\_solve}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00562}00562 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00563}00563     \textcolor{comment}{// Set flags to values that are appropriate if Picard iteration}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00564}00564     \textcolor{comment}{// does not converge with Max\_picard iterations}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00565}00565     \textcolor{keywordtype}{bool} converged = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00566}00566     \textcolor{keywordtype}{unsigned} iter\_taken = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805}{Max\_picard}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00567}00567 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00568}00568     \textcolor{comment}{// This one will be overwritten during the convergence checks}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00569}00569     \textcolor{keywordtype}{double} tol\_achieved = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00570}00570 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00571}00571     \textcolor{comment}{// Store the current values of the solid dofs as reference values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00572}00572     \textcolor{comment}{// and for the pointwise Aitken extrapolation}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00573}00573     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{store\_solid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00574}00574 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00575}00575     \textcolor{comment}{// Loop over Picard iterations}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00576}00576     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00577}00577     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} iter = 1; iter <= \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805}{Max\_picard}}; iter++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00578}00578     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00579}00579       \textcolor{comment}{// Calculate the initial residuals}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00580}00580       \textcolor{keywordflow}{if} (iter == 1)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00581}00581       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00582}00582         \textcolor{comment}{// Problem is always non-\/linear?}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00583}00583         \textcolor{comment}{// Perform any actions before the convergence check}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00584}00584         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abc1e909975df69e27f8f1435e215a842}{actions\_before\_segregated\_convergence\_check}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00585}00585 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00586}00586         \textcolor{keywordtype}{double} max\_res = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00587}00587         \textcolor{keywordflow}{if} (get\_max\_global\_residual)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00588}00588         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00589}00589           clock\_t t\_start = clock();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00590}00590           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}{restore\_solid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00591}00591           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}{restore\_fluid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00592}00592           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73}{rebuild\_monolithic\_mesh}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00593}00593           assign\_eqn\_numbers();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00594}00594           \textcolor{comment}{// This is now a full problem}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00595}00595           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40}{Solve\_type}} = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d}{Full\_solve}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00596}00596           DoubleVector residual;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00597}00597           get\_residuals(residual);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00598}00598           \textcolor{comment}{// Get maximum residuals using our own abscmp function}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00599}00599           max\_res = residual.max();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00600}00600           clock\_t t\_end = clock();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00601}00601           cpu\_for\_global\_residual += double(t\_end -\/ t\_start) / CLOCKS\_PER\_SEC;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00602}00602         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00603}00603 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00604}00604         oomph\_info << \textcolor{stringliteral}{"{}==================================================\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00605}00605         oomph\_info << \textcolor{stringliteral}{"{}Initial iteration             : "{}} << 0 << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00606}00606         oomph\_info << \textcolor{stringliteral}{"{}RMS  change           :       "{}} << 0 << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00607}00607         oomph\_info << \textcolor{stringliteral}{"{}Max. change           :       "{}} << 0 << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00608}00608         oomph\_info << \textcolor{stringliteral}{"{}RMS norm              :       "{}} << 0 << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00609}00609         \textcolor{keywordflow}{if} (get\_max\_global\_residual)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00610}00610         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00611}00611           oomph\_info << \textcolor{stringliteral}{"{}Max. global residual  :       "{}} << max\_res}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00612}00612                      << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00613}00613         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00614}00614         oomph\_info << \textcolor{stringliteral}{"{}==================================================\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00615}00615 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00616}00616         \textcolor{comment}{// Check for convergence, but this only makes sense}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00617}00617         \textcolor{comment}{// for the maximum (rather than relative case)}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00618}00618         \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a971ddd09518a1771ae3a6ed85a51514e}{Convergence\_criterion}} ==}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00619}00619              \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd}{Assess\_convergence\_based\_on\_max\_global\_residual}}) \&\&}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00620}00620             (max\_res < \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}}))}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00621}00621         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00622}00622           oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00623}00623             << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n////////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00624}00624             << \textcolor{stringliteral}{"{}\(\backslash\)nPicard iteration converged after "{}} << 0 << \textcolor{stringliteral}{"{} steps!"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00625}00625             << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00626}00626             << \textcolor{stringliteral}{"{}Convergence was based on max. residual of coupled eqns \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00627}00627             << \textcolor{stringliteral}{"{}being less than "{}} << \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}} << \textcolor{stringliteral}{"{}."{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00628}00628             << \textcolor{stringliteral}{"{}////////////////////////////////////////////////////////\(\backslash\)n\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00629}00629             << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00630}00630 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00631}00631           \textcolor{comment}{// Converged, so bail out}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00632}00632           \textcolor{comment}{// Number of iterations taken}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00633}00633           iter\_taken = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00634}00634 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00635}00635           \textcolor{comment}{// We have converged (overwrites default of false)}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00636}00636           conv\_data.\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a181a6b365fb045cd70e30f193542d087}{set\_solver\_converged}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00637}00637 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00638}00638           \textcolor{comment}{// Break loop using a GO TO! This is the first (and hopefully}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00639}00639           \textcolor{comment}{// the last) one in the whole of oomph-\/lib. Here it's}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00640}00640           \textcolor{comment}{// it's actually the cleanest way to exit from these}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00641}00641           \textcolor{comment}{// nested control structures}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00642}00642           \textcolor{keywordflow}{goto} jump\_out\_of\_picard;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00643}00643         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00644}00644       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00645}00645 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00646}00646       \textcolor{comment}{// Stage 1: Freeze wall and solve single-\/physics fluid problem}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00647}00647       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00648}00648       \textcolor{comment}{// Pin the solid dofs, restore the pinned status of the fluid dofs}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00649}00649       \textcolor{comment}{// and re-\/assign the equation numbers}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00650}00650       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}{restore\_fluid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00651}00651       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_acf28573efb54e2b33101ba8cb503a5b8}{pin\_solid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00652}00652       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13a9841e0aa05bf57ec228b49b311a26}{use\_only\_fluid\_elements}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00653}00653       assign\_eqn\_numbers();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00654}00654 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00655}00655       \textcolor{comment}{// Solve the fluid problem for the current wall geometry}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00656}00656       oomph\_info << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nDOING FLUID SOLVE\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00657}00657       \textcolor{comment}{// This is a fluid solve at the moment done by a newton solve}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00658}00658       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40}{Solve\_type}} = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418ab5a200f3f251db5b62d69b7d80b98dae}{Fluid\_solve}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00659}00659       newton\_solve();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00660}00660 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00661}00661       \textcolor{comment}{// Stage 2: Freeze fluid variables and update wall shape}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00662}00662       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00663}00663 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00664}00664       \textcolor{comment}{// Now restore the pinned status of the wall and pin the fluid}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00665}00665       \textcolor{comment}{// dofs in anticipation of the wall update:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00666}00666       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}{restore\_solid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00667}00667       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a33397ef8c5410b782cc9801979812be0}{pin\_fluid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00668}00668       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a330660bc7b69c9c128bfed62b54dcf62}{use\_only\_solid\_elements}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00669}00669       assign\_eqn\_numbers();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00670}00670 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00671}00671       \textcolor{comment}{// Solve the solid problem for the wall solution}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00672}00672       oomph\_info << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nDOING SOLID SOLVE\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00673}00673       \textcolor{comment}{// This is a solid solve, at the moment done by a newton method}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00674}00674       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40}{Solve\_type}} = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418adb1f2e7a1cc45691468c5a5663ada4ca}{Solid\_solve}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00675}00675       newton\_solve();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00676}00676 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00677}00677       \textcolor{comment}{// Under-\/relax, either by classical relaxation or by Irons \& Tuck}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00678}00678       \textcolor{comment}{// Note that we are under-\/relaxing before the convergence check}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00679}00679       \textcolor{comment}{// because under-\/relaxtion may be required to acheieve any}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00680}00680       \textcolor{comment}{// kind of convergence. If the convergence check is on the RELATIVE}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00681}00681       \textcolor{comment}{// change of the residuals, however, then a small under-\/relaxation}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00682}00682       \textcolor{comment}{// parameter will cause a false convergence. You have been warned!}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00683}00683       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a9da3017952982a64496ff9c16ca7024c}{under\_relax\_solid}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00684}00684 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00685}00685       \textcolor{comment}{// Stage 3: Convergence check (possibly again after pointwise Aitken}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00686}00686       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00687}00687       \textcolor{comment}{// extrapolation)}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00688}00688       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00689}00689       \textcolor{comment}{// Assume that we are not doing Aitken acceleration}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00690}00690       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2}{Recheck\_convergence\_after\_pointwise\_aitken}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00691}00691       \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00692}00692       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00693}00693         \textcolor{comment}{// Perform any actions before the convergence check}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00694}00694         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abc1e909975df69e27f8f1435e215a842}{actions\_before\_segregated\_convergence\_check}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00695}00695 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00696}00696         \textcolor{comment}{// Get the change in the solid variables}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00697}00697         \textcolor{keywordtype}{double} rms\_change;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00698}00698         \textcolor{keywordtype}{double} max\_change;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00699}00699         \textcolor{keywordtype}{double} rms\_norm;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00700}00700         \textcolor{keywordtype}{double} max\_res = 0.0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00701}00701         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad0792ffce87f26d8963846c472f13d08}{get\_solid\_change}}(rms\_change, max\_change, rms\_norm);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00702}00702 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00703}00703 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00704}00704         \textcolor{comment}{// If we are computing the maximum global residual, do so}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00705}00705         \textcolor{keywordflow}{if} (get\_max\_global\_residual)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00706}00706         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00707}00707           clock\_t t\_start = clock();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00708}00708 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00709}00709           \textcolor{comment}{// Free all dofs so the residuals of the global equations are computed}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00710}00710           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}{restore\_solid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00711}00711           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}{restore\_fluid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00712}00712           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73}{rebuild\_monolithic\_mesh}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00713}00713           assign\_eqn\_numbers();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00714}00714 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00715}00715           \textcolor{comment}{// We are now treating this as a full solve}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00716}00716           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40}{Solve\_type}} = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d}{Full\_solve}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00717}00717 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00718}00718           \textcolor{comment}{// Get the residuals}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00719}00719           DoubleVector residual;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00720}00720           get\_residuals(residual);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00721}00721 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00722}00722           \textcolor{comment}{// Get maximum residuals, using our own abscmp function}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00723}00723           max\_res = residual.max();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00724}00724 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00725}00725           clock\_t t\_end = clock();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00726}00726           cpu\_for\_global\_residual += double(t\_end -\/ t\_start) / CLOCKS\_PER\_SEC;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00727}00727         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00728}00728 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00729}00729         oomph\_info << \textcolor{stringliteral}{"{}==================================================\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00730}00730         oomph\_info << \textcolor{stringliteral}{"{}Iteration             : "{}} << iter << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00731}00731         oomph\_info << \textcolor{stringliteral}{"{}RMS  change           :       "{}} << rms\_change}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00732}00732                    << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00733}00733         oomph\_info << \textcolor{stringliteral}{"{}Max. change           :       "{}} << max\_change}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00734}00734                    << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00735}00735         oomph\_info << \textcolor{stringliteral}{"{}RMS norm              :       "{}} << rms\_norm << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00736}00736         \textcolor{keywordflow}{if} (get\_max\_global\_residual)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00737}00737         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00738}00738           oomph\_info << \textcolor{stringliteral}{"{}Max. global residual  :       "{}} << max\_res}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00739}00739                      << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00740}00740         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00741}00741         oomph\_info << \textcolor{stringliteral}{"{}==================================================\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00742}00742 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00743}00743         \textcolor{comment}{// Check for convergence}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00744}00744         \textcolor{keywordflow}{switch} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a971ddd09518a1771ae3a6ed85a51514e}{Convergence\_criterion}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00745}00745         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00746}00746           \textcolor{keywordflow}{case} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc}{Assess\_convergence\_based\_on\_absolute\_solid\_change}}:}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00747}00747             tol\_achieved = max\_change;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00748}00748             \textcolor{keywordflow}{if} (tol\_achieved < \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00749}00749             \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00750}00750               oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00751}00751                 << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n/////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00752}00752                    \textcolor{stringliteral}{"{}///"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00753}00753                 << \textcolor{stringliteral}{"{}\(\backslash\)nPicard iteration converged after "{}} << iter << \textcolor{stringliteral}{"{} steps!"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00754}00754                 << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00755}00755                 << \textcolor{stringliteral}{"{}Convergence was based on absolute change in solid dofs \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00756}00756                 << \textcolor{stringliteral}{"{}being less than "{}} << \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}} << \textcolor{stringliteral}{"{}."{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00757}00757                 << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00758}00758                 << \textcolor{stringliteral}{"{}////////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00759}00759                    \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00760}00760                 << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00761}00761               converged = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00762}00762             \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00763}00763             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00764}00764 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00765}00765 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00766}00766           \textcolor{keywordflow}{case} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a735439a264d7a63a310e12f384d5a081}{Assess\_convergence\_based\_on\_relative\_solid\_change}}:}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00767}00767             tol\_achieved = std::fabs(rms\_change / rms\_norm);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00768}00768             \textcolor{keywordflow}{if} (tol\_achieved < \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00769}00769             \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00770}00770               oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00771}00771                 << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n/////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00772}00772                    \textcolor{stringliteral}{"{}//"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00773}00773                 << \textcolor{stringliteral}{"{}\(\backslash\)nPicard iteration converged after "{}} << iter << \textcolor{stringliteral}{"{} steps!"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00774}00774                 << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00775}00775                 << \textcolor{stringliteral}{"{}Convergence was based on relative change in solid dofs \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00776}00776                 << \textcolor{stringliteral}{"{}being less than "{}} << \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}} << \textcolor{stringliteral}{"{}."{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00777}00777                 << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00778}00778                 << \textcolor{stringliteral}{"{}////////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00779}00779                    \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00780}00780                 << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00781}00781               converged = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00782}00782             \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00783}00783             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00784}00784 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00785}00785           \textcolor{keywordflow}{case} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd}{Assess\_convergence\_based\_on\_max\_global\_residual}}:}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00786}00786             tol\_achieved = max\_res;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00787}00787             \textcolor{keywordflow}{if} (tol\_achieved < \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00788}00788             \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00789}00789               oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00790}00790                 << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n/////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00791}00791                    \textcolor{stringliteral}{"{}///"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00792}00792                 << \textcolor{stringliteral}{"{}\(\backslash\)nPicard iteration converged after "{}} << iter << \textcolor{stringliteral}{"{} steps!"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00793}00793                 << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00794}00794                 << \textcolor{stringliteral}{"{}Convergence was based on max. residual of coupled eqns \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00795}00795                 << \textcolor{stringliteral}{"{}being less than "{}} << \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}} << \textcolor{stringliteral}{"{}."{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00796}00796                 << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00797}00797                 << \textcolor{stringliteral}{"{}////////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00798}00798                    \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00799}00799                 << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00800}00800               converged = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00801}00801             \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00802}00802             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00803}00803         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00804}00804 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00805}00805         \textcolor{comment}{// If converged bail out}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00806}00806         \textcolor{keywordflow}{if} (converged)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00807}00807         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00808}00808           \textcolor{comment}{// Number of iterations taken}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00809}00809           iter\_taken = iter;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00810}00810 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00811}00811           \textcolor{comment}{// We have converged (overwrites default of false)}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00812}00812           conv\_data.\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a181a6b365fb045cd70e30f193542d087}{set\_solver\_converged}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00813}00813 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00814}00814           \textcolor{comment}{// Break loop using a GO TO! This is the first (and hopefully}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00815}00815           \textcolor{comment}{// the last) one in the whole of oomph-\/lib. Here it's}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00816}00816           \textcolor{comment}{// it's actually the cleanest way to exit from these}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00817}00817           \textcolor{comment}{// nested control structures}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00818}00818           \textcolor{keywordflow}{goto} jump\_out\_of\_picard;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00819}00819         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00820}00820 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00821}00821         \textcolor{comment}{// Store the current values of the solid dofs as reference values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00822}00822         \textcolor{comment}{// and for the pointwise Aitken extrapolation}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00823}00823         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af6a9e7b6f13b86bf86b65cfb7c4f966f}{store\_solid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00824}00824 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00825}00825         \textcolor{comment}{// Correct wall shape by pointwise Aitken extrapolation if possible}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00826}00826         \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00827}00827         \textcolor{comment}{// and desired}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00828}00828         \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00829}00829         \textcolor{comment}{// This is an acceleration method for the (possibly under-\/relaxed)}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00830}00830         \textcolor{comment}{// sequence of iterates.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00831}00831         \textcolor{keywordflow}{if} ((3 == \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}{Pointwise\_aitken\_counter}}) \&\& (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a16f0551d5e9dbe5b211bb3b05e80f276}{Use\_pointwise\_aitken}}) \&\&}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00832}00832             (iter > \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a47bcf35aed40bbb7e1c3778b8dfad501}{Pointwise\_aitken\_start}}))}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00833}00833         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00834}00834           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a99a457e1b3c17e9a08590db163eb7118}{pointwise\_aitken\_extrapolate}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00835}00835 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00836}00836           \textcolor{comment}{// Repeat the convergence check}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00837}00837           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2}{Recheck\_convergence\_after\_pointwise\_aitken}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00838}00838         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00839}00839         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00840}00840         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00841}00841           \textcolor{comment}{// Didn't change anything: Don't repeat the convergence check}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00842}00842           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2}{Recheck\_convergence\_after\_pointwise\_aitken}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00843}00843         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00844}00844       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00845}00845       \textcolor{comment}{// Repeat convergence while we are doing aitken extrapolation}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00846}00846       \textcolor{keywordflow}{while} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0cef79bdf839668a2145e9fe5f77a5f2}{Recheck\_convergence\_after\_pointwise\_aitken}});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00847}00847 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00848}00848     \} \textcolor{comment}{// End of loop over iterations}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00849}00849 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00850}00850 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00851}00851     \textcolor{comment}{// Jump address for converged or diverged iteration}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00852}00852   jump\_out\_of\_picard:}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00853}00853 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00854}00854     \textcolor{comment}{// Reset everything}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00855}00855     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6da202671582bf7bf13a3dceb115385f}{restore\_solid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00856}00856     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_abbf4987f2891218d8efcf53de6150425}{restore\_fluid\_dofs}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00857}00857     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a61cad9a0a75f2999c0529caa9cac2b73}{rebuild\_monolithic\_mesh}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00858}00858     assign\_eqn\_numbers();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00859}00859     \textcolor{comment}{// This is a full solve again}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00860}00860     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_af238c6f11f6d4aacd2ff6e0dea917d40}{Solve\_type}} = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a263f8553427533dc831bd420b8fbf418a0a2ec06d36907f018f82176e8256e76d}{Full\_solve}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00861}00861 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00862}00862     \textcolor{comment}{// Do any updates that are required}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00863}00863     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a284fb37276735a73bca0467fa2e44909}{actions\_after\_segregated\_solve}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00864}00864 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00865}00865     \textcolor{comment}{// Number of iterations (either this is still Max\_iter from}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00866}00866     \textcolor{comment}{// the initialisation or it's been overwritten on convergence)}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00867}00867     conv\_data.\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_ad3b22721faf79f075d6f27dd7c0f5106}{niter}}() = iter\_taken;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00868}00868 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00869}00869     \textcolor{comment}{// Total cpu time}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00870}00870     clock\_t t\_total\_end = clock();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00871}00871     conv\_data.\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_a460e55b0cafe7e82578688d11f0b90ee}{cpu\_total}}() =}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00872}00872       double(t\_total\_end -\/ t\_total\_start) / CLOCKS\_PER\_SEC;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00873}00873 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00874}00874     \textcolor{comment}{// Total essential cpu time (exluding doc etc)}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00875}00875     conv\_data.\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_ad1af3a90edf3bab3ff1a065c3758fd77}{essential\_cpu\_total}}() = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_adaaaa08352182dc5e0a38c7003cb7a6b}{t\_spent\_on\_actual\_solve}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00876}00876 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00877}00877     \textcolor{comment}{// cpu time for check/doc of global residual}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00878}00878     conv\_data.\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_ab0d4a14936be023585174caa6a13fc73}{cpu\_for\_global\_residual}}() = cpu\_for\_global\_residual;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00879}00879 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00880}00880     \textcolor{comment}{// Final tolerance achieved by the iteration}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00881}00881     conv\_data.\mbox{\hyperlink{classoomph_1_1PicardConvergenceData_abe2279ce218f0321a227179bc66524eb}{tol\_achieved}}() = tol\_achieved;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00882}00882 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00883}00883     \textcolor{comment}{// Doc non-\/convergence}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00884}00884     \textcolor{keywordflow}{if} (!converged)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00885}00885     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00886}00886       \textcolor{keywordflow}{switch} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a971ddd09518a1771ae3a6ed85a51514e}{Convergence\_criterion}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00887}00887       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00888}00888         \textcolor{keywordflow}{case} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a96434fdb328f1440d763eb901f0e1dcc}{Assess\_convergence\_based\_on\_absolute\_solid\_change}}:}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00889}00889           oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00890}00890             << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n////////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00891}00891             << \textcolor{stringliteral}{"{}\(\backslash\)nPicard iteration did not converge after "{}} << iter\_taken}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00892}00892             << \textcolor{stringliteral}{"{} steps!"{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00893}00893             << \textcolor{stringliteral}{"{}Convergence was based on absolute change in solid dofs \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00894}00894             << \textcolor{stringliteral}{"{}being less than "{}} << \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}} << \textcolor{stringliteral}{"{} "{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00895}00895             << \textcolor{stringliteral}{"{}but we achieved only "{}} << tol\_achieved << \textcolor{stringliteral}{"{}."{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00896}00896             << \textcolor{stringliteral}{"{}////////////////////////////////////////////////////////\(\backslash\)n\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00897}00897             << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00898}00898           \textcolor{comment}{// Throw an error indicating if we ran out of iterations}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00899}00899           \textcolor{keywordflow}{if} (iter\_taken == \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805}{Max\_picard}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00900}00900           \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00901}00901             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1SegregatedSolverError}{SegregatedSolverError}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00902}00902           \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00903}00903           \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00904}00904           \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00905}00905             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1SegregatedSolverError}{SegregatedSolverError}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00906}00906           \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00907}00907           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00908}00908 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00909}00909 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00910}00910         \textcolor{keywordflow}{case} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373a735439a264d7a63a310e12f384d5a081}{Assess\_convergence\_based\_on\_relative\_solid\_change}}:}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00911}00911           oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00912}00912             << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n///////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00913}00913             << \textcolor{stringliteral}{"{}\(\backslash\)nPicard iteration did not converge after "{}} << iter\_taken}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00914}00914             << \textcolor{stringliteral}{"{} steps!"{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00915}00915             << \textcolor{stringliteral}{"{}Convergence was based on relative change in solid dofs \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00916}00916             << \textcolor{stringliteral}{"{}being less than "{}} << \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}} << \textcolor{stringliteral}{"{} "{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00917}00917             << \textcolor{stringliteral}{"{}but we achieved only "{}} << tol\_achieved << \textcolor{stringliteral}{"{}."{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00918}00918             << \textcolor{stringliteral}{"{}////////////////////////////////////////////////////////\(\backslash\)n\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00919}00919             << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00920}00920           \textcolor{comment}{// Throw an error indicating if we ran out of iterations}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00921}00921           \textcolor{keywordflow}{if} (iter\_taken == \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805}{Max\_picard}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00922}00922           \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00923}00923             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1SegregatedSolverError}{SegregatedSolverError}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00924}00924           \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00925}00925           \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00926}00926           \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00927}00927             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1SegregatedSolverError}{SegregatedSolverError}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00928}00928           \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00929}00929           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00930}00930 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00931}00931         \textcolor{keywordflow}{case} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a06634a6823bb5062d11e97f0be78f373aaf32b15e9b1cc097ef3acff8a196bbbd}{Assess\_convergence\_based\_on\_max\_global\_residual}}:}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00932}00932           oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00933}00933             << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)n////////////////////////////////////////////////////////"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00934}00934             << \textcolor{stringliteral}{"{}\(\backslash\)nPicard iteration did not converge after "{}} << iter\_taken}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00935}00935             << \textcolor{stringliteral}{"{} steps!"{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00936}00936             << \textcolor{stringliteral}{"{}Convergence was based on max. residual of coupled eqns \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00937}00937             << \textcolor{stringliteral}{"{}being less than "{}} << \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad9f2f249e0886878f096926b2cfca74b}{Convergence\_tolerance}} << \textcolor{stringliteral}{"{} "{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00938}00938             << \textcolor{stringliteral}{"{}but we achieved only "{}} << tol\_achieved << \textcolor{stringliteral}{"{}."{}} << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00939}00939 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00940}00940             << \textcolor{stringliteral}{"{}////////////////////////////////////////////////////////\(\backslash\)n\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00941}00941             << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00942}00942           \textcolor{comment}{// Throw an error indicating if we ran out of iterations}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00943}00943           \textcolor{keywordflow}{if} (iter\_taken == \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa2a06cb9517d1f183cdbaa20ea077805}{Max\_picard}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00944}00944           \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00945}00945             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1SegregatedSolverError}{SegregatedSolverError}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00946}00946           \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00947}00947           \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00948}00948           \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00949}00949             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classoomph_1_1SegregatedSolverError}{SegregatedSolverError}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00950}00950           \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00951}00951           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00952}00952       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00953}00953     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00954}00954 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00955}00955     \textcolor{keywordflow}{return} conv\_data;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00956}00956   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00957}00957 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00958}00958 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00959}00959   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00960}00960 \textcolor{comment}{  /// Segregated fixed point solver with optional pointwise Aitken acceleration}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00961}00961 \textcolor{comment}{  /// on selected solid dofs. Returns PicardConvergenceData object}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00962}00962 \textcolor{comment}{  /// that contains the vital stats of the iteration.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00963}00963 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00964}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f8145df86358916df505e2b513caf6a}{00964}}   \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{PicardConvergenceData}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f8145df86358916df505e2b513caf6a}{SegregatableFSIProblem::steady\_segregated\_solve}}()}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00965}00965   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00966}00966     \textcolor{comment}{// Find out how many timesteppers there are}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00967}00967     \textcolor{keywordtype}{unsigned} n\_time\_steppers = ntime\_stepper();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00968}00968 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00969}00969     \textcolor{comment}{// Vector of bools to store the is\_steady status of the various}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00970}00970     \textcolor{comment}{// timesteppers when we came in here}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00971}00971     std::vector<bool> was\_steady(n\_time\_steppers);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00972}00972 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00973}00973     \textcolor{comment}{// Loop over them all and make them (temporarily) static}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00974}00974     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_time\_steppers; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00975}00975     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00976}00976       was\_steady[i] = time\_stepper\_pt(i)-\/>is\_steady();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00977}00977       time\_stepper\_pt(i)-\/>make\_steady();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00978}00978     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00979}00979 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00980}00980     \textcolor{comment}{// Create object to doc convergence stats}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00981}00981     \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{PicardConvergenceData}} conv\_data;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00982}00982 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00983}00983     \textcolor{comment}{// Solve the non-\/linear problem by the segregated solver}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00984}00984     \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00985}00985     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00986}00986       conv\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}{segregated\_solve}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00987}00987     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00988}00988     \textcolor{comment}{// Catch any exceptions thrown in the segregated solver}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00989}00989     \textcolor{keywordflow}{catch} (\mbox{\hyperlink{classoomph_1_1SegregatedSolverError}{SegregatedSolverError}}\& error)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00990}00990     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00991}00991       \textcolor{keywordflow}{if} (!error.\mbox{\hyperlink{classoomph_1_1SegregatedSolverError_ad3aa39f2cc87179429a16373f197f600}{Ran\_out\_of\_iterations}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00992}00992       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00993}00993         std::ostringstream error\_stream;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00994}00994         error\_stream << \textcolor{stringliteral}{"{}Error occured in Segregated solver. "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00995}00995         \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00996}00996           error\_stream.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00997}00997       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00998}00998       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l00999}00999       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01000}01000         oomph\_info << \textcolor{stringliteral}{"{}Note: Ran out of iterations but continuing anyway"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01001}01001                    << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01002}01002       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01003}01003     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01004}01004 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01005}01005     \textcolor{comment}{// Reset the is\_steady status of all timesteppers that}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01006}01006     \textcolor{comment}{// weren't already steady when we came in here and reset their}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01007}01007     \textcolor{comment}{// weights}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01008}01008     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_time\_steppers; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01009}01009     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01010}01010       \textcolor{keywordflow}{if} (!was\_steady[i])}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01011}01011       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01012}01012         time\_stepper\_pt(i)-\/>undo\_make\_steady();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01013}01013       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01014}01014     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01015}01015 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01016}01016     \textcolor{comment}{// Since we performed a steady solve, the history values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01017}01017     \textcolor{comment}{// now have to be set as if we had performed an impulsive start from}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01018}01018     \textcolor{comment}{// the current solution. This ensures that the time-\/derivatives}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01019}01019     \textcolor{comment}{// evaluate to zero even now that the timesteppers have been}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01020}01020     \textcolor{comment}{// reactivated.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01021}01021     assign\_initial\_values\_impulsive();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01022}01022 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01023}01023     \textcolor{comment}{// Return the convergence data}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01024}01024     \textcolor{keywordflow}{return} conv\_data;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01025}01025   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01026}01026 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01027}01027 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01028}01028   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01029}01029 \textcolor{comment}{  /// Segregated fixed point solver with optional pointwise Aitken acceleration}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01030}01030 \textcolor{comment}{  /// on selected solid dofs. Returns PicardConvergenceData object}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01031}01031 \textcolor{comment}{  /// that contains the vital stats of the iteration.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01032}01032 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01033}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}{01033}}   \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{PicardConvergenceData}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}{SegregatableFSIProblem::unsteady\_segregated\_solve}}(}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01034}01034     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& dt)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01035}01035   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01036}01036     \textcolor{comment}{// We shift the values, so shift\_values is true}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01037}01037     \textcolor{keywordflow}{return} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}{unsteady\_segregated\_solve}}(dt, \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01038}01038   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01039}01039 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01040}01040   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01041}01041 \textcolor{comment}{  /// Segregated fixed point solver with optional pointwise Aitken acceleration}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01042}01042 \textcolor{comment}{  /// on selected solid dofs. Returns PicardConvergenceData object}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01043}01043 \textcolor{comment}{  /// that contains the vital stats of the iteration.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01044}01044 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01045}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a17f019ebaf83e170219bf605a8554111}{01045}}   \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{PicardConvergenceData}} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aae43b43dbc197d238535bcb5c3acf168}{SegregatableFSIProblem::unsteady\_segregated\_solve}}(}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01046}01046     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& dt, \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& shift\_values)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01047}01047   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01048}01048     \textcolor{comment}{// Shift the time values and the dts according to the control flag}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01049}01049     \textcolor{keywordflow}{if} (shift\_values)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01050}01050     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01051}01051       shift\_time\_values();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01052}01052     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01053}01053 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01054}01054     \textcolor{comment}{// Advance global time and set current value of dt}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01055}01055     time\_pt()-\/>time() += dt;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01056}01056     time\_pt()-\/>dt() = dt;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01057}01057 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01058}01058     \textcolor{comment}{// Find out how many timesteppers there are}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01059}01059     \textcolor{keywordtype}{unsigned} n\_time\_steppers = ntime\_stepper();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01060}01060 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01061}01061     \textcolor{comment}{// Loop over them all and set the weights}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01062}01062     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_time\_steppers; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01063}01063     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01064}01064       time\_stepper\_pt(i)-\/>set\_weights();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01065}01065     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01066}01066 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01067}01067     \textcolor{comment}{// Now update anything that needs updating before the timestep}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01068}01068     \textcolor{comment}{// This could be time-\/dependent boundary conditions, for example.}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01069}01069     actions\_before\_implicit\_timestep();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01070}01070 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01071}01071     \textcolor{comment}{// Extrapolate the solid data and then update fluid mesh during unsteady run}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01072}01072     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0e67b39cdae35ea25ef97e5e768aa60a}{extrapolate\_solid\_data}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01073}01073 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01074}01074     \textcolor{comment}{// Create object to doc convergence stats}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01075}01075     \mbox{\hyperlink{classoomph_1_1PicardConvergenceData}{PicardConvergenceData}} conv\_data;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01076}01076 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01077}01077     \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01078}01078     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01079}01079       \textcolor{comment}{// Solve the non-\/linear problem for this timestep with Newton's method}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01080}01080       conv\_data = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a87a69561674c1e596bb205e0fc4a387f}{segregated\_solve}}();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01081}01081     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01082}01082     \textcolor{comment}{// Catch any exceptions thrown in the segregated solver}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01083}01083     \textcolor{keywordflow}{catch} (\mbox{\hyperlink{classoomph_1_1SegregatedSolverError}{SegregatedSolverError}}\& error)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01084}01084     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01085}01085       \textcolor{keywordflow}{if} (!error.\mbox{\hyperlink{classoomph_1_1SegregatedSolverError_ad3aa39f2cc87179429a16373f197f600}{Ran\_out\_of\_iterations}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01086}01086       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01087}01087         std::ostringstream error\_stream;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01088}01088         error\_stream << \textcolor{stringliteral}{"{}Error occured in Segregated solver. "{}} << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01089}01089         \textcolor{keywordflow}{throw} OomphLibError(}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01090}01090           error\_stream.str(), OOMPH\_CURRENT\_FUNCTION, OOMPH\_EXCEPTION\_LOCATION);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01091}01091       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01092}01092       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01093}01093       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01094}01094         oomph\_info << \textcolor{stringliteral}{"{}Note: Ran out of iterations but continuing anyway"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01095}01095                    << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01096}01096       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01097}01097     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01098}01098 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01099}01099     \textcolor{comment}{// Now update anything that needs updating after the timestep}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01100}01100     actions\_after\_implicit\_timestep();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01101}01101 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01102}01102     \textcolor{keywordflow}{return} conv\_data;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01103}01103   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01104}01104 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01105}01105 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01106}01106   \textcolor{comment}{//============================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01107}01107 \textcolor{comment}{  /// Setup segregated solver, using the information provided by the user}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01108}01108 \textcolor{comment}{  /// in his/her implementation of the pure virtual function}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01109}01109 \textcolor{comment}{  /// identify\_fluid\_and\_solid\_dofs(...).}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01110}01110 \textcolor{comment}{}  \textcolor{comment}{//============================================================================}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01111}\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a12e662227e5daf656244a531f40022f9}{01111}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a12e662227e5daf656244a531f40022f9}{SegregatableFSIProblem::setup\_segregated\_solver}}(}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01112}01112     \textcolor{keyword}{const} \textcolor{keywordtype}{bool}\& full\_setup\_of\_fluid\_and\_solid\_dofs)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01113}01113   \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01114}01114     \textcolor{comment}{// If we are doing a full setup}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01115}01115     \textcolor{keywordflow}{if} (full\_setup\_of\_fluid\_and\_solid\_dofs)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01116}01116     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01117}01117       \textcolor{comment}{// Identify the fluid and solid Data}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01118}01118       Vector<Data*> fluid\_data\_pt;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01119}01119       Vector<Data*> solid\_data\_pt;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01120}01120       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6bb2c76228b8f392729e41a288e72948}{identify\_fluid\_and\_solid\_dofs}}(}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01121}01121         fluid\_data\_pt, solid\_data\_pt, \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}{Fluid\_mesh\_pt}}, \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}{Solid\_mesh\_pt}});}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01122}01122 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01123}01123       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ada29fa4ef2ae7b6460887f8f04eba6bf}{Fluid\_mesh\_pt}} == 0)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01124}01124       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01125}01125         oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01126}01126           << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01127}01127           << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01128}01128           << \textcolor{stringliteral}{"{}Warning: Your implementation of the pure virtual\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01129}01129           << \textcolor{stringliteral}{"{}         function identify\_fluid\_and\_solid\_dofs(...)\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01130}01130           << \textcolor{stringliteral}{"{}         returned a NULL pointer for Fluid\_mesh\_pt.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01131}01131           << \textcolor{stringliteral}{"{}         -\/-\/> The fluid elements will remain activated\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01132}01132           << \textcolor{stringliteral}{"{}         during the solid solve. This is inefficient!\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01133}01133           << \textcolor{stringliteral}{"{}         You should combine all fluid elements into a combined\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01134}01134           << \textcolor{stringliteral}{"{}         mesh and specify this mesh in your\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01135}01135           << \textcolor{stringliteral}{"{}         implementation of \(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01136}01136           << \textcolor{stringliteral}{"{}         "{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01137}01137              \textcolor{stringliteral}{"{}SegregatableFSIProblem::identify\_fluid\_and\_solid\_dofs(...)"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01138}01138           << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01139}01139           << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01140}01140       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01141}01141 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01142}01142 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01143}01143       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a3e7f6f5452767279d21ccbfc6336ef12}{Solid\_mesh\_pt}} == 0)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01144}01144       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01145}01145         oomph\_info}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01146}01146           << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01147}01147           << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01148}01148           << \textcolor{stringliteral}{"{}Warning: Your implementation of the pure virtual\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01149}01149           << \textcolor{stringliteral}{"{}         function identify\_fluid\_and\_solid\_dofs(...)\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01150}01150           << \textcolor{stringliteral}{"{}         returned a NULL pointer for Solid\_mesh\_pt.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01151}01151           << \textcolor{stringliteral}{"{}         -\/-\/> The solid elements will remain activated\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01152}01152           << \textcolor{stringliteral}{"{}         during the fluid solve. This is inefficient!\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01153}01153           << \textcolor{stringliteral}{"{}         You should combine all solid elements into a combined\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01154}01154           << \textcolor{stringliteral}{"{}         mesh and specify this mesh in your\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01155}01155           << \textcolor{stringliteral}{"{}         implementation of \(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01156}01156           << \textcolor{stringliteral}{"{}         "{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01157}01157              \textcolor{stringliteral}{"{}SegregatableFSIProblem::identify\_fluid\_and\_solid\_dofs(...)"{}}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01158}01158           << std::endl}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01159}01159           << std::endl;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01160}01160       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01161}01161 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01162}01162       \textcolor{comment}{// Back up the pointers to the submeshes in the original problem}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01163}01163       \textcolor{comment}{// so we can restore the problem when we're done}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01164}01164       \textcolor{keywordtype}{unsigned} orig\_n\_sub\_mesh = nsub\_mesh();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01165}01165       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}{Orig\_sub\_mesh\_pt}}.resize(orig\_n\_sub\_mesh);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01166}01166       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < orig\_n\_sub\_mesh; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01167}01167       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01168}01168         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a13ff18eb51b4eeb727443931cd19bac9}{Orig\_sub\_mesh\_pt}}[i] = mesh\_pt(i);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01169}01169       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01170}01170 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01171}01171       \textcolor{comment}{// Fluid}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01172}01172       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01173}01173 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01174}01174       \textcolor{comment}{// Reset}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01175}01175       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}.clear();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01176}01176       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}{Fluid\_value\_is\_pinned}}.clear();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01177}01177 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01178}01178       \textcolor{comment}{// Make space for fluid data items}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01179}01179       \textcolor{keywordtype}{unsigned} n\_fluid\_data = fluid\_data\_pt.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01180}01180       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}.resize(n\_fluid\_data);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01181}01181       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}{Fluid\_value\_is\_pinned}}.resize(n\_fluid\_data);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01182}01182 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01183}01183       \textcolor{comment}{// Counter for number of fluid values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01184}01184       \textcolor{keywordtype}{unsigned} n\_fluid\_values = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01185}01185 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01186}01186       \textcolor{comment}{// Loop over fluid data}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01187}01187       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_fluid\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01188}01188       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01189}01189         \textcolor{comment}{// Copy data}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01190}01190         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a1aac015f9f0e9c1b925a534278dc1e55}{Fluid\_data\_pt}}[i] = fluid\_data\_pt[i];}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01191}01191 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01192}01192         \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01193}01193         \textcolor{keywordtype}{unsigned} n\_value = fluid\_data\_pt[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01194}01194         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}{Fluid\_value\_is\_pinned}}[i].resize(n\_value);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01195}01195 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01196}01196         \textcolor{comment}{// Copy pinned status for all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01197}01197         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01198}01198         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01199}01199           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa39b7f8499588b28b9b490771c4bcff2}{Fluid\_value\_is\_pinned}}[i][k] = fluid\_data\_pt[i]-\/>is\_pinned(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01200}01200 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01201}01201           \textcolor{comment}{// Increment counter for number of fluid values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01202}01202           n\_fluid\_values++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01203}01203         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01204}01204       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01205}01205 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01206}01206 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01207}01207       \textcolor{comment}{// Solid}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01208}01208       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01209}01209 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01210}01210       \textcolor{comment}{// Reset}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01211}01211       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.clear();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01212}01212       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}{Solid\_value\_is\_pinned}}.clear();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01213}01213       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}{Previous\_solid\_value}}.clear();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01214}01214       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}{Pointwise\_aitken\_solid\_value}}.clear();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01215}01215       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}{Del\_irons\_and\_tuck}}.clear();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01216}01216 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01217}01217 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01218}01218       \textcolor{keywordtype}{unsigned} n\_solid\_data = solid\_data\_pt.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01219}01219 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01220}01220       \textcolor{comment}{// Make space for solid data items}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01221}01221       \textcolor{keywordtype}{unsigned} nsolid\_data = solid\_data\_pt.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01222}01222       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}.resize(nsolid\_data);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01223}01223       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}{Solid\_value\_is\_pinned}}.resize(nsolid\_data);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01224}01224 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01225}01225       \textcolor{comment}{// Counter for number of solid values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01226}01226       \textcolor{keywordtype}{unsigned} n\_solid\_values = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01227}01227 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01228}01228       \textcolor{comment}{// Loop over solid data}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01229}01229       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_solid\_data; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01230}01230       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01231}01231         \textcolor{comment}{// Copy data}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01232}01232         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aca9ab5f800334761ae470453ef476067}{Solid\_data\_pt}}[i] = solid\_data\_pt[i];}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01233}01233 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01234}01234         \textcolor{comment}{// Number of values stored at this Data item:}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01235}01235         \textcolor{keywordtype}{unsigned} n\_value = solid\_data\_pt[i]-\/>nvalue();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01236}01236         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}{Solid\_value\_is\_pinned}}[i].resize(n\_value);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01237}01237 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01238}01238         \textcolor{comment}{// Copy pinned status for all values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01239}01239         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} k = 0; k < n\_value; k++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01240}01240         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01241}01241           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a0f5d6ec62fd33f83600b69c9fcb1f4ed}{Solid\_value\_is\_pinned}}[i][k] = solid\_data\_pt[i]-\/>is\_pinned(k);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01242}01242 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01243}01243           \textcolor{comment}{// Increment counter for number of solid values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01244}01244           n\_solid\_values++;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01245}01245         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01246}01246       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01247}01247 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01248}01248       \textcolor{comment}{// Make space for previous solid values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01249}01249       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a6e056ff378e38504d5e9d522820ca8cf}{Previous\_solid\_value}}.resize(n\_solid\_values);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01250}01250 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01251}01251       \textcolor{comment}{// Allocate storage and initialise Irons and Tuck extrapolation}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01252}01252       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a23930085f18e43926b6afcbbdd2a0509}{Use\_irons\_and\_tuck\_extrapolation}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01253}01253       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01254}01254         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}{Del\_irons\_and\_tuck}}.resize(n\_solid\_values);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01255}01255       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01256}01256 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01257}01257       \textcolor{comment}{// Make space for pointwise Aitken extrapolation}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01258}01258       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a16f0551d5e9dbe5b211bb3b05e80f276}{Use\_pointwise\_aitken}})}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01259}01259       \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01260}01260         \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}{Pointwise\_aitken\_solid\_value}}.resize(n\_solid\_values);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01261}01261         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_solid\_values; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01262}01262         \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01263}01263           \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_aa193977e4617aee9906e59bdd31f2263}{Pointwise\_aitken\_solid\_value}}[i].resize(3);}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01264}01264         \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01265}01265       \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01266}01266 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01267}01267     \} \textcolor{comment}{// End of full setup}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01268}01268 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01269}01269 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01270}01270     \textcolor{comment}{// Initialise Irons and Tuck relaxation factor}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01271}01271     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a7568103d53df9c84b86fdf41885cf289}{R\_irons\_and\_tuck}} = 1.0 -\/ \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_adc81fa8a44920be1b41dcea5008db7ed}{Omega\_relax}};}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01272}01272 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01273}01273     \textcolor{comment}{// Initialise Irons and Tuck delta values}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01274}01274     \textcolor{keywordtype}{unsigned} n\_del = \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}{Del\_irons\_and\_tuck}}.size();}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01275}01275     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i = 0; i < n\_del; i++)}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01276}01276     \{}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01277}01277       \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_a8f4545c1a2647486d550499aa89e3136}{Del\_irons\_and\_tuck}}[i] = 1.0e20;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01278}01278     \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01279}01279 }
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01280}01280     \textcolor{comment}{// Initialise counter for the number of pointwise Aitken values stored}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01281}01281     \mbox{\hyperlink{classoomph_1_1SegregatableFSIProblem_ad92eead7c5dc21884292a5a501c71388}{Pointwise\_aitken\_counter}} = 0;}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01282}01282   \}}
+\DoxyCodeLine{\Hypertarget{segregated__fsi__solver_8cc_source_l01283}01283 \} \textcolor{comment}{// namespace oomph}}
+
+\end{DoxyCode}

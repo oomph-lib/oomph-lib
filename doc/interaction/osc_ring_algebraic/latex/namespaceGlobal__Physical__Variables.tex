@@ -11,7 +11,7 @@ Namespace for physical parameters.
 void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5928252d8e7440b329065c223926d4d2}{set\+\_\+params}} ()
 \begin{DoxyCompactList}\small\item\em Set the parameters that are used in the code as a function of the Womersley number, the density ratio and H. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa08c246eac99f59be33ef4a6ee924990}{pcos\+\_\+load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Non-\/\+FSI load function, a constant external pressure plus a (small) sinusoidal perturbation of wavenumber two. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,6 +40,10 @@ double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd723
 \doxysubsection{Detailed Description}
 Namespace for physical parameters. 
 
+///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////
+
+Namespace for physical parameters 
+
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_aa08c246eac99f59be33ef4a6ee924990}\label{namespaceGlobal__Physical__Variables_aa08c246eac99f59be33ef4a6ee924990}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!pcos\_load@{pcos\_load}}
@@ -47,17 +51,21 @@ Namespace for physical parameters.
 \doxysubsubsection{\texorpdfstring{pcos\_load()}{pcos\_load()}}
 {\footnotesize\ttfamily void Global\+\_\+\+Physical\+\_\+\+Variables\+::pcos\+\_\+load (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{xi,  }\item[{const Vector$<$ double $>$ \&}]{x,  }\item[{const Vector$<$ double $>$ \&}]{N,  }\item[{Vector$<$ double $>$ \&}]{load }\end{DoxyParamCaption})}
 
-Non-\/\+F\+SI load function, a constant external pressure plus a (small) sinusoidal perturbation of wavenumber two. 
-
-Definition at line 125 of file fsi\+\_\+osc\+\_\+ring.\+cc.
 
 
-
-References oomph\+::\+Sarah\+B\+L\+::N, Pcos, and Pext.
+Non-\/\+FSI load function, a constant external pressure plus a (small) sinusoidal perturbation of wavenumber two. 
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::\+F\+S\+I\+Ring\+Problem().
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00125}{125}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
+
+
+
+References \mbox{\hyperlink{osc__ring__sarah__asymptotics_8h_source_l00043}{oomph\+::\+Sarah\+BL\+::N}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00067}{Pcos}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00058}{Pext}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem\+::\+FSIRing\+Problem()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a5928252d8e7440b329065c223926d4d2}\label{namespaceGlobal__Physical__Variables_a5928252d8e7440b329065c223926d4d2}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!set\_params@{set\_params}}
@@ -71,15 +79,15 @@ Set the parameters that are used in the code as a function of the Womersley numb
 
 
 
-Definition at line 87 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{87}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-References Alpha\+\_\+sq, Density\+\_\+ratio, H, Lambda\+\_\+sq, Nu, Pcos, Q, Re, and Re\+St.
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00052}{Alpha\+\_\+sq}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00055}{Density\+\_\+ratio}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00064}{H}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00080}{Lambda\+\_\+sq}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00061}{Nu}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00067}{Pcos}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00083}{Q}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00074}{Re}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00077}{Re\+St}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::dynamic\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{FSIRing\+Problem\+::dynamic\+\_\+run()}}.
 
 
 
@@ -96,11 +104,11 @@ Square of Womersly number (a frequency parameter)
 
 
 
-Definition at line 52 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00052}{52}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::dynamic\+\_\+run(), and set\+\_\+params().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{FSIRing\+Problem\+::dynamic\+\_\+run()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_af5163137c5b98c6ebb942973cba4e297}\label{namespaceGlobal__Physical__Variables_af5163137c5b98c6ebb942973cba4e297}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Density\_ratio@{Density\_ratio}}
@@ -114,11 +122,11 @@ Density ratio of the solid and the fluid.
 
 
 
-Definition at line 55 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00055}{55}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::dynamic\+\_\+run(), and set\+\_\+params().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{FSIRing\+Problem\+::dynamic\+\_\+run()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}\label{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!H@{H}}
@@ -132,11 +140,11 @@ Nondimensional thickness of the beam.
 
 
 
-Definition at line 64 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00064}{64}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::dynamic\+\_\+run(), F\+S\+I\+Ring\+Problem\+::\+F\+S\+I\+Ring\+Problem(), set\+\_\+params(), and F\+S\+I\+Ring\+Problem\+::set\+\_\+wall\+\_\+initial\+\_\+condition().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{FSIRing\+Problem\+::dynamic\+\_\+run()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem\+::\+FSIRing\+Problem()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00318}{FSIRing\+Problem\+::set\+\_\+wall\+\_\+initial\+\_\+condition()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}\label{namespaceGlobal__Physical__Variables_a6fe17557ceb32dd353827fba60408363}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Lambda\_sq@{Lambda\_sq}}
@@ -150,11 +158,11 @@ Timescale ratio (non-\/dimensation density)
 
 
 
-Definition at line 80 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00080}{80}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::\+F\+S\+I\+Ring\+Problem(), and set\+\_\+params().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem\+::\+FSIRing\+Problem()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}\label{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Nu@{Nu}}
@@ -168,11 +176,11 @@ Poisson ratio.
 
 
 
-Definition at line 61 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00061}{61}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by set\+\_\+params().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}\label{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Pcos@{Pcos}}
@@ -186,11 +194,11 @@ Perturbation pressure.
 
 
 
-Definition at line 67 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00067}{67}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::dynamic\+\_\+run(), pcos\+\_\+load(), and set\+\_\+params().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{FSIRing\+Problem\+::dynamic\+\_\+run()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00125}{pcos\+\_\+load()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a00f471db241ed712eaefcbaf4fb1d6a9}\label{namespaceGlobal__Physical__Variables_a00f471db241ed712eaefcbaf4fb1d6a9}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Pext@{Pext}}
@@ -204,11 +212,11 @@ External Pressure.
 
 
 
-Definition at line 58 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00058}{58}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::dynamic\+\_\+run(), and pcos\+\_\+load().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{FSIRing\+Problem\+::dynamic\+\_\+run()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00125}{pcos\+\_\+load()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}\label{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Q@{Q}}
@@ -222,11 +230,11 @@ Stress ratio.
 
 
 
-Definition at line 83 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00083}{83}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::\+F\+S\+I\+Ring\+Problem(), and set\+\_\+params().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem\+::\+FSIRing\+Problem()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}\label{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Re@{Re}}
@@ -240,11 +248,11 @@ Reynolds number.
 
 
 
-Definition at line 74 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00074}{74}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::\+F\+S\+I\+Ring\+Problem(), Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Osc\+Ring\+N\+St\+Problem(), set\+\_\+params(), and Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::write\+\_\+trace\+\_\+file\+\_\+header().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem\+::\+FSIRing\+Problem()}}, \mbox{\hyperlink{osc__ring__alg_8cc_source_l00209}{Osc\+Ring\+NSt\+Problem$<$ ELEMENT $>$\+::\+Osc\+Ring\+NSt\+Problem()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}, and \mbox{\hyperlink{osc__ring__alg_8cc_source_l00856}{Osc\+Ring\+NSt\+Problem$<$ ELEMENT $>$\+::write\+\_\+trace\+\_\+file\+\_\+header()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}\label{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!ReSt@{ReSt}}
@@ -258,9 +266,9 @@ Reynolds x Strouhal number.
 
 
 
-Definition at line 77 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00077}{77}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem\+::\+F\+S\+I\+Ring\+Problem(), Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Osc\+Ring\+N\+St\+Problem(), set\+\_\+params(), and Osc\+Ring\+N\+St\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::write\+\_\+trace\+\_\+file\+\_\+header().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem\+::\+FSIRing\+Problem()}}, \mbox{\hyperlink{osc__ring__alg_8cc_source_l00209}{Osc\+Ring\+NSt\+Problem$<$ ELEMENT $>$\+::\+Osc\+Ring\+NSt\+Problem()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{set\+\_\+params()}}, and \mbox{\hyperlink{osc__ring__alg_8cc_source_l00856}{Osc\+Ring\+NSt\+Problem$<$ ELEMENT $>$\+::write\+\_\+trace\+\_\+file\+\_\+header()}}.
 

@@ -1,6 +1,6 @@
 In a \href{../../driven_cavity/html/index.html}{\texttt{ previous example}} we demonstrated the solution of the 2D driven cavity problem using {\ttfamily oomph-\/lib\textquotesingle{}s} 2D Taylor-\/\+Hood and Crouzeix-\/\+Raviart Navier-\/\+Stokes elements on a uniform mesh. The computed solution was clearly under-\/resolved near the corners of the domain where the discontinuity in the velocity boundary conditions creates pressure singularities.
 
-In this example we shall re-\/solve the driven cavity problem with the refineable versions of {\ttfamily oomph-\/lib\textquotesingle{}s} quadrilateral Navier-\/\+Stokes elements -- the {\ttfamily Refineable\+Q\+Taylor\+Hood\+Element$<$2$>$} and the {\ttfamily Refineable\+Q\+Crouzeix\+Raviart\+Element$<$2$>$}. Enabling spatial adaptivity for this problem involves the same straightforward steps as for a scalar problem\+:
+In this example we shall re-\/solve the driven cavity problem with the refineable versions of {\ttfamily oomph-\/lib\textquotesingle{}s} quadrilateral Navier-\/\+Stokes elements -- the {\ttfamily Refineable\+QTaylor\+Hood\+Element$<$2$>$} and the {\ttfamily Refineable\+QCrouzeix\+Raviart\+Element$<$2$>$}. Enabling spatial adaptivity for this problem involves the same straightforward steps as for a scalar problem\+:
 \begin{DoxyItemize}
 \item The domain must be discretised with a refineable mesh, i.\+e. a mesh that is derived from the {\ttfamily Refineable\+Mesh} class.
 \item An {\ttfamily Error\+Estimator} object must be specified.
@@ -11,23 +11,26 @@ In this example we shall re-\/solve the driven cavity problem with the refineabl
 \item unpin all pressure values, e.\+g. using the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::unpin\_all\_pressure\_dofs(...)}
+
 \end{DoxyCode}
 
 \item pin a pressure degree of freedom that is known to exist (e.\+g. the first pressure degree of freedom in the first element of the mesh -- whichever element this may be), e.\+g. using the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::fix\_pressure(...)}
+
 \end{DoxyCode}
 
 \end{DoxyEnumerate}
 \item The possible presence of hanging nodes in an adapted mesh requires special treatment for elements (e.\+g. Taylor-\/\+Hood elements) in which the pressure is represented by a low-\/order interpolation between a subset of the element\textquotesingle{}s nodal values. The required tasks are performed by the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::pin\_redundant\_nodal\_pressures(...)}
+
 \end{DoxyCode}
  which should be called
 \begin{DoxyEnumerate}
 \item before assigning the equation numbers for the first time, and
 \item after every mesh adaptation.
-\end{DoxyEnumerate}\mbox{[}If the user \char`\"{}forgets\char`\"{} to call this function, a warning is issued if the library is compiled with the P\+A\+R\+A\+N\+O\+ID flag.\mbox{]}
+\end{DoxyEnumerate}\mbox{[}If the user \char`\"{}forgets\char`\"{} to call this function, a warning is issued if the library is compiled with the PARANOID flag.\mbox{]}
 \end{DoxyItemize}The driver code discussed below illustrates the use of these functions. The section \mbox{\hyperlink{index_comments}{Comments and Exercises}} provides a more detailed discussion of the technical details involved in their implementation.
 
 \DoxyHorRuler{0}
@@ -74,7 +77,7 @@ The global namespace used to define the problem parameters is identical to the o
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -82,9 +85,7 @@ The global namespace used to define the problem parameters is identical to the o
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 The main driver code is virtually identical to that in the \href{../../driven_cavity/html/index.html\#main}{\texttt{ non-\/adaptive version}}. We specify the appropriate refineable element types and use the black-\/box adaptive Newton solver, allowing for up to three levels of spatial adaptivity.
@@ -93,13 +94,13 @@ The main driver code is virtually identical to that in the \href{../../driven_ca
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for RefineableDrivenCavity test problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{adaptive__driven__cavity_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
 \DoxyCodeLine{ DocInfo doc\_info;}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set max. number of black-\/box adaptation}}
@@ -109,16 +110,16 @@ The main driver code is virtually identical to that in the \href{../../driven_ca
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Build problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classRefineableDrivenCavityProblem}{RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2>}} > \mbox{\hyperlink{adaptive__driven__cavity_8txt_a10bd72da240e0b89c69e602ae14ebe6f}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classRefineableDrivenCavityProblem}{RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2>}} > problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem with automatic adaptation}}
-\DoxyCodeLine{  \mbox{\hyperlink{adaptive__driven__cavity_8txt_a10bd72da240e0b89c69e602ae14ebe6f}{problem}}.newton\_solve(max\_adapt);}
+\DoxyCodeLine{  problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()=0;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{  \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{adaptive__driven__cavity_8txt_a10bd72da240e0b89c69e602ae14ebe6f}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classRefineableDrivenCavityProblem_a0baa1e8f1d1f6f73ef921b06a9b20836}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{ \} \textcolor{comment}{// end of Taylor Hood elements}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
@@ -126,25 +127,23 @@ The main driver code is virtually identical to that in the \href{../../driven_ca
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Build problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classRefineableDrivenCavityProblem}{RefineableDrivenCavityProblem<RefineableQCrouzeixRaviartElement<2>}} > \mbox{\hyperlink{adaptive__driven__cavity_8txt_a10bd72da240e0b89c69e602ae14ebe6f}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classRefineableDrivenCavityProblem}{RefineableDrivenCavityProblem<RefineableQCrouzeixRaviartElement<2>}} > problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem with automatic adaptation}}
-\DoxyCodeLine{  \mbox{\hyperlink{adaptive__driven__cavity_8txt_a10bd72da240e0b89c69e602ae14ebe6f}{problem}}.newton\_solve(max\_adapt);}
+\DoxyCodeLine{  problem.newton\_solve(max\_adapt);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()=1;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{adaptive__driven__cavity_8txt_a10bd72da240e0b89c69e602ae14ebe6f}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classRefineableDrivenCavityProblem_a0baa1e8f1d1f6f73ef921b06a9b20836}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{ \} \textcolor{comment}{// end of Crouzeix Raviart elements}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 Most of the problem class is identical to that in the \href{../../driven_cavity/html/index.html\#problem}{\texttt{ non-\/adaptive version of the code }}\+: We provide a constructor and destructor and use the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} to (re-\/)assign the boundary conditions.
@@ -152,8 +151,8 @@ Most of the problem class is identical to that in the \href{../../driven_cavity/
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driven cavity problem in rectangular domain, templated}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// by element type. }}
+\DoxyCodeLine{\textcolor{comment}{/// Driven cavity problem in rectangular domain, templated}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// by element type. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineableDrivenCavityProblem}{RefineableDrivenCavityProblem}} : \textcolor{keyword}{public} Problem}
@@ -170,7 +169,7 @@ Most of the problem class is identical to that in the \href{../../driven_cavity/
 \DoxyCodeLine{\textcolor{comment}{ /// Update the after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableDrivenCavityProblem_a168df1ad7b08cf8b760b6d56e9920479}{actions\_after\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve. }}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve. }}
 \DoxyCodeLine{\textcolor{comment}{ /// (Re-\/)set velocity boundary conditions just to be on the safe side...}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableDrivenCavityProblem_af83cad4653c7ac633538ebf46657659a}{actions\_before\_newton\_solve}}()}
 \DoxyCodeLine{  \{ }
@@ -180,11 +179,11 @@ Most of the problem class is identical to that in the \href{../../driven_cavity/
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Tangential flow}}
-\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;}
-\DoxyCodeLine{    mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(\mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}},1.0);}
+\DoxyCodeLine{    \textcolor{keywordtype}{unsigned} i=0;}
+\DoxyCodeLine{    mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,1.0);}
 \DoxyCodeLine{    \textcolor{comment}{// No penetration}}
-\DoxyCodeLine{    \mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=1;}
-\DoxyCodeLine{    mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(\mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}},0.0);}
+\DoxyCodeLine{    i=1;}
+\DoxyCodeLine{    mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,0.0);}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Overwrite with no flow along all other boundaries}}
@@ -194,9 +193,9 @@ Most of the problem class is identical to that in the \href{../../driven_cavity/
 \DoxyCodeLine{    \textcolor{keywordtype}{unsigned} num\_nod= mesh\_pt()-\/>nboundary\_node(ibound);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{     \{}
-\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<2;\mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
 \DoxyCodeLine{       \{}
-\DoxyCodeLine{        mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(\mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}},0.0);}
+\DoxyCodeLine{        mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>set\_value(i,0.0);}
 \DoxyCodeLine{       \}}
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{   \}}
@@ -209,7 +208,7 @@ As discussed in the introduction, we use the function {\ttfamily Problem\+::acti
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// After adaptation: Unpin pressure and pin redudant pressure dofs.}}
+\DoxyCodeLine{\textcolor{comment}{ /// After adaptation: Unpin pressure and pin redudant pressure dofs.}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Unpin all pressure dofs}}
@@ -217,9 +216,7 @@ As discussed in the introduction, we use the function {\ttfamily Problem\+::acti
 \DoxyCodeLine{    unpin\_all\_pressure\_dofs(mesh\_pt()-\/>element\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-\mbox{[}Note that this function (implemented as a static member function of the {\ttfamily Navier\+Stokes\+Equations$<$\+D\+I\+M$>$} class) unpins the pressure degrees of freedom in all elements that are specified by the input argument (a vector of pointers to the these elements). This implementation allows certain elements in a mesh to be excluded from the procedure; this is required in problems where a mesh contains multiple element types. In the present problem, the mesh contains only Navier-\/\+Stokes elements, so we pass a vector of pointers to all elements in the mesh (returned by the function {\ttfamily Mesh\+::element\+\_\+pt()}\mbox{]} to the function.\mbox{]}
+ \mbox{[}Note that this function (implemented as a static member function of the {\ttfamily Navier\+Stokes\+Equations$<$\+DIM$>$} class) unpins the pressure degrees of freedom in all elements that are specified by the input argument (a vector of pointers to the these elements). This implementation allows certain elements in a mesh to be excluded from the procedure; this is required in problems where a mesh contains multiple element types. In the present problem, the mesh contains only Navier-\/\+Stokes elements, so we pass a vector of pointers to all elements in the mesh (returned by the function {\ttfamily Mesh\+::element\+\_\+pt()}\mbox{]} to the function.\mbox{]}
 
 Following the mesh adaptation any redundant nodal pressures must be pinned, so that hanging pressure degrees of freedom are treated correctly. We note that calling this function is essential for Taylor-\/\+Hood elements. The function may be executed without any adverse effect for all other Navier-\/\+Stokes elements; see \mbox{\hyperlink{index_comments}{Comments and Exercises}} for more details on the implementation.
 
@@ -243,9 +240,7 @@ Finally, we pin a single pressure degree of freedom (the first pressure value in
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_of\_actions\_after\_adapt}}
 
 \end{DoxyCodeInclude}
-
-
-The remainder of the problem class remains as \href{../../driven_cavity/html/index.html\#problem}{\texttt{ before}}.
+ The remainder of the problem class remains as \href{../../driven_cavity/html/index.html\#problem}{\texttt{ before}}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -256,7 +251,7 @@ The remainder of the problem class remains as \href{../../driven_cavity/html/ind
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Fix pressure in element e at pressure dof pdof and set to pvalue}}
+\DoxyCodeLine{\textcolor{comment}{ /// Fix pressure in element e at pressure dof pdof and set to pvalue}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fix\_pressure(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&e, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&pdof, }
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&pvalue)}
 \DoxyCodeLine{  \{}
@@ -268,9 +263,7 @@ The remainder of the problem class remains as \href{../../driven_cavity/html/ind
 \DoxyCodeLine{\}; \textcolor{comment}{// end\_of\_problem\_class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 The constructor remains largely as \href{../../driven_cavity/html/index.html\#constructor}{\texttt{ before}}. We create an adaptive mesh, build and assign an error estimator and pin the redundant nodal pressure degrees of freedom.
@@ -278,8 +271,8 @@ The constructor remains largely as \href{../../driven_cavity/html/index.html\#co
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor for RefineableDrivenCavity problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///}}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor for RefineableDrivenCavity problem }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{///}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableDrivenCavityProblem_aef71ddbff081a1f9c7f5484a6c80598a}{RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem}}()}
@@ -318,9 +311,9 @@ The constructor remains largely as \href{../../driven_cavity/html/index.html\#co
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} inod=0;inod<num\_nod;inod++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Loop over values (u and v velocities)}}
-\DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}=0;\mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}<2;\mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}++)}
+\DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(\mbox{\hyperlink{adaptive__driven__cavity_8txt_a7e98b8a17c0aad30ba64d47b74e2a6c1}{i}}); }
+\DoxyCodeLine{       mesh\_pt()-\/>boundary\_node\_pt(ibound,inod)-\/>pin(i); }
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
@@ -347,14 +340,12 @@ The constructor remains largely as \href{../../driven_cavity/html/index.html\#co
 \DoxyCodeLine{ fix\_pressure(0,0,0.0);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 The post-\/processing function is identical to that in the \href{../../driven_cavity/html/index.html\#doc}{\texttt{ non-\/adaptive version of the code}}.
@@ -363,7 +354,7 @@ The post-\/processing function is identical to that in the \href{../../driven_ca
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableDrivenCavityProblem_a0baa1e8f1d1f6f73ef921b06a9b20836}{RefineableDrivenCavityProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -376,7 +367,7 @@ The post-\/processing function is identical to that in the \href{../../driven_ca
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -385,9 +376,7 @@ The post-\/processing function is identical to that in the \href{../../driven_ca
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_hang_vector}{}\doxysubsection{Hanging nodes in problems with vector-\/valued unknowns}\label{index_hang_vector}
@@ -395,17 +384,18 @@ We discussed in an earlier example for a scalar (\href{../../../poisson/two_d_po
 
 To allow the use spatial adaptivity for elements in which different unknowns are represented by different interpolation schemes (e.\+g. in 2D quadrilateral Taylor-\/\+Hood elements where the two velocity components are represented by bi-\/quadratic interpolation between the values stored at the element\textquotesingle{}s 3x3 nodes, whereas the pressure is represented by bi-\/linear interpolation between the pressure values stored at the element\textquotesingle{}s 2x2 corner nodes) {\ttfamily oomph-\/lib} allows the different nodal values to have their own list of \char`\"{}master nodes\char`\"{} and \char`\"{}hanging weights\char`\"{}. This is achieved as follows;
 \begin{DoxyItemize}
-\item By default, all nodes are assumed to be non-\/hanging. This status is indicated by the fact that a {\ttfamily Node\textquotesingle{}s} pointer to its {\ttfamily Hang\+Info} object, accessible via its member function {\ttfamily Node\+::hanging\+\_\+pt()}, is {\ttfamily N\+U\+LL}.
+\item By default, all nodes are assumed to be non-\/hanging. This status is indicated by the fact that a {\ttfamily Node\textquotesingle{}s} pointer to its {\ttfamily Hang\+Info} object, accessible via its member function {\ttfamily Node\+::hanging\+\_\+pt()}, is {\ttfamily NULL}.
 \item Mesh adaptation may turn a node into a hanging node. A node\textquotesingle{}s \char`\"{}hanging status\char`\"{} is primarily a geometrical/topological property. If a {\ttfamily Node} is found to be hanging, {\ttfamily oomph-\/lib\textquotesingle{}s} mesh adaptation procedures create a {\ttfamily Hang\+Info} object that stores the list of the hanging node\textquotesingle{}s \char`\"{}master nodes\char`\"{} and their respective weights. A pointer to the {\ttfamily Hang\+Info} object is then passed to the {\ttfamily Node}. The list of master nodes and weights, stored in this {\ttfamily Hang\+Info} object is then used by the function {\ttfamily Node\+::position()} to determine the {\ttfamily Node\textquotesingle{}s} (constrained) position.
 \item Nodes also provide storage for separate pointers to {\ttfamily Hang\+Info} objects for each of their nodal values. These are accessible via the member function {\ttfamily Node\+::hanging\+\_\+pt(i)} which returns the pointer to the {\ttfamily Hang\+Info} object associated with the node\textquotesingle{}s i-\/th nodal value. By default, these pointers point to the \char`\"{}geometric\char`\"{} {\ttfamily Hang\+Info} object, accessible via the argument-\/free version of this function. This default behaviour is appropriate for isoparametric elements in which all unknowns are represented by interpolation between the elements\textquotesingle{} nodes, using its geometric shape functions as basis functions.
 \item For elements that use different interpolation schemes for different nodal values (e.\+g. in Taylor-\/\+Hood elements), the default assignment for the pointers to the {\ttfamily Hang\+Info} objects may be over-\/written. This is task is typically performed by re-\/implementing (and thus over-\/writing) the empty virtual function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RefineableElement::further\_setup\_hanging\_nodes()}
+
 \end{DoxyCode}
  for such elements. This function is called automatically during at the end of {\ttfamily oomph-\/lib\textquotesingle{}s} mesh adaptation procedures. ~\newline
+ . ~\newline
 
-\end{DoxyItemize}~\newline
-\hypertarget{index_refining_TH}{}\doxysubsection{Adaptivity for Taylor-\/\+Hood elements}\label{index_refining_TH}
+\end{DoxyItemize}\hypertarget{index_refining_TH}{}\doxysubsection{Adaptivity for Taylor-\/\+Hood elements}\label{index_refining_TH}
 \hypertarget{index_issues}{}\doxysubsubsection{The issues}\label{index_issues}
 In non-\/adaptive 2D \mbox{[}3D\mbox{]} Taylor-\/\+Hood elements, every node stores (at least) two \mbox{[}three\mbox{]} nodal values which represent the two \mbox{[}three\mbox{]} velocity components. The four corner \mbox{[}eight vertex\mbox{]} nodes store an additional third \mbox{[}fourth\mbox{]} value which represents the pressure. If the mesh is subjected to non-\/uniform refinement, some of the mid-\/side nodes in large elements also act as corner nodes for adjacent smaller elements, as illustrated in the figure below.
 
@@ -434,6 +424,7 @@ To facilitate the book-\/keeping for such problems, {\itshape all} nodes in the 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::pin\_redundant\_nodal\_pressures(...)}
+
 \end{DoxyCode}
 
 
@@ -442,6 +433,7 @@ which pins the \char`\"{}redundant\char`\"{} pressure degrees of freedom in all 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::pin\_all\_nodal\_pressure\_dofs()}
+
 \end{DoxyCode}
 
 
@@ -450,14 +442,15 @@ and then unpins the nodal pressure values at the elements\textquotesingle{} corn
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{NavierStokesEquations<DIM>::unpin\_proper\_nodal\_pressure\_dofs()}
+
 \end{DoxyCode}
 
 
-These functions are implemented as empty virtual functions in the {\ttfamily Navier\+Stokes\+Equations$<$\+D\+I\+M$>$} class which provides a base class for all Navier-\/\+Stokes elements. The empty functions are overwritten for {\ttfamily Q\+Taylor\+Hood\+Element$<$\+D\+I\+M$>$} and remain empty for all other Navier-\/\+Stokes elements, therefore they can be called for any element type.\hypertarget{index_refining_CR}{}\doxysubsection{Adaptivity for Crouzeix-\/\+Raviart elements}\label{index_refining_CR}
+These functions are implemented as empty virtual functions in the {\ttfamily Navier\+Stokes\+Equations$<$\+DIM$>$} class which provides a base class for all Navier-\/\+Stokes elements. The empty functions are overwritten for {\ttfamily QTaylor\+Hood\+Element$<$\+DIM$>$} and remain empty for all other Navier-\/\+Stokes elements, therefore they can be called for any element type.\hypertarget{index_refining_CR}{}\doxysubsection{Adaptivity for Crouzeix-\/\+Raviart elements}\label{index_refining_CR}
 As discussed in the \href{../../driven_cavity/html/index.html\#CR}{\texttt{ previous example}}, {\ttfamily oomph-\/lib\textquotesingle{}s} isoparametric 2D \mbox{[}3D\mbox{]} Crouzeix-\/\+Raviart elements employ a piecewise bi-\/ \mbox{[}tri-\/\mbox{]}linear, globally discontinuous pressure representation. In each element, the pressure is represented by bi-\/\mbox{[}tri-\/\mbox{]}linear basis functions, multiplied by 3 \mbox{[}4\mbox{]} pressure values which are stored in the element\textquotesingle{}s internal {\ttfamily Data}. Since the pressure representation is discontinuous, the pressure values do not have to be subjected to any constraints to ensure inter-\/element continuity. Each {\ttfamily Node} stores two \mbox{[}three\mbox{]} velocity degrees of freedom. Since the velocity representation is isoparametric, the default assignment for the nodal values\textquotesingle{} {\ttfamily Hang\+Info} pointer is appropriate and no further action is required.\hypertarget{index_exercises}{}\doxysubsection{Exercises}\label{index_exercises}
 
 \begin{DoxyEnumerate}
-\item Confirm that a warning message is issued if the function {\ttfamily Navier\+Stokes\+Equations$<$\+D\+I\+M$>$\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs()} is not called following the mesh adaptation.
+\item Confirm that a warning message is issued if the function {\ttfamily Navier\+Stokes\+Equations$<$\+DIM$>$\+::pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs()} is not called following the mesh adaptation.
 \item Investigate how the pressure distribution changes with each adaptation. \mbox{[}Hint\+: You can call {\ttfamily doc\+\_\+solution(...)} from {\ttfamily actions\+\_\+after\+\_\+newton\+\_\+solve()} to document the progress of the mesh adaptation.\mbox{]}
 \end{DoxyEnumerate}
 
@@ -472,5 +465,5 @@ As discussed in the \href{../../driven_cavity/html/index.html\#CR}{\texttt{ prev
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

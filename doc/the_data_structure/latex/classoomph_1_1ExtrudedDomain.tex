@@ -24,16 +24,16 @@ Inheritance diagram for oomph\+::Extruded\+Domain\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a306640b95630e899bbe0d134a2f003f7}{$\sim$\+Extruded\+Domain}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: Empty; the extruded macro elements will be deleted in \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_ab6f05f125c59dac12658aca14feb8999}{Extruded\+Domain}} (const \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&)
+\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a810801f17b6405ff13ff53b6007ca342}{Extruded\+Domain}} (const \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a2cb16f3d8558b539a7e5721dc778d062}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&)
+void \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_aee0ab3b9979849b79c482defe245897d}{operator=}} (const \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1ExtrudedMacroElement}{Extruded\+Macro\+Element}} $\ast$ \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a76a4d16eeb05a2576c74594755d6185c}{macro\+\_\+element\+\_\+pt}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
 \begin{DoxyCompactList}\small\item\em Access to i-\/th extruded macro element. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a62769f3dd74db326b534997fc87cd2ff}{nmacro\+\_\+element}} ()
 \begin{DoxyCompactList}\small\item\em Number of macro elements in domain. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&time, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D spatial = 3D space-\/time). N\+O\+TE\+: Some extra care has to be taken here to translate the \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} enumeration to the \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} enumeration (in the appropriate manner) so that the original \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} object can be used to calculate the global coordinate associated with the provided local coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&time, const unsigned \&i\+\_\+macro, const unsigned \&i\+\_\+direct, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D spatial = 3D space-\/time). NOTE\+: Some extra care has to be taken here to translate the \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} enumeration to the \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} enumeration (in the appropriate manner) so that the original \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} object can be used to calculate the global coordinate associated with the provided local coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -54,10 +54,11 @@ Base class for Extruded\+Domains with curvilinear and/or time-\/dependent bounda
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\mbox{\hyperlink{classoomph_1_1ExtrudedDomain_a10a824075e2d2ee6efcf3485966dbadc}{ExtrudedDomain::macro\_element\_boundary}}(...) }
+
 \end{DoxyCode}
  which returns a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of each of the Extruded\+Macro\+Elements\textquotesingle{} boundaries, parametrised by the coordinate(s) along this boundary. The Extruded\+Macro\+Elements obtain their boundary positions via member function pointers to {\ttfamily Extruded\+Domain\+::macro\+\_\+element\+\_\+boundary(...)}. 
 
-Definition at line 57 of file extruded\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00057}{57}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
 
 
 
@@ -74,11 +75,11 @@ Constructor.
 
 
 
-Definition at line 35 of file extruded\+\_\+domain.\+cc.
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00035}{35}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
 
 
 
-References Domain\+\_\+pt, i, oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt, N\+\_\+extruded\+\_\+element, and oomph\+::\+Domain\+::nmacro\+\_\+element().
+References \mbox{\hyperlink{extruded__domain_8h_source_l00101}{Domain\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{extruded__domain_8h_source_l00104}{N\+\_\+extruded\+\_\+element}}, and \mbox{\hyperlink{domain_8h_source_l00123}{oomph\+::\+Domain\+::nmacro\+\_\+element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_a8895282a7ebc08be6473062fbc5c9c60}\label{classoomph_1_1ExtrudedDomain_a8895282a7ebc08be6473062fbc5c9c60}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!ExtrudedDomain@{ExtrudedDomain}}
@@ -92,11 +93,11 @@ Constructor.
 
 
 
-Definition at line 63 of file extruded\+\_\+domain.\+cc.
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00063}{63}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
 
 
 
-References Domain\+\_\+pt, i, oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt, N\+\_\+extruded\+\_\+element, and oomph\+::\+Domain\+::nmacro\+\_\+element().
+References \mbox{\hyperlink{extruded__domain_8h_source_l00101}{Domain\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}, \mbox{\hyperlink{extruded__domain_8h_source_l00104}{N\+\_\+extruded\+\_\+element}}, and \mbox{\hyperlink{domain_8h_source_l00123}{oomph\+::\+Domain\+::nmacro\+\_\+element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_a306640b95630e899bbe0d134a2f003f7}\label{classoomph_1_1ExtrudedDomain_a306640b95630e899bbe0d134a2f003f7}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!````~ExtrudedDomain@{$\sim$ExtrudedDomain}}
@@ -110,25 +111,17 @@ Destructor\+: Empty; the extruded macro elements will be deleted in \mbox{\hyper
 
 
 
-Definition at line 72 of file extruded\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00072}{72}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_ab6f05f125c59dac12658aca14feb8999}\label{classoomph_1_1ExtrudedDomain_ab6f05f125c59dac12658aca14feb8999}} 
+\mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_a810801f17b6405ff13ff53b6007ca342}\label{classoomph_1_1ExtrudedDomain_a810801f17b6405ff13ff53b6007ca342}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!ExtrudedDomain@{ExtrudedDomain}}
 \index{ExtrudedDomain@{ExtrudedDomain}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
 \doxysubsubsection{\texorpdfstring{ExtrudedDomain()}{ExtrudedDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Extruded\+Domain\+::\+Extruded\+Domain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 75 of file extruded\+\_\+domain.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -141,7 +134,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D spatial = 3D space-\/time). N\+O\+TE\+: Some extra care has to be taken here to translate the \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} enumeration to the \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} enumeration (in the appropriate manner) so that the original \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} object can be used to calculate the global coordinate associated with the provided local coordinates. 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}} representation of the i\+\_\+macro-\/th macro element boundary i\+\_\+direct (e.\+g. N/\+S/\+W/E in 2D spatial = 3D space-\/time). NOTE\+: Some extra care has to be taken here to translate the \mbox{\hyperlink{classoomph_1_1OcTree}{Oc\+Tree}} enumeration to the \mbox{\hyperlink{classoomph_1_1QuadTree}{Quad\+Tree}} enumeration (in the appropriate manner) so that the original \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} object can be used to calculate the global coordinate associated with the provided local coordinates. 
 
 
 
@@ -149,15 +142,15 @@ Implements \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac910
 
 
 
-Definition at line 148 of file extruded\+\_\+domain.\+cc.
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{148}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
 
 
 
-References oomph\+::\+Oc\+Tree\+Names\+::B, oomph\+::\+Oc\+Tree\+Names\+::D, oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string, Domain\+\_\+pt, oomph\+::\+Quad\+Tree\+Names\+::E, oomph\+::\+Oc\+Tree\+Names\+::F, i, oomph\+::\+Oc\+Tree\+Names\+::L, oomph\+::\+Domain\+::macro\+\_\+element\+\_\+boundary(), macro\+\_\+element\+\_\+pt(), oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt(), oomph\+::\+Macro\+Element\+::macro\+\_\+map(), oomph\+::\+Quad\+Tree\+Names\+::N, N\+\_\+extruded\+\_\+element, oomph\+::\+Domain\+::nmacro\+\_\+element(), oomph\+::\+Oc\+Tree\+Names\+::R, oomph\+::\+Quad\+Tree\+Names\+::S, s, t, T\+\_\+max, T\+\_\+min, oomph\+::\+Oc\+Tree\+Names\+::U, and oomph\+::\+Quad\+Tree\+Names\+::W.
+References \mbox{\hyperlink{octree_8h_source_l00073}{oomph\+::\+Oc\+Tree\+Names\+::B}}, \mbox{\hyperlink{octree_8h_source_l00071}{oomph\+::\+Oc\+Tree\+Names\+::D}}, \mbox{\hyperlink{octree_8h_source_l00329}{oomph\+::\+Oc\+Tree\+::\+Direct\+\_\+string}}, \mbox{\hyperlink{extruded__domain_8h_source_l00101}{Domain\+\_\+pt}}, \mbox{\hyperlink{quadtree_8h_source_l00061}{oomph\+::\+Quad\+Tree\+Names\+::E}}, \mbox{\hyperlink{octree_8h_source_l00074}{oomph\+::\+Oc\+Tree\+Names\+::F}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{octree_8h_source_l00069}{oomph\+::\+Oc\+Tree\+Names\+::L}}, \mbox{\hyperlink{classoomph_1_1Domain_a95f3e00d28ea37e6c4d3027bfac91096}{oomph\+::\+Domain\+::macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{domain_8h_source_l00116}{oomph\+::\+Domain\+::macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{extruded__domain_8cc_source_l00132}{macro\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{macro__element_8h_source_l00126}{oomph\+::\+Macro\+Element\+::macro\+\_\+map()}}, \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{extruded__domain_8h_source_l00104}{N\+\_\+extruded\+\_\+element}}, \mbox{\hyperlink{domain_8h_source_l00123}{oomph\+::\+Domain\+::nmacro\+\_\+element()}}, \mbox{\hyperlink{octree_8h_source_l00070}{oomph\+::\+Oc\+Tree\+Names\+::R}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{quadtree_8h_source_l00062}{oomph\+::\+Quad\+Tree\+Names\+::S}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{extruded__domain_8h_source_l00110}{T\+\_\+max}}, \mbox{\hyperlink{extruded__domain_8h_source_l00107}{T\+\_\+min}}, \mbox{\hyperlink{octree_8h_source_l00072}{oomph\+::\+Oc\+Tree\+Names\+::U}}, \mbox{\hyperlink{quadtree_8h_source_l00063}{oomph\+::\+Quad\+Tree\+Names\+::W}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 
 
-Referenced by oomph\+::\+Q\+Extruded\+Macro\+Element$<$ 3 $>$\+::macro\+\_\+map(), and oomph\+::\+Q\+Extruded\+Macro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries().
+Referenced by \mbox{\hyperlink{extruded__macro__element_8cc_source_l00035}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::macro\+\_\+map()}}, and \mbox{\hyperlink{extruded__macro__element_8cc_source_l00316}{oomph\+::\+QExtruded\+Macro\+Element$<$ 3 $>$\+::output\+\_\+macro\+\_\+element\+\_\+boundaries()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_a76a4d16eeb05a2576c74594755d6185c}\label{classoomph_1_1ExtrudedDomain_a76a4d16eeb05a2576c74594755d6185c}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!macro\_element\_pt@{macro\_element\_pt}}
@@ -171,15 +164,15 @@ Access to i-\/th extruded macro element.
 
 
 
-Definition at line 132 of file extruded\+\_\+domain.\+cc.
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00132}{132}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
 
 
 
-References i, and oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), and macro\+\_\+element\+\_\+boundary().
+Referenced by \mbox{\hyperlink{extruded__cube__mesh__from__quad__mesh__with__macro__elements_8template_8cc_source_l00099}{oomph\+::\+Extruded\+Cube\+Mesh\+From\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, and \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_a62769f3dd74db326b534997fc87cd2ff}\label{classoomph_1_1ExtrudedDomain_a62769f3dd74db326b534997fc87cd2ff}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!nmacro\_element@{nmacro\_element}}
@@ -193,29 +186,21 @@ Number of macro elements in domain.
 
 
 
-Definition at line 122 of file extruded\+\_\+domain.\+cc.
+Definition at line \mbox{\hyperlink{extruded__domain_8cc_source_l00122}{122}} of file \mbox{\hyperlink{extruded__domain_8cc_source}{extruded\+\_\+domain.\+cc}}.
 
 
 
-References oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{domain_8h_source_l00301}{oomph\+::\+Domain\+::\+Macro\+\_\+element\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_a2cb16f3d8558b539a7e5721dc778d062}\label{classoomph_1_1ExtrudedDomain_a2cb16f3d8558b539a7e5721dc778d062}} 
+\mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_aee0ab3b9979849b79c482defe245897d}\label{classoomph_1_1ExtrudedDomain_aee0ab3b9979849b79c482defe245897d}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::ExtrudedDomain@{oomph::ExtrudedDomain}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Extruded\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Extruded\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1ExtrudedDomain}{Extruded\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 82 of file extruded\+\_\+domain.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 
@@ -232,11 +217,11 @@ Pointer to the \mbox{\hyperlink{classoomph_1_1Domain}{Domain}}.
 
 
 
-Definition at line 109 of file extruded\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00101}{101}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
 
 
 
-Referenced by Extruded\+Domain(), and macro\+\_\+element\+\_\+boundary().
+Referenced by \mbox{\hyperlink{extruded__domain_8cc_source_l00035}{Extruded\+Domain()}}, and \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_a413f4a9c0ed71a03fbafdc813ee23ddb}\label{classoomph_1_1ExtrudedDomain_a413f4a9c0ed71a03fbafdc813ee23ddb}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!N\_extruded\_element@{N\_extruded\_element}}
@@ -246,11 +231,11 @@ Referenced by Extruded\+Domain(), and macro\+\_\+element\+\_\+boundary().
 
 
 
-Definition at line 112 of file extruded\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00104}{104}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
 
 
 
-Referenced by Extruded\+Domain(), and macro\+\_\+element\+\_\+boundary().
+Referenced by \mbox{\hyperlink{extruded__domain_8cc_source_l00035}{Extruded\+Domain()}}, and \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_a22bebc406919888b8524f039a8cb784b}\label{classoomph_1_1ExtrudedDomain_a22bebc406919888b8524f039a8cb784b}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!T\_max@{T\_max}}
@@ -264,11 +249,11 @@ The maximum t-\/value.
 
 
 
-Definition at line 118 of file extruded\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00110}{110}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+Referenced by \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ExtrudedDomain_ada72a38780f4b85e5f9dda48082cf633}\label{classoomph_1_1ExtrudedDomain_ada72a38780f4b85e5f9dda48082cf633}} 
 \index{oomph::ExtrudedDomain@{oomph::ExtrudedDomain}!T\_min@{T\_min}}
@@ -282,11 +267,11 @@ The minimum t-\/value (defaults to 0.\+0 if not specified)
 
 
 
-Definition at line 115 of file extruded\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{extruded__domain_8h_source_l00107}{107}} of file \mbox{\hyperlink{extruded__domain_8h_source}{extruded\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+Referenced by \mbox{\hyperlink{extruded__domain_8cc_source_l00148}{macro\+\_\+element\+\_\+boundary()}}.
 
 
 

@@ -5,9 +5,9 @@ In this tutorial we demonstrate how to solve time-\/dependent solid mechanics pr
 \hypertarget{index_theory}{}\doxysection{Theory}\label{index_theory}
 Small-\/amplitude, axisymmetric oscillations of a circular disk of radius $ a $ are governed by the Navier-\/\+Lame equations \[ (\lambda +2 \mu) \ \mbox{grad}^* \mbox{div}^* {\bf u}^* = \rho \frac{\partial^2 {\bf u}^*}{\partial t^{*2}}, \] where the displacement field is given by $ {\bf u}^* = u^*(r^*,t^*) \ {\bf e}_r$. Here $ \lambda, \mu $ are the disk\textquotesingle{}s two Lame constants and $ \rho $ is its density. The outer boundary is stress-\/free so that \[ \tau_{rr} = \lambda \ \mbox{div}^* {\bf u}^* + 2 \mu \frac{\partial u^*}{\partial r^*} = 0 \ \ \ \ \ \mbox{at } r^* = a. \]
 
-We non-\/dimensionalise all lengths and displacements on the disk\textquotesingle{}s undeformed radius, $ {\cal L} = a $, and scale time on \[ {\cal T} = a \sqrt{\frac{\rho}{(\lambda+2\mu)}}. \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1) \] This transforms the governing P\+DE into the dimensionless and parameter-\/free form \[ \frac{\partial}{\partial r}\left(\frac{1}{r} \frac{\partial (ru)}{\partial r}\right) = \frac{\partial^2 u}{\partial t^2}, \] subject to the boundary condition \[ \frac{\nu}{1-2\nu}\frac{1}{r} \frac{\partial (ru)}{\partial r} + \frac{\partial u}{\partial r} = 0 \mbox{\ \ \ \ \ at } r=1, \] where $ \nu $ is Poisson\textquotesingle{}s ratio.
+We non-\/dimensionalise all lengths and displacements on the disk\textquotesingle{}s undeformed radius, $ {\cal L} = a $, and scale time on \[ {\cal T} = a \sqrt{\frac{\rho}{(\lambda+2\mu)}}. \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (1) \] This transforms the governing PDE into the dimensionless and parameter-\/free form \[ \frac{\partial}{\partial r}\left(\frac{1}{r} \frac{\partial (ru)}{\partial r}\right) = \frac{\partial^2 u}{\partial t^2}, \] subject to the boundary condition \[ \frac{\nu}{1-2\nu}\frac{1}{r} \frac{\partial (ru)}{\partial r} + \frac{\partial u}{\partial r} = 0 \mbox{\ \ \ \ \ at } r=1, \] where $ \nu $ is Poisson\textquotesingle{}s ratio.
 
-Making the ansatz $ u(r,t) = U(r) \sin(\omega t)$ transforms the P\+DE into an O\+DE for $ U(r) $\+: \[ \frac{d}{dr}\left( \frac{1}{r} \frac{d(rU)}{d r}\right) + \omega^2 U = 0. \] The solution of this O\+DE are Bessel functions and the requirement that $ U(r) $ is finite at $ r=0 $ implies that \[ U(r) \sim J_1(\omega r). \] where $ J_1 $ is the Bessel function of first order.
+Making the ansatz $ u(r,t) = U(r) \sin(\omega t)$ transforms the PDE into an ODE for $ U(r) $\+: \[ \frac{d}{dr}\left( \frac{1}{r} \frac{d(rU)}{d r}\right) + \omega^2 U = 0. \] The solution of this ODE are Bessel functions and the requirement that $ U(r) $ is finite at $ r=0 $ implies that \[ U(r) \sim J_1(\omega r). \] where $ J_1 $ is the Bessel function of first order.
 
 Substituting this into the stress-\/free boundary condition yields the dispersion relation \[ \frac{\nu}{1-2\nu}\frac{1}{r} \frac{d (rJ_1(\omega r))}{d r} + \frac{dJ_1(\omega r)}{dr} = 0 \mbox{\ \ \ \ \ at } r=1, \] for the eigenfrequencies $ \omega $.
 
@@ -61,7 +61,7 @@ The {\ttfamily multiplier(...)} function is needed during the assignment of the 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Poisson's ratio}}
@@ -73,7 +73,7 @@ The {\ttfamily multiplier(...)} function is needed during the assignment of the 
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to constitutive law}}
 \DoxyCodeLine{\textcolor{comment}{} ConstitutiveLaw* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}}=0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Multiplier for inertia terms (needed for consistent assignment }}
+\DoxyCodeLine{\textcolor{comment}{ /// Multiplier for inertia terms (needed for consistent assignment }}
 \DoxyCodeLine{\textcolor{comment}{ /// of initial conditions in Newmark scheme)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a01099bce3441c7fe79ac6926800097a8}{multiplier}}(\textcolor{keyword}{const} Vector<double>\& xi)}
 \DoxyCodeLine{ \{}
@@ -95,7 +95,7 @@ We use command line arguments to indicate if the time-\/dependent simulation is 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_main====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for disk oscillation problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{disk__oscillation_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -111,9 +111,7 @@ We use command line arguments to indicate if the time-\/dependent simulation is 
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We create a Hookean constitutive equation, build the problem and run the simulation\+:
+ We create a Hookean constitutive equation, build the problem and run the simulation\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -123,10 +121,10 @@ We create a Hookean constitutive equation, build the problem and run the simulat
 \DoxyCodeLine{  \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{ \mbox{\hyperlink{classDiskOscillationProblem}{DiskOscillationProblem<RefineableQPVDElement<2,3>}} > \mbox{\hyperlink{disk__oscillation_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{ \mbox{\hyperlink{classDiskOscillationProblem}{DiskOscillationProblem<RefineableQPVDElement<2,3>}} > problem;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Run the simulation}}
-\DoxyCodeLine{ \mbox{\hyperlink{disk__oscillation_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.run(nstep);}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classDiskOscillationProblem_ac0f7b36ffffa73ee49bc95bd961835dd}{run}}(nstep);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
@@ -141,15 +139,15 @@ The equations of solid mechanics require the assignment of initial conditions fo
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//================disk\_as\_geom\_object======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Axisymmetrially oscillating disk with displacement}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// field according to linear elasticity.}}
+\DoxyCodeLine{\textcolor{comment}{/// Axisymmetrially oscillating disk with displacement}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// field according to linear elasticity.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classAxisymOscillatingDisk}{AxisymOscillatingDisk}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: 2 Lagrangian coordinate, 2 Eulerian coords. Pass }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: 2 Lagrangian coordinate, 2 Eulerian coords. Pass }}
 \DoxyCodeLine{\textcolor{comment}{ /// amplitude of oscillation, Poisson ratio nu, and pointer to }}
 \DoxyCodeLine{\textcolor{comment}{ /// global timestepper.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classAxisymOscillatingDisk_a7671a9c1b8d4d854752ea14aa4f5865d}{AxisymOscillatingDisk}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& ampl, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& nu, }
@@ -158,26 +156,24 @@ The equations of solid mechanics require the assignment of initial conditions fo
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classAxisymOscillatingDisk_ab79de13fa0dcfac5d04d6ff371241c5d}{\string~AxisymOscillatingDisk}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Position vector at Lagrangian coordinate xi at present}}
+\DoxyCodeLine{\textcolor{comment}{ /// Position vector at Lagrangian coordinate xi at present}}
 \DoxyCodeLine{\textcolor{comment}{ /// time}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classAxisymOscillatingDisk_ab63d762c8fecce8de5a2b7dc4b3b677a}{position}}(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r) \textcolor{keyword}{const};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Parametrised velocity on object at current time: veloc = d r(xi)/dt.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Parametrised velocity on object at current time: veloc = d r(xi)/dt.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classAxisymOscillatingDisk_a7b39985cb0658924472700f4383b53aa}{veloc}}(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& \mbox{\hyperlink{classAxisymOscillatingDisk_a7b39985cb0658924472700f4383b53aa}{veloc}});}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Parametrised acceleration on object at current time: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Parametrised acceleration on object at current time: }}
 \DoxyCodeLine{\textcolor{comment}{ /// accel = d\string^2 r(xi)/dt\string^2.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classAxisymOscillatingDisk_a92993399b50f818c9045fe7cecf47fcb}{accel}}(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& \mbox{\hyperlink{classAxisymOscillatingDisk_a92993399b50f818c9045fe7cecf47fcb}{accel}});}
 
 \end{DoxyCodeInclude}
-
-
-The class provides a static member function {\ttfamily residual\+\_\+for\+\_\+dispersion(...)} which is used to solve the nonlinear dispersion relation for the disk\textquotesingle{}s eigenfrequency $ \omega $. The function is static (and thus essentially a global function) because it interacts with {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver.
+ The class provides a static member function {\ttfamily residual\+\_\+for\+\_\+dispersion(...)} which is used to solve the nonlinear dispersion relation for the disk\textquotesingle{}s eigenfrequency $ \omega $. The function is static (and thus essentially a global function) because it interacts with {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Parametrised j-\/th time-\/derivative on object at current time: }}
+\DoxyCodeLine{\textcolor{comment}{ /// Parametrised j-\/th time-\/derivative on object at current time: }}
 \DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)f\$ \(\backslash\)frac\{d\string^\{j\} r(\(\backslash\)zeta)\}\{dt\string^j\} \(\backslash\)f\$.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} dposition\_dt(\textcolor{keyword}{const} Vector<double>\& xi, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& j, }
 \DoxyCodeLine{                  Vector<double>\& drdt)}
@@ -201,7 +197,7 @@ The class provides a static member function {\ttfamily residual\+\_\+for\+\_\+di
 \DoxyCodeLine{     }
 \DoxyCodeLine{    \textcolor{keywordflow}{default}:}
 \DoxyCodeLine{     std::ostringstream error\_message;}
-\DoxyCodeLine{     error\_message << j << \textcolor{stringliteral}{"th derivative not implemented\(\backslash\)n"};}
+\DoxyCodeLine{     error\_message << j << \textcolor{stringliteral}{"{}th derivative not implemented\(\backslash\)n"{}};}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{keywordflow}{throw} OomphLibError(error\_message.str(),}
 \DoxyCodeLine{                         OOMPH\_CURRENT\_FUNCTION,}
@@ -210,7 +206,7 @@ The class provides a static member function {\ttfamily residual\+\_\+for\+\_\+di
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Residual of dispersion relation for use in black-\/box Newton method}}
+\DoxyCodeLine{\textcolor{comment}{ /// Residual of dispersion relation for use in black-\/box Newton method}}
 \DoxyCodeLine{\textcolor{comment}{ /// which requires global (or static) functions. }}
 \DoxyCodeLine{\textcolor{comment}{ /// Poisson's ratio is  passed as parameter.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{static} \textcolor{keywordtype}{void} residual\_for\_dispersion(\textcolor{keyword}{const} Vector<double>\& param, }
@@ -218,9 +214,7 @@ The class provides a static member function {\ttfamily residual\+\_\+for\+\_\+di
 \DoxyCodeLine{                                     Vector<double>\& residual);}
 
 \end{DoxyCodeInclude}
-
-
-The private member data stores the amplitude and period of the oscillation, the material\textquotesingle{}s Poisson ratio and the eigenfrequency.
+ The private member data stores the amplitude and period of the oscillation, the material\textquotesingle{}s Poisson ratio and the eigenfrequency.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -242,18 +236,16 @@ The private member data stores the amplitude and period of the oscillation, the 
 \DoxyCodeLine{\}; \textcolor{comment}{// end disk\_as\_geom\_object}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_ic_constructor}{}\doxysubsection{Constructor}\label{index_ic_constructor}
-The constructor uses {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver, defined in the namespace {\ttfamily Black\+Box\+F\+D\+Newton\+Solver}, to determine the eigenfrequency.
+The constructor uses {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver, defined in the namespace {\ttfamily Black\+Box\+FDNewton\+Solver}, to determine the eigenfrequency.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============ic\_constructor============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Constructor: 2 Lagrangian coordinates, 2 Eulerian coords. Pass }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// amplitude of oscillation, Poisson ratio nu, and pointer to }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// global timestepper. }}
+\DoxyCodeLine{\textcolor{comment}{/// Constructor: 2 Lagrangian coordinates, 2 Eulerian coords. Pass }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// amplitude of oscillation, Poisson ratio nu, and pointer to }}
+\DoxyCodeLine{\textcolor{comment}{/// global timestepper. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\mbox{\hyperlink{classAxisymOscillatingDisk_a7671a9c1b8d4d854752ea14aa4f5865d}{AxisymOscillatingDisk::AxisymOscillatingDisk}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& ampl,}
 \DoxyCodeLine{                                             \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& nu, }
@@ -278,7 +270,7 @@ The constructor uses {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newt
 \DoxyCodeLine{ \textcolor{comment}{// Assign/doc period of oscillation}}
 \DoxyCodeLine{ T=2.0*MathematicalConstants::Pi/Omega;}
 \DoxyCodeLine{}
-\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"Period of oscillation: "} << T << std::endl;}
+\DoxyCodeLine{ std::cout << \textcolor{stringliteral}{"{}Period of oscillation: "{}} << T << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}}
 
@@ -287,14 +279,14 @@ The constructor uses {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newt
 
 \DoxyHorRuler{0}
 \hypertarget{index_dispersion}{}\doxysubsection{The dispersion relation}\label{index_dispersion}
-Here is the specification of the dispersion relation, in the form required by {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver. The Bessel functions are computed by \href{http://www.crbond.com/}{\texttt{ C.\+R. Bond\textquotesingle{}s}} {\ttfamily bessjy01a(...)} function, available (with permission) via {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily C\+R\+Bond\+\_\+\+Bessel} namespace.
+Here is the specification of the dispersion relation, in the form required by {\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box Newton solver. The Bessel functions are computed by \href{http://www.crbond.com/}{\texttt{ C.\+R. Bond\textquotesingle{}s}} {\ttfamily bessjy01a(...)} function, available (with permission) via {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily CRBond\+\_\+\+Bessel} namespace.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_dispersion===============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Residual of dispersion relation for use in black box Newton method}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// which requires global (or static) functions. }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Poisson's ratio is passed as parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// Residual of dispersion relation for use in black box Newton method}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// which requires global (or static) functions. }}
+\DoxyCodeLine{\textcolor{comment}{/// Poisson's ratio is passed as parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAxisymOscillatingDisk_ae6a90b479781b587bb8905e7bf2bba3b}{AxisymOscillatingDisk::residual\_for\_dispersion}}(}
 \DoxyCodeLine{ \textcolor{keyword}{const} Vector<double>\& param, \textcolor{keyword}{const} Vector<double>\& omega,}
@@ -317,17 +309,15 @@ Here is the specification of the dispersion relation, in the form required by {\
 \DoxyCodeLine{\}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_position}{}\doxysubsection{The position(...), veloc(...) and accel(...) functions}\label{index_position}
 The {\ttfamily position(...)}, {\ttfamily veloc(...)} and {\ttfamily accel(...)} functions specify the motion of the {\ttfamily Geom\+Object}, according to the solution of the linearised equations derived in the \mbox{\hyperlink{index_theory}{Theory}} section. Here is a listing of the {\ttfamily position(...)} function\+:
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_position===========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Position Vector at Lagrangian coordinate xi at present}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// time}}
+\DoxyCodeLine{\textcolor{comment}{/// Position Vector at Lagrangian coordinate xi at present}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// time}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAxisymOscillatingDisk_ab63d762c8fecce8de5a2b7dc4b3b677a}{AxisymOscillatingDisk::position}}(\textcolor{keyword}{const} Vector<double>\& xi,}
 \DoxyCodeLine{                                     Vector<double>\& r)\textcolor{keyword}{ const}}
@@ -351,19 +341,17 @@ The {\ttfamily position(...)}, {\ttfamily veloc(...)} and {\ttfamily accel(...)}
 \DoxyCodeLine{   CRBond\_Bessel::bessjy01a(\mbox{\hyperlink{classAxisymOscillatingDisk_ab0ae3a1a7324dd0ccce15fd84471e3d1}{Omega}}*lagr\_radius,j0,j1,y0,y1,j0p,j1p,y0p,y1p);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Displacement field }}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} \mbox{\hyperlink{disk__oscillation_8txt_a8788dde7ac2262ea5307475125f91fec}{u}}=\mbox{\hyperlink{classAxisymOscillatingDisk_a9b73de59d11877c96bc85ad52fe7c407}{Ampl}}*j1*sin(2.0*MathematicalConstants::Pi*time/\mbox{\hyperlink{classAxisymOscillatingDisk_a7789dcf51ef2e2eb6e5eaa826f404da1}{T}});}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} u=\mbox{\hyperlink{classAxisymOscillatingDisk_a9b73de59d11877c96bc85ad52fe7c407}{Ampl}}*j1*sin(2.0*MathematicalConstants::Pi*time/\mbox{\hyperlink{classAxisymOscillatingDisk_a7789dcf51ef2e2eb6e5eaa826f404da1}{T}});}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Position Vector}}
-\DoxyCodeLine{   r[0]=(xi[0]+xi[0]/lagr\_radius*\mbox{\hyperlink{disk__oscillation_8txt_a8788dde7ac2262ea5307475125f91fec}{u}});}
-\DoxyCodeLine{   r[1]=(xi[1]+xi[1]/lagr\_radius*\mbox{\hyperlink{disk__oscillation_8txt_a8788dde7ac2262ea5307475125f91fec}{u}});}
+\DoxyCodeLine{   r[0]=(xi[0]+xi[0]/lagr\_radius*u);}
+\DoxyCodeLine{   r[1]=(xi[1]+xi[1]/lagr\_radius*u);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{//end position}}
 
 \end{DoxyCodeInclude}
-
-
-The {\ttfamily veloc(...)} and {\ttfamily accel(...)} functions are very similar and we omit their listings in the interest of brevity. See the source code \href{../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc}{\texttt{ disk\+\_\+oscillation.\+cc}} for details.
+ The {\ttfamily veloc(...)} and {\ttfamily accel(...)} functions are very similar and we omit their listings in the interest of brevity. See the source code \href{../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc}{\texttt{ disk\+\_\+oscillation.\+cc}} for details.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -373,11 +361,11 @@ We discretise a quarter of the domain with a solid mechanics version of the refi
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_mesh================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Elastic quarter circle sector mesh: We "upgrade"}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the RefineableQuarterCircleSectorMesh to become an}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// SolidMesh and equate the Eulerian and Lagrangian coordinates,}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// thus making the domain represented by the mesh the stress-\/free }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// configuration. }}
+\DoxyCodeLine{\textcolor{comment}{/// Elastic quarter circle sector mesh: We "{}upgrade"{}}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// the RefineableQuarterCircleSectorMesh to become an}}
+\DoxyCodeLine{\textcolor{comment}{/// SolidMesh and equate the Eulerian and Lagrangian coordinates,}}
+\DoxyCodeLine{\textcolor{comment}{/// thus making the domain represented by the mesh the stress-\/free }}
+\DoxyCodeLine{\textcolor{comment}{/// configuration. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh}} :}
@@ -386,9 +374,7 @@ We discretise a quarter of the domain with a solid mechanics version of the refi
 \DoxyCodeLine{\{}
 
 \end{DoxyCodeInclude}
-
-
-The constructor calls the constructor of the underlying non-\/solid mesh, checks that the element type, specified by the template argument, is a {\ttfamily Solid\+Finite\+Element}, and sets the Lagrangian coordinates of all nodes to their Eulerian positions, making the current configuration stress-\/free.
+ The constructor calls the constructor of the underlying non-\/solid mesh, checks that the element type, specified by the template argument, is a {\ttfamily Solid\+Finite\+Element}, and sets the Lagrangian coordinates of all nodes to their Eulerian positions, making the current configuration stress-\/free.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -396,7 +382,7 @@ The constructor calls the constructor of the underlying non-\/solid mesh, checks
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Build mesh and copy Eulerian coords to Lagrangian}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Build mesh and copy Eulerian coords to Lagrangian}}
 \DoxyCodeLine{\textcolor{comment}{ /// ones so that the initial configuration is the stress-\/free one.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}(GeomObject* wall\_pt,}
 \DoxyCodeLine{                                         \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& xi\_lo,}
@@ -407,14 +393,14 @@ The constructor calls the constructor of the underlying non-\/solid mesh, checks
 \DoxyCodeLine{  RefineableQuarterCircleSectorMesh<ELEMENT>(wall\_pt,xi\_lo,fract\_mid,xi\_hi,}
 \DoxyCodeLine{                                             time\_stepper\_pt)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef PARANOID}\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{   /// Check that the element type is derived from the SolidFiniteElement}}
 \DoxyCodeLine{\textcolor{comment}{}   SolidFiniteElement* el\_pt=\textcolor{keyword}{dynamic\_cast<}SolidFiniteElement*\textcolor{keyword}{>}}
 \DoxyCodeLine{    (finite\_element\_pt(0));}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (el\_pt==0)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{keywordflow}{throw} OomphLibError(}
-\DoxyCodeLine{      \textcolor{stringliteral}{"Element needs to be derived from SolidFiniteElement\(\backslash\)n"},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}Element needs to be derived from SolidFiniteElement\(\backslash\)n"{}},}
 \DoxyCodeLine{      OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{      OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{    \}}
@@ -429,9 +415,7 @@ The constructor calls the constructor of the underlying non-\/solid mesh, checks
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem_class}{}\doxysection{The Problem class}\label{index_problem_class}
 The {\ttfamily Problem} class has the usual member functions which will be discussed in more detail below.
@@ -439,8 +423,8 @@ The {\ttfamily Problem} class has the usual member functions which will be discu
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_class=================================================== }}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Problem class to simulate small-\/amplitude oscillations of }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// a circular disk.}}
+\DoxyCodeLine{\textcolor{comment}{/// Problem class to simulate small-\/amplitude oscillations of }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// a circular disk.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classDiskOscillationProblem}{DiskOscillationProblem}} : \textcolor{keyword}{public} Problem}
@@ -458,7 +442,7 @@ The {\ttfamily Problem} class has the usual member functions which will be discu
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskOscillationProblem_afea297af1844657099dec3d717fcccc5}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}* \mbox{\hyperlink{classDiskOscillationProblem_a9de851f400e5c161c5abf8efb2f2b082}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}* \mbox{\hyperlink{classDiskOscillationProblem_a583b50c50f3f065ddeeaa48e4e6d8b6c}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{    Problem::mesh\_pt());}
@@ -495,7 +479,7 @@ We start by creating the timestepper -- the standard {\ttfamily Newmark} timeste
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_constructor========================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classDiskOscillationProblem_a5ce89d95d655d8c5b579171c8e9a54b9}{DiskOscillationProblem<ELEMENT>::DiskOscillationProblem}}() }
 \DoxyCodeLine{\{}
@@ -524,9 +508,7 @@ We start by creating the timestepper -- the standard {\ttfamily Newmark} timeste
 \DoxyCodeLine{  curved\_boundary\_pt,xi\_lo,fract\_mid,xi\_hi,time\_stepper\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-We select the nodes on the horizontal symmetry boundary and on the curvilinear boundary as control nodes whose displacement we shall document in a trace file.
+ We select the nodes on the horizontal symmetry boundary and on the curvilinear boundary as control nodes whose displacement we shall document in a trace file.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -551,9 +533,7 @@ We select the nodes on the horizontal symmetry boundary and on the curvilinear b
 \DoxyCodeLine{  \} \textcolor{comment}{//done choosing trace nodes}}
 
 \end{DoxyCodeInclude}
-
-
-We apply symmetry boundary conditions along the horizontal and vertical symmetry boundaries\+: zero vertical displacement along the line $ y=0 $ (boundary 0) and zero horizontal displacement along the line $ x=0 $ (boundary 2).
+ We apply symmetry boundary conditions along the horizontal and vertical symmetry boundaries\+: zero vertical displacement along the line $ y=0 $ (boundary 0) and zero horizontal displacement along the line $ x=0 $ (boundary 2).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -576,9 +556,7 @@ We apply symmetry boundary conditions along the horizontal and vertical symmetry
 \DoxyCodeLine{  \} \textcolor{comment}{// done bcs}}
 
 \end{DoxyCodeInclude}
-
-
-We complete the build of the elements by specifying the pointer to the constitutive law and to the timescale ratio $ \Lambda^2. $
+ We complete the build of the elements by specifying the pointer to the constitutive law and to the timescale ratio $ \Lambda^2. $
 
 
 \begin{DoxyCodeInclude}{0}
@@ -600,9 +578,7 @@ We complete the build of the elements by specifying the pointer to the constitut
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we apply one level of uniform refinement and assign the equation numbers.
+ Finally, we apply one level of uniform refinement and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -627,7 +603,7 @@ We start the post-\/processing routine by plotting the shape of the deformed bod
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_doc====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskOscillationProblem_adf6e2bf1843d5f5e3fa7b2fc5fb129a8}{DiskOscillationProblem<ELEMENT>::doc\_solution}}(}
 \DoxyCodeLine{ DocInfo\& doc\_info)}
@@ -642,7 +618,7 @@ We start the post-\/processing routine by plotting the shape of the deformed bod
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output shape of deformed body}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -663,22 +639,20 @@ We start the post-\/processing routine by plotting the shape of the deformed bod
 \DoxyCodeLine{ \textcolor{keywordtype}{double} exact\_r=r\_exact[0]; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Add to trace file}}
-\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time()  << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << exact\_r << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time()  << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << exact\_r << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Doc radii of control nodes}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ntrace\_node=Trace\_node\_pt.size();}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j=0;j<ntrace\_node;j++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   Trace\_file << sqrt(pow(Trace\_node\_pt[j]-\/>x(0),2)+}
-\DoxyCodeLine{                      pow(Trace\_node\_pt[j]-\/>x(1),2)) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{                      pow(Trace\_node\_pt[j]-\/>x(1),2)) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ Trace\_file << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-Next we and output the exact and computed displacements and velocities (as a function of the Lagrangian coordinate) along the horizontal symmetry line where $ y=0. $ The displacements are given by the difference between the current Eulerian and the Lagrangian positions\+:
+ Next we and output the exact and computed displacements and velocities (as a function of the Lagrangian coordinate) along the horizontal symmetry line where $ y=0. $ The displacements are given by the difference between the current Eulerian and the Lagrangian positions\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -693,12 +667,12 @@ Next we and output the exact and computed displacements and velocities (as a fun
 \DoxyCodeLine{  \textcolor{keywordtype}{unsigned} nelem=mesh\_pt()-\/>nboundary\_element(0);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Open files}}
-\DoxyCodeLine{  sprintf(filename,\textcolor{stringliteral}{"\%s/displ\_along\_line\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{  sprintf(filename,\textcolor{stringliteral}{"{}\%s/displ\_along\_line\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{          doc\_info.number());}
 \DoxyCodeLine{  some\_file.open(filename);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  ofstream some\_file2;}
-\DoxyCodeLine{  sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_displ\_along\_line\%i.dat"},}
+\DoxyCodeLine{  sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_displ\_along\_line\%i.dat"{}},}
 \DoxyCodeLine{          doc\_info.directory().c\_str(),}
 \DoxyCodeLine{          doc\_info.number());}
 \DoxyCodeLine{  some\_file2.open(filename);}
@@ -712,8 +686,8 @@ Next we and output the exact and computed displacements and velocities (as a fun
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<nelem;e++)}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    some\_file << \textcolor{stringliteral}{"ZONE "} << std::endl;}
-\DoxyCodeLine{    some\_file2 << \textcolor{stringliteral}{"ZONE "} << std::endl;}
+\DoxyCodeLine{    some\_file << \textcolor{stringliteral}{"{}ZONE "{}} << std::endl;}
+\DoxyCodeLine{    some\_file2 << \textcolor{stringliteral}{"{}ZONE "{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<npts;i++)}
 \DoxyCodeLine{     \{}
@@ -741,10 +715,10 @@ Next we and output the exact and computed displacements and velocities (as a fun
 \DoxyCodeLine{      IC\_geom\_object\_pt-\/>veloc(xi,v\_exact);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{      \textcolor{comment}{// Plot radial distance and displacement}}
-\DoxyCodeLine{      some\_file << xi[0] << \textcolor{stringliteral}{" "} << x[0]-\/xi[0] << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{      some\_file << xi[0] << \textcolor{stringliteral}{"{} "{}} << x[0]-\/xi[0] << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{                << dxdt[0] << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{      some\_file2 << xi[0] << \textcolor{stringliteral}{" "} << r\_exact[0]-\/xi[0] << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{      some\_file2 << xi[0] << \textcolor{stringliteral}{"{} "{}} << r\_exact[0]-\/xi[0] << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{                 << v\_exact[0] << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \}}
@@ -755,9 +729,7 @@ Next we and output the exact and computed displacements and velocities (as a fun
 \DoxyCodeLine{ \} \textcolor{comment}{// end line output}}
 
 \end{DoxyCodeInclude}
-
-
-The function also contains similar output for 2D displacements fields but we suppress the listing here and refer to the source code \href{../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc}{\texttt{ disk\+\_\+oscillation.\+cc}} for details.
+ The function also contains similar output for 2D displacements fields but we suppress the listing here and refer to the source code \href{../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc}{\texttt{ disk\+\_\+oscillation.\+cc}} for details.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -768,7 +740,7 @@ Before starting the time-\/integration we create an output directory and open a 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_run====================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Run the problem: Pass number of timesteps to be performed.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskOscillationProblem_ac0f7b36ffffa73ee49bc95bd961835dd}{DiskOscillationProblem<ELEMENT>::run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& nstep)}
 \DoxyCodeLine{\{}
@@ -777,17 +749,15 @@ Before starting the time-\/integration we create an output directory and open a 
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 
 \end{DoxyCodeInclude}
-
-
-Next, we initialise the global {\ttfamily Time} object so that the initial condition is assigned at $ t= 1 $, and set the timestep for the time integration.
+ Next, we initialise the global {\ttfamily Time} object so that the initial condition is assigned at $ t= 1 $, and set the timestep for the time integration.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -801,9 +771,7 @@ Next, we initialise the global {\ttfamily Time} object so that the initial condi
 \DoxyCodeLine{ time\_pt()-\/>initialise\_dt(dt);}
 
 \end{DoxyCodeInclude}
-
-
-We choose the amplitude of the oscillation and pass it and the value of Poisson\textquotesingle{}s ratio to the constructor of the {\ttfamily Geom\+Object} that specifies the initial condition.
+ We choose the amplitude of the oscillation and pass it and the value of Poisson\textquotesingle{}s ratio to the constructor of the {\ttfamily Geom\+Object} that specifies the initial condition.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -819,9 +787,7 @@ We choose the amplitude of the oscillation and pass it and the value of Poisson\
 \DoxyCodeLine{                                             time\_stepper\_pt()); }
 
 \end{DoxyCodeInclude}
-
-
-To assign the initial conditions, we create a {\ttfamily Solid\+Initial\+Condition} object from the {\ttfamily Geom\+Object} and call the helper function {\ttfamily set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)} which assigns the (Newmark) history values of the nodal positions to be consistent with the current motion of the {\ttfamily Axisym\+Oscillation\+Disk}.
+ To assign the initial conditions, we create a {\ttfamily Solid\+Initial\+Condition} object from the {\ttfamily Geom\+Object} and call the helper function {\ttfamily set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)} which assigns the (Newmark) history values of the nodal positions to be consistent with the current motion of the {\ttfamily Axisym\+Oscillation\+Disk}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -835,9 +801,7 @@ To assign the initial conditions, we create a {\ttfamily Solid\+Initial\+Conditi
 \DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a01099bce3441c7fe79ac6926800097a8}{Global\_Physical\_Variables::multiplier}}); }
 
 \end{DoxyCodeInclude}
-
-
-Finally, we document the initial condition and start the timestepping loop.
+ Finally, we document the initial condition and start the timestepping loop.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -866,9 +830,9 @@ Finally, we document the initial condition and start the timestepping loop.
 In the constructor of the {\ttfamily Axisym\+Oscillation\+Disk} we used an initial guess of $ \omega=2 $ for the eigenfrequency. With this initial guess the Newton iteration converges to the first eigenfrequency with a period of $ T=2.96. $ The first eigenmode is relatively smooth and therefore easily resolved on a coarse mesh. Explore the system\textquotesingle{}s higher eigenmodes by specifying larger initial guesses for $ \omega $. For instance, specifying an initial guess of $ \omega=4 $ the Newton iteration converges to an eigenmode with a period of $ 0.297. $ You will need much finer meshes and smaller timesteps to accurately resolve these oscillations. This is because the Newmark scheme does not have any dissipation. This implies that any spurious features that are generated by under-\/resolved computations persist indefinitely.\hypertarget{index_newmark_ic}{}\doxysubsection{Assignment of history values for the Newmark timestepper}\label{index_newmark_ic}
 We commented \href{../../../linear_wave/two_d_linear_wave/html/index.html\#IC}{\texttt{ elsewhere}} that, even though the mathematical initial value problem only requires the specification of the initial position and the velocity, the Newmark timestepper requires assignments for the initial positions and for {\itshape two} history values, representing the discrete velocities and accelerations. We refer to the relevant section in the \href{../../../solid/solid_theory/html/index.html\#Solid_IC}{\texttt{ Solid Mechanics Tutorial}} for a discussion of the automatic assignment of these history values for solid mechanics problems.
 
-We note that the function {\ttfamily Solid\+Mesh\+::\+Solid\+\_\+\+I\+C\+\_\+problem.\+set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)} which may be used to assign the history values, requires the specification of the product of the (possibly spatially-\/varying) \char`\"{}multiplier\char`\"{} $\Gamma \Lambda^2 $ -- the product of the growth factor and the timescale ratio -- via a function pointer. If this function pointer is not specified, it is assumed that the product of these two quantities is equal to one -- appropriate for a case without growth and when time is non-\/dimensionalised on the system\textquotesingle{}s intrinsic timescale.
+We note that the function {\ttfamily Solid\+Mesh\+::\+Solid\+\_\+\+IC\+\_\+problem.\+set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)} which may be used to assign the history values, requires the specification of the product of the (possibly spatially-\/varying) \char`\"{}multiplier\char`\"{} $\Gamma \Lambda^2 $ -- the product of the growth factor and the timescale ratio -- via a function pointer. If this function pointer is not specified, it is assumed that the product of these two quantities is equal to one -- appropriate for a case without growth and when time is non-\/dimensionalised on the system\textquotesingle{}s intrinsic timescale.
 
-If the \char`\"{}multiplier\char`\"{} is not (or wrongly) specified, the assignment of the history values will be incorrect and {\ttfamily oomph-\/lib} will issue a suitable warning if the library is compiled with the {\ttfamily P\+A\+R\+A\+N\+O\+ID} flag. You should experiment with this by removing the function pointer in the call to {\ttfamily Solid\+Mesh\+::\+Solid\+\_\+\+I\+C\+\_\+problem.\+set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)}.
+If the \char`\"{}multiplier\char`\"{} is not (or wrongly) specified, the assignment of the history values will be incorrect and {\ttfamily oomph-\/lib} will issue a suitable warning if the library is compiled with the {\ttfamily PARANOID} flag. You should experiment with this by removing the function pointer in the call to {\ttfamily Solid\+Mesh\+::\+Solid\+\_\+\+IC\+\_\+problem.\+set\+\_\+newmark\+\_\+initial\+\_\+condition\+\_\+consistently(...)}.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -884,5 +848,5 @@ If the \char`\"{}multiplier\char`\"{} is not (or wrongly) specified, the assignm
 \begin{center} \href{../../../../demo_drivers/solid/disk_oscillation/disk_oscillation.cc}{\texttt{ demo\+\_\+drivers/solid/disk\+\_\+oscillation/disk\+\_\+oscillation.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

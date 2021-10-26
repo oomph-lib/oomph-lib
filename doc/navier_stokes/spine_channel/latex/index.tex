@@ -2,7 +2,7 @@ Many previous examples demonstrated {\ttfamily oomph-\/lib\textquotesingle{}s} a
 \begin{DoxyItemize}
 \item The motion of the curvilinear domain boundaries was prescribed.
 \item The domain was discretised by {\ttfamily Domain} / {\ttfamily Macro\+Element} -\/ based meshes. Recall that in such meshes the function {\ttfamily Mesh\+::node\+\_\+update()} updates the position of {\itshape all} of its constituent nodes in response to changes in the shape/position of the geometric objects that define its curvilinear boundaries. The update of the nodal positions is performed on an element-\/by-\/element basis and each element determines the new positions of its nodes by referring to the {\ttfamily Macro\+Element} representation of the domain.
-\item The governing equations were implemented in their Arbitrary Eulerian Lagrangian (A\+LE) form, in which the mesh velocity is determined from the \char`\"{}history values\char`\"{} of the nodal positions.
+\item The governing equations were implemented in their Arbitrary Eulerian Lagrangian (ALE) form, in which the mesh velocity is determined from the \char`\"{}history values\char`\"{} of the nodal positions.
 \end{DoxyItemize}We will now consider problems in which the position of the domain boundary is unknown and has to be determined as part of the overall solution. This situation arises, e.\+g., in free-\/surface fluid flow problems and in fluid-\/structure interaction problems. We shall explain why {\ttfamily Domain} / {\ttfamily Macro\+Element} -\/ based node update strategies are unlikely to be efficient for such problems and then introduce the \char`\"{}\+Method of Spines\char`\"{} as one of a number of sparse (and therefore more efficient) node-\/update strategies available in {\ttfamily oomph-\/lib}.
 
 \DoxyHorRuler{0}
@@ -16,13 +16,11 @@ The sketch below shows a free-\/surface fluids problem in which the \char`\"{}he
 \end{DoxyImage}
 
 
-Assume now that we have some discrete representation of the unknown free surface so that $ h(x_1) $ is approximated by a function that involves a finite number of discrete unknowns $ H_i \ (i=1,...,N_H)$ . In principle, this allows us to represent the unknown boundary by a {\ttfamily Geom\+Object} in which the unknowns $ H_i \ (i=1,...,N_H)$ play the role of \char`\"{}geometric
-\textbackslash{}c Data\char`\"{}, i.\+e. {\ttfamily Data} whose values determine the shape of the geometric object. Once the curvilinear boundary is represented by a {\ttfamily Geom\+Object}, the update of the nodal positions in the \char`\"{}bulk\char`\"{} mesh could be performed by the {\ttfamily Domain} / {\ttfamily Macro\+Element} -\/ based methods referred to above.
+Assume now that we have some discrete representation of the unknown free surface so that $ h(x_1) $ is approximated by a function that involves a finite number of discrete unknowns $ H_i \ (i=1,...,N_H)$ . In principle, this allows us to represent the unknown boundary by a {\ttfamily Geom\+Object} in which the unknowns $ H_i \ (i=1,...,N_H)$ play the role of \char`\"{}geometric \textbackslash{}c Data\char`\"{}, i.\+e. {\ttfamily Data} whose values determine the shape of the geometric object. Once the curvilinear boundary is represented by a {\ttfamily Geom\+Object}, the update of the nodal positions in the \char`\"{}bulk\char`\"{} mesh could be performed by the {\ttfamily Domain} / {\ttfamily Macro\+Element} -\/ based methods referred to above.
 
 How exactly the unknowns $ H_i \ (i=1,...,N_H)$ are determined is irrelevant for the purpose of this discussion ( in free surface flow problems, the relevant equation is the kinematic free-\/surface condition discussed in \href{../../../navier_stokes/single_layer_free_surface/html/index.html\#kinematic_condition_theory}{\texttt{ another tutorial}}) -- we simply assume that there {\itshape are} some equations that determine their values. The feature we wish to focus on here is that the solution of the problem by Newton\textquotesingle{}s method requires the computation of the derivatives of {\itshape all} discrete residuals with respect to {\itshape all} unknowns in the problem. {\ttfamily oomph-\/lib\textquotesingle{}s} Navier-\/\+Stokes elements compute the element residual vectors (the residuals of the discretised momentum and continuity equations, evaluated for the current values of the unknowns), and the derivatives of these residuals with respect to the elements\textquotesingle{} velocity and pressure degrees of freedom. Clearly, the entries in the element\textquotesingle{}s residual vector also depend on the position of the element\textquotesingle{}s constituent nodes, which, in a free-\/boundary problem, are determined (via the node update function) by the unknowns $ H_i \ (i=1,...,N_H)$ that discretise the position of the free surface.
 
-The main purpose of this example is to demonstrate the use (and the creation) of so-\/called \char`\"{}spine meshes\char`\"{}. Such meshes are similar to the {\ttfamily Macro\+Element} / {\ttfamily Domain} -\/ based meshes employed in many previous examples, in that they allow the nodal positions to be updated in response to changes in the shape of their (curvilinear) domain boundaries. The key feature of \char`\"{}spine meshes\char`\"{} is that the node update can be performed on a node-\/by-\/node basis -- this an important requirement for the efficient solution of free-\/boundary and fluid-\/structure interaction problems in which the position of the nodes in the \char`\"{}bulk
-mesh\char`\"{} is determined by the (unknown) position of the domain boundary. The efficient evaluation of the so-\/called \char`\"{}shape derivatives\char`\"{} (the derivatives of the residuals of the equations discretised by the elements in the \char`\"{}bulk mesh\char`\"{} with respect to the unknowns that determine the position of the domain boundary)
+The main purpose of this example is to demonstrate the use (and the creation) of so-\/called \char`\"{}spine meshes\char`\"{}. Such meshes are similar to the {\ttfamily Macro\+Element} / {\ttfamily Domain} -\/ based meshes employed in many previous examples, in that they allow the nodal positions to be updated in response to changes in the shape of their (curvilinear) domain boundaries. The key feature of \char`\"{}spine meshes\char`\"{} is that the node update can be performed on a node-\/by-\/node basis -- this an important requirement for the efficient solution of free-\/boundary and fluid-\/structure interaction problems in which the position of the nodes in the \char`\"{}bulk mesh\char`\"{} is determined by the (unknown) position of the domain boundary. The efficient evaluation of the so-\/called \char`\"{}shape derivatives\char`\"{} (the derivatives of the residuals of the equations discretised by the elements in the \char`\"{}bulk mesh\char`\"{} with respect to the unknowns that determine the position of the domain boundary)
 
 The idea behind spine-\/based node updates is illustrated in the sketch below. Assume that the position of the domain boundary is parametrised by a scalar function, so that, for instance, $ x_2 = h(x_1)$, where $ h(x_1)$ may have to be determined as part of the solution (e.\+g. in free-\/surface fluids problems -- the origin of the \char`\"{}\+Method of Spines\char`\"{}).
 
@@ -90,7 +88,7 @@ The Reynolds number is the only parameter in this problem. As usual, we define a
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace===================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -100,9 +98,7 @@ The Reynolds number is the only parameter in this problem. As usual, we define a
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We start by creating a {\ttfamily Doc\+Info} object to define the output directory.
@@ -111,19 +107,17 @@ We start by creating a {\ttfamily Doc\+Info} object to define the output directo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for channel flow problem with spine mesh.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{spine__channel_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
 \DoxyCodeLine{ DocInfo doc\_info;}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ doc\_info.number()=0;}
 
 \end{DoxyCodeInclude}
-
-
-When using spines, we must use elements augmented by the {\ttfamily Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$} class. This class, adds the functionality to be updated using the method of spines (i.\+e storing a vector of pointers to the spines and allocating equations numbers associated with the spines degrees of freedom). We build the problem using {\ttfamily Spine\+Element$<$Tayloor\+Hood\+Element$<$2$>$$>$}.
+ When using spines, we must use elements augmented by the {\ttfamily Spine\+Element$<$\+ELEMENT$>$} class. This class, adds the functionality to be updated using the method of spines (i.\+e storing a vector of pointers to the spines and allocating equations numbers associated with the spines degrees of freedom). We build the problem using {\ttfamily Spine\+Element$<$\+Tayloor\+Hood\+Element$<$2$>$$>$}.
 
 We now build and solve the problem with Spine-\/\+Taylor-\/\+Hood elements, then repeat for Spine-\/\+Crouzeix-\/\+Raviart elements.
 
@@ -134,13 +128,13 @@ We now build and solve the problem with Spine-\/\+Taylor-\/\+Hood elements, then
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Build problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classChannelSpineFlowProblem}{ChannelSpineFlowProblem<SpineElement<QTaylorHoodElement<2>}} > >}
-\DoxyCodeLine{   \mbox{\hyperlink{spine__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
+\DoxyCodeLine{   problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem with automatic adaptation}}
-\DoxyCodeLine{  \mbox{\hyperlink{spine__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{  problem.newton\_solve();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{spine__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classChannelSpineFlowProblem_a101bdeee56502231945cbac272ca21f6}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()++;}
 \DoxyCodeLine{}
@@ -152,13 +146,13 @@ We now build and solve the problem with Spine-\/\+Taylor-\/\+Hood elements, then
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Build problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classChannelSpineFlowProblem}{ChannelSpineFlowProblem<SpineElement<QCrouzeixRaviartElement<2>}} > >}
-\DoxyCodeLine{   \mbox{\hyperlink{spine__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
+\DoxyCodeLine{   problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Solve the problem with automatic adaptation}}
-\DoxyCodeLine{  \mbox{\hyperlink{spine__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.newton\_solve();}
+\DoxyCodeLine{  problem.newton\_solve();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{spine__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classChannelSpineFlowProblem_a101bdeee56502231945cbac272ca21f6}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{  \textcolor{comment}{// Step number}}
 \DoxyCodeLine{  doc\_info.number()++;}
 \DoxyCodeLine{  }
@@ -169,9 +163,7 @@ We now build and solve the problem with Spine-\/\+Taylor-\/\+Hood elements, then
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The problem class for this example is very similar to our previous \href{../../driven_cavity/html/index.html\#problem}{\texttt{ steady Navier-\/\+Stokes examples }}. We store the height of the channel as private data, this is because we need it to set the inflow boundary condition.
@@ -179,8 +171,8 @@ The problem class for this example is very similar to our previous \href{../../d
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Channel flow through a non-\/uniform channel whose geometry is defined }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// by a spine mesh.}}
+\DoxyCodeLine{\textcolor{comment}{/// Channel flow through a non-\/uniform channel whose geometry is defined }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// by a spine mesh.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classChannelSpineFlowProblem}{ChannelSpineFlowProblem}} : \textcolor{keyword}{public} Problem}
@@ -194,12 +186,12 @@ The problem class for this example is very similar to our previous \href{../../d
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor: (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classChannelSpineFlowProblem_abdf2cc520915167d8718499459df348b}{\string~ChannelSpineFlowProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve. }}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve. }}
 \DoxyCodeLine{\textcolor{comment}{ /// Set velocity boundary conditions just to be on the safe side...}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classChannelSpineFlowProblem_aaf6dd8a8a472ccd938df579aba61ec97}{actions\_before\_newton\_solve}}()}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{comment}{// Update the mesh}}
-\DoxyCodeLine{   \mbox{\hyperlink{classChannelSpineFlowProblem_ab68c7ab5406b90a0ef56c39b67f83a09}{mesh\_pt}}()-\/>node\_update();}
+\DoxyCodeLine{   \mbox{\hyperlink{classChannelSpineFlowProblem_a6f3a60eb5d2f2a0eccb9b40848d4387d}{mesh\_pt}}()-\/>node\_update();}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_of\_actions\_before\_newton\_solve}}
 \DoxyCodeLine{}
@@ -219,9 +211,7 @@ The problem class for this example is very similar to our previous \href{../../d
 \DoxyCodeLine{\}; \textcolor{comment}{// end\_of\_problem\_class}}
 
 \end{DoxyCodeInclude}
-
-
-Note that the absence of boundary conditions on the right boundary (1), causes a zero traction condition to be applied there. This implies that we should not fix a pressure degree of freedom.
+ Note that the absence of boundary conditions on the right boundary (1), causes a zero traction condition to be applied there. This implies that we should not fix a pressure degree of freedom.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -232,7 +222,7 @@ We begin by setting all the mesh parameters, and building it.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for ChannelSpineFlow problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classChannelSpineFlowProblem_a23f1b987e3395b1d101eaf3f3b5c94b2}{ChannelSpineFlowProblem<ELEMENT>::ChannelSpineFlowProblem}}()}
 \DoxyCodeLine{\{ }
@@ -268,7 +258,7 @@ We begin by setting all the mesh parameters, and building it.
 \DoxyCodeLine{ \textcolor{keywordtype}{double} zeta\_min=Lx0;}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} zeta\_max=Lx0+Lx1;}
 \DoxyCodeLine{ GeomObject* UpperWall = }
-\DoxyCodeLine{  \textcolor{keyword}{new} \mbox{\hyperlink{classSinusoidalWall}{SinusoidalWall}}(Ly,amplitude\_upper,zeta\_min,zeta\_max);}
+\DoxyCodeLine{  \textcolor{keyword}{new} SinusoidalWall(Ly,amplitude\_upper,zeta\_min,zeta\_max);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Build and assign mesh -\/-\/ pass pointer to geometric object}}
 \DoxyCodeLine{ \textcolor{comment}{// that represents the sinusoidal bump on the upper wall}}
@@ -277,9 +267,7 @@ We begin by setting all the mesh parameters, and building it.
 \DoxyCodeLine{                                                    UpperWall);}
 
 \end{DoxyCodeInclude}
-
-
-We then pin the velocities on the left, top and bottom boundaries (3,2 and 0).
+ We then pin the velocities on the left, top and bottom boundaries (3,2 and 0).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -311,9 +299,7 @@ We then pin the velocities on the left, top and bottom boundaries (3,2 and 0).
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we pass a pointer to the Reynolds number to each element and assign the equation numbers.
+ Finally, we pass a pointer to the Reynolds number to each element and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -367,14 +353,12 @@ Finally, we pass a pointer to the Reynolds number to each element and assign the
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_part2}{}\doxysection{Part 2\+: How to create a Spine\+Mesh}\label{index_part2}
 Spine-\/based meshes have their origin in free-\/surface fluid-\/mechanics problems where they were first (?) introduced by Kistler \& Scriven in their paper
@@ -383,7 +367,7 @@ Spine-\/based meshes have their origin in free-\/surface fluid-\/mechanics probl
 
 {\ttfamily oomph-\/lib\textquotesingle{}s} Spine\+Meshes provide a generalisation of their node-\/update techniques.
 
-In the past when solving a problem in a domain with curved boundaries, we have made a specific Mesh for the domain, and use a geometric object to define its curved \mbox{\hyperlink{spine__channel_8txt_ab6c081592e5a43c3ddd306db5c520563}{wall(s)}}.
+In the past when solving a problem in a domain with curved boundaries, we have made a specific Mesh for the domain, and use a geometric object to define its curved wall(s).
 
  
 \begin{DoxyImage}
@@ -397,11 +381,11 @@ To generalise this approach {\ttfamily oomph-\/lib} makes use of spines.
 \item A {\ttfamily Spine} is most easily visualised a line of a certain height, in one coordinate direction.
 \item A {\ttfamily Spine\+Node} is a {\ttfamily Node} located at a certain fraction along a {\ttfamily Spine}.
 \item A {\ttfamily Spine\+Mesh} is a {\ttfamily Mesh} which will update using spines.
-\item A {\ttfamily Spine\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$} takes a \char`\"{}normal\char`\"{} element and adds the functionality to work with spines.
+\item A {\ttfamily Spine\+Element$<$\+ELEMENT$>$} takes a \char`\"{}normal\char`\"{} element and adds the functionality to work with spines.
 \end{DoxyItemize}The creation of a {\ttfamily Spine\+Mesh} is discussed in detail below \mbox{\hyperlink{index_spine_mesh}{Making a Spine\+Mesh}}. While the picture above demonstrates the ability of Spine\+Node to individually update using the function {\ttfamily spine\+\_\+node\+\_\+update(spine\+\_\+node\+\_\+pt)}.\hypertarget{index_spine_mesh}{}\doxysubsection{Making a Spine\+Mesh}\label{index_spine_mesh}
 In this example we use a {\ttfamily Spine\+Mesh} to model the domain. This mesh constitutes three regions\+: left (0), centre (1) and right (2), the left and right regions have a constant height, while in the centre region the height varies. These heights are defined by two geometric objects, a \href{../../../the_data_structure/html/classoomph_1_1StraightLine.html}{\texttt{ straight line }} and a deflected line respectively. We will discuss the necessary steps taken to create this mesh (the complete documentation for this specific mesh can be found \href{../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html}{\texttt{ here }}).
 
-To begin, we create a new class templated by a element and inheriting from {\ttfamily Rectangular\+Quad\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$} and {\ttfamily Spine\+Mesh}. The latter adds the functionality needed for using Spines.
+To begin, we create a new class templated by a element and inheriting from {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$} and {\ttfamily Spine\+Mesh}. The latter adds the functionality needed for using Spines.
 
  
 \begin{DoxyCodeInclude}{0}
@@ -409,9 +393,7 @@ To begin, we create a new class templated by a element and inheriting from {\ttf
 \DoxyCodeLine{  \textcolor{keyword}{class }ChannelSpineMesh : \textcolor{keyword}{public} RectangularQuadMesh<ELEMENT>, \textcolor{keyword}{public} SpineMesh}
 
 \end{DoxyCodeInclude}
-
-
-All Spine\+Meshs must include a function {\ttfamily spine\+\_\+node\+\_\+update}(Spine\+Node$\ast$ spine\+\_\+node\+\_\+pt), this will describe the operations performed when updating every Spine\+Node in the mesh. First we find the Spine\+Nodes fraction along the spine.
+ All Spine\+Meshs must include a function {\ttfamily spine\+\_\+node\+\_\+update}(Spine\+Node$\ast$ spine\+\_\+node\+\_\+pt), this will describe the operations performed when updating every Spine\+Node in the mesh. First we find the Spine\+Nodes fraction along the spine.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -421,9 +403,7 @@ All Spine\+Meshs must include a function {\ttfamily spine\+\_\+node\+\_\+update}
 \DoxyCodeLine{      \textcolor{keywordtype}{double} W = spine\_node\_pt-\/>fraction();}
 
 \end{DoxyCodeInclude}
-
-
-We then get the local coordinate on the geometric object that defines the upper wall.
+ We then get the local coordinate on the geometric object that defines the upper wall.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -433,9 +413,7 @@ We then get the local coordinate on the geometric object that defines the upper 
 \DoxyCodeLine{      s\_wall[0] = spine\_node\_pt-\/>spine\_pt()-\/>geom\_parameter(0);}
 
 \end{DoxyCodeInclude}
-
-
-Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.
+ Finally we use the use the local coordinate to get the position of the geometric object and set the first coordinate value of the node.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -449,13 +427,11 @@ Finally we use the use the local coordinate to get the position of the geometric
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.
+ We store the number of elements in the x direction in each region, the number of elements in the y direction, the lengths of each region and the height of the uniform boundary, as well as pointers to the two geometric objects.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{/// Number of elements in the left region}}
+\DoxyCodeLine{\textcolor{comment}{    /// Number of elements in the left region}}
 \DoxyCodeLine{    \textcolor{keywordtype}{unsigned} Nx0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{    /// Number of elements in the centre region}}
@@ -489,9 +465,7 @@ We store the number of elements in the x direction in each region, the number of
 \DoxyCodeLine{\textcolor{comment}{}    GeomObject* Straight\_wall\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for {\ttfamily Rectangular\+Quad\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$}, copies these values to their storage in the mesh.
+ All these details are passed to the constructor, except for the pointer to the geometric object for the uniform wall. The constructor calls the empty constructor for {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$}, copies these values to their storage in the mesh.
 
  
 \begin{DoxyCodeInclude}{0}
@@ -524,9 +498,7 @@ All these details are passed to the constructor, except for the pointer to the g
 \DoxyCodeLine{      Wall\_pt(wall\_pt)}
 
 \end{DoxyCodeInclude}
-
-
-We then assign all the parameters for the {\ttfamily Rectangular\+Quad\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$}, create the geometric object for the uniform wall and call the function {\ttfamily \mbox{\hyperlink{spine__channel_8txt_af6dd20913b6f4c7abd5a0823c3ad7134}{build\+\_\+channel\+\_\+spine\+\_\+mesh(...)}}} 
+ We then assign all the parameters for the {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$}, create the geometric object for the uniform wall and call the function {\ttfamily build\+\_\+channel\+\_\+spine\+\_\+mesh(...)} 
 
 
 \begin{DoxyCodeInclude}{0}
@@ -537,24 +509,22 @@ We then assign all the parameters for the {\ttfamily Rectangular\+Quad\+Mesh$<$\
 \DoxyCodeLine{    \textcolor{comment}{// Mesh can only be built with spine elements}}
 \DoxyCodeLine{    MeshChecker::assert\_geometric\_element<SpineFiniteElement, ELEMENT>(2);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{comment}{// We've called the "generic" constructor for the RectangularQuadMesh}}
+\DoxyCodeLine{    \textcolor{comment}{// We've called the "{}generic"{} constructor for the RectangularQuadMesh}}
 \DoxyCodeLine{    \textcolor{comment}{// which doesn't do much...}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{comment}{// Build the straight line object}}
 \DoxyCodeLine{    Straight\_wall\_pt = \textcolor{keyword}{new} StraightLine(h);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{comment}{// Now build the mesh:}}
-\DoxyCodeLine{    \mbox{\hyperlink{spine__channel_8txt_af6dd20913b6f4c7abd5a0823c3ad7134}{build\_channel\_spine\_mesh}}(time\_stepper\_pt);}
+\DoxyCodeLine{    build\_channel\_spine\_mesh(time\_stepper\_pt);}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-When we call the function {\ttfamily \mbox{\hyperlink{spine__channel_8txt_af6dd20913b6f4c7abd5a0823c3ad7134}{build\+\_\+channel\+\_\+spine\+\_\+mesh(...)}}}, it calls its counterpart in the {\ttfamily Rectangular\+Quad\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$}, then store the numbers of elements in each direction in each region (and all at once).
+ When we call the function {\ttfamily build\+\_\+channel\+\_\+spine\+\_\+mesh(...)}, it calls its counterpart in the {\ttfamily Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$}, then store the numbers of elements in each direction in each region (and all at once).
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  \textcolor{keywordtype}{void} \mbox{\hyperlink{spine__channel_8txt_af6dd20913b6f4c7abd5a0823c3ad7134}{ChannelSpineMesh<ELEMENT>::build\_channel\_spine\_mesh}}(}
+\DoxyCodeLine{  \textcolor{keywordtype}{void} ChannelSpineMesh<ELEMENT>::build\_channel\_spine\_mesh(}
 \DoxyCodeLine{    TimeStepper* time\_stepper\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{    \textcolor{comment}{// Build the underlying quad mesh:}}
@@ -569,9 +539,7 @@ When we call the function {\ttfamily \mbox{\hyperlink{spine__channel_8txt_af6dd2
 \DoxyCodeLine{    \textcolor{keywordtype}{unsigned} n\_x2 = this-\/>Nx2;}
 
 \end{DoxyCodeInclude}
-
-
-We then allocate memory for the elements and spines in each region in each region.
+ We then allocate memory for the elements and spines in each region in each region.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -608,7 +576,7 @@ We then allocate memory for the elements and spines in each region in each regio
 \DoxyCodeLine{    \textcolor{comment}{// Check that we have the correct number of elements}}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (nelement() != nleft + ncentre + nright)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"Incorrect number of element pointers!"},}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Incorrect number of element pointers!"{}},}
 \DoxyCodeLine{                          OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                          OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{    \}}
@@ -646,9 +614,7 @@ We then allocate memory for the elements and spines in each region in each regio
 \DoxyCodeLine{    \textcolor{comment}{// end Allocating memory}}
 
 \end{DoxyCodeInclude}
-
-
-Now we allocate storage for the parameters used to build the spines.
+ Now we allocate storage for the parameters used to build the spines.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -672,9 +638,7 @@ Now we allocate storage for the parameters used to build the spines.
 \DoxyCodeLine{    \textcolor{keywordtype}{unsigned} n\_prev\_elements = 0;}
 
 \end{DoxyCodeInclude}
-
-
-Now we create the first Spine with unit length, pin the height (since it is not a degree of freedom in this mesh) and push the spine back onto the {\ttfamily Spine\+\_\+pt}.
+ Now we create the first Spine with unit length, pin the height (since it is not a degree of freedom in this mesh) and push the spine back onto the {\ttfamily Spine\+\_\+pt}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -686,14 +650,12 @@ Now we create the first Spine with unit length, pin the height (since it is not 
 \DoxyCodeLine{    \textcolor{comment}{// Element 0}}
 \DoxyCodeLine{    \textcolor{comment}{// Node 0}}
 \DoxyCodeLine{    \textcolor{comment}{// Assign the new spine with unit length}}
-\DoxyCodeLine{    \mbox{\hyperlink{spine__channel_8txt_a914410aeeaf61a0d6c75c43ec26ecbaa}{Spine}}* new\_spine\_pt = \textcolor{keyword}{new} \mbox{\hyperlink{spine__channel_8txt_a914410aeeaf61a0d6c75c43ec26ecbaa}{Spine}}(1.0);}
+\DoxyCodeLine{    Spine* new\_spine\_pt = \textcolor{keyword}{new} Spine(1.0);}
 \DoxyCodeLine{    new\_spine\_pt-\/>spine\_height\_pt()-\/>pin(0);}
 \DoxyCodeLine{    Spine\_pt.push\_back(new\_spine\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-We then set the {\ttfamily spine\+\_\+pt()} of the first node to the Spine we just created, assign the nodes {\ttfamily \mbox{\hyperlink{spine__channel_8txt_aa65a3698923f42762308375c13258dd9}{fraction()}}} to zero and define the node as part of this mesh.
+ We then set the {\ttfamily spine\+\_\+pt()} of the first node to the Spine we just created, assign the nodes {\ttfamily fraction()} to zero and define the node as part of this mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -708,9 +670,7 @@ We then set the {\ttfamily spine\+\_\+pt()} of the first node to the Spine we ju
 \DoxyCodeLine{    nod\_pt-\/>spine\_mesh\_pt() = \textcolor{keyword}{this};}
 
 \end{DoxyCodeInclude}
-
-
-We then mark the node as part of the left (0) region.
+ We then mark the node as part of the left (0) region.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -718,9 +678,7 @@ We then mark the node as part of the left (0) region.
 \DoxyCodeLine{    nod\_pt-\/>node\_update\_fct\_id() = 0;}
 
 \end{DoxyCodeInclude}
-
-
-When we built the Spine, we set its height to 1.\+0. We now need to assign its height from the {\ttfamily Straight\+\_\+wall\+\_\+pt} and assign all the information needed to update the mesh to the Spine.
+ When we built the Spine, we set its height to 1.\+0. We now need to assign its height from the {\ttfamily Straight\+\_\+wall\+\_\+pt} and assign all the information needed to update the mesh to the Spine.
 
 First we set the value of $\zeta$ and get the geometric object and the local coordinate.
 
@@ -737,9 +695,7 @@ First we set the value of $\zeta$ and get the geometric object and the local coo
 \DoxyCodeLine{      Straight\_wall\_pt-\/>locate\_zeta(zeta, geometric\_object\_pt, s\_wall);}
 
 \end{DoxyCodeInclude}
-
-
-Then we store these geometric parameters in the Spine.
+ Then we store these geometric parameters in the Spine.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -751,9 +707,7 @@ Then we store these geometric parameters in the Spine.
 \DoxyCodeLine{      nod\_pt-\/>spine\_pt()-\/>set\_geom\_parameter(parameters);}
 
 \end{DoxyCodeInclude}
-
-
-We then set the height of the Spine according to the geometric object.
+ We then set the height of the Spine according to the geometric object.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -765,9 +719,7 @@ We then set the height of the Spine according to the geometric object.
 \DoxyCodeLine{      nod\_pt-\/>spine\_pt()-\/>height() = r\_wall[1];}
 
 \end{DoxyCodeInclude}
-
-
-Finally we set the Spines\textquotesingle{} pointer to the geometric object.
+ Finally we set the Spines\textquotesingle{} pointer to the geometric object.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -782,9 +734,7 @@ Finally we set the Spines\textquotesingle{} pointer to the geometric object.
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-Now we loop vertically along the spine, adding a pointer to the spine to each element, and assigning the fraction for each node on this spine, define each node as part of this mesh, and mark it as part of the left region.
+ Now we loop vertically along the spine, adding a pointer to the spine to each element, and assigning the fraction for each node on this spine, define each node as part of this mesh, and mark it as part of the left region.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -811,9 +761,7 @@ Now we loop vertically along the spine, adding a pointer to the spine to each el
 \DoxyCodeLine{    \} \textcolor{comment}{// end loop over elements}}
 
 \end{DoxyCodeInclude}
-
-
-We then loop over the remaining spines in the left region repeating this process, except that the first spine in each element (except the first) is copied from the last spine in the previous element.
+ We then loop over the remaining spines in the left region repeating this process, except that the first spine in each element (except the first) is copied from the last spine in the previous element.
 
 We then repeat this process for the centre and right regions, using the correct geometric objects to define the upper wall, which can be examined in detail \href{../../../the_data_structure/html/classoomph_1_1ChannelSpineMesh.html}{\texttt{ here }}.
 
@@ -835,5 +783,5 @@ We then repeat this process for the centre and right regions, using the correct 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

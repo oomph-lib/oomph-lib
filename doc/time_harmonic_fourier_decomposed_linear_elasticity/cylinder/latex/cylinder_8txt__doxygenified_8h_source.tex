@@ -1,0 +1,516 @@
+\hypertarget{cylinder_8txt__doxygenified_8h_source}{}\doxysection{cylinder.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{cylinder_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage The azimuthally Fourier-\/decomposed equations of 3D time-\/harmonic linear elasticity }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{The aim of this tutorial is to demonstrate the solution of the}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{time-\/harmonic equations of linear elasticity in cylindrical polar}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{coordinates, using a Fourier decomposition of the solution in the }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{azimuthal direction.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{These equations are useful to describe forced, time-\/harmonic,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{non-\/axisymmetric oscillations of axisymmetric elastic bodies.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{<TABLE BORDER=1, WIDTH=500px>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{<TD bgcolor="{}cornsilk"{}>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{<B>Acknowledgement:</B>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{This implementation of the equations and the documentation }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{were developed jointly with Robert Harter (Thales Underwater Systems}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{Ltd) with financial support from a KTA Secondment grant from}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{University of Manchester's EPSRC-\/funded Knowledge Transfer Account.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{</TABLE>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{\(\backslash\)section theory Theory}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{Consider a three-\/dimensional, axisymmetric body (of density \(\backslash\)f\$ \(\backslash\)rho}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{\(\backslash\)f\$, Young's modulus \(\backslash\)f\$ E \(\backslash\)f\$, and Poisson's ratio \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$),}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{occupying the region \(\backslash\)f\$ D \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{whose boundary is \(\backslash\)f\$ \(\backslash\)partial D \(\backslash\)f\$.  Assuming that the body performs}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{time-\/harmonic oscillations of frequency of \(\backslash\)f\$ \(\backslash\)omega \(\backslash\)f\$, we use cylindrical }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{coordinates \(\backslash\)f\$ (r\string^*,\(\backslash\)theta,z\string^*) \(\backslash\)f\$. The equations of time-\/harmonic }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{linear elasticity can then be written as}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\string^*\(\backslash\)cdot\(\backslash\)tau\string^*\$\}+\(\backslash\)rho \(\backslash\)mbox\{\(\backslash\)boldmath\$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{F\string^*\$\}=-\/\(\backslash\)rho\(\backslash\)omega\string^2\(\backslash\)mbox\{\(\backslash\)boldmath\$ u\string^*\$\},}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{where \(\backslash\)f\$\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\string^*\$\}=(\(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{r\string^*\},\(\backslash\)frac\{1\}\{r\string^*\}\(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial\(\backslash\)theta\},\(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{z\string^*\}) \(\backslash\)f\$, and the stresses, body force}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{and displacements are given by }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{\(\backslash\)mbox\{\(\backslash\)boldmath\$\(\backslash\)tau\string^*\$\}(r\string^*,\(\backslash\)theta,z\string^*)\{\(\backslash\)rm e\}\string^\{-\/\{\(\backslash\)rm i\}\(\backslash\)omega}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{t\string^*\}\(\backslash\)\} \(\backslash\)f\$, }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{\(\backslash\)mbox\{\(\backslash\)boldmath\$F\string^*\$\}(r\string^*,\(\backslash\)theta,z\string^*)\{\(\backslash\)rm e\}\string^\{-\/\{\(\backslash\)rm i\}\(\backslash\)omega}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{t\string^*\}\(\backslash\)\} \(\backslash\)f\$ and \(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{\(\backslash\)mbox\{\(\backslash\)boldmath\$u\string^*\$\}(r\string^*,\(\backslash\)theta,z\string^*)\{\(\backslash\)rm e\}\string^\{-\/\{\(\backslash\)rm i\}\(\backslash\)omega}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{t\string^*\}\(\backslash\)\} \(\backslash\)f\$ respectively.  Note that here and henceforth, the superscript}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{asterisk notation is used to distinguish dimensional quantities}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{from their non-\/dimensional counterparts where required.  (The coordinate}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)theta \(\backslash\)f\$ is by definition dimensionless, and so we do not use}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{an asterisk when referencing this parameter).}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{The body is subject to imposed time-\/harmonic displacements}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)mbox\{\(\backslash\)boldmath\$ u\string^*\$\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{along  \(\backslash\)f\$ \(\backslash\)partial D\_d \(\backslash\)f\$, and subject to an imposed traction}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)hat\{\(\backslash\)tau\}\string^*\$\} \(\backslash\)f\$ along \(\backslash\)f\$ \(\backslash\)partial D\_n \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)partial D=\(\backslash\)partial D\_d\(\backslash\)cup\(\backslash\)partial D\_n \(\backslash\)f\$ so that}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ u\string^*\$\}=\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)hat\{u\}\string^*\$\}\(\backslash\),\(\backslash\),\(\backslash\)textrm\{on \$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{\(\backslash\)partial D\_d \$ \},\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau\string^*\$\} \(\backslash\)cdot }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\{\(\backslash\)bf n\}=\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)hat\{\(\backslash\)tau\}\string^*\$\}\(\backslash\),\(\backslash\),\(\backslash\)textrm\{on \$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{\(\backslash\)partial D\_n \$ \}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{where \(\backslash\)f\$ \{\(\backslash\)bf n\} \(\backslash\)f\$ is the outer unit normal on the boundary.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{The stresses and displacements are related by the constitutive equations}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau\string^*\$\}=\(\backslash\)frac\{E\}\{1+\(\backslash\)nu\}\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)nu\}\{1-\/2\(\backslash\)nu\}(\(\backslash\)mbox\{\(\backslash\)boldmath\$\(\backslash\)nabla\string^*\(\backslash\)cdot u\string^*\$\})\(\backslash\)textbf\{I\}+}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)frac\{1\}\{2\}(\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\string^* u\string^*\$\}+\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\string^* u\string^*\$\}\string^\{\{\(\backslash\)rm T\}\})\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\string^* u\string^*\$\}\string^\{\{\(\backslash\)rm T\}\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{\(\backslash\)f\$ represents the transpose of \(\backslash\)f\$ \(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\string^* u\string^*\$\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{\(\backslash\)f\$.  Note that in cylindrical coordinates, the second-\/order}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{tensor \(\backslash\)f\$ \(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\string^* u\string^*\$\} \(\backslash\)f\$ is given by}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\string^* u\string^*\$\}=}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)left(\(\backslash\)begin\{array\}\{ccc\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\string^*\_r\}\{\(\backslash\)partial r\string^*\}\&}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)frac\{1\}\{r\string^*\}\(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{u\string^*\_r\}\{\(\backslash\)partial\(\backslash\)theta\}-\/\(\backslash\)frac\{u\string^*\_\(\backslash\)theta\}\{r\string^*\}\&}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\string^*\_r\}\{\(\backslash\)partial z\string^*\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\string^*\_\(\backslash\)theta\}\{\(\backslash\)partial r\string^*\}\&}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{\(\backslash\)frac\{1\}\{r\string^*\}\(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{u\string^*\_\(\backslash\)theta\}\{\(\backslash\)partial\(\backslash\)theta\}+\(\backslash\)frac\{u\string^*\_r\}\{r\string^*\}\&}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\string^*\_\(\backslash\)theta\}\{\(\backslash\)partial z\string^*\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\string^*\_z\}\{\(\backslash\)partial r\string^*\}\&}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)frac\{1\}\{r\string^*\}\(\backslash\)frac\{\(\backslash\)partial u\string^*\_z\}\{\(\backslash\)partial\(\backslash\)theta\}\&}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\string^*\_z\}\{\(\backslash\)partial z\string^*\}\(\backslash\)end\{array\}\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{and \(\backslash\)f\$ \(\backslash\)mbox\{\(\backslash\)boldmath\$\(\backslash\)nabla\string^*\(\backslash\)cdot u\string^*\$\} \(\backslash\)f\$ is equal to the trace}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{of this matrix.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{We non-\/dimensionalise the equations, using a problem specific reference}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{length, \(\backslash\)f\$ \{\(\backslash\)cal L\} \(\backslash\)f\$, and a timescale \(\backslash\)f\$ \{\(\backslash\)cal T\}=1/\(\backslash\)omega \(\backslash\)f\$, and  use}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{Young's modulus to non-\/dimensionalise the body force and the stress tensor:}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau\string^*\$\} = E \(\backslash\), \(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau\$\}, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{r\string^* = \{\(\backslash\)cal L\}\(\backslash\), r, \(\backslash\)qquad z\string^* = \{\(\backslash\)cal L\}\(\backslash\), z}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ u\string^*\$\} = \{\(\backslash\)cal L\}\(\backslash\), \(\backslash\)mbox\{\(\backslash\)boldmath\$ u\$\}, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ F\string^*\$\} = \(\backslash\)frac\{E\}\{\(\backslash\)rho \(\backslash\)cal L\} \(\backslash\), \(\backslash\)mbox\{\(\backslash\)boldmath\$ F\$\},}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{t\string^* = \{\(\backslash\)cal T\}\(\backslash\), t.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{The non-\/dimensional form of the linear elasticity equations is then given by}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\(\backslash\)cdot\(\backslash\)tau\$\}+\(\backslash\)mbox\{\(\backslash\)boldmath\$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{F\$\}=-\/\(\backslash\)Omega\string^2\(\backslash\)mbox\{\(\backslash\)boldmath\$ u\$\},}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{where \(\backslash\)f\$\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla\$\}=(\(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{r\},\(\backslash\)frac\{1\}\{r\}\(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial\(\backslash\)theta\},\(\backslash\)frac\{\(\backslash\)partial\}\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{z\}) \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau \$\}=\(\backslash\)frac\{1\}\{1+\(\backslash\)nu\}\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)nu\}\{1-\/2\(\backslash\)nu\}(\(\backslash\)mbox\{\(\backslash\)boldmath\$\(\backslash\)nabla\(\backslash\)cdot u\$\})\(\backslash\)textbf\{I\}+}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{\(\backslash\)frac\{1\}\{2\}(\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla u\$\}+\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)nabla}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{u\$\}\string^\{\{\(\backslash\)rm T\}\})\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{and the non-\/dimensional parameter}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{\(\backslash\)Omega = \{\(\backslash\)cal L\}\(\backslash\)omega \(\backslash\)sqrt\{\(\backslash\)frac\{\(\backslash\)rho\}\{E\}\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{is the ratio of the elastic body's intrinsic timescale,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{ \(\backslash\)f\$\{\(\backslash\)cal L\} \(\backslash\)sqrt\{\(\backslash\)frac\{\(\backslash\)rho\}\{E\}\}\(\backslash\)f\$, to the problem-\/specific }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{timescale, \(\backslash\)f\$ \{\(\backslash\)cal T\}=1/\(\backslash\)omega \(\backslash\)f\$, that we used to non-\/dimensionalise time.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{The boundary conditions are}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ u\$\}=\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)hat\{u\}\$\}\(\backslash\),\(\backslash\),\(\backslash\)textrm\{on \$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{\(\backslash\)partial D\_d \$\},\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau\$\}\(\backslash\)cdot \{\(\backslash\)bf n\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{=\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)hat\{\(\backslash\)tau\}\$\}\(\backslash\),\(\backslash\),\(\backslash\)textrm\{on \$}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{\(\backslash\)partial D\_n \$\}.\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{Given the assumed axisymmetry of the body we expand all quantities}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{in a Fourier series in the azimuthal coordinate \(\backslash\)f\$ \(\backslash\)theta \(\backslash\)f\$ by }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{writing,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ u\$\}(r,\(\backslash\)theta ,z)=\(\backslash\)sum\_\{n=-\/\(\backslash\)infty\}\string^\{\(\backslash\)infty\}\(\backslash\)mbox\{\(\backslash\)boldmath\$ u\$\}\string^\{(n)\}(r,z)\{\(\backslash\)rm e\}\string^\{\{\(\backslash\)rm i\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{n\(\backslash\)theta\},\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ F\$\} (r,\(\backslash\)theta ,z)=\(\backslash\)sum\_\{n=-\/\(\backslash\)infty\}\string^\{\(\backslash\)infty\}\(\backslash\)mbox\{\(\backslash\)boldmath\$ F\$\}\string^\{(n)\}(r,z)\{\(\backslash\)rm e\}\string^\{\{\(\backslash\)rm i\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{n\(\backslash\)theta\},\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau\$\} (r,\(\backslash\)theta ,z)=\(\backslash\)sum\_\{n=-\/\(\backslash\)infty\}\string^\{\(\backslash\)infty\}\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau\$\}\string^\{(n)\}(r,z)\{\(\backslash\)rm e\}\string^\{\{\(\backslash\)rm i\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{n\(\backslash\)theta\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{,\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{This decomposition allows us to}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{remove the \(\backslash\)f\$ \(\backslash\)theta \(\backslash\)f\$-\/dependence from the equations by writing }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)frac\{\(\backslash\)partial\(\backslash\)zeta\}\{\(\backslash\)partial\(\backslash\)theta\}=\{\(\backslash\)rm i\}n\(\backslash\)zeta \(\backslash\)f\$, where}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{\(\backslash\)f\$\(\backslash\)zeta \(\backslash\)f\$ represents any physical parameter in the problem.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{Furthermore, since the governing equations are linear, we can solve for each}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{Fourier component separately and simply specify the Fourier wavenumber}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{\(\backslash\)f\$ n \(\backslash\)f\$ as a parameter.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{\(\backslash\)section element\_types Implementation }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{Within \(\backslash\)c oomph-\/lib, the non-\/dimensional version of the }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{two-\/dimensional Fourier-\/decomposed equations (1) with }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{the constitutive equations (2) are implemented }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{in the \(\backslash\)c TimeHarmonicFourierDecomposedLinearElasticityEquations equations }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{class. Following our usual approach, discussed in the}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{<A HREF="{}../../../quick\_guide/html/index.html"{}> (Not-\/So-\/)Quick}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{Guide,</A> this equation class is then combined with a geometric finite}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{element to form a fully-\/functional finite element. }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{For instance, the combination of the }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)c TimeHarmonicFourierDecomposedLinearElasticityEquations}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{class with the geometric finite element \(\backslash\)c QElement<2,3> yields a nine-\/node }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{quadrilateral element. As usual, the mapping }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{between local and global (Eulerian) coordinates within an element is given by,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{x\_i = \(\backslash\)sum\_\{j=1\}\string^\{N\string^\{(E)\}\} X\string^\{(E)\}\_\{ij\} \(\backslash\), \(\backslash\)psi\_j, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{i=1,2,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{where the coordinates are enumerated as \(\backslash\)f\$ x\_1=r, \(\backslash\) x\_2 = z\(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{\(\backslash\)f\$ N\string^\{(E)\} \(\backslash\)f\$ is the number of nodes in the element, \(\backslash\)f\$ X\string^\{(E)\}\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{\(\backslash\)f\$ is the \(\backslash\)f\$ i \(\backslash\)f\$-\/th global (Eulerian) coordinate (enumerated as above)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{of the \(\backslash\)f\$ j \(\backslash\)f\$-\/th \(\backslash\)c Node in the element, and the \(\backslash\)f\$ \(\backslash\)psi\_j \(\backslash\)f\$ are }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{the element's shape functions, defined in the geometric}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{finite element. }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{We allow for the presence of damping by allowing the constitutive}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{parameters and forcing frequency to be complex-\/valued. The three}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{components of the displacement field therefore have real and imaginary }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{parts and we store the six real-\/valued nodal unknowns in the order}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{\(\backslash\)f\$ Re\(\backslash\)\{u\_r\string^\{(n)\}\(\backslash\)\}, Re\(\backslash\)\{u\_z\string^\{(n)\}\(\backslash\)\}, Re\(\backslash\)\{u\_\(\backslash\)theta\string^\{(n)\}\(\backslash\)\},}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{    Im\(\backslash\)\{u\_r\string^\{(n)\}\(\backslash\)\}, Im\(\backslash\)\{u\_z\string^\{(n)\}\(\backslash\)\}, Im\(\backslash\)\{u\_\(\backslash\)theta\string^\{(n)\}\(\backslash\)\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{ \(\backslash\)f\$ and use the }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{shape functions to interpolate the displacements as}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{u\_i\string^\{(n)\} = \(\backslash\)sum\_\{j=1\}\string^\{N\string^\{(E)\}\} U\string^\{(E)\}\_\{ij\} \(\backslash\), \(\backslash\)psi\_j, \(\backslash\)qquad }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{i=1,...6,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{where \(\backslash\)f\$  U\string^\{(E)\}\_\{ij\} \(\backslash\)f\$  is the \(\backslash\)f\$ i \(\backslash\)f\$-\/th displacement component }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{(enumerated as indicated above) at the \(\backslash\)f\$ j \(\backslash\)f\$-\/th \(\backslash\)c Node in the element.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{\(\backslash\)section test The test problem}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{The governing equations are fairly complicated and it is difficult}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{to come up with non-\/trivial analytical solutions that could be used}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{to validate the implementation. We therefore construct an analytical}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{solution by postulating a displacement field and providing a body}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{force that makes this a solution of the equations.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{Specifically we consider the time-\/harmonic non-\/axisymmetric deformation of}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{an annular elastic body that occupies the region \(\backslash\)f\$ r\_\{\(\backslash\)rm min\}\(\backslash\)leq}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{r\(\backslash\)leq r\_\{\(\backslash\)rm max\}, z\_\{\(\backslash\)rm min\}\(\backslash\)leq}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{z\(\backslash\)leq z\_\{\(\backslash\)rm max\}, 0\(\backslash\)leq\(\backslash\)theta\(\backslash\)leq 2\(\backslash\)pi \(\backslash\)f\$.  }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{The displacement field}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$u\$\}\string^\{(n)\}=}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{\(\backslash\)left(\(\backslash\)begin\{array\}\{c\}u\_r\string^\{(n)\}\(\backslash\)\(\backslash\)u\_\(\backslash\)theta\string^\{(n)\}\(\backslash\)\(\backslash\)u\_z\string^\{(n)\}\(\backslash\)end\{array\}\(\backslash\)right)=}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{\(\backslash\)left(\(\backslash\)begin\{array\}\{c\}r\string^3\(\backslash\)cos\(\backslash\),}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{z\(\backslash\)\(\backslash\)r\string^3z\string^3\(\backslash\)\(\backslash\)r\string^3\(\backslash\)sin\(\backslash\),z\(\backslash\)end\{array\}\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{is an exact solution of the governing equations if the body is }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{subject to a body force}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ F\$\}\string^\{(n)\}=\(\backslash\)left(\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{-\/r(2\{\(\backslash\)rm i\} nz\string^3\(\backslash\)lambda+\(\backslash\)cos\(\backslash\), }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{z\(\backslash\)\{(8+3r)\(\backslash\)lambda-\/(n\string^2-\/16+r(r-\/3))\(\backslash\)mu+r\string^2 \(\backslash\)Lambda\string^2\(\backslash\)\})\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{-\/r\(\backslash\)\{8z\string^3\(\backslash\)mu-\/n\string^2z\string^3(\(\backslash\)lambda+2\(\backslash\)mu)+r\string^2(z\string^3\(\backslash\)Lambda\string^2+6\(\backslash\)mu z)+\{\(\backslash\)rm i\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{n\(\backslash\)cos\(\backslash\), z((4+r)\(\backslash\)lambda+(6+r)\(\backslash\)mu)\(\backslash\)\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{r\(\backslash\)sin\(\backslash\),}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{z\(\backslash\)\{(n\string^2-\/9)\(\backslash\)mu+4r(\(\backslash\)lambda+\(\backslash\)mu)+r\string^2(\(\backslash\)lambda+2\(\backslash\)mu-\/\(\backslash\)Lambda\string^2)\(\backslash\)\}-\/3\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{i\} nr\string^2z\string^2(\(\backslash\)lambda+\(\backslash\)mu)\(\backslash\)end\{array\}\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (4)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)lambda =  \(\backslash\)nu/((1+\(\backslash\)nu)(1-\/2\(\backslash\)nu))\(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)mu =}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{1/(2(1+\(\backslash\)nu))\(\backslash\)f\$ are the non-\/dimensional Lam\&eacute;   parameters}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{(non-\/dimensionalised on \(\backslash\)f\$ E \(\backslash\)f\$).  The body is subject to }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{a non-\/zero traction on all four boundaries; for }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{example, on the inner boundary (where \(\backslash\)f\$ r=r\_\{\(\backslash\)rm min\} \(\backslash\)f\$) the}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{traction is}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)hat\{\(\backslash\)tau\}\$\}\string^\{(n)\}\_3=}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{\(\backslash\)mbox\{\(\backslash\)boldmath\$ \(\backslash\)tau\$\}\string^\{(n)\}(r\_\{\(\backslash\)rm min\},z)\(\backslash\)cdot (-\/\{\(\backslash\)bf e\}\_r) =}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{\(\backslash\)left(\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{-\/6r\_\{\(\backslash\)rm min\}\string^2\(\backslash\)mu\(\backslash\)cos\(\backslash\), }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{z-\/\(\backslash\)lambda(\{\(\backslash\)rm i\} nr\_\{\(\backslash\)rm min\}\string^2z\string^3+r\_\{\(\backslash\)rm min\}\string^2(4+r\_\{\(\backslash\)rm min\})\(\backslash\)cos\(\backslash\), z)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{-\/\(\backslash\)mu r\_\{\(\backslash\)rm min\}\string^2(2z\string^3+\{\(\backslash\)rm i\} n\(\backslash\)cos\(\backslash\), z)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{-\/\(\backslash\)mu r\_\{\(\backslash\)rm min\}\string^2\(\backslash\)sin\(\backslash\), z(3-\/r\_\{\(\backslash\)rm min\})}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{\(\backslash\)end\{array\}\(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (5)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{We choose to set this traction as a boundary condition, whilst}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{pinning the displacements on the remaining boundaries }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{where we impose a prescribed displacement according to (3).}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{The figures below show plots of \(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{u\_r\string^\{(n)\}\(\backslash\)\}, }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{\{\(\backslash\)rm Re\}\(\backslash\)\{u\_z\string^\{(n)\}\(\backslash\)\} \(\backslash\)f\$ and  \(\backslash\)f\$ \{\(\backslash\)rm Re\}\(\backslash\)\{u\_\(\backslash\)theta\string^\{(n)\}\(\backslash\)\} \(\backslash\)f\$  }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{for a Fourier wavenumber of \(\backslash\)f\$ n=3 \(\backslash\)f\$ and geometric parameters }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{\(\backslash\)f\$ r\_\{\(\backslash\)rm min\}=0.1, r\_\{\(\backslash\)rm max\}=1.1, z\_\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{min\}=0.3, z\_\{\(\backslash\)rm max\}=2.3 \(\backslash\)f\$. We set \(\backslash\)f\$ \(\backslash\)Omega\string^2=10+5\{\(\backslash\)rm i\}\(\backslash\)f\$, }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{corresponding to an exponentially growing time-\/periodic forcing;}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{\(\backslash\)f\$ E=1+0.01\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{i\} \(\backslash\)f\$, corresponding to a slightly dissipative material (see \(\backslash\)ref}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{comments ); and \(\backslash\)f\$ \(\backslash\)nu=0.3+0.05\{\(\backslash\)rm i\}\(\backslash\)f\$.  The imaginary part of the }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{solution is small (though not identically equal to zero) but it converges to }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{zero under mesh refinement; see \(\backslash\)ref exercises .}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{\(\backslash\)image html validate\_ur.gif "{}Computed (red) and exact (green) solution for real part of the radial displacement component. "{} }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{\(\backslash\)image latex validate\_ur.eps "{}Computed (red) and exact (green) solution for real part of the radial displacement component. "{} width=0.3\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{\(\backslash\)image html validate\_uz.gif "{}Computed (red) and exact (green) solution for real part of the axial displacement component. "{} }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{\(\backslash\)image latex validate\_uz.eps "{}Computed (red) and exact (green) solution for real part of the axial displacement component. "{} width=0.3\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{\(\backslash\)image html validate\_utheta.gif "{}Computed (red) and exact (green) solution for real part of the azimuthal displacement component. "{} }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{\(\backslash\)image latex validate\_utheta.eps "{}Computed (red) and exact (green) solution for real part of the azimuthal displacement component. "{} width=0.3\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{\(\backslash\)section namespace Global parameters and functions}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{As usual, we define all non-\/dimensional parameters in a namespace.  In}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{this namespace, we also define the (Fourier-\/decomposed) body force,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{the traction to be applied on boundary 3, and the exact solution.  Note that,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{consistent with the enumeration of the unknowns, discussed above,}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{the order of the components in the functions that specify the body }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{force and the surface traction is \(\backslash\)f\$ (r,z,\(\backslash\)theta) \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{\(\backslash\)dontinclude cylinder.cc}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{\(\backslash\)skipline start\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{\(\backslash\)until end\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{We start by setting the number of elements in each of the two}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{coordinate directions before creating a  \(\backslash\)c DocInfo object to }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{store the output directory.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{\(\backslash\)until doc\_info.set\_directory("{}RESLT"{})}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{We build the problem using two-\/dimensional }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{\(\backslash\)c QTimeHarmonicFourierDecomposedLinearElasticityElements, solve }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{using the \(\backslash\)c Problem::newton\_solve() function, and document the }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{results.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{\(\backslash\)skipline // Set up problem}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{\(\backslash\)until end\_of\_main}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{\(\backslash\)section problem The problem class }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{The \(\backslash\)c Problem class is very simple. As in other problems with Neumann }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{boundary conditions, we provide separate meshes for the "{}bulk"{} }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{elements and the face elements that apply the traction }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{boundary conditions.  The latter are attached to the relevant }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{faces of the bulk elements by the function \(\backslash\)c assign\_traction\_elements().}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{\(\backslash\)dontinclude cylinder.cc}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{\(\backslash\)until end\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{\(\backslash\)section constructor The problem constructor}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{We begin by building the meshes and pin the displacements on }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{the appropriate boundaries. Recall that the order of the six real unknowns}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{stored at the nodes is }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)big(Re\(\backslash\)\{u\_r\string^\{(n)\}\(\backslash\)\}, Re\(\backslash\)\{u\_z\string^\{(n)\}\(\backslash\)\}, Re\(\backslash\)\{u\_\(\backslash\)theta\string^\{(n)\}\(\backslash\)\},}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{    Im\(\backslash\)\{u\_r\string^\{(n)\}\(\backslash\)\}, Im\(\backslash\)\{u\_z\string^\{(n)\}\(\backslash\)\}, Im\(\backslash\)\{u\_\(\backslash\)theta\string^\{(n)\}\(\backslash\)\}\(\backslash\)big).}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{ \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{\(\backslash\)until end\_of\_loop\_over\_boundary\_nodes}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{Next we loop over the bulk mesh elements and assign the constitutive}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{parameters, the body force, the Fourier wavenumber and the non-\/dimensional}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{frequency to each element.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{\(\backslash\)skipline Complete the problem}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{\(\backslash\)until end loop over elements}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{We then loop over the traction elements and specify the applied traction.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{\(\backslash\)skipline Loop over the traction elements}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{\(\backslash\)until end loop over traction elements}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{The two sub-\/meshes are now added to the problem and a }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{global mesh is constructed before the equation numbering scheme }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{is set up, using the function \(\backslash\)c assign\_eqn\_numbers().}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{\(\backslash\)skipline Add the submeshes to the problem}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{\(\backslash\)section traction\_elements The traction elements}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{We create the face elements that apply the traction to}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{the boundary \(\backslash\)f\$ r=r\_\{\(\backslash\)rm min\} \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{\(\backslash\)skipline start\_of\_traction}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{\(\backslash\)until end of assign\_traction\_elements}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{As expected, this member function documents the computed solution.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{\(\backslash\)skipline start\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{\(\backslash\)until end\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{\(\backslash\)section conclusion Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{\(\backslash\)subsection comments Comments}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{-\/ Given that we non-\/dimensionalised all stresses on Young's modulus}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{  it seems odd that we provide the option to specify a non-\/dimensional }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{  Young's modulus via the member function}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{  \(\backslash\)c TimeHarmonicFourierDecomposedLinearElasticityEquations::youngs\_modulus\_pt().}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{  The explanation for this is that this function specifies the ratio of}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{  the material's actual Young's modulus to the Young's modulus used in the}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{  non-\/dimensionalisation of the equations. The capability to specify}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{  such ratios is important in problems where the elastic body is made of }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{  multiple materials with different constitutive properties. If the}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{  body is made of a  single, homogeneous material, the specification}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{  of the non-\/dimensional Young's modulus is not required -\/-\/ it }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{  defaults to 1.0. In the example considered above, the specification }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{  of the non-\/dimensional Young's modulus as \(\backslash\)f\$ 1 + 0.01 \{\(\backslash\)rm i\} \(\backslash\)f\$  }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{  creates a small amount of damping in the material whose actual }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{  stiffness is still characterised by the (real-\/valued and dimensional)}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{  Young's modulus used to non-\/dimensionalise the equations.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{-\/ Note that we also allow Poisson's ratio (whose specification \(\backslash\)e is }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{  required) to be complex-\/valued. We are not aware of any meaningful physical}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{  interpretation of non-\/real Poisson ratios but provide this option }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{  because it appears to allow a better characterisation of some materials.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{\(\backslash\)subsection exercises Exercises}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{-\/ Confirm that the specification of Poisson's ratio is required:}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{  What happens if you comment out its assignment in the problem constructor?}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{-\/ Confirm that the small imaginary part of the computed displacement field}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{  for the test problem goes to zero under mesh refinement. }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{-\/ Change the problem setup to the (less contrived) case where the}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{  deformation of the cylinder is driven by a time-\/periodic pressure }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{  load acting on the inside while its upper and lower ends are held }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{  at a fixed position. (You can cheat -\/-\/ there's }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{  <a href="{}../../adaptive\_pressure\_loaded\_cylinder/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{  another tutorial</a> that shows you how to do it...).}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/time\_harmonic\_fourier\_decomposed\_linear\_elasticity/cylinder/"{}>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{demo\_drivers/time\_harmonic\_fourier\_decomposed\_linear\_elasticity/cylinder/}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{-\/ The driver code is: }}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/time\_harmonic\_fourier\_decomposed\_linear\_elasticity/cylinder/cylinder.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{demo\_drivers/time\_harmonic\_fourier\_decomposed\_linear\_elasticity/cylinder/cylinder.cc}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{cylinder_8txt__doxygenified_8h_source_l00511}00511 }
+
+\end{DoxyCode}

@@ -3,104 +3,14 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element}} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classFaceGeometry_3_01QGeneralisedAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4}{Face\+Geometry$<$ Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$}}
-\begin{DoxyCompactList}\small\item\em Face geometry for the \mbox{\hyperlink{classQGeneralisedAxisymAdvectionDiffusionElement}{Q\+Generalised\+Axisym\+Advection\+Diffusion\+Element}} elements\+: The spatial dimension of the face elements is one lower than that of the bulk element but they have the same number of points along their 1D edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classoomph_1_1GeneralisedAxisymAdvectionDiffusionEquations}{oomph\+::\+Generalised\+Axisym\+Advection\+Diffusion\+Equations}}
+\item 
+class \mbox{\hyperlink{classoomph_1_1QGeneralisedAxisymAdvectionDiffusionElement}{oomph\+::\+QGeneralised\+Axisym\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01QGeneralisedAxisymAdvectionDiffusionElement_3_01NNODE__1D_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ QGeneralised\+Axisym\+Advection\+Diffusion\+Element$<$ NNODE\+\_\+1\+D $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-virtual unsigned \mbox{\hyperlink{namespaceoomph_a03ba213638004c56b6417e159f16892f}{oomph\+::u\+\_\+index\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} () const
-\begin{DoxyCompactList}\small\item\em A class for all elements that solve the Advection Diffusion equations in conservative form using isoparametric elements in a cylindrical polar coordinate system. \textbackslash{}mbox\{\textbackslash{}boldmath\$\textbackslash{}nabla\textbackslash{}cdot\$\} \textbackslash{}left( Pe \textbackslash{}mbox\{\textbackslash{}boldmath\$w\$\}(\textbackslash{}mbox\{\textbackslash{}boldmath\$x\$\}) u. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_aae18c2f8b384a4a115d68ee5cbcdc84a}{oomph\+::du\+\_\+dt\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
-\begin{DoxyCompactList}\small\item\em du/dt at local node n. Uses suitably interpolated value for hanging nodes. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_aac9e9b485dd3b82c6c0b42989017c57f}{oomph\+::disable\+\_\+\+A\+LE}} ()
-\begin{DoxyCompactList}\small\item\em Disable A\+LE, i.\+e. assert the mesh is not moving -- you do this at your own risk! \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_aad37abf393b70f7aa747525923469a08}{oomph\+::enable\+\_\+\+A\+LE}} ()
-\begin{DoxyCompactList}\small\item\em (Re-\/)enable A\+LE, i.\+e. take possible mesh motion into account when evaluating the time-\/derivative. Note\+: By default, A\+LE is enabled, at the expense of possibly creating unnecessary work in problems where the mesh is, in fact, stationary. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_a2473930e2634d673e2a3bed63b6851f0}{oomph\+::output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Output with default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_ae53ff6c2852d72b8aa8801e40848e356}{oomph\+::output}} (std\+::ostream \&outfile, const unsigned \&nplot)
-\begin{DoxyCompactList}\small\item\em Output FE representation of soln\+: r,z,u at nplot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_a37b4754a63827566176ebfc2f3a2c601}{oomph\+::output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em C\+\_\+style output with default number of plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_a3cb50c6adc7ee4a17c17a567b645f6db}{oomph\+::output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output FE representation of soln\+: r,z,u at n\+\_\+plot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_af34df05c5bb9eca3576db493fb7d55ca}{oomph\+::output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output exact soln\+: r,z,u\+\_\+exact at nplot$^\wedge$2 plot points. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{namespaceoomph_a03bf88dd9de6857057781501ca5c066f}{oomph\+::output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&nplot, const double \&time, Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output exact soln\+: r,z,,u\+\_\+exact at nplot$^\wedge$2 plot points (dummy time-\/dependent version to keep intel compiler happy) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_ae99ee82405593cbf515785fa2116ec2a}{oomph\+::compute\+\_\+error}} (std\+::ostream \&outfile, Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt, double \&error, double \&norm)
-\begin{DoxyCompactList}\small\item\em Get error against and norm of exact solution. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_ac84166e8fd13dcb55670244c618a2bab}{oomph\+::compute\+\_\+error}} (std\+::ostream \&outfile, Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt exact\+\_\+soln\+\_\+pt, const double \&time, double \&error, double \&norm)
-\begin{DoxyCompactList}\small\item\em Dummy, time dependent error checker. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_a816fb1d612ecf4c4f42cecc69d5c636f}{oomph\+::integrate\+\_\+u}} ()
-\begin{DoxyCompactList}\small\item\em Integrate the concentration over the element. \end{DoxyCompactList}\item 
-Generalised\+Axisym\+Advection\+Diffusion\+Source\+Fct\+Pt \& \mbox{\hyperlink{namespaceoomph_aaeb31b697ac413871cfe74e70c3a60b1}{oomph\+::source\+\_\+fct\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to source function. \end{DoxyCompactList}\item 
-Generalised\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt \& \mbox{\hyperlink{namespaceoomph_a09679a76034a175cfc8a098dda6621c1}{oomph\+::wind\+\_\+fct\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to wind function. \end{DoxyCompactList}\item 
-Generalised\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt \& \mbox{\hyperlink{namespaceoomph_a664dfd26d500b1a6af69253d6265366b}{oomph\+::conserved\+\_\+wind\+\_\+fct\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to additional (conservative) wind function. \end{DoxyCompactList}\item 
-Generalised\+Axisym\+Advection\+Diffusion\+Diff\+Fct\+Pt \& \mbox{\hyperlink{namespaceoomph_a6dd5f52cf4ab589e9675a8b36fcc0e83}{oomph\+::diff\+\_\+fct\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Access function\+: Pointer to diffusion function. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{namespaceoomph_afc45e5b8613b10bb546b3400a996d8a2}{oomph\+::pe}} () const
-\begin{DoxyCompactList}\small\item\em Peclet number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{namespaceoomph_adcf7c31a36ba0fdda457f926e141c340}{oomph\+::pe\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Pointer to Peclet number. \end{DoxyCompactList}\item 
-const double \& \mbox{\hyperlink{namespaceoomph_a7f4533f76fda86b1fe191b46ae452971}{oomph\+::pe\+\_\+st}} () const
-\begin{DoxyCompactList}\small\item\em Peclet number multiplied by Strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{namespaceoomph_a7fcdde08224dce25a2a524fa23addd54}{oomph\+::pe\+\_\+st\+\_\+pt}} ()
-\begin{DoxyCompactList}\small\item\em Pointer to Peclet number multipled by Strouha number. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{namespaceoomph_aa0cdf7be6b3844c558f937572c4dfb5c}{oomph\+::get\+\_\+source\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&x, double \&source) const
-\begin{DoxyCompactList}\small\item\em Get source term at (Eulerian) position x. This function is virtual to allow overloading in multi-\/physics problems where the strength of the source function might be determined by another system of equations. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{namespaceoomph_aa6e74f36ccca7009265f81f333c4b5df}{oomph\+::get\+\_\+wind\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&wind) const
-\begin{DoxyCompactList}\small\item\em Get wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{namespaceoomph_a82958379ca7e57f9f8c3f273eb83f55c}{oomph\+::get\+\_\+conserved\+\_\+wind\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const Vector$<$ double $>$ \&x, Vector$<$ double $>$ \&wind) const
-\begin{DoxyCompactList}\small\item\em Get additional (conservative) wind at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{namespaceoomph_a2e1c951324dd766cdaddac0eb376f78f}{oomph\+::get\+\_\+diff\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const Vector$<$ double $>$ \&x, Dense\+Matrix$<$ double $>$ \&D) const
-\begin{DoxyCompactList}\small\item\em Get diffusivity tensor at (Eulerian) position x and/or local coordinate s. This function is virtual to allow overloading in multi-\/physics problems where the wind function might be determined by another system of equations. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_af24fd3b21fc45dcbe4b87f8e4224bd15}{oomph\+::get\+\_\+flux}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, Vector$<$ double $>$ \&flux) const
-\begin{DoxyCompactList}\small\item\em Get flux\+: $\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_a6bbeae059a0f06fc51b97fd76be99067}{oomph\+::get\+\_\+total\+\_\+flux}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, Vector$<$ double $>$ \&total\+\_\+flux) const
-\begin{DoxyCompactList}\small\item\em Get flux\+: $\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_a4221193ecad909a3bf5cfcec81202e39}{oomph\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector (wrapper) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_a96a6d71e6bedf75a2fb9051be0644f98}{oomph\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, Dense\+Matrix$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and the element Jacobian matrix (wrapper) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_a2a572a47ad179fe5efba31f8f0a67244}{oomph\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, Dense\+Matrix$<$ double $>$ \&jacobian, Dense\+Matrix$<$ double $>$ \&mass\+\_\+matrix)
-\item 
-double \mbox{\hyperlink{namespaceoomph_a24e114f1df46d56b50a57474d27e3dbb}{oomph\+::interpolated\+\_\+u\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
-\begin{DoxyCompactList}\small\item\em Return FE representation of function value u(s) at local coordinate s. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceoomph_a6a5cfce839009bef49cce08492ec6aeb}{oomph\+::self\+\_\+test}} ()
-\begin{DoxyCompactList}\small\item\em Self-\/test\+: Return 0 for OK. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{namespaceoomph_af332902ab67ff475277342a07dcb8a9b}{oomph\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, Shape \&psi, D\+Shape \&dpsidx, Shape \&test, D\+Shape \&dtestdx) const =0
-\begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at local coord. s; return Jacobian of mapping. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{namespaceoomph_a1302011e0b30d149dd485a356f901289}{oomph\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (const unsigned \&ipt, Shape \&psi, D\+Shape \&dpsidx, Shape \&test, D\+Shape \&dtestdx) const =0
-\begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{namespaceoomph_a7d874a2081564c9490111b5fb936e46d}{oomph\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+cons\+\_\+axisym\+\_\+adv\+\_\+diff}} (Vector$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, Dense\+Matrix$<$ double $>$ \&jacobian, Dense\+Matrix$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
-\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector only (if flag=and/or element Jacobian matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-double $\ast$ \mbox{\hyperlink{namespaceoomph_ae8c74390a52fa2e57b6ef898649fdfff}{oomph\+::\+Pe\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to global Peclet number. \end{DoxyCompactList}\item 
-double $\ast$ \mbox{\hyperlink{namespaceoomph_a54db0b0b7bccb80aa5110f4d86758dd5}{oomph\+::\+Pe\+St\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to global Peclet number multiplied by Strouhal number. \end{DoxyCompactList}\item 
-Generalised\+Axisym\+Advection\+Diffusion\+Source\+Fct\+Pt \mbox{\hyperlink{namespaceoomph_a051e9244ca4fd64439699c8e7e7bcf09}{oomph\+::\+Source\+\_\+fct\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to source function\+: \end{DoxyCompactList}\item 
-Generalised\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt \mbox{\hyperlink{namespaceoomph_a9065bf486c804884097785e02883f377}{oomph\+::\+Wind\+\_\+fct\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to wind function\+: \end{DoxyCompactList}\item 
-Generalised\+Axisym\+Advection\+Diffusion\+Wind\+Fct\+Pt \mbox{\hyperlink{namespaceoomph_a2453d7b0c71b0b9039b1f025226fad27}{oomph\+::\+Conserved\+\_\+wind\+\_\+fct\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to additional (conservative) wind function\+: \end{DoxyCompactList}\item 
-Generalised\+Axisym\+Advection\+Diffusion\+Diff\+Fct\+Pt \mbox{\hyperlink{namespaceoomph_a213e9eeb52fa6ea98254de45f1ba4f98}{oomph\+::\+Diff\+\_\+fct\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer to diffusivity funciton. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{namespaceoomph_ae5302eaf07e49e53147c42e2e6450eff}{oomph\+::\+A\+L\+E\+\_\+is\+\_\+disabled}}
-\begin{DoxyCompactList}\small\item\em Boolean flag to indicate if A\+LE formulation is disabled when time-\/derivatives are computed. Only set to false if you\textquotesingle{}re sure that the mesh is stationary. \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{namespaceoomph_a76008dfc377a12c79c93b9c506577c63}{oomph\+::\+Default\+\_\+peclet\+\_\+number}}
-\begin{DoxyCompactList}\small\item\em Static default value for the Peclet number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -2,7 +2,7 @@
 \label{classoomph_1_1NewMumpsPreconditioner}\index{oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}}
 
 
-An interface to allow Mumps to be used as an (exact) \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}.  
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
 
 
 
@@ -22,12 +22,12 @@ Inheritance diagram for oomph\+::New\+Mumps\+Preconditioner\+:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_adf548286fc44a98ddecf0108c8b938e3}{$\sim$\+New\+Mumps\+Preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_a32bb5cf92d1f3976d81e63bdccfa9a86}{New\+Mumps\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner}{New\+Mumps\+Preconditioner}} \&)
+\mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_a9d3537e6b35811cd3fd940975a96609f}{New\+Mumps\+Preconditioner}} (const \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner}{New\+Mumps\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_acc2b3a72965b6e18e584d0f9722bbd70}{operator=}} (const \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner}{New\+Mumps\+Preconditioner}} \&)
+void \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_a04f416ecf0538d9eaa725cd089970859}{operator=}} (const \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner}{New\+Mumps\+Preconditioner}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_a47e894b47284711131cb0a13a65c24e5}{setup}} ()
-\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} or \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{CCDouble\+Matrix}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_a763a8297c031fab7f16b37eaf257aeb1}{preconditioner\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&r, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&z)
 \begin{DoxyCompactList}\small\item\em Function applies Mumps to vector r for (exact) preconditioning, this requires a call to setup(...) first. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_a4a6cb6cc1207a765cc02ef47c6efa6e0}{clean\+\_\+up\+\_\+memory}} ()
@@ -45,9 +45,11 @@ void \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner_a8c01fbbb656c21c756c4
 
 
 \doxysubsection{Detailed Description}
-An interface to allow Mumps to be used as an (exact) \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}}. 
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
-Definition at line 272 of file mumps\+\_\+solver.\+h.
+An interface to allow Mumps to be used as an (exact) \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} 
+
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00337}{337}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
 
 
@@ -64,7 +66,7 @@ Constructor.
 
 
 
-Definition at line 276 of file mumps\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00341}{341}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_adf548286fc44a98ddecf0108c8b938e3}\label{classoomph_1_1NewMumpsPreconditioner_adf548286fc44a98ddecf0108c8b938e3}} 
 \index{oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}!````~NewMumpsPreconditioner@{$\sim$NewMumpsPreconditioner}}
@@ -78,25 +80,17 @@ Destructor.
 
 
 
-Definition at line 279 of file mumps\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00344}{344}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_a32bb5cf92d1f3976d81e63bdccfa9a86}\label{classoomph_1_1NewMumpsPreconditioner_a32bb5cf92d1f3976d81e63bdccfa9a86}} 
+\mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_a9d3537e6b35811cd3fd940975a96609f}\label{classoomph_1_1NewMumpsPreconditioner_a9d3537e6b35811cd3fd940975a96609f}} 
 \index{oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}!NewMumpsPreconditioner@{NewMumpsPreconditioner}}
 \index{NewMumpsPreconditioner@{NewMumpsPreconditioner}!oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}}
 \doxysubsubsection{\texorpdfstring{NewMumpsPreconditioner()}{NewMumpsPreconditioner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+New\+Mumps\+Preconditioner\+::\+New\+Mumps\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner}{New\+Mumps\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+New\+Mumps\+Preconditioner\+::\+New\+Mumps\+Preconditioner (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner}{New\+Mumps\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 282 of file mumps\+\_\+solver.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -117,11 +111,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Preconditioner_a46c31c416829be
 
 
 
-Definition at line 333 of file mumps\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00391}{391}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Mumps\+Solver\+::clean\+\_\+up\+\_\+memory(), and Solver.
+References \mbox{\hyperlink{mumps__solver_8cc_source_l00701}{oomph\+::\+Mumps\+Solver\+::clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00411}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_a8c01fbbb656c21c756c44be322a600b2}\label{classoomph_1_1NewMumpsPreconditioner_a8c01fbbb656c21c756c44be322a600b2}} 
 \index{oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}!disable\_doc\_time@{disable\_doc\_time}}
@@ -135,11 +129,11 @@ Disable the documentation of timings.
 
 
 
-Definition at line 346 of file mumps\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00404}{404}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Solver\+::disable\+\_\+doc\+\_\+time(), and Solver.
+References \mbox{\hyperlink{linear__solver_8h_source_l00116}{oomph\+::\+Linear\+Solver\+::disable\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00411}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_a2946bc9182e015a12471a5e225473e9a}\label{classoomph_1_1NewMumpsPreconditioner_a2946bc9182e015a12471a5e225473e9a}} 
 \index{oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}!enable\_doc\_time@{enable\_doc\_time}}
@@ -153,29 +147,21 @@ Enable documentation of timings.
 
 
 
-Definition at line 340 of file mumps\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00398}{398}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Solver\+::enable\+\_\+doc\+\_\+time(), and Solver.
+References \mbox{\hyperlink{linear__solver_8h_source_l00110}{oomph\+::\+Linear\+Solver\+::enable\+\_\+doc\+\_\+time()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00411}{Solver}}.
 
-\mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_acc2b3a72965b6e18e584d0f9722bbd70}\label{classoomph_1_1NewMumpsPreconditioner_acc2b3a72965b6e18e584d0f9722bbd70}} 
+\mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_a04f416ecf0538d9eaa725cd089970859}\label{classoomph_1_1NewMumpsPreconditioner_a04f416ecf0538d9eaa725cd089970859}} 
 \index{oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+New\+Mumps\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner}{New\+Mumps\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+New\+Mumps\+Preconditioner\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1NewMumpsPreconditioner}{New\+Mumps\+Preconditioner}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 289 of file mumps\+\_\+solver.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 \mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_a763a8297c031fab7f16b37eaf257aeb1}\label{classoomph_1_1NewMumpsPreconditioner_a763a8297c031fab7f16b37eaf257aeb1}} 
 \index{oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}!preconditioner\_solve@{preconditioner\_solve}}
@@ -193,11 +179,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_ace1199369e4465cd2b9a34
 
 
 
-Definition at line 325 of file mumps\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00383}{383}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Mumps\+Solver\+::resolve(), and Solver.
+References \mbox{\hyperlink{mumps__solver_8cc_source_l00990}{oomph\+::\+Mumps\+Solver\+::resolve()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00411}{Solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1NewMumpsPreconditioner_a47e894b47284711131cb0a13a65c24e5}\label{classoomph_1_1NewMumpsPreconditioner_a47e894b47284711131cb0a13a65c24e5}} 
 \index{oomph::NewMumpsPreconditioner@{oomph::NewMumpsPreconditioner}!setup@{setup}}
@@ -207,7 +193,7 @@ References oomph\+::\+Mumps\+Solver\+::resolve(), and Solver.
 
 
 
-Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} or \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{C\+C\+Double\+Matrix}}. 
+Function to set up a preconditioner for the linear system defined by matrix\+\_\+pt. This function must be called before using preconditioner\+\_\+solve. Note\+: matrix\+\_\+pt must point to an object of class \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} or \mbox{\hyperlink{classoomph_1_1CCDoubleMatrix}{CCDouble\+Matrix}}. 
 
 
 
@@ -215,11 +201,11 @@ Implements \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb1
 
 
 
-Definition at line 299 of file mumps\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00357}{357}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Mumps\+Solver\+::factorise(), oomph\+::\+Preconditioner\+::matrix\+\_\+pt(), oomph\+::oomph\+\_\+info, and Solver.
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{mumps__solver_8cc_source_l00180}{oomph\+::\+Mumps\+Solver\+::factorise()}}, \mbox{\hyperlink{preconditioner_8h_source_l00150}{oomph\+::\+Preconditioner\+::matrix\+\_\+pt()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00411}{Solver}}.
 
 
 
@@ -236,11 +222,11 @@ the Mumps solver emplyed by this preconditioner
 
 
 
-Definition at line 353 of file mumps\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{mumps__solver_8h_source_l00411}{411}} of file \mbox{\hyperlink{mumps__solver_8h_source}{mumps\+\_\+solver.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), disable\+\_\+doc\+\_\+time(), enable\+\_\+doc\+\_\+time(), preconditioner\+\_\+solve(), and setup().
+Referenced by \mbox{\hyperlink{mumps__solver_8h_source_l00391}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00404}{disable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00398}{enable\+\_\+doc\+\_\+time()}}, \mbox{\hyperlink{mumps__solver_8h_source_l00383}{preconditioner\+\_\+solve()}}, and \mbox{\hyperlink{mumps__solver_8h_source_l00357}{setup()}}.
 
 
 

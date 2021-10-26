@@ -2,11 +2,12 @@ This document provides an overview of how to distribute the \href{../../../poiss
 
 A feature of this problem is that the flux boundary conditions are applied by attaching \char`\"{}flux elements\char`\"{} (derived from the {\ttfamily Face\+Element} base class) to the \char`\"{}bulk elements\char`\"{} adjacent to the appropriate mesh boundary. As discussed in the \href{../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ tutorial for the serial driver code}}, the {\ttfamily Face\+Elements} are not involved in any adaptation within the bulk mesh. Instead, they are detached before the bulk mesh is adapted and re-\/attached afterwards, which ensures that the {\ttfamily Face\+Elements} are only attached to bulk elements present in the adapted mesh.
 
-The same issue arises when the {\ttfamily Problem} is distributed\+: all {\ttfamily Face\+Elements} must be attached before the problem is distributed to allow {\ttfamily M\+E\+T\+IS} to analyse the interaction between face and bulk elements correctly. However, after the {\ttfamily Problem} has been distributed, some of the bulk elements on each processor will have been deleted, leaving the corresponding {\ttfamily Face\+Element} dangling. To deal with such problems, {\ttfamily oomph-\/lib} provides the empty virtual functions
+The same issue arises when the {\ttfamily Problem} is distributed\+: all {\ttfamily Face\+Elements} must be attached before the problem is distributed to allow {\ttfamily METIS} to analyse the interaction between face and bulk elements correctly. However, after the {\ttfamily Problem} has been distributed, some of the bulk elements on each processor will have been deleted, leaving the corresponding {\ttfamily Face\+Element} dangling. To deal with such problems, {\ttfamily oomph-\/lib} provides the empty virtual functions
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_distribute() }
+
 \end{DoxyCode}
 
 
@@ -15,19 +16,20 @@ and
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_distribute() }
+
 \end{DoxyCode}
 
 
-which are called automatically by {\ttfamily Problem\+::distribute(...)}. Specifically, {\ttfamily Problem\+::actions\+\_\+before\+\_\+distribute()} is called {\bfseries{after}} the problem distribution has been determined by {\ttfamily M\+E\+T\+IS} but {\bfseries{before}} the actual distribution (during which elements are deleted) takes place. {\ttfamily Problem\+::actions\+\_\+after\+\_\+distribute()} is called after the problem distribution is complete.
+which are called automatically by {\ttfamily Problem\+::distribute(...)}. Specifically, {\ttfamily Problem\+::actions\+\_\+before\+\_\+distribute()} is called {\bfseries{after}} the problem distribution has been determined by {\ttfamily METIS} but {\bfseries{before}} the actual distribution (during which elements are deleted) takes place. {\ttfamily Problem\+::actions\+\_\+after\+\_\+distribute()} is called after the problem distribution is complete.
 
 In the present problem we overload the functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+distribute()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+distribute()} to perform the same functions as {\ttfamily actions\+\_\+before\+\_\+adapt()} (i.\+e. delete the flux elements) and {\ttfamily actions\+\_\+after\+\_\+adapt()} (i.\+e. re-\/attach the flux elements). ~\newline
- We note that any {\ttfamily Face\+Element} that is attached to a halo element in the bulk mesh becomes a halo element itself; see the \href{../../general_mpi/html/index.html\#face_elements}{\texttt{ general M\+PI tutorial}} for further details.
+ We note that any {\ttfamily Face\+Element} that is attached to a halo element in the bulk mesh becomes a halo element itself; see the \href{../../general_mpi/html/index.html\#face_elements}{\texttt{ general MPI tutorial}} for further details.
 
 Most of driver code is identical to its serial counterpart and we only discuss the changes required to distribute the problem. Please refer to \href{../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ another tutorial}} for a more detailed discussion of the problem and its (serial) implementation.
 
 \DoxyHorRuler{0}
 \hypertarget{index_main_body}{}\doxysection{The main function}\label{index_main_body}
-The only changes required to the main function are the usual calls to initialise and finalise {\ttfamily oomph-\/lib\textquotesingle{}s} M\+PI routines and a single call to {\ttfamily Problem\+::distribute()} after the problem has been constructed. The source code is actually slightly more complicated because the distribution is read in from a file so that the driver can be used as a self-\/test. Note that the file must specify the partition for {\bfseries{all}} elements, including the {\ttfamily Face\+Elements}. (We refer to \href{../../adaptive_driven_cavity/html/index.html\#no_disk}{\texttt{ another tutorial}} for details on how to create the distribution file.)
+The only changes required to the main function are the usual calls to initialise and finalise {\ttfamily oomph-\/lib\textquotesingle{}s} MPI routines and a single call to {\ttfamily Problem\+::distribute()} after the problem has been constructed. The source code is actually slightly more complicated because the distribution is read in from a file so that the driver can be used as a self-\/test. Note that the file must specify the partition for {\bfseries{all}} elements, including the {\ttfamily Face\+Elements}. (We refer to \href{../../adaptive_driven_cavity/html/index.html\#no_disk}{\texttt{ another tutorial}} for details on how to create the distribution file.)
 
 \DoxyHorRuler{0}
 \hypertarget{index_problem_class}{}\doxysection{The problem class}\label{index_problem_class}
@@ -35,29 +37,21 @@ The only additions to the problem class are the functions {\ttfamily actions\+\_
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Actions before distribute: Wipe the mesh of prescribed flux elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions before distribute: Wipe the mesh of prescribed flux elements}}
 \DoxyCodeLine{\textcolor{comment}{ /// (simply call actions\_before\_adapt() which does the same thing)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_distribute()}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_distribute()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   actions\_before\_adapt();}
 \DoxyCodeLine{  \}}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Actions after distribute: Rebuild the mesh of prescribed flux }}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions after distribute: Rebuild the mesh of prescribed flux }}
 \DoxyCodeLine{\textcolor{comment}{ /// elements (simply call actions\_after\_adapt() which does the same thing)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_distribute()}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_distribute()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   actions\_after\_adapt();}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_doc_solution}{}\doxysection{The doc\+\_\+solution() function}\label{index_doc_solution}
 As with other driver codes, the output files are modified to allow each processor to output its elements into files that include the processor number.
 
@@ -65,7 +59,7 @@ As with other driver codes, the output files are modified to allow each processo
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====================start\_of\_doc=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution: doc\_info contains labels/output directory etc.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} RefineableTwoMeshFluxPoissonProblem<ELEMENT>::doc\_solution(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -75,8 +69,8 @@ As with other driver codes, the output files are modified to allow each processo
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} max\_refinement\_level;}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>get\_refinement\_levels(min\_refinement\_level,}
 \DoxyCodeLine{                                     max\_refinement\_level); }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Ultimate min/max. refinement levels in bulk mesh : "} }
-\DoxyCodeLine{      << min\_refinement\_level << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Ultimate min/max. refinement levels in bulk mesh : "{}} }
+\DoxyCodeLine{      << min\_refinement\_level << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{      << max\_refinement\_level << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -91,7 +85,7 @@ As with other driver codes, the output files are modified to allow each processo
 \DoxyCodeLine{ \textcolor{comment}{// Output solution with halo elements }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>enable\_output\_of\_halo\_elements();}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\_with\_halo\%i\_on\_proc\%i.dat"},}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\_with\_halo\%i\_on\_proc\%i.dat"{}},}
 \DoxyCodeLine{         doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number(),this-\/>communicator\_pt()-\/>my\_rank());}
 \DoxyCodeLine{ some\_file.open(filename);}
@@ -102,7 +96,7 @@ As with other driver codes, the output files are modified to allow each processo
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i\_on\_proc\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i\_on\_proc\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number(),this-\/>communicator\_pt()-\/>my\_rank());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
@@ -110,7 +104,7 @@ As with other driver codes, the output files are modified to allow each processo
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i\_on\_proc\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i\_on\_proc\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number(),this-\/>communicator\_pt()-\/>my\_rank());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output\_fct(some\_file,npts,TanhSolnForPoisson::get\_exact\_u); }
@@ -120,7 +114,7 @@ As with other driver codes, the output files are modified to allow each processo
 \DoxyCodeLine{ \textcolor{comment}{// Doc error and return of the square of the L2 error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i\_on\_proc\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i\_on\_proc\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number(),this-\/>communicator\_pt()-\/>my\_rank());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>compute\_error(some\_file,TanhSolnForPoisson::get\_exact\_u,}
@@ -128,16 +122,14 @@ As with other driver codes, the output files are modified to allow each processo
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc L2 error and norm of solution}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)nNorm of error   : "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Norm of solution: "} << sqrt(norm) << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)nNorm of error   : "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Norm of solution: "{}} << sqrt(norm) << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 
 
 The remainder of this driver code is unchanged from the \href{../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html}{\texttt{ serial version}}.
@@ -158,5 +150,5 @@ The remainder of this driver code is unchanged from the \href{../../../poisson/t
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

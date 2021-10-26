@@ -22,11 +22,11 @@ and
 \begin{center} \href{../../../../demo_drivers/mpi/multi_domain/boussinesq_convection/multi_domain_ref_b_convection.cc}{\texttt{ {\ttfamily demo\+\_\+drivers/mpi/multi\+\_\+domain/boussinesq\+\_\+convection/multi\+\_\+domain\+\_\+ref\+\_\+convection.\+cc}}}. \end{center} 
 
 The parallelisation of the \href{../../../multi_physics/multi_domain_ref_b_convect/html/index.html}{\texttt{ multi-\/domain driver code }} is also quite straightforward. The key point is that the interaction between the domains must be set up again after the distribution of the problem because, on each processor, some of the \char`\"{}external elements\char`\"{} will have been deleted during the distribution. The required changes to the serial driver code are described below.\hypertarget{index_main_body}{}\doxysubsection{The main function}\label{index_main_body}
-The main function begins and ends with the usual calls to {\ttfamily M\+P\+I\+\_\+\+Helpers\+::init()} and {\ttfamily M\+P\+I\+\_\+\+Helpers\+::finalize()}; the problem is distributed with a simple call to {\ttfamily Problem\+::distribute()}.
+The main function begins and ends with the usual calls to {\ttfamily MPI\+\_\+\+Helpers\+::init()} and {\ttfamily MPI\+\_\+\+Helpers\+::finalize()}; the problem is distributed with a simple call to {\ttfamily Problem\+::distribute()}.
 
 \DoxyHorRuler{0}
 \hypertarget{index_problem_class}{}\doxysubsection{The problem class}\label{index_problem_class}
-The problem class is identical to its serial counterpart, apart from the addition of the {\ttfamily \mbox{\hyperlink{boussinesq__convection_8txt_a472f479ab997a5a2d889405dce0b7c39}{actions\+\_\+after\+\_\+distribute()}}} function, discussed below.
+The problem class is identical to its serial counterpart, apart from the addition of the {\ttfamily actions\+\_\+after\+\_\+distribute()} function, discussed below.
 
 \DoxyHorRuler{0}
 \hypertarget{index_actions_after_adapt}{}\doxysubsection{Actions after adaptation}\label{index_actions_after_adapt}
@@ -34,9 +34,9 @@ The boundary conditions are such that a single pressure degree of freedom must b
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Actions after adaptation, re-\/set all interactions, then}}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions after adaptation, re-\/set all interactions, then}}
 \DoxyCodeLine{\textcolor{comment}{ /// re-\/pin a single pressure degree of freedom}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Unpin all the pressures in NST mesh to avoid pinning two pressures}}
 \DoxyCodeLine{   RefineableNavierStokesEquations<2>::}
@@ -71,8 +71,8 @@ After the problem distribution, the multi-\/domain interactions must be set up a
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Actions after distribute: Re-\/setup multi-\/domain interaction}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{boussinesq__convection_8txt_a472f479ab997a5a2d889405dce0b7c39}{actions\_after\_distribute}}()}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions after distribute: Re-\/setup multi-\/domain interaction}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_distribute()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Re-\/set all the interactions in the problem}}
 \DoxyCodeLine{   Multi\_domain\_functions::setup\_multi\_domain\_interactions}
@@ -80,11 +80,9 @@ After the problem distribution, the multi-\/domain interactions must be set up a
 \DoxyCodeLine{  \} }
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_doc_solution}{}\doxysubsection{The doc\+\_\+solution() routine}\label{index_doc_solution}
-As usual, the {\ttfamily \mbox{\hyperlink{boussinesq__convection_8txt_a8cb7bc96a2ec61fe51b7b81e7ca542df}{doc\+\_\+solution()}}} function is modified by adding the processor ID to each output file, ensuring that output from one processor does not overwrite that from another.
+As usual, the {\ttfamily doc\+\_\+solution()} function is modified by adding the processor ID to each output file, ensuring that output from one processor does not overwrite that from another.
 
 \DoxyHorRuler{0}
 
@@ -93,7 +91,7 @@ The remainder of the driver code is identical to the \href{../../../multi_physic
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_multi_domain}{}\doxysection{Part I\+I\+: Setting up multi-\/domain interactions}\label{index_multi_domain}
+\hypertarget{index_multi_domain}{}\doxysection{Part II\+: Setting up multi-\/domain interactions}\label{index_multi_domain}
 The namespace {\ttfamily Multi\+\_\+domain\+\_\+functions} provides several helper functions that facilitate the location of \char`\"{}external elements\char`\"{} in multi-\/domain problems, in which the two interacting domains occupy the same physical space. The namespace also provides functions that can be used for problems in which the interacting domains meet at a lower-\/dimensional interface, {\itshape  e.\+g.} in fluid-\/structure interaction problems. The functions have a sensible default behaviour and can be used as \char`\"{}block-\/box\char`\"{} routines. We provide a brief overview of their (serial and parallel) implementation, providing enough detail to allow users to appreciate the role of the parameters that can be adjusted in order to optimise the functions\textquotesingle{} performance in specific applications.
 
 The function
@@ -103,12 +101,13 @@ The function
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT\_0,\textcolor{keyword}{class} ELEMENT\_1>     }
 \DoxyCodeLine{\textcolor{keywordtype}{void} Multi\_domain\_functions::setup\_multi\_domain\_interactions(}
 \DoxyCodeLine{                                       Problem* problem\_pt, }
-\DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&\mbox{\hyperlink{boussinesq__convection_8txt_a707b60a792e911d3fa7d844de3c21d8a}{first\_mesh\_pt}},}
-\DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&\mbox{\hyperlink{boussinesq__convection_8txt_ae55dc27b6a9169b989fbdb65e21a2e98}{second\_mesh\_pt}});}
+\DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&first\_mesh\_pt,}
+\DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&second\_mesh\_pt);}
+
 \end{DoxyCode}
 
 
-sets up a two-\/way interaction between two domains of the same spatial dimension represented by {\ttfamily first\+\_\+mesh\+\_\+pt}, a mesh of elements of type {\ttfamily E\+L\+E\+M\+E\+N\+T\+\_\+0}, and {\ttfamily second\+\_\+mesh\+\_\+pt}, a mesh of elements of type {\ttfamily E\+L\+E\+M\+E\+N\+T\+\_\+1}. Both {\ttfamily E\+L\+E\+M\+E\+N\+T\+\_\+0} and {\ttfamily E\+L\+E\+M\+E\+N\+T\+\_\+1} must inherit from {\ttfamily Element\+With\+External\+Elements}. The function loops over the integration points of all the elements in {\ttfamily first\+\_\+mesh\+\_\+pt} and establishes which \char`\"{}external element\char`\"{} in {\ttfamily second\+\_\+mesh\+\_\+pt} covers the same spatial position as the integration point. A pointer to this \char`\"{}external element\char`\"{} and the appropriate local coordinate are stored in the element in the {\ttfamily first\+\_\+mesh\+\_\+pt}, using the storage provided by the {\ttfamily Element\+With\+External\+Element} base class. Once the \char`\"{}external elements\char`\"{} have been found for all elements in {\ttfamily first\+\_\+mesh\+\_\+pt}, the procedure is repeated with the roles of the two meshes interchanged.
+sets up a two-\/way interaction between two domains of the same spatial dimension represented by {\ttfamily first\+\_\+mesh\+\_\+pt}, a mesh of elements of type {\ttfamily ELEMENT\+\_\+0}, and {\ttfamily second\+\_\+mesh\+\_\+pt}, a mesh of elements of type {\ttfamily ELEMENT\+\_\+1}. Both {\ttfamily ELEMENT\+\_\+0} and {\ttfamily ELEMENT\+\_\+1} must inherit from {\ttfamily Element\+With\+External\+Elements}. The function loops over the integration points of all the elements in {\ttfamily first\+\_\+mesh\+\_\+pt} and establishes which \char`\"{}external element\char`\"{} in {\ttfamily second\+\_\+mesh\+\_\+pt} covers the same spatial position as the integration point. A pointer to this \char`\"{}external element\char`\"{} and the appropriate local coordinate are stored in the element in the {\ttfamily first\+\_\+mesh\+\_\+pt}, using the storage provided by the {\ttfamily Element\+With\+External\+Element} base class. Once the \char`\"{}external elements\char`\"{} have been found for all elements in {\ttfamily first\+\_\+mesh\+\_\+pt}, the procedure is repeated with the roles of the two meshes interchanged.
 
 The corresponding function
 
@@ -119,18 +118,19 @@ The corresponding function
 \DoxyCodeLine{                                       Problem* problem\_pt,}
 \DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&mesh\_pt,}
 \DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&external\_mesh\_pt);}
+
 \end{DoxyCode}
 
 
-(note the singular) sets up a one-\/way interaction in which the mesh pointed to by {\ttfamily external\+\_\+mesh\+\_\+pt} provides the \char`\"{}external
-elements\char`\"{} (of type {\ttfamily E\+X\+T\+\_\+\+E\+L\+E\+M\+E\+NT}) for the {\ttfamily Element\+With\+External\+Elements} stored in {\ttfamily mesh\+\_\+pt}, but not vice versa. In fact, the two-\/way interaction described above is performed by two successive calls to this function
+(note the singular) sets up a one-\/way interaction in which the mesh pointed to by {\ttfamily external\+\_\+mesh\+\_\+pt} provides the \char`\"{}external elements\char`\"{} (of type {\ttfamily EXT\+\_\+\+ELEMENT}) for the {\ttfamily Element\+With\+External\+Elements} stored in {\ttfamily mesh\+\_\+pt}, but not vice versa. In fact, the two-\/way interaction described above is performed by two successive calls to this function
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{boussinesq__convection_8txt_a15a095909692c48e1e31dac9df3387a3}{setup\_multi\_domain\_interaction<ELEMENT\_1>}}}
-\DoxyCodeLine{     (problem\_pt,\mbox{\hyperlink{boussinesq__convection_8txt_a707b60a792e911d3fa7d844de3c21d8a}{first\_mesh\_pt}},\mbox{\hyperlink{boussinesq__convection_8txt_ae55dc27b6a9169b989fbdb65e21a2e98}{second\_mesh\_pt}});}
-\DoxyCodeLine{\mbox{\hyperlink{boussinesq__convection_8txt_ad0de0d1da8264c20e566a642a54e36a5}{setup\_multi\_domain\_interaction<ELEMENT\_0>}}}
-\DoxyCodeLine{     (problem\_pt,\mbox{\hyperlink{boussinesq__convection_8txt_ae55dc27b6a9169b989fbdb65e21a2e98}{second\_mesh\_pt}},\mbox{\hyperlink{boussinesq__convection_8txt_a707b60a792e911d3fa7d844de3c21d8a}{first\_mesh\_pt}});}
+\DoxyCodeLine{setup\_multi\_domain\_interaction<ELEMENT\_1>}
+\DoxyCodeLine{     (problem\_pt,first\_mesh\_pt,second\_mesh\_pt);}
+\DoxyCodeLine{setup\_multi\_domain\_interaction<ELEMENT\_0>}
+\DoxyCodeLine{     (problem\_pt,second\_mesh\_pt,first\_mesh\_pt);}
+
 \end{DoxyCode}
 
 
@@ -142,18 +142,17 @@ Finally, the function
 \DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&mesh\_pt,}
 \DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&external\_mesh\_pt,}
 \DoxyCodeLine{                                       Mesh* \textcolor{keyword}{const} \&external\_face\_mesh\_pt);}
+
 \end{DoxyCode}
 
 
-may be used to set up multi-\/domain interactions for problems in which the interaction occurs across the boundaries of adjacent domains ({\itshape  e.\+g. } in F\+SI problems where the fluid and solid domains meet along a lower-\/dimensional interface). We do not anticipate that users will have to call this function directly; it is called internally by the function {\ttfamily F\+S\+I\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}.
+may be used to set up multi-\/domain interactions for problems in which the interaction occurs across the boundaries of adjacent domains ({\itshape  e.\+g. } in FSI problems where the fluid and solid domains meet along a lower-\/dimensional interface). We do not anticipate that users will have to call this function directly; it is called internally by the function {\ttfamily FSI\+\_\+functions\+::setup\+\_\+fluid\+\_\+load\+\_\+info\+\_\+for\+\_\+solid\+\_\+elements(...)}.
 
 \DoxyHorRuler{0}
 \hypertarget{index_overview}{}\doxysubsection{Overview of the implementation}\label{index_overview}
 The setup of multi-\/domain interactions requires the identification of local coordinates within \char`\"{}external elements\char`\"{} that occupy the same Eulerian position as the integration points of the {\ttfamily Element\+With\+External\+Elements} with which they interact. Initially, the helper functions convert the mesh containing the \char`\"{}external elements\char`\"{} into a {\ttfamily Mesh\+As\+Geom\+Object} --- a compound {\ttfamily Geom\+Object} in which the constituent finite elements act as sub-\/{\ttfamily Geom\+Objects}. Given the Eulerian coordinates of a \char`\"{}target point\char`\"{}, the function {\ttfamily Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta(...)} is used to locate the \char`\"{}external element\char`\"{} (and the local coordinate within it) that contains the \char`\"{}target point\char`\"{}. The simplest implementation of this function is to loop over all the elements in the mesh, calling {\ttfamily Finite\+Element\+::locate\+\_\+zeta(...)} until the required point is located. The function {\ttfamily Finite\+Element\+::locate\+\_\+zeta(...)} can be overloaded for specific elements to take into account the interpolation method used within the element. By default, a Newton method is employed to determine the local coordinates of the \char`\"{}target point\char`\"{} within an element. If the Newton method fails to converge or if the \char`\"{}target point\char`\"{} is found at a local coordinate that is outside the element, then the functions return values are set to indicate that the \char`\"{}target point\char`\"{} has not been found within the element.
 
-One problem with the naive \char`\"{}loop over all the elements\char`\"{} approach is that in most cases, the candidate element will not contain the \char`\"{}target
-point\char`\"{}, so there will be a lot of wasted work. In addition, there is no guarantee that the (default) Newton iteration will converge, even when the element does contain the required point. A further complication in a distributed problem is that the element that contains the \char`\"{}target point\char`\"{} may not be located on the current processor. For these reasons, {\ttfamily Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta(...)} uses a bin-\/based search procedure described below. Conceptually, the algorithm still loops over all elements until it finds the one containing the \char`\"{}target
-point\char`\"{}; the efficiency gains are achieved by choosing a sensible search order so that the element containing the point is found quickly.
+One problem with the naive \char`\"{}loop over all the elements\char`\"{} approach is that in most cases, the candidate element will not contain the \char`\"{}target point\char`\"{}, so there will be a lot of wasted work. In addition, there is no guarantee that the (default) Newton iteration will converge, even when the element does contain the required point. A further complication in a distributed problem is that the element that contains the \char`\"{}target point\char`\"{} may not be located on the current processor. For these reasons, {\ttfamily Mesh\+As\+Geom\+Object\+::locate\+\_\+zeta(...)} uses a bin-\/based search procedure described below. Conceptually, the algorithm still loops over all elements until it finds the one containing the \char`\"{}target point\char`\"{}; the efficiency gains are achieved by choosing a sensible search order so that the element containing the point is found quickly.
 
 \DoxyHorRuler{0}
 \hypertarget{index_impl}{}\doxysubsection{Basic (serial) implementation}\label{index_impl}
@@ -186,8 +185,7 @@ To make the search process efficient, the constructor of the {\ttfamily Mesh\+As
 
 \DoxyHorRuler{0}
 \hypertarget{index_parallel}{}\doxysubsection{Parallel implementation}\label{index_parallel}
-When setting up multi-\/domain interactions for distributed meshes we face the additional challenge that the \char`\"{}external
-element\char`\"{} that contains a \char`\"{}target point\char`\"{} may not be located on the same processor as the {\ttfamily Element\+With\+External\+Element} with which it interacts. When dealing with distributed meshes, the search procedure described above is therefore modified as follows\+:
+When setting up multi-\/domain interactions for distributed meshes we face the additional challenge that the \char`\"{}external element\char`\"{} that contains a \char`\"{}target point\char`\"{} may not be located on the same processor as the {\ttfamily Element\+With\+External\+Element} with which it interacts. When dealing with distributed meshes, the search procedure described above is therefore modified as follows\+:
 \begin{DoxyEnumerate}
 \item When creating the {\ttfamily Mesh\+As\+Geom\+Object} representation of the distributed mesh that contains the \char`\"{}external elements\char`\"{}, each processor sets up a bin structure for its own part of that mesh. Some communication takes place at this point so that every processor holds the \char`\"{}global\char`\"{} extrema of the mesh. ~\newline
 ~\newline
@@ -198,8 +196,7 @@ element\char`\"{} that contains a \char`\"{}target point\char`\"{} may not be lo
 \item Each processor communicates its list of missing \char`\"{}external elements\char`\"{} to the \char`\"{}next\char`\"{} processor, using a ring-\/like communication pattern. ~\newline
 ~\newline
 
-\item All processors search for the yet-\/to-\/be-\/found \char`\"{}external
-   elements\char`\"{} amongst the \char`\"{}external elements\char`\"{} stored in their part of the distributed mesh. Again the search is restricted to the \char`\"{}external elements\char`\"{} that are associated with the bin that contains the \char`\"{}target point\char`\"{}. If an \char`\"{}external element\char`\"{} is found, a halo copy of it is created on the processor that contains the {\ttfamily Element\+With\+External\+Element}. ~\newline
+\item All processors search for the yet-\/to-\/be-\/found \char`\"{}external    elements\char`\"{} amongst the \char`\"{}external elements\char`\"{} stored in their part of the distributed mesh. Again the search is restricted to the \char`\"{}external elements\char`\"{} that are associated with the bin that contains the \char`\"{}target point\char`\"{}. If an \char`\"{}external element\char`\"{} is found, a halo copy of it is created on the processor that contains the {\ttfamily Element\+With\+External\+Element}. ~\newline
 ~\newline
 
 \item The list of any remaining missing \char`\"{}external elements\char`\"{} is then forwarded to the next processor in the communication ring where the search process is repeated. ~\newline
@@ -209,8 +206,7 @@ element\char`\"{} that contains a \char`\"{}target point\char`\"{} may not be lo
 ~\newline
 
 \item The setup of the multi-\/domain interaction is complete when all \char`\"{}external elements\char`\"{} have been located and halo copies have been made where required. The setup fails (for the same possible reasons listed in the discussion of the serial implementation) if none of the processors are able to locate one or more of the required \char`\"{}external elements\char`\"{}.
-\end{DoxyEnumerate}The algorithm is based on the assumption that the majority of the pairs of interacting elements will be stored on the same processor, which is typically the case when {\ttfamily M\+E\+T\+IS} is used to determine the distribution. The algorithm also assumes that the external elements can usually be found by searching only in the bin containing the \char`\"{}target
- point\char`\"{}, which is true provided the bin structure is not too fine. The algorithm should always find the external elements even if these assumptions are not satisfied, but it may not be optimal in these situations.
+\end{DoxyEnumerate}The algorithm is based on the assumption that the majority of the pairs of interacting elements will be stored on the same processor, which is typically the case when {\ttfamily METIS} is used to determine the distribution. The algorithm also assumes that the external elements can usually be found by searching only in the bin containing the \char`\"{}target  point\char`\"{}, which is true provided the bin structure is not too fine. The algorithm should always find the external elements even if these assumptions are not satisfied, but it may not be optimal in these situations.
 
 \DoxyHorRuler{0}
 
@@ -228,5 +224,5 @@ Additional parallel driver codes for the distributed Boussinesq problem using bo
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

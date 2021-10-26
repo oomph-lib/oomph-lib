@@ -565,7 +565,7 @@ that specifies the beam's undeformed shape.
 We start by creating the undeformed centreline of the beam as a
 \c StraightLine, one of \c oomph-lib's standard geometric objects. 
 
-\skipline start_of_constructor   
+\skipline start_of_constructor
 \until Undef_beam_pt
 
  We then construct the a one-dimensional Lagrangian mesh in

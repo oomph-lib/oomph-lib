@@ -168,7 +168,7 @@ namespace oomph
   }
 
   //============================================================================
-  /// \short Uniformly distribute global_nrow over all processors where
+  /// Uniformly distribute global_nrow over all processors where
   /// processors 0 holds approximately the first
   /// global_nrow/n_proc, processor 1 holds the next
   /// global_nrow/n_proc and so on...
@@ -330,7 +330,7 @@ namespace oomph
   namespace LinearAlgebraDistributionHelpers
   {
     //===========================================================================
-    /// \short Takes a vector of LinearAlgebraDistribution objects and
+    /// Takes a vector of LinearAlgebraDistribution objects and
     /// concatenates them such that the nrow_local of the out_distribution
     /// is the sum of the nrow_local of all the in_distributions and the number
     /// of global rows of the out_distribution is the sum of the number of
@@ -388,7 +388,7 @@ namespace oomph
         }
       }
 
-      ////////////////////////////////
+      /// /////////////////////////////
 
       // Check that all in distributions are built.
       for (unsigned dist_i = 0; dist_i < ndistributions; dist_i++)
@@ -404,7 +404,7 @@ namespace oomph
         }
       }
 
-      ////////////////////////////////
+      /// /////////////////////////////
 
       // Check that all communicators to concatenate are the same
       // by comparing all communicators against the first one.
@@ -428,7 +428,7 @@ namespace oomph
         }
       }
 
-      ////////////////////////////////
+      /// /////////////////////////////
 
       // Ensure that all distributions are either distributed or not.
       // This is because we use the distributed() function from the first
@@ -451,7 +451,7 @@ namespace oomph
         }
       }
 
-      ////////////////////////////////
+      /// /////////////////////////////
 
       // Check that the out distribution is not built.
       if (out_distribution.built())

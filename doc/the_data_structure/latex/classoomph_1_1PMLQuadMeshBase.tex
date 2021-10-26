@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1PMLQuadMeshBase}{}\doxysection{oomph\+::P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1PMLQuadMeshBase}{}\doxysection{oomph\+::PMLQuad\+Mesh\+Base\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1PMLQuadMeshBase}\index{oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}}
 
 
-P\+ML mesh class. Policy class for 2D P\+ML meshes.  
+PML mesh class. Policy class for 2D PML meshes.  
 
 
 
 
 {\ttfamily \#include $<$pml\+\_\+meshes.\+h$>$}
 
-Inheritance diagram for oomph\+::P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PMLQuad\+Mesh\+Base\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.000000cm]{classoomph_1_1PMLQuadMeshBase}
@@ -18,20 +18,19 @@ Inheritance diagram for oomph\+::P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+NT 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_aff4042f75a253b56f06cb321605c2afe}{P\+M\+L\+Quad\+Mesh\+Base}} (const unsigned \&n\+\_\+pml\+\_\+x, const unsigned \&n\+\_\+pml\+\_\+y, const double \&x\+\_\+pml\+\_\+start, const double \&x\+\_\+pml\+\_\+end, const double \&y\+\_\+pml\+\_\+start, const double \&y\+\_\+pml\+\_\+end, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_aff4042f75a253b56f06cb321605c2afe}{PMLQuad\+Mesh\+Base}} (const unsigned \&n\+\_\+pml\+\_\+x, const unsigned \&n\+\_\+pml\+\_\+y, const double \&x\+\_\+pml\+\_\+start, const double \&x\+\_\+pml\+\_\+end, const double \&y\+\_\+pml\+\_\+start, const double \&y\+\_\+pml\+\_\+end, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Create the underlying rectangular quad mesh. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}{pml\+\_\+locate\+\_\+zeta}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\&coarse\+\_\+mesh\+\_\+el\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Overloaded function to allow the user to locate an element in mesh given the (Eulerian) position of a point. Note, the result may be nonunique if the given point lies on the boundary of two elements in the mesh. Additionally, we assume that the P\+ML mesh is axis aligned when deciding if the given point lies inside the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase_a8054b13b65a898e1364ca30eace6c1e8}{pml\+\_\+locate\+\_\+zeta}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\&coarse\+\_\+mesh\+\_\+el\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Overloaded function to allow the user to locate an element in mesh given the (Eulerian) position of a point. Note, the result may be nonunique if the given point lies on the boundary of two elements in the mesh. Additionally, we assume that the PML mesh is axis aligned when deciding if the given point lies inside the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+PMLQuad\+Mesh\+Base$<$ ELEMENT $>$}
+PML mesh class. Policy class for 2D PML meshes. 
 
-P\+ML mesh class. Policy class for 2D P\+ML meshes. 
-
-Definition at line 185 of file pml\+\_\+meshes.\+h.
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00185}{185}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
 
 
 
@@ -40,8 +39,8 @@ Definition at line 185 of file pml\+\_\+meshes.\+h.
 \index{oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}!PMLQuadMeshBase@{PMLQuadMeshBase}}
 \index{PMLQuadMeshBase@{PMLQuadMeshBase}!oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PMLQuadMeshBase()}{PMLQuadMeshBase()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{P\+M\+L\+Quad\+Mesh\+Base}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+pml\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+y,  }\item[{const double \&}]{x\+\_\+pml\+\_\+start,  }\item[{const double \&}]{x\+\_\+pml\+\_\+end,  }\item[{const double \&}]{y\+\_\+pml\+\_\+start,  }\item[{const double \&}]{y\+\_\+pml\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{oomph\+::\+PMLQuad\+Mesh\+Base}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{PMLQuad\+Mesh\+Base}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+pml\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+y,  }\item[{const double \&}]{x\+\_\+pml\+\_\+start,  }\item[{const double \&}]{x\+\_\+pml\+\_\+end,  }\item[{const double \&}]{y\+\_\+pml\+\_\+start,  }\item[{const double \&}]{y\+\_\+pml\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -49,7 +48,7 @@ Constructor\+: Create the underlying rectangular quad mesh.
 
 
 
-Definition at line 190 of file pml\+\_\+meshes.\+h.
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00190}{190}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
 
 
 
@@ -58,24 +57,24 @@ Definition at line 190 of file pml\+\_\+meshes.\+h.
 \index{oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}!pml\_locate\_zeta@{pml\_locate\_zeta}}
 \index{pml\_locate\_zeta@{pml\_locate\_zeta}!oomph::PMLQuadMeshBase$<$ ELEMENT $>$@{oomph::PMLQuadMeshBase$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{pml\_locate\_zeta()}{pml\_locate\_zeta()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base}}$<$ E\+L\+E\+M\+E\+NT $>$\+::pml\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\&}]{coarse\+\_\+mesh\+\_\+el\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1PMLQuadMeshBase}{oomph\+::\+PMLQuad\+Mesh\+Base}}$<$ ELEMENT $>$\+::pml\+\_\+locate\+\_\+zeta (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\&}]{coarse\+\_\+mesh\+\_\+el\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Overloaded function to allow the user to locate an element in mesh given the (Eulerian) position of a point. Note, the result may be nonunique if the given point lies on the boundary of two elements in the mesh. Additionally, we assume that the P\+ML mesh is axis aligned when deciding if the given point lies inside the mesh. 
+Overloaded function to allow the user to locate an element in mesh given the (Eulerian) position of a point. Note, the result may be nonunique if the given point lies on the boundary of two elements in the mesh. Additionally, we assume that the PML mesh is axis aligned when deciding if the given point lies inside the mesh. 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{oomph\+::\+P\+M\+L\+Mesh\+Base}}.
+Implements \mbox{\hyperlink{classoomph_1_1PMLMeshBase_a49d7e044f51a32bed758d4c16052b995}{oomph\+::\+PMLMesh\+Base}}.
 
 
 
-Definition at line 212 of file pml\+\_\+meshes.\+h.
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00212}{212}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
 
 
 
-References oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt(), oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), i, oomph\+::\+Mesh\+::nnode(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nx(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ny(), oomph\+::\+Node\+::x(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+max(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+min(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+max(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+min().
+References \mbox{\hyperlink{mesh_8h_source_l00840}{oomph\+::\+Mesh\+::boundary\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00224}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::nx()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00231}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::ny()}}, \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00245}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::x\+\_\+max()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00238}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::x\+\_\+min()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00259}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::y\+\_\+max()}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00252}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::y\+\_\+min()}}.
 
 
 

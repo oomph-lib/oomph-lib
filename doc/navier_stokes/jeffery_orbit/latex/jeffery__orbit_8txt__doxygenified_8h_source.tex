@@ -1,0 +1,489 @@
+\hypertarget{jeffery__orbit_8txt__doxygenified_8h_source}{}\doxysection{jeffery\+\_\+orbit.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{jeffery__orbit_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Motion of an elliptical particle in shear flow: Jeffery orbits}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{ We study the problem of the motion of a rigid elliptical particle}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{freely suspended in a shear flow as described by Jeffery (1922) }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{[The motion of elliptical particles immersed in viscous fluid, <I>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{ Proc. Roy. Soc. A </I> <B> 102 </B> 161-\/179]. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{ The problem is solved using \(\backslash\)c oomph-\/lib's }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{<a href="{}../../../../doc/meshes/mesh\_from\_inline\_triangle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{inline unstructured mesh generation </a> procedures to modify }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{the fluid mesh in response to changes in orientation of the ellipse.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{\(\backslash\)section overview Overview of the problem}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{\(\backslash\)image html jeff\_sketch.gif "{}A rigid ellipse immersed in a shear flow "{} }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{\(\backslash\)image latex jeff\_sketch.eps "{}A rigid ellipse immersed in a shear flow "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{We consider an ellipse with centre of mass fixed at the origin of a}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{Cartesian coordinate system \(\backslash\)f\$ (x\_\{1\}\string^\{*\}, x\_\{2\}\string^\{*\}) \(\backslash\)f\$, but}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{immersed in a viscous fluid undergoing a linear shear flow }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{with shear rate \(\backslash\)f\$ G \(\backslash\)f\$. In the absence of the ellipse }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{the fluid velocity field would be }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{ \(\backslash\)f\$ u\string^\{*\}\_\{1\} = Gx\string^\{*\}\_\{2\} \(\backslash\)f\$, \(\backslash\)f\$ u\string^\{*\}\_\{2\} = 0 \(\backslash\)f\$, where}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{ \(\backslash\)f\$ u\string^\{*\}\_\{i\} \(\backslash\)f\$ is the dimensional velocity component in the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{ \(\backslash\)f\$ x\string^\{*\}\_\{i\} \(\backslash\)f\$ coordinate direction.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{ The configuration of a rigid body in two dimensions is determined entirely}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{ by the position of its centre of mass, \(\backslash\)f\$(X\string^\{*\}\_\{1\},X\string^\{*\}\_\{2\})\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{ and an angle, \(\backslash\)f\$\(\backslash\)chi\(\backslash\)f\$ that specifies its orientation to a fixed}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{ axis. The equations governing the motion of the particle are then simply}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{ conservation of linear and angular momentum:}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{\(\backslash\)f[ M \(\backslash\)frac\{\(\backslash\)mbox\{d\}\string^\{2\} X\string^\{*\}\_\{i\}\}\{\(\backslash\)mbox\{d\} t\string^\{*2\}\} = F\string^\{*\}\_\{i\} \(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{ \(\backslash\)mbox\{and\} \(\backslash\)quad I \(\backslash\)frac\{\(\backslash\)mbox\{d\}\string^\{2\} \(\backslash\)chi\}\{\(\backslash\)mbox\{d\} t\string^\{*2\}\} = T\string^\{*\}, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{ where \(\backslash\)f\$M\(\backslash\)f\$ is the mass of the body, \(\backslash\)f\$I\(\backslash\)f\$ is its moment of}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{ inertia about the centre of mass, \(\backslash\)f\$(F\string^\{*\}\_\{1\},F\string^\{*\}\_\{2\})\(\backslash\)f\$ is the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{ resultant force on the body and \(\backslash\)f\$T\string^\{*\}\(\backslash\)f\$ is the resultant torque about}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{ the centre of mass.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{ In the present context, the force and torque on the body are entirely}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{ due to the viscous fluid loading on its surface in which case}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)f[ F\string^\{*\}\_\{i\} = \(\backslash\)int \(\backslash\)tau\string^\{*\}\_\{ij\}\(\backslash\), n\_\{j\}\(\backslash\), \(\backslash\)mbox\{d\} s \(\backslash\)quad\(\backslash\)mbox\{and\}\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{    T\string^\{*\} = \(\backslash\)oint  (x\string^\{*\}\_\{1\} -\/ X\string^\{*\}\_\{1\}) \(\backslash\)tau\string^\{*\}\_\{2j\}\(\backslash\),n\_\{j\} -\/ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{               (x\string^\{*\}\_\{2\} -\/ X\string^\{*\}\_\{2\}) \(\backslash\)tau\string^\{*\}\_\{1j\}\(\backslash\),n\_\{j\}\(\backslash\), \(\backslash\)mbox\{d\}}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{ s, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{ where the integral is around the perimeter of the ellipse,}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{ \(\backslash\)f\$\(\backslash\)tau\string^\{*\}\_\{ij\}\(\backslash\)f\$ is the fluid stress tensor and}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{ \(\backslash\)f\$(n\_\{1\},n\_\{2\})\(\backslash\)f\$ is the unit normal to the ellipse surface, directed}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{ away from the solid body. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{ We non-\/dimensionalise the rigid-\/body equations, using the same }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{problem-\/specific reference quantities as used in the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{non-\/dimensionalisation of the Navier-\/-\/Stokes equations, described }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{<a href="{}../../../../doc/navier\_stokes/driven\_cavity/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{in another tutorial. </a> Thus, \(\backslash\)f\$ \{\(\backslash\)cal U\}\(\backslash\)f\$ is a typical fluid velocity, }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)cal L\} \(\backslash\)f\$ is the length scale, \(\backslash\)f\$\{\(\backslash\)cal T\}\(\backslash\)f\$ is the time scale}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{and the fluid pressure is non-\/dimensionalised on the viscous scale, \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{\(\backslash\)mu\_\{ref\} \{\(\backslash\)cal U\}/\{\(\backslash\)cal L\} \(\backslash\)f\$, where \(\backslash\)f\$ \(\backslash\)mu\_\{ref\} \(\backslash\)f\$ is the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{reference fluid viscosity. Hence,}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{\(\backslash\)tau\string^\{*\}\_\{ij\} = \(\backslash\)frac\{\(\backslash\)mu\_\{ref\} \{\(\backslash\)cal U\}\}\{\{\(\backslash\)cal L\}\} \(\backslash\), \(\backslash\)tau\_\{ij\}, \(\backslash\)qquad        }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{x\_i\string^\{*\} = \{\(\backslash\)cal L\}\(\backslash\), x\_i, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{X\_i\string^* = \{\(\backslash\)cal L\}\(\backslash\), X\_i, \(\backslash\)qquad        }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{t\string^* = \{\(\backslash\)cal T\}\(\backslash\), t.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{The external forces and torques are non-\/dimensionalised on the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{viscous scales per unit length, \(\backslash\)f\$ F\string^\{*\}\_\{i\} = \(\backslash\)mu\_\{ref\} \{\(\backslash\)cal U\}}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{F\_\{i\} \(\backslash\)f\$ and \(\backslash\)f\$ T\string^\{*\} = \(\backslash\)mu\_\{ref\} \{\(\backslash\)cal U\} \{\(\backslash\)cal L\} T \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{The dimensionless rigid-\/body equations are then}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)f[ Re St\string^\{2\} \(\backslash\)frac\{\(\backslash\)rho\_\{s\}\}\{\(\backslash\)rho\_\{f\}\}\(\backslash\), \(\backslash\)bar\{M\}\(\backslash\), }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)mbox\{d\}\string^\{2\} X\_\{i\}\}\{\(\backslash\)mbox\{d\} t\string^\{2\}\} = F\_\{i\} }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{ \(\backslash\)mbox\{and\} \(\backslash\)quad Re St\string^\{2\} \(\backslash\)frac\{\(\backslash\)rho\_\{s\}\}\{\(\backslash\)rho\_\{f\}\}\(\backslash\), \(\backslash\)bar\{I\}\(\backslash\), }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{ \(\backslash\)frac\{\(\backslash\)mbox\{d\}\string^\{2\} \(\backslash\)chi\}\{\(\backslash\)mbox\{d\} t\string^\{2\}\} = T, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{ where the dimensionless parameters}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{\(\backslash\)f[ Re = \(\backslash\)frac\{\(\backslash\)rho\_\{f\} \{\(\backslash\)cal U\}\{\(\backslash\)cal L\}\}\{\(\backslash\)mu\_\{ref\}\}, \(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{    St = \(\backslash\)frac\{\(\backslash\)cal L\}\{\{\(\backslash\)cal U\}\{\(\backslash\)cal T\}\},\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{    \(\backslash\)frac\{\(\backslash\)rho\_\{s\}\}\{\(\backslash\)rho\_\{f\}\}, \(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{    \(\backslash\)bar\{M\} = \(\backslash\)frac\{M\}\{\(\backslash\)rho\_\{s\} \{\(\backslash\)cal L\}\string^\{2\}\}, \(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{    \(\backslash\)bar\{I\} = \(\backslash\)frac\{I\}\{\(\backslash\)rho\_\{s\} \{\(\backslash\)cal L\}\string^\{4\}\}, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{are the Reynolds number, the Strouhal number, the density ratio, and the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{dimensionless mass and moment of inertia, respectively. In the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{above \(\backslash\)f\$ \(\backslash\)rho\_\{f\} \(\backslash\)f\$ is the fluid density and \(\backslash\)f\$ \(\backslash\)rho\_\{s\} \(\backslash\)f\$ is}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{the solid density.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{ In the specific problem considered here, the centre of mass is}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{ fixed, and the only possible motion of the particle is free}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{ rotation. The particle motion is therefore reduced to the solution of}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{ a single equation for the unknown angle. We choose \(\backslash\)f\$ \{\(\backslash\)cal L\} = 2b}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{ \(\backslash\)f\$, the major axis of the ellipse, \(\backslash\)f\$ \{\(\backslash\)cal U\} = 2Gb \(\backslash\)f\$ and \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{ \{\(\backslash\)cal T\} = G\string^\{-\/1\} \(\backslash\)f\$, so that \(\backslash\)f\$ St = 1 \(\backslash\)f\$ and the governing}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{ equations for the fluid and solid become}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{ <center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{ \(\backslash\)f[  Re \(\backslash\)left (\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial t\} + }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{u\_j \(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} \(\backslash\)right) =}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{-\/ \(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial x\_i\} +}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \}\{\(\backslash\)partial x\_j\} \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} +  }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} \(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\)quad\(\backslash\)mbox\{and\}\(\backslash\)quad}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_i\} = 0.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{ and}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\)f[ Re \(\backslash\)left(\(\backslash\)frac\{\(\backslash\)rho\_\{s\}\}\{\(\backslash\)rho\_\{f\}\}\(\backslash\)right) \(\backslash\)bar\{I\} }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{=    \(\backslash\)oint  \(\backslash\)left[x\_\{1\}\(\backslash\)tau\_\{2j\}\(\backslash\),n\_\{j\} -\/ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{                x\_\{2\} \(\backslash\)tau\_\{1j\}\(\backslash\),n\_\{j\}\(\backslash\), \(\backslash\)right] \(\backslash\)mbox\{d\} s, \(\backslash\)f].}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{We perform the computations in the domain \(\backslash\)f\$ x\_\{1\} \(\backslash\)in [-\/L,}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{ L]\(\backslash\)f\$ and \(\backslash\)f\$ x\_\{2\} \(\backslash\)in [-\/H, H] \(\backslash\)f\$, and apply the boundary conditions}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{ \(\backslash\)f[ u\_\{1\} = H f(t), u\_\{2\} = 0, \(\backslash\)quad\(\backslash\)mbox\{on\}\(\backslash\)quad x\_\{2\} = -\/H; \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{ \(\backslash\)f[ u\_\{1\} = -\/H f(t), u\_\{2\} = 0, \(\backslash\)quad\(\backslash\)mbox\{on\}\(\backslash\)quad x\_\{2\} = H; \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{ \(\backslash\)f[ \(\backslash\)tau\_\{11\} = 0, u\_\{2\} = 0, \(\backslash\)quad\(\backslash\)mbox\{on\}\(\backslash\)quad x\_\{1\} = -\/L, L; \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{ where \(\backslash\)f\$f(t)\(\backslash\)f\$ is a smooth ramp function such that \(\backslash\)f\$f(0) = \(\backslash\)dot\{f\}(0) =}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{ \(\backslash\)ddot\{f\}(0) = 0\(\backslash\)f\$ and \(\backslash\)f\$f(t) \(\backslash\)to 1\(\backslash\)f\$ as \(\backslash\)f\$ t \(\backslash\)to \(\backslash\)infty\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{ Jeffery (1922) showed that for a two-\/dimensional ellipse in Stokes}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{ flow (\(\backslash\)f\$ Re = 0 \(\backslash\)f\$), the exact solution for the angle as a function}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{ of time is}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{ \(\backslash\)f[ \(\backslash\)chi = \(\backslash\)tan\string^\{-\/1\}\(\backslash\)left(\(\backslash\)frac\{b\}\{a\}\(\backslash\)tan \(\backslash\)frac\{abGt\}\{a\string^\{2\} +}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{ b\string^\{2\}\}\(\backslash\)right),\(\backslash\)quad\(\backslash\)mbox\{and\}\(\backslash\)quad \(\backslash\)dot\{\(\backslash\)chi\} = \(\backslash\)frac\{G\}\{a\string^\{2\} +}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{ b\string^\{2\}\}\(\backslash\)left(b\string^\{2\}\(\backslash\)cos\string^\{2\}\(\backslash\)chi + a\string^\{2\}\(\backslash\)sin\string^\{2\}\(\backslash\)chi\(\backslash\)right). \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{ Thus, the ellipse performs periodic orbits but with a non-\/uniform}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{ velocity. For sufficiently small \(\backslash\)f\$ Re \(\backslash\)f\$, Ding \(\backslash\)\& Aidun (2000)}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{ [The dynamics and scaling law for particles suspended in shear flow}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{ with inertia, <I> J. Fluid Mech. </I> <B> 423 </B> 317-\/344]}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{ showed that the system approximates the Jeffery orbits but with an}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{ increased period. Typical solutions for \(\backslash\)f\$ Re = 1\(\backslash\)f\$ are shown}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{ below.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{\(\backslash\)image html orbit\_mesh.gif "{}An ellipse performing approximate Jeffery orbits at Re = 1 "{} }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{\(\backslash\)image latex orbit\_mesh.eps "{}An ellipse performing approximate Jeffery orbits at Re = 1 "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)image html jeff\_graph.gif "{}Angle and angular velocity as functions of time for Re = 1 "{} }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{\(\backslash\)image latex jeff\_graph.eps "{}Angle and angular velocity as functions of time for Re = 1 "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{\(\backslash\)section fsi Implementation as a fluid-\/structure interaction problem}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{ The problem is a fluid-\/structure interaction problem in}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{which the structural dynamics are particularly simple, depending only}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{on a single degree of freedom. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{Nonetheless, the two types of physical coupling between the fluid }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{and the solid remain:}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{-\/\# The position of the free boundary depends on the position}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{   of the rigid body.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{-\/\# The rigid body is loaded by the fluid traction.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{ As in other }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{<a href="{}../../../../doc/interaction/unstructured\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{ 2D unstructured FSI </a> problems, we treat the fluid mesh as a}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{ pseudo-\/solid body and determine the position of the boundary nodes }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{ on the fluid-\/solid interface using  }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{ \(\backslash\)c ImposeDisplacementByLagrangeMultiplierElements. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{ The rigid body mechanics is handled by using a \(\backslash\)c GeomObject that}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{represents the perimeter of the rigid body to create}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{an \(\backslash\)c ImmersedRigidBodyElement}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{that solves the three equations of motion for}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{a rigid body; and the load is applied to the rigid body}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{using \(\backslash\)c NavierStokesSurfaceDragTorqueElements.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{\(\backslash\)section global Problem Parameters}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{ We use a namespace to define the parameters used in the problem}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{\(\backslash\)dontinclude jeffery\_orbit.cc}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)skipline start\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{\(\backslash\)until end\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{\(\backslash\)section ellipse Defining the ellipse as a GeomObject}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{ We create a basic \(\backslash\)c GeomObject to represent the ellipse whose}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{boundary we parametrise by the polar angle, measured from its centre}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{of mass.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)dontinclude jeffery\_orbit.cc }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)skipline start\_of\_general\_ellipse}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{\(\backslash\)until end\_of\_general\_ellipse}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{\(\backslash\)section driver The driver code}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{ After parsing the command-\/line arguments, which are used to modify}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{ certain parameters for validation runs, a single instance of the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{ \(\backslash\)c UnstructuredImmersedEllipseProblem (described below) is}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{ constructed using Taylor Hood elements.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)dontinclude jeffery\_orbit.cc}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{\(\backslash\)until problem;}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{ After construction the \(\backslash\)c Nodes on the boundary of the ellipse will}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{ have been directly mapped onto the curvilinear }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{ surface using a strong (collocation)}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{ condition, \(\backslash\)f\$ x\_\{i\} = R\_\{i\}\(\backslash\)f\$, where \(\backslash\)f\$R\_\{i\}\(\backslash\)f\$ is the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{ corresponding boundary of the ellipse.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{ In the full problem }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{ the displacement boundary condition is enforced weakly }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{ via Lagrange multipliers }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{ \(\backslash\)f\$ \(\backslash\)oint \(\backslash\)left\(\backslash\)\{x\_\{i\} -\/ R\_\{i\}\(\backslash\)right\(\backslash\)\}\(\backslash\)psi \(\backslash\)mbox\{d\} s =}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{ 0\(\backslash\)f\$. In order to ensure consistency, we initially solve the problem}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{ in which the rigid body is pinned so that the boundary nodes are}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{ adjusted to be consistent with the weak form of the boundary}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{ condition. We note that for sufficiently fine initial meshes }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{ the difference is minimal.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{ \(\backslash\)until solve\_for\_consistent}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{ Now that we have a consistent initial condition, we initialise the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{ timestepper and set conditions consistent with a impulsive start from}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{ rest.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{ \(\backslash\)until doc\_solution();}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{ We then take a fixed number of timesteps on the initial mesh,}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{ documenting the solution after each solve.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{ \(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{ Finally, we loop over a number of ``cycles'' in which we adapt the problem}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{ and then solve for a fixed number of time steps on the each mesh.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{ \(\backslash\)skipline for}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{ \(\backslash\)until //end of main}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{\(\backslash\)section problem The Problem class}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{ The Problem class follows the usual pattern. The time-\/dependent}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{ boundary conditions are applied using the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{ actions\_before\_implicit\_timestep() function and the no-\/slip boundary}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{ condition is applied in \(\backslash\)c actions\_before\_newton\_convergence\_check()}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{ via an auxiliary node update function.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{ <a href="{}../../../../doc/meshes/mesh\_from\_inline\_triangle/html/index.html\#adapt"{}>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{ Recall</a> that when adapting an unstructured mesh, its constituent}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{ elements are completely re-\/generated. Physical}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{ parameters and boundary conditions must therefore be reassigned, which is the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{ task of the \(\backslash\)c complete\_problem\_setup() function, called in \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{ actions\_after\_adapt().}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{ Helper functions are also provided to solve the initial problem to}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{ move the boundary nodes [\(\backslash\)c solve\_for\_consistent\_nodal\_positions()]; }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{ to apply the boundary conditions [\(\backslash\)c set\_boundary\_velocity()];}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{ and to construct and delete the surface}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{ elements that impose the Lagrange multiplier constraints and compute the load}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{ on the rigid body [\(\backslash\)c create\_lagrange\_multiplier\_elements(), \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{ delete\_lagrange\_multiplier\_elements(), \(\backslash\)c create\_drag\_elements(), }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{ \(\backslash\)c delete\_drag\_elements()].}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{ The class also provides storage for the meshes, the rigid body }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{and file handles for documentation.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{\(\backslash\)dontinclude jeffery\_orbit.cc}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{\(\backslash\)until end\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{\(\backslash\)section constructor The Problem Constructor}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{ We begin by opening the output files and allocating two time}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{ steppers, one for the fluid problem and one for the rigid body}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{ problem.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{\(\backslash\)skipline start\_constructor}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{\(\backslash\)until Newmark}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{ We then define the geometry that defines the outer boundary of the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{ unstructured mesh by constructing a \(\backslash\)c TriangleMeshPolygon that }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{ consists of four straight-\/line boundaries.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{\(\backslash\)until new TriangleMeshPolygon}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{ Next we build the single \(\backslash\)c ImmersedRigidBodyElement from an}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{ instantiation of a \(\backslash\)c GeneralEllipse}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{ geometric object.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{\(\backslash\)until this-\/>time\_stepper\_pt(1)}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{ The \(\backslash\)c ImmersedRigidBodyElement is used to define a }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{\(\backslash\)c TriangleMeshCurvilinearClosedCurve in exactly the same way as if it}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{were simply a (passive) \(\backslash\)c GeomObject, as discussed in }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{<a href="{}../../../../doc/meshes/mesh\_from\_inline\_triangle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{another tutorial. </a>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{\(\backslash\)until linear\_boundary\_pt,hole\_}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{ We then build the unstructured fluid mesh using the boundary}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{ information, set a spatial error estimator and complete the setup of}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{ the problem}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{\(\backslash\)until complete\_problem\_setup()}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{ The \(\backslash\)c ImmersedRigidBodyElement is not deleted during the adaptation}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{ process and so its physical parameters can be set once in the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{ constructor. We set the initial position of the centre of mass,}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{ as well as the non-\/dimensional mass and moment of inertia shape, the }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{ Reynolds and Strouhal numbers, and the density ratio, which appear in the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{ governing equations above. For this problem, we also fix the location}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{ of the centre of mass. (The section \(\backslash\)ref comments contains an}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{ exercise that asks you to explore what happens when you omit this step).}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{\(\backslash\)until pin\_centre\_of\_mass\_coordinate(1)}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{ For later reference, we store the single \(\backslash\)c ImmersedRigidBodyElement in a mesh}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{\(\backslash\)until add\_element\_pt}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{ We then create the elements that apply the load on the rigid body and}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{ pass the entire mesh of elements to the rigid body. This is the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{ equivalent of the function }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{ \(\backslash\)c FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements(..), but}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{ here the procedure is very simple because <b> all </b> the surface}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{ elements affect the single rigid body. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{\(\backslash\)until rigid\_element1\_pt}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{ We next create the mesh of Lagrange-\/multiplier elements that drive}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{the deformation of the fluid mesh in response to the motion of the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{ellipse}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{ \(\backslash\)until create\_lagrange}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{ and then construct the global mesh and assign equation numbers.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{ \(\backslash\)until end\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{ Note that the \(\backslash\)c Drag\_mesh\_pt does not need to be added as a sub-\/mesh}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{ because its elements do not contribute <i> directly </i> to the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{ residuals and Jacobian. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{\(\backslash\)section complete Completing the problem setup}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{ The helper function \(\backslash\)c complete\_problem\_setup() starts by}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{ (re-\/)applying the boundary conditions by pinning the fluid velocity}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{ in the \(\backslash\)f\$ x\_\{2\}\(\backslash\)f\$-\/direction on all boundaries and that in the \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{ x\_\{1\} \(\backslash\)f\$-\/direction on the top and bottom (boundaries 1 and 3).}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{\(\backslash\)dontinclude jeffery\_orbit.cc}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{\(\backslash\)skipline start\_complete\_problem\_setup}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{\(\backslash\)until -\/>pin(1)}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{ The boundary conditions for the solid degrees of freedom that}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{ describe the mesh deformation are assigned next by pinning the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{ nodal positions on the fixed domain boundaries (boundaries 0, 1, 2,}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{ 3):}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{ \(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{ The nodes on the boundary of the rigid body should be free to move,}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{ so they are unpinned and an auxiliary node update function is set}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{ to apply the no-\/slip boundary condition from the \(\backslash\)c Node's positional}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{ history values. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{\(\backslash\)until // End loop over boundaries}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{ We then loop over the fluid elements and set pointers to the physical}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{ parameters and the apply the velocity boundary conditions}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{\(\backslash\)until end\_of\_complete\_problem\_setup}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)section surface Creating and destroying the surface elements}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{ The general}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{ procedure for creating, attaching and deleting\(\backslash\)c FaceElements is}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{ exactly the same as described }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{<a href="{}../../../../doc/poisson/two\_d\_poisson\_flux\_bc/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{ in another tutorial, </a> so is not described in detail here.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{ The functions \(\backslash\)c create\_lagrange\_multiplier\_elements() and \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{ create\_drag\_elements() construct surface }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{\(\backslash\)c ImposeDisplacementByLagrangeMulitiplierElements and}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{\(\backslash\)c NavierStokesSurfaceDragTorqueElements, respectively, around the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{ boundary of the rigid body, setting any required member data. For}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{ example, the \(\backslash\)c NavierStokesSurfaceDragTorqueElements require the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{ location of the centre of mass in order to compute the torque. The}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{ elements are added to the internal storage containers }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{\(\backslash\)c Lagrange\_multiplier\_mesh\_pt and \(\backslash\)c Drag\_mesh\_pt. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{ The corresponding functions \(\backslash\)c delete\_lagrange\_multiplier\_elements()}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{ and \(\backslash\)c delete\_drag\_elements() are used to delete and remove }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{ the elements before adaptation.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{\(\backslash\)section bc Setting the boundary velocity}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{ The function \(\backslash\)c set\_boundary\_velocity()  is used to apply the }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{ time-\/dependent boundary conditions to the external boundaries of the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{ fluid domain. The only subtlety is that after a remesh the history}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{ values for the boundary nodes must also be (re-\/)applied; and, for}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{ simplicity, the history values are always reset.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{\(\backslash\)section initial Solving for consistent initial nodal positions}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{ The initial nodal positions are made consistent with the}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{ weakly-\/imposed displacement boundary condition by pinning the rigid}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{ body degrees of freedom, performing a steady Newton solve and then}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{ releasing the rigid body degrees of freedom.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{ \(\backslash\)skipline start\_solve\_for\_consistent\_nodal\_positions}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{ \(\backslash\)until end\_solve\_for\_consistent\_nodal\_positions}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{\(\backslash\)subsection exercises Exercises}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{-\/\# Confirm that for sufficiently large times the solution agrees }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{   with Jeffery's analytic solution when you set \(\backslash\)f\$ Re=0 \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{   Explain why you expect there to be a discrepancy at early times.\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{-\/\# What happens when the centre of mass is not fixed?}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{   Can you explain the observed behaviour?\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{-\/\# What happens if you don't call the function }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{   \(\backslash\)c solve\_for\_consistent\_nodal\_positions()? }}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{   Can you explain the observed behaviour?\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{-\/\# Investigate the behaviour of the system with increasing}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{   \(\backslash\)f\$Re\(\backslash\)f\$. What happens to the oscillations for \(\backslash\)f\$ Re > 30 \(\backslash\)f\$?\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/jeffery\_orbit/"{}>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{demo\_drivers/navier\_stokes/jeffery\_orbit/}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/jeffery\_orbit/jeffery\_orbit.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{demo\_drivers/navier\_stokes/jeffery\_orbit/jeffery\_orbit.cc}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{jeffery__orbit_8txt__doxygenified_8h_source_l00484}00484 }
+
+\end{DoxyCode}

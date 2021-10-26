@@ -3,50 +3,50 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classoomph_1_1BoundingElementType}{oomph\+::\+Bounding\+Element\+Type$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1BoundingElementType}{oomph\+::\+Bounding\+Element\+Type$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em This policy class is used to associate specific bounding elements with specific Fluid\+Interface elements. It must be filled in for every class that uses the Spine\+Update\+Fluid\+Interface$<$...$>$ or Elastic\+Update\+Fluid\+Interface$<$....$>$ generic template classes. Examples for our default Line, Axisymmetric and Surface types are included below. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em This policy class is used to allow additional values to be added to the nodes from new surface equations, for examples of usage see the Surfactant\+Transport\+Fluid\+Interface\+Elements. The use of this class avoids issues with calling virtual functions in constructors and avoids having a global look-\/up able, although it functions in much the same way. Typically, this will only be filled in by \char`\"{}expert users\char`\"{} and is only required if you want to write generic surface-\/element classes. Specific classes can always be overloaded on a case-\/by-\/case basis. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1FluidInterfaceAdditionalValues_3_01FluidInterfaceElement_01_4}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ Fluid\+Interface\+Element $>$}}
 \begin{DoxyCompactList}\small\item\em Specific policy class for the Fluid\+Interface\+Elemetnts, which do not require any additional values at the nodes. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+S\+S, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+S\+S, E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Generic Spine node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses spines. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1SpinePointFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Point\+Fluid\+Interface\+Bounding\+Element$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Spine version of the \mbox{\hyperlink{classoomph_1_1PointFluidInterfaceBoundingElement}{Point\+Fluid\+Interface\+Bounding\+Element}}. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceBoundingElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Bounding\+Element$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Spine version of the \mbox{\hyperlink{classoomph_1_1LineFluidInterfaceBoundingElement}{Line\+Fluid\+Interface\+Bounding\+Element}}. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1SpineLineFluidInterfaceElement}{oomph\+::\+Spine\+Line\+Fluid\+Interface\+Element$<$ ELEMENT $>$}}
 \item 
-class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01SpineUpdateFluidInterfaceElement_3_01FluidInterfaceElement0079ff469c68e949ddcf7a17f32ba6a9}{oomph\+::\+Bounding\+Element\+Type$<$ Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01SpineUpdateFluidInterfaceElement_3_01FluidInterfaceElement0079ff469c68e949ddcf7a17f32ba6a9}{oomph\+::\+Bounding\+Element\+Type$<$ Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, ELEMENT $>$ $>$}}
 \item 
-class \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Fluid\+Interface\+Element$<$ ELEMENT $>$}}
 \item 
-class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01SpineUpdateFluidInterfaceElement_3_01FluidInterfaceElement7e4c3b8d4bf0b8ea24b4420ab41b2522}{oomph\+::\+Bounding\+Element\+Type$<$ Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01SpineUpdateFluidInterfaceElement_3_01FluidInterfaceElement7e4c3b8d4bf0b8ea24b4420ab41b2522}{oomph\+::\+Bounding\+Element\+Type$<$ Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, ELEMENT $>$ $>$}}
 \item 
-class \mbox{\hyperlink{classoomph_1_1SpineSurfaceFluidInterfaceElement}{oomph\+::\+Spine\+Surface\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1SpineSurfaceFluidInterfaceElement}{oomph\+::\+Spine\+Surface\+Fluid\+Interface\+Element$<$ ELEMENT $>$}}
 \item 
-class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01SpineUpdateFluidInterfaceElement_3_01FluidInterfaceElement967a9cdd4c55a2ab80dbfbe6be84b5ab}{oomph\+::\+Bounding\+Element\+Type$<$ Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01SpineUpdateFluidInterfaceElement_3_01FluidInterfaceElement967a9cdd4c55a2ab80dbfbe6be84b5ab}{oomph\+::\+Bounding\+Element\+Type$<$ Spine\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, ELEMENT $>$ $>$}}
 \item 
-class \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ E\+Q\+U\+A\+T\+I\+O\+N\+\_\+\+C\+L\+A\+S\+S, D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+\_\+\+C\+L\+A\+S\+S, E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Generic Elastic node update interface template class that can be combined with a given surface equations class and surface derivative class to provide a concrete implementation of any surface element that uses elastic node updates. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1ElasticPointFluidInterfaceBoundingElement}{oomph\+::\+Elastic\+Point\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ EQUATION\+\_\+\+CLASS, DERIVATIVE\+\_\+\+CLASS, ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ElasticPointFluidInterfaceBoundingElement}{oomph\+::\+Elastic\+Point\+Fluid\+Interface\+Bounding\+Element$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Pseudo-\/elasticity version of the \mbox{\hyperlink{classoomph_1_1PointFluidInterfaceBoundingElement}{Point\+Fluid\+Interface\+Bounding\+Element}}. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1ElasticLineFluidInterfaceBoundingElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1ElasticLineFluidInterfaceBoundingElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Bounding\+Element$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Pseudo-\/elasticity version of the \mbox{\hyperlink{classoomph_1_1LineFluidInterfaceBoundingElement}{Line\+Fluid\+Interface\+Bounding\+Element}}. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1ElasticLineFluidInterfaceElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1ElasticLineFluidInterfaceElement}{oomph\+::\+Elastic\+Line\+Fluid\+Interface\+Element$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Specialise the elastic update template class to concrete 1D case. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01ElasticUpdateFluidInterfaceElement_3_01FluidInterfaceEleme25258208c656cd18bb5e78a946d0c1ca}{oomph\+::\+Bounding\+Element\+Type$<$ Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01ElasticUpdateFluidInterfaceElement_3_01FluidInterfaceEleme25258208c656cd18bb5e78a946d0c1ca}{oomph\+::\+Bounding\+Element\+Type$<$ Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Line\+Derivatives, ELEMENT $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Define the Bounding\+Element type associated with the 1D surface element. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricFluidInterfaceElement}{oomph\+::\+Elastic\+Axisymmetric\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1ElasticAxisymmetricFluidInterfaceElement}{oomph\+::\+Elastic\+Axisymmetric\+Fluid\+Interface\+Element$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Specialise the Elastic update case to axisymmetric equations. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01ElasticUpdateFluidInterfaceElement_3_01FluidInterfaceEleme3184fbb3565ba21902c1c3c09e7b1c72}{oomph\+::\+Bounding\+Element\+Type$<$ Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01ElasticUpdateFluidInterfaceElement_3_01FluidInterfaceEleme3184fbb3565ba21902c1c3c09e7b1c72}{oomph\+::\+Bounding\+Element\+Type$<$ Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Axisymmetric\+Derivatives, ELEMENT $>$ $>$}}
 \item 
-class \mbox{\hyperlink{classoomph_1_1ElasticSurfaceFluidInterfaceElement}{oomph\+::\+Elastic\+Surface\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classoomph_1_1ElasticSurfaceFluidInterfaceElement}{oomph\+::\+Elastic\+Surface\+Fluid\+Interface\+Element$<$ ELEMENT $>$}}
 \begin{DoxyCompactList}\small\item\em Specialise Elastic update case to the concrete 2D case. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01ElasticUpdateFluidInterfaceElement_3_01FluidInterfaceEleme0e022f57b173f7bea5703185db24e722}{oomph\+::\+Bounding\+Element\+Type$<$ Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1BoundingElementType_3_01ElasticUpdateFluidInterfaceElement_3_01FluidInterfaceEleme0e022f57b173f7bea5703185db24e722}{oomph\+::\+Bounding\+Element\+Type$<$ Elastic\+Update\+Fluid\+Interface\+Element$<$ Fluid\+Interface\+Element, Surface\+Derivatives, ELEMENT $>$ $>$}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
 \end{DoxyCompactItemize}

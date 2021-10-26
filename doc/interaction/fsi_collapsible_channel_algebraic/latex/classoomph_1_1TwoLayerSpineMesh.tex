@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1TwoLayerSpineMesh}{}\doxysection{oomph\+::Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1TwoLayerSpineMesh}{}\doxysection{oomph\+::Two\+Layer\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1TwoLayerSpineMesh}\index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
+
+
+Two-\/layer spine mesh class derived from standard 2D mesh. The mesh contains two layers of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$).  
+
+
 
 
 {\ttfamily \#include $<$two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Two\+Layer\+Spine\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1TwoLayerSpineMesh}
@@ -13,23 +18,23 @@ Inheritance diagram for oomph\+::Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+NT $>
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a0c41a93e9ccaaa34956215e64611be2a}{Two\+Layer\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&ny1, const unsigned \&ny2, const double \&lx, const double \&h1, const double \&h2, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a0c41a93e9ccaaa34956215e64611be2a}{Two\+Layer\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&ny1, const unsigned \&ny2, const double \&lx, const double \&h1, const double \&h2, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a8787a305ee929d001542464529e23787}{Two\+Layer\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&ny1, const unsigned \&ny2, const double \&lx, const double \&h1, const double \&h2, const bool \&periodic\+\_\+in\+\_\+x, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a8787a305ee929d001542464529e23787}{Two\+Layer\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&ny1, const unsigned \&ny2, const double \&lx, const double \&h1, const double \&h2, const bool \&periodic\+\_\+in\+\_\+x, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a374454978976c3873a89bedc688b983f}{Two\+Layer\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&ny1, const unsigned \&ny2, const double \&lx, const double \&h1, const double \&h2, const bool \&periodic\+\_\+in\+\_\+x, const bool \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{build\+\_\+mesh}}, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a374454978976c3873a89bedc688b983f}{Two\+Layer\+Spine\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&ny1, const unsigned \&ny2, const double \&lx, const double \&h1, const double \&h2, const bool \&periodic\+\_\+in\+\_\+x, const bool \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{build\+\_\+mesh}}, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, a boolean flag to specify whether or not to call the \char`\"{}build\+\_\+two\+\_\+layer\+\_\+mesh\char`\"{} function, and pointer to timestepper (defaults to Steady timestepper) \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a0a9287b69d15a8240f6f60ca6fedaf10}{upper\+\_\+layer\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_add891b913c7bd9476e7d98a872e7e4f5}{upper\+\_\+layer\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in upper layer. \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a67efb3349ba853f6b3d9820071419bcf}{lower\+\_\+layer\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a4c196072cee98f491705a61a1380860a}{lower\+\_\+layer\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in bottom layer. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a7d92e162c4fd6e70627982f761d1a66c}{nupper}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements in upper layer. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_acc617bc2ae9ee4c5084c8fb004a0b1a4}{nlower}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements in top layer. \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a917bb7c27c8a8ce6b0187e56d7e3fdbb}{interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a94b35f6fbab447b45b131bf775f5b144}{interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in upper layer. \end{DoxyCompactList}\item 
-Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_aeed4f1db953eff50551434af38ba35d8}{interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}} (const unsigned long \&i)
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a2fe01380398010b156941c4116513bbd}{interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}} (const unsigned long \&i)
 \begin{DoxyCompactList}\small\item\em Access functions for pointers to elements in bottom layer. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_adb5035599cf78ba65e53f7183c98e115}{ninterface\+\_\+upper}} () const
 \begin{DoxyCompactList}\small\item\em Number of elements in upper layer. \end{DoxyCompactList}\item 
@@ -76,17 +81,16 @@ Vector$<$ Finite\+Element $\ast$ $>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpin
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
-Two-\/layer spine mesh class derived from standard 2D mesh. The mesh contains two layers of spinified fluid elements (of type E\+L\+E\+M\+E\+NT; e.\+g Spine\+Element$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$).
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}
+Two-\/layer spine mesh class derived from standard 2D mesh. The mesh contains two layers of spinified fluid elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$). 
 
 This mesh paritions the elements into those above and below a notional interface and relabels boundaries so that the mesh is as follows \hypertarget{classoomph_1_1TwoLayerSpineMesh_autotoc_md5}{}\doxysubsubsection{3}\label{classoomph_1_1TwoLayerSpineMesh_autotoc_md5}
 $\vert$ $\vert$ 4 $\vert$ $\vert$ 2 \hypertarget{classoomph_1_1TwoLayerSpineMesh_autotoc_md6}{}\doxysubsubsection{$\vert$                 6                   $\vert$}\label{classoomph_1_1TwoLayerSpineMesh_autotoc_md6}
 $\vert$ $\vert$ 5 $\vert$ $\vert$ 1 \hypertarget{classoomph_1_1TwoLayerSpineMesh_autotoc_md7}{}\doxysubsubsection{$\vert$                                     $\vert$}\label{classoomph_1_1TwoLayerSpineMesh_autotoc_md7}
 0 Update information for the nodes in response to changes in spine length is given, but additional equations must be specified in order to completely specify the problem. 
 
-Definition at line 59 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00059}{59}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -95,8 +99,8 @@ Definition at line 59 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!TwoLayerSpineMesh@{TwoLayerSpineMesh}}
 \index{TwoLayerSpineMesh@{TwoLayerSpineMesh}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{TwoLayerSpineMesh()}{TwoLayerSpineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{Two\+Layer\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny1,  }\item[{const unsigned \&}]{ny2,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{h1,  }\item[{const double \&}]{h2,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{Two\+Layer\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny1,  }\item[{const unsigned \&}]{ny2,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{h1,  }\item[{const double \&}]{h2,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
 
 
 
@@ -104,20 +108,20 @@ Constructor\+: Pass number of elements in x-\/direction, number of elements in y
 
 Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, and pointer to timestepper (defaults to Static timestepper).
 
-The mesh contains two layers of elements (of type E\+L\+E\+M\+E\+NT; e.\+g Spine\+Element$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ for 2D planar problems. 
+The mesh contains two layers of elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type INTERFACE\+\_\+\+ELEMENT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$ for 2D planar problems. 
 
-Definition at line 49 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00049}{49}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+H1, oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+H2, oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny1, and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny2.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00267}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00207}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H1}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00210}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H2}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00201}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny1}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00204}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny2}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a8787a305ee929d001542464529e23787}\label{classoomph_1_1TwoLayerSpineMesh_a8787a305ee929d001542464529e23787}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!TwoLayerSpineMesh@{TwoLayerSpineMesh}}
 \index{TwoLayerSpineMesh@{TwoLayerSpineMesh}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{TwoLayerSpineMesh()}{TwoLayerSpineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{Two\+Layer\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny1,  }\item[{const unsigned \&}]{ny2,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{h1,  }\item[{const double \&}]{h2,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{Two\+Layer\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny1,  }\item[{const unsigned \&}]{ny2,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{h1,  }\item[{const double \&}]{h2,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
 
 
 
@@ -125,20 +129,20 @@ Constructor\+: Pass number of elements in x-\/direction, number of elements in y
 
 Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, and pointer to timestepper (defaults to Static timestepper).
 
-The mesh contains two layers of elements (of type E\+L\+E\+M\+E\+NT; e.\+g Spine\+Element$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ for 2D planar problems. 
+The mesh contains two layers of elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type INTERFACE\+\_\+\+ELEMENT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$ for 2D planar problems. 
 
-Definition at line 98 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00098}{98}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+H1, oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+H2, oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny1, and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny2.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00267}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00207}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H1}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00210}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H2}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00201}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny1}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00204}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny2}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a374454978976c3873a89bedc688b983f}\label{classoomph_1_1TwoLayerSpineMesh_a374454978976c3873a89bedc688b983f}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!TwoLayerSpineMesh@{TwoLayerSpineMesh}}
 \index{TwoLayerSpineMesh@{TwoLayerSpineMesh}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{TwoLayerSpineMesh()}{TwoLayerSpineMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{Two\+Layer\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny1,  }\item[{const unsigned \&}]{ny2,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{h1,  }\item[{const double \&}]{h2,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{const bool \&}]{build\+\_\+mesh,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{Two\+Layer\+Spine\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny1,  }\item[{const unsigned \&}]{ny2,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{h1,  }\item[{const double \&}]{h2,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{const bool \&}]{build\+\_\+mesh,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})}
 
 
 
@@ -146,13 +150,13 @@ Constructor\+: Pass number of elements in x-\/direction, number of elements in y
 
 Constuctor for spine 2D mesh\+: Pass number of elements in x-\/direction, number of elements in y-\/direction in bottom and top layer, respectively, axial length and height of top and bottom layers, a boolean flag to make the mesh periodic in the x-\/direction, a boolean flag to specify whether or not to call the \char`\"{}build\+\_\+two\+\_\+layer\+\_\+mesh\char`\"{} function, and pointer to timestepper (defaults to Static timestepper).
 
-The mesh contains two layers of elements (of type E\+L\+E\+M\+E\+NT; e.\+g Spine\+Element$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ for 2D planar problems. 
+The mesh contains two layers of elements (of type ELEMENT; e.\+g Spine\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$) and an interfacial layer of corresponding Spine interface elements of type INTERFACE\+\_\+\+ELEMENT, e.\+g. Spine\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$ for 2D planar problems. 
 
-Definition at line 156 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00156}{156}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+H1, oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+H2, oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny1, and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny2.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00043}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00267}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00207}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H1}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00210}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+H2}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00201}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny1}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00204}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Ny2}}.
 
 
 
@@ -161,31 +165,31 @@ References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::buil
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!build\_two\_layer\_mesh@{build\_two\_layer\_mesh}}
 \index{build\_two\_layer\_mesh@{build\_two\_layer\_mesh}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{build\_two\_layer\_mesh()}{build\_two\_layer\_mesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh (\begin{DoxyParamCaption}\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh (\begin{DoxyParamCaption}\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
 Helper function to actually build the two-\/layer spine mesh (called from various constructors) 
 
-Helper function that actually builds the two-\/layer spine mesh based on the parameters set in the various constructors 
+Helper function that actually builds the two-\/layer spine mesh based on the parameters set in the various constructors. 
 
-Definition at line 267 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
-
-
-
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00267}{267}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Two\+Layer\+Spine\+Mesh().
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00043}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
 
-\mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_aeed4f1db953eff50551434af38ba35d8}\label{classoomph_1_1TwoLayerSpineMesh_aeed4f1db953eff50551434af38ba35d8}} 
+
+
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00049}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
+
+\mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a2fe01380398010b156941c4116513bbd}\label{classoomph_1_1TwoLayerSpineMesh_a2fe01380398010b156941c4116513bbd}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!interface\_lower\_boundary\_element\_pt@{interface\_lower\_boundary\_element\_pt}}
 \index{interface\_lower\_boundary\_element\_pt@{interface\_lower\_boundary\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interface\_lower\_boundary\_element\_pt()}{interface\_lower\_boundary\_element\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Finite\+Element$\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -193,18 +197,18 @@ Access functions for pointers to elements in bottom layer.
 
 
 
-Definition at line 141 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00141}{141}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00220}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a441e4c3a46f0ba2210130a59be471e09}\label{classoomph_1_1TwoLayerSpineMesh_a441e4c3a46f0ba2210130a59be471e09}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!interface\_lower\_face\_index\_at\_boundary@{interface\_lower\_face\_index\_at\_boundary}}
 \index{interface\_lower\_face\_index\_at\_boundary@{interface\_lower\_face\_index\_at\_boundary}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interface\_lower\_face\_index\_at\_boundary()}{interface\_lower\_face\_index\_at\_boundary()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::interface\+\_\+lower\+\_\+face\+\_\+index\+\_\+at\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::interface\+\_\+lower\+\_\+face\+\_\+index\+\_\+at\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -212,14 +216,14 @@ Index of the face of the elements next to the interface in the lower region (alw
 
 
 
-Definition at line 167 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00167}{167}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a917bb7c27c8a8ce6b0187e56d7e3fdbb}\label{classoomph_1_1TwoLayerSpineMesh_a917bb7c27c8a8ce6b0187e56d7e3fdbb}} 
+\mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a94b35f6fbab447b45b131bf775f5b144}\label{classoomph_1_1TwoLayerSpineMesh_a94b35f6fbab447b45b131bf775f5b144}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!interface\_upper\_boundary\_element\_pt@{interface\_upper\_boundary\_element\_pt}}
 \index{interface\_upper\_boundary\_element\_pt@{interface\_upper\_boundary\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interface\_upper\_boundary\_element\_pt()}{interface\_upper\_boundary\_element\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Finite\+Element$\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -227,18 +231,18 @@ Access functions for pointers to elements in upper layer.
 
 
 
-Definition at line 135 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00135}{135}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00224}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a2f31c7c1ad05803e296545a0a4210164}\label{classoomph_1_1TwoLayerSpineMesh_a2f31c7c1ad05803e296545a0a4210164}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!interface\_upper\_face\_index\_at\_boundary@{interface\_upper\_face\_index\_at\_boundary}}
 \index{interface\_upper\_face\_index\_at\_boundary@{interface\_upper\_face\_index\_at\_boundary}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interface\_upper\_face\_index\_at\_boundary()}{interface\_upper\_face\_index\_at\_boundary()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-int \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::interface\+\_\+upper\+\_\+face\+\_\+index\+\_\+at\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+int \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::interface\+\_\+upper\+\_\+face\+\_\+index\+\_\+at\+\_\+boundary (\begin{DoxyParamCaption}\item[{const unsigned \&}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -246,14 +250,14 @@ Index of the face of the elements next to the interface in the upper region (alw
 
 
 
-Definition at line 160 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00160}{160}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a67efb3349ba853f6b3d9820071419bcf}\label{classoomph_1_1TwoLayerSpineMesh_a67efb3349ba853f6b3d9820071419bcf}} 
+\mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a4c196072cee98f491705a61a1380860a}\label{classoomph_1_1TwoLayerSpineMesh_a4c196072cee98f491705a61a1380860a}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!lower\_layer\_element\_pt@{lower\_layer\_element\_pt}}
 \index{lower\_layer\_element\_pt@{lower\_layer\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{lower\_layer\_element\_pt()}{lower\_layer\_element\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Finite\+Element$\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -261,18 +265,18 @@ Access functions for pointers to elements in bottom layer.
 
 
 
-Definition at line 117 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00117}{117}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00213}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a5ad10a9a2022a32e2a5f311f789fae51}\label{classoomph_1_1TwoLayerSpineMesh_a5ad10a9a2022a32e2a5f311f789fae51}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!ninterface\_lower@{ninterface\_lower}}
 \index{ninterface\_lower@{ninterface\_lower}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ninterface\_lower()}{ninterface\_lower()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::ninterface\+\_\+lower (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::ninterface\+\_\+lower (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -280,18 +284,18 @@ Number of elements in top layer.
 
 
 
-Definition at line 153 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00153}{153}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00220}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_adb5035599cf78ba65e53f7183c98e115}\label{classoomph_1_1TwoLayerSpineMesh_adb5035599cf78ba65e53f7183c98e115}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!ninterface\_upper@{ninterface\_upper}}
 \index{ninterface\_upper@{ninterface\_upper}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ninterface\_upper()}{ninterface\_upper()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::ninterface\+\_\+upper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::ninterface\+\_\+upper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -299,18 +303,18 @@ Number of elements in upper layer.
 
 
 
-Definition at line 147 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00147}{147}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00224}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_acc617bc2ae9ee4c5084c8fb004a0b1a4}\label{classoomph_1_1TwoLayerSpineMesh_acc617bc2ae9ee4c5084c8fb004a0b1a4}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!nlower@{nlower}}
 \index{nlower@{nlower}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nlower()}{nlower()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nlower (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::nlower (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -318,18 +322,18 @@ Number of elements in top layer.
 
 
 
-Definition at line 129 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00129}{129}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00213}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Lower\+\_\+layer\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a7d92e162c4fd6e70627982f761d1a66c}\label{classoomph_1_1TwoLayerSpineMesh_a7d92e162c4fd6e70627982f761d1a66c}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!nupper@{nupper}}
 \index{nupper@{nupper}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nupper()}{nupper()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nupper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned long \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::nupper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -337,18 +341,18 @@ Number of elements in upper layer.
 
 
 
-Definition at line 123 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00123}{123}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00216}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_ad9b80ae7e34be72ca03f6d1bc6062de4}\label{classoomph_1_1TwoLayerSpineMesh_ad9b80ae7e34be72ca03f6d1bc6062de4}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!spine\_node\_update@{spine\_node\_update}}
 \index{spine\_node\_update@{spine\_node\_update}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update()}{spine\_node\_update()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{Spine\+Node $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update (\begin{DoxyParamCaption}\item[{Spine\+Node $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -356,18 +360,18 @@ General node update function implements pure virtual function defined in Spine\+
 
 
 
-Definition at line 175 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00175}{175}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower(), and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper().
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00242}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00254}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a7973ed642b9adff26bf531c76dade747}\label{classoomph_1_1TwoLayerSpineMesh_a7973ed642b9adff26bf531c76dade747}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!spine\_node\_update\_lower@{spine\_node\_update\_lower}}
 \index{spine\_node\_update\_lower@{spine\_node\_update\_lower}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_lower()}{spine\_node\_update\_lower()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower (\begin{DoxyParamCaption}\item[{Spine\+Node $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower (\begin{DoxyParamCaption}\item[{Spine\+Node $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -375,22 +379,22 @@ Update function for the lower part of the domain.
 
 
 
-Definition at line 242 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00242}{242}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ymin.
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00198}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00075}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymin}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00175}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_adc173b7505ec801a4aa688f97ffe55e0}\label{classoomph_1_1TwoLayerSpineMesh_adc173b7505ec801a4aa688f97ffe55e0}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!spine\_node\_update\_upper@{spine\_node\_update\_upper}}
 \index{spine\_node\_update\_upper@{spine\_node\_update\_upper}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{spine\_node\_update\_upper()}{spine\_node\_update\_upper()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper (\begin{DoxyParamCaption}\item[{Spine\+Node $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper (\begin{DoxyParamCaption}\item[{Spine\+Node $\ast$}]{spine\+\_\+node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -398,22 +402,22 @@ Update function for the upper part of the domain.
 
 
 
-Definition at line 254 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00254}{254}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H, oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ymax, and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ymin.
+References \mbox{\hyperlink{fsi__collapsible__channel_8cc_source_l00198}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00077}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymax}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00075}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymin}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00175}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}.
 
-\mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a0a9287b69d15a8240f6f60ca6fedaf10}\label{classoomph_1_1TwoLayerSpineMesh_a0a9287b69d15a8240f6f60ca6fedaf10}} 
+\mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_add891b913c7bd9476e7d98a872e7e4f5}\label{classoomph_1_1TwoLayerSpineMesh_add891b913c7bd9476e7d98a872e7e4f5}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!upper\_layer\_element\_pt@{upper\_layer\_element\_pt}}
 \index{upper\_layer\_element\_pt@{upper\_layer\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{upper\_layer\_element\_pt()}{upper\_layer\_element\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Finite\+Element$\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Finite\+Element $\ast$\& \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned long \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -421,18 +425,18 @@ Access functions for pointers to elements in upper layer.
 
 
 
-Definition at line 111 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00111}{111}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt.
+References \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00216}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Upper\+\_\+layer\+\_\+element\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a5fd9eae27ba19788e0b397936f0c5ead}\label{classoomph_1_1TwoLayerSpineMesh_a5fd9eae27ba19788e0b397936f0c5ead}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!x\_spacing\_function@{x\_spacing\_function}}
 \index{x\_spacing\_function@{x\_spacing\_function}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{x\_spacing\_function()}{x\_spacing\_function()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::x\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{unsigned}]{xelement,  }\item[{unsigned}]{xnode,  }\item[{unsigned}]{yelement,  }\item[{unsigned}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{unsigned}]{xelement,  }\item[{unsigned}]{xnode,  }\item[{unsigned}]{yelement,  }\item[{unsigned}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -440,18 +444,18 @@ The spacing function for the x co-\/ordinates with two regions.
 
 The spacing function for the x co-\/ordinate, which is the same as the default function. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 211 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00211}{211}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a2d05d5228e3831021ab48dd429ada890}\label{classoomph_1_1TwoLayerSpineMesh_a2d05d5228e3831021ab48dd429ada890}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!y\_spacing\_function@{y\_spacing\_function}}
 \index{y\_spacing\_function@{y\_spacing\_function}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{y\_spacing\_function()}{y\_spacing\_function()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::y\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{unsigned}]{xelement,  }\item[{unsigned}]{xnode,  }\item[{unsigned}]{yelement,  }\item[{unsigned}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::y\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{unsigned}]{xelement,  }\item[{unsigned}]{xnode,  }\item[{unsigned}]{yelement,  }\item[{unsigned}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -459,11 +463,11 @@ The spacing function for the y co-\/ordinates with three regions in each fluid.
 
 The spacing function for the y co-\/ordinates, which splits the region into two regions (1 and 2), according to the heights H1 and H2, with Ny1 and Ny2 elements respectively. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 227 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00227}{227}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+cc}}.
 
 
 
@@ -472,8 +476,8 @@ Definition at line 227 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!H1@{H1}}
 \index{H1@{H1}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{H1}{H1}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::H1\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::H1\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -481,18 +485,18 @@ Height of the lower layer.
 
 
 
-Definition at line 207 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00207}{207}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Two\+Layer\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00049}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a0a7e5f7297ad653440d7d833c89d1b44}\label{classoomph_1_1TwoLayerSpineMesh_a0a7e5f7297ad653440d7d833c89d1b44}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!H2@{H2}}
 \index{H2@{H2}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{H2}{H2}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::H2\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::H2\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -500,18 +504,18 @@ Height of the upper layer.
 
 
 
-Definition at line 210 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00210}{210}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Two\+Layer\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00049}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_aaa5c2ad2f61cd7637b12573265b42bd7}\label{classoomph_1_1TwoLayerSpineMesh_aaa5c2ad2f61cd7637b12573265b42bd7}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Interface\_lower\_boundary\_element\_pt@{Interface\_lower\_boundary\_element\_pt}}
 \index{Interface\_lower\_boundary\_element\_pt@{Interface\_lower\_boundary\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Interface\_lower\_boundary\_element\_pt}{Interface\_lower\_boundary\_element\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::Interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -519,18 +523,18 @@ Vector of pointers to the elements adjacent to the interface on the lower layer.
 
 
 
-Definition at line 220 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00220}{220}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt(), and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ninterface\+\_\+lower().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00141}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::interface\+\_\+lower\+\_\+boundary\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00153}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::ninterface\+\_\+lower()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a1ebfbb343b476e764e3de338e4774d32}\label{classoomph_1_1TwoLayerSpineMesh_a1ebfbb343b476e764e3de338e4774d32}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Interface\_upper\_boundary\_element\_pt@{Interface\_upper\_boundary\_element\_pt}}
 \index{Interface\_upper\_boundary\_element\_pt@{Interface\_upper\_boundary\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Interface\_upper\_boundary\_element\_pt}{Interface\_upper\_boundary\_element\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::Interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -538,18 +542,18 @@ Vector of pointers to the element adjacent to the interface on the upper layer.
 
 
 
-Definition at line 224 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00224}{224}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt(), and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ninterface\+\_\+upper().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00135}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::interface\+\_\+upper\+\_\+boundary\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00147}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::ninterface\+\_\+upper()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a14b79ca1154063be4611c3855a05755f}\label{classoomph_1_1TwoLayerSpineMesh_a14b79ca1154063be4611c3855a05755f}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Lower\_layer\_element\_pt@{Lower\_layer\_element\_pt}}
 \index{Lower\_layer\_element\_pt@{Lower\_layer\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Lower\_layer\_element\_pt}{Lower\_layer\_element\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Lower\+\_\+layer\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::Lower\+\_\+layer\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -557,18 +561,18 @@ Vector of pointers to element in the upper layer.
 
 
 
-Definition at line 213 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00213}{213}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt(), and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nlower().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00117}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::lower\+\_\+layer\+\_\+element\+\_\+pt()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00129}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::nlower()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a614e800b8c5ba2963254e7e41bcfc9e2}\label{classoomph_1_1TwoLayerSpineMesh_a614e800b8c5ba2963254e7e41bcfc9e2}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Ny1@{Ny1}}
 \index{Ny1@{Ny1}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ny1}{Ny1}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ny1\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::Ny1\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -576,18 +580,18 @@ Number of elements in lower layer.
 
 
 
-Definition at line 201 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00201}{201}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Two\+Layer\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00049}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a48a69edc318571675eed16c9154235e3}\label{classoomph_1_1TwoLayerSpineMesh_a48a69edc318571675eed16c9154235e3}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Ny2@{Ny2}}
 \index{Ny2@{Ny2}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ny2}{Ny2}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ny2\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::Ny2\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -595,18 +599,18 @@ Number of elements in upper layer.
 
 
 
-Definition at line 204 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00204}{204}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Two\+Layer\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00049}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoLayerSpineMesh_a0973b44d5a44d36ba5c4c37864259b95}\label{classoomph_1_1TwoLayerSpineMesh_a0973b44d5a44d36ba5c4c37864259b95}} 
 \index{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}!Upper\_layer\_element\_pt@{Upper\_layer\_element\_pt}}
 \index{Upper\_layer\_element\_pt@{Upper\_layer\_element\_pt}!oomph::TwoLayerSpineMesh$<$ ELEMENT $>$@{oomph::TwoLayerSpineMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Upper\_layer\_element\_pt}{Upper\_layer\_element\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Upper\+\_\+layer\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Vector$<$Finite\+Element$\ast$$>$ \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh}{oomph\+::\+Two\+Layer\+Spine\+Mesh}}$<$ ELEMENT $>$\+::Upper\+\_\+layer\+\_\+element\+\_\+pt\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -614,11 +618,11 @@ Vector of pointers to element in the lower layer.
 
 
 
-Definition at line 216 of file two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00216}{216}} of file \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source}{two\+\_\+layer\+\_\+spine\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nupper(), and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt().
+Referenced by \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00123}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::nupper()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00111}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::upper\+\_\+layer\+\_\+element\+\_\+pt()}}.
 
 
 

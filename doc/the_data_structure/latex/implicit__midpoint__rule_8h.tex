@@ -3,14 +3,14 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classoomph_1_1IMRBase}{oomph\+::\+I\+M\+R\+Base}}
+class \mbox{\hyperlink{classoomph_1_1IMRBase}{oomph\+::\+IMRBase}}
 \begin{DoxyCompactList}\small\item\em Implicit midpoint rule base class for the two implementations. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1IMR}{oomph\+::\+I\+MR}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1IMRByBDF}{oomph\+::\+I\+M\+R\+By\+B\+DF}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classoomph_1_1IMR}{oomph\+::\+IMR}}
+\begin{DoxyCompactList}\small\item\em The \char`\"{}real\char`\"{} implementation of the implicit midpoint rule. Implemented by calculation of residuals etc. at half step. This requires non-\/trivial modifications to the element\textquotesingle{}s residual and Jacobian calculation functions to interpolate values to the midpoint. As such \mbox{\hyperlink{classoomph_1_1IMRByBDF}{IMRBy\+BDF}} should be preferred. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1IMRByBDF}{oomph\+::\+IMRBy\+BDF}}
+\begin{DoxyCompactList}\small\item\em Implementation of implicit midpoint rule by taking half a step of bdf1 then applying an update to all dofs. This implementation {\itshape should} work with any existing problem for which the \mbox{\hyperlink{classoomph_1_1BDF}{BDF}} methods work. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}

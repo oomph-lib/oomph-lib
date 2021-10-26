@@ -51,7 +51,7 @@
 namespace oomph
 {
   //============================================================================
-  /// \short face geometry for biharmonic elements - template parameter
+  /// face geometry for biharmonic elements - template parameter
   /// indicates dimension of problem (i.e. bulk element),  not the face elements
   //============================================================================
   template<unsigned DIM>
@@ -59,7 +59,7 @@ namespace oomph
     : public virtual QHermiteElement<DIM - 1>
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional BiharmonicElement
     FaceGeometry() : QHermiteElement<DIM - 1>() {}
   };
@@ -68,7 +68,7 @@ namespace oomph
   class FaceGeometry<BiharmonicElement<1>> : public virtual PointElement
   {
   public:
-    /// \short Constructor: Call the constructor for the
+    /// Constructor: Call the constructor for the
     /// appropriate lower-dimensional BiharmonicElement
     FaceGeometry() : PointElement() {}
   };
@@ -87,13 +87,13 @@ namespace oomph
     /// of the macro element coordinate position (s) along the problem edge
     typedef void (*FluxFctPt)(const double& s, double& flux);
 
-    ///\short constructor
+    /// constructor
     BiharmonicFluxElement(FiniteElement* const& bulk_el_pt,
                           const int& face_index,
                           const unsigned& b);
 
 
-    ///\short  Broken empty constructor
+    /// Broken empty constructor
     BiharmonicFluxElement()
     {
       throw OomphLibError("Don't call empty constructor for PoissonFluxElement",
@@ -103,17 +103,11 @@ namespace oomph
 
 
     /// Broken copy constructor
-    BiharmonicFluxElement(const BiharmonicFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("BiharmonicFluxElement<DIM>");
-    }
+    BiharmonicFluxElement(const BiharmonicFluxElement& dummy) = delete;
 
 
     /// Broken assignment operator
-    void operator=(const BiharmonicFluxElement&)
-    {
-      BrokenCopy::broken_assign("BiharmonicFluxElement<DIM>");
-    }
+    void operator=(const BiharmonicFluxElement&) = delete;
 
     /// Access function for the flux0 function pointer
     FluxFctPt& flux0_fct_pt()
@@ -135,7 +129,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and its
+    /// Add the element's contribution to its residual vector and its
     /// Jacobian matrix (note - no contributions are made to the jacobian)
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -145,7 +139,7 @@ namespace oomph
     }
 
 
-    /// \short Specify the value of nodal zeta from the face geometry
+    /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
@@ -162,7 +156,7 @@ namespace oomph
     void output(std::ostream& outfile) {}
 
 
-    /// \short Output function -- does nothing
+    /// Output function -- does nothing
     void output(std::ostream& outfile, const unsigned& n_plot) {}
 
 
@@ -170,7 +164,7 @@ namespace oomph
     void output(FILE* file_pt) {}
 
 
-    /// \short C-style output function -- does nothing
+    /// C-style output function -- does nothing
     void output(FILE* file_pt, const unsigned& n_plot) {}
 
 
@@ -191,7 +185,7 @@ namespace oomph
     }
 
   private:
-    /// \short Function to return the prescribed flux at a given macro element
+    /// Function to return the prescribed flux at a given macro element
     /// coordinate position
     void get_flux0(const double& s, double& flux)
     {
@@ -207,7 +201,7 @@ namespace oomph
       }
     }
 
-    /// \short Function to return the prescribed flux at a given macro element
+    /// Function to return the prescribed flux at a given macro element
     /// coordinate position
     void get_flux1(const double& s, double& flux)
     {
@@ -223,11 +217,11 @@ namespace oomph
       }
     }
 
-    /// \short Calculate the Jacobian of the mapping between local and global
+    /// Calculate the Jacobian of the mapping between local and global
     /// coordinates at the position s for face elements
     double J_eulerian(const Vector<double>& s) const;
 
-    /// \short Add the element's contribution to its residual vector. Flux
+    /// Add the element's contribution to its residual vector. Flux
     /// elements only make contribution to the residual vector
     void fill_in_generic_residual_contribution_biharmonic_flux(
       Vector<double>& residuals);
@@ -238,11 +232,11 @@ namespace oomph
     /// Function pointer to the prescribed flux
     FluxFctPt Flux1_fct_pt;
 
-    /// \short the number of nodal degrees of freedom for the face element basis
+    /// the number of nodal degrees of freedom for the face element basis
     /// functions
     unsigned Nface_nodal_dof;
 
-    /// \short
+    /// Boundary ID
     unsigned Boundary;
   };
 

@@ -1281,7 +1281,7 @@ namespace oomph
   ///   - Add node to the mesh's stoarge scheme for the boundary nodes.
   ///   - Add the new node to the mesh itself
   ///   - Doc newly created nodes in file "new_nodes.dat" in the directory
-  ////    of the DocInfo object (only if it's open!)
+  /// /    of the DocInfo object (only if it's open!)
   /// - Finally, excute the element-specific further_build()
   ///   (empty by default -- must be overloaded for specific elements).
   ///   This deals with any build operations that are not included

@@ -1,14 +1,14 @@
 In this example we consider our first moving-\/boundary Navier-\/\+Stokes problem\+: The flow of a viscous fluid contained in an elliptical ring whose walls perform periodic oscillations. ~\newline
 
 
-{\ttfamily oomph-\/lib\textquotesingle{}s} Navier-\/\+Stokes elements are based on the Arbitrary Lagrangian Eulerian (A\+LE) form of the Navier-\/\+Stokes equations and can therefore be used in moving domain problems. In this example we illustrate their use in {\ttfamily Domain} -\/ based meshes (first discussed in the example demonstrating the solution of the \href{../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html}{\texttt{ unsteady heat equation in a moving domain}}) in which {\ttfamily Macro\+Elements} are used to update the nodal positions in response to changes in the domain boundary. In subsequent examples, we will discuss alternative, sparse mesh update techniques that are useful in problems with free boundaries and in fluid-\/structure interaction problems.
+{\ttfamily oomph-\/lib\textquotesingle{}s} Navier-\/\+Stokes elements are based on the Arbitrary Lagrangian Eulerian (ALE) form of the Navier-\/\+Stokes equations and can therefore be used in moving domain problems. In this example we illustrate their use in {\ttfamily Domain} -\/ based meshes (first discussed in the example demonstrating the solution of the \href{../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html}{\texttt{ unsteady heat equation in a moving domain}}) in which {\ttfamily Macro\+Elements} are used to update the nodal positions in response to changes in the domain boundary. In subsequent examples, we will discuss alternative, sparse mesh update techniques that are useful in problems with free boundaries and in fluid-\/structure interaction problems.
 
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
 \hline
 \begin{center} {\bfseries{Finite-\/\+Reynolds-\/number-\/flow driven by an oscillating ellipse}} \end{center} 
 
-We consider the unsteady 2D flow of a Newtonian fluid that is contained in an oscillating elliptical ring whose wall shape is parametrised by the Lagrangian coordinate $ \xi $ as \[ {\bf R}_w(\xi) = \left( \begin{array}{l} a(t) \cos(\xi) \\ a^{-1}(t) \sin(\xi) \end{array} \right) \] where \[ a(t) = A + \widehat{A} \cos\left(\frac{2\pi t}{T}\right). \] $ A $ represents the average half-\/axis of the elliptical ring in the $ x_1 $-\/direction, and $ \widehat{A} $ is the amplitude of its periodic variation. The ring has constant cross-\/sectional area -- consistent with the incompressibility of the fluid whose motion is governed by the A\+LE form of the Navier-\/\+Stokes equations, \[ Re\left(St\frac{\partial u_i}{\partial t} + \left(u_j-u_j^M\right)\frac{\partial u_i}{\partial x_j}\right) = - \frac{\partial p}{\partial x_i} + \frac{\partial }{\partial x_j} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \ (1) \] and the continuity equation \[ \frac{\partial u_i}{\partial x_i} = 0, \] where $ u_j^M $ is the mesh velocity. We exploit the symmetry of the problem and solve the equations in the quarter domain \[ D = \left\{(x_1,x_2) \, \bigg| \, x_1\geq0, \, x_2\geq0,\, \left(\frac{x_1}{a(t)}\right)^2 + \big(x_2 \, a(t)\big)^2 \leq 1\right\}, \] shown in this sketch (for $ A=1, \ \widehat{A}=1 $ and $T=1$),  
+We consider the unsteady 2D flow of a Newtonian fluid that is contained in an oscillating elliptical ring whose wall shape is parametrised by the Lagrangian coordinate $ \xi $ as \[ {\bf R}_w(\xi) = \left( \begin{array}{l} a(t) \cos(\xi) \\ a^{-1}(t) \sin(\xi) \end{array} \right) \] where \[ a(t) = A + \widehat{A} \cos\left(\frac{2\pi t}{T}\right). \] $ A $ represents the average half-\/axis of the elliptical ring in the $ x_1 $-\/direction, and $ \widehat{A} $ is the amplitude of its periodic variation. The ring has constant cross-\/sectional area -- consistent with the incompressibility of the fluid whose motion is governed by the ALE form of the Navier-\/\+Stokes equations, \[ Re\left(St\frac{\partial u_i}{\partial t} + \left(u_j-u_j^M\right)\frac{\partial u_i}{\partial x_j}\right) = - \frac{\partial p}{\partial x_i} + \frac{\partial }{\partial x_j} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \ (1) \] and the continuity equation \[ \frac{\partial u_i}{\partial x_i} = 0, \] where $ u_j^M $ is the mesh velocity. We exploit the symmetry of the problem and solve the equations in the quarter domain \[ D = \left\{(x_1,x_2) \, \bigg| \, x_1\geq0, \, x_2\geq0,\, \left(\frac{x_1}{a(t)}\right)^2 + \big(x_2 \, a(t)\big)^2 \leq 1\right\}, \] shown in this sketch (for $ A=1, \ \widehat{A}=1 $ and $T=1$),  
 \begin{DoxyImage}
 \includegraphics[width=0.75\textwidth]{wall}
 \doxyfigcaption{Sketch of the computational domain. }
@@ -50,17 +50,17 @@ As usual, we represent the moving wall as a {\ttfamily Geom\+Object} and define 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_MyEllipse===========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Oscillating ellipse}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ x = (A + \(\backslash\)widehat\{A\} \(\backslash\)cos(2\(\backslash\)pi t/T)) \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// \(\backslash\)f[ y = \(\backslash\)frac\{\(\backslash\)sin(\(\backslash\)xi)\}\{A + \(\backslash\)widehat\{A\} \(\backslash\)cos(2\(\backslash\)pi t/T)\}   \(\backslash\)f]}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Note that cross-\/sectional area is conserved.}}
+\DoxyCodeLine{\textcolor{comment}{/// Oscillating ellipse}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ x = (A + \(\backslash\)widehat\{A\} \(\backslash\)cos(2\(\backslash\)pi t/T)) \(\backslash\)cos(\(\backslash\)xi)  \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)f[ y = \(\backslash\)frac\{\(\backslash\)sin(\(\backslash\)xi)\}\{A + \(\backslash\)widehat\{A\} \(\backslash\)cos(2\(\backslash\)pi t/T)\}   \(\backslash\)f]}}
+\DoxyCodeLine{\textcolor{comment}{/// Note that cross-\/sectional area is conserved.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMyEllipse}{MyEllipse}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor:  Pass initial x-\/half axis, amplitude of x-\/variation, }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor:  Pass initial x-\/half axis, amplitude of x-\/variation, }}
 \DoxyCodeLine{\textcolor{comment}{ /// period of oscillation and pointer to time object.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classMyEllipse_a6d780f1f450d99e175842e88a3079069}{MyEllipse}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& a, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& a\_hat,}
 \DoxyCodeLine{           \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& period, Time* time\_pt) : }
@@ -69,7 +69,7 @@ As usual, we represent the moving wall as a {\ttfamily Geom\+Object} and define 
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor: Empty}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classMyEllipse_ac2f2d3fb269c57fb26b4db6d9a0c7c05}{\string~MyEllipse}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Current position vector to material point at }}
+\DoxyCodeLine{\textcolor{comment}{ /// Current position vector to material point at }}
 \DoxyCodeLine{\textcolor{comment}{ /// Lagrangian coordinate xi }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyEllipse_a7b139a2f4564005773c83325f2414e3e}{position}}(\textcolor{keyword}{const} Vector<double>\& xi, Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
@@ -82,14 +82,14 @@ As usual, we represent the moving wall as a {\ttfamily Geom\+Object} and define 
 \DoxyCodeLine{   r[1] = (1.0/axis)*sin(xi[0]);}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Parametrised position on object: r(xi). Evaluated at}}
+\DoxyCodeLine{\textcolor{comment}{ /// Parametrised position on object: r(xi). Evaluated at}}
 \DoxyCodeLine{\textcolor{comment}{ /// previous time level. t=0: current time; t>0: previous}}
 \DoxyCodeLine{\textcolor{comment}{ /// time level.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyEllipse_a7b139a2f4564005773c83325f2414e3e}{position}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}, \textcolor{keyword}{const} Vector<double>\& xi,}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classMyEllipse_a7b139a2f4564005773c83325f2414e3e}{position}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, \textcolor{keyword}{const} Vector<double>\& xi,}
 \DoxyCodeLine{               Vector<double>\& r)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{  }\{}
 \DoxyCodeLine{   \textcolor{comment}{// Get current time:}}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} time=\mbox{\hyperlink{classMyEllipse_abc1c4c863a599ce87bdff1abb9971953}{Time\_pt}}-\/>time(\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}});}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} time=\mbox{\hyperlink{classMyEllipse_abc1c4c863a599ce87bdff1abb9971953}{Time\_pt}}-\/>time(t);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Position vector}}
 \DoxyCodeLine{   \textcolor{keywordtype}{double} axis=\mbox{\hyperlink{classMyEllipse_aa2a0efd0a39f9d4fc307a6ff011682ed}{A}}+\mbox{\hyperlink{classMyEllipse_a653e71cf296cdc86cc595d16f18004dd}{A\_hat}}*cos(2.0*MathematicalConstants::Pi*time/\mbox{\hyperlink{classMyEllipse_ab098069ab23bbbd8f30b0da3523dc87f}{T}});}
@@ -114,9 +114,7 @@ As usual, we represent the moving wall as a {\ttfamily Geom\+Object} and define 
 \DoxyCodeLine{\}; \textcolor{comment}{// end of MyEllipse}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_namespace}{}\doxysection{The global parameters}\label{index_namespace}
 As in most previous examples, we use a namespace to define and initialise global problem parameters such as the Reynolds and Strouhal numbers\+:
@@ -125,7 +123,7 @@ As in most previous examples, we use a namespace to define and initialise global
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namepspace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -136,9 +134,7 @@ As in most previous examples, we use a namespace to define and initialise global
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}}=100.0;}
 
 \end{DoxyCodeInclude}
-
-
-We also define and initialise the parameters that specify the motion of the domain boundary and specify the exact solution.
+ We also define and initialise the parameters that specify the motion of the domain boundary and specify the exact solution.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -153,16 +149,16 @@ We also define and initialise the parameters that specify the motion of the doma
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}=1.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Exact solution of the problem as a vector containing u,v,p}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af29d0fbf7264555610176a1fc931591a}{get\_exact\_u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}, \textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af29d0fbf7264555610176a1fc931591a}{get\_exact\_u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& t, \textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{keyword}{using namespace }MathematicalConstants;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Strouhal number}}
-\DoxyCodeLine{  \textcolor{keywordtype}{double} St = \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}}/\mbox{\hyperlink{osc__ellipse_8txt_a79beac6c46e99b17b2f5888955340d22}{Re}};}
+\DoxyCodeLine{  \textcolor{keywordtype}{double} St = \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}{ReSt}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Half axis}}
-\DoxyCodeLine{  \textcolor{keywordtype}{double} a=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}}+\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}});}
-\DoxyCodeLine{  \textcolor{keywordtype}{double} adot=-\/2.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*Pi*sin(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}; }
+\DoxyCodeLine{  \textcolor{keywordtype}{double} a=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}}+\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}});}
+\DoxyCodeLine{  \textcolor{keywordtype}{double} adot=-\/2.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*Pi*sin(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}; }
 \DoxyCodeLine{  u.resize(3);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Velocity solution}}
@@ -170,23 +166,21 @@ We also define and initialise the parameters that specify the motion of the doma
 \DoxyCodeLine{  u[1]=-\/adot*x[1]/a;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Pressure solution}}
-\DoxyCodeLine{  u[2]=(2.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*Pi*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a79beac6c46e99b17b2f5888955340d22}{Re}}*(x[0]*x[0]*St*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}} + }
+\DoxyCodeLine{  u[2]=(2.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*Pi*Pi*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}*(x[0]*x[0]*St*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}} + }
 \DoxyCodeLine{                            x[0]*x[0]*St*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}} -\/ x[0]*x[0]*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}} +}
-\DoxyCodeLine{                            x[0]*x[0]*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}) -\/}
-\DoxyCodeLine{                            x[1]*x[1]*St*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}} -\/ }
+\DoxyCodeLine{                            x[0]*x[0]*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}) -\/}
+\DoxyCodeLine{                            x[1]*x[1]*St*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}} -\/ }
 \DoxyCodeLine{                            x[1]*x[1]*St*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}} -\/ x[1]*x[1]*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}} +}
-\DoxyCodeLine{                            x[1]*x[1]*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}) ))}
-\DoxyCodeLine{   /(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}*(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}} + 2.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}) + }
-\DoxyCodeLine{          \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*cos(2.0*Pi*\mbox{\hyperlink{osc__ellipse_8txt_a5fc28b29793f1ed1f3836062cfa4ff79}{t}}/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}) ));}
+\DoxyCodeLine{                            x[1]*x[1]*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}) ))}
+\DoxyCodeLine{   /(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}*(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}} + 2.0*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a4894f9a3a9cbf84f00d0719f2841e624}{A}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}) + }
+\DoxyCodeLine{          \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a11d1e77201d6b8c250c4c9396fc5ad06}{A\_hat}}*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}})*cos(2.0*Pi*t/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1a806ee7c4d04d6afaba1d24d94dceea}{T}}) ));}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 As in most previous unsteady demo codes, we allow the code to be run in a validation mode (in which we use a coarser mesh and execute fewer timesteps). This mode is selected by specifying an (arbitrary) command line argument that we store in the namespace {\ttfamily Command\+Line\+Args}.
@@ -194,9 +188,9 @@ As in most previous unsteady demo codes, we allow the code to be run in a valida
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_main=================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady Navier-\/Stokes flow, driven by}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// oscillating ellipse. If the code is executed with command line}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// arguments, a validation run is performed. }}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code for unsteady Navier-\/Stokes flow, driven by}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// oscillating ellipse. If the code is executed with command line}}
+\DoxyCodeLine{\textcolor{comment}{/// arguments, a validation run is performed. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{osc__quarter__ellipse_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -205,9 +199,7 @@ As in most previous unsteady demo codes, we allow the code to be run in a valida
 \DoxyCodeLine{ CommandLineArgs::setup(argc,argv);}
 
 \end{DoxyCodeInclude}
-
-
-We create a {\ttfamily Doc\+Info} object to specify the output directory, build the problem with adaptive Crouzeix-\/\+Raviart elements and the {\ttfamily B\+D\+F$<$2$>$} timestepper and perform the unsteady simulation.
+ We create a {\ttfamily Doc\+Info} object to specify the output directory, build the problem with adaptive Crouzeix-\/\+Raviart elements and the {\ttfamily BDF$<$2$>$} timestepper and perform the unsteady simulation.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -217,19 +209,17 @@ We create a {\ttfamily Doc\+Info} object to specify the output directory, build 
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Create DocInfo object with suitable directory name for output}}
 \DoxyCodeLine{  DocInfo doc\_info;}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_CR"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_CR"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Set up problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classOscEllipseProblem}{OscEllipseProblem<RefineableQCrouzeixRaviartElement<2>}},BDF<2> > \mbox{\hyperlink{osc__ellipse_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classOscEllipseProblem}{OscEllipseProblem<RefineableQCrouzeixRaviartElement<2>}},BDF<2> > problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Run the unsteady simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{osc__ellipse_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.unsteady\_run(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classOscEllipseProblem_ad0d879edbbd8b09b61e802ab66ef98a3}{unsteady\_run}}(doc\_info);}
 \DoxyCodeLine{ \}}
 
 \end{DoxyCodeInclude}
-
-
-Then we repeat this process for adaptive Taylor-\/\+Hood elements.
+ Then we repeat this process for adaptive Taylor-\/\+Hood elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -238,22 +228,20 @@ Then we repeat this process for adaptive Taylor-\/\+Hood elements.
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Create DocInfo object with suitable directory name for output}}
 \DoxyCodeLine{  DocInfo doc\_info;}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_TH"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classOscEllipseProblem}{OscEllipseProblem<RefineableQTaylorHoodElement<2>}},BDF<2> > \mbox{\hyperlink{osc__ellipse_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}};}
+\DoxyCodeLine{  \mbox{\hyperlink{classOscEllipseProblem}{OscEllipseProblem<RefineableQTaylorHoodElement<2>}},BDF<2> > problem;}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Run the unsteady simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{osc__ellipse_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.unsteady\_run(doc\_info);}
+\DoxyCodeLine{  problem.\mbox{\hyperlink{classOscEllipseProblem_ad0d879edbbd8b09b61e802ab66ef98a3}{unsteady\_run}}(doc\_info);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 Most of the problem class is a straightforward combination of the problem classes employed in the simulation of \href{../../driven_cavity/html/index.html}{\texttt{ the adaptive driven cavity }} and \href{../../rayleigh_channel/html/index.html}{\texttt{ Rayleigh channel }} problems, in that the problem combines unsteadiness with spatial adaptivity (though in the present problem the adaptivity is only used to uniformly refine the very coarse base mesh; we refer to {\itshape {\bfseries{another example}}} for the use of full spatial adaptivity in a moving-\/domain Navier-\/\+Stokes problem).
@@ -262,7 +250,7 @@ Most of the problem class is a straightforward combination of the problem classe
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_problem\_class=========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Navier-\/Stokes problem in an oscillating ellipse domain.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classOscEllipseProblem}{OscEllipseProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -278,7 +266,7 @@ Most of the problem class is a straightforward combination of the problem classe
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscEllipseProblem_a268e14b24e3ac922e7362bbb37ccde1f}{actions\_after\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update problem specs before solve (empty)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update problem specs before solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classOscEllipseProblem_a18bbd70aa8c140637637053a5f839c11}{actions\_before\_newton\_solve}}() \{\} }
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt (empty)}}
@@ -307,7 +295,7 @@ The key new feature in the current problem is the presence of the moving domain 
 \begin{DoxyEnumerate}
 \item all nodal positions
 \item the prescribed velocities on the moving wall via the no-\/slip condition.
-\end{DoxyEnumerate}before every timestep. Since the nodal positions of the {\ttfamily Quarter\+Circle\+Sector\+Mesh} are determined via its {\ttfamily Macro\+Element} / {\ttfamily Domain} representation (which updates the nodal position in response to changes in the geometry of the {\ttfamily Geom\+Objects} that define its boundaries), the former task may be accomplished by executing the {\ttfamily Mesh\+::node\+\_\+update()} function; the update of the no-\/slip condition may be performed by calling the function {\ttfamily F\+S\+I\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(\+Node$\ast$ node\+\_\+pt)}, a helper function, defined in the namespace {\ttfamily F\+S\+I\+\_\+functions}, which updates the velocity components $ u_1, u_2 [, u_3] $ according to the no-\/slip boundary condition \[ {\bf u}_{Node} = \frac{\partial {\bf x}_{Node}}{\partial t} \] where the time-\/derivative of the nodal positions is evaluated by the {\ttfamily Node\textquotesingle{}s} positional timestepper. \mbox{[}{\bfseries{Note\+:}} The function {\ttfamily F\+S\+I\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(...)} assumes that the velocity components are stored in the {\ttfamily Node\textquotesingle{}s} first 2 \mbox{[}3\mbox{]} values. This is consistent with the storage of the velocity component in all existing Navier-\/\+Stokes elements. If you develop your own Navier-\/\+Stokes elements and use a different storage scheme you use this function at your own risk.\mbox{]}
+\end{DoxyEnumerate}before every timestep. Since the nodal positions of the {\ttfamily Quarter\+Circle\+Sector\+Mesh} are determined via its {\ttfamily Macro\+Element} / {\ttfamily Domain} representation (which updates the nodal position in response to changes in the geometry of the {\ttfamily Geom\+Objects} that define its boundaries), the former task may be accomplished by executing the {\ttfamily Mesh\+::node\+\_\+update()} function; the update of the no-\/slip condition may be performed by calling the function {\ttfamily FSI\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(\+Node$\ast$ node\+\_\+pt)}, a helper function, defined in the namespace {\ttfamily FSI\+\_\+functions}, which updates the velocity components $ u_1, u_2 [, u_3] $ according to the no-\/slip boundary condition \[ {\bf u}_{Node} = \frac{\partial {\bf x}_{Node}}{\partial t} \] where the time-\/derivative of the nodal positions is evaluated by the {\ttfamily Node\textquotesingle{}s} positional timestepper. \mbox{[}{\bfseries{Note\+:}} The function {\ttfamily FSI\+\_\+functions\+::apply\+\_\+no\+\_\+slip\+\_\+on\+\_\+moving\+\_\+wall(...)} assumes that the velocity components are stored in the {\ttfamily Node\textquotesingle{}s} first 2 \mbox{[}3\mbox{]} values. This is consistent with the storage of the velocity component in all existing Navier-\/\+Stokes elements. If you develop your own Navier-\/\+Stokes elements and use a different storage scheme you use this function at your own risk.\mbox{]}
 
 Here is the implementation of these tasks\+:
 
@@ -315,7 +303,7 @@ Here is the implementation of these tasks\+:
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before next timestep}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before next timestep}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_implicit\_timestep()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Update the domain shape}}
@@ -339,9 +327,7 @@ Here is the implementation of these tasks\+:
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_implicit\_timestep()\{\}}
 
 \end{DoxyCodeInclude}
-
-
-The remaining functions are similar to those used in our previous Navier-\/\+Stokes examples and require no further explanation.
+ The remaining functions are similar to those used in our previous Navier-\/\+Stokes examples and require no further explanation.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -352,12 +338,12 @@ The remaining functions are similar to those used in our previous Navier-\/\+Sto
 \DoxyCodeLine{\textcolor{comment}{ /// Timestepping loop}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} unsteady\_run(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set initial condition}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set initial condition}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_initial\_condition();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Fix pressure in element e at pressure dof pdof and set to pvalue}}
+\DoxyCodeLine{\textcolor{comment}{ /// Fix pressure in element e at pressure dof pdof and set to pvalue}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fix\_pressure(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&e, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&pdof, }
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&pvalue)}
 \DoxyCodeLine{  \{}
@@ -372,9 +358,7 @@ The remaining functions are similar to those used in our previous Navier-\/\+Sto
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem\_class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 We start by creating a timestepper of the type specified by the {\ttfamily Problem\textquotesingle{}s} template parameter and add (a pointer to) it to the {\ttfamily Problem\textquotesingle{}s} collection of {\ttfamily Timesteppers}. Recall that this function also creates the {\ttfamily Problem\textquotesingle{}s} {\ttfamily Time} object.
@@ -395,9 +379,7 @@ We start by creating a timestepper of the type specified by the {\ttfamily Probl
 \DoxyCodeLine{ add\_time\_stepper\_pt(\textcolor{keyword}{new} TIMESTEPPER);}
 
 \end{DoxyCodeInclude}
-
-
-Next we create the {\ttfamily Geom\+Object} that defines the curvilinear domain boundary and pass it to the Mesh constructor. (Since we will only use adaptivity to refine the mesh uniformly, it is not necessary to define an error estimator.)
+ Next we create the {\ttfamily Geom\+Object} that defines the curvilinear domain boundary and pass it to the Mesh constructor. (Since we will only use adaptivity to refine the mesh uniformly, it is not necessary to define an error estimator.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -438,9 +420,7 @@ Next we create the {\ttfamily Geom\+Object} that defines the curvilinear domain 
 \DoxyCodeLine{ \textcolor{comment}{//mesh\_pt()-\/>spatial\_error\_estimator\_pt()=error\_estimator\_pt;}}
 
 \end{DoxyCodeInclude}
-
-
-Both velocity components on the curvilinear mesh boundary are determined by the no-\/slip condition and must therefore be pinned,
+ Both velocity components on the curvilinear mesh boundary are determined by the no-\/slip condition and must therefore be pinned,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -465,9 +445,7 @@ Both velocity components on the curvilinear mesh boundary are determined by the 
 \DoxyCodeLine{ \} \textcolor{comment}{// end boundary 1}}
 
 \end{DoxyCodeInclude}
-
-
-whereas on the symmetry boundaries only one of the two velocity components is set to zero\+:
+ whereas on the symmetry boundaries only one of the two velocity components is set to zero\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -498,9 +476,7 @@ whereas on the symmetry boundaries only one of the two velocity components is se
 \DoxyCodeLine{ \} \textcolor{comment}{// end boundary 2}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we pass the pointers to $ Re $, $ Re \ St $ and the global {\ttfamily Time} object (automatically created by the {\ttfamily Problem} when the timestepper was passed to it at the beginning of the constructor) to the elements, pin the redundant nodal pressure degrees of freedom (see the discussion of the \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ adaptive driven-\/cavity problem}} for more details), pin one pressure degree of freedom, and set up the equation numbering scheme.
+ Finally, we pass the pointers to $ Re $, $ Re \ St $ and the global {\ttfamily Time} object (automatically created by the {\ttfamily Problem} when the timestepper was passed to it at the beginning of the constructor) to the elements, pin the redundant nodal pressure degrees of freedom (see the discussion of the \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ adaptive driven-\/cavity problem}} for more details), pin one pressure degree of freedom, and set up the equation numbering scheme.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -532,14 +508,12 @@ Finally, we pass the pointers to $ Re $, $ Re \ St $ and the global {\ttfamily T
 \DoxyCodeLine{ fix\_pressure(0,0,0.0);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_IC}{}\doxysection{Assigning the initial conditions}\label{index_IC}
 This function assigns \char`\"{}history values\char`\"{} for the velocities and the nodal positions from the exact solution. It is implemented in exactly the same way as in the solution of the \href{../../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html\#IC}{\texttt{ unsteady heat equation in a moving domain}}. Note that because the domain is moving, the nodal positions must be updated (according to the position of the domain boundary at the relevant previous timestep), before evaluating the exact solution at the nodal position.
@@ -547,8 +521,8 @@ This function assigns \char`\"{}history values\char`\"{} for the velocities and 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_set\_initial\_condition====================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set initial condition: Assign previous and current values}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from exact solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOscEllipseProblem_ae638f238a7b0e0acb5d6087b7363fe01}{OscEllipseProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
@@ -585,7 +559,7 @@ This function assigns \char`\"{}history values\char`\"{} for the velocities and 
 \DoxyCodeLine{   \textcolor{comment}{// to continous time )}}
 \DoxyCodeLine{   time\_pt()-\/>time()=time;}
 \DoxyCodeLine{   }
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"setting IC at time ="} << time << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}setting IC at time ="{}} << time << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Update the mesh for this value of the continuous time}}
 \DoxyCodeLine{   \textcolor{comment}{// (The wall object reads the continous time from the }}
@@ -620,9 +594,7 @@ This function assigns \char`\"{}history values\char`\"{} for the velocities and 
 \DoxyCodeLine{\} \textcolor{comment}{// end of set\_initial\_condition}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post processing}\label{index_doc}
 The function {\ttfamily doc\+\_\+solution(...)} is similar to that in the \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#doc}{\texttt{ unsteady heat examples }} and the previous Navier-\/\+Stokes examples. We add dummy zones and tecplot geometries to facilitate the post-\/processing of the results with tecplot.
@@ -631,7 +603,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to that in the \href{
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_doc\_solution============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOscEllipseProblem_afca2cc3e3e64ac764323f232cacc7e3b}{OscEllipseProblem<ELEMENT,TIMESTEPPER>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -644,36 +616,36 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to that in the \href{
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"time = "} }
-\DoxyCodeLine{           << time\_pt()-\/>time() << \textcolor{stringliteral}{"\(\backslash\)""};}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"1"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"2"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{" 0 0"} << std::endl;}
-\DoxyCodeLine{ some\_file << time\_pt()-\/>time()*20.0 << \textcolor{stringliteral}{" 0"} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"{}time = "{}} }
+\DoxyCodeLine{           << time\_pt()-\/>time() << \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}1"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}2"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{} 0 0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << time\_pt()-\/>time()*20.0 << \textcolor{stringliteral}{"{} 0"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write dummy zones that force tecplot to keep the axis limits constant}}
 \DoxyCodeLine{ \textcolor{comment}{// while the domain is moving.}}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"ZONE I=2,J=2"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"0.0 0.0 -\/0.65 -\/0.65 -\/200.0"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"1.15 0.0 -\/0.65 -\/0.65 -\/200.0"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"0.0 1.15 -\/0.65 -\/0.65 -\/200.0"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"1.15 1.15 -\/0.65 -\/0.65 -\/200.0"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"ZONE I=2,J=2"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"0.0 0.0 0.65 0.65 300.0"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"1.15 0.0 0.65 0.65 300.0"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"0.0 1.15 0.65 0.65 300.0"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"1.15 1.15 0.65 0.65 300.0"} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}ZONE I=2,J=2"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}0.0 0.0 -\/0.65 -\/0.65 -\/200.0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}1.15 0.0 -\/0.65 -\/0.65 -\/200.0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}0.0 1.15 -\/0.65 -\/0.65 -\/200.0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}1.15 1.15 -\/0.65 -\/0.65 -\/200.0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}ZONE I=2,J=2"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}0.0 0.0 0.65 0.65 300.0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}1.15 0.0 0.65 0.65 300.0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}0.0 1.15 0.65 0.65 300.0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}1.15 1.15 0.65 0.65 300.0"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_fct(some\_file,npts,time\_pt()-\/>time(),}
@@ -683,7 +655,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to that in the \href{
 \DoxyCodeLine{ \textcolor{comment}{// Doc error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>compute\_error(some\_file,}
@@ -695,13 +667,13 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to that in the \href{
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc solution and error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"error: "} << error << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"norm : "} << norm << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}error: "{}} << error << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}norm : "{}} << norm << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Plot wall posn}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/Wall\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/Wall\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ }
@@ -711,7 +683,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to that in the \href{
 \DoxyCodeLine{   Vector<double> xi\_wall(1), r\_wall(2);}
 \DoxyCodeLine{   xi\_wall[0]=0.5*MathematicalConstants::Pi*double(iplot)/double(nplot-\/1);}
 \DoxyCodeLine{   Wall\_pt-\/>position(xi\_wall,r\_wall);}
-\DoxyCodeLine{   some\_file << r\_wall[0] << \textcolor{stringliteral}{" "} << r\_wall[1] << std::endl;}
+\DoxyCodeLine{   some\_file << r\_wall[0] << \textcolor{stringliteral}{"{} "{}} << r\_wall[1] << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{ }
@@ -721,9 +693,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to that in the \href{
 \DoxyCodeLine{\} \textcolor{comment}{// end of doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_unsteady_run}{}\doxysection{The timestepping loop}\label{index_unsteady_run}
 The timestepping loop is extremely straightforward\+: We choose a timestep and the overall length of the simulation, initialise the timestepper(s) by calling {\ttfamily Problem\+::initialise\+\_\+dt(...)} and assign the initial condition.
@@ -732,7 +702,7 @@ The timestepping loop is extremely straightforward\+: We choose a timestep and t
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_unsteady\_run============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unsteady run}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classOscEllipseProblem_ad0d879edbbd8b09b61e802ab66ef98a3}{OscEllipseProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}
@@ -750,9 +720,7 @@ The timestepping loop is extremely straightforward\+: We choose a timestep and t
 \DoxyCodeLine{ set\_initial\_condition();}
 
 \end{DoxyCodeInclude}
-
-
-Next we set the number of timesteps for a normal run.
+ Next we set the number of timesteps for a normal run.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -764,9 +732,7 @@ Next we set the number of timesteps for a normal run.
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep = unsigned(t\_max/dt);}
 
 \end{DoxyCodeInclude}
-
-
-We over-\/write this number and perform a single uniform mesh refinement if the code is run in self-\/test mode (indicated by a non-\/zero number of command line arguments),
+ We over-\/write this number and perform a single uniform mesh refinement if the code is run in self-\/test mode (indicated by a non-\/zero number of command line arguments),
 
 
 \begin{DoxyCodeInclude}{0}
@@ -777,13 +743,11 @@ We over-\/write this number and perform a single uniform mesh refinement if the 
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   nstep=2;}
 \DoxyCodeLine{   refine\_uniformly();}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"validation run"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}validation run"{}} << std::endl;}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-otherwise we refine the mesh three times and output the initial conditions
+ otherwise we refine the mesh three times and output the initial conditions
 
 
 \begin{DoxyCodeInclude}{0}
@@ -800,9 +764,7 @@ otherwise we refine the mesh three times and output the initial conditions
 \DoxyCodeLine{ doc\_solution(doc\_info);}
 
 \end{DoxyCodeInclude}
-
-
-Finally we execute the proper timestepping loop and document the solution after every timestep
+ Finally we execute the proper timestepping loop and document the solution after every timestep
 
 
 \begin{DoxyCodeInclude}{0}
@@ -810,8 +772,8 @@ Finally we execute the proper timestepping loop and document the solution after 
 \DoxyCodeLine{ \textcolor{comment}{// Timestepping loop}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"TIMESTEP "} << istep << std::endl;}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Time is now "} << time\_pt()-\/>time() << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}TIMESTEP "{}} << istep << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Time is now "{}} << time\_pt()-\/>time() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Take timestep }}
 \DoxyCodeLine{   unsteady\_newton\_solve(dt);}
@@ -823,16 +785,14 @@ Finally we execute the proper timestepping loop and document the solution after 
 \DoxyCodeLine{\} \textcolor{comment}{// end of unsteady\_run}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 
 \begin{DoxyEnumerate}
 \item Compare the results of the numerical simulation in which $ {\bf u}_{IC} $ is given by the exact solution (an unsteady stagnation point flow) to that obtained from an \char`\"{}impulsive start\char`\"{} where $ {\bf u}_{IC} = {\bf 0}. $ (This is most easily implemented by replacing the call to {\ttfamily set\+\_\+initial\+\_\+condition()} with a call to {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()}. ~\newline
  ~\newline
- Why do we obtain the same velocity with both initial conditions and why does the pressure take a few timesteps (How many exactly? Compare simulations with {\ttfamily B\+D\+F$<$4$>$} and {\ttfamily B\+D\+F$<$2$>$} timesteppers.) to \char`\"{}catch up\char`\"{} with the exact solution? \mbox{[}Hint\+: The unsteady stagnation point flow is a potential flow, therefore the viscous terms in the Navier-\/\+Stokes equations disappear. See also chapter 3.\+19 in Volume 2 of Gresho \& Sani\textquotesingle{}s wonderful book \char`\"{}\+Incompressible Flow and the Finite Element Method\char`\"{}.\mbox{]}
+ Why do we obtain the same velocity with both initial conditions and why does the pressure take a few timesteps (How many exactly? Compare simulations with {\ttfamily BDF$<$4$>$} and {\ttfamily BDF$<$2$>$} timesteppers.) to \char`\"{}catch up\char`\"{} with the exact solution? \mbox{[}Hint\+: The unsteady stagnation point flow is a potential flow, therefore the viscous terms in the Navier-\/\+Stokes equations disappear. See also chapter 3.\+19 in Volume 2 of Gresho \& Sani\textquotesingle{}s wonderful book \char`\"{}\+Incompressible Flow and the Finite Element Method\char`\"{}.\mbox{]}
 \end{DoxyEnumerate}
 
 \DoxyHorRuler{0}
@@ -846,5 +806,5 @@ Finally we execute the proper timestepping loop and document the solution after 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

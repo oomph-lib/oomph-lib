@@ -1,10 +1,10 @@
-\hypertarget{classoomph_1_1DGMesh}{}\doxysection{oomph\+::D\+G\+Mesh Class Reference}
+\hypertarget{classoomph_1_1DGMesh}{}\doxysection{oomph\+::DGMesh Class Reference}
 \label{classoomph_1_1DGMesh}\index{oomph::DGMesh@{oomph::DGMesh}}
 
 
 {\ttfamily \#include $<$dg\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::D\+G\+Mesh\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::DGMesh\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1DGMesh}
@@ -13,14 +13,14 @@ Inheritance diagram for oomph\+::D\+G\+Mesh\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1DGMesh_a6c55e53bed6291fcc188aad8a594c026}{D\+G\+Mesh}} ()
+\mbox{\hyperlink{classoomph_1_1DGMesh_a6c55e53bed6291fcc188aad8a594c026}{DGMesh}} ()
 \item 
-virtual \mbox{\hyperlink{classoomph_1_1DGMesh_a26cbcb2fb7d9546ce3c6c4b382b162cd}{$\sim$\+D\+G\+Mesh}} ()
+virtual \mbox{\hyperlink{classoomph_1_1DGMesh_a26cbcb2fb7d9546ce3c6c4b382b162cd}{$\sim$\+DGMesh}} ()
 \item 
 virtual void \mbox{\hyperlink{classoomph_1_1DGMesh_a87c47885b2e96fe1559b269686ebb7b7}{neighbour\+\_\+finder}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+element\+\_\+pt, const int \&face\+\_\+index, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+bulk, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&face\+\_\+element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&s\+\_\+face)
 \item 
 void \mbox{\hyperlink{classoomph_1_1DGMesh_ac8839d6d15a037536217b84e32dd2ae3}{setup\+\_\+face\+\_\+neighbour\+\_\+info}} (const bool \&add\+\_\+face\+\_\+data\+\_\+as\+\_\+external=false)
-\item 
+\begin{DoxyCompactList}\small\item\em If the boolean flag is set to true then the data from neighbouring faces will be added as external data to the bulk element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1DGMesh_a0fd53356d91d991a8ad68e8a6ceb3860}{limit\+\_\+slopes}} (\mbox{\hyperlink{classoomph_1_1SlopeLimiter}{Slope\+Limiter}} $\ast$const \&slope\+\_\+limiter\+\_\+pt)
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
@@ -34,7 +34,7 @@ static double \mbox{\hyperlink{classoomph_1_1DGMesh_ad130d7e5d2778f37cc032633b73
 \doxysubsection{Detailed Description}
 
 
-Definition at line 461 of file dg\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00461}{461}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
 
 
 
@@ -43,21 +43,21 @@ Definition at line 461 of file dg\+\_\+elements.\+h.
 \index{oomph::DGMesh@{oomph::DGMesh}!DGMesh@{DGMesh}}
 \index{DGMesh@{DGMesh}!oomph::DGMesh@{oomph::DGMesh}}
 \doxysubsubsection{\texorpdfstring{DGMesh()}{DGMesh()}}
-{\footnotesize\ttfamily oomph\+::\+D\+G\+Mesh\+::\+D\+G\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+DGMesh\+::\+DGMesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 466 of file dg\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00466}{466}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGMesh_a26cbcb2fb7d9546ce3c6c4b382b162cd}\label{classoomph_1_1DGMesh_a26cbcb2fb7d9546ce3c6c4b382b162cd}} 
 \index{oomph::DGMesh@{oomph::DGMesh}!````~DGMesh@{$\sim$DGMesh}}
 \index{````~DGMesh@{$\sim$DGMesh}!oomph::DGMesh@{oomph::DGMesh}}
 \doxysubsubsection{\texorpdfstring{$\sim$DGMesh()}{~DGMesh()}}
-{\footnotesize\ttfamily virtual oomph\+::\+D\+G\+Mesh\+::$\sim$\+D\+G\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+DGMesh\+::$\sim$\+DGMesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 468 of file dg\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00468}{468}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
 
 
 
@@ -66,47 +66,55 @@ Definition at line 468 of file dg\+\_\+elements.\+h.
 \index{oomph::DGMesh@{oomph::DGMesh}!limit\_slopes@{limit\_slopes}}
 \index{limit\_slopes@{limit\_slopes}!oomph::DGMesh@{oomph::DGMesh}}
 \doxysubsubsection{\texorpdfstring{limit\_slopes()}{limit\_slopes()}}
-{\footnotesize\ttfamily void oomph\+::\+D\+G\+Mesh\+::limit\+\_\+slopes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SlopeLimiter}{Slope\+Limiter}} $\ast$const \&}]{slope\+\_\+limiter\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+DGMesh\+::limit\+\_\+slopes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1SlopeLimiter}{Slope\+Limiter}} $\ast$const \&}]{slope\+\_\+limiter\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 502 of file dg\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00502}{502}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
 
 
 
-References e, oomph\+::\+Mesh\+::element\+\_\+pt(), and oomph\+::\+Mesh\+::nelement().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, and \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGMesh_a87c47885b2e96fe1559b269686ebb7b7}\label{classoomph_1_1DGMesh_a87c47885b2e96fe1559b269686ebb7b7}} 
 \index{oomph::DGMesh@{oomph::DGMesh}!neighbour\_finder@{neighbour\_finder}}
 \index{neighbour\_finder@{neighbour\_finder}!oomph::DGMesh@{oomph::DGMesh}}
 \doxysubsubsection{\texorpdfstring{neighbour\_finder()}{neighbour\_finder()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+D\+G\+Mesh\+::neighbour\+\_\+finder (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+bulk,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&}]{face\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+face }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+DGMesh\+::neighbour\+\_\+finder (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+bulk,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$\&}]{face\+\_\+element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s\+\_\+face }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 470 of file dg\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00470}{470}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 
-Referenced by oomph\+::\+D\+G\+Element\+::get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate().
+Referenced by \mbox{\hyperlink{dg__elements_8cc_source_l00675}{oomph\+::\+DGElement\+::get\+\_\+neighbouring\+\_\+face\+\_\+and\+\_\+local\+\_\+coordinate()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGMesh_ac8839d6d15a037536217b84e32dd2ae3}\label{classoomph_1_1DGMesh_ac8839d6d15a037536217b84e32dd2ae3}} 
 \index{oomph::DGMesh@{oomph::DGMesh}!setup\_face\_neighbour\_info@{setup\_face\_neighbour\_info}}
 \index{setup\_face\_neighbour\_info@{setup\_face\_neighbour\_info}!oomph::DGMesh@{oomph::DGMesh}}
 \doxysubsubsection{\texorpdfstring{setup\_face\_neighbour\_info()}{setup\_face\_neighbour\_info()}}
-{\footnotesize\ttfamily void oomph\+::\+D\+G\+Mesh\+::setup\+\_\+face\+\_\+neighbour\+\_\+info (\begin{DoxyParamCaption}\item[{const bool \&}]{add\+\_\+face\+\_\+data\+\_\+as\+\_\+external = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+DGMesh\+::setup\+\_\+face\+\_\+neighbour\+\_\+info (\begin{DoxyParamCaption}\item[{const bool \&}]{add\+\_\+face\+\_\+data\+\_\+as\+\_\+external = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 If the boolean flag is set to true then the data from neighbouring faces will be added as external data to the bulk element. 
 
-Definition at line 489 of file dg\+\_\+elements.\+h.
+
+
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00489}{489}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
 
 
 
-References e, oomph\+::\+Mesh\+::element\+\_\+pt(), and oomph\+::\+Mesh\+::nelement().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{dg__elements_8h_source_l00489}{setup\+\_\+face\+\_\+neighbour\+\_\+info()}}.
+
+
+
+Referenced by \mbox{\hyperlink{dg__elements_8h_source_l00489}{setup\+\_\+face\+\_\+neighbour\+\_\+info()}}.
 
 
 
@@ -115,11 +123,11 @@ References e, oomph\+::\+Mesh\+::element\+\_\+pt(), and oomph\+::\+Mesh\+::nelem
 \index{oomph::DGMesh@{oomph::DGMesh}!FaceTolerance@{FaceTolerance}}
 \index{FaceTolerance@{FaceTolerance}!oomph::DGMesh@{oomph::DGMesh}}
 \doxysubsubsection{\texorpdfstring{FaceTolerance}{FaceTolerance}}
-{\footnotesize\ttfamily double oomph\+::\+D\+G\+Mesh\+::\+Face\+Tolerance = 1.\+0e-\/10\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily double oomph\+::\+DGMesh\+::\+Face\+Tolerance = 1.\+0e-\/10\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Definition at line 464 of file dg\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{dg__elements_8h_source_l00464}{464}} of file \mbox{\hyperlink{dg__elements_8h_source}{dg\+\_\+elements.\+h}}.
 
 
 

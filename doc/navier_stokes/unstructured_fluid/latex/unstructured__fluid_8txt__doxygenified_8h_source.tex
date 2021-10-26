@@ -1,0 +1,453 @@
+\hypertarget{unstructured__fluid_8txt__doxygenified_8h_source}{}\doxysection{unstructured\+\_\+fluid.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{unstructured__fluid_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: Fluid Mechanics on unstructured meshes}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{This tutorial provides another quick demonstration of how to use}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{unstructured meshes for the solution of fluid flow problems.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{(The <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig </a>/}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{<A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{</A> <a href="{}../../../meshes/mesh\_from\_xfig/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{tutorial</a> already contains 2D and 3D unstructured fluid examples.)}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{The specific problem considered here serves as a "{}warm-\/up problem"{} for the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{<a href="{}../../../interaction/unstructured\_fsi/html/index.html"{}>corresponding }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{fluid-\/structure interaction problem</a> in which the part of the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{domain boundary is replaced by an elastic object.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{\(\backslash\)section problem The problem }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{Here is a sketch of the problem: Flow is driven through a 2D channel }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{that is partly obstructed by an odd-\/shaped obstacle. The flow}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{is driven by the imposed Poiseuille flow at the upstream end of}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{the channel. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{\(\backslash\)image html fluid\_sketch.gif "{}Sketch of the problem. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{\(\backslash\)image latex fluid\_sketch.eps "{}Sketch of the problem. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{\(\backslash\)section mesh Mesh generation}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{We use the combination of <A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A>,}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{\(\backslash\)c oomph-\/lib's conversion code }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{<a href="{}../../../meshes/mesh\_from\_xfig/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)c fig2poly </a>, and the unstructured}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{mesh generator }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{<A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{</A> to generate the mesh, using the procedure discussed in }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{<a href="{}../../../meshes/mesh\_from\_xfig/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{another tutorial.</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{We start by drawing the outline of the fluid domain as a polyline in}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{<A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A>:}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{\(\backslash\)image html xfig\_screenshot.gif "{}xfig drawing of the fluid body. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{\(\backslash\)image latex xfig\_screenshot.eps "{}xfig drawing of the fluid body. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{(Note that we draw the domain upside-\/down because of the way }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{<A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig</A> orients its coordinate axes.)}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{We save the figure as a *.fig file and convert it to a *.poly file}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{using \(\backslash\)c oomph-\/lib's conversion code }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{<a href="{}../../../meshes/mesh\_from\_xfig/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{\(\backslash\)c fig2poly </a> (a copy of which is}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{located in \(\backslash\)c oomph-\/lib's \(\backslash\)c bin directory): }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{fig2poly fluid.fig }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{This creates a file called \(\backslash\)c fluid.fig.poly that can be processed}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{using Triangle. For instance, to create a quality mesh with a maximum}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{element size of 0.03 we use}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{triangle -\/q -\/a0.03 fluid.fig.poly}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{Here is a plot of the mesh, generated by \(\backslash\)c showme }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{distributed with }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{<A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{</A>:}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{\(\backslash\)image html showme\_screenshot.gif "{}Visualisation of the mesh with showme. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{\(\backslash\)image latex showme\_screenshot.eps "{}Visualisation of the mesh with showme. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{The <CODE> *.poly, *.ele </CODE> and <CODE> *.node </CODE>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{files generated by }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{<A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{</A> can now be used as input to \(\backslash\)c oomph-\/lib's }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)c TriangleMesh class.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{The animation shown below illustrates the flow field (streamlines and}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{pressure contours) for Reynolds numbers of \(\backslash\)f\$ Re=0, 5, 10, ... \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{An increase in Reynolds number increases the length}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{of the recirculation region behind the obstacle; furthermore,}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{the sharp corner at the "{}leading edge"{} of the obstacle creates}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{very low pressures just downstream of the corner. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{\(\backslash\)image html stream.gif "{}Flowfield (streamlines and pressure contours) at various Reynolds numbers. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{\(\backslash\)image latex stream.eps "{}Flowfield (streamlines and pressure contours) at various Reynolds numbers. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)section mesh\_code Creating the mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{In anticipation of the mesh's use in a fluid-\/structure interaction}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{problem, we create the mesh by multiple inheritance from \(\backslash\)c oomph-\/lib's }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)c TriangleMesh and the \(\backslash\)c SolidMesh base class. This will allow}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{us to use pseudo-\/solid node-\/update techniques to update the position}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{of the fluid nodes in response to changes in the domain boundary. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{In the present problem, the "{}elasticity"{} of the fluid elements}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{plays no useful role; see \(\backslash\)ref comm\_ex for instructions on how to }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{remove the pseudo-\/elasticity from the problem.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_two\_d\_fluid.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\)skipline start\_mesh}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{\(\backslash\)until \{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{The constructor calls the constructor of the underlying }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{\(\backslash\)c TriangleMesh, and, as usual, sets the Lagrangian coordinates}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{to the current nodal positions, making the current configuration}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{stress-\/free.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{The \(\backslash\)c TriangleMesh constructor associates each polyline in the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{\(\backslash\)c xfig drawing with a distinct \(\backslash\)c oomph-\/lib mesh boundary. Hence}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{the boundary nodes are initially located on the same, single boundary.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{The boundary conditions can be more easily applied if the boundary is}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{divided into three boundaries, which is the task of the function}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{\(\backslash\)c TriangleMesh::identify\_boundaries().}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{We first allocate storage for three boundaries:}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)until set\_nboundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{We loop over all nodes in the mesh and identify nodes on the left}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{(inflow) boundary by their x-\/coordinate. We remove the node}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{from the boundary 0 and re-\/allocate it to the new boundary 1:}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{Similarly, we identify all nodes on the right (outflow) boundary and}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{re-\/assign them to boundary 2, before re-\/generating the various boundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{lookup schemes that identify which elements are located next}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{to the various mesh boundaries:}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{\(\backslash\)section namespace Problem Parameters}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{As usual we define the various problem parameters in a }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{global namespace. We define the Reynolds number and }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{prepare a pointer to a constitutive equation (for the pseudo-\/elastic}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{elements).}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)skipline start\_namespace}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{\(\backslash\)until end\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{We specify an output directory and instantiate a constitutive }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{equation for the pseudo-\/elasticity, specifying the Poisson ratio.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_two\_d\_fluid.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{\(\backslash\)until Nu);}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{We create the \(\backslash\)c Problem object and output the domain boundaries}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{and the initial guess for the flow field.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{\(\backslash\)skipline Build}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{\(\backslash\)until ()++}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{Finally, we perform a straightforward parameter study by}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{slowly increasing the Reynolds number of the flow from zero.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{\(\backslash\)until end\_of\_parameter\_study}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)section class The Problem class}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{The \(\backslash\)c Problem class has the usual member functions and provides}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{explicit storage for the fluid mesh. [This is again slight overkill}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{for the problem at hand, and is done mainly in anticipation of }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{the "{}upgrade"{} of this driver code to }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{<a href="{}../../../interaction/unstructured\_fsi/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{the FSI problem</a> with its }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{multiple meshes; in the present problem we could, of course, store the }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{pointer to the problem's one-\/and-\/only mesh directly in }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{\(\backslash\)c Problem::mesh\_pt(). ] }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{\(\backslash\)dontinclude unstructured\_two\_d\_fluid.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{\(\backslash\)section constructor The Problem constructor}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{We start by building the fluid mesh, using the files created}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{by <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{</A>.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{\(\backslash\)skipline start\_constructor}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{\(\backslash\)until fluid\_poly\_file\_name);}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{Next, we apply the boundary conditions for the fluid and the }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{pseudo-\/solid equations using the function \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{set\_boundary\_conditions(), which also completes the build of the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{elements by setting the appropriate pointers to the physical}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{variables.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{\(\backslash\)until set\_boundary\_conditions()}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{We add the fluid mesh as a single sub-\/mesh to the \(\backslash\)c Problem and build}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{the global mesh (see the comment in \(\backslash\)ref class .)}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{\(\backslash\)until build\_global}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{Finally, we assign the equation numbers}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{\(\backslash\)until end\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{\(\backslash\)section bound Setting the boundary conditions}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{We pin the pseudo-\/solid nodes along}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{all domain boundaries, apply a no-\/slip condition for the fluid velocity }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{along the solid boundary  (boundary 0), pin the velocity at the inflow}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{(boundary 1, where we will impose a Poiseuille flow profile), and impose}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{parallel outflow at the downstream end (boundary 2). }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{Given that the manual identification of}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{mesh boundaries in unstructured meshes that are generated by}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{third-\/party mesh generators is a relatively error-\/prone process, we}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{document the boundary conditions in three separate files to allow }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{an external sanity check; see}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{<a href="{}../../../solid/unstructured\_solid/html/index.html\#comm\_ex"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{the comments in the corresponding solid mechanics tutorial.</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{The \(\backslash\)ref comm\_ex section of the present tutorial also has a sub-\/section }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{that illustrates what can go wrong. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{\(\backslash\)until solid\_bc\_file.close();}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{We complete the build of the elements by specifying}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{the Reynolds number and the constitutive equation for the pseudo-\/solid}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{equations. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{Finally, we impose a Poiseuille profile at the inflow boundary (boundary}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{1).}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{\(\backslash\)until end\_of\_set\_boundary\_conditions}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{The post-\/processing routine outputs the flow field.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{\(\backslash\)until end\_of\_doc}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{\(\backslash\)section comm\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{\(\backslash\)subsection reynolds What is the Reynolds number?}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{The problem considered here is  a "{}toy"{}-\/problem, devised}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{to illustrate the use of unstructured meshes in fluids problems.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{The specific non-\/dimensionalisation and parameter values are therefore}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{of secondary importance. However, since \(\backslash\)c oomph-\/lib's implementation}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{of the Navier-\/Stokes equations is based on their non-\/dimensional form}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{it is important to clarify the meaning of the Reynolds number }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{in the present problem. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{<a href="{}../../driven\_cavity/html/index.html\#equation"{}>Recall</a> }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{that the Reynolds number is defined as }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{Re = \(\backslash\)frac\{\(\backslash\)rho \{\(\backslash\)cal U\} \{\(\backslash\)cal L\}\}\{\(\backslash\)mu\}}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)rho \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)mu \(\backslash\)f\$ are the fluid density and viscosity,}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{respectively.  \(\backslash\)f\$ \{\(\backslash\)cal L\} \(\backslash\)f\$ is the reference length chosen for the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{non-\/dimensionalisation of the coordinates. In the present problem,}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{where the domain boundaries were simply drawn in }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{<A HREF="{}http://en.wikipedia.org/wiki/Xfig"{}>xfig </a>, no specific reference}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{length was identified, but inspection of the maximum and minimum }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{y-\/coordinates of the inflow boundary in the mesh plot }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{shows that the inflow boundary has a (dimensional) length }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{of \(\backslash\)f\$ (4.0875 -\/ 0.1125) \{\(\backslash\)cal L\} = 3.975 \{\(\backslash\)cal L\}. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{In the non-\/dimensional version of the Navier-\/Stokes equations, all }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{velocities are non-\/dimensionalised with a reference velocity}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)cal U\} \(\backslash\)f\$. When we applied the inflow boundary conditions,}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{we chose the (dimensionless) inflow profile such that its }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{integral over the inflow boundary yields a value of 1. The velocity }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{scale \(\backslash\)f\$ \{\(\backslash\)cal U\} \(\backslash\)f\$ may therefore be interpreted as }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{a (dimensional) average inflow velocity through the channel, i.e. the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{volume flux divided by the reference length scale.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{\(\backslash\)subsection bound Identification/assignment of mesh boundaries}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{We wish to re-\/iterate the comments made in the }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{<a href="{}../../../solid/unstructured\_solid/html/index.html\#comm\_ex"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{corresponding solid mechanics tutorial</a> that the manual }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{identification of nodes on domain boundaries is tedious and }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{therefore error prone. It pays off to <B>be  as a paranoid }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{as possible</B>, by always documenting the domain boundaries and the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{applied boundary conditions. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{ Here is the plot of boundary conditions applied in the present}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{problem. Hollow blue markers indicate (pseudo-\/)solid boundary conditions}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{(both displacements are pinned); small red markers identify nodes}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{where the vertical fluid velocity is pinned; hollow green markers (filling}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{the space between the blue and red lines markers) identify nodes at}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{which the horizontal fluid velocity is pinned. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{\(\backslash\)image html bcs.gif "{}Plot of the correct boundary conditions. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{\(\backslash\)image latex bcs.eps "{}Plot of the correct boundary conditions. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{Here is another plot, obtained with the initial version of }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{our driver code -\/-\/ can you spot what's wrong and can you}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{identify the lines were added to the mesh constructor to }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{fix the problem? }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{\(\backslash\)image html bcs\_wrong.gif "{}Plot of the wrong boundary conditions. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{\(\backslash\)image latex bcs\_wrong.eps "{}Plot of the wrong boundary conditions. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{\(\backslash\)subsection pseudo\_elast Pseudo-\/elasticity}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{As mentioned above, the elements' pseudo-\/elasticity plays no useful}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{role in the present problem, as the domain boundaries remain}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{at fixed positions and no mesh movement is required. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{-\/ As an exercise, remove all functionality related to the }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{  pseudo-\/elasticity by changing the element type from}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{  \(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{  PseudoSolidNodeUpdateElement<TTaylorHoodElement<2>,TPVDElement<2,3> >}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{  \(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{  to}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{  \(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{  TTaylorHoodElement<2>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{  \(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{  Adjust the code as required (e.g. remove mesh's inheritance from the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{  \(\backslash\)c SolidMesh base class; remove the application of boundary conditions}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{  for the nodal positions; etc) and confirm that the results}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{  for the flow field remain unchanged.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{-\/ Alternatively, the pseudo-\/elasticity can can be suppressed by }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{  pinning all nodal positions, drastically reducing the number}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{  of degrees of freedom in the problem without the need to }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{  rewrite the rest of the code. (Note that this is also a useful}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{  test for the development of FSI codes.)}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{-\/ However, if the pseudo-\/elastic capabilities are retained}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{  the fluid mesh can indeed deform as an elastic}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{  body; for example, by specifying a (solid mechanics) body force. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{  Simply follow the steps used in }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{  <a href="{}../../../solid/unstructured\_solid/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{  the corresponding solid mechanics problem.</a> Define the body}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{  force in the namespace \(\backslash\)c Global\_Physical\_Variables}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{  and pass a (function-\/)pointer to it }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{  to the elements. N.B. }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{  The body force for the (pseudo-\/)solid equations must be specified explicitly}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{  because  the Navier-\/Stokes equations have their own body force}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{  pointer! The compiler will complain about ambiguities in the following code: }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{  \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{  \(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{  [...]}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{   //Set the body force}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{   el\_pt-\/>body\_force\_fct\_pt() = Global\_Physical\_Variables::gravity;}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{  [...]  }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{  \(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{  Instead, we must be more specific by writing}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{  \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{  \(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{  [...]}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{   //Set the body force}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{   el\_pt-\/>PVDEquationsBase<2>::body\_force\_fct\_pt() = }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{    Global\_Physical\_Variables::gravity;}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{  [...]   }}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{  \(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{   indicating that it is the body force defined in the}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{  2D solid mechanics equations that is being specified.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/unstructured\_fluid/"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{demo\_drivers/navier\_stokes/unstructured\_fluid/}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/unstructured\_fluid/unstructured\_two\_d\_fluid.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{demo\_drivers/navier\_stokes/unstructured\_fluid/unstructured\_two\_d\_fluid.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{unstructured__fluid_8txt__doxygenified_8h_source_l00448}00448 }
+
+\end{DoxyCode}

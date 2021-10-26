@@ -37,7 +37,7 @@ Here is a plot of the domain specified by \href{../../../../demo_drivers/solid/u
 \end{DoxyImage}
 
 
-Note that we have deliberately assigned a different boundary ID to each facet. This will make the assignment of the traction boundary condition somewhat tedious as the inner surface of the vessel (where the traction is to be applied) is represented by twelve separate mesh boundaries. However, the assignment of distinct boundary I\+Ds for the different facets is essential for the automatic generation of boundary coordinates in the \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ corresponding fluid-\/structure interaction problem }} and is therefore {\bfseries{strongly recommended}}.
+Note that we have deliberately assigned a different boundary ID to each facet. This will make the assignment of the traction boundary condition somewhat tedious as the inner surface of the vessel (where the traction is to be applied) is represented by twelve separate mesh boundaries. However, the assignment of distinct boundary IDs for the different facets is essential for the automatic generation of boundary coordinates in the \href{../../../interaction/unstructured_three_d_fsi/html/index.html}{\texttt{ corresponding fluid-\/structure interaction problem }} and is therefore {\bfseries{strongly recommended}}.
 
 \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily Tetgen} }} generates an unstructured volumetric mesh from the information contained in the {\ttfamily $\ast$.poly} file and writes the mesh\textquotesingle{}s nodes, elements and faces in the files
 \begin{DoxyItemize}
@@ -49,6 +49,7 @@ Note that we have deliberately assigned a different boundary ID to each facet. T
 The figure below shows a {\ttfamily tetview} plot of the mesh, created with a volume constraint of 0.\+2 (i.\+e. the maximum volume of each tetrahedron is guaranteed to be less than 0.\+2 units), using the command 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{tetgen -\/a0.2 fsi\_bifurcation\_solid.poly }
+
 \end{DoxyCode}
 
 
@@ -59,7 +60,7 @@ The figure below shows a {\ttfamily tetview} plot of the mesh, created with a vo
 \end{DoxyImage}
 
 
-Note how \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} has subdivided each of the 27 original facets specified in the {\ttfamily $\ast$.poly} file into a surface triangulation. The nodes and tetrahedral elements that are located on (or adjacent to) the 27 original facets inherit their boundary I\+Ds. This will be important when we assign the boundary conditions.
+Note how \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} has subdivided each of the 27 original facets specified in the {\ttfamily $\ast$.poly} file into a surface triangulation. The nodes and tetrahedral elements that are located on (or adjacent to) the 27 original facets inherit their boundary IDs. This will be important when we assign the boundary conditions.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -70,16 +71,14 @@ We create the solid mesh by multiple inheritance from {\ttfamily oomph-\/lib\tex
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======================start\_mesh========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Tetgen-\/based mesh upgraded to become a solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh}} : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TetgenMesh<ELEMENT>, }
 \DoxyCodeLine{                       \textcolor{keyword}{public} \textcolor{keyword}{virtual} SolidMesh }
 \DoxyCodeLine{\{}
 
 \end{DoxyCodeInclude}
-
-
-The constructor calls the constructor of the underlying {\ttfamily Tetgen\+Mesh} (using the {\ttfamily $\ast$.node } {\ttfamily $\ast$.ele} and {\ttfamily $\ast$.face} files created by \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen}. }} As usual we set the nodes\textquotesingle{} Lagrangian coordinates to their current Eulerian positions, making the current configuration stress-\/free.
+ The constructor calls the constructor of the underlying {\ttfamily Tetgen\+Mesh} (using the {\ttfamily $\ast$.node } {\ttfamily $\ast$.ele} and {\ttfamily $\ast$.face} files created by \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen}. }} As usual we set the nodes\textquotesingle{} Lagrangian coordinates to their current Eulerian positions, making the current configuration stress-\/free.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -99,9 +98,7 @@ The constructor calls the constructor of the underlying {\ttfamily Tetgen\+Mesh}
 \DoxyCodeLine{   set\_lagrangian\_nodal\_coordinates();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we identify the elements that are located next to the various mesh boundaries to facilitate the application of the traction boundary conditions.
+ Finally, we identify the elements that are located next to the various mesh boundaries to facilitate the application of the traction boundary conditions.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -111,15 +108,13 @@ Finally, we identify the elements that are located next to the various mesh boun
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Empty Destructor}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \string~\mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh}}() \{ \}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classMySolidTetgenMesh}{\string~MySolidTetgenMesh}}() \{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_namespace}{}\doxysection{Problem parameters}\label{index_namespace}
 As usual, we define the various problem parameters in a global namespace. We use {\ttfamily oomph-\/lib\textquotesingle{}s} generalised Hookean constitutive law as the constitutive equation, using a Poisson\textquotesingle{}s ratio of 0.\+3. (\href{../../solid_theory/html/index.html\#non-dim_solid}{\texttt{ Recall}} that omitting the specification of Young\textquotesingle{}s modulus, $ E $, implies that the stresses are non-\/dimensionalised on $ E $ .)
@@ -128,7 +123,7 @@ As usual, we define the various problem parameters in a global namespace. We use
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -139,9 +134,7 @@ As usual, we define the various problem parameters in a global namespace. We use
 \DoxyCodeLine{\textcolor{comment}{} ConstitutiveLaw* \mbox{\hyperlink{namespaceGlobal__Parameters_adbd1f040f375c96fe56b3f475f7dbec2}{Constitutive\_law\_pt}}=\textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Nu}});}
 
 \end{DoxyCodeInclude}
-
-
-Next we define the gravitational body force which acts in the negative $x$-\/direction,
+ Next we define the gravitational body force which acts in the negative $x$-\/direction,
 
 
 \begin{DoxyCodeInclude}{0}
@@ -160,9 +153,7 @@ Next we define the gravitational body force which acts in the negative $x$-\/dir
 \DoxyCodeLine{ \} \textcolor{comment}{// end gravity}}
 
 \end{DoxyCodeInclude}
-
-
-and the pressure load, $ {\bf t} = -P {\bf n} $, that acts on internal walls of the bifurcation (note that the outer unit normal $ {\bf n} $ on the wall is passed to the function).
+ and the pressure load, $ {\bf t} = -P {\bf n} $, that acts on internal walls of the bifurcation (note that the outer unit normal $ {\bf n} $ on the wall is passed to the function).
 
 
 \begin{DoxyCodeInclude}{0}
@@ -170,7 +161,7 @@ and the pressure load, $ {\bf t} = -P {\bf n} $, that acts on internal walls of 
 \DoxyCodeLine{\textcolor{comment}{ /// Uniform pressure}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}} = 0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constant pressure load. The arguments to this function are imposed}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constant pressure load. The arguments to this function are imposed}}
 \DoxyCodeLine{\textcolor{comment}{ /// on us by the SolidTractionElements which allow the traction to }}
 \DoxyCodeLine{\textcolor{comment}{ /// depend on the Lagrangian and Eulerian coordinates x and xi, and on the }}
 \DoxyCodeLine{\textcolor{comment}{ /// outer unit normal to the surface. Here we only need the outer unit}}
@@ -189,9 +180,7 @@ and the pressure load, $ {\bf t} = -P {\bf n} $, that acts on internal walls of 
 \DoxyCodeLine{\} \textcolor{comment}{//end namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 The driver code is straightforward. We store the command line arguments, specify an output directory and create the problem object, using ten-\/noded tetrahedral solid mechanics elements to discretise the principle of virtual displacements.
@@ -200,7 +189,7 @@ The driver code is straightforward. We store the command line arguments, specify
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============================start\_main==================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Demonstrate how to solve an unstructured 3D solid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{unstructured__three__d__solid_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -210,21 +199,19 @@ The driver code is straightforward. We store the command line arguments, specify
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem}}
-\DoxyCodeLine{ \mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem<TPVDElement<3,3>}} > \mbox{\hyperlink{unstructured__three__d__solid_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{ \mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem<TPVDElement<3,3>}} > problem;}
 
 \end{DoxyCodeInclude}
-
-
-We output the initial configuration and then perform a parameter study in which we increment the gravitational body force and the pressure loads simultaneously, causing the vessel to expand and sag, as shown in the animation at the beginning of this tutorial. (As usual we perform a smaller number of steps if the code is run in self-\/test mode; this is indicated by a non-\/zero number of command line arguments.)
+ We output the initial configuration and then perform a parameter study in which we increment the gravitational body force and the pressure loads simultaneously, causing the vessel to expand and sag, as shown in the animation at the beginning of this tutorial. (As usual we perform a smaller number of steps if the code is run in self-\/test mode; this is indicated by a non-\/zero number of command line arguments.)
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Output initial configuration}}
-\DoxyCodeLine{ \mbox{\hyperlink{unstructured__three__d__solid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{ problem.\mbox{\hyperlink{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{ doc\_info.number()++;   }
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Parameter study}}
@@ -235,7 +222,7 @@ We output the initial configuration and then perform a parameter study in which 
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep=6;}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::Argc!=1)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"Validation -\/-\/ only doing two steps"} << std::endl;}
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}Validation -\/-\/ only doing two steps"{}} << std::endl;}
 \DoxyCodeLine{   nstep=2;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
@@ -243,10 +230,10 @@ We output the initial configuration and then perform a parameter study in which 
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{   \mbox{\hyperlink{unstructured__three__d__solid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve();}
+\DoxyCodeLine{   problem.newton\_solve();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{unstructured__three__d__solid_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{   problem.\mbox{\hyperlink{classUnstructuredSolidProblem_ab3d66fd61b69d12b4f159d763fc44f15}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{   doc\_info.number()++;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Bump up load}}
@@ -269,9 +256,9 @@ The {\ttfamily Problem} class has the usual member functions, and provides stora
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_problem===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem}} : \textcolor{keyword}{public} \mbox{\hyperlink{unstructured__three__d__solid_8txt_a369f11bc5cf9fc0b3069a6f53624f7e2}{Problem}}}
+\DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classUnstructuredSolidProblem}{UnstructuredSolidProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
@@ -299,8 +286,7 @@ The {\ttfamily Problem} class has the usual member functions, and provides stora
 \end{DoxyCodeInclude}
 
 
-The two vectors {\ttfamily Pinned\+\_\+solid\+\_\+boundary\+\_\+id} and {\ttfamily Solid\+\_\+traction\+\_\+boundary\+\_\+id} are used to store the I\+Ds of mesh boundaries that make up the in-\/ and outflow cross-\/sections (where the bifurcation is pinned), and the internal boundaries (where the pressure load has to be applied). Recall that {\ttfamily tetgen} requires the domain boundaries to be specified as a collection of planar facets. Boundary of interest in the computation, such as the \char`\"{}internal boundary of the
-bifurcation\char`\"{}, therefore tend to comprise multiple distinct mesh boundaries.
+The two vectors {\ttfamily Pinned\+\_\+solid\+\_\+boundary\+\_\+id} and {\ttfamily Solid\+\_\+traction\+\_\+boundary\+\_\+id} are used to store the IDs of mesh boundaries that make up the in-\/ and outflow cross-\/sections (where the bifurcation is pinned), and the internal boundaries (where the pressure load has to be applied). Recall that {\ttfamily tetgen} requires the domain boundaries to be specified as a collection of planar facets. Boundary of interest in the computation, such as the \char`\"{}internal boundary of the bifurcation\char`\"{}, therefore tend to comprise multiple distinct mesh boundaries.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -308,7 +294,7 @@ bifurcation\char`\"{}, therefore tend to comprise multiple distinct mesh boundar
 \DoxyCodeLine{\textcolor{comment}{ /// IDs of solid mesh boundaries where displacements are pinned}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> Pinned\_solid\_boundary\_id;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short IDs of solid mesh boundaries which make up the traction interface}}
+\DoxyCodeLine{\textcolor{comment}{ /// IDs of solid mesh boundaries which make up the traction interface}}
 \DoxyCodeLine{\textcolor{comment}{} Vector<unsigned> Solid\_traction\_boundary\_id;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
@@ -325,23 +311,21 @@ We start by building the bulk mesh, using the files created by \href{http://wias
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_constructor==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredSolidProblem_a18ce02b6e4bbc86403c9e1b32c095772}{UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Create solid bulk mesh}}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_solid.1.node"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_solid.1.ele"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} face\_file\_name=\textcolor{stringliteral}{"fsi\_bifurcation\_solid.1.face"};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.node"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.ele"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} face\_file\_name=\textcolor{stringliteral}{"{}fsi\_bifurcation\_solid.1.face"{}};}
 \DoxyCodeLine{ Solid\_mesh\_pt =  \textcolor{keyword}{new} \mbox{\hyperlink{classMySolidTetgenMesh}{MySolidTetgenMesh<ELEMENT>}}(node\_file\_name,}
 \DoxyCodeLine{                                              element\_file\_name,}
 \DoxyCodeLine{                                              face\_file\_name);}
 
 \end{DoxyCodeInclude}
-
-
-Next we specify the I\+Ds of the \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} boundaries that form part of specific domain boundaries in our problem. Boundaries 0, 1 and 2 are the in-\/ and outflow faces along which the solid is pinned. (See the specification of the boundaries in \href{../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly}{\texttt{ fsi\+\_\+bifurcation\+\_\+solid.\+poly}} and/or check the boundary enumeration using {\ttfamily tetview} as shown in the {\ttfamily tetview} plot of the domain boundaries at the beginning of this tutorial.)
+ Next we specify the IDs of the \href{http://wias-berlin.de/software/tetgen//}{\texttt{ {\ttfamily tetgen} }} boundaries that form part of specific domain boundaries in our problem. Boundaries 0, 1 and 2 are the in-\/ and outflow faces along which the solid is pinned. (See the specification of the boundaries in \href{../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly}{\texttt{ fsi\+\_\+bifurcation\+\_\+solid.\+poly}} and/or check the boundary enumeration using {\ttfamily tetview} as shown in the {\ttfamily tetview} plot of the domain boundaries at the beginning of this tutorial.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -356,9 +340,7 @@ Next we specify the I\+Ds of the \href{http://wias-berlin.de/software/tetgen//}{
 \DoxyCodeLine{ Pinned\_solid\_boundary\_id[2]=2;}
 
 \end{DoxyCodeInclude}
-
-
-Similarly, boundaries 3 to 15 are the faces that define the internal boundary of the bifurcation, i.\+e. the boundary along which we have to apply the pressure load\+:
+ Similarly, boundaries 3 to 15 are the faces that define the internal boundary of the bifurcation, i.\+e. the boundary along which we have to apply the pressure load\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -371,9 +353,7 @@ Similarly, boundaries 3 to 15 are the faces that define the internal boundary of
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We apply the boundary conditions by pinning the displacements of all nodes that are located on the in-\/ and outflow faces, and document their positions.
+ We apply the boundary conditions by pinning the displacements of all nodes that are located on the in-\/ and outflow faces, and document their positions.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -383,7 +363,7 @@ We apply the boundary conditions by pinning the displacements of all nodes that 
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Doc pinned solid nodes}}
-\DoxyCodeLine{ std::ofstream bc\_file(\textcolor{stringliteral}{"RESLT/pinned\_solid\_nodes.dat"});}
+\DoxyCodeLine{ std::ofstream bc\_file(\textcolor{stringliteral}{"{}RESLT/pinned\_solid\_nodes.dat"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Pin positions at inflow boundary (boundaries 0 and 1)}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n=Pinned\_solid\_boundary\_id.size();}
@@ -403,7 +383,7 @@ We apply the boundary conditions by pinning the displacements of all nodes that 
 \DoxyCodeLine{       nod\_pt-\/>pin\_position(i);}
 \DoxyCodeLine{       }
 \DoxyCodeLine{       \textcolor{comment}{// ...and doc it as pinned}}
-\DoxyCodeLine{       bc\_file << nod\_pt-\/>x(i) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{       bc\_file << nod\_pt-\/>x(i) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     bc\_file << std::endl;}
@@ -412,9 +392,7 @@ We apply the boundary conditions by pinning the displacements of all nodes that 
 \DoxyCodeLine{ bc\_file.close();}
 
 \end{DoxyCodeInclude}
-
-
-We complete the build of the elements by setting the pointer to the constitutive equation and the body force.
+ We complete the build of the elements by setting the pointer to the constitutive equation and the body force.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -459,12 +437,10 @@ Next we create the traction elements, attaching them to the \char`\"{}bulk\char`
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Build the traction elements}}
-\DoxyCodeLine{ \mbox{\hyperlink{unstructured__three__d__solid_8txt_a99adc9b3c56170216a114b9b14978e9a}{create\_traction\_elements}}();}
+\DoxyCodeLine{ create\_traction\_elements();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we add the various meshes as sub-\/meshes to the {\ttfamily Problem}, build the global mesh, and assign the equation numbers.
+ Finally, we add the various meshes as sub-\/meshes to the {\ttfamily Problem}, build the global mesh, and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -487,7 +463,7 @@ Finally, we add the various meshes as sub-\/meshes to the {\ttfamily Problem}, b
 \DoxyCodeLine{ build\_global\_mesh();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ std::cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ std::cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end constructor}}
 
@@ -497,7 +473,7 @@ Finally, we add the various meshes as sub-\/meshes to the {\ttfamily Problem}, b
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_traction}{}\doxysection{Creating the traction elements}\label{index_traction}
-The helper function {\ttfamily \mbox{\hyperlink{unstructured__three__d__solid_8txt_a99adc9b3c56170216a114b9b14978e9a}{create\+\_\+traction\+\_\+elements()}}} does exactly what it says\+: It loops over the bulk elements that are adjacent to the inner surface of the vessel, and attaches {\ttfamily Solid\+Traction\+Elements} to the appropriate faces. We store the pointers to the newly-\/created traction elements in separate meshes and specify the function pointer to the load function.
+The helper function {\ttfamily create\+\_\+traction\+\_\+elements()} does exactly what it says\+: It loops over the bulk elements that are adjacent to the inner surface of the vessel, and attaches {\ttfamily Solid\+Traction\+Elements} to the appropriate faces. We store the pointers to the newly-\/created traction elements in separate meshes and specify the function pointer to the load function.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -574,7 +550,7 @@ The post-\/processing routine outputs the deformed domain shape and the applied 
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solid solution}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/solid\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/solid\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output(some\_file,npts);}
@@ -583,7 +559,7 @@ The post-\/processing routine outputs the deformed domain shape and the applied 
 \DoxyCodeLine{    }
 \DoxyCodeLine{ \textcolor{comment}{// Output traction}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/traction\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/traction\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n=Solid\_traction\_boundary\_id.size();}
@@ -642,5 +618,5 @@ Experiment with the {\ttfamily tetgen} -\/based mesh generation by modifying the
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

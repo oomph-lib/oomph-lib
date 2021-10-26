@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4}{}\doxysection{oomph\+::T\+Gauss$<$ 2, 2 $>$ Class Reference}
+\hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4}{}\doxysection{oomph\+::TGauss\texorpdfstring{$<$}{<} 2, 2 \texorpdfstring{$>$}{>} Class Reference}
 \label{classoomph_1_1TGauss_3_012_00_012_01_4}\index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
+
+
+2D Gaussian integration class for linear triangles. Three integration points. This integration scheme can integrate up to second-\/order polynomials exactly and is therefore a suitable \char`\"{}full\char`\"{} integration scheme for linear (three-\/node) elements in which the highest-\/order polynomial is quadratic.  
+
+
 
 
 {\ttfamily \#include $<$integral.\+h$>$}
 
-Inheritance diagram for oomph\+::T\+Gauss$<$ 2, 2 $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::TGauss\texorpdfstring{$<$}{<} 2, 2 \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1TGauss_3_012_00_012_01_4}
@@ -13,11 +18,11 @@ Inheritance diagram for oomph\+::T\+Gauss$<$ 2, 2 $>$\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_012_01_4_ad9af8d7f419274c7feb66c7cfc231dc4}{T\+Gauss}} ()
+\mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_012_01_4_ad9af8d7f419274c7feb66c7cfc231dc4}{TGauss}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor (empty) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_012_01_4_a3687a534a652b5582c5e57aedb8b0542}{T\+Gauss}} (const \mbox{\hyperlink{classoomph_1_1TGauss}{T\+Gauss}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_012_01_4_af7b36a3a311b0bcd4ff6102a2d34e41d}{TGauss}} (const \mbox{\hyperlink{classoomph_1_1TGauss}{TGauss}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_012_01_4_abf76c96f78a1cbecc94de883214ed4ee}{operator=}} (const \mbox{\hyperlink{classoomph_1_1TGauss}{T\+Gauss}} \&)
+void \mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_012_01_4_a74aff788a883fa9ed9c610e0a0c9c3a4}{operator=}} (const \mbox{\hyperlink{classoomph_1_1TGauss}{TGauss}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_012_01_4_a62216f1c81c087131e0fee31d23bd165}{nweight}} () const
 \begin{DoxyCompactList}\small\item\em Number of integration points of the scheme. \end{DoxyCompactList}\item 
@@ -39,7 +44,7 @@ static const double \mbox{\hyperlink{classoomph_1_1TGauss_3_012_00_012_01_4_a15b
 \doxysubsection{Detailed Description}
 2D Gaussian integration class for linear triangles. Three integration points. This integration scheme can integrate up to second-\/order polynomials exactly and is therefore a suitable \char`\"{}full\char`\"{} integration scheme for linear (three-\/node) elements in which the highest-\/order polynomial is quadratic. 
 
-Definition at line 919 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00823}{823}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
@@ -48,7 +53,7 @@ Definition at line 919 of file integral.\+h.
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!TGauss@{TGauss}}
 \index{TGauss@{TGauss}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{TGauss()}{TGauss()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::\mbox{\hyperlink{classoomph_1_1TGauss}{T\+Gauss}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::\mbox{\hyperlink{classoomph_1_1TGauss}{TGauss}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -56,25 +61,17 @@ Default constructor (empty)
 
 
 
-Definition at line 930 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00834}{834}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4_a3687a534a652b5582c5e57aedb8b0542}\label{classoomph_1_1TGauss_3_012_00_012_01_4_a3687a534a652b5582c5e57aedb8b0542}} 
+\mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4_af7b36a3a311b0bcd4ff6102a2d34e41d}\label{classoomph_1_1TGauss_3_012_00_012_01_4_af7b36a3a311b0bcd4ff6102a2d34e41d}} 
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!TGauss@{TGauss}}
 \index{TGauss@{TGauss}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{TGauss()}{TGauss()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::\mbox{\hyperlink{classoomph_1_1TGauss}{T\+Gauss}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TGauss}{T\+Gauss}}$<$ 2, 2 $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::\mbox{\hyperlink{classoomph_1_1TGauss}{TGauss}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TGauss}{TGauss}}$<$ 2, 2 $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 933 of file integral.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -83,7 +80,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!knot@{knot}}
 \index{knot@{knot}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{knot()}{knot()}}
-{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -91,21 +88,17 @@ Return coordinate x\mbox{[}j\mbox{]} of integration point i.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral}}.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00849}{849}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
-Definition at line 951 of file integral.\+h.
-
-
-
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4_a62216f1c81c087131e0fee31d23bd165}\label{classoomph_1_1TGauss_3_012_00_012_01_4_a62216f1c81c087131e0fee31d23bd165}} 
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!nweight@{nweight}}
 \index{nweight@{nweight}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{nweight()}{nweight()}}
-{\footnotesize\ttfamily unsigned \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::nweight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::nweight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -113,35 +106,23 @@ Number of integration points of the scheme.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral}}.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00843}{843}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
-
-
-Definition at line 945 of file integral.\+h.
-
-\mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4_abf76c96f78a1cbecc94de883214ed4ee}\label{classoomph_1_1TGauss_3_012_00_012_01_4_abf76c96f78a1cbecc94de883214ed4ee}} 
+\mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4_a74aff788a883fa9ed9c610e0a0c9c3a4}\label{classoomph_1_1TGauss_3_012_00_012_01_4_a74aff788a883fa9ed9c610e0a0c9c3a4}} 
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TGauss}{T\+Gauss}}$<$ 2, 2 $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TGauss}{TGauss}}$<$ 2, 2 $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 939 of file integral.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4_a4cc9233ea68d61a10422d954f31ce0ee}\label{classoomph_1_1TGauss_3_012_00_012_01_4_a4cc9233ea68d61a10422d954f31ce0ee}} 
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!weight@{weight}}
 \index{weight@{weight}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{weight()}{weight()}}
-{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::weight (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::weight (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -149,15 +130,11 @@ Return weight of integration point i.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral}}.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00855}{855}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
-Definition at line 957 of file integral.\+h.
-
-
-
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
@@ -166,7 +143,7 @@ References i.
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!Knot@{Knot}}
 \index{Knot@{Knot}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{Knot}{Knot}}
-{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::Knot\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::Knot\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -179,15 +156,15 @@ References i.
 
 Array to hold the weights and knots (defined in cc file) 
 
+/ Define the positions and weights of the 2D \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} points for triangles 
 
-
-Definition at line 926 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00830}{830}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4_a8b4cada9b62d5e8ee18fbd7e66780368}\label{classoomph_1_1TGauss_3_012_00_012_01_4_a8b4cada9b62d5e8ee18fbd7e66780368}} 
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!Npts@{Npts}}
 \index{Npts@{Npts}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{Npts}{Npts}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::Npts = 3\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::Npts = 3\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -195,13 +172,13 @@ Number of integration points in the scheme.
 
 
 
-Definition at line 923 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00827}{827}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1TGauss_3_012_00_012_01_4_a15b24895b6d3e309de659b46d110a21e}\label{classoomph_1_1TGauss_3_012_00_012_01_4_a15b24895b6d3e309de659b46d110a21e}} 
 \index{oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}!Weight@{Weight}}
 \index{Weight@{Weight}!oomph::TGauss$<$ 2, 2 $>$@{oomph::TGauss$<$ 2, 2 $>$}}
 \doxysubsubsection{\texorpdfstring{Weight}{Weight}}
-{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+T\+Gauss}}$<$ 2, 2 $>$\+::Weight\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const double \mbox{\hyperlink{classoomph_1_1TGauss}{oomph\+::\+TGauss}}$<$ 2, 2 $>$\+::Weight\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -211,7 +188,7 @@ Definition at line 923 of file integral.\+h.
 \end{DoxyCode}
 
 
-Definition at line 926 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l00830}{830}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 

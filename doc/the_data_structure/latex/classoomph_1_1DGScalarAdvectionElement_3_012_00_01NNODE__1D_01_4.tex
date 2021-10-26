@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4}{}\doxysection{oomph\+::D\+G\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4}{}\doxysection{oomph\+::DGScalar\+Advection\+Element\texorpdfstring{$<$}{<} 2, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4}\index{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}}
 
 
@@ -9,7 +9,7 @@ Specialisation for 2D DG Elements.
 
 {\ttfamily \#include $<$scalar\+\_\+advection\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::D\+G\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::DGScalar\+Advection\+Element\texorpdfstring{$<$}{<} 2, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.568807cm]{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4}
@@ -20,31 +20,30 @@ Inheritance diagram for oomph\+::D\+G\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a316a94ee11fe6fe52e25a2eec1b4a1c8}{required\+\_\+nflux}} ()
 \begin{DoxyCompactList}\small\item\em Set the number of flux components. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a929abefd370881945240338a03265d99}{calculate\+\_\+element\+\_\+averages}} (double $\ast$\&\mbox{\hyperlink{classoomph_1_1DGElement_a9349e3c349f9cf3b25bcb6121e86a7f2}{average\+\_\+value}})
+void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a929abefd370881945240338a03265d99}{calculate\+\_\+element\+\_\+averages}} (double $\ast$\&\mbox{\hyperlink{classoomph_1_1DGElement_ac6e34ef10309c4714881404a788d0722}{average\+\_\+value}})
 \begin{DoxyCompactList}\small\item\em Calculate the averages in the element. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a9c47cf7c2c926c1b23a0d5a02ee3b5b9}{D\+G\+Scalar\+Advection\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a9c47cf7c2c926c1b23a0d5a02ee3b5b9}{DGScalar\+Advection\+Element}} ()
 \item 
-\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a3685f199c4487a78ed548943ab32337e}{$\sim$\+D\+G\+Scalar\+Advection\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a3685f199c4487a78ed548943ab32337e}{$\sim$\+DGScalar\+Advection\+Element}} ()
 \item 
 void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a467b719ab6fd88aaddade7e32a0cf354}{build\+\_\+all\+\_\+faces}} ()
 \item 
-void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a2c33e2b2f4e41b504d77bd86881f0869}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a2c33e2b2f4e41b504d77bd86881f0869}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_af13f4a07a9d3c67e1394f8154e6ddc71}{D\+G\+Scalar\+Advection\+Face\+Element$<$ D\+G\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_af13f4a07a9d3c67e1394f8154e6ddc71}{DGScalar\+Advection\+Face\+Element$<$ DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$ $>$}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+D\+G\+Scalar\+Advection\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$}
-
+\subsubsection*{template$<$unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+DGScalar\+Advection\+Element$<$ 2, NNODE\+\_\+1\+D $>$}
 Specialisation for 2D DG Elements. 
 
-Definition at line 964 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00953}{953}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 
 
@@ -53,23 +52,23 @@ Definition at line 964 of file scalar\+\_\+advection\+\_\+elements.\+h.
 \index{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}!DGScalarAdvectionElement@{DGScalarAdvectionElement}}
 \index{DGScalarAdvectionElement@{DGScalarAdvectionElement}!oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{DGScalarAdvectionElement()}{DGScalarAdvectionElement()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Element}}$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{D\+G\+Scalar\+Advection\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+DGScalar\+Advection\+Element}}$<$ 2, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{DGScalar\+Advection\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 984 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00973}{973}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a3685f199c4487a78ed548943ab32337e}\label{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a3685f199c4487a78ed548943ab32337e}} 
 \index{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}!````~DGScalarAdvectionElement@{$\sim$DGScalarAdvectionElement}}
 \index{````~DGScalarAdvectionElement@{$\sim$DGScalarAdvectionElement}!oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$DGScalarAdvectionElement()}{~DGScalarAdvectionElement()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Element}}$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{D\+G\+Scalar\+Advection\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+DGScalar\+Advection\+Element}}$<$ 2, NNODE\+\_\+1D $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{DGScalar\+Advection\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 989 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00978}{978}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 
 
@@ -78,23 +77,23 @@ Definition at line 989 of file scalar\+\_\+advection\+\_\+elements.\+h.
 \index{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}!build\_all\_faces@{build\_all\_faces}}
 \index{build\_all\_faces@{build\_all\_faces}!oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{build\_all\_faces()}{build\_all\_faces()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Element}}$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$\+::build\+\_\+all\+\_\+faces (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+DGScalar\+Advection\+Element}}$<$ 2, NNODE\+\_\+1D $>$\+::build\+\_\+all\+\_\+faces (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{oomph\+::\+D\+G\+Element}}.
+Implements \mbox{\hyperlink{classoomph_1_1DGElement_a4387d0837a07a2d5423896331c6c012a}{oomph\+::\+DGElement}}.
 
 
 
-Definition at line 991 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00980}{980}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a929abefd370881945240338a03265d99}\label{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a929abefd370881945240338a03265d99}} 
 \index{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}!calculate\_element\_averages@{calculate\_element\_averages}}
 \index{calculate\_element\_averages@{calculate\_element\_averages}!oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{calculate\_element\_averages()}{calculate\_element\_averages()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Element}}$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$\+::calculate\+\_\+element\+\_\+averages (\begin{DoxyParamCaption}\item[{double $\ast$\&}]{average\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+DGScalar\+Advection\+Element}}$<$ 2, NNODE\+\_\+1D $>$\+::calculate\+\_\+element\+\_\+averages (\begin{DoxyParamCaption}\item[{double $\ast$\&}]{average\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -102,22 +101,22 @@ Calculate the averages in the element.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1DGElement_a336c61ef405a4710060f177e707c3ec9}{oomph\+::\+D\+G\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DGElement_a336c61ef405a4710060f177e707c3ec9}{oomph\+::\+DGElement}}.
 
 
 
-Definition at line 978 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00967}{967}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$\+::calculate\+\_\+element\+\_\+averages().
+References \mbox{\hyperlink{flux__transport__elements_8cc_source_l00308}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::calculate\+\_\+element\+\_\+averages()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a2c33e2b2f4e41b504d77bd86881f0869}\label{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a2c33e2b2f4e41b504d77bd86881f0869}} 
 \index{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}!fill\_in\_generic\_residual\_contribution\_flux\_transport@{fill\_in\_generic\_residual\_contribution\_flux\_transport}}
 \index{fill\_in\_generic\_residual\_contribution\_flux\_transport@{fill\_in\_generic\_residual\_contribution\_flux\_transport}!oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_flux\_transport()}{fill\_in\_generic\_residual\_contribution\_flux\_transport()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Element}}$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+DGScalar\+Advection\+Element}}$<$ 2, NNODE\+\_\+1D $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -125,22 +124,22 @@ Compute the residuals for the Navier--Stokes equations; flag=1(or 0)\+: do (or d
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6994eab818eb7236e24e45b6fedec1f7}{oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FluxTransportEquations_a6994eab818eb7236e24e45b6fedec1f7}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$}}.
 
 
 
-Definition at line 1011 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l01000}{1000}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Flux\+Transport\+Equations$<$ D\+I\+M $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport(), and residuals().
+References \mbox{\hyperlink{flux__transport__elements_8cc_source_l00090}{oomph\+::\+Flux\+Transport\+Equations$<$ DIM $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+flux\+\_\+transport()}}.
 
 \mbox{\Hypertarget{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a316a94ee11fe6fe52e25a2eec1b4a1c8}\label{classoomph_1_1DGScalarAdvectionElement_3_012_00_01NNODE__1D_01_4_a316a94ee11fe6fe52e25a2eec1b4a1c8}} 
 \index{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}!required\_nflux@{required\_nflux}}
 \index{required\_nflux@{required\_nflux}!oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nflux()}{required\_nflux()}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+D\+G\+Scalar\+Advection\+Element}}$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nflux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{oomph\+::\+DGScalar\+Advection\+Element}}$<$ 2, NNODE\+\_\+1D $>$\+::required\+\_\+nflux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -148,11 +147,11 @@ Set the number of flux components.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1DGElement_a87dc9f5b40437c3ab22db35229012c07}{oomph\+::\+D\+G\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1DGElement_a87dc9f5b40437c3ab22db35229012c07}{oomph\+::\+DGElement}}.
 
 
 
-Definition at line 972 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00961}{961}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 
 
@@ -161,12 +160,12 @@ Definition at line 972 of file scalar\+\_\+advection\+\_\+elements.\+h.
 \index{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}!DGScalarAdvectionFaceElement$<$ DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$ $>$@{DGScalarAdvectionFaceElement$<$ DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$ $>$}}
 \index{DGScalarAdvectionFaceElement$<$ DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$ $>$@{DGScalarAdvectionFaceElement$<$ DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$ $>$}!oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$@{oomph::DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{DGScalarAdvectionFaceElement$<$ DGScalarAdvectionElement$<$ 2, NNODE\_1D $>$ $>$}{DGScalarAdvectionFaceElement< DGScalarAdvectionElement< 2, NNODE\_1D > >}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-friend class \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement}{D\+G\+Scalar\+Advection\+Face\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{D\+G\+Scalar\+Advection\+Element}}$<$ 2, N\+N\+O\+D\+E\+\_\+1D $>$ $>$\hspace{0.3cm}{\ttfamily [friend]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+friend class \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionFaceElement}{DGScalar\+Advection\+Face\+Element}}$<$ \mbox{\hyperlink{classoomph_1_1DGScalarAdvectionElement}{DGScalar\+Advection\+Element}}$<$ 2, NNODE\+\_\+1D $>$ $>$\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
-Definition at line 968 of file scalar\+\_\+advection\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{scalar__advection__elements_8h_source_l00945}{945}} of file \mbox{\hyperlink{scalar__advection__elements_8h_source}{scalar\+\_\+advection\+\_\+elements.\+h}}.
 
 
 

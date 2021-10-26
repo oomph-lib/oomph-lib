@@ -1,0 +1,130 @@
+\hypertarget{annular__mesh_8template_8cc_source}{}\doxysection{annular\+\_\+mesh.\+template.\+cc}
+\label{annular__mesh_8template_8cc_source}\index{annular\_mesh.template.cc@{annular\_mesh.template.cc}}
+\mbox{\hyperlink{annular__mesh_8template_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00026}00026 \textcolor{preprocessor}{\#ifndef OOMPH\_ANNULAR\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00027}00027 \textcolor{preprocessor}{\#define OOMPH\_ANNULAR\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00029}00029 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{annular__mesh_8template_8h}{annular\_mesh.template.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00031}00031 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00032}00032 \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00033}00033   \textcolor{comment}{//===================================================================}\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00034}00034 \textcolor{comment}{  /// Helper function to Wrap mesh into annular shape}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00035}00035 \textcolor{comment}{}  \textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00036}00036   \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00037}\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_adcf4ce1aefcce7a773c66ff0f496df9e}{00037}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_adcf4ce1aefcce7a773c66ff0f496df9e}{TwoDAnnularMesh<ELEMENT>::wrap\_into\_annular\_shape}}(}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00038}00038     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& a,}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00039}00039     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& h,}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00040}00040     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& azimuthal\_fraction,}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00041}00041     \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& phi)}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00042}00042   \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00043}00043     \textcolor{comment}{// Create the hole}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00044}00044     Ellipse ellipse(a, a);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00046}00046     \textcolor{comment}{// Set all the initial positions of the nodes}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00047}00047     Vector<double> xi(1);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00048}00048     Vector<double> base(2);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00049}00049     Vector<double> N(2);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00050}00050     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = this-\/>nnode();}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00051}00051     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n = 0; n < n\_node; n++)}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00052}00052     \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00053}00053       \textcolor{comment}{// Pointer to node}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00054}00054       Node* nod\_pt = this-\/>node\_pt(n);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00056}00056       \textcolor{comment}{// Get the angle of the node -\/-\/ rotate such that jump in angle}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00057}00057       \textcolor{comment}{// appears at periodic boundary. Shrink domain slightly}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00058}00058       \textcolor{comment}{// to keep angle unique}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00059}00059       xi[0] = (1.0 -\/ 1.0e-\/10) * (-\/azimuthal\_fraction * nod\_pt-\/>x(0)) * 2.0 *}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00060}00060                 MathematicalConstants::Pi +}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00061}00061               MathematicalConstants::Pi -\/}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00062}00062               (1.0 -\/ azimuthal\_fraction) * 2.0 * MathematicalConstants::Pi;}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00063}00063 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00064}00064       \textcolor{comment}{// Rotate}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00065}00065       xi[0] += phi;}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00067}00067       \textcolor{comment}{// Get the node's fraction in the radial direction}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00068}00068       \textcolor{keywordtype}{double} w = nod\_pt-\/>x(1);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00070}00070       \textcolor{comment}{// Get the position on the ellipse base}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00071}00071       ellipse.position(xi, base);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00073}00073       \textcolor{comment}{// Get the unit normal, if it were a circle , by normalising the base}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00074}00074       \textcolor{keywordtype}{double} norm = sqrt(base[0] * base[0] + base[1] * base[1]);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00075}00075       N[0] = base[0] / norm;}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00076}00076       N[1] = base[1] / norm;}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00078}00078       \textcolor{comment}{// Set circular film from the ellipse}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00079}00079       nod\_pt-\/>x(0) = base[0] + w * (h + a -\/ norm) * N[0];}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00080}00080       nod\_pt-\/>x(1) = base[1] + w * (h + a -\/ norm) * N[1];}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00081}00081 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00082}00082       \textcolor{comment}{// Set boundary coordinates}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00083}00083       Vector<double> xi\_bound(1);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00085}00085       \textcolor{comment}{// Polar angle for boundary coordinate on boundary 0}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00086}00086       \textcolor{keywordflow}{if} (nod\_pt-\/>is\_on\_boundary(0))}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00087}00087       \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00088}00088         xi\_bound[0] = atan2(nod\_pt-\/>x(1), nod\_pt-\/>x(0));}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00089}00089         nod\_pt-\/>set\_coordinates\_on\_boundary(0, xi\_bound);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00090}00090       \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00092}00092       \textcolor{comment}{// Radius for boundary coordinate on boundary 1}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00093}00093       \textcolor{keywordflow}{if} (nod\_pt-\/>is\_on\_boundary(1))}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00094}00094       \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00095}00095         xi\_bound[0] = sqrt(pow(nod\_pt-\/>x(0), 2) + pow(nod\_pt-\/>x(1), 2));}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00096}00096         nod\_pt-\/>set\_coordinates\_on\_boundary(1, xi\_bound);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00097}00097       \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00099}00099       \textcolor{comment}{// Polar angle for boundary coordinate on boundary 2}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00100}00100       \textcolor{keywordflow}{if} (nod\_pt-\/>is\_on\_boundary(2))}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00101}00101       \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00102}00102         xi\_bound[0] = atan2(nod\_pt-\/>x(1), nod\_pt-\/>x(0));}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00103}00103         nod\_pt-\/>set\_coordinates\_on\_boundary(2, xi\_bound);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00104}00104       \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00105}00105 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00106}00106       \textcolor{comment}{// Radius for boundary coordinate on boundary 3}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00107}00107       \textcolor{keywordflow}{if} (nod\_pt-\/>is\_on\_boundary(3))}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00108}00108       \{}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00109}00109         xi\_bound[0] = sqrt(pow(nod\_pt-\/>x(0), 2) + pow(nod\_pt-\/>x(1), 2));}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00110}00110         nod\_pt-\/>set\_coordinates\_on\_boundary(3, xi\_bound);}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00111}00111       \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00112}00112     \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00113}00113 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00114}00114     this-\/>Boundary\_coordinate\_exists[0] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00115}00115     this-\/>Boundary\_coordinate\_exists[1] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00116}00116     this-\/>Boundary\_coordinate\_exists[2] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00117}00117     this-\/>Boundary\_coordinate\_exists[3] = \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00118}00118   \}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00119}00119 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00120}00120 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00121}00121 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00122}00122 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00123}00123 }
+\DoxyCodeLine{\Hypertarget{annular__mesh_8template_8cc_source_l00124}00124 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

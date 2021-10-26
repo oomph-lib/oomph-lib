@@ -1,0 +1,460 @@
+\hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source}{}\doxysection{lgr\+\_\+navier\+\_\+stokes.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{lgr__navier__stokes_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: A preconditioner for the solution of Navier-\/Stokes equations with weakly imposed boundary conditions via Lagrange multipliers}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{The purpose of this tutorial is to show how to use \(\backslash\)c oomph-\/lib's  Lagrange}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{Enforced Flow Navier-\/Stokes preconditioner. Similarly to the problem considered}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{in the <a href="{}../../../navier\_stokes/vmtk\_fluid/html/index.html"{}> Steady}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{finite-\/Reynolds-\/number flow through an iliac bifurcation</a> tutorial, the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{outflow boundary of the demo problem (discussed below) are not aligned with any}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{coordinate planes. Parallel outflow is therefore enforced by a Lagrange}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{multiplier method, implemented using \(\backslash\)c oomph-\/lib's \(\backslash\)c FaceElement framework.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{\(\backslash\)section model The model problem, theory and preconditioner}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{We will demonstrate the development and application of the preconditioner using}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{the Poiseuille flow through a unit square domain \(\backslash\)f\$\(\backslash\)Omega\string^\{[\(\backslash\)alpha]\} \(\backslash\)in}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{\(\backslash\)mathbb\{R\}\string^2\(\backslash\)f\$ rotated by an arbitrary angle \(\backslash\)f\$\(\backslash\)alpha\(\backslash\)f\$ (see the figure}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{below). The domain \(\backslash\)f\$\(\backslash\)Omega\string^\{[\(\backslash\)alpha]\}\(\backslash\)f\$ is obtained by rotating the discrete}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{points \(\backslash\)f\$(x\_1,x\_2)\(\backslash\)f\$ in the unit square \(\backslash\)f\$\(\backslash\)Omega = [0,1]\string^2\(\backslash\)f\$ by the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{following transformation}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{R(\(\backslash\)alpha)=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{\(\backslash\)left( }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{\(\backslash\)begin\{array\}\{cc\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{\{\(\backslash\)cos(\(\backslash\)alpha)\} \& \{-\/\(\backslash\)sin(\(\backslash\)alpha)\} \(\backslash\)\(\backslash\) \{\(\backslash\)sin(\(\backslash\)alpha)\} \& \{\(\backslash\)cos(\(\backslash\)alpha)\} }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{\(\backslash\)end\{array\} }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{where \(\backslash\)f\$\(\backslash\)alpha\(\backslash\)f\$ is the angle of rotation.  The figure below show the flow}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{field (velocity vectors and pressure contours) for a unit square domain rotated}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{by an angle of \(\backslash\)f\$\(\backslash\)alpha=30\string^\(\backslash\)circ \(\backslash\)f\$ and a Reynolds number of \(\backslash\)f\$ Re = 100}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)f\$. The flow is driven by a prescribed parabolic boundary condition.  }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\)image html SimAng30Rey100Noel4.gif "{}Velocity field and pressure "{} }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)image latex SimAng30Rey100Noel4.eps "{}Velocity field and pressure "{} width=0.4\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{For convenience, we present the boundary conditions for the non-\/rotated unit}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{square \(\backslash\)f\$\(\backslash\)alpha = 0\string^\{\(\backslash\)circ\}\(\backslash\)f\$. In order to obtain the boundary conditions for}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{\(\backslash\)f\$\(\backslash\)alpha \(\backslash\)ne 0\string^\(\backslash\)circ\(\backslash\)f\$, we only have to apply the rotation}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{(1).  The flow is driven by imposing a parabolic velocity}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{profile along the inflow boundary \(\backslash\)f\$\(\backslash\)Omega\_I\(\backslash\)f\$. Along the characteristic}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{boundary, \(\backslash\)f\$\(\backslash\)Omega\_C\(\backslash\)f\$, the no-\/slip condition \(\backslash\)f\$u\_i = 0\(\backslash\)f\$, \(\backslash\)f\$i = 1,2\(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{is prescribed.  We impose `parallel outflow' along the outlet \(\backslash\)f\$\(\backslash\)Omega\_O\(\backslash\)f\$ by}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{insisting that}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{\(\backslash\)f[     }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\{\(\backslash\)bf u\}\(\backslash\)cdot \{\(\backslash\)bf t\}\_\{\} = 0 \(\backslash\)mbox\{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) on \$\(\backslash\)Omega\_\{O\}\$,\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{where \(\backslash\)f\$ \{\(\backslash\)bf t\}\(\backslash\)f\$ is the tangent vector at each discrete point on the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{boundary \(\backslash\)f\$ \(\backslash\)Omega\_\{O\}\(\backslash\)f\$.  We weakly enforce the flow constraint by}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{augmenting the Navier-\/Stokes momentum residual equation (introduced in}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{<a href="{}../../../navier\_stokes/rayleigh\_traction\_channel/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{Unsteady flow in a 2D channel, driven by an applied traction</a> tutorial) with}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{a Lagrange multiplier term so that it becomes}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{r\_\{il\}\string^\{u\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)int\_\(\backslash\)Omega}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{  Re}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{    \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{      St\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{      + u\_j\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{    \(\backslash\)right) \(\backslash\)psi\_l}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{  + \(\backslash\)tau\_\{ij\}\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)psi\_l\}\{\(\backslash\)partial x\_j\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{d\(\backslash\)Omega}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{-\/}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{\(\backslash\)int\_\{\(\backslash\)partial\(\backslash\)Omega\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{\(\backslash\)tau\_\{ij\} n\_j\(\backslash\)psi\_l dS}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{+ \(\backslash\)delta \(\backslash\)Pi\_\{constraint\} = 0,}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{where}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)Pi\_\{constraint\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{\(\backslash\)int\_\{\(\backslash\)partial \(\backslash\)Omega\} \(\backslash\)lambda u\_i t\_i dS,}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (4)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{and \(\backslash\)f\$\(\backslash\)lambda\(\backslash\)f\$ is the Lagrange multiplier. Upon taking the first variation}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{of the constraint with respect to the unknown velocity and the Lagrange}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{multiplier, the residual form of the constrained momentum equation is}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{r\_\{il\}\string^\{u\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)int\_\(\backslash\)Omega}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{  Re}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{    \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{      St\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{      + u\_j\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{    \(\backslash\)right) \(\backslash\)psi\_l}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{  + \(\backslash\)tau\_\{ij\}\(\backslash\)frac\{\(\backslash\)partial \(\backslash\)psi\_l\}\{\(\backslash\)partial x\_j\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{d\(\backslash\)Omega}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{-\/}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)int\_\{\(\backslash\)partial\(\backslash\)Omega\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{\(\backslash\)tau\_\{ij\} n\_j\(\backslash\)psi\_l dS}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{+ }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\(\backslash\)int\_\{\(\backslash\)partial\(\backslash\)Omega\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)lambda\(\backslash\)psi\_l t\_i = 0.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (5)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{The weak formulation of (2) is simply}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{r\_\{l\}\string^\{\(\backslash\)lambda\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)int\_\(\backslash\)Omega}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{u\_i t\_i \(\backslash\)psi\string^\(\backslash\)lambda}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{dS}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{0,}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (6)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{where \(\backslash\)f\$\(\backslash\)psi\string^\(\backslash\)lambda\(\backslash\)f\$ is a suitable basis function.  Equation}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{(5) reveals that the Lagrange multipliers act as}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{the (negative) tangential traction \(\backslash\)f\$(\(\backslash\)lambda =}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{-\/\{\(\backslash\)mathbf\{n\}\}\string^T\{\(\backslash\)mathbf\{\(\backslash\)tau\}\}\{\(\backslash\)mathbf\{t\}\})\(\backslash\)f\$ that enforce the parallel flow}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{across the boundary \(\backslash\)f\$\(\backslash\)partial\(\backslash\)Omega\_\{O\}\(\backslash\)f\$.  We discretise this constraint by}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{attaching \(\backslash\)c ImposeParallelOutflowElements to the boundaries of the "{}bulk"{}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{Navier-\/Stokes elements that are adjacent to \(\backslash\)f\$ \(\backslash\)partial \(\backslash\)Omega\_O \(\backslash\)f\$ as shown}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{in the <a href="{}../../../navier\_stokes/vmtk\_fluid/html/index.html"{}> Steady}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{finite-\/Reynolds-\/number flow through an iliac bifurcation</a> tutorial, also see}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{the <a href="{}../../../solid/prescribed\_displ\_lagr\_mult/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{Deformation of a solid by a prescribed boundary motion </a> tutorial which}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{employs a similar technique used to enforce prescribed boundary displacements}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{in solid mechanics problems. We discretise the Navier-\/Stokes equations using \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{oomph-\/lib's \(\backslash\)c QTaylorHoodElements, see the <a href="{}../../../navier\_stokes/driven\_cavity/html/index.html"{}> 2D Driven Cavity}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{Problem</a> tutorial for more information.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{The discretised problem therefore contains the following types of discrete }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{unknowns:}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{-\/ The fluid degrees of freedom (velocity and pressure).\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{-\/ The nodal values representing the components of the (vector-\/valued)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{  Lagrange multipliers. These only exist for the nodes on }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{  \(\backslash\)f\$ \(\backslash\)partial \(\backslash\)Omega\_O\(\backslash\)f\$. (The nodes are re-\/sized to}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{  accommodate the additional unknowns when the \(\backslash\)c ImposeParallelOutflowElements are}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{  attached to the bulk elements.)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{The preconditioner requires a further sub-\/division of these degrees of}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{freedom into the following categories:}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{-\/ the unconstrained velocity in the x-\/direction}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{-\/ the unconstrained velocity in the y-\/direction}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{-\/ [the unconstrained velocity in the z-\/direction (only in 3D)]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{-\/ the constrained velocity in the x-\/direction}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{-\/ the constrained velocity in the y-\/direction}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{-\/ [the constrained velocity in the z-\/direction (only in 3D)]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{-\/ the Lagrange multiplier at the constrained nodes}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{-\/ [the other Lagrange multiplier at the constrained nodes}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{  (only in 3D)].}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{For a 2D problem, the linear system to be solved in the course of the Newton}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{iteration can then be (formally) re-\/ordered into the following block structure:}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{\(\backslash\)begin\{array\}\{ccccc|c\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{\{ F\_\{\(\backslash\)rm xx\}\}\&\{ F\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{      x\}\}\}\&\{ F\_\{\(\backslash\)rm xy\}\}\&\{ F\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ B\_\{\(\backslash\)rm x\}\string^\{T\}\}\&\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm x\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm y\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ B\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\}\string^\{T\}\}\&\{ M\_\{\(\backslash\)rm x\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{\{ F\_\{\(\backslash\)rm yx\}\}\&\{ F\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{      x\}\}\}\&\{ F\_\{\(\backslash\)rm yy\}\}\&\{ F\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ B\_\{\(\backslash\)rm y\}\string^\{T\}\}\&\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm x\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{      y\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm y\}\}\&\{ }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{  F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ B\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\}\string^\{T\}\}\&\{ M\_\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{\{ B\_\{\(\backslash\)rm x\}\}\&\{ B\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ B\_\{\(\backslash\)rm y\}\}\&\{ B\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{\(\backslash\)hline}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{\&\{ M\_\{\(\backslash\)rm x\}\}\&\&\{ M\_\{\(\backslash\)rm y\}\}\&\&}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{U\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{\(\backslash\)overline\{U\}\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{U\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{\(\backslash\)overline\{U\}\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{P\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{\(\backslash\)Lambda\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{ =}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{-\/}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm p\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm \(\backslash\)Lambda\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{\(\backslash\)right].}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)   (7)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{Here the vectors \(\backslash\)f\$\{\(\backslash\)bf U\}\_\{\(\backslash\)rm x\}\(\backslash\)f\$, \(\backslash\)f\$\{\(\backslash\)bf U\}\_\{\(\backslash\)rm y\}\(\backslash\)f\$, \(\backslash\)f\$\{\(\backslash\)bf P\}\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{and \(\backslash\)f\$\{\(\backslash\)bf \(\backslash\)Lambda\}\(\backslash\)f\$ contain the \(\backslash\)f\$x\(\backslash\)f\$ and \(\backslash\)f\$y\(\backslash\)f\$ components of the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{velocity unknowns, the pressure unknowns and Lagrange multipliers unknowns,}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{respectively. The overbars identify the unknown nodal positions that are}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{constrained by the Lagrange multiplier. The matrices \(\backslash\)f\$M\_\{\(\backslash\)rm x\}\(\backslash\)f\$ and}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{\(\backslash\)f\$M\_\{\(\backslash\)rm y\}\(\backslash\)f\$ are mass-\/like matrices whose entries are formed from products}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{of the basis functions multiplied by a component of the tangent vector at each}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{discrete point on \(\backslash\)f\$\(\backslash\)partial\(\backslash\)Omega\_\{O\}\(\backslash\)f\$, for example,}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{\(\backslash\)f\$[M\_\{\{\(\backslash\)rm x\}\}]\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{\(\backslash\)int\_\{\(\backslash\)partial \(\backslash\)Omega\_\{O\}\} t\_x \{\(\backslash\)psi\_i\} \(\backslash\) \{\(\backslash\)psi\_j\} \(\backslash\) dS \(\backslash\)f\$. Denote}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{J\_\{\(\backslash\)rm NS\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{\(\backslash\)begin\{array\}\{ccccc\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{\{ F\_\{\(\backslash\)rm xx\}\}\&\{ F\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{      x\}\}\}\&\{ F\_\{\(\backslash\)rm xy\}\}\&\{ F\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ B\_\{\(\backslash\)rm x\}\string^\{T\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm x\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm y\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ B\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\}\string^\{T\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{\{ F\_\{\(\backslash\)rm yx\}\}\&\{ F\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{      x\}\}\}\&\{ F\_\{\(\backslash\)rm yy\}\}\&\{ F\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ B\_\{\(\backslash\)rm y\}\string^\{T\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm x\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{      y\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm y\}\}\&\{ }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{  F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\&\{ B\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\}\string^\{T\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{\{ B\_\{\(\backslash\)rm x\}\}\&\{ B\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ B\_\{\(\backslash\)rm y\}\}\&\{ B\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\}\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{L = }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{\(\backslash\)begin\{array\}\{ccccc\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{ \&\{M\_\{\(\backslash\)rm x\}\}\& \&\{ M\_\{\(\backslash\)rm x\}\} \&}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{X\}\_\{\(\backslash\)rm NS\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{U\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{\(\backslash\)overline\{U\}\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{U\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{\(\backslash\)overline\{U\}\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{P\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{\(\backslash\)right],\(\backslash\)mbox\{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) and \}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm NS\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm x\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm y\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm p\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{\(\backslash\)right].}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{Then we can re-\/write (7) as}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{\(\backslash\)begin\{array\}\{cc\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{\{ J\_\{\(\backslash\)rm NS\}\}\&L\string^\{T\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{L\& }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{X\}\_\{\(\backslash\)rm NS\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{\(\backslash\)Delta \(\backslash\)mathbf\{\(\backslash\)Lambda\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{ =}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{-\/}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm NS\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{\(\backslash\)mathbf\{r\}\_\{\(\backslash\)rm \(\backslash\)Lambda\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{\(\backslash\)right].}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)   (8)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{We have shown that }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{P=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{\(\backslash\)begin\{array\}\{cc\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{\{ J\_\{\(\backslash\)rm NS\}\} + L\string^\{T\}W\string^\{-\/1\} L\& \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{ \& W}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)   (9)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{where \(\backslash\)f\$W = \(\backslash\)frac\{1\}\{\(\backslash\)sigma\}LL\string^\{T\}\(\backslash\)f\$ is an optimal preconditioner for the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{linear system (8) if we set \(\backslash\)f\$ \(\backslash\)sigma=\(\backslash\)|F\(\backslash\)|\_\{\(\backslash\)infty\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{\(\backslash\)f\$ where \(\backslash\)f\$F\(\backslash\)f\$ is the compound \(\backslash\)f\$4\(\backslash\)times 4\(\backslash\)f\$ top-\/left block }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{F}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{\(\backslash\)begin\{array\}\{ccccc\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{\{ F\_\{\(\backslash\)rm xx\}\}\&\{ F\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{      x\}\}\}\&\{ F\_\{\(\backslash\)rm xy\}\}\&\{ F\_\{\(\backslash\)rm x\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm x\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)rm y\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm x\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{\{ F\_\{\(\backslash\)rm yx\}\}\&\{ F\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{      x\}\}\}\&\{ F\_\{\(\backslash\)rm yy\}\}\&\{ F\_\{\(\backslash\)rm y\(\backslash\)bar\{\(\backslash\)rm y\}\}\}\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm x\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{      y\}\(\backslash\)bar\{\(\backslash\)rm x\}\}\}\&\{ F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)rm y\}\}\&\{ }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{  F\_\{\(\backslash\)bar\{\(\backslash\)rm y\}\(\backslash\)bar\{\(\backslash\)rm y\}\}\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{\(\backslash\)right]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{in the Jacobian matrix.  Application of the preconditioner \(\backslash\)f\$P\(\backslash\)f\$ requires the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{repeated solution of linear systems involving the diagonal blocks \(\backslash\)f\$\{J\_\{\(\backslash\)rm}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{NS\}\} + L\string^\{T\}W\string^\{-\/1\} L\(\backslash\)f\$ and \(\backslash\)f\$W\(\backslash\)f\$.  The matrix \(\backslash\)f\$W\string^\{-\/1\} = \(\backslash\)sigma}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{(LL\string^\{T\})\string^\{-\/1\} = \(\backslash\)sigma (\{M\_\{\(\backslash\)rm x\}\}\string^\{2\}+\{M\_\{\(\backslash\)rm y\}\string^\{2\}\})\string^\{-\/1\}\(\backslash\)f\$ is dense and}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{will cause the addition of dense sub-\/matrices to the Jacobian matrix:}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{\(\backslash\)sigma L\string^\{T\}(LL\string^\{T\})\string^\{-\/1\}L}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{\(\backslash\)sigma}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{\(\backslash\)begin\{array\}\{ccccc\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{\(\backslash\)cal O \&\(\backslash\)cal O \&\(\backslash\)cal O \&\(\backslash\)cal O \&\(\backslash\)cal O \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{ \(\backslash\)cal O\&\{M\_\{\(\backslash\)rm x\}\}(\{M\_\{\(\backslash\)rm x\}\}\string^\{2\}+\{M\_\{\(\backslash\)rm y\}\string^\{2\}\})\string^\{-\/1\}\{M\_\{\(\backslash\)rm x\}\}\&\(\backslash\)cal O \&\{M\_\{\(\backslash\)rm x\}\}(\{M\_\{\(\backslash\)rm x\}\}\string^\{2\}+\{M\_\{\(\backslash\)rm y\}\string^\{2\}\})\string^\{-\/1\}\{M\_\{\(\backslash\)rm y\}\}\&\(\backslash\)cal O \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{ \(\backslash\)cal O\&\(\backslash\)cal O \&\(\backslash\)cal O \&\(\backslash\)cal O \&\(\backslash\)cal O \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{ \(\backslash\)cal O\&\{M\_\{\(\backslash\)rm y\}\}(\{M\_\{\(\backslash\)rm x\}\}\string^\{2\}+\{M\_\{\(\backslash\)rm y\}\string^\{2\}\})\string^\{-\/1\}\{M\_\{\(\backslash\)rm x\}\}\&\(\backslash\)cal O \&\{M\_\{\(\backslash\)rm y\}\}(\{M\_\{\(\backslash\)rm x\}\}\string^\{2\}+\{M\_\{\(\backslash\)rm y\}\string^\{2\}\})\string^\{-\/1\}\{M\_\{\(\backslash\)rm y\}\}\& \(\backslash\)cal O\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{ \(\backslash\)cal O\&\(\backslash\)cal O \&\(\backslash\)cal O \&\(\backslash\)cal O \&\(\backslash\)cal O}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{\(\backslash\)right].}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{Numerical experiments show that an efficient implementation can be obtained by}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{replacing \(\backslash\)f\$W\(\backslash\)f\$ by its diagonal approximation \(\backslash\)f\$\(\backslash\)widehat\{W\} =}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{\(\backslash\)mbox\{diag\}(M\_\{\(\backslash\)rm x\}\string^\{2\}+M\_\{\(\backslash\)rm y\}\string^\{2\})\(\backslash\)f\$.  Then the inversion of \(\backslash\)f\$W\(\backslash\)f\$ is}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{straight forward and the addition of \(\backslash\)f\$L\string^\{T\}\{\(\backslash\)widehat\{W\}\}\string^\{-\/1\}L\(\backslash\)f\$ to the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{Jacobian does not significantly increase the number of non-\/zero entries in the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{matrix \(\backslash\)f\$J\_\{\(\backslash\)rm NS\}\(\backslash\)f\$.  Denote the efficient implementation by}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{\(\backslash\)tilde\{P\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{=}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{\(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{\(\backslash\)begin\{array\}\{cc\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{\{ \(\backslash\)tilde\{J\}\_\{\(\backslash\)rm NS\}\}\& \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{ \& \(\backslash\)widehat\{W\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{\(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)   (10)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{where \(\backslash\)f\$\(\backslash\)tilde\{J\}\_\{\(\backslash\)rm NS\} =J\_\{\(\backslash\)rm NS\}+ L\string^\{T\}\{\(\backslash\)widehat\{W\}\}\string^\{-\/1\}L\(\backslash\)f\$ is the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{augmented Navier-\/Stokes Jacobian matrix.  In our implementation of the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{preconditioner, the linear system involving \(\backslash\)f\$\(\backslash\)tilde\{J\}\_\{\(\backslash\)rm NS\}\(\backslash\)f\$ can either}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{be solved "{}exactly"{}, using \(\backslash\)c SuperLU (in its incarnation as an exact}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{preconditioner; this is the default) or by any other \(\backslash\)c Preconditioner}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{(interpreted as an "{}inexact solver"{}) specified via the access function}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{LagrangeEnforcedFlowPreconditioner::set\_navier\_stokes\_preconditioner(...)}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{Numerical experiments show that a nearly optimal preconditioner is obtained by}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{replacing the solution of the linear system involving the augmented}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{Navier-\/Stokes Jacobian \(\backslash\)f\$ \(\backslash\)tilde\{J\}\_\{\(\backslash\)rm NS\} \(\backslash\)f\$ by an application of Elman,}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{Silvester and Wathen's <a href="{}../../lsc\_navier\_stokes/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{Least-\/Squares Commutator (LSC) preconditioner</a>, and by replacing the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{remaining block-\/solves within these preconditioners by a small number of AMG}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{cycles.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{With these approximations, the computational cost of one application of}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{\(\backslash\)f\$\(\backslash\)tilde P\(\backslash\)f\$ is linear in the number of unknowns.  The optimality of the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{preconditioner can therefore be assessed by demonstrating that the number of}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{GMRES iterations remains constant under mesh refinement.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{\(\backslash\)section example Demo driver and use of the preconditioner}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{To demonstrate how to use the preconditioner, here are the relevant extracts}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{from the driver code <A HREF="{}../../../../demo\_drivers/navier\_stokes/lagrange\_enforced\_flow\_preconditioner/two\_d\_tilted\_square.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{two\_d\_tilted\_square.cc</A> which solves the model problem described above.  As}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{explained in the <a href="{}../../../linear\_solvers/html/index.html"{}>Linear}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{Solvers Tutorial</A> switching to an iterative linear solver is typically}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{performed in the \(\backslash\)c Problem constructor and involves a few straightforward}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{steps:}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{-\/\# <b>Create an instance of the IterativeLinearSolver and pass it to the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{   Problem</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{   In our problem, we choose right preconditioned \(\backslash\)c GMRES as the linear }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{   solver: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{   \(\backslash\)dontinclude two\_d\_tilted\_square.cc}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{   \(\backslash\)skipline Create oomph-\/lib}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{   \(\backslash\)until solver\_pt;}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{-\/\# <b>Create an instance of the Preconditioner and give it access to the }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{   meshes</b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{   The \(\backslash\)c LagrangeEnforceFlowPreconditioner takes a pointer of meshes. }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{   It is important that the bulk mesh is in position \(\backslash\)c 0 :}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{   \(\backslash\)skipline Create the preconditioner}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{   \(\backslash\)until set\_meshes(mesh\_pt);}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{   By default, \(\backslash\)c SuperLUPreconditioner is used for all subsidiary block}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{   solves. To use the LSC preconditioner to approximately solve the}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{   sub-\/block system involving the momentum block, we invoke the following:}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{   \(\backslash\)skipline Create the NS LSC preconditioner}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{   \(\backslash\)until set\_navier\_stokes\_preconditioner(lsc\_prec\_pt);}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{   The LSC preconditioner is discussed in}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{   <a href="{}../../lsc\_navier\_stokes/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{   another tutorial</A>.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{-\/\# <b>Pass the preconditioner to the solver, and the solver to the problem}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{   </b> \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{   \(\backslash\)skipline Pass the preconditioner to the solver.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{   \(\backslash\)until linear\_solver\_pt() = Solver\_pt;}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/lagrange\_enforced\_flow\_preconditioner"{}>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{demo\_drivers/navier\_stokes/lagrange\_enforced\_flow\_preconditioner}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/navier\_stokes/lagrange\_enforced\_flow\_preconditioner/two\_d\_tilted\_square.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{demo\_drivers/navier\_stokes/lagrange\_enforced\_flow\_preconditioner/two\_d\_tilted\_square.cc}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{lgr__navier__stokes_8txt__doxygenified_8h_source_l00455}00455 }
+
+\end{DoxyCode}

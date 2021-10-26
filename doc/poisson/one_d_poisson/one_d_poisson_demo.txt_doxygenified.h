@@ -3,13 +3,14 @@
 \mainpage Demo problem: A one-dimensional Poisson problem
 In this document, we demonstrate how a solve the 1D Poisson problem
 using existing objects from the \c oomph-lib library:
+
 <CENTER>
-<TABLE>  
-<TR> 
-<TD>  
+<TABLE>
+<TR>
+<TD>
 <CENTER>
 <B>One-dimensional model Poisson problem</B>
-</CENTER> 
+</CENTER>
 Solve
 \f[
 \frac{\mbox{d}^2u}{\mbox{d}x^2} = f(x),
@@ -23,7 +24,7 @@ u(0)=u_0 \ \mbox{\ \ \ and \ \ \ } \ \ u(1)=u_1,
 where \f$ u_0 \f$ and \f$ u_1 \f$  are given.
 </TD>
 </TR>
-</TABLE>  
+</TABLE>
 </CENTER>
 
 We provide a detailed discussion of the driver code 

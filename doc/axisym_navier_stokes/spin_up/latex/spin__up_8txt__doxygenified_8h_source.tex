@@ -1,0 +1,784 @@
+\hypertarget{spin__up_8txt__doxygenified_8h_source}{}\doxysection{spin\+\_\+up.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{spin__up_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Example problem: Spin-\/up of a viscous fluid}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{This is our first axisymmetric Navier-\/-\/Stokes example problem. We}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{discuss the non-\/dimensionalisation of the equations and their}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{implementation in \(\backslash\)c oomph-\/lib, and demonstrate the solution of a}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{spin-\/up problem.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{\(\backslash\)section equations The axisymmetric Navier-\/-\/Stokes equations}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{In dimensional form the axisymmetric Navier-\/-\/Stokes equations are}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{given by the momentum equations (for the \(\backslash\)f\$ r\string^* \(\backslash\)f\$ , \(\backslash\)f\$ z\string^* \(\backslash\)f\$ and}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)theta \(\backslash\)f\$ directions, respectively)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{\(\backslash\)rho \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_r\string^*\}\{\(\backslash\)partial t\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{  + \{u\_r\string^*\}\(\backslash\)frac\{\(\backslash\)partial u\_r\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{  -\/ \(\backslash\)frac\{\{u\_\{\(\backslash\)theta\}\string^*\}\string^2\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{  + \{u\_z\string^*\}\(\backslash\)frac\{\(\backslash\)partial u\_r\string^*\}\{\(\backslash\)partial z\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{\(\backslash\)right] = B\_r\string^*\(\backslash\)left(r\string^*,z\string^*,t\string^*\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{+ \(\backslash\)rho G\_r\string^*}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{rr\}\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)tau\_\{rr\}\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{-\/ \(\backslash\)frac\{\(\backslash\)tau\_\{\(\backslash\)theta\(\backslash\)theta\}\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial\(\backslash\)tau\_\{rz\}\string^*\}\{\(\backslash\)partial z\string^*\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{\(\backslash\)rho \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_z\string^*\}\{\(\backslash\)partial t\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{  + \{u\_r\string^*\}\(\backslash\)frac\{\(\backslash\)partial u\_z\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{  + \{u\_z\string^*\}\(\backslash\)frac\{\(\backslash\)partial u\_z\string^*\}\{\(\backslash\)partial z\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)right] = B\_z\string^*\(\backslash\)left(r\string^*,z\string^*,t\string^*\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{+ \(\backslash\)rho G\_z\string^*}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{zr\}\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)tau\_\{zr\}\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial\(\backslash\)tau\_\{zz\}\string^*\}\{\(\backslash\)partial z\string^*\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{\(\backslash\)rho \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\string^*\}\{\(\backslash\)partial t\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{  + \{u\_r\string^*\}\(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{  + \(\backslash\)frac\{u\_r\string^* u\_\{\(\backslash\)theta\}\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{  + u\_z\string^* \(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\string^*\}\{\(\backslash\)partial z\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{\(\backslash\)right] = B\_\(\backslash\)theta\string^*\(\backslash\)left(r\string^*,z\string^*,t\string^*\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{+ \(\backslash\)rho G\_\(\backslash\)theta\string^*}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{\(\backslash\)theta r\}\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)tau\_\{\(\backslash\)theta r\}\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)tau\_\{r\(\backslash\)theta\}\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial\(\backslash\)tau\_\{\(\backslash\)theta z\}\string^*\}\{\(\backslash\)partial z\string^*\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{and the continuity equation}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_r\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{+ \(\backslash\)frac\{u\_r\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial u\_z\string^*\}\{\(\backslash\)partial z\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{= Q\string^*,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{where \(\backslash\)f\$ u\_r\string^* \(\backslash\)f\$ , \(\backslash\)f\$ u\_z\string^* \(\backslash\)f\$ and \(\backslash\)f\$ u\_\{\(\backslash\)theta\}\string^* \(\backslash\)f\$ are the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{radial, axial and azimuthal velocity components respectively, \(\backslash\)f\$ p\string^*}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)f\$ is the pressure and \(\backslash\)f\$ t\string^* \(\backslash\)f\$ is time. We have split the body}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{force into two components: A constant vector \(\backslash\)f\$ \(\backslash\)rho \(\backslash\) G\_i\string^* \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{(where \(\backslash\)f\$ i = r, z, \(\backslash\)theta \(\backslash\)f\$) which typically represents}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{gravitational forces; and a variable body force, \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{B\_i\string^*(r\string^*,z\string^*,t\string^*) \(\backslash\)f\$ . \(\backslash\)f\$ Q\string^*(r\string^*,z\string^*,t\string^*) \(\backslash\)f\$ is a volumetric}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{source term for the continuity equation and is typically equal to}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{zero.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{The components of the dimensional stress tensor \(\backslash\)f\$ \(\backslash\)tau\_\{ij\}\string^* \(\backslash\)f\$ are}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{defined as: }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{\(\backslash\)tau\_\{rr\}\string^* = -\/p\string^*}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{+ \(\backslash\)mu (1+\(\backslash\)Gamma) \(\backslash\)frac\{\(\backslash\)partial u\_r\string^*\}\{\(\backslash\)partial r\string^*\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{\(\backslash\)tau\_\{\(\backslash\)theta\(\backslash\)theta\}\string^* = -\/p\string^*}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{+ \(\backslash\)mu (1+\(\backslash\)Gamma) \(\backslash\)frac\{u\_r\string^*\}\{r\string^*\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)tau\_\{zz\}\string^* = -\/p\string^*}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{+ \(\backslash\)mu (1+\(\backslash\)Gamma) \(\backslash\)frac\{\(\backslash\)partial u\_z\string^*\}\{\(\backslash\)partial z\string^*\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)tau\_\{rz\}\string^* = \(\backslash\)mu \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_r\string^*\}\{\(\backslash\)partial z\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{  + \(\backslash\)Gamma \(\backslash\)frac\{\(\backslash\)partial u\_z\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{\(\backslash\)tau\_\{zr\}\string^* = \(\backslash\)mu \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_z\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{  + \(\backslash\)Gamma \(\backslash\)frac\{\(\backslash\)partial u\_r\string^*\}\{\(\backslash\)partial z\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{\(\backslash\)tau\_\{r \(\backslash\)theta\}\string^* = \(\backslash\)mu \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{  \(\backslash\)Gamma \(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{  -\/ \(\backslash\)frac\{u\_\{\(\backslash\)theta\}\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\)tau\_\{\(\backslash\)theta r\}\string^* = \(\backslash\)mu \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\string^*\}\{\(\backslash\)partial r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{  -\/ \(\backslash\)Gamma \(\backslash\)frac\{u\_\{\(\backslash\)theta\}\string^*\}\{r\string^*\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{\(\backslash\)tau\_\{\(\backslash\)theta z\}\string^* = \(\backslash\)mu \(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\string^*\}\{\(\backslash\)partial z\string^*\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{\(\backslash\)tau\_\{z \(\backslash\)theta\}\string^* = \(\backslash\)mu \(\backslash\)Gamma \(\backslash\)frac\{\(\backslash\)partial u\_\{\(\backslash\)theta\}\string^*\}\{\(\backslash\)partial z\string^*\}.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{We note that taking \(\backslash\)f\$ \(\backslash\)Gamma=1 \(\backslash\)f\$ corresponds to using the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{stress-\/divergence form of the viscous term in the Navier-\/-\/Stokes}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{equations, which is the form that \(\backslash\)c oomph-\/lib uses by default. We}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{can, however, recover the `standard' form by setting \(\backslash\)f\$ \(\backslash\)Gamma=0 \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{We non-\/dimensionalise the equations, using problem-\/specific reference}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{quantities for the velocity, \(\backslash\)f\$ \{\(\backslash\)cal U\},\(\backslash\)f\$ length, \(\backslash\)f\$ \{\(\backslash\)cal L\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)f\$ and time, \(\backslash\)f\$\{\(\backslash\)cal T\},\(\backslash\)f\$ and scale the constant body force vector}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{on the gravitational acceleration, \(\backslash\)f\$ g, \(\backslash\)f\$ so that}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{u\_r\string^* = \{\(\backslash\)cal U\} \(\backslash\), u\_r, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{u\_z\string^* = \{\(\backslash\)cal U\} \(\backslash\), u\_z, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{u\_\(\backslash\)theta\string^* = \{\(\backslash\)cal U\} \(\backslash\), u\_\(\backslash\)theta,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{r\string^* = \{\(\backslash\)cal L\} \(\backslash\), r, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{z\string^* = \{\(\backslash\)cal L\} \(\backslash\), z, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{t\string^* = \{\(\backslash\)cal T\} \(\backslash\), t, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{G\_i\string^* = g \(\backslash\), G\_i,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{p\string^* = \(\backslash\)frac\{\(\backslash\)mu\_\{ref\} \{\(\backslash\)cal U\}\}\{\{\(\backslash\)cal L\}\} \(\backslash\), p, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{B\_i\string^* = \(\backslash\)frac\{\{\(\backslash\)cal U\}\(\backslash\)mu\_\{ref\}\}\{\{\(\backslash\)cal L\}\string^2\} \(\backslash\), B\_i, \(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{Q\string^* = \(\backslash\)frac\{\{\(\backslash\)cal U\}\}\{\{\(\backslash\)cal L\}\}\(\backslash\), Q,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{where we note that the pressure and the variable body force have been}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{non-\/dimensionalised on the viscous scale. \(\backslash\)f\$ \(\backslash\)mu\_\{ref\} \(\backslash\)f\$ and \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)rho\_\{ref\} \(\backslash\)f\$ are reference values for the fluid}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{viscosity and density, respectively. In single-\/fluid problems, they}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{are identical to the viscosity \(\backslash\)f\$ \(\backslash\)mu \(\backslash\)f\$ and density \(\backslash\)f\$ \(\backslash\)rho \(\backslash\)f\$ of}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{the (one and only) fluid in the problem.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{The non-\/dimensional form of the axisymmetric Navier-\/-\/Stokes equations}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{is then given by}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{R\_\{\(\backslash\)rho\} Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{  St \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{  + u\_r \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{  -\/ \(\backslash\)frac\{u\_\(\backslash\)theta\string^2\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{  + u\_z \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{\(\backslash\)right] = B\_r\(\backslash\)left(r,z,t\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{+ R\_\(\backslash\)rho \(\backslash\)frac\{Re\}\{Fr\} G\_r}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{rr\}\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)tau\_\{rr\}\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{-\/ \(\backslash\)frac\{\(\backslash\)tau\_\{\(\backslash\)theta\(\backslash\)theta\}\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{rz\}\}\{\(\backslash\)partial z\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{R\_\{\(\backslash\)rho\} Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{St \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{+ u\_r \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{+ u\_z \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{\(\backslash\)right] = B\_z\(\backslash\)left(r,z,t\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{+ R\_\(\backslash\)rho \(\backslash\)frac\{Re\}\{Fr\} G\_z}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{zr\}\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)tau\_\{zr\}\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{zz\}\}\{\(\backslash\)partial z\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{R\_\{\(\backslash\)rho\} Re \(\backslash\)left[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{St \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial t\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{+ u\_r \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{+ \(\backslash\)frac\{u\_r u\_\(\backslash\)theta\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{+ u\_z \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{\(\backslash\)right] = B\_\(\backslash\)theta\(\backslash\)left(r,z,t\(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{+ R\_\(\backslash\)rho \(\backslash\)frac\{Re\}\{Fr\} G\_\(\backslash\)theta}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{\(\backslash\)theta r\}\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)tau\_\{\(\backslash\)theta r\}\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)tau\_\{r \(\backslash\)theta\}\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)tau\_\{\(\backslash\)theta z\}\}\{\(\backslash\)partial z\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{+ \(\backslash\)frac\{u\_r\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{+ \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{= Q.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{Here the components of the non-\/dimensional stress tensor \(\backslash\)f\$ \(\backslash\)tau\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{\(\backslash\)f\$ are defined as:}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)tau\_\{rr\} = -\/p + R\_\(\backslash\)mu (1+\(\backslash\)Gamma) \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial r\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{\(\backslash\)tau\_\{\(\backslash\)theta\(\backslash\)theta\} = -\/p + R\_\(\backslash\)mu (1+\(\backslash\)Gamma) \(\backslash\)frac\{u\_r\}\{r\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{\(\backslash\)tau\_\{zz\} = -\/p + R\_\(\backslash\)mu (1+\(\backslash\)Gamma) \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial z\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{\(\backslash\)tau\_\{rz\} = R\_\(\backslash\)mu \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{  + \(\backslash\)Gamma \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{\(\backslash\)tau\_\{zr\} = R\_\(\backslash\)mu \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_z\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{  + \(\backslash\)Gamma \(\backslash\)frac\{\(\backslash\)partial u\_r\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{\(\backslash\)tau\_\{r \(\backslash\)theta\} = R\_\(\backslash\)mu \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{  \(\backslash\)Gamma \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{  -\/ \(\backslash\)frac\{u\_\(\backslash\)theta\}\{r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{\(\backslash\)tau\_\{\(\backslash\)theta r\} = R\_\(\backslash\)mu \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{  \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial r\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{  -\/ \(\backslash\)Gamma \(\backslash\)frac\{u\_\(\backslash\)theta\}\{r\} \(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{\(\backslash\)tau\_\{\(\backslash\)theta z\} = R\_\(\backslash\)mu \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial z\}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\)qquad}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)tau\_\{z \(\backslash\)theta\} = R\_\(\backslash\)mu \(\backslash\)Gamma \(\backslash\)frac\{\(\backslash\)partial u\_\(\backslash\)theta\}\{\(\backslash\)partial z\}.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{The dimensionless parameters}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{Re = \(\backslash\)frac\{\{\(\backslash\)cal U\}\{\(\backslash\)cal L\}\(\backslash\)rho\_\{ref\}\}\{\(\backslash\)mu\_\{ref\}\}, \(\backslash\)qquad }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{St = \(\backslash\)frac\{\{\(\backslash\)cal L\}\}\{\{\(\backslash\)cal U\}\{\(\backslash\)cal T\}\}, \(\backslash\)qquad }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{Fr = \(\backslash\)frac\{\{\(\backslash\)cal U\}\string^2\}\{g\{\(\backslash\)cal L\}\},}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{are the Reynolds number, Strouhal number and Froude number}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{respectively. \(\backslash\)f\$ R\_\(\backslash\)rho=\(\backslash\)rho/\(\backslash\)rho\_\{ref\} \(\backslash\)f\$ and \(\backslash\)f\$ R\_\(\backslash\)mu}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{=\(\backslash\)mu/\(\backslash\)mu\_\{ref\}\(\backslash\)f\$ represent the ratios of the fluid's density and its}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{dynamic viscosity, relative to the density and viscosity values used}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{to form the non-\/dimensional parameters (By default, \(\backslash\)f\$ R\_\(\backslash\)rho = R\_\(\backslash\)mu}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{= 1 \(\backslash\)f\$ ; other values tend to be used in problems involving multiple}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{fluids). We refer to <A HREF="{}../../../navier\_stokes/driven\_cavity/html/index.html\#params"{}>another tutorial</A> }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{for a more detailed discussion of these non-\/dimensional parameters and}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{their default values.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{The above equations are typically augmented by Dirichlet boundary conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{for (some of) the velocity components. On boundaries where }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{no velocity boundary conditions are applied, the flow satisfies the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{"{}traction free"{} natural boundary condition}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{\(\backslash\)f\$ t\_i = 0 \(\backslash\)f\$. For example, in the spin-\/up problem to be considered}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{below, no condition is}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{applied to the \(\backslash\)f\$ z \(\backslash\)f\$-\/component of the velocity on the symmetry}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{boundary, which means that the traction in this direction, \(\backslash\)f\$ t\_z \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{is equal to zero.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{If the velocity is prescribed along the entire domain boundary, }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{the fluid pressure \(\backslash\)f\$ p \(\backslash\)f\$ is only determined up to an arbitrary}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{constant. This indeterminacy may be overcome by prescribing the }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{value of the pressure at a single point in the domain. See the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{exercises at the end of the (non-\/axisymmetric) <A HREF="{}../../../navier\_stokes/driven\_cavity/html/index.html\#exercises"{}>driven cavity example</A>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{for further discussion of this issue.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{\(\backslash\)section implementation Implementation}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{\(\backslash\)c oomph-\/lib provides two LBB-\/stable isoparametric axisymmetric}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{Navier-\/-\/Stokes elements that are based on the \(\backslash\)c QElement<2,3> family of }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{geometric finite elements. They are nine-\/node quadrilateral elements}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{which only differ in the way in which the pressure is represented. In}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{\(\backslash\)c AxisymmetricQCrouzeixRaviartElements the pressure is represented by}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{a discontinuous, piecewise bi-\/linear function. \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{AxisymmetricQTaylorHoodElements represent the pressure by a}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{globally-\/continuous, piecewise bi-\/linear interpolation between the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{pressure values that are stored at the elements' four corner nodes.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{The implementation of these axisymmetric Navier-\/-\/Stokes elements is}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{very similar to their non-\/axisymmetric counterparts, discussed in}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{detail in <A HREF="{}../../../navier\_stokes/driven\_cavity/html/index.html\#element\_types"{}>another tutorial</A>.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{The radial and axial nodal positions are stored at the first and}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{second nodal coordinates respectively, and can therefore be accessed}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{by the member functions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{-\/ Radial coordinate (\(\backslash\)f\$ r \(\backslash\)f\$): \(\backslash\)c Node::x(0)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{-\/ Axial coordinate (\(\backslash\)f\$ z \(\backslash\)f\$): \(\backslash\)c Node::x(1)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{By default the radial, axial and azimuthal components are stored as}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{the first, second and third nodal values respectively, and can}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{therefore be accessed by the member functions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{-\/ Radial component (\(\backslash\)f\$ u\_r \(\backslash\)f\$): \(\backslash\)c Node::value(0)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{-\/ Axial component (\(\backslash\)f\$ u\_z \(\backslash\)f\$): \(\backslash\)c Node::value(1)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{-\/ Azimuthal component (\(\backslash\)f\$ u\_\(\backslash\)theta \(\backslash\)f\$): \(\backslash\)c Node::value(2)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{\(\backslash\)section example The example problem}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{The solution of the axisymmetric Navier-\/-\/Stokes equations will be}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{illustrated using the example of a spin-\/up problem. We consider a}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{sealed cylindrical container of radius \(\backslash\)f\$ R \(\backslash\)f\$ and height \(\backslash\)f\$ H \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{filled with a fluid of density \(\backslash\)f\$ \(\backslash\)rho \(\backslash\)f\$ and dynamic viscosity \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{\(\backslash\)mu \(\backslash\)f\$. Both the fluid and the cylinder are initially at rest, and at}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{time \(\backslash\)f\$ t=0 \(\backslash\)f\$ the cylinder immediately begins to rotate about its}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{vertical axis of symmetry with a constant angular velocity \(\backslash\)f\$ \(\backslash\)Omega}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{\(\backslash\)f\$. Initially, the bulk of the fluid remains stationary, with the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{exception of the regions next to the solid boundaries. The fluid near}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{the top and bottom `lids' is moving faster than that along the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{bulk of the cylinder, and gets driven radially outward. It is replaced}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{by fluid from the interior, setting up secondary flows in the \(\backslash\)f\$ r \(\backslash\)f\$-\/\(\backslash\)f\$ z}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{\(\backslash\)f\$ plane, until eventually the }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{entire fluid is moving in solid body rotation with the cylinder.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{\(\backslash\)image html spin\_up\_diagram.gif "{}Sketch of the problem. The red `slice' represents the domain in which the axisymmetric Navier-\/-\/Stokes equations will be solved. "{} }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{\(\backslash\)image latex spin\_up\_diagram.eps "{}Sketch of the problem. The red `slice' represents the domain in which the axisymmetric Navier-\/-\/Stokes equations will be solved. "{} width=0.3\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{We model this problem by solving the axisymmetric Navier-\/-\/Stokes}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{equations in a rectangular domain of width \(\backslash\)f\$ R \(\backslash\)f\$ and height \(\backslash\)f\$ H}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{\(\backslash\)f\$. For our non-\/dimensionalisation we choose the length scale \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{\{\(\backslash\)cal L\} \(\backslash\)f\$ to be the radius of the cylinder \(\backslash\)f\$ R \(\backslash\)f\$ and the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{velocity scale \(\backslash\)f\$ \{\(\backslash\)cal U\} \(\backslash\)f\$ to be the speed of the outer wall \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{R \(\backslash\), \(\backslash\)Omega \(\backslash\)f\$. The time scale \(\backslash\)f\$ \{\(\backslash\)cal T\} \(\backslash\)f\$ is chosen to be \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{\{\(\backslash\)cal L\}/\{\(\backslash\)cal U\} \(\backslash\)f\$ so that the Strouhal number is equal to one.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{We choose an aspect ratio of \(\backslash\)f\$ H = 1.4 R \(\backslash\)f\$ and therefore our}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{domain \(\backslash\)f\$ D \(\backslash\)f\$ is defined to be}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{D = \(\backslash\)\{ r \(\backslash\)in [0.0,1.0], \(\backslash\); z \(\backslash\)in [0.0,1.4] \(\backslash\)\}.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{The governing equations are subject to the Dirichlet boundary}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{u\_r = 0, \(\backslash\)qquad u\_z = 0, \(\backslash\)qquad u\_\(\backslash\)theta = r}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{on the bottom, right and top boundaries and }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{u\_r = 0, \(\backslash\)qquad u\_\(\backslash\)theta = 0}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{on the left boundary, \(\backslash\)f\$ r=0 \(\backslash\)f\$. The \(\backslash\)f\$ z \(\backslash\)f\$-\/component of the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{velocity on this boundary is traction-\/free, which corresponds to the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{symmetry condition \(\backslash\)f\$ \(\backslash\)partial u\_z /\(\backslash\)partial r = 0 \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{The figure below shows contour plots of the azimuthal}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{velocity component and the pressure distribution with superimposed}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{streamlines, taken from <A HREF="{}../figures/spin\_up\_stream.avi"{}>an animation of the flow field</A>,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{computed with axisymmetric Taylor-\/Hood elements for the parameters \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{Re = Re \(\backslash\), St = 5.0 \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{\(\backslash\)image html spin\_up\_stream.gif "{}Plot of the azimuthal velocity and pressure fields. "{} }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{\(\backslash\)image latex spin\_up\_stream.eps "{}Plot of the azimuthal velocity and pressure fields. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{The figure below shows carpet plots of all three velocity components}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{and the pressure, taken from <A HREF="{}../figures/spin\_up\_carpet.avi"{}>another animation of the flow field</A>,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{computed with axisymmetric Taylor-\/Hood elements for the parameters \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{Re = Re \(\backslash\), St = 5.0 \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{\(\backslash\)image html spin\_up\_carpet.gif "{}Plot of the velocity and pressure fields. "{} }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{\(\backslash\)image latex spin\_up\_carpet.eps "{}Plot of the velocity and pressure fields. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{\(\backslash\)section namespace Global parameters and functions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{The Reynolds number and the Womersley number (the product of the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{Reynolds and Strouhal numbers) are needed in this problem. As usual,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{we define them in a namespace: }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{\(\backslash\)dontinclude spin\_up.cc}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{\(\backslash\)skipline start\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)until End of namespace}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{We start by specifying the (non-\/dimensional) length of time we want to}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{run the simulation for and the size of the timestep. Because all driver}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{codes are run as part of \(\backslash\)c oomph-\/lib's self-\/testing routines we allow}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{the user to pass a command line argument to the executable which sets}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{the maximum time to some lower value.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{\(\backslash\)until t\_max = 0.02}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{Next we specify the dimensions of the mesh and the number of elements}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{in the radial and azimuthal directions.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{\(\backslash\)skipline Number of elements in radial (r) direction}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{\(\backslash\)until l\_z}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{We build the problem using \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{RefineableAxisymmetricQTaylorHoodElements and the \(\backslash\)c BDF<2>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{timestepper, before calling \(\backslash\)c unsteady\_run(...). This function solves}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{the system at each timestep using the \(\backslash\)c }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{Problem::unsteady\_newton\_solve(...) function before documenting the result.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{\(\backslash\)skipline RefineableAxisymmetricQTaylorHoodElements}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{We then repeat the process with \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{RefineableAxisymmetricQCrouzeixRaviartElements.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{\(\backslash\)skipline RefineableAxisymmetricQCrouzeixRaviartElements}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{\(\backslash\)until End of main}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{\(\backslash\)section problem The problem class}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{The \(\backslash\)c Problem class for our unsteady axisymmetric Navier-\/-\/Stokes}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{problem is very similar to that used in the <A HREF="{}../../../navier\_stokes/rayleigh\_channel/html/index.html"{}>Rayleigh channel example</A>.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{We specify the type of the element and the type}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{of the timestepper (assumed to be a member of the \(\backslash\)c BDF family) as}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{template parameters, and pass the number of elements and domain}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{length in both coordinate directions to the problem constructor. We}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{define an empty destructor, functions to set the initial and boundary}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{conditions and a post-\/processing function \(\backslash\)c doc\_solution(...),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{which will be used by the timestepping function \(\backslash\)c unsteady\_run(...).}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{\(\backslash\)dontinclude spin\_up.cc}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{\(\backslash\)until dir\_name}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{Next we define an access function to the specific \(\backslash\)c Mesh:}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{\(\backslash\)skipline Access function for the specific mesh}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{We reset the boundary conditions before each solve by overloading }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{\(\backslash\)c Problem::actions\_before\_newton\_solve(). This is to ensure that}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{all newly-\/created nodes are given the correct boundary conditions.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{\(\backslash\)skipline private}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{\(\backslash\)until actions\_after\_newton\_solve}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{In Navier-\/-\/Stokes problems in which the velocity is prescribed along}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{the entire domain boundary, the pressure is only determined up an}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{arbitrary constant, making it necessary to "{}pin"{} one pressure}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{value. If the pinned pressure degree of freedom is associated with}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{an element that is unrefined during the mesh adaptation, the pinned}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{degree of freedom may no longer exist in the adapted problem. We}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{therefore use the function \(\backslash\)c Problem::actions\_after\_adapt() to}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{ensure that precisely one pressure degree of freedom is pinned when}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{re-\/solving the adapted problem. Additionally, the possible presence}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{of hanging nodes in an adapted mesh requires special treatment for}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{elements (e.g. Taylor-\/Hood elements) in which the pressure is}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{represented by a low-\/order  interpolation between a subset of the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{element's nodal values. The function \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{AxisymmetricNavierStokesEquations::pin\_redundant\_nodal\_pressures(...)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{performs the required tasks. The technical details of these functions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{are discussed in detail in an <A HREF="{}../../../navier\_stokes/adaptive\_driven\_cavity/html/index.html"{}>earlier tutorial</A>.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{\(\backslash\)skipline After adaptation}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{\(\backslash\)until End of actions\_after\_adapt}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{Finally, we provide a helper function}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{\(\backslash\)c fix\_pressure(...) which pins a pressure value in a specified element}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{and assigns a specific value.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{\(\backslash\)skipline Fix pressure in element}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{\(\backslash\)until End of problem class}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{\(\backslash\)section constructor The problem constructor}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{We start by building the timestepper, determining its type from the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{class's second template argument, and pass a pointer to it to }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{the problem, using the function \(\backslash\)c Problem::add\_time\_stepper\_pt(...).}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{\(\backslash\)until add\_time\_stepper\_pt}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{Next we build the adaptive mesh and specify an error estimator, which}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{will be used to guide the automatic mesh adaptation. We pass this to}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{the mesh, set the maximum refinement level and override the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{maximum and minimum permitted errors, which are used to determine}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{whether or not an element should be refined/unrefined during mesh}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{adaptation.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{\(\backslash\)skipline Build and assign mesh}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{\(\backslash\)until min\_permitted\_error}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{We pin the radial and azimuthal velocity components on all boundaries,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{and the axial component on the three solid boundaries.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{\(\backslash\)skipline Set the boundary conditions for this problem}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{\(\backslash\)until End of loop over mesh boundaries}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{We pass the pointers to the Reynolds and Womersley numbers,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{\(\backslash\)f\$ Re \(\backslash\)f\$ and \(\backslash\)f\$ Re\(\backslash\), St \(\backslash\)f\$ , and the pointer to the global time}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{object (created when we called \(\backslash\)c Problem::add\_time\_stepper\_pt(...)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{above) to the elements. Because we know that the mesh will remain}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{stationary we can disable the ALE formulation of the unsteady}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{equations by calling \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{AxisymmetricNavierStokesEquations::disable\_ALE(). This suppresses}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{the additional computation required to calculate the correction to the Eulerian}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{time-\/derivative \(\backslash\)f\$ \(\backslash\)partial u /\(\backslash\)partial t \(\backslash\)f\$ which is required if}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{the mesh is moving, as discussed in detail in <A HREF="{}../../../optimisation/html/index.html\#ale"{}>another tutorial</A>.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{\(\backslash\)skipline Complete the problem setup to make the elements fully functional}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{\(\backslash\)until End of loop over elements}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{Since no traction boundary conditions are}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{applied anywhere, the pressure is only determined up to an arbitrary}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{constant. For the reasons discussed above we pin any redundant}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{pressure degrees of freedom caused by hanging nodes and then ensure a}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{unique solution by pinning a single pressure value. Finally, we set up}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{the equation numbering scheme using the function \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{Problem::assign\_eqn\_numbers().}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{\(\backslash\)skipline Pin redundant pressure dofs}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{\(\backslash\)until End of constructor}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{\(\backslash\)section set\_initial\_condition Initial conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{The function \(\backslash\)c set\_initial\_condition() sets the initial conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{for the problem by looping over all the nodes in the mesh and setting}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{all velocity components to zero. No initial conditions are required}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{for the pressure. We then }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{call the function \(\backslash\)c Problem::assign\_initial\_values\_impulsive() which}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{copies the current values at each of the nodes into the required}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{number of history values for the timestepper in question. This}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{corresponds to an impulsive start, as for all time \(\backslash\)f\$ t \(\backslash\)leq 0 \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{the fluid is at rest. At the first}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{timestep, the solid domain boundaries are immediately moving with a speed}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{corresponding to their radial distance from the symmetry boundary.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{\(\backslash\)c Problem::set\_initial\_condition() is called after each mesh adaptation on}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{the first timestep only. This means that any newly-\/created nodes}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{obtain their values from the actual (analytical) initial}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{conditions rather than from interpolation of the values of}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{previously-\/existing nodes.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{\(\backslash\)skipline start\_of\_set\_initial\_condition}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{\(\backslash\)until End of set\_initial\_condition}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{\(\backslash\)section set\_boundary\_conditions Boundary conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{The function \(\backslash\)c set\_boundary\_conditions() sets the boundary conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{for the problem. On the three solid boundaries (\(\backslash\)f\$ r = 1.0 \(\backslash\)f\$, \(\backslash\)f\$ z}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{= 0.0 \(\backslash\)f\$ and \(\backslash\)f\$ z = 1.4 \(\backslash\)f\$) we set the radial and axial velocities}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{to zero so that there is no penetration of the wall by the fluid or}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{flow along it. To simulate the domain rotating around the axis \(\backslash\)f\$ r =}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{0 \(\backslash\)f\$ we set the azimuthal velocity at each node along these}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{boundaries to be equal to the radial position of the node. On the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{symmetry boundary (\(\backslash\)f\$ r = 0 \(\backslash\)f\$) we set the radial and azimuthal}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{velocities to zero but leave the axial component unconstrained. As}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{discussed  <A HREF="{}\#equations"{}>above</A>, not applying}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{a velocity boundary condition causes the flow to satisfy the "{}traction}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{free"{} natural boundary condition; in this case, \(\backslash\)f\$ t\_z = 0 \(\backslash\)f\$. This}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{corresponds to the symmetry condition \(\backslash\)f\$ \(\backslash\)partial u\_z /\(\backslash\)partial r = 0 \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{\(\backslash\)skipline start\_of\_set\_boundary\_conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{\(\backslash\)until End of set\_boundary\_conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{As expected, this member function documents the computed}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{solution. We first print the value of the current time to the screen,}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{before outputting the computed solution.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{\(\backslash\)skipline start\_of\_doc\_solution}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{\(\backslash\)until End of doc\_solution}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{\(\backslash\)section timestepping The timestepping loop}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{The function \(\backslash\)c unsteady\_run(...) is used to perform the timestepping}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{procedure. We start by creating a \(\backslash\)c DocInfo object to store the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{output directory and the label for the output files.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{Before using any of \(\backslash\)c oomph-\/lib's timestepping functions, the timestep}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{\(\backslash\)f\$ dt \(\backslash\)f\$ must be passed to the problem's timestepping routines by calling}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{the function \(\backslash\)c Problem::initialise\_dt(...) which sets the weights for}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{all timesteppers in the problem. Next we assign the initial conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{by calling \(\backslash\)c Problem::set\_initial\_condition(), which was discussed}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{<A HREF="{}\#set\_initial\_condition"{}>above</A>.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00617}00617 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00618}00618 \textcolor{comment}{\(\backslash\)skipline Initialise timestep}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00619}00619 \textcolor{comment}{\(\backslash\)until set\_initial\_condition}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00620}00620 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00621}00621 \textcolor{comment}{We define the maximum number of spatial adaptations which are}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00622}00622 \textcolor{comment}{permitted per timestep, and refine the mesh uniformly twice.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00623}00623 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00624}00624 \textcolor{comment}{\(\backslash\)skipline Maximum number}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00625}00625 \textcolor{comment}{\(\backslash\)until refine\_uniformly()}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00626}00626 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00627}00627 \textcolor{comment}{We determine the number of timesteps to be performed and document the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00628}00628 \textcolor{comment}{initial conditions. A flag, \(\backslash\)c first\_timestep, is initialised and set}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00629}00629 \textcolor{comment}{to true. This flag will be passed to \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00630}00630 \textcolor{comment}{Problem::unsteady\_newton\_solve(...), and when set to true instructs the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00631}00631 \textcolor{comment}{code to re-\/assign the initial conditions after every mesh adaptation.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00632}00632 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00633}00633 \textcolor{comment}{\(\backslash\)skipline Determine number of timesteps}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00634}00634 \textcolor{comment}{\(\backslash\)until first\_timestep}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00635}00635 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00636}00636 \textcolor{comment}{A key feature of this problem is the fact that the flow field}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00637}00637 \textcolor{comment}{approaches a "{}trivial"{} solution (rigid body rotation) which can be}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00638}00638 \textcolor{comment}{fully-\/resolved by the discretisation. In that case, equidistribution}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00639}00639 \textcolor{comment}{of the error (normalised by the norm of the global error which tends}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00640}00640 \textcolor{comment}{to zero!) leads to strong uniform mesh refinement despite the fact}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00641}00641 \textcolor{comment}{that the solution is fully converged. To avoid this, we prescribe a}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00642}00642 \textcolor{comment}{constant reference flux to normalise the error. For more details, see}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00643}00643 \textcolor{comment}{the discussion in the <A HREF="{}../../../the\_data\_structure/html/classoomph\_1\_1Z2ErrorEstimator.html"{}>\(\backslash\)c Z2ErrorEstimator class reference</A>.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00644}00644 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00645}00645 \textcolor{comment}{\(\backslash\)skipline Specify normalising factor explicitly}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00646}00646 \textcolor{comment}{\(\backslash\)until reference\_flux\_norm()}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00647}00647 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00648}00648 \textcolor{comment}{Finally, we perform the actual timestepping loop. For each timestep}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00649}00649 \textcolor{comment}{the function \(\backslash\)c unsteady\_newton\_solve(dt) is called and the solution}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00650}00650 \textcolor{comment}{documented.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00651}00651 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00652}00652 \textcolor{comment}{\(\backslash\)skipline Timestepping loop}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00653}00653 \textcolor{comment}{\(\backslash\)until End of unsteady\_run}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00654}00654 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00655}00655 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00656}00656 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00657}00657 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00658}00658 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00659}00659 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00660}00660 \textcolor{comment}{\(\backslash\)subsection good\_practice\_bcs Good practice: Assigning boundary conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00661}00661 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00662}00662 \textcolor{comment}{In our driver code we reset the boundary conditions for the problem}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00663}00663 \textcolor{comment}{before each Newton solve. This is done to ensure that any}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00664}00664 \textcolor{comment}{new boundary nodes created during mesh refinement are explicitly given}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00665}00665 \textcolor{comment}{the correct boundary conditions. However, the function that actually}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00666}00666 \textcolor{comment}{creates the new nodes, \(\backslash\)c RefineableQElement<2>::build(...),}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00667}00667 \textcolor{comment}{automatically assigns new nodes with values by interpolating within the father}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00668}00668 \textcolor{comment}{element. Since in our case the boundary conditions are linear, there}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00669}00669 \textcolor{comment}{is in fact no need to reset them at any point during}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00670}00670 \textcolor{comment}{the simulation, as the new boundary nodes were already given precisely the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00671}00671 \textcolor{comment}{correct values by interpolation. Resetting the boundary conditions is}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00672}00672 \textcolor{comment}{only strictly necessary, therefore, in cases where:}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00673}00673 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00674}00674 \textcolor{comment}{-\/\# The boundary conditions are given by a function which is of higher}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00675}00675 \textcolor{comment}{   order than the shape functions used by the finite element, or}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00676}00676 \textcolor{comment}{-\/\# The boundary conditions are time-\/dependent.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00677}00677 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00678}00678 \textcolor{comment}{\(\backslash\)subsection good\_practice\_ics Good practice: Assigning initial conditions}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00679}00679 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00680}00680 \textcolor{comment}{Similarly, we repeatedly call the \(\backslash\)c set\_initial\_condition() function}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00681}00681 \textcolor{comment}{after each mesh adaptation during the first timestep. This is done to}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00682}00682 \textcolor{comment}{ensure that the exact initial conditions are given to newly created}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00683}00683 \textcolor{comment}{nodes during mesh refinement. Again, this is not strictly necessary in our}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00684}00684 \textcolor{comment}{case since \(\backslash\)c RefineableQElement<2>::build(...) provides newly-\/created}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00685}00685 \textcolor{comment}{nodes with history values which are computed by interpolation of the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00686}00686 \textcolor{comment}{history values stored at the nodes of the father element. Our initial}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00687}00687 \textcolor{comment}{conditions are constant and can therefore be represented exactly by}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00688}00688 \textcolor{comment}{this procedure. Should the initial conditions be given by an}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00689}00689 \textcolor{comment}{analytical function of higher order than the shape functions used by}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00690}00690 \textcolor{comment}{the finite elements, however, it would indeed be necessary to explicitly}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00691}00691 \textcolor{comment}{provide newly-\/created nodes with the exact initial conditions during}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00692}00692 \textcolor{comment}{the first timestep. For a more in-\/depth discussion, see <A HREF="{}../../../unsteady\_heat/two\_d\_unsteady\_heat\_adapt/html/index.html\#spatial\_adapt"{}>another tutorial</A>.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00693}00693 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00694}00694 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00695}00695 \textcolor{comment}{<b>A slight subtlety</b>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00696}00696 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00697}00697 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00698}00698 \textcolor{comment}{Omitting the re-\/assignment of the initial conditions on the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00699}00699 \textcolor{comment}{adapted mesh when performing the first timestep does have a subtle}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00700}00700 \textcolor{comment}{effect that we encourage you to explore in the exercises below.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00701}00701 \textcolor{comment}{You will observe that the solution obtained when re-\/assigning}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00702}00702 \textcolor{comment}{the initial conditions differs <b>very</b> slightly}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00703}00703 \textcolor{comment}{from that obtained when this step is suppressed. This obviously seems to}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00704}00704 \textcolor{comment}{contradict the statements made above and requires some explanation.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00705}00705 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00706}00706 \textcolor{comment}{To understand why the behaviour is not unexpected (and perfectly acceptable!)}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00707}00707 \textcolor{comment}{let us analyse in more detail what really happens when we compute the first}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00708}00708 \textcolor{comment}{timestep in a spatially adaptive computation. When we perform}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00709}00709 \textcolor{comment}{the first Newton solve on the original mesh, the history values}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00710}00710 \textcolor{comment}{(which, for a BDF timestepper, represent the solution at previous}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00711}00711 \textcolor{comment}{timesteps) are identically equal to zero. The current values are}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00712}00712 \textcolor{comment}{also zero but this has no particular significance -\/-\/ they simply}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00713}00713 \textcolor{comment}{provide the initial guess for the solution at the advanced time}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00714}00714 \textcolor{comment}{level and their values are subsequently updated by the Newton solver.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00715}00715 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00716}00716 \textcolor{comment}{Following the convergence of the Newton solver, the history values}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00717}00717 \textcolor{comment}{will therefore have retained their original values (zero) while}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00718}00718 \textcolor{comment}{the current values will have been updated to represent the "{}correct"{}}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00719}00719 \textcolor{comment}{solution of the nonlinear problem at the next timestep (on the current}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00720}00720 \textcolor{comment}{mesh). The accuracy of this solution is now assessed by the spatial}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00721}00721 \textcolor{comment}{error estimator. If the estimated error is deemed too large, the mesh}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00722}00722 \textcolor{comment}{is adapted and all quantities (history values <b>and</b> current}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00723}00723 \textcolor{comment}{values) are automatically transferred onto the new mesh by}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00724}00724 \textcolor{comment}{interpolation -\/-\/ exactly as discussed above. Interpolation of the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00725}00725 \textcolor{comment}{(identically equal to zero) history values onto the new mesh assigns}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00726}00726 \textcolor{comment}{zero history values for all newly-\/created nodes -\/-\/ exactly what}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00727}00727 \textcolor{comment}{we (needlessly) do in our own implementation of}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00728}00728 \textcolor{comment}{\(\backslash\)c Problem::set\_initial\_conditions(). The interpolation of the current}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00729}00729 \textcolor{comment}{values transfers what is our current}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00730}00730 \textcolor{comment}{"{}best guess"{} for the solution at the advanced time onto the new mesh.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00731}00731 \textcolor{comment}{In principle, this provides a "{}better"{} initial guess for the solution}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00732}00732 \textcolor{comment}{at the advanced time level than the zero initial guess that we}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00733}00733 \textcolor{comment}{re-\/assign when we call \(\backslash\)c Problem::set\_initial\_conditions() but (as}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00734}00734 \textcolor{comment}{long as the Newton iteration converges) this assignment is irrelevant.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00735}00735 \textcolor{comment}{However, starting the Newton iteration from a different}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00736}00736 \textcolor{comment}{initial guess will almost certainly lead to a slightly different solution -\/-\/ a}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00737}00737 \textcolor{comment}{solution being defined as a(ny) set of current values for which the maximum}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00738}00738 \textcolor{comment}{residual in the \(\backslash\)c Problem's residual vector is less than the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00739}00739 \textcolor{comment}{required tolerance. Hence, even though omitting or performing the re-\/assignment}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00740}00740 \textcolor{comment}{of the initial conditions leads to two <b>slightly</b> different}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00741}00741 \textcolor{comment}{solutions, both solutions are equally acceptable (within the threshold}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00742}00742 \textcolor{comment}{that is implicit in our convergence criterion for the Newton iteration). }}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00743}00743 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00744}00744 \textcolor{comment}{\(\backslash\)subsection exercises Exercises}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00745}00745 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00746}00746 \textcolor{comment}{-\/\# Remove the function \(\backslash\)c set\_initial\_condition() entirely from the}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00747}00747 \textcolor{comment}{   driver code (do not just leave it empty!), so that the initial}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00748}00748 \textcolor{comment}{   conditions are not constantly reset during the first timestep.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00749}00749 \textcolor{comment}{   Confirm that the code still produces approximately (but not}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00750}00750 \textcolor{comment}{   precisely) the same results, as discussed in the <A HREF="{}\#good\_practice\_ics"{}>previous section</A>.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00751}00751 \textcolor{comment}{-\/\# Restore \(\backslash\)c set\_initial\_condition() to  its original state, but}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00752}00752 \textcolor{comment}{   remove the call to \(\backslash\)c assign\_initial\_values\_impulsive(). Confirm}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00753}00753 \textcolor{comment}{   that the code still produces precisely the same results. Why are}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00754}00754 \textcolor{comment}{   exactly the same results produced this time?}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00755}00755 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00756}00756 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00757}00757 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00758}00758 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00759}00759 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00760}00760 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00761}00761 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00762}00762 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/axisym\_navier\_stokes/spin\_up/"{}>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00763}00763 \textcolor{comment}{demo\_drivers/axisym\_navier\_stokes/spin\_up/}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00764}00764 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00765}00765 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00766}00766 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00767}00767 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00768}00768 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/axisym\_navier\_stokes/spin\_up/spin\_up.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00769}00769 \textcolor{comment}{demo\_drivers/axisym\_navier\_stokes/spin\_up/spin\_up.cc}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00770}00770 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00771}00771 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00772}00772 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00773}00773 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00774}00774 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00775}00775 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00776}00776 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00777}00777 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00778}00778 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{spin__up_8txt__doxygenified_8h_source_l00779}00779 }
+
+\end{DoxyCode}

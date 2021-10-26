@@ -1,13 +1,20 @@
 \hypertarget{namespaceoomph_1_1MeshChecker}{}\doxysection{oomph\+::Mesh\+Checker Namespace Reference}
 \label{namespaceoomph_1_1MeshChecker}\index{oomph::MeshChecker@{oomph::MeshChecker}}
+
+
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$class G\+E\+O\+M\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+B\+A\+SE , class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1MeshChecker_a8e9d9ec5a142aba10ec0f3beb9b61d43}{assert\+\_\+geometric\+\_\+element}} (const unsigned \&dim, const unsigned \&nnode\+\_\+1d=0)
-\begin{DoxyCompactList}\small\item\em Helper function to assert that finite element of type E\+L\+E\+M\+E\+NT can be cast to base class of type G\+E\+O\+M\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+B\+A\+SE -- useful to avoid confusion if a mesh that was written for a specific element type (e.\+g. a \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}}) is used with another one (e.\+g. a \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}. First argument specifies the required spatial dimension of the element (i.\+e. the number of local coordinates). The optional second argument specifies the required nnode\+\_\+1d (i.\+e. the number of nodes along a 1D element edge). Can be omitted if the mesh can handle any number in which case this test is skipped. \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\footnotesize template$<$class GEOM\+\_\+\+ELEMENT\+\_\+\+BASE , class ELEMENT $>$ }\\void \mbox{\hyperlink{namespaceoomph_1_1MeshChecker_a8e9d9ec5a142aba10ec0f3beb9b61d43}{assert\+\_\+geometric\+\_\+element}} (const unsigned \&dim, const unsigned \&nnode\+\_\+1d=0)
+\begin{DoxyCompactList}\small\item\em Helper function to assert that finite element of type ELEMENT can be cast to base class of type GEOM\+\_\+\+ELEMENT\+\_\+\+BASE -- useful to avoid confusion if a mesh that was written for a specific element type (e.\+g. a \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}) is used with another one (e.\+g. a \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}. First argument specifies the required spatial dimension of the element (i.\+e. the number of local coordinates). The optional second argument specifies the required nnode\+\_\+1d (i.\+e. the number of nodes along a 1D element edge). Can be omitted if the mesh can handle any number in which case this test is skipped. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
+
 Namespace with helper function to check element type in mesh constructors (say). 
 
 \doxysubsection{Function Documentation}
@@ -15,14 +22,14 @@ Namespace with helper function to check element type in mesh constructors (say).
 \index{oomph::MeshChecker@{oomph::MeshChecker}!assert\_geometric\_element@{assert\_geometric\_element}}
 \index{assert\_geometric\_element@{assert\_geometric\_element}!oomph::MeshChecker@{oomph::MeshChecker}}
 \doxysubsubsection{\texorpdfstring{assert\_geometric\_element()}{assert\_geometric\_element()}}
-{\footnotesize\ttfamily template$<$class G\+E\+O\+M\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+B\+A\+SE , class E\+L\+E\+M\+E\+NT $>$ \\
+{\footnotesize\ttfamily template$<$class GEOM\+\_\+\+ELEMENT\+\_\+\+BASE , class ELEMENT $>$ \\
 void oomph\+::\+Mesh\+Checker\+::assert\+\_\+geometric\+\_\+element (\begin{DoxyParamCaption}\item[{const unsigned \&}]{dim,  }\item[{const unsigned \&}]{nnode\+\_\+1d = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 
 
-Helper function to assert that finite element of type E\+L\+E\+M\+E\+NT can be cast to base class of type G\+E\+O\+M\+\_\+\+E\+L\+E\+M\+E\+N\+T\+\_\+\+B\+A\+SE -- useful to avoid confusion if a mesh that was written for a specific element type (e.\+g. a \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}}) is used with another one (e.\+g. a \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}}. First argument specifies the required spatial dimension of the element (i.\+e. the number of local coordinates). The optional second argument specifies the required nnode\+\_\+1d (i.\+e. the number of nodes along a 1D element edge). Can be omitted if the mesh can handle any number in which case this test is skipped. 
+Helper function to assert that finite element of type ELEMENT can be cast to base class of type GEOM\+\_\+\+ELEMENT\+\_\+\+BASE -- useful to avoid confusion if a mesh that was written for a specific element type (e.\+g. a \mbox{\hyperlink{classoomph_1_1QElement}{QElement}}) is used with another one (e.\+g. a \mbox{\hyperlink{classoomph_1_1TElement}{TElement}}. First argument specifies the required spatial dimension of the element (i.\+e. the number of local coordinates). The optional second argument specifies the required nnode\+\_\+1d (i.\+e. the number of nodes along a 1D element edge). Can be omitted if the mesh can handle any number in which case this test is skipped. 
 
 
 
-Definition at line 2835 of file mesh.\+h.
+Definition at line \mbox{\hyperlink{mesh_8h_source_l02821}{2821}} of file \mbox{\hyperlink{mesh_8h_source}{mesh.\+h}}.
 

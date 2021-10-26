@@ -4,15 +4,15 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{oomph\+::\+Linear\+Algebra\+Distribution}}
-\begin{DoxyCompactList}\small\item\em Describes the distribution of a distributable linear algebra type object. Typically this is a container (such as a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}) or an operator (e.\+g \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} or \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}). This object is used in both serial and parallel implementations. In the serial context (no M\+PI) this just contains an integer indicating the number of rows. In parallel either each processor holds a subset of the set of global rows. (each processor contains only a single continuous block of rows -\/ parametised with variables denoting the first row and the number of local rows) or, all rows are be duplicated across all processors. In parallel this object also contains an \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} object which primarily contains the M\+P\+I\+\_\+\+Comm communicator associated with this object. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Describes the distribution of a distributable linear algebra type object. Typically this is a container (such as a \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}}) or an operator (e.\+g \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} or \mbox{\hyperlink{classoomph_1_1LinearSolver}{Linear\+Solver}}). This object is used in both serial and parallel implementations. In the serial context (no MPI) this just contains an integer indicating the number of rows. In parallel either each processor holds a subset of the set of global rows. (each processor contains only a single continuous block of rows -\/ parametised with variables denoting the first row and the number of local rows) or, all rows are be duplicated across all processors. In parallel this object also contains an \mbox{\hyperlink{classoomph_1_1OomphCommunicator}{Oomph\+Communicator}} object which primarily contains the MPI\+\_\+\+Comm communicator associated with this object. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1DistributableLinearAlgebraObject}{oomph\+::\+Distributable\+Linear\+Algebra\+Object}}
 \begin{DoxyCompactList}\small\item\em Base class for any linear algebra object that is distributable. Just contains storage for the \mbox{\hyperlink{classoomph_1_1LinearAlgebraDistribution}{Linear\+Algebra\+Distribution}} object and access functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceoomph_1_1LinearAlgebraDistributionHelpers}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers}}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1LinearAlgebraDistributionHelpers}{oomph\+::\+Linear\+Algebra\+Distribution\+Helpers}}
 \begin{DoxyCompactList}\small\item\em Namespace for helper functions for Linear\+Algebra\+Distributions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}

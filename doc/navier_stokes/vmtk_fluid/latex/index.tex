@@ -1,4 +1,4 @@
-The purpose of this tutorial is to demonstrate the simulation of cardiovascular fluid mechanics problems with {\ttfamily oomph-\/lib}. We showed in \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ another tutorial}} how to use \href{http://www.vmtk.org}{\texttt{ V\+M\+TK}} together with {\ttfamily oomph-\/lib\textquotesingle{}s} conversion code ~\newline
+The purpose of this tutorial is to demonstrate the simulation of cardiovascular fluid mechanics problems with {\ttfamily oomph-\/lib}. We showed in \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ another tutorial}} how to use \href{http://www.vmtk.org}{\texttt{ VMTK}} together with {\ttfamily oomph-\/lib\textquotesingle{}s} conversion code ~\newline
 ~\newline
 \begin{center} \href{../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc}{\texttt{ demo\+\_\+drivers/meshing/mesh\+\_\+from\+\_\+vmtk/create\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+surface\+\_\+mesh\+\_\+from\+\_\+fluid\+\_\+xda\+\_\+mesh.\+cc}} \end{center}  ~\newline
 ~\newline
@@ -11,7 +11,7 @@ We stress that the tutorial focuses on the implementation aspects, not the actua
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem (and results)}\label{index_problem}
-The two figures below show the geometry of the blood vessel (obtained from a scan of an iliac bifurcation, using the procedure discussed in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ V\+M\+TK tutorial}}) and the flow field (velocity vectors and pressure contours) for a nominal Reynolds number of $ Re = 10. $ (See \mbox{\hyperlink{index_re}{What does the Reynolds number mean in this problem?}} for a more detailed discussion of the Reynolds number.) The flow is driven by an applied pressure drop between the in-\/ and outflow boundaries, as in the \href{../../unstructured_three_d_fluid/html/index.html}{\texttt{ previous example.}}
+The two figures below show the geometry of the blood vessel (obtained from a scan of an iliac bifurcation, using the procedure discussed in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ VMTK tutorial}}) and the flow field (velocity vectors and pressure contours) for a nominal Reynolds number of $ Re = 10. $ (See \mbox{\hyperlink{index_re}{What does the Reynolds number mean in this problem?}} for a more detailed discussion of the Reynolds number.) The flow is driven by an applied pressure drop between the in-\/ and outflow boundaries, as in the \href{../../unstructured_three_d_fluid/html/index.html}{\texttt{ previous example.}}
 
  
 \begin{DoxyImage}
@@ -34,8 +34,7 @@ The figure below shows more clearly that the in-\/ and outflow from the upstream
 \hypertarget{index_parallel_flow}{}\doxysection{Imposing parallel in-\/ and outflow}\label{index_parallel_flow}
 In most of the Navier-\/\+Stokes problems we have considered so far, the geometry of the fluid domain was such that the in-\/ and outflow cross-\/sections were aligned with the Cartesian coordinate planes. In such geometries the imposition of parallel in-\/ and outflow is straightforward as it only requires pinning of the transverse velocity components. A pressure drop between upstream and downstream ends can be applied by attaching {\ttfamily Navier\+Stokes\+Traction\+Elements} to the bulk elements that are adjacent to the relevant domain boundaries.
 
-In the current problem, the in-\/ and outflow cross-\/sections have some arbitrary orientation, implying that when the in-\/ or outflow is parallel (or, more accurately, orthogonal to the in-\/ or outflow cross sections), neither of the three velocity components vanishes. The easiest way to enforce parallel outflow in such situations is to employ Lagrange multipliers to enforce the two constraints \[ {\bf u} \cdot {\bf t}_\alpha = 0 \mbox{\ \ \ \ for $\alpha = 1,2$,} \] ~\newline
- where $ {\bf t}_\alpha $ (for $\alpha = 1,2$) are the two tangent vectors spanning the in-\/ or outflow cross-\/sections. Physically, the Lagrange multipliers act as tangential tractions that enforce the parallel flow. The Lagrange multipliers introduce additional degrees of freedom into the problem and their implementation as {\ttfamily Impose\+Parallel\+Outflow\+Elements} employs a technique similar to that used to enforce prescribed boundary displacements in solid mechanics problems. (This is discussed in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}.) The {\ttfamily Impose\+Parallel\+Outflow\+Elements} also allow the specification of a pressure that acts on the fluid (in the direction opposite to the outer unit normal on the bulk fluid element).
+In the current problem, the in-\/ and outflow cross-\/sections have some arbitrary orientation, implying that when the in-\/ or outflow is parallel (or, more accurately, orthogonal to the in-\/ or outflow cross sections), neither of the three velocity components vanishes. The easiest way to enforce parallel outflow in such situations is to employ Lagrange multipliers to enforce the two constraints \[ {\bf u} \cdot {\bf t}_\alpha = 0 \mbox{\ \ \ \ for $\alpha = 1,2$,} \] where $ {\bf t}_\alpha $ (for $\alpha = 1,2$) are the two tangent vectors spanning the in-\/ or outflow cross-\/sections. Physically, the Lagrange multipliers act as tangential tractions that enforce the parallel flow. The Lagrange multipliers introduce additional degrees of freedom into the problem and their implementation as {\ttfamily Impose\+Parallel\+Outflow\+Elements} employs a technique similar to that used to enforce prescribed boundary displacements in solid mechanics problems. (This is discussed in \href{../../../solid/prescribed_displ_lagr_mult/html/index.html}{\texttt{ another tutorial}}.) The {\ttfamily Impose\+Parallel\+Outflow\+Elements} also allow the specification of a pressure that acts on the fluid (in the direction opposite to the outer unit normal on the bulk fluid element).
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -50,7 +49,7 @@ The namespace specifying the problem parameters contains the Reynolds number and
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -67,9 +66,7 @@ The namespace specifying the problem parameters contains the Reynolds number and
 \DoxyCodeLine{\} \textcolor{comment}{//end namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysubsection{The main function}\label{index_main}
 The main function remains identical to that in the \href{../../unstructured_three_d_fluid/html/index.html}{\texttt{ problem with axis-\/aligned outflow.}}
 
@@ -85,15 +82,15 @@ The problem constructor is also very similar. We start by building the fluid mes
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==========start\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured 3D fluid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFluidProblem_a9751f4afac540e148b3d90ae43dd5187}{UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{//Create fluid bulk mesh, sub-\/dividing "corner" elements}}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"fluid\_iliac.1.node"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"fluid\_iliac.1.ele"};}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} face\_file\_name=\textcolor{stringliteral}{"fluid\_iliac.1.face"};}
+\DoxyCodeLine{ \textcolor{comment}{//Create fluid bulk mesh, sub-\/dividing "{}corner"{} elements}}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} node\_file\_name=\textcolor{stringliteral}{"{}fluid\_iliac.1.node"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} element\_file\_name=\textcolor{stringliteral}{"{}fluid\_iliac.1.ele"{}};}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} face\_file\_name=\textcolor{stringliteral}{"{}fluid\_iliac.1.face"{}};}
 \DoxyCodeLine{ \textcolor{keywordtype}{bool} split\_corner\_elements=\textcolor{keyword}{true};}
 \DoxyCodeLine{}
 \DoxyCodeLine{ Fluid\_mesh\_pt =  \textcolor{keyword}{new} TetgenMesh<ELEMENT>(node\_file\_name,}
@@ -104,7 +101,7 @@ The problem constructor is also very similar. We start by building the fluid mes
 \end{DoxyCodeInclude}
 
 
-Next, we set up a boundary lookup scheme that records which elements are located next to which domain boundaries, and specify the I\+Ds of the mesh boundaries that coincide with the in-\/ and outflow cross-\/sections. Note that this information reflects the specification of the boundary I\+Ds in the {\ttfamily tetgen} {\ttfamily $\ast$.poly} file. \mbox{[}The conversion code \href{../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc}{\texttt{ create\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+surface\+\_\+mesh\+\_\+from\+\_\+fluid\+\_\+xda\+\_\+mesh.\+cc}} lists the relation between the original boundary I\+Ds and the new ones (obtained by giving each surface facet a separate boundary ID) at the end of the {\ttfamily $\ast$.poly} file.\mbox{]}
+Next, we set up a boundary lookup scheme that records which elements are located next to which domain boundaries, and specify the IDs of the mesh boundaries that coincide with the in-\/ and outflow cross-\/sections. Note that this information reflects the specification of the boundary IDs in the {\ttfamily tetgen} {\ttfamily $\ast$.poly} file. \mbox{[}The conversion code \href{../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc}{\texttt{ create\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+surface\+\_\+mesh\+\_\+from\+\_\+fluid\+\_\+xda\+\_\+mesh.\+cc}} lists the relation between the original boundary IDs and the new ones (obtained by giving each surface facet a separate boundary ID) at the end of the {\ttfamily $\ast$.poly} file.\mbox{]}
 
 
 \begin{DoxyCodeInclude}{0}
@@ -132,9 +129,7 @@ Next, we set up a boundary lookup scheme that records which elements are located
 \DoxyCodeLine{  \} \textcolor{comment}{// done outflow boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-We create the meshes containing the Lagrange multiplier elements and add all sub-\/meshes to the Problem\textquotesingle{}s global mesh.
+ We create the meshes containing the Lagrange multiplier elements and add all sub-\/meshes to the Problem\textquotesingle{}s global mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -171,12 +166,12 @@ We create the meshes containing the Lagrange multiplier elements and add all sub
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Build global mesh}}
-\DoxyCodeLine{ \mbox{\hyperlink{vmtk__fluid_8txt_ad6c99ac835e378aa06b6fdfb81410555}{build\_global\_mesh}}();}
+\DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
 
 
-Next we apply the boundary conditions. We start by identifying the I\+Ds of the boundaries that are subject to no-\/slip boundary conditions.
+Next we apply the boundary conditions. We start by identifying the IDs of the boundaries that are subject to no-\/slip boundary conditions.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -214,9 +209,7 @@ Next we apply the boundary conditions. We start by identifying the I\+Ds of the 
 \DoxyCodeLine{  \} \textcolor{comment}{// done identification of boundaries where velocities are pinned}}
 
 \end{DoxyCodeInclude}
-
-
-Next we loop over all boundaries, visit their nodes and pin all three velocity components if the boundary is subject to a no-\/slip condition\+:
+ Next we loop over all boundaries, visit their nodes and pin all three velocity components if the boundary is subject to a no-\/slip condition\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -238,9 +231,7 @@ Next we loop over all boundaries, visit their nodes and pin all three velocity c
 \DoxyCodeLine{       nod\_pt-\/>pin(2); }
 
 \end{DoxyCodeInclude}
-
-
-We now check if the node in question is also located on the in-\/ and outflow boundaries...
+ We now check if the node in question is also located on the in-\/ and outflow boundaries...
 
 
 \begin{DoxyCodeInclude}{0}
@@ -306,9 +297,7 @@ We now check if the node in question is also located on the in-\/ and outflow bo
 \DoxyCodeLine{  \} \textcolor{comment}{// end of BC }}
 
 \end{DoxyCodeInclude}
-
-
-The rest of the constructor is unchanged. We pass the pointer to the Reynolds number to the elements and assign the equation numbers\+:
+ The rest of the constructor is unchanged. We pass the pointer to the Reynolds number to the elements and assign the equation numbers\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -328,14 +317,12 @@ The rest of the constructor is unchanged. We pass the pointer to the Reynolds nu
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ std::cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ std::cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// end constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_lagr}{}\doxysubsection{Creating the Lagrange multiplier elements}\label{index_lagr}
 The helper function {\ttfamily create\+\_\+parallel\+\_\+outflow\+\_\+lagrange\+\_\+elements()} loops over the bulk elements that are adjacent to the in-\/ and outflow cross-\/sections and attaches {\ttfamily Impose\+Parallel\+Outflow\+Elements} to the relevant faces. We store pointers to the newly-\/created elements in the appropriate meshes, and pass pointers to the doubles that specify the imposed pressure to the elements.
 
@@ -343,7 +330,7 @@ The helper function {\ttfamily create\+\_\+parallel\+\_\+outflow\+\_\+lagrange\+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_lagrange\_multiplier\_elements======================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create Lagrange multiplier elements that impose parallel outflow}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classUnstructuredFluidProblem_aea2fa32b4dd90aab81da540566b9925a}{UnstructuredFluidProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFluidProblem_aea2fa32b4dd90aab81da540566b9925a}{create\_parallel\_outflow\_lagrange\_elements}}()}
@@ -423,10 +410,10 @@ The post-\/processing routine is unchanged.
 \hypertarget{index_realism}{}\doxysubsection{How to make the simulation more realistic}\label{index_realism}
 The simulation presented above is obviously very crude and serves primarily as a proof of concept. However, it is straightforward to address most of the shortcomings and we encourage you to explore the following improvements\+:
 \begin{DoxyItemize}
-\item Generate a finer fluid mesh using the instructions in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ V\+M\+TK tutorial }} We are hoping to make the image files used in this tutorial available soon. Please \href{../../../contact/html/index.html}{\texttt{ contact us}} if you can\textquotesingle{}t wait. Remember that you will have to update the enumeration of the domain boundaries if you change the mesh. ~\newline
+\item Generate a finer fluid mesh using the instructions in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html}{\texttt{ VMTK tutorial }} We are hoping to make the image files used in this tutorial available soon. Please \href{../../../contact/html/index.html}{\texttt{ contact us}} if you can\textquotesingle{}t wait. Remember that you will have to update the enumeration of the domain boundaries if you change the mesh. ~\newline
 ~\newline
 
-\item Attach \char`\"{}flow extensions\char`\"{} to the in-\/ and outflow cross-\/sections, using the technique described in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html\#add_extensions}{\texttt{ V\+M\+TK tutorial.}} ~\newline
+\item Attach \char`\"{}flow extensions\char`\"{} to the in-\/ and outflow cross-\/sections, using the technique described in {\ttfamily oomph-\/lib\textquotesingle{}s} \href{../../../meshes/mesh_from_vmtk/html/index.html\#add_extensions}{\texttt{ VMTK tutorial.}} ~\newline
 ~\newline
 
 \item Make the problem time-\/dependent and apply a period driving pressure drop. ~\newline
@@ -448,5 +435,5 @@ The simulation presented above is obviously very crude and serves primarily as a
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

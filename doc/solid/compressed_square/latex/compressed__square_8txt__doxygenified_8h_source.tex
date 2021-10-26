@@ -1,0 +1,466 @@
+\hypertarget{compressed__square_8txt__doxygenified_8h_source}{}\doxysection{compressed\+\_\+square.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{compressed__square_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: Compressible and incompressible behaviour}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{The purpose of this tutorial is to discuss the use of compressible}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{and incompressible constitutive equations for solid mechanics}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{problems. As discussed in the }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{<a href="{}../../solid\_theory/html/index.html\#elastic\_constitutive"{}>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{Solid Mechanics Theory Tutorial</a>, problems in which the solid}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{is truly incompressible require a solution based on the }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{pressure/displacement formulation of the principle of }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{virtual displacements (PVD). Mathematically, this is because }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{the pressure acts as the Lagrange multiplier that enforces }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{incompressibility. The pressure/displacement form of the}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{PVD may be discretised with finite elements that employ}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{continuous (e.g. Taylor-\/Hood-\/type) or discontinuous}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{(e.g. Crouzeix-\/Raviart-\/type) elements. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{  Some constitutive equations allow for compressible and}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{incompressible behaviour, depending on their parameters.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{Problems involving such constitutive equations may be solved }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{with large number of formulations. As an example, consider \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{oomph-\/lib's generalised Hookean constitutive equation}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{(see the <a href="{}\#disclaimer"{}>disclaimer</a> below).}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{<b> I. The displacement form </b>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{\(\backslash\)c oomph-\/lib's generalised Hookean constitutive law assumes that }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{the 2nd Piola Kirchhoff stress \(\backslash\)f\$ \(\backslash\)sigma\string^\{ij\} \(\backslash\)f\$ (non-\/dimensionalised on }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{Young's modulus \(\backslash\)f\$ E \(\backslash\)f\$) is related to Green's strain tensor }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)gamma\_\{ij\} = 1/2 \(\backslash\) (G\_\{ij\} -\/ g\_\{ij\}) \(\backslash\)f\$ via}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{\(\backslash\)sigma\string^\{ij\} = \(\backslash\)frac\{1\}\{2(1+\(\backslash\)nu)\}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{\(\backslash\)left( }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{G\string^\{ik\} G\string^\{jl\} + G\string^\{il\} G\string^\{jk\}  +}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)frac\{2\(\backslash\)nu\}\{1-\/2\(\backslash\)nu\} G\string^\{ij\} G\string^\{kl\} }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{\(\backslash\)right) \(\backslash\)gamma\_\{kl\}.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\)hspace\{3cm\} (1)}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{Here \(\backslash\)f\$ g\_\{ij\} \(\backslash\)f\$ and \(\backslash\)f\$ G\_\{ij\} \(\backslash\)f\$ are the metric tensors }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{associated with the undeformed and deformed configurations. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{This constitutive law reduces to the}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{the classical version of Hooke's law for small strains when}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)f\$ G\_\{ij\} \(\backslash\)to g\_\{ij\}. \(\backslash\)f\$ In the above form, the constitutive}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{law can be used directly in the displacement-\/based form of the PVD, }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{unless \(\backslash\)f\$ \(\backslash\)nu = 1/2 \(\backslash\)f\$ -\/-\/ the case that corresponds to }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{incompressible behaviour in the small-\/displacement regime. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{(While the above formulation only breaks down completely}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{when \(\backslash\)f\$ \(\backslash\)nu = 1/2, \(\backslash\)f\$ numerical solutions based on the}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{above form of the constitutive equation become badly-\/behaved}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{as \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$ approaches that value.)}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{<b> II. The pressure-\/displacement form for compressible and}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{incompressible behaviour</b>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{To avoid the problems that arise as \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)to 1/2, \(\backslash\)f\$ the constitutive }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{equation may be rewritten in the form}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{\(\backslash\)sigma\string^\{ij\} =  \(\backslash\)overline\{\(\backslash\)sigma\}\string^\{ij\} -\/ p \(\backslash\) G\string^\{ij\} \(\backslash\) , }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{where the deviatoric stress is given by}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)f[ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{\(\backslash\)overline\{\(\backslash\)sigma\}\string^\{ij\} = }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{\(\backslash\)frac\{1\}\{2(1+\(\backslash\)nu)\}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{\(\backslash\)bigg( }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{G\string^\{ik\} G\string^\{jl\} + G\string^\{il\} G\string^\{jk\} \(\backslash\)bigg) \(\backslash\)gamma\_\{kl\}.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{To remain consistent with (1), the pressure}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)f\$ p \(\backslash\)f\$ must then be determined via the equation}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{p \(\backslash\) \(\backslash\)frac\{1\}\{\(\backslash\)kappa\} + d = 0, \(\backslash\)hspace\{4cm\} (2)}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{where }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{d = G\string^\{ij\} \(\backslash\)gamma\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{is the generalised dilatation (which reduces to the actual dilatation}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{in the small-\/strain limit). The inverse bulk modulus is defined as}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)frac\{1\}\{\(\backslash\)kappa\} =  \(\backslash\)frac\{(1-\/2\(\backslash\)nu)(1+\(\backslash\)nu)\}\{\(\backslash\)nu\}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{and tends to zero as \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)to 0. \(\backslash\)f\$ The alternative }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{form of the constitutive equation can therefore be used for}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{any value of \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$. If \(\backslash\)f\$ \(\backslash\)nu = 1/2, \(\backslash\)f\$ the }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{constraint (2) enforces \(\backslash\)f\$ d=0, \(\backslash\)f\$ i.e }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{incompressible behaviour (at least in the}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{small displacement regime -\/-\/ for large deflections the constraint}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{ (2) simply ensures that the generalised dilatation }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{vanishes; this may not be a physically meaningful constraint). }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{<b> III. Truly incompressible behaviour</b>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{Finally, we may retain the decomposition of the stress into its}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{deviatoric and non-\/deviatoric parts but determine the pressure}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{from the actual incompressibility constraint, i.e. replace}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{(2) by}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{\(\backslash\)det G\_\{ij\} -\/ \(\backslash\)det g\_\{ij\} = 0. \(\backslash\)hspace\{5cm\} (3)}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{In this case, the deviatoric part of the stress is determined}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{by the material's constitutive parameters, i.e. its Young's modulus}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{and its Poisson ratio while the pressure (acting as the Lagrange}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{multiplier for the constraint (3)) }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{enforces true incompressibility.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{<a name="{}disclaimer"{}>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{<table border=1>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{<tr>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{<td bgcolor="{}cornsilk"{}>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{<center>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{<b>Disclaimer</b>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{</center>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{We wish to stress that not all the combinations discussed above}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{are necessarily physically meaningful. For instance, as already}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{acknowledged,  setting \(\backslash\)f\$ \(\backslash\)nu = 1/2 \(\backslash\)f\$ in formulation II does not }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{ensure true incompressibility (in the sense of (3)) }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{if the solid undergoes large deflections. Similarly, setting }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$ to a value that differs from \(\backslash\)f\$ 1/2 \(\backslash\)f\$ while }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{enforcing true incompressibility via formulation III would be }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{extremely odd. Furthermore, it is not clear (to us) if our}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{generalisation of Hooke's law (obtained by replacing the undeformed}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{metric tensor \(\backslash\)f\$ g\_\{ij\} \(\backslash\)f\$ by its deformed counterpart \(\backslash\)f\$ G\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{\(\backslash\)f\$ yields a constitutive equation that is particularly useful }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{for any specific material. However, the same is true for any other}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{constitutive equation -\/-\/ not all of them are useful for all materials!}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{The important point is that all constitutive equations that allow }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{for compressible and incompressible behaviour contain combinations }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{of constitutive parameters that blow up as incompressibility}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{is approached. Formulation II shows how to express such }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{constitutive laws in a way that can be used for any value of }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{the constitutive parameters. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{</td>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{</tr>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{</TABLE>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{With this disclaimer in mind, we will now demonstrate the use }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{of the various combinations outlined above in a simple test problem}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{for which an exact (linearised) solution is available. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{\(\backslash\)section problem The problem }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{Here is a sketch of the problem: Three faces of a square elastic body are}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{surrounded by "{}slippery"{} rigid walls that allow the body to slide freely}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{along them. The body is subject to a vertical, gravitational}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{body force, acting in the negative \(\backslash\)f\$ y \(\backslash\)f\$ -\/direction.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{\(\backslash\)image html sketch.gif "{}Sketch of the problem. "{} }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{\(\backslash\)image latex sketch.eps "{}Sketch of the problem. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{We choose the height of the square as the reference length for}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{the non-\/dimensionalisation by setting }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)cal L\} = L, \(\backslash\)f\$ and use the characteristic stiffness associated with the}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{body's constitutive equation to scale the stresses and the body}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{forces. For instance, for linear elastic behaviour, we choose}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{the reference stress to be the solid's Young's modulus, thus setting}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)cal S\} = E. \(\backslash\)f\$ The non-\/dimensional body force }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{is then given by \(\backslash\)f\$ \{\(\backslash\)bf f\} = -\/ g \(\backslash\) \{\(\backslash\)bf e\}\_y, \(\backslash\)f\$ where}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{g = \(\backslash\)frac\{\(\backslash\)rho g\string^* L\}\{E\}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{indicates the magnitude of the gravitational load relative to the}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{body's stiffness;}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{see the <a href="{}../../solid\_theory/html/index.html\#non-\/dim\_solid"{}>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{Solid Mechanics Theory Tutorial</a> for full details on the }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{non-\/dimensionalisation of the governing equations. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{\(\backslash\)section exact An exact solution}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{Assuming weak loading, i.e. \(\backslash\)f\$ g \(\backslash\)ll 1 \(\backslash\)f\$, the body will undergo}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{small deflections and its deformation will be governed by the equations}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{of linear elasticity. Given that the walls bounding the solid }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{are slippery, it is easy to show that a displacement field has}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{the form \(\backslash\)f\$ \{\(\backslash\)bf u\} = v(y)\(\backslash\) \{\(\backslash\)bf e\}\_y \(\backslash\)f\$. Inserting this}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{ansatz into the Navier-\/Lame equations shows that the non-\/dimensional}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{displacement in the vertical direction is given by}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{v(y) = g \(\backslash\) \(\backslash\)frac\{(1+\(\backslash\)nu)(1-\/2\(\backslash\)nu)\}\{(1-\/\(\backslash\)nu)\} }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{\(\backslash\)left( \(\backslash\)frac\{1\}\{2\} y\string^2 -\/ y \(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{ The stresses are given by}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{\(\backslash\)sigma\_\{xx\} = \(\backslash\)frac\{g \(\backslash\) \(\backslash\)nu\}\{(1-\/\(\backslash\)nu)\} (y-\/1) \(\backslash\) , \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)sigma\_\{xy\} = 0 \(\backslash\) ,  }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{\(\backslash\)mbox\{ \(\backslash\) \(\backslash\) \(\backslash\) and \(\backslash\) \(\backslash\) \(\backslash\) \}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{\(\backslash\)sigma\_\{yy\} = g \(\backslash\) (y-\/1) \(\backslash\) .}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{This shows that, as the solid approaches incompressibility,}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)nu \(\backslash\)to 1/2, \(\backslash\)f\$ the displacements are suppressed and}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{the stress distribution becomes hydrostatic with \(\backslash\)f\$ \(\backslash\)sigma\_\{xx\} \(\backslash\)to }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{\(\backslash\)sigma\_\{yy\}. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{Here is a plot of the three non-\/zero quantities (the vertical }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{displacement \(\backslash\)f\$ v \(\backslash\)f\$, and the horizontal and vertical stresses,}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)sigma\_\{xx\} \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)sigma\_\{yy\} \(\backslash\)f\$, respectively) for}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{\(\backslash\)f\$ g = 10\string^\{-\/2\}  \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)nu =0.45. \(\backslash\)f\$ The shaded surface }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{shows the exact solution while the mesh shows the finite element}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{solution obtained with the displacement formulation of the problem.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{The solutions obtained with formulations II and III}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{are graphically indistinguishable. All other quantities}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{(the transverse displacement and the shear stress \(\backslash\)f\$ \(\backslash\)sigma\_\{xy\} \(\backslash\)f\$)}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{are of order \(\backslash\)f\$ 10\string^\{-\/12\}. \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{\(\backslash\)image html validate\_vs\_lin.gif "{}Plot of the vertical displacement and the horizontal and vertical stresses, respectively. "{} }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{\(\backslash\)image latex validate\_vs\_lin.eps "{}Plot of the vertical displacement and the horizontal and vertical stresses, respectively. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{The driver code listed below also computes solutions for various }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{other values of \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$ (including the incompressible case}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)nu=1/2 \(\backslash\)f\$),  and  demonstrates how to enforce}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{"{}true"{} incompressibility via formulation III. Furthermore, it}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{computes a solution based on the incompressible Mooney-\/Rivlin}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{constitutive law. The agreement between analytical and}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{computed results is as good as the one shown in the above plot. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{In particular in all cases where incompressibility is enforced, the vertical}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{displacement is suppressed and the stress state becomes}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{hydrostatic, as predicted by the analytical solution. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{\(\backslash\)section wrapper Modifying the element's output function}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{Since we wish to compare the stresses and displacements}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{against the analytical solution, we modify the \(\backslash\)c SolidElement's}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{output function by means of a wrapper class that overloads the }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{\(\backslash\)c SolidElement::output(...).}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\)dontinclude compressed\_square.cc}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)skipline start\_wrapper}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{\(\backslash\)section namespace Problem Parameters}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{As usual we define the various problem parameters in a }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{global namespace. We prepare a pointer to a constitutive equation}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{and define Poisson's ratio for use with the generalised Hookean }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{constitutive law. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{\(\backslash\)skipline start\_namespace}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{\(\backslash\)until Nu}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{We also prepare a pointer to a strain energy function and }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{define the coefficients for the Mooney Rivlin law:}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{\(\backslash\)until C2}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{Finally, we define the gravitational body force.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{\(\backslash\)until end namespace}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{The driver code solves the problem with a large number of}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{different formulations and constitutive equations. We start}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{with the generalised Hookean constitutive equation and}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{consider three different values of Poisson's ratio, corresponding}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{to compressible, near-\/incompressible and incompressible behaviour:}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{\(\backslash\)dontinclude compressed\_square.cc}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{\(\backslash\)until ::Nu);}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{First, we solve the problem in the pure displacement formulation,}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{using (the wrapped version of the) displacement-\/based }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{\(\backslash\)c QPVDElements. (As discussed above, the displacement formulation}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{cannot be used for \(\backslash\)f\$ \(\backslash\)nu=1/2 \(\backslash\)f\$.)}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{Next we consider the pressure/displacement formulation with}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{continuous pressures (Taylor-\/Hood), using the  }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{\(\backslash\)c QPVDElementWithContinuousPressure element.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{We suppress the listing of the remaining combinations (see the driver code}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/solid/compressed\_square/compressed\_square.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{compressed\_square.cc}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{</A>for details):}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{-\/ Pressure/displacement formulation with discontinuous pressures}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{  (Crouzeix-\/Raviart), using the \(\backslash\)c QPVDElementWithPressure element. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{-\/ Pressure/displacement formulation with continuous pressures}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{  (Taylor-\/Hood), using the \(\backslash\)c QPVDElementWithContinuousPressure}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{  element, with true incompressibility enforced via formulation}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{  III. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{-\/ Pressure/displacement formulation with discontinuous pressures}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{  (Crouzeix-\/Raviart), using the \(\backslash\)c QPVDElementWithPressure element, }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{  with true incompressibility enforced via formulation}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{  III.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{Before the end of the loop over the different \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$ values we }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{delete the constitutive equation, allowing it to be re-\/built }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{with a different Poisson ratio.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{\(\backslash\)skipline Clean up}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{\(\backslash\)until end generalised Hookean}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{Next we build the strain-\/energy-\/based Mooney-\/Rivlin constitutive law}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{\(\backslash\)until Global\_Physical\_Variables::Strain\_energy\_function\_pt);}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{and solve the problem with \(\backslash\)c QPVDElementWithContinuousPressure}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{and \(\backslash\)c QPVDElementWithPressure elements, enforcing true incompressibility }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{enforced via formulation III by setting the \(\backslash\)c incompressible flag}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{to true.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{\(\backslash\)until end of main}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{\(\backslash\)section class The Problem class}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{The \(\backslash\)c Problem class has the usual member functions. The \(\backslash\)c i\_case}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{label is used to distinguish different cases while the boolean}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{\(\backslash\)c incompressible indicates if we wish to enforce incompressibility}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{via formulation III. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{\(\backslash\)dontinclude compressed\_square.cc}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{\(\backslash\)skipline begin\_problem}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{\(\backslash\)until \};}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{\(\backslash\)section constructor The Problem constructor}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{We start by building the mesh -\/-\/ the \(\backslash\)c SolidMesh version of the}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{\(\backslash\)c ElasticRectangularQuadMesh. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{\(\backslash\)until new Elastic}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{We complete the build of the elements by specifying the constitutive}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{equation and the gravitational body force. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{\(\backslash\)until ::gravity;}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{If the element is based on the pressure/displacement form of the principle of}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{virtual displacements we enforce (true) incompressibility if}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{required. Note that, by default, \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{pressure/displacement-\/based solid mechanics elements do not }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{assume incompressibility, i.e. the default is to use formulation II.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{\(\backslash\)until end compressibility }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{Finally, we pick a control node to document the solid's load-\/displacement}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{characteristics and apply the boundary conditions (no displacements}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{normal to the "{}slippery"{} walls) before setting up the equation}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{numbering scheme.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{The post-\/processing routine documents the load-\/displacement}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{characteristics in a trace file and outputs the deformed domain shape.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{\(\backslash\)until endl;}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{We then output the exact solution of the linearised equations}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{using the same format as in the element's overloaded output function.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{\(\backslash\)until end doc}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)section comm\_ex Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{As usual, \(\backslash\)c oomph-\/lib provides self-\/tests that assess if the }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{enforcement incompressibility (or the lack thereof) is consistent:}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{-\/ The compiler will not allow the user to enforce incompressibility}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{  on elements that are based on the displacement form of the}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{  principle of virtual displacements. This is because}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{  the displacement-\/based elements do not have a member function}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{  \(\backslash\)c incompressible().}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{-\/ Certain constitutive laws, such as the Mooney-\/Rivlin law used in}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{  the present example require an incompressible formulation. If \(\backslash\)c oomph-\/lib}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{  is compiled with the \(\backslash\)c PARANOID flag, an error is thrown if}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{  such a constitutive law is used by an element for which}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{  incompressibility has not been requested. }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{  <center>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{  <b>Recall that the default setting is not to enforce}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{  incompressibility!</b>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{  </center>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{  \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{  If the library is}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{  compiled without the \(\backslash\)c PARANOID flag no warning will be issued}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{  but the results will be "{}wrong"{} at least in the sense that}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{  the material does not behave like an incompressible Mooney-\/Rivlin}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{  solid. In fact, it is likely that the Newton solver will}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{  diverge.  Anyway, as we keep saying, without the \(\backslash\)c PARANOID flag, }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{  you're on your own!}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{You should experiment with different combinations of constitutive laws and}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{element types to familiarise yourself with these issues.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{<CENTER> }}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/solid/compressed\_square/"{}>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{demo\_drivers/solid/compressed\_square/}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/solid/compressed\_square/compressed\_square.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{demo\_drivers/solid/compressed\_square/compressed\_square.cc}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{compressed__square_8txt__doxygenified_8h_source_l00461}00461 }
+
+\end{DoxyCode}

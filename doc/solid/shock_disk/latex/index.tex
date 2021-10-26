@@ -35,19 +35,19 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <cmath>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//My own includes}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "solid.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}solid.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Need to instantiate templated mesh}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/quarter\_circle\_sector\_mesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/quarter\_circle\_sector\_mesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }oomph;}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//================================================================}\textcolor{comment}{}}
@@ -82,15 +82,15 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{///////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// ////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//================================================================}\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{/// Elastic quarter circle sector mesh with functionality to}}
-\DoxyCodeLine{\textcolor{comment}{/// attach traction elements to the curved surface. We "upgrade"}}
+\DoxyCodeLine{\textcolor{comment}{/// attach traction elements to the curved surface. We "{}upgrade"{}}}
 \DoxyCodeLine{\textcolor{comment}{/// the RefineableQuarterCircleSectorMesh to become an}}
 \DoxyCodeLine{\textcolor{comment}{/// SolidMesh and equate the Eulerian and Lagrangian coordinates,}}
 \DoxyCodeLine{\textcolor{comment}{/// thus making the domain represented by the mesh the stress-\/free }}
@@ -109,7 +109,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Build mesh and copy Eulerian coords to Lagrangian}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Build mesh and copy Eulerian coords to Lagrangian}}
 \DoxyCodeLine{\textcolor{comment}{ /// ones so that the initial configuration is the stress-\/free one.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}(GeomObject* wall\_pt,}
 \DoxyCodeLine{                                         \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& xi\_lo,}
@@ -120,14 +120,14 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{  RefineableQuarterCircleSectorMesh<ELEMENT>(wall\_pt,xi\_lo,fract\_mid,xi\_hi,}
 \DoxyCodeLine{                                             time\_stepper\_pt)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef PARANOID}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef PARANOID}\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{   /// Check that the element type is derived from the SolidFiniteElement}}
 \DoxyCodeLine{\textcolor{comment}{}   SolidFiniteElement* el\_pt=\textcolor{keyword}{dynamic\_cast<}SolidFiniteElement*\textcolor{keyword}{>}}
 \DoxyCodeLine{    (finite\_element\_pt(0));}
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (el\_pt==0)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{keywordflow}{throw} OomphLibError(}
-\DoxyCodeLine{      \textcolor{stringliteral}{"Element needs to be derived from SolidFiniteElement\(\backslash\)n"},}
+\DoxyCodeLine{      \textcolor{stringliteral}{"{}Element needs to be derived from SolidFiniteElement\(\backslash\)n"{}},}
 \DoxyCodeLine{      OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{      OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{    \}}
@@ -141,7 +141,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function to create mesh made of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} make\_traction\_element\_mesh(SolidMesh*\& traction\_mesh\_pt)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_ad9734ea7aee2141079544bb782d3ace1}{make\_traction\_element\_mesh}}(SolidMesh*\& traction\_mesh\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Make new mesh}}
@@ -166,7 +166,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function to wipe and re-\/create mesh made of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} remake\_traction\_element\_mesh(SolidMesh*\& traction\_mesh\_pt)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_a33ef5828fc64fcf4e50e6c38d626ffcb}{remake\_traction\_element\_mesh}}(SolidMesh*\& traction\_mesh\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Wipe existing mesh (but don't call it's destructor as this}}
@@ -197,14 +197,14 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////////}}
-\DoxyCodeLine{\textcolor{comment}{/////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// //////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// //////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{\textcolor{comment}{/// //////////////////////////////////////////////////////////////////////}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//====================================================================== }\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{/// "Shock" wave propagates through an impulsively loaded}}
+\DoxyCodeLine{\textcolor{comment}{/// "{}Shock"{} wave propagates through an impulsively loaded}}
 \DoxyCodeLine{\textcolor{comment}{/// circular disk.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
@@ -214,64 +214,64 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Constructor:}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classDiskShockWaveProblem}{DiskShockWaveProblem}}();}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classDiskShockWaveProblem_ae670d0120936f410134ba3e3b61aa880}{DiskShockWaveProblem}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Run the problem; specify case\_number to label output}}
+\DoxyCodeLine{\textcolor{comment}{ /// Run the problem; specify case\_number to label output}}
 \DoxyCodeLine{\textcolor{comment}{ /// directory}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} run(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& case\_number);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_af8dc3befd3eba59b008c315bfe077340}{run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& case\_number);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}*\& solid\_mesh\_pt() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}*\& \mbox{\hyperlink{classDiskShockWaveProblem_a7313e96ea296dbd10b47a1e00f02341e}{solid\_mesh\_pt}}() }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} Solid\_mesh\_pt;  }
+\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classDiskShockWaveProblem_a6efbcb695e829d63f810a7a9bb5a81a4}{Solid\_mesh\_pt}};  }
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the mesh of surface traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} SolidMesh*\& traction\_mesh\_pt() }
+\DoxyCodeLine{\textcolor{comment}{} SolidMesh*\& \mbox{\hyperlink{classDiskShockWaveProblem_ab8b15ee82d66441cdffc2bab1b49ffa6}{traction\_mesh\_pt}}() }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{return} Traction\_mesh\_pt;  }
+\DoxyCodeLine{   \textcolor{keywordflow}{return} \mbox{\hyperlink{classDiskShockWaveProblem_a286fe7d51aa16f07f0444ae7c553f140}{Traction\_mesh\_pt}};  }
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a7685309caac199d18f3f81468d9fcb23}{doc\_solution}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a46f6a25da58128f6abfdbbe92ea49d11}{actions\_after\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a50ba8e9b29ff7796fa9cb7ede8598376}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Actions after adaption: Kill and then re-\/build the traction }}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions after adaption: Kill and then re-\/build the traction }}
 \DoxyCodeLine{\textcolor{comment}{ /// elements on boundary 1 and re-\/assign the equation numbers}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_ac2a22a8399355e461d1a9ad1e5425c9a}{actions\_after\_adapt}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc displacement and velocity: label file with before and after}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_displ\_and\_veloc(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& stage=0);}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc displacement and velocity: label file with before and after}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a75403423b0a031adabb5b487fa88373f}{doc\_displ\_and\_veloc}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\& stage=0);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Dump problem-\/specific parameters values, then dump}}
+\DoxyCodeLine{\textcolor{comment}{ /// Dump problem-\/specific parameters values, then dump}}
 \DoxyCodeLine{\textcolor{comment}{ /// generic problem data.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} dump\_it(ofstream\& dump\_file);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_a2eaf91d3e0eb5f37b9920fc3d9d54cb9}{dump\_it}}(ofstream\& dump\_file);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Read problem-\/specific parameter values, then recover}}
+\DoxyCodeLine{\textcolor{comment}{ /// Read problem-\/specific parameter values, then recover}}
 \DoxyCodeLine{\textcolor{comment}{ /// generic problem data.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} restart(ifstream\& restart\_file);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDiskShockWaveProblem_ae883625e9bbe6ea442413f7c970d3fb1}{restart}}(ifstream\& restart\_file);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output}}
-\DoxyCodeLine{ DocInfo Doc\_info;}
+\DoxyCodeLine{ DocInfo \mbox{\hyperlink{classDiskShockWaveProblem_a8e445e31a1067ebbd3bd667cc02e8662}{Doc\_info}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Trace file}}
-\DoxyCodeLine{\textcolor{comment}{} ofstream Trace\_file;}
+\DoxyCodeLine{\textcolor{comment}{} ofstream \mbox{\hyperlink{classDiskShockWaveProblem_a8ec35b07dc6870e4d5b729288053c4fe}{Trace\_file}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Vector of pointers to nodes whose position we're tracing}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<Node*> Trace\_node\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Vector<Node*> \mbox{\hyperlink{classDiskShockWaveProblem_a7ab6db65bbf28185b238e84bbc16c1b8}{Trace\_node\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to solid mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}* Solid\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{ElasticRefineableQuarterCircleSectorMesh<ELEMENT>}}* \mbox{\hyperlink{classDiskShockWaveProblem_a6efbcb695e829d63f810a7a9bb5a81a4}{Solid\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} SolidMesh* Traction\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} SolidMesh* \mbox{\hyperlink{classDiskShockWaveProblem_a286fe7d51aa16f07f0444ae7c553f140}{Traction\_mesh\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
@@ -336,7 +336,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{comment}{// Traction mesh is first sub-\/mesh}}
 \DoxyCodeLine{ add\_sub\_mesh(traction\_mesh\_pt());}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Build combined "global" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Build combined "{}global"{} mesh}}
 \DoxyCodeLine{ build\_global\_mesh();}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -442,7 +442,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{comment}{// Wipe and re-\/build traction element mesh}}
 \DoxyCodeLine{ solid\_mesh\_pt()-\/>remake\_traction\_element\_mesh(traction\_mesh\_pt());}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Re-\/build combined "global" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Re-\/build combined "{}global"{} mesh}}
 \DoxyCodeLine{ rebuild\_global\_mesh();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Find number of elements in traction mesh}}
@@ -484,7 +484,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{comment}{// Output shape of deformed body}}
 \DoxyCodeLine{ ofstream some\_file;}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ solid\_mesh\_pt()-\/>output(some\_file,npts);}
@@ -493,7 +493,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output traction}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nel=traction\_mesh\_pt()-\/>nelement();}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/traction\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/traction\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Vector<double> unit\_normal(2);}
@@ -502,7 +502,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ Vector<double> s\_dummy(1);}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<nel;e++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   some\_file << \textcolor{stringliteral}{"ZONE "} << std::endl;}
+\DoxyCodeLine{   some\_file << \textcolor{stringliteral}{"{}ZONE "{}} << std::endl;}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<npts;i++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     s\_dummy[0]=-\/1.0+2.0*double(i)/double(npts-\/1);}
@@ -512,8 +512,8 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{     el\_pt-\/>outer\_unit\_normal(s\_dummy,unit\_normal);}
 \DoxyCodeLine{     el\_pt-\/>traction(s\_dummy,traction);}
 \DoxyCodeLine{     el\_pt-\/>interpolated\_x(s\_dummy,x\_dummy);}
-\DoxyCodeLine{     some\_file << x\_dummy[0] << \textcolor{stringliteral}{" "} << x\_dummy[1] << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{               << traction[0] << \textcolor{stringliteral}{" "} << traction[1] << \textcolor{stringliteral}{" "}  }
+\DoxyCodeLine{     some\_file << x\_dummy[0] << \textcolor{stringliteral}{"{} "{}} << x\_dummy[1] << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{               << traction[0] << \textcolor{stringliteral}{"{} "{}} << traction[1] << \textcolor{stringliteral}{"{} "{}}  }
 \DoxyCodeLine{               << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{  \}}
@@ -530,7 +530,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{  \textcolor{keywordtype}{unsigned} nelem=solid\_mesh\_pt()-\/>nboundary\_element(0);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Open files}}
-\DoxyCodeLine{  sprintf(filename,\textcolor{stringliteral}{"\%s/displ\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{  sprintf(filename,\textcolor{stringliteral}{"{}\%s/displ\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{          Doc\_info.number());}
 \DoxyCodeLine{  some\_file.open(filename);}
 \DoxyCodeLine{  }
@@ -543,7 +543,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<nelem;e++)}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    some\_file << \textcolor{stringliteral}{"ZONE "} << std::endl;}
+\DoxyCodeLine{    some\_file << \textcolor{stringliteral}{"{}ZONE "{}} << std::endl;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<npts;i++)}
 \DoxyCodeLine{     \{}
 \DoxyCodeLine{      \textcolor{comment}{// Move along bottom edge of element}}
@@ -564,7 +564,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{      el\_pt-\/>interpolated\_dxdt(s,1,dxdt);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{      \textcolor{comment}{// Plot radial distance and displacement}}
-\DoxyCodeLine{      some\_file << xi[0] << \textcolor{stringliteral}{" "} << x[0]-\/xi[0] << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{      some\_file << xi[0] << \textcolor{stringliteral}{"{} "{}} << x[0]-\/xi[0] << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{                << dxdt[0] << std::endl;}
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{   \}}
@@ -573,12 +573,12 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{  }
 \DoxyCodeLine{ \textcolor{comment}{// Write trace file}}
-\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time()  << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time()  << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ntrace\_node=Trace\_node\_pt.size();}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j=0;j<ntrace\_node;j++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   Trace\_file << sqrt(pow(Trace\_node\_pt[j]-\/>x(0),2)+}
-\DoxyCodeLine{                      pow(Trace\_node\_pt[j]-\/>x(1),2)) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{                      pow(Trace\_node\_pt[j]-\/>x(1),2)) << \textcolor{stringliteral}{"{} "{}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ Trace\_file << std::endl;}
 \DoxyCodeLine{}
@@ -588,14 +588,14 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{comment}{// SolidHelpers::doc\_2D\_principal\_stress<ELEMENT>(Doc\_info,solid\_mesh\_pt());}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//  // Write restart file}}
-\DoxyCodeLine{\textcolor{comment}{//  sprintf(filename,"\%s/restart\%i.dat",Doc\_info.directory().c\_str(),}}
+\DoxyCodeLine{\textcolor{comment}{//  sprintf(filename,"{}\%s/restart\%i.dat"{},Doc\_info.directory().c\_str(),}}
 \DoxyCodeLine{\textcolor{comment}{//          Doc\_info.number());}}
 \DoxyCodeLine{\textcolor{comment}{//  some\_file.open(filename);}}
 \DoxyCodeLine{\textcolor{comment}{//  dump\_it(some\_file);}}
 \DoxyCodeLine{\textcolor{comment}{//  some\_file.close();}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Doced solution for step "} }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Doced solution for step "{}} }
 \DoxyCodeLine{      << Doc\_info.number() }
 \DoxyCodeLine{      << std::endl << std::endl << std::endl;}
 \DoxyCodeLine{\}}
@@ -609,7 +609,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{/// Doc displacement and veloc in displ\_and\_veloc*.dat.}}
 \DoxyCodeLine{\textcolor{comment}{/// The int stage defaults to 0, in which case the '*' in the}}
 \DoxyCodeLine{\textcolor{comment}{/// filename is simply the step number specified by the Problem's}}
-\DoxyCodeLine{\textcolor{comment}{/// DocInfo object. If it's +/-\/1, the word "before" and "after"}}
+\DoxyCodeLine{\textcolor{comment}{/// DocInfo object. If it's +/-\/1, the word "{}before"{} and "{}after"{}}}
 \DoxyCodeLine{\textcolor{comment}{/// get inserted. This allows checking of the veloc/displacment}}
 \DoxyCodeLine{\textcolor{comment}{/// interpolation during adaptive mesh refinement.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
@@ -628,17 +628,17 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{comment}{// Open file}}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (stage==-\/1)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"\%s/displ\_and\_veloc\_before\%i.dat"},}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}\%s/displ\_and\_veloc\_before\%i.dat"{}},}
 \DoxyCodeLine{           Doc\_info.directory().c\_str(),Doc\_info.number());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (stage==1)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"\%s/displ\_and\_veloc\_after\%i.dat"},}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}\%s/displ\_and\_veloc\_after\%i.dat"{}},}
 \DoxyCodeLine{           Doc\_info.directory().c\_str(),Doc\_info.number());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"\%s/displ\_and\_veloc\%i.dat"},}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}\%s/displ\_and\_veloc\%i.dat"{}},}
 \DoxyCodeLine{           Doc\_info.directory().c\_str(),Doc\_info.number());}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ some\_file.open(filename);}
@@ -649,7 +649,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nel=solid\_mesh\_pt()-\/>nelement();}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e=0;e<nel;e++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   some\_file << \textcolor{stringliteral}{"ZONE I="} << npts << \textcolor{stringliteral}{", J="} << npts << std::endl;}
+\DoxyCodeLine{   some\_file << \textcolor{stringliteral}{"{}ZONE I="{}} << npts << \textcolor{stringliteral}{"{}, J="{}} << npts << std::endl;}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<npts;i++)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     s[0]=-\/1.0+2.0*double(i)/double(npts-\/1);}
@@ -674,9 +674,9 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{       \textcolor{comment}{// Velocity (1st deriv)}}
 \DoxyCodeLine{       el\_pt-\/>interpolated\_dxdt(s,1,dxdt);}
 \DoxyCodeLine{}
-\DoxyCodeLine{       some\_file << x[0] << \textcolor{stringliteral}{" "} << x[1] << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{                 << displ[0] << \textcolor{stringliteral}{" "} << displ[1] << \textcolor{stringliteral}{" "}  }
-\DoxyCodeLine{                 << dxdt[0] << \textcolor{stringliteral}{" "} << dxdt[1] << \textcolor{stringliteral}{" "}  }
+\DoxyCodeLine{       some\_file << x[0] << \textcolor{stringliteral}{"{} "{}} << x[1] << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{                 << displ[0] << \textcolor{stringliteral}{"{} "{}} << displ[1] << \textcolor{stringliteral}{"{} "{}}  }
+\DoxyCodeLine{                 << dxdt[0] << \textcolor{stringliteral}{"{} "{}} << dxdt[1] << \textcolor{stringliteral}{"{} "{}}  }
 \DoxyCodeLine{                 << std::endl;}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \}}
@@ -729,7 +729,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Define output directory}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} dirname[100];}
-\DoxyCodeLine{ sprintf(dirname,\textcolor{stringliteral}{"RESLT\%i"},case\_number);}
+\DoxyCodeLine{ sprintf(dirname,\textcolor{stringliteral}{"{}RESLT\%i"{}},case\_number);}
 \DoxyCodeLine{ Doc\_info.set\_directory(dirname);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
@@ -737,21 +737,21 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},Doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},Doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set up trace nodes as the nodes on boundary 1 (=curved boundary) in }}
 \DoxyCodeLine{ \textcolor{comment}{// the original mesh (they exist under any refinement!) }}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nnod0=solid\_mesh\_pt()-\/>nboundary\_node(0);}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nnod1=solid\_mesh\_pt()-\/>nboundary\_node(1);}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"time\(\backslash\)""};}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}time\(\backslash\)"{}"{}};}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j=0;j<nnod0;j++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   Trace\_file << \textcolor{stringliteral}{", \(\backslash\)"radial node "} << j << \textcolor{stringliteral}{"\(\backslash\)" "};}
+\DoxyCodeLine{   Trace\_file << \textcolor{stringliteral}{"{}, \(\backslash\)"{}radial node "{}} << j << \textcolor{stringliteral}{"{}\(\backslash\)"{} "{}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} j=0;j<nnod1;j++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   Trace\_file << \textcolor{stringliteral}{", \(\backslash\)"azimuthal node "} << j << \textcolor{stringliteral}{"\(\backslash\)" "};}
+\DoxyCodeLine{   Trace\_file << \textcolor{stringliteral}{"{}, \(\backslash\)"{}azimuthal node "{}} << j << \textcolor{stringliteral}{"{}\(\backslash\)"{} "{}};}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ Trace\_file << std::endl;}
 \DoxyCodeLine{}
@@ -767,7 +767,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{//  //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{\textcolor{comment}{//  if (CommandLineArgs::Argc==1)}}
 \DoxyCodeLine{\textcolor{comment}{//   \{}}
-\DoxyCodeLine{\textcolor{comment}{//    cout << "No restart" << std::endl;}}
+\DoxyCodeLine{\textcolor{comment}{//    cout << "{}No restart"{} << std::endl;}}
 \DoxyCodeLine{\textcolor{comment}{//   \}}}
 \DoxyCodeLine{\textcolor{comment}{//  // Restart}}
 \DoxyCodeLine{\textcolor{comment}{//  //-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -777,23 +777,23 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{\textcolor{comment}{//    restart\_file\_pt=new ifstream(CommandLineArgs::Argv[1],ios\_base::in);}}
 \DoxyCodeLine{\textcolor{comment}{//    if (restart\_file\_pt!=0)}}
 \DoxyCodeLine{\textcolor{comment}{//     \{}}
-\DoxyCodeLine{\textcolor{comment}{//      cout << "Have opened " << CommandLineArgs::Argv[1] << }}
-\DoxyCodeLine{\textcolor{comment}{//       " for restart. " << std::endl;}}
+\DoxyCodeLine{\textcolor{comment}{//      cout << "{}Have opened "{} << CommandLineArgs::Argv[1] << }}
+\DoxyCodeLine{\textcolor{comment}{//       "{} for restart. "{} << std::endl;}}
 \DoxyCodeLine{\textcolor{comment}{//     \}}}
 \DoxyCodeLine{\textcolor{comment}{//    else}}
 \DoxyCodeLine{\textcolor{comment}{//     \{}}
-\DoxyCodeLine{\textcolor{comment}{//      cout << "ERROR while trying to open " << CommandLineArgs::Argv[1] << }}
-\DoxyCodeLine{\textcolor{comment}{//       " for restart." << std::endl;}}
+\DoxyCodeLine{\textcolor{comment}{//      cout << "{}ERROR while trying to open "{} << CommandLineArgs::Argv[1] << }}
+\DoxyCodeLine{\textcolor{comment}{//       "{} for restart."{} << std::endl;}}
 \DoxyCodeLine{\textcolor{comment}{//     \}}}
 \DoxyCodeLine{\textcolor{comment}{//    // Do the actual restart}}
-\DoxyCodeLine{\textcolor{comment}{//    pause("need to do the actual restart");}}
+\DoxyCodeLine{\textcolor{comment}{//    pause("{}need to do the actual restart"{});}}
 \DoxyCodeLine{\textcolor{comment}{//    //problem.restart(*restart\_file\_pt);}}
 \DoxyCodeLine{\textcolor{comment}{//   \}}}
 \DoxyCodeLine{\textcolor{comment}{//  // More than one restart file specified?}}
 \DoxyCodeLine{\textcolor{comment}{//  else }}
 \DoxyCodeLine{\textcolor{comment}{//   \{}}
-\DoxyCodeLine{\textcolor{comment}{//    cout << "Can only specify one input file " << std::endl;}}
-\DoxyCodeLine{\textcolor{comment}{//    cout << "You specified the following command line arguments: " << std::endl;}}
+\DoxyCodeLine{\textcolor{comment}{//    cout << "{}Can only specify one input file "{} << std::endl;}}
+\DoxyCodeLine{\textcolor{comment}{//    cout << "{}You specified the following command line arguments: "{} << std::endl;}}
 \DoxyCodeLine{\textcolor{comment}{//    CommandLineArgs::output();}}
 \DoxyCodeLine{\textcolor{comment}{//    //assert(false);}}
 \DoxyCodeLine{\textcolor{comment}{//   \}}}
@@ -849,7 +849,7 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}} = 1.0; \textcolor{comment}{// ADJUST }}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}} = 0.3; \textcolor{comment}{// ADJUST}}
 \DoxyCodeLine{}
-\DoxyCodeLine{  \textcolor{comment}{// "Big G" Linear constitutive equations:}}
+\DoxyCodeLine{  \textcolor{comment}{// "{}Big G"{} Linear constitutive equations:}}
 \DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}} = }
 \DoxyCodeLine{   \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}},}
 \DoxyCodeLine{                          \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a09a019474b7405b35da2437f7779bc7e}{Global\_Physical\_Variables::E}});}
@@ -860,8 +860,8 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Pure displacement formulation}}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Running case "} << case\_number }
-\DoxyCodeLine{        << \textcolor{stringliteral}{": Pure displacement formulation"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Running case "{}} << case\_number }
+\DoxyCodeLine{        << \textcolor{stringliteral}{"{}: Pure displacement formulation"{}} << std::endl;}
 \DoxyCodeLine{   \mbox{\hyperlink{classDiskShockWaveProblem}{DiskShockWaveProblem<RefineableQPVDElement<2,3>}}, Newmark<1> > problem;}
 \DoxyCodeLine{   problem.\mbox{\hyperlink{classDiskShockWaveProblem_af8dc3befd3eba59b008c315bfe077340}{run}}(case\_number);}
 \DoxyCodeLine{   case\_number++;}
@@ -869,8 +869,8 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Pressure-\/displacement with Crouzeix Raviart-\/type pressure}}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Running case "} << case\_number }
-\DoxyCodeLine{        << \textcolor{stringliteral}{": Pressure/displacement with Crouzeix-\/Raviart pressure"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Running case "{}} << case\_number }
+\DoxyCodeLine{        << \textcolor{stringliteral}{"{}: Pressure/displacement with Crouzeix-\/Raviart pressure"{}} << std::endl;}
 \DoxyCodeLine{   \mbox{\hyperlink{classDiskShockWaveProblem}{DiskShockWaveProblem<RefineableQPVDElementWithPressure<2>}}, Newmark<1> >}
 \DoxyCodeLine{    problem;}
 \DoxyCodeLine{   problem.\mbox{\hyperlink{classDiskShockWaveProblem_af8dc3befd3eba59b008c315bfe077340}{run}}(case\_number);}
@@ -880,8 +880,8 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Pressure-\/displacement with Taylor-\/Hood-\/type pressure}}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Running case "} << case\_number }
-\DoxyCodeLine{        << \textcolor{stringliteral}{": Pressure/displacement with Taylor-\/Hood pressure"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Running case "{}} << case\_number }
+\DoxyCodeLine{        << \textcolor{stringliteral}{"{}: Pressure/displacement with Taylor-\/Hood pressure"{}} << std::endl;}
 \DoxyCodeLine{   \mbox{\hyperlink{classDiskShockWaveProblem}{DiskShockWaveProblem<RefineableQPVDElementWithContinuousPressure<2>}}, }
 \DoxyCodeLine{    Newmark<1> > problem;}
 \DoxyCodeLine{   problem.\mbox{\hyperlink{classDiskShockWaveProblem_af8dc3befd3eba59b008c315bfe077340}{run}}(case\_number);}
@@ -902,10 +902,11 @@ Detailed documentation to be written. Here\textquotesingle{}s the already fairly
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+
 \end{DoxyCodeInclude}
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

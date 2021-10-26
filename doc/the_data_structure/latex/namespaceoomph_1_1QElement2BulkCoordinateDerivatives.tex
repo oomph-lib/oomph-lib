@@ -1,11 +1,16 @@
-\hypertarget{namespaceoomph_1_1QElement2BulkCoordinateDerivatives}{}\doxysection{oomph\+::Q\+Element2\+Bulk\+Coordinate\+Derivatives Namespace Reference}
+\hypertarget{namespaceoomph_1_1QElement2BulkCoordinateDerivatives}{}\doxysection{oomph\+::QElement2\+Bulk\+Coordinate\+Derivatives Namespace Reference}
 \label{namespaceoomph_1_1QElement2BulkCoordinateDerivatives}\index{oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}}
+
+
+Namespace for helper functions that calculate derivatives of the local coordinates in the bulk elements wrt the local coordinates in the face element.  
+
+
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a94c0ba8cb61bc07bdf826604637d0a3b}{faces0}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dsbulk\+\_\+dsface, unsigned \&interior\+\_\+direction)
+void \mbox{\hyperlink{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a94c0ba8cb61bc07bdf826604637d0a3b}{faces0}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dsbulk\+\_\+dsface, unsigned \&interior\+\_\+direction)
 \begin{DoxyCompactList}\small\item\em Function for the east and west faces, along which s0 is fixed. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a07953f5dbe4f1e51b98e2a37282c3458}{faces1}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dsbulk\+\_\+dsface, unsigned \&interior\+\_\+direction)
+void \mbox{\hyperlink{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a07953f5dbe4f1e51b98e2a37282c3458}{faces1}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dsbulk\+\_\+dsface, unsigned \&interior\+\_\+direction)
 \begin{DoxyCompactList}\small\item\em Function for the north and south faces, along which s1 is fixed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -17,7 +22,7 @@ Namespace for helper functions that calculate derivatives of the local coordinat
 \index{oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}!faces0@{faces0}}
 \index{faces0@{faces0}!oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}}
 \doxysubsubsection{\texorpdfstring{faces0()}{faces0()}}
-{\footnotesize\ttfamily void oomph\+::\+Q\+Element2\+Bulk\+Coordinate\+Derivatives\+::faces0 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{dsbulk\+\_\+dsface,  }\item[{unsigned \&}]{interior\+\_\+direction }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+QElement2\+Bulk\+Coordinate\+Derivatives\+::faces0 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{dsbulk\+\_\+dsface,  }\item[{unsigned \&}]{interior\+\_\+direction }\end{DoxyParamCaption})}
 
 
 
@@ -25,17 +30,17 @@ Function for the east and west faces, along which s0 is fixed.
 
 
 
-Definition at line 116 of file Qelement\+\_\+face\+\_\+coordinate\+\_\+translation\+\_\+schemes.\+cc.
+Definition at line \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00116}{116}} of file \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source}{Qelement\+\_\+face\+\_\+coordinate\+\_\+translation\+\_\+schemes.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Q\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt().
+Referenced by \mbox{\hyperlink{hermite__elements_8cc_source_l00913}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{Qspectral__elements_8cc_source_l00305}{oomph\+::\+QSpectral\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{Qelements_8h_source_l01201}{oomph\+::\+QElement$<$ 2, NNODE\+\_\+1\+D $>$\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt()}}.
 
 \mbox{\Hypertarget{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a07953f5dbe4f1e51b98e2a37282c3458}\label{namespaceoomph_1_1QElement2BulkCoordinateDerivatives_a07953f5dbe4f1e51b98e2a37282c3458}} 
 \index{oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}!faces1@{faces1}}
 \index{faces1@{faces1}!oomph::QElement2BulkCoordinateDerivatives@{oomph::QElement2BulkCoordinateDerivatives}}
 \doxysubsubsection{\texorpdfstring{faces1()}{faces1()}}
-{\footnotesize\ttfamily void oomph\+::\+Q\+Element2\+Bulk\+Coordinate\+Derivatives\+::faces1 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{dsbulk\+\_\+dsface,  }\item[{unsigned \&}]{interior\+\_\+direction }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+QElement2\+Bulk\+Coordinate\+Derivatives\+::faces1 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{dsbulk\+\_\+dsface,  }\item[{unsigned \&}]{interior\+\_\+direction }\end{DoxyParamCaption})}
 
 
 
@@ -43,9 +48,9 @@ Function for the north and south faces, along which s1 is fixed.
 
 
 
-Definition at line 131 of file Qelement\+\_\+face\+\_\+coordinate\+\_\+translation\+\_\+schemes.\+cc.
+Definition at line \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source_l00131}{131}} of file \mbox{\hyperlink{Qelement__face__coordinate__translation__schemes_8cc_source}{Qelement\+\_\+face\+\_\+coordinate\+\_\+translation\+\_\+schemes.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Q\+Spectral\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element(), oomph\+::\+Q\+Hermite\+Element$<$ D\+I\+M -\/ 1 $>$\+::build\+\_\+face\+\_\+element(), and oomph\+::\+Q\+Element$<$ 2, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt().
+Referenced by \mbox{\hyperlink{hermite__elements_8cc_source_l00913}{oomph\+::\+QHermite\+Element$<$ DIM $>$\+::build\+\_\+face\+\_\+element()}}, \mbox{\hyperlink{Qspectral__elements_8cc_source_l00305}{oomph\+::\+QSpectral\+Element$<$ 2, NNODE\+\_\+1\+D $>$\+::build\+\_\+face\+\_\+element()}}, and \mbox{\hyperlink{Qelements_8h_source_l01201}{oomph\+::\+QElement$<$ 2, NNODE\+\_\+1\+D $>$\+::bulk\+\_\+coordinate\+\_\+derivatives\+\_\+fct\+\_\+pt()}}.
 

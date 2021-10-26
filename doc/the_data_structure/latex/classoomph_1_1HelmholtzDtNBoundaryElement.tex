@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement}{}\doxysection{oomph\+::Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement}{}\doxysection{oomph\+::Helmholtz\+Dt\+NBoundary\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1HelmholtzDtNBoundaryElement}\index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
+
+
+\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} used to apply Sommerfeld radiation conditon via Dirichlet to Neumann map.  
+
+
 
 
 {\ttfamily \#include $<$helmholtz\+\_\+bc\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Helmholtz\+Dt\+NBoundary\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.925810cm]{classoomph_1_1HelmholtzDtNBoundaryElement}
@@ -13,40 +18,39 @@ Inheritance diagram for oomph\+::Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a2d4a2e2bda9e359efe709b042b7948fe}{Helmholtz\+Dt\+N\+Boundary\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&bulk\+\_\+el\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}})
+\mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a2d4a2e2bda9e359efe709b042b7948fe}{Helmholtz\+Dt\+NBoundary\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&bulk\+\_\+el\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}})
 \begin{DoxyCompactList}\small\item\em Construct element from specification of bulk element and face index. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a963011242bb33d0e5d8cbd46dd878f9e}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a963011242bb33d0e5d8cbd46dd878f9e}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_afb3ab9366490295ba422a9c3fa7d6279}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_afb3ab9366490295ba422a9c3fa7d6279}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
 \begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residual vector and its Jacobian matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_af8d3a6206766e56ada5063490003dcdb}{compute\+\_\+gamma\+\_\+contribution}} (const double \&phi, const int \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, std\+::complex$<$ double $>$ \&gamma\+\_\+con, std\+::map$<$ unsigned, std\+::complex$<$ double $>$$>$ \&d\+\_\+gamma\+\_\+con)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a5393d290b291de8434ead6cce873a376}{compute\+\_\+gamma\+\_\+contribution}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&phi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&n, std\+::complex$<$ double $>$ \&gamma\+\_\+con, std\+::map$<$ unsigned, std\+::complex$<$ double $>$ $>$ \&d\+\_\+gamma\+\_\+con)
 \begin{DoxyCompactList}\small\item\em Compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes the wavenumber and the polar angle phi as input. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a28b795a0c330435e1132a6e0694916cf}{outer\+\_\+boundary\+\_\+mesh\+\_\+pt}} () const
+\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+NMesh}}$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_aae4895d630c8b4cb5585ef55a23f24c9}{outer\+\_\+boundary\+\_\+mesh\+\_\+pt}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Access function to mesh of all DtN boundary condition elements (needed to get access to gamma values) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a8079cc033c8b300917c79af27367dc33}{set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$mesh\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a8079cc033c8b300917c79af27367dc33}{set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+NMesh}}$<$ ELEMENT $>$ $\ast$mesh\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set mesh of all DtN boundary condition elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_aefb821cc3b61a602ab5ca9dd9d843a63}{complete\+\_\+setup\+\_\+of\+\_\+dependencies}} ()
 \begin{DoxyCompactList}\small\item\em Complete the setup of additional dependencies arising through the far-\/away interaction with other nodes in Outer\+\_\+boundary\+\_\+mesh\+\_\+pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a1cc37a3e79fac04fbe2a778ebf770c2c}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, const unsigned \&flag)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_a1cc37a3e79fac04fbe2a778ebf770c2c}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&flag)
 \begin{DoxyCompactList}\small\item\em Compute the element\textquotesingle{}s residual vector Jacobian matrix. Overloaded version, using the gamma computed in the mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_ae72d72e1442234fc262d8151307efacb}{Outer\+\_\+boundary\+\_\+mesh\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+NMesh}}$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement_ae72d72e1442234fc262d8151307efacb}{Outer\+\_\+boundary\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to mesh of all DtN boundary condition elements (needed to get access to gamma values) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$}
 \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} used to apply Sommerfeld radiation conditon via Dirichlet to Neumann map. 
 
-Definition at line 1126 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01120}{1120}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
@@ -55,8 +59,8 @@ Definition at line 1126 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!HelmholtzDtNBoundaryElement@{HelmholtzDtNBoundaryElement}}
 \index{HelmholtzDtNBoundaryElement@{HelmholtzDtNBoundaryElement}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{HelmholtzDtNBoundaryElement()}{HelmholtzDtNBoundaryElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{Helmholtz\+Dt\+N\+Boundary\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{Helmholtz\+Dt\+NBoundary\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{bulk\+\_\+el\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -64,7 +68,7 @@ Construct element from specification of bulk element and face index.
 
 
 
-Definition at line 1131 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01125}{1125}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
@@ -73,8 +77,8 @@ Definition at line 1131 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!complete\_setup\_of\_dependencies@{complete\_setup\_of\_dependencies}}
 \index{complete\_setup\_of\_dependencies@{complete\_setup\_of\_dependencies}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{complete\_setup\_of\_dependencies()}{complete\_setup\_of\_dependencies()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -86,41 +90,43 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_af03c43b9df
 
 
 
-Definition at line 1184 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01178}{1178}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data(), oomph\+::\+Node\+::copied\+\_\+node\+\_\+pt(), e, oomph\+::\+Data\+::is\+\_\+a\+\_\+copy(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{elements_8cc_source_l00307}{oomph\+::\+Generalised\+Element\+::add\+\_\+external\+\_\+data()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01443}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement_af8d3a6206766e56ada5063490003dcdb}\label{classoomph_1_1HelmholtzDtNBoundaryElement_af8d3a6206766e56ada5063490003dcdb}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement_a5393d290b291de8434ead6cce873a376}\label{classoomph_1_1HelmholtzDtNBoundaryElement_a5393d290b291de8434ead6cce873a376}} 
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!compute\_gamma\_contribution@{compute\_gamma\_contribution}}
 \index{compute\_gamma\_contribution@{compute\_gamma\_contribution}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_gamma\_contribution()}{compute\_gamma\_contribution()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::compute\+\_\+gamma\+\_\+contribution (\begin{DoxyParamCaption}\item[{const double \&}]{phi,  }\item[{const int \&}]{n,  }\item[{std\+::complex$<$ double $>$ \&}]{gamma\+\_\+con,  }\item[{std\+::map$<$ unsigned, std\+::complex$<$ double $>$$>$ \&}]{d\+\_\+gamma\+\_\+con }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::compute\+\_\+gamma\+\_\+contribution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{phi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{n,  }\item[{std\+::complex$<$ double $>$ \&}]{gamma\+\_\+con,  }\item[{std\+::map$<$ unsigned, std\+::complex$<$ double $>$ $>$ \&}]{d\+\_\+gamma\+\_\+con }\end{DoxyParamCaption})}
 
 
 
 Compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes the wavenumber and the polar angle phi as input. 
 
+///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////
+
 compute the contribution of the element to the Gamma integral and its derivates w.\+r.\+t to global unknows; the function takes wavenumber n and polar angle phi as input. 
 
-Definition at line 1465 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01459}{1459}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim, oomph\+::\+Mathematical\+Constants\+::\+I(), i, interpolated\+\_\+u(), n, and s.
+References \mbox{\hyperlink{multi__domain_8cc_source_l00060}{oomph\+::\+Multi\+\_\+domain\+\_\+functions\+::\+Dim}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{namespaceoomph_1_1MathematicalConstants_a609ab3b897b174e49ddf7a19fd95f2ef}{oomph\+::\+Mathematical\+Constants\+::\+I()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
-Referenced by oomph\+::\+Helmholtz\+Dt\+N\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+gamma().
+Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01674}{oomph\+::\+Helmholtz\+Dt\+NMesh$<$ ELEMENT $>$\+::setup\+\_\+gamma()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement_afb3ab9366490295ba422a9c3fa7d6279}\label{classoomph_1_1HelmholtzDtNBoundaryElement_afb3ab9366490295ba422a9c3fa7d6279}} 
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -132,18 +138,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a0ae7af222af38a0
 
 
 
-Definition at line 1148 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01142}{1142}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), and residuals().
+References \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01228}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement_a963011242bb33d0e5d8cbd46dd878f9e}\label{classoomph_1_1HelmholtzDtNBoundaryElement_a963011242bb33d0e5d8cbd46dd878f9e}} 
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -155,18 +161,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 1138 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01132}{1132}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), and residuals().
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01228}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement_a1cc37a3e79fac04fbe2a778ebf770c2c}\label{classoomph_1_1HelmholtzDtNBoundaryElement_a1cc37a3e79fac04fbe2a778ebf770c2c}} 
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_helmholtz\_DtN\_bc@{fill\_in\_generic\_residual\_contribution\_helmholtz\_DtN\_bc}}
 \index{fill\_in\_generic\_residual\_contribution\_helmholtz\_DtN\_bc@{fill\_in\_generic\_residual\_contribution\_helmholtz\_DtN\_bc}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_helmholtz\_DtN\_bc()}{fill\_in\_generic\_residual\_contribution\_helmholtz\_DtN\_bc()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -174,22 +180,22 @@ Compute the element\textquotesingle{}s residual vector Jacobian matrix. Overload
 
 
 
-Definition at line 1234 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01228}{1228}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Integral\+::knot(), oomph\+::\+Generalised\+Element\+::nexternal\+\_\+data(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt, residuals(), s, oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::test\+\_\+only(), oomph\+::\+Helmholtz\+B\+C\+Element\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+U\+\_\+index\+\_\+helmholtz, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+References \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00547}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l00704}{oomph\+::\+Generalised\+Element\+::eqn\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l00311}{oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l00829}{oomph\+::\+Generalised\+Element\+::nexternal\+\_\+data()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01443}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00504}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::test\+\_\+only()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l00544}{oomph\+::\+Helmholtz\+BCElement\+Base$<$ ELEMENT $>$\+::\+U\+\_\+index\+\_\+helmholtz}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 
 
-Referenced by oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01142}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01132}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
-\mbox{\Hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement_a28b795a0c330435e1132a6e0694916cf}\label{classoomph_1_1HelmholtzDtNBoundaryElement_a28b795a0c330435e1132a6e0694916cf}} 
+\mbox{\Hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement_aae4895d630c8b4cb5585ef55a23f24c9}\label{classoomph_1_1HelmholtzDtNBoundaryElement_aae4895d630c8b4cb5585ef55a23f24c9}} 
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!outer\_boundary\_mesh\_pt@{outer\_boundary\_mesh\_pt}}
 \index{outer\_boundary\_mesh\_pt@{outer\_boundary\_mesh\_pt}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{outer\_boundary\_mesh\_pt()}{outer\_boundary\_mesh\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+N\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::outer\+\_\+boundary\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+NMesh}}$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::outer\+\_\+boundary\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -197,18 +203,18 @@ Access function to mesh of all DtN boundary condition elements (needed to get ac
 
 
 
-Definition at line 1169 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01163}{1163}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01443}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzDtNBoundaryElement_a8079cc033c8b300917c79af27367dc33}\label{classoomph_1_1HelmholtzDtNBoundaryElement_a8079cc033c8b300917c79af27367dc33}} 
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!set\_outer\_boundary\_mesh\_pt@{set\_outer\_boundary\_mesh\_pt}}
 \index{set\_outer\_boundary\_mesh\_pt@{set\_outer\_boundary\_mesh\_pt}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{set\_outer\_boundary\_mesh\_pt()}{set\_outer\_boundary\_mesh\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+N\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+NMesh}}$<$ ELEMENT $>$ $\ast$}]{mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -216,11 +222,11 @@ Set mesh of all DtN boundary condition elements.
 
 
 
-Definition at line 1175 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01169}{1169}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01443}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::\+Outer\+\_\+boundary\+\_\+mesh\+\_\+pt}}.
 
 
 
@@ -229,8 +235,8 @@ References oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T
 \index{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}!Outer\_boundary\_mesh\_pt@{Outer\_boundary\_mesh\_pt}}
 \index{Outer\_boundary\_mesh\_pt@{Outer\_boundary\_mesh\_pt}!oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$@{oomph::HelmholtzDtNBoundaryElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Outer\_boundary\_mesh\_pt}{Outer\_boundary\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+N\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Outer\+\_\+boundary\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1HelmholtzDtNMesh}{Helmholtz\+Dt\+NMesh}}$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classoomph_1_1HelmholtzDtNBoundaryElement}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element}}$<$ ELEMENT $>$\+::Outer\+\_\+boundary\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -238,11 +244,11 @@ Pointer to mesh of all DtN boundary condition elements (needed to get access to 
 
 
 
-Definition at line 1449 of file helmholtz\+\_\+bc\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01443}{1443}} of file \mbox{\hyperlink{helmholtz__bc__elements_8h_source}{helmholtz\+\_\+bc\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies(), oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc(), oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::outer\+\_\+boundary\+\_\+mesh\+\_\+pt(), and oomph\+::\+Helmholtz\+Dt\+N\+Boundary\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt().
+Referenced by \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01178}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::complete\+\_\+setup\+\_\+of\+\_\+dependencies()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01228}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+helmholtz\+\_\+\+Dt\+N\+\_\+bc()}}, \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01163}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::outer\+\_\+boundary\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{helmholtz__bc__elements_8h_source_l01169}{oomph\+::\+Helmholtz\+Dt\+NBoundary\+Element$<$ ELEMENT $>$\+::set\+\_\+outer\+\_\+boundary\+\_\+mesh\+\_\+pt()}}.
 
 
 

@@ -1,0 +1,176 @@
+\hypertarget{unstructured__sphere_8txt__doxygenified_8h_source}{}\doxysection{unstructured\+\_\+sphere.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{unstructured__sphere_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage The spatially-\/adaptive solution of azimuthally Fourier-\/decomposed time-\/harmonic 3D acoustic fluid-\/structure interaction problems on unstructured meshes}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{In this document we discuss the spatially-\/adaptive solution of 3D}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{time-\/harmonic acoustic fluid-\/structure interaction problems}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{in cylindrical polar coordinates on unstructured meshes.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{  The driver code is very similar to the one presented in}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<a href=../../sphere/html/index.html>another tutorial</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{and we only discuss the changes necessary to deal with the generation}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{of the adaptive, unstructured meshes and the }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{assignment of different material properties to different parts of the }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{solid domain.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{\(\backslash\)section test A test problem}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{The sketch below shows the problem setup: An elastic sphere}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{which is reinforced with an azimuthal T-\/rib is immersed in a compressible}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{fluid and subjected to a time-\/periodic pressure load of magnitude}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{\{\(\backslash\)bf t\} = P ( \(\backslash\)exp(\(\backslash\)alpha(\(\backslash\)theta-\/\(\backslash\)pi/4)\string^2)  + \(\backslash\)exp(\(\backslash\)alpha(\(\backslash\)theta-\/3\(\backslash\)pi/4)\string^2) )}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{(where \(\backslash\)f\$ \(\backslash\)theta \(\backslash\)f\$ is the zenith angle) along }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{its inner surface. The parameter \(\backslash\)f\$ \(\backslash\)alpha \(\backslash\)f\$ controls the }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{"{}sharpness"{} of the pressure load. For  \(\backslash\)f\$ \(\backslash\)alpha=0 \(\backslash\)f\$ we obtain a }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{uniform, spherically symmetric load; the sketch below shows the pressure }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{distribution (red vectors indicating the traction) for \(\backslash\)f\$ \(\backslash\)alpha = 200. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{\(\backslash\)image html setup.gif "{}Sketch of the problem setup. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{\(\backslash\)image latex setup.eps "{}Sketch of the problem setup. "{} width=0.8\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{   }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{The figure below shows an animation of the structure's time-\/harmonic}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{oscillation. The blue shaded region shows the shape of the}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{oscillating structure while the pink region shows its undeformed configuration.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{The left half of the plot is used to show the (mirror image of}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{the) adaptive unstructured mesh on which the displacement field was computed:}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{\(\backslash\)image html anim.gif "{}Animation of the time-\/harmonic deformation. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\(\backslash\)image latex anim.eps "{}Animation of the time-\/harmonic deformation. "{} width=0.8\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{Here is a plot of the corresponding fluid displacement potential, a }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{measure of the fluid pressure:   }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{\(\backslash\)image html potential\_unstr.gif "{}The fluid displacement potential, a measure of the fluid pressure. Elevation: real part; contours: imaginary part. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{\(\backslash\)image latex potential\_unstr.eps "{}The fluid displacement potential, a measure of the fluid pressure. Elevation: real part; contours: imaginary part. "{} width=0.8\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{This looks very pretty and shows that we can solve acoustic FSI}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{problems in non-\/trivial geometries but should you believe the results? }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{Here's an attempt to convince you: If we make the rib much softer than the}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{sphere and set its inertia to zero, the rib will not offer much }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{structural resistance and the sphere will deform as if the rib was not present.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{If we then set \(\backslash\)f\$ \(\backslash\)alpha = 0 \(\backslash\)f\$ we apply a spherically symmetric forcing}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{onto the structure and would expect the resulting displacement}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{field (at least in the sphere) to be spherically symmetric, too.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{The animation of the displacement field for this case, shown below,}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{shows that this is indeed the case:}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)image html anim\_alpha0.gif "{}Animation of the time-\/harmonic deformation for a uniform pressure load and a very soft and inertia-\/less rib. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{\(\backslash\)image latex anim\_alpha0.eps "{}Animation of the time-\/harmonic deformation for a uniform pressure load and a very soft and inertia-\/less rib. "{} width=0.8\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{Here is a plot of the corresponding fluid displacement potential, a }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{measure of the fluid pressure: }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)image html potential\_unstr\_alpha0.gif "{}The fluid displacement potential, a measure of the fluid pressure for a uniform pressure load and a very soft and inertia-\/less rib. Elevation: real part; contours: imaginary part. "{} }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)image latex potential\_unstr\_alpha0.eps "{}The fluid displacement potential, a measure of the fluid pressure for a uniform pressure load and a very soft and inertia-\/less rib. Elevation: real part; contours: imaginary part. "{} width=0.8\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{\(\backslash\)section num The numerical solution}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{The driver code for this problem is very similar to the one discussed in}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{<a href=../../sphere/html/index.html>another tutorial</a>.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{Running \(\backslash\)c sdiff on the two driver codes}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/interaction/fourier\_decomposed\_acoustic\_fsi/fourier\_decomposed\_acoustic\_fsi.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{demo\_drivers/interaction/fourier\_decomposed\_acoustic\_fsi/fourier\_decomposed\_acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/interaction/fourier\_decomposed\_acoustic\_fsi/unstructured\_fourier\_decomposed\_acoustic\_fsi.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{demo\_drivers/interaction/fourier\_decomposed\_acoustic\_fsi/unstructured\_fourier\_decomposed\_acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{shows you the differences, the most important of which are:}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{-\/ The provision of multiple non-\/dimensional Young's moduli and frequency}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{  parameters for the two different regions (the rib and the }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{  sphere). }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{  <a href="{}../../../time\_harmonic\_fourier\_decomposed\_linear\_elasticity/cylinder/html/index.html\#comments"{}>Recall</a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{  that the non-\/dimensional Young's modulus specified via \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{  TimeHarmonicFourierDecomposedLinearElasticityEquations::youngs\_modulus\_pt()}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{  represents the ratio of the material's actual Young's modulus to the}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{  Young's modulus used in <a href="{}../../../time\_harmonic\_fourier\_decomposed\_linear\_elasticity/cylinder/html/index.html\#theory"{}>the}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{  non-\/dimensionalisation of the equations. </a>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{-\/ The change of forcing from a prescribed time-\/harmonic displacement}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{  to a pressure}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{  load on the inside boundary -\/-\/ this requires yet another mesh of}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{  \(\backslash\)c FaceElements.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{-\/ The provision of the \(\backslash\)c actions\_before/after\_adapt() functions and a }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{  helper function \(\backslash\)c complete\_problem\_setup()}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{  which rebuilds the elements (by passing the problem parameters}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{  to the elements) following the unstructured mesh adaptation.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{  (The need/rationale for such a function is discussed in }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{  <a href="{}../../../meshes/mesh\_from\_inline\_triangle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{  another tutorial.</a>)}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{-\/ The mesh generation -\/-\/ the specification of the curvilinear}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{  boundaries and the geometry of the rib is somewhat tedious.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{  We refer to }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{  <a href="{}../../../meshes/mesh\_from\_inline\_triangle\_internal\_boundaries/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{  another tutorial</a> for a discussion of how to define the}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{  internal mesh boundary that separates the two regions}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{  (the rib and the sphere) so that we can assign }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{  different material properties to them. }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{.  }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{All of this is reasonably straightforward and provides a}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{powerful code that automatically adapts both meshes while}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{respecting the curvilinear boundaries of the domain. }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{Have a look through the driver code and play with it.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)section code Code listing}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{Here's a listing of the complete driver code:}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{\(\backslash\)include unstructured\_fourier\_decomposed\_acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{  <CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{  <A HREF="{}../../../../demo\_drivers/interaction/fourier\_decomposed\_acoustic\_fsi"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{  demo\_drivers/interaction/fourier\_decomposed\_acoustic\_fsi/}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{  </A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{  </CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{  <CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{  <A HREF="{}../../../../demo\_drivers/interaction/fourier\_decomposed\_acoustic\_fsi/unstructured\_fourier\_decomposed\_acoustic\_fsi.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{  demo\_drivers/interaction/fourier\_decomposed\_acoustic\_fsi/unstructured\_fourier\_decomposed\_acoustic\_fsi.cc}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{  </A>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{  </CENTER>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{unstructured__sphere_8txt__doxygenified_8h_source_l00171}00171 }
+
+\end{DoxyCode}

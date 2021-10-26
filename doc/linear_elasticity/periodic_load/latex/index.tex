@@ -36,7 +36,7 @@ In this tutorial we only consider steady problems for which the equations reduce
 \hypertarget{index_element_types}{}\doxysection{Implementation}\label{index_element_types}
 \DoxyHorRuler{0}
 \hypertarget{index_el}{}\doxysubsection{The elements}\label{index_el}
-Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of the {\ttfamily D\+IM}-\/dimensional Cauchy equations (1) with the constitutive equations (2) are implemented in the {\ttfamily Linear\+Elasticity\+Equations$<$\+D\+I\+M$>$} equations class. Following our usual approach, discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily Linear\+Elasticity\+Equations$<$2$>$} class with the geometric finite element {\ttfamily Q\+Element$<$2,3$>$} yields a nine-\/node quadrilateral linear elasticity element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center} \[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2\quad [\mbox{and }3], \] \end{center}  where $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
+Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of the {\ttfamily DIM}-\/dimensional Cauchy equations (1) with the constitutive equations (2) are implemented in the {\ttfamily Linear\+Elasticity\+Equations$<$\+DIM$>$} equations class. Following our usual approach, discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily Linear\+Elasticity\+Equations$<$2$>$} class with the geometric finite element {\ttfamily QElement$<$2,3$>$} yields a nine-\/node quadrilateral linear elasticity element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center} \[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2\quad [\mbox{and }3], \] \end{center}  where $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
 
 The cartesian displacement components $ u_1, $ $ u_2, $ ~\newline
  \mbox{[}and $ u_3 $\mbox{]} are stored as nodal values, and the shape functions are used to interpolate the displacements as \begin{center} \[ u_i = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad i=1,2\quad [\mbox{and }3], \] \end{center}  where $ U^{(E)}_{ij} $ is the $ i $-\/th displacement component at the $ j $-\/th {\ttfamily Node} in the element. Nodal values of the displacement components are accessible via the access function
@@ -44,6 +44,7 @@ The cartesian displacement components $ u_1, $ $ u_2, $ ~\newline
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{LinearElasticityEquations<DIM>::u(i,j)}
+
 \end{DoxyCode}
 
 
@@ -93,13 +94,13 @@ As usual, we define all non-\/dimensional parameters in a namespace.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Amplitude of traction applied}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Parameters_a184a9ddf15137a1b11ccf7dc790d697d}{Amplitude}} = 1.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Specify problem to be solved (boundary conditons for finite or}}
+\DoxyCodeLine{\textcolor{comment}{ /// Specify problem to be solved (boundary conditons for finite or}}
 \DoxyCodeLine{\textcolor{comment}{ /// infinite domain).}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceGlobal__Parameters_a3a5d4759509036a2650d5efde8e15d56}{Finite}}=\textcolor{keyword}{false};}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -139,9 +140,7 @@ As usual, we define all non-\/dimensional parameters in a namespace.
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We start by setting the number of elements in each of the two coordinate directions before creating a {\ttfamily Doc\+Info} object to store the output directory.
@@ -150,7 +149,7 @@ We start by setting the number of elements in each of the two coordinate directi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for PeriodicLoad linearly elastic problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{periodic__load_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Number of elements in x-\/direction}}
@@ -163,24 +162,22 @@ We start by setting the number of elements in each of the two coordinate directi
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 
 \end{DoxyCodeInclude}
-
-
-We build the problem using two-\/dimensional {\ttfamily Q\+Linear\+Elasticity\+Elements}, solve using the {\ttfamily Problem\+::newton\+\_\+solve()} function, and document the results.
+ We build the problem using two-\/dimensional {\ttfamily QLinear\+Elasticity\+Elements}, solve using the {\ttfamily Problem\+::newton\+\_\+solve()} function, and document the results.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Set up problem}}
 \DoxyCodeLine{ \mbox{\hyperlink{classPeriodicLoadProblem}{PeriodicLoadProblem<QLinearElasticityElement<2,3>}} > }
-\DoxyCodeLine{  \mbox{\hyperlink{periodic__load_8txt_a40e9262f7b687d0d3d3d02533f566ed4}{problem}}(nx,ny,\mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Global\_Parameters::Lx}}, \mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Global\_Parameters::Ly}});}
+\DoxyCodeLine{  problem(nx,ny,\mbox{\hyperlink{namespaceGlobal__Parameters_a8a81b077f0a29b3468c576f56ecb1348}{Global\_Parameters::Lx}}, \mbox{\hyperlink{namespaceGlobal__Parameters_a25a31b2de3f05ac457b62fc9fa999872}{Global\_Parameters::Ly}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Solve}}
-\DoxyCodeLine{ \mbox{\hyperlink{periodic__load_8txt_a40e9262f7b687d0d3d3d02533f566ed4}{problem}}.newton\_solve();}
+\DoxyCodeLine{ problem.newton\_solve();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output the solution}}
-\DoxyCodeLine{ \mbox{\hyperlink{periodic__load_8txt_a40e9262f7b687d0d3d3d02533f566ed4}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{ problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_main}}
 
@@ -196,13 +193,13 @@ The {\ttfamily Problem} class is very simple. As in other problems with Neumann 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Periodic loading problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classPeriodicLoadProblem}{PeriodicLoadProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass number of elements in x and y directions }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass number of elements in x and y directions }}
 \DoxyCodeLine{\textcolor{comment}{ /// and lengths}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classPeriodicLoadProblem_a66bf36608f2068374c09c73d9256edda}{PeriodicLoadProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny, }
 \DoxyCodeLine{                     \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
@@ -240,8 +237,8 @@ Since this is a steady problem, the constructor is quite simple. We begin by bui
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in coordinate}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// directions and size of domain.}}
+\DoxyCodeLine{\textcolor{comment}{/// Problem constructor: Pass number of elements in coordinate}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// directions and size of domain.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classPeriodicLoadProblem_a66bf36608f2068374c09c73d9256edda}{PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem}}}
@@ -296,9 +293,7 @@ Since this is a steady problem, the constructor is quite simple. We begin by bui
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_loop\_over\_boundary\_nodes}}
 
 \end{DoxyCodeInclude}
-
-
-Next we pass a pointer to the elasticity tensor (stored in {\ttfamily Global\+\_\+\+Physical\+\_\+\+Variables\+::E}) to all elements.
+ Next we pass a pointer to the elasticity tensor (stored in {\ttfamily Global\+\_\+\+Physical\+\_\+\+Variables\+::E}) to all elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -316,9 +311,7 @@ Next we pass a pointer to the elasticity tensor (stored in {\ttfamily Global\+\_
 \DoxyCodeLine{  \}\textcolor{comment}{// end loop over elements}}
 
 \end{DoxyCodeInclude}
-
-
-We loop over the traction elements and specify the applied traction.
+ We loop over the traction elements and specify the applied traction.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -336,9 +329,7 @@ We loop over the traction elements and specify the applied traction.
 \DoxyCodeLine{  \}\textcolor{comment}{// end loop over traction elements}}
 
 \end{DoxyCodeInclude}
-
-
-The two submeshes are now added to the problem and a global mesh is constructed before the equation numbering scheme is set up, using the function {\ttfamily assign\+\_\+eqn\+\_\+numbers()}.
+ The two submeshes are now added to the problem and a global mesh is constructed before the equation numbering scheme is set up, using the function {\ttfamily assign\+\_\+eqn\+\_\+numbers()}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -350,7 +341,7 @@ The two submeshes are now added to the problem and a global mesh is constructed 
 \DoxyCodeLine{ build\_global\_mesh();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Assign equation numbers}}
-\DoxyCodeLine{ cout << assign\_eqn\_numbers() << \textcolor{stringliteral}{" equations assigned"} << std::endl; }
+\DoxyCodeLine{ cout << assign\_eqn\_numbers() << \textcolor{stringliteral}{"{} equations assigned"{}} << std::endl; }
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
@@ -365,7 +356,7 @@ In anticipation of the extension of this code to its \href{../../refineable_peri
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_traction===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Make traction elements along the top boundary of the bulk mesh}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPeriodicLoadProblem_ad850863c61c0055e230e6319d67905e2}{PeriodicLoadProblem<ELEMENT>::assign\_traction\_elements}}()}
 \DoxyCodeLine{\{}
@@ -401,7 +392,7 @@ As expected, this member function documents the computed solution.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classPeriodicLoadProblem_ad414cf9a0b4a61de439e459f10e762c7}{PeriodicLoadProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -412,13 +403,13 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output\_fct(some\_file,npts,}
 \DoxyCodeLine{                          \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\_Parameters::exact\_solution}}); }
@@ -427,7 +418,7 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{ \textcolor{comment}{// Doc error}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error=0.0;}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} norm=0.0;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>compute\_error(some\_file,}
 \DoxyCodeLine{                             \mbox{\hyperlink{namespaceGlobal__Parameters_a6e53a9e4370e8719e9091eff6b6a0c01}{Global\_Parameters::exact\_solution}}, }
@@ -435,17 +426,15 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Doc error norm:}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)nNorm of error    "} << sqrt(error) << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Norm of solution : "} << sqrt(norm) << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)nNorm of error    "{}} << sqrt(error) << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Norm of solution : "{}} << sqrt(norm) << std::endl << std::endl;}
 \DoxyCodeLine{ cout << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_doc\_solution   }}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_nondim}{}\doxysubsection{Comments}\label{index_nondim}
@@ -467,5 +456,5 @@ As discussed in the introduction, the non-\/dimensional version of the steady Ca
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

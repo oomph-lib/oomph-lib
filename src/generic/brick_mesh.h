@@ -47,9 +47,9 @@
 
 namespace oomph
 {
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////
 
 
   //====================================================================
@@ -63,9 +63,9 @@ namespace oomph
   } // namespace BrickFromTetMeshHelper
 
 
-  ///////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////
 
 
   //======================================================================
@@ -75,14 +75,11 @@ namespace oomph
   class DummyBrickElement : public virtual QElement<3, 2>
   {
   public:
-    ///\short  Constructor:
+    /// Constructor:
     DummyBrickElement() : QElement<3, 2>() {}
 
     /// Broken copy constructor
-    DummyBrickElement(const DummyBrickElement& dummy)
-    {
-      BrokenCopy::broken_copy("DummyElement");
-    }
+    DummyBrickElement(const DummyBrickElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -90,13 +87,10 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const DummyBrickElement&)
-     {
-      BrokenCopy::broken_assign("DummyBrickElement");
-      }*/
+    /*void operator=(const DummyBrickElement&) = delete;*/
 
 
-    /// \short  Required  # of `values' (pinned or dofs)
+    ///  Required  # of `values' (pinned or dofs)
     /// at node n
     inline unsigned required_nvalue(const unsigned& n) const
     {
@@ -104,7 +98,7 @@ namespace oomph
     }
 
 
-    /// \short Compute vector of FE interpolated local coordinate in tet,
+    /// Compute vector of FE interpolated local coordinate in tet,
     /// s_tet, evaluated at local coordinate s in current element.
     void interpolated_s_tet(const Vector<double>& s,
                             Vector<double>& s_tet) const
@@ -172,9 +166,9 @@ namespace oomph
     }
   };
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
+  /// ////////////////////////////////////////////////////////////////////////
 
 
   //================================================================
@@ -188,16 +182,10 @@ namespace oomph
 
 
     /// Broken copy constructor
-    BrickMeshBase(const BrickMeshBase&)
-    {
-      BrokenCopy::broken_copy("BrickMeshBase");
-    }
+    BrickMeshBase(const BrickMeshBase&) = delete;
 
     /// Broken assignment operator
-    /*void operator=(const BrickMeshBase&)
-     {
-      BrokenCopy::broken_assign("BrickMeshBase");
-      }*/
+    /*void operator=(const BrickMeshBase&) = delete;*/
 
     /// Destructor (empty)
     virtual ~BrickMeshBase() {}
@@ -210,7 +198,7 @@ namespace oomph
       setup_boundary_element_info(outfile);
     }
 
-    /// \short Setup lookup schemes which establish whic elements are located
+    /// Setup lookup schemes which establish whic elements are located
     /// next to mesh's boundaries. Doc in outfile (if it's open).
     void setup_boundary_element_info(std::ostream& outfile);
   };

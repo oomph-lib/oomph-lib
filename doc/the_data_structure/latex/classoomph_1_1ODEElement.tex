@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1ODEElement}{}\doxysection{oomph\+::O\+D\+E\+Element Class Reference}
+\hypertarget{classoomph_1_1ODEElement}{}\doxysection{oomph\+::ODEElement Class Reference}
 \label{classoomph_1_1ODEElement}\index{oomph::ODEElement@{oomph::ODEElement}}
 
 
-Element for integrating an initial value O\+DE.  
+Element for integrating an initial value ODE.  
 
 
 
 
 {\ttfamily \#include $<$ode\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::O\+D\+E\+Element\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::ODEElement\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1ODEElement}
@@ -18,25 +18,25 @@ Inheritance diagram for oomph\+::O\+D\+E\+Element\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ODEElement_a727627ab2008a2829f73e6e437be04fa}{O\+D\+E\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1ODEElement_a727627ab2008a2829f73e6e437be04fa}{ODEElement}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor\+: null any pointers. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ODEElement_a178efce7a692eb0b245e4a64f44b4576}{O\+D\+E\+Element}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt, \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}} $\ast$exact\+\_\+solution\+\_\+pt)
-\item 
+\mbox{\hyperlink{classoomph_1_1ODEElement_a178efce7a692eb0b245e4a64f44b4576}{ODEElement}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt, \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}} $\ast$exact\+\_\+solution\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass time stepper and a solution function pointer, then build the element. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1ODEElement_ab7885b17adcc0d175a1522197d9d30cf}{build}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt, \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}} $\ast$exact\+\_\+solution\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Store pointers, create internal data. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classoomph_1_1ODEElement_acc30d7f02f15948f113cc4209ca9ca33}{$\sim$\+O\+D\+E\+Element}} ()
+virtual \mbox{\hyperlink{classoomph_1_1ODEElement_acc30d7f02f15948f113cc4209ca9ca33}{$\sim$\+ODEElement}} ()
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1ODEElement_ad968e4ce7f28115bf97f5854446bb5c4}{nvalue}} () const
 \item 
-virtual void \mbox{\hyperlink{classoomph_1_1ODEElement_ab13351a18eee7d2ba455312ea755801f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+virtual void \mbox{\hyperlink{classoomph_1_1ODEElement_ab13351a18eee7d2ba455312ea755801f}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Get residuals. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ODEElement_a4db1a9984200b201e7aae566afd0cfc6}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Add the elemental contribution to the jacobian matrix. and the residuals vector. Note that this function will N\+OT initialise the residuals vector or the jacobian matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is to use finite differences to calculate the jacobian. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1ODEElement_aef001ba04ec222921cbdf887ddc6b041}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mm)
-\begin{DoxyCompactList}\small\item\em Add the elemental contribution to the mass matrix matrix. and the residuals vector. Note that this function should N\+OT initialise the residuals vector or the mass matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is deliberately broken. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ODEElement_a4d5e0a3989f17428bbc9e8eca4470fe2}{exact\+\_\+solution}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}) const
+virtual void \mbox{\hyperlink{classoomph_1_1ODEElement_a4db1a9984200b201e7aae566afd0cfc6}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Add the elemental contribution to the jacobian matrix. and the residuals vector. Note that this function will NOT initialise the residuals vector or the jacobian matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is to use finite differences to calculate the jacobian. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1ODEElement_aef001ba04ec222921cbdf887ddc6b041}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mm)
+\begin{DoxyCompactList}\small\item\em Add the elemental contribution to the mass matrix matrix. and the residuals vector. Note that this function should NOT initialise the residuals vector or the mass matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is deliberately broken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ODEElement_a4a962db7537b5f3e801d68129ffc09ed}{exact\+\_\+solution}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}) const
 \begin{DoxyCompactList}\small\item\em Exact solution. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ODEElement_a95369a0392e9e068ad2a85b78ba0cbb3}{derivative\+\_\+function}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}{derivative\+\_\+function}} (const double \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
 \begin{DoxyCompactList}\small\item\em Exact solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -49,9 +49,9 @@ bool \mbox{\hyperlink{classoomph_1_1ODEElement_a4d1119b79288a81c14cd7b462ca5eee6
 
 
 \doxysubsection{Detailed Description}
-Element for integrating an initial value O\+DE. 
+Element for integrating an initial value ODE. 
 
-Definition at line 40 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00040}{40}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
@@ -60,7 +60,7 @@ Definition at line 40 of file ode\+\_\+elements.\+h.
 \index{oomph::ODEElement@{oomph::ODEElement}!ODEElement@{ODEElement}}
 \index{ODEElement@{ODEElement}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{ODEElement()}{ODEElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+O\+D\+E\+Element\+::\+O\+D\+E\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+ODEElement\+::\+ODEElement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -68,35 +68,39 @@ Default constructor\+: null any pointers.
 
 
 
-Definition at line 44 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00044}{44}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References Exact\+\_\+solution\+\_\+pt, and Use\+\_\+fd\+\_\+jacobian.
+References \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, and \mbox{\hyperlink{ode__elements_8h_source_l00182}{Use\+\_\+fd\+\_\+jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1ODEElement_a178efce7a692eb0b245e4a64f44b4576}\label{classoomph_1_1ODEElement_a178efce7a692eb0b245e4a64f44b4576}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!ODEElement@{ODEElement}}
 \index{ODEElement@{ODEElement}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{ODEElement()}{ODEElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+O\+D\+E\+Element\+::\+O\+D\+E\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}} $\ast$}]{exact\+\_\+solution\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+ODEElement\+::\+ODEElement (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}} $\ast$}]{exact\+\_\+solution\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 Constructor\+: Pass time stepper and a solution function pointer, then build the element. 
 
-Definition at line 53 of file ode\+\_\+elements.\+h.
+
+
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00053}{53}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References build().
+References \mbox{\hyperlink{ode__elements_8h_source_l00060}{build()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ODEElement_acc30d7f02f15948f113cc4209ca9ca33}\label{classoomph_1_1ODEElement_acc30d7f02f15948f113cc4209ca9ca33}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!````~ODEElement@{$\sim$ODEElement}}
 \index{````~ODEElement@{$\sim$ODEElement}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{$\sim$ODEElement()}{~ODEElement()}}
-{\footnotesize\ttfamily virtual oomph\+::\+O\+D\+E\+Element\+::$\sim$\+O\+D\+E\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual oomph\+::\+ODEElement\+::$\sim$\+ODEElement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line 74 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00074}{74}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
@@ -105,7 +109,7 @@ Definition at line 74 of file ode\+\_\+elements.\+h.
 \index{oomph::ODEElement@{oomph::ODEElement}!build@{build}}
 \index{build@{build}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{build()}{build()}}
-{\footnotesize\ttfamily void oomph\+::\+O\+D\+E\+Element\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}} $\ast$}]{exact\+\_\+solution\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+ODEElement\+::build (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}} $\ast$}]{exact\+\_\+solution\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -113,21 +117,21 @@ Store pointers, create internal data.
 
 
 
-Definition at line 60 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00060}{60}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), Data, exact\+\_\+solution(), Exact\+\_\+solution\+\_\+pt, nvalue(), and Use\+\_\+fd\+\_\+jacobian.
+References \mbox{\hyperlink{elements_8cc_source_l00062}{oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data()}}, \mbox{\hyperlink{ode__elements_8h_source_l00151}{exact\+\_\+solution()}}, \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, \mbox{\hyperlink{ode__elements_8h_source_l00076}{nvalue()}}, and \mbox{\hyperlink{ode__elements_8h_source_l00182}{Use\+\_\+fd\+\_\+jacobian}}.
 
 
 
-Referenced by O\+D\+E\+Element().
+Referenced by \mbox{\hyperlink{ode__elements_8h_source_l00053}{ODEElement()}}.
 
-\mbox{\Hypertarget{classoomph_1_1ODEElement_a95369a0392e9e068ad2a85b78ba0cbb3}\label{classoomph_1_1ODEElement_a95369a0392e9e068ad2a85b78ba0cbb3}} 
+\mbox{\Hypertarget{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}\label{classoomph_1_1ODEElement_a2bcb0934042157ff4bd03a316b65c0ff}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!derivative\_function@{derivative\_function}}
 \index{derivative\_function@{derivative\_function}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{derivative\_function()}{derivative\_function()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+O\+D\+E\+Element\+::derivative\+\_\+function (\begin{DoxyParamCaption}\item[{const double \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ oomph\+::\+ODEElement\+::derivative\+\_\+function (\begin{DoxyParamCaption}\item[{const double \&}]{t,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -135,21 +139,21 @@ Exact solution.
 
 
 
-Definition at line 166 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00166}{166}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Solution\+Functor\+Base\+::derivative(), Exact\+\_\+solution\+\_\+pt, t, and u().
+References \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase_a794f59127c33dec7e177aade170b3584}{oomph\+::\+Solution\+Functor\+Base\+::derivative()}}, \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{ode__elements_8h_source_l00082}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
-\mbox{\Hypertarget{classoomph_1_1ODEElement_a4d5e0a3989f17428bbc9e8eca4470fe2}\label{classoomph_1_1ODEElement_a4d5e0a3989f17428bbc9e8eca4470fe2}} 
+\mbox{\Hypertarget{classoomph_1_1ODEElement_a4a962db7537b5f3e801d68129ffc09ed}\label{classoomph_1_1ODEElement_a4a962db7537b5f3e801d68129ffc09ed}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!exact\_solution@{exact\_solution}}
 \index{exact\_solution@{exact\_solution}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{exact\_solution()}{exact\_solution()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+O\+D\+E\+Element\+::exact\+\_\+solution (\begin{DoxyParamCaption}\item[{const double \&}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ oomph\+::\+ODEElement\+::exact\+\_\+solution (\begin{DoxyParamCaption}\item[{const double \&}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -157,25 +161,25 @@ Exact solution.
 
 
 
-Definition at line 151 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00151}{151}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References Exact\+\_\+solution\+\_\+pt, and t.
+References \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 
 
-Referenced by build().
+Referenced by \mbox{\hyperlink{ode__elements_8h_source_l00060}{build()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ODEElement_a4db1a9984200b201e7aae566afd0cfc6}\label{classoomph_1_1ODEElement_a4db1a9984200b201e7aae566afd0cfc6}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+ODEElement\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Add the elemental contribution to the jacobian matrix. and the residuals vector. Note that this function will N\+OT initialise the residuals vector or the jacobian matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is to use finite differences to calculate the jacobian. 
+Add the elemental contribution to the jacobian matrix. and the residuals vector. Note that this function will NOT initialise the residuals vector or the jacobian matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is to use finite differences to calculate the jacobian. 
 
 
 
@@ -183,39 +187,39 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 109 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00109}{109}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References a(), Exact\+\_\+solution\+\_\+pt, fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd(), oomph\+::\+Solution\+Functor\+Base\+::have\+\_\+jacobian(), i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), oomph\+::\+Solution\+Functor\+Base\+::jacobian(), n, nvalue(), residuals(), t, oomph\+::\+Time\+Stepper\+::time(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), u(), Use\+\_\+fd\+\_\+jacobian, oomph\+::\+Data\+::value(), and oomph\+::\+Time\+Stepper\+::weight().
+References \mbox{\hyperlink{ode__elements_8h_source_l00180}{Exact\+\_\+solution\+\_\+pt}}, \mbox{\hyperlink{ode__elements_8h_source_l00082}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, \mbox{\hyperlink{elements_8cc_source_l01102}{oomph\+::\+Generalised\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+internal\+\_\+by\+\_\+fd()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l01145}{oomph\+::\+Solution\+Functor\+Base\+::have\+\_\+jacobian()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l01134}{oomph\+::\+Solution\+Functor\+Base\+::jacobian()}}, \mbox{\hyperlink{ode__elements_8h_source_l00076}{nvalue()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00332}{oomph\+::\+Time\+Stepper\+::time()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, \mbox{\hyperlink{ode__elements_8h_source_l00182}{Use\+\_\+fd\+\_\+jacobian}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, and \mbox{\hyperlink{timesteppers_8h_source_l00594}{oomph\+::\+Time\+Stepper\+::weight()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ODEElement_aef001ba04ec222921cbdf887ddc6b041}\label{classoomph_1_1ODEElement_aef001ba04ec222921cbdf887ddc6b041}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!fill\_in\_contribution\_to\_mass\_matrix@{fill\_in\_contribution\_to\_mass\_matrix}}
 \index{fill\_in\_contribution\_to\_mass\_matrix@{fill\_in\_contribution\_to\_mass\_matrix}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_mass\_matrix()}{fill\_in\_contribution\_to\_mass\_matrix()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+ODEElement\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Add the elemental contribution to the mass matrix matrix. and the residuals vector. Note that this function should N\+OT initialise the residuals vector or the mass matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is deliberately broken. 
+Add the elemental contribution to the mass matrix matrix. and the residuals vector. Note that this function should NOT initialise the residuals vector or the mass matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is deliberately broken. 
 
-Add the elemental contribution to the mass matrix and the residuals vector. Note that this function will N\+OT initialise the residuals vector or the mass matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is deliberately broken. 
+Add the elemental contribution to the mass matrix and the residuals vector. Note that this function will NOT initialise the residuals vector or the mass matrix. It must be called after the residuals vector and jacobian matrix have been initialised to zero. The default is deliberately broken. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a09e337880e9bfc6e2d43202616121b50}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 140 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00140}{140}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals(), nvalue(), and residuals().
+References \mbox{\hyperlink{ode__elements_8h_source_l00082}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}, and \mbox{\hyperlink{ode__elements_8h_source_l00076}{nvalue()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ODEElement_ab13351a18eee7d2ba455312ea755801f}\label{classoomph_1_1ODEElement_ab13351a18eee7d2ba455312ea755801f}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+O\+D\+E\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+ODEElement\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -227,33 +231,33 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 82 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00082}{82}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References derivative\+\_\+function(), oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), nvalue(), residuals(), t, oomph\+::\+Time\+Stepper\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+derivative(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), u(), and oomph\+::\+Data\+::value().
+References \mbox{\hyperlink{ode__elements_8h_source_l00166}{derivative\+\_\+function()}}, \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{ode__elements_8h_source_l00076}{nvalue()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}, \mbox{\hyperlink{timesteppers_8h_source_l00332}{oomph\+::\+Time\+Stepper\+::time()}}, \mbox{\hyperlink{timesteppers_8h_source_l00502}{oomph\+::\+Time\+Stepper\+::time\+\_\+derivative()}}, \mbox{\hyperlink{nodes_8h_source_l00238}{oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt()}}, \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}, and \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix().
+Referenced by \mbox{\hyperlink{ode__elements_8h_source_l00109}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{ode__elements_8h_source_l00140}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ODEElement_ad968e4ce7f28115bf97f5854446bb5c4}\label{classoomph_1_1ODEElement_ad968e4ce7f28115bf97f5854446bb5c4}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!nvalue@{nvalue}}
 \index{nvalue@{nvalue}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{nvalue()}{nvalue()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+O\+D\+E\+Element\+::nvalue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+ODEElement\+::nvalue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 76 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00076}{76}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), and oomph\+::\+Data\+::nvalue().
+References \mbox{\hyperlink{elements_8h_source_l00622}{oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt()}}, and \mbox{\hyperlink{nodes_8h_source_l00483}{oomph\+::\+Data\+::nvalue()}}.
 
 
 
-Referenced by build(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{ode__elements_8h_source_l00060}{build()}}, \mbox{\hyperlink{ode__elements_8h_source_l00109}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{ode__elements_8h_source_l00140}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+mass\+\_\+matrix()}}, and \mbox{\hyperlink{ode__elements_8h_source_l00082}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
 
 
@@ -262,29 +266,29 @@ Referenced by build(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), f
 \index{oomph::ODEElement@{oomph::ODEElement}!Exact\_solution\_pt@{Exact\_solution\_pt}}
 \index{Exact\_solution\_pt@{Exact\_solution\_pt}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{Exact\_solution\_pt}{Exact\_solution\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}}$\ast$ oomph\+::\+O\+D\+E\+Element\+::\+Exact\+\_\+solution\+\_\+pt}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SolutionFunctorBase}{Solution\+Functor\+Base}}$\ast$ oomph\+::\+ODEElement\+::\+Exact\+\_\+solution\+\_\+pt}
 
 
 
-Definition at line 180 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00180}{180}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-Referenced by build(), derivative\+\_\+function(), exact\+\_\+solution(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and O\+D\+E\+Element().
+Referenced by \mbox{\hyperlink{ode__elements_8h_source_l00060}{build()}}, \mbox{\hyperlink{ode__elements_8h_source_l00166}{derivative\+\_\+function()}}, \mbox{\hyperlink{ode__elements_8h_source_l00151}{exact\+\_\+solution()}}, \mbox{\hyperlink{ode__elements_8h_source_l00109}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{ode__elements_8h_source_l00044}{ODEElement()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ODEElement_a4d1119b79288a81c14cd7b462ca5eee6}\label{classoomph_1_1ODEElement_a4d1119b79288a81c14cd7b462ca5eee6}} 
 \index{oomph::ODEElement@{oomph::ODEElement}!Use\_fd\_jacobian@{Use\_fd\_jacobian}}
 \index{Use\_fd\_jacobian@{Use\_fd\_jacobian}!oomph::ODEElement@{oomph::ODEElement}}
 \doxysubsubsection{\texorpdfstring{Use\_fd\_jacobian}{Use\_fd\_jacobian}}
-{\footnotesize\ttfamily bool oomph\+::\+O\+D\+E\+Element\+::\+Use\+\_\+fd\+\_\+jacobian}
+{\footnotesize\ttfamily bool oomph\+::\+ODEElement\+::\+Use\+\_\+fd\+\_\+jacobian}
 
 
 
-Definition at line 182 of file ode\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{ode__elements_8h_source_l00182}{182}} of file \mbox{\hyperlink{ode__elements_8h_source}{ode\+\_\+elements.\+h}}.
 
 
 
-Referenced by build(), fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and O\+D\+E\+Element().
+Referenced by \mbox{\hyperlink{ode__elements_8h_source_l00060}{build()}}, \mbox{\hyperlink{ode__elements_8h_source_l00109}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{ode__elements_8h_source_l00044}{ODEElement()}}.
 
 
 

@@ -1,0 +1,123 @@
+\hypertarget{convert__geom__file_8cc_source}{}\doxysection{convert\+\_\+geom\+\_\+file.\+cc}
+\label{convert__geom__file_8cc_source}\index{convert\_geom\_file.cc@{convert\_geom\_file.cc}}
+\mbox{\hyperlink{convert__geom__file_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00001}00001 \textcolor{comment}{//LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00002}00002 \textcolor{comment}{//LIC// This file forms part of oomph-\/lib, the object-\/oriented, }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00003}00003 \textcolor{comment}{//LIC// multi-\/physics finite-\/element library, available }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00004}00004 \textcolor{comment}{//LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00005}00005 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00006}00006 \textcolor{comment}{//LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00007}00007 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00008}00008 \textcolor{comment}{//LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00009}00009 \textcolor{comment}{//LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00010}00010 \textcolor{comment}{//LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00011}00011 \textcolor{comment}{//LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00012}00012 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00013}00013 \textcolor{comment}{//LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00014}00014 \textcolor{comment}{//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00015}00015 \textcolor{comment}{//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00016}00016 \textcolor{comment}{//LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00017}00017 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00018}00018 \textcolor{comment}{//LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00019}00019 \textcolor{comment}{//LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00020}00020 \textcolor{comment}{//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00021}00021 \textcolor{comment}{//LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00022}00022 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00023}00023 \textcolor{comment}{//LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00024}00024 \textcolor{comment}{//LIC// }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00025}00025 \textcolor{comment}{//LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00026}00026 \textcolor{comment}{// Create an output file that can be read with geomview}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00027}00027 \textcolor{comment}{// Change the infile name and the output name to use it }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00030}00030 \textcolor{preprocessor}{\#include<iostream>}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00031}00031 \textcolor{preprocessor}{\#include<fstream>}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00032}00032 \textcolor{preprocessor}{\#include<vector>}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00033}00033 \textcolor{preprocessor}{\#include<math.h>}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00034}00034 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00036}\mbox{\hyperlink{convert__geom__file_8cc_a0ddf1224851353fc92bfbff6f499fa97}{00036}} \textcolor{keywordtype}{int} \mbox{\hyperlink{convert__geom__file_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00037}00037  \{}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00039}00039  \textcolor{comment}{// Convert argument to strings that specify the input file name}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00040}00040  \textcolor{keywordtype}{string} mesh\_file\_name(argv[1]);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00041}00041   }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00042}00042 \textcolor{comment}{// Read the output mesh file to find informations about the nodes}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00043}00043 \textcolor{comment}{// and elements of the mesh }}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00045}00045 ifstream infile(mesh\_file\_name.c\_str(), ios\_base::in);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00046}00046 \textcolor{keywordtype}{unsigned} n\_node;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00047}00047 infile>>n\_node;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00048}00048 vector<double> x(n\_node);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00049}00049 vector<double> y(n\_node);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00050}00050 vector<int> vertinfo(n\_node);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00051}00051  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_node;i++)}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00052}00052   \{ }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00053}00053    infile>>x[i];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00054}00054    infile>>y[i];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00055}00055    infile>>vertinfo[i];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00056}00056   \}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00057}00057 \textcolor{keywordtype}{unsigned} n\_vx;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00058}00058 infile>>n\_vx;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00059}00059 vector<int> nodecode(n\_vx);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00060}00060 vector<int> icurv(n\_vx);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00061}00061 vector<double> ucurv(n\_vx);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00062}00062  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_vx;i++)}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00063}00063   \{}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00064}00064    infile>>nodecode[i];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00065}00065    infile>>icurv[i];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00066}00066    infile>>ucurv[i];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00067}00067   \}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00068}00068 \textcolor{keywordtype}{unsigned} n\_local\_node;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00069}00069 infile>>n\_local\_node;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00070}00070 \textcolor{keywordtype}{unsigned} n\_element;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00071}00071 infile>>n\_element;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00072}00072 \textcolor{keywordtype}{unsigned} b=n\_local\_node*n\_element;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00073}00073 vector<int> v(b);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00074}00074 vector<int> edgeinfo(b);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00075}00075 \textcolor{keywordtype}{unsigned} k=0;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00076}00076 \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_element;i++)}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00077}00077  \{}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00078}00078   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} j=0;j<n\_local\_node;j++)}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00079}00079    \{}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00080}00080     infile>>v[k];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00081}00081     k++;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00082}00082    \}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00083}00083  \}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00084}00084 \textcolor{keywordtype}{unsigned} l=0;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00085}00085 \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_element;i++)}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00086}00086  \{}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00087}00087   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} j=0;j<n\_local\_node;j++)}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00088}00088    \{}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00089}00089     infile>>edgeinfo[l];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00090}00090     l++;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00091}00091    \}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00092}00092  \}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00093}00093 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00094}00094 infile.close();}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00096}00096 \textcolor{comment}{// Create a file of type "{}.quad"{} to visualize the mesh with geomview}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00099}00099  \textcolor{keywordtype}{unsigned} nn=0;}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00100}00100  \textcolor{keywordtype}{char} result[20];}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00101}00101  sprintf(result,\textcolor{stringliteral}{"{}\%s"{}},\textcolor{stringliteral}{"{}mesh.quad"{}});}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00102}00102  ofstream outfile(result,ios\_base::out);}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00103}00103  outfile<<\textcolor{stringliteral}{"{}QUAD"{}}<<\textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00104}00104  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_element;i++)}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00105}00105    \{}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00106}00106     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} j=0;j<n\_local\_node;j++) }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00107}00107      \{}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00108}00108       outfile<<x[v[nn]-\/1]<<\textcolor{stringliteral}{"{} "{}}<<y[v[nn]-\/1]<<\textcolor{stringliteral}{"{} 0 "{}};}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00109}00109       nn++; }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00110}00110      \}}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00111}00111     outfile<<\textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00112}00112    \} }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00113}00113  outfile.close(); }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00115}00115 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{convert__geom__file_8cc_source_l00117}00117 \}  \textcolor{comment}{//end of main}}
+
+\end{DoxyCode}

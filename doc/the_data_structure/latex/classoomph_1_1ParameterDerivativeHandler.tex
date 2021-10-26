@@ -21,14 +21,13 @@ Inheritance diagram for oomph\+::Parameter\+Derivative\+Handler\+:\begin{figure}
 \mbox{\hyperlink{classoomph_1_1ParameterDerivativeHandler_af9d8c24e7fdc34662086c66b759de2a6}{Parameter\+Derivative\+Handler}} (\mbox{\hyperlink{classoomph_1_1AssemblyHandler}{Assembly\+Handler}} $\ast$const \&assembly\+\_\+handler\+\_\+pt, double $\ast$const \&parameter\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Store the original assembly handler and parameter. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1ParameterDerivativeHandler_a341d4e7cfaab7e66df43913d775a6871}{ndof}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt)
-\item 
+\begin{DoxyCompactList}\small\item\em Return the number of degrees of freedom in the element elem\+\_\+pt Pass through to the original assembly handler. \end{DoxyCompactList}\item 
 unsigned long \mbox{\hyperlink{classoomph_1_1ParameterDerivativeHandler_a359b3b627532773b4606db1989f9c844}{eqn\+\_\+number}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, const unsigned \&ieqn\+\_\+local)
 \begin{DoxyCompactList}\small\item\em Return the global equation number of the local unknown ieqn\+\_\+local in elem\+\_\+pt.\+Pass through to the original assembly handler. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ParameterDerivativeHandler_a8ba1dbc805c00ac75e6d5d53f1b014c1}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1ParameterDerivativeHandler_a8ba1dbc805c00ac75e6d5d53f1b014c1}{get\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the contribution to the residuals of the element elem\+\_\+pt by using the derivatives. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1ParameterDerivativeHandler_a0bdfd879c1e63cc74923cf956b4f4310}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation
-/ d variable\char`\"{} for elem\+\_\+pt. Overloaded to return the derivatives wrt the parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1ParameterDerivativeHandler_a0bdfd879c1e63cc74923cf956b4f4310}{get\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&elem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+\begin{DoxyCompactList}\small\item\em Calculate the elemental Jacobian matrix \char`\"{}d equation / d variable\char`\"{} for elem\+\_\+pt. Overloaded to return the derivatives wrt the parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,7 +40,7 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1ParameterDerivativeHandler_a4915174
 \doxysubsection{Detailed Description}
 A class that is used to define the functions used when assembling the derivatives of the residuals with respect to a parameter. The idea is to replace get\+\_\+residuals with get\+\_\+dresiduals\+\_\+dparameter with a particular parameter and assembly handler that are passed on assembly. 
 
-Definition at line 338 of file assembly\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00338}{338}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
 
 
 
@@ -58,7 +57,7 @@ Store the original assembly handler and parameter.
 
 
 
-Definition at line 348 of file assembly\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00348}{348}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
 
 
 
@@ -79,11 +78,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a94d28e2de2559
 
 
 
-Definition at line 363 of file assembly\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00363}{363}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
 
 
 
-References Assembly\+\_\+handler\+\_\+pt, and oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number().
+References \mbox{\hyperlink{assembly__handler_8h_source_l00344}{Assembly\+\_\+handler\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l00082}{oomph\+::\+Assembly\+Handler\+::eqn\+\_\+number()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ParameterDerivativeHandler_a0bdfd879c1e63cc74923cf956b4f4310}\label{classoomph_1_1ParameterDerivativeHandler_a0bdfd879c1e63cc74923cf956b4f4310}} 
 \index{oomph::ParameterDerivativeHandler@{oomph::ParameterDerivativeHandler}!get\_jacobian@{get\_jacobian}}
@@ -93,8 +92,7 @@ References Assembly\+\_\+handler\+\_\+pt, and oomph\+::\+Assembly\+Handler\+::eq
 
 
 
-Calculate the elemental Jacobian matrix \char`\"{}d equation
-/ d variable\char`\"{} for elem\+\_\+pt. Overloaded to return the derivatives wrt the parameter. 
+Calculate the elemental Jacobian matrix \char`\"{}d equation / d variable\char`\"{} for elem\+\_\+pt. Overloaded to return the derivatives wrt the parameter. 
 
 
 
@@ -102,11 +100,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_ad43c3d8760be0
 
 
 
-Definition at line 382 of file assembly\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00382}{382}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
 
 
 
-References Assembly\+\_\+handler\+\_\+pt, oomph\+::\+Assembly\+Handler\+::get\+\_\+djacobian\+\_\+dparameter(), Parameter\+\_\+pt, and residuals().
+References \mbox{\hyperlink{assembly__handler_8h_source_l00344}{Assembly\+\_\+handler\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00138}{oomph\+::\+Assembly\+Handler\+::get\+\_\+djacobian\+\_\+dparameter()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00341}{Parameter\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1ParameterDerivativeHandler_a8ba1dbc805c00ac75e6d5d53f1b014c1}\label{classoomph_1_1ParameterDerivativeHandler_a8ba1dbc805c00ac75e6d5d53f1b014c1}} 
 \index{oomph::ParameterDerivativeHandler@{oomph::ParameterDerivativeHandler}!get\_residuals@{get\_residuals}}
@@ -124,11 +122,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a7a6203b0ab90d
 
 
 
-Definition at line 371 of file assembly\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00371}{371}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
 
 
 
-References Assembly\+\_\+handler\+\_\+pt, oomph\+::\+Assembly\+Handler\+::get\+\_\+dresiduals\+\_\+dparameter(), Parameter\+\_\+pt, and residuals().
+References \mbox{\hyperlink{assembly__handler_8h_source_l00344}{Assembly\+\_\+handler\+\_\+pt}}, \mbox{\hyperlink{assembly__handler_8cc_source_l00125}{oomph\+::\+Assembly\+Handler\+::get\+\_\+dresiduals\+\_\+dparameter()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00341}{Parameter\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1ParameterDerivativeHandler_a341d4e7cfaab7e66df43913d775a6871}\label{classoomph_1_1ParameterDerivativeHandler_a341d4e7cfaab7e66df43913d775a6871}} 
 \index{oomph::ParameterDerivativeHandler@{oomph::ParameterDerivativeHandler}!ndof@{ndof}}
@@ -136,17 +134,21 @@ References Assembly\+\_\+handler\+\_\+pt, oomph\+::\+Assembly\+Handler\+::get\+\
 \doxysubsubsection{\texorpdfstring{ndof()}{ndof()}}
 {\footnotesize\ttfamily unsigned oomph\+::\+Parameter\+Derivative\+Handler\+::ndof (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$const \&}]{elem\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
-Return the number of degrees of freedom in the element elem\+\_\+pt Pass through to the original assembly handler 
+
+
+Return the number of degrees of freedom in the element elem\+\_\+pt Pass through to the original assembly handler. 
+
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1AssemblyHandler_a09213be8f4aa009e0366460a7ed78e68}{oomph\+::\+Assembly\+Handler}}.
 
 
 
-Definition at line 356 of file assembly\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00356}{356}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
 
 
 
-References Assembly\+\_\+handler\+\_\+pt, and oomph\+::\+Assembly\+Handler\+::ndof().
+References \mbox{\hyperlink{assembly__handler_8h_source_l00344}{Assembly\+\_\+handler\+\_\+pt}}, and \mbox{\hyperlink{assembly__handler_8cc_source_l00042}{oomph\+::\+Assembly\+Handler\+::ndof()}}.
 
 
 
@@ -163,11 +165,11 @@ The original assembly handler.
 
 
 
-Definition at line 344 of file assembly\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00344}{344}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
 
 
 
-Referenced by eqn\+\_\+number(), get\+\_\+jacobian(), get\+\_\+residuals(), and ndof().
+Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00363}{eqn\+\_\+number()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00382}{get\+\_\+jacobian()}}, \mbox{\hyperlink{assembly__handler_8h_source_l00371}{get\+\_\+residuals()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00356}{ndof()}}.
 
 \mbox{\Hypertarget{classoomph_1_1ParameterDerivativeHandler_a4915174c5f1663bf9df2b0ba1cff56e6}\label{classoomph_1_1ParameterDerivativeHandler_a4915174c5f1663bf9df2b0ba1cff56e6}} 
 \index{oomph::ParameterDerivativeHandler@{oomph::ParameterDerivativeHandler}!Parameter\_pt@{Parameter\_pt}}
@@ -181,11 +183,11 @@ The value of the parameter.
 
 
 
-Definition at line 341 of file assembly\+\_\+handler.\+h.
+Definition at line \mbox{\hyperlink{assembly__handler_8h_source_l00341}{341}} of file \mbox{\hyperlink{assembly__handler_8h_source}{assembly\+\_\+handler.\+h}}.
 
 
 
-Referenced by get\+\_\+jacobian(), and get\+\_\+residuals().
+Referenced by \mbox{\hyperlink{assembly__handler_8h_source_l00382}{get\+\_\+jacobian()}}, and \mbox{\hyperlink{assembly__handler_8h_source_l00371}{get\+\_\+residuals()}}.
 
 
 

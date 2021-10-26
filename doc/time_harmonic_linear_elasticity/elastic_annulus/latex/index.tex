@@ -25,7 +25,7 @@ The non-\/dimensional form of the equations is then given by \begin{center} \[ \
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_element_types}{}\doxysection{Implementation}\label{index_element_types}
-Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of equations (1) with the constitutive equations (2) are implemented in the {\ttfamily Time\+Harmonic\+Linear\+Elasticity\+Equations$<$\+D\+I\+M$>$} equations class, where the template parameter {\ttfamily D\+IM} indicates the spatial dimension. Following our usual approach, discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily Time\+Harmonic\+Linear\+Elasticity\+Equations$<$2$>$} class with the geometric finite element {\ttfamily Q\+Element$<$2,3$>$} yields a nine-\/node quadrilateral element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center} \[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2, \] \end{center}  where $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
+Within {\ttfamily oomph-\/lib}, the non-\/dimensional version of equations (1) with the constitutive equations (2) are implemented in the {\ttfamily Time\+Harmonic\+Linear\+Elasticity\+Equations$<$\+DIM$>$} equations class, where the template parameter {\ttfamily DIM} indicates the spatial dimension. Following our usual approach, discussed in the \href{../../../quick_guide/html/index.html}{\texttt{ (Not-\/\+So-\/)Quick Guide,}} this equation class is then combined with a geometric finite element to form a fully-\/functional finite element. For instance, the combination of the {\ttfamily Time\+Harmonic\+Linear\+Elasticity\+Equations$<$2$>$} class with the geometric finite element {\ttfamily QElement$<$2,3$>$} yields a nine-\/node quadrilateral element. As usual, the mapping between local and global (Eulerian) coordinates within an element is given by, \begin{center} \[ x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad i=1,2, \] \end{center}  where $ N^{(E)} $ is the number of nodes in the element, $ X^{(E)}_{ij} $ is the $ i $-\/th global (Eulerian) coordinate of the $ j $-\/th {\ttfamily Node} in the element, and the $ \psi_j $ are the element\textquotesingle{}s shape functions, defined in the geometric finite element.
 
 All the constitutive parameters are real. The two components of the displacement field have a real and imaginary part. We store the four real-\/valued nodal unknowns in the order $ {\rm Re}\{u_x\}, {\rm Re}\{u_y\}, {\rm Im}\{u_x\}, {\rm Im}\{u_y\} $ and use the shape functions to interpolate the displacements as \begin{center} \[ u_i^{(n)} = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad i=1,...4, \] \end{center}  where $ U^{(E)}_{ij} $ is the $ i $-\/th displacement component (enumerated as described above) at the $ j $-\/th {\ttfamily Node} in the element.
 
@@ -93,7 +93,7 @@ As usual, we define all non-\/dimensional parameters in a namespace where we als
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -131,24 +131,22 @@ As usual, we define all non-\/dimensional parameters in a namespace where we als
 \DoxyCodeLine{\textcolor{comment}{ /// Constant pressure load (real and imag part)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Parameters_a8363ab9f8687e9f7802f801f6dcab6e6}{constant\_pressure}}(\textcolor{keyword}{const} Vector<double> \&x,}
 \DoxyCodeLine{                        \textcolor{keyword}{const} Vector<double> \&n, }
-\DoxyCodeLine{                        Vector<std::complex<double> >\&\mbox{\hyperlink{elastic__annulus_8txt_a1d14d265e44897eec22cff52a1fbd05b}{traction}})}
+\DoxyCodeLine{                        Vector<std::complex<double> >\&traction)}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} dim = \mbox{\hyperlink{elastic__annulus_8txt_a1d14d265e44897eec22cff52a1fbd05b}{traction}}.size();}
+\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} dim = traction.size();}
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<dim;i++)}
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    \mbox{\hyperlink{elastic__annulus_8txt_a1d14d265e44897eec22cff52a1fbd05b}{traction}}[i] = complex<double>(-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*n[i],\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*n[i]);}
+\DoxyCodeLine{    traction[i] = complex<double>(-\/\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*n[i],\mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{P}}*n[i]);}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{ \} \textcolor{comment}{// end\_of\_pressure\_load}}
 
 \end{DoxyCodeInclude}
-
-
-We also define the output directory and the number of elements in the mesh.
+ We also define the output directory and the number of elements in the mesh.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Output directory}}
-\DoxyCodeLine{ \textcolor{keywordtype}{string} \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}}=\textcolor{stringliteral}{"RESLT"};}
+\DoxyCodeLine{\textcolor{comment}{ /// Output directory}}
+\DoxyCodeLine{ \textcolor{keywordtype}{string} \mbox{\hyperlink{namespaceGlobal__Parameters_a301ab922df72030c660b21328d6caf76}{Directory}}=\textcolor{stringliteral}{"{}RESLT"{}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Number of elements in azimuthal direction }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Parameters_a1f67286edeb13ef67687fd483e105b5e}{Ntheta}}=20;}
@@ -168,7 +166,7 @@ We start by defining command line arguments which specify the number of elements
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for annular disk loaded by pressure}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{time__harmonic__elastic__annulus_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -180,31 +178,29 @@ We start by defining command line arguments which specify the number of elements
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Number of elements in azimuthal direction}}
 \DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(}
-\DoxyCodeLine{  \textcolor{stringliteral}{"-\/-\/ntheta"},}
+\DoxyCodeLine{  \textcolor{stringliteral}{"{}-\/-\/ntheta"{}},}
 \DoxyCodeLine{  \&\mbox{\hyperlink{namespaceGlobal__Parameters_a1f67286edeb13ef67687fd483e105b5e}{Global\_Parameters::Ntheta}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Number of elements in radial direction}}
 \DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(}
-\DoxyCodeLine{  \textcolor{stringliteral}{"-\/-\/nr"},}
+\DoxyCodeLine{  \textcolor{stringliteral}{"{}-\/-\/nr"{}},}
 \DoxyCodeLine{  \&\mbox{\hyperlink{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}{Global\_Parameters::Nr}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Do have a gap in the annulus?}}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/have\_gap"});}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/have\_gap"{}});}
 
 \end{DoxyCodeInclude}
-
-
-The code performs a parameter study in which we compute the solution for a range of pressures. We specify the pressure increment and the number of steps to be performed, parse the command line arguments and document them.
+ The code performs a parameter study in which we compute the solution for a range of pressures. We specify the pressure increment and the number of steps to be performed, parse the command line arguments and document them.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// P increment}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} p\_increment=0.1;}
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/p\_increment"},\&p\_increment);}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/p\_increment"{}},\&p\_increment);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Number of steps}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nstep=3; }
-\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"-\/-\/nstep"},\&nstep);}
+\DoxyCodeLine{ CommandLineArgs::specify\_command\_line\_flag(\textcolor{stringliteral}{"{}-\/-\/nstep"{}},\&nstep);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Parse command line}}
 \DoxyCodeLine{ CommandLineArgs::parse\_and\_assign(); }
@@ -213,17 +209,13 @@ The code performs a parameter study in which we compute the solution for a range
 \DoxyCodeLine{ CommandLineArgs::doc\_specified\_flags();}
 
 \end{DoxyCodeInclude}
-
-
-Next, we create the problem (discretising the domain with nine-\/noded quadrilateral elements), 
+ Next, we create the problem (discretising the domain with nine-\/noded quadrilateral elements), 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{//Set up the problem}}
 \DoxyCodeLine{ \mbox{\hyperlink{classAnnularDiskProblem}{AnnularDiskProblem<RefineableQTimeHarmonicLinearElasticityElement<2,3>}} >}
 
 \end{DoxyCodeInclude}
-
-
-and perform the parameter study\+:
+ and perform the parameter study\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -233,22 +225,10 @@ and perform the parameter study\+:
 \DoxyCodeLine{ \textcolor{comment}{//Parameter incrementation}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<nstep;i++)}
 \DoxyCodeLine{  \{}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem using Newton's method}}
-\DoxyCodeLine{   \mbox{\hyperlink{elastic__annulus_8txt_aa4ad07cc2c1f3b98d082504a54bfaba5}{problem}}.newton\_solve();}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{   problem.newton\_solve();}
 \DoxyCodeLine{   \textcolor{comment}{// Doc solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{elastic__annulus_8txt_aa4ad07cc2c1f3b98d082504a54bfaba5}{problem}}.doc\_solution();}
+\DoxyCodeLine{   problem.doc\_solution();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Increment pressure}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a31fb55c20db4aa0127aafa20f0d76731}{Global\_Parameters::P}}+=p\_increment;}
@@ -257,18 +237,16 @@ and perform the parameter study\+:
 \DoxyCodeLine{\} \textcolor{comment}{//end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
-The {\ttfamily Problem} class is very simple. As in other problems with Neumann boundary conditions, we provide separate meshes for the \char`\"{}bulk\char`\"{} elements and the face elements that apply the traction boundary conditions. The latter are attached to the relevant faces of the bulk elements by the function {\ttfamily \mbox{\hyperlink{elastic__annulus_8txt_abab50edf3fca9faf4edf2d43c95ad07f}{create\+\_\+traction\+\_\+elements()}}}.
+The {\ttfamily Problem} class is very simple. As in other problems with Neumann boundary conditions, we provide separate meshes for the \char`\"{}bulk\char`\"{} elements and the face elements that apply the traction boundary conditions. The latter are attached to the relevant faces of the bulk elements by the function {\ttfamily create\+\_\+traction\+\_\+elements()}.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============begin\_problem============================================ }}
 \DoxyCodeLine{\textcolor{comment}{/// Annular disk}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classAnnularDiskProblem}{AnnularDiskProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -283,37 +261,19 @@ The {\ttfamily Problem} class is very simple. As in other problems with Neumann 
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update function (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classAnnularDiskProblem_a147e5fbe37f7132bbace2b713acb03a5}{actions\_before\_newton\_solve}}() \{\}}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Doc the solution}}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} doc\_solution();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Create traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{elastic__annulus_8txt_abab50edf3fca9faf4edf2d43c95ad07f}{create\_traction\_elements}}();}
+\DoxyCodeLine{\textcolor{comment}{ /// Create traction elements}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} create\_traction\_elements();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete traction elements}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_traction\_elements();}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Pointer to solid mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to solid mesh}}
 \DoxyCodeLine{ Mesh* Solid\_mesh\_pt;}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Pointer to mesh of traction elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to mesh of traction elements}}
 \DoxyCodeLine{ Mesh* Traction\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// DocInfo object for output}}
@@ -333,7 +293,7 @@ We begin by building the \char`\"{}bulk\char`\"{} solid mesh, specifying the pre
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===========start\_of\_constructor======================================= }}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor: }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================== }}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================== }}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classAnnularDiskProblem_aad1ce56fa5c26045fb14d46acf29c89e}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::AnnularDiskProblem}}() }
 \DoxyCodeLine{\{}
@@ -342,7 +302,7 @@ We begin by building the \char`\"{}bulk\char`\"{} solid mesh, specifying the pre
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// The mesh is periodic }}
-\DoxyCodeLine{ \textcolor{keywordtype}{bool} \mbox{\hyperlink{elastic__annulus_8txt_a2a435bde04d6dc5025f08c4c97bbf582}{periodic}}=\textcolor{keyword}{true};}
+\DoxyCodeLine{ \textcolor{keywordtype}{bool} periodic=\textcolor{keyword}{true};}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Azimuthal fraction of elastic coating}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} azimuthal\_fraction\_of\_coating=1.0;}
@@ -351,40 +311,30 @@ We begin by building the \char`\"{}bulk\char`\"{} solid mesh, specifying the pre
 \DoxyCodeLine{ \textcolor{keywordtype}{double} a=1.0;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Gap in annulus?}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/have\_gap"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/have\_gap"{}}))}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \mbox{\hyperlink{elastic__annulus_8txt_a2a435bde04d6dc5025f08c4c97bbf582}{periodic}}=\textcolor{keyword}{false};}
+\DoxyCodeLine{   periodic=\textcolor{keyword}{false};}
 \DoxyCodeLine{   azimuthal\_fraction\_of\_coating=0.9;}
 \DoxyCodeLine{  \}}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Build solid mesh}}
 \DoxyCodeLine{ Solid\_mesh\_pt = \textcolor{keyword}{new} }
 \DoxyCodeLine{  RefineableTwoDAnnularMesh<ELASTICITY\_ELEMENT>(}
-\DoxyCodeLine{   \mbox{\hyperlink{elastic__annulus_8txt_a2a435bde04d6dc5025f08c4c97bbf582}{periodic}},azimuthal\_fraction\_of\_coating,}
+\DoxyCodeLine{   periodic,azimuthal\_fraction\_of\_coating,}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a1f67286edeb13ef67687fd483e105b5e}{Global\_Parameters::Ntheta}},}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_aeebb1e39d849d32cebdc9be13026606e}{Global\_Parameters::Nr}},a,}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a0b73c5ead1114ae88bbd4cb0eb54f078}{Global\_Parameters::H\_annulus}});}
 
 \end{DoxyCodeInclude}
-
-
-It is always a good idea to have a look at the mesh and its boundary enumeration\+:
+ It is always a good idea to have a look at the mesh and its boundary enumeration\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Let's have a look where the boundaries are}}
-\DoxyCodeLine{ Solid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"solid\_mesh.dat"});}
-\DoxyCodeLine{ Solid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"solid\_mesh\_boundary.dat"});}
+\DoxyCodeLine{ Solid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}solid\_mesh.dat"{}});}
+\DoxyCodeLine{ Solid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}solid\_mesh\_boundary.dat"{}});}
 
 \end{DoxyCodeInclude}
-
-
-We loop over the elements and specify the relevant physical parameters via the pointer to the tensor of constitutive parameters and the (square of the) non-\/dimensional frequency, 
+ We loop over the elements and specify the relevant physical parameters via the pointer to the tensor of constitutive parameters and the (square of the) non-\/dimensional frequency, 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -405,16 +355,14 @@ We loop over the elements and specify the relevant physical parameters via the p
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Next we create the mesh that contains the Face\+Elements that apply the traction boundary conditions, and combine all meshes into a global mesh\+:
+ Next we create the mesh that contains the Face\+Elements that apply the traction boundary conditions, and combine all meshes into a global mesh\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Construct the traction element mesh}}
 \DoxyCodeLine{ Traction\_mesh\_pt=\textcolor{keyword}{new} Mesh;}
-\DoxyCodeLine{ \mbox{\hyperlink{elastic__annulus_8txt_abab50edf3fca9faf4edf2d43c95ad07f}{create\_traction\_elements}}(); }
+\DoxyCodeLine{ create\_traction\_elements(); }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Solid mesh is first sub-\/mesh}}
 \DoxyCodeLine{ add\_sub\_mesh(Solid\_mesh\_pt);}
@@ -422,13 +370,11 @@ Next we create the mesh that contains the Face\+Elements that apply the traction
 \DoxyCodeLine{ \textcolor{comment}{// Add traction sub-\/mesh}}
 \DoxyCodeLine{ add\_sub\_mesh(Traction\_mesh\_pt);}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Build combined "global" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Build combined "{}global"{} mesh}}
 \DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-We apply the displacement boundary conditions by pinning the real and imaginary part of the two displacement components at all nodes on boundary 0. We then impose a purely radial displacement on the real and imaginary parts of the displacement field, using the function defined in the {\ttfamily \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}} namespace\+:
+ We apply the displacement boundary conditions by pinning the real and imaginary part of the two displacement components at all nodes on boundary 0. We then impose a purely radial displacement on the real and imaginary parts of the displacement field, using the function defined in the {\ttfamily \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}} namespace\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -468,9 +414,7 @@ We apply the displacement boundary conditions by pinning the real and imaginary 
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Finally we assign the equation numbers and specify the output directory\+:
+ Finally we assign the equation numbers and specify the output directory\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -495,17 +439,17 @@ We create the face elements that apply the traction on the outer boundary (bound
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_traction\_elements==============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create traction elements }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAnnularDiskProblem_aeab547741d3b500af5f465e52e1ba57c}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::create\_traction\_elements}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Load outer surface (2) and both "ends" (1 and 3) if there's a gap}}
+\DoxyCodeLine{ \textcolor{comment}{// Load outer surface (2) and both "{}ends"{} (1 and 3) if there's a gap}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} b\_lo=1;}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} b\_hi=3;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// ...otherwise load only the outside (2)}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (!CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"-\/-\/have\_gap"}))}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (!CommandLineArgs::command\_line\_flag\_has\_been\_set(\textcolor{stringliteral}{"{}-\/-\/have\_gap"{}}))}
 \DoxyCodeLine{  \{     }
 \DoxyCodeLine{   b\_lo=2;}
 \DoxyCodeLine{   b\_hi=2;}
@@ -557,7 +501,7 @@ As expected, this member function documents the computed solution.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============start\_doc===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELASTICITY\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classAnnularDiskProblem_a8034c630f21ccf5882a21eef2c1464fc}{AnnularDiskProblem<ELASTICITY\_ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{}
@@ -570,7 +514,7 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output displacement field}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/elast\_soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/elast\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output(some\_file,n\_plot);}
@@ -579,7 +523,7 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output traction elements}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/traction\_soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/traction\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Traction\_mesh\_pt-\/>output(some\_file,n\_plot);}
@@ -587,7 +531,7 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>output\_fct(some\_file,n\_plot,\mbox{\hyperlink{namespaceGlobal__Parameters_a97162dba4bd29a15067b9c9bbe53c754}{Global\_Parameters::exact\_u}}); }
@@ -599,9 +543,7 @@ As expected, this member function documents the computed solution.
 \DoxyCodeLine{\} \textcolor{comment}{//end doc}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_conclusion}{}\doxysection{Comments and Exercises}\label{index_conclusion}
 \hypertarget{index_comments}{}\doxysubsection{Comments}\label{index_comments}
@@ -640,5 +582,5 @@ As expected, this member function documents the computed solution.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

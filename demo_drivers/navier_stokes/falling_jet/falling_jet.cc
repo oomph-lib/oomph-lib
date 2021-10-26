@@ -24,7 +24,7 @@
 //LIC// 
 //LIC//====================================================================
 /// Driver for a jet falling from a circular orifice under the action
-///of gravity
+/// of gravity
 
 //Generic routines
 #include "generic.h"
@@ -76,14 +76,14 @@ public:
  Vector<GeneralisedElement*> &bulk_element_pt()
   {return Bulk_element_pt;}
 
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  GeneralisedElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
 
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
 
- ///Constructor
+ /// Constructor
  ElasticQuarterTubeMesh(GeomObject* wall_pt,
                            const Vector<double>& xi_lo,
                            const double& fract_mid,
@@ -263,7 +263,7 @@ public:
    doc_solution();
   }
 
- /// \short Update the problem specs before solve 
+ /// Update the problem specs before solve 
  void actions_before_newton_solve() { } 
 
  /// After adaptation: Pin redudant pressure dofs.
@@ -277,7 +277,7 @@ public:
  /// Doc the solution
  void doc_solution();
 
- /// \short Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  ElasticQuarterTubeMesh<ELEMENT,ElasticSurfaceFluidInterfaceElement<ELEMENT> >* 
  mesh_pt() 
@@ -579,9 +579,9 @@ void EntryFlowProblem<ELEMENT>::doc_solution()
  
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //=start_of_main=======================================================

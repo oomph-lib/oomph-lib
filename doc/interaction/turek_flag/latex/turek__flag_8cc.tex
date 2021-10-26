@@ -3,19 +3,19 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classTurekProblem}{Turek\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Problem class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classTurekProblem}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
 \begin{DoxyCompactList}\small\item\em Global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d569e}{Global\+\_\+\+Parameters\+::gravity}} (const double \&time, const Vector$<$ double $>$ \&xi, Vector$<$ double $>$ \&b)
 \begin{DoxyCompactList}\small\item\em Non-\/dimensional gravity as body force. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceGlobal__Parameters_a536aa5314a6cdb36af852e9513351d55}{Global\+\_\+\+Parameters\+::flux}} (const double \&\mbox{\hyperlink{turek__flag_8txt_a0e13eaa7c5f7694e71118ba0687a09ec}{t}})
+double \mbox{\hyperlink{namespaceGlobal__Parameters_a536aa5314a6cdb36af852e9513351d55}{Global\+\_\+\+Parameters\+::flux}} (const double \&t)
 \begin{DoxyCompactList}\small\item\em Flux increases between Min\+\_\+flux and Max\+\_\+flux over period Ramp\+\_\+period. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceGlobal__Parameters_a8c333f9041cad78d5c0160a8e2c169f5}{Global\+\_\+\+Parameters\+::set\+\_\+parameters}} (const string \&case\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Set parameters for the various test cases. \end{DoxyCompactList}\item 
@@ -24,18 +24,18 @@ int \mbox{\hyperlink{turek__flag_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-string \mbox{\hyperlink{namespaceGlobal__Parameters_a887474a9be53363806b4de417f660dba}{Global\+\_\+\+Parameters\+::\+Case\+\_\+\+ID}} =\char`\"{}F\+S\+I1\char`\"{}
+string \mbox{\hyperlink{namespaceGlobal__Parameters_a887474a9be53363806b4de417f660dba}{Global\+\_\+\+Parameters\+::\+Case\+\_\+\+ID}} =\char`\"{}FSI1\char`\"{}
 \begin{DoxyCompactList}\small\item\em Default case ID. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\+\_\+\+Parameters\+::\+Re}} =20.\+0
-\begin{DoxyCompactList}\small\item\em Reynolds number (default assignment for F\+S\+I1 test case) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Reynolds number (default assignment for FSI1 test case) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_af1af40a0df651e86bc1be273fafa98da}{Global\+\_\+\+Parameters\+::\+St}} =0.\+5
-\begin{DoxyCompactList}\small\item\em Strouhal number (default assignment for F\+S\+I1 test case) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Strouhal number (default assignment for FSI1 test case) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a7a59a32365e87566069e458dc83bd18a}{Global\+\_\+\+Parameters\+::\+Re\+St}} =10.\+0
-\begin{DoxyCompactList}\small\item\em Product of Reynolds and Strouhal numbers (default assignment for F\+S\+I1 test case) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Product of Reynolds and Strouhal numbers (default assignment for FSI1 test case) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\+\_\+\+Parameters\+::Q}} =1.\+429e-\/6
-\begin{DoxyCompactList}\small\item\em F\+SI parameter (default assignment for F\+S\+I1 test case) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em FSI parameter (default assignment for FSI1 test case) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a517d4c31b8bce6563c2f605266dd9679}{Global\+\_\+\+Parameters\+::\+Density\+\_\+ratio}} =1.\+0
-\begin{DoxyCompactList}\small\item\em Density ratio (solid to fluid; default assignment for F\+S\+I1 test case) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Density ratio (solid to fluid; default assignment for FSI1 test case) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_ab360628e7830e43e355ce5768f6d6a6c}{Global\+\_\+\+Parameters\+::H}} =0.\+2
 \begin{DoxyCompactList}\small\item\em Height of flag. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a0f0247cc83ba202413b50e7b4b7fceb0}{Global\+\_\+\+Parameters\+::\+Centre\+\_\+x}} =2.\+0
@@ -51,13 +51,13 @@ double \mbox{\hyperlink{namespaceGlobal__Parameters_a3e3428638f89f970fcf2148b0ba
 double \mbox{\hyperlink{namespaceGlobal__Parameters_ab29c9f716872de235c78e62bce2c4109}{Global\+\_\+\+Parameters\+::\+Dt}} =0.\+1
 \begin{DoxyCompactList}\small\item\em Timestep. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespaceGlobal__Parameters_aac13d615d2acd78d22a3137ffd62f7aa}{Global\+\_\+\+Parameters\+::\+Ignore\+\_\+fluid\+\_\+loading}} =false
-\begin{DoxyCompactList}\small\item\em Ignore fluid (default assignment for F\+S\+I1 test case) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Ignore fluid (default assignment for FSI1 test case) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_aa3dfbdb1b2fd80d516850f66c96b6fd0}{Global\+\_\+\+Parameters\+::E}} =1.\+0
 \begin{DoxyCompactList}\small\item\em Elastic modulus. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\+\_\+\+Parameters\+::\+Nu}} =0.\+4
 \begin{DoxyCompactList}\small\item\em Poisson\textquotesingle{}s ratio. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}{Global\+\_\+\+Parameters\+::\+Gravity}} =0.\+0
-\begin{DoxyCompactList}\small\item\em Non-\/dim gravity (default assignment for F\+S\+I1 test case) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Non-\/dim gravity (default assignment for FSI1 test case) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_af6afcca0b1ffdf88144f99cdfed18d3b}{Global\+\_\+\+Parameters\+::\+Ramp\+\_\+period}} =2.\+0
 \begin{DoxyCompactList}\small\item\em Period for ramping up in flux. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a5aabde2d31d07e5d0a84f6ff02c263dc}{Global\+\_\+\+Parameters\+::\+Min\+\_\+flux}} =0.\+0
@@ -79,9 +79,9 @@ Driver.
 
 
 
-Definition at line 1080 of file turek\+\_\+flag.\+cc.
+Definition at line \mbox{\hyperlink{turek__flag_8cc_source_l01080}{1080}} of file \mbox{\hyperlink{turek__flag_8cc_source}{turek\+\_\+flag.\+cc}}.
 
 
 
-References Global\+\_\+\+Parameters\+::\+Case\+\_\+\+ID, Global\+\_\+\+Parameters\+::\+Dt, problem, and Global\+\_\+\+Parameters\+::set\+\_\+parameters().
+References \mbox{\hyperlink{turek__flag_8cc_source_l00055}{Global\+\_\+\+Parameters\+::\+Case\+\_\+\+ID}}, \mbox{\hyperlink{turek__flag_8cc_source_l01008}{Turek\+Problem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{turek__flag_8cc_source_l00094}{Global\+\_\+\+Parameters\+::\+Dt}}, and \mbox{\hyperlink{turek__flag_8cc_source_l00143}{Global\+\_\+\+Parameters\+::set\+\_\+parameters()}}.
 

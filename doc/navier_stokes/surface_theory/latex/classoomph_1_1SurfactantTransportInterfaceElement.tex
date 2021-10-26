@@ -2,6 +2,11 @@
 \label{classoomph_1_1SurfactantTransportInterfaceElement}\index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 
 
+Generic surfactant transport equations implemented independently of the dimension and then specialised using the generic mechanisms introduce in the Fluid\+Interface\+Elements.  
+
+
+
+
 {\ttfamily \#include $<$surfactant\+\_\+transport\+\_\+elements.\+h$>$}
 
 Inheritance diagram for oomph\+::Surfactant\+Transport\+Interface\+Element\+:\begin{figure}[H]
@@ -14,7 +19,7 @@ Inheritance diagram for oomph\+::Surfactant\+Transport\+Interface\+Element\+:\be
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a8934ab8e723427ed39298c592b2876a5}{Surfactant\+Transport\+Interface\+Element}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor that passes the bulk element and face index down to the underlying. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_aaf7988dfac3e02018c591f2f9e34f644}{set\+\_\+c\+\_\+index}} (const Vector$<$ unsigned $>$ \&c\+\_\+index)
 \item 
 double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a79003d87401ad6106b8d10373ff12e73}{beta}} ()
@@ -23,19 +28,19 @@ double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ac945c
 \begin{DoxyCompactList}\small\item\em Return the surface peclect number. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_acb4ff16ed90e79ffe9e4156ef030d689}{peclet\+\_\+strouhal\+\_\+s}} ()
 \begin{DoxyCompactList}\small\item\em Return the surface peclect strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a41af929d7aabb7fef48b993b3e893fe4}{beta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ab50173df0654ca3b389308ab6ba40e58}{beta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the Elasticity number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a22bc470c2fb7eef5a7b6f9a61f04d5cb}{peclet\+\_\+s\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a3b1ca81ff9b154021d48ec268e0b0e01}{peclet\+\_\+s\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the surface Peclet number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a7f7e5af3ad9d26b920c01653bdb1e88a}{peclet\+\_\+strouhal\+\_\+s\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_aa534251a5882f4a96afbb424d1d79cfb}{peclet\+\_\+strouhal\+\_\+s\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the surface Peclet x Strouhal number. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a280f065d9cb85438c0fe4f7cd95d14b3}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_aebc3ed4954b636f4992a212c7973c670}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a32ae151a017b122dd7a4c03511afbcc9}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a32ae151a017b122dd7a4c03511afbcc9}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the C-\/style output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ad41354dbe1ae8291e3330b3752b525f8}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_ad41354dbe1ae8291e3330b3752b525f8}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style Output function. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a703c35a6da2925926c976957f2da77c4}{integrate\+\_\+c}} ()
 \begin{DoxyCompactList}\small\item\em Compute the concentration intergated over the surface area. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -47,18 +52,18 @@ double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a9da12
 double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a7b5cc851b94d836a3caa2130cbf45bec}{dcdt\+\_\+surface}} (const unsigned \&l) const
 \begin{DoxyCompactList}\small\item\em The time derivative of the surface concentration. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a1710057c610ccccc06ef41f34f086aae}{sigma}} (const Vector$<$ double $>$ \&s)
-\item 
+\begin{DoxyCompactList}\small\item\em The surface tension function is linear in the concentration with constant of proportionality equal to the elasticity number. \end{DoxyCompactList}\item 
 virtual double \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a36422cf9aa94de6f0bfa668e5d4fa900}{dsigma\+\_\+dC}} (const Vector$<$ double $>$ \&s)
-\item 
-void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_adedf33390efdf652e169f8bd38eb2350}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const D\+Shape \&dpsifds, const D\+Shape \&dpsifdS, const D\+Shape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
+\begin{DoxyCompactList}\small\item\em Return the derivative of sigma with respect to C For use in computing the Jacobian. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_adedf33390efdf652e169f8bd38eb2350}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const DShape \&dpsifds, const DShape \&dpsifdS, const DShape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
 \begin{DoxyCompactList}\small\item\em Overload the Helper function to calculate the residuals and jacobian entries. This particular function ensures that the additional entries are calculated inside the integration loop. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a7c0f9b63cea887a4a65abbe9aeb3b3cf}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, Dense\+Matrix$<$ double $>$ \&mass\+\_\+matrix)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 Vector$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement_a26727fb7b57f88d3e1bdf4f2dd9f3b02}{C\+\_\+index}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Index at which the surfactant concentration is stored at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -76,9 +81,9 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1SurfactantTransportInterfaceElement
 
 
 \doxysubsection{Detailed Description}
-Generic surfactant transport equations implemented independently of the dimension and then specialised using the generic mechanisms introduce in the Fluid\+Interface\+Elements 
+Generic surfactant transport equations implemented independently of the dimension and then specialised using the generic mechanisms introduce in the Fluid\+Interface\+Elements. 
 
-Definition at line 48 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00048}{48}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
@@ -89,13 +94,17 @@ Definition at line 48 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 \doxysubsubsection{\texorpdfstring{SurfactantTransportInterfaceElement()}{SurfactantTransportInterfaceElement()}}
 {\footnotesize\ttfamily oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::\+Surfactant\+Transport\+Interface\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Constructor that passes the bulk element and face index down to the underlying 
-
-Definition at line 120 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
+Constructor that passes the bulk element and face index down to the underlying. 
 
-References Beta\+\_\+pt, Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value, Peclet\+\_\+\+S\+\_\+pt, and Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt.
+
+
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00120}{120}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00052}{Beta\+\_\+pt}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00067}{Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00055}{Peclet\+\_\+\+S\+\_\+pt}}, and \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00058}{Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt}}.
 
 
 
@@ -104,7 +113,7 @@ References Beta\+\_\+pt, Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value, P
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}}
 \index{add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{add\_additional\_residual\_contributions\_interface()}{add\_additional\_residual\_contributions\_interface()}}
-{\footnotesize\ttfamily void oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const Shape \&}]{psif,  }\item[{const D\+Shape \&}]{dpsifds,  }\item[{const D\+Shape \&}]{dpsifdS,  }\item[{const D\+Shape \&}]{dpsifd\+S\+\_\+div,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W,  }\item[{const double \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const Shape \&}]{psif,  }\item[{const DShape \&}]{dpsifds,  }\item[{const DShape \&}]{dpsifdS,  }\item[{const DShape \&}]{dpsifd\+S\+\_\+div,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W,  }\item[{const double \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -116,15 +125,15 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0bc278b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Line\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Surface\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Line\+Derivatives, ELEMENT $>$}}, \mbox{\hyperlink{classoomph_1_1SpineUpdateFluidInterfaceElement_a3958845051cafecd8e73745fc04c7a78}{oomph\+::\+Spine\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Surface\+Derivatives, ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1ElasticUpdateFluidInterfaceElement_a15c3d2912325ace17676366c1469121f}{oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, ELEMENT $>$}}.
 
 
 
-Definition at line 121 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00120}{120}} of file \mbox{\hyperlink{surfactant__transport__elements_8cc_source}{surfactant\+\_\+transport\+\_\+elements.\+cc}}.
 
 
 
-References C\+\_\+index, oomph\+::\+Fluid\+Interface\+Element\+::ca(), dcdt\+\_\+surface(), dsigma\+\_\+d\+C(), interpolated\+\_\+\+C(), oomph\+::\+Fluid\+Interface\+Element\+::interpolated\+\_\+u(), peclet\+\_\+s(), psi, psi\+\_\+, and oomph\+::\+Fluid\+Interface\+Element\+::\+U\+\_\+index\+\_\+interface.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00063}{C\+\_\+index}}, \mbox{\hyperlink{interface__elements_8h_source_l00473}{oomph\+::\+Fluid\+Interface\+Element\+::ca()}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00067}{dcdt\+\_\+surface()}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00082}{dsigma\+\_\+d\+C()}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00040}{interpolated\+\_\+\+C()}}, \mbox{\hyperlink{interface__elements_8cc_source_l00442}{oomph\+::\+Fluid\+Interface\+Element\+::interpolated\+\_\+u()}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00141}{peclet\+\_\+s()}}, and \mbox{\hyperlink{interface__elements_8h_source_l00338}{oomph\+::\+Fluid\+Interface\+Element\+::\+U\+\_\+index\+\_\+interface}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a79003d87401ad6106b8d10373ff12e73}\label{classoomph_1_1SurfactantTransportInterfaceElement_a79003d87401ad6106b8d10373ff12e73}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!beta@{beta}}
@@ -138,21 +147,21 @@ Return the Elasticity number.
 
 
 
-Definition at line 135 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00135}{135}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References Beta\+\_\+pt.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00052}{Beta\+\_\+pt}}.
 
 
 
-Referenced by dsigma\+\_\+d\+C(), and sigma().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00082}{dsigma\+\_\+d\+C()}}, and \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00095}{sigma()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a41af929d7aabb7fef48b993b3e893fe4}\label{classoomph_1_1SurfactantTransportInterfaceElement_a41af929d7aabb7fef48b993b3e893fe4}} 
+\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_ab50173df0654ca3b389308ab6ba40e58}\label{classoomph_1_1SurfactantTransportInterfaceElement_ab50173df0654ca3b389308ab6ba40e58}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!beta\_pt@{beta\_pt}}
 \index{beta\_pt@{beta\_pt}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{beta\_pt()}{beta\_pt()}}
-{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -160,11 +169,11 @@ Access function for pointer to the Elasticity number.
 
 
 
-Definition at line 153 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00153}{153}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References Beta\+\_\+pt.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00052}{Beta\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a7b5cc851b94d836a3caa2130cbf45bec}\label{classoomph_1_1SurfactantTransportInterfaceElement_a7b5cc851b94d836a3caa2130cbf45bec}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!dcdt\_surface@{dcdt\_surface}}
@@ -178,15 +187,15 @@ The time derivative of the surface concentration.
 
 
 
-Definition at line 67 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00067}{67}} of file \mbox{\hyperlink{surfactant__transport__elements_8cc_source}{surfactant\+\_\+transport\+\_\+elements.\+cc}}.
 
 
 
-References C\+\_\+index.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00063}{C\+\_\+index}}.
 
 
 
-Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00121}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a36422cf9aa94de6f0bfa668e5d4fa900}\label{classoomph_1_1SurfactantTransportInterfaceElement_a36422cf9aa94de6f0bfa668e5d4fa900}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!dsigma\_dC@{dsigma\_dC}}
@@ -194,17 +203,21 @@ Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interfac
 \doxysubsubsection{\texorpdfstring{dsigma\_dC()}{dsigma\_dC()}}
 {\footnotesize\ttfamily virtual double oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::dsigma\+\_\+dC (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-Return the derivative of sigma with respect to C For use in computing the Jacobian 
-
-Definition at line 82 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
-
-References beta().
+Return the derivative of sigma with respect to C For use in computing the Jacobian. 
 
 
 
-Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface().
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00082}{82}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00135}{beta()}}.
+
+
+
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00121}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a7c0f9b63cea887a4a65abbe9aeb3b3cf}\label{classoomph_1_1SurfactantTransportInterfaceElement_a7c0f9b63cea887a4a65abbe9aeb3b3cf}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
@@ -212,9 +225,13 @@ Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interfac
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}}
 {\footnotesize\ttfamily void oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
-Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix 
 
-Definition at line 107 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+
+Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00107}{107}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a703c35a6da2925926c976957f2da77c4}\label{classoomph_1_1SurfactantTransportInterfaceElement_a703c35a6da2925926c976957f2da77c4}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!integrate\_c@{integrate\_c}}
@@ -228,11 +245,11 @@ Compute the concentration intergated over the surface area.
 
 
 
-Definition at line 358 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00358}{358}} of file \mbox{\hyperlink{surfactant__transport__elements_8cc_source}{surfactant\+\_\+transport\+\_\+elements.\+cc}}.
 
 
 
-References C\+\_\+index, oomph\+::\+Fluid\+Interface\+Element\+::compute\+\_\+surface\+\_\+derivatives(), and psi\+\_\+.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00063}{C\+\_\+index}}, and \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0180a8e36fadbbe6984f9b3c5edffc81}{oomph\+::\+Fluid\+Interface\+Element\+::compute\+\_\+surface\+\_\+derivatives()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a9da12df06b20e5f1ce0736acfc7e8d83}\label{classoomph_1_1SurfactantTransportInterfaceElement_a9da12df06b20e5f1ce0736acfc7e8d83}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!interpolated\_C@{interpolated\_C}}
@@ -246,21 +263,21 @@ Get the surfactant concentration.
 
 
 
-Definition at line 40 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00040}{40}} of file \mbox{\hyperlink{surfactant__transport__elements_8cc_source}{surfactant\+\_\+transport\+\_\+elements.\+cc}}.
 
 
 
-References C\+\_\+index, and psi.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00063}{C\+\_\+index}}.
 
 
 
-Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface(), and output().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00121}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, and \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00298}{output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a32ae151a017b122dd7a4c03511afbcc9}\label{classoomph_1_1SurfactantTransportInterfaceElement_a32ae151a017b122dd7a4c03511afbcc9}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!output@{output}}
 \index{output@{output}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -268,13 +285,13 @@ Overload the C-\/style output function.
 
 
 
-Definition at line 180 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00180}{180}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_ad41354dbe1ae8291e3330b3752b525f8}\label{classoomph_1_1SurfactantTransportInterfaceElement_ad41354dbe1ae8291e3330b3752b525f8}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!output@{output}}
 \index{output@{output}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -282,7 +299,7 @@ C-\/style Output function.
 
 
 
-Definition at line 186 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00186}{186}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a280f065d9cb85438c0fe4f7cd95d14b3}\label{classoomph_1_1SurfactantTransportInterfaceElement_a280f065d9cb85438c0fe4f7cd95d14b3}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!output@{output}}
@@ -296,7 +313,7 @@ Overload the output function.
 
 
 
-Definition at line 172 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00172}{172}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_aebc3ed4954b636f4992a212c7973c670}\label{classoomph_1_1SurfactantTransportInterfaceElement_aebc3ed4954b636f4992a212c7973c670}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!output@{output}}
@@ -310,11 +327,11 @@ Overload the output function.
 
 
 
-Definition at line 298 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00298}{298}} of file \mbox{\hyperlink{surfactant__transport__elements_8cc_source}{surfactant\+\_\+transport\+\_\+elements.\+cc}}.
 
 
 
-References interpolated\+\_\+\+C(), oomph\+::\+Fluid\+Interface\+Element\+::interpolated\+\_\+u(), sigma(), oomph\+::\+Fluid\+Interface\+Element\+::u(), and oomph\+::\+Fluid\+Interface\+Element\+::\+U\+\_\+index\+\_\+interface.
+References \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00040}{interpolated\+\_\+\+C()}}, \mbox{\hyperlink{interface__elements_8cc_source_l00442}{oomph\+::\+Fluid\+Interface\+Element\+::interpolated\+\_\+u()}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00095}{sigma()}}, \mbox{\hyperlink{interface__elements_8h_source_l00510}{oomph\+::\+Fluid\+Interface\+Element\+::u()}}, and \mbox{\hyperlink{interface__elements_8h_source_l00338}{oomph\+::\+Fluid\+Interface\+Element\+::\+U\+\_\+index\+\_\+interface}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_ac945c28401b92a061e3e245e83541c55}\label{classoomph_1_1SurfactantTransportInterfaceElement_ac945c28401b92a061e3e245e83541c55}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!peclet\_s@{peclet\_s}}
@@ -328,21 +345,21 @@ Return the surface peclect number.
 
 
 
-Definition at line 141 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00141}{141}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References Peclet\+\_\+\+S\+\_\+pt.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00055}{Peclet\+\_\+\+S\+\_\+pt}}.
 
 
 
-Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00121}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
 
-\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a22bc470c2fb7eef5a7b6f9a61f04d5cb}\label{classoomph_1_1SurfactantTransportInterfaceElement_a22bc470c2fb7eef5a7b6f9a61f04d5cb}} 
+\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a3b1ca81ff9b154021d48ec268e0b0e01}\label{classoomph_1_1SurfactantTransportInterfaceElement_a3b1ca81ff9b154021d48ec268e0b0e01}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!peclet\_s\_pt@{peclet\_s\_pt}}
 \index{peclet\_s\_pt@{peclet\_s\_pt}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{peclet\_s\_pt()}{peclet\_s\_pt()}}
-{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -350,11 +367,11 @@ Access function for pointer to the surface Peclet number.
 
 
 
-Definition at line 159 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00159}{159}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References Peclet\+\_\+\+S\+\_\+pt.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00055}{Peclet\+\_\+\+S\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_acb4ff16ed90e79ffe9e4156ef030d689}\label{classoomph_1_1SurfactantTransportInterfaceElement_acb4ff16ed90e79ffe9e4156ef030d689}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!peclet\_strouhal\_s@{peclet\_strouhal\_s}}
@@ -368,17 +385,17 @@ Return the surface peclect strouhal number.
 
 
 
-Definition at line 147 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00147}{147}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00058}{Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a7f7e5af3ad9d26b920c01653bdb1e88a}\label{classoomph_1_1SurfactantTransportInterfaceElement_a7f7e5af3ad9d26b920c01653bdb1e88a}} 
+\mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_aa534251a5882f4a96afbb424d1d79cfb}\label{classoomph_1_1SurfactantTransportInterfaceElement_aa534251a5882f4a96afbb424d1d79cfb}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!peclet\_strouhal\_s\_pt@{peclet\_strouhal\_s\_pt}}
 \index{peclet\_strouhal\_s\_pt@{peclet\_strouhal\_s\_pt}!oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}}
 \doxysubsubsection{\texorpdfstring{peclet\_strouhal\_s\_pt()}{peclet\_strouhal\_s\_pt()}}
-{\footnotesize\ttfamily double$\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double $\ast$\& oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -386,11 +403,11 @@ Access function for pointer to the surface Peclet x Strouhal number.
 
 
 
-Definition at line 165 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00165}{165}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-References Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00058}{Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_aaf7988dfac3e02018c591f2f9e34f644}\label{classoomph_1_1SurfactantTransportInterfaceElement_aaf7988dfac3e02018c591f2f9e34f644}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!set\_c\_index@{set\_c\_index}}
@@ -400,11 +417,11 @@ References Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt.
 
 
 
-Definition at line 129 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00129}{129}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ Surfactant\+Transport\+Interface\+Element $>$\+::setup\+\_\+equation\+\_\+indices().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00211}{oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ Surfactant\+Transport\+Interface\+Element $>$\+::setup\+\_\+equation\+\_\+indices()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a1710057c610ccccc06ef41f34f086aae}\label{classoomph_1_1SurfactantTransportInterfaceElement_a1710057c610ccccc06ef41f34f086aae}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!sigma@{sigma}}
@@ -412,21 +429,25 @@ Referenced by oomph\+::\+Fluid\+Interface\+Additional\+Values$<$ Surfactant\+Tra
 \doxysubsubsection{\texorpdfstring{sigma()}{sigma()}}
 {\footnotesize\ttfamily double oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::sigma (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
+
+
 The surface tension function is linear in the concentration with constant of proportionality equal to the elasticity number. 
+
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a7e5c3ca1eba5d4dd44c0eab9be252c2a}{oomph\+::\+Fluid\+Interface\+Element}}.
 
 
 
-Definition at line 95 of file surfactant\+\_\+transport\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00095}{95}} of file \mbox{\hyperlink{surfactant__transport__elements_8cc_source}{surfactant\+\_\+transport\+\_\+elements.\+cc}}.
 
 
 
-References beta(), C\+\_\+index, and psi.
+References \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00135}{beta()}}, and \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00063}{C\+\_\+index}}.
 
 
 
-Referenced by output().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00298}{output()}}.
 
 
 
@@ -443,11 +464,11 @@ Pointer to an Elasticity number.
 
 
 
-Definition at line 52 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00052}{52}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-Referenced by beta(), beta\+\_\+pt(), and Surfactant\+Transport\+Interface\+Element().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00135}{beta()}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00153}{beta\+\_\+pt()}}, and \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00120}{Surfactant\+Transport\+Interface\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a26727fb7b57f88d3e1bdf4f2dd9f3b02}\label{classoomph_1_1SurfactantTransportInterfaceElement_a26727fb7b57f88d3e1bdf4f2dd9f3b02}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!C\_index@{C\_index}}
@@ -455,13 +476,17 @@ Referenced by beta(), beta\+\_\+pt(), and Surfactant\+Transport\+Interface\+Elem
 \doxysubsubsection{\texorpdfstring{C\_index}{C\_index}}
 {\footnotesize\ttfamily Vector$<$unsigned$>$ oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::\+C\+\_\+index\hspace{0.3cm}{\ttfamily [protected]}}
 
-Index at which the surfactant concentration is stored at the nodes 
-
-Definition at line 63 of file surfactant\+\_\+transport\+\_\+elements.\+h.
 
 
+Index at which the surfactant concentration is stored at the nodes. 
 
-Referenced by add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface(), dcdt\+\_\+surface(), integrate\+\_\+c(), interpolated\+\_\+\+C(), and sigma().
+
+
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00063}{63}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00121}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00067}{dcdt\+\_\+surface()}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00358}{integrate\+\_\+c()}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00040}{interpolated\+\_\+\+C()}}, and \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00095}{sigma()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_ae2c6f40fd7bc427636ac25c23d816e74}\label{classoomph_1_1SurfactantTransportInterfaceElement_ae2c6f40fd7bc427636ac25c23d816e74}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
@@ -481,11 +506,11 @@ Default value of the physical constants.
 
 
 
-Definition at line 67 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00067}{67}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-Referenced by Surfactant\+Transport\+Interface\+Element().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00120}{Surfactant\+Transport\+Interface\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a50b4771707337535c081324f2f0d8c30}\label{classoomph_1_1SurfactantTransportInterfaceElement_a50b4771707337535c081324f2f0d8c30}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!Peclet\_S\_pt@{Peclet\_S\_pt}}
@@ -499,11 +524,11 @@ Pointer to Surface Peclet number.
 
 
 
-Definition at line 55 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00055}{55}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-Referenced by peclet\+\_\+s(), peclet\+\_\+s\+\_\+pt(), and Surfactant\+Transport\+Interface\+Element().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00141}{peclet\+\_\+s()}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00159}{peclet\+\_\+s\+\_\+pt()}}, and \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00120}{Surfactant\+Transport\+Interface\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SurfactantTransportInterfaceElement_a3c4a6abcb3795ee53baff49864cd0020}\label{classoomph_1_1SurfactantTransportInterfaceElement_a3c4a6abcb3795ee53baff49864cd0020}} 
 \index{oomph::SurfactantTransportInterfaceElement@{oomph::SurfactantTransportInterfaceElement}!Peclet\_Strouhal\_S\_pt@{Peclet\_Strouhal\_S\_pt}}
@@ -517,11 +542,11 @@ Pointer to the surface Peclect Strouhal number.
 
 
 
-Definition at line 58 of file surfactant\+\_\+transport\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00058}{58}} of file \mbox{\hyperlink{surfactant__transport__elements_8h_source}{surfactant\+\_\+transport\+\_\+elements.\+h}}.
 
 
 
-Referenced by peclet\+\_\+strouhal\+\_\+s(), peclet\+\_\+strouhal\+\_\+s\+\_\+pt(), and Surfactant\+Transport\+Interface\+Element().
+Referenced by \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00147}{peclet\+\_\+strouhal\+\_\+s()}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00165}{peclet\+\_\+strouhal\+\_\+s\+\_\+pt()}}, and \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00120}{Surfactant\+Transport\+Interface\+Element()}}.
 
 
 

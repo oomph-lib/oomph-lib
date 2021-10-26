@@ -398,7 +398,7 @@ control:
     store it in \c Global_Physical_Variables::Pext_data_pt to make it
     accessible to the load function 
     \c Global_Physical_Variables::press_load(...) \n\n
-    \skipline The constructor of the   
+    \skipline The constructor of the
     \until displacement_control_load_pt();
     \n\n
   - <B>Case 2b: The load \c Data already exists</B> \n\n

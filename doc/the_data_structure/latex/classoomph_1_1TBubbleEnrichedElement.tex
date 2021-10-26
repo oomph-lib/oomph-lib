@@ -1,5 +1,10 @@
-\hypertarget{classoomph_1_1TBubbleEnrichedElement}{}\doxysection{oomph\+::T\+Bubble\+Enriched\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1TBubbleEnrichedElement}{}\doxysection{oomph\+::TBubble\+Enriched\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1TBubbleEnrichedElement}\index{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}}
+
+
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$Telements.\+h$>$}
@@ -14,18 +19,19 @@ void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_a095db8469bd582300d19
 const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_a3703e251b2baaa8fca10acf36e674b2a}{Central\+\_\+node\+\_\+on\+\_\+face}} \mbox{[}4\mbox{]}
 \item 
 void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_aee941e6c9a1dd40dffdcb4e1aa7d5881}{build\+\_\+face\+\_\+element}} (const int \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$face\+\_\+element\+\_\+pt)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function to setup geometrical information for lower-\/dimensional Face\+Elements (which are of type \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element$<$2,3$>$}}). \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+T\+Bubble\+Enriched\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+TBubble\+Enriched\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
-\mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} class for which the shape functions have been enriched by a single bubble function of the next order
+\mbox{\hyperlink{classoomph_1_1TElement}{TElement}} class for which the shape functions have been enriched by a single bubble function of the next order
 
 Empty, just establishes the template parameters 
 
-Definition at line 3599 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03569}{3569}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
@@ -34,7 +40,7 @@ Definition at line 3599 of file Telements.\+h.
 \index{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}!build\_face\_element@{build\_face\_element}}
 \index{build\_face\_element@{build\_face\_element}!oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{build\_face\_element()}{build\_face\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ 2, 3 $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ 2, 3 $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
@@ -42,37 +48,45 @@ The face element for is the same in the two-\/dimesional case.
 
 
 
-Definition at line 873 of file Telements.\+cc.
+Definition at line \mbox{\hyperlink{Telements_8cc_source_l00873}{873}} of file \mbox{\hyperlink{Telements_8cc_source}{Telements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_aee941e6c9a1dd40dffdcb4e1aa7d5881}\label{classoomph_1_1TBubbleEnrichedElement_aee941e6c9a1dd40dffdcb4e1aa7d5881}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}!build\_face\_element@{build\_face\_element}}
 \index{build\_face\_element@{build\_face\_element}!oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{build\_face\_element()}{build\_face\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ 3, 3 $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ 3, 3 $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})}
 
-Function to setup geometrical information for lower-\/dimensional Face\+Elements (which are of type \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{T\+Bubble\+Enriched\+Element$<$2,3$>$}}). 
 
-Definition at line 893 of file Telements.\+cc.
+
+Function to setup geometrical information for lower-\/dimensional Face\+Elements (which are of type \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element$<$2,3$>$}}). 
+
+
+
+Definition at line \mbox{\hyperlink{Telements_8cc_source_l00893}{893}} of file \mbox{\hyperlink{Telements_8cc_source}{Telements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l04853}{oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number()}}, \mbox{\hyperlink{elements_8h_source_l04846}{oomph\+::\+Face\+Element\+::bulk\+\_\+node\+\_\+number\+\_\+resize()}}, \mbox{\hyperlink{elements_8h_source_l04873}{oomph\+::\+Face\+Element\+::nbulk\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l04888}{oomph\+::\+Face\+Element\+::nbulk\+\_\+value\+\_\+resize()}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_acbf904b8d5bfcde73fae984533e95b3c}\label{classoomph_1_1TBubbleEnrichedElement_acbf904b8d5bfcde73fae984533e95b3c}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}!Central\_node\_on\_face@{Central\_node\_on\_face}}
 \index{Central\_node\_on\_face@{Central\_node\_on\_face}!oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Central\_node\_on\_face()}{Central\_node\_on\_face()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ 2, 3 $>$\+::Central\+\_\+node\+\_\+on\+\_\+face}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ 2, 3 $>$\+::Central\+\_\+node\+\_\+on\+\_\+face}
 
 
 
-Definition at line 865 of file Telements.\+cc.
+Definition at line \mbox{\hyperlink{Telements_8cc_source_l00865}{865}} of file \mbox{\hyperlink{Telements_8cc_source}{Telements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_a3703e251b2baaa8fca10acf36e674b2a}\label{classoomph_1_1TBubbleEnrichedElement_a3703e251b2baaa8fca10acf36e674b2a}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}!Central\_node\_on\_face@{Central\_node\_on\_face}}
 \index{Central\_node\_on\_face@{Central\_node\_on\_face}!oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$@{oomph::TBubbleEnrichedElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Central\_node\_on\_face()}{Central\_node\_on\_face()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ 3, 3 $>$\+::Central\+\_\+node\+\_\+on\+\_\+face}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ 3, 3 $>$\+::Central\+\_\+node\+\_\+on\+\_\+face}
 
 
 
-Definition at line 884 of file Telements.\+cc.
+Definition at line \mbox{\hyperlink{Telements_8cc_source_l00884}{884}} of file \mbox{\hyperlink{Telements_8cc_source}{Telements.\+cc}}.
 
 
 

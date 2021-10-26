@@ -9,7 +9,7 @@ Namespace for phyical parameters.
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
-\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by F\+S\+I\+Wall\+Element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by FSIWall\+Element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -24,20 +24,17 @@ double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef
 Data $\ast$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad31ed4ea9a7fce4c20c2230d26047f6f}{P\+\_\+ext\+\_\+data\+\_\+pt}} =0
 \begin{DoxyCompactList}\small\item\em Pointer to Data object that stores external pressure. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ae6b6b04387b165c0da5160865170c0e7}{Pmin}} =1.\+5
-\begin{DoxyCompactList}\small\item\em Min. pressure. Only used in steady runs during parameter incrementation. Use 1.\+5 for values of Re to span the range in Heil (2004) paper. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Min. pressure. Only used in steady runs during parameter incrementation. Use 1.\+5 for values of Re to span the range in Heil (2004) paper. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3e094a3c45284edb77a880f49c93f94b}{Pmax}} =2.\+0
-\begin{DoxyCompactList}\small\item\em Max. pressure. Only used in steady runs during parameter incrementation. Use 2.\+0 for Re=250; 3.\+7 for Re=0 to span the range in Heil (2004) paper. ~\newline
- \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Max. pressure. Only used in steady runs during parameter incrementation. Use 2.\+0 for Re=250; 3.\+7 for Re=0 to span the range in Heil (2004) paper. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa1a76edebe4c23344938421cd68f0a8b}{P\+\_\+step}} =0.\+0
 \begin{DoxyCompactList}\small\item\em Jump in pressure after a restart -- used to give a steady solution a kick before starting a time-\/dependent run. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_afd29cc714595594020831c7c54387883}{Yprescr}} = 1.\+0
 \begin{DoxyCompactList}\small\item\em Current prescribed vertical position of control point (only used for displacement control) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad6b457166fefe63a8341e9d0faefe892}{Yprescr\+\_\+min}} =0.\+6
-\item 
+\begin{DoxyCompactList}\small\item\em Min. of prescribed vertical position of conrol point (only used during parameter study with displacement control). 0.\+6 corresponds to the value in Heil (2004) paper for static runs. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}} =1.\+0e-\/2
-\begin{DoxyCompactList}\small\item\em Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. As in Heil (2004) paper ~\newline
- \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. As in Heil (2004) paper. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -52,19 +49,19 @@ Namespace for phyical parameters.
 
 
 
-Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by F\+S\+I\+Wall\+Element. 
+Load function\+: Apply a constant external pressure to the wall. Note\+: This is the load without the fluid contribution! Fluid load gets added on by FSIWall\+Element. 
 
 
 
-Definition at line 76 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00076}{76}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-References P\+\_\+ext\+\_\+data\+\_\+pt.
+References \mbox{\hyperlink{fsi__chan__problem_8h_source_l00076}{load()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{P\+\_\+ext\+\_\+data\+\_\+pt}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l00076}{load()}}.
 
 
 
@@ -81,11 +78,11 @@ Non-\/dimensional wall thickness. As in Heil (2004) paper.
 
 
 
-Definition at line 42 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00042}{42}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ad31ed4ea9a7fce4c20c2230d26047f6f}\label{namespaceGlobal__Physical__Variables_ad31ed4ea9a7fce4c20c2230d26047f6f}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!P\_ext\_data\_pt@{P\_ext\_data\_pt}}
@@ -99,11 +96,11 @@ Pointer to Data object that stores external pressure.
 
 
 
-Definition at line 48 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00048}{48}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution\+\_\+steady(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::dump\+\_\+it(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem(), Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs(), load(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::restart(), Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::unsteady\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00853}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution\+\_\+steady()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00974}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::dump\+\_\+it()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00244}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::identify\+\_\+fluid\+\_\+and\+\_\+solid\+\_\+dofs()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00076}{load()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l01016}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::restart()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l01160}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00359}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l01282}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::unsteady\+\_\+run()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_aa1a76edebe4c23344938421cd68f0a8b}\label{namespaceGlobal__Physical__Variables_aa1a76edebe4c23344938421cd68f0a8b}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!P\_step@{P\_step}}
@@ -117,11 +114,11 @@ Jump in pressure after a restart -- used to give a steady solution a kick before
 
 
 
-Definition at line 62 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00062}{62}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by Flags\+::doc\+\_\+flags(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::restart().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00254}{Flags\+::doc\+\_\+flags()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l01016}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::restart()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a3e094a3c45284edb77a880f49c93f94b}\label{namespaceGlobal__Physical__Variables_a3e094a3c45284edb77a880f49c93f94b}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Pmax@{Pmax}}
@@ -131,16 +128,15 @@ Referenced by Flags\+::doc\+\_\+flags(), and F\+S\+I\+Collapsible\+Channel\+Prob
 
 
 
-Max. pressure. Only used in steady runs during parameter incrementation. Use 2.\+0 for Re=250; 3.\+7 for Re=0 to span the range in Heil (2004) paper. ~\newline
- 
+Max. pressure. Only used in steady runs during parameter incrementation. Use 2.\+0 for Re=250; 3.\+7 for Re=0 to span the range in Heil (2004) paper. 
 
 
 
-Definition at line 58 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00058}{58}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::unsteady\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l01160}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}, \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00359}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l01282}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::unsteady\+\_\+run()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ae6b6b04387b165c0da5160865170c0e7}\label{namespaceGlobal__Physical__Variables_ae6b6b04387b165c0da5160865170c0e7}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Pmin@{Pmin}}
@@ -150,16 +146,15 @@ Referenced by Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+
 
 
 
-Min. pressure. Only used in steady runs during parameter incrementation. Use 1.\+5 for values of Re to span the range in Heil (2004) paper. ~\newline
- 
+Min. pressure. Only used in steady runs during parameter incrementation. Use 1.\+5 for values of Re to span the range in Heil (2004) paper. 
 
 
 
-Definition at line 53 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00053}{53}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l01160}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}, and \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00359}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}\label{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Q@{Q}}
@@ -169,16 +164,15 @@ Referenced by Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+
 
 
 
-Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. As in Heil (2004) paper ~\newline
- 
+Fluid structure interaction parameter\+: Ratio of stresses used for non-\/dimensionalisation of fluid to solid stresses. As in Heil (2004) paper. 
 
 
 
-Definition at line 89 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00089}{89}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by Flags\+::doc\+\_\+flags(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::unsteady\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00254}{Flags\+::doc\+\_\+flags()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l01160}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l01282}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::unsteady\+\_\+run()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}\label{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Re@{Re}}
@@ -192,11 +186,11 @@ Reynolds number.
 
 
 
-Definition at line 36 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00036}{36}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by Flags\+::doc\+\_\+flags(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::unsteady\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00254}{Flags\+::doc\+\_\+flags()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l01160}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}, and \mbox{\hyperlink{fsi__chan__problem_8h_source_l01282}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::unsteady\+\_\+run()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}\label{namespaceGlobal__Physical__Variables_a085ee4bf968ffdd01a41b8c41864f907}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!ReSt@{ReSt}}
@@ -210,11 +204,11 @@ Womersley = Reynolds times Strouhal.
 
 
 
-Definition at line 39 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00039}{39}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}\label{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Sigma0@{Sigma0}}
@@ -228,11 +222,11 @@ Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\
 
 
 
-Definition at line 45 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00045}{45}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_afd29cc714595594020831c7c54387883}\label{namespaceGlobal__Physical__Variables_afd29cc714595594020831c7c54387883}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Yprescr@{Yprescr}}
@@ -246,11 +240,11 @@ Current prescribed vertical position of control point (only used for displacemen
 
 
 
-Definition at line 66 of file fsi\+\_\+chan\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00066}{66}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::doc\+\_\+solution\+\_\+steady(), F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+F\+S\+I\+Collapsible\+Channel\+Problem(), Segregated\+F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run(), and F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l00853}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution\+\_\+steady()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l00483}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::\+FSICollapsible\+Channel\+Problem()}}, \mbox{\hyperlink{fsi__chan__problem_8h_source_l01160}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}, and \mbox{\hyperlink{simple__segregated__driver_8cc_source_l00359}{Segregated\+FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}.
 
 \mbox{\Hypertarget{namespaceGlobal__Physical__Variables_ad6b457166fefe63a8341e9d0faefe892}\label{namespaceGlobal__Physical__Variables_ad6b457166fefe63a8341e9d0faefe892}} 
 \index{Global\_Physical\_Variables@{Global\_Physical\_Variables}!Yprescr\_min@{Yprescr\_min}}
@@ -258,11 +252,15 @@ Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\
 \doxysubsubsection{\texorpdfstring{Yprescr\_min}{Yprescr\_min}}
 {\footnotesize\ttfamily double Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Yprescr\+\_\+min =0.\+6}
 
+
+
 Min. of prescribed vertical position of conrol point (only used during parameter study with displacement control). 0.\+6 corresponds to the value in Heil (2004) paper for static runs. 
 
-Definition at line 71 of file fsi\+\_\+chan\+\_\+problem.\+h.
+
+
+Definition at line \mbox{\hyperlink{fsi__chan__problem_8h_source_l00071}{71}} of file \mbox{\hyperlink{fsi__chan__problem_8h_source}{fsi\+\_\+chan\+\_\+problem.\+h}}.
 
 
 
-Referenced by F\+S\+I\+Collapsible\+Channel\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$\+::steady\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__chan__problem_8h_source_l01160}{FSICollapsible\+Channel\+Problem$<$ ELEMENT $>$\+::steady\+\_\+run()}}.
 

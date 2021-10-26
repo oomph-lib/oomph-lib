@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1FSISolidTractionElement}{}\doxysection{oomph\+::F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$ Class Template Reference}
+\hypertarget{classoomph_1_1FSISolidTractionElement}{}\doxysection{oomph\+::FSISolid\+Traction\+Element\texorpdfstring{$<$}{<} ELEMENT, DIM \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1FSISolidTractionElement}\index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
+
+
+////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$solid\+\_\+traction\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::FSISolid\+Traction\+Element\texorpdfstring{$<$}{<} ELEMENT, DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.310160cm]{classoomph_1_1FSISolidTractionElement}
@@ -13,30 +18,30 @@ Inheritance diagram for oomph\+::F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a6b1f461ae72d6ecbd9e1b1175ee9da5d}{F\+S\+I\+Solid\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}}, const bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
-\begin{DoxyCompactList}\small\item\em Constructor\+: Create element as \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}) with D\+I\+M-\/1 Lagrangian and D\+IM Eulerian coordinates. By default, we assume that the normal vector computed by the underlying \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} points into the fluid. If this is not the case, overwrite this with the access function \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_aaa745c32fe53e76ac0b9d1b00a05fe36}{F\+S\+I\+Solid\+Traction\+Element\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid()}} Constructor for \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is called explicitly because of virtual inheritance! \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a6f5c381525601f876ba1bcd6b754b3f3}{$\sim$\+F\+S\+I\+Solid\+Traction\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a6b1f461ae72d6ecbd9e1b1175ee9da5d}{FSISolid\+Traction\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Create element as \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}) with DIM-\/1 Lagrangian and DIM Eulerian coordinates. By default, we assume that the normal vector computed by the underlying \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} points into the fluid. If this is not the case, overwrite this with the access function \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_aaa745c32fe53e76ac0b9d1b00a05fe36}{FSISolid\+Traction\+Element\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid()}} Constructor for \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is called explicitly because of virtual inheritance! \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a6f5c381525601f876ba1bcd6b754b3f3}{$\sim$\+FSISolid\+Traction\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a0addf60f42d1386b6b07f52f62a8373b}{set\+\_\+normal\+\_\+pointing\+\_\+into\+\_\+fluid}} ()
 \begin{DoxyCompactList}\small\item\em Set the normal computed by underlying \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} to point into the fluid. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_aaa745c32fe53e76ac0b9d1b00a05fe36}{set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid}} ()
 \begin{DoxyCompactList}\small\item\em Set the normal computed by underlying \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} to point out of the fluid. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a65724c5eb73e1f82a0c8230e84f86144}{dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&drdxi) const
+void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a65724c5eb73e1f82a0c8230e84f86144}{dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&drdxi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Derivative of position vector w.\+r.\+t. the \mbox{\hyperlink{classoomph_1_1SolidFiniteElement}{Solid\+Finite\+Element}}\textquotesingle{}s Lagrangian coordinates; evaluated at current time. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a789bdb99ca30e3c7b56adab5be79a59d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
-\begin{DoxyCompactList}\small\item\em Final overload... Forwards to the version in the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}}. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a861d9e1c8358c02f304e90c0d16a050d}{get\+\_\+traction}} (const unsigned \&intpt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1SolidTractionElement_ab00a3429962eb33612054e82095f8082}{traction}})
-\begin{DoxyCompactList}\small\item\em Get the load vector\+: Pass number of the integration point, Lagr. coordinate, Eulerian coordinate (neither of the last two are used in the F\+SI implementation of this function!) and normal vector and return the load vector, taking the sign of the normal into account. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a8f4008e86ceefec5f6678cdf37e49eb8}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+virtual void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a789bdb99ca30e3c7b56adab5be79a59d}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
+\begin{DoxyCompactList}\small\item\em Final overload... Forwards to the version in the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a861d9e1c8358c02f304e90c0d16a050d}{get\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&intpt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1SolidTractionElement_ab00a3429962eb33612054e82095f8082}{traction}})
+\begin{DoxyCompactList}\small\item\em Get the load vector\+: Pass number of the integration point, Lagr. coordinate, Eulerian coordinate (neither of the last two are used in the FSI implementation of this function!) and normal vector and return the load vector, taking the sign of the normal into account. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a8f4008e86ceefec5f6678cdf37e49eb8}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function\+: Note we can only output the traction at \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} points so n\+\_\+plot is actually ignored. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a1b45927afbb43a1808b5857128995ae4}{ndof\+\_\+types}} () const
-\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a886c3447b4a44c670c2839efeeb2f771}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+unsigned \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a1b45927afbb43a1808b5857128995ae4}{ndof\+\_\+types}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_a9adce8a7e39bba43c3a231f970d82785}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-virtual void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1SolidTractionElement_ab00a3429962eb33612054e82095f8082}{traction}}) \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_aa10bcd878e85fd09a68833225e70660f}{traction\+\_\+fct\+\_\+pt}} ()
+virtual void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1SolidTractionElement_ab00a3429962eb33612054e82095f8082}{traction}}) \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_afc5745a91de1a653b9c3e912ff3d0b6a}{traction\+\_\+fct\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Broken overloaded reference to the traction function pointer. It doesn\textquotesingle{}t make sense to specify an external traction. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -47,12 +52,13 @@ bool \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_ab00f0ee9793a838bac6
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT, unsigned D\+IM$>$\newline
-class oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$}
+\subsubsection*{template$<$class ELEMENT, unsigned DIM$>$\newline
+class oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$}
+////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////// 
 
-\mbox{\hyperlink{classoomph_1_1SolidTractionElement}{Solid\+Traction\+Element}} \char`\"{}upgraded\char`\"{} to a \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}), so it can be used in F\+SI. The element is templated by the bulk solid element and the spatial (Eulerian) dimension of the bulk element. 
+\mbox{\hyperlink{classoomph_1_1SolidTractionElement}{Solid\+Traction\+Element}} \char`\"{}upgraded\char`\"{} to a \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}), so it can be used in FSI. The element is templated by the bulk solid element and the spatial (Eulerian) dimension of the bulk element. 
 
-Definition at line 778 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00778}{778}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
@@ -61,27 +67,27 @@ Definition at line 778 of file solid\+\_\+traction\+\_\+elements.\+h.
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!FSISolidTractionElement@{FSISolidTractionElement}}
 \index{FSISolidTractionElement@{FSISolidTractionElement}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{FSISolidTractionElement()}{FSISolidTractionElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{F\+S\+I\+Solid\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{FSISolid\+Traction\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Create element as \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}) with D\+I\+M-\/1 Lagrangian and D\+IM Eulerian coordinates. By default, we assume that the normal vector computed by the underlying \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} points into the fluid. If this is not the case, overwrite this with the access function \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_aaa745c32fe53e76ac0b9d1b00a05fe36}{F\+S\+I\+Solid\+Traction\+Element\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid()}} Constructor for \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is called explicitly because of virtual inheritance! 
+Constructor\+: Create element as \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}} (and thus, by inheritance, a \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}) with DIM-\/1 Lagrangian and DIM Eulerian coordinates. By default, we assume that the normal vector computed by the underlying \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} points into the fluid. If this is not the case, overwrite this with the access function \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement_aaa745c32fe53e76ac0b9d1b00a05fe36}{FSISolid\+Traction\+Element\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid()}} Constructor for \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} is called explicitly because of virtual inheritance! 
 
 
 
-Definition at line 795 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00795}{795}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+F\+S\+I\+Wall\+Element\+::setup\+\_\+fsi\+\_\+wall\+\_\+element().
+References \mbox{\hyperlink{fsi_8cc_source_l00121}{oomph\+::\+FSIWall\+Element\+::setup\+\_\+fsi\+\_\+wall\+\_\+element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_a6f5c381525601f876ba1bcd6b754b3f3}\label{classoomph_1_1FSISolidTractionElement_a6f5c381525601f876ba1bcd6b754b3f3}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!````~FSISolidTractionElement@{$\sim$FSISolidTractionElement}}
 \index{````~FSISolidTractionElement@{$\sim$FSISolidTractionElement}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$FSISolidTractionElement()}{~FSISolidTractionElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{F\+S\+I\+Solid\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{FSISolid\+Traction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -89,7 +95,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 809 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00809}{809}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
@@ -98,8 +104,8 @@ Definition at line 809 of file solid\+\_\+traction\+\_\+elements.\+h.
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!dposition\_dlagrangian\_at\_local\_coordinate@{dposition\_dlagrangian\_at\_local\_coordinate}}
 \index{dposition\_dlagrangian\_at\_local\_coordinate@{dposition\_dlagrangian\_at\_local\_coordinate}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{dposition\_dlagrangian\_at\_local\_coordinate()}{dposition\_dlagrangian\_at\_local\_coordinate()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{drdxi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::dposition\+\_\+dlagrangian\+\_\+at\+\_\+local\+\_\+coordinate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{drdxi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -107,95 +113,95 @@ Derivative of position vector w.\+r.\+t. the \mbox{\hyperlink{classoomph_1_1Soli
 
 
 
-Definition at line 828 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00828}{828}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_a789bdb99ca30e3c7b56adab5be79a59d}\label{classoomph_1_1FSISolidTractionElement_a789bdb99ca30e3c7b56adab5be79a59d}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Final overload... Forwards to the version in the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{F\+S\+I\+Wall\+Element}}. 
+Final overload... Forwards to the version in the \mbox{\hyperlink{classoomph_1_1FSIWallElement}{FSIWall\+Element}}. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194a635}{oomph\+::\+F\+S\+I\+Wall\+Element}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FSIWallElement_a7817d2662c24540d3757cb1a1194a635}{oomph\+::\+FSIWall\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_a886a6bcb5722c9535f6f78ccefdc0646}{oomph\+::\+Refineable\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableFSISolidTractionElement_a886a6bcb5722c9535f6f78ccefdc0646}{oomph\+::\+Refineable\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$}}.
 
 
 
-Definition at line 838 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00838}{838}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd(), and residuals().
+References \mbox{\hyperlink{solid__traction__elements_8h_source_l00176}{oomph\+::\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{element__with__external__element_8h_source_l00345}{oomph\+::\+Element\+With\+External\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+external\+\_\+interaction\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
-\mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_a886c3447b4a44c670c2839efeeb2f771}\label{classoomph_1_1FSISolidTractionElement_a886c3447b4a44c670c2839efeeb2f771}} 
+\mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_a9adce8a7e39bba43c3a231f970d82785}\label{classoomph_1_1FSISolidTractionElement_a9adce8a7e39bba43c3a231f970d82785}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) This element is only in charge of the solid dofs. 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF types\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) This element is only in charge of the solid dofs. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
-
-
-
-Definition at line 985 of file solid\+\_\+traction\+\_\+elements.\+h.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a069f59bfc3e607a5bebba52c6314d777}{oomph\+::\+Generalised\+Element}}.
 
 
 
-References i, and n.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00985}{985}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_a861d9e1c8358c02f304e90c0d16a050d}\label{classoomph_1_1FSISolidTractionElement_a861d9e1c8358c02f304e90c0d16a050d}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!get\_traction@{get\_traction}}
 \index{get\_traction@{get\_traction}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-virtual void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const unsigned \&}]{intpt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+virtual void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{intpt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{xi,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Get the load vector\+: Pass number of the integration point, Lagr. coordinate, Eulerian coordinate (neither of the last two are used in the F\+SI implementation of this function!) and normal vector and return the load vector, taking the sign of the normal into account. 
+Get the load vector\+: Pass number of the integration point, Lagr. coordinate, Eulerian coordinate (neither of the last two are used in the FSI implementation of this function!) and normal vector and return the load vector, taking the sign of the normal into account. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidTractionElement_ace61448de38dc67cbc0f7b42ed743eff}{oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidTractionElement_ace61448de38dc67cbc0f7b42ed743eff}{oomph\+::\+Solid\+Traction\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 854 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00854}{854}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+F\+S\+I\+Wall\+Element\+::fluid\+\_\+load\+\_\+vector(), i, n, oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::\+Normal\+\_\+points\+\_\+into\+\_\+fluid, and oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::traction().
+References \mbox{\hyperlink{fsi_8cc_source_l00162}{oomph\+::\+FSIWall\+Element\+::fluid\+\_\+load\+\_\+vector()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l00783}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::\+Normal\+\_\+points\+\_\+into\+\_\+fluid}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00286}{oomph\+::\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}.
 
 
 
-Referenced by oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::output().
+Referenced by \mbox{\hyperlink{solid__traction__elements_8h_source_l00878}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_a1b45927afbb43a1808b5857128995ae4}\label{classoomph_1_1FSISolidTractionElement_a1b45927afbb43a1808b5857128995ae4}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!ndof\_types@{ndof\_types}}
 \index{ndof\_types@{ndof\_types}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. 
+The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Just the solid degrees of freedom themselves. 
 
 
 
@@ -203,14 +209,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870
 
 
 
-Definition at line 960 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00960}{960}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_a8f4008e86ceefec5f6678cdf37e49eb8}\label{classoomph_1_1FSISolidTractionElement_a8f4008e86ceefec5f6678cdf37e49eb8}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!output@{output}}
 \index{output@{output}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -218,22 +224,22 @@ Output function\+: Note we can only output the traction at \mbox{\hyperlink{clas
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidTractionElement_a13a5bbe49c2d7ad5079e3354a34f248e}{oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1SolidTractionElement_a13a5bbe49c2d7ad5079e3354a34f248e}{oomph\+::\+Solid\+Traction\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 878 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00878}{878}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::dim(), oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::get\+\_\+traction(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Generalised\+Element\+::is\+\_\+halo(), oomph\+::\+Integral\+::knot(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), s, and oomph\+::\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::traction().
+References \mbox{\hyperlink{elements_8h_source_l02616}{oomph\+::\+Finite\+Element\+::dim()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l00854}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::get\+\_\+traction()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l01163}{oomph\+::\+Generalised\+Element\+::is\+\_\+halo()}}, \mbox{\hyperlink{elements_8cc_source_l06010}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00286}{oomph\+::\+Solid\+Traction\+Element$<$ ELEMENT $>$\+::traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_a0addf60f42d1386b6b07f52f62a8373b}\label{classoomph_1_1FSISolidTractionElement_a0addf60f42d1386b6b07f52f62a8373b}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!set\_normal\_pointing\_into\_fluid@{set\_normal\_pointing\_into\_fluid}}
 \index{set\_normal\_pointing\_into\_fluid@{set\_normal\_pointing\_into\_fluid}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_normal\_pointing\_into\_fluid()}{set\_normal\_pointing\_into\_fluid()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::set\+\_\+normal\+\_\+pointing\+\_\+into\+\_\+fluid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::set\+\_\+normal\+\_\+pointing\+\_\+into\+\_\+fluid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -241,18 +247,18 @@ Set the normal computed by underlying \mbox{\hyperlink{classoomph_1_1FaceElement
 
 
 
-Definition at line 814 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00814}{814}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::\+Normal\+\_\+points\+\_\+into\+\_\+fluid.
+References \mbox{\hyperlink{solid__traction__elements_8h_source_l00783}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::\+Normal\+\_\+points\+\_\+into\+\_\+fluid}}.
 
 \mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_aaa745c32fe53e76ac0b9d1b00a05fe36}\label{classoomph_1_1FSISolidTractionElement_aaa745c32fe53e76ac0b9d1b00a05fe36}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!set\_normal\_pointing\_out\_of\_fluid@{set\_normal\_pointing\_out\_of\_fluid}}
 \index{set\_normal\_pointing\_out\_of\_fluid@{set\_normal\_pointing\_out\_of\_fluid}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_normal\_pointing\_out\_of\_fluid()}{set\_normal\_pointing\_out\_of\_fluid()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -260,11 +266,11 @@ Set the normal computed by underlying \mbox{\hyperlink{classoomph_1_1FaceElement
 
 
 
-Definition at line 821 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00821}{821}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::\+Normal\+\_\+points\+\_\+into\+\_\+fluid.
+References \mbox{\hyperlink{solid__traction__elements_8h_source_l00783}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::\+Normal\+\_\+points\+\_\+into\+\_\+fluid}}.
 
 
 
@@ -273,8 +279,8 @@ References oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!Normal\_points\_into\_fluid@{Normal\_points\_into\_fluid}}
 \index{Normal\_points\_into\_fluid@{Normal\_points\_into\_fluid}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Normal\_points\_into\_fluid}{Normal\_points\_into\_fluid}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-bool \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::Normal\+\_\+points\+\_\+into\+\_\+fluid\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+bool \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::Normal\+\_\+points\+\_\+into\+\_\+fluid\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -282,18 +288,18 @@ Boolean flag to indicate whether the normal is directed into the fluid.
 
 
 
-Definition at line 783 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00783}{783}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::get\+\_\+traction(), oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::set\+\_\+normal\+\_\+pointing\+\_\+into\+\_\+fluid(), and oomph\+::\+F\+S\+I\+Solid\+Traction\+Element$<$ E\+L\+E\+M\+E\+N\+T, D\+I\+M $>$\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid().
+Referenced by \mbox{\hyperlink{solid__traction__elements_8h_source_l00854}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::get\+\_\+traction()}}, \mbox{\hyperlink{solid__traction__elements_8h_source_l00814}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::set\+\_\+normal\+\_\+pointing\+\_\+into\+\_\+fluid()}}, and \mbox{\hyperlink{solid__traction__elements_8h_source_l00821}{oomph\+::\+FSISolid\+Traction\+Element$<$ ELEMENT, DIM $>$\+::set\+\_\+normal\+\_\+pointing\+\_\+out\+\_\+of\+\_\+fluid()}}.
 
-\mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_aa10bcd878e85fd09a68833225e70660f}\label{classoomph_1_1FSISolidTractionElement_aa10bcd878e85fd09a68833225e70660f}} 
+\mbox{\Hypertarget{classoomph_1_1FSISolidTractionElement_afc5745a91de1a653b9c3e912ff3d0b6a}\label{classoomph_1_1FSISolidTractionElement_afc5745a91de1a653b9c3e912ff3d0b6a}} 
 \index{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}!traction\_fct\_pt@{traction\_fct\_pt}}
 \index{traction\_fct\_pt@{traction\_fct\_pt}!oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$@{oomph::FSISolidTractionElement$<$ ELEMENT, DIM $>$}}
 \doxysubsubsection{\texorpdfstring{traction\_fct\_pt}{traction\_fct\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT , unsigned D\+IM$>$ \\
-virtual void($\ast$\&)(const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& xi, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& x, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$\& \mbox{\hyperlink{classoomph_1_1SolidTractionElement_ab00a3429962eb33612054e82095f8082}{traction}}) \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+F\+S\+I\+Solid\+Traction\+Element}}$<$ E\+L\+E\+M\+E\+NT, D\+IM $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT , unsigned DIM$>$ \\
+virtual void($\ast$\&)(\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&xi, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&n, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1SolidTractionElement_ab00a3429962eb33612054e82095f8082}{traction}}) \mbox{\hyperlink{classoomph_1_1FSISolidTractionElement}{oomph\+::\+FSISolid\+Traction\+Element}}$<$ ELEMENT, DIM $>$\+::traction\+\_\+fct\+\_\+pt()\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -301,7 +307,7 @@ Broken overloaded reference to the traction function pointer. It doesn\textquote
 
 
 
-Definition at line 944 of file solid\+\_\+traction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{solid__traction__elements_8h_source_l00944}{944}} of file \mbox{\hyperlink{solid__traction__elements_8h_source}{solid\+\_\+traction\+\_\+elements.\+h}}.
 
 
 

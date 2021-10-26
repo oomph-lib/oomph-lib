@@ -1,6 +1,11 @@
-\hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{}\doxysection{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{}\doxysection{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}\index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
-Inheritance diagram for Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+
+
+Interface class to handle the mass transport between bulk and surface as well as the surfactant transport along the.  
+
+
+Inheritance diagram for Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.588653cm]{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}
@@ -10,14 +15,14 @@ Inheritance diagram for Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+I
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0df5772b5f387b69601c892feb4f6da7}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}} (Finite\+Element $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor that passes the bulk element and face index down to the underlying. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a5cf569c81997dde4f4f2a8d5ee1069ca}{alpha}} ()
 \begin{DoxyCompactList}\small\item\em Return the adsorption number. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a90120618d2868a87ee3b8f95c60f29b2}{k}} ()
 \begin{DoxyCompactList}\small\item\em Return the solubility nubmer. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a29024a8b66da3d19bd199130e3c04d81}{alpha\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0036cc1a2ace2478b5ec1ac65a9aa4e7}{alpha\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to adsorption number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a247b428c085e2d21385592af55b18539}{k\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a60c00c52b44edbb065871f4c483033e7}{k\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to solubility number. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a13366c67ba0fdbd1aef64d9cc55e6995}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -28,7 +33,7 @@ double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterf
 \begin{DoxyCompactList}\small\item\em Get the bulk surfactant concentration. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a7a1bdaf7177d0db70c2461a24c40a364}{dc\+\_\+bulk\+\_\+dt\+\_\+surface}} (const unsigned \&l) const
 \begin{DoxyCompactList}\small\item\em The time derivative of the bulk surface concentration. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a054c0dfcc88814e128318c7ad30e6e31}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const D\+Shape \&dpsifds, const D\+Shape \&dpsifdS, const D\+Shape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
+void \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a054c0dfcc88814e128318c7ad30e6e31}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const DShape \&dpsifds, const DShape \&dpsifdS, const DShape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
 \begin{DoxyCompactList}\small\item\em Overload the Helper function to calculate the residuals and jacobian entries. This particular function ensures that the additional entries are calculated inside the integration loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -38,17 +43,16 @@ double $\ast$ \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTranspor
 double $\ast$ \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a56d585256baa21c787f25fd0678d62ea}{K\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to solubility number. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0aa3229635561841f97bc00b616566bf}{C\+\_\+bulk\+\_\+index}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Storage for the index at which the bulk concentration is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$}
+Interface class to handle the mass transport between bulk and surface as well as the surfactant transport along the. 
 
-Interface class to handle the mass transport between bulk and surface as well as the surfactant transport along the 
-
-Definition at line 142 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00142}{142}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
 
 
@@ -57,12 +61,20 @@ Definition at line 142 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfa
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}}
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement()}{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}} (\begin{DoxyParamCaption}\item[{Finite\+Element $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}} (\begin{DoxyParamCaption}\item[{Finite\+Element $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Constructor that passes the bulk element and face index down to the underlying 
 
-Definition at line 328 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+
+Constructor that passes the bulk element and face index down to the underlying. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00328}{328}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00147}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+Alpha\+\_\+pt}}, and \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00067}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}.
 
 
 
@@ -71,8 +83,8 @@ Definition at line 328 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfa
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}}
 \index{add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{add\_additional\_residual\_contributions\_interface()}{add\_additional\_residual\_contributions\_interface()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const Shape \&}]{psif,  }\item[{const D\+Shape \&}]{dpsifds,  }\item[{const D\+Shape \&}]{dpsifdS,  }\item[{const D\+Shape \&}]{dpsifd\+S\+\_\+div,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W,  }\item[{const double \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const Shape \&}]{psif,  }\item[{const DShape \&}]{dpsifds,  }\item[{const DShape \&}]{dpsifdS,  }\item[{const DShape \&}]{dpsifd\+S\+\_\+div,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W,  }\item[{const double \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -84,18 +96,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0bc278b
 
 
 
-Definition at line 212 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{212}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
 
 
-References oomph\+::\+Elastic\+Update\+Fluid\+Interface\+Element$<$ Surfactant\+Transport\+Interface\+Element, Axisymmetric\+Derivatives, E\+L\+E\+M\+E\+N\+T $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface().
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00343}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::alpha()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00153}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+bulk\+\_\+index}}, \mbox{\hyperlink{surfactant__transport__elements_8h_source_l00063}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::\+C\+\_\+index}}, \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00040}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::interpolated\+\_\+\+C()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00158}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C\+\_\+bulk()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00346}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::k()}}.
 
 \mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a5cf569c81997dde4f4f2a8d5ee1069ca}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a5cf569c81997dde4f4f2a8d5ee1069ca}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!alpha@{alpha}}
 \index{alpha@{alpha}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{alpha()}{alpha()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -103,14 +115,22 @@ Return the adsorption number.
 
 
 
-Definition at line 343 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00343}{343}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
-\mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a29024a8b66da3d19bd199130e3c04d81}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a29024a8b66da3d19bd199130e3c04d81}} 
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00147}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+Alpha\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0036cc1a2ace2478b5ec1ac65a9aa4e7}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0036cc1a2ace2478b5ec1ac65a9aa4e7}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!alpha\_pt@{alpha\_pt}}
 \index{alpha\_pt@{alpha\_pt}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{alpha\_pt()}{alpha\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double $\ast$\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::alpha\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -118,14 +138,18 @@ Access function for pointer to adsorption number.
 
 
 
-Definition at line 349 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00349}{349}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00147}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+Alpha\+\_\+pt}}.
 
 \mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a7a1bdaf7177d0db70c2461a24c40a364}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a7a1bdaf7177d0db70c2461a24c40a364}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!dc\_bulk\_dt\_surface@{dc\_bulk\_dt\_surface}}
 \index{dc\_bulk\_dt\_surface@{dc\_bulk\_dt\_surface}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{dc\_bulk\_dt\_surface()}{dc\_bulk\_dt\_surface()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::dc\+\_\+bulk\+\_\+dt\+\_\+surface (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::dc\+\_\+bulk\+\_\+dt\+\_\+surface (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -133,14 +157,18 @@ The time derivative of the bulk surface concentration.
 
 
 
-Definition at line 185 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00185}{185}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00153}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+bulk\+\_\+index}}.
 
 \mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a9be81fbc02916555947d831f776fbbad}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a9be81fbc02916555947d831f776fbbad}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!interpolated\_C\_bulk@{interpolated\_C\_bulk}}
 \index{interpolated\_C\_bulk@{interpolated\_C\_bulk}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_C\_bulk()}{interpolated\_C\_bulk()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::interpolated\+\_\+\+C\+\_\+bulk (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::interpolated\+\_\+\+C\+\_\+bulk (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -148,14 +176,22 @@ Get the bulk surfactant concentration.
 
 
 
-Definition at line 158 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00158}{158}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00153}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+bulk\+\_\+index}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00355}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::output()}}.
 
 \mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a90120618d2868a87ee3b8f95c60f29b2}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a90120618d2868a87ee3b8f95c60f29b2}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!k@{k}}
 \index{k@{k}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{k()}{k()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::k (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::k (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -163,14 +199,22 @@ Return the solubility nubmer.
 
 
 
-Definition at line 346 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00346}{346}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
-\mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a247b428c085e2d21385592af55b18539}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a247b428c085e2d21385592af55b18539}} 
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00149}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+K\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a60c00c52b44edbb065871f4c483033e7}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a60c00c52b44edbb065871f4c483033e7}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!k\_pt@{k\_pt}}
 \index{k\_pt@{k\_pt}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{k\_pt()}{k\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::k\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double $\ast$\& \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::k\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -178,14 +222,18 @@ Access function for pointer to solubility number.
 
 
 
-Definition at line 352 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00352}{352}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00149}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+K\+\_\+pt}}.
 
 \mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a13366c67ba0fdbd1aef64d9cc55e6995}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a13366c67ba0fdbd1aef64d9cc55e6995}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -193,11 +241,11 @@ Overload the output function.
 
 
 
-Definition at line 355 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00355}{355}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
 
 
 
-References sigma.
+References \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00040}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::interpolated\+\_\+\+C()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00158}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C\+\_\+bulk()}}, \mbox{\hyperlink{interface__elements_8cc_source_l00442}{oomph\+::\+Fluid\+Interface\+Element\+::interpolated\+\_\+u()}}, and \mbox{\hyperlink{surfactant__transport__elements_8cc_source_l00095}{oomph\+::\+Surfactant\+Transport\+Interface\+Element\+::sigma()}}.
 
 
 
@@ -206,8 +254,8 @@ References sigma.
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!Alpha\_pt@{Alpha\_pt}}
 \index{Alpha\_pt@{Alpha\_pt}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Alpha\_pt}{Alpha\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double$\ast$ \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::Alpha\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -215,25 +263,37 @@ Pointer to adsorption number.
 
 
 
-Definition at line 147 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00147}{147}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00343}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::alpha()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00349}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::alpha\+\_\+pt()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00328}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::\+Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element()}}.
 
 \mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0aa3229635561841f97bc00b616566bf}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a0aa3229635561841f97bc00b616566bf}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!C\_bulk\_index@{C\_bulk\_index}}
 \index{C\_bulk\_index@{C\_bulk\_index}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{C\_bulk\_index}{C\_bulk\_index}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::C\+\_\+bulk\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::C\+\_\+bulk\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
 
-Storage for the index at which the bulk concentration is stored 
 
-Definition at line 153 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+
+Storage for the index at which the bulk concentration is stored. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00153}{153}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00212}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00185}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::dc\+\_\+bulk\+\_\+dt\+\_\+surface()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00158}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C\+\_\+bulk()}}.
 
 \mbox{\Hypertarget{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a56d585256baa21c787f25fd0678d62ea}\label{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement_a56d585256baa21c787f25fd0678d62ea}} 
 \index{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}!K\_pt@{K\_pt}}
 \index{K\_pt@{K\_pt}!ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$@{ElasticAxisymmetricSolubleSurfactantTransportInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{K\_pt}{K\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::K\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double$\ast$ \mbox{\hyperlink{classElasticAxisymmetricSolubleSurfactantTransportInterfaceElement}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element}}$<$ ELEMENT $>$\+::K\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -241,7 +301,11 @@ Pointer to solubility number.
 
 
 
-Definition at line 149 of file rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00149}{149}} of file \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+soluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00346}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::k()}}, and \mbox{\hyperlink{rayleigh__instability__soluble__surfactant_8cc_source_l00352}{Elastic\+Axisymmetric\+Soluble\+Surfactant\+Transport\+Interface\+Element$<$ ELEMENT $>$\+::k\+\_\+pt()}}.
 
 
 

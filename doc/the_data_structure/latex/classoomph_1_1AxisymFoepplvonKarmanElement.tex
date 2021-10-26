@@ -1,84 +1,90 @@
-\hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement}{}\doxysection{oomph\+::Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement}{}\doxysection{oomph\+::Axisym\+Foepplvon\+Karman\+Element\texorpdfstring{$<$}{<} NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1AxisymFoepplvonKarmanElement}\index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+
+
+//////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Axisym\+Foepplvon\+Karman\+Element\texorpdfstring{$<$}{<} NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.382979cm]{classoomph_1_1AxisymFoepplvonKarmanElement}
+\includegraphics[height=0.714894cm]{classoomph_1_1AxisymFoepplvonKarmanElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_ae05df596899638a8ee2800266412d163}{Axisym\+Foepplvon\+Karman\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a3258341718feafc5196b85594911fd19}{Axisym\+Foepplvon\+Karman\+Element}} (const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a4c1ab876d20e7a2b8e4700d9d1069e43}{Axisym\+Foepplvon\+Karman\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a2fc69c8a64430a00d344eb55562ab8f2}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_acfa52869f254f9b5988e03d3c49fa7ae}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$ \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_ab481ef11edd5211f38bb6e9936d2351f}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_ab481ef11edd5211f38bb6e9936d2351f}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a76cf09e19fc810a96251a64572248f76}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: r,w,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function\+: r,w,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi at n\+\_\+plot plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a17a94d66cf74c7be11d8e0a514db1d92}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a17a94d66cf74c7be11d8e0a514db1d92}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,w. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a09a7d0ec1c8c495c7703e6c034d8eafc}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a09a7d0ec1c8c495c7703e6c034d8eafc}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,w at n\+\_\+plot plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: r,w\+\_\+exact at n\+\_\+plot plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a290c4391d1da3688805466cf2852a93e}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a290c4391d1da3688805466cf2852a93e}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. r,w\+\_\+exact at n\+\_\+plot plot points (Calls the steady version) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_ae05df596899638a8ee2800266412d163}{Axisym\+Foepplvon\+Karman\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a3258341718feafc5196b85594911fd19}{Axisym\+Foepplvon\+Karman\+Element}} (const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a4c1ab876d20e7a2b8e4700d9d1069e43}{Axisym\+Foepplvon\+Karman\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a2fc69c8a64430a00d344eb55562ab8f2}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_acfa52869f254f9b5988e03d3c49fa7ae}{operator=}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$ \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_ab481ef11edd5211f38bb6e9936d2351f}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_ab481ef11edd5211f38bb6e9936d2351f}{required\+\_\+nvalue}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a76cf09e19fc810a96251a64572248f76}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: r,w,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function\+: r,w,sigma\+\_\+r\+\_\+r,sigma\+\_\+phi\+\_\+phi at n\+\_\+plot plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a17a94d66cf74c7be11d8e0a514db1d92}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a17a94d66cf74c7be11d8e0a514db1d92}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,w. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a09a7d0ec1c8c495c7703e6c034d8eafc}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a09a7d0ec1c8c495c7703e6c034d8eafc}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: r,w at n\+\_\+plot plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: r,w\+\_\+exact at n\+\_\+plot plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a290c4391d1da3688805466cf2852a93e}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a290c4391d1da3688805466cf2852a93e}{output\+\_\+fct}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. r,w\+\_\+exact at n\+\_\+plot plot points (Calls the steady version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axisym\+\_\+fvk}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidr, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdr) const
+double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axisym\+\_\+fvk}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidr, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdr) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a20841d263ec4590d5614d43f2f813ae7}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidr, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdr) const
+double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a20841d263ec4590d5614d43f2f813ae7}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidr, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdr) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axisym\+\_\+fvk}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidr, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdr) const
+double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axisym\+\_\+fvk}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidr, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdr) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a20841d263ec4590d5614d43f2f813ae7}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidr, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdr) const
+double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a20841d263ec4590d5614d43f2f813ae7}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidr, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdr) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a881cfa4e7a54d746002871a99337eae8}{Initial\+\_\+\+Nvalue}} = 3
+static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement_a881cfa4e7a54d746002871a99337eae8}{Initial\+\_\+\+Nvalue}} = 3
 \begin{DoxyCompactList}\small\item\em Static int that holds the number of variables at nodes\+: always the same. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$}
+//////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
 Axisym Foepplvon\+Karman\+Element elements are 1D Foeppl von Karman elements with isoparametric interpolation for the function. 
 
-Definition at line 406 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00401}{401}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
@@ -87,69 +93,53 @@ Definition at line 406 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elemen
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!AxisymFoepplvonKarmanElement@{AxisymFoepplvonKarmanElement}}
 \index{AxisymFoepplvonKarmanElement@{AxisymFoepplvonKarmanElement}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{AxisymFoepplvonKarmanElement()}{AxisymFoepplvonKarmanElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}. 
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}. 
 
 
 
-Definition at line 418 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00413}{413}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a3258341718feafc5196b85594911fd19}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a3258341718feafc5196b85594911fd19}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a4c1ab876d20e7a2b8e4700d9d1069e43}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a4c1ab876d20e7a2b8e4700d9d1069e43}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!AxisymFoepplvonKarmanElement@{AxisymFoepplvonKarmanElement}}
 \index{AxisymFoepplvonKarmanElement@{AxisymFoepplvonKarmanElement}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{AxisymFoepplvonKarmanElement()}{AxisymFoepplvonKarmanElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 424 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_ae05df596899638a8ee2800266412d163}\label{classoomph_1_1AxisymFoepplvonKarmanElement_ae05df596899638a8ee2800266412d163}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!AxisymFoepplvonKarmanElement@{AxisymFoepplvonKarmanElement}}
 \index{AxisymFoepplvonKarmanElement@{AxisymFoepplvonKarmanElement}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{AxisymFoepplvonKarmanElement()}{AxisymFoepplvonKarmanElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}. 
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations}{Axisym\+Foepplvon\+Karman\+Equations}}. 
 
 
 
-Definition at line 404 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00399}{399}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a3258341718feafc5196b85594911fd19}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a3258341718feafc5196b85594911fd19}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a4c1ab876d20e7a2b8e4700d9d1069e43}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a4c1ab876d20e7a2b8e4700d9d1069e43}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!AxisymFoepplvonKarmanElement@{AxisymFoepplvonKarmanElement}}
 \index{AxisymFoepplvonKarmanElement@{AxisymFoepplvonKarmanElement}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{AxisymFoepplvonKarmanElement()}{AxisymFoepplvonKarmanElement()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 410 of file axisym\+\_\+fvk\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -158,59 +148,44 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk()}{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidr,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidr,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
 \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. 
 
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
+Galerkin\+: Test functions = shape functions 
 
 Implements \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a456a9c27c326d6d1e55e3ab822ac1a5f}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations}}.
+
+
+
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00540}{540}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a20841d263ec4590d5614d43f2f813ae7}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a20841d263ec4590d5614d43f2f813ae7}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk()}{dshape\_and\_dtest\_eulerian\_at\_knot\_axisym\_fvk()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidr,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axisym\+\_\+fvk (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidr,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
 \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
-Galerkin\+: Test functions = shape functions 
 
 Implements \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a456a9c27c326d6d1e55e3ab822ac1a5f}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations}}.
-
-
-
-Definition at line 552 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_axisym\_fvk}}
 \index{dshape\_and\_dtest\_eulerian\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_axisym\_fvk}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_axisym\_fvk()}{dshape\_and\_dtest\_eulerian\_axisym\_fvk()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axisym\+\_\+fvk (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidr,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
-
-
-
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
-
-
-
-Implements \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a838cd424e2666b007113de0a95f5d999}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations}}.
-
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}} 
-\index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_axisym\_fvk}}
-\index{dshape\_and\_dtest\_eulerian\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_axisym\_fvk}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
-\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_axisym\_fvk()}{dshape\_and\_dtest\_eulerian\_axisym\_fvk()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axisym\+\_\+fvk (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidr,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axisym\+\_\+fvk (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidr,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -224,56 +199,55 @@ Implements \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a838cd4
 
 
 
-Definition at line 525 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00514}{514}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References s.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a2fc69c8a64430a00d344eb55562ab8f2}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a2fc69c8a64430a00d344eb55562ab8f2}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a0eb2dfad7aef696dfeabb51595db46db}} 
+\index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_axisym\_fvk}}
+\index{dshape\_and\_dtest\_eulerian\_axisym\_fvk@{dshape\_and\_dtest\_eulerian\_axisym\_fvk}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
+\doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_axisym\_fvk()}{dshape\_and\_dtest\_eulerian\_axisym\_fvk()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axisym\+\_\+fvk (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidr,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
+
+
+
+Implements \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations_a838cd424e2666b007113de0a95f5d999}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations}}.
+
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_acfa52869f254f9b5988e03d3c49fa7ae}\label{classoomph_1_1AxisymFoepplvonKarmanElement_acfa52869f254f9b5988e03d3c49fa7ae}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 417 of file axisym\+\_\+fvk\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
-\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a2fc69c8a64430a00d344eb55562ab8f2}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a2fc69c8a64430a00d344eb55562ab8f2}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_acfa52869f254f9b5988e03d3c49fa7ae}\label{classoomph_1_1AxisymFoepplvonKarmanElement_acfa52869f254f9b5988e03d3c49fa7ae}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 431 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a17a94d66cf74c7be11d8e0a514db1d92}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a17a94d66cf74c7be11d8e0a514db1d92}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -285,18 +259,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 446 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00449}{449}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a17a94d66cf74c7be11d8e0a514db1d92}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a17a94d66cf74c7be11d8e0a514db1d92}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -308,18 +282,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 460 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00435}{435}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a09a7d0ec1c8c495c7703e6c034d8eafc}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a09a7d0ec1c8c495c7703e6c034d8eafc}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -331,18 +305,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 453 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00456}{456}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a09a7d0ec1c8c495c7703e6c034d8eafc}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a09a7d0ec1c8c495c7703e6c034d8eafc}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -354,18 +328,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 467 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00442}{442}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a76cf09e19fc810a96251a64572248f76}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a76cf09e19fc810a96251a64572248f76}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -377,18 +351,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 432 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00435}{435}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a76cf09e19fc810a96251a64572248f76}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a76cf09e19fc810a96251a64572248f76}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -400,18 +374,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 446 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00421}{421}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -423,22 +397,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}.
 
 
 
-Definition at line 439 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00442}{442}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a435aab946dfcaa0b23e7df59e9bc3933}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -450,22 +424,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{oomph\+::\+F\+S\+I\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D, F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1FSIAxisymFoepplvonKarmanElement_a03c82e935db8c1c93dfe2f443ec5e817}{oomph\+::\+FSIAxisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D, FLUID\+\_\+\+ELEMENT $>$}}.
 
 
 
-Definition at line 453 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00428}{428}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00117}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a290c4391d1da3688805466cf2852a93e}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a290c4391d1da3688805466cf2852a93e}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -477,18 +451,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 471 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00474}{474}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00385}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_a290c4391d1da3688805466cf2852a93e}\label{classoomph_1_1AxisymFoepplvonKarmanElement_a290c4391d1da3688805466cf2852a93e}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -500,18 +474,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 485 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00460}{460}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00385}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}\label{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -523,18 +497,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 460 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00463}{463}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00385}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}\label{classoomph_1_1AxisymFoepplvonKarmanElement_aee745c3439aa18c82ddbe8b90fade1c0}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -546,18 +520,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanEquations
 
 
 
-Definition at line 474 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00449}{449}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct().
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8cc_source_l00385}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Equations\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_ab481ef11edd5211f38bb6e9936d2351f}\label{classoomph_1_1AxisymFoepplvonKarmanElement_ab481ef11edd5211f38bb6e9936d2351f}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -569,18 +543,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 424 of file axisym\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00427}{427}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue.
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00408}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymFoepplvonKarmanElement_ab481ef11edd5211f38bb6e9936d2351f}\label{classoomph_1_1AxisymFoepplvonKarmanElement_ab481ef11edd5211f38bb6e9936d2351f}} 
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -592,11 +566,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7
 
 
 
-Definition at line 438 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__fvk__elements_8h_source_l00413}{413}} of file \mbox{\hyperlink{axisym__fvk__elements_8h_source}{axisym\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue.
+References \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00408}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
 
 
 
@@ -605,8 +579,8 @@ References oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1
 \index{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$@{oomph::AxisymFoepplvonKarmanElement$<$ NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily template$<$unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ N\+N\+O\+D\+E\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue = 3\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NNODE\+\_\+1D$>$ \\
+static \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \mbox{\hyperlink{classoomph_1_1AxisymFoepplvonKarmanElement}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element}}$<$ NNODE\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue = 3\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -616,11 +590,11 @@ Set the data for the number of Variables at each node\+: 6.
 
 Set the data for the number of Variables at each node -\/ 3. 
 
-Definition at line 413 of file axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00408}{408}} of file \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source}{axisym\+\_\+displ\+\_\+based\+\_\+fvk\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ N\+N\+O\+D\+E\+\_\+1\+D $>$\+::required\+\_\+nvalue().
+Referenced by \mbox{\hyperlink{axisym__displ__based__fvk__elements_8h_source_l00427}{oomph\+::\+Axisym\+Foepplvon\+Karman\+Element$<$ NNODE\+\_\+1\+D $>$\+::required\+\_\+nvalue()}}.
 
 
 

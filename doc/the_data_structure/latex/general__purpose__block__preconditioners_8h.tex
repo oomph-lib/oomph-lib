@@ -3,27 +3,27 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}
+class \mbox{\hyperlink{classoomph_1_1GeneralPurposeBlockPreconditioner}{oomph\+::\+General\+Purpose\+Block\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em Base class for general purpose block preconditioners. Deals with setting subsidiary preconditioners and dof to block maps. Subsidiary preconditioners can be set in two ways\+: 1) A pointer to a subsidiary preconditioner for block i can be passed to set\+\_\+subsidiary\+\_\+preconditioner\+\_\+pt(prec, i). 2) A default subsidiary preconditioner can be set up by providing a function pointer to a function which creates a preconditioner. During \mbox{\hyperlink{classoomph_1_1Preconditioner_af4886f4efe510e5c9b0eb19422943588}{setup()}} all unset subsidiary preconditioner pointers will be filled in using this function. By default this uses Super\+LU. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BlockDiagonalPreconditioner}{oomph\+::\+Block\+Diagonal\+Preconditioner$<$ MATRIX $>$}}
 \begin{DoxyCompactList}\small\item\em Block diagonal preconditioner. By default Super\+LU is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1BlockTriangularPreconditioner}{oomph\+::\+Block\+Triangular\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}
-\begin{DoxyCompactList}\small\item\em General purpose block triangular preconditioner By default this is Upper triangular. By default \mbox{\hyperlink{classoomph_1_1SuperLUPreconditioner}{Super\+L\+U\+Preconditioner}} (or Super\+L\+U\+Dist\+Preconditioner) is used to solve the subsidiary systems, but other preconditioners can be used by setting them using passing a pointer to a function of type Subsidiary\+Preconditioner\+Fct\+Pt to the method subsidiary\+\_\+preconditioner\+\_\+function\+\_\+pt(). \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1ExactBlockPreconditioner}{oomph\+::\+Exact\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1BlockAntiDiagonalPreconditioner}{oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}
+class \mbox{\hyperlink{classoomph_1_1BlockTriangularPreconditioner}{oomph\+::\+Block\+Triangular\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1ExactBlockPreconditioner}{oomph\+::\+Exact\+Block\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1BlockAntiDiagonalPreconditioner}{oomph\+::\+Block\+Anti\+Diagonal\+Preconditioner$<$ MATRIX $>$}}
 \begin{DoxyCompactList}\small\item\em Block \char`\"{}anti-\/diagonal\char`\"{} preconditioner, i.\+e. same as block diagonal but along the other diagonal of the matrix (top-\/right to bottom-\/left). \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1DummyBlockPreconditioner}{oomph\+::\+Dummy\+Block\+Preconditioner$<$ M\+A\+T\+R\+I\+X $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classoomph_1_1DummyBlockPreconditioner}{oomph\+::\+Dummy\+Block\+Preconditioner$<$ MATRIX $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Preconditioner}{Preconditioner}} that doesn\textquotesingle{}t actually do any preconditioning, it just allows access to the Jacobian blocks. This is pretty hacky but oh well.. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceoomph_1_1PreconditionerCreationFunctions}{oomph\+::\+Preconditioner\+Creation\+Functions}}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1PreconditionerCreationFunctions}{oomph\+::\+Preconditioner\+Creation\+Functions}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-Preconditioner $\ast$ \mbox{\hyperlink{namespaceoomph_1_1PreconditionerCreationFunctions_a99628579d47aa9048467b02c5acd96a5}{oomph\+::\+Preconditioner\+Creation\+Functions\+::create\+\_\+super\+\_\+lu\+\_\+preconditioner}} ()
+Preconditioner $\ast$ \mbox{\hyperlink{namespaceoomph_1_1PreconditionerCreationFunctions_a0a6456cb4b119cb3a55fbe42f11dd44d}{oomph\+::\+Preconditioner\+Creation\+Functions\+::create\+\_\+super\+\_\+lu\+\_\+preconditioner}} ()
 \begin{DoxyCompactList}\small\item\em Helper function to create a Super\+Lu preconditioner (for use as the default subsididary preconditioner creator in General\+Purpose\+Block\+Preconditioners). \end{DoxyCompactList}\end{DoxyCompactItemize}

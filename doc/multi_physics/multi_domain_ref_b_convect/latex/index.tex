@@ -11,13 +11,13 @@ The tutorial is quite long but comprises four relatively self-\/contained parts.
  ~\newline
 ~\newline
 
-\item \href{\#multi_domain_boussinesq}{\texttt{ {\bfseries{Part I\+II}}}} discusses the driver code to solve the Boussinesq problem, using the elements developed in Part II. ~\newline
+\item \href{\#multi_domain_boussinesq}{\texttt{ {\bfseries{Part III}}}} discusses the driver code to solve the Boussinesq problem, using the elements developed in Part II. ~\newline
 ~\newline
 
 \item \href{\#optimise}{\texttt{ {\bfseries{Part IV}}}} discusses how to optimise multi-\/domain interactions.
 \end{DoxyItemize}\DoxyHorRuler{0}
 \hypertarget{index_setting_up}{}\doxysection{Part I\+: The overall framework for handling multi-\/domain interactions}\label{index_setting_up}
-When two or more physical processes interact within the same spatial domain there are three different approaches to setting up the interaction within {\ttfamily oomph-\/lib}. One approach is to write a completely new element that discretises all the P\+D\+Es involved in the problem. The second approach, described in the tutorials discussing the \href{../../b_convection/html/index.html}{\texttt{ the non-\/refineable }} and \href{../../refine_b_convect/html/index.html}{\texttt{ refineable }} solution of the Boussinesq convection problem, is to create a combined multi-\/physics element using inheritance from two, or more, existing elements. In both these cases, the physical processes and their associated fields interact within a single element and we refer to this methodology as a {\bfseries{multi-\/field}} approach.
+When two or more physical processes interact within the same spatial domain there are three different approaches to setting up the interaction within {\ttfamily oomph-\/lib}. One approach is to write a completely new element that discretises all the PDEs involved in the problem. The second approach, described in the tutorials discussing the \href{../../b_convection/html/index.html}{\texttt{ the non-\/refineable }} and \href{../../refine_b_convect/html/index.html}{\texttt{ refineable }} solution of the Boussinesq convection problem, is to create a combined multi-\/physics element using inheritance from two, or more, existing elements. In both these cases, the physical processes and their associated fields interact within a single element and we refer to this methodology as a {\bfseries{multi-\/field}} approach.
 
 In this tutorial we describe a third approach to multi-\/physics problems, in which we solve the problem using two different types of elements on two different meshes (domains), each occupying the same physical space. Rather than interacting locally within elements, the different physical processes interact directly between the two domains, so that, in the Boussinesq convection problem considered here, each advection-\/diffusion element obtains the \char`\"{}wind\char`\"{} from the (separate) Navier-\/\+Stokes element that occupies the same position, while the Navier-\/\+Stokes elements obtain the temperature required for the computation of the buoyancy force from the corresponding advection-\/diffusion element.
 
@@ -35,7 +35,7 @@ One benefit of this {\bfseries{multi-\/domain}} approach, compared to a {\bfseri
 Interaction between different elements in different domains is a fundamental feature of many multi-\/physics problems and the generic functionality to deal with such interactions is provided by the {\ttfamily Element\+With\+External\+Element} class. Any element that requires information from an \char`\"{}external element\char`\"{} should therefore inherit from the base class {\ttfamily Element\+With\+External\+Element}. ~\newline
 
 
-\char`\"{}\+External elements\char`\"{} typically provide source-\/like terms for the {\ttfamily Element\+With\+External\+Element}. For instance, in the Boussinesq convection problem studied here, the advection-\/diffusion element is the \char`\"{}external element\char`\"{} for the Navier-\/\+Stokes element because it affects the body force in the Navier-\/\+Stokes equations; in a fluid-\/structure interaction problem, the Navier-\/\+Stokes elements that are adjacent to the fluid-\/loaded elastic wall act as the \char`\"{}external elements\char`\"{} for the {\ttfamily F\+S\+I\+Wall\+Element} because they determine the traction that the fluid exerts onto the wall; etc.
+\char`\"{}\+External elements\char`\"{} typically provide source-\/like terms for the {\ttfamily Element\+With\+External\+Element}. For instance, in the Boussinesq convection problem studied here, the advection-\/diffusion element is the \char`\"{}external element\char`\"{} for the Navier-\/\+Stokes element because it affects the body force in the Navier-\/\+Stokes equations; in a fluid-\/structure interaction problem, the Navier-\/\+Stokes elements that are adjacent to the fluid-\/loaded elastic wall act as the \char`\"{}external elements\char`\"{} for the {\ttfamily FSIWall\+Element} because they determine the traction that the fluid exerts onto the wall; etc.
 
 Within a finite-\/element context, the effect of the \char`\"{}external element\char`\"{} onto the {\ttfamily Element\+With\+External\+Element} typically has to be evaluated at the integration points of the {\ttfamily Element\+With\+External\+Element}. Therefore, the {\ttfamily Element\+With\+External\+Element} base class provides storage for a pointer to an \char`\"{}external element\char`\"{} (and the local coordinate within it) for each integration point. Access to this information is provided via the member functions
 
@@ -44,6 +44,7 @@ Within a finite-\/element context, the effect of the \char`\"{}external element\
 \DoxyCodeLine{FiniteElement*\& ElementWithExternalElement::external\_element\_pt(}
 \DoxyCodeLine{                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& interaction, }
 \DoxyCodeLine{                                \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt);}
+
 \end{DoxyCode}
 
 
@@ -54,10 +55,11 @@ and
 \DoxyCodeLine{Vector<double>\& ElementWithExternalElement::external\_element\_local\_coord(}
 \DoxyCodeLine{                      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& interaction, }
 \DoxyCodeLine{                      \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt);}
+
 \end{DoxyCode}
 
 
-For a given integration point, {\ttfamily ipt}, within the {\ttfamily Element\+With\+External\+Element}, these functions identify the corresponding point in the \char`\"{}external element\char`\"{} by returning a pointer to the \char`\"{}external element\char`\"{} and the local coordinate within it, respectively. The unsigned parameter {\ttfamily interaction} denotes the interaction index, required to allow for cases where an element interacts with more than one \char`\"{}external element\char`\"{}. This occurs, for instance, in double-\/diffusive convection problems (discussed in \href{../../../../demo_drivers/multi_physics/double_diffusive_convection/multimesh_dd_convection.cc}{\texttt{ a separate demo driver code }}), in which the body force in the Navier-\/\+Stokes equations is affected by two physical properties, {\itshape  e.\+g.} temperature and salinity, both of which are transported by separate advection-\/diffusion processes; or in F\+SI problems where a beam or shell element is affected by a fluid load on both its \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} (see, e.\+g., the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ F\+SI channel with leaflet problem}}).
+For a given integration point, {\ttfamily ipt}, within the {\ttfamily Element\+With\+External\+Element}, these functions identify the corresponding point in the \char`\"{}external element\char`\"{} by returning a pointer to the \char`\"{}external element\char`\"{} and the local coordinate within it, respectively. The unsigned parameter {\ttfamily interaction} denotes the interaction index, required to allow for cases where an element interacts with more than one \char`\"{}external element\char`\"{}. This occurs, for instance, in double-\/diffusive convection problems (discussed in \href{../../../../demo_drivers/multi_physics/double_diffusive_convection/multimesh_dd_convection.cc}{\texttt{ a separate demo driver code }}), in which the body force in the Navier-\/\+Stokes equations is affected by two physical properties, {\itshape  e.\+g.} temperature and salinity, both of which are transported by separate advection-\/diffusion processes; or in FSI problems where a beam or shell element is affected by a fluid load on both its \char`\"{}front\char`\"{} and \char`\"{}back\char`\"{} (see, e.\+g., the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ FSI channel with leaflet problem}}).
 
 {\ttfamily Data} that affects the fields in the \char`\"{}external elements\char`\"{} must be specified so that the off-\/diagonal blocks in the {\ttfamily Element\+With\+External\+Element\textquotesingle{}s} Jacobian matrix (representing the derivatives of the {\ttfamily Element\+With\+External\+Element\textquotesingle{}s} residual vector with respect to the {\ttfamily Data} in the \char`\"{}external elements\char`\"{}) can be calculated. We divide such data into two categories\+:
 \begin{DoxyItemize}
@@ -74,6 +76,7 @@ Both types of external data are determined (automatically) by two member functio
 \DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void}  ElementWithExternalElement::identify\_all\_field\_data\_for\_external\_interaction(}
 \DoxyCodeLine{    Vector<std::set<FiniteElement*> > \textcolor{keyword}{const} \&external\_elements\_pt,}
 \DoxyCodeLine{    std::set<std::pair<Data*,unsigned> > \&paired\_interaction\_data); }
+
 \end{DoxyCode}
 
 
@@ -82,6 +85,7 @@ determines the external field data that affect the (possibly multiple) interacti
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} FiniteElement::identify\_field\_data\_for\_interactions(...)}
+
 \end{DoxyCode}
 
 
@@ -92,6 +96,7 @@ for each \char`\"{}external element\char`\"{}. Similarly, the function
 \DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void}  ElementWithExternalElement::identify\_all\_geometric\_data\_for\_external\_interaction(}
 \DoxyCodeLine{    Vector<std::set<FiniteElement*> >  \textcolor{keyword}{const} \&external\_elements\_pt,}
 \DoxyCodeLine{    std::set<Data*> \&external\_geometric\_data\_pt);}
+
 \end{DoxyCode}
 
 
@@ -100,6 +105,7 @@ returns the set of {\bfseries{all}} {\ttfamily Data} that affect the shape or po
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} FiniteElement::identify\_geometric\_data(..)}
+
 \end{DoxyCode}
 
 
@@ -109,14 +115,14 @@ We note that the default implementation of these functions can (and, where possi
 
 \DoxyHorRuler{0}
 \hypertarget{index_off_diag_jac}{}\doxysubsection{Computation of the Jacobian matrix}\label{index_off_diag_jac}
-Most single-\/physics elements already provide functions to compute their own Jacobians analytically. These functions compute the derivatives of the element\textquotesingle{}s residual vector with respect to the element\textquotesingle{}s \char`\"{}own\char`\"{} degrees of freedom (e.\+g. the fluid velocity and pressure in a Navier-\/\+Stokes element). The interaction with the \char`\"{}external element\char`\"{} introduces additional dependencies because the element\textquotesingle{}s residual vector now also depends on the unknowns associated with the \char`\"{}external
-elements\char`\"{}. The derivatives of the element\textquotesingle{}s residual vector with respect to these unknowns must therefore be included into the computation of the element\textquotesingle{}s Jacobian matrix.
+Most single-\/physics elements already provide functions to compute their own Jacobians analytically. These functions compute the derivatives of the element\textquotesingle{}s residual vector with respect to the element\textquotesingle{}s \char`\"{}own\char`\"{} degrees of freedom (e.\+g. the fluid velocity and pressure in a Navier-\/\+Stokes element). The interaction with the \char`\"{}external element\char`\"{} introduces additional dependencies because the element\textquotesingle{}s residual vector now also depends on the unknowns associated with the \char`\"{}external elements\char`\"{}. The derivatives of the element\textquotesingle{}s residual vector with respect to these unknowns must therefore be included into the computation of the element\textquotesingle{}s Jacobian matrix.
 
 To maximise code re-\/use, we follow the approach discussed in the \href{../../b_convection/html/index.html\#comments}{\texttt{ comments }} section of the single-\/domain version of the problem and re-\/use the underlying element\textquotesingle{}s {\ttfamily fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)} function, while employing finite-\/differencing to evaluate the derivatives of the element\textquotesingle{}s residual vector with respect to the unknowns associated with the \char`\"{}external elements\char`\"{}. This is done most easily by using the function
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ElementWithExternalElement::fill\_in\_jacobian\_from\_external\_interaction\_by\_fd(..)}
+
 \end{DoxyCode}
 
 
@@ -125,6 +131,7 @@ which computes the derivatives of the element\textquotesingle{}s residual vector
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ElementWithExternalElement::fill\_in\_jacobian\_from\_external\_interaction\_field\_by\_fd(..)}
+
 \end{DoxyCode}
 
 
@@ -133,6 +140,7 @@ and
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ElementWithExternalElement::fill\_in\_jacobian\_from\_external\_interaction\_geometric\_by\_fd(..)}
+
 \end{DoxyCode}
 
 
@@ -141,6 +149,7 @@ If, in a particular problem, it is known that the interaction is not affected by
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ElementWithExternalElement::ignore\_external\_geometric\_data();}
+
 \end{DoxyCode}
 
 
@@ -158,16 +167,17 @@ The namespace {\ttfamily Multi\+\_\+domain\+\_\+functions} provides numerous hel
 \DoxyCodeLine{                                     Mesh* \textcolor{keyword}{const} \&second\_mesh\_pt,}
 \DoxyCodeLine{                                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& first\_interaction=0,}
 \DoxyCodeLine{                                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& second\_interaction=0);}
+
 \end{DoxyCode}
 
 
-Here {\ttfamily first\+\_\+mesh\+\_\+pt} and {\ttfamily second\+\_\+mesh\+\_\+pt} point to the two interacting meshes whose elements (of type {\ttfamily E\+L\+E\+M\+E\+N\+T\+\_\+0} and {\ttfamily E\+L\+E\+M\+E\+N\+T\+\_\+1}, respectively), must be derived from the {\ttfamily Element\+With\+External\+Element} class. The optional interaction parameters may be used to specify which interaction is set up in each mesh. If the parameter is not specified it defaults to zero, appropriate if there is only a single interaction.
+Here {\ttfamily first\+\_\+mesh\+\_\+pt} and {\ttfamily second\+\_\+mesh\+\_\+pt} point to the two interacting meshes whose elements (of type {\ttfamily ELEMENT\+\_\+0} and {\ttfamily ELEMENT\+\_\+1}, respectively), must be derived from the {\ttfamily Element\+With\+External\+Element} class. The optional interaction parameters may be used to specify which interaction is set up in each mesh. If the parameter is not specified it defaults to zero, appropriate if there is only a single interaction.
 
 The function must be called prior to the assignment of the equation numbers, and then again whenever either of the two meshes has changed, {\itshape  e.\+g.} after a mesh adaptation.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_implement_boussinesq}{}\doxysection{Part I\+I\+: Implementing multi-\/domain interaction elements for the Boussinesq convection problem}\label{index_implement_boussinesq}
+\hypertarget{index_implement_boussinesq}{}\doxysection{Part II\+: Implementing multi-\/domain interaction elements for the Boussinesq convection problem}\label{index_implement_boussinesq}
 We illustrate the general procedures discussed above by demonstrating how to upgrade existing single-\/physics Navier-\/\+Stokes and advection-\/diffusion elements to {\ttfamily Element\+With\+External\+Elements} that can be used for the multi-\/domain-\/based solution of the Boussinesq convection problem.
 
 \DoxyHorRuler{0}
@@ -177,10 +187,10 @@ We use multiple inheritance to upgrade an existing refineable Navier-\/\+Stokes 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//======================nst\_bous\_class=================================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Build a refineable Navier Stokes element that inherits from}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// ElementWithExternalElement so that it can "communicate" with}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// an advection diffusion element that provides the temperature}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// in the body force term.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Build a refineable Navier Stokes element that inherits from}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{  /// ElementWithExternalElement so that it can "{}communicate"{} with}}
+\DoxyCodeLine{\textcolor{comment}{  /// an advection diffusion element that provides the temperature}}
+\DoxyCodeLine{\textcolor{comment}{  /// in the body force term.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT, \textcolor{keyword}{class} AD\_ELEMENT>}
 \DoxyCodeLine{  \textcolor{keyword}{class }RefineableNavierStokesBoussinesqElement}
@@ -196,7 +206,7 @@ The constructor calls the constructors of the underlying elements, initialises t
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor: call the underlying constructors and}}
+\DoxyCodeLine{\textcolor{comment}{    /// Constructor: call the underlying constructors and}}
 \DoxyCodeLine{\textcolor{comment}{    /// initialise the pointer to the Rayleigh number to point}}
 \DoxyCodeLine{\textcolor{comment}{    /// to the default value of 0.0.}}
 \DoxyCodeLine{\textcolor{comment}{}    RefineableNavierStokesBoussinesqElement()}
@@ -210,9 +220,7 @@ The constructor calls the constructors of the underlying elements, initialises t
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-We provide access functions to the Rayleigh number
+ We provide access functions to the Rayleigh number
 
 
 \begin{DoxyCodeInclude}{0}
@@ -238,16 +246,14 @@ and, given that we are dealing with a refineable element, make sure that the poi
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-The most important step is to overload the function that computes the body force in the Navier-\/\+Stokes equations so that it depends on the temperature at the {\ttfamily ipt} -\/th integration point, as computed by the \char`\"{}external element\char`\"{}\+:
+ The most important step is to overload the function that computes the body force in the Navier-\/\+Stokes equations so that it depends on the temperature at the {\ttfamily ipt} -\/th integration point, as computed by the \char`\"{}external element\char`\"{}\+:
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Overload get\_body\_force\_nst() to return the temperature-\/dependent}}
-\DoxyCodeLine{\textcolor{comment}{    /// buoyancy force, using the temperature computed by the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// "external" advection diffusion element associated with}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// integration point \(\backslash\)c ipt.}}
+\DoxyCodeLine{\textcolor{comment}{    /// Overload get\_body\_force\_nst() to return the temperature-\/dependent}}
+\DoxyCodeLine{\textcolor{comment}{    /// buoyancy force, using the temperature computed by the}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// "{}external"{} advection diffusion element associated with}}
+\DoxyCodeLine{\textcolor{comment}{    /// integration point \(\backslash\)c ipt.}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_body\_force\_nst(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time,}
 \DoxyCodeLine{                            \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double>\& s,}
@@ -280,16 +286,14 @@ The most important step is to overload the function that computes the body force
 \DoxyCodeLine{    \} \textcolor{comment}{// end overloaded body force}}
 
 \end{DoxyCodeInclude}
-
-
-There is only one external interaction so the interaction index is set to zero and the value of the temperature at the integration point is obtained by casting the external element to an advection diffusion element and finding its interpolated field at the appropriate stored local coordinate. Once the temperature has been obtained, the code is identical to that discussed in the \href{../../b_convection/html/index.html}{\texttt{ tutorial for the corresponding multi-\/field implementation}}; in that implementation the temperature could be found from a member function because the interaction is internal to the element.
+ There is only one external interaction so the interaction index is set to zero and the value of the temperature at the integration point is obtained by casting the external element to an advection diffusion element and finding its interpolated field at the appropriate stored local coordinate. Once the temperature has been obtained, the code is identical to that discussed in the \href{../../b_convection/html/index.html}{\texttt{ tutorial for the corresponding multi-\/field implementation}}; in that implementation the temperature could be found from a member function because the interaction is internal to the element.
 
 Finally, we have to compute the element\textquotesingle{}s Jacobian matrix. The easiest (although potentially inefficient) way to do this is to recycle the analytical computation of the derivatives of the Navier-\/\+Stokes residuals with respect to the fluid degrees of freedom, as implemented in ~\newline
- {\ttfamily N\+S\+T\+\_\+\+E\+L\+E\+M\+E\+N\+T\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)},
+ {\ttfamily NST\+\_\+\+ELEMENT\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(...)},
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
+\DoxyCodeLine{\textcolor{comment}{    /// Compute the element's residual vector and the Jacobian matrix.}}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
 \DoxyCodeLine{                                          DenseMatrix<double>\& jacobian)}
 \DoxyCodeLine{    \{}
@@ -297,10 +301,7 @@ Finally, we have to compute the element\textquotesingle{}s Jacobian matrix. The 
 \DoxyCodeLine{      NST\_ELEMENT::fill\_in\_contribution\_to\_jacobian(residuals, jacobian);}
 
 \end{DoxyCodeInclude}
-
-
-and then fill in the derivatives with respect to the degrees of freedom associated with the \char`\"{}external
-elements\char`\"{} by finite differencing\+:
+ and then fill in the derivatives with respect to the degrees of freedom associated with the \char`\"{}external elements\char`\"{} by finite differencing\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -314,9 +315,7 @@ elements\char`\"{} by finite differencing\+:
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 
 \end{DoxyCodeInclude}
-
-
-If this is deemed to be too inefficient, we can provide a function that computes the required entries in the Jacobian analytically\+:
+ If this is deemed to be too inefficient, we can provide a function that computes the required entries in the Jacobian analytically\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -330,7 +329,7 @@ If this is deemed to be too inefficient, we can provide a function that computes
 \end{DoxyCodeInclude}
 
 
-(The code illustrates both approaches and employs the macro {\ttfamily U\+S\+E\+\_\+\+F\+D\+\_\+\+F\+O\+R\+\_\+\+D\+E\+R\+I\+V\+A\+T\+I\+V\+E\+S\+\_\+\+W\+R\+T\+\_\+\+E\+X\+T\+E\+R\+N\+A\+L\+\_\+\+D\+A\+T\+A\+\_\+\+I\+N\+\_\+\+M\+U\+L\+T\+I\+\_\+\+D\+O\+M\+A\+I\+N\+\_\+\+B\+O\+U\+S\+S\+I\+N\+E\+SQ} to choose which one to use.)
+(The code illustrates both approaches and employs the macro {\ttfamily USE\+\_\+\+FD\+\_\+\+FOR\+\_\+\+DERIVATIVES\+\_\+\+WRT\+\_\+\+EXTERNAL\+\_\+\+DATA\+\_\+\+IN\+\_\+\+MULTI\+\_\+\+DOMAIN\+\_\+\+BOUSSINESQ} to choose which one to use.)
 
 We refer to \href{\#optimise}{\texttt{ {\bfseries{Part IV}}}} for a discussion of how to implement the fully-\/analytic computation of the Jacobian matrix in the function {\ttfamily fill\+\_\+in\+\_\+off\+\_\+diagonal\+\_\+block\+\_\+analytic(...)}.
 
@@ -344,9 +343,9 @@ Upgrading the advection-\/diffusion element to an {\ttfamily Element\+With\+Exte
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//======================ad\_bous\_class==================================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Build an AdvectionDiffusionElement that inherits from}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// ElementWithExternalElement so that it can "communicate" with the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// a NavierStokesElement that provides its wind.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Build an AdvectionDiffusionElement that inherits from}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{  /// ElementWithExternalElement so that it can "{}communicate"{} with the}}
+\DoxyCodeLine{\textcolor{comment}{  /// a NavierStokesElement that provides its wind.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} AD\_ELEMENT, \textcolor{keyword}{class} NST\_ELEMENT>}
 \DoxyCodeLine{  \textcolor{keyword}{class }RefineableAdvectionDiffusionBoussinesqElement}
@@ -354,7 +353,7 @@ Upgrading the advection-\/diffusion element to an {\ttfamily Element\+With\+Exte
 \DoxyCodeLine{      \textcolor{keyword}{public} \textcolor{keyword}{virtual} ElementWithExternalElement}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{  \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{    /// \(\backslash\)short Constructor: call the underlying constructors}}
+\DoxyCodeLine{\textcolor{comment}{    /// Constructor: call the underlying constructors}}
 \DoxyCodeLine{\textcolor{comment}{}    RefineableAdvectionDiffusionBoussinesqElement()}
 \DoxyCodeLine{      : AD\_ELEMENT(), ElementWithExternalElement()}
 \DoxyCodeLine{    \{}
@@ -369,10 +368,10 @@ We overload the function that computes the \char`\"{}wind\char`\"{} for the adve
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Overload the wind function in the advection-\/diffusion equations.}}
-\DoxyCodeLine{\textcolor{comment}{    /// This provides the coupling from the Navier-\/-\/Stokes equations to the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// advection-\/diffusion equations because the wind is the fluid velocity,}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// obtained from the "external" element}}
+\DoxyCodeLine{\textcolor{comment}{    /// Overload the wind function in the advection-\/diffusion equations.}}
+\DoxyCodeLine{\textcolor{comment}{    /// This provides the coupling from the Navier-\/-\/Stokes equations to the}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// advection-\/diffusion equations because the wind is the fluid velocity,}}
+\DoxyCodeLine{\textcolor{comment}{    /// obtained from the "{}external"{} element}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keywordtype}{void} get\_wind\_adv\_diff(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& ipt,}
 \DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& s,}
 \DoxyCodeLine{                           \textcolor{keyword}{const} Vector<double>\& x,}
@@ -381,7 +380,7 @@ We overload the function that computes the \char`\"{}wind\char`\"{} for the adve
 \DoxyCodeLine{      \textcolor{comment}{// There is only one interaction}}
 \DoxyCodeLine{      \textcolor{keywordtype}{unsigned} interaction = 0;}
 \DoxyCodeLine{}
-\DoxyCodeLine{      \textcolor{comment}{// Dynamic cast "external" element to Navier Stokes element}}
+\DoxyCodeLine{      \textcolor{comment}{// Dynamic cast "{}external"{} element to Navier Stokes element}}
 \DoxyCodeLine{      NST\_ELEMENT* nst\_el\_pt =}
 \DoxyCodeLine{        \textcolor{keyword}{dynamic\_cast<}NST\_ELEMENT*\textcolor{keyword}{>}(external\_element\_pt(interaction, ipt));}
 \DoxyCodeLine{}
@@ -392,15 +391,13 @@ We overload the function that computes the \char`\"{}wind\char`\"{} for the adve
 \DoxyCodeLine{    \} \textcolor{comment}{// end of get\_wind\_adv\_diff}}
 
 \end{DoxyCodeInclude}
-
-
-Again, there is only one external interaction so the interaction index is set to zero and the external element must be cast to a Navier-\/\+Stokes element so that the interpolated velocity field can be found. The code is similar to that used in the \href{../../b_convection/html/index.html}{\texttt{ multi-\/field implementation}}, which uses internal, rather than external, interaction.
+ Again, there is only one external interaction so the interaction index is set to zero and the external element must be cast to a Navier-\/\+Stokes element so that the interpolated velocity field can be found. The code is similar to that used in the \href{../../b_convection/html/index.html}{\texttt{ multi-\/field implementation}}, which uses internal, rather than external, interaction.
 
 The element\textquotesingle{}s Jacobian matrix can be computed by the same methods discussed for the Navier-\/\+Stokes elements\+:
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{///\(\backslash\)short Compute the element's residual vector and the Jacobian matrix.}}
+\DoxyCodeLine{\textcolor{comment}{    /// Compute the element's residual vector and the Jacobian matrix.}}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} fill\_in\_contribution\_to\_jacobian(Vector<double>\& residuals,}
 \DoxyCodeLine{                                          DenseMatrix<double>\& jacobian)}
 \DoxyCodeLine{    \{}
@@ -426,7 +423,7 @@ The element\textquotesingle{}s Jacobian matrix can be computed by the same metho
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_multi_domain_boussinesq}{}\doxysection{Part I\+I\+I\+: The driver code for the multi-\/domain Boussinesq problem}\label{index_multi_domain_boussinesq}
+\hypertarget{index_multi_domain_boussinesq}{}\doxysection{Part III\+: The driver code for the multi-\/domain Boussinesq problem}\label{index_multi_domain_boussinesq}
 Using the upgraded elements discussed above, \href{../../../../demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.cc}{\texttt{ the driver code }} for the multi-\/domain-\/based solution of the Boussinesq convection problem is very similar to that of the \href{../../refine_b_convect/html/index.html}{\texttt{ single-\/domain example.}} Indeed, the {\ttfamily \mbox{\hyperlink{boussinesq__convection_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main()}}} functions are virtually identical. The only difference is that the {\ttfamily \mbox{\hyperlink{classRefineableConvectionProblem}{Refineable\+Convection\+Problem}}} takes two template arguments (specifying the two different element types) instead of one (specifying the type of the single, combined element).
 
 \DoxyHorRuler{0}
@@ -435,23 +432,17 @@ The problem class is similar to that of the \href{../../refine_b_convect/html/in
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Access function to the NST mesh. }}
-\DoxyCodeLine{\textcolor{comment}{ /// Casts the pointer to the base Mesh object to }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// the actual mesh type.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Access function to the NST mesh. }}
+\DoxyCodeLine{\textcolor{comment}{ /// Casts the pointer to the base Mesh object to }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
 \DoxyCodeLine{\textcolor{comment}{} RefineableRectangularQuadMesh<NST\_ELEMENT>* nst\_mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<NST\_ELEMENT>*\textcolor{keyword}{>}}
 \DoxyCodeLine{    (Nst\_mesh\_pt);}
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_of\_nst\_mesh}}
-
-\end{DoxyCodeInclude}
-
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Access function to the AD mesh. }}
-\DoxyCodeLine{\textcolor{comment}{ /// Casts the pointer to the base Mesh object to }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// the actual mesh type.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Access function to the AD mesh. }}
+\DoxyCodeLine{\textcolor{comment}{ /// Casts the pointer to the base Mesh object to }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
 \DoxyCodeLine{\textcolor{comment}{} RefineableRectangularQuadMesh<AD\_ELEMENT>* adv\_diff\_mesh\_pt() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}RefineableRectangularQuadMesh<AD\_ELEMENT>*\textcolor{keyword}{>}}
@@ -459,15 +450,13 @@ The problem class is similar to that of the \href{../../refine_b_convect/html/in
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_of\_ad\_mesh}}
 
 \end{DoxyCodeInclude}
-
-
-and after any mesh adaptation, the interaction between the two meshes must be set up again.
+ and after any mesh adaptation, the interaction between the two meshes must be set up again.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Actions after adaptation, reset all sources, then}}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions after adaptation, reset all sources, then}}
 \DoxyCodeLine{\textcolor{comment}{ /// re-\/pin a single pressure degree of freedom}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Unpin all the pressures in NST mesh to avoid pinning two pressures}}
 \DoxyCodeLine{   RefineableNavierStokesEquations<2>::}
@@ -485,9 +474,7 @@ and after any mesh adaptation, the interaction between the two meshes must be se
 \DoxyCodeLine{  \} \textcolor{comment}{//end\_of\_actions\_after\_adapt}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysubsection{The Problem constructor}\label{index_constructor}
 The problem constructor is slightly different from the equivalent single-\/domain version, mainly because there are two meshes instead of one. Firstly, we build two coarse meshes with the same number of elements ( $ 9 \times 8 $, as in the original single-\/domain problem) and dimensions for each mesh. Error estimators and error targets are set separately for each mesh.
 
@@ -495,13 +482,13 @@ The problem constructor is slightly different from the equivalent single-\/domai
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for adaptive thermal convection problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT,\textcolor{keyword}{class} AD\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc}{RefineableConvectionProblem<NST\_ELEMENT,AD\_ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineableConvectionProblem_a97e661986093402bf55fb6c32b782ddc}{RefineableConvectionProblem}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ Doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// \# of elements in x-\/direction}}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_x=9;}
@@ -532,9 +519,7 @@ The problem constructor is slightly different from the equivalent single-\/domai
 \DoxyCodeLine{ Adv\_diff\_mesh\_pt-\/>min\_permitted\_error()=0.5e-\/4; }
 
 \end{DoxyCodeInclude}
-
-
-The boundary constraints are applied to each mesh in turn; firstly on the Navier--Stokes mesh, where we must also pin a single pressure\+:
+ The boundary constraints are applied to each mesh in turn; firstly on the Navier--Stokes mesh, where we must also pin a single pressure\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -579,9 +564,7 @@ The boundary constraints are applied to each mesh in turn; firstly on the Navier
 \DoxyCodeLine{ fix\_pressure(0,0,0.0);}
 
 \end{DoxyCodeInclude}
-
-
-We then apply boundary constraints to the advection-\/diffusion mesh\+:
+ We then apply boundary constraints to the advection-\/diffusion mesh\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -616,9 +599,7 @@ We then apply boundary constraints to the advection-\/diffusion mesh\+:
 \DoxyCodeLine{  \} \textcolor{comment}{// end of loop over AD mesh boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-and complete the build of all elements in each mesh by setting the pointers to the required physical parameters in each domain. Since neither of the interaction terms involves spatial derivatives of the field variables in the \char`\"{}external elements\char`\"{}, we can ignore the derivatives with respect to the external geometric data when computing the element\textquotesingle{}s Jacobian matrix. This is done by the calls to {\ttfamily Element\+With\+External\+Element\+::ignore\+\_\+external\+\_\+geometric\+\_\+data()};
+ and complete the build of all elements in each mesh by setting the pointers to the required physical parameters in each domain. Since neither of the interaction terms involves spatial derivatives of the field variables in the \char`\"{}external elements\char`\"{}, we can ignore the derivatives with respect to the external geometric data when computing the element\textquotesingle{}s Jacobian matrix. This is done by the calls to {\ttfamily Element\+With\+External\+Element\+::ignore\+\_\+external\+\_\+geometric\+\_\+data()};
 
 
 \begin{DoxyCodeInclude}{0}
@@ -646,7 +627,7 @@ and complete the build of all elements in each mesh by setting the pointers to t
 \DoxyCodeLine{   \textcolor{comment}{//Set Gravity vector}}
 \DoxyCodeLine{   el\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a42f4a0aee37dbb36186267931c614053}{Global\_Physical\_Variables::Direction\_of\_gravity}};}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{// We can ignore the external geometric data in the "external"}}
+\DoxyCodeLine{   \textcolor{comment}{// We can ignore the external geometric data in the "{}external"{}}}
 \DoxyCodeLine{   \textcolor{comment}{// advection diffusion element when computing the Jacobian matrix}}
 \DoxyCodeLine{   \textcolor{comment}{// because the interaction does not involve spatial gradients of }}
 \DoxyCodeLine{   \textcolor{comment}{// the temperature (and also because the mesh isn't moving!)}}
@@ -666,7 +647,7 @@ and complete the build of all elements in each mesh by setting the pointers to t
 \DoxyCodeLine{   \textcolor{comment}{// Set the Peclet number multiplied by the Strouhal number}}
 \DoxyCodeLine{   el\_pt-\/>pe\_st\_pt() =\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad4cdf142ba50635d62ac4c614f445af7}{Global\_Physical\_Variables::Peclet}};}
 \DoxyCodeLine{}
-\DoxyCodeLine{   \textcolor{comment}{// We can ignore the external geometric data in the "external"}}
+\DoxyCodeLine{   \textcolor{comment}{// We can ignore the external geometric data in the "{}external"{}}}
 \DoxyCodeLine{   \textcolor{comment}{// Navier Stokes element when computing the Jacobian matrix}}
 \DoxyCodeLine{   \textcolor{comment}{// because the interaction does not involve spatial gradients of }}
 \DoxyCodeLine{   \textcolor{comment}{// the velocities (and also because the mesh isn't moving!)}}
@@ -675,9 +656,7 @@ and complete the build of all elements in each mesh by setting the pointers to t
 \DoxyCodeLine{  \} \textcolor{comment}{// end of setup for all AD elements}}
 
 \end{DoxyCodeInclude}
-
-
-Finally we combine the submeshes, set up the interaction between the two meshes, and assign the equation numbers.
+ Finally we combine the submeshes, set up the interaction between the two meshes, and assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -692,22 +671,20 @@ Finally we combine the submeshes, set up the interaction between the two meshes,
 \DoxyCodeLine{  (\textcolor{keyword}{this},nst\_mesh\_pt(),adv\_diff\_mesh\_pt());}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_actions_before_newton_solve}{}\doxysubsection{The function actions\+\_\+before\+\_\+newton\+\_\+solve(...)}\label{index_actions_before_newton_solve}
 In this function we update the problem specifications before a solution by re-\/applying the specific values of the Dirichlet boundary conditions for each mesh, and ensuring that the mass-\/conserving imperfection is applied to the velocity boundary conditions on the Navier--Stokes mesh if required. The boundary conditions are exactly the same as for the \href{../../b_convection/html/index.html}{\texttt{ single-\/domain version of the problem}}, but they must be applied differently because there are now two meshes instead of one.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===================start\_actions\_before\_newton\_solve====================}}
-\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to include an imperfection (or not) depending on the control flag.}}
+\DoxyCodeLine{\textcolor{comment}{/// Update the problem specs before solve: (Re-\/)set boundary conditions}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// to include an imperfection (or not) depending on the control flag.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT,\textcolor{keyword}{class} AD\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableConvectionProblem_a694f0be87fe09a30d94e92acfce85eee}{RefineableConvectionProblem<NST\_ELEMENT,AD\_ELEMENT>::actions\_before\_newton\_solve}}()}
@@ -773,9 +750,7 @@ In this function we update the problem specifications before a solution by re-\/
 \DoxyCodeLine{\}  \textcolor{comment}{// end of actions before solve}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_doc_solution}{}\doxysubsection{The function doc\+\_\+solution(...)}\label{index_doc_solution}
 This function outputs all fields to the specified solution file in the directory pointed to by the {\ttfamily Doc\+Info} object.
 
@@ -783,7 +758,7 @@ This function outputs all fields to the specified solution file in the directory
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====================start\_of\_doc\_solution===============================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} NST\_ELEMENT,\textcolor{keyword}{class} AD\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineableConvectionProblem_a47efcb3467931e13e12687303135e38b}{RefineableConvectionProblem<NST\_ELEMENT,AD\_ELEMENT>::doc\_solution}}()}
 \DoxyCodeLine{\{ }
@@ -795,14 +770,14 @@ This function outputs all fields to the specified solution file in the directory
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output Navier-\/Stokes solution}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/fluid\_soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/fluid\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ nst\_mesh\_pt()-\/>output(some\_file,npts);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output advection diffusion solution}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/temperature\_soln\%i.dat"},Doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/temperature\_soln\%i.dat"{}},Doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         Doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ adv\_diff\_mesh\_pt()-\/>output(some\_file,npts);}
@@ -817,7 +792,7 @@ This function outputs all fields to the specified solution file in the directory
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_optimise}{}\doxysection{Part I\+V\+: Optimising multi-\/domain interactions}\label{index_optimise}
+\hypertarget{index_optimise}{}\doxysection{Part IV\+: Optimising multi-\/domain interactions}\label{index_optimise}
 We showed in \href{\#implement_boussinesq}{\texttt{ {\bfseries{Part II}}}} that only a small number of functions {\bfseries{ must }} be implemented to upgrade an existing single-\/physics element to an {\ttfamily Element\+With\+External\+Element} that can interact with another element in a different domain. This is because much of the required functionality is already implemented in the {\ttfamily Element\+With\+External\+Element} base class, which makes the implementation of multi-\/physics interactions very easy. The use of general-\/purpose functions may incur unnecessary computational cost, however. Hence, a better efficiency can be achieved by overloading certain functions when implementing a specific {\ttfamily Element\+With\+External\+Element}.
 
 \DoxyHorRuler{0}
@@ -827,10 +802,10 @@ The function {\ttfamily Element\+With\+External\+Element\+::identify\+\_\+all\+\
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{comment}{//================optimised\_identification\_of\_field\_data==================}}
-\DoxyCodeLine{\textcolor{comment}{  /// Overload the function that must return all field data involved}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// in the interaction with the external (Navier Stokes) element.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// Only the velocity dofs in the Navier Stokes element affect the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// interaction with the current element.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Overload the function that must return all field data involved}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{  /// in the interaction with the external (Navier Stokes) element.}}
+\DoxyCodeLine{\textcolor{comment}{  /// Only the velocity dofs in the Navier Stokes element affect the}}
+\DoxyCodeLine{\textcolor{comment}{  /// interaction with the current element.}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{  \textcolor{keyword}{template}<\textcolor{keyword}{class} AD\_ELEMENT, \textcolor{keyword}{class} NST\_ELEMENT>}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} RefineableAdvectionDiffusionBoussinesqElement<AD\_ELEMENT, NST\_ELEMENT>::}
@@ -874,9 +849,7 @@ The function {\ttfamily Element\+With\+External\+Element\+::identify\+\_\+all\+\
 \DoxyCodeLine{  \} \textcolor{comment}{// done}}
 
 \end{DoxyCodeInclude}
-
-
-Similar approaches can be used to ignore selected (weak) interactions when computing the element\textquotesingle{}s Jacobian matrix. For instance, the {\ttfamily F\+S\+I\+Wall\+Element} is an {\ttfamily Element\+With\+External\+Element} for which the adjacent fluid elements that apply the fluid traction to the F\+SI boundary act as \char`\"{}external elements\char`\"{}. In high-\/\+Reynolds-\/number flows, the fluid traction is dominated by the pressure while shear stresses tend to be small. The {\ttfamily F\+S\+I\+Wall\+Element} therefore uses the same mechanism as illustrated above to (optionally) neglect the derivatives of its residuals with respect to the fluid velocity degrees of freedom. We stress that this does not exclude the shear stress from the computation -- it simply replaces the exact Jacobian by an approximate version in which the effect of the velocity degrees of freedom on the residuals of the {\ttfamily F\+S\+I\+Wall\+Element} are neglected. This may lead to a slight degradation in the convergence rate of the Newton iteration but this may be more than compensated for by the reduction in the C\+PU times required to compute the Jacobian matrix.
+ Similar approaches can be used to ignore selected (weak) interactions when computing the element\textquotesingle{}s Jacobian matrix. For instance, the {\ttfamily FSIWall\+Element} is an {\ttfamily Element\+With\+External\+Element} for which the adjacent fluid elements that apply the fluid traction to the FSI boundary act as \char`\"{}external elements\char`\"{}. In high-\/\+Reynolds-\/number flows, the fluid traction is dominated by the pressure while shear stresses tend to be small. The {\ttfamily FSIWall\+Element} therefore uses the same mechanism as illustrated above to (optionally) neglect the derivatives of its residuals with respect to the fluid velocity degrees of freedom. We stress that this does not exclude the shear stress from the computation -- it simply replaces the exact Jacobian by an approximate version in which the effect of the velocity degrees of freedom on the residuals of the {\ttfamily FSIWall\+Element} are neglected. This may lead to a slight degradation in the convergence rate of the Newton iteration but this may be more than compensated for by the reduction in the CPU times required to compute the Jacobian matrix.
 
 \DoxyHorRuler{0}
 \hypertarget{index_restricting_geom_data}{}\doxysubsection{Ignoring geometric data}\label{index_restricting_geom_data}
@@ -885,6 +858,7 @@ If the interaction with the \char`\"{}external element\char`\"{} does not involv
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ElementWithExternalElement::ignore\_external\_geometric\_data();}
+
 \end{DoxyCode}
 
 
@@ -952,5 +926,5 @@ demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convect
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

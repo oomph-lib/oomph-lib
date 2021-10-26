@@ -31,8 +31,7 @@ Note that we have chosen the Eulerian coordinate axes so that they coincide with
 
 \DoxyHorRuler{0}
 \hypertarget{index_theory}{}\doxysection{The expected deformation and the displacement-\/control formulation of the problem}\label{index_theory}
-Standard linear stability analysis \mbox{[}see, e.\+g., G.\+J. Simitses \char`\"{}\+An introduction to the elastic stability of 
-structures\char`\"{}, Prentice-\/\+Hall, (1976)\mbox{]} predicts the ring to become unstable to non-\/axisymmetric perturbations with an azimuthal wavenumber of $ N=2 $ at a pressure of \[ p_{ext}^{[buckl]} = 3 \times \frac{1}{12} h^3. \] For $ p_{ext} > p_{ext}^{[buckl]} $ we therefore expect the ring to deform into a shape similar to the one indicated by the dashed line in the above sketch. As the ring buckles non-\/axisymmetrically, the material point on the vertical symmetry line (i.\+e. the material point with Lagrangian coordinate $ \xi=\pi/2$ ) moves radially inwards. This makes it an excellent control point for this problem as we can \char`\"{}sweep\char`\"{} through the entire range of the ring\textquotesingle{}s post-\/buckling deformation by varying its $ x_2 $ -- coordinate from $ R_{ctrl} =1 $ (corresponding to the undeformed, axisymmetric configuration) to $ R_{ctrl} = 0 $ (corresponding to a configuration in which the ring is collapsed to the point of opposite wall contact). We note that Flaherty, Keller \& Rubinow\textquotesingle{}s analysis \mbox{[}S\+I\+AM J. Appl. Math {\bfseries{23}}, 446--455 (1972)\mbox{]}, based on an inextensible beam model, predicts opposite wall contact to occur at an external pressure of \[ p_{ext}^{[owc]} = 5.22 \times \frac{1}{12} h^3. \]
+Standard linear stability analysis \mbox{[}see, e.\+g., G.\+J. Simitses \char`\"{}\+An introduction to the elastic stability of  structures\char`\"{}, Prentice-\/\+Hall, (1976)\mbox{]} predicts the ring to become unstable to non-\/axisymmetric perturbations with an azimuthal wavenumber of $ N=2 $ at a pressure of \[ p_{ext}^{[buckl]} = 3 \times \frac{1}{12} h^3. \] For $ p_{ext} > p_{ext}^{[buckl]} $ we therefore expect the ring to deform into a shape similar to the one indicated by the dashed line in the above sketch. As the ring buckles non-\/axisymmetrically, the material point on the vertical symmetry line (i.\+e. the material point with Lagrangian coordinate $ \xi=\pi/2$ ) moves radially inwards. This makes it an excellent control point for this problem as we can \char`\"{}sweep\char`\"{} through the entire range of the ring\textquotesingle{}s post-\/buckling deformation by varying its $ x_2 $ -- coordinate from $ R_{ctrl} =1 $ (corresponding to the undeformed, axisymmetric configuration) to $ R_{ctrl} = 0 $ (corresponding to a configuration in which the ring is collapsed to the point of opposite wall contact). We note that Flaherty, Keller \& Rubinow\textquotesingle{}s analysis \mbox{[}SIAM J. Appl. Math {\bfseries{23}}, 446--455 (1972)\mbox{]}, based on an inextensible beam model, predicts opposite wall contact to occur at an external pressure of \[ p_{ext}^{[owc]} = 5.22 \times \frac{1}{12} h^3. \]
 
 To apply displacement control we change the formulation of the problem from \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
@@ -91,8 +90,7 @@ The diagram clearly illustrates the enormous change in stiffness when the ring c
 \hypertarget{index_displ_control}{}\doxysection{Applying displacement control in oomph-\/lib}\label{index_displ_control}
 To facilitate the solution of solid mechanics problems with displacement-\/control techniques, {\ttfamily oomph-\/lib} provides a {\ttfamily Displacement\+Control\+Element}, which may be used to add the displacement control constraint to the global system of equations that is solved by Newton\textquotesingle{}s method. Applying displacement control in a solid mechanics problem involves the following straightforward steps\+:
 \begin{DoxyEnumerate}
-\item {\bfseries{Formulate the solid mechanics problems in its \char`\"{}standard
-   form\char`\"{}\+:}} ~\newline
+\item {\bfseries{Formulate the solid mechanics problems in its \char`\"{}standard    form\char`\"{}\+:}} ~\newline
 ~\newline
  In this formulation the (scalar) load level is prescribed and the displacements are regarded as unknowns. ~\newline
 ~\newline
@@ -143,7 +141,7 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_namespace=========================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -156,28 +154,28 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{
 \DoxyCodeLine{\textcolor{comment}{ /// Perturbation pressure}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}=0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Pointer to pressure load (stored in Data so it can }}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to pressure load (stored in Data so it can }}
 \DoxyCodeLine{\textcolor{comment}{ /// become an unknown in the problem when displacement control is used}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{steady__ring_8txt_a6fd111ba8588ca6fa58a49b3f42739d9}{Data}}* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Pext\_data\_pt}};}
+\DoxyCodeLine{\textcolor{comment}{} Data* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Pext\_data\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Load function: Constant external pressure with cos variation to}}
+\DoxyCodeLine{\textcolor{comment}{ /// Load function: Constant external pressure with cos variation to}}
 \DoxyCodeLine{\textcolor{comment}{ /// induce buckling in n=2 mode}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{press\_load}}(\textcolor{keyword}{const} Vector<double>\& \mbox{\hyperlink{steady__ring_8txt_ad491714529f007b47396d009f24f18ac}{xi}},}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{press\_load}}(\textcolor{keyword}{const} Vector<double>\& xi,}
 \DoxyCodeLine{                 \textcolor{keyword}{const} Vector<double> \&x,}
 \DoxyCodeLine{                 \textcolor{keyword}{const} Vector<double>\& N,}
 \DoxyCodeLine{                 Vector<double>\& load)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<2;i++) }
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    load[i] = (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Pext\_data\_pt}}-\/>value(0)-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}*\mbox{\hyperlink{steady__ring_8txt_a33298df64564d35290d4b62eb7d5db4b}{cos}}(2.0*\mbox{\hyperlink{steady__ring_8txt_ad491714529f007b47396d009f24f18ac}{xi}}[0]))*N[i];}
+\DoxyCodeLine{    load[i] = (\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Pext\_data\_pt}}-\/>value(0)-\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab55734aaa66260cd9d4bf68a4ecafdd5}{Pcos}}*cos(2.0*xi[0]))*N[i];}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Return a reference to the external pressure }}
+\DoxyCodeLine{\textcolor{comment}{ /// Return a reference to the external pressure }}
 \DoxyCodeLine{\textcolor{comment}{ /// load on the elastic ring.}}
 \DoxyCodeLine{\textcolor{comment}{ /// A reference is obtained by de-\/referencing the pointer to the}}
 \DoxyCodeLine{\textcolor{comment}{ /// data value that contains the external load}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8c25ac6a672ea50d1b709292d1f4837b}{external\_pressure}}() }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_accc1e6e92957e427340871d606b8835d}{external\_pressure}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} *\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Pext\_data\_pt}}-\/>value\_pt(0);\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -194,7 +192,7 @@ The main function builds two different versions of the problem, demonstrating th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_main=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for ring test problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{steady__ring_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Number of elements}}
@@ -213,13 +211,13 @@ The main function builds two different versions of the problem, demonstrating th
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem<HermiteBeamElement>}} }
-\DoxyCodeLine{   \mbox{\hyperlink{steady__ring_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(n\_element,displ\_control,load\_data\_already\_exists);}
+\DoxyCodeLine{   problem(n\_element,displ\_control,load\_data\_already\_exists);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_global"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_global"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Do static run}}
-\DoxyCodeLine{  \mbox{\hyperlink{steady__ring_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.parameter\_study(doc\_info);}
+\DoxyCodeLine{  problem.parameter\_study(doc\_info);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Demonstrate how to use displacement control without existing load Data}}
@@ -229,24 +227,22 @@ The main function builds two different versions of the problem, demonstrating th
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up the problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem<HermiteBeamElement>}} }
-\DoxyCodeLine{   \mbox{\hyperlink{steady__ring_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(n\_element,displ\_control,load\_data\_already\_exists);}
+\DoxyCodeLine{   problem(n\_element,displ\_control,load\_data\_already\_exists);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_no\_global"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_no\_global"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Reset counter}}
 \DoxyCodeLine{  doc\_info.number()=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Do static run}}
-\DoxyCodeLine{  \mbox{\hyperlink{steady__ring_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.parameter\_study(doc\_info);}
+\DoxyCodeLine{  problem.parameter\_study(doc\_info);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_problem_class}{}\doxysection{The problem class}\label{index_problem_class}
 The problem class is very similar to the one used ~\newline
  in \href{../../tensioned_string/html/index.html}{\texttt{ the previous example}} without displacement control. Here we store the number of solid mechanics elements in the Problem\textquotesingle{}s private member data since we will add the {\ttfamily Displacement\+Control\+Element} to the mesh.
@@ -255,7 +251,7 @@ The problem class is very similar to the one used ~\newline
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_problem\_class========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Ring problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticRingProblem}{ElasticRingProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -269,7 +265,7 @@ The problem class is very similar to the one used ~\newline
 \DoxyCodeLine{                    \textcolor{keywordtype}{bool}\& load\_data\_already\_exists);}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Access function for the specific mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_a7e956ca937741ce71cf400eb492825b3}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<ELEMENT>* \mbox{\hyperlink{classElasticRingProblem_a34742403e3b79007c042c1441c4fd857}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<ELEMENT>*\textcolor{keyword}{>}(Problem::mesh\_pt());}
 \DoxyCodeLine{  \}}
@@ -300,9 +296,7 @@ The problem class is very similar to the one used ~\newline
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The constructor}\label{index_constructor}
 The first half of the constructor is similar to the one used in \href{../../tensioned_string/html/index.html}{\texttt{ the previous example}} without displacement control. We create a {\ttfamily Geom\+Object} (an {\ttfamily Ellipse} with unit half axes) to define the ring\textquotesingle{}s undeformed geometry, and build the 1D Lagrangian mesh. Note that, because of the symmetry of the buckling pattern, we only discretise one quarter of the domain.
 
@@ -310,7 +304,7 @@ The first half of the constructor is similar to the one used in \href{../../tens
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_constructor============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for elastic ring problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classElasticRingProblem_a46779ff320754561750e22216f7605e3}{ElasticRingProblem<ELEMENT>::ElasticRingProblem}}}
 \DoxyCodeLine{(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_element, \textcolor{keywordtype}{bool}\& displ\_control, \textcolor{keywordtype}{bool}\& load\_data\_already\_exists) : }
@@ -328,9 +322,7 @@ The first half of the constructor is similar to the one used in \href{../../tens
 \DoxyCodeLine{  \textcolor{keyword}{new} OneDLagrangianMesh<ELEMENT>(n\_element,length,Undef\_geom\_pt); }
 
 \end{DoxyCodeInclude}
-
-
-Next we apply the symmetry boundary conditions\+: Zero vertical \mbox{[}horizontal\mbox{]} displacements and infinite \mbox{[}zero\mbox{]} slope at $ \xi =0 $ \mbox{[}at $ \xi =\pi/2 $ \mbox{]}. (See \href{../../tensioned_string/html/index.html}{\texttt{ the previous example}} for a more detailed discussion of the boundary conditions for beam elements.)
+ Next we apply the symmetry boundary conditions\+: Zero vertical \mbox{[}horizontal\mbox{]} displacements and infinite \mbox{[}zero\mbox{]} slope at $ \xi =0 $ \mbox{[}at $ \xi =\pi/2 $ \mbox{]}. (See \href{../../tensioned_string/html/index.html}{\texttt{ the previous example}} for a more detailed discussion of the boundary conditions for beam elements.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -351,9 +343,7 @@ Next we apply the symmetry boundary conditions\+: Zero vertical \mbox{[}horizont
 \DoxyCodeLine{ mesh\_pt()-\/>boundary\_node\_pt(ibound,0)-\/>pin\_position(1,1);}
 
 \end{DoxyCodeInclude}
-
-
-We now distinguish between the cases with and without displacement control\+:
+ We now distinguish between the cases with and without displacement control\+:
 
 
 \begin{DoxyItemize}
@@ -369,7 +359,7 @@ We now distinguish between the cases with and without displacement control\+:
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Create Data object whose one-\/and-\/only value contains the}}
 \DoxyCodeLine{   \textcolor{comment}{// (in principle) adjustable load}}
-\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}}=\textcolor{keyword}{new} \mbox{\hyperlink{steady__ring_8txt_a6fd111ba8588ca6fa58a49b3f42739d9}{Data}}(1);}
+\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}}=\textcolor{keyword}{new} Data(1);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Pin the external pressure because it isn't actually adjustable.}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}}-\/>pin(0);}
@@ -428,11 +418,6 @@ We now distinguish between the cases with and without displacement control\+:
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{     \textcolor{comment}{// The constructor of the  DisplacementControlElement has created}}
-
-\end{DoxyCodeInclude}
- ~\newline
- 
-\begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{     \textcolor{comment}{// a new Data object whose one-\/and-\/only value contains the}}
 \DoxyCodeLine{     \textcolor{comment}{// adjustable load: Use this Data object in the load function:}}
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}}=displ\_control\_el\_pt-\/>}
@@ -454,11 +439,11 @@ We now distinguish between the cases with and without displacement control\+:
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Create Data object whose one-\/and-\/only value contains the}}
 \DoxyCodeLine{     \textcolor{comment}{// adjustable load}}
-\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}}=\textcolor{keyword}{new} \mbox{\hyperlink{steady__ring_8txt_a6fd111ba8588ca6fa58a49b3f42739d9}{Data}}(1);}
+\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}}=\textcolor{keyword}{new} Data(1);}
 \DoxyCodeLine{     }
-\DoxyCodeLine{     \textcolor{comment}{// Currently, nobody's "in charge of" this Data so it won't}}
+\DoxyCodeLine{     \textcolor{comment}{// Currently, nobody's "{}in charge of"{} this Data so it won't}}
 \DoxyCodeLine{     \textcolor{comment}{// get included in any equation numbering schemes etc.}}
-\DoxyCodeLine{     \textcolor{comment}{// -\/-\/> declare it to be "global Data" for the Problem}}
+\DoxyCodeLine{     \textcolor{comment}{// -\/-\/> declare it to be "{}global Data"{} for the Problem}}
 \DoxyCodeLine{     \textcolor{comment}{// so the Problem is in charge and will perform such tasks.}}
 \DoxyCodeLine{     add\_global\_data(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}});}
 \DoxyCodeLine{     }
@@ -517,20 +502,18 @@ We now distinguish between the cases with and without displacement control\+:
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Do equation numbering}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\# of dofs "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\# of dofs "{}} << assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 The post-\/processing function documents the ring shapes and adds the load/displacement characteristics of the two material points on the ring\textquotesingle{}s symmetry lines to the trace file. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_doc=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Document solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_ab644c5fd57310f2d4c858f64d8c5a223}{ElasticRingProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info,}
 \DoxyCodeLine{                                               ofstream\& trace\_file)}
@@ -542,7 +525,7 @@ The post-\/processing function documents the ring shapes and adds the load/displ
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/ring\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/ring\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
@@ -558,10 +541,10 @@ The post-\/processing function documents the ring shapes and adds the load/displ
 \DoxyCodeLine{ trace\_file }
 \DoxyCodeLine{  << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}}-\/>value(0)/}
 \DoxyCodeLine{  (pow(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{Global\_Physical\_Variables::H}},3)/12.0)  }
-\DoxyCodeLine{  << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{  << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{  << \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(mesh\_pt()-\/>}
 \DoxyCodeLine{                            element\_pt(0))-\/>interpolated\_x(s\_left,0)}
-\DoxyCodeLine{  << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{  << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{  << \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}}
 \DoxyCodeLine{  (mesh\_pt()-\/>element\_pt(Nbeam\_element-\/1))-\/>interpolated\_x(s\_right,1)}
 \DoxyCodeLine{  << std::endl;}
@@ -580,25 +563,23 @@ We start by opening a trace file to record the load/displacement characteristics
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_run=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Solver loop to perform parameter study}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticRingProblem_afed9c0948c535c315c3e22e92e3266d3}{ElasticRingProblem<ELEMENT>::parameter\_study}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Open a trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ ofstream trace\_file(filename);}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"p\_e\_x\_t\(\backslash\)",\(\backslash\)"R\_1\(\backslash\)",\(\backslash\)"R\_2\(\backslash\)""} << std::endl;}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"ZONE"} << std::endl;}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}p\_e\_x\_t\(\backslash\)"{},\(\backslash\)"{}R\_1\(\backslash\)"{},\(\backslash\)"{}R\_2\(\backslash\)"{}"{}} << std::endl;}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output initial data}}
 \DoxyCodeLine{ doc\_solution(doc\_info,trace\_file);}
 
 \end{DoxyCodeInclude}
-
-
-Next we set up the increment of the control parameter, choosing the displacement or load increments such that the ring\textquotesingle{}s deformation is increased from the axisymmetric initial state to total collapse with opposite wall contact in 11 steps.
+ Next we set up the increment of the control parameter, choosing the displacement or load increments such that the ring\textquotesingle{}s deformation is increased from the axisymmetric initial state to total collapse with opposite wall contact in 11 steps.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -616,9 +597,7 @@ Next we set up the increment of the control parameter, choosing the displacement
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a9d598320fb3d7ecf94101088e8f376d2}{Global\_Physical\_Variables::Pext\_data\_pt}}-\/>set\_value(0,p\_buckl-\/pext\_increment);}
 
 \end{DoxyCodeInclude}
-
-
-Without displacement-\/control the Newton method can require a large number of iterations, therefore we increment the maximum number of iterations.
+ Without displacement-\/control the Newton method can require a large number of iterations, therefore we increment the maximum number of iterations.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -631,9 +610,7 @@ Without displacement-\/control the Newton method can require a large number of i
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We start the parameter study by increasing the ring\textquotesingle{}s compression (either by increasing the external pressure or by reducing the $ x_2$ -\/ coordinate of the control point) with $ p_{cos} > 0 $ to induce buckling in the desired direction.
+ We start the parameter study by increasing the ring\textquotesingle{}s compression (either by increasing the external pressure or by reducing the $ x_2$ -\/ coordinate of the control point) with $ p_{cos} > 0 $ to induce buckling in the desired direction.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -653,7 +630,7 @@ We start the parameter study by increasing the ring\textquotesingle{}s compressi
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (!Displ\_control) }
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Increment pressure}}
-\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8c25ac6a672ea50d1b709292d1f4837b}{Global\_Physical\_Variables::external\_pressure}}() += pext\_increment;}
+\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_accc1e6e92957e427340871d606b8835d}{Global\_Physical\_Variables::external\_pressure}}() += pext\_increment;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
@@ -683,10 +660,10 @@ Then we reset the perturbation pressure to zero and reduce the ring\textquotesin
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set initial values for parameters that are to be incremented}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1c774c9cb221df909201e81e84b15f40}{Global\_Physical\_Variables::Xprescr}}-\/=displ\_increment;}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8c25ac6a672ea50d1b709292d1f4837b}{Global\_Physical\_Variables::external\_pressure}}() += pext\_increment;}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_accc1e6e92957e427340871d606b8835d}{Global\_Physical\_Variables::external\_pressure}}() += pext\_increment;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Start new zone for tecplot}}
-\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"ZONE"} << std::endl;}
+\DoxyCodeLine{ trace\_file << \textcolor{stringliteral}{"{}ZONE"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Upward loop over parameter incrementation}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -697,7 +674,7 @@ Then we reset the perturbation pressure to zero and reduce the ring\textquotesin
 \DoxyCodeLine{   \textcolor{keywordflow}{if} (!Displ\_control) }
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     \textcolor{comment}{// Increment pressure}}
-\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8c25ac6a672ea50d1b709292d1f4837b}{Global\_Physical\_Variables::external\_pressure}}() -\/= pext\_increment;}
+\DoxyCodeLine{     \mbox{\hyperlink{namespaceGlobal__Physical__Variables_accc1e6e92957e427340871d606b8835d}{Global\_Physical\_Variables::external\_pressure}}() -\/= pext\_increment;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   \textcolor{keywordflow}{else}}
 \DoxyCodeLine{    \{}
@@ -717,9 +694,7 @@ Then we reset the perturbation pressure to zero and reduce the ring\textquotesin
 \DoxyCodeLine{\} \textcolor{comment}{// end of run}}
 
 \end{DoxyCodeInclude}
-
-
-Done!
+ Done!
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -736,6 +711,7 @@ In the section \mbox{\hyperlink{index_constructor}{The constructor}} we encounte
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::add\_global\_data(...)}
+
 \end{DoxyCode}
 
 
@@ -782,5 +758,5 @@ demo_drivers/beam/steady_ring/steady_ring.cc
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -1,6 +1,11 @@
-\hypertarget{classElasticRefineableQuarterCircleSectorMesh}{}\doxysection{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classElasticRefineableQuarterCircleSectorMesh}{}\doxysection{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classElasticRefineableQuarterCircleSectorMesh}\index{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
-Inheritance diagram for Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+
+
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
+Inheritance diagram for Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.623188cm]{classElasticRefineableQuarterCircleSectorMesh}
@@ -16,15 +21,15 @@ void \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_ad9734ea7aee
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ ELEMENT $>$}
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 Elastic quarter circle sector mesh with functionality to attach traction elements to the curved surface. We \char`\"{}upgrade\char`\"{} the Refineable\+Quarter\+Circle\+Sector\+Mesh to become an Solid\+Mesh and equate the Eulerian and Lagrangian coordinates, thus making the domain represented by the mesh the stress-\/free configuration. ~\newline
 ~\newline
-The member function {\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_ad9734ea7aee2141079544bb782d3ace1}{make\+\_\+traction\+\_\+element\+\_\+mesh()}}} creates a separate mesh of Solid\+Traction\+Elements that are attached to the mesh\textquotesingle{}s curved boundary (boundary 1). ~\newline
- 
+The member function {\ttfamily \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh_ad9734ea7aee2141079544bb782d3ace1}{make\+\_\+traction\+\_\+element\+\_\+mesh()}}} creates a separate mesh of Solid\+Traction\+Elements that are attached to the mesh\textquotesingle{}s curved boundary (boundary 1). 
 
-Definition at line 112 of file disk\+\_\+compression.\+cc.
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00112}{112}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
 
 
 
@@ -33,8 +38,8 @@ Definition at line 112 of file disk\+\_\+compression.\+cc.
 \index{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!ElasticRefineableQuarterCircleSectorMesh@{ElasticRefineableQuarterCircleSectorMesh}}
 \index{ElasticRefineableQuarterCircleSectorMesh@{ElasticRefineableQuarterCircleSectorMesh}!ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ElasticRefineableQuarterCircleSectorMesh()}{ElasticRefineableQuarterCircleSectorMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{wall\+\_\+pt,  }\item[{const double \&}]{xi\+\_\+lo,  }\item[{const double \&}]{fract\+\_\+mid,  }\item[{const double \&}]{xi\+\_\+hi,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}} (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{wall\+\_\+pt,  }\item[{const double \&}]{xi\+\_\+lo,  }\item[{const double \&}]{fract\+\_\+mid,  }\item[{const double \&}]{xi\+\_\+hi,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -42,7 +47,11 @@ Constructor\+: Build mesh and copy Eulerian coords to Lagrangian ones so that th
 
 Make the current configuration the undeformed one by setting the nodal Lagrangian coordinates to their current Eulerian ones
 
-Definition at line 122 of file disk\+\_\+compression.\+cc.
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00085}{85}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
+
+
+
+References \mbox{\hyperlink{disk__compression_8cc_source_l00082}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Uniform\+\_\+gamma}}.
 
 
 
@@ -51,8 +60,8 @@ Definition at line 122 of file disk\+\_\+compression.\+cc.
 \index{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}!make\_traction\_element\_mesh@{make\_traction\_element\_mesh}}
 \index{make\_traction\_element\_mesh@{make\_traction\_element\_mesh}!ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$@{ElasticRefineableQuarterCircleSectorMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{make\_traction\_element\_mesh()}{make\_traction\_element\_mesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::make\+\_\+traction\+\_\+element\+\_\+mesh (\begin{DoxyParamCaption}\item[{Solid\+Mesh $\ast$\&}]{traction\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classElasticRefineableQuarterCircleSectorMesh}{Elastic\+Refineable\+Quarter\+Circle\+Sector\+Mesh}}$<$ ELEMENT $>$\+::make\+\_\+traction\+\_\+element\+\_\+mesh (\begin{DoxyParamCaption}\item[{Solid\+Mesh $\ast$\&}]{traction\+\_\+mesh\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -60,7 +69,7 @@ Function to create mesh made of traction elements.
 
 
 
-Definition at line 139 of file disk\+\_\+compression.\+cc.
+Definition at line \mbox{\hyperlink{disk__compression_8cc_source_l00139}{139}} of file \mbox{\hyperlink{disk__compression_8cc_source}{disk\+\_\+compression.\+cc}}.
 
 
 

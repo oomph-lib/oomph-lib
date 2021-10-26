@@ -1,44 +1,49 @@
-\hypertarget{classoomph_1_1QLinearWaveElement}{}\doxysection{oomph\+::Q\+Linear\+Wave\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1QLinearWaveElement}{}\doxysection{oomph\+::QLinear\+Wave\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1QLinearWaveElement}\index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
+
+
+//////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$linear\+\_\+wave\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Q\+Linear\+Wave\+Element$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QLinear\+Wave\+Element\texorpdfstring{$<$}{<} DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.529359cm]{classoomph_1_1QLinearWaveElement}
+\includegraphics[height=2.276423cm]{classoomph_1_1QLinearWaveElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QLinearWaveElement_ad87841cc70d3f2b6b1ce5ccbf4efbd22}{Q\+Linear\+Wave\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Linear\+Wave equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a0379e5690ec0f285d0e6281204f357d5}{Q\+Linear\+Wave\+Element}} (const \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\mbox{\hyperlink{classoomph_1_1QLinearWaveElement_ad87841cc70d3f2b6b1ce5ccbf4efbd22}{QLinear\+Wave\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Linear\+Wave equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QLinearWaveElement_ae4479977649b62a6bcd6a1f9280a3741}{QLinear\+Wave\+Element}} (const \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_acd9fed2d3150d2e129a80b7df54dfb71}{operator=}} (const \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&)
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af1aff68bad7411d9fe32df137e3bfaf7}{operator=}} (const \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a62c08bf0690b81184694b87424db4d46}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a62c08bf0690b81184694b87424db4d46}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_ae7176ab05b31f360cc7c774e857242d9}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4e44576ef363b7b9680a60da96b7687b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a9b6c23f23a7f8e188241fe2698c7543d}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a9b6c23f23a7f8e188241fe2698c7543d}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4fe8053385a090049e459faa0e0cc3be}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a4fe8053385a090049e459faa0e0cc3be}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af72b64dee3c8690aca4734d7f41515bc}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_af991bd517d135fe1320074b28ed84b02}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points (Calls the steady version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+DIM plot points (Calls the steady version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a97bfe7e067f0b8f3cf82b02ca1e7421e}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+lin\+\_\+wave}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\item 
-double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+lin\+\_\+wave}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a97bfe7e067f0b8f3cf82b02ca1e7421e}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+lin\+\_\+wave}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_a96e8d0a3deace8fe691b5576607f1c0c}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+lin\+\_\+wave}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -66,18 +71,18 @@ const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_acce75f65012a63
 \item 
 static const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement_aa8b8b5b3e5fa3ab646fc0ce814121712}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nvalue\mbox{[}n\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Q\+Linear\+Wave\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$}
+//////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
-\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{Q\+Linear\+Wave\+Element}} elements are linear/quadrilateral/brick-\/shaped Linear\+Wave elements with isoparametric interpolation for the function.
+\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinear\+Wave\+Element}} elements are linear/quadrilateral/brick-\/shaped Linear\+Wave elements with isoparametric interpolation for the function.
 
 Empty, just establishes the template parameters 
 
-Definition at line 407 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00401}{401}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 
 
@@ -86,35 +91,27 @@ Definition at line 407 of file linear\+\_\+wave\+\_\+elements.\+h.
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!QLinearWaveElement@{QLinearWaveElement}}
 \index{QLinearWaveElement@{QLinearWaveElement}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QLinearWaveElement()}{QLinearWaveElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{Q\+Linear\+Wave\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinear\+Wave\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Linear\+Wave equations. 
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Linear\+Wave equations. 
 
 
 
-Definition at line 419 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00413}{413}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a0379e5690ec0f285d0e6281204f357d5}\label{classoomph_1_1QLinearWaveElement_a0379e5690ec0f285d0e6281204f357d5}} 
+\mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_ae4479977649b62a6bcd6a1f9280a3741}\label{classoomph_1_1QLinearWaveElement_ae4479977649b62a6bcd6a1f9280a3741}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!QLinearWaveElement@{QLinearWaveElement}}
 \index{QLinearWaveElement@{QLinearWaveElement}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QLinearWaveElement()}{QLinearWaveElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{Q\+Linear\+Wave\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinear\+Wave\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 424 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -123,8 +120,8 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave@{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave@{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave()}{dshape\_and\_dtest\_eulerian\_at\_knot\_lin\_wave()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -134,80 +131,74 @@ Define the shape functions and test functions and derivatives w.\+r.\+t. global 
 
 Galerkin\+: Test functions = shape functions 
 
-Implements \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a8033ffc13e61d7adcd4b7e1154ea12af}{oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}}.
-
-
-
-Definition at line 558 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00545}{545}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a97bfe7e067f0b8f3cf82b02ca1e7421e}\label{classoomph_1_1QLinearWaveElement_a97bfe7e067f0b8f3cf82b02ca1e7421e}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_lin\_wave@{dshape\_and\_dtest\_eulerian\_lin\_wave}}
 \index{dshape\_and\_dtest\_eulerian\_lin\_wave@{dshape\_and\_dtest\_eulerian\_lin\_wave}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_lin\_wave()}{dshape\_and\_dtest\_eulerian\_lin\_wave()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+lin\+\_\+wave (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
+
+
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
 
 Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
 Galerkin\+: Test functions = shape functions 
 
-Implements \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a57ed864bd1ecad66fc115bf3b956e4c6}{oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00513}{513}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 
 
-Definition at line 525 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References i, and s.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a7287f6aba907248d2f0ee71f4dbfb91a}\label{classoomph_1_1QLinearWaveElement_a7287f6aba907248d2f0ee71f4dbfb91a}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 2, 4 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 2, 4 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 48 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00048}{48}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_ae3b48281ac6934a3db36bf3db3b095ef}\label{classoomph_1_1QLinearWaveElement_ae3b48281ac6934a3db36bf3db3b095ef}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 3, 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 3, 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 60 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00060}{60}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_ae2af2246b42c100dd88283716ca48580}\label{classoomph_1_1QLinearWaveElement_ae2af2246b42c100dd88283716ca48580}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 1, 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 1, 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 45 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00045}{45}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a32b3b8e189567a176b58f5c6d68ef5ed}\label{classoomph_1_1QLinearWaveElement_a32b3b8e189567a176b58f5c6d68ef5ed}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 1, 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 1, 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 43 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00043}{43}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_aa76d9d6ad69c263d38cbe2a75691fbd4}\label{classoomph_1_1QLinearWaveElement_aa76d9d6ad69c263d38cbe2a75691fbd4}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 1, 4 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 1, 4 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -215,73 +206,65 @@ Definition at line 43 of file linear\+\_\+wave\+\_\+elements.\+cc.
 
 
 
-Definition at line 41 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00041}{41}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_afbcae91b32ac279db6ade03cf0e736e8}\label{classoomph_1_1QLinearWaveElement_afbcae91b32ac279db6ade03cf0e736e8}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [6/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 2, 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 2, 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 54 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00054}{54}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_acce75f65012a63394481a61080ecf83c}\label{classoomph_1_1QLinearWaveElement_acce75f65012a63394481a61080ecf83c}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 3, 4 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 3, 4 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 64 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00064}{64}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a94179db43ea96f4297a3c42e494c5945}\label{classoomph_1_1QLinearWaveElement_a94179db43ea96f4297a3c42e494c5945}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [8/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 3, 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 3, 2 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 57 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00057}{57}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_ac47ebbcd60bbbfff4268c7d22569efe1}\label{classoomph_1_1QLinearWaveElement_ac47ebbcd60bbbfff4268c7d22569efe1}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue()}{Initial\_Nvalue()}\hspace{0.1cm}{\footnotesize\ttfamily [9/9]}}
-{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ 2, 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ 2, 3 $>$\+::Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 51 of file linear\+\_\+wave\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8cc_source_l00051}{51}} of file \mbox{\hyperlink{linear__wave__elements_8cc_source}{linear\+\_\+wave\+\_\+elements.\+cc}}.
 
-\mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_acd9fed2d3150d2e129a80b7df54dfb71}\label{classoomph_1_1QLinearWaveElement_acd9fed2d3150d2e129a80b7df54dfb71}} 
+\mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_af1aff68bad7411d9fe32df137e3bfaf7}\label{classoomph_1_1QLinearWaveElement_af1aff68bad7411d9fe32df137e3bfaf7}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 431 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a9b6c23f23a7f8e188241fe2698c7543d}\label{classoomph_1_1QLinearWaveElement_a9b6c23f23a7f8e188241fe2698c7543d}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -289,45 +272,37 @@ Output function\+: x,y,u or x,y,z,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a7a1464dbadf5fb3542979951b389694b}{oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00447}{447}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 
 
-Definition at line 459 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a4fe8053385a090049e459faa0e0cc3be}\label{classoomph_1_1QLinearWaveElement_a4fe8053385a090049e459faa0e0cc3be}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a2e3dd0d7c46d095fea74969c3648f0ca}{oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00454}{454}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 
 
-Definition at line 466 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_ae7176ab05b31f360cc7c774e857242d9}\label{classoomph_1_1QLinearWaveElement_ae7176ab05b31f360cc7c774e857242d9}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -335,91 +310,67 @@ Output function\+: x,y,u or x,y,z,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_ad5d68d2b3ec9fe3c6102ae91b9c61cc6}{oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00433}{433}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 
 
-Definition at line 445 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a4e44576ef363b7b9680a60da96b7687b}\label{classoomph_1_1QLinearWaveElement_a4e44576ef363b7b9680a60da96b7687b}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a1830b4405d4ab215e91e01914dd426f3}{oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00440}{440}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 
 
-Definition at line 452 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_af991bd517d135fe1320074b28ed84b02}\label{classoomph_1_1QLinearWaveElement_af991bd517d135fe1320074b28ed84b02}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points (Calls the steady version) 
+Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+DIM plot points (Calls the steady version) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_aa0089c4e106d9bd525639d3215ed6825}{oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}}.
-
-
-
-Definition at line 485 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::output\+\_\+fct().
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00473}{473}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_af72b64dee3c8690aca4734d7f41515bc}\label{classoomph_1_1QLinearWaveElement_af72b64dee3c8690aca4734d7f41515bc}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+DIM plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearWaveEquations_a3ae24c98f2d190e56fe24e754de682d8}{oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$}}.
-
-
-
-Definition at line 474 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Linear\+Wave\+Equations$<$ D\+I\+M $>$\+::output\+\_\+fct().
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00462}{462}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1QLinearWaveElement_a62c08bf0690b81184694b87424db4d46}\label{classoomph_1_1QLinearWaveElement_a62c08bf0690b81184694b87424db4d46}} 
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -427,15 +378,11 @@ Required \# of `values' (pinned or dofs) at node n.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00426}{426}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 
 
-Definition at line 438 of file linear\+\_\+wave\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Q\+Linear\+Wave\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue, and n.
+References \mbox{\hyperlink{linear__wave__elements_8h_source_l00407}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::\+Initial\+\_\+\+Nvalue}}.
 
 
 
@@ -444,8 +391,8 @@ References oomph\+::\+Q\+Linear\+Wave\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\
 \index{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$@{oomph::QLinearWaveElement$<$ DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+Q\+Linear\+Wave\+Element}}$<$ D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+const unsigned \mbox{\hyperlink{classoomph_1_1QLinearWaveElement}{oomph\+::\+QLinear\+Wave\+Element}}$<$ DIM, NNODE\+\_\+1D $>$\+::Initial\+\_\+\+Nvalue\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -453,11 +400,11 @@ Static array of ints to hold number of variables at nodes\+: Initial\+\_\+\+Nval
 
 
 
-Definition at line 413 of file linear\+\_\+wave\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{linear__wave__elements_8h_source_l00407}{407}} of file \mbox{\hyperlink{linear__wave__elements_8h_source}{linear\+\_\+wave\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Q\+Linear\+Wave\+Element$<$ D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$\+::required\+\_\+nvalue().
+Referenced by \mbox{\hyperlink{linear__wave__elements_8h_source_l00426}{oomph\+::\+QLinear\+Wave\+Element$<$ DIM, NNODE\+\_\+1\+D $>$\+::required\+\_\+nvalue()}}.
 
 
 

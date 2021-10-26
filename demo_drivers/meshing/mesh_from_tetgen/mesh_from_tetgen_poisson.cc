@@ -49,26 +49,26 @@ namespace TanhSolnForPoisson
  /// Parameter for steepness of step
  double Alpha=3;
 
- ///\short Orientation (non-normalised x-component of unit vector in direction
+ /// Orientation (non-normalised x-component of unit vector in direction
  /// of step plane)
  double N_x=-1.0;
 
- ///\short Orientation (non-normalised y-component of unit vector in direction
+ /// Orientation (non-normalised y-component of unit vector in direction
  /// of step plane)
  double N_y=-1.0;
 
- ///\short Orientation (non-normalised z-component of unit vector in direction
+ /// Orientation (non-normalised z-component of unit vector in direction
  /// of step plane)
  double N_z=1.0;
 
 
- ///\short Orientation (x-coordinate of step plane) 
+ /// Orientation (x-coordinate of step plane) 
  double X_0=0.0;
 
- ///\short Orientation (y-coordinate of step plane) 
+ /// Orientation (y-coordinate of step plane) 
  double Y_0=0.0;
 
- ///\short Orientation (z-coordinate of step plane) 
+ /// Orientation (z-coordinate of step plane) 
  double Z_0=0.0;
 
 

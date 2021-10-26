@@ -1,21 +1,26 @@
-\hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement}{}\doxysection{oomph\+::Axisymmetric\+Q\+Taylor\+Hood\+Element Class Reference}
+\hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement}{}\doxysection{oomph\+::Axisymmetric\+QTaylor\+Hood\+Element Class Reference}
 \label{classoomph_1_1AxisymmetricQTaylorHoodElement}\index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
+
+
+/////////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Axisymmetric\+Q\+Taylor\+Hood\+Element\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Axisymmetric\+QTaylor\+Hood\+Element\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.786069cm]{classoomph_1_1AxisymmetricQTaylorHoodElement}
+\includegraphics[height=2.649842cm]{classoomph_1_1AxisymmetricQTaylorHoodElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ac6b80d9619833e670b80cafff35f3739}{Axisymmetric\+Q\+Taylor\+Hood\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ac6b80d9619833e670b80cafff35f3739}{Axisymmetric\+QTaylor\+Hood\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, no internal data points. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a89c18769297b69e2e3522d83c8b68d73}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a89c18769297b69e2e3522d83c8b68d73}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at node n. Can be overwritten for hanging node version. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a318c767e20198f6d3f8a5c788df31055}{p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst}} () const
 \begin{DoxyCompactList}\small\item\em Which nodal value represents the pressure? \end{DoxyCompactList}\item 
@@ -25,34 +30,34 @@ unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a636d0c75
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a1557e286a76d63d79aabef3493cf0af2}{fix\+\_\+pressure}} (const unsigned \&n\+\_\+p, const double \&pvalue)
 \begin{DoxyCompactList}\small\item\em Fix the pressure at local pressure node n\+\_\+p. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_abfaf2fb0ff51a888f77c724af8c20809}{get\+\_\+traction}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a0a5523b91d5191c2f9e23fe8d74f4e07}{traction}}) const
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_abfaf2fb0ff51a888f77c724af8c20809}{get\+\_\+traction}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&traction) const
 \begin{DoxyCompactList}\small\item\em Compute traction at local coordinate s for outer unit normal N. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a5593ee69e94a15cca6f309bb38717913}{p\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+int \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a5593ee69e94a15cca6f309bb38717913}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Overload the access function for the pressure\textquotesingle{}s local equation numbers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_aa092b03db26878057c3d3c92496d752d}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a73bc9729dd01b61e467d4fdc7d8b802c}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a91861ce04f934aeae956c9d938ce337f}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a4c2fcefe0593bb39d6c4937b0fdc1292}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a91861ce04f934aeae956c9d938ce337f}{output}} (FILE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a4c2fcefe0593bb39d6c4937b0fdc1292}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a9cd3bbcb75c7a4501c3de68e524a5503}{ndof\+\_\+types}} () const
-\begin{DoxyCompactList}\small\item\em Returns the number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (3 components) and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a71e61d0cdcea38a3f6d58e8d045595da}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (3 components) and pressure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ad763c91177814d4221ec485b076a38e9}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a413aba20f944dc30c84bb432c408cbc1}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a413aba20f944dc30c84bb432c408cbc1}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_abd3de2e051bca2f697560e907a53abde}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_abd3de2e051bca2f697560e907a53abde}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a77fe7f0caef36c951f99a923b94c2f7a}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_a77fe7f0caef36c951f99a923b94c2f7a}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping (J). Also compute derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ab4eea01cdcd97616ce75e6547c0c4338}{pshape\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ab4eea01cdcd97616ce75e6547c0c4338}{pshape\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Pressure shape functions at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_abdb9779d344d9dbe51260e8d01852737}{pshape\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_abdb9779d344d9dbe51260e8d01852737}{pshape\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Pressure shape and test functions at local coordinte s. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -64,13 +69,14 @@ static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElem
 \item 
 static const unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricQTaylorHoodElement_ae0826bd23cb739552135795de862c758}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold number of variables at node. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
+///////////////////////////////////////////////////////////////////////// 
+
 Taylor--Hood elements are Navier--Stokes elements with quadratic interpolation for velocities and positions and continous linear pressure interpolation 
 
-Definition at line 1633 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01633}{1633}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
@@ -79,7 +85,7 @@ Definition at line 1633 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!AxisymmetricQTaylorHoodElement@{AxisymmetricQTaylorHoodElement}}
 \index{AxisymmetricQTaylorHoodElement@{AxisymmetricQTaylorHoodElement}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{AxisymmetricQTaylorHoodElement()}{AxisymmetricQTaylorHoodElement()}}
-{\footnotesize\ttfamily oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Axisymmetric\+QTaylor\+Hood\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -87,7 +93,7 @@ Constructor, no internal data points.
 
 
 
-Definition at line 1688 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01688}{1688}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
@@ -96,7 +102,7 @@ Definition at line 1688 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -106,21 +112,17 @@ Define the shape functions (psi) and test functions (test) and their derivatives
 
 Galerkin\+: Test functions = shape functions 
 
-Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a2cd0715a679af81bd0e3d7448a5560cb}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01842}{1842}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1843 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_abd3de2e051bca2f697560e907a53abde}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_abd3de2e051bca2f697560e907a53abde}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -128,21 +130,17 @@ Velocity shape and test functions and their derivs w.\+r.\+t. to global coords a
 
 Derivatives of the shape functions and test functions w.\+r.\+t to global (Eulerian) coordinates. Return Jacobian of mapping between local and global coordinates. 
 
-Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a76e090fdac4507d10eb9f81feb53a51b}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01813}{1813}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1814 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a413aba20f944dc30c84bb432c408cbc1}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a413aba20f944dc30c84bb432c408cbc1}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!dshape\_and\_dtest\_eulerian\_axi\_nst@{dshape\_and\_dtest\_eulerian\_axi\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_axi\_nst@{dshape\_and\_dtest\_eulerian\_axi\_nst}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_axi\_nst()}{dshape\_and\_dtest\_eulerian\_axi\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -150,21 +148,17 @@ Velocity shape and test functions and their derivs w.\+r.\+t. to global coords a
 
 Derivatives of the shape functions and test functions w.\+r.\+t to global (Eulerian) coordinates. Return Jacobian of mapping between local and global coordinates. 
 
-Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a8d958da8ef73dcf5c68360edc9d9f565}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01787}{1787}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1788 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a1557e286a76d63d79aabef3493cf0af2}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a1557e286a76d63d79aabef3493cf0af2}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!fix\_pressure@{fix\_pressure}}
 \index{fix\_pressure@{fix\_pressure}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -172,39 +166,33 @@ Fix the pressure at local pressure node n\+\_\+p.
 
 
 
-Definition at line 1720 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01720}{1720}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::node\+\_\+pt(), p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst(), oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
+References \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01701}{p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01644}{Pconv}}.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a71e61d0cdcea38a3f6d58e8d045595da}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a71e61d0cdcea38a3f6d58e8d045595da}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_ad763c91177814d4221ec485b076a38e9}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_ad763c91177814d4221ec485b076a38e9}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-Create a list of pairs for all unknowns in this element, so the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
+//////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
+Create a list of pairs for all unknowns in this element, so the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-
-
-Definition at line 3741 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
-
-
-
-References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), and oomph\+::\+Data\+::nvalue().
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8cc_source_l03741}{3741}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8cc_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_abfaf2fb0ff51a888f77c724af8c20809}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_abfaf2fb0ff51a888f77c724af8c20809}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!get\_traction@{get\_traction}}
 \index{get\_traction@{get\_traction}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption}) const}
 
 
 
@@ -212,35 +200,31 @@ Compute traction at local coordinate s for outer unit normal N.
 
 
 
-Definition at line 3794 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8cc_source_l03794}{3794}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8cc_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::N, s, and oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::traction().
+References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a9cd3bbcb75c7a4501c3de68e524a5503}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a9cd3bbcb75c7a4501c3de68e524a5503}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!ndof\_types@{ndof\_types}}
 \index{ndof\_types@{ndof\_types}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Returns the number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (3 components) and pressure. 
+Returns the number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity (3 components) and pressure. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
-
-
-
-Definition at line 1765 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01765}{1765}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a636d0c75c75483f9da193d0192f4e05e}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a636d0c75c75483f9da193d0192f4e05e}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!npres\_axi\_nst@{npres\_axi\_nst}}
 \index{npres\_axi\_nst@{npres\_axi\_nst}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{npres\_axi\_nst()}{npres\_axi\_nst()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::npres\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::npres\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -248,109 +232,89 @@ Return number of pressure values.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a89edaffb4913131cc14a5f6e45ed117a}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01714}{1714}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1714 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-Referenced by oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs().
+Referenced by \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00428}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a91861ce04f934aeae956c9d938ce337f}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a91861ce04f934aeae956c9d938ce337f}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a61129dd7505ac363862946bd8b3ea5bf}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01751}{1751}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1751 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a4c2fcefe0593bb39d6c4937b0fdc1292}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a4c2fcefe0593bb39d6c4937b0fdc1292}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_abc2ca00250845e243da3f4e0845b2c96}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01757}{1757}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1757 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_aa092b03db26878057c3d3c92496d752d}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_aa092b03db26878057c3d3c92496d752d}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_afe0c7b607ec3fd03a73b7db4f1fe6252}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01739}{1739}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1739 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a73bc9729dd01b61e467d4fdc7d8b802c}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a73bc9729dd01b61e467d4fdc7d8b802c}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a94a243ca05ba3b995e366564e6cf7695}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01745}{1745}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1745 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_aec113045099e51a61a1624b0126a05b1}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_aec113045099e51a61a1624b0126a05b1}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!p\_axi\_nst@{p\_axi\_nst}}
 \index{p\_axi\_nst@{p\_axi\_nst}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{p\_axi\_nst()}{p\_axi\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::p\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::p\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -358,21 +322,17 @@ Access function for the pressure values at local pressure node n\+\_\+p (const v
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a3aa173227f477a40fb4adba84a337f5b}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01708}{1708}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1708 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst(), and Pconv.
+References \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01701}{p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01644}{Pconv}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a5593ee69e94a15cca6f309bb38717913}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a5593ee69e94a15cca6f309bb38717913}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!p\_local\_eqn@{p\_local\_eqn}}
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
-{\footnotesize\ttfamily int oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily int oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -380,21 +340,17 @@ Overload the access function for the pressure\textquotesingle{}s local equation 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_ad6ac62ca5fa411c365fd2ecc72aa25e8}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01733}{1733}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1733 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References n, oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst(), and Pconv.
+References \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01701}{p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01644}{Pconv}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a318c767e20198f6d3f8a5c788df31055}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a318c767e20198f6d3f8a5c788df31055}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!p\_nodal\_index\_axi\_nst@{p\_nodal\_index\_axi\_nst}}
 \index{p\_nodal\_index\_axi\_nst@{p\_nodal\_index\_axi\_nst}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{p\_nodal\_index\_axi\_nst()}{p\_nodal\_index\_axi\_nst()}}
-{\footnotesize\ttfamily virtual int oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual int oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -402,21 +358,17 @@ Which nodal value represents the pressure?
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a47c61dbb8a32fd785c99ab3aa8bc35f9}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01701}{1701}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1701 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-Referenced by fix\+\_\+pressure(), p\+\_\+axi\+\_\+nst(), p\+\_\+local\+\_\+eqn(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), and oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
+Referenced by \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01720}{fix\+\_\+pressure()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01708}{p\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01733}{p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00428}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}, and \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00416}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_ab4eea01cdcd97616ce75e6547c0c4338}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_ab4eea01cdcd97616ce75e6547c0c4338}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!pshape\_axi\_nst@{pshape\_axi\_nst}}
 \index{pshape\_axi\_nst@{pshape\_axi\_nst}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pshape\_axi\_nst()}{pshape\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pshape\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::pshape\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -424,25 +376,21 @@ Pressure shape functions at local coordinate s.
 
 Pressure shape functions. 
 
-Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a6309780fd1964c4df0cca0818ccff158}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01884}{1884}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1884 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00608}{oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$()}}.
 
 
 
-References i, s, and oomph\+::\+One\+Dim\+Lagrange\+::shape$<$ 2 $>$().
-
-
-
-Referenced by oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::interpolating\+\_\+basis(), and pshape\+\_\+axi\+\_\+nst().
+Referenced by \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00708}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::interpolating\+\_\+basis()}}, and \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01908}{pshape\+\_\+axi\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_abdb9779d344d9dbe51260e8d01852737}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_abdb9779d344d9dbe51260e8d01852737}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!pshape\_axi\_nst@{pshape\_axi\_nst}}
 \index{pshape\_axi\_nst@{pshape\_axi\_nst}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{pshape\_axi\_nst()}{pshape\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pshape\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::pshape\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -450,21 +398,17 @@ Pressure shape and test functions at local coordinte s.
 
 Pressure shape and test functions. 
 
-Implements \mbox{\hyperlink{classoomph_1_1AxisymmetricNavierStokesEquations_a19a4135581356bf368a7ecae2b315f85}{oomph\+::\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01908}{1908}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1908 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References i, pshape\+\_\+axi\+\_\+nst(), and s.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01884}{pshape\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a89c18769297b69e2e3522d83c8b68d73}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a89c18769297b69e2e3522d83c8b68d73}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily virtual unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -472,19 +416,15 @@ Number of values (pinned or dofs) required at node n. Can be overwritten for han
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3a7d2c7272f30b217c992b2c90ce8881}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element}}.
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricQTaylorHoodElement_a3a7d2c7272f30b217c992b2c90ce8881}{oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01695}{1695}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1695 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References Initial\+\_\+\+Nvalue, and n.
+References \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01639}{Initial\+\_\+\+Nvalue}}.
 
 
 
@@ -493,7 +433,7 @@ References Initial\+\_\+\+Nvalue, and n.
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -507,17 +447,17 @@ Static array of ints to hold number of variables at node.
 
 
 
-Definition at line 1639 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01639}{1639}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Referenced by required\+\_\+nvalue().
+Referenced by \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01695}{required\+\_\+nvalue()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricQTaylorHoodElement_a40720e74e6b8ce8d803ee95d7a6ad119}\label{classoomph_1_1AxisymmetricQTaylorHoodElement_a40720e74e6b8ce8d803ee95d7a6ad119}} 
 \index{oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}!Pconv@{Pconv}}
 \index{Pconv@{Pconv}!oomph::AxisymmetricQTaylorHoodElement@{oomph::AxisymmetricQTaylorHoodElement}}
 \doxysubsubsection{\texorpdfstring{Pconv}{Pconv}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::\+Pconv = \{0, 2, 6, 8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Axisymmetric\+QTaylor\+Hood\+Element\+::\+Pconv = \{0, 2, 6, 8\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -525,11 +465,11 @@ Static array of ints to hold conversion from pressure node numbers to actual nod
 
 
 
-Definition at line 1644 of file axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01644}{1644}} of file \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source}{axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::interpolating\+\_\+node\+\_\+pt(), p\+\_\+axi\+\_\+nst(), p\+\_\+local\+\_\+eqn(), oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs(), and oomph\+::\+Refineable\+Axisymmetric\+Q\+Taylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt().
+Referenced by \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01720}{fix\+\_\+pressure()}}, \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00615}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::get\+\_\+interpolating\+\_\+node\+\_\+at\+\_\+local\+\_\+coordinate()}}, \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00576}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::interpolating\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01708}{p\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{axisym__navier__stokes__elements_8h_source_l01733}{p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00428}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}, and \mbox{\hyperlink{refineable__axisym__navier__stokes__elements_8h_source_l00410}{oomph\+::\+Refineable\+Axisymmetric\+QTaylor\+Hood\+Element\+::pressure\+\_\+node\+\_\+pt()}}.
 
 
 

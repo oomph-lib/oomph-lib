@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure}{}\doxysection{oomph\+::Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure Class Reference}
+\hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure}{}\doxysection{oomph\+::Axisymmetric\+PVDEquations\+With\+Pressure Class Reference}
 \label{classoomph_1_1AxisymmetricPVDEquationsWithPressure}\index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
+
+
+A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements in axisymmetric coordinates in a formulation that allows for incompressibility or near incompressibility.  
+
+
 
 
 {\ttfamily \#include $<$axisym\+\_\+solid\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Axisymmetric\+PVDEquations\+With\+Pressure\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.794520cm]{classoomph_1_1AxisymmetricPVDEquationsWithPressure}
@@ -13,55 +18,55 @@ Inheritance diagram for oomph\+::Axisymmetric\+P\+V\+D\+Equations\+With\+Pressur
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a70d70c4f5629ef9479c4530d10828891}{Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure}} ()
+\mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a70d70c4f5629ef9479c4530d10828891}{Axisymmetric\+PVDEquations\+With\+Pressure}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, by default the element is not incompressible. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aef6c8fe7ef4a80b745ea1a38d24adf92}{constitutive\+\_\+law\+\_\+pt}} ()
+Constitutive\+Law $\ast$\& \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a012e0a165cffdb439069cde2e2f82efe}{constitutive\+\_\+law\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Return the constitutive law pointer. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&Gup, double \&pressure\+\_\+stress, double \&kappa)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}{get\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&Gup, double \&pressure\+\_\+stress, double \&kappa)
 \begin{DoxyCompactList}\small\item\em Return the stress tensor, as calculated from the constitutive law in the Near-\/incompresible formulation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9614022b7f3e3fe4ffa9d1de15bfda7}{get\+\_\+stress}} (const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&sigma, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&Gup, double \&detG)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9614022b7f3e3fe4ffa9d1de15bfda7}{get\+\_\+stress}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&g, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&G, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_afa000da090f53047b0e04943d98206f7}{sigma}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&Gup, double \&detG)
 \begin{DoxyCompactList}\small\item\em Return the stress tensor, as calculated from the constitutive law in the \char`\"{}true\char`\"{} incompresible formulation. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7d38dd422ad492ad99bda7abac207738}{is\+\_\+incompressible}} () const
+bool \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7d38dd422ad492ad99bda7abac207738}{is\+\_\+incompressible}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Return whether the material is incompressible. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a731e0c99343554529ab5e41bad4a454d}{set\+\_\+incompressible}} ()
 \begin{DoxyCompactList}\small\item\em Set the material to be incompressible. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9c2a4524a6de7ce842a6fc0c3c810e9}{set\+\_\+compressible}} ()
 \begin{DoxyCompactList}\small\item\em Set the material to be compressible. \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a4cfeab9fe5e9c26fcf39659bacc53a8f}{nsolid\+\_\+pres}} () const =0
+virtual unsigned \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a4cfeab9fe5e9c26fcf39659bacc53a8f}{nsolid\+\_\+pres}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
 \begin{DoxyCompactList}\small\item\em Return the number of solid pressure degrees of freedom. \end{DoxyCompactList}\item 
-virtual double \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aeb03a2cef37040790d5d9dacafb89144}{solid\+\_\+p}} (const unsigned \&l)=0
+virtual double \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aeb03a2cef37040790d5d9dacafb89144}{solid\+\_\+p}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&l)=0
 \begin{DoxyCompactList}\small\item\em Return the lth solid pressures. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a97e21b6429e7406a463d8c8cf3057660}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a97e21b6429e7406a463d8c8cf3057660}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em Return the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a43c81b1695c9cd22b7546dd7764b70bd}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a43c81b1695c9cd22b7546dd7764b70bd}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
 \begin{DoxyCompactList}\small\item\em Return the residuals and the jacobian. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a38ed51aff165e6a9708664a251fe291b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a38ed51aff165e6a9708664a251fe291b}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Return the residuals for the equations of solid mechanics formulated in the incompressible case! \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a975e38ffef201b3c8bd36e7ff6206eb9}{compute\+\_\+physical\+\_\+size}} () const
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a975e38ffef201b3c8bd36e7ff6206eb9}{compute\+\_\+physical\+\_\+size}} () \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Overload/implement the size function. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\+\_\+solid\+\_\+p}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}})
+double \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}{interpolated\+\_\+solid\+\_\+p}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}})
 \begin{DoxyCompactList}\small\item\em Return the interpolated\+\_\+solid\+\_\+pressure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aba49f4147fb78fa74cd591b4a77eab98}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a6916b3f7784015c263556565b2a7219d}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a6916b3f7784015c263556565b2a7219d}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ad5018c9a6f9236f13c6df43df87336aa}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ad5018c9a6f9236f13c6df43df87336aa}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a3a6d03fa236a2e0173abbc1734799d19}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a3a6d03fa236a2e0173abbc1734799d19}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual int \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7b77ffb084d0967b1220898613718d0b}{solid\+\_\+p\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})=0
-\item 
-virtual void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ab93f05b37f8bee3a8f390e33cbcd3a6e}{solid\+\_\+pshape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const =0
+virtual int \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7b77ffb084d0967b1220898613718d0b}{solid\+\_\+p\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})=0
+\begin{DoxyCompactList}\small\item\em Access function that returns the local equation number for the n-\/th solid pressure value. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ab93f05b37f8bee3a8f390e33cbcd3a6e}{solid\+\_\+pshape}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} =0
 \begin{DoxyCompactList}\small\item\em Return the solid pressure shape functions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2c423c3bfbc0debcf041f11fc24d1510}{solid\+\_\+pshape\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+void \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2c423c3bfbc0debcf041f11fc24d1510}{solid\+\_\+pshape\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Return the stored solid shape functions at the knots. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}} $\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\+\_\+law\+\_\+pt}}
+Constitutive\+Law $\ast$ \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a792ad265951fa647ca47d4a71b1df02f}{Constitutive\+\_\+law\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to constitutive law. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2ceef4a0290f5b475c99dd26721659d0}{Incompressible}}
 \begin{DoxyCompactList}\small\item\em Boolean to determine whether the solid is incompressible or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -71,7 +76,7 @@ bool \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2ceef4
 \doxysubsection{Detailed Description}
 A class for elements that solve the equations of solid mechanics, based on the principle of virtual displacements in axisymmetric coordinates in a formulation that allows for incompressibility or near incompressibility. 
 
-Definition at line 660 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00660}{660}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
@@ -80,7 +85,7 @@ Definition at line 660 of file axisym\+\_\+solid\+\_\+elements.\+h.
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!AxisymmetricPVDEquationsWithPressure@{AxisymmetricPVDEquationsWithPressure}}
 \index{AxisymmetricPVDEquationsWithPressure@{AxisymmetricPVDEquationsWithPressure}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{AxisymmetricPVDEquationsWithPressure()}{AxisymmetricPVDEquationsWithPressure()}}
-{\footnotesize\ttfamily oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::\+Axisymmetric\+PVDEquations\+With\+Pressure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -88,7 +93,7 @@ Constructor, by default the element is not incompressible.
 
 
 
-Definition at line 682 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00682}{682}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
@@ -97,7 +102,7 @@ Definition at line 682 of file axisym\+\_\+solid\+\_\+elements.\+h.
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!compute\_physical\_size@{compute\_physical\_size}}
 \index{compute\_physical\_size@{compute\_physical\_size}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{compute\_physical\_size()}{compute\_physical\_size()}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::compute\+\_\+physical\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::compute\+\_\+physical\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -109,17 +114,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a782a540035dc31c
 
 
 
-Definition at line 1132 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l01132}{1132}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Mathematical\+Constants\+::\+Pi, oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+References \mbox{\hyperlink{elements_8cc_source_l06741}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l03921}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
-\mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aef6c8fe7ef4a80b745ea1a38d24adf92}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aef6c8fe7ef4a80b745ea1a38d24adf92}} 
+\mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a012e0a165cffdb439069cde2e2f82efe}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a012e0a165cffdb439069cde2e2f82efe}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!constitutive\_law\_pt@{constitutive\_law\_pt}}
 \index{constitutive\_law\_pt@{constitutive\_law\_pt}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{constitutive\_law\_pt()}{constitutive\_law\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}}$\ast$\& oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::constitutive\+\_\+law\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Constitutive\+Law $\ast$\& oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::constitutive\+\_\+law\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -127,17 +132,17 @@ Return the constitutive law pointer.
 
 
 
-Definition at line 688 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00688}{688}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References Constitutive\+\_\+law\+\_\+pt.
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00664}{Constitutive\+\_\+law\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a43c81b1695c9cd22b7546dd7764b70bd}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a43c81b1695c9cd22b7546dd7764b70bd}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -149,17 +154,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Definition at line 780 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00780}{780}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure(), oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd(), and residuals().
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}, \mbox{\hyperlink{elements_8cc_source_l06989}{oomph\+::\+Solid\+Finite\+Element\+::fill\+\_\+in\+\_\+jacobian\+\_\+from\+\_\+solid\+\_\+position\+\_\+by\+\_\+fd()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a97e21b6429e7406a463d8c8cf3057660}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a97e21b6429e7406a463d8c8cf3057660}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -171,17 +176,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Definition at line 771 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00771}{771}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure(), and residuals().
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a38ed51aff165e6a9708664a251fe291b}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a38ed51aff165e6a9708664a251fe291b}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!fill\_in\_generic\_residual\_contribution\_axisym\_pvd\_with\_pressure@{fill\_in\_generic\_residual\_contribution\_axisym\_pvd\_with\_pressure}}
 \index{fill\_in\_generic\_residual\_contribution\_axisym\_pvd\_with\_pressure@{fill\_in\_generic\_residual\_contribution\_axisym\_pvd\_with\_pressure}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_axisym\_pvd\_with\_pressure()}{fill\_in\_generic\_residual\_contribution\_axisym\_pvd\_with\_pressure()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -189,21 +194,21 @@ Return the residuals for the equations of solid mechanics formulated in the inco
 
 
 
-Definition at line 792 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{792}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot(), get\+\_\+stress(), i, Incompressible, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+solid\+\_\+p(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen(), oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen(), nsolid\+\_\+pres(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn(), residuals(), solid\+\_\+p(), solid\+\_\+p\+\_\+local\+\_\+eqn(), solid\+\_\+pshape\+\_\+at\+\_\+knot(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+References \mbox{\hyperlink{elements_8cc_source_l06741}{oomph\+::\+Solid\+Finite\+Element\+::dshape\+\_\+lagrangian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l00695}{get\+\_\+stress()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l00667}{Incompressible}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l01236}{interpolated\+\_\+solid\+\_\+p()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l03921}{oomph\+::\+Solid\+Finite\+Element\+::lagrangian\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{elements_8h_source_l02468}{oomph\+::\+Finite\+Element\+::nnodal\+\_\+position\+\_\+type()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02354}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position\+\_\+gen()}}, \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a4cfeab9fe5e9c26fcf39659bacc53a8f}{nsolid\+\_\+pres()}}, \mbox{\hyperlink{elements_8h_source_l04165}{oomph\+::\+Solid\+Finite\+Element\+::position\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aeb03a2cef37040790d5d9dacafb89144}{solid\+\_\+p()}}, \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7b77ffb084d0967b1220898613718d0b}{solid\+\_\+p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{axisym__solid__elements_8cc_source_l00035}{solid\+\_\+pshape\+\_\+at\+\_\+knot()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00780}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{axisym__solid__elements_8h_source_l00771}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9614022b7f3e3fe4ffa9d1de15bfda7}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9614022b7f3e3fe4ffa9d1de15bfda7}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!get\_stress@{get\_stress}}
 \index{get\_stress@{get\_stress}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{Gup,  }\item[{double \&}]{detG }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{Gup,  }\item[{double \&}]{detG }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -211,17 +216,17 @@ Return the stress tensor, as calculated from the constitutive law in the \char`\
 
 
 
-Definition at line 722 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00722}{722}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress(), Constitutive\+\_\+law\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00664}{Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af74b386309449d7022b9599674d58088}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!get\_stress@{get\_stress}}
 \index{get\_stress@{get\_stress}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{get\_stress()}{get\_stress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{const \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{Gup,  }\item[{double \&}]{pressure\+\_\+stress,  }\item[{double \&}]{kappa }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::get\+\_\+stress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{g,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{G,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{sigma,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{Gup,  }\item[{double \&}]{pressure\+\_\+stress,  }\item[{double \&}]{kappa }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -229,21 +234,21 @@ Return the stress tensor, as calculated from the constitutive law in the Near-\/
 
 
 
-Definition at line 695 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00695}{695}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Constitutive\+Law\+::calculate\+\_\+second\+\_\+piola\+\_\+kirchhoff\+\_\+stress(), Constitutive\+\_\+law\+\_\+pt, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00664}{Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{constitutive__laws_8h_source_l00318}{oomph\+::sigma}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_adfd0277b2f05d4689fd7b4c6707929ab}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!interpolated\_solid\_p@{interpolated\_solid\_p}}
 \index{interpolated\_solid\_p@{interpolated\_solid\_p}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{interpolated\_solid\_p()}{interpolated\_solid\_p()}}
-{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::interpolated\+\_\+solid\+\_\+p (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::interpolated\+\_\+solid\+\_\+p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -251,21 +256,21 @@ Return the interpolated\+\_\+solid\+\_\+pressure.
 
 
 
-Definition at line 1236 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l01236}{1236}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References nsolid\+\_\+pres(), s, solid\+\_\+p(), and solid\+\_\+pshape().
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l01236}{interpolated\+\_\+solid\+\_\+p()}}, \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a4cfeab9fe5e9c26fcf39659bacc53a8f}{nsolid\+\_\+pres()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aeb03a2cef37040790d5d9dacafb89144}{solid\+\_\+p()}}, and \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ab93f05b37f8bee3a8f390e33cbcd3a6e}{solid\+\_\+pshape()}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure(), and output().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l01236}{interpolated\+\_\+solid\+\_\+p()}}, and \mbox{\hyperlink{axisym__solid__elements_8h_source_l01263}{output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7d38dd422ad492ad99bda7abac207738}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7d38dd422ad492ad99bda7abac207738}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!is\_incompressible@{is\_incompressible}}
 \index{is\_incompressible@{is\_incompressible}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{is\_incompressible()}{is\_incompressible()}}
-{\footnotesize\ttfamily bool oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::is\+\_\+incompressible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::is\+\_\+incompressible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -273,17 +278,17 @@ Return whether the material is incompressible.
 
 
 
-Definition at line 747 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00747}{747}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References Incompressible.
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00667}{Incompressible}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a4cfeab9fe5e9c26fcf39659bacc53a8f}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a4cfeab9fe5e9c26fcf39659bacc53a8f}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!nsolid\_pres@{nsolid\_pres}}
 \index{nsolid\_pres@{nsolid\_pres}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{nsolid\_pres()}{nsolid\_pres()}}
-{\footnotesize\ttfamily virtual unsigned oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::nsolid\+\_\+pres (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual unsigned oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::nsolid\+\_\+pres (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -291,17 +296,17 @@ Return the number of solid pressure degrees of freedom.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_ac39d97adf69f12b20640ae10aeaec156}{oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_ac39d97adf69f12b20640ae10aeaec156}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure(), and interpolated\+\_\+solid\+\_\+p().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}, and \mbox{\hyperlink{axisym__solid__elements_8h_source_l01236}{interpolated\+\_\+solid\+\_\+p()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ad5018c9a6f9236f13c6df43df87336aa}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ad5018c9a6f9236f13c6df43df87336aa}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -313,21 +318,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a72cddd09f8ddbee
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a8f09df5914ea8dbb6ba7041bd6be15bd}{oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a8f09df5914ea8dbb6ba7041bd6be15bd}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure}}.
 
 
 
-Definition at line 1298 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l01298}{1298}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a3a6d03fa236a2e0173abbc1734799d19}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a3a6d03fa236a2e0173abbc1734799d19}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -339,21 +344,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_adfaee690bb0608f
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a273e1cfc1185192fcb9cc3812360c87e}{oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a273e1cfc1185192fcb9cc3812360c87e}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure}}.
 
 
 
-Definition at line 1305 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l01305}{1305}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References i, oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), and s.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aba49f4147fb78fa74cd591b4a77eab98}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aba49f4147fb78fa74cd591b4a77eab98}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -365,25 +370,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a2ad98a3d2ef4999
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a1df3ba1290d73dd33634d5b99993dee7}{oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a1df3ba1290d73dd33634d5b99993dee7}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure}}.
 
 
 
-Definition at line 1257 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l01257}{1257}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::output().
+References \mbox{\hyperlink{elements_8h_source_l03055}{oomph\+::\+Finite\+Element\+::output()}}.
 
 
 
-Referenced by oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure\+::output().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l01408}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a6916b3f7784015c263556565b2a7219d}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a6916b3f7784015c263556565b2a7219d}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!output@{output}}
 \index{output@{output}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -395,21 +400,21 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_afa9d9b2670f999b
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_aa7bf745c0767590c36a761d3a6399e57}{oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_aa7bf745c0767590c36a761d3a6399e57}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure}}.
 
 
 
-Definition at line 1263 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l01263}{1263}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References i, interpolated\+\_\+solid\+\_\+p(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), and s.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l01236}{interpolated\+\_\+solid\+\_\+p()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9c2a4524a6de7ce842a6fc0c3c810e9}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_af9c2a4524a6de7ce842a6fc0c3c810e9}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!set\_compressible@{set\_compressible}}
 \index{set\_compressible@{set\_compressible}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{set\_compressible()}{set\_compressible()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::set\+\_\+compressible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::set\+\_\+compressible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -417,17 +422,17 @@ Set the material to be compressible.
 
 
 
-Definition at line 759 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00759}{759}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References Incompressible.
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00667}{Incompressible}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a731e0c99343554529ab5e41bad4a454d}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a731e0c99343554529ab5e41bad4a454d}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!set\_incompressible@{set\_incompressible}}
 \index{set\_incompressible@{set\_incompressible}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{set\_incompressible()}{set\_incompressible()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::set\+\_\+incompressible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::set\+\_\+incompressible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -435,17 +440,17 @@ Set the material to be incompressible.
 
 
 
-Definition at line 753 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00753}{753}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-References Incompressible.
+References \mbox{\hyperlink{axisym__solid__elements_8h_source_l00667}{Incompressible}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aeb03a2cef37040790d5d9dacafb89144}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_aeb03a2cef37040790d5d9dacafb89144}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!solid\_p@{solid\_p}}
 \index{solid\_p@{solid\_p}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{solid\_p()}{solid\_p()}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::solid\+\_\+p (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::solid\+\_\+p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -453,31 +458,35 @@ Return the lth solid pressures.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a43a3e699d4e958d00d5ebc20ff23827b}{oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a43a3e699d4e958d00d5ebc20ff23827b}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure(), and interpolated\+\_\+solid\+\_\+p().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}, and \mbox{\hyperlink{axisym__solid__elements_8h_source_l01236}{interpolated\+\_\+solid\+\_\+p()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7b77ffb084d0967b1220898613718d0b}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a7b77ffb084d0967b1220898613718d0b}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!solid\_p\_local\_eqn@{solid\_p\_local\_eqn}}
 \index{solid\_p\_local\_eqn@{solid\_p\_local\_eqn}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{solid\_p\_local\_eqn()}{solid\_p\_local\_eqn()}}
-{\footnotesize\ttfamily virtual int oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::solid\+\_\+p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual int oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::solid\+\_\+p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
 
 Access function that returns the local equation number for the n-\/th solid pressure value. 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a8c9fa9511418570fab627362609235d0}{oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure}}.
+
+
+Implemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_a8c9fa9511418570fab627362609235d0}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ab93f05b37f8bee3a8f390e33cbcd3a6e}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ab93f05b37f8bee3a8f390e33cbcd3a6e}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!solid\_pshape@{solid\_pshape}}
 \index{solid\_pshape@{solid\_pshape}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{solid\_pshape()}{solid\_pshape()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::solid\+\_\+pshape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::solid\+\_\+pshape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
 
 
 
@@ -485,17 +494,17 @@ Return the solid pressure shape functions.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_acc96f08aadc9568d283dbe09ce06d643}{oomph\+::\+Axisym\+Q\+P\+V\+D\+Element\+With\+Pressure}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1AxisymQPVDElementWithPressure_acc96f08aadc9568d283dbe09ce06d643}{oomph\+::\+Axisym\+QPVDElement\+With\+Pressure}}.
 
 
 
-Referenced by interpolated\+\_\+solid\+\_\+p(), and solid\+\_\+pshape\+\_\+at\+\_\+knot().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l01236}{interpolated\+\_\+solid\+\_\+p()}}, and \mbox{\hyperlink{axisym__solid__elements_8cc_source_l00035}{solid\+\_\+pshape\+\_\+at\+\_\+knot()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2c423c3bfbc0debcf041f11fc24d1510}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2c423c3bfbc0debcf041f11fc24d1510}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!solid\_pshape\_at\_knot@{solid\_pshape\_at\_knot}}
 \index{solid\_pshape\_at\_knot@{solid\_pshape\_at\_knot}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{solid\_pshape\_at\_knot()}{solid\_pshape\_at\_knot()}}
-{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::solid\+\_\+pshape\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::solid\+\_\+pshape\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -503,15 +512,15 @@ Return the stored solid shape functions at the knots.
 
 Solid pressure shape function evaluated at integration point. 
 
-Definition at line 35 of file axisym\+\_\+solid\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8cc_source_l00035}{35}} of file \mbox{\hyperlink{axisym__solid__elements_8cc_source}{axisym\+\_\+solid\+\_\+elements.\+cc}}.
 
 
 
-References i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Integral\+::knot(), s, and solid\+\_\+pshape().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{classoomph_1_1AxisymmetricPVDEquationsWithPressure_ab93f05b37f8bee3a8f390e33cbcd3a6e}{solid\+\_\+pshape()}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}.
 
 
 
@@ -520,7 +529,7 @@ Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!Constitutive\_law\_pt@{Constitutive\_law\_pt}}
 \index{Constitutive\_law\_pt@{Constitutive\_law\_pt}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{Constitutive\_law\_pt}{Constitutive\_law\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1ConstitutiveLaw}{Constitutive\+Law}}$\ast$ oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::\+Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Constitutive\+Law$\ast$ oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::\+Constitutive\+\_\+law\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -528,17 +537,17 @@ Pointer to constitutive law.
 
 
 
-Definition at line 664 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00664}{664}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-Referenced by constitutive\+\_\+law\+\_\+pt(), and get\+\_\+stress().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00688}{constitutive\+\_\+law\+\_\+pt()}}, and \mbox{\hyperlink{axisym__solid__elements_8h_source_l00695}{get\+\_\+stress()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2ceef4a0290f5b475c99dd26721659d0}\label{classoomph_1_1AxisymmetricPVDEquationsWithPressure_a2ceef4a0290f5b475c99dd26721659d0}} 
 \index{oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}!Incompressible@{Incompressible}}
 \index{Incompressible@{Incompressible}!oomph::AxisymmetricPVDEquationsWithPressure@{oomph::AxisymmetricPVDEquationsWithPressure}}
 \doxysubsubsection{\texorpdfstring{Incompressible}{Incompressible}}
-{\footnotesize\ttfamily bool oomph\+::\+Axisymmetric\+P\+V\+D\+Equations\+With\+Pressure\+::\+Incompressible\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Axisymmetric\+PVDEquations\+With\+Pressure\+::\+Incompressible\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -546,11 +555,11 @@ Boolean to determine whether the solid is incompressible or not.
 
 
 
-Definition at line 667 of file axisym\+\_\+solid\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{axisym__solid__elements_8h_source_l00667}{667}} of file \mbox{\hyperlink{axisym__solid__elements_8h_source}{axisym\+\_\+solid\+\_\+elements.\+h}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure(), is\+\_\+incompressible(), set\+\_\+compressible(), and set\+\_\+incompressible().
+Referenced by \mbox{\hyperlink{axisym__solid__elements_8h_source_l00792}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axisym\+\_\+pvd\+\_\+with\+\_\+pressure()}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l00747}{is\+\_\+incompressible()}}, \mbox{\hyperlink{axisym__solid__elements_8h_source_l00759}{set\+\_\+compressible()}}, and \mbox{\hyperlink{axisym__solid__elements_8h_source_l00753}{set\+\_\+incompressible()}}.
 
 
 

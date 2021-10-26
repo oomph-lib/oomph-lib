@@ -3,14 +3,14 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement}{oomph\+::\+Axisymmetric\+Q\+Advection\+Crouzeix\+Raviart\+Element}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01AxisymmetricQAdvectionCrouzeixRaviartElement_01_4}{oomph\+::\+Face\+Geometry$<$ Axisymmetric\+Q\+Advection\+Crouzeix\+Raviart\+Element $>$}}
+class \mbox{\hyperlink{classoomph_1_1AxisymmetricQAdvectionCrouzeixRaviartElement}{oomph\+::\+Axisymmetric\+QAdvection\+Crouzeix\+Raviart\+Element}}
+\begin{DoxyCompactList}\small\item\em A class that solves the Boussinesq approximation of the Navier--Stokes and energy equations by coupling two pre-\/existing classes. The QAdvection\+Diffusion\+Reaction\+Element with bi-\/quadratic interpolation for the scalar variables (temperature and concentration) and QCrouzeix\+Raviart\+Element which solves the Navier--Stokes equations using bi-\/quadratic interpolation for the velocities and a discontinuous bi-\/linear interpolation for the pressure. Note that we are free to choose the order in which we store the variables at the nodes. In this case we choose to store the variables in the order fluid velocities followed by temperature. We must, therefore, overload the function Advection\+Diffusion\+Reaction\+Equations$<$2,\+DIM$>$\+::u\+\_\+index\+\_\+adv\+\_\+diff\+\_\+react() to indicate that the temperature is stored at the DIM-\/th position not the 0-\/th. We do not need to overload the corresponding function in the Navier\+Stokes\+Equations$<$\+DIM$>$ class because the velocities are stored first. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01AxisymmetricQAdvectionCrouzeixRaviartElement_01_4}{oomph\+::\+Face\+Geometry$<$ Axisymmetric\+QAdvection\+Crouzeix\+Raviart\+Element $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of the 2D Double\+Buoyant Crouzeix\+\_\+\+Raviart elements. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01AxisymmetricQAdvectionCrouzeixRaviartElement_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Axisymmetric\+Q\+Advection\+Crouzeix\+Raviart\+Element $>$ $>$}}
+class \mbox{\hyperlink{classoomph_1_1FaceGeometry_3_01FaceGeometry_3_01AxisymmetricQAdvectionCrouzeixRaviartElement_01_4_01_4}{oomph\+::\+Face\+Geometry$<$ Face\+Geometry$<$ Axisymmetric\+QAdvection\+Crouzeix\+Raviart\+Element $>$ $>$}}
 \begin{DoxyCompactList}\small\item\em Face geometry of the 2D Double\+Buoyant Crouzeix\+\_\+\+Raviart elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
 \end{DoxyCompactItemize}

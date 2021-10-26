@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4}{}\doxysection{oomph\+::T\+Bubble\+Enriched\+Element$<$ D\+IM, 3 $>$ Class Template Reference}
+\hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4}{}\doxysection{oomph\+::TBubble\+Enriched\+Element\texorpdfstring{$<$}{<} DIM, 3 \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4}\index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
+
+
+Enriched \mbox{\hyperlink{classoomph_1_1TElement}{TElement}} class specialised to two spatial dimensions and three nodes per side (quadratic element) Ordering of nodes as in Zienkiwizc sketches\+: vertex nodes 0 -\/ 1 -\/ 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. The idea is that we inherit from the existing \mbox{\hyperlink{classoomph_1_1TElement}{TElement$<$2,3$>$}}, add the single extra node at the centroid and overload the shape functions to be those corresponding to the enriched element.  
+
+
 
 
 {\ttfamily \#include $<$Telements.\+h$>$}
 
-Inheritance diagram for oomph\+::T\+Bubble\+Enriched\+Element$<$ D\+IM, 3 $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::TBubble\+Enriched\+Element\texorpdfstring{$<$}{<} DIM, 3 \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.481482cm]{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4}
@@ -13,38 +18,37 @@ Inheritance diagram for oomph\+::T\+Bubble\+Enriched\+Element$<$ D\+IM, 3 $>$\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_ad7b4bb73defa6c522acf3f08c4b73027}{T\+Bubble\+Enriched\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_ad7b4bb73defa6c522acf3f08c4b73027}{TBubble\+Enriched\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a7dbc888e1901bc871449633d109bf705}{T\+Bubble\+Enriched\+Element}} (const \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{T\+Bubble\+Enriched\+Element}} \&)
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a1ceeaf3bd32ff9c5e22c234faba450c2}{TBubble\+Enriched\+Element}} (const \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a94fae605fd85dca13c1f491e897b792c}{$\sim$\+T\+Bubble\+Enriched\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a94fae605fd85dca13c1f491e897b792c}{$\sim$\+TBubble\+Enriched\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a874e11ea0e72ee05ac9de81e3ba7fe97}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a874e11ea0e72ee05ac9de81e3ba7fe97}{shape}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Calculate the geometric shape functions at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_abf68d2c613e7876e949bbd61765d0c91}{dshape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids) const
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_abf68d2c613e7876e949bbd61765d0c91}{dshape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids) const
 \begin{DoxyCompactList}\small\item\em Compute the geometric shape functions and derivatives w.\+r.\+t. local coordinates at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af362359deb0709dc5d42b29eaf776152}{d2shape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&d2psids) const
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af362359deb0709dc5d42b29eaf776152}{d2shape\+\_\+local}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsids, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&d2psids) const
 \begin{DoxyCompactList}\small\item\em Compute the geometric shape functions, derivatives and second derivatives w.\+r.\+t local coordinates at local coordinate s d2psids(i,0) = $ \partial^2 \psi_j / \partial s_0^2 $ d2psids(i,1) = $ \partial^2 \psi_j / \partial s_1^2 $ d2psids(i,2) = $ \partial^2 \psi_j / \partial s_0 \partial s_1 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af0da229b9fbea583877e7fa5d5992cdb}{local\+\_\+coordinate\+\_\+of\+\_\+node}} (const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}) const
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af0da229b9fbea583877e7fa5d5992cdb}{local\+\_\+coordinate\+\_\+of\+\_\+node}} (const unsigned \&j, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}) const
 \begin{DoxyCompactList}\small\item\em Return local coordinates of node j. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3297077e3bd4514380233784ce6d4a19}{build\+\_\+face\+\_\+element}} (const int \&face\+\_\+index, \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$face\+\_\+element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss}{T\+Bubble\+Enriched\+Gauss}}$<$ D\+IM, 3 $>$ \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_acd57a0473fd5ef1bd69f1a2a4ce26df6}{Default\+\_\+enriched\+\_\+integration\+\_\+scheme}}
+static \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss}{TBubble\+Enriched\+Gauss}}$<$ DIM, 3 $>$ \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_acd57a0473fd5ef1bd69f1a2a4ce26df6}{Default\+\_\+enriched\+\_\+integration\+\_\+scheme}}
 \item 
-static const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3b07ec8fd22312d11af3fc8b61609b93}{Central\+\_\+node\+\_\+on\+\_\+face}} \mbox{[}D\+IM+1\mbox{]}
+static const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a3b07ec8fd22312d11af3fc8b61609b93}{Central\+\_\+node\+\_\+on\+\_\+face}} \mbox{[}DIM+1\mbox{]}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM$>$\newline
-class oomph\+::\+T\+Bubble\+Enriched\+Element$<$ D\+I\+M, 3 $>$}
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+TBubble\+Enriched\+Element$<$ DIM, 3 $>$}
+Enriched \mbox{\hyperlink{classoomph_1_1TElement}{TElement}} class specialised to two spatial dimensions and three nodes per side (quadratic element) Ordering of nodes as in Zienkiwizc sketches\+: vertex nodes 0 -\/ 1 -\/ 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. The idea is that we inherit from the existing \mbox{\hyperlink{classoomph_1_1TElement}{TElement$<$2,3$>$}}, add the single extra node at the centroid and overload the shape functions to be those corresponding to the enriched element. 
 
-Enriched \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element}} class specialised to two spatial dimensions and three nodes per side (quadratic element) Ordering of nodes as in Zienkiwizc sketches\+: vertex nodes 0 -\/ 1 -\/ 2 anticlockwise. Midside nodes filled in progressing along the consecutive edges. Central node(s) come(s) last. The idea is that we inherit from the existing \mbox{\hyperlink{classoomph_1_1TElement}{T\+Element$<$2,3$>$}}, add the single extra node at the centroid and overload the shape functions to be those corresponding to the enriched element. 
-
-Definition at line 3651 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03621}{3621}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
@@ -53,8 +57,8 @@ Definition at line 3651 of file Telements.\+h.
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!TBubbleEnrichedElement@{TBubbleEnrichedElement}}
 \index{TBubbleEnrichedElement@{TBubbleEnrichedElement}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{TBubbleEnrichedElement()}{TBubbleEnrichedElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{T\+Bubble\+Enriched\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -62,33 +66,25 @@ Constructor.
 
 
 
-Definition at line 3664 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03634}{3634}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a7dbc888e1901bc871449633d109bf705}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a7dbc888e1901bc871449633d109bf705}} 
+\mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a1ceeaf3bd32ff9c5e22c234faba450c2}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a1ceeaf3bd32ff9c5e22c234faba450c2}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!TBubbleEnrichedElement@{TBubbleEnrichedElement}}
 \index{TBubbleEnrichedElement@{TBubbleEnrichedElement}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{TBubbleEnrichedElement()}{TBubbleEnrichedElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{T\+Bubble\+Enriched\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
 
-
-
-Definition at line 3676 of file Telements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
-
 \mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a94fae605fd85dca13c1f491e897b792c}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a94fae605fd85dca13c1f491e897b792c}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!````~TBubbleEnrichedElement@{$\sim$TBubbleEnrichedElement}}
 \index{````~TBubbleEnrichedElement@{$\sim$TBubbleEnrichedElement}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$TBubbleEnrichedElement()}{~TBubbleEnrichedElement()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{T\+Bubble\+Enriched\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{TBubble\+Enriched\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -96,7 +92,7 @@ Broken assignment operator.
 
 Destructor 
 
-Definition at line 3688 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03652}{3652}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
@@ -105,8 +101,8 @@ Definition at line 3688 of file Telements.\+h.
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!build\_face\_element@{build\_face\_element}}
 \index{build\_face\_element@{build\_face\_element}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{build\_face\_element()}{build\_face\_element()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::build\+\_\+face\+\_\+element (\begin{DoxyParamCaption}\item[{const int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}} $\ast$}]{face\+\_\+element\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
@@ -116,8 +112,8 @@ Build the lower-\/dimensional \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!d2shape\_local@{d2shape\_local}}
 \index{d2shape\_local@{d2shape\_local}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{d2shape\_local()}{d2shape\_local()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::d2shape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::d2shape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{d2psids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -125,18 +121,18 @@ Compute the geometric shape functions, derivatives and second derivatives w.\+r.
 
 
 
-Definition at line 3711 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03675}{3675}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References s.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_abf68d2c613e7876e949bbd61765d0c91}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_abf68d2c613e7876e949bbd61765d0c91}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!dshape\_local@{dshape\_local}}
 \index{dshape\_local@{dshape\_local}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_local()}{dshape\_local()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::dshape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::dshape\+\_\+local (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsids }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -144,18 +140,18 @@ Compute the geometric shape functions and derivatives w.\+r.\+t. local coordinat
 
 
 
-Definition at line 3698 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03662}{3662}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References s.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af0da229b9fbea583877e7fa5d5992cdb}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_af0da229b9fbea583877e7fa5d5992cdb}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!local\_coordinate\_of\_node@{local\_coordinate\_of\_node}}
 \index{local\_coordinate\_of\_node@{local\_coordinate\_of\_node}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{local\_coordinate\_of\_node()}{local\_coordinate\_of\_node()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::local\+\_\+coordinate\+\_\+of\+\_\+node (\begin{DoxyParamCaption}\item[{const unsigned \&}]{j,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -163,18 +159,18 @@ Return local coordinates of node j.
 
 
 
-Definition at line 3721 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03685}{3685}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References s.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a874e11ea0e72ee05ac9de81e3ba7fe97}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_a874e11ea0e72ee05ac9de81e3ba7fe97}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!shape@{shape}}
 \index{shape@{shape}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{shape()}{shape()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -182,11 +178,11 @@ Calculate the geometric shape functions at local coordinate s.
 
 
 
-Definition at line 3691 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03655}{3655}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References s, and oomph\+::\+One\+Dim\+Lagrange\+::shape().
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{shape_8h_source_l00564}{oomph\+::\+One\+Dim\+Lagrange\+::shape()}}.
 
 
 
@@ -195,23 +191,23 @@ References s, and oomph\+::\+One\+Dim\+Lagrange\+::shape().
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!Central\_node\_on\_face@{Central\_node\_on\_face}}
 \index{Central\_node\_on\_face@{Central\_node\_on\_face}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{Central\_node\_on\_face}{Central\_node\_on\_face}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::Central\+\_\+node\+\_\+on\+\_\+face\mbox{[}D\+IM+1\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+const unsigned \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::Central\+\_\+node\+\_\+on\+\_\+face\mbox{[}DIM+1\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
-Definition at line 3660 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03630}{3630}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_acd57a0473fd5ef1bd69f1a2a4ce26df6}\label{classoomph_1_1TBubbleEnrichedElement_3_01DIM_00_013_01_4_acd57a0473fd5ef1bd69f1a2a4ce26df6}} 
 \index{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}!Default\_enriched\_integration\_scheme@{Default\_enriched\_integration\_scheme}}
 \index{Default\_enriched\_integration\_scheme@{Default\_enriched\_integration\_scheme}!oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$@{oomph::TBubbleEnrichedElement$<$ DIM, 3 $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_enriched\_integration\_scheme}{Default\_enriched\_integration\_scheme}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss}{T\+Bubble\+Enriched\+Gauss}}$<$ D\+IM, 3 $>$ \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+T\+Bubble\+Enriched\+Element}}$<$ D\+IM, 3 $>$\+::Default\+\_\+enriched\+\_\+integration\+\_\+scheme\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1TBubbleEnrichedGauss}{TBubble\+Enriched\+Gauss}}$<$ DIM, 3 $>$ \mbox{\hyperlink{classoomph_1_1TBubbleEnrichedElement}{oomph\+::\+TBubble\+Enriched\+Element}}$<$ DIM, 3 $>$\+::Default\+\_\+enriched\+\_\+integration\+\_\+scheme\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
-Definition at line 3657 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l03627}{3627}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 

@@ -2,6 +2,11 @@
 \label{classoomph_1_1SurfaceDerivatives}\index{oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}}
 
 
+Class that establishes the surface derivative functions for Surface\+Interface\+Elements (2D surfaces in 3D space) These are defined in a separate class so that they can be used by other interface equation-\/type classes.  
+
+
+
+
 {\ttfamily \#include $<$interface\+\_\+elements.\+h$>$}
 
 Inheritance diagram for oomph\+::Surface\+Derivatives\+:\begin{figure}[H]
@@ -18,14 +23,14 @@ Inheritance diagram for oomph\+::Surface\+Derivatives\+:\begin{figure}[H]
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1SurfaceDerivatives_a44e841bfa4ad82dcb87e672c821ffde7}{compute\+\_\+surface\+\_\+derivatives}} (const Shape \&\mbox{\hyperlink{surface__theory_8txt_a778489f3b8ca18a936dc9fa53e7994da}{psi}}, const D\+Shape \&dpsids, const Dense\+Matrix$<$ double $>$ \&interpolated\+\_\+t, const Vector$<$ double $>$ \&interpolated\+\_\+x, D\+Shape \&surface\+\_\+gradient, D\+Shape \&surface\+\_\+divergence)
+double \mbox{\hyperlink{classoomph_1_1SurfaceDerivatives_a44e841bfa4ad82dcb87e672c821ffde7}{compute\+\_\+surface\+\_\+derivatives}} (const Shape \&psi, const DShape \&dpsids, const Dense\+Matrix$<$ double $>$ \&interpolated\+\_\+t, const Vector$<$ double $>$ \&interpolated\+\_\+x, DShape \&surface\+\_\+gradient, DShape \&surface\+\_\+divergence)
 \begin{DoxyCompactList}\small\item\em Fill in the specific surface derivative calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class that establishes the surface derivative functions for Surface\+Interface\+Elements (2D surfaces in 3D space) These are defined in a separate class so that they can be used by other interface equation-\/type classes. 
 
-Definition at line 708 of file interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00708}{708}} of file \mbox{\hyperlink{interface__elements_8h_source}{interface\+\_\+elements.\+h}}.
 
 
 
@@ -38,7 +43,7 @@ Definition at line 708 of file interface\+\_\+elements.\+h.
 
 
 
-Definition at line 712 of file interface\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{interface__elements_8h_source_l00712}{712}} of file \mbox{\hyperlink{interface__elements_8h_source}{interface\+\_\+elements.\+h}}.
 
 
 
@@ -47,19 +52,17 @@ Definition at line 712 of file interface\+\_\+elements.\+h.
 \index{oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}!compute\_surface\_derivatives@{compute\_surface\_derivatives}}
 \index{compute\_surface\_derivatives@{compute\_surface\_derivatives}!oomph::SurfaceDerivatives@{oomph::SurfaceDerivatives}}
 \doxysubsubsection{\texorpdfstring{compute\_surface\_derivatives()}{compute\_surface\_derivatives()}}
-{\footnotesize\ttfamily double oomph\+::\+Surface\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const Shape \&}]{psi,  }\item[{const D\+Shape \&}]{dpsids,  }\item[{const Dense\+Matrix$<$ double $>$ \&}]{interpolated\+\_\+t,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{D\+Shape \&}]{surface\+\_\+gradient,  }\item[{D\+Shape \&}]{surface\+\_\+divergence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily double oomph\+::\+Surface\+Derivatives\+::compute\+\_\+surface\+\_\+derivatives (\begin{DoxyParamCaption}\item[{const Shape \&}]{psi,  }\item[{const DShape \&}]{dpsids,  }\item[{const Dense\+Matrix$<$ double $>$ \&}]{interpolated\+\_\+t,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{DShape \&}]{dpsidS,  }\item[{DShape \&}]{dpsid\+S\+\_\+div }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
 Fill in the specific surface derivative calculations. 
 
-Specialise the surface derivatives for 2D surface case. 
+///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////
 
-Definition at line 847 of file interface\+\_\+elements.\+cc.
+Specialise the surface derivatives for 2D surface case 
 
-
-
-References al(), and psi.
+Definition at line \mbox{\hyperlink{interface__elements_8cc_source_l00847}{847}} of file \mbox{\hyperlink{interface__elements_8cc_source}{interface\+\_\+elements.\+cc}}.
 
 
 

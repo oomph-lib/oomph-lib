@@ -47,9 +47,9 @@ namespace oomph
   };
 
 
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
 
 
   // Forward references
@@ -57,19 +57,19 @@ namespace oomph
   class NonRefineableBinArray;
 
 
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////
 
 
   //=========================================================================
-  /// \short Helper object for dealing with the parameters used for the
+  /// Helper object for dealing with the parameters used for the
   /// SamplePointContainer objects
   //=========================================================================
   class SamplePointContainerParameters
   {
   public:
-    /// \short Constructor is private and only accessible by friends
+    /// Constructor is private and only accessible by friends
     /// to ensure that parameters are set correctly
     friend class BinArrayParameters;
     friend class RefineableBinArrayParameters;
@@ -78,18 +78,12 @@ namespace oomph
     friend class CGALSamplePointContainerParameters;
 #endif
 
-    /// \short Broken copy constructor.
-    SamplePointContainerParameters(const SamplePointContainerParameters& data)
-    {
-      BrokenCopy::broken_copy("SamplePointContainerParameters");
-    }
+    /// Broken copy constructor.
+    SamplePointContainerParameters(const SamplePointContainerParameters& data) =
+      delete;
 
     /// Broken assignment operator.
-    void operator=(const SamplePointContainerParameters&)
-    {
-      BrokenCopy::broken_assign("SamplePointContainerParameters");
-    }
-
+    void operator=(const SamplePointContainerParameters&) = delete;
 
     /// Empty destructor
     virtual ~SamplePointContainerParameters() {}
@@ -100,7 +94,7 @@ namespace oomph
       return Mesh_pt;
     }
 
-    /// \short Vector of pairs of doubles for min and maximum coordinates.
+    /// Vector of pairs of doubles for min and maximum coordinates.
     /// Call: Min_and_max_coordinates[j] gives me the
     /// pair of min (first) and max. (second) coordinates in the j-th
     /// coordinate direction.
@@ -109,7 +103,7 @@ namespace oomph
       return Min_and_max_coordinates;
     }
 
-    /// \short Vector of pairs of doubles for min and maximum coordinates.
+    /// Vector of pairs of doubles for min and maximum coordinates.
     /// Call: Min_and_max_coordinates[j] gives me the
     /// pair of min (first) and max. (second) coordinates in the j-th
     /// coordinate direction. Const version
@@ -118,7 +112,7 @@ namespace oomph
       return Min_and_max_coordinates;
     }
 
-    /// \short "Measure of" number of sample points generated in each element
+    /// "Measure of" number of sample points generated in each element
     /// const version
     unsigned nsample_points_generated_per_element() const
     {
@@ -131,7 +125,7 @@ namespace oomph
       return Nsample_points_generated_per_element;
     }
 
-    /// \short Use eulerian coordinates (via interpolated_x) during
+    /// Use eulerian coordinates (via interpolated_x) during
     /// setup (otherwise use interpolated_zeta())?
     bool use_eulerian_coordinates_during_setup() const
     {
@@ -186,12 +180,12 @@ namespace oomph
     /// "Measure of" number of sample points generated in each element
     unsigned Nsample_points_generated_per_element;
 
-    /// \short Use Eulerian coordinates to setup bin (i.e. use interpolated_x()
+    /// Use Eulerian coordinates to setup bin (i.e. use interpolated_x()
     /// rather than interpolated_zeta() when setting up and searching sample
     /// point container)
     bool Use_eulerian_coordinates_during_setup;
 
-    /// \short Ignore halo elements? Accepting halo elements can drastically
+    /// Ignore halo elements? Accepting halo elements can drastically
     /// reduce the number of external halo elements in multidomain
     /// problems -- currently not aware of any problems with doing this
     /// therefore set to false by default but retention
@@ -200,7 +194,7 @@ namespace oomph
 
 
   private:
-    /// \short Constructor: Pass mesh.
+    /// Constructor: Pass mesh.
     /// Constructor is private and can only be called
     /// by the derived friends.
     SamplePointContainerParameters(Mesh* mesh_pt)
@@ -212,7 +206,7 @@ namespace oomph
     {
     }
 
-    /// \short Broken default constructor; needed for broken
+    /// Broken default constructor; needed for broken
     /// copy constructors. Don't call. It will die.
     SamplePointContainerParameters()
     {
@@ -224,14 +218,14 @@ namespace oomph
   };
 
 
-  //////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
 
 #ifdef OOMPH_HAS_CGAL
 
   //=========================================================================
-  /// \short Helper object for dealing with the parameters used for the
+  /// Helper object for dealing with the parameters used for the
   /// CGALSamplePointContainer objects
   //=========================================================================
   class CGALSamplePointContainerParameters
@@ -245,29 +239,23 @@ namespace oomph
     }
 
 
-    /// \short Broken copy constructor.
+    /// Broken copy constructor.
     CGALSamplePointContainerParameters(
-      const CGALSamplePointContainerParameters& data)
-    {
-      BrokenCopy::broken_copy("CGALSamplePointContainerParameters");
-    }
+      const CGALSamplePointContainerParameters& data) = delete;
 
     /// Broken assignment operator.
-    void operator=(const CGALSamplePointContainerParameters&)
-    {
-      BrokenCopy::broken_assign("CGALSamplePointContainerParameters");
-    }
+    void operator=(const CGALSamplePointContainerParameters&) = delete;
   };
 
 #endif
 
-  //////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
 
 
   //=========================================================================
-  /// \short Helper object for dealing with the parameters used for the
+  /// Helper object for dealing with the parameters used for the
   /// BinArray objects
   //=========================================================================
   class BinArrayParameters : public virtual SamplePointContainerParameters
@@ -277,45 +265,39 @@ namespace oomph
     friend class RefineableBinArrayParameters;
     friend class NonRefineableBinArrayParameters;
 
-    /// \short Broken copy constructor.
-    BinArrayParameters(const BinArrayParameters& data)
-    {
-      BrokenCopy::broken_copy("BinArrayParameters");
-    }
+    /// Broken copy constructor.
+    BinArrayParameters(const BinArrayParameters& data) = delete;
 
     /// Broken assignment operator.
-    void operator=(const BinArrayParameters&)
-    {
-      BrokenCopy::broken_assign("BinArrayParameters");
-    }
+    void operator=(const BinArrayParameters&) = delete;
 
     /// Empty destructor
     virtual ~BinArrayParameters() {}
 
-    /// \short Number of bins in each coordinate direction
+    /// Number of bins in each coordinate direction
     Vector<unsigned>& dimensions_of_bin_array()
     {
       return Dimensions_of_bin_array;
     }
 
-    /// \short Number of bins in each coordinate direction. Const version
+    /// Number of bins in each coordinate direction. Const version
     Vector<unsigned> dimensions_of_bin_array() const
     {
       return Dimensions_of_bin_array;
     }
 
   protected:
-    /// \short Number of bins in each coordinate direction
+    /// Number of bins in each coordinate direction
     Vector<unsigned> Dimensions_of_bin_array;
 
   private:
-    /// \short Constructor: Pass mesh. Constructor is private and can only
+    /// Constructor: Pass mesh. Constructor is private and can only
     /// be called by the derived friends.
     BinArrayParameters(Mesh* mesh_pt) : SamplePointContainerParameters(mesh_pt)
     {
     }
 
-    /// \short Broken default constructor; needed for broken
+    /// Broken default constructor; needed for broken
     /// copy constructors. Don't call. It will die.
     BinArrayParameters()
     {
@@ -327,13 +309,13 @@ namespace oomph
   };
 
 
-  //////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
 
 
   //=========================================================================
-  /// \short Helper object for dealing with the parameters used for the
+  /// Helper object for dealing with the parameters used for the
   /// RefineableBinArray objects
   //=========================================================================
   class RefineableBinArrayParameters : public virtual BinArrayParameters
@@ -352,17 +334,12 @@ namespace oomph
     {
     }
 
-    /// \short Broken copy constructor.
-    RefineableBinArrayParameters(const RefineableBinArrayParameters& data)
-    {
-      BrokenCopy::broken_copy("RefineableBinArrayParameters");
-    }
+    /// Broken copy constructor.
+    RefineableBinArrayParameters(const RefineableBinArrayParameters& data) =
+      delete;
 
     /// Broken assignment operator.
-    void operator=(const RefineableBinArrayParameters&)
-    {
-      BrokenCopy::broken_assign("RefineableBinArrayParameters");
-    }
+    void operator=(const RefineableBinArrayParameters&) = delete;
 
     /// Empty destructor
     virtual ~RefineableBinArrayParameters() {}
@@ -386,40 +363,40 @@ namespace oomph
       Bin_array_is_recursive = false;
     }
 
-    /// \short Variable which stores the Depth value of the bin_array.
+    /// Variable which stores the Depth value of the bin_array.
     unsigned& depth()
     {
       return Depth;
     }
 
-    /// \short Variable which stores the Depth value of the bin_array.
+    /// Variable which stores the Depth value of the bin_array.
     /// const version
     unsigned depth() const
     {
       return Depth;
     }
 
-    /// \short Max. depth value of the bin_array.
+    /// Max. depth value of the bin_array.
     unsigned& max_depth()
     {
       return Max_depth;
     }
 
-    /// \short Max. depth value of the bin_array.
+    /// Max. depth value of the bin_array.
     /// const version
     unsigned max_depth() const
     {
       return Max_depth;
     }
 
-    /// \short Maximum number of sample points in bin (before it's subdivided
+    /// Maximum number of sample points in bin (before it's subdivided
     /// recursively)
     unsigned& max_number_of_sample_point_per_bin()
     {
       return Max_number_of_sample_point_per_bin;
     }
 
-    /// \short Maximum number of sample points in bin (before it's subdivided
+    /// Maximum number of sample points in bin (before it's subdivided
     /// recursively; const version
     unsigned max_number_of_sample_point_per_bin() const
     {
@@ -445,19 +422,19 @@ namespace oomph
     static unsigned Default_max_number_of_sample_point_per_bin;
 
   private:
-    /// \short Variable which stores if the RefineableBinArray is
+    /// Variable which stores if the RefineableBinArray is
     /// recursive or not.
     bool Bin_array_is_recursive;
 
-    /// \short Variable which stores the Depth value of the bin_array. Useful
+    /// Variable which stores the Depth value of the bin_array. Useful
     /// for debugging and for preventing "infinite" recursion in case if there
     /// is a problem.
     unsigned Depth;
 
-    /// \short Max. depth value of the bin_array.
+    /// Max. depth value of the bin_array.
     unsigned Max_depth;
 
-    /// \short Maximum number of sample points in bin (before its subdivided
+    /// Maximum number of sample points in bin (before its subdivided
     /// recursively
     unsigned Max_number_of_sample_point_per_bin;
 
@@ -466,13 +443,13 @@ namespace oomph
   };
 
 
-  //////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////
 
 
   //=========================================================================
-  /// \short Helper object for dealing with the parameters used for the
+  /// Helper object for dealing with the parameters used for the
   /// NonRefineableBinArray objects
   //=========================================================================
   class NonRefineableBinArrayParameters : public virtual BinArrayParameters
@@ -486,41 +463,36 @@ namespace oomph
     {
     }
 
-    /// \short Broken copy constructor.
-    NonRefineableBinArrayParameters(const NonRefineableBinArrayParameters& data)
-    {
-      BrokenCopy::broken_copy("NonRefineableBinArrayParameters");
-    }
+    /// Broken copy constructor.
+    NonRefineableBinArrayParameters(
+      const NonRefineableBinArrayParameters& data) = delete;
 
     /// Broken assignment operator.
-    void operator=(const NonRefineableBinArrayParameters&)
-    {
-      BrokenCopy::broken_assign("NonRefineableBinArrayParameters");
-    }
+    void operator=(const NonRefineableBinArrayParameters&) = delete;
 
     /// Empty destructor
     virtual ~NonRefineableBinArrayParameters() {}
 
-    /// \short Number of spirals that are being
+    /// Number of spirals that are being
     /// visited before doing another circular mpi communication
     /// const version
     unsigned nspiral_chunk() const
     {
       return Nspiral_chunk;
     }
-    /// \short Number of spirals that are being
+    /// Number of spirals that are being
     /// visited before doing another circular mpi communication
     unsigned& nspiral_chunk()
     {
       return Nspiral_chunk;
     }
 
-    /// \short Default value for number of spirals that are being
+    /// Default value for number of spirals that are being
     /// visited before doing another circular mpi communication
     static unsigned Default_nspiral_chunk;
 
   private:
-    /// \short Number of spirals that are being
+    /// Number of spirals that are being
     /// visited before doing another circular mpi communication
     unsigned Nspiral_chunk;
   };

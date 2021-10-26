@@ -4,19 +4,19 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classoomph_1_1ExplicitTimeSteppableObject}{oomph\+::\+Explicit\+Time\+Steppable\+Object}}
-\item 
+\begin{DoxyCompactList}\small\item\em Class for objects than can be advanced in time by an Explicit Timestepper. WARNING\+: For explicit time stepping to work the object\textquotesingle{}s residual function (as used by get\+\_\+inverse\+\_\+mass\+\_\+matrix\+\_\+times\+\_\+residuals(..)) MUST be in the form r = f(t, u) -\/ \mbox{[}timestepper approximation to dudt\mbox{]}! Standard implicit time stepping will work with plenty of residuals that don\textquotesingle{}t fit into this form. Some examples where implicit time stepping will work fine but explicit will fail\+: 1) The negation of the above formula, this implementation will end up using dudt = -\/ f(u,t). 2) A residual which is implicit or non-\/linear in dudt, such as r = dudt. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1ExplicitTimeStepper}{oomph\+::\+Explicit\+Time\+Stepper}}
 \begin{DoxyCompactList}\small\item\em A Base class for explicit timesteppers. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classoomph_1_1Euler}{oomph\+::\+Euler}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta$<$ O\+R\+D\+E\+R $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1LowStorageRungeKutta}{oomph\+::\+Low\+Storage\+Runge\+Kutta$<$ O\+R\+D\+E\+R $>$}}
-\item 
-class \mbox{\hyperlink{classoomph_1_1EBDF3}{oomph\+::\+E\+B\+D\+F3}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em =========================================================== Simple first-\/order \mbox{\hyperlink{classoomph_1_1Euler}{Euler}} Timestepping \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1RungeKutta}{oomph\+::\+Runge\+Kutta$<$ ORDER $>$}}
+\begin{DoxyCompactList}\small\item\em =========================================================== Standard Runge Kutta Timestepping \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1LowStorageRungeKutta}{oomph\+::\+Low\+Storage\+Runge\+Kutta$<$ ORDER $>$}}
+\begin{DoxyCompactList}\small\item\em =========================================================== Runge Kutta Timestepping that uses low storage \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoomph_1_1EBDF3}{oomph\+::\+EBDF3}}
+\begin{DoxyCompactList}\small\item\em =========================================================== An explicit version of BDF3 (i.\+e. uses derivative evaluation at y\+\_\+n instead of y\+\_\+\{n+1\}). Useful as a predictor because it is third order accurate but requires only one function evaluation (i.\+e. only one mass matrix inversion + residual calculation). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}

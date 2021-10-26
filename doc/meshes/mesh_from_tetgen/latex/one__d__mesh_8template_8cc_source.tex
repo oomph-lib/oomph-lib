@@ -1,0 +1,264 @@
+\hypertarget{one__d__mesh_8template_8cc_source}{}\doxysection{one\+\_\+d\+\_\+mesh.\+template.\+cc}
+\label{one__d__mesh_8template_8cc_source}\index{one\_d\_mesh.template.cc@{one\_d\_mesh.template.cc}}
+\mbox{\hyperlink{one__d__mesh_8template_8cc}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00026}00026 \textcolor{preprocessor}{\#ifndef OOMPH\_ONE\_D\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00027}00027 \textcolor{preprocessor}{\#define OOMPH\_ONE\_D\_MESH\_TEMPLATE\_CC}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00030}00030 \textcolor{comment}{// oomph-\/lib headers}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00031}00031 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{one__d__mesh_8template_8h}{one\_d\_mesh.template.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00033}00033 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00034}00034 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceoomph}{oomph}}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00035}00035 \{\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00036}00036 \textcolor{comment}{  /// The generic mesh construction routine -\/-\/-\/ this contains all the hard}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00037}00037 \textcolor{comment}{  /// work and is called by all constructors}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00038}00038 \textcolor{comment}{}  \textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00039}\mbox{\hyperlink{classoomph_1_1OneDMesh_a5a1a27eaa9d58bb85facb617127e9f0a}{00039}}   \textcolor{keywordtype}{void} \mbox{\hyperlink{classoomph_1_1OneDMesh_a5a1a27eaa9d58bb85facb617127e9f0a}{OneDMesh<ELEMENT>::build\_mesh}}(TimeStepper* time\_stepper\_pt)}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00040}00040   \{}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00041}00041     \textcolor{comment}{// Set the length of the domain}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00042}00042     Length = Xmax -\/ Xmin;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00044}00044     \textcolor{comment}{// Set the number of boundaries -\/-\/ there are 2 boundaries in a 1D mesh}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00045}00045     set\_nboundary(2);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00047}00047     \textcolor{comment}{// Allocate storage for the pointers to the elements}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00048}00048     Element\_pt.resize(N);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00050}00050     \textcolor{comment}{// Allocate memory for the first element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00051}00051     Element\_pt[0] = \textcolor{keyword}{new} ELEMENT;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00053}00053     \textcolor{comment}{// Read out the number of nodes in the element (the member function}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00054}00054     \textcolor{comment}{// nnode\_1d() is implemented in QElement)}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00055}00055     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00056}00056       \textcolor{keyword}{dynamic\_cast<}ELEMENT*\textcolor{keyword}{>}(finite\_element\_pt(0))-\/>nnode\_1d();}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00058}00058     \textcolor{comment}{// We can now allocate storage for the pointers to the nodes in the mesh}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00059}00059     Node\_pt.resize(1 + (n\_node -\/ 1) * N);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00061}00061     \textcolor{comment}{// Initialise the node counter}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00062}00062     \textcolor{keywordtype}{unsigned} node\_count = 0;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00063}00063 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00064}00064     \textcolor{comment}{// Initialise the minimum x coordinate in the mesh}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00065}00065     \textcolor{keyword}{const} \textcolor{keywordtype}{double} xinit = Xmin;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00067}00067     \textcolor{comment}{// Calculate the length of the element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00068}00068     \textcolor{keyword}{const} \textcolor{keywordtype}{double} el\_length = Length / double(N);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00070}00070     \textcolor{comment}{// Allocate storage for the local coordinate in the element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00071}00071     Vector<double> s\_fraction;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00073}00073     \textcolor{comment}{// If the number of elements is 1, the first element is also the}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00074}00074     \textcolor{comment}{// last element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00075}00075     \textcolor{keywordflow}{if} (N == 1)}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00076}00076     \{}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00077}00077       \textcolor{comment}{// Set the first node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00078}00078       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00080}00080       \textcolor{comment}{// Allocate memory for the node, using the element's own construct\_node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00081}00081       \textcolor{comment}{// function -\/-\/ only the element knows what type of nodes it needs!}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00082}00082       Node\_pt[node\_count] =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00083}00083         finite\_element\_pt(0)-\/>construct\_boundary\_node(0, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00084}00084 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00085}00085       \textcolor{comment}{// Set the position of the node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00086}00086       node\_pt(node\_count)-\/>x(0) = xinit;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00088}00088       \textcolor{comment}{// Add the node to the boundary 0}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00089}00089       add\_boundary\_node(0, Node\_pt[node\_count]);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00091}00091       \textcolor{comment}{// Increment the counter for the nodes}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00092}00092       node\_count++;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00093}00093 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00094}00094       \textcolor{comment}{// Now build central nodes (ignore last one which needs special}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00095}00095       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00096}00096       \textcolor{comment}{// treatment because it's on the boundary)}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00097}00097       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00098}00098       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} jnod = 1; jnod < (n\_node -\/ 1); jnod++)}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00099}00099       \{}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00100}00100         \textcolor{comment}{// Allocate memory for nodes, as before}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00101}00101         Node\_pt[node\_count] =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00102}00102           finite\_element\_pt(0)-\/>construct\_node(jnod, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00104}00104         \textcolor{comment}{// Get the local coordinate of the node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00105}00105         finite\_element\_pt(0)-\/>local\_fraction\_of\_node(jnod, s\_fraction);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00106}00106 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00107}00107         \textcolor{comment}{// Set the position of the node (linear mapping)}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00108}00108         node\_pt(node\_count)-\/>x(0) = xinit + el\_length * s\_fraction[0];}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00109}00109 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00110}00110         \textcolor{comment}{// Increment the node counter}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00111}00111         node\_count++;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00112}00112       \}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00113}00113 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00114}00114       \textcolor{comment}{// New final node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00115}00115       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00117}00117       \textcolor{comment}{// Allocate memory for the node, as before}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00118}00118       Node\_pt[node\_count] = finite\_element\_pt(0)-\/>construct\_boundary\_node(}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00119}00119         n\_node -\/ 1, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00120}00120 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00121}00121       \textcolor{comment}{// Set the position of the node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00122}00122       node\_pt(node\_count)-\/>x(0) = xinit + Length;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00123}00123 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00124}00124       \textcolor{comment}{// Add the node to the boundary 1}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00125}00125       add\_boundary\_node(1, Node\_pt[node\_count]);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00127}00127       \textcolor{comment}{// Increment the node counter}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00128}00128       node\_count++;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00129}00129     \}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00130}00130 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00131}00131     \textcolor{comment}{// Otherwise, i.e. if there is more than one element, build all elements}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00132}00132     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00133}00133     \{}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00134}00134       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00135}00135       \textcolor{comment}{// FIRST ELEMENT}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00136}00136       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00137}00137 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00138}00138       \textcolor{comment}{// Set the first node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00139}00139       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00140}00140 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00141}00141       \textcolor{comment}{// Allocate memory for the node, using the element's own construct\_node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00142}00142       \textcolor{comment}{// function -\/-\/ only the element knows what type of nodes it needs!}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00143}00143       Node\_pt[node\_count] =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00144}00144         finite\_element\_pt(0)-\/>construct\_boundary\_node(0, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00145}00145 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00146}00146       \textcolor{comment}{// Set the position of the node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00147}00147       node\_pt(node\_count)-\/>x(0) = xinit;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00148}00148 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00149}00149       \textcolor{comment}{// Add the node to the boundary 0}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00150}00150       add\_boundary\_node(0, Node\_pt[node\_count]);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00152}00152       \textcolor{comment}{// Increment the counter for the nodes}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00153}00153       node\_count++;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00155}00155       \textcolor{comment}{// Now build the other nodes in the first element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00156}00156       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00158}00158       \textcolor{comment}{// Loop over the other nodes in the first element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00159}00159       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} jnod = 1; jnod < n\_node; jnod++)}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00160}00160       \{}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00161}00161         \textcolor{comment}{// Allocate memory for the nodes}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00162}00162         Node\_pt[node\_count] =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00163}00163           finite\_element\_pt(0)-\/>construct\_node(jnod, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00164}00164 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00165}00165         \textcolor{comment}{// Get the local coordinate of the node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00166}00166         finite\_element\_pt(0)-\/>local\_fraction\_of\_node(jnod, s\_fraction);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00167}00167 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00168}00168         \textcolor{comment}{// Set the position of the node (linear mapping)}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00169}00169         node\_pt(node\_count)-\/>x(0) = xinit + el\_length * s\_fraction[0];}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00170}00170 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00171}00171         \textcolor{comment}{// Increment the node counter}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00172}00172         node\_count++;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00173}00173       \}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00174}00174 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00175}00175       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00176}00176       \textcolor{comment}{// CENTRAL ELEMENTS}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00177}00177       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00178}00178 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00179}00179       \textcolor{comment}{// Loop over central elements in mesh}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00180}00180       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} e = 1; e < (N -\/ 1); e++)}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00181}00181       \{}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00182}00182         \textcolor{comment}{// Allocate memory for the new element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00183}00183         Element\_pt[e] = \textcolor{keyword}{new} ELEMENT;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00184}00184 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00185}00185         \textcolor{comment}{// The first node is the same as the last node in the neighbouring}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00186}00186         \textcolor{comment}{// element on the left}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00187}00187         finite\_element\_pt(e)-\/>node\_pt(0) =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00188}00188           finite\_element\_pt(e -\/ 1)-\/>node\_pt((n\_node -\/ 1));}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00189}00189 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00190}00190         \textcolor{comment}{// Loop over the remaining nodes in the element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00191}00191         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} jnod = 1; jnod < n\_node; jnod++)}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00192}00192         \{}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00193}00193           \textcolor{comment}{// Allocate memory for the nodes, as before}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00194}00194           Node\_pt[node\_count] =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00195}00195             finite\_element\_pt(e)-\/>construct\_node(jnod, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00196}00196 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00197}00197           \textcolor{comment}{// Get the local coordinate of the nodes}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00198}00198           finite\_element\_pt(e)-\/>local\_fraction\_of\_node(jnod, s\_fraction);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00200}00200           \textcolor{comment}{// Set the position of the node (linear mapping)}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00201}00201           node\_pt(node\_count)-\/>x(0) = xinit + el\_length * (e + s\_fraction[0]);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00202}00202 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00203}00203           \textcolor{comment}{// Increment the node counter}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00204}00204           node\_count++;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00205}00205         \}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00206}00206       \} \textcolor{comment}{// End of loop over central elements}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00207}00207 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00208}00208 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00209}00209       \textcolor{comment}{// FINAL ELEMENT}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00210}00210       \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00211}00211 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00212}00212       \textcolor{comment}{// Allocate memory for element}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00213}00213       Element\_pt[N -\/ 1] = \textcolor{keyword}{new} ELEMENT;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00214}00214 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00215}00215       \textcolor{comment}{// The first node is the same as the last node in the neighbouring}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00216}00216       \textcolor{comment}{// element on the left}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00217}00217       finite\_element\_pt(N -\/ 1)-\/>node\_pt(0) =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00218}00218         finite\_element\_pt(N -\/ 2)-\/>node\_pt(n\_node -\/ 1);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00219}00219 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00220}00220       \textcolor{comment}{// New central nodes (ignore last one which needs special treatment}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00221}00221       \textcolor{comment}{// because it's on the boundary)}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00222}00222       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} jnod = 1; jnod < (n\_node -\/ 1); jnod++)}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00223}00223       \{}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00224}00224         \textcolor{comment}{// Allocate memory for nodes, as before}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00225}00225         Node\_pt[node\_count] =}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00226}00226           finite\_element\_pt(N -\/ 1)-\/>construct\_node(jnod, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00227}00227 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00228}00228         \textcolor{comment}{// Get the local coordinate of the node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00229}00229         finite\_element\_pt(N -\/ 1)-\/>local\_fraction\_of\_node(jnod, s\_fraction);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00230}00230 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00231}00231         \textcolor{comment}{// Set the position of the node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00232}00232         node\_pt(node\_count)-\/>x(0) = xinit + el\_length * (N -\/ 1 + s\_fraction[0]);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00234}00234         \textcolor{comment}{// Increment the node counter}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00235}00235         node\_count++;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00236}00236       \}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00237}00237 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00238}00238       \textcolor{comment}{// New final node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00239}00239       \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00240}00240 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00241}00241       \textcolor{comment}{// Allocate memory for the node, as before}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00242}00242       Node\_pt[node\_count] = finite\_element\_pt(N -\/ 1)-\/>construct\_boundary\_node(}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00243}00243         n\_node -\/ 1, time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00244}00244 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00245}00245       \textcolor{comment}{// Set the position of the node}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00246}00246       node\_pt(node\_count)-\/>x(0) = xinit + Length;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00247}00247 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00248}00248       \textcolor{comment}{// Add the node to the boundary 1}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00249}00249       add\_boundary\_node(1, Node\_pt[node\_count]);}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00250}00250 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00251}00251       \textcolor{comment}{// Increment the node counter}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00252}00252       node\_count++;}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00253}00253     \}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00254}00254   \}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00255}00255 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00256}00256 \} \textcolor{comment}{// namespace oomph}}
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00257}00257 }
+\DoxyCodeLine{\Hypertarget{one__d__mesh_8template_8cc_source_l00258}00258 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

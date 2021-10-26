@@ -12,7 +12,7 @@ Refineable version of the Axisymmetric Navier--Stokes equations.
 Inheritance diagram for oomph\+::Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=0.997151cm]{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}
+\includegraphics[height=1.196581cm]{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -22,28 +22,28 @@ Inheritance diagram for oomph\+::Refineable\+Generalised\+Newtonian\+Axisymmetri
 \begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_aa0085413944f5d84578ae28f57d7f4fc}{num\+\_\+\+Z2\+\_\+flux\+\_\+terms}} ()
 \begin{DoxyCompactList}\small\item\em Number of \textquotesingle{}flux\textquotesingle{} terms for Z2 error estimation. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a6858f80eb16799bc4bfc844e0e297432}{get\+\_\+\+Z2\+\_\+flux}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
+void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a6858f80eb16799bc4bfc844e0e297432}{get\+\_\+\+Z2\+\_\+flux}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Get \textquotesingle{}flux\textquotesingle{} for Z2 error recovery\+: Upper triangular entries in strain rate tensor. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a1079d819a74edb3a620dc01061168950}{geometric\+\_\+jacobian}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x)
+double \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a1079d819a74edb3a620dc01061168950}{geometric\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}})
 \begin{DoxyCompactList}\small\item\em Fill in the geometric Jacobian, which in this case is r. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_af800c46aa82a7188565d68df5aee6fa0}{further\+\_\+build}} ()
 \begin{DoxyCompactList}\small\item\em Further build\+: pass the pointers down to the sons. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a36b7f19e66187a7b0fef8e0134e716f4}{dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+ddata, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
+void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a36b7f19e66187a7b0fef8e0134e716f4}{dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&du\+\_\+ddata, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&global\+\_\+eqn\+\_\+number)
 \begin{DoxyCompactList}\small\item\em Compute the derivatives of the i-\/th component of velocity at point s with respect to all data that can affect its value. In addition, return the global equation numbers corresponding to the data. Overload the non-\/refineable version to take account of hanging node information. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a6f99de802883fc8b4cf3fbcbf3e342d0}{get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates}} (\mbox{\hyperlink{classoomph_1_1RankThreeTensor}{Rank\+Three\+Tensor}}$<$ double $>$ \&dresidual\+\_\+dnodal\+\_\+coordinates)
 \begin{DoxyCompactList}\small\item\em Compute derivatives of elemental residual vector with respect to nodal coordinates. This function computes these terms analytically and overwrites the default implementation in the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} base class. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j) = d res(l) / d\+X\+\_\+\{ij\}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a5cb6605a28f51e2c59e33eeb5fe661ba}{pin\+\_\+redundant\+\_\+nodal\+\_\+pressures}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&element\+\_\+pt)
+static void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a5cb6605a28f51e2c59e33eeb5fe661ba}{pin\+\_\+redundant\+\_\+nodal\+\_\+pressures}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which typically contains all the elements in a fluid mesh) and pin the nodal pressure degrees of freedom that are not being used. Function uses the member function. \end{DoxyCompactList}\item 
-static void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a9322914ae79b08750153d5ca2e9e4f2e}{unpin\+\_\+all\+\_\+pressure\+\_\+dofs}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&element\+\_\+pt)
+static void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a9322914ae79b08750153d5ca2e9e4f2e}{unpin\+\_\+all\+\_\+pressure\+\_\+dofs}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&element\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs in elements listed in vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a626f83e867f6d2fda5d9ed20a265c6ca}{pressure\+\_\+node\+\_\+pt}} (const unsigned \&n\+\_\+p)
-\begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node (Default\+: N\+U\+LL, indicating that pressure is not based on nodal interpolation). \end{DoxyCompactList}\item 
+virtual Node $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a831bd56507f36d3a0a7b3b810708a64f}{pressure\+\_\+node\+\_\+pt}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+p)
+\begin{DoxyCompactList}\small\item\em Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressure is not based on nodal interpolation). \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_adec2514256f89cd8ff2694abd8178675}{unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs}} ()=0
 \begin{DoxyCompactList}\small\item\em Unpin all pressure dofs in the element. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a1402cf618786a821b31ea44a636acde9}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs}} ()
@@ -51,11 +51,11 @@ virtual void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisym
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a2db17023f544958a02c0c787da9020df}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a2db17023f544958a02c0c787da9020df}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&mass\+\_\+matrix, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Add element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix and mass matrix flag=2\+: compute all flag=1\+: compute both residual and Jacobian flag=0\+: compute only residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a5c48a485d233b8932b58a46138d34241}{fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst}} (double $\ast$const \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dmass\+\_\+matrix\+\_\+dparam, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a5c48a485d233b8932b58a46138d34241}{fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst}} (double $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&parameter\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&dres\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djac\+\_\+dparam, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&dmass\+\_\+matrix\+\_\+dparam, unsigned flag)
 \begin{DoxyCompactList}\small\item\em Add element\textquotesingle{}s contribution to the derivative of the elemental residual vector and/or Jacobian matrix and/or mass matrix flag=2\+: compute all flag=1\+: compute both residual and Jacobian flag=0\+: compute only residual vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a7794ad4a3ea19be7604d7c8884debe70}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+hessian\+\_\+vector\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \&Y, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ const \&C, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&product)
+void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a7794ad4a3ea19be7604d7c8884debe70}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+hessian\+\_\+vector\+\_\+products}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&Y, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&C, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&product)
 \begin{DoxyCompactList}\small\item\em Compute the hessian tensor vector products required to perform continuation of bifurcations analytically. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -63,7 +63,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNa
 \doxysubsection{Detailed Description}
 Refineable version of the Axisymmetric Navier--Stokes equations. 
 
-Definition at line 45 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00045}{45}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
@@ -80,7 +80,7 @@ Empty Constructor.
 
 
 
-Definition at line 67 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00067}{67}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
@@ -89,7 +89,7 @@ Definition at line 67 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+ax
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!dinterpolated\_u\_axi\_nst\_ddata@{dinterpolated\_u\_axi\_nst\_ddata}}
 \index{dinterpolated\_u\_axi\_nst\_ddata@{dinterpolated\_u\_axi\_nst\_ddata}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{dinterpolated\_u\_axi\_nst\_ddata()}{dinterpolated\_u\_axi\_nst\_ddata()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+ddata,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{global\+\_\+eqn\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dinterpolated\+\_\+u\+\_\+axi\+\_\+nst\+\_\+ddata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{du\+\_\+ddata,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \&}]{global\+\_\+eqn\+\_\+number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -97,21 +97,17 @@ Compute the derivatives of the i-\/th component of velocity at point s with resp
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a115dec50e9fc5d82449a327d420c9790}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00176}{176}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 176 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Finite\+Element\+::shape(), and oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+axi\+\_\+nst().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a58a25b6859ddd43b7bfe64a19fee5023}{oomph\+::\+Finite\+Element\+::shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a7794ad4a3ea19be7604d7c8884debe70}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a7794ad4a3ea19be7604d7c8884debe70}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!fill\_in\_contribution\_to\_hessian\_vector\_products@{fill\_in\_contribution\_to\_hessian\_vector\_products}}
 \index{fill\_in\_contribution\_to\_hessian\_vector\_products@{fill\_in\_contribution\_to\_hessian\_vector\_products}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_hessian\_vector\_products()}{fill\_in\_contribution\_to\_hessian\_vector\_products()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+hessian\+\_\+vector\+\_\+products (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ const \&}]{Y,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ const \&}]{C,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{product }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+hessian\+\_\+vector\+\_\+products (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{Y,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{C,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{product }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -119,17 +115,17 @@ Compute the hessian tensor vector products required to perform continuation of b
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a2087bbf2d46364b9dc414a7ca90f25de}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a94e118d65f31ce404963509e462b2d0e}{oomph\+::\+Generalised\+Element}}.
 
 
 
-Definition at line 390 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00390}{390}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a5c48a485d233b8932b58a46138d34241}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a5c48a485d233b8932b58a46138d34241}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!fill\_in\_generic\_dresidual\_contribution\_axi\_nst@{fill\_in\_generic\_dresidual\_contribution\_axi\_nst}}
 \index{fill\_in\_generic\_dresidual\_contribution\_axi\_nst@{fill\_in\_generic\_dresidual\_contribution\_axi\_nst}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_dresidual\_contribution\_axi\_nst()}{fill\_in\_generic\_dresidual\_contribution\_axi\_nst()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{double $\ast$const \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dres\+\_\+dparam,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djac\+\_\+dparam,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{dmass\+\_\+matrix\+\_\+dparam,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+dresidual\+\_\+contribution\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{double $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{parameter\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{dres\+\_\+dparam,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djac\+\_\+dparam,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{dmass\+\_\+matrix\+\_\+dparam,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
@@ -137,33 +133,25 @@ Add element\textquotesingle{}s contribution to the derivative of the elemental r
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a162f23398b74cb7a99506c4f8f277811}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
-
-
-
-Definition at line 376 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00376}{376}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a2db17023f544958a02c0c787da9020df}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a2db17023f544958a02c0c787da9020df}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!fill\_in\_generic\_residual\_contribution\_axi\_nst@{fill\_in\_generic\_residual\_contribution\_axi\_nst}}
 \index{fill\_in\_generic\_residual\_contribution\_axi\_nst@{fill\_in\_generic\_residual\_contribution\_axi\_nst}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_axi\_nst()}{fill\_in\_generic\_residual\_contribution\_axi\_nst()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{mass\+\_\+matrix,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Add element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix and mass matrix flag=2\+: compute all flag=1\+: compute both residual and Jacobian flag=0\+: compute only residual vector. 
 
-Add element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix. flag=1\+: compute both flag=0\+: compute only residual vector 
+Add element\textquotesingle{}s contribution to the elemental residual vector and/or Jacobian matrix. flag=1\+: compute both flag=0\+: compute only residual vector. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_ad41c00dfe90c6dbc9e53fac71f20489e}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
-
-
-
-Definition at line 38 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source_l00037}{37}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+A\+L\+E\+\_\+is\+\_\+disabled, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Constitutive\+\_\+eqn\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::density\+\_\+ratio(), oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+dt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ D\+I\+M $>$\+::dviscosity\+\_\+dinvariant(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::extrapolated\+\_\+strain\+\_\+rate(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::g(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Gamma, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+body\+\_\+force\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+source\+\_\+fct(), oomph\+::\+Node\+::hanging\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Integral\+::knot(), oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), n, oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::npres\+\_\+axi\+\_\+nst(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::p\+\_\+local\+\_\+eqn(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst(), pressure\+\_\+node\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::pshape\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+invfr(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+invro(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+st(), residuals(), s, oomph\+::\+Second\+Invariant\+Helper\+::second\+\_\+invariant(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate(), oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+pt(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Use\+\_\+extrapolated\+\_\+strainrate\+\_\+to\+\_\+compute\+\_\+second\+\_\+invariant, oomph\+::\+Generalised\+Newtonian\+Constitutive\+Equation$<$ D\+I\+M $>$\+::viscosity(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::viscosity\+\_\+ratio(), oomph\+::\+Quad\+Tree\+Names\+::W, oomph\+::\+Integral\+::weight(), and oomph\+::\+Time\+Stepper\+::weight().
+References \mbox{\hyperlink{elements_8h_source_l02338}{oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+dt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{refineable__elements_8h_source_l00278}{oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00053}{pressure\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00163}{oomph\+::\+Second\+Invariant\+Helper\+::second\+\_\+invariant()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_af800c46aa82a7188565d68df5aee6fa0}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_af800c46aa82a7188565d68df5aee6fa0}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!further\_build@{further\_build}}
@@ -181,25 +169,25 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1RefineableElement_a26628ce36df
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a56b98748492bec100b08532892d5ac7f}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a56b98748492bec100b08532892d5ac7f}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element}}.
 
 
 
-Definition at line 136 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00136}{136}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+A\+L\+E\+\_\+is\+\_\+disabled, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::axi\+\_\+nst\+\_\+body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Body\+\_\+force\+\_\+fct\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Density\+\_\+\+Ratio\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::density\+\_\+ratio\+\_\+pt(), oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+G\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::g\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+invfr\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+invro\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Re\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+st\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Re\+Inv\+Fr\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Re\+Inv\+Ro\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Re\+St\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Source\+\_\+fct\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::source\+\_\+fct\+\_\+pt, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Viscosity\+\_\+\+Ratio\+\_\+pt, and oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::viscosity\+\_\+ratio\+\_\+pt().
+References \mbox{\hyperlink{refineable__elements_8h_source_l00539}{oomph\+::\+Refineable\+Element\+::father\+\_\+element\+\_\+pt()}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build().
+Referenced by \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00998}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::further\+\_\+build()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a1079d819a74edb3a620dc01061168950}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a1079d819a74edb3a620dc01061168950}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!geometric\_jacobian@{geometric\_jacobian}}
 \index{geometric\_jacobian@{geometric\_jacobian}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{geometric\_jacobian()}{geometric\_jacobian()}}
-{\footnotesize\ttfamily double oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::geometric\+\_\+jacobian (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::geometric\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -211,7 +199,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ad
 
 
 
-Definition at line 129 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00129}{129}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+References \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a6f99de802883fc8b4cf3fbcbf3e342d0}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a6f99de802883fc8b4cf3fbcbf3e342d0}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!get\_dresidual\_dnodal\_coordinates@{get\_dresidual\_dnodal\_coordinates}}
@@ -223,23 +215,23 @@ Definition at line 129 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+a
 
 Compute derivatives of elemental residual vector with respect to nodal coordinates. This function computes these terms analytically and overwrites the default implementation in the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} base class. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j) = d res(l) / d\+X\+\_\+\{ij\}. 
 
-Compute derivatives of elemental residual vector with respect to nodal coordinates. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j) = d res(l) / d\+X\+\_\+\{ij\} Overloads the F\+D-\/based version in the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} base class. 
+Compute derivatives of elemental residual vector with respect to nodal coordinates. dresidual\+\_\+dnodal\+\_\+coordinates(l,i,j) = d res(l) / d\+X\+\_\+\{ij\} Overloads the FD-\/based version in the \mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} base class. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a741048e47acae2bdbda0cee6aaf0b4b0}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
-
-
-
-Definition at line 1557 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_ad3e5e89f43bd6e4a2a46e524a71da0ff}{oomph\+::\+Finite\+Element}}.
 
 
 
-References oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+A\+L\+E\+\_\+is\+\_\+disabled, oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::density\+\_\+ratio(), oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+dt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::du\+\_\+dt\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::g(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::\+Gamma, oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+body\+\_\+force\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+body\+\_\+force\+\_\+gradient\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+source\+\_\+fct(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+source\+\_\+fct\+\_\+gradient(), oomph\+::\+Node\+::hanging\+\_\+pt(), oomph\+::\+Node\+::has\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct\+\_\+pt(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), interpolated\+\_\+u(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Node\+::is\+\_\+hanging(), oomph\+::\+Integral\+::knot(), oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn(), oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt(), oomph\+::\+Hang\+Info\+::master\+\_\+weight(), oomph\+::\+Generalised\+Element\+::ndof(), oomph\+::\+Hang\+Info\+::nmaster(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::nodal\+\_\+position(), oomph\+::\+Finite\+Element\+::nodal\+\_\+value(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::npres\+\_\+axi\+\_\+nst(), oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::p\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::p\+\_\+local\+\_\+eqn(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::p\+\_\+nodal\+\_\+index\+\_\+axi\+\_\+nst(), oomph\+::\+Node\+::perform\+\_\+auxiliary\+\_\+node\+\_\+update\+\_\+fct(), oomph\+::\+Node\+::position\+\_\+time\+\_\+stepper\+\_\+pt(), pressure\+\_\+node\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::pshape\+\_\+axi\+\_\+nst(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+invfr(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+invro(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::re\+\_\+st(), s, oomph\+::\+Refineable\+Element\+::shape\+\_\+controlling\+\_\+node\+\_\+lookup(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), oomph\+::\+Time\+::time(), oomph\+::\+Time\+Stepper\+::time\+\_\+pt(), oomph\+::\+Data\+::time\+\_\+stepper\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::u\+\_\+index\+\_\+axi\+\_\+nst(), oomph\+::\+Data\+::value\+\_\+pt(), oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::viscosity\+\_\+ratio(), oomph\+::\+Integral\+::weight(), oomph\+::\+Time\+Stepper\+::weight(), and oomph\+::\+Node\+::x().
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source_l01556}{1556}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
+
+
+
+References \mbox{\hyperlink{elements_8h_source_l01198}{oomph\+::\+Generalised\+Element\+::\+Default\+\_\+fd\+\_\+jacobian\+\_\+step}}, \mbox{\hyperlink{elements_8h_source_l02338}{oomph\+::\+Finite\+Element\+::dnodal\+\_\+position\+\_\+dt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00278}{oomph\+::\+Refineable\+Element\+::local\+\_\+hang\+\_\+eqn()}}, \mbox{\hyperlink{nodes_8h_source_l00791}{oomph\+::\+Hang\+Info\+::master\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{nodes_8h_source_l00808}{oomph\+::\+Hang\+Info\+::master\+\_\+weight()}}, \mbox{\hyperlink{elements_8h_source_l00835}{oomph\+::\+Generalised\+Element\+::ndof()}}, \mbox{\hyperlink{nodes_8h_source_l00785}{oomph\+::\+Hang\+Info\+::nmaster()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{elements_8h_source_l02322}{oomph\+::\+Finite\+Element\+::nodal\+\_\+position()}}, \mbox{\hyperlink{elements_8h_source_l02598}{oomph\+::\+Finite\+Element\+::nodal\+\_\+value()}}, \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}, \mbox{\hyperlink{refineable__elements_8h_source_l00627}{oomph\+::\+Refineable\+Element\+::nshape\+\_\+controlling\+\_\+nodes()}}, \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00053}{pressure\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, \mbox{\hyperlink{refineable__elements_8h_source_l00636}{oomph\+::\+Refineable\+Element\+::shape\+\_\+controlling\+\_\+node\+\_\+lookup()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a6858f80eb16799bc4bfc844e0e297432}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a6858f80eb16799bc4bfc844e0e297432}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!get\_Z2\_flux@{get\_Z2\_flux}}
 \index{get\_Z2\_flux@{get\_Z2\_flux}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{get\_Z2\_flux()}{get\_Z2\_flux()}}
-{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::get\+\_\+\+Z2\+\_\+flux (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{flux }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -251,11 +243,11 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_a5688ff5f5
 
 
 
-Definition at line 83 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00083}{83}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References i, and oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::strain\+\_\+rate().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_aa0085413944f5d84578ae28f57d7f4fc}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_aa0085413944f5d84578ae28f57d7f4fc}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!num\_Z2\_flux\_terms@{num\_Z2\_flux\_terms}}
@@ -273,7 +265,7 @@ Implements \mbox{\hyperlink{classoomph_1_1ElementWithZ2ErrorEstimator_ae82c57289
 
 
 
-Definition at line 75 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00075}{75}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a1402cf618786a821b31ea44a636acde9}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a1402cf618786a821b31ea44a636acde9}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!pin\_elemental\_redundant\_nodal\_pressure\_dofs@{pin\_elemental\_redundant\_nodal\_pressure\_dofs}}
@@ -287,21 +279,21 @@ Pin unused nodal pressure dofs (empty by default, because by default pressure do
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement_a15c0c8547d963fd747929c973277ce74}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement_a15c0c8547d963fd747929c973277ce74}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QTaylor\+Hood\+Element}}.
 
 
 
-Definition at line 63 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00063}{63}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Referenced by pin\+\_\+redundant\+\_\+nodal\+\_\+pressures().
+Referenced by \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00320}{pin\+\_\+redundant\+\_\+nodal\+\_\+pressures()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a5cb6605a28f51e2c59e33eeb5fe661ba}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a5cb6605a28f51e2c59e33eeb5fe661ba}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!pin\_redundant\_nodal\_pressures@{pin\_redundant\_nodal\_pressures}}
 \index{pin\_redundant\_nodal\_pressures@{pin\_redundant\_nodal\_pressures}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{pin\_redundant\_nodal\_pressures()}{pin\_redundant\_nodal\_pressures()}}
-{\footnotesize\ttfamily static void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::pin\+\_\+redundant\+\_\+nodal\+\_\+pressures (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily static void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::pin\+\_\+redundant\+\_\+nodal\+\_\+pressures (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
@@ -312,39 +304,39 @@ Loop over all elements in \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} (which
 \item {\ttfamily \mbox{\hyperlink{classoomph_1_1RefineableAxisymmetricNavierStokesEquations}{Refineable\+Axisymmetric\+Navier\+Stokes\+Equations}}\+:}\+: pin\+\_\+all\+\_\+nodal\+\_\+pressure\+\_\+dofs()
 \end{DoxyItemize}which is empty by default and should be implemented for elements with nodal pressure degrees of freedom (e.\+g. for refineable Taylor-\/\+Hood.) 
 
-Definition at line 320 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00320}{320}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References e, and pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00063}{pin\+\_\+elemental\+\_\+redundant\+\_\+nodal\+\_\+pressure\+\_\+dofs()}}.
 
-\mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a626f83e867f6d2fda5d9ed20a265c6ca}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a626f83e867f6d2fda5d9ed20a265c6ca}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a831bd56507f36d3a0a7b3b810708a64f}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a831bd56507f36d3a0a7b3b810708a64f}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!pressure\_node\_pt@{pressure\_node\_pt}}
 \index{pressure\_node\_pt@{pressure\_node\_pt}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{pressure\_node\_pt()}{pressure\_node\_pt()}}
-{\footnotesize\ttfamily virtual \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual Node $\ast$ oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::pressure\+\_\+node\+\_\+pt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Pointer to n\+\_\+p-\/th pressure node (Default\+: N\+U\+LL, indicating that pressure is not based on nodal interpolation). 
+Pointer to n\+\_\+p-\/th pressure node (Default\+: NULL, indicating that pressure is not based on nodal interpolation). 
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement_a323d05f3e4ba28e9e9b503f44cb33eb7}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement_a4fcd7f9b4b7ec08d027dba9b3ce0318e}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QTaylor\+Hood\+Element}}.
 
 
 
-Definition at line 53 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00053}{53}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Referenced by fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst(), and get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates().
+Referenced by \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source_l00038}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8cc_source_l01557}{get\+\_\+dresidual\+\_\+dnodal\+\_\+coordinates()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a9322914ae79b08750153d5ca2e9e4f2e}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_a9322914ae79b08750153d5ca2e9e4f2e}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!unpin\_all\_pressure\_dofs@{unpin\_all\_pressure\_dofs}}
 \index{unpin\_all\_pressure\_dofs@{unpin\_all\_pressure\_dofs}!oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}}
 \doxysubsubsection{\texorpdfstring{unpin\_all\_pressure\_dofs()}{unpin\_all\_pressure\_dofs()}}
-{\footnotesize\ttfamily static void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::unpin\+\_\+all\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily static void oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::unpin\+\_\+all\+\_\+pressure\+\_\+dofs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1GeneralisedElement}{Generalised\+Element}} $\ast$ $>$ \&}]{element\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
@@ -352,11 +344,11 @@ Unpin all pressure dofs in elements listed in vector.
 
 
 
-Definition at line 336 of file generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00336}{336}} of file \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+refineable\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References e, and unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_adec2514256f89cd8ff2694abd8178675}{unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_adec2514256f89cd8ff2694abd8178675}\label{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations_adec2514256f89cd8ff2694abd8178675}} 
 \index{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations@{oomph::RefineableGeneralisedNewtonianAxisymmetricNavierStokesEquations}!unpin\_elemental\_pressure\_dofs@{unpin\_elemental\_pressure\_dofs}}
@@ -370,11 +362,11 @@ Unpin all pressure dofs in the element.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_af2bed6ea40d0520dc570b62b3fd81b7d}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}}, and \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement_ad454d2660371f7a2b3bcbd7a951762b5}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Taylor\+Hood\+Element}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQTaylorHoodElement_ad454d2660371f7a2b3bcbd7a951762b5}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QTaylor\+Hood\+Element}}, and \mbox{\hyperlink{classoomph_1_1RefineableGeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_af2bed6ea40d0520dc570b62b3fd81b7d}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element}}.
 
 
 
-Referenced by unpin\+\_\+all\+\_\+pressure\+\_\+dofs().
+Referenced by \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00336}{unpin\+\_\+all\+\_\+pressure\+\_\+dofs()}}.
 
 
 

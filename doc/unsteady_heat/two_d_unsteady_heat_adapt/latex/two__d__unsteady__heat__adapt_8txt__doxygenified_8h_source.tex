@@ -1,0 +1,589 @@
+\hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source}{}\doxysection{two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+adapt.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{two__d__unsteady__heat__adapt_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Example problem: Spatially adaptive solution of the 2D unsteady heat equation with flux boundary conditions.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{This is a slightly more advanced example in which we demonstrate}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{the use of spatial adaptivity in time-\/dependent problems.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{We discuss the implementation of the spatially adaptive version of}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{\(\backslash\)c oomph-\/lib's unsteady Newton solver, \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{Problem::unsteady\_newton\_solve(...), and explain why the assignment}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{of initial conditions should be performed by overloading the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{\(\backslash\)c Problem::set\_initial\_condition() function. We also}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{discuss briefly how \(\backslash\)c oomph-\/lib's generic dump and restart}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{functions deal with adaptive meshes.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{For this purpose consider the following problem:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{<TR> }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{<B>The two-\/dimensional unsteady heat equation with flux boundary}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{conditions in a quarter circle domain</B>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{\(\backslash\)sum\_\{i=1\}\string^2\(\backslash\)frac\{\(\backslash\)partial\string^2 u\}\{\(\backslash\)partial x\_i\string^2\} }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{= \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial t\} + f\(\backslash\)left(x\_1,x\_2,t\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{in the quarter-\/circle domain \(\backslash\)f\$ D \(\backslash\)f\$, bounded by the coordinate axes}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{and the unit circle, subject to Neumann boundary conditions,}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{\(\backslash\)left. \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial n\}\(\backslash\)right|\_\{\(\backslash\)partial D\_\{Neumann\}\}=}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{-\/ \(\backslash\)left. \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\_2\}\(\backslash\)right|\_\{\(\backslash\)partial D\_\{Neumann\}\}=}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{g\_0, }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{along the horizontal domain boundary \(\backslash\)f\$ \(\backslash\)partial D\_\{Neumann\} = }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{\(\backslash\)\{ (x\_1,x\_2) | x\_1 \(\backslash\)in [0,1], x\_2=0 \(\backslash\)\} \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{and to Dirichlet boundary conditions,}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)left. u\(\backslash\)right|\_\{\(\backslash\)partial D\_\{Dirichlet\}\}=h\_0, }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{elsewhere.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{\(\backslash\)image html domain.gif "{}Sketch of the domain and the boundary conditions. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{\(\backslash\)image latex domain.eps "{}Sketch of the domain and the boundary conditions. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{The initial conditions are given by}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{u(x\_1,x\_2,t=0)=k\_0(x\_1,x\_2),}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (4)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{where the functions \(\backslash\)f\$ f, g\_0, \(\backslash\) h\_0\(\backslash\)f\$ and  \(\backslash\)f\$ k\_0\(\backslash\)f\$ are given. }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{We choose the functions \(\backslash\)f\$ f, g\_0, \(\backslash\) h\_0\(\backslash\)f\$ and  \(\backslash\)f\$ k\_0\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{so that}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{u\_0(x\_1,x\_2,t) = \(\backslash\)tanh\(\backslash\)bigg[1-\/\(\backslash\)alpha\(\backslash\)bigg(\(\backslash\)tan\(\backslash\)Phi}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{\(\backslash\)big(x\_1-\/\(\backslash\)beta\(\backslash\)tanh[ \(\backslash\)gamma\(\backslash\)cos\(\backslash\)left(2\(\backslash\)pi}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{t\(\backslash\)right)]\(\backslash\)big)-\/ x\_2\(\backslash\)bigg)\(\backslash\)bigg]}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (5)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{is the exact solution.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{The solution represents the "{}usual"{} tanh profile, whose steepness}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{is controlled by the parameter \(\backslash\)f\$ \(\backslash\)alpha \(\backslash\)f\$ so that for \(\backslash\)f\$ \(\backslash\)alpha}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{\(\backslash\)gg 1 \(\backslash\)f\$ the solution approaches a step. The step is oriented}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{at an angle \(\backslash\)f\$ \(\backslash\)Phi \(\backslash\)f\$ against the \(\backslash\)f\$ x\_1-\/\(\backslash\)f\$ axis and its position varies}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{periodically. The parameter \(\backslash\)f\$ \(\backslash\)beta \(\backslash\)f\$ controls the amplitude}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{of the step's lateral displacement, while \(\backslash\)f\$ \(\backslash\)gamma \(\backslash\)f\$ determines the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{rate at which its position changes. For \(\backslash\)f\$ \(\backslash\)gamma \(\backslash\)gg 1 \(\backslash\)f\$ ,}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{the step remains stationary for most of the period and then}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{translates rapidly parallel to the \(\backslash\)f\$ x\_1-\/ \(\backslash\)f\$ axis, making this a very }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{challenging problem.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{The figure below shows a snapshot of the <A HREF="{}../figures/step\_soln.avi"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{animated solution</A>, obtained from the spatially adaptive simulation}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{discussed below, for the parameter values \(\backslash\)f\$ \(\backslash\)alpha=10, \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{\(\backslash\)Phi=45\string^o, \(\backslash\) \(\backslash\)beta=0.3, \(\backslash\) \(\backslash\)gamma=5. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)image html step\_soln.gif "{}Snapshot of the solution. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)image latex step\_soln.eps "{}Snapshot of the solution. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{  The mesh adaptation in response to the translation of the step can be}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{seen more clearly in this contour plot, taken from}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{<A HREF="{}../figures/unsteady\_heat\_contour.avi"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{another animation of the solution</A>.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{\(\backslash\)image html unsteady\_heat\_contour.gif "{}Contour plot of the solution. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{\(\backslash\)image latex unsteady\_heat\_contour.eps "{}Contour plot of the solution. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{\(\backslash\)section spatial\_adapt Background: Spatial adaptivity in time-\/dependent problems}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{Enabling spatial adaptivity in time-\/dependent problems involves}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{essentially the same steps as for steady problems:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{-\/ The domain must be discretised with a mesh that is derived}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{  from the \(\backslash\)c RefineableMesh base class.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{-\/ An \(\backslash\)c ErrorEstimator object must be created and passed to the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{  mesh.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{-\/ The empty virtual functions \(\backslash\)c Problem::actions\_before\_adapt() and }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{  \(\backslash\)c Problem::actions\_after\_adapt() may be overloaded to }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{  perform any actions that are required before or after the mesh}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{  adaptation, such as the deletion or recreation of any \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{  FaceElements that apply flux boundary conditions.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{Once these steps have been performed, a spatially adaptive}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{solution can be computed with a three-\/argument version of \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{unsteady Newton solver \(\backslash\)c Problem::unsteady\_newton\_solve(...):}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{\(\backslash\)code }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{Problem::unsteady\_newton\_solve(dt,max\_adapt,first)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{The arguments to this function are as follows:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{-\/ The \(\backslash\)c double \(\backslash\)c dt specifies the (fixed) timestep.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{-\/ The \(\backslash\)c unsigned \(\backslash\)c max\_adapt specifies the maximum number of }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{  spatial adaptations allowed.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{-\/ The \(\backslash\)c bool \(\backslash\)c first indicates if the first timestep is performed.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{  This argument is required to allow the automatic re-\/assignment of}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{  the initial conditions following any mesh adaptations during the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{  computation of the first timestep.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{Given these arguments, the unsteady Newton solver solves the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{non-\/linear system of spatially and temporally discretised equations }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{to advance the solution from time  \(\backslash\)f\$ t \(\backslash\)f\$ to \(\backslash\)f\$ t + dt \(\backslash\)f\$ . }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{Once the solution  at time \(\backslash\)f\$ t + dt \(\backslash\)f\$ has been obtained, }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{error estimates are computed for all elements. If any }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{elemental error estimates are outside the target range, the solution}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{is rejected  and the mesh is adapted. In the course of mesh adaptation}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{the existing solution (the nodal values \(\backslash\)e and the history}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{values) at time  \(\backslash\)f\$ t \(\backslash\)f\$ are interpolated onto the new mesh}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{ before recomputing the solution.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{This process is repeated until the error estimates are within}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{the target range, or until the maximum number of adaptations, specified}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{by the parameter \(\backslash\)c max\_adapt, is exceeded, just as in the steady case.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{Here is an illustration of the procedure for a 1D problem:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{\(\backslash\)image html adapted.gif "{}Sketch of the mesh adaptation for time-\/dependent problems. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{\(\backslash\)image latex adapted.eps "{}Sketch of the mesh adaptation for time-\/dependent problems. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{ This procedure is the obvious generalisation of the procedure for steady}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{problems. However, in time-\/dependent problems two additional }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{issues arise:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{-\/\# In a steady problem the interpolation of the solution onto the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{   adapted mesh (step 4 in the above sketch) merely serves to }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{   provide an initial guess for the solution on the refined }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{   mesh. It is irrelevant if the interpolation from the coarse mesh}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{   provides a poor approximation of the actual solution as }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{   the solution is completely recomputed anyway. }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{   In an unsteady problem, we also have to interpolate the history }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{   values (the solution at previous timesteps in a BDF scheme) onto }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{   the adapted mesh. Their values are \(\backslash\)e not}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{   changed when the solution is advanced from time \(\backslash\)f\$ t \(\backslash\)f\$ to \(\backslash\)f\$ t+ dt. \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{   In time-\/dependent problems, the benefit of repeated mesh}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{   adaptations (i.e. \(\backslash\)c max\_adapt > 1) is therefore }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{   limited by the fact that mesh refinement cannot improve their }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{   accuracy -\/-\/ the history values are always given by}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{   the (possibly poor) approximations obtained by interpolation }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{   from the coarser mesh employed at the previous timestep. We}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{   therefore recommend limiting the number of spatial adaptations to}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{   \(\backslash\)c max\_adapt = 1. We stress that, in practice, this is not a serious}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{   restriction because the time-\/integration procedure will only provide}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{   (temporally) accurate results if the timestep \(\backslash\)c dt is so small that the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{   solution at time \(\backslash\)f\$ t \(\backslash\)f\$ only differs slightly from that}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{   at time  \(\backslash\)f\$ t + dt \(\backslash\)f\$ . One level of mesh adaptation per timestep }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{   should therefore be sufficient to adapt the mesh}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{   in response to these changes.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{-\/\# The only exception to this recommendation arises during the computation of}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{   the first timestep, illustrated in the following sketch:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{\(\backslash\)image html adapted\_ic1.gif "{}Sketch of the mesh adaptation during the computation of the first timestep. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{\(\backslash\)image latex adapted\_ic1.eps "{}Sketch of the mesh adaptation during the computation of the first timestep. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{   When computing the first timestep, the solution on the initial mesh}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{   will have been created by assigning the nodal values according to the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{   analytical initial condition}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{   (4). If the initial mesh is very coarse}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{   (as it should be), the finite-\/element representation of the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{   initial condition is likely to be very poor, as shown in the above}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{   sketch. Clearly, the interpolation}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{   from the coarse onto the fine mesh cannot recover any small-\/scale}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{   features in the initial condition that were missed by its }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{   representation on the coarse mesh. It is therefore better to}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{   re-\/assign the initial condition (the values \(\backslash\)e and the history values!) }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{   on the adapted mesh, as shown in this sketch:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)image html adapted\_ic2.gif "{}Sketch of the modified mesh adaptation during the computation of the first timestep. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{\(\backslash\)image latex adapted\_ic2.eps "{}Sketch of the modified mesh adaptation during the computation of the first timestep. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{   With this procedure, repeated mesh adaptations will}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{   improve the accuracy of the solution, therefore much larger }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{   values of \(\backslash\)c max\_adapt can (and should!) be specified}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{   when the first timestep is computed.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{   The unsteady Newton solver \(\backslash\)c Problem::unsteady\_newton\_solve(...)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{   performs the revised procedure if the boolean argument}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{   \(\backslash\)c first is set \(\backslash\)c true. In that case,}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{   the values and history values on the adapted mesh are }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{   (re-\/)assigned by calling the function}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{   \(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{   Problem::set\_initial\_condition()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{   \(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{   which is defined as an }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{   empty virtual function in the \(\backslash\)c Problem base class. You should}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{   overload it in your derived \(\backslash\)c Problem to ensure that your specific}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{   initial conditions are assigned}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{   by the mesh adaptation procedures. [In fact, the function  \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{   Problem::set\_initial\_condition() is not quite empty -\/-\/ not }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{   re-\/setting the initial condition when performing mesh adaptations }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{   during the first timestep of a time-\/dependent simulation seems "{}so }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{   wrong"{} that the function issues a warning message. Although the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{   overloading of this function is not strictly necessary if the initial}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{   conditions can be represented exactly by the interpolation from the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{   coarse mesh onto the fine mesh, we consider it good practice to}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{   do so, for reasons discussed in <A HREF="{}../../../axisym\_navier\_stokes/spin\_up/html/index.html\#good\_practice\_ics"{}>another tutorial</A>.]}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{\(\backslash\)section overview Overview of the driver code }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{Equipped with this background information, the driver code for our}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{example problem is easy to understand, if somewhat }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{lengthy. [Using an example with Dirichlet boundary conditions }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{along the entire domain boundary would have shortened}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{the code significantly but we deliberately chose an example with}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{Neumann boundary conditions to demonstrate that the functions }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{\(\backslash\)c Problem::actions\_before\_adapt()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{and \(\backslash\)c Problem::actions\_after\_adapt() may be used exactly as in}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{the steady computations.] We will not discuss the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{methodology for applying flux-\/type boundary conditions in problems}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{with spatial adaptivity in detail, but refer to the discussion provided}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{in the <A HREF="{}../../../poisson/two\_d\_poisson\_flux\_bc\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{ earlier steady example.</A>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{Overall, the code is a straightforward combination of the driver code for}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{the <A HREF="{}../../../poisson/two\_d\_poisson\_flux\_bc\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{steady Poisson problem with flux boundary conditions and spatial}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{adaptivity</a> and the driver code for the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{<A HREF="{}../../two\_d\_unsteady\_heat/html/index.html"{}> unsteady heat equation}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{without spatial adaptivity. </A> }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{\(\backslash\)section namespace Global parameters and functions}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{As usual, we store the problem parameters in a namespace,}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{\(\backslash\)c TanhSolnForUnsteadyHeat, }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{in which we also specify the source function, the prescribed flux }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{along the Neumann boundary and the exact solution.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{\(\backslash\)section ellipse Representing the curvilinear domain boundary by a  GeomObject}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{As discussed <A HREF="{}../../../poisson/fish\_poisson2/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{elsewhere,</A> \(\backslash\)c oomph-\/lib's mesh adaptation procedures require}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{curvilinear domain boundaries to be represented by}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{\(\backslash\)c GeomObjects which describe the object's shape via their member }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{function \(\backslash\)c GeomObject::position(...). This function exists}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{in two versions: }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{-\/ The two-\/argument version,  \(\backslash\)c GeomObject::position(xi,r)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{  computes the position vector, \(\backslash\)c r, to the point on/in the \(\backslash\)c GeomObject,}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{  parametrised by the vector of intrinsic coordinates, \(\backslash\)c xi.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{-\/ The three-\/argument version \(\backslash\)c GeomObject::position(t,xi,r), where}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{  \(\backslash\)c t is an \(\backslash\)c unsigned, computes the position vector at }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{  the \(\backslash\)c t -\/ th previous timestep. }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{In the current problem, the domain boundary}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{is stationary, therefore the steady and unsteady versions of the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{function are identical. Here is the complete source code for}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{the \(\backslash\)c MyUnitCircle object which we will use to represent the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{curvilinear domain boundary:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{\(\backslash\)dontinclude two\_d\_unsteady\_heat\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{\(\backslash\)skipline start\_of\_MyUnitCircle}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{\(\backslash\)until end of MyUnitCircle}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{\(\backslash\)section main The main function}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{As before, we use command line arguments to (optionally) specify }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{a restart file. We store the command line arguments in}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{the namespace \(\backslash\)c CommandLineArgs and build the \(\backslash\)c Problem object,}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{passing the pointer to the source function. Next we specify the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{time-\/interval for the simulation and set the error targets for }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{the spatial adaptation.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{\(\backslash\)dontinclude two\_d\_unsteady\_heat\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{\(\backslash\)until min\_permitted\_error}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{We create and initialise the boolean flag that indicates if the first timestep}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{is computed, and choose a large initial value for the number of permitted mesh }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{adaptations. We then assign the initial conditions on the coarse}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{initial mesh and retrieve the timestep (chosen when the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{initial conditions are assigned in \(\backslash\)c set\_initial\_condition() ) }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{from the problem's \(\backslash\)c Time object.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{\(\backslash\)skipline Set IC}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{\(\backslash\)until -\/>dt}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{If the simulation has been restarted, the first timestep is not the step}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{at which the initial condition has to be assigned, therefore}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{we reset the \(\backslash\)c first and \(\backslash\)c max\_adapt parameters to their}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{appropriate values. If the run is not restarted, the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{problem will have been built with a very coarse initial mesh}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{(comprising just three elements). We don't need an error estimator}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{to tell us that this is too coarse to represent the solution }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{accurately and apply two levels of uniform refinement }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{before solving the problem. Note that we refine the entire }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{problem, not just the mesh to ensure that }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{\(\backslash\)c Problem::actions\_before\_adapt() and \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{Problem::actions\_after\_adapt() are executed and the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{equation numbering scheme is re-\/generated. \(\backslash\)c Problem::refine\_uniformly()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{also interpolates the solution from the coarse initial mesh onto the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{refined mesh but, as discussed above, this will lead to a very poor}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{representation of the initial condition. Therefore we re-\/assign}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{the initial condition on the refined mesh and document the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{finite-\/element representation of the initial condition.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{\(\backslash\)skipline If restart:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{\(\backslash\)until doc\_solution}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{The time-\/stepping loop itself is very similar to that used in the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{<A HREF="{}../../two\_d\_unsteady\_heat/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{example without spatial adaptivity</A>. Here we call the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{three-\/argument version of the unsteady Newton solver}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{\(\backslash\)c Problem::unsteady\_newton\_solve(...) and re-\/set the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{parameters \(\backslash\)c max\_adapt and \(\backslash\)c first to their appropriate values}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{once the first step has been performed.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{\(\backslash\)dontinclude two\_d\_unsteady\_heat\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{\(\backslash\)skipline  Find number of steps}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{\(\backslash\)until end of main}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{\(\backslash\)section problem The problem class}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{As discussed above, the problem class mainly contains verbatim copies of}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{the member functions in the corresponding }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{ <A HREF="{}../../../poisson/two\_d\_poisson\_flux\_bc\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{steady </a> and }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{<A HREF="{}../../two\_d\_unsteady\_heat/html/index.html"{}>unsteady</A> }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{problems:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{\(\backslash\)dontinclude two\_d\_unsteady\_heat\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{\(\backslash\)until // end of problem\_class}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{\(\backslash\)section constructor The problem constructor}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{The problem constructor combines the constructors of the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{ <A HREF="{}../../../poisson/two\_d\_poisson\_flux\_bc\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{steady </a> and }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{<A HREF="{}../../two\_d\_unsteady\_heat/html/index.html"{}>unsteady</A> }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{problems. We start by creating a \(\backslash\)c DocInfo object to control}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{the output, set the parameters for the exact solution and create}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{the \(\backslash\)c TimeStepper:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{\(\backslash\)until add\_time\_stepper}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{We create the \(\backslash\)c GeomObject that describes the curvilinear}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{domain boundary and pass it to the mesh constructor:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{\(\backslash\)skipline Setup mesh}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{\(\backslash\)until Boundary\_pt,xi\_lo,fract\_mid}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{Next, we create the surface mesh that contains the prescribed flux}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{elements and combine the two submeshes to the \(\backslash\)c Problem's global}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{mesh. We create an instance of the \(\backslash\)c Z2ErrorEstimator}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{and pass it to the bulk mesh. }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{\(\backslash\)skipline Create the surface}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{\(\backslash\)until Bulk\_mesh\_pt-\/>spatial\_error\_estimator\_pt()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{We pin the nodal values on the Dirichlet boundaries and select the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{central node in the unrefined three-\/element mesh as the control node}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{at which the solution is documented in the trace file.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{\(\backslash\)skipline Set the boundary conditions for }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{\(\backslash\)until Doc\_node\_pt=el0\_pt-\/>node\_pt}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{Finally, we complete the build of all elements by passing the relevant}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{function pointers to the elements, and assign the equation numbers.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{\(\backslash\)skipline Complete the build of all elements}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{\(\backslash\)section old\_functions Other member functions}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{The remaining member functions}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{-\/ \(\backslash\)c  actions\_after\_newton\_solve()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{-\/ \(\backslash\)c  actions\_before\_newton\_solve()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{-\/ \(\backslash\)c  actions\_after\_implicit\_timestep()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{-\/ \(\backslash\)c  actions\_before\_implicit\_timestep()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{-\/ \(\backslash\)c  actions\_before\_adapt()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{-\/ \(\backslash\)c  actions\_after\_adapt()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{-\/ \(\backslash\)c  set\_initial\_condition()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{-\/ \(\backslash\)c  create\_flux\_elements(...)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{-\/ \(\backslash\)c  delete\_flux\_elements(...)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{-\/ \(\backslash\)c  doc\_solution()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{-\/ \(\backslash\)c  dump\_it(...)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{-\/ \(\backslash\)c  restart(...)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{are identical (or at least extremely similar) to those in previous }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{examples, so we do not list them here. You can examine the functions in detail}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{in the source code}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/unsteady\_heat/two\_d\_unsteady\_heat\_adapt/two\_d\_unsteady\_heat\_adapt.cc"{}>two\_d\_unsteady\_heat\_adapt.cc</A>.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{\(\backslash\)section restart Dump/restart with spatial adaptivity}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{It is worth examining the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{dump and restart functions, however, as they demonstrate that}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{the generic versions defined in the \(\backslash\)c Problem base class}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{can also deal with adaptive problems -\/-\/ a non-\/trivial task!}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{\(\backslash\)skipline start\_of\_dump\_it}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{\(\backslash\)until end of restart}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{Since details of their implementation are hidden from the user, we}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{briefly comment on the various tasks performed by these functions.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{The main task of the \(\backslash\)c Problem::read(...) function is to }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{read values (and history values) of all \(\backslash\)c Data objects from a file and to}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{assign these values to the appropriate \(\backslash\)c Data (and \(\backslash\)c Node) objects in the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{\(\backslash\)c Problem. This assumes that the \(\backslash\)c Problem's }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{constituent \(\backslash\)c Meshes, elements, \(\backslash\)c Nodes and \(\backslash\)c Data objects have been }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{created, and that the \(\backslash\)c Problem's various pointer-\/based lookup schemes}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{access them in the order they were in when the \(\backslash\)c Problem was dumped}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{to the restart file. In a non-\/adaptive computation, the number of }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{elements and the number of \(\backslash\)c Data objects remain constant throughout the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{simulation and the \(\backslash\)c Problem::read(...) function can be called }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{as soon as the \(\backslash\)c Problem has been built -\/-\/ usually by its}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{constructor. (The \(\backslash\)c Problem constructor always builds and enumerates }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{its constituent objects in the same order.)}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{In a simulation with spatial adaptivity the number of elements,  \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{Nodes and \(\backslash\)c Data objects varies throughout the computation. }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{It is therefore necessary to re-\/generate the \(\backslash\)c Problem's refinement pattern }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{before the \(\backslash\)c Data values can be read from the restart file. This is achieved}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{(internally) by calling the function \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{RefineableMesh::dump\_refinement(...) for all refineable meshes}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{before the \(\backslash\)c Data is dumped. This function writes the \(\backslash\)c Mesh's}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{refinement pattern to the restart file, using a format that}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{can be read by the corresponding member function }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{\(\backslash\)c RefineableMesh::refine(...) which adapts an unrefined mesh so that}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{its topology and the order of its \(\backslash\)c Nodes and elements is recreated. }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{\(\backslash\)section comments Comments and exercises}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{The plots below show the time history of various parameters.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{-\/ The upper graph  compares the solution at the control node }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{  (red line) against the exact solution (green line). }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{-\/ The middle graph shows the position of the step by plotting its}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{  intercept with the \(\backslash\)f\$ x\_1-\/ \(\backslash\)f\$ axis as a function of time, and}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{  the error of the solution. }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{-\/ The lower graph illustrates the evolution of the adaptive spatial }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{  refinement process: The green line illustrates the total number of }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{  elements; the blue and red lines show the number of elements that }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{  are refined and unrefined at each timestep.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{\(\backslash\)image html trace.gif "{}Time history of the solution. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{\(\backslash\)image latex trace.eps "{}Time history of the solution. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{The plots illustrate clearly how the mesh is adapted as the step}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{moves through the domain -\/-\/ the peaks in the number of refined/unrefined }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{elements per timestep coincide with the periods during which the step moves }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{very rapidly. The increase in the error during these phases is mainly }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{due to the temporal error -\/-\/ the <A HREF="{}../figures/step\_soln.avi"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{animation</A> shows that the computed solution lags behind}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{the exact one. We will address this by adding adaptive time-\/stepping}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{in <A HREF="{}../../two\_d\_unsteady\_heat\_2adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{another example.</A>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{\(\backslash\)subsection ex Exercises}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{-\/\# Confirm that the error during the periods of rapid change in the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{   solution is due to the temporal error by repeating the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{   simulation with a smaller/larger timestep and/or a time-\/stepping scheme}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{   with higher/lower order (e.g. BDF<1> or BDF<4>).}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{-\/\# Assess the importance of re-\/assigning the initial conditions when}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{   spatial adaptations are performed during the computation of the}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{   first timestep.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{   -\/\# Compare the finite-\/element representation of the initial}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{      condition(contained in the file \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{      RESLT/soln0.dat) against that obtained when the }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{      re-\/assignment of the initial conditions }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{      after the two calls to \(\backslash\)c problem.refine\_uniformly()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{      in the \(\backslash\)c main function is suppressed.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{   -\/\# Comment out the calls to \(\backslash\)c problem.refine\_uniformly()}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{      and set \(\backslash\)c first=false throughout the \(\backslash\)c main function and}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{      compare the computed results against those obtained with  }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{      the correct procedure.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{<A HREF="{}}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{../../../../}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{demo\_drivers/unsteady\_heat/two\_d\_unsteady\_heat\_adapt/}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{demo\_drivers/unsteady\_heat/two\_d\_unsteady\_heat\_adapt/}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{-\/ The driver code is: }}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{<A HREF="{}}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{../../../../}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{demo\_drivers/unsteady\_heat/two\_d\_unsteady\_heat\_adapt/two\_d\_unsteady\_heat\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{demo\_drivers/unsteady\_heat/two\_d\_unsteady\_heat\_adapt/two\_d\_unsteady\_heat\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{two__d__unsteady__heat__adapt_8txt__doxygenified_8h_source_l00584}00584 }
+
+\end{DoxyCode}

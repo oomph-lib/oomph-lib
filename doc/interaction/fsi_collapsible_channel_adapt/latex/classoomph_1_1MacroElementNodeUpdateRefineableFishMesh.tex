@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{}\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{}\doxysection{oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}\index{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}}
+
+
+Refineable fish shaped mesh with Macro\+Element-\/based node update. The fish\textquotesingle{}s back is represented by a specified geometric object. Some or all of the geometric Data in that geometric object may contain unknowns in the global Problem. The dependency on these unknowns is taken into account when setting up the Jacobian matrix of the elements. For this purpose, the element (whose type is specified by the template parameter) must inherit from Macro\+Element\+Node\+Update\+Element\+Base.  
+
+
 
 
 {\ttfamily \#include $<$fish\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.821138cm]{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}
@@ -13,7 +18,7 @@ Inheritance diagram for oomph\+::Macro\+Element\+Node\+Update\+Refineable\+Fish\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a7adcb19be3d66c63d88bf87d4822dacc}{Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} (\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$back\+\_\+pt, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a7adcb19be3d66c63d88bf87d4822dacc}{Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} (Geom\+Object $\ast$back\+\_\+pt, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}s back and pointer to timestepper (defaults to (Steady) default timestepper defined in Mesh). \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a68cdd294ca61ad64dbcd1313356d2ca4}{$\sim$\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: empty. \end{DoxyCompactList}\item 
@@ -23,12 +28,11 @@ void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a10
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh$<$ ELEMENT $>$}
 Refineable fish shaped mesh with Macro\+Element-\/based node update. The fish\textquotesingle{}s back is represented by a specified geometric object. Some or all of the geometric Data in that geometric object may contain unknowns in the global Problem. The dependency on these unknowns is taken into account when setting up the Jacobian matrix of the elements. For this purpose, the element (whose type is specified by the template parameter) must inherit from Macro\+Element\+Node\+Update\+Element\+Base. 
 
-Definition at line 197 of file fish\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00197}{197}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -37,8 +41,8 @@ Definition at line 197 of file fish\+\_\+mesh.\+template.\+h.
 \index{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}!MacroElementNodeUpdateRefineableFishMesh@{MacroElementNodeUpdateRefineableFishMesh}}
 \index{MacroElementNodeUpdateRefineableFishMesh@{MacroElementNodeUpdateRefineableFishMesh}!oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{MacroElementNodeUpdateRefineableFishMesh()}{MacroElementNodeUpdateRefineableFishMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a9c6741891789e8156d85c39d4e3adaa7}{Geom\+Object}} $\ast$}]{back\+\_\+pt,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{back\+\_\+pt,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -46,18 +50,18 @@ Constructor\+: Pass pointer Geom\+Object that defines the fish\textquotesingle{}
 
 
 
-Definition at line 205 of file fish\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00205}{205}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Back\+\_\+pt, and oomph\+::\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::domain\+\_\+pt().
+References \mbox{\hyperlink{fish__mesh_8template_8h_source_l00105}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Back\+\_\+pt}}, and \mbox{\hyperlink{fish__mesh_8template_8h_source_l00086}{oomph\+::\+Fish\+Mesh$<$ ELEMENT $>$\+::domain\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a68cdd294ca61ad64dbcd1313356d2ca4}\label{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh_a68cdd294ca61ad64dbcd1313356d2ca4}} 
 \index{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}!````~MacroElementNodeUpdateRefineableFishMesh@{$\sim$MacroElementNodeUpdateRefineableFishMesh}}
 \index{````~MacroElementNodeUpdateRefineableFishMesh@{$\sim$MacroElementNodeUpdateRefineableFishMesh}!oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$MacroElementNodeUpdateRefineableFishMesh()}{~MacroElementNodeUpdateRefineableFishMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -65,7 +69,7 @@ Destructor\+: empty.
 
 
 
-Definition at line 284 of file fish\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00284}{284}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -74,8 +78,8 @@ Definition at line 284 of file fish\+\_\+mesh.\+template.\+h.
 \index{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}!node\_update@{node\_update}}
 \index{node\_update@{node\_update}!oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$@{oomph::MacroElementNodeUpdateRefineableFishMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{node\_update()}{node\_update()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1MacroElementNodeUpdateRefineableFishMesh}{oomph\+::\+Macro\+Element\+Node\+Update\+Refineable\+Fish\+Mesh}}$<$ ELEMENT $>$\+::node\+\_\+update (\begin{DoxyParamCaption}\item[{const bool \&}]{update\+\_\+all\+\_\+solid\+\_\+nodes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -83,7 +87,7 @@ Resolve mesh update\+: Node\+Update current nodal positions via sparse Macro\+El
 
 
 
-Definition at line 291 of file fish\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{fish__mesh_8template_8h_source_l00291}{291}} of file \mbox{\hyperlink{fish__mesh_8template_8h_source}{fish\+\_\+mesh.\+template.\+h}}.
 
 
 

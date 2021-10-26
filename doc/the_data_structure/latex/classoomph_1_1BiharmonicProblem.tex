@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1BiharmonicProblem}{}\doxysection{oomph\+::Biharmonic\+Problem$<$ D\+IM $>$ Class Template Reference}
+\hypertarget{classoomph_1_1BiharmonicProblem}{}\doxysection{oomph\+::Biharmonic\+Problem\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1BiharmonicProblem}\index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 
 
@@ -9,7 +9,7 @@ Biharmonic Plate \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} Class -\/ for
 
 {\ttfamily \#include $<$biharmonic\+\_\+problem.\+h$>$}
 
-Inheritance diagram for oomph\+::Biharmonic\+Problem$<$ D\+IM $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Biharmonic\+Problem\texorpdfstring{$<$}{<} DIM \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1BiharmonicProblem}
@@ -18,9 +18,9 @@ Inheritance diagram for oomph\+::Biharmonic\+Problem$<$ D\+IM $>$\+:\begin{figur
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+B\+C\+Fct\+Pt}}) (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+BCFct\+Pt}}) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})
 \begin{DoxyCompactList}\small\item\em Definition of a dirichlet boundary condition function pointer. Takes the position along a boundary (s) in the macro element coordinate scheme and returns the value of the boundary condition at that point (u). \end{DoxyCompactList}\item 
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{Biharmonic\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{Biharmonic\+Source\+Fct\+Pt}}) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})
 \begin{DoxyCompactList}\small\item\em Definition of the Source Function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -35,35 +35,34 @@ void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ad685995c81201b8e5dfa7136e
 \begin{DoxyCompactList}\small\item\em action after solve \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a4f978440c83f738544b15995d0c6a178}{doc\+\_\+solution}} (\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&doc\+\_\+info, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt=0)
 \begin{DoxyCompactList}\small\item\em documents the solution, and if an exact solution is provided, then the error between the numerical and exact solution is presented \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a3ead105fc8c4ebc9c9ba6ca443f4f0fd}{bulk\+\_\+element\+\_\+mesh\+\_\+pt}} ()
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a3164249306d16db494cceee0b3bfe07b}{bulk\+\_\+element\+\_\+mesh\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function to the bulk element mesh pt. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a62b9e4a4040c57379423acf04145ba78}{Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} for Biharmonic\+Element$<$\+D\+I\+M$>$ only -\/ the block preconditioner assemble the global equation number to block number mapping from elements in this mesh only. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} for Biharmonic\+Element$<$\+DIM$>$ only -\/ the block preconditioner assemble the global equation number to block number mapping from elements in this mesh only. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_af5ca1abca1c8ad4d56822d643c33cdd8}{Face\+\_\+element\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em mesh for face elements \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a1aea493ececa7c6491ea9115bd3e6289}{build\+\_\+bulk\+\_\+mesh}} (const unsigned n\+\_\+x, const unsigned n\+\_\+y, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} $\ast$domain\+\_\+pt, \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{Biharmonic\+Element}}$<$ 2 $>$$>$\+::Mesh\+Spacing\+Fn\+Ptr spacing\+\_\+fn=0)
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_aefd82d374a3a6f899faf752afd39ac36}{build\+\_\+bulk\+\_\+mesh}} (const unsigned n\+\_\+x, const unsigned n\+\_\+y, \mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} $\ast$domain\+\_\+pt, \mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{Biharmonic\+Element}}$<$ 2 $>$ $>$\+::Mesh\+Spacing\+Fn\+Ptr spacing\+\_\+fn=0)
 \begin{DoxyCompactList}\small\item\em builds the bulk mesh on a prescribed domain with a node spacing defined by spacing fn with n\+\_\+x by n\+\_\+y elements \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a2ed9f3c94a3609638042089251476bcf}{build\+\_\+global\+\_\+mesh\+\_\+and\+\_\+assign\+\_\+eqn\+\_\+numbers}} ()
-\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_aed3e4068c71df9c27f561b5880b49e18}{set\+\_\+source\+\_\+function}} (const \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{Biharmonic\+Source\+Fct\+Pt}} \mbox{\hyperlink{namespaceoomph_aaeb31b697ac413871cfe74e70c3a60b1}{source\+\_\+fct\+\_\+pt}})
-\begin{DoxyCompactList}\small\item\em Impose a load to the surface of the plate. note \+: M\+U\+ST be called before neumann boundary conditions are imposed, i.\+e. a free edge or a simply supported edge with laplacian(u) imposed. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ad1d8a1b35dce481d1af72d0662110538}{set\+\_\+dirichlet\+\_\+boundary\+\_\+condition}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+B\+C\+Fct\+Pt}} u\+\_\+fn=0, \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+B\+C\+Fct\+Pt}} dudn\+\_\+fn=0)
-\begin{DoxyCompactList}\small\item\em Imposes the prescribed dirichlet B\+Cs u (u\+\_\+fn) and du/dn (dudn\+\_\+fn) dirichlet B\+Cs by \textquotesingle{}pinning\textquotesingle{}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Build global mesh and assign equation numbers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_aed3e4068c71df9c27f561b5880b49e18}{set\+\_\+source\+\_\+function}} (const \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{Biharmonic\+Source\+Fct\+Pt}} source\+\_\+fct\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Impose a load to the surface of the plate. note \+: MUST be called before neumann boundary conditions are imposed, i.\+e. a free edge or a simply supported edge with laplacian(u) imposed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ad1d8a1b35dce481d1af72d0662110538}{set\+\_\+dirichlet\+\_\+boundary\+\_\+condition}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+BCFct\+Pt}} u\+\_\+fn=0, \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+BCFct\+Pt}} dudn\+\_\+fn=0)
+\begin{DoxyCompactList}\small\item\em Imposes the prescribed dirichlet BCs u (u\+\_\+fn) and du/dn (dudn\+\_\+fn) dirichlet BCs by \textquotesingle{}pinning\textquotesingle{}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a19509193167f4b969aa9f6cb6c2586b2}{set\+\_\+neumann\+\_\+boundary\+\_\+condition}} (const unsigned \&b, \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::Flux\+Fct\+Pt flux0\+\_\+fct\+\_\+pt, \mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::Flux\+Fct\+Pt flux1\+\_\+fct\+\_\+pt=0)
-\begin{DoxyCompactList}\small\item\em Imposes the prescribed Neumann B\+Cs laplacian(u) (flux0\+\_\+fct\+\_\+pt) and dlaplacian(u)/dn (flux1\+\_\+fct\+\_\+pt) with flux edge elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Imposes the prescribed Neumann BCs laplacian(u) (flux0\+\_\+fct\+\_\+pt) and dlaplacian(u)/dn (flux1\+\_\+fct\+\_\+pt) with flux edge elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned D\+IM$>$\newline
-class oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$}
-
+\subsubsection*{template$<$unsigned DIM$>$\newline
+class oomph\+::\+Biharmonic\+Problem$<$ DIM $>$}
 Biharmonic Plate \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} Class -\/ for problems where the load can be assumed to be acting normal to the surface of the plate and the deflections are small relative to the thickness of the plate. Developed for the topologically rectangular Hermite Element \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}. Contains functions allowing the following boundary conditions to be applied (on a given edge)\+: 
 
 
@@ -73,7 +72,7 @@ Biharmonic Plate \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} Class -\/ for
 \item free \+: laplacian(u) and dlaplacian(u)/dn imposed 
 \end{DoxyItemize}
 
-Definition at line 66 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00066}{66}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
@@ -82,8 +81,8 @@ Definition at line 66 of file biharmonic\+\_\+problem.\+h.
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!BiharmonicSourceFctPt@{BiharmonicSourceFctPt}}
 \index{BiharmonicSourceFctPt@{BiharmonicSourceFctPt}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{BiharmonicSourceFctPt}{BiharmonicSourceFctPt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::Biharmonic\+Source\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&x, double \&f)}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::Biharmonic\+Source\+Fct\+Pt) (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, double \&\mbox{\hyperlink{namespaceoomph_ad835af913df4cbdc5648440f91b794ab}{f}})}
 
 
 
@@ -91,14 +90,14 @@ Definition of the Source Function.
 
 
 
-Definition at line 77 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00077}{77}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}\label{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!DirichletBCFctPt@{DirichletBCFctPt}}
 \index{DirichletBCFctPt@{DirichletBCFctPt}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{DirichletBCFctPt}{DirichletBCFctPt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::Dirichlet\+B\+C\+Fct\+Pt) (const double \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, double \&\mbox{\hyperlink{the__data__structure_8txt_aaa5287b1cf3ca06b3f413cb95bd1ec60}{u}})}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+typedef void($\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::Dirichlet\+BCFct\+Pt) (const double \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, double \&\mbox{\hyperlink{namespaceoomph_ac0ed65f6db53d9ad737e1d2a69767d25}{u}})}
 
 
 
@@ -106,7 +105,7 @@ Definition of a dirichlet boundary condition function pointer. Takes the positio
 
 
 
-Definition at line 73 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00073}{73}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
@@ -115,8 +114,8 @@ Definition at line 73 of file biharmonic\+\_\+problem.\+h.
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!BiharmonicProblem@{BiharmonicProblem}}
 \index{BiharmonicProblem@{BiharmonicProblem}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{BiharmonicProblem()}{BiharmonicProblem()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{Biharmonic\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::\mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{Biharmonic\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -124,18 +123,18 @@ Constructor.
 
 
 
-Definition at line 80 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00080}{80}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-References oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt, and oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Face\+\_\+element\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__problem_8h_source_l00204}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Face\+\_\+element\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_aa8a0fd0fdaa257149f4f513d383d9178}\label{classoomph_1_1BiharmonicProblem_aa8a0fd0fdaa257149f4f513d383d9178}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!````~BiharmonicProblem@{$\sim$BiharmonicProblem}}
 \index{````~BiharmonicProblem@{$\sim$BiharmonicProblem}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$BiharmonicProblem()}{~BiharmonicProblem()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{Biharmonic\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{Biharmonic\+Problem}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -143,11 +142,11 @@ Destructor. Delete the meshes.
 
 
 
-Definition at line 87 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00087}{87}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-References oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt, and oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Face\+\_\+element\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__problem_8h_source_l00204}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Face\+\_\+element\+\_\+mesh\+\_\+pt}}.
 
 
 
@@ -156,8 +155,8 @@ References oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Bulk\+\_\+element\
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -169,14 +168,14 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a033ec7301123deeb7e56d
 
 
 
-Definition at line 109 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00109}{109}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_a161f8a00ca635684bfd54880925cd5bf}\label{classoomph_1_1BiharmonicProblem_a161f8a00ca635684bfd54880925cd5bf}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -188,18 +187,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1Problem_a0c8d70891f7369bb4bf84
 
 
 
-Definition at line 94 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00094}{94}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-References oomph\+::oomph\+\_\+info, and oomph\+::\+Problem\+::self\+\_\+test().
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, and \mbox{\hyperlink{problem_8cc_source_l13271}{oomph\+::\+Problem\+::self\+\_\+test()}}.
 
-\mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_a1aea493ececa7c6491ea9115bd3e6289}\label{classoomph_1_1BiharmonicProblem_a1aea493ececa7c6491ea9115bd3e6289}} 
+\mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_aefd82d374a3a6f899faf752afd39ac36}\label{classoomph_1_1BiharmonicProblem_aefd82d374a3a6f899faf752afd39ac36}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!build\_bulk\_mesh@{build\_bulk\_mesh}}
 \index{build\_bulk\_mesh@{build\_bulk\_mesh}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{build\_bulk\_mesh()}{build\_bulk\_mesh()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::build\+\_\+bulk\+\_\+mesh (\begin{DoxyParamCaption}\item[{const unsigned}]{n\+\_\+x,  }\item[{const unsigned}]{n\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} $\ast$}]{domain\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{Biharmonic\+Element}}$<$ 2 $>$$>$\+::Mesh\+Spacing\+Fn\+Ptr}]{spacing\+\_\+fn = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::build\+\_\+bulk\+\_\+mesh (\begin{DoxyParamCaption}\item[{const unsigned}]{n\+\_\+x,  }\item[{const unsigned}]{n\+\_\+y,  }\item[{\mbox{\hyperlink{classoomph_1_1TopologicallyRectangularDomain}{Topologically\+Rectangular\+Domain}} $\ast$}]{domain\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1HermiteQuadMesh}{Hermite\+Quad\+Mesh}}$<$ \mbox{\hyperlink{classoomph_1_1BiharmonicElement}{Biharmonic\+Element}}$<$ 2 $>$ $>$\+::Mesh\+Spacing\+Fn\+Ptr}]{spacing\+\_\+fn = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -207,33 +206,37 @@ builds the bulk mesh on a prescribed domain with a node spacing defined by spaci
 
 
 
-Definition at line 126 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00126}{126}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-References oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_a2ed9f3c94a3609638042089251476bcf}\label{classoomph_1_1BiharmonicProblem_a2ed9f3c94a3609638042089251476bcf}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!build\_global\_mesh\_and\_assign\_eqn\_numbers@{build\_global\_mesh\_and\_assign\_eqn\_numbers}}
 \index{build\_global\_mesh\_and\_assign\_eqn\_numbers@{build\_global\_mesh\_and\_assign\_eqn\_numbers}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{build\_global\_mesh\_and\_assign\_eqn\_numbers()}{build\_global\_mesh\_and\_assign\_eqn\_numbers()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::build\+\_\+global\+\_\+mesh\+\_\+and\+\_\+assign\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::build\+\_\+global\+\_\+mesh\+\_\+and\+\_\+assign\+\_\+eqn\+\_\+numbers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
-Definition at line 150 of file biharmonic\+\_\+problem.\+h.
+Build global mesh and assign equation numbers. 
 
 
 
-References oomph\+::\+Problem\+::add\+\_\+sub\+\_\+mesh(), oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Problem\+::build\+\_\+global\+\_\+mesh(), oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt, and oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Face\+\_\+element\+\_\+mesh\+\_\+pt.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00150}{150}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_a3ead105fc8c4ebc9c9ba6ca443f4f0fd}\label{classoomph_1_1BiharmonicProblem_a3ead105fc8c4ebc9c9ba6ca443f4f0fd}} 
+
+
+References \mbox{\hyperlink{problem_8h_source_l01330}{oomph\+::\+Problem\+::add\+\_\+sub\+\_\+mesh()}}, \mbox{\hyperlink{problem_8cc_source_l01989}{oomph\+::\+Problem\+::assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{problem_8cc_source_l01493}{oomph\+::\+Problem\+::build\+\_\+global\+\_\+mesh()}}, \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{biharmonic__problem_8h_source_l00204}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Face\+\_\+element\+\_\+mesh\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_a3164249306d16db494cceee0b3bfe07b}\label{classoomph_1_1BiharmonicProblem_a3164249306d16db494cceee0b3bfe07b}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!bulk\_element\_mesh\_pt@{bulk\_element\_mesh\_pt}}
 \index{bulk\_element\_mesh\_pt@{bulk\_element\_mesh\_pt}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{bulk\_element\_mesh\_pt()}{bulk\_element\_mesh\_pt()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::bulk\+\_\+element\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::bulk\+\_\+element\+\_\+mesh\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -241,18 +244,18 @@ Access function to the bulk element mesh pt.
 
 
 
-Definition at line 118 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00118}{118}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-References oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_a4f978440c83f738544b15995d0c6a178}\label{classoomph_1_1BiharmonicProblem_a4f978440c83f738544b15995d0c6a178}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DocInfo}{Doc\+Info}} \&}]{doc\+\_\+info,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 
 
@@ -260,68 +263,68 @@ documents the solution, and if an exact solution is provided, then the error bet
 
 
 
-Definition at line 341 of file biharmonic\+\_\+problem.\+cc.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00341}{341}} of file \mbox{\hyperlink{biharmonic__problem_8cc_source}{biharmonic\+\_\+problem.\+cc}}.
 
 
 
-References oomph\+::\+Doc\+Info\+::directory(), oomph\+::\+Doc\+Info\+::number(), and oomph\+::oomph\+\_\+info.
+References \mbox{\hyperlink{oomph__utilities_8h_source_l00524}{oomph\+::\+Doc\+Info\+::directory()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00554}{oomph\+::\+Doc\+Info\+::number()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_ad1d8a1b35dce481d1af72d0662110538}\label{classoomph_1_1BiharmonicProblem_ad1d8a1b35dce481d1af72d0662110538}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!set\_dirichlet\_boundary\_condition@{set\_dirichlet\_boundary\_condition}}
 \index{set\_dirichlet\_boundary\_condition@{set\_dirichlet\_boundary\_condition}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_dirichlet\_boundary\_condition()}{set\_dirichlet\_boundary\_condition()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::set\+\_\+dirichlet\+\_\+boundary\+\_\+condition (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+B\+C\+Fct\+Pt}}}]{u\+\_\+fn = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+B\+C\+Fct\+Pt}}}]{dudn\+\_\+fn = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::set\+\_\+dirichlet\+\_\+boundary\+\_\+condition (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+BCFct\+Pt}}}]{u\+\_\+fn = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicProblem_ac3e873c52bcd489bc545f3cd2c860e8f}{Dirichlet\+BCFct\+Pt}}}]{dudn\+\_\+fn = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Imposes the prescribed dirichlet B\+Cs u (u\+\_\+fn) and du/dn (dudn\+\_\+fn) dirichlet B\+Cs by \textquotesingle{}pinning\textquotesingle{}. 
+Imposes the prescribed dirichlet BCs u (u\+\_\+fn) and du/dn (dudn\+\_\+fn) dirichlet BCs by \textquotesingle{}pinning\textquotesingle{}. 
 
-Impose a Clamped \mbox{\hyperlink{classoomph_1_1Edge}{Edge}}. Imposes the prescribed dirichlet B\+Cs u and du/dn dirichlet B\+Cs by pinning. 
+Impose a Clamped \mbox{\hyperlink{classoomph_1_1Edge}{Edge}}. Imposes the prescribed dirichlet BCs u and du/dn dirichlet BCs by pinning. 
 
-Definition at line 42 of file biharmonic\+\_\+problem.\+cc.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00042}{42}} of file \mbox{\hyperlink{biharmonic__problem_8cc_source}{biharmonic\+\_\+problem.\+cc}}.
 
 
 
-References e, n, s, and u().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}, and \mbox{\hyperlink{error__estimator_8h_source_l00165}{oomph\+::u}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_a19509193167f4b969aa9f6cb6c2586b2}\label{classoomph_1_1BiharmonicProblem_a19509193167f4b969aa9f6cb6c2586b2}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!set\_neumann\_boundary\_condition@{set\_neumann\_boundary\_condition}}
 \index{set\_neumann\_boundary\_condition@{set\_neumann\_boundary\_condition}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_neumann\_boundary\_condition()}{set\_neumann\_boundary\_condition()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::set\+\_\+neumann\+\_\+boundary\+\_\+condition (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::Flux\+Fct\+Pt}]{flux0\+\_\+fct\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::Flux\+Fct\+Pt}]{flux1\+\_\+fct\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::set\+\_\+neumann\+\_\+boundary\+\_\+condition (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b,  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::Flux\+Fct\+Pt}]{flux0\+\_\+fct\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1BiharmonicFluxElement}{Biharmonic\+Flux\+Element}}$<$ 2 $>$\+::Flux\+Fct\+Pt}]{flux1\+\_\+fct\+\_\+pt = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Imposes the prescribed Neumann B\+Cs laplacian(u) (flux0\+\_\+fct\+\_\+pt) and dlaplacian(u)/dn (flux1\+\_\+fct\+\_\+pt) with flux edge elements. 
+Imposes the prescribed Neumann BCs laplacian(u) (flux0\+\_\+fct\+\_\+pt) and dlaplacian(u)/dn (flux1\+\_\+fct\+\_\+pt) with flux edge elements. 
 
-Imposes a \textquotesingle{}free\textquotesingle{} edge. Imposes the prescribed Neumann B\+Cs laplacian(u) and dlaplacian(u)/dn with flux edge elements. 
+Imposes a \textquotesingle{}free\textquotesingle{} edge. Imposes the prescribed Neumann BCs laplacian(u) and dlaplacian(u)/dn with flux edge elements. 
 
-Definition at line 294 of file biharmonic\+\_\+problem.\+cc.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8cc_source_l00294}{294}} of file \mbox{\hyperlink{biharmonic__problem_8cc_source}{biharmonic\+\_\+problem.\+cc}}.
 
 
 
-References e, oomph\+::\+Biharmonic\+Flux\+Element$<$ D\+I\+M $>$\+::flux0\+\_\+fct\+\_\+pt(), and oomph\+::\+Biharmonic\+Flux\+Element$<$ D\+I\+M $>$\+::flux1\+\_\+fct\+\_\+pt().
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00113}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::flux0\+\_\+fct\+\_\+pt()}}, and \mbox{\hyperlink{biharmonic__flux__elements_8h_source_l00119}{oomph\+::\+Biharmonic\+Flux\+Element$<$ DIM $>$\+::flux1\+\_\+fct\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_aed3e4068c71df9c27f561b5880b49e18}\label{classoomph_1_1BiharmonicProblem_aed3e4068c71df9c27f561b5880b49e18}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!set\_source\_function@{set\_source\_function}}
 \index{set\_source\_function@{set\_source\_function}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{set\_source\_function()}{set\_source\_function()}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::set\+\_\+source\+\_\+function (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{Biharmonic\+Source\+Fct\+Pt}}}]{source\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+void \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::set\+\_\+source\+\_\+function (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BiharmonicProblem_a08d7386bbae19862d6fa656b8a2ae2a0}{Biharmonic\+Source\+Fct\+Pt}}}]{source\+\_\+fct\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
-Impose a load to the surface of the plate. note \+: M\+U\+ST be called before neumann boundary conditions are imposed, i.\+e. a free edge or a simply supported edge with laplacian(u) imposed. 
+Impose a load to the surface of the plate. note \+: MUST be called before neumann boundary conditions are imposed, i.\+e. a free edge or a simply supported edge with laplacian(u) imposed. 
 
 
 
-Definition at line 164 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00164}{164}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-References oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt, oomph\+::\+Mesh\+::element\+\_\+pt(), i, oomph\+::\+Mesh\+::nelement(), oomph\+::source\+\_\+fct\+\_\+pt(), and oomph\+::\+Biharmonic\+Equations$<$ D\+I\+M $>$\+::source\+\_\+fct\+\_\+pt().
+References \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Bulk\+\_\+element\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{mesh_8h_source_l00448}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, and \mbox{\hyperlink{biharmonic__elements_8h_source_l00485}{oomph\+::\+Biharmonic\+Equations$<$ DIM $>$\+::source\+\_\+fct\+\_\+pt()}}.
 
 
 
@@ -330,27 +333,27 @@ References oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Bulk\+\_\+element\
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!Bulk\_element\_mesh\_pt@{Bulk\_element\_mesh\_pt}}
 \index{Bulk\_element\_mesh\_pt@{Bulk\_element\_mesh\_pt}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Bulk\_element\_mesh\_pt}{Bulk\_element\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::Bulk\+\_\+element\+\_\+mesh\+\_\+pt}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::Bulk\+\_\+element\+\_\+mesh\+\_\+pt}
 
 
 
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} for Biharmonic\+Element$<$\+D\+I\+M$>$ only -\/ the block preconditioner assemble the global equation number to block number mapping from elements in this mesh only. 
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} for Biharmonic\+Element$<$\+DIM$>$ only -\/ the block preconditioner assemble the global equation number to block number mapping from elements in this mesh only. 
 
 
 
-Definition at line 201 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00201}{201}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-Referenced by oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Biharmonic\+Problem(), oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::build\+\_\+bulk\+\_\+mesh(), oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::build\+\_\+global\+\_\+mesh\+\_\+and\+\_\+assign\+\_\+eqn\+\_\+numbers(), oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::bulk\+\_\+element\+\_\+mesh\+\_\+pt(), oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::set\+\_\+source\+\_\+function(), and oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::$\sim$\+Biharmonic\+Problem().
+Referenced by \mbox{\hyperlink{biharmonic__problem_8h_source_l00080}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Biharmonic\+Problem()}}, \mbox{\hyperlink{biharmonic__problem_8h_source_l00126}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::build\+\_\+bulk\+\_\+mesh()}}, \mbox{\hyperlink{biharmonic__problem_8h_source_l00150}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::build\+\_\+global\+\_\+mesh\+\_\+and\+\_\+assign\+\_\+eqn\+\_\+numbers()}}, \mbox{\hyperlink{biharmonic__problem_8h_source_l00118}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::bulk\+\_\+element\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{biharmonic__problem_8h_source_l00164}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::set\+\_\+source\+\_\+function()}}, and \mbox{\hyperlink{biharmonic__problem_8h_source_l00087}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::$\sim$\+Biharmonic\+Problem()}}.
 
 \mbox{\Hypertarget{classoomph_1_1BiharmonicProblem_af5ca1abca1c8ad4d56822d643c33cdd8}\label{classoomph_1_1BiharmonicProblem_af5ca1abca1c8ad4d56822d643c33cdd8}} 
 \index{oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}!Face\_element\_mesh\_pt@{Face\_element\_mesh\_pt}}
 \index{Face\_element\_mesh\_pt@{Face\_element\_mesh\_pt}!oomph::BiharmonicProblem$<$ DIM $>$@{oomph::BiharmonicProblem$<$ DIM $>$}}
 \doxysubsubsection{\texorpdfstring{Face\_element\_mesh\_pt}{Face\_element\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$unsigned D\+IM$>$ \\
-\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ D\+IM $>$\+::Face\+\_\+element\+\_\+mesh\+\_\+pt}
+{\footnotesize\ttfamily template$<$unsigned DIM$>$ \\
+\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}$\ast$ \mbox{\hyperlink{classoomph_1_1BiharmonicProblem}{oomph\+::\+Biharmonic\+Problem}}$<$ DIM $>$\+::Face\+\_\+element\+\_\+mesh\+\_\+pt}
 
 
 
@@ -358,11 +361,11 @@ mesh for face elements
 
 
 
-Definition at line 204 of file biharmonic\+\_\+problem.\+h.
+Definition at line \mbox{\hyperlink{biharmonic__problem_8h_source_l00204}{204}} of file \mbox{\hyperlink{biharmonic__problem_8h_source}{biharmonic\+\_\+problem.\+h}}.
 
 
 
-Referenced by oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::\+Biharmonic\+Problem(), oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::build\+\_\+global\+\_\+mesh\+\_\+and\+\_\+assign\+\_\+eqn\+\_\+numbers(), and oomph\+::\+Biharmonic\+Problem$<$ D\+I\+M $>$\+::$\sim$\+Biharmonic\+Problem().
+Referenced by \mbox{\hyperlink{biharmonic__problem_8h_source_l00080}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::\+Biharmonic\+Problem()}}, \mbox{\hyperlink{biharmonic__problem_8h_source_l00150}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::build\+\_\+global\+\_\+mesh\+\_\+and\+\_\+assign\+\_\+eqn\+\_\+numbers()}}, and \mbox{\hyperlink{biharmonic__problem_8h_source_l00087}{oomph\+::\+Biharmonic\+Problem$<$ DIM $>$\+::$\sim$\+Biharmonic\+Problem()}}.
 
 
 

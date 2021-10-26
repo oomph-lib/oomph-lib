@@ -1,0 +1,555 @@
+\hypertarget{fish__poisson2_8txt__doxygenified_8h_source}{}\doxysection{fish\+\_\+poisson2.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{fish__poisson2_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: How to create refineable meshes in domains with curvilinear and/or moving boundaries}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{In an }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{<A HREF="{}../../../../doc/poisson/two\_d\_poisson\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{earlier example</A> we demonstrated how easy it is to "{}upgrade"{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{an existing quad mesh to a \(\backslash\)c RefineableMesh that can be used}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{with \(\backslash\)c oomph-\/lib's mesh adaptation routines. The "{}upgrade"{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{was achieved by multiple inheritance: We combined the basic }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{(non-\/refineable) mesh object with \(\backslash\)c oomph-\/lib's \(\backslash\)c RefineableQuadMesh}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{-\/-\/ a class that implements the required mesh adaptation procedures,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{using  \(\backslash\)c QuadTree -\/ based refinement techniques for meshes}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{that contain quadrilateral elements. During the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{refinement process, selected elements are split into four "{}son"{}}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{elements and the nodal values and coordinates of any newly created }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{nodes are determined by interpolation from the "{}father"{} element.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{This procedure is perfectly adequate for problems with polygonal}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{domain boundaries in which the initial coarse mesh provides a}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{perfect representation of the domain. The situation is more}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{complicated in problems with curvilinear domain boundaries since}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{we must ensure that successive mesh refinements lead to an}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{increasingly accurate representation of the domain boundary.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{To illustrate these issues we (re-\/)consider the 2D Poisson problem}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{<B>Two-\/dimensional model Poisson problem in a non-\/trivial domain</B>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{\(\backslash\)sum\_\{i=1\}\string^2 \(\backslash\)frac\{\(\backslash\)partial\string^2u\}\{\(\backslash\)partial x\_i\string^2\} = -\/1,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{in the fish-\/shaped domain \(\backslash\)f\$D\_\{fish\} \(\backslash\)f\$ with homogeneous}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{Dirichlet boundary conditions}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{\(\backslash\)left. u\(\backslash\)right|\_\{\(\backslash\)partial D\_\{fish\}\}=0.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{</CENTER>  }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{In Part 1 of this document we shall explain how \(\backslash\)c oomph-\/lib's mesh }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{adaptation procedures employ the \(\backslash\)c Domain and \(\backslash\)c MacroElement objects to adapt}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{meshes in domains with curvilinear  boundaries. In Part 2, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{we demonstrate how to create new \(\backslash\)c Domain objects.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{\(\backslash\)section adapt Part 1: Mesh adaptation in domains with curvilinear boundaries, using Domain and MacroElement objects}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{The plot below shows the domain  \(\backslash\)f\$D\_\{fish\} \(\backslash\)f\$, represented by the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{multi-\/coloured, shaded region and its (extremely coarse) }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{discretisation with four four-\/node quad elements. The elements' }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{edges and nodes are shown in black.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{\(\backslash\)image html coarse\_fish\_mesh\_and\_domain.gif "{}The fish-\/shaped domain and its discretisation with four four-\/node quad elements "{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{\(\backslash\)image latex coarse\_fish\_mesh\_and\_domain.eps "{}The fish-\/shaped domain and its discretisation with four four-\/node quad elements "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{Obviously, the curvilinear boundaries of the fish-\/shaped domain}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{(arcs of circles) are very poorly resolved by the elements' straight}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{edges. Simple mesh adaptation, based on the techniques}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{described in the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{<A HREF="{}../../../../doc/poisson/two\_d\_poisson\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{earlier example</A> will not result in convergence to the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{exact solution since the refined mesh never approaches the exact}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{domain geometry:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{\(\backslash\)image html fish\_poisson\_soln\_no\_macro.gif "{}Plot of the mesh adaptation without MacroElements "{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{\(\backslash\)image latex fish\_poisson\_soln\_no\_macro.eps "{}Plot of the mesh adaptation without MacroElements "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{To overcome this problem, the mesh adaptation routines must be given access to}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{an exact, analytical representation of the actual domain. This is}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{the purpose of \(\backslash\)c oomph-\/lib's \(\backslash\)c Domain object. A \(\backslash\)c Domain}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{provides an analytical description of a mathematical}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{domain, by decomposing it into a number of so-\/called \(\backslash\)c MacroElements.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{Each \(\backslash\)c MacroElement provides a mapping between a set of local}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{and global coordinates \(\backslash\)f\$ \{\(\backslash\)bf r\}\_\{macro\}(\{\(\backslash\)bf s\})\(\backslash\)f\$ -\/-\/ similar to the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{mapping between the local and global coordinates in a finite element. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{The key difference between the two types of element is that the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{\(\backslash\)c MacroElement mapping resolves curvilinear domain boundaries}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{exactly, whereas the finite element mapping interpolates the global coordinates}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{between the coordinates of its nodes. The topology of \(\backslash\)c MacroElements }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{mirrors that of the associated (geometric) finite elements: }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{For instance, the \(\backslash\)c QMacroElement family is the counterpart }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{of the \(\backslash\)c QElement family of geometric finite elements. Both are }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{templated by the spatial dimension, and the local coordinates }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{(in their right-\/handed local coordinate systems) are in the range }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{between -\/1 and +1. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{  The different-\/coloured, shaded regions in the above sketch}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{represent the four two-\/dimensional \(\backslash\)c QMacroElements }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{by which the \(\backslash\)c FishDomain represents the fish-\/shaped}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{domain \(\backslash\)f\$ D\_\{fish\} \(\backslash\)f\$. For instance, \(\backslash\)c MacroElement 0}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{(shown in orange) represents the lower half of the fish's body; }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{within this \(\backslash\)c MacroElement, the curved "{}belly"{} is represented by the line}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf r\}\_\{macro\}(s\_0,s\_1=-\/1)\(\backslash\)f\$ for \(\backslash\)f\$s\_0\(\backslash\)in[-\/1,1]\(\backslash\)f\$; the lower}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{"{}jaw"{} is represented by \(\backslash\)f\$ \{\(\backslash\)bf r\}\_\{macro\}(s\_0=-\/1,s\_1)\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{for \(\backslash\)f\$s\_1\(\backslash\)in[-\/1,1]\(\backslash\)f\$; etc.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{To illustrate the use of \(\backslash\)c MacroElements / \(\backslash\)c Domains, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{the following code fragment (from  }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{<A HREF="{}../../../../src/meshes/fish\_mesh.template.cc"{}>fish\_mesh.template.cc}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{</A>) demonstrates how the constructor of the original, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{non-\/refineable \(\backslash\)c FishMesh assigns the nodal positions. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{Each of the \(\backslash\)c FishDomain's four \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{QMacroElements is associated with one of the four finite elements in the mesh.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{Since both types of elements are parametrised by the same}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{local coordinate systems, we determine the position of}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{the node that is located at \(\backslash\)f\$(s\_0, s\_1)\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{(in the finite element's local coordinate system) from the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{corresponding \(\backslash\)c MacroElement mapping, \(\backslash\)f\$\{\(\backslash\)bf r\}\_\{macro\}(s\_0, s\_1)\(\backslash\)f\$:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)dontinclude fish\_mesh.template.cc}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)skipline Create elements}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{\(\backslash\)until end of loop }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{This technique ensures that the mesh's boundary nodes}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{are placed on the exact domain boundary when the mesh is created.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{  To retain this functionality during the mesh adaptation,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{each \(\backslash\)c FiniteElement provides storage for a pointer to an }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{associated \(\backslash\)c MacroElement. By default,  the \(\backslash\)c MacroElement pointer }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{is set to \(\backslash\)c NULL, indicating that the element is not associated }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{with a \(\backslash\)c MacroElement. In that case, the coordinates of newly created }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{nodes are determined by interpolation from the father element, as discussed}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{above. If the \(\backslash\)c MacroElement pointer is non-\/\(\backslash\)c NULL, the refinement process}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{refers to the element's \(\backslash\)c MacroElement representation to determine}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{the new nodal positions.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{  To enable the mesh adaptation process to respect the domain's}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{curvilinear boundaries, each element in the coarse base mesh must }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{therefore be given a pointer to its associated \(\backslash\)c MacroElement,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{e.g. by using the following loop:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{\(\backslash\)dontinclude fish\_mesh.template.cc}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{\(\backslash\)skipline Loop over all elements and set macro element pointer}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{Once the mesh is aware of the curvilinear boundaries, each level of }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{mesh refinement produces a better representation of the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{curvilinear domain, ensuring the convergence to the exact solution:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)image html fish\_poisson\_adapt\_soln.gif "{}Plot of the mesh adaptation with MacroElements "{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{\(\backslash\)image latex fish\_poisson\_adapt\_soln.eps "{}Plot of the mesh adaptation with MacroElements "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{The  results shown in this animation were computed with the demo code }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/poisson/fish\_poisson2/fish\_poisson\_adapt.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{fish\_poisson\_adapt.cc</A> -\/-\/ a simple modification}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{of the code  }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/poisson/fish\_poisson/fish\_poisson.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{fish\_poisson.cc</A> that we used in the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{<A HREF="{}../../../../doc/poisson/fish\_poisson/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{earlier example</A>. The only difference between the two codes}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{is that in the present example, the \(\backslash\)c FishDomain is discretised with }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{four-\/node rather than nine-\/node \(\backslash\)c RefineableQPoissonElements to }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{highlight the inadequacy of the basic mesh refinement process.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{Note that, as a result of lower accuracy of the four-\/node elements,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{we require a much finer discretisation in the interior of the domain. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{\(\backslash\)section domain Part 2: How to represent domains with curvilinear boundaries by Domain and MacroElement objects}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{The above example demonstrated that "{}upgrading"{} existing }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{meshes to \(\backslash\)c RefineableMeshes that can be used with \(\backslash\)c oomph-\/lib's}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{mesh adaptation procedures, can be achieved in two trivial steps:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{-\/\# Associate each \(\backslash\)c RefineableQElement with a \(\backslash\)c QuadTree -\/-\/}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{   this can done completely automatically by calling the function}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{   \(\backslash\)c RefineableQuadMesh::setup\_quadtree\_forest().}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{-\/\# If the problem's domain has curvilinear boundaries, associate }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{   each \(\backslash\)c RefineableQElement with a \(\backslash\)c MacroElement -\/-\/ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{   defined in the \(\backslash\)c Domain object that provides an     }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{   analytical representation of the domain. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{While this looks (and indeed is) impressively simple, we still have to }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{explain how to create \(\backslash\)c Domain objects. We start by introducing}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{yet another useful \(\backslash\)c oomph-\/lib class, the \(\backslash\)c GeomObject.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{\(\backslash\)subsection geom\_object The geometric object, GeomObject}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{As the name suggests, \(\backslash\)c GeomObjects are \(\backslash\)c oomph-\/lib objects that }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{provide an analytical description/parametrisation of geometric}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{objects. Mathematically, \(\backslash\)c GeomObjects define a mapping from }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{a set of "{}Lagrangian"{} (intrinsic) coordinates to the global }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{"{}Eulerian"{} coordinates of the object. The number of Lagrangian}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{and Eulerian coordinates can differ. For instance, the unit circle,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{centred at the origin may be parametrised by a single coordinate, \(\backslash\)f\$ \(\backslash\)xi}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{\(\backslash\)f\$ (representing the polar angle), as}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{\{\(\backslash\)bf r\}\_\{circle\} = }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{\(\backslash\)left( }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{\(\backslash\)cos \(\backslash\)xi \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{\(\backslash\)sin \(\backslash\)xi}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)right),}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{while a 2D disk may be parametrised by two coordinates }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{ \(\backslash\)f\$ \(\backslash\)xi\_1 \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)xi\_2 \(\backslash\)f\$ (representing the radius and the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{polar angle, respectively) as}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{\{\(\backslash\)bf r\}\_\{disk\} = }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{\(\backslash\)xi\_1 \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{\(\backslash\)cos \(\backslash\)xi\_2 \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{\(\backslash\)sin \(\backslash\)xi\_2}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{\(\backslash\)right).}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{All specific \(\backslash\)c GeomObjects must implement the pure virtual function}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{\(\backslash\)c GeomObject::position(...) which computes the Eulerian}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{position vector \(\backslash\)f\$ \{\(\backslash\)bf r\}\(\backslash\)f\$ as a function of the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{(vector of) Lagrangian coordinates \(\backslash\)f\$ \{\(\backslash\)bf \(\backslash\)xi\}\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{(The \(\backslash\)c GeomObject base class also provides interfaces for}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{a multitude of other functions, such as functions that compute}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{the spatial and temporal derivatives of the position vector. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{These functions are implemented as "{}broken"{} virtual functions and }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{their implementation is optional; see the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{<A HREF="{}../../../../doc/poisson/two\_d\_poisson\_flux\_bc/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{earlier example</A> for a discussion of "{}broken"{} virtual functions.)}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{  Here is a complete example of a specific \(\backslash\)c GeomObject:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{\(\backslash\)dontinclude fish\_domain.cc}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\)skipline start\_of\_unit\_circle}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)until end of unit circle}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{[The dummy time-\/dependent version of the \(\backslash\)c position(...) function is}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{required to stop the compiler from complaining about "{}only partially }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{overridden"{} virtual functions]. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{\(\backslash\)subsection domain\_objects Domains}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{\(\backslash\)c GeomObjects provide a natural way of representing a \(\backslash\)c Domain's}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{curvilinear boundaries. For instance, the fish's body in  \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{D\_\{fish\}\(\backslash\)f\$ is bounded by two circular arcs. These may be}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{represented by \(\backslash\)c GeomObjects of type \(\backslash\)c Circle -\/-\/ a slight generalisation}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{of the \(\backslash\)c UnitCircle class shown above. The \(\backslash\)c FishDomain constructor}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{therefore takes a pointer to a 2D \(\backslash\)c GeomObject and the "{}start"{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{and "{}end"{} values of the Lagrangian coordinate along this object. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{The \(\backslash\)c GeomObject represents the curvilinear boundary }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{of the fish's  (upper) body and the two coordinates represent the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{Lagrangian coordinates of the "{}nose"{} and the "{}tail"{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{on this \(\backslash\)c GeomObject, as shown in this sketch:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{\(\backslash\)image html fish\_domain.gif "{}The fish-\/shaped domain and its MacroElement-\/based representation by the FishDomain object. The arrows show the orientation of the MacroElements' local coordinate systems. "{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{\(\backslash\)image latex fish\_domain.eps "{}The fish-\/shaped domain and its MacroElement-\/based representation by the FishDomain object. The arrows show the orientation of the MacroElements' local coordinate systems. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{To construct a \(\backslash\)c FishDomain whose curvilinear boundaries}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{are arcs of unit circles, centred at \(\backslash\)f\$ (x\_0,x\_1) = (1/2 , 0) \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{we create a \(\backslash\)c GeomObject of type \(\backslash\)c Circle, passing the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{appropriate parameters to its constructor:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{ // Fish back is a circle of radius 1, centred at (0.5,0.0)}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{ double x\_c=0.5;}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{ double y\_c=0.0;}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{ double r\_back=1.0;}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{ GeomObject* back\_pt=new Circle(x\_c,y\_c,r\_back);}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{Next, we pass the (pointer to the)  \(\backslash\)c Circle object}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{to the constructor of the \(\backslash\)c FishDomain, locating}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{the "{}nose end"{} of the fish's back at \(\backslash\)f\$\(\backslash\)xi=2.4\(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{and  its "{}tail end"{} at \(\backslash\)f\$\(\backslash\)xi=0.4\(\backslash\)f\$:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{ double xi\_nose=2.6; }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{ double xi\_tail=0.4; }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{ Domain* domain\_pt=new FishDomain(back\_pt,xi\_nose,xi\_tail);}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{ To see how this works internally, let us have a look at the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{\(\backslash\)c FishDomain constructor. The constructor stores the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{pointer to the fish's "{}back"{}, and the start and end values of the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{Lagrangian coordinates in the private data members \(\backslash\)c Back\_pt, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{\(\backslash\)c Xi\_nose and \(\backslash\)c Xi\_tail. Next we set some additional parameters,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{that define the geometry (the mouth is located at the origin; }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{the fin is a vertical line at \(\backslash\)f\$ x=1.7\(\backslash\)f\$, ranging from }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{\(\backslash\)f\$ y=-\/0.9\(\backslash\)f\$ to  \(\backslash\)f\$ y=+0.9\(\backslash\)f\$). Finally, we allocate storage for }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{the four \(\backslash\)c MacroElements and build them. Note that the constructor }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{of the \(\backslash\)c MacroElement takes a pointer to the Domain, and the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{\(\backslash\)c MacroElement's number within that \(\backslash\)c Domain:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{\(\backslash\)dontinclude fish\_domain.h}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{\(\backslash\)skipline Constructor: Pass pointer to GeomObject that }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{Most of the remaining public member functions are equally}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{straightforward. We provide various access functions to the geometric parameters}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{such as \(\backslash\)c X\_mouth, etc -\/-\/ we will not list these explicitly.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{All the "{}real work"{} is done in the implementation of the pure }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{virtual function \(\backslash\)c Domain::macro\_element\_boundary(...). Given }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{-\/ the number of the \(\backslash\)c MacroElement in its \(\backslash\)c Domain}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{-\/ the direction of its boundary (N[orth], S[outh], E[ast], W[est],}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{  enumerated in the namespace \(\backslash\)c QuadTreeNames)}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{this function must compute the vector \(\backslash\)f\$ \{\(\backslash\)bf r\}(\(\backslash\)zeta)\(\backslash\)f\$ to the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{\(\backslash\)c MacroElement's boundary.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{Here \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)in [-\/1,1]\(\backslash\)f\$ is the 1D coordinate along the element}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{boundary, aligned with the direction of the \(\backslash\)c }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{MacroElement's 2D coordinates \(\backslash\)f\$(s\_0,s\_1) \(\backslash\)f\$ as indicated in this sketch:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{\(\backslash\)image html macro\_element\_sketch.gif "{}Sketch illustrating the parametrisation of the MacroElement's four boundaries. "{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{\(\backslash\)image latex macro\_element\_sketch.eps "{}Sketch illustrating the parametrisation of the MacroElement's four boundaries. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{Since the shape of the domain can evolve in time, the full interface }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{for the function includes an additional parameter, \(\backslash\)c t, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{which indicates the (discrete) time level at which the domain shape}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{is to be evaluated. If \(\backslash\)c t=0 the function computes the domain shape}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{at the current time; if \(\backslash\)c t>0 it computes the shape at the \(\backslash\)c t -\/th }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{previous timestep. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{(<A HREF="{}../../../unsteady\_heat/two\_d\_unsteady\_heat\_ALE/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{Another example</A> in which we solve the unsteady}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{heat equation in a moving domain, provides a a more detailed discussion of }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{this aspect.) Here is the full}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{interface for the \(\backslash\)c FishDomain::macro\_element\_boundary(...) function:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{\(\backslash\)skipline Vector repre}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{\(\backslash\)until r);}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{The implementation of this function is the only tedious task that}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{needs to be performed by the "{}mesh writer"{}. Once }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{\(\backslash\)c Domain::macro\_element\_boundary(...) }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{is implemented, the \(\backslash\)c Domain's constituent \(\backslash\)c MacroElements}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{can refer to this function to establish the positions of their}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{boundaries (recall that we passed the pointer to the \(\backslash\)c Domain and}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{the \(\backslash\)c MacroElement's number in the \(\backslash\)c Domain to the \(\backslash\)c MacroElement}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{constructor). The \(\backslash\)c MacroElement::macro\_map(...) functions}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{interpolate the position of the \(\backslash\)c MacroElement's boundaries into their}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{interior. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{To illustrate the general procedure, here is the complete listing of }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{the \(\backslash\)c FishDomain::macro\_element\_boundary(...) function. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{The function employs switch statements to identify the private member functions}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{that provide the parametrisation of individual \(\backslash\)c MacroElement}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{boundaries. Some of these functions are listed below.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{\(\backslash\)dontinclude fish\_domain.h}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{\(\backslash\)skipline start\_of\_macro\_element\_boundary}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{\(\backslash\)until end of macro\_element\_boundary}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{Here are a few of the private member functions that define individual }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{\(\backslash\)c MacroElement boundaries:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{-\/ The N[orthern] boundary}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{  of macro element 2 (which represents the upper body) }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{  coincides with the domain boundary that is parametrised by the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{  geometric object pointed to by \(\backslash\)c Back\_pt. The function }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{  translates the coordinate \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)in [-\/1,1] \(\backslash\)f\$ to the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{  Lagrangian coordinate \(\backslash\)f\$ \(\backslash\)xi \(\backslash\)in [\(\backslash\)xi\_\{nose\}, \(\backslash\)xi\_\{tail\}] \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{  along the geometric object. We use this Lagrangian coordinate}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{  to obtain the position vector to the domain boundary via a call to the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{  \(\backslash\)c GeomObject::position(...) function of the geometric object }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{  pointed to by \(\backslash\)c Back\_pt:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{\(\backslash\)dontinclude fish\_domain.h}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{\(\backslash\)skipline start\_of\_r\_upper\_body\_N}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{\(\backslash\)until  end of r\_upper\_body\_N }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{-\/ The E[astern] boundary of macro element 2 is a straight vertical}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{  line from the "{}tail end"{} of the curved fish back to the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{  x-\/axis: }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{\(\backslash\)dontinclude fish\_domain.h}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{\(\backslash\)skipline start\_of\_r\_upper\_body\_E}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{\(\backslash\)until  end of r\_upper\_body\_E}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{-\/ The S[outhern] boundary of macro element 2 is a straight horizontal}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{  line from the "{}mouth"{} to the end of the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{  body: }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{\(\backslash\)dontinclude fish\_domain.h}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{\(\backslash\)skipline start\_of\_r\_upper\_body\_S}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{\(\backslash\)until  end of r\_upper\_body\_S}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{-\/ The W[estern] boundary of macro element 2 is a straight}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{  line from the "{}mouth"{} to the "{}mouth"{} end of the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{  curved upper boundary of the body:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{\(\backslash\)dontinclude fish\_domain.h}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{\(\backslash\)skipline start\_of\_r\_upper\_body\_W}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{\(\backslash\)until  end of r\_upper\_body\_W}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{-\/ The S[outhern] boundary of macro element 0 (which represents the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{  lower body) is simply a reflection of the N[orthern] boundary}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{  of macro element 2:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{\(\backslash\)dontinclude fish\_domain.h}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{\(\backslash\)skipline  Southern boundary of lower body macro element}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{\(\backslash\)until  \}}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{-\/ etc.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{Tedious? Yes! Rocket Science? No!}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{\(\backslash\)section com Further comments}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{\(\backslash\)subsection nod\_update Node updates in response to changes in the Domain shape.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{You may have noticed that, even though we introduced}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{\(\backslash\)c MacroElements in the context of adaptive mesh refinement, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{the pointer to a refineable element's \(\backslash\)c MacroElement is }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{stored in the \(\backslash\)c FiniteElement, rather than the (derived) \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{RefineableElement class, suggesting that \(\backslash\)c MacroElements}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{have additional uses outside the context of mesh adaptation. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{Indeed, the code fragment that illustrated the use of \(\backslash\)c Domains }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{and \(\backslash\)c MacroElements during mesh generation, was taken from }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{the constructor of the \(\backslash\)e non-\/refineable \(\backslash\)c FishMesh,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{rather than its adaptive counterpart. During the mesh generation}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{process, the \(\backslash\)c FiniteElement's \(\backslash\)c MacroElement representation }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{was used to determine the position of its \(\backslash\)c Nodes within the \(\backslash\)c Domain. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{The same procedure can be employed to \(\backslash\)e update the nodal positions in }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{response to changes in the domain shape. This is implemented, generically,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{in the function}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{Mesh::node\_update()}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{This function loops over all elements in a \(\backslash\)c Mesh and updates}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{their nodal positions in response to changes in the domain boundary.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{(If the \(\backslash\)c Mesh's constituent elements's are not associated with }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{\(\backslash\)c MacroElements and if the \(\backslash\)c Mesh does not implement the node update}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{by other means, this function does not change the mesh.)}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{The following code fragment illustrates the trivial modifications}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{to the driver code required to compute the solution of Poisson's }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{equation in fish-\/shaped  domain of various widths. We simply}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{change the position of the \(\backslash\)c GeomObject that specifies the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{curvilinear boundary (by changing the position of the circle's}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{centre), call the \(\backslash\)c Mesh::node\_update() function, and recompute}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{the solution.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{\(\backslash\)dontinclude fish\_poisson\_node\_update.cc}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{\(\backslash\)until end of main}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{The }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{ <A HREF="{}../../../../demo\_drivers/poisson/fish\_poisson2/fish\_poisson\_node\_update.cc"{}>rest}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{ of the code</A> remains unchanged. Here is a plot of the solution for }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{various widths of the domain (computed with nine-\/node elements).}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{\(\backslash\)image html fish\_poisson\_node\_update.gif "{}Adaptive solution of Poisson's equation in fish-\/shaped domains of varying width. "{} }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{\(\backslash\)image latex fish\_poisson\_node\_update.eps "{}Adaptive solution of Poisson's equation in fish-\/shaped domains of varying width. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{\(\backslash\)subsection boundary\_coords Good practice: Storing boundary coordinates}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{The above example demonstrated how the representation of curvilinear }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{domain boundaries by \(\backslash\)c GeomObjects}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{allows \(\backslash\)c oomph-\/lib's mesh generation and adaptation procedures to }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{place nodes on these boundaries. We note that the }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{Lagrangian coordinate(s) that parametrise(s) the relevant \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{GeomObjects also provide a parametrisation of the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{corresponding domain boundaries. In certain applications (such as }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{free-\/boundary or fluid-\/structure interaction problems) it is useful}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{to have direct access to these boundary coordinates. For this purpose}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{the \(\backslash\)c Node class provides the function}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{Node::set\_coordinates\_on\_boundary(const unsigned\& b, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{                                  const Vector<double>\& xi);}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{which allows the mesh writer to store the (vector of) boundary}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{coordinates that a given (\(\backslash\)c Boundary)\(\backslash\)c Node is located at. The argument \(\backslash\)c b }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{specifies the number of the mesh boundary, reflecting the fact that nodes may}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{be located on multiple domain boundaries, each of which is likely to have}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{a different set of surface coordinates. [\(\backslash\)b Note: The function is}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{implemented as a broken virtual function in the \(\backslash\)c Node base class.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{The actual functionality to store boundary coordinates is only}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{provided in (and required by) the derived \(\backslash\)c BoundaryNode class.]}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{Since the storage of boundary coordinates is optional, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{the \(\backslash\)c Mesh base class provides a protected vector of bools,}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{std::vector<bool> Mesh::Boundary\_coordinate\_exists;}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{that indicates if the boundary coordinates have been stored for}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{all \(\backslash\)c Nodes on a specific mesh boundary. This vector}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{is resized and its entries are initialised to \(\backslash\)c false, when}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{the number of mesh boundaries is declared with a call}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{to \(\backslash\)c Mesh::set\_nboundary(...). If, during mesh refinement, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{a new  \(\backslash\)c BoundaryNode is created on the mesh's boundary \(\backslash\)c b, }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{its boundary coordinates are computed by interpolation from the}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{corresponding values at the nodes in the father element, if }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{\(\backslash\)c Mesh::Boundary\_coordinate\_exists[b] has been set to \(\backslash\)c true.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{We regard it as good practice to set boundary coordinates for}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{all \(\backslash\)c BoundaryNodes that are located on curvlinear mesh boundaries. }}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{The source code}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{<A HREF="{}../../../../src/meshes/fish\_mesh.template.cc"{}>fish\_mesh.template.cc</A>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{for the refineable FishMesh illustrates the methodology.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/poisson/fish\_poisson2/"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{demo\_drivers/poisson/fish\_poisson2/}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{-\/ The driver code is:}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/poisson/fish\_poisson2/fish\_poisson\_adapt.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{demo\_drivers/poisson/fish\_poisson2/fish\_poisson\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{fish__poisson2_8txt__doxygenified_8h_source_l00550}00550 }
+
+\end{DoxyCode}

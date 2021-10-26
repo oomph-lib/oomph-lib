@@ -1,0 +1,622 @@
+\hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source}{}\doxysection{mesh\+\_\+from\+\_\+inline\+\_\+triangle.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{mesh__from__inline__triangle_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Inline mesh generation and adaptation based on Triangle}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this document we demonstrate how to generate unstructured}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{2D meshes for \(\backslash\)c oomph-\/lib, using}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{<A HREF="{}http://www.cs.berkeley.edu/\string~jrs/"{}>Jonathan Shewchuk's</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{<A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}> Triangle</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{library from within an \(\backslash\)c oomph-\/lib driver code.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{This complements the discussion in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<A HREF="{}../../../../doc/meshes/mesh\_from\_triangle/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{another tutorial</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{where we illustrated how to build \(\backslash\)c oomph-\/lib meshes using the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{output generated when <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{\(\backslash\)c Triangle </A> is used to create the mesh externally. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{ In addition, we demonstrate }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{-\/ how to create meshes with polygonal or curvilinear boundaries}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{and }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{-\/ how to  adapt (re-\/generate) these meshes based on spatial error estimates. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{Here we restrict ourselves to the solution of problems in fixed}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{domains. Other tutorials discuss more advanced applications involving}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{moving meshes, e.g.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{-\/ <A HREF="{}../../../../doc/navier\_stokes/jeffery\_orbit/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{  The motion of an ellipse in a shear flow</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{-\/ <A HREF=}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{  "{}../../../../doc/navier\_stokes/adaptive\_bubble\_in\_channel/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{  The propagation of a bubble in a channel -\/-\/ mesh generation and adaptation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{  for free-\/surface flows.</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{\(\backslash\)section overview Overview of mesh generation procedures}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)subsection polygonal Meshes with polygonal boundaries}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{If the domain has polygonal outer (and possibly internal) }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{boundaries, the mesh generation process follows a similar pattern }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{to that required in the external use}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{of <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{</A>, but using \(\backslash\)c oomph-\/lib classes to represent the required data.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{We define the polygonal boundaries using \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{TriangleMeshPolyLines, }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{which represent distinct mesh boundaries and are defined by a series of}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{vertex coordinates. Multiple \(\backslash\)c TriangleMeshPolyLines can be }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{combined to define}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{(closed) \(\backslash\)c TriangleMeshPolygons. These are then used }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{to create an unstructured mesh with a pre-\/determined target area for}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{all elements, via an interface to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{<A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle </A>.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{One particular feature of \(\backslash\)c oomph-\/lib's interface}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{to  <A HREF="{}http://www.cs.cmu.edu/\string~quake/triangle.html"{}>\(\backslash\)c Triangle </A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{is that each closed \(\backslash\)c TriangleMeshPolygon must contain at least two}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{distinct \(\backslash\)c TriangleMeshPolyLines, each with its own boundary ID. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{This is because every \(\backslash\)c Node can only have a single-\/valued boundary}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{coordinate but if the boundary is closed there would be a discontinuity}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{in the coordinate value. (For example, a standard representation }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{would have \(\backslash\)f\$ \(\backslash\)zeta = [0,2\(\backslash\)pi] \(\backslash\)f\$ , but the node at }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)f\$\(\backslash\)zeta=0\(\backslash\)f\$ should also have \(\backslash\)f\$ \(\backslash\)zeta=2\(\backslash\)pi \(\backslash\)f\$ and this is not possible.)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{The sketch below shows a representative domain }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{as well as two legal and one illegal representations of the domain}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{boundaries. Note that the boundaries can be enumerated in an arbitrary }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{fashion. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{\(\backslash\)image html polygonal\_mesh.gif "{}Sketch of a polygonal domain (top) and two legal (bottom left and middle) and one illegal (bottom right) representations of the boundaries in terms of TriangleMeshPolyLines. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)image latex polygonal\_mesh.eps "{}Sketch of a polygonal domain (top) and two legal (bottom left and middle) and one illegal (bottom right) representations of the boundaries in terms of TriangleMeshPolyLines. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{\(\backslash\)subsection curvilinear Meshes with curvilinear boundaries}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{It is also possible to discretise domains with curvilinear boundaries}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{as shown in the sketch below. Assuming that each curvilinear boundary}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{is represented by a \(\backslash\)c GeomObject that specifies the position vector}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf R\}(\(\backslash\)zeta) \(\backslash\)f\$ to a point on the curvilinear boundary as a }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{function of some surface coordinate \(\backslash\)f\$ \(\backslash\)zeta \(\backslash\)f\$, we split each}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{closed boundary into (at least) two distinct \(\backslash\)c TriangleMeshCurviLines -\/-\/}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{the curvilinear equivalents of \(\backslash\)c TriangleMeshPolyLines.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{Each \(\backslash\)c TriangleMeshCurviLine is constructed from a pointer to the \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{GeomObject and the start and end values of the boundary coordinate \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{\(\backslash\)zeta \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{along the relevant part of the curvilinear boundary. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{The \(\backslash\)c TriangleMeshCurviLines are then  combined to a}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)c TriangleMeshClosedCurve -\/-\/ the general closed curve.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)image html curvilinear\_mesh.gif "{}Sketch of a domain bounded by a curvilinear boundary, containing two holes with curvilinear (hole 1) and polygonal (hole 2) boundaries, respectively. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)image latex curvilinear\_mesh.eps "{}Sketch of a domain bounded by a curvilinear boundary, containing two holes with curvilinear (hole 1) and polygonal (hole 2) boundaries, respectively. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{The mesh is then created in a two-\/stage process: All  \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{TriangleMeshCurviLines are sampled at a certain number of}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{points (specified by the user in the constructor) to create the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{vertices for a polyline representation of the boundary. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{This polygonal representation of the boundaries is }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{used by \(\backslash\)c Triangle to generate the mesh. Finally, nodes on }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{curvilinear boundaries are "{}snapped"{} onto the actual curvilinear }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{boundary.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)section adapt Overview of mesh adaptation methodology}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{The methodology employed to adapt \(\backslash\)c oomph-\/lib's unstructured meshes }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{differs from that used for structured meshes. Specifically, rather than}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{sub-\/dividing elements in which the error estimate exceeds a threshold}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{and merging elements in which the solution is }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{"{}too accurate"{}, we completely re-\/generate the mesh and project}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{the solution from the old to the new mesh. This is because we}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{originally developed the underlying methodology to solve}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{free-\/boundary problems in which the domain undergoes such large}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{deformations that re-\/meshing is required. The ability to }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{adjust the element sizes guided by spatial error estimates}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{when re-\/meshing the domain is a simple fringe benefit.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{A number of issues are important: }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{-\/ To facilitate mesh adaptation in free-\/boundary problems, we }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{  re-\/generate the polygonal representation of the boundary,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{  using the vertex nodes of the elements on the boundary to re-\/define }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{  the polygon. The number of vertices in the polygons that define the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{  mesh boundaries will therefore generally change during the mesh }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{  adaptation process. This is discussed in more detail in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{  <a href=}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{  "{}../../../../doc/navier\_stokes/adaptive\_bubble\_in\_channel/html/index.html\#adapt"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{  another tutorial.</a>\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{-\/ The mesh (and thus its constituent elements) are completely }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{  re-\/generated when the mesh is adapted, and so it is necessary to "{}complete}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{  the build"{} of all elements after each mesh adaptation. For instance,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{  pointers to problem parameters (Reynolds numbers, source functions,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{  etc) must  be re-\/set after the adaptation since they cannot }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{  (easily) be passed from the old to the new mesh. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{-\/ When projecting the solution from the old to the new mesh, we}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{  project }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{  -\/ all unknowns and their associated history values (if any)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{    \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{  -\/ the history values of the nodal positions. This is important for moving}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{    mesh problems where the mesh velocity is required to evaluate}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{    the ALE time-\/derivatives.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{  .}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{-\/ The ability to automatically project the solution from the old to }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{  the new mesh requires the elements, of type \(\backslash\)c ELEMENT, say, to be wrapped }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{  in the templated \(\backslash\)c ProjectableElement<ELEMENT> class. This class}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{  requires the specification of various element characteristics}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{  (such as the number of fields to be projected, the number of history }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{  values, etc) in the form of virtual functions. This is much more}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{  straightforward than upgrading an existing element to become a refineable}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{  element for use in an adaptive computation on a structured}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{  mesh because the "{}mesh adaptation by mesh re-\/generation"{} avoids the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{  creation of hanging nodes. See the section \(\backslash\)ref wrapper for a}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{  slightly more detailed }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{  discussion of this aspect.  }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{-\/ Note that we do \(\backslash\)b not apply any boundary conditions }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{  during the projection of these fields. This decision was not taken}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{  out of laziness but because the interfaces required to specify}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{  which boundary conditions to enforce and which ones to relax during}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{  the projection were too unwieldy. It is therefore \(\backslash\)b important}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{  to re-\/apply boundary conditions and boundary values after each}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{  adaptation.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{We recommend using the \(\backslash\)c Problem::actions\_after\_adapt()  function to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{re-\/assign boundary conditions and to complete the build of all}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{elements after the adaptation.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{Apart from these issues, the user interfaces to the mesh adaptation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{functions are exactly the same as for structured meshes. Specifically,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{it is possible to specify maximum and minimum element sizes and}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{target values for the error such that the mesh is refined in regions}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{where the error estimate is ``too large'' and unrefined where it is }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{``too small''.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{Typically, the most computationally expensive stage of the mesh }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{regeneration procedure is the multi-\/domain setup procedure which identifies}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{corresponding points in the old and new meshes. In "{}cheap"{} problems, such as }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{the Poisson problem discussed below, the cost of the mesh regeneration}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{can exceed the cost of the subsequent solve, but in most "{}hard"{}}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{problems (such as the ones listed at the beginning of this tutorial)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{the cost of the mesh regeneration is modest (and, in the case}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{of large-\/displacement free-\/boundary problems, unavoidable anyway).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{\(\backslash\)section example An example: The adaptive solution of Poisson's equations on an unstructured mesh}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{As an example we consider the adaptive solution of Poisson's equation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial\string^2 u\}\{\(\backslash\)partial x\_i\string^2\} = f(x\_1,x\_2)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{in a circular domain that contains an elliptical and a polygonal}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{hole. As in many previous examples, we apply Dirichlet boundary}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{conditions on all domain boundaries and choose the boundary}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{values and the source function  \(\backslash\)f\$ f(x\_1,x\_2) \(\backslash\)f\$ such that }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{the exact solution of the problem is given by}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{u(x\_1,x\_2) = \(\backslash\)tanh(1-\/\(\backslash\)alpha(x\_1 \(\backslash\)tan\(\backslash\)Phi -\/ x\_2)),}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{which approaches a step function, oriented at an angle \(\backslash\)f\$ \(\backslash\)Phi \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{within the \(\backslash\)f\$ (x\_1,x\_2) \(\backslash\)f\$ plane, as \(\backslash\)f\$ \(\backslash\)alpha \(\backslash\)f\$ becomes large.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{The figure below shows contour plots of the solution }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{for \(\backslash\)f\$ \(\backslash\)alpha = 5 \(\backslash\)f\$ for various angles \(\backslash\)f\$ \(\backslash\)Phi \(\backslash\)f\$. It illustrates }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{how the mesh adaptation adjusts the mesh such the smallest elements}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{are located in the region where the solution undergoes rapid change. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{\(\backslash\)image html solution.gif "{}Contour plot of the solution. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{\(\backslash\)image latex solution.eps "{}Contour plot of the solution. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{\(\backslash\)section global Global parameters and functions}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{Following our usual practice, we use a namespace to define the source function }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{and the exact solution. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{\(\backslash\)dontinclude mesh\_from\_inline\_triangle.cc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{\(\backslash\)skipline start\_of\_namespace}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{\(\backslash\)until end of namespace}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{We start by processing command line arguments which allow us to }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{run the code in self-\/test mode and build the problem with }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{"{}projectable"{} six-\/noded triangular Poisson elements. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{\(\backslash\)dontinclude mesh\_from\_inline\_triangle.cc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{\(\backslash\)skipline start\_of\_main}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{\(\backslash\)until problem;}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{We then perform a parameter study, solving the problem for various}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{orientations of the "{}step"{} and allowing a certain number of spatial }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{adaptations per solve. (If the code is run in self-\/test mode, we}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{perform fewer steps and allow for less adaptation to speed up}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{the computation.)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{\(\backslash\)skipline Loop over orientation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{\(\backslash\)until End of main}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{\(\backslash\)section problem The problem class}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{The problem class contains the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{usual member functions. As discussed above, the boundary conditions}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{and the source function have to be re-\/specified after every mesh }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{adaptation since the adapted mesh contains completely new elements.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{This is done in the function \(\backslash\)c complete\_problem\_setup(), discussed}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{below, which is called from the Problem constructor and }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{from \(\backslash\)c actions\_after\_adapt(). We re-\/assign the Dirichlet boundary }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{conditions in \(\backslash\)c actions\_before\_newton\_solve(), using a second helper function}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{\(\backslash\)c apply\_boundary\_conditions():}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{\(\backslash\)dontinclude mesh\_from\_inline\_triangle.cc }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{\(\backslash\)until end\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{\(\backslash\)section constructor The Problem constructor}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{Most of the problem constructor is concerned with the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{specification of the mesh boundaries.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{We start by generating a \(\backslash\)c GeomObject that describes the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{circular outer boundary of the domain.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{\(\backslash\)skipline start\_constructor}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{\(\backslash\)until Ellipse(A,B)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{This \(\backslash\)c GeomObject is now used to describe the outer boundary in}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{terms of a \(\backslash\)c TriangleMeshClosedCurve object, a base class which }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{can represent polygonal and curvilinear boundaries. We start by}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{providing a pointer to this (yet-\/to-\/be-\/built) object.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{\(\backslash\)until closed\_curve\_pt}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{As discussed above, the closed outer boundary must be broken up into }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{(at least) two distinct sub-\/boundaries to allow \(\backslash\)c oomph-\/lib}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{to automatically refine and setup boundary coordinates. We therefore create}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{two \(\backslash\)c TriangleMeshCurviLines, specifying}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{-\/ the \(\backslash\)c GeomObject that provides the exact curvilinear representation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{  of the boundary,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{-\/ the start and end coordinates of the boundary on that \(\backslash\)c GeomObject,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{-\/ the number of straight-\/line segments used to represent this}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{  boundary during the initial phase of the mesh generation process.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{  Recall that nodes on this boundary are "{}snapped"{} onto the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{  exact curvilinear boundary after the initial mesh is generated -\/-\/}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{  the number of segments should therefore be sufficiently large to}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{  ensure that the "{}snapping"{} does not distort the elements next to the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{  boundary too much. See \(\backslash\)ref how\_many\_segments for a more detailed}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{  discussion of this issue.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{\(\backslash\)skipline Provide storage for pointers to the two parts of the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{\(\backslash\)until outer\_curvi}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{We choose five boundary segments for the first \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{TriangleMeshCurviLine which represents the upper half of the boundary}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{which we label as boundary 0,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{\(\backslash\)until outer\_boundary\_ellipse\_pt,zeta\_start,zeta\_end,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{and eight segments for the lower half which we label as boundary 1:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{\(\backslash\)until outer\_boundary\_ellipse\_pt,zeta\_start,zeta\_end,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{We then combine the two \(\backslash\)c TriangleMeshCurviLines to a }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{\(\backslash\)c TriangleMeshClosedCurve which describes the outer boundary.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{\(\backslash\)skipline // Combine to curvilinear boundary and define the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{\(\backslash\)until TriangleMeshClosedCurve}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{Next we deal with the two inner (hole) boundaries}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{\(\backslash\)skipline Now build the holes}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{\(\backslash\)until hole\_pt(2)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{The first hole is a polygon whose 12 vertices we distribute along a}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{circle of radius \(\backslash\)f\$ 0.1 \(\backslash\)f\$ , centred at \(\backslash\)f\$ (x\_1,x\_2)=(0,0.5). \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{As above, we break the closed boundary into two distinct }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{sub-\/boundaries -\/-\/ this time represented by \(\backslash\)c TriangleMeshPolyLines:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{\(\backslash\)until TriangleMeshCurveSection}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{We create the vertex coordinates for the upper half of the polygonal}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{hole,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{and build the \(\backslash\)c TriangleMeshPolyLine, specifying a boundary ID:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{\(\backslash\)until boundary\_id)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{We repeat the exercise for the lower half which we turn into boundary}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{4:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{\(\backslash\)until boundary\_id)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{Finally, we build the polygonal hole itself, specifying its constituent}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{\(\backslash\)c TriangleMeshPolyLines and the coordinate of a point inside the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{hole, which is required by \(\backslash\)c Triangle:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{\(\backslash\)until hole\_pt[0]}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{The construction of the second, curvilinear internal boundary }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{(an ellipse centred at the origin) is virtually identical to the }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{steps taken for the construction of the outer boundary, apart from }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{the fact that, as an internal boundary, it again requires the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{specification of a point inside the hole.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{\(\backslash\)skipline curvilinear hole}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{\(\backslash\)until hole\_coords); }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{\(\backslash\)subsection build\_mesh Construct the mesh}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{To facilitate the construction of the mesh \(\backslash\)c TriangleMesh}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{object we use the object \(\backslash\)c TriangleMeshParameters. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{The only necessary argument for creating this object is the outer }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{boundary. The definition of holes, internal boundaries and regions is}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{explained in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{<A HREF="{}../../../../doc/meshes/mesh\_from\_inline\_triangle\_internal\_boundaries/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{another tutorial</a>.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{The object can also be used to control whether}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00379}00379 \textcolor{comment}{additional refinement may be performed on the mesh boundaries. The}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00380}00380 \textcolor{comment}{default behaviour is that such refinement will occur so that }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00381}00381 \textcolor{comment}{the highest quality mesh is obtained. In some cases,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00382}00382 \textcolor{comment}{e.g. periodic boundary conditions, you may wish to ensure that each}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00383}00383 \textcolor{comment}{input boundary segment corresponds to a single element edge in the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00384}00384 \textcolor{comment}{final mesh. This can be achieved for the outer boundary by calling }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00385}00385 \textcolor{comment}{\(\backslash\)c TriangleMeshParameters::disable\_boundary\_refinement(). However, Triangle}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00386}00386 \textcolor{comment}{will still add additional points to any internal boundaries unless the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00387}00387 \textcolor{comment}{additional function }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00388}00388 \textcolor{comment}{\(\backslash\)c TriangleMeshParameters::disable\_internal\_boundary\_refinement() is}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00389}00389 \textcolor{comment}{also called. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00390}00390 \textcolor{comment}{The functions \(\backslash\)c TriangleMeshParameters::enable\_boundary\_refinement()}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00391}00391 \textcolor{comment}{and \(\backslash\)c TriangleMeshParameters::enable\_internal\_boundary\_refinement()}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00392}00392 \textcolor{comment}{can be used to return to the default behaviour. Note that it is not }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00393}00393 \textcolor{comment}{currently possible to suppress refinement on the internal boundaries,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00394}00394 \textcolor{comment}{but refine the outer boundary.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00395}00395 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00396}00396 \textcolor{comment}{We can specify a target for the element sizes and pass it to the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00397}00397 \textcolor{comment}{\(\backslash\)c TriangleMeshParameters object as showed next:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00398}00398 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00399}00399 \textcolor{comment}{\(\backslash\)skipline Now build the mesh}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00400}00400 \textcolor{comment}{\(\backslash\)until Problem::mesh\_pt()}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00401}00401 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00402}00402 \textcolor{comment}{We specify a spatial error estimator and limit the maximum and }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00403}00403 \textcolor{comment}{minimum element sizes,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00404}00404 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00405}00405 \textcolor{comment}{\(\backslash\)until min\_element\_size()}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00406}00406 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00407}00407 \textcolor{comment}{before completing the problem setup (see below) and assigning }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00408}00408 \textcolor{comment}{the equation numbers.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00409}00409 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00410}00410 \textcolor{comment}{\(\backslash\)until end\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00411}00411 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00412}00412 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00413}00413 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00414}00414 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00415}00415 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00416}00416 \textcolor{comment}{\(\backslash\)section complete Completing the problem setup}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00417}00417 \textcolor{comment}{As discussed above, the helper function \(\backslash\)c complete\_problem\_setup()}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00418}00418 \textcolor{comment}{starts by (re-\/)applying the boundary conditions by pinning the nodal values}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00419}00419 \textcolor{comment}{on all mesh boundaries,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00420}00420 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00421}00421 \textcolor{comment}{\(\backslash\)skipline start\_of\_complete}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00422}00422 \textcolor{comment}{\(\backslash\)until end loop over}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00423}00423 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00424}00424 \textcolor{comment}{specifies the source function pointer for all elements,}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00425}00425 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00426}00426 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00427}00427 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00428}00428 \textcolor{comment}{and then re-\/sets the boundary values:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00429}00429 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00430}00430 \textcolor{comment}{\(\backslash\)until \}}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00431}00431 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00432}00432 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00433}00433 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00434}00434 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00435}00435 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00436}00436 \textcolor{comment}{\(\backslash\)section bc Assigning the boundary values}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00437}00437 \textcolor{comment}{The function \(\backslash\)c apply\_boundary\_conditions()}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00438}00438 \textcolor{comment}{does exactly what is says: It loops over all boundary nodes}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00439}00439 \textcolor{comment}{and assigns the value according the exact solution specified}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00440}00440 \textcolor{comment}{in the namespace \(\backslash\)c TanhSolnForPoisson.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00441}00441 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00442}00442 \textcolor{comment}{\(\backslash\)skipline start\_of\_apply\_bc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00443}00443 \textcolor{comment}{\(\backslash\)until end set bc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00444}00444 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00445}00445 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00446}00446 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00447}00447 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00448}00448 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00449}00449 \textcolor{comment}{\(\backslash\)section doc Post-\/processing}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00450}00450 \textcolor{comment}{We compare the computed solution against the exact solution:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00451}00451 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00452}00452 \textcolor{comment}{\(\backslash\)skipline start\_of\_doc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00453}00453 \textcolor{comment}{\(\backslash\)until end of doc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00454}00454 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00455}00455 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00456}00456 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00457}00457 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00458}00458 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00459}00459 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00460}00460 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00461}00461 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00462}00462 \textcolor{comment}{\(\backslash\)section comments Comments and Exercises}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00463}00463 \textcolor{comment}{  }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00464}00464 \textcolor{comment}{\(\backslash\)subsection wrapper Upgrading elements to become "{}projectable"{}}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00465}00465 \textcolor{comment}{As discussed above, a key step in the "{}mesh-\/adaptation-\/by-\/mesh-\/regeneration"{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00466}00466 \textcolor{comment}{procedure is the projection of the solution from the old to the new mesh. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00467}00467 \textcolor{comment}{The ability to perform this projection fully-\/automatically during the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00468}00468 \textcolor{comment}{mesh adaptation requires the elements to be "{}wrapped"{} in the templated}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00469}00469 \textcolor{comment}{\(\backslash\)c ProjectableElement<ELEMENT> class. This class is derived from the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00470}00470 \textcolor{comment}{\(\backslash\)c ProjectableElementBase base class which specifies a number of}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00471}00471 \textcolor{comment}{pure virtual functions that must be specified for each specific}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00472}00472 \textcolor{comment}{element type. For the Poisson problem considered here these functions }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00473}00473 \textcolor{comment}{are already provided in the \(\backslash\)c ProjectablePoissonElement<ELEMENT>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00474}00474 \textcolor{comment}{class. Similar wrappers exist for many other equations. If you }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00475}00475 \textcolor{comment}{want to "{}upgrade"{} your own elements to become projectable, inspect}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00476}00476 \textcolor{comment}{the prototypes for the relevant pure virtual functions }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00477}00477 \textcolor{comment}{which are defined in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00478}00478 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00479}00479 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00480}00480 \textcolor{comment}{<A HREF="{}../../../../src/generic/projection.h"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00481}00481 \textcolor{comment}{src/generic/projection.h}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00482}00482 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00483}00483 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00484}00484 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00485}00485 \textcolor{comment}{while the specific implementation for the projectable Poisson elements}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00486}00486 \textcolor{comment}{is provided in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00487}00487 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00488}00488 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00489}00489 \textcolor{comment}{<A HREF="{}../../../../src/poisson/poisson\_elements.h"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00490}00490 \textcolor{comment}{src/poisson/poisson\_elements.h}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00491}00491 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00492}00492 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00493}00493 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00494}00494 \textcolor{comment}{Of course, you can avoid the additional work by dispensing with}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00495}00495 \textcolor{comment}{adaptivity and simply generating a sufficiently fine (uniform)}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00496}00496 \textcolor{comment}{mesh. This is illustrated in the alternative driver code}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00497}00497 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00498}00498 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/meshing/mesh\_from\_inline\_triangle/mesh\_from\_inline\_triangle\_no\_adapt.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00499}00499 \textcolor{comment}{demo\_drivers/meshing/mesh\_from\_inline\_triangle/mesh\_from\_inline\_triangle\_no\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00500}00500 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00501}00501 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00502}00502 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00503}00503 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00504}00504 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00505}00505 \textcolor{comment}{\(\backslash\)subsection how\_many\_segments How many vertices should I use to sample my curvilinear boundary?}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00506}00506 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00507}00507 \textcolor{comment}{As discussed above, meshes with curvilinear boundaries are created in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00508}00508 \textcolor{comment}{a two-\/stage process. Initially, Triangle generates a mesh with }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00509}00509 \textcolor{comment}{polygonal boundaries using a user-\/specified number of vertices }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00510}00510 \textcolor{comment}{that are evenly distributed along the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00511}00511 \textcolor{comment}{relevant \(\backslash\)c GeomObject. The nodes on that boundary are then}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00512}00512 \textcolor{comment}{"{}snapped"{} onto the actual curvilinear boundary in a post-\/processing }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00513}00513 \textcolor{comment}{step.  The decision of how many vertices to choose involves a}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00514}00514 \textcolor{comment}{compromise between two conflicting demands:}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00515}00515 \textcolor{comment}{-\/ The number of boundary nodes created by Triangle will be at least}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00516}00516 \textcolor{comment}{  as big as the number of vertices specified. Triangle may add }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00517}00517 \textcolor{comment}{  additional boundary nodes to generate a mesh of sufficient quality }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00518}00518 \textcolor{comment}{  but it will not remove any vertices. Using a very large number of vertices }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00519}00519 \textcolor{comment}{  can therefore lead to unnecessarily fine meshes.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00520}00520 \textcolor{comment}{  \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00521}00521 \textcolor{comment}{-\/ If the number of vertices is too small, the polygonal representation}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00522}00522 \textcolor{comment}{  of the domain boundary may be a poor approximation to the actual}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00523}00523 \textcolor{comment}{  curvilinear boundary. Elements near such boundaries may become}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00524}00524 \textcolor{comment}{  (too) strongly distorted when nodes are "{}snapped"{} onto the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00525}00525 \textcolor{comment}{  curvilinear boundary. This often}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00526}00526 \textcolor{comment}{  manifests itself in inverted elements. (An element is}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00527}00527 \textcolor{comment}{  considered inverted if the Jacobian of the mapping between local}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00528}00528 \textcolor{comment}{  and global coordinates becomes non-\/positive anywhere. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00529}00529 \textcolor{comment}{  Note that negative Jacobians may}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00530}00530 \textcolor{comment}{  occur in the interior of elements (e.g. at their Gauss points) even}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00531}00531 \textcolor{comment}{  if a plot of the element, based on its nodal positions, still looks "{}OK"{}).}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00532}00532 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00533}00533 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00534}00534 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00535}00535 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00536}00536 \textcolor{comment}{\(\backslash\)subsection ex Exercises}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00537}00537 \textcolor{comment}{-\/\# Change the outer curvilinear boundary to a polygonal boundary}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00538}00538 \textcolor{comment}{   (you can cheat -\/-\/ the relevant code is already contained in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00539}00539 \textcolor{comment}{   the driver code but it's "{}hidden"{} with \(\backslash\)c ifdefs; this code also}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00540}00540 \textcolor{comment}{   documents the re-\/distribution of straight-\/line segments between }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00541}00541 \textcolor{comment}{   different polylines, a capability that is important in certain}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00542}00542 \textcolor{comment}{   free-\/boundary problems). }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00543}00543 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00544}00544 \textcolor{comment}{-\/\# Vary the number of vertices used for the initial polygonal}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00545}00545 \textcolor{comment}{   representation of the curvilinear hole to establish what number}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00546}00546 \textcolor{comment}{   is required to avoid the inversion of elements during the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00547}00547 \textcolor{comment}{   "{}snap-\/nodes-\/to-\/the-\/curvilinear-\/boundary"{} phase.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00548}00548 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00549}00549 \textcolor{comment}{-\/\# Create "{}projectable"{} advection diffusion elements to solve the}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00550}00550 \textcolor{comment}{   the advection diffusion problem discussed in }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00551}00551 \textcolor{comment}{<A HREF="{}../../../../doc/advection\_diffusion/two\_d\_adv\_diff\_adapt/html/index.html"{}>another tutorial,</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00552}00552 \textcolor{comment}{   using spatial adaptation on an unstructured mesh.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00553}00553 \textcolor{comment}{   \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00554}00554 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00555}00555 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00556}00556 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00557}00557 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00558}00558 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00559}00559 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00560}00560 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00561}00561 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00562}00562 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00563}00563 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/meshing/mesh\_from\_triangle/"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00564}00564 \textcolor{comment}{demo\_drivers/meshing/mesh\_from\_inline\_triangle/}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00565}00565 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00566}00566 \textcolor{comment}{</CENTER>\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00567}00567 \textcolor{comment}{-\/ The driver code is: \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00568}00568 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00569}00569 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/meshing/mesh\_from\_inline\_triangle/mesh\_from\_inline\_triangle.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00570}00570 \textcolor{comment}{demo\_drivers/meshing/mesh\_from\_inline\_triangle/mesh\_from\_inline\_triangle.cc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00571}00571 \textcolor{comment}{</A> }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00572}00572 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00573}00573 \textcolor{comment}{\(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00574}00574 \textcolor{comment}{-\/ The additional driver code \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00575}00575 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00576}00576 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/meshing/mesh\_from\_inline\_triangle/mesh\_from\_inline\_triangle\_no\_adapt.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00577}00577 \textcolor{comment}{demo\_drivers/meshing/mesh\_from\_inline\_triangle/mesh\_from\_inline\_triangle\_no\_adapt.cc}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00578}00578 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00579}00579 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00580}00580 \textcolor{comment}{\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00581}00581 \textcolor{comment}{shows how to generate non-\/refineable triangle meshes inline. This}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00582}00582 \textcolor{comment}{code does not require any modifications to existing triangular}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00583}00583 \textcolor{comment}{elements.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00584}00584 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00585}00585 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00586}00586 \textcolor{comment}{\(\backslash\)section curve\_sections Appendix A: Generalization for polylines and curvilines}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00587}00587 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00588}00588 \textcolor{comment}{The objects, \(\backslash\)c TriangleMeshPolyLine and \(\backslash\)c TriangleMeshCurviLine }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00589}00589 \textcolor{comment}{inherit the properties of a more general representation called }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00590}00590 \textcolor{comment}{\(\backslash\)c TriangleMeshCurveSection. This allows one to define more general }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00591}00591 \textcolor{comment}{boundaries as a combination of \(\backslash\)c TriangleMeshPolyLines and }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00592}00592 \textcolor{comment}{\(\backslash\)c TriangleMeshCurviLines. Therefore, if we want to define a more general}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00593}00593 \textcolor{comment}{closed curve use the \(\backslash\)c TriangleMeshClosedCurve object. }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00594}00594 \textcolor{comment}{You may notice the use of this object through the example code when defining the outer boundary.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00595}00595 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00596}00596 \textcolor{comment}{For the interested reader, the class diagram showing the hierarchy of the mentioned objects is}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00597}00597 \textcolor{comment}{showed on the next figure.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00598}00598 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00599}00599 \textcolor{comment}{\(\backslash\)image html class\_diagram.gif "{}The hierarchy of the \(\backslash\)c TriangleMesh objects. "{} }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00600}00600 \textcolor{comment}{\(\backslash\)image latex class\_diagram.eps "{}The hierarchy of the \(\backslash\)c TriangleMesh objects. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00601}00601 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00602}00602 \textcolor{comment}{Note the \(\backslash\)c TriangleMeshOpenCurve object, which allows to define}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00603}00603 \textcolor{comment}{internal boundaries on the domain, explained on }}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00604}00604 \textcolor{comment}{<A HREF="{}../../../../doc/meshes/mesh\_from\_inline\_triangle\_internal\_boundaries/html/index.html"{}>another tutorial</a>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00605}00605 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00606}00606 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00607}00607 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00608}00608 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00609}00609 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00610}00610 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00611}00611 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00612}00612 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00613}00613 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00614}00614 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00615}00615 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00616}00616 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{mesh__from__inline__triangle_8txt__doxygenified_8h_source_l00617}00617 }
+
+\end{DoxyCode}

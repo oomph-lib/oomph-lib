@@ -31,11 +31,11 @@ We shall now discuss how the free surface boundary conditions are implemented in
  \DoxyHorRuler{0}
 \hypertarget{index_implementation}{}\doxysection{Implementation}\label{index_implementation}
 \hypertarget{index_kinematic_condition_implementation}{}\doxysubsection{The kinematic condition and the pseudo-\/solid node-\/update procedure}\label{index_kinematic_condition_implementation}
-In addition to solving for the fluid velocity and pressure (as in all Navier--Stokes examples), we have additional degrees of freedom in our problem due to the fact that the position of the free surface $ \mathbf{R} $ is unknown. The Navier--Stokes elements in {\ttfamily oomph-\/lib} are based on the Arbitrary Lagrangian Eulerian (A\+LE) form of the Navier-\/\+Stokes equations, and so can be used to solve problems in moving domains. This allows us to discretise our domain using a boundary fitted mesh, which will need to deform in response to the motion of the free surface. This is achieved by treating the interior of the mesh as a fictitious elastic solid, and solving a solid mechanics problem for the (unknown) nodal positions. This technique, which will subsequently be referred to as a `pseudo-\/solid node-\/update strategy', employs wrapper elements to existing fluid and solid equation classes. The specific element used in this example is a {\ttfamily Pseudo\+Solid\+Node\+Update\+Element$<$Q\+Crouzeix\+Raviart\+Element$<$2$>$}, {\ttfamily Q\+P\+V\+D\+Element$<$2,3$>$} {\ttfamily $>$} element, which takes two template arguments. The first is the standard element type used to solve the fluid problem, and the second is the element type which solves the equations that are used to control the mesh deformation.
+In addition to solving for the fluid velocity and pressure (as in all Navier--Stokes examples), we have additional degrees of freedom in our problem due to the fact that the position of the free surface $ \mathbf{R} $ is unknown. The Navier--Stokes elements in {\ttfamily oomph-\/lib} are based on the Arbitrary Lagrangian Eulerian (ALE) form of the Navier-\/\+Stokes equations, and so can be used to solve problems in moving domains. This allows us to discretise our domain using a boundary fitted mesh, which will need to deform in response to the motion of the free surface. This is achieved by treating the interior of the mesh as a fictitious elastic solid, and solving a solid mechanics problem for the (unknown) nodal positions. This technique, which will subsequently be referred to as a `pseudo-\/solid node-\/update strategy', employs wrapper elements to existing fluid and solid equation classes. The specific element used in this example is a {\ttfamily Pseudo\+Solid\+Node\+Update\+Element\texorpdfstring{$<$}{<}QCrouzeix\+Raviart\+Element$<$2$>$}, {\ttfamily QPVDElement$<$2,3$>$} {\ttfamily \texorpdfstring{$>$}{>}} element, which takes two template arguments. The first is the standard element type used to solve the fluid problem, and the second is the element type which solves the equations that are used to control the mesh deformation.
 
 The deformation of the free surface boundary is imposed by introducing a field of Lagrange multipliers at the free surface, following the method outlined in Cairncross et al., \`{}A finite element method for free surface flows of incompressible fluids in three dimensions. Part I. Boundary fitted mesh motion\textquotesingle{} (2000). These new unknowns are stored as nodal values, and so the vector of values at each node is resized accordingly. Since this introduces further degrees of freedom into the problem, we require an additional equation\+: the kinematic boundary condition (1).
 
-We discretise this equation by attaching {\ttfamily Face\+Elements} to the boundaries of the \char`\"{}bulk\char`\"{} elements that are adjacent to the free surface. The specific {\ttfamily Face\+Element} used in this example is an {\ttfamily Elastic\+Line\+Fluid\+Interface\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$}, which takes the bulk element type as a template argument. This allows the user of the driver code to easily change the bulk element type, since the appropriate {\ttfamily Face\+Element} type is automatically used. These {\ttfamily Face\+Elements} are applied in the same way as all other surface elements (e.\+g. {\ttfamily Navier\+Stokes\+Traction\+Elements}, {\ttfamily Unsteady\+Heat\+Flux\+Elements}, etc.), and a general introduction can be found in \href{../../../poisson/two_d_poisson_flux_bc/html/index.html\#create_flux}{\texttt{ another tutorial}}.\hypertarget{index_dynamic_condition_implementation}{}\doxysubsection{The dynamic condition}\label{index_dynamic_condition_implementation}
+We discretise this equation by attaching {\ttfamily Face\+Elements} to the boundaries of the \char`\"{}bulk\char`\"{} elements that are adjacent to the free surface. The specific {\ttfamily Face\+Element} used in this example is an {\ttfamily Elastic\+Line\+Fluid\+Interface\+Element$<$\+ELEMENT$>$}, which takes the bulk element type as a template argument. This allows the user of the driver code to easily change the bulk element type, since the appropriate {\ttfamily Face\+Element} type is automatically used. These {\ttfamily Face\+Elements} are applied in the same way as all other surface elements (e.\+g. {\ttfamily Navier\+Stokes\+Traction\+Elements}, {\ttfamily Unsteady\+Heat\+Flux\+Elements}, etc.), and a general introduction can be found in \href{../../../poisson/two_d_poisson_flux_bc/html/index.html\#create_flux}{\texttt{ another tutorial}}.\hypertarget{index_dynamic_condition_implementation}{}\doxysubsection{The dynamic condition}\label{index_dynamic_condition_implementation}
 Within a finite element framework, the dynamic boundary condition is incorporated as contributions to each of the momentum equations at the free surface. We refer to Ruschak, \`{}A method for incorporating free boundaries with surface tension in finite element fluid-\/flow simulators\textquotesingle{} (1980), for details on the formulation, which can also be found in our \href{../../surface_theory/html/index.html\#boundary_conditions}{\texttt{ free surface theory }} document. Since both Taylor--Hood and Crouzeix--Raviart elements are implemented such that the normal stresses between elements are balanced, applying the dynamic boundary condition in cases in which we are solving the Navier--Stokes equations on both sides of the interface is as straightforward as adding the appropriate surface tension contributions to the relevant momentum equations at the interface. In cases such as the example below, where we have an inviscid fluid above the free surface, we need to add the appropriate external pressure contributions (if any) as well. Both of these contributions are automatically added to the appropriate momentum equations using the same {\ttfamily Face\+Elements} which are used to discretise the kinematic boundary condition (see \href{\#kinematic_condition_implementation}{\texttt{ above}}).
 
 The Capillary number defaults to 1.\+0 and other values may be set using the function\+:
@@ -43,6 +43,7 @@ The Capillary number defaults to 1.\+0 and other values may be set using the fun
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{double}* FluidInterfaceElement::ca\_pt().}
+
 \end{DoxyCode}
 
 
@@ -51,6 +52,7 @@ The Strouhal number defaults to 1.\+0 and other values may be set using the func
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{double}* FluidInterfaceElement::st\_pt().}
+
 \end{DoxyCode}
 
 
@@ -59,6 +61,7 @@ The external pressure defaults to zero and other values may be set using the fun
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} FluidInterfaceElement::set\_external\_pressure\_data(Data* p\_ext\_data\_pt),}
+
 \end{DoxyCode}
 
 
@@ -67,6 +70,7 @@ where {\ttfamily p\+\_\+ext\+\_\+data\+\_\+pt} is (a pointer to) the {\ttfamily 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{double} FluidInterfaceElement::pext().}
+
 \end{DoxyCode}
 
 
@@ -131,7 +135,7 @@ As usual, we use a namespace to define the dimensionless parameters $ Re $, $ St
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_namespace====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -159,9 +163,7 @@ As usual, we use a namespace to define the dimensionless parameters $ Re $, $ St
 \DoxyCodeLine{\} \textcolor{comment}{// End of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We start by computing the product of the Reynolds and Strouhal numbers before specifying the (non-\/dimensional) length of time for which we want the simulation to run and the size of the timestep. Because all driver codes are run as part of {\ttfamily oomph-\/lib\textquotesingle{}s} self-\/testing routines we allow the user to pass a command line argument to the executable which sets the maximum time to some lower value.
@@ -170,7 +172,7 @@ We start by computing the product of the Reynolds and Strouhal numbers before sp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_main=========================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for two-\/dimensional single fluid free surface problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{elastic__single__layer_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Store command line arguments}}
@@ -190,9 +192,7 @@ We start by computing the product of the Reynolds and Strouhal numbers before sp
 \DoxyCodeLine{ \textcolor{keywordflow}{if}(CommandLineArgs::Argc>1) \{ t\_max = 0.005; \}}
 
 \end{DoxyCodeInclude}
-
-
-Next we specify the dimensions of the mesh and the number of elements in the $ x_1 $ and $ x_2 $ directions. To remain consistent with the example code we shall from now on refer to $ x_1 $ as $ x $ and $ x_2 $ as $ y $.
+ Next we specify the dimensions of the mesh and the number of elements in the $ x_1 $ and $ x_2 $ directions. To remain consistent with the example code we shall from now on refer to $ x_1 $ as $ x $ and $ x_2 $ as $ y $.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -209,9 +209,7 @@ Next we specify the dimensions of the mesh and the number of elements in the $ x
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} h = 1.0;}
 
 \end{DoxyCodeInclude}
-
-
-At this point we define the direction in which gravity acts\+: vertically downwards.
+ At this point we define the direction in which gravity acts\+: vertically downwards.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -220,9 +218,7 @@ At this point we define the direction in which gravity acts\+: vertically downwa
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a37a6f46efcb35b4bd12c73f19d741020}{Global\_Physical\_Variables::G}}[1] = -\/1.0;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we build the problem using the `pseudo-\/solid' version of {\ttfamily Q\+Crouzeix\+Raviart\+Elements} and the {\ttfamily B\+D\+F$<$2$>$} timestepper, before calling {\ttfamily unsteady\+\_\+run(...)}. This function solves the system at each timestep using the {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} function before documenting the result.
+ Finally, we build the problem using the `pseudo-\/solid' version of {\ttfamily QCrouzeix\+Raviart\+Elements} and the {\ttfamily BDF$<$2$>$} timestepper, before calling {\ttfamily unsteady\+\_\+run(...)}. This function solves the system at each timestep using the {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} function before documenting the result.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -230,26 +226,24 @@ Finally, we build the problem using the `pseudo-\/solid' version of {\ttfamily Q
 \DoxyCodeLine{ \textcolor{comment}{// using the BDF<2> timestepper}}
 \DoxyCodeLine{ \mbox{\hyperlink{classInterfaceProblem}{InterfaceProblem<PseudoSolidNodeUpdateElement< QCrouzeixRaviartElement<2>}},}
 \DoxyCodeLine{  QPVDElement<2,3> > , BDF<2> >}
-\DoxyCodeLine{  \mbox{\hyperlink{single__layer__free__surface_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(n\_x,n\_y,l\_x,h);}
+\DoxyCodeLine{  problem(n\_x,n\_y,l\_x,h);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Run the unsteady simulation}}
-\DoxyCodeLine{ \mbox{\hyperlink{single__layer__free__surface_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.unsteady\_run(t\_max,dt);}
+\DoxyCodeLine{ problem.unsteady\_run(t\_max,dt);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{// End of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem_class}{}\doxysection{The problem class}\label{index_problem_class}
-Since we are solving the unsteady Navier--Stokes equations, the {\ttfamily Problem} class is very similar to that used in the \href{../../rayleigh_channel/html/index.html}{\texttt{ Rayleigh channel example}}. We specify the type of the element and the type of the timestepper (assumed to be a member of the {\ttfamily B\+DF} family) as template parameters, before passing the number of elements and domain length in both coordinate directions to the problem constructor. We define an empty destructor, functions to set the initial and boundary conditions and a post-\/processing function {\ttfamily doc\+\_\+solution(...)}, which will be used by the timestepping function {\ttfamily unsteady\+\_\+run(...)}.
+Since we are solving the unsteady Navier--Stokes equations, the {\ttfamily Problem} class is very similar to that used in the \href{../../rayleigh_channel/html/index.html}{\texttt{ Rayleigh channel example}}. We specify the type of the element and the type of the timestepper (assumed to be a member of the {\ttfamily BDF} family) as template parameters, before passing the number of elements and domain length in both coordinate directions to the problem constructor. We define an empty destructor, functions to set the initial and boundary conditions and a post-\/processing function {\ttfamily doc\+\_\+solution(...)}, which will be used by the timestepping function {\ttfamily unsteady\+\_\+run(...)}.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Single fluid free surface problem in a rectangular domain which is}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// periodic in the x direction}}
+\DoxyCodeLine{\textcolor{comment}{/// Single fluid free surface problem in a rectangular domain which is}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// periodic in the x direction}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classInterfaceProblem}{InterfaceProblem}} : \textcolor{keyword}{public} Problem}
@@ -279,9 +273,7 @@ Since we are solving the unsteady Navier--Stokes equations, the {\ttfamily Probl
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\_run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&t\_max, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&dt); }
 
 \end{DoxyCodeInclude}
-
-
-The nodal positions are unknowns in the problem and hence are updated automatically, so there is no need to update the mesh before performing a Newton solve. However, since the main use of the methodology demonstrated here is in free-\/boundary problems where the solution of the solid problem merely serves to update the nodal positions in response to the motion of the free surface, we reset the nodes\textquotesingle{} Lagrangian coordinates to their Eulerian positions before every solve, by calling {\ttfamily Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates()}. This makes the deformed configuration stress-\/free and tends to stabilise the computation, allowing larger domain deformations to be computed.
+ The nodal positions are unknowns in the problem and hence are updated automatically, so there is no need to update the mesh before performing a Newton solve. However, since the main use of the methodology demonstrated here is in free-\/boundary problems where the solution of the solid problem merely serves to update the nodal positions in response to the motion of the free surface, we reset the nodes\textquotesingle{} Lagrangian coordinates to their Eulerian positions before every solve, by calling {\ttfamily Solid\+Mesh\+::set\+\_\+lagrangian\+\_\+nodal\+\_\+coordinates()}. This makes the deformed configuration stress-\/free and tends to stabilise the computation, allowing larger domain deformations to be computed.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -293,8 +285,8 @@ The nodal positions are unknowns in the problem and hence are updated automatica
 \DoxyCodeLine{\textcolor{comment}{ /// No actions required after solve step}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Actions before the timestep: For maximum stability, reset}}
-\DoxyCodeLine{\textcolor{comment}{ /// the current nodal positions to be the "stress-\/free" ones.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions before the timestep: For maximum stability, reset}}
+\DoxyCodeLine{\textcolor{comment}{ /// the current nodal positions to be the "{}stress-\/free"{} ones.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_implicit\_timestep()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   Bulk\_mesh\_pt-\/>set\_lagrangian\_nodal\_coordinates();}
@@ -304,16 +296,14 @@ The nodal positions are unknowns in the problem and hence are updated automatica
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} deform\_free\_surface(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&epsilon, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_periods);}
 
 \end{DoxyCodeInclude}
-
-
-The problem class stores pointers to the specific bulk mesh and the surface mesh, which will contain the interface elements, as well as a pointer to a constitutive law for the pseudo-\/solid mesh. The width of the domain is also stored since it is used by the function {\ttfamily deform\+\_\+free\+\_\+surface(...)} when setting up the initial mesh deformation. Finally we store an output stream in which we record the height of the interface at the domain edge.
+ The problem class stores pointers to the specific bulk mesh and the surface mesh, which will contain the interface elements, as well as a pointer to a constitutive law for the pseudo-\/solid mesh. The width of the domain is also stored since it is used by the function {\ttfamily deform\+\_\+free\+\_\+surface(...)} when setting up the initial mesh deformation. Finally we store an output stream in which we record the height of the interface at the domain edge.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Pointer to the (specific) "bulk" mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the (specific) "{}bulk"{} mesh}}
 \DoxyCodeLine{ ElasticRectangularQuadMesh<ELEMENT>* Bulk\_mesh\_pt;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "surface" mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the "{}surface"{} mesh}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* Surface\_mesh\_pt;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Pointer to the constitutive law used to determine the mesh deformation}}
@@ -328,9 +318,7 @@ The problem class stores pointers to the specific bulk mesh and the surface mesh
 \DoxyCodeLine{\}; \textcolor{comment}{// End of problem class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 The constructor starts by copying the width of the domain into the private member data of the problem class, before building the timestepper.
@@ -339,7 +327,7 @@ The constructor starts by copying the width of the domain into the private membe
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_constructor==================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for single fluid free surface problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a83023535d663a2a6558959f36bf6e1e7}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a83023535d663a2a6558959f36bf6e1e7}{InterfaceProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_x, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_y,}
@@ -350,26 +338,22 @@ The constructor starts by copying the width of the domain into the private membe
 \DoxyCodeLine{ add\_time\_stepper\_pt(\textcolor{keyword}{new} TIMESTEPPER);}
 
 \end{DoxyCodeInclude}
-
-
-Next we build the bulk mesh. The mesh we are using is the {\ttfamily Elastic\+Rectangular\+Quad\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$}, which takes the bulk element as a template argument. The boolean argument in the mesh constructor, which is set to `true' here, indicates whether or not the domain is to be periodic in $ x $. The surface mesh is also built, although it is empty at this point.
+ Next we build the bulk mesh. The mesh we are using is the {\ttfamily Elastic\+Rectangular\+Quad\+Mesh$<$\+ELEMENT$>$}, which takes the bulk element as a template argument. The boolean argument in the mesh constructor, which is set to `true' here, indicates whether or not the domain is to be periodic in $ x $. The surface mesh is also built, although it is empty at this point.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{// Build and assign the "bulk" mesh (the "true" boolean flag tells}}
+\DoxyCodeLine{ \textcolor{comment}{// Build and assign the "{}bulk"{} mesh (the "{}true"{} boolean flag tells}}
 \DoxyCodeLine{ \textcolor{comment}{// the mesh constructor that the domain is periodic in x)}}
 \DoxyCodeLine{ Bulk\_mesh\_pt = \textcolor{keyword}{new} ElasticRectangularQuadMesh<ELEMENT>}
 \DoxyCodeLine{  (n\_x,n\_y,l\_x,h,\textcolor{keyword}{true},time\_stepper\_pt());}
 \DoxyCodeLine{}
-\DoxyCodeLine{ \textcolor{comment}{// Create the "surface mesh" that will contain only the interface}}
+\DoxyCodeLine{ \textcolor{comment}{// Create the "{}surface mesh"{} that will contain only the interface}}
 \DoxyCodeLine{ \textcolor{comment}{// elements. The constructor just creates the mesh without giving}}
 \DoxyCodeLine{ \textcolor{comment}{// it any elements, nodes, etc.}}
 \DoxyCodeLine{ Surface\_mesh\_pt = \textcolor{keyword}{new} Mesh;}
 
 \end{DoxyCodeInclude}
-
-
-Having created the bulk elements, we now create the interface elements. We first build an empty mesh in which to store them, before looping over the bulk elements adjacent to the free surface and `attaching' interface elements to their upper faces. These newly-\/created elements are then stored in the surface mesh.
+ Having created the bulk elements, we now create the interface elements. We first build an empty mesh in which to store them, before looping over the bulk elements adjacent to the free surface and `attaching' interface elements to their upper faces. These newly-\/created elements are then stored in the surface mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -393,9 +377,7 @@ Having created the bulk elements, we now create the interface elements. We first
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-Now that the interface elements have been created, we combine the bulk and surface meshes into a single mesh.
+ Now that the interface elements have been created, we combine the bulk and surface meshes into a single mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -407,9 +389,7 @@ Now that the interface elements have been created, we combine the bulk and surfa
 \DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-On the solid bottom boundary ( $ y = 0 $) we pin both velocity components so that there is no penetration of the wall by the fluid or flow along it. On the left and right symmetry boundaries ( $ x = 0.0 $ and $ x = 1.0 $) we pin the $ x $ component of the velocity but leave the $ y $ component unconstrained. We do not apply any velocity boundary conditions to the free surface (the top boundary). We pin the vertical displacement of the nodes on the bottom boundary (since these must remain stationary) and pin the horizontal displacement of all nodes in the mesh.
+ On the solid bottom boundary ( $ y = 0 $) we pin both velocity components so that there is no penetration of the wall by the fluid or flow along it. On the left and right symmetry boundaries ( $ x = 0.0 $ and $ x = 1.0 $) we pin the $ x $ component of the velocity but leave the $ y $ component unconstrained. We do not apply any velocity boundary conditions to the free surface (the top boundary). We pin the vertical displacement of the nodes on the bottom boundary (since these must remain stationary) and pin the horizontal displacement of all nodes in the mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -466,9 +446,7 @@ On the solid bottom boundary ( $ y = 0 $) we pin both velocity components so tha
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++) \{ Bulk\_mesh\_pt-\/>node\_pt(n)-\/>pin\_position(0); \}}
 
 \end{DoxyCodeInclude}
-
-
-Next we create a generalised Hookean constitutive equation for the pseudo-\/solid mesh. This constitutive equation is discussed in \href{../../../solid/disk_compression/html/index.html\#hooke}{\texttt{ another tutorial}}.
+ Next we create a generalised Hookean constitutive equation for the pseudo-\/solid mesh. This constitutive equation is discussed in \href{../../../solid/disk_compression/html/index.html\#hooke}{\texttt{ another tutorial}}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -476,9 +454,7 @@ Next we create a generalised Hookean constitutive equation for the pseudo-\/soli
 \DoxyCodeLine{ Constitutive\_law\_pt = \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a3962c36313826b19f216f6bbbdd6a477}{Global\_Physical\_Variables::Nu}});}
 
 \end{DoxyCodeInclude}
-
-
-We loop over the bulk elements and pass them pointers to the Reynolds and Womersley numbers, $ Re $ and $ Re\, St $, the product of the Reynolds number and the inverse of the Froude number, $ Re/Fr $, the direction of gravity, $ G $, and the constitutive law. In addition we pass a pointer to the global time object, created when we called {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)} above.
+ We loop over the bulk elements and pass them pointers to the Reynolds and Womersley numbers, $ Re $ and $ Re\, St $, the product of the Reynolds number and the inverse of the Froude number, $ Re/Fr $, the direction of gravity, $ G $, and the constitutive law. In addition we pass a pointer to the global time object, created when we called {\ttfamily Problem\+::add\+\_\+time\+\_\+stepper\+\_\+pt(...)} above.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -513,9 +489,7 @@ We loop over the bulk elements and pass them pointers to the Reynolds and Womers
 \DoxyCodeLine{  \} \textcolor{comment}{// End of loop over bulk elements}}
 
 \end{DoxyCodeInclude}
-
-
-Next we create a pointer to a {\ttfamily Data} value for the external pressure $ p_{ext} $, before pinning it and assigning an arbitrary value.
+ Next we create a pointer to a {\ttfamily Data} value for the external pressure $ p_{ext} $, before pinning it and assigning an arbitrary value.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -527,9 +501,7 @@ Next we create a pointer to a {\ttfamily Data} value for the external pressure $
 \DoxyCodeLine{ external\_pressure\_data\_pt-\/>set\_value(0,1.31);}
 
 \end{DoxyCodeInclude}
-
-
-We then loop over the interface elements and pass them a pointer to this external pressure value as well as pointers to the Strouhal and Capillary numbers.
+ We then loop over the interface elements and pass them a pointer to this external pressure value as well as pointers to the Strouhal and Capillary numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -556,9 +528,7 @@ We then loop over the interface elements and pass them a pointer to this externa
 \DoxyCodeLine{  \} \textcolor{comment}{// End of loop over interface elements}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we apply the problem\textquotesingle{}s boundary conditions (discussed \href{\#set_boundary_conditions}{\texttt{ later on}}) before setting up the equation numbering scheme using the function {\ttfamily Problem\+::assign\+\_\+eqn\+\_\+numbers()}.
+ Finally, we apply the problem\textquotesingle{}s boundary conditions (discussed \href{\#set_boundary_conditions}{\texttt{ later on}}) before setting up the equation numbering scheme using the function {\ttfamily Problem\+::assign\+\_\+eqn\+\_\+numbers()}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -566,14 +536,12 @@ Finally, we apply the problem\textquotesingle{}s boundary conditions (discussed 
 \DoxyCodeLine{ set\_boundary\_conditions();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// End of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_set_initial_condition}{}\doxysection{Initial conditions}\label{index_set_initial_condition}
 This function sets the initial conditions for the problem. We loop over all nodes in the mesh and set both velocity components to zero. No initial conditions are required for the pressure. We then call the function {\ttfamily Problem\+::assign\+\_\+initial\+\_\+values\+\_\+impulsive()} which copies the current values at each of the nodes, as well as the current nodal positions, into the required number of history values for the timestepper in question. This corresponds to an impulsive start, as for all time $ t \leq 0 $ none of the fluid is moving and the shape of the interface is constant.
@@ -581,9 +549,9 @@ This function sets the initial conditions for the problem. We loop over all node
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_initial\_condition========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set initial conditions: Set all nodal velocities to zero and}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// initialise the previous velocities and nodal positions to correspond}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// to an impulsive start}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial conditions: Set all nodal velocities to zero and}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// initialise the previous velocities and nodal positions to correspond}}
+\DoxyCodeLine{\textcolor{comment}{/// to an impulsive start}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a0d3af8378c4f0a6e38636be958c300d5}{InterfaceProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
@@ -609,9 +577,7 @@ This function sets the initial conditions for the problem. We loop over all node
 \DoxyCodeLine{\} \textcolor{comment}{// End of set\_initial\_condition}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_set_boundary_conditions}{}\doxysection{Boundary conditions}\label{index_set_boundary_conditions}
 This function sets the boundary conditions for the problem. Since the Dirichlet conditions are homogeneous this function is not strictly necessary as all values are initialised to zero by default.
@@ -619,9 +585,9 @@ This function sets the boundary conditions for the problem. Since the Dirichlet 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_set\_boundary\_conditions======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set boundary conditions: Set both velocity components to zero}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// on the bottom (solid) wall and the horizontal component only to zero}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// on the side (periodic) boundaries}}
+\DoxyCodeLine{\textcolor{comment}{/// Set boundary conditions: Set both velocity components to zero}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// on the bottom (solid) wall and the horizontal component only to zero}}
+\DoxyCodeLine{\textcolor{comment}{/// on the side (periodic) boundaries}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a844445832ad7a32aa9f5d03ffdb40ebb}{InterfaceProblem<ELEMENT,TIMESTEPPER>::set\_boundary\_conditions}}()}
@@ -656,9 +622,7 @@ This function sets the boundary conditions for the problem. Since the Dirichlet 
 \DoxyCodeLine{\} \textcolor{comment}{// End of set\_boundary\_conditions}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_deform_free_surface}{}\doxysection{Prescribing the initial free surface position}\label{index_deform_free_surface}
 At the beginning of the simulation the free surface is deformed by a prescribed function (9). To do this we define a function, {\ttfamily deform\+\_\+free\+\_\+surface(...)}, which cycles through the bulk mesh\textquotesingle{}s {\ttfamily Nodes} and modifies their positions accordingly, such that the nodes on the free surface follow the prescribed interface shape (9) and the bulk nodes retain their fractional position between the lower and the (now deformed) upper boundary.
@@ -667,12 +631,12 @@ At the beginning of the simulation the free surface is deformed by a prescribed 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_deform\_free\_surface==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Deform the mesh/free surface to a prescribed function}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_a2319232b08d9df1ab473f6cbd40939d5}{deform\_free\_surface}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&epsilon,\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_periods)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{ \textcolor{comment}{// Determine number of nodes in the "bulk" mesh}}
+\DoxyCodeLine{ \textcolor{comment}{// Determine number of nodes in the "{}bulk"{} mesh}}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} n\_node = Bulk\_mesh\_pt-\/>nnode();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Loop over all nodes in mesh}}
@@ -693,9 +657,7 @@ At the beginning of the simulation the free surface is deformed by a prescribed 
 \DoxyCodeLine{\} \textcolor{comment}{// End of deform\_free\_surface}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post-\/processing}\label{index_doc}
 As expected, this member function documents the computed solution. We first output the value of the current time to the screen, before recording the continuous time and the height of the free surface at the domain boundary in the trace file. We note that as the domain is periodic the height of the free surface must be the same at both the left and right boundaries.
@@ -704,13 +666,13 @@ As expected, this member function documents the computed solution. We first outp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Document the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_a49714e35e94f7d2af0b6ddd22b851f52}{InterfaceProblem<ELEMENT,TIMESTEPPER>::doc\_solution}}(DocInfo \&doc\_info)}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output the time}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Time is now "} << time\_pt()-\/>time() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Time is now "{}} << time\_pt()-\/>time() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Upcast from GeneralisedElement to the present element}}
 \DoxyCodeLine{ ElasticLineFluidInterfaceElement<ELEMENT>* el\_pt = }
@@ -719,13 +681,11 @@ As expected, this member function documents the computed solution. We first outp
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Document time and vertical position of left hand side of interface}}
 \DoxyCodeLine{ \textcolor{comment}{// in trace file}}
-\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time() << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{ Trace\_file << time\_pt()-\/>time() << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{            << el\_pt-\/>node\_pt(0)-\/>x(1) << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-We then output the computed solution.
+ We then output the computed solution.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -736,7 +696,7 @@ We then output the computed solution.
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} npts = 5;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Open solution output file}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},}
 \DoxyCodeLine{         doc\_info.directory().c\_str(),doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{}
@@ -747,14 +707,12 @@ We then output the computed solution.
 \DoxyCodeLine{ some\_file.close();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we output the shape of the interface.
+ Finally, we output the shape of the interface.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Open interface solution output file}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/interface\_soln\%i.dat"},}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/interface\_soln\%i.dat"{}},}
 \DoxyCodeLine{         doc\_info.directory().c\_str(),doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ }
@@ -767,9 +725,7 @@ Finally, we output the shape of the interface.
 \DoxyCodeLine{\} \textcolor{comment}{// End of doc\_solution}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_unsteady_run}{}\doxysection{The timestepping loop}\label{index_unsteady_run}
 The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepping procedure. We start by deforming the free surface in the manner specified by equation (9).
@@ -778,7 +734,7 @@ The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_unsteady\_run=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Perform run up to specified time t\_max with given timestep dt}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{InterfaceProblem<ELEMENT,TIMESTEPPER>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classInterfaceProblem_adf1f4e43d10939e4323e0e315b711085}{unsteady\_run}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&t\_max, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&dt)}
@@ -794,9 +750,7 @@ The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepp
 \DoxyCodeLine{ deform\_free\_surface(epsilon,n\_periods);}
 
 \end{DoxyCodeInclude}
-
-
-We then create a {\ttfamily Doc\+Info} object to store the output directory and the label for the output files.
+ We then create a {\ttfamily Doc\+Info} object to store the output directory and the label for the output files.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -804,30 +758,26 @@ We then create a {\ttfamily Doc\+Info} object to store the output directory and 
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Initialise counter for solutions}}
 \DoxyCodeLine{ doc\_info.number()=0;}
 
 \end{DoxyCodeInclude}
-
-
-Next we open and initialise the trace file.
+ Next we open and initialise the trace file.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Initialise trace file}}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"time, free surface height"} << std::endl;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}time, free surface height"{}} << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-Before using any of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping functions, the timestep $ dt $ must be passed to the problem\textquotesingle{}s timestepping routines by calling the function {\ttfamily Problem\+::initialise\+\_\+dt(...)} which sets the weights for all timesteppers in the problem. Next we assign the initial conditions by calling {\ttfamily Problem\+::set\+\_\+initial\+\_\+condition()}, which was discussed \href{\#set_initial_condition}{\texttt{ above}}.
+ Before using any of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping functions, the timestep $ dt $ must be passed to the problem\textquotesingle{}s timestepping routines by calling the function {\ttfamily Problem\+::initialise\+\_\+dt(...)} which sets the weights for all timesteppers in the problem. Next we assign the initial conditions by calling {\ttfamily Problem\+::set\+\_\+initial\+\_\+condition()}, which was discussed \href{\#set_initial_condition}{\texttt{ above}}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -838,9 +788,7 @@ Before using any of {\ttfamily oomph-\/lib\textquotesingle{}s} timestepping func
 \DoxyCodeLine{ set\_initial\_condition();}
 
 \end{DoxyCodeInclude}
-
-
-We determine the number of timesteps to be performed and document the initial conditions, and then perform the actual timestepping loop. For each timestep the function {\ttfamily unsteady\+\_\+newton\+\_\+solve(dt)} is called and the solution documented.
+ We determine the number of timesteps to be performed and document the initial conditions, and then perform the actual timestepping loop. For each timestep the function {\ttfamily unsteady\+\_\+newton\+\_\+solve(dt)} is called and the solution documented.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -857,7 +805,7 @@ We determine the number of timesteps to be performed and document the initial co
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} t=1;t<=n\_timestep;t++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Output current timestep to screen}}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"\(\backslash\)nTimestep "} << t << \textcolor{stringliteral}{" of "} << n\_timestep << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}\(\backslash\)nTimestep "{}} << t << \textcolor{stringliteral}{"{} of "{}} << n\_timestep << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Take one fixed timestep}}
 \DoxyCodeLine{   unsteady\_newton\_solve(dt);}
@@ -873,12 +821,10 @@ We determine the number of timesteps to be performed and document the initial co
 \DoxyCodeLine{\} \textcolor{comment}{// End of unsteady\_run}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments}\label{index_comments}
-\hypertarget{index_application_of_dbc}{}\doxysubsection{The application of the dynamic boundary condition within the F\+EM}\label{index_application_of_dbc}
+\hypertarget{index_application_of_dbc}{}\doxysubsection{The application of the dynamic boundary condition within the FEM}\label{index_application_of_dbc}
 As discussed in an \href{../../rayleigh_traction_channel/html/index.html\#traction_theory}{\texttt{ earlier tutorial}}, the finite element solution of the Navier--Stokes equations is based on their weak form, which is obtained by weighting the stress-\/divergence form of the momentum equations with the global test functions $ \psi_l $, and integrating by parts to obtain the discrete residuals \[ f_{il} = \int_D \left[ Re\left(St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j} - \frac{G_i}{Fr}\right) \ \psi_l + \tau_{ij} \ \frac{\partial \psi_l}{\partial x_j} \right] \, dV - \int_{\partial D} \tau_{ij} \ n_j \ \psi_l \ dS = 0. \ \ \ \ \ \ \ \ \ \ (10) \] Weighting the dynamic condition (7) by the same global test functions $ \psi_l $ and integrating over the domain boundary $ \partial D$ gives \[ \int_{\partial D} \tau_{ij} n_j \ \psi_l \ dS = - \int_{\partial D} p_{ext} n_i \ \psi_l \ dS - \int_{\partial D} \frac{1}{Ca} \kappa \ \psi_l \ dS. \ \ \ \ \ \ \ \ \ \ (11) \] In a two-\/dimensional problem, such as the one considered in this tutorial, the domain boundary reduces to a one-\/dimensional curve, $ C $. A further integration by parts of (11) therefore gives \[ \int_{\partial D} \tau_{ij} n_j \ \psi_l \ dS = - \int_C p_{ext} n_i \ \psi_l \ dS + \int_C \frac{1}{Ca} t_i \ \frac{\partial\psi_l}{\partial S} \ dS - \frac{1}{Ca} \left[ t_i \ \psi_l \right]^{c_2}_{c_1}, \ \ \ \ \ \ \ \ \ \ (12) \] where $ t_i $, $ (i=1,2) $ is the $ i $-\/th component of a unit vector tangent to $ C $ and pointing in the direction of increasing $ S $, and $ c_1 $ and $ c_2 $ are the two endpoints of $ C $.
 
 In the problem considered in this tutorial, the domain boundary $ C $ can be written as $ C = C_{solid} \ \cup \ C_{surface} $, where $ C_{solid} $ represents the portion of the domain boundary corresponding to a rigid wall and $ C_{surface} $ represents the portion corresponding to the free surface. The velocity along $ C_{solid} $ is prescribed by Dirichlet boundary conditions, and we \href{../../../intro/html/index.html\#galerkin}{\texttt{ recall}} that the global test functions $ \psi_l $ vanish in this case. On non-\/\+Dirichlet boundaries we must either specify the external pressure $ p_{ext} $, or deliberately neglect this term to obtain the `natural' condition $ p_{ext} = 0 $.\hypertarget{index_contact_line}{}\doxysubsection{The contact line}\label{index_contact_line}
@@ -897,5 +843,5 @@ Specifying the contact angle is not the only condition that can be applied at th
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

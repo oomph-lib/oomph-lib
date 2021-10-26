@@ -3,21 +3,21 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classShellMesh}{Shell\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\item 
-class \mbox{\hyperlink{classShellProblem}{Shell\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
+class \mbox{\hyperlink{classShellMesh}{Shell\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em A 2D Mesh class. The tube wall is represented by two Lagrangian coordinates that correspond to z and theta in cylindrical polars. The required mesh is therefore a 2D mesh and is therefore inherited from the generic Rectangular\+Quad\+Mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classShellProblem}{Shell\+Problem$<$ ELEMENT $>$}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
+namespace \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\+\_\+\+Physical\+\_\+\+Variables}}
 \begin{DoxyCompactList}\small\item\em Global variables that represent physical properties. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a80149b39ce76ea0a779f7493905eb1b8}{Global\+\_\+\+Physical\+\_\+\+Variables\+::external\+\_\+pressure}} ()
 \begin{DoxyCompactList}\small\item\em Return a reference to the external pressure load on the elastic tube. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{Global\+\_\+\+Physical\+\_\+\+Variables\+::press\+\_\+load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&\mbox{\hyperlink{clamped__shell__buckling_8txt_a018f990526757b6bf7c8020a8ca96f1b}{load}})
+void \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a86fd8f502cb8c4c7939ffae742f023eb}{Global\+\_\+\+Physical\+\_\+\+Variables\+::press\+\_\+load}} (const Vector$<$ double $>$ \&xi, const Vector$<$ double $>$ \&x, const Vector$<$ double $>$ \&N, Vector$<$ double $>$ \&load)
 \begin{DoxyCompactList}\small\item\em Load function, normal pressure loading. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{clamped__shell_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
 \begin{DoxyCompactList}\small\item\em Driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -45,9 +45,9 @@ Driver.
 
 
 
-Definition at line 540 of file clamped\+\_\+shell.\+cc.
+Definition at line \mbox{\hyperlink{clamped__shell_8cc_source_l00540}{540}} of file \mbox{\hyperlink{clamped__shell_8cc_source}{clamped\+\_\+shell.\+cc}}.
 
 
 
-References problem.
+References \mbox{\hyperlink{clamped__shell_8cc_source_l00485}{Shell\+Problem$<$ ELEMENT $>$\+::solve()}}.
 

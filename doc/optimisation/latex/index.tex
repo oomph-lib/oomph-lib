@@ -11,9 +11,9 @@ Here are some examples for possible optimisations that you may wish to activate 
 \item \mbox{\hyperlink{index_linear_vs_nonlinear}{Linear vs. nonlinear problems}}
 \item \mbox{\hyperlink{index_store_shape}{Storing the shape functions}}
 \item \mbox{\hyperlink{index_full_integration}{Full vs. reduced integration}}
-\item \mbox{\hyperlink{index_ale}{Disabling the A\+LE formulation of unsteady equations}}
+\item \mbox{\hyperlink{index_ale}{Disabling the ALE formulation of unsteady equations}}
 \item \mbox{\hyperlink{index_C_style_output}{C vs. C++-\/style output}}
-\item \mbox{\hyperlink{index_assembly}{Different sparse assembly techniques and the S\+TL memory pool}}
+\item \mbox{\hyperlink{index_assembly}{Different sparse assembly techniques and the STL memory pool}}
 \end{DoxyItemize}All tend to lead to faster run times (by how much depends on your machine and your compiler -- experiment!), but there are caveats that you must be aware of\+:
 \begin{DoxyItemize}
 \item Some techniques may incur significant memory overheads (e.\+g. storing the shape functions).
@@ -29,6 +29,7 @@ By default, {\ttfamily oomph-\/lib} treats all problems as nonlinear and uses Ne
 The user may declare a problem to be linear by setting the flag 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{bool} Problem::Problem\_is\_nonlinear}
+
 \end{DoxyCode}
  which is initialised to {\ttfamily true} in the constructor of the {\ttfamily Problem} base class, to {\ttfamily false}.
 
@@ -43,7 +44,7 @@ However, there are two problems with this approach\+:
 \begin{DoxyEnumerate}
 \item It introduces significant memory overheads. For instance, to store just the shape functions in a 3D problem discretised by $ N_{elem}$ 27-\/node brick elements with a 27-\/point Gauss rule, storage for $ 27 \times 27 \times N_{elem} $ doubles is required. Storage of the (much more costly to compute) shape function derivatives requires six times that storage.
 \item The most costly-\/to-\/compute quantities are the derivatives of the shape functions with respect to the global coordinates, so it is most tempting to store these. However, in free-\/boundary problems in which the nodal positions are determined as part of the solution, the derivatives of the shape functions with respect to the global coordinates depend on the solution and {\bfseries{must}} be recomputed.
-\end{DoxyEnumerate}To ensure correctness/robustness and to minimise the memory overheads, {\ttfamily oomph-\/lib\textquotesingle{}s} existing finite elements represent the shape functions and their derivatives as {\ttfamily Storable\+Shape\+Function} objects. These allow their values to be stored at the integration points, but the capability is not activated, unless an element (of type {\ttfamily E\+L\+E\+M\+E\+NT}, say) is used in its \char`\"{}wrapped\char`\"{} form, as {\ttfamily Storable\+Shape\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$}.
+\end{DoxyEnumerate}To ensure correctness/robustness and to minimise the memory overheads, {\ttfamily oomph-\/lib\textquotesingle{}s} existing finite elements represent the shape functions and their derivatives as {\ttfamily Storable\+Shape\+Function} objects. These allow their values to be stored at the integration points, but the capability is not activated, unless an element (of type {\ttfamily ELEMENT}, say) is used in its \char`\"{}wrapped\char`\"{} form, as {\ttfamily Storable\+Shape\+Element$<$\+ELEMENT$>$}.
 
 The detailed documentation for this is yet to be written but you may consult the well-\/documented demo code \href{../../../demo_drivers/optimisation/stored_shape_fcts/two_d_poisson_stored_shape_fcts.cc}{\texttt{ two\+\_\+d\+\_\+poisson\+\_\+stored\+\_\+shape\+\_\+fcts.\+cc}}, and the discussion in the \href{../../quick_guide/html/index.html\#pre_compute_psi}{\texttt{ (Not-\/\+So-\/)Quick Guide.}}
 
@@ -55,34 +56,37 @@ To maximise the potential for code reuse, all existing finite elements in {\ttfa
 In this case, the user can over-\/write the default spatial integration scheme, using the function {\ttfamily Finite\+Element\+::set\+\_\+integration\+\_\+scheme(...)}, as illustrated here. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Create an instance of a lower-\/order integration scheme}}
-\DoxyCodeLine{ Gauss<2,2>* \mbox{\hyperlink{optimisation_8txt_a14cb177259090edfc37678f58089ad82}{int\_pt}}=\textcolor{keyword}{new} Gauss<2,2>;}
+\DoxyCodeLine{ Gauss<2,2>* int\_pt=\textcolor{keyword}{new} Gauss<2,2>;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Find number of elements in mesh}}
-\DoxyCodeLine{\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{optimisation_8txt_aa34e0d1dbc3b594b42ed453dd728fa24}{n\_element}} = problem.mesh\_pt()-\/>nelement();}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned} n\_element = problem.mesh\_pt()-\/>nelement();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Loop over the elements }}
-\DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<\mbox{\hyperlink{optimisation_8txt_aa34e0d1dbc3b594b42ed453dd728fa24}{n\_element}};i++)}
+\DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_element;i++)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Set the a different integration scheme}}
-\DoxyCodeLine{  problem.mesh\_pt()-\/>finite\_element\_pt(i)-\/>set\_integration\_scheme(\mbox{\hyperlink{optimisation_8txt_a14cb177259090edfc37678f58089ad82}{int\_pt}}); }
+\DoxyCodeLine{  problem.mesh\_pt()-\/>finite\_element\_pt(i)-\/>set\_integration\_scheme(int\_pt); }
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
 Driver codes that may be used to experiment with reduced integration and to assess the asymptotic convergence behaviour can be found in the directory \href{../../../self_test/poisson/convergence_tests}{\texttt{ self\+\_\+test/poisson/convergence\+\_\+tests/}} \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_ale}{}\doxysection{Disabling the A\+L\+E formulation of unsteady equations}\label{index_ale}
-Most existing finite elements for unsteady problems are formulated in the \char`\"{}\+Arbitrary Lagrangian Eulerian (\+A\+L\+E)\char`\"{} form by implementing the Eulerian time-\/derivative $ \partial u /\partial t$ (to be evaluated at a fixed Eulerian position) as \[ \left. \frac{\partial u}{\partial t} \right|_{\mbox{fixed Eulerian position}} = \left. \frac{\partial u}{\partial t} \right|_{\mbox{fixed local coordinate}} - \sum_{i=1}^{DIM} v_i^{\mbox{[Mesh]}} \ \frac{\partial u}{\partial x_i} \] where $ v_i^{\mbox{[Mesh]}} \ \ (i=1,...,DIM)$ is the mesh velocity. This formulation ensures that the time-\/derivatives are computed correctly if the element is used in a free-\/boundary value problem. However, the computation of the mesh velocities introduces an additional cost which is avoidable if the mesh is, in fact, stationary. The user may disable the computation of the A\+LE terms by calling the function 
+\hypertarget{index_ale}{}\doxysection{Disabling the ALE formulation of unsteady equations}\label{index_ale}
+Most existing finite elements for unsteady problems are formulated in the \char`\"{}\+Arbitrary Lagrangian Eulerian (\+ALE)\char`\"{} form by implementing the Eulerian time-\/derivative $ \partial u /\partial t$ (to be evaluated at a fixed Eulerian position) as \[ \left. \frac{\partial u}{\partial t} \right|_{\mbox{fixed Eulerian position}} = \left. \frac{\partial u}{\partial t} \right|_{\mbox{fixed local coordinate}} - \sum_{i=1}^{DIM} v_i^{\mbox{[Mesh]}} \ \frac{\partial u}{\partial x_i} \] where $ v_i^{\mbox{[Mesh]}} \ \ (i=1,...,DIM)$ is the mesh velocity. This formulation ensures that the time-\/derivatives are computed correctly if the element is used in a free-\/boundary value problem. However, the computation of the mesh velocities introduces an additional cost which is avoidable if the mesh is, in fact, stationary. The user may disable the computation of the ALE terms by calling the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::disable\_ALE()}
+
 \end{DoxyCode}
- (This function is implemented as a virtual function in the {\ttfamily Finite\+Element} base class. If called, it simply issues a warning message to announce that it has not been overloaded in a derived class -- usually an indication that the element in question does not involve any A\+LE terms). The A\+LE capability may be re-\/enabled by calling the corresponding function 
+ (This function is implemented as a virtual function in the {\ttfamily Finite\+Element} base class. If called, it simply issues a warning message to announce that it has not been overloaded in a derived class -- usually an indication that the element in question does not involve any ALE terms). The ALE capability may be re-\/enabled by calling the corresponding function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::enable\_ALE()}
+
 \end{DoxyCode}
 
 
-Experiment with the driver codes in the directory \href{../../../demo_drivers/optimisation/disable_ALE}{\texttt{ demo\+\_\+drivers/optimisation/disable\+\_\+\+A\+LE}} to examine the speedup achievable by ignoring the A\+LE terms in the \href{../../../demo_drivers/optimisation/disable_ALE/unsteady_heat}{\texttt{ unsteady heat}} and \href{../../../demo_drivers/optimisation/disable_ALE/navier_stokes}{\texttt{ Navier-\/\+Stokes}} equations.
+Experiment with the driver codes in the directory \href{../../../demo_drivers/optimisation/disable_ALE}{\texttt{ demo\+\_\+drivers/optimisation/disable\+\_\+\+ALE}} to examine the speedup achievable by ignoring the ALE terms in the \href{../../../demo_drivers/optimisation/disable_ALE/unsteady_heat}{\texttt{ unsteady heat}} and \href{../../../demo_drivers/optimisation/disable_ALE/navier_stokes}{\texttt{ Navier-\/\+Stokes}} equations.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -93,15 +97,16 @@ In most \href{../../example_code_list/html/index.html}{\texttt{ demo driver code
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}
-\DoxyCodeLine{ofstream output\_stream(\textcolor{stringliteral}{"solution.dat"});}
-\DoxyCodeLine{\mbox{\hyperlink{optimisation_8txt_a692941378f809f62418f43da15fbc2dc}{mesh\_pt}}()-\/>output(output\_stream);}
+\DoxyCodeLine{ofstream output\_stream(\textcolor{stringliteral}{"{}solution.dat"{}});}
+\DoxyCodeLine{mesh\_pt()-\/>output(output\_stream);}
 \DoxyCodeLine{output\_stream.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
+
 \end{DoxyCode}
 
 
-While C++-\/streams are very convenient, they can be expensive -- so much so that in extreme cases a computation can become dominated by the cost of the post-\/processing operations. There is no obvious reason why I/O with C++ streams should be so much slower than I/O in fortran or C, say. In fact, it is not supposed to be! (Google will lead you to numerous heated discussions on this topic.) However, we (and, it seems, many others) have found C++-\/output to be consistently slower than C-\/style output. Since the latter is available from C++ we have started to provide alternative output routines that employ C-\/style I/O, using the F\+I\+LE type. If your computation involves lots of I/O, it may be helpful to replace the above statements by
+While C++-\/streams are very convenient, they can be expensive -- so much so that in extreme cases a computation can become dominated by the cost of the post-\/processing operations. There is no obvious reason why I/O with C++ streams should be so much slower than I/O in fortran or C, say. In fact, it is not supposed to be! (Google will lead you to numerous heated discussions on this topic.) However, we (and, it seems, many others) have found C++-\/output to be consistently slower than C-\/style output. Since the latter is available from C++ we have started to provide alternative output routines that employ C-\/style I/O, using the FILE type. If your computation involves lots of I/O, it may be helpful to replace the above statements by
 
 
 \begin{DoxyCode}{0}
@@ -109,11 +114,12 @@ While C++-\/streams are very convenient, they can be expensive -- so much so tha
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
 \DoxyCodeLine{}
-\DoxyCodeLine{FILE* \mbox{\hyperlink{optimisation_8txt_ada49fa1d057ae8d583d1bef8c0c0e740}{file\_pt}} = fopen(\textcolor{stringliteral}{"solution.dat"},\textcolor{stringliteral}{"w"});}
-\DoxyCodeLine{\mbox{\hyperlink{optimisation_8txt_a692941378f809f62418f43da15fbc2dc}{mesh\_pt}}()-\/>output(\mbox{\hyperlink{optimisation_8txt_ada49fa1d057ae8d583d1bef8c0c0e740}{file\_pt}});}
-\DoxyCodeLine{\mbox{\hyperlink{optimisation_8txt_af3006296a5de68031c177e9c4bb0a83f}{fclose}}(\mbox{\hyperlink{optimisation_8txt_ada49fa1d057ae8d583d1bef8c0c0e740}{file\_pt}});}
+\DoxyCodeLine{FILE* file\_pt = fopen(\textcolor{stringliteral}{"{}solution.dat"{}},\textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{mesh\_pt()-\/>output(file\_pt);}
+\DoxyCodeLine{fclose(file\_pt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
+
 \end{DoxyCode}
 
 
@@ -121,15 +127,16 @@ Depending on the application, we typically find that C-\/style output is about 2
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_assembly}{}\doxysection{Different sparse assembly techniques and the S\+T\+L memory pool}\label{index_assembly}
+\hypertarget{index_assembly}{}\doxysection{Different sparse assembly techniques and the STL memory pool}\label{index_assembly}
 \hypertarget{index_assembly_methods}{}\doxysubsection{The different sparse assembly methods and how to compare their relative performance}\label{index_assembly_methods}
-{\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box nonlinear solver {\ttfamily Problem\+::newton\+\_\+solve()} employs Newton\textquotesingle{}s method to solve the system of nonlinear algebraic equations arising from the discretisation of the problem. By default, the linear systems that determine the corrections to the unknowns during the Newton iterations are solved with {\ttfamily Super\+L\+U\+Solver}, {\ttfamily oomph-\/lib\textquotesingle{}s} default {\ttfamily Linear\+Solver}. Within this framework the two most computationally expensive steps (both in terms of memory usage and C\+PU time) are the assembly of the linear system (comprising the Jacobian matrix and the residual vector) and its solution. \mbox{[}Not all of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Linear\+Solvers} require the assembly of the Jacobian matrix (for instance the frontal solver {\ttfamily H\+S\+L\+\_\+\+M\+A42} avoids the assembly of the linear system and computes its LU decomposition \char`\"{}on the fly\char`\"{}) but most of them do.\mbox{]}
+{\ttfamily oomph-\/lib\textquotesingle{}s} black-\/box nonlinear solver {\ttfamily Problem\+::newton\+\_\+solve()} employs Newton\textquotesingle{}s method to solve the system of nonlinear algebraic equations arising from the discretisation of the problem. By default, the linear systems that determine the corrections to the unknowns during the Newton iterations are solved with {\ttfamily Super\+LUSolver}, {\ttfamily oomph-\/lib\textquotesingle{}s} default {\ttfamily Linear\+Solver}. Within this framework the two most computationally expensive steps (both in terms of memory usage and CPU time) are the assembly of the linear system (comprising the Jacobian matrix and the residual vector) and its solution. \mbox{[}Not all of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Linear\+Solvers} require the assembly of the Jacobian matrix (for instance the frontal solver {\ttfamily HSL\+\_\+\+MA42} avoids the assembly of the linear system and computes its LU decomposition \char`\"{}on the fly\char`\"{}) but most of them do.\mbox{]}
 
 The assembly of the Jacobian matrix (in compressed-\/row or compressed-\/column storage) is typically performed by the function
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::sparse\_assemble\_row\_or\_column\_compressed(...)}
+
 \end{DoxyCode}
 
 
@@ -138,12 +145,13 @@ This function performs the assembly, using one of five different assembly method
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{unsigned} Problem::Sparse\_assembly\_method}
+
 \end{DoxyCode}
 
 
 in the {\ttfamily Problem} class. This flag can take any of the values defined in the enumeration {\ttfamily Problem\+::\+Assembly\+\_\+method}.
 
-Each of the five different methods has its own advantages and disadvantages in terms of speed and/or memory requirements. By default, we use the \char`\"{}assembly using vectors of pairs\char`\"{} as it tends to be optimal in both respects -- at least when the library is compiled with full optimisation. If the library is compiled without optimisation and/or in {\ttfamily P\+A\+R\+A\+N\+O\+ID} mode, the map-\/based assembly tends to be faster, if significantly more expensive in terms of memory requirements.
+Each of the five different methods has its own advantages and disadvantages in terms of speed and/or memory requirements. By default, we use the \char`\"{}assembly using vectors of pairs\char`\"{} as it tends to be optimal in both respects -- at least when the library is compiled with full optimisation. If the library is compiled without optimisation and/or in {\ttfamily PARANOID} mode, the map-\/based assembly tends to be faster, if significantly more expensive in terms of memory requirements.
 
 You should explore the performance of the various methods on your machine, using the the driver code \href{../../../demo_drivers/optimisation/sparse_assemble/sparse_assemble_test.cc}{\texttt{ sparse\+\_\+assemble\+\_\+test.\+cc}} in the directory
 
@@ -151,21 +159,22 @@ You should explore the performance of the various methods on your machine, using
 
 The shell script \href{../../../demo_drivers/optimisation/sparse_assemble/compare.bash}{\texttt{ compare.\+bash}} in the same directory may be used to systematically explore the performance of the different methods for various problem sizes.
 
-While the test code automatically documents the C\+PU times required for the matrix assembly, the automatic assessment of its memory usage is a somewhat nontrivial task. We provide a quick-\/and-\/dirty solution to this problem\+: If the protected member data
+While the test code automatically documents the CPU times required for the matrix assembly, the automatic assessment of its memory usage is a somewhat nontrivial task. We provide a quick-\/and-\/dirty solution to this problem\+: If the protected member data
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{bool} Problem::Pause\_at\_end\_of\_sparse\_assembly}
+
 \end{DoxyCode}
 
 
 is set to true, the assembly process is halted when it has reached its most memory-\/intensive phase. The user can then use {\ttfamily top} (or some other external tool) to assess the memory usage of the code. (Typing \char`\"{}\+M\char`\"{} in {\ttfamily top} sorts the entries by memory usage rather than by cpu usage).
 
 \DoxyHorRuler{0}
-\hypertarget{index_STL_pool}{}\doxysubsection{The S\+T\+L memory pool}\label{index_STL_pool}
-When analysing the code\textquotesingle{}s memory usage, you may notice that, following the assembly of the Jacobian matrix, not all memory is returned to the system, particularly, if maps or lists are used for the assembly. This does {\bfseries{not}} indicate the presence of a memory leak but is a result of the internal memory management performed by the S\+TL allocator which retains some (and in some cases a lot) of the initially allocated memory in its own \char`\"{}memory pool\char`\"{} in order to speed up the subsequent memory allocation for other S\+TL objects. \href{http://www.google.com}{\texttt{ Google}} for \char`\"{}\+S\+T\+L memory pool\char`\"{} to find out more about this issue. The executive summary is\+: \char`\"{}\+Memory pools are good for you\char`\"{}, even though they have the slightly annoying side-\/effect of making it virtually impossible to monitor the {\itshape actual} memory usage of the code.
+\hypertarget{index_STL_pool}{}\doxysubsection{The STL memory pool}\label{index_STL_pool}
+When analysing the code\textquotesingle{}s memory usage, you may notice that, following the assembly of the Jacobian matrix, not all memory is returned to the system, particularly, if maps or lists are used for the assembly. This does {\bfseries{not}} indicate the presence of a memory leak but is a result of the internal memory management performed by the STL allocator which retains some (and in some cases a lot) of the initially allocated memory in its own \char`\"{}memory pool\char`\"{} in order to speed up the subsequent memory allocation for other STL objects. \href{http://www.google.com}{\texttt{ Google}} for \char`\"{}\+STL memory pool\char`\"{} to find out more about this issue. The executive summary is\+: \char`\"{}\+Memory pools are good for you\char`\"{}, even though they have the slightly annoying side-\/effect of making it virtually impossible to monitor the {\itshape actual} memory usage of the code.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

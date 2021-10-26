@@ -1,0 +1,384 @@
+\hypertarget{harmonic_8txt__doxygenified_8h_source}{}\doxysection{harmonic.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{harmonic_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: A one-\/dimensional eigenproblem}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{In this document, we demonstrate how to solve a 1D eigenproblem}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{(eigenvalues of the 1D Laplace operator in a bounded domain) by}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{creating custom elements. The tutorial is similar in spirit to the }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{<a href="{}../../../quick\_guide/html/index.html"{}> quick guide </a> but far}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{less detailed.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<TR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{<B>One-\/dimensional model eigenvalue problem</B>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial\string^2u\}\{\(\backslash\)partial x\_1\string^2\} + \(\backslash\)lambda u = 0,}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{in the domain \(\backslash\)f\$D =\(\backslash\)left\(\backslash\)\{ x\_1 \(\backslash\)in }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{[0,1] \(\backslash\)right\(\backslash\)\}\(\backslash\)f\$, }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{with homogeneous Dirichlet boundary conditions}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{\(\backslash\)left. u\(\backslash\)right|\_\{\(\backslash\)partial D\}=0. }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{ An eigenfunction must be non-\/zero by definition and so the exact}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{solutions are given by the countably infinite set:}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{   u\_\{n\} = \(\backslash\)sin (\(\backslash\)sqrt\{\(\backslash\)lambda\}\_\{n\} x\_\{1\}), \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{   \(\backslash\)lambda\_\{n\} = n\string^\{2\}\(\backslash\)pi\string^\{2\}.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{We provide a detailed discussion of the driver code }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/eigenproblems/harmonic/harmonic.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{harmonic.cc</A> which solves the problem for the first four eigenvalues.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{In \(\backslash\)c oomph-\/lib all eigenproblems are solved by using interfaces to third-\/party}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{libraries. The default is LAPACK's (direct) QZ solver which is included with}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{the library. An interface is also provided to the serial version of }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{ARPACK, an iterative solver, but we are not allowed to }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{redistribute the source code, so it}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{must be downloaded separately. That said, much of }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{the functionality of ARPACK has}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{been superseded by the ANASAZI solver that is part of The Trilinos}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{Project. Thus, if you want to solve small problems, use the default QZ}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{solver; for larger problems, we recommend using ANASAZI.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{\(\backslash\)section theory Overview of the theory}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{ A discrete (linear) eigenproblem takes the form}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{\(\backslash\)f[ J\_\{ij\} V\_\{j\} = \(\backslash\)lambda M\_\{ij\} V\_\{j\}, \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3) \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{ where \(\backslash\)f\$ V\_\{j\} \(\backslash\)f\$ is the vector of discrete unknowns, \(\backslash\)f\$ \(\backslash\)lambda \(\backslash\)f\$ is}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{ the eigenvalue, and \(\backslash\)f\$ J\_\{ij\}  \(\backslash\)f\$ and \(\backslash\)f\$ M\_\{ij\} \(\backslash\)f\$ are two matrices:}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{ \(\backslash\)f\$ J\_\{ij\} \(\backslash\)f\$ (often denoted \(\backslash\)f\$ K\_\{ij\} \(\backslash\)f\$ in the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{ literature) is known as the stiffness matrix and \(\backslash\)f\$ M\_\{ij\}}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{ \(\backslash\)f\$ is termed the mass matrix. The third-\/party libraries mentioned}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{ above all solve systems of the form (3), and within \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{ oomph-\/lib we must simply provide the required mass and stiffness}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{ matrices.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)subsection linear\_stab Linear Stability Theory }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{In many cases, eigenproblems arise from}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{linear stability analyses of steady solutions to our set of nonlinear}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{residuals. For example, if we have a time-\/dependent system of equations}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial t\} = \(\backslash\)mathcal\{F\}(u), \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{then the residual formulation is}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)mathcal\{R\}(u) = \(\backslash\)mathcal\{F\}(u) -\/ \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial t\} =}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{0;  \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (4) \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{and steady solutions, \(\backslash\)f\$ u\_\{s\} \(\backslash\)f\$ are found by setting \(\backslash\)f\$ \(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{u / \(\backslash\)partial t  =}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{0 \(\backslash\)f\$. Note that in a nonlinear system there may be many possible}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{steady solutions for the same set of parameter values.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{A linear stability analysis proceeds by assuming that the steady}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{solution is perturbed by a small amount, so that}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{\(\backslash\)f\$ u = u\_\{s\} + \(\backslash\)epsilon \(\backslash\)hat\{u\} \(\backslash\)f\$, where \(\backslash\)f\$ |\(\backslash\)epsilon| \(\backslash\)ll}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{1\(\backslash\)f\$. If we substitute this expression into the governing equation}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{(4) and}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{neglect terms that involve \(\backslash\)f\$ \(\backslash\)epsilon\string^\{2\} \(\backslash\)f\$ (on the assumption that they}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{are really small) then we obtain the equation:}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)mathcal\{F\}(u\_\{s\}) + \(\backslash\)epsilon \(\backslash\)left[\(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{\(\backslash\)mathcal\{F\}(u\_\{s\})\}\{\(\backslash\)partial u\} \(\backslash\)hat\{u\}  -\/ \(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{\(\backslash\)hat\{u\}\}\{\(\backslash\)partial t\} \(\backslash\)right] \(\backslash\)approx 0. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{Note that we have used a Taylor expansion of \(\backslash\)f\$ \(\backslash\)mathcal\{F\} \(\backslash\)f\$, so}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{we are assuming that such an operation "{}makes sense"{}. The solution \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{u\_\{s\} \(\backslash\)f\$ is a steady state, so by definition \(\backslash\)f\$\(\backslash\)mathcal\{F\}(u\_\{s\}) =}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{0\(\backslash\)f\$ and then we are left with the \(\backslash\)b linear equation}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{ \(\backslash\)f[ \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)mathcal\{F\} (u\_\{s\})\}\{\(\backslash\)partial u\} \(\backslash\)hat\{u\} =}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{ \(\backslash\)mathcal\{J\}(u\_\{s\}) \(\backslash\)hat\{u\} = \(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{ \(\backslash\)hat\{u\}\}\{\(\backslash\)partial t\}. \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (5) \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{ The Jacobian \(\backslash\)f\$ \(\backslash\)mathcal\{J\} \(\backslash\)f\$ is exactly the same as that required by the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{ Newton method when solving the steady set of equations, \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{ \(\backslash\)mathcal\{F\}(u) = 0.\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{The general solution of equation (5) takes the form \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\(\backslash\)hat\{u\} = \(\backslash\)mbox\{e\}\string^\{\(\backslash\)lambda t\} v\(\backslash\)f\$ because the only function that is}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{proportional to its derivative is the exponential. The necessary}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{functional form of the solution means that equation (5)}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{becomes}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)mathcal\{J\}(u\_\{s\}) v = \(\backslash\)lambda v, \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{which is an eigenproblem in which the mass "{}matrix"{} is the identity.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{Thus, in order to assess the stability of a solution to our nonlinear}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{system we must solve an eigenproblem using the Jacobian matrix, which}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{is why we used the notation \(\backslash\)f\$ J\_\{ij\} \(\backslash\)f\$ rather than \(\backslash\)f\$ K\_\{ij\} \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{in equation (3). The solution is said to be linearly stable if the real}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{part of all eigenvalues is negative because then the perturbation}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{decays as \(\backslash\)f\$ t \(\backslash\)to \(\backslash\)infty\(\backslash\)f\$, but it is linearly unstable if even a single}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{eigenvalue has positive real part. Note that in even more general equations}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{the mass "{}matrix"{} is not necessarily the identity.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{\(\backslash\)subsection weak Weak formulation of the problem}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{ If we wish to solve the problem (1) using finite elements,}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{we must first derive the weak form, which follows from the standard}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{procedure of multiplication by a test function and integration by}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{parts}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)int\_\{D\} \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\_\{1\}\} \(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)phi\string^\{(test)\}\}\{\(\backslash\)partial x\_\{1\}\}\(\backslash\),\(\backslash\)mbox\{d\} x\_\{1\} = }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{ \(\backslash\)lambda \(\backslash\)int\_\{D\} u\(\backslash\), \(\backslash\)phi\string^\{(test)\}\(\backslash\),\(\backslash\)mbox\{d\} x\_\{1\}. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{Note that the boundary terms are neglected as a consequence of the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{Dirichlet boundary conditions.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{If we expand the \(\backslash\)f\$ u(x\_\{1\}) = V\_\{j\} \(\backslash\)psi\_\{j\}(x\_\{1\}) \(\backslash\)f\$ in terms of}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{known basis functions \(\backslash\)f\$ \(\backslash\)psi\_\{j\} \(\backslash\)f\$ and use}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{the same basis functions as our test functions (Galerkin method), then the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{weak form becomes}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{\(\backslash\)f[ \(\backslash\)int\_\{D\} \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)psi\_\{j\}\}\{\(\backslash\)partial x\_\{1\}\} \(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{\(\backslash\)psi\_\{i\}\}\{\(\backslash\)partial x\_\{1\}\}\(\backslash\),\(\backslash\)mbox\{d\} x\_\{1\} V\_\{j\} = \(\backslash\)lambda \(\backslash\)int\_\{D\}}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{\(\backslash\)psi\_\{i\} \(\backslash\)psi\_\{j\}\(\backslash\),\(\backslash\)mbox\{d\} x\_\{1\} V\_\{j\}. \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{On comparison with equation (3), we identify the Jacobian and}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{mass matrices}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{\(\backslash\)f[ J\_\{ij\} =  \(\backslash\)int\_\{D\} \(\backslash\)frac\{\(\backslash\)partial \(\backslash\)psi\_\{j\}\}\{\(\backslash\)partial x\_\{1\}\} \(\backslash\)frac\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{\(\backslash\)psi\_\{i\}\}\{\(\backslash\)partial x\_\{1\}\}\(\backslash\),\(\backslash\)mbox\{d\} x\_\{1\}, \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{    M\_\{ij\} = \(\backslash\)int\_\{D\}}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{\(\backslash\)psi\_\{i\} \(\backslash\)psi\_\{j\}\(\backslash\),\(\backslash\)mbox\{d\} x\_\{1\}. \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (6) \(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{\(\backslash\)section impl Implementation}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{ In \(\backslash\)c oomph-\/lib, eigenproblems are formulated on an}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{element-\/by-\/element basis in a similar way to standard}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{problems. Eigenproblems make use of the function}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{ GeneralisedElement::get\_jacobian\_and\_mass\_matrix(}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{   Vector<double> \&residuals, }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{   DenseMatrix<double> \&jacobian,}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{   DenseMatrix<double> \&mass\_matrix);}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{ where the Jacobian is the matrix \(\backslash\)f\$J\_\{ij\}\(\backslash\)f\$ and the mass matrix is}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{ \(\backslash\)f\$M\_\{ij\}\(\backslash\)f\$ in equation (3). The residuals need not be}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{ returned when solving an eigenproblem, but the interface is chosen so}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{ that linear stability of solutions to the nonlinear system can easily be}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{ calculated without reformulating the problem.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{ Once again, to avoid reinitialisation in multi-\/physics problems, the helper}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{ function}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{\(\backslash\)code}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{ GeneralisedElement::fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix(}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{   Vector<double> \&residuals, }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{   DenseMatrix<double> \&jacobian,}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{   DenseMatrix<double> \&mass\_matrix);}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{\(\backslash\)endcode}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{ is used and this will be overloaded in our custom elements below.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{\(\backslash\)subsection equations Creating the elements}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{ For generality, we implement the mathematics to assemble contributions to the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{Jacobian and mass matrices defined in equations (6) in the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{class \(\backslash\)c HarmonicEquations that inherits from \(\backslash\)c FiniteElement. This}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{construction mirrors that in our standard equation classes and allows}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{a clean separation between the equations and the choice of basis function.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{\(\backslash\)dontinclude harmonic.cc}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{\(\backslash\)skipline A class}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{\(\backslash\)until HarmonicEquations()}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{The  unknowns that represent }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{the discretised eigenfunction are assumed to be stored at the nodes.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{\(\backslash\)until \{return nodal\_value}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{The class contains functions to output the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{eigenfunction; interpolate the nodal unknown;}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{and provides interfaces for the shape functions and their}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{derivatives. The key function is \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{ which implements the calculation of the equations}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{ (6). The residuals vector is not filled in and does not}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{ need to be unless we also wish to solve an associated (non-\/eigen) problem.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{\(\backslash\)skipline fill\_in\_contribution}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{\(\backslash\)until end\_of\_fill\_in}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{ The shape functions are specified in the \(\backslash\)c QHarmonicElement}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{class that inherits from our standard one-\/dimensional Lagrange elements}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00212}00212 \textcolor{comment}{ \(\backslash\)c QElement<1,NNODE\_1D> as well as \(\backslash\)c HarmonicEquations.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00213}00213 \textcolor{comment}{ The number of unknowns (one) is specified and the output functions}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00214}00214 \textcolor{comment}{and shape functions are overloaded as required: the output functions are}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00215}00215 \textcolor{comment}{ specified in the \(\backslash\)c HarmonicEquations class, whereas the shape}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00216}00216 \textcolor{comment}{ functions are provided by the \(\backslash\)c QElement<1,NNODE\_1D> class.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00217}00217 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00218}00218 \textcolor{comment}{\(\backslash\)skipline template <unsigned}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00219}00219 \textcolor{comment}{\(\backslash\)until end\_of\_QHarmonic}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00220}00220 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00221}00221 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00222}00222 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00223}00223 \textcolor{comment}{\(\backslash\)section main The driver code}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00224}00224 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00225}00225 \textcolor{comment}{In order to solve the 1D eigenproblem using \(\backslash\)c oomph-\/lib, we represent the }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00226}00226 \textcolor{comment}{mathematical problem defined by equations (1) }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00227}00227 \textcolor{comment}{and (2) in a specific \(\backslash\)c Problem object, \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00228}00228 \textcolor{comment}{HarmonicProblem, which is templated by the element type and the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00229}00229 \textcolor{comment}{eigensolver. We use \(\backslash\)c QHarmonicElement<3>, a quadratic element and our}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00230}00230 \textcolor{comment}{three different eigensolvers, including timing statements to compare}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00231}00231 \textcolor{comment}{the three approaches. Note that if you do not have Trilinos or ARPACK}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00232}00232 \textcolor{comment}{installed then only the LAPACK\_QZ solver will do anything. }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00233}00233 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00234}00234 \textcolor{comment}{The problem class takes a single argument corresponding to the number}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00235}00235 \textcolor{comment}{of elements used to discretise the domain and contains a member}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00236}00236 \textcolor{comment}{function \(\backslash\)c solve that takes an integer used for documentation purposes.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00237}00237 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00238}00238 \textcolor{comment}{\(\backslash\)skipline n\_element=100}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00239}00239 \textcolor{comment}{\(\backslash\)until t\_end1 = clock}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00240}00240 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00241}00241 \textcolor{comment}{The same problem is then solved with a different solver}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00242}00242 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00243}00243 \textcolor{comment}{\(\backslash\)skipline t\_start2 = clock}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00244}00244 \textcolor{comment}{\(\backslash\)until t\_end2 = clock}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00245}00245 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00246}00246 \textcolor{comment}{and again with the Trilinos ANASAZI solver if it is installed.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00247}00247 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00248}00248 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00249}00249 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00250}00250 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00251}00251 \textcolor{comment}{\(\backslash\)section problem The problem class}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00252}00252 \textcolor{comment}{The \(\backslash\)c HarmonicProblem is derived from \(\backslash\)c oomph-\/lib's generic}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00253}00253 \textcolor{comment}{\(\backslash\)c Problem class and the specific element}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00254}00254 \textcolor{comment}{type and eigensolver are specified as template parameters to make it easy for }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00255}00255 \textcolor{comment}{the "{}user"{} to change either of these from the driver code.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00256}00256 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00257}00257 \textcolor{comment}{\(\backslash\)dontinclude harmonic.cc}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00258}00258 \textcolor{comment}{\(\backslash\)skipline start\_of\_problem\_class}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00259}00259 \textcolor{comment}{\(\backslash\)until public Problem}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00260}00260 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00261}00261 \textcolor{comment}{The problem class has four member functions:}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00262}00262 \textcolor{comment}{-\/ the constructor \(\backslash\)c HarmonicProblem(...)}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00263}00263 \textcolor{comment}{-\/ the destructor \(\backslash\)c \string~HarmonicProblem()}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00264}00264 \textcolor{comment}{-\/ the function \(\backslash\)c solve(...)}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00265}00265 \textcolor{comment}{-\/ the function \(\backslash\)c doc\_solution(...)}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00266}00266 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00267}00267 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00268}00268 \textcolor{comment}{ The destructor merely cleans up the memory by deleting the objects that are}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00269}00269 \textcolor{comment}{allocated in the constructor, so we shall not discuss it further}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00270}00270 \textcolor{comment}{here. The \(\backslash\)c doc\_solution function is also simple and writes the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00271}00271 \textcolor{comment}{eigenfunction to a file.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00272}00272 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00273}00273 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00274}00274 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00275}00275 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00276}00276 \textcolor{comment}{\(\backslash\)section constructor The Problem constructor}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00277}00277 \textcolor{comment}{In the \(\backslash\)c Problem constructor, we start by creating the eigensolver}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00278}00278 \textcolor{comment}{specified by the second template parameter.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00279}00279 \textcolor{comment}{We then discretise the domain using \(\backslash\)c oomph-\/lib's \(\backslash\)c 1DMesh object. }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00280}00280 \textcolor{comment}{The arguments of this object's constructor are the number of elements }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00281}00281 \textcolor{comment}{(whose type is specified by the template parameter), }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00282}00282 \textcolor{comment}{and the domain length. Next, we pin the nodal values on the domain}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00283}00283 \textcolor{comment}{boundaries, which corresponds to applying the Dirichlet boundary conditions.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00284}00284 \textcolor{comment}{Finally we call the generic \(\backslash\)c}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00285}00285 \textcolor{comment}{Problem::assign\_eqn\_numbers() routine to set up the equation}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00286}00286 \textcolor{comment}{numbers.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00287}00287 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00288}00288 \textcolor{comment}{\(\backslash\)dontinclude harmonic.cc}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00289}00289 \textcolor{comment}{\(\backslash\)skipline start\_of\_constructor}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00290}00290 \textcolor{comment}{\(\backslash\)until end of constructor}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00291}00291 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00292}00292 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00293}00293 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00294}00294 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00295}00295 \textcolor{comment}{\(\backslash\)section solve Solving the problem}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00296}00296 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00297}00297 \textcolor{comment}{ The \(\backslash\)c solve(...) function is where all the action happens }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00298}00298 \textcolor{comment}{ and takes a single unsigned integer argument which is used as a}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00299}00299 \textcolor{comment}{ label to distinguish the output from different eigensolvers.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00300}00300 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00301}00301 \textcolor{comment}{ The function \(\backslash\)c Problem::solve\_eigenproblem(...) plays an equivalent}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00302}00302 \textcolor{comment}{ role to \(\backslash\)c Problem::newton\_solve(...) in eigenproblems. Here, }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00303}00303 \textcolor{comment}{ additional storage must be allocated for the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00304}00304 \textcolor{comment}{ eigenvalues (a vector of complex numbers)}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00305}00305 \textcolor{comment}{ and eigenvectors (a vector of double vectors). The vectors will be}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00306}00306 \textcolor{comment}{ resized internally depending on the number of eigenvalues}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00307}00307 \textcolor{comment}{ returned. The number is not always the same as the number of}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00308}00308 \textcolor{comment}{ eigenvalues requested because both parts of a }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00309}00309 \textcolor{comment}{ complex conjugate pair of eigenvalues are always returned.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00310}00310 \textcolor{comment}{ In the \(\backslash\)c solve(..) function we first}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00311}00311 \textcolor{comment}{ allocate the required storage, specify the desired number of}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00312}00312 \textcolor{comment}{ eigenvalues and then solve the eigenproblem:}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00313}00313 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00314}00314 \textcolor{comment}{ \(\backslash\)skipline start\_of\_solve}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00315}00315 \textcolor{comment}{ \(\backslash\)until solve\_eigenproblem(}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00316}00316 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00317}00317 \textcolor{comment}{ The rest of the function post-\/processes the output from the}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00318}00318 \textcolor{comment}{ eigensolver. In order to ensure repeatability of the output for our}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00319}00319 \textcolor{comment}{ self-\/tests the eigenvalues are sorted on the size of their real}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00320}00320 \textcolor{comment}{ part. The eigenfunction associated with the second smallest}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00321}00321 \textcolor{comment}{ eigenvalue is normalised to have unit length and then output to a file. }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00322}00322 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00323}00323 \textcolor{comment}{ In order to output the eigenfunction the values must be transferred}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00324}00324 \textcolor{comment}{ to the nodal values so that it can be interpolated. This is performed}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00325}00325 \textcolor{comment}{ by the function \(\backslash\)c Problem::assign\_eigenvector\_to\_dofs(...). Note}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00326}00326 \textcolor{comment}{ that this function overwrites the existing nodal data, so a backup}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00327}00327 \textcolor{comment}{ must be taken if it is important. This can be done using the function}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00328}00328 \textcolor{comment}{ \(\backslash\)c Problem::store\_current\_dof\_values() and the stored values can be}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00329}00329 \textcolor{comment}{ recovered via \(\backslash\)c Problem::restore\_dof\_values().}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00330}00330 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00331}00331 \textcolor{comment}{ Finally, the sorted eigenvalues are reported and also saved to a file.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00332}00332 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00333}00333 \textcolor{comment}{ \(\backslash\)until end\_of\_solve}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00334}00334 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00335}00335 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00336}00336 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00337}00337 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00338}00338 \textcolor{comment}{\(\backslash\)section exercises Comments and exercises}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00339}00339 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00340}00340 \textcolor{comment}{-\/\# Modify the code to compute a different number of eigenvalues. What is the maximum number of eigenvalues that could be computed? }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00341}00341 \textcolor{comment}{-\/\# Write a function to calculate the error between the numerical}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00342}00342 \textcolor{comment}{and exact solutions to the eigenproblem. }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00343}00343 \textcolor{comment}{How does the error vary with changes in the number of elements?}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00344}00344 \textcolor{comment}{-\/\# Compare the errors for each different eigenfunction. What happens}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00345}00345 \textcolor{comment}{to the error as the eigenvalue increase? Can you explain why?}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00346}00346 \textcolor{comment}{-\/\# Repeat the above experiments with \(\backslash\)c QHarmonicElement<2>. What}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00347}00347 \textcolor{comment}{happens?}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00348}00348 \textcolor{comment}{-\/\# Modify the problem to include a convective-\/like term \(\backslash\)f\$ \(\backslash\)mu}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00349}00349 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\_\{1\}\} \(\backslash\)f\$. Compare the computed results}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00350}00350 \textcolor{comment}{to the analytic solution. What happens to the eigenvalues and eigenfunctions?}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00351}00351 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00352}00352 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00353}00353 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00354}00354 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00355}00355 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00356}00356 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00357}00357 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00358}00358 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00359}00359 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00360}00360 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/eigenproblems/harmonic/"{}>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00361}00361 \textcolor{comment}{demo\_drivers/eigenproblems/harmonic/}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00362}00362 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00363}00363 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00364}00364 \textcolor{comment}{-\/ The driver code is: }}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00365}00365 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00366}00366 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/eigenproblems/harmonic/harmonic.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00367}00367 \textcolor{comment}{demo\_drivers/eigenproblems/harmonic/harmonic.cc}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00368}00368 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00369}00369 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00370}00370 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00371}00371 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00372}00372 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00373}00373 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00374}00374 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00375}00375 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00376}00376 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00377}00377 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00378}00378 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{harmonic_8txt__doxygenified_8h_source_l00379}00379 }
+
+\end{DoxyCode}

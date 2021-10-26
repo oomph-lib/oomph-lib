@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1SuperLUSolver}{}\doxysection{oomph\+::Super\+L\+U\+Solver Class Reference}
+\hypertarget{classoomph_1_1SuperLUSolver}{}\doxysection{oomph\+::Super\+LUSolver Class Reference}
 \label{classoomph_1_1SuperLUSolver}\index{oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 
 
-. Super\+LU Project Solver class. This is a combined wrapper for both Super\+LU and Super\+LU Dist. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+L\+U/}} Default Behaviour\+: If this solver is distributed over more than one processor then Super\+LU Dist is used. Member data naming convention\+: member data associated with the Super\+LU Dist solver begins Dist\+\_\+... and member data associated with the serial Super\+LU solver begins Serial\+\_\+... .  
+//////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////////  
 
 
 
 
 {\ttfamily \#include $<$linear\+\_\+solver.\+h$>$}
 
-Inheritance diagram for oomph\+::Super\+L\+U\+Solver\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Super\+LUSolver\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classoomph_1_1SuperLUSolver}
@@ -18,21 +18,21 @@ Inheritance diagram for oomph\+::Super\+L\+U\+Solver\+:\begin{figure}[H]
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{Type}} \{ \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1aa899bf1bf033b5c6dbc7a3479a5a650fc}{Default}}, 
-\mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1aa80ab98447db39df77743bc5711d9e5d7}{Serial}}, 
-\mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1aa2fe10e60579b07a72fe0126f06e820ce}{Distributed}}
+enum \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{Type}} \{ \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1aa899bf1bf033b5c6dbc7a3479a5a650fc}{Default}}
+, \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1aa80ab98447db39df77743bc5711d9e5d7}{Serial}}
+, \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1aa2fe10e60579b07a72fe0126f06e820ce}{Distributed}}
  \}
 \begin{DoxyCompactList}\small\item\em enum type to specify the solver behaviour. Default -\/ will employ superlu dist if more than 1 processor. Serial -\/ will always try use superlu (serial). Distributed -\/ will always try to use superlu dist. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1SuperLUSolver_a85a1b2227578d19db7cc5b36094ea07e}{Super\+L\+U\+Solver}} ()
+\mbox{\hyperlink{classoomph_1_1SuperLUSolver_a85a1b2227578d19db7cc5b36094ea07e}{Super\+LUSolver}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. Set the defaults. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SuperLUSolver_a863c22b3cb27f57aaeccb46c013ca4ce}{Super\+L\+U\+Solver}} (const \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1SuperLUSolver_a02f1c0c32ca6d9c0e1b6faa4504ec06f}{Super\+LUSolver}} (const \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+LUSolver}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_adab7beeef8f9eec635b9f07ca423e2bb}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}} \&)
+void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a2d107f4319f3ab5b49004661e0797b51}{operator=}} (const \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+LUSolver}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1SuperLUSolver_a9ce5a1656ee0ec0d41d367567a990889}{$\sim$\+Super\+L\+U\+Solver}} ()
+\mbox{\hyperlink{classoomph_1_1SuperLUSolver_a9ce5a1656ee0ec0d41d367567a990889}{$\sim$\+Super\+LUSolver}} ()
 \begin{DoxyCompactList}\small\item\em Destructor, clean up the stored matrices. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aeb52340bb6d747f60fba9d6c6f9ab2e9}{enable\+\_\+computation\+\_\+of\+\_\+gradient}} ()
 \begin{DoxyCompactList}\small\item\em function to enable the computation of the gradient \end{DoxyCompactList}\item 
@@ -41,11 +41,11 @@ void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ac278643faf0a13eb3f8e6bc984338
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a5a121df89c72a8741d051aa176b12255}{solve}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a94e94a44f4cb93f2adf035e9b99990e7}{solve}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a10bdce2b176a3ca514b82f66cd50e037}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&problem\+\_\+pt, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a4954bcec402af933d69825d58824fafc}{solve\+\_\+transpose}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
-\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_acef6e1b3bf469061777866d97689ba77}{resolve}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em Resolve the system defined by the last assembled jacobian and the specified rhs vector if resolve has been enabled. Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a81d582d853c16aa1fcd91ae6a328f424}{resolve\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
@@ -59,7 +59,7 @@ double \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a9e9bdeac1f619319b931d1dea53
 virtual double \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a39e375e5ca81863127fe6d381ef97b65}{linear\+\_\+solver\+\_\+solution\+\_\+time}} () const
 \begin{DoxyCompactList}\small\item\em return the time taken to solve the linear system (needs to be overloaded for each linear solver) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a67d7a06fdff48c75736498c7b853d781}{factorise}} (\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&matrix\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ae9c60b9515bcebc1e0509b7b0e51b5f9}{backsub}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
 \begin{DoxyCompactList}\small\item\em Do the backsubstitution for Super\+LU solver Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_afa0a6cb2320c56f2e08fdbef87a96eb6}{backsub\+\_\+transpose}} (const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&rhs, \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&result)
@@ -67,19 +67,19 @@ void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_afa0a6cb2320c56f2e08fdbef87a96
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory}} ()
 \begin{DoxyCompactList}\small\item\em Clean up the memory allocated by the solver. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a7d59158ece5d377644f598ca60093be1}{set\+\_\+solver\+\_\+type}} (const \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{Type}} \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}})
-\begin{DoxyCompactList}\small\item\em Specify the solve type. Either default, serial or distributed. See enum Super\+L\+U\+\_\+solver\+\_\+type for more details. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Specify the solve type. Either default, serial or distributed. See enum Super\+LU\+\_\+solver\+\_\+type for more details. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ad0d31829d3afe5f7a315d1b37693e8a2}{use\+\_\+compressed\+\_\+row\+\_\+for\+\_\+superlu\+\_\+serial}} ()
 \begin{DoxyCompactList}\small\item\em Use the compressed row format in superlu serial. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_abd96a292e666e7553651add727265529}{use\+\_\+compressed\+\_\+column\+\_\+for\+\_\+superlu\+\_\+serial}} ()
 \begin{DoxyCompactList}\small\item\em Use the compressed column format in superlu serial. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a9b8487741998c97db3f41493ca427c1d}{enable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist}} ()
-\begin{DoxyCompactList}\small\item\em Set Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set Delete\+\_\+matrix\+\_\+data flag. Super\+LU\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a887c4a5fd19034f7a74d91d453d4f425}{disable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist}} ()
-\begin{DoxyCompactList}\small\item\em Unset Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unset Delete\+\_\+matrix\+\_\+data flag. Super\+LU\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a9489a249d736316901e1644e73aa55b9}{enable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist}} ()
-\begin{DoxyCompactList}\small\item\em Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+L\+U\+\_\+\+D\+I\+ST, and can lead to significantly faster solves. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set flag so that Super\+LU\+\_\+\+DIST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+LU\+\_\+\+DIST, and can lead to significantly faster solves. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a3386eb5e27caa80d9c63a6061a304680}{disable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist}} ()
-\begin{DoxyCompactList}\small\item\em Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is not allowed to permute matrix rows and columns during factorisation. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set flag so that Super\+LU\+\_\+\+DIST is not allowed to permute matrix rows and columns during factorisation. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a4eac19f126f7da82f6af48416410442a}{use\+\_\+global\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist}} ()
 \begin{DoxyCompactList}\small\item\em Calling this method will ensure that when the problem based solve interface is used, a global (serial) jacobian will be assembled. Note\+: calling this function will delete any distributed solve data. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a400adf19a2051b05baec7a300bda5406}{use\+\_\+distributed\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist}} ()
@@ -92,7 +92,7 @@ double \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ac61498d3c80a4ed13c2df101766
 \begin{DoxyCompactItemize}
 \item 
 static bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a11c89f3138e42a38eb0cd5def128eabf}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}}
-\begin{DoxyCompactList}\small\item\em Static flag that determines whether the warning about incorrect distribution of R\+H\+Ss will be printed or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Static flag that determines whether the warning about incorrect distribution of RHSs will be printed or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -120,7 +120,7 @@ bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a88f9065710fb4b6096369586be76a
 bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a052def009be940b82847d6c476fd0319}{Doc\+\_\+stats}}
 \begin{DoxyCompactList}\small\item\em Set to true to output statistics (false by default). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{Type}} \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a26ba07c6f63b830e73c594debe9e68a9}{Solver\+\_\+type}}
-\begin{DoxyCompactList}\small\item\em the solver type. see Super\+L\+U\+\_\+solver\+\_\+type for details. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em the solver type. see Super\+LU\+\_\+solver\+\_\+type for details. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a7420188d74f95b5b1543268ff3ccc9e0}{Using\+\_\+dist}}
 \begin{DoxyCompactList}\small\item\em boolean flag indicating whether superlu dist is being used \end{DoxyCompactList}\item 
 void $\ast$ \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a7dc6fcd6c30c90fd66b7ea828075a718}{Serial\+\_\+f\+\_\+factors}}
@@ -134,7 +134,7 @@ int \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aa9c97e960b45b82eb01dd5548bed89
 bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a50f46a4d8c674f3853ce0f682ebd4096}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}
 \begin{DoxyCompactList}\small\item\em Use compressed row version? \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aab7193cb7f228dc57c4e6c237ea065ba}{Dist\+\_\+use\+\_\+global\+\_\+solver}}
-\begin{DoxyCompactList}\small\item\em Flag that determines whether the M\+P\+I\+Problem based solve function uses the global or distributed version of Super\+L\+U\+\_\+\+D\+I\+ST (default value is false). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Flag that determines whether the MPIProblem based solve function uses the global or distributed version of Super\+LU\+\_\+\+DIST (default value is false). \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ac5458172732cfe687891af65cc2d45e6}{Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated}}
 \begin{DoxyCompactList}\small\item\em Flag is true if solve data has been generated for a global matrix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ae1058d90e75f3cc6229581382f159324}{Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated}}
@@ -148,22 +148,24 @@ int \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ae377dc4f0d37fa9ba3056ed8d9bdcd
 int \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ab9792c27162920763f77861f30c552d1}{Dist\+\_\+info}}
 \begin{DoxyCompactList}\small\item\em Info flag for the Super\+LU solver. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_ab7477cbe49c517e2ee39ad6eedcf6f63}{Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations}}
-\begin{DoxyCompactList}\small\item\em If true then Super\+L\+U\+\_\+\+D\+I\+ST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+L\+U\+\_\+\+D\+I\+ST, and can lead to significantly faster solves, but has been known to fail, hence the default value is 0. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em If true then Super\+LU\+\_\+\+DIST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+LU\+\_\+\+DIST, and can lead to significantly faster solves, but has been known to fail, hence the default value is 0. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a0c44f15dfab9ac11376a8272fcf0a3b4}{Dist\+\_\+delete\+\_\+matrix\+\_\+data}}
-\begin{DoxyCompactList}\small\item\em Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Delete\+\_\+matrix\+\_\+data flag. Super\+LU\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. \end{DoxyCompactList}\item 
 double $\ast$ \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a4aa2df1c91537adb245395aff054b591}{Dist\+\_\+value\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer for storage of the matrix values required by Super\+L\+U\+\_\+\+D\+I\+ST. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Pointer for storage of the matrix values required by Super\+LU\+\_\+\+DIST. \end{DoxyCompactList}\item 
 int $\ast$ \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a1c7efdc631fad57eaa4d96a4d927a23f}{Dist\+\_\+index\+\_\+pt}}
-\begin{DoxyCompactList}\small\item\em Pointer for storage of matrix rows or column indices required by Super\+L\+U\+\_\+\+D\+I\+ST. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Pointer for storage of matrix rows or column indices required by Super\+LU\+\_\+\+DIST. \end{DoxyCompactList}\item 
 int $\ast$ \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a7b5c61ed28e441622bfe3f623dee28b7}{Dist\+\_\+start\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointers for storage of matrix column or row starts. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-. Super\+LU Project Solver class. This is a combined wrapper for both Super\+LU and Super\+LU Dist. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+L\+U/}} Default Behaviour\+: If this solver is distributed over more than one processor then Super\+LU Dist is used. Member data naming convention\+: member data associated with the Super\+LU Dist solver begins Dist\+\_\+... and member data associated with the serial Super\+LU solver begins Serial\+\_\+... . 
+//////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////// 
 
-Definition at line 503 of file linear\+\_\+solver.\+h.
+Super\+LU Project Solver class. This is a combined wrapper for both Super\+LU and Super\+LU Dist. See \href{http://crd.lbl.gov/~xiaoye/SuperLU/}{\texttt{ http\+://crd.\+lbl.\+gov/$\sim$xiaoye/\+Super\+LU/}} Default Behaviour\+: If this solver is distributed over more than one processor then Super\+LU Dist is used. Member data naming convention\+: member data associated with the Super\+LU Dist solver begins Dist\+\_\+... and member data associated with the serial Super\+LU solver begins Serial\+\_\+... . 
+
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00485}{485}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
@@ -172,7 +174,7 @@ Definition at line 503 of file linear\+\_\+solver.\+h.
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Type@{Type}}
 \index{Type@{Type}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Type}{Type}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{oomph\+::\+Super\+L\+U\+Solver\+::\+Type}}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{oomph\+::\+Super\+LUSolver\+::\+Type}}}
 
 
 
@@ -194,7 +196,7 @@ Distributed&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 510 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00492}{492}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
@@ -203,7 +205,7 @@ Definition at line 510 of file linear\+\_\+solver.\+h.
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!SuperLUSolver@{SuperLUSolver}}
 \index{SuperLUSolver@{SuperLUSolver}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{SuperLUSolver()}{SuperLUSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily oomph\+::\+Super\+L\+U\+Solver\+::\+Super\+L\+U\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Super\+LUSolver\+::\+Super\+LUSolver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -211,35 +213,27 @@ Constructor. Set the defaults.
 
 
 
-Definition at line 518 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00500}{500}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Default, Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations, Dist\+\_\+delete\+\_\+matrix\+\_\+data, Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated, Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated, Dist\+\_\+index\+\_\+pt, Dist\+\_\+solver\+\_\+data\+\_\+pt, Dist\+\_\+start\+\_\+pt, Dist\+\_\+use\+\_\+global\+\_\+solver, Dist\+\_\+value\+\_\+pt, Doc\+\_\+stats, Serial\+\_\+compressed\+\_\+row\+\_\+flag, Serial\+\_\+n\+\_\+dof, Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix, Solver\+\_\+type, Suppress\+\_\+solve, and Using\+\_\+dist.
+References \mbox{\hyperlink{linear__solver_8h_source_l00494}{Default}}, \mbox{\hyperlink{linear__solver_8h_source_l00841}{Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations}}, \mbox{\hyperlink{linear__solver_8h_source_l00849}{Dist\+\_\+delete\+\_\+matrix\+\_\+data}}, \mbox{\hyperlink{linear__solver_8h_source_l00823}{Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated}}, \mbox{\hyperlink{linear__solver_8h_source_l00820}{Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated}}, \mbox{\hyperlink{linear__solver_8h_source_l00856}{Dist\+\_\+index\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00826}{Dist\+\_\+solver\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00860}{Dist\+\_\+start\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00817}{Dist\+\_\+use\+\_\+global\+\_\+solver}}, \mbox{\hyperlink{linear__solver_8h_source_l00852}{Dist\+\_\+value\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}, \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}, \mbox{\hyperlink{linear__solver_8h_source_l00788}{Serial\+\_\+n\+\_\+dof}}, \mbox{\hyperlink{linear__solver_8h_source_l00791}{Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix}}, \mbox{\hyperlink{linear__solver_8h_source_l00773}{Solver\+\_\+type}}, \mbox{\hyperlink{linear__solver_8h_source_l00767}{Suppress\+\_\+solve}}, and \mbox{\hyperlink{linear__solver_8h_source_l00776}{Using\+\_\+dist}}.
 
-\mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a863c22b3cb27f57aaeccb46c013ca4ce}\label{classoomph_1_1SuperLUSolver_a863c22b3cb27f57aaeccb46c013ca4ce}} 
+\mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a02f1c0c32ca6d9c0e1b6faa4504ec06f}\label{classoomph_1_1SuperLUSolver_a02f1c0c32ca6d9c0e1b6faa4504ec06f}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!SuperLUSolver@{SuperLUSolver}}
 \index{SuperLUSolver@{SuperLUSolver}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{SuperLUSolver()}{SuperLUSolver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Super\+L\+U\+Solver\+::\+Super\+L\+U\+Solver (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Super\+LUSolver\+::\+Super\+LUSolver (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+LUSolver}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
 
-
-
-Definition at line 546 of file linear\+\_\+solver.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
-
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a9ce5a1656ee0ec0d41d367567a990889}\label{classoomph_1_1SuperLUSolver_a9ce5a1656ee0ec0d41d367567a990889}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!````~SuperLUSolver@{$\sim$SuperLUSolver}}
 \index{````~SuperLUSolver@{$\sim$SuperLUSolver}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{$\sim$SuperLUSolver()}{~SuperLUSolver()}}
-{\footnotesize\ttfamily oomph\+::\+Super\+L\+U\+Solver\+::$\sim$\+Super\+L\+U\+Solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Super\+LUSolver\+::$\sim$\+Super\+LUSolver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -247,11 +241,11 @@ Destructor, clean up the stored matrices.
 
 
 
-Definition at line 558 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00534}{534}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}.
 
 
 
@@ -260,29 +254,29 @@ References clean\+\_\+up\+\_\+memory().
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!backsub@{backsub}}
 \index{backsub@{backsub}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{backsub()}{backsub()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::backsub (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::backsub (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})}
 
 
 
 Do the backsubstitution for Super\+LU solver Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
 
-Do the backsubstitution for \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}}. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
+Do the backsubstitution for \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+LUSolver}}. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
 
-Definition at line 2254 of file linear\+\_\+solver.\+cc.
-
-
-
-References backsub\+\_\+distributed(), backsub\+\_\+serial(), and Using\+\_\+dist.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l02254}{2254}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-Referenced by resolve(), and solve().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02465}{backsub\+\_\+serial()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00776}{Using\+\_\+dist}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l01735}{resolve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01056}{solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a6f57fd508b25b730841de735bbea2b17}\label{classoomph_1_1SuperLUSolver_a6f57fd508b25b730841de735bbea2b17}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!backsub\_distributed@{backsub\_distributed}}
 \index{backsub\_distributed@{backsub\_distributed}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{backsub\_distributed()}{backsub\_distributed()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+distributed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::backsub\+\_\+distributed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -290,21 +284,21 @@ backsub method for Super\+LU Dist
 
 Do the backsubstitution for Super\+LU solver. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
 
-Definition at line 2302 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l02302}{2302}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Linear\+Algebra\+Distribution\+::built(), Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated, Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated, Dist\+\_\+info, Dist\+\_\+npcol, Dist\+\_\+nprow, Dist\+\_\+solver\+\_\+data\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), oomph\+::superlu\+\_\+dist\+\_\+distributed\+\_\+matrix(), oomph\+::superlu\+\_\+dist\+\_\+global\+\_\+matrix(), Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve, and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00342}{oomph\+::\+Linear\+Algebra\+Distribution\+::built()}}, \mbox{\hyperlink{linear__solver_8h_source_l00823}{Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated}}, \mbox{\hyperlink{linear__solver_8h_source_l00820}{Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated}}, \mbox{\hyperlink{linear__solver_8h_source_l00835}{Dist\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00832}{Dist\+\_\+npcol}}, \mbox{\hyperlink{linear__solver_8h_source_l00829}{Dist\+\_\+nprow}}, \mbox{\hyperlink{linear__solver_8h_source_l00826}{Dist\+\_\+solver\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00500}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{namespaceoomph_afda4e6a29a247cb24203d0c93047a05e}{oomph\+::superlu\+\_\+dist\+\_\+distributed\+\_\+matrix()}}, \mbox{\hyperlink{namespaceoomph_a69210c78770d5e7a589b23ca3b821ec1}{oomph\+::superlu\+\_\+dist\+\_\+global\+\_\+matrix()}}, \mbox{\hyperlink{linear__solver_8h_source_l00811}{Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 
 
-Referenced by backsub().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02254}{backsub()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a3cf319015c149958fd68cfb631e6b2e9}\label{classoomph_1_1SuperLUSolver_a3cf319015c149958fd68cfb631e6b2e9}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!backsub\_serial@{backsub\_serial}}
 \index{backsub\_serial@{backsub\_serial}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{backsub\_serial()}{backsub\_serial()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+serial (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::backsub\+\_\+serial (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -312,43 +306,43 @@ backsub method for Super\+LU (serial)
 
 Do the backsubstitution for Super\+LU. 
 
-Definition at line 2465 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l02465}{2465}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats, i, n, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), Serial\+\_\+compressed\+\_\+row\+\_\+flag, Serial\+\_\+f\+\_\+factors, Serial\+\_\+info, Serial\+\_\+n\+\_\+dof, oomph\+::superlu(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}, \mbox{\hyperlink{linear__solver_8h_source_l00782}{Serial\+\_\+f\+\_\+factors}}, \mbox{\hyperlink{linear__solver_8h_source_l00785}{Serial\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00788}{Serial\+\_\+n\+\_\+dof}}, \mbox{\hyperlink{namespaceoomph_ad3cf4046d72d2de41baaa7505068d9ab}{oomph\+::superlu()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 
 
-Referenced by backsub().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02254}{backsub()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_afa0a6cb2320c56f2e08fdbef87a96eb6}\label{classoomph_1_1SuperLUSolver_afa0a6cb2320c56f2e08fdbef87a96eb6}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!backsub\_transpose@{backsub\_transpose}}
 \index{backsub\_transpose@{backsub\_transpose}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{backsub\_transpose()}{backsub\_transpose()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::backsub\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})}
 
 
 
 Do the back-\/substitution for transposed system of the Super\+LU solver Note\+: Returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
 
-Do the backsubstitution of the transposed system for \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}}. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
+Do the backsubstitution of the transposed system for \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+LUSolver}}. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
 
-Definition at line 2274 of file linear\+\_\+solver.\+cc.
-
-
-
-References backsub\+\_\+transpose\+\_\+distributed(), backsub\+\_\+transpose\+\_\+serial(), and Using\+\_\+dist.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l02274}{2274}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-Referenced by resolve\+\_\+transpose(), and solve\+\_\+transpose().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02445}{backsub\+\_\+transpose\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02555}{backsub\+\_\+transpose\+\_\+serial()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00776}{Using\+\_\+dist}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l01757}{resolve\+\_\+transpose()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01524}{solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a446f170e0bb740c61f155e9688d76a32}\label{classoomph_1_1SuperLUSolver_a446f170e0bb740c61f155e9688d76a32}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!backsub\_transpose\_distributed@{backsub\_transpose\_distributed}}
 \index{backsub\_transpose\_distributed@{backsub\_transpose\_distributed}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{backsub\_transpose\_distributed()}{backsub\_transpose\_distributed()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+distributed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::backsub\+\_\+transpose\+\_\+distributed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -356,17 +350,17 @@ backsub method for Super\+LU Dist
 
 Do the backsubstitution for Super\+LU solver. Note -\/ this method performs no paranoid checks -\/ these are all performed in solve(...) and resolve(...) 
 
-Definition at line 2445 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l02445}{2445}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-Referenced by backsub\+\_\+transpose().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02274}{backsub\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_acd4a9a9e06c68de09942d146e7f337bb}\label{classoomph_1_1SuperLUSolver_acd4a9a9e06c68de09942d146e7f337bb}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!backsub\_transpose\_serial@{backsub\_transpose\_serial}}
 \index{backsub\_transpose\_serial@{backsub\_transpose\_serial}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{backsub\_transpose\_serial()}{backsub\_transpose\_serial()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::backsub\+\_\+transpose\+\_\+serial (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::backsub\+\_\+transpose\+\_\+serial (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -374,21 +368,21 @@ backsub method for Super\+LU (serial)
 
 Do the backsubstitution for Super\+LU. 
 
-Definition at line 2555 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l02555}{2555}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::built(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats, i, n, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), Serial\+\_\+compressed\+\_\+row\+\_\+flag, Serial\+\_\+f\+\_\+factors, Serial\+\_\+info, Serial\+\_\+n\+\_\+dof, oomph\+::superlu(), and oomph\+::\+Double\+Vector\+::values\+\_\+pt().
+References \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}, \mbox{\hyperlink{linear__solver_8h_source_l00782}{Serial\+\_\+f\+\_\+factors}}, \mbox{\hyperlink{linear__solver_8h_source_l00785}{Serial\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00788}{Serial\+\_\+n\+\_\+dof}}, \mbox{\hyperlink{namespaceoomph_ad3cf4046d72d2de41baaa7505068d9ab}{oomph\+::superlu()}}, and \mbox{\hyperlink{double__vector_8h_source_l00254}{oomph\+::\+Double\+Vector\+::values\+\_\+pt()}}.
 
 
 
-Referenced by backsub\+\_\+transpose().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02274}{backsub\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}\label{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!clean\_up\_memory@{clean\_up\_memory}}
 \index{clean\_up\_memory@{clean\_up\_memory}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{clean\_up\_memory()}{clean\_up\_memory()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::clean\+\_\+up\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -400,39 +394,39 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a9d66f3262e80ca06
 
 
 
-Definition at line 2645 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l02645}{2645}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution(), Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated, Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated, Dist\+\_\+index\+\_\+pt, Dist\+\_\+info, Dist\+\_\+npcol, Dist\+\_\+nprow, Dist\+\_\+solver\+\_\+data\+\_\+pt, Dist\+\_\+start\+\_\+pt, Dist\+\_\+value\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats, i, oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), Serial\+\_\+compressed\+\_\+row\+\_\+flag, Serial\+\_\+f\+\_\+factors, Serial\+\_\+info, Serial\+\_\+n\+\_\+dof, oomph\+::superlu(), oomph\+::superlu\+\_\+dist\+\_\+distributed\+\_\+matrix(), and oomph\+::superlu\+\_\+dist\+\_\+global\+\_\+matrix().
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00522}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::clear\+\_\+distribution()}}, \mbox{\hyperlink{linear__solver_8h_source_l00823}{Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated}}, \mbox{\hyperlink{linear__solver_8h_source_l00820}{Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated}}, \mbox{\hyperlink{linear__solver_8h_source_l00856}{Dist\+\_\+index\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00835}{Dist\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00832}{Dist\+\_\+npcol}}, \mbox{\hyperlink{linear__solver_8h_source_l00829}{Dist\+\_\+nprow}}, \mbox{\hyperlink{linear__solver_8h_source_l00826}{Dist\+\_\+solver\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00860}{Dist\+\_\+start\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00852}{Dist\+\_\+value\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}, \mbox{\hyperlink{linear__solver_8h_source_l00782}{Serial\+\_\+f\+\_\+factors}}, \mbox{\hyperlink{linear__solver_8h_source_l00785}{Serial\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00788}{Serial\+\_\+n\+\_\+dof}}, \mbox{\hyperlink{namespaceoomph_ad3cf4046d72d2de41baaa7505068d9ab}{oomph\+::superlu()}}, \mbox{\hyperlink{namespaceoomph_afda4e6a29a247cb24203d0c93047a05e}{oomph\+::superlu\+\_\+dist\+\_\+distributed\+\_\+matrix()}}, and \mbox{\hyperlink{namespaceoomph_a69210c78770d5e7a589b23ca3b821ec1}{oomph\+::superlu\+\_\+dist\+\_\+global\+\_\+matrix()}}.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::clean\+\_\+up\+\_\+memory(), disable\+\_\+resolve(), factorise(), factorise\+\_\+distributed(), factorise\+\_\+serial(), set\+\_\+solver\+\_\+type(), solve(), solve\+\_\+transpose(), use\+\_\+distributed\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist(), use\+\_\+global\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist(), and $\sim$\+Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00106}{oomph\+::\+Super\+LUPreconditioner\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8h_source_l00549}{disable\+\_\+resolve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01782}{factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02123}{factorise\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8h_source_l00646}{set\+\_\+solver\+\_\+type()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8h_source_l00723}{use\+\_\+distributed\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist()}}, \mbox{\hyperlink{linear__solver_8h_source_l00710}{use\+\_\+global\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00534}{$\sim$\+Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a887c4a5fd19034f7a74d91d453d4f425}\label{classoomph_1_1SuperLUSolver_a887c4a5fd19034f7a74d91d453d4f425}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!disable\_delete\_matrix\_data\_in\_superlu\_dist@{disable\_delete\_matrix\_data\_in\_superlu\_dist}}
 \index{disable\_delete\_matrix\_data\_in\_superlu\_dist@{disable\_delete\_matrix\_data\_in\_superlu\_dist}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{disable\_delete\_matrix\_data\_in\_superlu\_dist()}{disable\_delete\_matrix\_data\_in\_superlu\_dist()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::disable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::disable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Unset Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be. 
+Unset Delete\+\_\+matrix\+\_\+data flag. Super\+LU\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be. 
 
 
 
-Definition at line 710 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00686}{686}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Dist\+\_\+delete\+\_\+matrix\+\_\+data.
+References \mbox{\hyperlink{linear__solver_8h_source_l00849}{Dist\+\_\+delete\+\_\+matrix\+\_\+data}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ad4a6f466585f86cbba0b033eb8cda0e4}\label{classoomph_1_1SuperLUSolver_ad4a6f466585f86cbba0b033eb8cda0e4}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!disable\_doc\_stats@{disable\_doc\_stats}}
 \index{disable\_doc\_stats@{disable\_doc\_stats}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{disable\_doc\_stats()}{disable\_doc\_stats()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::disable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -440,21 +434,21 @@ Disable documentation of solver statistics.
 
 
 
-Definition at line 633 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00609}{609}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Doc\+\_\+stats.
+References \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::disable\+\_\+doc\+\_\+stats(), and oomph\+::\+Super\+L\+U\+Preconditioner\+::\+Super\+L\+U\+Preconditioner().
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00158}{oomph\+::\+Super\+LUPreconditioner\+::disable\+\_\+doc\+\_\+stats()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00043}{oomph\+::\+Super\+LUPreconditioner\+::\+Super\+LUPreconditioner()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ac278643faf0a13eb3f8e6bc984338d2a}\label{classoomph_1_1SuperLUSolver_ac278643faf0a13eb3f8e6bc984338d2a}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!disable\_resolve@{disable\_resolve}}
 \index{disable\_resolve@{disable\_resolve}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{disable\_resolve()}{disable\_resolve()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::disable\+\_\+resolve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -466,35 +460,35 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_ad61c63af94c59618
 
 
 
-Definition at line 573 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00549}{549}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), and oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00144}{oomph\+::\+Linear\+Solver\+::disable\+\_\+resolve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a3386eb5e27caa80d9c63a6061a304680}\label{classoomph_1_1SuperLUSolver_a3386eb5e27caa80d9c63a6061a304680}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!disable\_row\_and\_col\_permutations\_in\_superlu\_dist@{disable\_row\_and\_col\_permutations\_in\_superlu\_dist}}
 \index{disable\_row\_and\_col\_permutations\_in\_superlu\_dist@{disable\_row\_and\_col\_permutations\_in\_superlu\_dist}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{disable\_row\_and\_col\_permutations\_in\_superlu\_dist()}{disable\_row\_and\_col\_permutations\_in\_superlu\_dist()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::disable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::disable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is not allowed to permute matrix rows and columns during factorisation. 
+Set flag so that Super\+LU\+\_\+\+DIST is not allowed to permute matrix rows and columns during factorisation. 
 
 
 
-Definition at line 725 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00701}{701}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations.
+References \mbox{\hyperlink{linear__solver_8h_source_l00841}{Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_aeb52340bb6d747f60fba9d6c6f9ab2e9}\label{classoomph_1_1SuperLUSolver_aeb52340bb6d747f60fba9d6c6f9ab2e9}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!enable\_computation\_of\_gradient@{enable\_computation\_of\_gradient}}
 \index{enable\_computation\_of\_gradient@{enable\_computation\_of\_gradient}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{enable\_computation\_of\_gradient()}{enable\_computation\_of\_gradient()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::enable\+\_\+computation\+\_\+of\+\_\+gradient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::enable\+\_\+computation\+\_\+of\+\_\+gradient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -506,35 +500,35 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a37f1f8b8c6d45115
 
 
 
-Definition at line 564 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00540}{540}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References oomph\+::\+Linear\+Solver\+::\+Compute\+\_\+gradient.
+References \mbox{\hyperlink{linear__solver_8h_source_l00081}{oomph\+::\+Linear\+Solver\+::\+Compute\+\_\+gradient}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a9b8487741998c97db3f41493ca427c1d}\label{classoomph_1_1SuperLUSolver_a9b8487741998c97db3f41493ca427c1d}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!enable\_delete\_matrix\_data\_in\_superlu\_dist@{enable\_delete\_matrix\_data\_in\_superlu\_dist}}
 \index{enable\_delete\_matrix\_data\_in\_superlu\_dist@{enable\_delete\_matrix\_data\_in\_superlu\_dist}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{enable\_delete\_matrix\_data\_in\_superlu\_dist()}{enable\_delete\_matrix\_data\_in\_superlu\_dist()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::enable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::enable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Set Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. 
+Set Delete\+\_\+matrix\+\_\+data flag. Super\+LU\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. 
 
 
 
-Definition at line 702 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00678}{678}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Dist\+\_\+delete\+\_\+matrix\+\_\+data.
+References \mbox{\hyperlink{linear__solver_8h_source_l00849}{Dist\+\_\+delete\+\_\+matrix\+\_\+data}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a3eca8399eb777ea97eaad15383eb5795}\label{classoomph_1_1SuperLUSolver_a3eca8399eb777ea97eaad15383eb5795}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!enable\_doc\_stats@{enable\_doc\_stats}}
 \index{enable\_doc\_stats@{enable\_doc\_stats}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{enable\_doc\_stats()}{enable\_doc\_stats()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::enable\+\_\+doc\+\_\+stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -542,83 +536,83 @@ Enable documentation of solver statistics.
 
 
 
-Definition at line 627 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00603}{603}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Doc\+\_\+stats.
+References \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::enable\+\_\+doc\+\_\+stats().
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00151}{oomph\+::\+Super\+LUPreconditioner\+::enable\+\_\+doc\+\_\+stats()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a9489a249d736316901e1644e73aa55b9}\label{classoomph_1_1SuperLUSolver_a9489a249d736316901e1644e73aa55b9}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!enable\_row\_and\_col\_permutations\_in\_superlu\_dist@{enable\_row\_and\_col\_permutations\_in\_superlu\_dist}}
 \index{enable\_row\_and\_col\_permutations\_in\_superlu\_dist@{enable\_row\_and\_col\_permutations\_in\_superlu\_dist}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{enable\_row\_and\_col\_permutations\_in\_superlu\_dist()}{enable\_row\_and\_col\_permutations\_in\_superlu\_dist()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::enable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::enable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Set flag so that Super\+L\+U\+\_\+\+D\+I\+ST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+L\+U\+\_\+\+D\+I\+ST, and can lead to significantly faster solves. 
+Set flag so that Super\+LU\+\_\+\+DIST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+LU\+\_\+\+DIST, and can lead to significantly faster solves. 
 
 
 
-Definition at line 718 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00694}{694}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations.
+References \mbox{\hyperlink{linear__solver_8h_source_l00841}{Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a67d7a06fdff48c75736498c7b853d781}\label{classoomph_1_1SuperLUSolver_a67d7a06fdff48c75736498c7b853d781}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!factorise@{factorise}}
 \index{factorise@{factorise}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{factorise()}{factorise()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::factorise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::factorise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})}
 
 
 
-Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+Do the factorisation stage Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
 
 LU decompose the matrix addressed by matrix\+\_\+pt by using the Super\+LU solver. The resulting matrix factors are stored internally. 
 
-Definition at line 1782 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l01782}{1782}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), Default, Distributed, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), factorise\+\_\+distributed(), factorise\+\_\+serial(), oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised(), Solver\+\_\+type, and Using\+\_\+dist.
+References \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00494}{Default}}, \mbox{\hyperlink{linear__solver_8h_source_l00496}{Distributed}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02123}{factorise\+\_\+serial()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00851}{oomph\+::\+MPI\+\_\+\+Helpers\+::mpi\+\_\+has\+\_\+been\+\_\+initialised()}}, \mbox{\hyperlink{linear__solver_8h_source_l00773}{Solver\+\_\+type}}, and \mbox{\hyperlink{linear__solver_8h_source_l00776}{Using\+\_\+dist}}.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::setup(), solve(), and solve\+\_\+transpose().
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00063}{oomph\+::\+Super\+LUPreconditioner\+::setup()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01056}{solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01524}{solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ab60386fae7cd417ad62f46c3cb1463c0}\label{classoomph_1_1SuperLUSolver_ab60386fae7cd417ad62f46c3cb1463c0}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!factorise\_distributed@{factorise\_distributed}}
 \index{factorise\_distributed@{factorise\_distributed}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{factorise\_distributed()}{factorise\_distributed()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+distributed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::factorise\+\_\+distributed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 factorise method for Super\+LU Dist 
 
-LU decompose the matrix addressed by matrix\+\_\+pt using the Super\+L\+U\+\_\+\+D\+I\+ST solver. The resulting matrix factors are stored internally. 
+LU decompose the matrix addressed by matrix\+\_\+pt using the Super\+LU\+\_\+\+DIST solver. The resulting matrix factors are stored internally. 
 
-Definition at line 1827 of file linear\+\_\+solver.\+cc.
-
-
-
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+C\+R\+Double\+Matrix\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+C\+C\+Matrix$<$ T $>$\+::clean\+\_\+up\+\_\+memory(), oomph\+::\+C\+R\+Double\+Matrix\+::clear(), oomph\+::\+C\+R\+Double\+Matrix\+::column\+\_\+index(), oomph\+::\+C\+C\+Matrix$<$ T $>$\+::column\+\_\+start(), oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt(), oomph\+::\+M\+P\+I\+\_\+\+Helpers\+::communicator\+\_\+pt(), Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations, Dist\+\_\+delete\+\_\+matrix\+\_\+data, Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated, Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated, Dist\+\_\+index\+\_\+pt, Dist\+\_\+info, Dist\+\_\+npcol, Dist\+\_\+nprow, Dist\+\_\+solver\+\_\+data\+\_\+pt, Dist\+\_\+start\+\_\+pt, Dist\+\_\+value\+\_\+pt, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row(), i, n, oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+Sparse\+Matrix$<$ T, M\+A\+T\+R\+I\+X\+\_\+\+T\+Y\+P\+E $>$\+::nnz(), oomph\+::\+C\+R\+Double\+Matrix\+::nnz(), oomph\+::\+Linear\+Algebra\+Distribution\+::nrow(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+C\+R\+Double\+Matrix\+::nrow(), oomph\+::\+C\+C\+Double\+Matrix\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local(), oomph\+::\+C\+C\+Matrix$<$ T $>$\+::row\+\_\+index(), oomph\+::\+C\+R\+Double\+Matrix\+::row\+\_\+start(), oomph\+::superlu\+\_\+cr\+\_\+to\+\_\+cc(), oomph\+::superlu\+\_\+dist\+\_\+distributed\+\_\+matrix(), oomph\+::superlu\+\_\+dist\+\_\+global\+\_\+matrix(), oomph\+::\+Sparse\+Matrix$<$ T, M\+A\+T\+R\+I\+X\+\_\+\+T\+Y\+P\+E $>$\+::value(), and oomph\+::\+C\+R\+Double\+Matrix\+::value().
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l01827}{1827}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-Referenced by factorise().
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{matrices_8h_source_l01210}{oomph\+::\+CRDouble\+Matrix\+::built()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrices_8h_source_l03169}{oomph\+::\+CCMatrix$<$ T $>$\+::clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrices_8cc_source_l01657}{oomph\+::\+CRDouble\+Matrix\+::clear()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l02692}{oomph\+::\+CCMatrix$<$ T $>$\+::column\+\_\+start()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01046}{oomph\+::\+MPI\+\_\+\+Helpers\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00335}{oomph\+::\+Linear\+Algebra\+Distribution\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00841}{Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations}}, \mbox{\hyperlink{linear__solver_8h_source_l00849}{Dist\+\_\+delete\+\_\+matrix\+\_\+data}}, \mbox{\hyperlink{linear__solver_8h_source_l00823}{Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated}}, \mbox{\hyperlink{linear__solver_8h_source_l00820}{Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated}}, \mbox{\hyperlink{linear__solver_8h_source_l00856}{Dist\+\_\+index\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00835}{Dist\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00832}{Dist\+\_\+npcol}}, \mbox{\hyperlink{linear__solver_8h_source_l00829}{Dist\+\_\+nprow}}, \mbox{\hyperlink{linear__solver_8h_source_l00826}{Dist\+\_\+solver\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00860}{Dist\+\_\+start\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00852}{Dist\+\_\+value\+\_\+pt}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00481}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::first\+\_\+row()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l00640}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{oomph\+::\+CRDouble\+Matrix\+::nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00186}{oomph\+::\+Linear\+Algebra\+Distribution\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l02817}{oomph\+::\+CCDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00469}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow\+\_\+local()}}, \mbox{\hyperlink{matrices_8h_source_l02704}{oomph\+::\+CCMatrix$<$ T $>$\+::row\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start()}}, \mbox{\hyperlink{namespaceoomph_ac806709e87d971d63a6a4ba4c9e0e40d}{oomph\+::superlu\+\_\+cr\+\_\+to\+\_\+cc()}}, \mbox{\hyperlink{namespaceoomph_afda4e6a29a247cb24203d0c93047a05e}{oomph\+::superlu\+\_\+dist\+\_\+distributed\+\_\+matrix()}}, \mbox{\hyperlink{namespaceoomph_a69210c78770d5e7a589b23ca3b821ec1}{oomph\+::superlu\+\_\+dist\+\_\+global\+\_\+matrix()}}, \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{oomph\+::\+CRDouble\+Matrix\+::value()}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l01782}{factorise()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a6b1ce356d11fa878315e9b32ac566748}\label{classoomph_1_1SuperLUSolver_a6b1ce356d11fa878315e9b32ac566748}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!factorise\_serial@{factorise\_serial}}
 \index{factorise\_serial@{factorise\_serial}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{factorise\_serial()}{factorise\_serial()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::factorise\+\_\+serial (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::factorise\+\_\+serial (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -626,65 +620,65 @@ factorise method for Super\+LU (serial)
 
 LU decompose the matrix addressed by matrix\+\_\+pt by using the Super\+LU solver. The resulting matrix factors are stored internally. 
 
-Definition at line 2123 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l02123}{2123}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), oomph\+::\+C\+R\+Double\+Matrix\+::column\+\_\+index(), oomph\+::\+C\+C\+Matrix$<$ T $>$\+::column\+\_\+start(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Leak\+Check\+Names\+::doc(), Doc\+\_\+stats, i, n, oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+Sparse\+Matrix$<$ T, M\+A\+T\+R\+I\+X\+\_\+\+T\+Y\+P\+E $>$\+::nnz(), oomph\+::\+C\+R\+Double\+Matrix\+::nnz(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+C\+C\+Matrix$<$ T $>$\+::row\+\_\+index(), oomph\+::\+C\+R\+Double\+Matrix\+::row\+\_\+start(), Serial\+\_\+compressed\+\_\+row\+\_\+flag, Serial\+\_\+f\+\_\+factors, Serial\+\_\+info, Serial\+\_\+n\+\_\+dof, Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix, oomph\+::\+Cumulative\+Timings\+::start(), oomph\+::superlu(), value, oomph\+::\+Sparse\+Matrix$<$ T, M\+A\+T\+R\+I\+X\+\_\+\+T\+Y\+P\+E $>$\+::value(), and oomph\+::\+C\+R\+Double\+Matrix\+::value().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{matrices_8h_source_l01072}{oomph\+::\+CRDouble\+Matrix\+::column\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l02692}{oomph\+::\+CCMatrix$<$ T $>$\+::column\+\_\+start()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l01212}{oomph\+::\+Leak\+Check\+Names\+::doc()}}, \mbox{\hyperlink{linear__solver_8h_source_l00770}{Doc\+\_\+stats}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l00640}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::nnz()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{oomph\+::\+CRDouble\+Matrix\+::nnz()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l02704}{oomph\+::\+CCMatrix$<$ T $>$\+::row\+\_\+index()}}, \mbox{\hyperlink{matrices_8h_source_l01060}{oomph\+::\+CRDouble\+Matrix\+::row\+\_\+start()}}, \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}, \mbox{\hyperlink{linear__solver_8h_source_l00782}{Serial\+\_\+f\+\_\+factors}}, \mbox{\hyperlink{linear__solver_8h_source_l00785}{Serial\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00788}{Serial\+\_\+n\+\_\+dof}}, \mbox{\hyperlink{linear__solver_8h_source_l00791}{Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix}}, \mbox{\hyperlink{oomph__utilities_8cc_source_l00243}{oomph\+::\+Cumulative\+Timings\+::start()}}, \mbox{\hyperlink{namespaceoomph_ad3cf4046d72d2de41baaa7505068d9ab}{oomph\+::superlu()}}, \mbox{\hyperlink{matrices_8h_source_l00616}{oomph\+::\+Sparse\+Matrix$<$ T, MATRIX\+\_\+\+TYPE $>$\+::value()}}, and \mbox{\hyperlink{matrices_8h_source_l01084}{oomph\+::\+CRDouble\+Matrix\+::value()}}.
 
 
 
-Referenced by factorise().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l01782}{factorise()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_aadb0962a432228fb906f3046b96fa59d}\label{classoomph_1_1SuperLUSolver_aadb0962a432228fb906f3046b96fa59d}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!get\_memory\_usage\_for\_lu\_factors@{get\_memory\_usage\_for\_lu\_factors}}
 \index{get\_memory\_usage\_for\_lu\_factors@{get\_memory\_usage\_for\_lu\_factors}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{get\_memory\_usage\_for\_lu\_factors()}{get\_memory\_usage\_for\_lu\_factors()}}
-{\footnotesize\ttfamily double oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily double oomph\+::\+Super\+LUSolver\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 How much memory do the LU factors take up? In bytes. 
 
-How much memory do the LU factors take up? In bytes N\+O\+TE\+: This has been scraped from d\+Query\+Space(...) in dmemory.\+c in external\+\_\+src/oomph\+\_\+superlu\+\_\+4.\+3. 
+How much memory do the LU factors take up? In bytes NOTE\+: This has been scraped from d\+Query\+Space(...) in dmemory.\+c in external\+\_\+src/oomph\+\_\+superlu\+\_\+4.\+3. 
 
-Definition at line 748 of file linear\+\_\+solver.\+cc.
-
-
-
-References Dist\+\_\+solver\+\_\+data\+\_\+pt, Distributed, oomph\+::get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), oomph\+::get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist(), Serial\+\_\+f\+\_\+factors, and Solver\+\_\+type.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00748}{748}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors(), and oomph\+::\+Super\+L\+U\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu().
+References \mbox{\hyperlink{linear__solver_8h_source_l00826}{Dist\+\_\+solver\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00496}{Distributed}}, \mbox{\hyperlink{namespaceoomph_afa6ccf7edb94bd0b516ecc462431eec2}{oomph\+::get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, \mbox{\hyperlink{namespaceoomph_a0714a3736ec7c01d37cfd2b86d8cd0da}{oomph\+::get\+\_\+lu\+\_\+factor\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist()}}, \mbox{\hyperlink{linear__solver_8h_source_l00782}{Serial\+\_\+f\+\_\+factors}}, and \mbox{\hyperlink{linear__solver_8h_source_l00773}{Solver\+\_\+type}}.
+
+
+
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00113}{oomph\+::\+Super\+LUPreconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors()}}, and \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00133}{oomph\+::\+Super\+LUPreconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ac61498d3c80a4ed13c2df101766fbd3a}\label{classoomph_1_1SuperLUSolver_ac61498d3c80a4ed13c2df101766fbd3a}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!get\_total\_needed\_memory@{get\_total\_needed\_memory}}
 \index{get\_total\_needed\_memory@{get\_total\_needed\_memory}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{get\_total\_needed\_memory()}{get\_total\_needed\_memory()}}
-{\footnotesize\ttfamily double oomph\+::\+Super\+L\+U\+Solver\+::get\+\_\+total\+\_\+needed\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily double oomph\+::\+Super\+LUSolver\+::get\+\_\+total\+\_\+needed\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 How much memory was allocated by Super\+LU? In bytes. 
 
-How much memory was used in total? In bytes N\+O\+TE\+: This has been scraped from d\+Query\+Space(...) in dmemory.\+c in external\+\_\+src/oomph\+\_\+superlu\+\_\+4.\+3. 
+How much memory was used in total? In bytes NOTE\+: This has been scraped from d\+Query\+Space(...) in dmemory.\+c in external\+\_\+src/oomph\+\_\+superlu\+\_\+4.\+3. 
 
-Definition at line 776 of file linear\+\_\+solver.\+cc.
-
-
-
-References Dist\+\_\+solver\+\_\+data\+\_\+pt, Distributed, oomph\+::get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes(), oomph\+::get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist(), Serial\+\_\+f\+\_\+factors, and Solver\+\_\+type.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00776}{776}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu(), oomph\+::\+Super\+L\+U\+Preconditioner\+::get\+\_\+total\+\_\+memory\+\_\+needed\+\_\+for\+\_\+superlu(), solve(), and solve\+\_\+transpose().
+References \mbox{\hyperlink{linear__solver_8h_source_l00826}{Dist\+\_\+solver\+\_\+data\+\_\+pt}}, \mbox{\hyperlink{linear__solver_8h_source_l00496}{Distributed}}, \mbox{\hyperlink{namespaceoomph_a06d9bb3fe552fe55d8e9ffe4d4a8ffbd}{oomph\+::get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes()}}, \mbox{\hyperlink{namespaceoomph_a4db51611062d6c5548a68f721b19bf29}{oomph\+::get\+\_\+total\+\_\+memory\+\_\+usage\+\_\+in\+\_\+bytes\+\_\+dist()}}, \mbox{\hyperlink{linear__solver_8h_source_l00782}{Serial\+\_\+f\+\_\+factors}}, and \mbox{\hyperlink{linear__solver_8h_source_l00773}{Solver\+\_\+type}}.
+
+
+
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00133}{oomph\+::\+Super\+LUPreconditioner\+::get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+superlu()}}, \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00122}{oomph\+::\+Super\+LUPreconditioner\+::get\+\_\+total\+\_\+memory\+\_\+needed\+\_\+for\+\_\+superlu()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01056}{solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01524}{solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a9e9bdeac1f619319b931d1dea53a2d96}\label{classoomph_1_1SuperLUSolver_a9e9bdeac1f619319b931d1dea53a2d96}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!jacobian\_setup\_time@{jacobian\_setup\_time}}
 \index{jacobian\_setup\_time@{jacobian\_setup\_time}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{jacobian\_setup\_time()}{jacobian\_setup\_time()}}
-{\footnotesize\ttfamily double oomph\+::\+Super\+L\+U\+Solver\+::jacobian\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Super\+LUSolver\+::jacobian\+\_\+setup\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -696,17 +690,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a0fedfb9d9855d0e9
 
 
 
-Definition at line 640 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00616}{616}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Jacobian\+\_\+setup\+\_\+time.
+References \mbox{\hyperlink{linear__solver_8h_source_l00761}{Jacobian\+\_\+setup\+\_\+time}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a39e375e5ca81863127fe6d381ef97b65}\label{classoomph_1_1SuperLUSolver_a39e375e5ca81863127fe6d381ef97b65}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!linear\_solver\_solution\_time@{linear\_solver\_solution\_time}}
 \index{linear\_solver\_solution\_time@{linear\_solver\_solution\_time}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{linear\_solver\_solution\_time()}{linear\_solver\_solution\_time()}}
-{\footnotesize\ttfamily virtual double oomph\+::\+Super\+L\+U\+Solver\+::linear\+\_\+solver\+\_\+solution\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual double oomph\+::\+Super\+LUSolver\+::linear\+\_\+solver\+\_\+solution\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -718,193 +712,193 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3c66f77db812a9c1
 
 
 
-Definition at line 647 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00623}{623}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Solution\+\_\+time.
+References \mbox{\hyperlink{linear__solver_8h_source_l00764}{Solution\+\_\+time}}.
 
-\mbox{\Hypertarget{classoomph_1_1SuperLUSolver_adab7beeef8f9eec635b9f07ca423e2bb}\label{classoomph_1_1SuperLUSolver_adab7beeef8f9eec635b9f07ca423e2bb}} 
+\mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a2d107f4319f3ab5b49004661e0797b51}\label{classoomph_1_1SuperLUSolver_a2d107f4319f3ab5b49004661e0797b51}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+L\+U\+Solver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUSolver}{Super\+LUSolver}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 552 of file linear\+\_\+solver.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_acef6e1b3bf469061777866d97689ba77}\label{classoomph_1_1SuperLUSolver_acef6e1b3bf469061777866d97689ba77}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!resolve@{resolve}}
 \index{resolve@{resolve}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{resolve()}{resolve()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Resolve the system defined by the last assembled jacobian and the specified rhs vector if resolve has been enabled. Note\+: returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
 
-Resolve the system for a given R\+HS. 
+Resolve the system for a given RHS. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a3b310d08333033edc119b2a5bd7dcbfb}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 1735 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l01735}{1735}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References backsub(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::oomph\+\_\+info, Solution\+\_\+time, and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02254}{backsub()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00764}{Solution\+\_\+time}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::preconditioner\+\_\+solve().
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00090}{oomph\+::\+Super\+LUPreconditioner\+::preconditioner\+\_\+solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a81d582d853c16aa1fcd91ae6a328f424}\label{classoomph_1_1SuperLUSolver_a81d582d853c16aa1fcd91ae6a328f424}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!resolve\_transpose@{resolve\_transpose}}
 \index{resolve\_transpose@{resolve\_transpose}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{resolve\_transpose()}{resolve\_transpose()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::resolve\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::resolve\+\_\+transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Resolve the (transposed) system defined by the last assembled Jacobian and the specified rhs vector if resolve has been enabled. 
 
-Resolve the (transposed) system for a given R\+HS. 
+Resolve the (transposed) system for a given RHS. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_acf539c2dd415e22e597fade4c0ca4022}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 1757 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l01757}{1757}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References backsub\+\_\+transpose(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::oomph\+\_\+info, Solution\+\_\+time, and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02274}{backsub\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00764}{Solution\+\_\+time}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 
 
-Referenced by oomph\+::\+Super\+L\+U\+Preconditioner\+::preconditioner\+\_\+solve\+\_\+transpose().
+Referenced by \mbox{\hyperlink{SuperLU__preconditioner_8h_source_l00098}{oomph\+::\+Super\+LUPreconditioner\+::preconditioner\+\_\+solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a7d59158ece5d377644f598ca60093be1}\label{classoomph_1_1SuperLUSolver_a7d59158ece5d377644f598ca60093be1}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!set\_solver\_type@{set\_solver\_type}}
 \index{set\_solver\_type@{set\_solver\_type}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{set\_solver\_type()}{set\_solver\_type()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::set\+\_\+solver\+\_\+type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{Type}} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::set\+\_\+solver\+\_\+type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{Type}} \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Specify the solve type. Either default, serial or distributed. See enum Super\+L\+U\+\_\+solver\+\_\+type for more details. 
+Specify the solve type. Either default, serial or distributed. See enum Super\+LU\+\_\+solver\+\_\+type for more details. 
 
 
 
-Definition at line 670 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00646}{646}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), Solver\+\_\+type, and t.
+References \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8h_source_l00773}{Solver\+\_\+type}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{t}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a94e94a44f4cb93f2adf035e9b99990e7}\label{classoomph_1_1SuperLUSolver_a94e94a44f4cb93f2adf035e9b99990e7}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!solve@{solve}}
 \index{solve@{solve}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} pointer defaults to N\+U\+LL and can be omitted. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} pointer defaults to NULL and can be omitted. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a546c09822d18191df14caed864c04c09}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 1056 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l01056}{1056}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References backsub(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, factorise(), get\+\_\+total\+\_\+needed\+\_\+memory(), oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+C\+R\+Double\+Matrix\+::nnz(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+C\+R\+Double\+Matrix\+::nrow(), oomph\+::oomph\+\_\+info, Solution\+\_\+time, and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02254}{backsub()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{linear__solver_8cc_source_l01782}{factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00776}{get\+\_\+total\+\_\+needed\+\_\+memory()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{oomph\+::\+CRDouble\+Matrix\+::nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00764}{Solution\+\_\+time}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a5a121df89c72a8741d051aa176b12255}\label{classoomph_1_1SuperLUSolver_a5a121df89c72a8741d051aa176b12255}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!solve@{solve}}
 \index{solve@{solve}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
 
-Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
 
 Implements \mbox{\hyperlink{classoomph_1_1LinearSolver_a15ce22542b74ed1826ea485edacbeb6e}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 804 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l00804}{804}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Compute\+\_\+gradient, Default, Dist\+\_\+delete\+\_\+matrix\+\_\+data, Dist\+\_\+use\+\_\+global\+\_\+solver, Distributed, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Linear\+Solver\+::\+Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve, oomph\+::\+Linear\+Solver\+::\+Gradient\+\_\+has\+\_\+been\+\_\+computed, Jacobian\+\_\+setup\+\_\+time, oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Problem\+::ndof(), oomph\+::oomph\+\_\+info, oomph\+::\+Double\+Vector\+::redistribute(), residuals(), Serial\+\_\+compressed\+\_\+row\+\_\+flag, Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix, oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian(), Solver\+\_\+type, Suppress\+\_\+solve, and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00081}{oomph\+::\+Linear\+Solver\+::\+Compute\+\_\+gradient}}, \mbox{\hyperlink{linear__solver_8h_source_l00494}{Default}}, \mbox{\hyperlink{linear__solver_8h_source_l00849}{Dist\+\_\+delete\+\_\+matrix\+\_\+data}}, \mbox{\hyperlink{linear__solver_8h_source_l00817}{Dist\+\_\+use\+\_\+global\+\_\+solver}}, \mbox{\hyperlink{linear__solver_8h_source_l00496}{Distributed}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{linear__solver_8h_source_l00088}{oomph\+::\+Linear\+Solver\+::\+Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}, \mbox{\hyperlink{linear__solver_8h_source_l00084}{oomph\+::\+Linear\+Solver\+::\+Gradient\+\_\+has\+\_\+been\+\_\+computed}}, \mbox{\hyperlink{linear__solver_8h_source_l00761}{Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}, \mbox{\hyperlink{linear__solver_8h_source_l00791}{Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix}}, \mbox{\hyperlink{problem_8h_source_l02424}{oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, \mbox{\hyperlink{linear__solver_8h_source_l00773}{Solver\+\_\+type}}, \mbox{\hyperlink{linear__solver_8h_source_l00767}{Suppress\+\_\+solve}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a4954bcec402af933d69825d58824fafc}\label{classoomph_1_1SuperLUSolver_a4954bcec402af933d69825d58824fafc}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!solve\_transpose@{solve\_transpose}}
 \index{solve\_transpose@{solve\_transpose}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{solve\_transpose()}{solve\_transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1DoubleMatrixBase}{Double\+Matrix\+Base}} $\ast$const \&}]{matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
 
-Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} pointer defaults to N\+U\+LL and can be omitted. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/$>$\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
+Linear-\/algebra-\/type solver\+: Takes pointer to a matrix and rhs vector and returns the solution of the linear system. \mbox{\hyperlink{classoomph_1_1Problem}{Problem}} pointer defaults to NULL and can be omitted. The function returns the global result \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. Note\+: if Delete\+\_\+matrix\+\_\+data is true the function matrix\+\_\+pt-\/\texorpdfstring{$>$}{>}\mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} will be used to wipe the matrix data. 
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a600b4d06d85c238bdd6bd33f05d69c44}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 1524 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l01524}{1524}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References backsub\+\_\+transpose(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Linear\+Algebra\+Distribution\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve, factorise(), get\+\_\+total\+\_\+needed\+\_\+memory(), oomph\+::\+Double\+Matrix\+Base\+::ncol(), oomph\+::\+C\+R\+Double\+Matrix\+::nnz(), oomph\+::\+Double\+Matrix\+Base\+::nrow(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow(), oomph\+::\+C\+R\+Double\+Matrix\+::nrow(), oomph\+::oomph\+\_\+info, Solution\+\_\+time, and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{linear__solver_8cc_source_l02274}{backsub\+\_\+transpose()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00329}{oomph\+::\+Linear\+Algebra\+Distribution\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{linear__solver_8h_source_l00073}{oomph\+::\+Linear\+Solver\+::\+Enable\+\_\+resolve}}, \mbox{\hyperlink{linear__solver_8cc_source_l01782}{factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00776}{get\+\_\+total\+\_\+needed\+\_\+memory()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_a253feffbf1db1976cdd86c6134c50abe}{oomph\+::\+Double\+Matrix\+Base\+::ncol()}}, \mbox{\hyperlink{matrices_8h_source_l01096}{oomph\+::\+CRDouble\+Matrix\+::nnz()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}, \mbox{\hyperlink{matrices_8h_source_l01002}{oomph\+::\+CRDouble\+Matrix\+::nrow()}}, \mbox{\hyperlink{classoomph_1_1DoubleMatrixBase_acdcd6e1ea2bf2380f1a2fa32c7829cb5}{oomph\+::\+Double\+Matrix\+Base\+::nrow()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{linear__solver_8h_source_l00764}{Solution\+\_\+time}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a10bdce2b176a3ca514b82f66cd50e037}\label{classoomph_1_1SuperLUSolver_a10bdce2b176a3ca514b82f66cd50e037}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!solve\_transpose@{solve\_transpose}}
 \index{solve\_transpose@{solve\_transpose}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{solve\_transpose()}{solve\_transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::solve\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::solve\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Problem}{Problem}} $\ast$const \&}]{problem\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
 Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
 
-Solver\+: Takes pointer to problem and returns the results \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} which contains the solution of the linear system defined by the problem\textquotesingle{}s fully assembled Jacobian and residual \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}. 
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1LinearSolver_a8e970813a1583f6105ee2d677d3e45f3}{oomph\+::\+Linear\+Solver}}.
 
 
 
-Definition at line 1271 of file linear\+\_\+solver.\+cc.
+Definition at line \mbox{\hyperlink{linear__solver_8cc_source_l01271}{1271}} of file \mbox{\hyperlink{linear__solver_8cc_source}{linear\+\_\+solver.\+cc}}.
 
 
 
-References oomph\+::\+Double\+Vector\+::build(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution(), oomph\+::\+Double\+Vector\+::built(), clean\+\_\+up\+\_\+memory(), oomph\+::\+Problem\+::communicator\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Compute\+\_\+gradient, Default, Dist\+\_\+delete\+\_\+matrix\+\_\+data, Dist\+\_\+use\+\_\+global\+\_\+solver, Distributed, oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time, oomph\+::\+Problem\+::get\+\_\+jacobian(), oomph\+::\+Linear\+Solver\+::\+Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve, oomph\+::\+Linear\+Solver\+::\+Gradient\+\_\+has\+\_\+been\+\_\+computed, Jacobian\+\_\+setup\+\_\+time, oomph\+::\+C\+R\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+C\+C\+Double\+Matrix\+::multiply\+\_\+transpose(), oomph\+::\+Problem\+::ndof(), oomph\+::oomph\+\_\+info, oomph\+::\+Double\+Vector\+::redistribute(), residuals(), Serial\+\_\+compressed\+\_\+row\+\_\+flag, Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix, oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian(), Solver\+\_\+type, Suppress\+\_\+solve, and oomph\+::\+Timing\+Helpers\+::timer().
+References \mbox{\hyperlink{double__vector_8cc_source_l00035}{oomph\+::\+Double\+Vector\+::build()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00507}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::build\+\_\+distribution()}}, \mbox{\hyperlink{double__vector_8h_source_l00154}{oomph\+::\+Double\+Vector\+::built()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{problem_8h_source_l01246}{oomph\+::\+Problem\+::communicator\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00081}{oomph\+::\+Linear\+Solver\+::\+Compute\+\_\+gradient}}, \mbox{\hyperlink{linear__solver_8h_source_l00494}{Default}}, \mbox{\hyperlink{linear__solver_8h_source_l00849}{Dist\+\_\+delete\+\_\+matrix\+\_\+data}}, \mbox{\hyperlink{linear__solver_8h_source_l00817}{Dist\+\_\+use\+\_\+global\+\_\+solver}}, \mbox{\hyperlink{linear__solver_8h_source_l00496}{Distributed}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, \mbox{\hyperlink{linear__solver_8h_source_l00077}{oomph\+::\+Linear\+Solver\+::\+Doc\+\_\+time}}, \mbox{\hyperlink{problem_8cc_source_l03890}{oomph\+::\+Problem\+::get\+\_\+jacobian()}}, \mbox{\hyperlink{linear__solver_8h_source_l00088}{oomph\+::\+Linear\+Solver\+::\+Gradient\+\_\+for\+\_\+glob\+\_\+conv\+\_\+newton\+\_\+solve}}, \mbox{\hyperlink{linear__solver_8h_source_l00084}{oomph\+::\+Linear\+Solver\+::\+Gradient\+\_\+has\+\_\+been\+\_\+computed}}, \mbox{\hyperlink{linear__solver_8h_source_l00761}{Jacobian\+\_\+setup\+\_\+time}}, \mbox{\hyperlink{matrices_8cc_source_l01882}{oomph\+::\+CRDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{matrices_8cc_source_l00715}{oomph\+::\+CCDouble\+Matrix\+::multiply\+\_\+transpose()}}, \mbox{\hyperlink{problem_8h_source_l01674}{oomph\+::\+Problem\+::ndof()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{double__vector_8cc_source_l00164}{oomph\+::\+Double\+Vector\+::redistribute()}}, \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}, \mbox{\hyperlink{linear__solver_8h_source_l00791}{Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix}}, \mbox{\hyperlink{problem_8h_source_l02424}{oomph\+::\+Problem\+::sign\+\_\+of\+\_\+jacobian()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8h_source_l00773}{Solver\+\_\+type}}, \mbox{\hyperlink{linear__solver_8h_source_l00767}{Suppress\+\_\+solve}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
+
+
+
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_abd96a292e666e7553651add727265529}\label{classoomph_1_1SuperLUSolver_abd96a292e666e7553651add727265529}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!use\_compressed\_column\_for\_superlu\_serial@{use\_compressed\_column\_for\_superlu\_serial}}
 \index{use\_compressed\_column\_for\_superlu\_serial@{use\_compressed\_column\_for\_superlu\_serial}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{use\_compressed\_column\_for\_superlu\_serial()}{use\_compressed\_column\_for\_superlu\_serial()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::use\+\_\+compressed\+\_\+column\+\_\+for\+\_\+superlu\+\_\+serial (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::use\+\_\+compressed\+\_\+column\+\_\+for\+\_\+superlu\+\_\+serial (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -912,17 +906,17 @@ Use the compressed column format in superlu serial.
 
 
 
-Definition at line 686 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00662}{662}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Serial\+\_\+compressed\+\_\+row\+\_\+flag.
+References \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ad0d31829d3afe5f7a315d1b37693e8a2}\label{classoomph_1_1SuperLUSolver_ad0d31829d3afe5f7a315d1b37693e8a2}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!use\_compressed\_row\_for\_superlu\_serial@{use\_compressed\_row\_for\_superlu\_serial}}
 \index{use\_compressed\_row\_for\_superlu\_serial@{use\_compressed\_row\_for\_superlu\_serial}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{use\_compressed\_row\_for\_superlu\_serial()}{use\_compressed\_row\_for\_superlu\_serial()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::use\+\_\+compressed\+\_\+row\+\_\+for\+\_\+superlu\+\_\+serial (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::use\+\_\+compressed\+\_\+row\+\_\+for\+\_\+superlu\+\_\+serial (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -930,17 +924,17 @@ Use the compressed row format in superlu serial.
 
 
 
-Definition at line 680 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00656}{656}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References Serial\+\_\+compressed\+\_\+row\+\_\+flag.
+References \mbox{\hyperlink{linear__solver_8h_source_l00794}{Serial\+\_\+compressed\+\_\+row\+\_\+flag}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a400adf19a2051b05baec7a300bda5406}\label{classoomph_1_1SuperLUSolver_a400adf19a2051b05baec7a300bda5406}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!use\_distributed\_solve\_in\_superlu\_dist@{use\_distributed\_solve\_in\_superlu\_dist}}
 \index{use\_distributed\_solve\_in\_superlu\_dist@{use\_distributed\_solve\_in\_superlu\_dist}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{use\_distributed\_solve\_in\_superlu\_dist()}{use\_distributed\_solve\_in\_superlu\_dist()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::use\+\_\+distributed\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::use\+\_\+distributed\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -948,17 +942,17 @@ Calling this method will ensure that when the problem based solve interface is u
 
 
 
-Definition at line 747 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00723}{723}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), and Dist\+\_\+use\+\_\+global\+\_\+solver.
+References \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00817}{Dist\+\_\+use\+\_\+global\+\_\+solver}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a4eac19f126f7da82f6af48416410442a}\label{classoomph_1_1SuperLUSolver_a4eac19f126f7da82f6af48416410442a}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!use\_global\_solve\_in\_superlu\_dist@{use\_global\_solve\_in\_superlu\_dist}}
 \index{use\_global\_solve\_in\_superlu\_dist@{use\_global\_solve\_in\_superlu\_dist}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{use\_global\_solve\_in\_superlu\_dist()}{use\_global\_solve\_in\_superlu\_dist()}}
-{\footnotesize\ttfamily void oomph\+::\+Super\+L\+U\+Solver\+::use\+\_\+global\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Super\+LUSolver\+::use\+\_\+global\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -966,11 +960,11 @@ Calling this method will ensure that when the problem based solve interface is u
 
 
 
-Definition at line 734 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00710}{710}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-References clean\+\_\+up\+\_\+memory(), and Dist\+\_\+use\+\_\+global\+\_\+solver.
+References \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00817}{Dist\+\_\+use\+\_\+global\+\_\+solver}}.
 
 
 
@@ -979,43 +973,43 @@ References clean\+\_\+up\+\_\+memory(), and Dist\+\_\+use\+\_\+global\+\_\+solve
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_allow\_row\_and\_col\_permutations@{Dist\_allow\_row\_and\_col\_permutations}}
 \index{Dist\_allow\_row\_and\_col\_permutations@{Dist\_allow\_row\_and\_col\_permutations}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_allow\_row\_and\_col\_permutations}{Dist\_allow\_row\_and\_col\_permutations}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+allow\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-If true then Super\+L\+U\+\_\+\+D\+I\+ST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+L\+U\+\_\+\+D\+I\+ST, and can lead to significantly faster solves, but has been known to fail, hence the default value is 0. 
+If true then Super\+LU\+\_\+\+DIST is allowed to permute matrix rows and columns during factorisation. This is the default for Super\+LU\+\_\+\+DIST, and can lead to significantly faster solves, but has been known to fail, hence the default value is 0. 
 
 
 
-Definition at line 865 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00841}{841}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist(), enable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist(), factorise\+\_\+distributed(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8h_source_l00701}{disable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist()}}, \mbox{\hyperlink{linear__solver_8h_source_l00694}{enable\+\_\+row\+\_\+and\+\_\+col\+\_\+permutations\+\_\+in\+\_\+superlu\+\_\+dist()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a0c44f15dfab9ac11376a8272fcf0a3b4}\label{classoomph_1_1SuperLUSolver_a0c44f15dfab9ac11376a8272fcf0a3b4}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_delete\_matrix\_data@{Dist\_delete\_matrix\_data}}
 \index{Dist\_delete\_matrix\_data@{Dist\_delete\_matrix\_data}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_delete\_matrix\_data}{Dist\_delete\_matrix\_data}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+delete\+\_\+matrix\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+delete\+\_\+matrix\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Delete\+\_\+matrix\+\_\+data flag. Super\+L\+U\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. 
+Delete\+\_\+matrix\+\_\+data flag. Super\+LU\+\_\+dist needs its own copy of the input matrix, therefore a copy must be made if any matrix used with this solver is to be preserved. If the input matrix can be deleted the flag can be set to true to reduce the amount of memory required, and the matrix data will be wiped using its \mbox{\hyperlink{classoomph_1_1SuperLUSolver_aec78b96a8f831a89f9b8fb48b1ce0c68}{clean\+\_\+up\+\_\+memory()}} function. Default value is false. 
 
 
 
-Definition at line 873 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00849}{849}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by disable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist(), enable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist(), factorise\+\_\+distributed(), solve(), solve\+\_\+transpose(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8h_source_l00686}{disable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist()}}, \mbox{\hyperlink{linear__solver_8h_source_l00678}{enable\+\_\+delete\+\_\+matrix\+\_\+data\+\_\+in\+\_\+superlu\+\_\+dist()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ae1058d90e75f3cc6229581382f159324}\label{classoomph_1_1SuperLUSolver_ae1058d90e75f3cc6229581382f159324}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_distributed\_solve\_data\_allocated@{Dist\_distributed\_solve\_data\_allocated}}
 \index{Dist\_distributed\_solve\_data\_allocated@{Dist\_distributed\_solve\_data\_allocated}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_distributed\_solve\_data\_allocated}{Dist\_distributed\_solve\_data\_allocated}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+distributed\+\_\+solve\+\_\+data\+\_\+allocated\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1023,17 +1017,17 @@ Flag is true if solve data has been generated for distributed matrix.
 
 
 
-Definition at line 847 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00823}{823}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+distributed(), clean\+\_\+up\+\_\+memory(), factorise\+\_\+distributed(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ac5458172732cfe687891af65cc2d45e6}\label{classoomph_1_1SuperLUSolver_ac5458172732cfe687891af65cc2d45e6}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_global\_solve\_data\_allocated@{Dist\_global\_solve\_data\_allocated}}
 \index{Dist\_global\_solve\_data\_allocated@{Dist\_global\_solve\_data\_allocated}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_global\_solve\_data\_allocated}{Dist\_global\_solve\_data\_allocated}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+global\+\_\+solve\+\_\+data\+\_\+allocated\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1041,35 +1035,35 @@ Flag is true if solve data has been generated for a global matrix.
 
 
 
-Definition at line 844 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00820}{820}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+distributed(), clean\+\_\+up\+\_\+memory(), factorise\+\_\+distributed(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a1c7efdc631fad57eaa4d96a4d927a23f}\label{classoomph_1_1SuperLUSolver_a1c7efdc631fad57eaa4d96a4d927a23f}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_index\_pt@{Dist\_index\_pt}}
 \index{Dist\_index\_pt@{Dist\_index\_pt}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_index\_pt}{Dist\_index\_pt}}
-{\footnotesize\ttfamily int$\ast$ oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+index\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int$\ast$ oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+index\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Pointer for storage of matrix rows or column indices required by Super\+L\+U\+\_\+\+D\+I\+ST. 
+Pointer for storage of matrix rows or column indices required by Super\+LU\+\_\+\+DIST. 
 
 
 
-Definition at line 880 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00856}{856}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), factorise\+\_\+distributed(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ab9792c27162920763f77861f30c552d1}\label{classoomph_1_1SuperLUSolver_ab9792c27162920763f77861f30c552d1}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_info@{Dist\_info}}
 \index{Dist\_info@{Dist\_info}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_info}{Dist\_info}}
-{\footnotesize\ttfamily int oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1077,17 +1071,17 @@ Info flag for the Super\+LU solver.
 
 
 
-Definition at line 859 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00835}{835}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+distributed(), clean\+\_\+up\+\_\+memory(), and factorise\+\_\+distributed().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ae377dc4f0d37fa9ba3056ed8d9bdcd35}\label{classoomph_1_1SuperLUSolver_ae377dc4f0d37fa9ba3056ed8d9bdcd35}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_npcol@{Dist\_npcol}}
 \index{Dist\_npcol@{Dist\_npcol}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_npcol}{Dist\_npcol}}
-{\footnotesize\ttfamily int oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+npcol\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+npcol\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1095,17 +1089,17 @@ Number of columns for the process grid.
 
 
 
-Definition at line 856 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00832}{832}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+distributed(), clean\+\_\+up\+\_\+memory(), and factorise\+\_\+distributed().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_af46267ceb2fe5b52e1460dd827cc9593}\label{classoomph_1_1SuperLUSolver_af46267ceb2fe5b52e1460dd827cc9593}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_nprow@{Dist\_nprow}}
 \index{Dist\_nprow@{Dist\_nprow}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_nprow}{Dist\_nprow}}
-{\footnotesize\ttfamily int oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+nprow\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+nprow\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1113,17 +1107,17 @@ Number of rows for the process grid.
 
 
 
-Definition at line 853 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00829}{829}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+distributed(), clean\+\_\+up\+\_\+memory(), and factorise\+\_\+distributed().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_add0e2151ba6dffc2317f0ae63938b429}\label{classoomph_1_1SuperLUSolver_add0e2151ba6dffc2317f0ae63938b429}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_solver\_data\_pt@{Dist\_solver\_data\_pt}}
 \index{Dist\_solver\_data\_pt@{Dist\_solver\_data\_pt}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_solver\_data\_pt}{Dist\_solver\_data\_pt}}
-{\footnotesize\ttfamily void$\ast$ oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+solver\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void$\ast$ oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+solver\+\_\+data\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1131,17 +1125,17 @@ Storage for the LU factors and other data required by Super\+LU.
 
 
 
-Definition at line 850 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00826}{826}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+distributed(), clean\+\_\+up\+\_\+memory(), factorise\+\_\+distributed(), get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors(), get\+\_\+total\+\_\+needed\+\_\+memory(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00748}{get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00776}{get\+\_\+total\+\_\+needed\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a7b5c61ed28e441622bfe3f623dee28b7}\label{classoomph_1_1SuperLUSolver_a7b5c61ed28e441622bfe3f623dee28b7}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_start\_pt@{Dist\_start\_pt}}
 \index{Dist\_start\_pt@{Dist\_start\_pt}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_start\_pt}{Dist\_start\_pt}}
-{\footnotesize\ttfamily int$\ast$ oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+start\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int$\ast$ oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+start\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1149,53 +1143,53 @@ Pointers for storage of matrix column or row starts.
 
 
 
-Definition at line 884 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00860}{860}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), factorise\+\_\+distributed(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_aab7193cb7f228dc57c4e6c237ea065ba}\label{classoomph_1_1SuperLUSolver_aab7193cb7f228dc57c4e6c237ea065ba}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_use\_global\_solver@{Dist\_use\_global\_solver}}
 \index{Dist\_use\_global\_solver@{Dist\_use\_global\_solver}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_use\_global\_solver}{Dist\_use\_global\_solver}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+use\+\_\+global\+\_\+solver\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+use\+\_\+global\+\_\+solver\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Flag that determines whether the M\+P\+I\+Problem based solve function uses the global or distributed version of Super\+L\+U\+\_\+\+D\+I\+ST (default value is false). 
+Flag that determines whether the MPIProblem based solve function uses the global or distributed version of Super\+LU\+\_\+\+DIST (default value is false). 
 
 
 
-Definition at line 841 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00817}{817}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by solve(), solve\+\_\+transpose(), Super\+L\+U\+Solver(), use\+\_\+distributed\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist(), and use\+\_\+global\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}, \mbox{\hyperlink{linear__solver_8h_source_l00723}{use\+\_\+distributed\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00710}{use\+\_\+global\+\_\+solve\+\_\+in\+\_\+superlu\+\_\+dist()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a4aa2df1c91537adb245395aff054b591}\label{classoomph_1_1SuperLUSolver_a4aa2df1c91537adb245395aff054b591}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Dist\_value\_pt@{Dist\_value\_pt}}
 \index{Dist\_value\_pt@{Dist\_value\_pt}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Dist\_value\_pt}{Dist\_value\_pt}}
-{\footnotesize\ttfamily double$\ast$ oomph\+::\+Super\+L\+U\+Solver\+::\+Dist\+\_\+value\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double$\ast$ oomph\+::\+Super\+LUSolver\+::\+Dist\+\_\+value\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Pointer for storage of the matrix values required by Super\+L\+U\+\_\+\+D\+I\+ST. 
+Pointer for storage of the matrix values required by Super\+LU\+\_\+\+DIST. 
 
 
 
-Definition at line 876 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00852}{852}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by clean\+\_\+up\+\_\+memory(), factorise\+\_\+distributed(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a052def009be940b82847d6c476fd0319}\label{classoomph_1_1SuperLUSolver_a052def009be940b82847d6c476fd0319}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Doc\_stats@{Doc\_stats}}
 \index{Doc\_stats@{Doc\_stats}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Doc\_stats}{Doc\_stats}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Doc\+\_\+stats\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Doc\+\_\+stats\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1203,17 +1197,17 @@ Set to true to output statistics (false by default).
 
 
 
-Definition at line 794 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00770}{770}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+distributed(), backsub\+\_\+serial(), backsub\+\_\+transpose\+\_\+serial(), clean\+\_\+up\+\_\+memory(), disable\+\_\+doc\+\_\+stats(), enable\+\_\+doc\+\_\+stats(), factorise\+\_\+distributed(), factorise\+\_\+serial(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02465}{backsub\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02555}{backsub\+\_\+transpose\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8h_source_l00609}{disable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{linear__solver_8h_source_l00603}{enable\+\_\+doc\+\_\+stats()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01827}{factorise\+\_\+distributed()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02123}{factorise\+\_\+serial()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_ac712018d9ba5b50a1e6777e55303b5b8}\label{classoomph_1_1SuperLUSolver_ac712018d9ba5b50a1e6777e55303b5b8}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Jacobian\_setup\_time@{Jacobian\_setup\_time}}
 \index{Jacobian\_setup\_time@{Jacobian\_setup\_time}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Jacobian\_setup\_time}{Jacobian\_setup\_time}}
-{\footnotesize\ttfamily double oomph\+::\+Super\+L\+U\+Solver\+::\+Jacobian\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double oomph\+::\+Super\+LUSolver\+::\+Jacobian\+\_\+setup\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1221,17 +1215,17 @@ Jacobian setup time.
 
 
 
-Definition at line 785 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00761}{761}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by jacobian\+\_\+setup\+\_\+time(), solve(), and solve\+\_\+transpose().
+Referenced by \mbox{\hyperlink{linear__solver_8h_source_l00616}{jacobian\+\_\+setup\+\_\+time()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a50f46a4d8c674f3853ce0f682ebd4096}\label{classoomph_1_1SuperLUSolver_a50f46a4d8c674f3853ce0f682ebd4096}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Serial\_compressed\_row\_flag@{Serial\_compressed\_row\_flag}}
 \index{Serial\_compressed\_row\_flag@{Serial\_compressed\_row\_flag}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Serial\_compressed\_row\_flag}{Serial\_compressed\_row\_flag}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Serial\+\_\+compressed\+\_\+row\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Serial\+\_\+compressed\+\_\+row\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1239,17 +1233,17 @@ Use compressed row version?
 
 
 
-Definition at line 818 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00794}{794}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+serial(), backsub\+\_\+transpose\+\_\+serial(), clean\+\_\+up\+\_\+memory(), factorise\+\_\+serial(), solve(), solve\+\_\+transpose(), Super\+L\+U\+Solver(), use\+\_\+compressed\+\_\+column\+\_\+for\+\_\+superlu\+\_\+serial(), and use\+\_\+compressed\+\_\+row\+\_\+for\+\_\+superlu\+\_\+serial().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02465}{backsub\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02555}{backsub\+\_\+transpose\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02123}{factorise\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}, \mbox{\hyperlink{linear__solver_8h_source_l00662}{use\+\_\+compressed\+\_\+column\+\_\+for\+\_\+superlu\+\_\+serial()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00656}{use\+\_\+compressed\+\_\+row\+\_\+for\+\_\+superlu\+\_\+serial()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a7dc6fcd6c30c90fd66b7ea828075a718}\label{classoomph_1_1SuperLUSolver_a7dc6fcd6c30c90fd66b7ea828075a718}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Serial\_f\_factors@{Serial\_f\_factors}}
 \index{Serial\_f\_factors@{Serial\_f\_factors}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Serial\_f\_factors}{Serial\_f\_factors}}
-{\footnotesize\ttfamily void$\ast$ oomph\+::\+Super\+L\+U\+Solver\+::\+Serial\+\_\+f\+\_\+factors\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void$\ast$ oomph\+::\+Super\+LUSolver\+::\+Serial\+\_\+f\+\_\+factors\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1257,17 +1251,17 @@ Storage for the LU factors as required by Super\+LU.
 
 
 
-Definition at line 806 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00782}{782}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+serial(), backsub\+\_\+transpose\+\_\+serial(), clean\+\_\+up\+\_\+memory(), factorise\+\_\+serial(), get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors(), and get\+\_\+total\+\_\+needed\+\_\+memory().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02465}{backsub\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02555}{backsub\+\_\+transpose\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02123}{factorise\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00748}{get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l00776}{get\+\_\+total\+\_\+needed\+\_\+memory()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_afb45da60b3bb2e75db5bd7d83b488064}\label{classoomph_1_1SuperLUSolver_afb45da60b3bb2e75db5bd7d83b488064}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Serial\_info@{Serial\_info}}
 \index{Serial\_info@{Serial\_info}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Serial\_info}{Serial\_info}}
-{\footnotesize\ttfamily int oomph\+::\+Super\+L\+U\+Solver\+::\+Serial\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int oomph\+::\+Super\+LUSolver\+::\+Serial\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1275,17 +1269,17 @@ Info flag for the Super\+LU solver.
 
 
 
-Definition at line 809 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00785}{785}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+serial(), backsub\+\_\+transpose\+\_\+serial(), clean\+\_\+up\+\_\+memory(), and factorise\+\_\+serial().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02465}{backsub\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02555}{backsub\+\_\+transpose\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l02123}{factorise\+\_\+serial()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a7c18b341d34df78809d8c5c3332d675d}\label{classoomph_1_1SuperLUSolver_a7c18b341d34df78809d8c5c3332d675d}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Serial\_n\_dof@{Serial\_n\_dof}}
 \index{Serial\_n\_dof@{Serial\_n\_dof}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Serial\_n\_dof}{Serial\_n\_dof}}
-{\footnotesize\ttfamily unsigned long oomph\+::\+Super\+L\+U\+Solver\+::\+Serial\+\_\+n\+\_\+dof\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily unsigned long oomph\+::\+Super\+LUSolver\+::\+Serial\+\_\+n\+\_\+dof\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1293,17 +1287,17 @@ The number of unknowns in the linear system.
 
 
 
-Definition at line 812 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00788}{788}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+serial(), backsub\+\_\+transpose\+\_\+serial(), clean\+\_\+up\+\_\+memory(), factorise\+\_\+serial(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02465}{backsub\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02555}{backsub\+\_\+transpose\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02645}{clean\+\_\+up\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02123}{factorise\+\_\+serial()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_aa9c97e960b45b82eb01dd5548bed89a1}\label{classoomph_1_1SuperLUSolver_aa9c97e960b45b82eb01dd5548bed89a1}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Serial\_sign\_of\_determinant\_of\_matrix@{Serial\_sign\_of\_determinant\_of\_matrix}}
 \index{Serial\_sign\_of\_determinant\_of\_matrix@{Serial\_sign\_of\_determinant\_of\_matrix}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Serial\_sign\_of\_determinant\_of\_matrix}{Serial\_sign\_of\_determinant\_of\_matrix}}
-{\footnotesize\ttfamily int oomph\+::\+Super\+L\+U\+Solver\+::\+Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily int oomph\+::\+Super\+LUSolver\+::\+Serial\+\_\+sign\+\_\+of\+\_\+determinant\+\_\+of\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1311,17 +1305,17 @@ Sign of the determinant of the matrix.
 
 
 
-Definition at line 815 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00791}{791}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by factorise\+\_\+serial(), solve(), solve\+\_\+transpose(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02123}{factorise\+\_\+serial()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a45c813ff80cad04e58efebe9bb1bfecb}\label{classoomph_1_1SuperLUSolver_a45c813ff80cad04e58efebe9bb1bfecb}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Solution\_time@{Solution\_time}}
 \index{Solution\_time@{Solution\_time}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Solution\_time}{Solution\_time}}
-{\footnotesize\ttfamily double oomph\+::\+Super\+L\+U\+Solver\+::\+Solution\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double oomph\+::\+Super\+LUSolver\+::\+Solution\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1329,35 +1323,35 @@ Solution time.
 
 
 
-Definition at line 788 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00764}{764}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by linear\+\_\+solver\+\_\+solution\+\_\+time(), resolve(), resolve\+\_\+transpose(), solve(), and solve\+\_\+transpose().
+Referenced by \mbox{\hyperlink{linear__solver_8h_source_l00623}{linear\+\_\+solver\+\_\+solution\+\_\+time()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01735}{resolve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01757}{resolve\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01056}{solve()}}, and \mbox{\hyperlink{linear__solver_8cc_source_l01524}{solve\+\_\+transpose()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a26ba07c6f63b830e73c594debe9e68a9}\label{classoomph_1_1SuperLUSolver_a26ba07c6f63b830e73c594debe9e68a9}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Solver\_type@{Solver\_type}}
 \index{Solver\_type@{Solver\_type}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Solver\_type}{Solver\_type}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{Type}} oomph\+::\+Super\+L\+U\+Solver\+::\+Solver\+\_\+type\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1SuperLUSolver_a55d3709b5e082ecce2b41f9db6716e1a}{Type}} oomph\+::\+Super\+LUSolver\+::\+Solver\+\_\+type\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-the solver type. see Super\+L\+U\+\_\+solver\+\_\+type for details. 
+the solver type. see Super\+LU\+\_\+solver\+\_\+type for details. 
 
 
 
-Definition at line 797 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00773}{773}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by factorise(), get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors(), get\+\_\+total\+\_\+needed\+\_\+memory(), set\+\_\+solver\+\_\+type(), solve(), solve\+\_\+transpose(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l01782}{factorise()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00748}{get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+factors()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00776}{get\+\_\+total\+\_\+needed\+\_\+memory()}}, \mbox{\hyperlink{linear__solver_8h_source_l00646}{set\+\_\+solver\+\_\+type()}}, \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a11c89f3138e42a38eb0cd5def128eabf}\label{classoomph_1_1SuperLUSolver_a11c89f3138e42a38eb0cd5def128eabf}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
 \index{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve@{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}{Suppress\_incorrect\_rhs\_distribution\_warning\_in\_resolve}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Suppress\+\_\+incorrect\+\_\+rhs\+\_\+distribution\+\_\+warning\+\_\+in\+\_\+resolve\hspace{0.3cm}{\ttfamily [static]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -1367,21 +1361,21 @@ Referenced by factorise(), get\+\_\+memory\+\_\+usage\+\_\+for\+\_\+lu\+\_\+fact
 \end{DoxyCode}
 
 
-Static flag that determines whether the warning about incorrect distribution of R\+H\+Ss will be printed or not. 
+Static flag that determines whether the warning about incorrect distribution of RHSs will be printed or not. 
 
-Static warning to suppress warnings about incorrect distribution of R\+HS vector. Default is false 
+Static warning to suppress warnings about incorrect distribution of RHS vector. Default is false. 
 
-Definition at line 835 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00811}{811}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub\+\_\+distributed().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02302}{backsub\+\_\+distributed()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a88f9065710fb4b6096369586be76a67c}\label{classoomph_1_1SuperLUSolver_a88f9065710fb4b6096369586be76a67c}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Suppress\_solve@{Suppress\_solve}}
 \index{Suppress\_solve@{Suppress\_solve}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Suppress\_solve}{Suppress\_solve}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Suppress\+\_\+solve\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Suppress\+\_\+solve\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1389,17 +1383,17 @@ Suppress solve?
 
 
 
-Definition at line 791 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00767}{767}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by solve(), solve\+\_\+transpose(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l00804}{solve()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01271}{solve\+\_\+transpose()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SuperLUSolver_a7420188d74f95b5b1543268ff3ccc9e0}\label{classoomph_1_1SuperLUSolver_a7420188d74f95b5b1543268ff3ccc9e0}} 
 \index{oomph::SuperLUSolver@{oomph::SuperLUSolver}!Using\_dist@{Using\_dist}}
 \index{Using\_dist@{Using\_dist}!oomph::SuperLUSolver@{oomph::SuperLUSolver}}
 \doxysubsubsection{\texorpdfstring{Using\_dist}{Using\_dist}}
-{\footnotesize\ttfamily bool oomph\+::\+Super\+L\+U\+Solver\+::\+Using\+\_\+dist\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily bool oomph\+::\+Super\+LUSolver\+::\+Using\+\_\+dist\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -1407,11 +1401,11 @@ boolean flag indicating whether superlu dist is being used
 
 
 
-Definition at line 800 of file linear\+\_\+solver.\+h.
+Definition at line \mbox{\hyperlink{linear__solver_8h_source_l00776}{776}} of file \mbox{\hyperlink{linear__solver_8h_source}{linear\+\_\+solver.\+h}}.
 
 
 
-Referenced by backsub(), backsub\+\_\+transpose(), factorise(), and Super\+L\+U\+Solver().
+Referenced by \mbox{\hyperlink{linear__solver_8cc_source_l02254}{backsub()}}, \mbox{\hyperlink{linear__solver_8cc_source_l02274}{backsub\+\_\+transpose()}}, \mbox{\hyperlink{linear__solver_8cc_source_l01782}{factorise()}}, and \mbox{\hyperlink{linear__solver_8h_source_l00500}{Super\+LUSolver()}}.
 
 
 

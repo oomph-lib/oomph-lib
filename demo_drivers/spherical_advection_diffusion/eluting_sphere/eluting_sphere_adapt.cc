@@ -77,7 +77,7 @@ public:
  /// Destructor to clean up memory
  ~RefineableElutingSphereProblem();
 
- /// \short Set the boundary conditions
+ /// Set the boundary conditions
  void set_boundary_conditions();
  
  // Access function for the specific mesh
@@ -174,7 +174,7 @@ RefineableElutingSphereProblem<ELEMENT>::RefineableElutingSphereProblem()
 
 
 //=========start of set_boundary_conditions===============================
-/// \short Set the boundary conditions so that the inner sphere has
+/// Set the boundary conditions so that the inner sphere has
 /// a constant angular rotation of angular velocity one.
 //========================================================================
 template<class ELEMENT>
@@ -253,9 +253,9 @@ void RefineableElutingSphereProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 } // end_of_doc_solution
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //==start_of_main======================================================

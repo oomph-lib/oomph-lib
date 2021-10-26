@@ -1,0 +1,676 @@
+\hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source}{}\doxysection{fsi\+\_\+channel\+\_\+with\+\_\+leaflet.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{fsi__channel__with__leaflet_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Demo problem: Flow in a 2D channel with an elastic leaflet }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{In this example we consider the flow in a 2D channel which is partially}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{obstructed by an elastic leaflet -\/-\/ the  FSI generalisation of the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{<A HREF="{}../../../navier\_stokes/channel\_with\_leaflet/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{Navier-\/Stokes problem in which the motion of the leaflet is}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{prescribed.</A> A particular feature of this problem is that the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{leaflet (modelled as a thin-\/walled beam structure) is totally immersed}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{in the fluid and is therefore exposed to the fluid traction from}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{both sides. }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{The problem presented here was used as one of the test cases}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{for \(\backslash\)c oomph-\/lib's FSI preconditioner; see \(\backslash\)n\(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{<A href="{}http://www.maths.man.ac.uk/\string~mheil/oomph\_lib\_additional\_material/HeilHazelBoyleCompMech/HeilHazelBoyleCompMech.pdf"{}>Heil, M., Hazel, A.L. \& Boyle, J. (2008): Solvers for large-\/displacement fluid-\/structure interaction problems: Segregated vs. monolithic approaches. Computational Mechanics.</A>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{In this tutorial we concentrate on the problem formulation. }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{The application of the preconditioner is discussed }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{<a href="{}../../../preconditioners/fsi/html/index.html"{}>elsewhere</a> -\/-\/}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{the required source code is contained in the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{<A href="{}../../../../demo\_drivers/interaction/fsi\_channel\_with\_leaflet/fsi\_channel\_with\_leaflet.cc"{}>driver code.</A>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{\(\backslash\)section the\_problem The Problem}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{The figure below shows a sketch of the problem:  A 2D channel of}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{height  \(\backslash\)f\$ H\string^*\_\{tot\}\(\backslash\)f\$ and length \(\backslash\)f\$ L\string^*\_\{left\} + L\string^*\_\{right\} \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{is partially occluded by a thin-\/walled elastic leaflet of height }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)f\$ H\string^*\_\{leaflet\} \(\backslash\)f\$. (As usual, we use asterisks to distinguish}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{dimensional quantities from their non-\/dimensional equivalents to be}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{introduced later.) We assume that the leaflet is}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{sufficiently thin so that, as far as the boundary conditions}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{for the fluid are concerned, the leaflet can be assumed to }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{be infinitely thin. This allows us to parametrise its shape }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{by a single Lagrangian coordinate \(\backslash\)f\$ \(\backslash\)xi\string^* \(\backslash\)f\$. Hence we write the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{position vector to a material point on the leaflet as}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf R\}\string^*\_w(\(\backslash\)xi\string^*,t\string^*) \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{A pulsatile Poiseuille flow whose mean velocity fluctuates between}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{\(\backslash\)f\$ U\string^* \(\backslash\)f\$ and \(\backslash\)f\$ 2 U\string^* \(\backslash\)f\$ is imposed at the upstream end of the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{channel. The outflow is assumed to be parallel and axially }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{traction-\/free.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\(\backslash\)image html fsi\_channel\_with\_leaflet\_dim.gif "{}Sketch of the problem. "{} }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{\(\backslash\)image latex fsi\_channel\_with\_leaflet\_dim.eps "{}Sketch of the problem. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{We non-\/dimensionalise all length and coordinates on the channel }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{width, \(\backslash\)f\$ H\string^*\_\{tot\} \(\backslash\)f\$ , time on the natural timescale of the flow,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{\(\backslash\)f\$ H\string^*\_\{tot\}/U\string^* \(\backslash\)f\$, the velocities on the (minimum) mean velocity,  }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{\(\backslash\)f\$ U\string^* \(\backslash\)f\$, and the pressure on the viscous scale. }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{The fluid flow is then governed by the non-\/dimensional Navier-\/Stokes equations}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{Re \(\backslash\)left( St \(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial t\} + }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{u\_j \(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} \(\backslash\)right) =}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{-\/ \(\backslash\)frac\{\(\backslash\)partial p\}\{\(\backslash\)partial x\_i\}  +}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial \}\{\(\backslash\)partial x\_j\} \(\backslash\)left[ \(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} +  }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} \(\backslash\)right) \(\backslash\)right],}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{where \(\backslash\)f\$ Re = \(\backslash\)rho U\string^* H\_0\string^* / \(\backslash\)mu \(\backslash\)f\$ and \(\backslash\)f\$ St = 1 \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{and}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_i\} = 0,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{subject to a time-\/periodic, parabolic inflow with non-\/dimensional}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{period \(\backslash\)f\$ T \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{\{\(\backslash\)bf u\} = 6 x\_2 (1-\/x\_2) \(\backslash\)left( 1 + \(\backslash\)frac\{1\}\{2\} (1-\/\(\backslash\)cos(2 \(\backslash\)pi t/T)) \(\backslash\)right) }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{\{\(\backslash\)bf e\}\_1}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{in the inflow cross-\/section; parallel, axially-\/traction-\/free outflow}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{at the outlet; and no-\/slip on the stationary channel walls, }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf u\} = \{\(\backslash\)bf 0\} \(\backslash\)f\$. The no-\/slip condition on the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{leaflet is}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{\{\(\backslash\)bf u\} = \(\backslash\)frac\{\(\backslash\)partial \{\(\backslash\)bf R\}\_w(\(\backslash\)xi,t)\}\{\(\backslash\)partial t\}.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)f] }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{We model the leaflet as a thin-\/walled, massless, elastic Kirchhoff-\/Love}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{beam of wall thickness \(\backslash\)f\$ h\string^* \(\backslash\)f\$. The beam's effective (1D) elastic modulus}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{is given by \(\backslash\)f\$ E\_\{eff\} = E/(1-\/\(\backslash\)nu\string^2), \(\backslash\)f\$ where \(\backslash\)f\$ E \(\backslash\)f\$ and \(\backslash\)f\$ \(\backslash\)nu \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{are its 3D Young's modulus and Poisson's ratio, respectively.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{The beam's deformation is governed by the principle of virtual}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{displacements, discussed in detail }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{<A HREF="{}../../../beam/tensioned\_string/html/index.html"{}>in another }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{tutorial.</A> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{As in the Navier-\/Stokes equations, we scale all lengths in}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{the beam problem on the channel's width, \(\backslash\)f\$ H\string^*\_\{tot\}. \(\backslash\)f\$ The}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{non-\/dimensional position vector}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf r\}\_w(\(\backslash\)xi) \(\backslash\)f\$ to the undeformed wall is then given by}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\{\(\backslash\)bf r\}\_w(\(\backslash\)xi) = }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{\{\(\backslash\)bf R\}\_w(\(\backslash\)xi,t=0) = }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{\(\backslash\)begin\{array\}\{c\}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{X\_0  \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{\(\backslash\)xi}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{\(\backslash\)end\{array\}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{\(\backslash\)right) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)mbox\{where \$\(\backslash\)xi \(\backslash\)in [0,H\_\{leaflet\}].\$\}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{Our non-\/dimensionalisation of the principle of virtual displacements}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{requires all stresses and tractions to be non-\/dimensionalised }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{on the beam's (effective 1D) elastic modulus, \(\backslash\)f\$ E\_\{eff\} \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{The non-\/dimensional load vector \(\backslash\)f\$ \{\(\backslash\)bf f\} = \{\(\backslash\)bf f\}\string^\{*\}/E\_\{eff\} \(\backslash\)f\$ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{that acts on the leaflet (combining the fluid tractions acting}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{on its front and back faces) is then given by}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{f\_i = Q \(\backslash\)bigg\(\backslash\)\{ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{\(\backslash\)left( p\(\backslash\)big|\_\{front\} \(\backslash\) N\_i\string^\{[front]\} -\/}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} +}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{\(\backslash\)right)\(\backslash\)bigg|\_\{front\} N\_j\string^\{[front]\} \(\backslash\)right)}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{+}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{. \(\backslash\)hspace\{3cm\} + \(\backslash\)left( p\(\backslash\)big|\_\{back\} \(\backslash\) N\_i\string^\{[back]\} -\/}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{\(\backslash\)left(}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_i\}\{\(\backslash\)partial x\_j\} +}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{\(\backslash\)frac\{\(\backslash\)partial u\_j\}\{\(\backslash\)partial x\_i\} }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{\(\backslash\)right)\(\backslash\)bigg|\_\{back\} N\_j\string^\{[back]\} \(\backslash\)right) }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00136}00136 \textcolor{comment}{\(\backslash\)bigg\(\backslash\)\}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00137}00137 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)mbox\{for \$i=1,2,\$\}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00138}00138 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00139}00139 \textcolor{comment}{where }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00140}00140 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00141}00141 \textcolor{comment}{Q = \(\backslash\)frac\{\(\backslash\)mu U\}\{E\_\{eff\} H\_\{tot\}\string^*\}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00142}00142 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00143}00143 \textcolor{comment}{is the ratio of the fluid pressure scale, \(\backslash\)f\$ \(\backslash\)mu U/H\_\{tot\}\string^* \(\backslash\)f\$ ,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00144}00144 \textcolor{comment}{used to non-\/dimensionalise the Navier-\/Stokes equations, to the}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00145}00145 \textcolor{comment}{beam's effective elastic modulus, \(\backslash\)f\$ E\_\{eff\} \(\backslash\)f\$. The parameter \(\backslash\)f\$ Q}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00146}00146 \textcolor{comment}{\(\backslash\)f\$ therefore indicates the strength of the fluid-\/structure}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00147}00147 \textcolor{comment}{interaction. In particular, if \(\backslash\)f\$ Q=0 \(\backslash\)f\$ the leaflet does not}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00148}00148 \textcolor{comment}{"{}feel"{} the fluid traction. \(\backslash\)f\$ \{\(\backslash\)bf N\}\_\{front\} \(\backslash\)f\$ and }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00149}00149 \textcolor{comment}{\(\backslash\)f\$ \{\(\backslash\)bf N\}\_\{back\} \(\backslash\)f\$ are the outer unit normals on the "{}front"{} and "{}back"{}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00150}00150 \textcolor{comment}{faces of the deformed leaflet, as shown in this sketch of }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00151}00151 \textcolor{comment}{the non-\/dimensional version of the problem: }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00152}00152 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00153}00153 \textcolor{comment}{\(\backslash\)image html fsi\_channel\_with\_leaflet.gif "{}Sketch of the problem in dimensionless variables. "{} }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00154}00154 \textcolor{comment}{\(\backslash\)image latex fsi\_channel\_with\_leaflet.eps "{}Sketch of the problem in dimensionless variables. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00155}00155 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00156}00156 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00157}00157 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00158}00158 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00159}00159 \textcolor{comment}{\(\backslash\)section results Results}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00160}00160 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00161}00161 \textcolor{comment}{The figure below shows (a) a snapshot of the flow field  }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00162}00162 \textcolor{comment}{(pressure contours and instantaneous streamlines) and (b) the time-\/trace}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00163}00163 \textcolor{comment}{of the horizontal position of the leaflet's tip for a Reynolds number}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00164}00164 \textcolor{comment}{of \(\backslash\)f\$ Re = 200 \(\backslash\)f\$, a non-\/dimensional period of \(\backslash\)f\$ T=2 \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00165}00165 \textcolor{comment}{and an interaction parameter of \(\backslash\)f\$ Q = 10\string^\{-\/6\}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00166}00166 \textcolor{comment}{\(\backslash\)f\$. Following the decay of initial transients the leaflet performs}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00167}00167 \textcolor{comment}{periodic large-\/amplitude oscillations with the period of the pulsating}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00168}00168 \textcolor{comment}{inflow.  Large velocity gradients develop at the front of the leaflet and }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00169}00169 \textcolor{comment}{in the shear layer that emanates from its tip and separates the }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00170}00170 \textcolor{comment}{recirculating flow region behind the leaflet from the main flow.  Fig. (c) }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00171}00171 \textcolor{comment}{illustrates the non-\/uniform mesh refinement and shows}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00172}00172 \textcolor{comment}{the improved resolution in the high-\/shear regions, particularly near }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00173}00173 \textcolor{comment}{the leaflet's tip where the pressure is singular. The mesh was }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00174}00174 \textcolor{comment}{continuously adapted throughout the simulation and contained an average of}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00175}00175 \textcolor{comment}{about 32,000 degrees of freedom. This is a fraction of the 1,324,343 degrees }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00176}00176 \textcolor{comment}{of freedom that would be required to achieve the same local resolution via }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00177}00177 \textcolor{comment}{uniform mesh refinement.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00178}00178 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00179}00179 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00180}00180 \textcolor{comment}{ }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00181}00181 \textcolor{comment}{\(\backslash\)image html flow\_from\_paper.gif "{}Computational results. "{} }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00182}00182 \textcolor{comment}{\(\backslash\)image latex flow\_from\_paper.eps "{}Computational results. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00183}00183 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00184}00184 \textcolor{comment}{The corresponding <A HREF="{}../figures/fsi\_channel\_with\_leaflet\_flow.avi"{}>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00185}00185 \textcolor{comment}{animation</A> illustrates the algebraic node update strategy }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00186}00186 \textcolor{comment}{(implemented with an \(\backslash\)c AlgebraicMesh, discussed in more detail}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00187}00187 \textcolor{comment}{in  <A HREF="{}../../fsi\_collapsible\_channel\_algebraic/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00188}00188 \textcolor{comment}{another tutorial</A>) and the evolution of}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00189}00189 \textcolor{comment}{the flow field. Note that the instantaneous streamlines intersect}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00190}00190 \textcolor{comment}{the (impermeable) leaflet because the leaflet is not stationary. }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00191}00191 \textcolor{comment}{The animation shows how the mesh adapts itself to changes in the flow}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00192}00192 \textcolor{comment}{field -\/-\/ using much smaller elements in high-\/shear regions,}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00193}00193 \textcolor{comment}{including the artificial outflow boundary layer that is created}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00194}00194 \textcolor{comment}{by the imposition of parallel outflow in a region where the }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00195}00195 \textcolor{comment}{flow is far from fully-\/developed.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00196}00196 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00197}00197 \textcolor{comment}{<HR> }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00198}00198 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00199}00199 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00200}00200 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00201}00201 \textcolor{comment}{\(\backslash\)section parameters The global parameters}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00202}00202 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00203}00203 \textcolor{comment}{As usual we use a namespace to define the problem parameters:}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00204}00204 \textcolor{comment}{The Reynolds number and its product with the Strouhal number }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00205}00205 \textcolor{comment}{(both initialised to 50),}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00206}00206 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00207}00207 \textcolor{comment}{\(\backslash\)dontinclude fsi\_channel\_with\_leaflet.cc}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00208}00208 \textcolor{comment}{\(\backslash\)skipline start\_of\_global\_parameters}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00209}00209 \textcolor{comment}{\(\backslash\)until ReSt=50.0;}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00210}00210 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00211}00211 \textcolor{comment}{the leaflet's non-\/dimensional wall thickness, \(\backslash\)f\$ h = h\string^*/}\mbox{\hyperlink{namespaceGlobal__Physical__Variables_af6e07423e22c0991084d9a2f43727805}{H}}\string^*\_\{tot\}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00212}00212 \(\backslash\)f\$, and the FSI parameter,}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00213}00213 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00214}00214 \(\backslash\)until \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}}=1.0e-\/6; }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00215}00215 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00216}00216 and the parameters that define the magnitude of the pulsating inflow.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00217}00217 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00218}00218 \(\backslash\)until end\_of\_namespace}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00219}00219 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00220}00220 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00221}00221 <HR>  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00222}00222 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00223}00223 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00224}00224 \(\backslash\)section leaflet The undeformed leaflet}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00225}00225 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00226}00226 We use a \(\backslash\)c GeomObject to describe the initial, stress-\/free shape}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00227}00227 of the elastic leaflet: a vertical straight line. The member function}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00228}00228 \(\backslash\)c d2position(...) provides the first and second derivatives of}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00229}00229 the position vector, as required by the variational principle}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00230}00230 that governs the beam's deformation;}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00231}00231 see <A HREF="{}../../../beam/tensioned\_string/html/index.html"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00232}00232 the beam theory tutorial for details. </A>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00233}00233 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00234}00234 \(\backslash\)skipline start\_of\_undeformed\_leaflet}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00235}00235 \(\backslash\)until end\_of\_undeformed\_wall}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00236}00236 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00237}00237 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00238}00238 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00239}00239 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00240}00240 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00241}00241 \(\backslash\)section \mbox{\hyperlink{fsi__channel__with__leaflet_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} The driver code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00242}00242 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00243}00243 As with most time-\/dependent demo codes, the specification of }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00244}00244 a non-\/zero number of command line arguments will be interpreted }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00245}00245 as the code being run as part  of \(\backslash\)c oomph-\/lib's self-\/test in which}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00246}00246 case only a few timesteps will be performed. Therefore we start by storing}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00247}00247 the command line arguments in the namespace \(\backslash\)c CommandLineArgs}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00248}00248 to make them accessible throughout the code.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00249}00249 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00250}00250 \(\backslash\)skipline start\_of\_main}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00251}00251 \(\backslash\)until ::setup(}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00252}00252 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00253}00253 Next we specify the geometry and mesh parameters, and build }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00254}00254 the \(\backslash\)c Problem \textcolor{keywordtype}{object}, using the \(\backslash\)c AlgebraicElement version of}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00255}00255 the two-\/dimensional \(\backslash\)c RefineableQTaylorHoodElements.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00256}00256 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00257}00257 \(\backslash\)until ,ny2,x\_0);}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00258}00258 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00259}00259 We prepare a \(\backslash\)c DocInfo \textcolor{keywordtype}{object} and open a trace file to document}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00260}00260 the system's evolution.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00261}00261 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00262}00262 \(\backslash\)until trace.open}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00263}00263 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00264}00264 Next we assign the timestepping parameters (using fewer timesteps if the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00265}00265 code is run during a self-\/test) and document the system's initial }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00266}00266 state which provides the initial guess for the Newton iteration in }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00267}00267 the subsequent steady solve.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00268}00268 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00269}00269 \(\backslash\)until doc\_info.number()++; }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00270}00270 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00271}00271 We wish to start the time-\/dependent simulation from an initial}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00272}00272 condition that corresponds to the steady solution of the problem }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00273}00273 with unit influx (i.e. the steady solution obtained if the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00274}00274 time-\/dependent boundary condition that is applied at the inlet is held}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00275}00275 fixed at its value for \(\backslash\)f\$ t= 0 \(\backslash\)f\$). For the required}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00276}00276 Reynolds number of \(\backslash\)f\$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=200 \(\backslash\)f\$, the currently assigned}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00277}00277 initial guess (zero velocity and pressure, with the wall  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00278}00278 in its undeformed position) is "{}too far"{} from the actual solution}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00279}00279 and the Newton method would diverge (try it!). Therefore we}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00280}00280 generate the initial steady solution in a preliminary sequence}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00281}00281 of steady computations in which we first compute the solution for}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00282}00282 a Reynolds number of  \(\backslash\)f\$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=50 \(\backslash\)f\$ (for this value the Newton }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00283}00283 method does converge).}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00284}00284 This solution is then used as the initial guess for the computation}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00285}00285 at  \(\backslash\)f\$ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=100 \(\backslash\)f\$, etc. We allow for up to 3 mesh adaptations }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00286}00286 for each Reynolds number to allow the mesh to adapt itself to the flow}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00287}00287 conditions before starting the time-\/dependent run.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00288}00288 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00289}00289 \(\backslash\)until reached final Reynolds number}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00290}00290 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00291}00291 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00292}00292 Finally, we start the proper timestepping procedure, allowing for}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00293}00293 one mesh adaptation per timestep and suppressing the re-\/assignment}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00294}00294 of the initial condition after the mesh adaptation by setting}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00295}00295 the \(\backslash\)c first flag to false.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00296}00296  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00297}00297 \(\backslash\)until \}\textcolor{comment}{//end of main}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00298}00298 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00299}00299 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00300}00300 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00301}00301 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00302}00302 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00303}00303 \(\backslash\)section problem The Problem class}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00304}00304 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00305}00305 The \(\backslash\)c Problem class contains the usual member functions, most of which}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00306}00306 are either empty or explained in more detail below. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00307}00307 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00308}00308 \(\backslash\)dontinclude fsi\_channel\_with\_leaflet.cc}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00309}00309 \(\backslash\)skipline start\_of\_problem\_class}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00310}00310 \(\backslash\)until doc\_solution}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00311}00311 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00312}00312 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00313}00313 Two member functions are implemented here: The function }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00314}00314 \(\backslash\)c actions\_before\_implicit\_timestep() updates the time-\/dependent}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00315}00315 velocity profile at the upstream boundary (boundary 3; see the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00316}00316 enumeration of the mesh boundaries in the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00317}00317 <A HREF="{}../../../meshes/mesh\_list/html/index.html\textcolor{preprocessor}{\#channel\_with\_leaflet"{}>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00318}00318 \textcolor{preprocessor}{<CODE>ChannelWithLeafletMesh</CODE></A>):}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00319}00319 \textcolor{preprocessor}{\(\backslash\)until   \} // end of actions\_before\_implicit\_timestep}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00320}00320 \textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00321}00321 \textcolor{preprocessor}{Since the node-\/update is performed by an algebraic node-\/update}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00322}00322 \textcolor{preprocessor}{procedure the nodal positions in the fluid mesh must be }}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00323}00323 \textcolor{preprocessor}{updated whenever any of the (solid) degrees-\/of-\/freedom change.}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00324}00324 \textcolor{preprocessor}{This is done automatically during the computation of the shape}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00325}00325 \textcolor{preprocessor}{derivatives (implemented in the \(\backslash\)c AlgebraicElement wrapper class}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00326}00326 \textcolor{preprocessor}{described <A HREF="{}}../../fsi\_collapsible\_channel\_algebraic/html/index.html"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00327}00327 another tutorial</A>), but an additional node update must be performed}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00328}00328 when the unknowns are updated by the Newton solver. This}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00329}00329 is achieved by performing a further node-\/update in the function }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00330}00330 \(\backslash\)c actions\_before\_newton\_convergence\_check():}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00331}00331 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00332}00332 \(\backslash\)until \}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00333}00333 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00334}00334 The private member data contains the usual pointers to the \(\backslash\)c}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00335}00335 Problem's two sub-\/meshes,}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00336}00336 the pointer to \(\backslash\)c GeomObject that represents the leaflet, and}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00337}00337 the total height of the channel.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00338}00338 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00339}00339 \(\backslash\)until \};}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00340}00340 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00341}00341 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00342}00342 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00343}00343 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00344}00344 \(\backslash\)section constructor The problem constructor}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00345}00345 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00346}00346 We start the problem construction by creating two timesteppers:}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00347}00347 A \(\backslash\)c BFD<2> timestepper for the fluid and the fake timestepper}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00348}00348 \(\backslash\)c Steady<2> for the (massless) solid. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00349}00349 (<A HREF="{}../../fsi\_collapsible\_channel\_adapt/html/index.html"{}>Recall }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00350}00350 </A> that timesteppers}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00351}00351 from the \(\backslash\)c Steady family return zero time-\/derivatives but keep }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00352}00352 track of the past histories. These are needed during the adaptive}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00353}00353 refinement of the fluid mesh: when assigning the history of the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00354}00354 previous nodal positions for newly created fluid nodes, we must}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00355}00355 evaluate the position of the leaflet at previous timesteps; this is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00356}00356 discussed in more detail in }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00357}00357 <A HREF="{}../../fsi\_collapsible\_channel\_adapt/html/index.html"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00358}00358 another tutorial</A>.)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00359}00359 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00360}00360 \(\backslash\)skipline start\_of\_constructor}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00361}00361 \(\backslash\)until add\_time\_stepper\_pt(wall\_time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00362}00362 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00363}00363 Next we create the mesh of 1D Hermite beam elements that represents}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00364}00364 the leaflet, passing a pointer to an instance of the \(\backslash\)c}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00365}00365 UndeformedLeaflet to its constructor.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00366}00366 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00367}00367 \(\backslash\)until ,undeformed\_wall\_pt,wall\_time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00368}00368 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00369}00369 The wall mesh defines the geometry of the deformed leaflet, therefore}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00370}00370 we create a \(\backslash\)c GeomObject representation of that mesh, using the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00371}00371 \(\backslash\)c MeshAsGeomObject class, and pass it to the constructor of the fluid mesh:}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00372}00372 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00373}00373 \(\backslash\)until  fluid\_time\_stepper\_pt);}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00374}00374 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00375}00375 We specify an error estimator for the fluid mesh}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00376}00376 and add both meshes to the \(\backslash\)c Problem before combining them}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00377}00377 into a global mesh.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00378}00378 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00379}00379 \(\backslash\)until  build\_global\_mesh();}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00380}00380 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00381}00381 Dirichlet conditions (prescribed velocity) are applied on virtually}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00382}00382 all boundaries of the fluid domain (prescribed inflow at the inlet;}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00383}00383 zero velocity on the rigid channel walls; fluid velocity prescribed}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00384}00384 by the wall motion on the leaflet), apart from the outflow}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00385}00385 (boundary 1; see the enumeration of the mesh boundaries in the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00386}00386 <A HREF="{}../../../meshes/mesh\_list/html/index.html\#channel\_with\_leaflet"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00387}00387 <CODE>ChannelWithLeafletMesh</CODE></A>) where the axial velocity }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00388}00388 is unknown (and determined indirectly}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00389}00389 by the "{}axially-\/traction-\/free"{} condition) while the vertical}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00390}00390 velocity has to be set to zero to ensure parallel outflow.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00391}00391 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00392}00392 \(\backslash\)until end loop over boundaries}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00393}00393 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00394}00394 Next we assign the parabolic velocity profile at the inlet}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00395}00395 (recall that all values are initialised to zero so no further action}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00396}00396 is required on any of the other Dirichlet boundaries). }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00397}00397 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00398}00398 \(\backslash\)until  \}// end of setup boundary condition}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00399}00399 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00400}00400 The leaflet is clamped at its lower end so we pin its \(\backslash\)f\$x\_1\(\backslash\)f\$-\/ and}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00401}00401 \(\backslash\)f\$x\_2\(\backslash\)f\$-\/positions, and impose a vertical slope by setting \(\backslash\)f\$ dx\_1/ds = 0 \(\backslash\)f\$}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00402}00402 (where s is the local coordinate along the element; see the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00403}00403 discussion of the boundary conditions for beam elements in }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00404}00404 <A HREF="{}../../../beam/tensioned\_string/html/index.html"{}>another}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00405}00405 tutorial</A> for details).}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00406}00406 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00407}00407 \(\backslash\)until pin\_position(1,0)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00408}00408 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00409}00409 Next, we complete the build of the fluid elements by passing }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00410}00410 pointers to the relevant physical parameters to the elements}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00411}00411 and pinning any redundant pressure degrees of freedom; see}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00412}00412 <A HREF="{}../../../navier\_stokes/adaptive\_driven\_cavity/html/index.html"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00413}00413 another tutorial</A> for details.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00414}00414 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00415}00415 \(\backslash\)until pin\_redundant}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00416}00416 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00417}00417  When completing the build of the wall elements we use the function}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00418}00418 \(\backslash\)c enable\_fluid\_loading\_on\_both\_sides() to indicate that}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00419}00419 the leaflet is completely immersed in the fluid so that}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00420}00420 fluid tractions act on both of its faces. When setting up the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00421}00421 fluid-\/structure interaction below, one of the two faces}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00422}00422 will have to be identified as the "{}front"{} (face 0) and the other}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00423}00423 one as the "{}back"{} (face 1). The function \(\backslash\)c normal\_points\_into\_fluid()}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00424}00424 allows us to indicate if the outer unit normal on the leaflet }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00425}00425 (as computed by \(\backslash\)c FSIHermiteBeamElement::get\_normal(...) points}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00426}00426 into the fluid, when viewed from the "{}front"{} face. Here it does not -\/-\/}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00427}00427 see \(\backslash\)ref comm for more details on this slightly subtle point). }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00428}00428 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00429}00429 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00430}00430 \(\backslash\)until // end of loop over elements}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00431}00431 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00432}00432 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00433}00433 We can now set up the fluid structure interaction. The motion of the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00434}00434 leaflet determines the fluid velocity of all nodes on boundaries 4 and 5}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00435}00435 via the no-\/slip condition (see the enumeration of the mesh boundaries in the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00436}00436 <A HREF="{}../../../meshes/mesh\_list/html/index.html\#channel\_with\_leaflet"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00437}00437 <CODE>ChannelWithLeafletMesh</CODE></A>). The fluid velocity at these nodes can be updated}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00438}00438 automatically whenever a fluid node is moved (by the fluid mesh's}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00439}00439 node-\/update function) by specifying an auxiliary node update function.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00440}00440 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00441}00441 \(\backslash\)until aux node update fct has been set}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00442}00442 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00443}00443 Finally, we have to determine which fluid elements are adjacent}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00444}00444 to the two faces of the \(\backslash\)c FSIHermiteBeamElements }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00445}00445 to allow them to compute the fluid traction they are exposed to.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00446}00446 This is done separately for the "{}front"{} and "{}back"{} faces. The}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00447}00447 "{}front"{} of the leaflet (face 0) is assumed to coincide with the fluid mesh}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00448}00448 boundary 4; the "{}back"{} (face 1) is assumed to coincide with the fluid mesh}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00449}00449 boundary 5.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00450}00450 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00451}00451 \(\backslash\)until   (this,5,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00452}00452 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00453}00453 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00454}00454 Following the setup of the fluid-\/structure interaction we}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00455}00455 assign the equation numbers:}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00456}00456 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00457}00457 \(\backslash\)skipline   // Setup equation numbering scheme}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00458}00458 \(\backslash\)until cout <<"{}Number of equations: "{} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00459}00459 \(\backslash\)skipline end of constructor}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00460}00460 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00461}00461 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00462}00462 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00463}00463 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00464}00464 \(\backslash\)section adapt Actions after the mesh adaptation}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00465}00465 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00466}00466 Once the fluid mesh has been adapted we free all pressure}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00467}00467 degrees of freedom and then (re-\/)pin any redundant ones;}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00468}00468 see the discussion in }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00469}00469 <A HREF="{}../../../navier\_stokes/adaptive\_driven\_cavity/html/index.html"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00470}00470 another tutorial</a> for details.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00471}00471 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00472}00472 \(\backslash\)skipline start\_of\_actions\_after\_adapt}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00473}00473 \(\backslash\)until pin\_redundant}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00474}00474 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00475}00475 Any newly created fluid nodes on the leaflet (i.e. on the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00476}00476 fluid mesh boundaries 4 and 5) must be subjected to the automatic}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00477}00477 application of the no-\/slip condition. For simplicity }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00478}00478 we (re-\/)specify the auxiliary node update function pointer}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00479}00479 for all of the nodes on those boundaries.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00480}00480 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00481}00481 \(\backslash\)until  aux node update fct has been (re-\/)set}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00482}00482 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00483}00483 Finally, the adaptation of the fluid mesh may change the fluid }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00484}00484 elements that are adjacent to the wall elements so we re-\/generate the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00485}00485 corresponding FSI lookup schemes.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00486}00486 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00487}00487 \(\backslash\)until end\_of\_actions\_after\_adapt}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00488}00488 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00489}00489 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00490}00490 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00491}00491 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00492}00492 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00493}00493 \(\backslash\)section doc Post Processing}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00494}00494 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00495}00495 The function \(\backslash\)c doc\_solution(...) documents the results. We output}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00496}00496 the fluid and solid meshes and document selected additional quantities}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00497}00497 in the trace file.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00498}00498 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00499}00499 \(\backslash\)skipline start\_of\_doc\_solution}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00500}00500 \(\backslash\)until << std::endl;}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00501}00501 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00502}00502 The remaining output is created to determine which elements}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00503}00503 are located next to the fluid mesh boundaries 4 and 5}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00504}00504 (Yes, <a href="{}../../../meshes/mesh\_list/html/index.html\#channel\_with\_leaflet"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00505}00505 the documentation for the mesh</A> illustrates the enumeration of the mesh}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00506}00506 boundaries but we generally prefer to be paranoid; see \(\backslash\)ref comm ), }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00507}00507 and to establish the direction of the unit normal on the beam. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00508}00508 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00509}00509 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00510}00510 \(\backslash\)until end\_of\_doc\_solution}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00511}00511 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00512}00512 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00513}00513 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00514}00514 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00515}00515 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00516}00516 \(\backslash\)section comm\_ex Further comments and exercises}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00517}00517 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00518}00518 \(\backslash\)subsection comm Further comments}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00519}00519 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00520}00520 -\/\# <B>How does one identify the "{}front"{} and "{}back"{} of an immersed beam}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00521}00521    structure?</B> \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00522}00522    When setting up the fluid-\/structure interaction in the \(\backslash\)ref constructor}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00523}00523    we had to associate the fluid mesh boundaries 4 and 5 (the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00524}00524    boundaries adjacent to the leaflet (see the enumeration of }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00525}00525    the mesh boundaries in the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00526}00526    <A HREF="{}../../../meshes/mesh\_list/html/index.html\#channel\_with\_leaflet"{}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00527}00527    <CODE>ChannelWithLeafletMesh</CODE></A>) with the "{}front"{} and "{}back"{}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00528}00528    of the fully immersed beam structure. Furthermore, since the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00529}00529    computation of the fluid traction acting on the leaflet depends on the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00530}00530    direction of the normal, and the normal on the "{}front"{} of the leaflet}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00531}00531    points in the opposite direction to that on its "{}back"{} it is}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00532}00532    important to assess which normal is used in the automatic }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00533}00533    computation of the fluid traction.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00534}00534    There are two ways of establishing this: \(\backslash\)n\(\backslash\)n }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00535}00535    -\/\# <B>Quick and dirty:</B> \(\backslash\)n Set }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00536}00536       \(\backslash\)c FSIHermiteBeamElement::normal\_points\_into\_fluid() to \(\backslash\)c true}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00537}00537       and perform a steady computation. If the leaflet is sucked}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00538}00538       towards the high-\/pressure region you got it wrong. \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00539}00539    -\/\# <B>Do it properly:</B> \(\backslash\)n Use the output generated in }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00540}00540       \(\backslash\)c doc\_solution(...) to identify the elements adjacent}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00541}00541       to the fluid mesh boundaries 4 and 5 (i.e. the fluid elements next to the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00542}00542       leaflet's "{}front"{} and "{}back"{} faces), respectively, and the normal vector}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00543}00543       returned by \(\backslash\)c FSIHermiteBeamElement::get\_normal(...) -\/-\/ this}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00544}00544       is the normal that is used in the computation of the fluid}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00545}00545       traction. The figure below shows a plot of these}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00546}00546       within an adaptively refined fluid mesh. \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00547}00547 \(\backslash\)image html front\_and\_back.gif "{}Elements near the `front' (red) and `back' (green) of the leaflet and the outer unit normal on the leaflet. "{} }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00548}00548 \(\backslash\)image latex front\_and\_back.eps "{}Elements near the `front' (red) and `back' (green) of the leaflet and the outer unit normal on the leaflet. "{} width=0.75\(\backslash\)textwidth}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00549}00549       The red and green elements are the fluid elements adjacent to}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00550}00550       the fluid mesh boundaries 4 and 5 (i.e. the "{}front"{} and "{}back"{} }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00551}00551       of the leaflet), respectively. The normal}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00552}00552       vectors (shown in blue) point towards the upstream end of the channel so }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00553}00553       they point \(\backslash\)e away \(\backslash\)e from (rather than \(\backslash\)e into) the fluid}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00554}00554       that is adjacent to the "{}front"{} (the red region). This is why we set}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00555}00555       \(\backslash\)c FSIHermiteBeamElement::normal\_points\_into\_fluid()=false}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00556}00556       (Admittedly, we used the former method to get this right and only}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00557}00557       documented the proper way to do it when writing this tutorial...)}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00558}00558       \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00559}00559 -\/\# <B>Use of faster solvers: \(\backslash\)c oomph-\/lib's FSI preconditioner</B> \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00560}00560    The problem presented in this tutorial was used as one of the test cases}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00561}00561    for \(\backslash\)c oomph-\/lib's FSI preconditioner; see \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00562}00562    <CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00563}00563    <a href="{}http:\textcolor{comment}{//www.maths.man.ac.uk/\string~mheil/oomph\_lib\_additional\_material/HeilHazelBoyleCompMech/HeilHazelBoyleCompMech.pdf"{}>}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00564}00564    Heil, M., Hazel, A.L. \& Boyle, J. (2008): Solvers \textcolor{keywordflow}{for}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00565}00565    large-\/displacement fluid-\/structure interaction problems: }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00566}00566    Segregated vs. monolithic approaches. Computational Mechanics.</a>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00567}00567    </CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00568}00568    \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00569}00569    The use of \textcolor{keyword}{this} preconditioner (which leads to much faster solution}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00570}00570    times) is described in another tutorial. However, the required source}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00571}00571    code is already part of the driver code and has simply been ignored}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00572}00572    in \textcolor{keyword}{this} tutorial. Feel free to experiment with the preconditioner }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00573}00573    by modifying}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00574}00574    <A HREF=\textcolor{stringliteral}{"{}../../../../demo\_drivers/interaction/fsi\_channel\_with\_leaflet/fsi\_channel\_with\_leaflet.cc"{}}>the source code.</A>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00575}00575    }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00576}00576 \(\backslash\)subsection ex Exercises}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00577}00577 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00578}00578 -\/\# Confirm that choosing the wrong value \textcolor{keywordflow}{for} the flag  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00579}00579    \(\backslash\)c FSIHermiteBeamElement::normal\_points\_into\_fluid() makes}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00580}00580    the leaflet move in the wrong direction as it perceives positive}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00581}00581    fluid tractions as negative ones and vice versa. Here is }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00582}00582    what you should get:}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00583}00583 \(\backslash\)image html normal\_points\_in\_wrong\_direction.gif "{}Deformation of the leaflet with the wrong choice of FSIHermiteBeamElement::normal\_points\_into\_fluid(): The leaflet gets sucked towards the high-\/pressure region. "{} }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00584}00584 \(\backslash\)image latex normal\_points\_in\_wrong\_direction.eps "{}Deformation of the leaflet with the wrong choice of FSIHermiteBeamElement::normal\_points\_into\_fluid(): The leaflet gets sucked towards the high-\/pressure region. "{} width=0.75\(\backslash\)textwidth}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00585}00585    Clearly, the normal points in the wrong direction and the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00586}00586    tractions have the wrong sign. This can be made "{}consistent"{},}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00587}00587    however, by also swapping the association between the mesh boundaries}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00588}00588    and the leaflet's faces. I.e. if we associate mesh boundary 5}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00589}00589    with the "{}front"{} via  \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00590}00590    \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00591}00591    \textcolor{comment}{// Front of leaflet: face 0}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00592}00592    face=0; }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00593}00593    FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<ELEMENT,2>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00594}00594     (this,5,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00595}00595    \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00596}00596    \(\backslash\)n and mesh boundary 4 with the "{}back"{} via \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00597}00597     \(\backslash\)code}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00598}00598    \textcolor{comment}{// Back of leaflet: face 1}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00599}00599    face=1; }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00600}00600    FSI\_functions::setup\_fluid\_load\_info\_for\_solid\_elements<ELEMENT,2>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00601}00601     (this,4,Fluid\_mesh\_pt,Wall\_mesh\_pt,face); }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00602}00602    \(\backslash\)endcode}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00603}00603    \(\backslash\)n the code gives the right results again (make sure you change }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00604}00604    the code in the problem constructor and in the actions}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00605}00605    after adaptation!) -\/-\/ sometimes two wrongs do}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00606}00606    cancel each other out! }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00607}00607    \(\backslash\)n\(\backslash\)n }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00608}00608 -\/\textcolor{preprocessor}{\# <A HREF="{}../figures/fsi\_channel\_with\_leaflet\_flow.avi"{}}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00609}00609    The animation</A> of the flow field shows that the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00610}00610    outflow boundary condition is applied \textcolor{stringliteral}{"{}too close"{}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00611}00611    to the leaflet: in the relatively \textcolor{keywordtype}{short} domain chosen here,}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00612}00612    the outflow is far from fully developed and}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00613}00613    as a result the imposition of a parallel flow leads to the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00614}00614    development of a artificial outflow boundary layer. \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00615}00615 \(\backslash\)image html outflow\_bl.gif \textcolor{stringliteral}{"{}Artificial outflow boundary layer. "{}} }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00616}00616 \(\backslash\)image latex outflow\_bl.eps \textcolor{stringliteral}{"{}Artificial outflow boundary layer. "{}} width=0.75\(\backslash\)textwidth}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00617}00617    Confirm }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00618}00618    that an increase in the downstream length of the domain (or a reduction}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00619}00619    in the Reynolds number) improves the situation. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00620}00620    \(\backslash\)n\(\backslash\)n }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00621}00621 -\/\# The algebraic node-\/update technique employed in the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00622}00622    <A HREF=\textcolor{stringliteral}{"{}../../../meshes/mesh\_list/html/index.html\#channel\_with\_leaflet"{}}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00623}00623    <CODE>ChannelWithLeafletMesh</CODE></A> forces \(\backslash\)e all fluid nodes}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00624}00624    to move when the leaflet deforms. An increase in the downstream}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00625}00625    length of the fluid domain therefore leads to a significant}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00626}00626    increase in computational cost. Use the improved node-\/update}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00627}00627    technique suggested in the }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00628}00628    <A HREF=\textcolor{stringliteral}{"{}../../../navier\_stokes/channel\_with\_leaflet/html/index.html\#ex"{}}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00629}00629    corresponding Navier-\/Stokes example</A> (only move the nodes}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00630}00630    in the vicinity of the leaflet) to improve the}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00631}00631    efficiency of the code. }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00632}00632 .}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00633}00633  }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00634}00634 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00635}00635 <HR> }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00636}00636 \(\backslash\)section ackn Acknowledgements}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00637}00637 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00638}00638 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00639}00639 -\/ This code was originally developed by Floraine Cordier.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00640}00640 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00641}00641 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00642}00642 <HR>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00643}00643 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00644}00644 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00645}00645 \(\backslash\)section sources Source files \textcolor{keywordflow}{for} \textcolor{keyword}{this} tutorial}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00646}00646 -\/ The source files \textcolor{keywordflow}{for} \textcolor{keyword}{this} tutorial are located in the directory:\(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00647}00647 <CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00648}00648 <A HREF=\textcolor{stringliteral}{"{}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00649}00649 \textcolor{stringliteral}{../../../../}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00650}00650 \textcolor{stringliteral}{demo\_drivers/interaction/fsi\_channel\_with\_leaflet/}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00651}00651 \textcolor{stringliteral}{"{}}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00652}00652 demo\_drivers/interaction/fsi\_channel\_with\_leaflet/}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00653}00653 </A>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00654}00654 </CENTER>\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00655}00655 -\/ The driver code is: \(\backslash\)n\(\backslash\)n}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00656}00656 <CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00657}00657 <A HREF=\textcolor{stringliteral}{"{}}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00658}00658 \textcolor{stringliteral}{../../../../}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00659}00659 \textcolor{stringliteral}{demo\_drivers/interaction/fsi\_channel\_with\_leaflet/fsi\_channel\_with\_leaflet.cc}}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00660}00660 \textcolor{stringliteral}{"{}}>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00661}00661 demo\_drivers/interaction/fsi\_channel\_with\_leaflet/fsi\_channel\_with\_leaflet.cc}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00662}00662 </A>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00663}00663 </CENTER>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00664}00664 .}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00665}00665 }
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00666}00666 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00667}00667 <hr>}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00668}00668 \(\backslash\)section pdf PDF file}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00669}00669 A <a href="{}../latex/refman.pdf"{}>pdf version</a> of \textcolor{keyword}{this} document is available.}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00670}00670 **/}
+\DoxyCodeLine{\Hypertarget{fsi__channel__with__leaflet_8txt__doxygenified_8h_source_l00671}00671 }
+
+\end{DoxyCode}

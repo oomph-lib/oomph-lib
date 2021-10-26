@@ -63,7 +63,7 @@ As usual, we use a namespace to define the problem parameters, the Reynolds numb
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_namespace=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for global parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Parameters}{Global\_Parameters}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -75,16 +75,14 @@ As usual, we use a namespace to define the problem parameters, the Reynolds numb
 \DoxyCodeLine{\textcolor{comment}{ /// Flag for long/short run: Default =  perform long run}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Long\_run\_flag}}=1;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Flag for impulsive start: Default = start from exact}}
+\DoxyCodeLine{\textcolor{comment}{ /// Flag for impulsive start: Default = start from exact}}
 \DoxyCodeLine{\textcolor{comment}{ /// time-\/periodic solution. }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{namespaceGlobal__Parameters_aec41eb8da4929003e5d78ef4b43c0ed9}{Impulsive\_start\_flag}}=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_exact}{}\doxysection{The exact solution}\label{index_exact}
 We use another namespace to define the exact, time-\/periodic parallel-\/flow solution\+:
@@ -93,12 +91,12 @@ We use another namespace to define the exact, time-\/periodic parallel-\/flow so
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_exact\_solution=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for exact solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceExactSoln}{ExactSoln}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Exact solution of the problem as a vector}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{get\_exact\_u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}, \textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{get\_exact\_u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& t, \textcolor{keyword}{const} Vector<double>\& x, Vector<double>\& u)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} y=x[1];}
 \DoxyCodeLine{  \textcolor{comment}{// I=sqrt(-\/1)}}
@@ -111,7 +109,7 @@ We use another namespace to define the exact, time-\/periodic parallel-\/flow so
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{// Solution}}
 \DoxyCodeLine{  complex<double> sol(}
-\DoxyCodeLine{   exp(complex<double>(0.0,omega*\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}})) * }
+\DoxyCodeLine{   exp(complex<double>(0.0,omega*t)) * }
 \DoxyCodeLine{   (exp(lambda*complex<double>(0.0,y))-\/exp(lambda*complex<double>(0.0,-\/y)))}
 \DoxyCodeLine{   /(exp(I*lambda)-\/exp(-\/I*lambda)) );}
 \DoxyCodeLine{  }
@@ -122,7 +120,7 @@ We use another namespace to define the exact, time-\/periodic parallel-\/flow so
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Exact solution of the problem as a scalar}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{get\_exact\_u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& y,\textcolor{keywordtype}{double}\& u)}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{get\_exact\_u}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& t, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& y,\textcolor{keywordtype}{double}\& u)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// I=sqrt(-\/1)}}
 \DoxyCodeLine{  complex<double> I(0.0,1.0);}
@@ -133,7 +131,7 @@ We use another namespace to define the exact, time-\/periodic parallel-\/flow so
 \DoxyCodeLine{  lambda = I*sqrt(lambda);}
 \DoxyCodeLine{  \textcolor{comment}{// Solution}}
 \DoxyCodeLine{  complex<double> sol(}
-\DoxyCodeLine{   exp(complex<double>(0.0,omega*\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}})) * }
+\DoxyCodeLine{   exp(complex<double>(0.0,omega*t)) * }
 \DoxyCodeLine{   (exp(lambda*complex<double>(0.0,y))-\/exp(lambda*complex<double>(0.0,-\/y)))}
 \DoxyCodeLine{   /(exp(I*lambda)-\/exp(-\/I*lambda)) );}
 \DoxyCodeLine{}
@@ -156,19 +154,19 @@ We use optional command line arguments to specify which mode the code is run in\
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_main======================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for Rayleigh channel problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{rayleigh__channel_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) }
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Convert command line arguments (if any) into flags:}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordflow}{if} (argc==1)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"No command line arguments specified -\/-\/ using defaults."} }
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}No command line arguments specified -\/-\/ using defaults."{}} }
 \DoxyCodeLine{        << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argc==3)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Two command line arguments specified:"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Two command line arguments specified:"{}} << std::endl;}
 \DoxyCodeLine{   \textcolor{comment}{// Flag for long run}}
 \DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Global\_Parameters::Long\_run\_flag}}=atoi(argv[1]);\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{   /// Flag for impulsive start}}
@@ -177,25 +175,23 @@ We use optional command line arguments to specify which mode the code is run in\
 \DoxyCodeLine{ \textcolor{keywordflow}{else}}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   std::string error\_message = }
-\DoxyCodeLine{    \textcolor{stringliteral}{"Wrong number of command line arguments. Specify none or two.\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Wrong number of command line arguments. Specify none or two.\(\backslash\)n"{}};}
 \DoxyCodeLine{   error\_message +=}
-\DoxyCodeLine{    \textcolor{stringliteral}{"Arg1: Long\_run\_flag [0/1]\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Arg1: Long\_run\_flag [0/1]\(\backslash\)n"{}};}
 \DoxyCodeLine{   error\_message +=}
-\DoxyCodeLine{    \textcolor{stringliteral}{"Arg2: Impulsive\_start\_flag [0/1]\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Arg2: Impulsive\_start\_flag [0/1]\(\backslash\)n"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(error\_message,}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{  \}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Long run flag: "} }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Long run flag: "{}} }
 \DoxyCodeLine{      <<  \mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Global\_Parameters::Long\_run\_flag}} << std::endl;}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Impulsive start flag: "} }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Impulsive start flag: "{}} }
 \DoxyCodeLine{      <<  \mbox{\hyperlink{namespaceGlobal__Parameters_aec41eb8da4929003e5d78ef4b43c0ed9}{Global\_Parameters::Impulsive\_start\_flag}} << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-Next we set the physical and mesh parameters.
+ Next we set the physical and mesh parameters.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -220,9 +216,7 @@ Next we set the physical and mesh parameters.
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ny=10;}
 
 \end{DoxyCodeInclude}
-
-
-Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Hood elements and Crouzeix-\/\+Raviart elements.
+ Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Hood elements and Crouzeix-\/\+Raviart elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -232,13 +226,13 @@ Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Ho
 \DoxyCodeLine{  \textcolor{comment}{// Set up doc info}}
 \DoxyCodeLine{  DocInfo doc\_info;}
 \DoxyCodeLine{  doc\_info.number()=0;}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_CR"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_CR"{}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Set up problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classRayleighProblem}{RayleighProblem<QCrouzeixRaviartElement<2>}},BDF<2> > \mbox{\hyperlink{rayleigh__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}(nx,ny,lx,ly);}
+\DoxyCodeLine{  \mbox{\hyperlink{classRayleighProblem}{RayleighProblem<QCrouzeixRaviartElement<2>}},BDF<2> > problem(nx,ny,lx,ly);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Run the unsteady simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{rayleigh__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.unsteady\_run(doc\_info);}
+\DoxyCodeLine{  problem.unsteady\_run(doc\_info);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -248,30 +242,28 @@ Finally we set up {\ttfamily Doc\+Info} objects and solve for both Taylor-\/\+Ho
 \DoxyCodeLine{  \textcolor{comment}{// Set up doc info}}
 \DoxyCodeLine{  DocInfo doc\_info;}
 \DoxyCodeLine{  doc\_info.number()=0;}
-\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT\_TH"});}
+\DoxyCodeLine{  doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT\_TH"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Set up problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{classRayleighProblem}{RayleighProblem<QTaylorHoodElement<2>}},BDF<2> > \mbox{\hyperlink{rayleigh__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}(nx,ny,lx,ly);}
+\DoxyCodeLine{  \mbox{\hyperlink{classRayleighProblem}{RayleighProblem<QTaylorHoodElement<2>}},BDF<2> > problem(nx,ny,lx,ly);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{// Run the unsteady simulation}}
-\DoxyCodeLine{  \mbox{\hyperlink{rayleigh__channel_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.unsteady\_run(doc\_info);}
+\DoxyCodeLine{  problem.unsteady\_run(doc\_info);}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
-The problem class is very similar to that used in the \href{../../driven_cavity/html/index.html}{\texttt{ driven cavity example}}. We specify the type of the element and the type of the timestepper (assumed to be a member of the B\+DF family) as template parameters and pass the mesh parameters to the problem constructor.
+The problem class is very similar to that used in the \href{../../driven_cavity/html/index.html}{\texttt{ driven cavity example}}. We specify the type of the element and the type of the timestepper (assumed to be a member of the BDF family) as template parameters and pass the mesh parameters to the problem constructor.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_problem\_class=============================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Rayleigh-\/type problem: 2D channel whose upper}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// wall oscillates periodically.}}
+\DoxyCodeLine{\textcolor{comment}{/// Rayleigh-\/type problem: 2D channel whose upper}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// wall oscillates periodically.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRayleighProblem}{RayleighProblem}} : \textcolor{keyword}{public} Problem}
@@ -284,9 +276,7 @@ The problem class is very similar to that used in the \href{../../driven_cavity/
 \DoxyCodeLine{                 \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&lx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&ly);}
 
 \end{DoxyCodeInclude}
-
-
-No action is needed before or after solving, but we update the time-\/dependent boundary conditions at the upper wall before each timestep, using {\ttfamily Problem\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}. The boundary values are obtained from the exact solution, defined in the namespace {\ttfamily \mbox{\hyperlink{namespaceExactSoln}{Exact\+Soln}}}.
+ No action is needed before or after solving, but we update the time-\/dependent boundary conditions at the upper wall before each timestep, using {\ttfamily Problem\+::actions\+\_\+before\+\_\+implicit\+\_\+timestep()}. The boundary values are obtained from the exact solution, defined in the namespace {\ttfamily \mbox{\hyperlink{namespaceExactSoln}{Exact\+Soln}}}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -294,7 +284,7 @@ No action is needed before or after solving, but we update the time-\/dependent 
 \DoxyCodeLine{ \textcolor{comment}{//Update before solve is empty}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update after solve is empty}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update after solve is empty}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Actions before timestep: Update no slip on upper oscillating wall}}
@@ -319,9 +309,7 @@ No action is needed before or after solving, but we update the time-\/dependent 
 \DoxyCodeLine{  \} \textcolor{comment}{// end of actions\_before\_implicit\_timestep}}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily unsteady\+\_\+run(...)}, discussed below, performs the timestepping and documents the solution in the directory specified in the {\ttfamily Doc\+Info} object.
+ The function {\ttfamily unsteady\+\_\+run(...)}, discussed below, performs the timestepping and documents the solution in the directory specified in the {\ttfamily Doc\+Info} object.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -330,9 +318,7 @@ The function {\ttfamily unsteady\+\_\+run(...)}, discussed below, performs the t
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} unsteady\_run(DocInfo\& doc\_info); }
 
 \end{DoxyCodeInclude}
-
-
-We define the function {\ttfamily doc\+\_\+solution(...)} which documents the results, and provide functions to set the initial conditions and to fix a pressure value. The problem\textquotesingle{}s only member data contains an output stream in which we record the time-\/trace of the solution.
+ We define the function {\ttfamily doc\+\_\+solution(...)} which documents the results, and provide functions to set the initial conditions and to fix a pressure value. The problem\textquotesingle{}s only member data contains an output stream in which we record the time-\/trace of the solution.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -340,13 +326,13 @@ We define the function {\ttfamily doc\+\_\+solution(...)} which documents the re
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Set initial condition (incl previous timesteps) according}}
+\DoxyCodeLine{\textcolor{comment}{ /// Set initial condition (incl previous timesteps) according}}
 \DoxyCodeLine{\textcolor{comment}{ /// to specified function. }}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} set\_initial\_condition();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Fix pressure in element e at pressure dof pdof and set to pvalue}}
+\DoxyCodeLine{\textcolor{comment}{ /// Fix pressure in element e at pressure dof pdof and set to pvalue}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} fix\_pressure(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&e, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&pdof, }
 \DoxyCodeLine{                   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&pvalue)}
 \DoxyCodeLine{  \{}
@@ -372,7 +358,7 @@ We start by building the timestepper, determining its type from the class\textqu
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_constructor=============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem constructor}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\mbox{\hyperlink{classRayleighProblem_a53aeda7918553889b3fa0dd70cdb30f1}{RayleighProblem<ELEMENT,TIMESTEPPER>::RayleighProblem}}}
 \DoxyCodeLine{(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny,}
@@ -382,9 +368,7 @@ We start by building the timestepper, determining its type from the class\textqu
 \DoxyCodeLine{ add\_time\_stepper\_pt(\textcolor{keyword}{new} TIMESTEPPER); }
 
 \end{DoxyCodeInclude}
-
-
-Next we build the mesh and pass an additional boolean flag to the constructor to indicate that periodic boundary conditions are to be applied in the $ x_1$ -\/direction. We will discuss the implementation of this feature in more detail in \href{\#periodic}{\texttt{ below}}.
+ Next we build the mesh and pass an additional boolean flag to the constructor to indicate that periodic boundary conditions are to be applied in the $ x_1$ -\/direction. We will discuss the implementation of this feature in more detail in \href{\#periodic}{\texttt{ below}}.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -396,9 +380,7 @@ Next we build the mesh and pass an additional boolean flag to the constructor to
 \DoxyCodeLine{                                   time\_stepper\_pt());}
 
 \end{DoxyCodeInclude}
-
-
-We pin both velocity components on the top and bottom boundaries (i.\+e. at $ x_2=0$ and $ x_2=1$ , respectively), and pin the vertical velocity on the left and right boundaries (i.\+e. at $ x_1=0 $ and $ x_1=1 $ , respectively) to enforce horizontal outflow through the periodic boundaries.
+ We pin both velocity components on the top and bottom boundaries (i.\+e. at $ x_2=0$ and $ x_2=1$ , respectively), and pin the vertical velocity on the left and right boundaries (i.\+e. at $ x_1=0 $ and $ x_1=1 $ , respectively) to enforce horizontal outflow through the periodic boundaries.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -428,9 +410,7 @@ We pin both velocity components on the top and bottom boundaries (i.\+e. at $ x_
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-Finally we pass the pointers to the Reynolds and Strouhal numbers, $ Re $ and $ Re\, St $ , to the elements. Since no traction boundary conditions are applied anywhere, the pressure is only determined up to an arbitrary constant. To ensure a unique solution we pin a single pressure value before setting up the equation numbering scheme.
+ Finally we pass the pointers to the Reynolds and Strouhal numbers, $ Re $ and $ Re\, St $ , to the elements. Since no traction boundary conditions are applied anywhere, the pressure is only determined up to an arbitrary constant. To ensure a unique solution we pin a single pressure value before setting up the equation numbering scheme.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -457,32 +437,29 @@ Finally we pass the pointers to the Reynolds and Strouhal numbers, $ Re $ and $ 
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_IC}{}\doxysection{Initial conditions}\label{index_IC}
-The application of initial conditions for vector-\/valued problems is performed by the same procedure that we described for \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#IC}{\texttt{ scalar problems}}, except that we now have to assign \char`\"{}history
-values\char`\"{} for multiple nodal values. For timesteppers from the B\+DF family, the \char`\"{}history values\char`\"{} represent the solution at previous timesteps. We check that the timestepper is of the appropriate type, ~\newline
- loop over previous time levels, determine the velocity at those times and assign them to the \char`\"{}history values\char`\"{} of the velocities. No initial conditions are required for the pressure. Note that we also have to assign \char`\"{}history values\char`\"{} for the nodal positions since {\ttfamily oomph-\/lib\textquotesingle{}s} Navier-\/\+Stokes elements discretise the momentum equations in their A\+LE form. This aspect was explained in more detail in our discussion of the solution of the \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#IC}{\texttt{ unsteady heat equation}}.
+The application of initial conditions for vector-\/valued problems is performed by the same procedure that we described for \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#IC}{\texttt{ scalar problems}}, except that we now have to assign \char`\"{}history values\char`\"{} for multiple nodal values. For timesteppers from the BDF family, the \char`\"{}history values\char`\"{} represent the solution at previous timesteps. We check that the timestepper is of the appropriate type, ~\newline
+ loop over previous time levels, determine the velocity at those times and assign them to the \char`\"{}history values\char`\"{} of the velocities. No initial conditions are required for the pressure. Note that we also have to assign \char`\"{}history values\char`\"{} for the nodal positions since {\ttfamily oomph-\/lib\textquotesingle{}s} Navier-\/\+Stokes elements discretise the momentum equations in their ALE form. This aspect was explained in more detail in our discussion of the solution of the \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#IC}{\texttt{ unsteady heat equation}}.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======================start\_of\_set\_initial\_condition====================}}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Set initial condition: Assign previous and current values}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// from exact solution.}}
+\DoxyCodeLine{\textcolor{comment}{/// Set initial condition: Assign previous and current values}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// from exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighProblem_a5c54c02c45c656cabbe8f8808e2cfd6b}{RayleighProblem<ELEMENT,TIMESTEPPER>::set\_initial\_condition}}()}
 \DoxyCodeLine{\{ }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Check that timestepper is from the BDF family}}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (time\_stepper\_pt()-\/>type()!=\textcolor{stringliteral}{"BDF"})}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (time\_stepper\_pt()-\/>type()!=\textcolor{stringliteral}{"{}BDF"{}})}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   std::ostringstream error\_stream;}
-\DoxyCodeLine{   error\_stream << \textcolor{stringliteral}{"Timestepper has to be from the BDF family!\(\backslash\)n"}}
-\DoxyCodeLine{                << \textcolor{stringliteral}{"You have specified a timestepper from the "}}
-\DoxyCodeLine{                << time\_stepper\_pt()-\/>type() << \textcolor{stringliteral}{" family"} << std::endl;}
+\DoxyCodeLine{   error\_stream << \textcolor{stringliteral}{"{}Timestepper has to be from the BDF family!\(\backslash\)n"{}}}
+\DoxyCodeLine{                << \textcolor{stringliteral}{"{}You have specified a timestepper from the "{}}}
+\DoxyCodeLine{                << time\_stepper\_pt()-\/>type() << \textcolor{stringliteral}{"{} family"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
@@ -507,17 +484,17 @@ values\char`\"{} for multiple nodal values. For timesteppers from the B\+DF fami
 \DoxyCodeLine{ \textcolor{comment}{// How many previous timesteps does the timestepper use?}}
 \DoxyCodeLine{ \textcolor{keywordtype}{int} nprev\_steps=time\_stepper\_pt()-\/>nprev\_values();}
 \DoxyCodeLine{ Vector<double> prev\_time(nprev\_steps+1);}
-\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}=nprev\_steps;\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}>=0;\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}-\/-\/)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} t=nprev\_steps;t>=0;t-\/-\/)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   prev\_time[\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}]=time\_pt()-\/>time(\textcolor{keywordtype}{unsigned}(\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}));}
+\DoxyCodeLine{   prev\_time[t]=time\_pt()-\/>time(\textcolor{keywordtype}{unsigned}(t));}
 \DoxyCodeLine{  \} }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Loop over current \& previous timesteps}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}=nprev\_steps;\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}>=0;\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}-\/-\/)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} t=nprev\_steps;t>=0;t-\/-\/)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Continuous time}}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} time=prev\_time[\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}];}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"setting IC at time ="} << time << std::endl;}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} time=prev\_time[t];}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}setting IC at time ="{}} << time << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Loop over the nodes to set initial guess everywhere}}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n=0;n<num\_nod;n++)}
@@ -530,14 +507,14 @@ values\char`\"{} for multiple nodal values. For timesteppers from the B\+DF fami
 \DoxyCodeLine{     \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{ExactSoln::get\_exact\_u}}(time,x,soln);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Assign solution}}
-\DoxyCodeLine{     mesh\_pt()-\/>node\_pt(n)-\/>set\_value(\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}},0,soln[0]);}
-\DoxyCodeLine{     mesh\_pt()-\/>node\_pt(n)-\/>set\_value(\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}},1,soln[1]);}
+\DoxyCodeLine{     mesh\_pt()-\/>node\_pt(n)-\/>set\_value(t,0,soln[0]);}
+\DoxyCodeLine{     mesh\_pt()-\/>node\_pt(n)-\/>set\_value(t,1,soln[1]);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Loop over coordinate directions: Mesh doesn't move, so }}
 \DoxyCodeLine{     \textcolor{comment}{// previous position = present position}}
 \DoxyCodeLine{     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} i=0;i<2;i++)}
 \DoxyCodeLine{      \{}
-\DoxyCodeLine{       mesh\_pt()-\/>node\_pt(n)-\/>x(\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}},i)=x[i];}
+\DoxyCodeLine{       mesh\_pt()-\/>node\_pt(n)-\/>x(t,i)=x[i];}
 \DoxyCodeLine{      \}}
 \DoxyCodeLine{    \} }
 \DoxyCodeLine{  \}}
@@ -548,9 +525,7 @@ values\char`\"{} for multiple nodal values. For timesteppers from the B\+DF fami
 \DoxyCodeLine{\} \textcolor{comment}{// end of set\_initial\_condition}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_doc}{}\doxysection{Post processing}\label{index_doc}
 The function {\ttfamily doc\+\_\+solution(...)} is similar to those used in the \href{../../../unsteady_heat/two_d_unsteady_heat/html/index.html\#doc}{\texttt{ unsteady heat examples}}. We plot the computed solution, the time-\/periodic exact solution and the difference between the two, and record various parameters in the trace file. The plot of the computed solution contains tecplot instructions that generate a blue line in the top-\/left corner of the plot to indicate how time progresses during the simulation. The trace file contains a record of
@@ -568,7 +543,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to those used in the 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighProblem_aca1b0f4134bc745c75ae524450e97109}{RayleighProblem<ELEMENT,TIMESTEPPER>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -579,27 +554,27 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to those used in the 
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write file as a tecplot text object}}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"time = "} }
-\DoxyCodeLine{           << time\_pt()-\/>time() << \textcolor{stringliteral}{"\(\backslash\)""};}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\(\backslash\)"{}time = "{}} }
+\DoxyCodeLine{           << time\_pt()-\/>time() << \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
 \DoxyCodeLine{ \textcolor{comment}{// ...and draw a horizontal line whose length is proportional}}
 \DoxyCodeLine{ \textcolor{comment}{// to the elapsed time}}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"1"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"2"} << std::endl;}
-\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{" 0 0"} << std::endl;}
-\DoxyCodeLine{ some\_file << time\_pt()-\/>time()*20.0 << \textcolor{stringliteral}{" 0"} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}1"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{}2"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << \textcolor{stringliteral}{"{} 0 0"{}} << std::endl;}
+\DoxyCodeLine{ some\_file << time\_pt()-\/>time()*20.0 << \textcolor{stringliteral}{"{} 0"{}} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output exact solution }}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/exact\_soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/exact\_soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_fct(some\_file,npts,time\_pt()-\/>time(),}
@@ -609,7 +584,7 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to those used in the 
 \DoxyCodeLine{ \textcolor{comment}{// Doc error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} error,norm;}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/error\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/error\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>compute\_error(some\_file,}
@@ -620,8 +595,8 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to those used in the 
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc solution and error}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"error: "} << error << std::endl; }
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"norm : "} << norm << std::endl << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}error: "{}} << error << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}norm : "{}} << norm << std::endl << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Get time, position and exact soln at control node }}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_control=37;}
@@ -634,17 +609,17 @@ The function {\ttfamily doc\+\_\+solution(...)} is similar to those used in the 
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceExactSoln_a2598550281dd62f4160edb3d0b2e5432}{ExactSoln::get\_exact\_u}}(time,x,u);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write trace file}}
-\DoxyCodeLine{ Trace\_file << time << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << x[0] << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << x[1] << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << node\_pt-\/>value(0) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << node\_pt-\/>value(1) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << u[0] << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << u[1] << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << abs(u[0]-\/node\_pt-\/>value(0)) << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << abs(u[1]-\/node\_pt-\/>value(1)) << \textcolor{stringliteral}{" "} }
-\DoxyCodeLine{            << error << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{            << norm << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{ Trace\_file << time << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << x[0] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << x[1] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << node\_pt-\/>value(0) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << node\_pt-\/>value(1) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << u[0] << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << u[1] << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << abs(u[0]-\/node\_pt-\/>value(0)) << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << abs(u[1]-\/node\_pt-\/>value(1)) << \textcolor{stringliteral}{"{} "{}} }
+\DoxyCodeLine{            << error << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{            << norm << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{            << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -662,33 +637,31 @@ The function {\ttfamily unsteady\+\_\+run(...)} is used to perform the timestepp
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_unsteady\_run=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Unsteady run...}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=============================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT,\textcolor{keyword}{class} TIMESTEPPER>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classRayleighProblem_a7404085b8be8865ffc07fd4133e40151}{RayleighProblem<ELEMENT,TIMESTEPPER>::unsteady\_run}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Open trace file}}
 \DoxyCodeLine{ \textcolor{keywordtype}{char} filename[100];   }
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/trace.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/trace.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ Trace\_file.open(filename);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Write tecplot header for trace file}}
-\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"time"} << \textcolor{stringliteral}{",      "} }
-\DoxyCodeLine{            << \textcolor{stringliteral}{"x"} << \textcolor{stringliteral}{",         "}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"y"} << \textcolor{stringliteral}{",         "}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"u\_1"} << \textcolor{stringliteral}{",       "}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"u\_2"} << \textcolor{stringliteral}{",       "}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"u\_exact\_1"} << \textcolor{stringliteral}{", "}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"u\_exact\_2"} << \textcolor{stringliteral}{", "}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"error\_1"} << \textcolor{stringliteral}{",   "}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"error\_2"} << \textcolor{stringliteral}{",   "} }
-\DoxyCodeLine{            << \textcolor{stringliteral}{"L2 error"} << \textcolor{stringliteral}{",  "}}
-\DoxyCodeLine{            << \textcolor{stringliteral}{"L2 norm"} << \textcolor{stringliteral}{",   "} << std::endl;}
+\DoxyCodeLine{ Trace\_file << \textcolor{stringliteral}{"{}time"{}} << \textcolor{stringliteral}{"{},      "{}} }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}x"{}} << \textcolor{stringliteral}{"{},         "{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}y"{}} << \textcolor{stringliteral}{"{},         "{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}u\_1"{}} << \textcolor{stringliteral}{"{},       "{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}u\_2"{}} << \textcolor{stringliteral}{"{},       "{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}u\_exact\_1"{}} << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}u\_exact\_2"{}} << \textcolor{stringliteral}{"{}, "{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}error\_1"{}} << \textcolor{stringliteral}{"{},   "{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}error\_2"{}} << \textcolor{stringliteral}{"{},   "{}} }
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}L2 error"{}} << \textcolor{stringliteral}{"{},  "{}}}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"{}L2 norm"{}} << \textcolor{stringliteral}{"{},   "{}} << std::endl;}
 
 \end{DoxyCodeInclude}
-
-
-Next, we choose a value for the timestep and set up the initial conditions, either for an impulsive start...
+ Next, we choose a value for the timestep and set up the initial conditions, either for an impulsive start...
 
 
 \begin{DoxyCodeInclude}{0}
@@ -700,13 +673,11 @@ Next, we choose a value for the timestep and set up the initial conditions, eith
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Initialise all history values for an impulsive start}}
 \DoxyCodeLine{   assign\_initial\_values\_impulsive(dt);}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"IC = impulsive start"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}IC = impulsive start"{}} << std::endl;}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-...or for a \char`\"{}smooth\char`\"{} start from the time-\/periodic exact solution\+:
+ ...or for a \char`\"{}smooth\char`\"{} start from the time-\/periodic exact solution\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -716,13 +687,11 @@ Next, we choose a value for the timestep and set up the initial conditions, eith
 \DoxyCodeLine{   initialise\_dt(dt);}
 \DoxyCodeLine{   \textcolor{comment}{// Set initial conditions.}}
 \DoxyCodeLine{   set\_initial\_condition();}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"IC = exact solution"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}IC = exact solution"{}} << std::endl;}
 \DoxyCodeLine{  \} }
 
 \end{DoxyCodeInclude}
-
-
-We choose the number of timesteps to be computed and document the initial conditions.
+ We choose the number of timesteps to be computed and document the initial conditions.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -734,7 +703,7 @@ We choose the number of timesteps to be computed and document the initial condit
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceGlobal__Parameters_a457472b8222bb6bb0d97b2aed78d1ef4}{Global\_Parameters::Long\_run\_flag}}==0)}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   ntsteps=5; }
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"validation run"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}validation run"{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Doc initial condition}}
@@ -744,23 +713,21 @@ We choose the number of timesteps to be computed and document the initial condit
 \DoxyCodeLine{ doc\_info.number()++;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, perform the actual timestepping and document the solution after every timestep.
+ Finally, perform the actual timestepping and document the solution after every timestep.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Loop over the timesteps}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}=1;\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}<=ntsteps;\mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}}++)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} t=1;t<=ntsteps;t++)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"TIMESTEP "} << \mbox{\hyperlink{rayleigh__channel_8txt_ab47f2ddbbb6e782aad3890ff929101a0}{t}} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}TIMESTEP "{}} << t << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Take one fixed timestep}}
 \DoxyCodeLine{   unsteady\_newton\_solve(dt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Output the time}}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Time is now "} << time\_pt()-\/>time() << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Time is now "{}} << time\_pt()-\/>time() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Doc solution}}
 \DoxyCodeLine{   doc\_solution(doc\_info);}
@@ -772,9 +739,7 @@ Finally, perform the actual timestepping and document the solution after every t
 \DoxyCodeLine{\} \textcolor{comment}{// end of unsteady run}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
 \hypertarget{index_periodic}{}\doxysubsection{Periodic boundaries}\label{index_periodic}
@@ -785,18 +750,20 @@ Periodic boundary conditions arise in problems that are periodic in one of their
 In {\ttfamily oomph-\/lib} we create periodic nodes by allowing two (or more) nodes to access some of the same internal data. One of the nodes should be regarded as the original and the other(s) are set to be its \char`\"{}periodic counterpart(s)\char`\"{} and hence access its internal data. The \char`\"{}periodic counterpart(s)\char`\"{} are created by calling the member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{BoundaryNode::make\_periodic(Node *\textcolor{keyword}{const}\& node\_pt)}
+
 \end{DoxyCode}
  where the pointer to the original node is passed as the argument. Note that the required functionality imposes a slight storage overhead and so in {\ttfamily oomph-\/lib} we only allow Boundary\+Nodes to be made periodic.
 
 Here is a sketch of a 2D rectangular quad mesh. If this mesh is to be used in a problem with periodic boundary conditions in the horizontal direction (as in the above example), the pointer to node 3 on boundary 3 would have to be used when node 3 on boundary 1 is made periodic, etc. The appropriate commands are 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{//Get pointers to the two nodes that are to be "connected" via}}
+\DoxyCodeLine{\textcolor{comment}{//Get pointers to the two nodes that are to be "{}connected"{} via}}
 \DoxyCodeLine{\textcolor{comment}{//a periodic boundary}}
 \DoxyCodeLine{Node* original\_node\_pt = mesh\_pt()-\/>boundary\_node\_pt(3,3);}
 \DoxyCodeLine{Node* periodic\_node\_pt = mesh\_pt()-\/>boundary\_node\_pt(1,3);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Make the periodic\_node\_pt periodic the data from the original\_node\_pt}}
 \DoxyCodeLine{periodic\_node\_pt-\/>make\_periodic(original\_node\_pt);}
+
 \end{DoxyCode}
 
 
@@ -812,6 +779,7 @@ Although it is possible to make nodes periodic at any time, it is usually easier
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{RectangularQuadMesh<ELEMENT>}
+
 \end{DoxyCode}
 
 
@@ -837,5 +805,5 @@ We note that the application of periodic boundary conditions in spatially adapti
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

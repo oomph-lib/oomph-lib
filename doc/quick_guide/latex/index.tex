@@ -4,8 +4,8 @@ The purpose of this document is to provide a \char`\"{}quick\char`\"{} introduct
 \end{DoxyItemize}and
 \begin{DoxyItemize}
 \item are reasonably familiar with object-\/oriented programming in C++,
-\end{DoxyItemize}the Quick Guide should enable you to solve basic P\+DE problems using {\ttfamily oomph-\/lib}. You should also consult the extensive \href{../../example_code_list/html/index.html}{\texttt{ list of example codes}} distributed with the library.\hypertarget{index_main_how_to}{}\doxysection{How to solve simple P\+D\+Es with oomph-\/lib}\label{index_main_how_to}
-To solve a given P\+DE with {\ttfamily oomph-\/lib}, its discretisation needs to be specified in a {\ttfamily Problem} object. This usually involves the specification of the {\ttfamily Mesh} and the element types, followed by the application of the boundary conditions. If these steps are performed in the {\ttfamily Problem} constructor, the driver code itself can be as simple as\+:  
+\end{DoxyItemize}the Quick Guide should enable you to solve basic PDE problems using {\ttfamily oomph-\/lib}. You should also consult the extensive \href{../../example_code_list/html/index.html}{\texttt{ list of example codes}} distributed with the library.\hypertarget{index_main_how_to}{}\doxysection{How to solve simple PDEs with oomph-\/lib}\label{index_main_how_to}
+To solve a given PDE with {\ttfamily oomph-\/lib}, its discretisation needs to be specified in a {\ttfamily Problem} object. This usually involves the specification of the {\ttfamily Mesh} and the element types, followed by the application of the boundary conditions. If these steps are performed in the {\ttfamily Problem} constructor, the driver code itself can be as simple as\+:  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main()}
 \DoxyCodeLine{ \{}
@@ -18,13 +18,11 @@ To solve a given P\+DE with {\ttfamily oomph-\/lib}, its discretisation needs to
 \DoxyCodeLine{ \}}
 
 \end{DoxyCodeInclude}
-
-
-The amount of work required to represent a given P\+DE as a {\ttfamily Problem} object is problem-\/dependent\+:
+ The amount of work required to represent a given PDE as a {\ttfamily Problem} object is problem-\/dependent\+:
 \begin{DoxyItemize}
 \item If {\ttfamily oomph-\/lib\textquotesingle{}s} existing {\ttfamily Mesh} objects and element types are sufficient to discretise the problem, the generation of a fully-\/functional {\ttfamily Problem} object is straightforward. We shall discuss this case in the section \mbox{\hyperlink{index_problem}{How to build a Problem}}.
 \item If {\ttfamily oomph-\/lib} provides the required element type but none of the available meshes are suitable, you will have to write your own {\ttfamily Mesh} object. We shall discuss this in the section \mbox{\hyperlink{index_mesh}{How to build a Mesh}}. It is also possible to create {\ttfamily oomph-\/lib} meshes based on the output from third-\/party (commercial) mesh generators. This is illustrated in \href{../../meshes/third_party_meshes/html/index.html}{\texttt{ another example.}}
-\item Finally, the problem might involve a P\+DE for which {\ttfamily oomph-\/lib} does not provide any suitable elements. In this case you will need to write your own element. When implementing elements in {\ttfamily oomph-\/lib} the element formulation is generally sub-\/divided into (at least) two levels. Geometric elements implement the element geometry (e.\+g. 2D quad elements, 3D brick elements, etc); these geometric elements act as base classes for specific {\ttfamily Finite\+Elements} that implement the discretisation of particular P\+D\+Es. We discuss the implementation of the two types of elements in two separate sections\+:
+\item Finally, the problem might involve a PDE for which {\ttfamily oomph-\/lib} does not provide any suitable elements. In this case you will need to write your own element. When implementing elements in {\ttfamily oomph-\/lib} the element formulation is generally sub-\/divided into (at least) two levels. Geometric elements implement the element geometry (e.\+g. 2D quad elements, 3D brick elements, etc); these geometric elements act as base classes for specific {\ttfamily Finite\+Elements} that implement the discretisation of particular PDEs. We discuss the implementation of the two types of elements in two separate sections\+:
 \begin{DoxyItemize}
 \item In the section \mbox{\hyperlink{index_FEequations}{How to implement a new system of equations as a specific Finite\+Element}} we describe how to discretise a new system of equations, using existing geometric elements.
 \item In the section \mbox{\hyperlink{index_FEgeom}{How to build a new geometric element}} we discuss how to formulate new geometric elements.
@@ -49,18 +47,21 @@ All specific {\ttfamily Problems} should be implemented as objects that inherit 
 
 Only a few member functions {\itshape must} be implemented for each specific {\ttfamily Problem} class\+:
 \begin{DoxyItemize}
-\item The problem constructor
+\item The problem constructor 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SomeSpecificProblem(...) }
+
 \end{DoxyCode}
 
 \item and the member functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_before\_newton\_solve() }
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::actions\_after\_newton\_solve() }
+
 \end{DoxyCode}
 
 \end{DoxyItemize}\hypertarget{index_spec}{}\doxysubsection{The constructor\+: Some\+Specific\+Problem(...)}\label{index_spec}
@@ -69,27 +70,32 @@ The Problem constructor {\ttfamily Some\+Specific\+Problem(...)} usually contain
 \item Construction of the timestepper (if required), e.\+g. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::add\_time\_stepper\_pt(\textcolor{keyword}{new} SomeTimeStepper()); }
+
 \end{DoxyCode}
  ~\newline
 
 \item Construction of the {\ttfamily Mesh} (which may involve passing a particular element type as a template parameter), e.\+g. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::mesh\_pt() = \textcolor{keyword}{new} SomeMesh<SomeElement>(...); }
+
 \end{DoxyCode}
 
 \item Specification of the boundary conditions. By default, all nodal values are assumed to be free and their values are initialised to zero. Therefore, we only need to \char`\"{}pin\char`\"{} the values that are prescribed by boundary conditions and assign any nonzero boundary values. For instance, the following instruction \char`\"{}pins\char`\"{} the (single) nodal value at node \char`\"{}0\char`\"{}\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::mesh\_pt()-\/>node\_pt(0)-\/>pin(0); }
+
 \end{DoxyCode}
  A non-\/zero boundary value can be set by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::mesh\_pt()-\/>node\_pt(0)-\/>set\_value(0,1.0); }
+
 \end{DoxyCode}
  This statement sets the first (= zero-\/th in C++\textquotesingle{}s zero-\/based indexing) nodal value to 1.\+0.
 \item Completion of the build of the elements\+: Elements are typically constructed during the mesh generation process. To allow a generic implementation of this process, mesh constructors use an argument-\/free constructor to create the elements. Thus, element constructors must not have any arguments. (See the section `new\+\_\+mesh\&rsquo;, below, for an illustration of this process.) If an element requires any global parameters (such as pointers to physical parameters, function pointers to source functions, etc.), these parameters should be passed to the element via suitable access functions, {\itshape after} the element has been created by the mesh constructor.
 \item Assignment of the global and local equation numbers 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::assign\_eqn\_numbers(); }
+
 \end{DoxyCode}
 
 \end{DoxyItemize}\hypertarget{index_actbef}{}\doxysubsection{The function Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()}\label{index_actbef}
@@ -98,6 +104,7 @@ The Problem constructor {\ttfamily Some\+Specific\+Problem(...)} usually contain
 The (pure virtual) member function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} should contain everything that {\itshape must} be done before a nonlinear solve to complete the specification of the problem. For example, the function may contain a call to update the boundary conditions. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{update\_boundary\_conditions();\}}
+
 \end{DoxyCode}
 
 
@@ -110,9 +117,10 @@ The (pure virtual) member function {\ttfamily Problem\+::actions\+\_\+after\+\_\
 \DoxyCodeLine{  GlobalVariables::slave = node\_pt(0)-\/>value(0) + node\_pt(0)-\/>value(1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Call the output function}}
-\DoxyCodeLine{  ofstream output\_file(\textcolor{stringliteral}{"result.dat"});}
+\DoxyCodeLine{  ofstream output\_file(\textcolor{stringliteral}{"{}result.dat"{}});}
 \DoxyCodeLine{  output(output\_file); }
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -181,7 +189,7 @@ Here is the full specification for the {\ttfamily Demo\+Poisson\+Problem} class 
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{comment}{//Assign the global and local equations numbers for the problem}}
-\DoxyCodeLine{    cout << \textcolor{stringliteral}{"Number of equations is "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}Number of equations is "{}} << assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{}}
@@ -190,14 +198,14 @@ Here is the full specification for the {\ttfamily Demo\+Poisson\+Problem} class 
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (0==self\_test())}
 \DoxyCodeLine{     \{}
-\DoxyCodeLine{      cout << \textcolor{stringliteral}{"Problem has been set up correctly and can be solved."} }
+\DoxyCodeLine{      cout << \textcolor{stringliteral}{"{}Problem has been set up correctly and can be solved."{}} }
 \DoxyCodeLine{           << std::endl;}
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{    \textcolor{keywordflow}{else}}
 \DoxyCodeLine{     \{}
 \DoxyCodeLine{      \textcolor{keywordflow}{throw} }
-\DoxyCodeLine{       OomphLibError(\textcolor{stringliteral}{"Trouble! Check error messages and fix the problems.\(\backslash\)n"},}
-\DoxyCodeLine{                     \textcolor{stringliteral}{"DemoPoissonProblem::actions\_before\_newton\_solve()"},}
+\DoxyCodeLine{       OomphLibError(\textcolor{stringliteral}{"{}Trouble! Check error messages and fix the problems.\(\backslash\)n"{}},}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"{}DemoPoissonProblem::actions\_before\_newton\_solve()"{}},}
 \DoxyCodeLine{                     OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{   \}}
@@ -206,7 +214,7 @@ Here is the full specification for the {\ttfamily Demo\+Poisson\+Problem} class 
 \DoxyCodeLine{\textcolor{comment}{  /// Print out the result after the solve}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{void} actions\_after\_newton\_solve() }
 \DoxyCodeLine{   \{}
-\DoxyCodeLine{    ofstream file (\textcolor{stringliteral}{"result.dat"});}
+\DoxyCodeLine{    ofstream file (\textcolor{stringliteral}{"{}result.dat"{}});}
 \DoxyCodeLine{    mesh\_pt()-\/>output(file);}
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{}
@@ -243,7 +251,8 @@ If the domain is too different from any of the existing meshes, a new, customise
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }SpecificMesh : \textcolor{keyword}{public} \mbox{\hyperlink{quick__guide_8txt_a87d98d9383cf4ede5d237d15f8b45b54}{Mesh}}}
+\DoxyCodeLine{\textcolor{keyword}{class }SpecificMesh : \textcolor{keyword}{public} Mesh}
+
 \end{DoxyCode}
 
 
@@ -259,12 +268,12 @@ The minimum requirements for a specific mesh object are that it must\+:
 \end{DoxyItemize}We suggest that all specific {\ttfamily Mesh} constructors also set up an auxiliary lookup scheme that stores information about the mesh boundaries. While this is not strictly required, it greatly facilitates the application of boundary conditions in complex domains. Firstly, the function {\ttfamily Mesh\+::set\+\_\+nboundary(...)} must be called to specify the number of mesh boundaries. In addition, the generic {\ttfamily Mesh} class provides a function {\ttfamily Mesh\+::add\+\_\+boundary\+\_\+node(i,node\+\_\+pt)}, which adds the {\ttfamily Node} pointed to by {\ttfamily node\+\_\+pt} to the {\ttfamily Mesh\textquotesingle{}s} i-\/th boundary and constructs the required look-\/up schemes, including a reverse lookup scheme that informs all {\ttfamily Nodes} which mesh boundaries (if any) they are located on. (In our simple 1D example there are only two boundaries, each consisting of a single Node.) Although this step is optional, it {\itshape is} required during mesh adaptation -- if the reverse lookup scheme has not been set up, a warning is issued and the code execution stops when any mesh adaptation is attempted. {\bfseries{Implementation}} {\bfseries{detail\+:}} {\ttfamily Nodes} that are located on mesh boundaries must be defined as {\ttfamily Boundary\+Nodes}. ~\newline
 
 
-The majority of the work required to build a specific {\ttfamily Mesh} takes place in its constructor. Typically, the constructor creates the elements (of the type specified by the template parameter {\ttfamily E\+L\+E\+M\+E\+NT}) and uses the elements\textquotesingle{} member function {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} to create the new {\ttfamily Nodes}. The equivalent member function {\ttfamily Finite\+Element\+::construct\+\_\+boundary\+\_\+node(...)} is used to create new {\ttfamily Boundary\+Nodes}.
+The majority of the work required to build a specific {\ttfamily Mesh} takes place in its constructor. Typically, the constructor creates the elements (of the type specified by the template parameter {\ttfamily ELEMENT}) and uses the elements\textquotesingle{} member function {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} to create the new {\ttfamily Nodes}. The equivalent member function {\ttfamily Finite\+Element\+::construct\+\_\+boundary\+\_\+node(...)} is used to create new {\ttfamily Boundary\+Nodes}.
 
 Here is the complete class definition for a simple, one-\/dimensional (line) mesh which discretises the 1D domain $x\in [0,1]$ using a specified number of equally-\/spaced elements.  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
-\DoxyCodeLine{\textcolor{keyword}{class }OneDimMesh : \textcolor{keyword}{public} \mbox{\hyperlink{quick__guide_8txt_a87d98d9383cf4ede5d237d15f8b45b54}{Mesh}}}
+\DoxyCodeLine{\textcolor{keyword}{class }OneDimMesh : \textcolor{keyword}{public} Mesh}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
@@ -395,6 +404,7 @@ Here is the complete class definition for a simple, one-\/dimensional (line) mes
 To build a {\ttfamily One\+Dim\+Mesh} with ten elements of type {\ttfamily Some\+Element}, say, the {\ttfamily Problem} constructor would contain the following 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Problem::mesh\_pt() = \textcolor{keyword}{new} OneDimMesh<SomeElement>(10);}
+
 \end{DoxyCode}
 \hypertarget{index_distorted_mesh}{}\doxysubsection{How to adapt an existing Mesh to a different domain shape}\label{index_distorted_mesh}
 Given that mesh generation tends to be a fairly tedious process, one should always check whether it is possible to deform an existing {\ttfamily Mesh} into a shape that matches the required domain. Provided that the new domain has the same topology as the domain represented by the original {\ttfamily Mesh}, this can always be done by re-\/positioning the Nodes. Such \char`\"{}deformed\char`\"{} {\ttfamily Meshes} should be implemented via inheritance, by deriving the new {\ttfamily Mesh} from an existing one.
@@ -417,10 +427,10 @@ Here is an example that illustrates the procedure. Assume we wish to solve an eq
 \DoxyCodeLine{\textcolor{comment}{ /// SimpleRectangularQuadMesh; then deforms the mesh so that it fits }}
 \DoxyCodeLine{\textcolor{comment}{ /// into the annular region bounded by the radii r\_min and r\_max}}
 \DoxyCodeLine{\textcolor{comment}{ /// and angles (in degree) of phi\_min and phi\_max.}}
-\DoxyCodeLine{\textcolor{comment}{} AnnularQuadMesh(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_r, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& \mbox{\hyperlink{quick__guide_8txt_a28c512be778574961174106e95825c6d}{n\_phi}},}
-\DoxyCodeLine{                 \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{quick__guide_8txt_a78d8afa5582b00e09020ac467b127397}{r\_min}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{quick__guide_8txt_a9a75da5e2f56dd5571b8a556e1a6c500}{r\_max}},}
-\DoxyCodeLine{                 \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{quick__guide_8txt_af10de6107417dc48a16cf00b58d00fc7}{phi\_min}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{quick__guide_8txt_ac839063c3988d3908e1455a2213bc073}{phi\_max}}) :}
-\DoxyCodeLine{  SimpleRectangularQuadMesh<ELEMENT>(n\_r,\mbox{\hyperlink{quick__guide_8txt_a28c512be778574961174106e95825c6d}{n\_phi}},1.0,1.0)}
+\DoxyCodeLine{\textcolor{comment}{} AnnularQuadMesh(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_r, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& n\_phi,}
+\DoxyCodeLine{                 \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& r\_min, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& r\_max,}
+\DoxyCodeLine{                 \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& phi\_min, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& phi\_max) :}
+\DoxyCodeLine{  SimpleRectangularQuadMesh<ELEMENT>(n\_r,n\_phi,1.0,1.0)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// The constructor for the  SimpleRectangularQuadMesh has}}
@@ -432,7 +442,7 @@ Here is an example that illustrates the procedure. Assume we wish to solve an eq
 \DoxyCodeLine{   \textcolor{keywordtype}{unsigned} n\_node=nnode();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Calculate the value of pi}}
-\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{double} \mbox{\hyperlink{quick__guide_8txt_a4648272fb56eaaebdcdfc9f50f47daba}{pi}} = 4.0*atan(1.0);}
+\DoxyCodeLine{   \textcolor{keyword}{const} \textcolor{keywordtype}{double} pi = 4.0*atan(1.0);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Loop over all nodes}}
 \DoxyCodeLine{   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
@@ -445,8 +455,8 @@ Here is an example that illustrates the procedure. Assume we wish to solve an eq
 \DoxyCodeLine{     \textcolor{keywordtype}{double} y\_old=nod\_pt-\/>x(1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Map from the old x/y to the new r/phi:}}
-\DoxyCodeLine{     \textcolor{keywordtype}{double} r=\mbox{\hyperlink{quick__guide_8txt_a78d8afa5582b00e09020ac467b127397}{r\_min}}+(\mbox{\hyperlink{quick__guide_8txt_a9a75da5e2f56dd5571b8a556e1a6c500}{r\_max}}-\/\mbox{\hyperlink{quick__guide_8txt_a78d8afa5582b00e09020ac467b127397}{r\_min}})*x\_old;}
-\DoxyCodeLine{     \textcolor{keywordtype}{double} phi=(\mbox{\hyperlink{quick__guide_8txt_af10de6107417dc48a16cf00b58d00fc7}{phi\_min}}+(\mbox{\hyperlink{quick__guide_8txt_ac839063c3988d3908e1455a2213bc073}{phi\_max}}-\/\mbox{\hyperlink{quick__guide_8txt_af10de6107417dc48a16cf00b58d00fc7}{phi\_min}})*y\_old)*\mbox{\hyperlink{quick__guide_8txt_a4648272fb56eaaebdcdfc9f50f47daba}{pi}}/180.0;}
+\DoxyCodeLine{     \textcolor{keywordtype}{double} r=r\_min+(r\_max-\/r\_min)*x\_old;}
+\DoxyCodeLine{     \textcolor{keywordtype}{double} phi=(phi\_min+(phi\_max-\/phi\_min)*y\_old)*pi/180.0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{     \textcolor{comment}{// Set new nodal coordinates}}
 \DoxyCodeLine{     nod\_pt-\/>x(0)=r*cos(phi);}
@@ -455,6 +465,7 @@ Here is an example that illustrates the procedure. Assume we wish to solve an eq
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\};}
+
 \end{DoxyCode}
 
 
@@ -465,7 +476,7 @@ Modify the {\ttfamily One\+Dim\+Mesh} object so that it provides a piecewise uni
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_finiteelement}{}\doxysection{How to build a Finite\+Element}\label{index_finiteelement}
-{\ttfamily oomph-\/lib} provides fully-\/functional {\ttfamily Finite\+Elements} for the discretisation of a wide range of P\+D\+Es. Most of the existing elements are constructed in a three-\/level hierarchy, the base being the generic {\ttfamily Finite\+Element} class. The next level in the hierarchy contains geometric elements (e.\+g. 1D line elements, 2D quad or triangular elements, 3D brick elements, etc.). These geometric classes form the bases for elements that implement the discretisation of particular P\+D\+Es. This hierarchy maximises the potential for code-\/reuse, because it allows many different specific elements to be derived from the same geometric element.
+{\ttfamily oomph-\/lib} provides fully-\/functional {\ttfamily Finite\+Elements} for the discretisation of a wide range of PDEs. Most of the existing elements are constructed in a three-\/level hierarchy, the base being the generic {\ttfamily Finite\+Element} class. The next level in the hierarchy contains geometric elements (e.\+g. 1D line elements, 2D quad or triangular elements, 3D brick elements, etc.). These geometric classes form the bases for elements that implement the discretisation of particular PDEs. This hierarchy maximises the potential for code-\/reuse, because it allows many different specific elements to be derived from the same geometric element.
 
 We shall discuss the implementation of new element types in two sections\+:
 \begin{DoxyItemize}
@@ -475,26 +486,30 @@ We shall discuss the implementation of new element types in two sections\+:
 
 \DoxyHorRuler{0}
 \hypertarget{index_FEequations}{}\doxysubsection{How to implement a new system of equations as a specific Finite\+Element}\label{index_FEequations}
-Assume that we wish to design a new element type, {\ttfamily Specific\+Element}, say, that implements the discretisation of a system of P\+D\+Es on an existing geometric element. The {\ttfamily Specific\+Element} class needs to implement the following functions\+:
+Assume that we wish to design a new element type, {\ttfamily Specific\+Element}, say, that implements the discretisation of a system of PDEs on an existing geometric element. The {\ttfamily Specific\+Element} class needs to implement the following functions\+:
 \begin{DoxyItemize}
 \item The function that specifies the number of nodal values required at each of the element\textquotesingle{}s nodes\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::required\_nvalue(n) }
+
 \end{DoxyCode}
 
 \item The function that computes the element\textquotesingle{}s residual vector\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::get\_residuals(residuals) }
+
 \end{DoxyCode}
 
 \item The function that computes the element\textquotesingle{}s Jacobian matrix and its residual vector\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::get\_jacobian(residuals,jacobian) }
+
 \end{DoxyCode}
 
 \item The output function\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::output(ostream) }
+
 \end{DoxyCode}
 
 \end{DoxyItemize}
@@ -504,44 +519,34 @@ Most specific finite element classes will contain further member functions and m
 \DoxyCodeLine{\textcolor{keyword}{class }TwoNodePoissonElement : \textcolor{keyword}{public} TwoNodeGeometricElement}
 
 \end{DoxyCodeInclude}
-
-
-In addition to the {\ttfamily Finite\+Element} member functions discussed above, this element provides a function that defines the source function $ f(x) $,  
+ In addition to the {\ttfamily Finite\+Element} member functions discussed above, this element provides a function that defines the source function $ f(x) $,  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  \textcolor{keywordtype}{double} \mbox{\hyperlink{quick__guide_8txt_ac17939ce74bee1d9d5e41f861c653489}{f}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&x) \textcolor{keyword}{const} }
+\DoxyCodeLine{  \textcolor{keywordtype}{double} f(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&x) \textcolor{keyword}{const} }
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} double(Sign)*30.0*sin(sqrt(30.0)*x);}
 \DoxyCodeLine{   \}}
 
 \end{DoxyCodeInclude}
-
-
-where the sign of the source function is stored as private member data  
+ where the sign of the source function is stored as private member data  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{keywordtype}{int} Sign;}
 
 \end{DoxyCodeInclude}
-
-
-and can be set by the access function  
+ and can be set by the access function  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{keywordtype}{int}\& sign() \{\textcolor{keywordflow}{return} Sign;\}}
 
 \end{DoxyCodeInclude}
-
-
-We provide a member function that returns the (single) nodal value stored at a specified local node in the element,  
+ We provide a member function that returns the (single) nodal value stored at a specified local node in the element,  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} u(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n) \{\textcolor{keywordflow}{return} node\_pt(n)-\/>value(0);\}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, it is good practice to implement a self-\/test function that provides a sanity check of all data before the problem is solved. {\ttfamily oomph-\/lib} already provides self-\/test functions for all fundamental objects. Additional tests can be added by overloading these. For instance, in our Poisson element, the {\ttfamily Sign} variable should only take the values $ \pm 1 $. This can be tested with the following function, which also executes the {\ttfamily self\+\_\+test()} function of the underlying {\ttfamily Finite\+Element\+:}  
+ Finally, it is good practice to implement a self-\/test function that provides a sanity check of all data before the problem is solved. {\ttfamily oomph-\/lib} already provides self-\/test functions for all fundamental objects. Additional tests can be added by overloading these. For instance, in our Poisson element, the {\ttfamily Sign} variable should only take the values $ \pm 1 $. This can be tested with the following function, which also executes the {\ttfamily self\+\_\+test()} function of the underlying {\ttfamily Finite\+Element\+:}  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{  /// \(\backslash\)short Self test function: The sign in the source function should}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// only have the values +/-\/ 1. Following the general oomph-\/lib convention,}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /// the self\_test() returns 0 for success, and 1 for failure:}}
+\DoxyCodeLine{\textcolor{comment}{  /// Self test function: The sign in the source function should}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{  /// only have the values +/-\/ 1. Following the general oomph-\/lib convention,}}
+\DoxyCodeLine{\textcolor{comment}{  /// the self\_test() returns 0 for success, and 1 for failure:}}
 \DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{unsigned} self\_test()}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    \textcolor{comment}{// Initialise success flag}}
@@ -553,8 +558,8 @@ Finally, it is good practice to implement a self-\/test function that provides a
 \DoxyCodeLine{    \textcolor{comment}{// Do additional test for this function}}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} ((Sign!=1)\&\&(Sign!=-\/1))}
 \DoxyCodeLine{     \{}
-\DoxyCodeLine{      cout << \textcolor{stringliteral}{"Sign of source function should be +/-\/ 1,"} << std::endl;}
-\DoxyCodeLine{      cout << \textcolor{stringliteral}{"but it is:"} << Sign << std::endl;}
+\DoxyCodeLine{      cout << \textcolor{stringliteral}{"{}Sign of source function should be +/-\/ 1,"{}} << std::endl;}
+\DoxyCodeLine{      cout << \textcolor{stringliteral}{"{}but it is:"{}} << Sign << std::endl;}
 \DoxyCodeLine{      success=1;}
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{}
@@ -564,20 +569,16 @@ Finally, it is good practice to implement a self-\/test function that provides a
 \DoxyCodeLine{   \} \textcolor{comment}{// End of self test}}
 
 \end{DoxyCodeInclude}
-
-
-We will now discuss the implementation of the generic {\ttfamily Finite\+Element} member functions for the specific {\ttfamily Two\+Node\+Poisson\+Element\+:} \hypertarget{index_Fereq_nvalue}{}\doxysubsubsection{The function Finite\+Element\+::required\+\_\+nvalue(n)}\label{index_Fereq_nvalue}
+ We will now discuss the implementation of the generic {\ttfamily Finite\+Element} member functions for the specific {\ttfamily Two\+Node\+Poisson\+Element\+:} \hypertarget{index_Fereq_nvalue}{}\doxysubsubsection{The function Finite\+Element\+::required\+\_\+nvalue(n)}\label{index_Fereq_nvalue}
 The function returns the number of values that are stored at the element\textquotesingle{}s {\ttfamily n-\/th} local node. In our scalar Poisson problem, each node stores one value\+:
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{  /// For the Poisson equation, only one value is stored at each node}}
-\DoxyCodeLine{\textcolor{comment}{}  \textcolor{keywordtype}{unsigned} required\_nvalue(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} 1;\}}
+\DoxyCodeLine{  \textcolor{keywordtype}{unsigned} required\_nvalue(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n)\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} 1;\}}
 
 \end{DoxyCodeInclude}
-
-
-The function is used by {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} to determine the amount of storage to be allocated at each of the element\textquotesingle{}s {\ttfamily Nodes}.\hypertarget{index_residuals}{}\doxysubsubsection{The function Finite\+Element\+::get\+\_\+residuals(residuals)}\label{index_residuals}
+ The function is used by {\ttfamily Finite\+Element\+::construct\+\_\+node(...)} to determine the amount of storage to be allocated at each of the element\textquotesingle{}s {\ttfamily Nodes}.\hypertarget{index_residuals}{}\doxysubsubsection{The function Finite\+Element\+::get\+\_\+residuals(residuals)}\label{index_residuals}
 This function calculates the element\textquotesingle{}s residual vector whose entries are labelled by the {\itshape local} equation numbers. (Consult the \href{../../intro/html/index.html}{\texttt{ Introduction}} for a detailed discussion of the weak form of Poisson\textquotesingle{}s equation and its finite element discretisation which produces the discrete residual implemented here.) The spatial integration over the element is performed by the (default) integration scheme specified in the underlying geometric element. Note that it should (must) not be assumed that the residuals vector has been set to zero before the function call. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} get\_residuals(Vector<double> \&residuals)}
@@ -640,7 +641,7 @@ This function calculates the element\textquotesingle{}s residual vector whose en
 \DoxyCodeLine{       \}}
 \DoxyCodeLine{      }
 \DoxyCodeLine{      \textcolor{comment}{// Evaluate the source function}}
-\DoxyCodeLine{      \textcolor{keywordtype}{double} source=\mbox{\hyperlink{quick__guide_8txt_ac17939ce74bee1d9d5e41f861c653489}{f}}(interpolated\_x);}
+\DoxyCodeLine{      \textcolor{keywordtype}{double} source=f(interpolated\_x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{      \textcolor{comment}{//ASSEMBLE THE RESIDUALS}}
 \DoxyCodeLine{      }
@@ -668,7 +669,7 @@ This function calculates the element\textquotesingle{}s residual vector whose en
 \DoxyCodeLine{   \} \textcolor{comment}{//End of function}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_jac}{}\doxysubsubsection{The function Finite\+Element\+::get\+\_\+jacobian(residuals,jacobian)}\label{index_jac}
+ \hypertarget{index_jac}{}\doxysubsubsection{The function Finite\+Element\+::get\+\_\+jacobian(residuals,jacobian)}\label{index_jac}
 This function calculates the element\textquotesingle{}s Jacobian matrix and its residual vector, performing the spatial integration with the (default) integration scheme defined in the underlying geometric element. The entries in the Jacobian matrix and the residual vector are labelled by the {\itshape local} equation numbers. Note that neither the residuals vector nor the Jacobian matrix should be assumed to have been initialised to zero before the function call. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{  \textcolor{keywordtype}{void} get\_jacobian(Vector<double> \&residuals, DenseMatrix<double> \&jacobian)}
@@ -751,13 +752,12 @@ This function calculates the element\textquotesingle{}s Jacobian matrix and its 
 \DoxyCodeLine{   \} \textcolor{comment}{//End of function}}
 
 \end{DoxyCodeInclude}
-
-
-{\bfseries{Note\+:}} There is a large amount of code duplication between the {\ttfamily get\+\_\+residuals()} and {\ttfamily get\+\_\+jacobian()} functions. To avoid this, we usually implement the computation of the residual vector and the Jacobian matrix in a single function containing the loop over the integration points. We then use a boolean flag as an additional argument to determine whether the Jacobian matrix should be assembled, e.\+g. 
+ {\bfseries{Note\+:}} There is a large amount of code duplication between the {\ttfamily get\+\_\+residuals()} and {\ttfamily get\+\_\+jacobian()} functions. To avoid this, we usually implement the computation of the residual vector and the Jacobian matrix in a single function containing the loop over the integration points. We then use a boolean flag as an additional argument to determine whether the Jacobian matrix should be assembled, e.\+g. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} get\_generic\_residual\_contribution(Vector<double>\& residuals,}
 \DoxyCodeLine{                                       DenseMatrix<double>\& jacobian,}
 \DoxyCodeLine{                                       \textcolor{keywordtype}{bool} flag)         }
+
 \end{DoxyCode}
 \hypertarget{index_FEout}{}\doxysubsubsection{The function Finite\+Element\+::output(out\+\_\+stream)}\label{index_FEout}
 The output function is used to print the nodal values over the element 
@@ -771,21 +771,19 @@ The output function is used to print the nodal values over the element
 \DoxyCodeLine{    \textcolor{comment}{//and value of the field variable, u, at each node}}
 \DoxyCodeLine{    \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} n=0;n<n\_node;n++)}
 \DoxyCodeLine{     \{}
-\DoxyCodeLine{      output << nodal\_position(n,0) << \textcolor{stringliteral}{" "} << u(n) << std::endl;}
+\DoxyCodeLine{      output << nodal\_position(n,0) << \textcolor{stringliteral}{"{} "{}} << u(n) << std::endl;}
 \DoxyCodeLine{     \}}
 \DoxyCodeLine{   \} \textcolor{comment}{//End of function}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \hypertarget{index_FE_exercise}{}\doxysubsection{Exercises\+:}\label{index_FE_exercise}
 
 \begin{DoxyItemize}
 \item Implement the function {\ttfamily get\+\_\+generic\+\_\+residual\+\_\+contribution(...)} as a private member function of the {\ttfamily Two\+Node\+Poisson\+Element}. Use the function to avoid the large amount of code duplication between {\ttfamily get\+\_\+residuals(...)} and {\ttfamily get\+\_\+jacobian(...)} by re-\/writing these functions as follows\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Calculate the elemental contributions to the residuals for }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the weak form of the Poisson equation}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Calculate the elemental contributions to the residuals for }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// the weak form of the Poisson equation}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} get\_residuals(Vector<double> \&residuals)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Set flag for not computing the Jacobian}}
@@ -797,11 +795,12 @@ The output function is used to print the nodal values over the element
 \DoxyCodeLine{  \textcolor{comment}{// Compute the residuals only:}}
 \DoxyCodeLine{  get\_generic\_residual\_contribution(residuals,jacobian,flag);}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Calculate the elemental contribution to the Jacobian }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// matrix dR\_\{i\}/du\_\{j\} used in the Newton method}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Calculate the elemental contribution to the Jacobian }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// matrix dR\_\{i\}/du\_\{j\} used in the Newton method}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{void} get\_jacobian(Vector<double> \&residuals, DenseMatrix<double> \&jacobian)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{// Set flag for computing the Jacobian matrix}}
@@ -810,38 +809,42 @@ The output function is used to print the nodal values over the element
 \DoxyCodeLine{  \textcolor{comment}{// Compute the residuals and the Jacobian matrix:}}
 \DoxyCodeLine{  get\_generic\_residual\_contribution(residuals,jacobian,flag);}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 \item The implementation of the specific source function ~\newline
- $ f(x) $ in {\ttfamily Two\+Node\+Poisson\+Element\+::f(...)} makes it impossible to use the {\ttfamily Two\+Node\+Poisson\+Element} to solve the Poisson equation with any other source functions, even though the discretisation of the O\+DE would otherwise be completely identical. A better implementation would allow the \char`\"{}user\char`\"{} to specify a different source function without having to change the implementation of the element class itself. ~\newline
+ $ f(x) $ in {\ttfamily Two\+Node\+Poisson\+Element\+::f(...)} makes it impossible to use the {\ttfamily Two\+Node\+Poisson\+Element} to solve the Poisson equation with any other source functions, even though the discretisation of the ODE would otherwise be completely identical. A better implementation would allow the \char`\"{}user\char`\"{} to specify a different source function without having to change the implementation of the element class itself. ~\newline
  ~\newline
  Here is a suggestion for an improved implementation, which illustrates the procedure employed in the existing elements in {\ttfamily oomph-\/lib}\+:
 \begin{DoxyItemize}
 \item Introduce a public typedef into the element class to define the required format of the function pointer\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Function pointer to source function: }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// The source function returns the value of the }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// source function at the global coordinate x.}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Function pointer to source function: }\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// The source function returns the value of the }}
+\DoxyCodeLine{\textcolor{comment}{/// source function at the global coordinate x.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{typedef} double (*PoissonSourceFctPt)(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x);}
+
 \end{DoxyCode}
 
-\item Add a function pointer to the private data of the {\ttfamily Two\+Node\+Poisson\+Element} class and initialise it to N\+U\+LL in the constructor\+: 
+\item Add a function pointer to the private data of the {\ttfamily Two\+Node\+Poisson\+Element} class and initialise it to NULL in the constructor\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Function pointer to source function (initialised to}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// NULL in the constructor)}}
+\DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Function pointer to source function (initialised to}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// NULL in the constructor)}}
 \DoxyCodeLine{\textcolor{comment}{}PoissonSourceFctPt Source\_fct\_pt;}
+
 \end{DoxyCode}
 
 \item Provide an access function for the source function pointer\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// \(\backslash\)short Access function to pointer to source function}}
-\DoxyCodeLine{\textcolor{comment}{}PoissonSourceFctPt\& source\_fct\_pt() \{\textcolor{keywordflow}{return} Source\_fct\_pt;\}}
+\DoxyCodeLine{PoissonSourceFctPt\& source\_fct\_pt() \{\textcolor{keywordflow}{return} Source\_fct\_pt;\}}
+
 \end{DoxyCode}
 
 \item Re-\/write the {\ttfamily Two\+Node\+Poisson\+Element\+::f(...)} function, so that it evaluates the (global) function pointed to by the source function pointer. If possible, provide a default value for the case when the function pointer has not been set\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Evaluate source function at Eulerian position x}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keywordtype}{double} \mbox{\hyperlink{quick__guide_8txt_ac17939ce74bee1d9d5e41f861c653489}{f}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keywordtype}{double} f(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& x)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{ }\{ }
 \DoxyCodeLine{  \textcolor{comment}{//If no source function has been set, return zero}}
 \DoxyCodeLine{  \textcolor{comment}{//so that the Poisson equation defaults to a Laplace equation.}}
@@ -853,45 +856,52 @@ The output function is used to print the nodal values over the element
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} source;}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 \end{DoxyItemize}The pointer to the source function (typically defined in a suitable namespace in the \char`\"{}user\textquotesingle{}s\char`\"{} driver code) can now be set in the Problem constructor.
-\item Generalise the {\ttfamily Two\+Node\+Poisson\+Element} to a {\ttfamily Two\+Node\+Self\+Adjoint\+Element} that implements the isoparametric discretisation of the self-\/adjoint O\+DE \[ \frac{\mbox{d}}{\mbox{d}x} \left( a(x) \frac{\mbox{d}u}{\mbox{d}x} \right) + b(x) u(x) = f(x). \ \ \ \ \ \ \ \ \ (3) \] Use function pointers to allow the \char`\"{}user\char`\"{} to specify the coefficient functions $ a(x), \ b(x) $ and $ f(x) $.
+\item Generalise the {\ttfamily Two\+Node\+Poisson\+Element} to a {\ttfamily Two\+Node\+Self\+Adjoint\+Element} that implements the isoparametric discretisation of the self-\/adjoint ODE \[ \frac{\mbox{d}}{\mbox{d}x} \left( a(x) \frac{\mbox{d}u}{\mbox{d}x} \right) + b(x) u(x) = f(x). \ \ \ \ \ \ \ \ \ (3) \] Use function pointers to allow the \char`\"{}user\char`\"{} to specify the coefficient functions $ a(x), \ b(x) $ and $ f(x) $.
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
 \hypertarget{index_FEgeom}{}\doxysubsection{How to build a new geometric element}\label{index_FEgeom}
-Geometric elements define the geometry of a {\ttfamily Finite\+Element}. They are usually implemented as distinct classes that can then be used to create a number of {\ttfamily Finite\+Elements} each discretising a specific P\+DE, but with the same underlying geometrical representation. For this purpose, each geometric {\ttfamily Finite\+Element} must implement the following functions\+:
+Geometric elements define the geometry of a {\ttfamily Finite\+Element}. They are usually implemented as distinct classes that can then be used to create a number of {\ttfamily Finite\+Elements} each discretising a specific PDE, but with the same underlying geometrical representation. For this purpose, each geometric {\ttfamily Finite\+Element} must implement the following functions\+:
 \begin{DoxyItemize}
 \item The constructor 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SomeGeometricFiniteElement::SomeGeometricFiniteElement() }
+
 \end{DoxyCode}
  must perform the following actions\+:
 \begin{DoxyItemize}
 \item Set the number of Nodes by calling the protected member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_n\_node(n\_node). }
+
 \end{DoxyCode}
 
-\item Set the dimension of the element by calling the protected member function
+\item Set the dimension of the element by calling the protected member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_dimension(dim)}
+
 \end{DoxyCode}
  Here the dimension of the element is defined as the number of local coordinates required to parametrise its shape. (Note that this is not necessarily the same as the spatial dimension of the problem -- we can have one-\/dimensional {\ttfamily Finite\+Elements} in 3D space, say.)
-\item {\bfseries{Optional\+:}} Set the spatial integration scheme by calling the protected member function
+\item {\bfseries{Optional\+:}} Set the spatial integration scheme by calling the protected member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_integration\_scheme(\&integration\_scheme) }
+
 \end{DoxyCode}
 
-\item {\bfseries{Optional\+:}} If the spatial dimension (= the number of Eulerian coordinates) required at all Nodes in the element is different from the spatial dimension of the element then set the \char`\"{}nodal dimension\char`\"{} by calling the protected member function
+\item {\bfseries{Optional\+:}} If the spatial dimension (= the number of Eulerian coordinates) required at all Nodes in the element is different from the spatial dimension of the element then set the \char`\"{}nodal dimension\char`\"{} by calling the protected member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_nodal\_dimension(dim)}
+
 \end{DoxyCode}
  For example in shell elements, a two-\/dimensional surface is embedded in a three-\/dimensional space, so the elemental dimension is two, but the nodal dimension is three.
 \item {\bfseries{Optional\+:}} If the Eulerian coordinate (position) is interpolated using generalised coordinates, e.\+g. vector-\/valued shape functions, or Hermite-\/type interpolation, set the number of generalised coordinates or \char`\"{}position types\char`\"{} by using the protected member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::set\_n\_nodal\_position\_type(n\_position\_type)}
+
 \end{DoxyCode}
 
 \end{DoxyItemize}
@@ -899,6 +909,7 @@ Geometric elements define the geometry of a {\ttfamily Finite\+Element}. They ar
  The geometric shape functions {\itshape can} be (and often are) also used in specific {\ttfamily Finite\+Elements} to interpolate the unknown function(s) between the nodal values. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::shape(s,psi) }
+
 \end{DoxyCode}
 
 \end{DoxyItemize}
@@ -908,12 +919,14 @@ It is usually necessary to implement the following additional functions\+:
 \item The function that computes the derivatives of the element\textquotesingle{}s shape functions with respect to the local coordinates, 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::dshape\_local(s,psi,dpsids) }
+
 \end{DoxyCode}
 
 \item The function that specifies the number of Nodes along the element\textquotesingle{}s 1D \char`\"{}edges\char`\"{} ~\newline
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::nnode\_1d() }
+
 \end{DoxyCode}
 
 \end{DoxyItemize}Further member functions and member data may be defined as and when required. For instance, all specific {\ttfamily Finite\+Elements} must store a pointer to an (instantiated) spatial integration scheme. It is good practice to provide a default integration scheme for each geometric element and to ensure its instantiation by making it a static data member of the geometric element class. This allows the constructor of the geometric element to set the pointer to the default integration scheme. If the default is not appropriate for a specific derived {\ttfamily Finite\+Element}, the default assignment can be over-\/written in the constructor of the derived class.
@@ -923,18 +936,14 @@ As a concrete example, we consider the implementation of the one-\/dimensional, 
 \DoxyCodeLine{\textcolor{keyword}{class }TwoNodeGeometricElement : \textcolor{keyword}{public} FiniteElement}
 
 \end{DoxyCodeInclude}
-
-
-and it uses a one-\/dimensional, two-\/point Gauss rule as the default spatial integration scheme 
+ and it uses a one-\/dimensional, two-\/point Gauss rule as the default spatial integration scheme 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short Integration scheme that will be used to integrate over the element.}}
+\DoxyCodeLine{\textcolor{comment}{ /// Integration scheme that will be used to integrate over the element.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Simple Gaussian quadrature in one dimension, with two Gauss points.}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{static} Gauss<1,2> Default\_spatial\_integration\_scheme;}
+\DoxyCodeLine{ \textcolor{keyword}{static} Gauss<1,2> Default\_spatial\_integration\_scheme;}
 
 \end{DoxyCodeInclude}
-
-
-Here is the implementation of the generic {\ttfamily Finite\+Element} member functions for our specific geometric {\ttfamily Finite\+Element\+:} \hypertarget{index_Geomconst}{}\doxysubsubsection{The constructor\+: Two\+Node\+Geometric\+Element()}\label{index_Geomconst}
+ Here is the implementation of the generic {\ttfamily Finite\+Element} member functions for our specific geometric {\ttfamily Finite\+Element\+:} \hypertarget{index_Geomconst}{}\doxysubsubsection{The constructor\+: Two\+Node\+Geometric\+Element()}\label{index_Geomconst}
 The constructor sets the number of local nodes in the element (2), sets the dimension of the element (1) and sets the pointer to the spatial integration scheme to be the default that is defined and instantiated as a static data member of the class\+: 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ TwoNodeGeometricElement()}
@@ -956,7 +965,7 @@ The constructor sets the number of local nodes in the element (2), sets the dime
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_shape}{}\doxysubsubsection{The function Finite\+Element\+::shape(s,psi)}\label{index_shape}
+ \hypertarget{index_shape}{}\doxysubsubsection{The function Finite\+Element\+::shape(s,psi)}\label{index_shape}
 This function returns the shape functions at the local element coordinate, s. The shape functions are used to interpolate the position, and also, any data values stored at nodes in derived, isoparametric elements. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} shape(\textcolor{keyword}{const} Vector<double> \&s, Shape \&psi) \textcolor{keyword}{const}}
@@ -974,7 +983,7 @@ This function returns the shape functions at the local element coordinate, s. Th
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_dshape}{}\doxysubsubsection{The function Finite\+Element\+::dshape\+\_\+local(s,psi,dpsids)}\label{index_dshape}
+ \hypertarget{index_dshape}{}\doxysubsubsection{The function Finite\+Element\+::dshape\+\_\+local(s,psi,dpsids)}\label{index_dshape}
 This function returns the shape functions and their derivatives with respect to the local coordinates 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} dshape\_local(\textcolor{keyword}{const} Vector<double> \&s, Shape \&psi, DShape \&dpsids) \textcolor{keyword}{const}}
@@ -996,9 +1005,7 @@ Return the number of nodes along the element\textquotesingle{}s 1d \char`\"{}edg
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nnode\_1d()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} 2;\}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \hypertarget{index_geom_element_exercise}{}\doxysubsection{Exercises\+:}\label{index_geom_element_exercise}
 
 \begin{DoxyItemize}
@@ -1007,12 +1014,14 @@ Return the number of nodes along the element\textquotesingle{}s 1d \char`\"{}edg
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{unsigned} NNODE>}
 \DoxyCodeLine{\textcolor{keyword}{class }GeometricLineElement : \textcolor{keyword}{public} FiniteElement}
+
 \end{DoxyCode}
- represents 1D line elements with {\ttfamily N\+N\+O\+DE} nodes. Consider carefully which member functions you can implement in generality and which member functions require specialised implementations. Provide the specialised member functions for elements with two, three and four nodes.
+ represents 1D line elements with {\ttfamily NNODE} nodes. Consider carefully which member functions you can implement in generality and which member functions require specialised implementations. Provide the specialised member functions for elements with two, three and four nodes.
 \item Use the templated {\ttfamily Geometric\+Line\+Elements} to implement an equivalent generalisation of the {\ttfamily Two\+Node\+Poisson\+Element} and {\ttfamily Three\+Node\+Poisson\+Element} classes to the general class 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{unsigned} NNODE>}
 \DoxyCodeLine{\textcolor{keyword}{class }PoissonLineElement : \textcolor{keyword}{public} GeometricLineElement<NNODE>}
+
 \end{DoxyCode}
 
 \item Validate all elements against the exact solution and confirm the theoretical error estimate which predicts that if the domain $ x \in [0,1]$ is discretised with $ N $ equally spaced $n$-\/node line elements, we have \[ e = \sqrt{ \int_0^1 \left( u_{FE}(x) - u_{exact}(x) \right) ^2 dx } \sim h^{(n-1)} \mbox{ \ \ \ \ as $N \to \infty$} \] where $ h = 1/N $.
@@ -1022,7 +1031,7 @@ Return the number of nodes along the element\textquotesingle{}s 1d \char`\"{}edg
 We reiterate that the main purpose of this document is to provide a {\itshape quick} introduction to {\ttfamily oomph-\/lib\textquotesingle{}s} fundamental objects. The exercises have already highlighted several undesirable features of the simple example classes which could easily be improved to facilitate the (re-\/)use of the classes in different problems. Here we shall briefly discuss some further modifications that we regard as good practice, and which tend to be implemented in the existing classes in {\ttfamily oomph-\/lib}\+:
 \begin{DoxyItemize}
 \item \mbox{\hyperlink{index_dim_independent}{Dimension-\/independent implementation}}
-\item \mbox{\hyperlink{index_pre_compute_psi}{Using pre-\/computed shape functions and the Storable\+Shape\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class}}
+\item \mbox{\hyperlink{index_pre_compute_psi}{Using pre-\/computed shape functions and the Storable\+Shape\+Element$<$\+ELEMENT$>$ class}}
 \item \mbox{\hyperlink{index_equation_classes}{Further sub-\/division of specific element classes -- equation classes.}}
 \item \mbox{\hyperlink{index_paranoia}{Implement extensive (but optional) self tests in all classes}}
 \item \mbox{\hyperlink{index_magic}{The use of \char`\"{}magic numbers\char`\"{}}}
@@ -1031,15 +1040,16 @@ We reiterate that the main purpose of this document is to provide a {\itshape qu
 
 \DoxyHorRuler{0}
 \hypertarget{index_dim_independent}{}\doxysubsection{Dimension-\/independent implementation}\label{index_dim_independent}
-The exercises in the section \mbox{\hyperlink{index_FEgeom}{How to build a new geometric element}} suggest the use of templating to implement families of objects. This idea also permits the implementation of (geometric and specific) {\ttfamily Finite\+Elements} in arbitrary spatial dimensions. For instance, {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Q\+Element} class represents the family of (line/quadrilateral/brick-\/shaped) geometric elements with an arbitrary number of nodes along the elements\textquotesingle{} 1D edges. Thus, a {\ttfamily Q\+Element$<$1,3$>$} is a three-\/node 1D line element, a {\ttfamily Q\+Element$<$3,2$>$} is an eight-\/node 3D brick element, etc.
+The exercises in the section \mbox{\hyperlink{index_FEgeom}{How to build a new geometric element}} suggest the use of templating to implement families of objects. This idea also permits the implementation of (geometric and specific) {\ttfamily Finite\+Elements} in arbitrary spatial dimensions. For instance, {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily QElement} class represents the family of (line/quadrilateral/brick-\/shaped) geometric elements with an arbitrary number of nodes along the elements\textquotesingle{} 1D edges. Thus, a {\ttfamily QElement$<$1,3$>$} is a three-\/node 1D line element, a {\ttfamily QElement$<$3,2$>$} is an eight-\/node 3D brick element, etc.
 
-These geometric elements naturally form the basis for corresponding specific elements, such as the {\ttfamily Q\+Poisson\+Element} family which provides an isoparametric discretisation of the Poisson equation (in an arbitrary spatial dimension), based on the {\ttfamily Q\+Elements} with the same template parameters.
+These geometric elements naturally form the basis for corresponding specific elements, such as the {\ttfamily QPoisson\+Element} family which provides an isoparametric discretisation of the Poisson equation (in an arbitrary spatial dimension), based on the {\ttfamily QElements} with the same template parameters.
 
 \DoxyHorRuler{0}
-\hypertarget{index_pre_compute_psi}{}\doxysubsection{Using pre-\/computed shape functions and the Storable\+Shape\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$ class}\label{index_pre_compute_psi}
+\hypertarget{index_pre_compute_psi}{}\doxysubsection{Using pre-\/computed shape functions and the Storable\+Shape\+Element$<$\+ELEMENT$>$ class}\label{index_pre_compute_psi}
 The computation of the element\textquotesingle{}s residual vector and the Jacobian matrix requires the evaluation of the element\textquotesingle{}s shape functions, $ \psi_j $, and their derivatives with respect to the global coordinate, $ \mbox{d}\psi_j/\mbox{d}x $, at the element\textquotesingle{}s integration points. In our simple example class, {\ttfamily Two\+Node\+Poisson\+Element}, we (re-\/)compute these functions \char`\"{}on the fly\char`\"{}, using the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::dshape\_eulerian(s,psi,dpsidx)}
+
 \end{DoxyCode}
  where the local coordinate of the integration point is passed in the (one-\/dimensional) vector {\ttfamily s}.
 
@@ -1052,82 +1062,99 @@ The re-\/computation is wasteful because\+:
 \item Calls to the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::shape(s,psi)}
+
 \end{DoxyCode}
  which computes the shape function at a given local coordinate, {\ttfamily s}, can be replaced by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::shape\_at\_knot(int\_point,psi)}
+
 \end{DoxyCode}
- where the {\ttfamily unsigned} argument {\ttfamily int\+\_\+point} identifies the integration point (as specified by the element\textquotesingle{}s spatial integration scheme). In \char`\"{}standard\char`\"{} {\ttfamily Finite\+Elements} the function {\ttfamily Finite\+Element\+::shape\+\_\+at\+\_\+knot(...)} simply determines the position of the integration point and calls {\ttfamily Finite\+Element\+::shape(...)} and so the shape functions are still computed \char`\"{}on the fly\char`\"{}. The templated class {\ttfamily Storable\+Shape\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$}, however, may be used to upgrade any class derived from {\ttfamily Finite\+Element} into a class that {\bfseries{can}} store the values of the shape functions and their derivatives at the integration points. The function {\ttfamily shape\+\_\+at\+\_\+knot(...)} is overloaded so that when called for the first time, it computes the values of the shape function at all integration points and stores them for future reference. In subsequent calls, the function returns the stored values, rather than re-\/computing them.
+ where the {\ttfamily unsigned} argument {\ttfamily int\+\_\+point} identifies the integration point (as specified by the element\textquotesingle{}s spatial integration scheme). In \char`\"{}standard\char`\"{} {\ttfamily Finite\+Elements} the function {\ttfamily Finite\+Element\+::shape\+\_\+at\+\_\+knot(...)} simply determines the position of the integration point and calls {\ttfamily Finite\+Element\+::shape(...)} and so the shape functions are still computed \char`\"{}on the fly\char`\"{}. The templated class {\ttfamily Storable\+Shape\+Element$<$\+ELEMENT$>$}, however, may be used to upgrade any class derived from {\ttfamily Finite\+Element} into a class that {\bfseries{can}} store the values of the shape functions and their derivatives at the integration points. The function {\ttfamily shape\+\_\+at\+\_\+knot(...)} is overloaded so that when called for the first time, it computes the values of the shape function at all integration points and stores them for future reference. In subsequent calls, the function returns the stored values, rather than re-\/computing them.
 \item There are equivalent alternatives for the functions that compute the shape functions and their derivatives with respect to the local coordinates\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::dshape(s,psi,dpsids)}
+
 \end{DoxyCode}
  can be replaced by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::dshape\_at\_knot(int\_point,psi,dpsids)}
+
 \end{DoxyCode}
  while 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::d2shape(s,psi,dpsids,d2psids)}
+
 \end{DoxyCode}
  can be replaced by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::d2shape\_at\_knot(int\_point,psi,dpsids,d2psids)}
+
 \end{DoxyCode}
 
-\end{DoxyItemize}These functions are all overloaded in the {\ttfamily Storable\+Shape\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$} class and by default the overloaded functions store the pre-\/computed values of the shape functions and their derivatives locally within each element. This implementation ensures data locality and should increase the speed of access to the stored values. However, it can also create significant storage overheads. {\ttfamily oomph-\/lib} therefore provides the function 
+\end{DoxyItemize}These functions are all overloaded in the {\ttfamily Storable\+Shape\+Element$<$\+ELEMENT$>$} class and by default the overloaded functions store the pre-\/computed values of the shape functions and their derivatives locally within each element. This implementation ensures data locality and should increase the speed of access to the stored values. However, it can also create significant storage overheads. {\ttfamily oomph-\/lib} therefore provides the function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{StorableShapeElement<ELEMENT>::set\_shape\_local\_stored\_from\_element(...)}
+
 \end{DoxyCode}
  which frees up the storage in the element and replaces it by pointer-\/based access to the values stored in another element. Typically, all elements in a mesh are of the same type and use the same spatial integration scheme and so the values of the shape functions need only be stored in one element.
 
 Derivatives of the element\textquotesingle{}s shape functions with respect to the global Eulerian coordinates are generally computed by 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::dshape\_eulerian(s,psi,dpsidx)}
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::d2shape\_eulerian(s,psi,dpsidx,d2psidx)}
+
 \end{DoxyCode}
  These functions also return the Jacobian of the mapping between the local and global coordinates -- the Jacobian can also be computed independently from 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{FiniteElement::J\_eulerian(s)}
+
 \end{DoxyCode}
  The derivatives of the shape functions with respect the global coordinates depend on the nodal positions, and it is not safe to assume that they will remain constant. For instance in moving boundary problems, the position of the nodes is determined as part of the solution. By default, the functions 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{StorableShapeElement<ELEMENT>::dshape\_eulerian\_at\_knot(int\_point,psi,dpsidx)}
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{StorableShapeElement<ELEMENT>::d2shape\_eulerian\_at\_knot(int\_point,psi,dpsidx,d2psidx)}
+
 \end{DoxyCode}
  and 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{StorableShapeElement<ELEMENT>::J\_eulerian\_at\_knot(int\_point)}
+
 \end{DoxyCode}
  re-\/compute the derivatives at the specified integration point \char`\"{}on the fly\char`\"{}. If the \char`\"{}user\char`\"{} is confident that in his/her problem, the nodal positions will not change, the values can be pre-\/computed by calling 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{StorableShapeElement<ELEMENT>::pre\_compute\_dshape\_eulerian\_at\_knots()}
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{StorableShapeElement<ELEMENT>::pre\_compute\_d2shape\_eulerian\_at\_knots()}
+
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
 \DoxyCodeLine{StorableShapeElement<ELEMENT>::pre\_compute\_J\_eulerian\_at\_knots()}
+
 \end{DoxyCode}
  Once these functions have been called, any subsequent calls to the {\ttfamily $\ast$\+\_\+eulerian\+\_\+at\+\_\+knot}(...) functions return the stored values. To revert to the case in which the derivatives are re-\/computed \char`\"{}on the fly\char`\"{}, the storage for the derivatives must be deleted by ~\newline
  calling 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{StorableShapeElement<ELEMENT>::delete\_dshape\_eulerian\_stored()}
+
 \end{DoxyCode}
 
 
 {\bfseries{Notes\+:}} 
 \begin{DoxyItemize}
 \item In the (unlikely!) case that an element\textquotesingle{}s spatial integration scheme is changed during the code execution, all stored values are automatically re-\/computed.
-\item The class {\ttfamily Storable\+Shape\+Solid\+Element$<$\+E\+L\+E\+M\+E\+N\+T$>$} provides equivalent overloaded functions for derivatives with respect to the element\textquotesingle{}s Lagrangian coordinates that are used in solid mechanics problems.
+\item The class {\ttfamily Storable\+Shape\+Solid\+Element$<$\+ELEMENT$>$} provides equivalent overloaded functions for derivatives with respect to the element\textquotesingle{}s Lagrangian coordinates that are used in solid mechanics problems.
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
@@ -1138,7 +1165,7 @@ Note that different element types may store the same physical variable at differ
 
 As an example, consider the weak form of the 2D advection diffusion equation \[ \int \left(\mbox{Pe} \ \sum_{i=1}^2 w_i \frac{\partial u}{\partial x_i} \psi^{(test)}_l + \sum_{i=1}^2 \frac{\partial u}{\partial x_i} \frac{\partial \psi^{(test)}_l}{\partial x_i} \right) dA = 0, \] where the Peclet number, $ Pe $ , and the \char`\"{}wind\char`\"{} $w_i \ (i=1,2)$ are given. We expand the unknown function $u(x_1,x_2)$ in terms of the (global) basis functions $ \psi^{(basis)}_k(x_1,x_2), \ (k=1,...,N)$, \[ u(x_1,x_2) = \sum_{k=1}^N U_k \ \psi^{(basis)}_k(x_1,x_2), \] where $N$ is the total number of nodes in the mesh. The mapping between the element\textquotesingle{}s local and global coordinates is represented in terms of the local shape functions $\psi^{(shape)}_j(s_1,s_2)$ as \[ x_i = \sum_{j=1}^n X_{ij} \ \psi^{(shape)}_j(s_1,s_2) \] where $ n $ is the number of nodes in the element.
 
-The following sketch illustrates how this discretisation is implemented in {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Q\+Advection\+Diffusion\+Element} -- an isoparametric, quadrilateral element, based on the Galerkin discretisation of the weak form with $ \psi^{(shape)}_j = \psi^{(test)}_j = \psi^{(basis)}_j $
+The following sketch illustrates how this discretisation is implemented in {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily QAdvection\+Diffusion\+Element} -- an isoparametric, quadrilateral element, based on the Galerkin discretisation of the weak form with $ \psi^{(shape)}_j = \psi^{(test)}_j = \psi^{(basis)}_j $
 
  
 \begin{DoxyImage}
@@ -1147,13 +1174,13 @@ The following sketch illustrates how this discretisation is implemented in {\ttf
 \end{DoxyImage}
 
 
-At large Peclet number, the Galerkin discretisation of the advection diffusion equation is well-\/known to produce spurious \char`\"{}wiggles\char`\"{} in the solution. These can be suppressed by S\+U\+PG stabilisation which employs test functions, $ \psi_j^{(test)} $, that differ from the basis function, $ \psi_j^{(basis)} $, \[ \psi_j^{(test)} = \psi_j^{(basis)} + \tau^{(SUPG)} \sum_{i=1}^2 w_i \frac{\partial \psi_j^{(basis)}}{\partial x_i}, \] where $ \tau^{(SUPG)} $ is a stabilisation parameter. This can be implemented with a trivial change to the {\ttfamily Q\+Advection\+Diffusion\+Element} class -- the {\ttfamily Q\+S\+U\+P\+G\+Advection\+Diffusion\+Element} simply provides a different implementation of the test functions.
+At large Peclet number, the Galerkin discretisation of the advection diffusion equation is well-\/known to produce spurious \char`\"{}wiggles\char`\"{} in the solution. These can be suppressed by SUPG stabilisation which employs test functions, $ \psi_j^{(test)} $, that differ from the basis function, $ \psi_j^{(basis)} $, \[ \psi_j^{(test)} = \psi_j^{(basis)} + \tau^{(SUPG)} \sum_{i=1}^2 w_i \frac{\partial \psi_j^{(basis)}}{\partial x_i}, \] where $ \tau^{(SUPG)} $ is a stabilisation parameter. This can be implemented with a trivial change to the {\ttfamily QAdvection\+Diffusion\+Element} class -- the {\ttfamily QSUPGAdvection\+Diffusion\+Element} simply provides a different implementation of the test functions.
 
 \DoxyHorRuler{0}
 \hypertarget{index_paranoia}{}\doxysubsection{Implement extensive (but optional) self tests in all classes}\label{index_paranoia}
 We have already illustrated the use of {\ttfamily oomph-\/lib\textquotesingle{}s} generic {\ttfamily self\+\_\+test()} functions. The top-\/level {\ttfamily Problem\+::self\+\_\+test()} function performs a systematic test of all fundamental objects involved in a specific problem and can be used to diagnose any problems. It is good practise to implement further {\ttfamily self\+\_\+test()} functions in any newly developed classes. The generic {\ttfamily self\+\_\+test()} functions are defined to be virtual functions in {\ttfamily oomph-\/lib\textquotesingle{}s} fundamental objects and can be overloaded. Obviously, the {\ttfamily self\+\_\+test()} function in a specific derived object should still call the {\ttfamily self\+\_\+test()} function of the underlying fundamental object. The {\ttfamily Two\+Node\+Poisson\+Element\+::self\+\_\+test()} function, listed in in the section \mbox{\hyperlink{index_FEequations}{How to implement a new system of equations as a specific Finite\+Element}} illustrates the procedure.
 
-While frequent sanity checks are helpful during code-\/development, they can introduce significant overheads into the code execution. {\ttfamily oomph-\/lib} therefore provides a compiler flag P\+A\+R\+A\+N\+O\+ID, which allows the execution of sanity checks to be switched on or off. When developing new classes, sanity checks should be implemented to catch any potential problems, but the relevant code should be surrounded by {\ttfamily ifdef/endif} statements to allow the tests to be disabled. Here is an example\+: 
+While frequent sanity checks are helpful during code-\/development, they can introduce significant overheads into the code execution. {\ttfamily oomph-\/lib} therefore provides a compiler flag PARANOID, which allows the execution of sanity checks to be switched on or off. When developing new classes, sanity checks should be implemented to catch any potential problems, but the relevant code should be surrounded by {\ttfamily ifdef/endif} statements to allow the tests to be disabled. Here is an example\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{preprocessor}{ \#include <typeinfo>}}
 \DoxyCodeLine{}
@@ -1166,9 +1193,9 @@ While frequent sanity checks are helpful during code-\/development, they can int
 \DoxyCodeLine{  \textcolor{keywordflow}{if} (other\_pt==0)}
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{   std::ostringstream error\_stream;}
-\DoxyCodeLine{     error\_stream << \textcolor{stringliteral}{"Failed to cast some\_pt to SomeOtherObject* "}  }
+\DoxyCodeLine{     error\_stream << \textcolor{stringliteral}{"{}Failed to cast some\_pt to SomeOtherObject* "{}}  }
 \DoxyCodeLine{                  << std::endl;}
-\DoxyCodeLine{     error\_stream << \textcolor{stringliteral}{"The pointer some\_pt points to an object of type: "} <<}
+\DoxyCodeLine{     error\_stream << \textcolor{stringliteral}{"{}The pointer some\_pt points to an object of type: "{}} <<}
 \DoxyCodeLine{                  << \textcolor{keyword}{typeid}(some\_pt).name() << std::endl; }
 \DoxyCodeLine{     \textcolor{keywordflow}{throw} OomphLibError(error\_stream.str(),}
 \DoxyCodeLine{                         OOMPH\_CURRENT\_FUNCTION,}
@@ -1177,20 +1204,23 @@ While frequent sanity checks are helpful during code-\/development, they can int
 \DoxyCodeLine{\textcolor{preprocessor}{ \#endif }}
 \DoxyCodeLine{}
 \DoxyCodeLine{[...]}
+
 \end{DoxyCode}
  Note that we throw a specific {\ttfamily Oomph\+Lib\+Error} object after catching the error -- this allows the provision of more explicit (and hopefully more meaningful) error messages.
 
-Many access functions that provide indexed access to a private container, do, in fact, access a private S\+TL vector. Explicit range checking for these (frequent!) cases can be avoided by changing the container to {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Vector} class. The {\ttfamily Vector} class performs automatic range checking, if {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily generic} library is compiled with the {\ttfamily R\+A\+N\+G\+E\+\_\+\+C\+H\+E\+C\+K\+I\+NG} flag set (i.\+e. if {\ttfamily -\/D\+R\+A\+N\+G\+E\+\_\+\+C\+H\+E\+C\+K\+I\+NG} is specified as a compilation flag for the C++ compiler). For access functions that do not use the {\ttfamily Vector} class you should implement your own range checks using the R\+A\+N\+G\+E\+\_\+\+C\+H\+E\+C\+K\+I\+NG compiler flag.
+Many access functions that provide indexed access to a private container, do, in fact, access a private STL vector. Explicit range checking for these (frequent!) cases can be avoided by changing the container to {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Vector} class. The {\ttfamily Vector} class performs automatic range checking, if {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily generic} library is compiled with the {\ttfamily RANGE\+\_\+\+CHECKING} flag set (i.\+e. if {\ttfamily -\/DRANGE\+\_\+\+CHECKING} is specified as a compilation flag for the C++ compiler). For access functions that do not use the {\ttfamily Vector} class you should implement your own range checks using the RANGE\+\_\+\+CHECKING compiler flag.
 
 \DoxyHorRuler{0}
 \hypertarget{index_magic}{}\doxysubsection{The use of \char`\"{}magic numbers\char`\"{}}\label{index_magic}
 In general, we set the equation number to -\/1 to indicate that a nodal value is pinned, i.\+e. prescribed by boundary conditions. This convention is used throughout {\ttfamily oomph-\/lib}, but the direct use of -\/1 as a (bad!) \char`\"{}magic number\char`\"{} is generally avoided. Instead we refer to the static data member of the {\ttfamily Data} class 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{static} \textcolor{keywordtype}{long} Data::Is\_pinned }
+
 \end{DoxyCode}
  which is (of course) set to -\/1. Similarly, when nodes are created, the equation numbers of their value(s) are initialised to a value of -\/10, represented by the static data member 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{static} \textcolor{keywordtype}{int} Data::Is\_unclassified }
+
 \end{DoxyCode}
  This allows the function {\ttfamily Problem\+::self\+\_\+test()} to check if any values have not been classified as pinned or free.
 
@@ -1205,7 +1235,7 @@ As the name of the library suggests, {\ttfamily oomph-\/lib\textquotesingle{}s} 
 \item \mbox{\hyperlink{index_dont_wipe}{Rule 1\+: Elements must only initialise their own entries in the element residual vector and the element Jacobian matrix}}
 \item \mbox{\hyperlink{index_virtual}{Rule 2\+: Forcing functions, etc. should be implemented as uniquely-\/named virtual functions}}
 \item \mbox{\hyperlink{index_index_fcts}{Rule 3\+: Nodal values should only be accessed indirectly via index functions that can be overloaded in derived multi-\/physics elements}}
-\item \mbox{\hyperlink{index_mesh_movement}{Rule 4\+: Time derivatives should be implemented in the A\+LE formulation to allow for moving meshes.}}
+\item \mbox{\hyperlink{index_mesh_movement}{Rule 4\+: Time derivatives should be implemented in the ALE formulation to allow for moving meshes.}}
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
@@ -1223,6 +1253,7 @@ To illustrate this point, consider what would happen if we used the {\ttfamily T
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} j=0;j<n\_dof;j++) \{jacobian(i,j) = 0.0;\}}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -1232,6 +1263,7 @@ would initialise the {\itshape entire} Jacobian matrix, thus wiping out the entr
 The strategy used in {\ttfamily oomph-\/lib} to permit the easy combination of elements is to use the two protected member functions of the {\ttfamily Generalised\+Element} class\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} GeneralisedElement::fill\_in\_contribution\_to\_residuals(Vector<double>\&residuals);}
+
 \end{DoxyCode}
 
 
@@ -1241,10 +1273,11 @@ and
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} GeneralisedElement::fill\_in\_contribution\_to\_jacobian(Vector<double> \&residuals,}
 \DoxyCodeLine{                                                                  DenseMatrix<double> \&jacobian); }
+
 \end{DoxyCode}
 
 
-These functions DO N\+OT initialise the entries of the residuals vector or the Jacobian matrix. Instead, the functions merely add the appropriate contributions to the vector and the matrix entries. The default version of the {\ttfamily get\+\_\+residuals()} and {\ttfamily get\+\_\+jacobian()} functions, defined in {\ttfamily Generalised\+Element}, are simple wrappers that initialise the residuals and Jacobian to zero and then call the appropriate {\ttfamily fill\+\_\+in\+\_\+contribution}... function. 
+These functions DO NOT initialise the entries of the residuals vector or the Jacobian matrix. Instead, the functions merely add the appropriate contributions to the vector and the matrix entries. The default version of the {\ttfamily get\+\_\+residuals()} and {\ttfamily get\+\_\+jacobian()} functions, defined in {\ttfamily Generalised\+Element}, are simple wrappers that initialise the residuals and Jacobian to zero and then call the appropriate {\ttfamily fill\+\_\+in\+\_\+contribution}... function. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} GeneralisedElement::get\_residuals(Vector<double> \&residuals) }
 \DoxyCodeLine{\{}
@@ -1267,13 +1300,14 @@ These functions DO N\+OT initialise the entries of the residuals vector or the J
 \DoxyCodeLine{ \textcolor{comment}{//Add the elemental contribution to the residuals vector and Jacobian}}
 \DoxyCodeLine{ fill\_in\_contribution\_to\_jacobian(residuals,jacobian);}
 \DoxyCodeLine{\} }
+
 \end{DoxyCode}
 
 
 The {\ttfamily get\+\_\+residuals} function, for example, can thus be overloaded in a multi-\/physics element, as follows\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Multi-\/physics element, created by multiple inheritance}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{keyword}{class }SomeMultiPhysicsElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TwoNodePoissonElement,}
+\DoxyCodeLine{\textcolor{keyword}{class }SomeMultiPhysicsElement : \textcolor{keyword}{public} \textcolor{keyword}{virtual} TwoNodePoissonElement,}
 \DoxyCodeLine{                                \textcolor{keyword}{public} \textcolor{keyword}{virtual} TwoNodeSomeOtherEquationElement}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -1297,6 +1331,7 @@ The {\ttfamily get\+\_\+residuals} function, for example, can thus be overloaded
 \DoxyCodeLine{  [...]}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \};}
+
 \end{DoxyCode}
 
 
@@ -1306,10 +1341,12 @@ To allow for an interaction between multiple equations, any forcing functions (s
 Furthermore, to avoid clashes of function names that may occur when two single-\/physics elements are combined, member functions that can be expected to have counterparts in the context of other equations should be given suitable modifiers. For instance, 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{AdvectionDiffusionEquation::source\_fct\_adv\_diff(...)}
+
 \end{DoxyCode}
  is a better name for a member function that returns the source function in the advection-\/diffusion equations than 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{AdvectionDiffusionEquation::source\_fct(...)}
+
 \end{DoxyCode}
  since many other equations are likely to have source functions, too. It is obviously impossible to completely avoid such clashes but this strategy makes them less likely to occur. We are fairly confident that the relevant member functions of all existing elements in {\ttfamily oomph-\/lib} have been given suitable modifiers to avoid clashes of this type. Therefore, you should be able to combine any element with any other element in the library. If you find a counter-\/example \href{../../contact/html/index.html}{\texttt{ let us know}}, and we will rectify this in the next release. In the meantime exploit the fact that {\ttfamily oomph-\/lib} is an open source library; you can change anything you want!\hypertarget{index_index_fcts}{}\doxysubsubsection{Rule 3\+: Nodal values should only be accessed indirectly via index functions that can be overloaded in derived multi-\/physics elements}\label{index_index_fcts}
 When implementing the single-\/physics {\ttfamily Two\+Node\+Poisson\+Element}, discussed above, we provided an access function {\ttfamily u(n)} that returns the (single) nodal value, stored at the element\textquotesingle{}s {\ttfamily n} -\/th {\ttfamily Node}. The function was implemented as a simple wrapper that followed the pointer to the element\textquotesingle{}s {\ttfamily n} -\/th {\ttfamily Node} and returned the zero-\/th nodal value stored at that {\ttfamily Node\+:} 
@@ -1318,6 +1355,7 @@ When implementing the single-\/physics {\ttfamily Two\+Node\+Poisson\+Element}, 
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} node\_pt(n)-\/>value(0);}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -1329,6 +1367,7 @@ The same logic suggests that a {\ttfamily Two\+Node\+Advection\+Diffusion\+Eleme
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} node\_pt(n)-\/>value(0);}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -1340,6 +1379,7 @@ However, merging these two elements via multiple inheritance creates two problem
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} node\_pt(n)-\/>value(u\_index\_poisson());}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -1353,6 +1393,7 @@ where the virtual function {\ttfamily u\+\_\+index\+\_\+poisson()} provides the 
 \DoxyCodeLine{  \textcolor{comment}{// value is stored at the zero-\/th nodal value:}}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} 0;}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -1364,6 +1405,7 @@ The advection-\/diffusion element can be modified in the same way\+:
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} node\_pt(n)-\/>value(u\_index\_adv\_diff());}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -1377,6 +1419,7 @@ with
 \DoxyCodeLine{  \textcolor{comment}{// value is stored at the zero-\/th nodal value:}}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} 0;}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -1387,6 +1430,7 @@ In a combined multi-\/physics problem, we can now merge the two elements by mult
 \DoxyCodeLine{\textcolor{keyword}{class }TwoNodeAdvDiffAndPoissonElement : }
 \DoxyCodeLine{       \textcolor{keyword}{public} \textcolor{keyword}{virtual} TwoNodePoissonElement,}
 \DoxyCodeLine{       \textcolor{keyword}{public} \textcolor{keyword}{virtual} TwoNodeAdvectionDiffusionElement}
+
 \end{DoxyCode}
 
 
@@ -1402,6 +1446,7 @@ Name clashes are already avoided, so we only have to overwrite the two index fun
 \DoxyCodeLine{  \textcolor{comment}{// function!]}}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} 0;}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
@@ -1415,13 +1460,14 @@ and
 \DoxyCodeLine{  \textcolor{comment}{// value at the first nodal value:}}
 \DoxyCodeLine{  \textcolor{keywordflow}{return} 1;}
 \DoxyCodeLine{ \}}
+
 \end{DoxyCode}
 
 
-Specific examples that illustrate the creation of (non-\/trivial) multi-\/physics elements by multiple inheritance are provided in the \href{../../example_code_list/html/index.html\#multi}{\texttt{ list of example codes.}}\hypertarget{index_mesh_movement}{}\doxysubsubsection{Rule 4\+: Time derivatives should be implemented in the A\+L\+E formulation to allow for moving meshes.}\label{index_mesh_movement}
-In moving mesh problems, the time-\/derivative of a nodal value (approximated by the Node\textquotesingle{}s {\ttfamily Time\+Stepper}) is not the same as the Eulerian time-\/derivative $ \partial/ \partial t $ that \char`\"{}usually\char`\"{} occurs in the governing equation. The former represents the rate of change when following the moving node; the latter is the rate of change evaluated at a fixed Eulerian position. The two time-\/derivatives are related to each other via the A\+LE relation \[ \left. \frac{\partial (.)}{\partial t} \right|_{Eulerian} = \left. \frac{\partial (.) }{\partial t} \right|_{at \ node} - \ \sum_{i=1}^D v_i^{(Mesh)} \ \frac{\partial (.) }{ \partial x_i} \] where $ D $ is the spatial dimension of the problem and $ v_i^{(Mesh)} \ (i=1,...,D) $ is the velocity of the node. Any Eulerian time-\/derivatives in the governing equation should be implemented in the above form to ensure that the element remains functional in moving mesh problems. See the \href{../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html}{\texttt{ example describing the solution of the unsteady heat equation in a moving domain}} for further details.
+Specific examples that illustrate the creation of (non-\/trivial) multi-\/physics elements by multiple inheritance are provided in the \href{../../example_code_list/html/index.html\#multi}{\texttt{ list of example codes.}}\hypertarget{index_mesh_movement}{}\doxysubsubsection{Rule 4\+: Time derivatives should be implemented in the ALE formulation to allow for moving meshes.}\label{index_mesh_movement}
+In moving mesh problems, the time-\/derivative of a nodal value (approximated by the Node\textquotesingle{}s {\ttfamily Time\+Stepper}) is not the same as the Eulerian time-\/derivative $ \partial/ \partial t $ that \char`\"{}usually\char`\"{} occurs in the governing equation. The former represents the rate of change when following the moving node; the latter is the rate of change evaluated at a fixed Eulerian position. The two time-\/derivatives are related to each other via the ALE relation \[ \left. \frac{\partial (.)}{\partial t} \right|_{Eulerian} = \left. \frac{\partial (.) }{\partial t} \right|_{at \ node} - \ \sum_{i=1}^D v_i^{(Mesh)} \ \frac{\partial (.) }{ \partial x_i} \] where $ D $ is the spatial dimension of the problem and $ v_i^{(Mesh)} \ (i=1,...,D) $ is the velocity of the node. Any Eulerian time-\/derivatives in the governing equation should be implemented in the above form to ensure that the element remains functional in moving mesh problems. See the \href{../../unsteady_heat/two_d_unsteady_heat_ALE/html/index.html}{\texttt{ example describing the solution of the unsteady heat equation in a moving domain}} for further details.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

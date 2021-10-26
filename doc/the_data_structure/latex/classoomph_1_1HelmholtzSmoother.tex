@@ -2,6 +2,11 @@
 \label{classoomph_1_1HelmholtzSmoother}\index{oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}}
 
 
+Helmholtz smoother class\+: The smoother class is designed for the Helmholtz equation to be used in conjunction with multigrid. The action of the smoother should reduce the high frequency errors. These methods are inefficient as stand-\/alone solvers.  
+
+
+
+
 {\ttfamily \#include $<$complex\+\_\+smoother.\+h$>$}
 
 Inheritance diagram for oomph\+::Helmholtz\+Smoother\+:\begin{figure}[H]
@@ -19,11 +24,11 @@ virtual \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_ac83116186f1a5beffab8fa
 \begin{DoxyCompactList}\small\item\em Virtual empty destructor. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a8ec748270df3e1199f19ef267d5b8e85}{complex\+\_\+smoother\+\_\+solve}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&result)=0
 \begin{DoxyCompactList}\small\item\em The smoother\+\_\+solve function performs fixed number of iterations on the system A$\ast$result=rhs. The number of (smoothing) iterations is the same as the max. number of iterations in the underlying \mbox{\hyperlink{classoomph_1_1IterativeLinearSolver}{Iterative\+Linear\+Solver}} class. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a7c46336fdc3b386b0bab6111a3c55d44}{complex\+\_\+smoother\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ matrix\+\_\+pt)=0
+virtual void \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a7c46336fdc3b386b0bab6111a3c55d44}{complex\+\_\+smoother\+\_\+setup}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ matrix\+\_\+pt)=0
 \begin{DoxyCompactList}\small\item\em Setup the smoother for the matrix specified by the pointer. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_aeabcedb15b9f86681bcbcfbbbcc6b45c}{complex\+\_\+matrix\+\_\+multiplication}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$ matrices\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&x, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&soln)
+void \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_aeabcedb15b9f86681bcbcfbbbcc6b45c}{complex\+\_\+matrix\+\_\+multiplication}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$ matrices\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&\mbox{\hyperlink{namespaceoomph_a9d1d2da2b8bb8e73af72b5cadb8fe97c}{x}}, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&soln)
 \begin{DoxyCompactList}\small\item\em Helper function to calculate a complex matrix-\/vector product. Assumes the matrix has been provided as a \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} of length two; the first entry containing the real part of the system matrix and the second entry containing the imaginary part. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename M\+A\+T\+R\+IX $>$ }\\void \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a10dbef9689095e84e92f6864938850f7}{check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$const \&real\+\_\+matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$const \&imag\+\_\+matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&solution, const double \&n\+\_\+dof)
+{\footnotesize template$<$typename MATRIX $>$ }\\void \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a10dbef9689095e84e92f6864938850f7}{check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs}} (\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$const \&real\+\_\+matrix\+\_\+pt, \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$const \&imag\+\_\+matrix\+\_\+pt, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&rhs, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&solution, const double \&n\+\_\+dof)
 \begin{DoxyCompactList}\small\item\em Self-\/test to check that all the dimensions of the inputs to solve helper are consistent and everything that needs to be built, is. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -34,9 +39,9 @@ bool \mbox{\hyperlink{classoomph_1_1HelmholtzSmoother_a2b4b16dcb611cb27371afa163
 
 
 \doxysubsection{Detailed Description}
-Helmholtz smoother class\+: The smoother class is designed for the Helmholtz equation to be used in conjunction with multigrid. The action of the smoother should reduce the high frequency errors. These methods are inefficient as stand-\/alone solvers 
+Helmholtz smoother class\+: The smoother class is designed for the Helmholtz equation to be used in conjunction with multigrid. The action of the smoother should reduce the high frequency errors. These methods are inefficient as stand-\/alone solvers. 
 
-Definition at line 45 of file complex\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l00045}{45}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
@@ -53,7 +58,7 @@ Empty constructor.
 
 
 
-Definition at line 49 of file complex\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l00049}{49}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzSmoother_ac83116186f1a5beffab8faa299b8d4f1}\label{classoomph_1_1HelmholtzSmoother_ac83116186f1a5beffab8faa299b8d4f1}} 
 \index{oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}!````~HelmholtzSmoother@{$\sim$HelmholtzSmoother}}
@@ -67,7 +72,7 @@ Virtual empty destructor.
 
 
 
-Definition at line 52 of file complex\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l00052}{52}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
@@ -76,8 +81,8 @@ Definition at line 52 of file complex\+\_\+smoother.\+h.
 \index{oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}!check\_validity\_of\_solve\_helper\_inputs@{check\_validity\_of\_solve\_helper\_inputs}}
 \index{check\_validity\_of\_solve\_helper\_inputs@{check\_validity\_of\_solve\_helper\_inputs}!oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}}
 \doxysubsubsection{\texorpdfstring{check\_validity\_of\_solve\_helper\_inputs()}{check\_validity\_of\_solve\_helper\_inputs()}}
-{\footnotesize\ttfamily template$<$typename M\+A\+T\+R\+IX $>$ \\
-void oomph\+::\+Helmholtz\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$const \&}]{real\+\_\+matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$const \&}]{imag\+\_\+matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{solution,  }\item[{const double \&}]{n\+\_\+dof }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$typename MATRIX $>$ \\
+void oomph\+::\+Helmholtz\+Smoother\+::check\+\_\+validity\+\_\+of\+\_\+solve\+\_\+helper\+\_\+inputs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$const \&}]{real\+\_\+matrix\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$const \&}]{imag\+\_\+matrix\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{rhs,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{solution,  }\item[{const double \&}]{n\+\_\+dof }\end{DoxyParamCaption})}
 
 
 
@@ -85,17 +90,17 @@ Self-\/test to check that all the dimensions of the inputs to solve helper are c
 
 Self-\/test to be called inside solve\+\_\+helper to ensure that all inputs are consistent and everything that needs to be built, is. 
 
-Definition at line 185 of file complex\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l00185}{185}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed(), oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt(), and oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow().
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00493}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distributed()}}, \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00463}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::nrow()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzSmoother_aeabcedb15b9f86681bcbcfbbbcc6b45c}\label{classoomph_1_1HelmholtzSmoother_aeabcedb15b9f86681bcbcfbbbcc6b45c}} 
 \index{oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}!complex\_matrix\_multiplication@{complex\_matrix\_multiplication}}
 \index{complex\_matrix\_multiplication@{complex\_matrix\_multiplication}!oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}}
 \doxysubsubsection{\texorpdfstring{complex\_matrix\_multiplication()}{complex\_matrix\_multiplication()}}
-{\footnotesize\ttfamily void oomph\+::\+Helmholtz\+Smoother\+::complex\+\_\+matrix\+\_\+multiplication (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$}]{matrices\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Helmholtz\+Smoother\+::complex\+\_\+matrix\+\_\+multiplication (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$}]{matrices\+\_\+pt,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{x,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1DoubleVector}{Double\+Vector}} $>$ \&}]{soln }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -103,17 +108,17 @@ Helper function to calculate a complex matrix-\/vector product. Assumes the matr
 
 
 
-Definition at line 69 of file complex\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l00069}{69}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-References oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt().
+References \mbox{\hyperlink{linear__algebra__distribution_8h_source_l00457}{oomph\+::\+Distributable\+Linear\+Algebra\+Object\+::distribution\+\_\+pt()}}, and \mbox{\hyperlink{pseudo__buckling__ring_8h_source_l00049}{oomph\+::x}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzSmoother_a7c46336fdc3b386b0bab6111a3c55d44}\label{classoomph_1_1HelmholtzSmoother_a7c46336fdc3b386b0bab6111a3c55d44}} 
 \index{oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}!complex\_smoother\_setup@{complex\_smoother\_setup}}
 \index{complex\_smoother\_setup@{complex\_smoother\_setup}!oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}}
 \doxysubsubsection{\texorpdfstring{complex\_smoother\_setup()}{complex\_smoother\_setup()}}
-{\footnotesize\ttfamily virtual void oomph\+::\+Helmholtz\+Smoother\+::complex\+\_\+smoother\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}} $\ast$ $>$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual void oomph\+::\+Helmholtz\+Smoother\+::complex\+\_\+smoother\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} $\ast$ $>$}]{matrix\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -121,7 +126,7 @@ Setup the smoother for the matrix specified by the pointer.
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a1c8ff4f7c1a14f195942ba3e33e73b49}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, and \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a4cf2cdac05266021cd0660ba60ae6a8b}{oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a4cf2cdac05266021cd0660ba60ae6a8b}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$}}, and \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a1c8ff4f7c1a14f195942ba3e33e73b49}{oomph\+::\+Complex\+GMRES$<$ MATRIX $>$}}.
 
 \mbox{\Hypertarget{classoomph_1_1HelmholtzSmoother_a8ec748270df3e1199f19ef267d5b8e85}\label{classoomph_1_1HelmholtzSmoother_a8ec748270df3e1199f19ef267d5b8e85}} 
 \index{oomph::HelmholtzSmoother@{oomph::HelmholtzSmoother}!complex\_smoother\_solve@{complex\_smoother\_solve}}
@@ -135,7 +140,7 @@ The smoother\+\_\+solve function performs fixed number of iterations on the syst
 
 
 
-Implemented in \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a874520bc44cd8127497d972373938df9}{oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$}}, and \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a3e548db0f775e4239ff7b9c76a7b1c76}{oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$}}.
+Implemented in \mbox{\hyperlink{classoomph_1_1ComplexDampedJacobi_a3e548db0f775e4239ff7b9c76a7b1c76}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$}}, and \mbox{\hyperlink{classoomph_1_1ComplexGMRES_a874520bc44cd8127497d972373938df9}{oomph\+::\+Complex\+GMRES$<$ MATRIX $>$}}.
 
 
 
@@ -152,11 +157,11 @@ When a derived class object is being used as a smoother in the MG algorithm the 
 
 
 
-Definition at line 176 of file complex\+\_\+smoother.\+h.
+Definition at line \mbox{\hyperlink{complex__smoother_8h_source_l00176}{176}} of file \mbox{\hyperlink{complex__smoother_8h_source}{complex\+\_\+smoother.\+h}}.
 
 
 
-Referenced by oomph\+::\+Complex\+Damped\+Jacobi$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+solve(), and oomph\+::\+Complex\+G\+M\+R\+E\+S$<$ M\+A\+T\+R\+I\+X $>$\+::complex\+\_\+smoother\+\_\+solve().
+Referenced by \mbox{\hyperlink{complex__smoother_8h_source_l00472}{oomph\+::\+Complex\+Damped\+Jacobi$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+solve()}}, and \mbox{\hyperlink{complex__smoother_8h_source_l00991}{oomph\+::\+Complex\+GMRES$<$ MATRIX $>$\+::complex\+\_\+smoother\+\_\+solve()}}.
 
 
 

@@ -1,0 +1,194 @@
+\hypertarget{stacktrace_8h_source}{}\doxysection{stacktrace.\+h}
+\label{stacktrace_8h_source}\index{stacktrace.h@{stacktrace.h}}
+\mbox{\hyperlink{stacktrace_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00001}00001 \textcolor{comment}{// LIC// ====================================================================}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00002}00002 \textcolor{comment}{// LIC// This file forms part of oomph-\/lib, the object-\/oriented,}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00003}00003 \textcolor{comment}{// LIC// multi-\/physics finite-\/element library, available}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00004}00004 \textcolor{comment}{// LIC// at http://www.oomph-\/lib.org.}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00005}00005 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00006}00006 \textcolor{comment}{// LIC// Copyright (C) 2006-\/2021 Matthias Heil and Andrew Hazel}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00007}00007 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00008}00008 \textcolor{comment}{// LIC// This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00009}00009 \textcolor{comment}{// LIC// modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00010}00010 \textcolor{comment}{// LIC// License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00011}00011 \textcolor{comment}{// LIC// version 2.1 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00012}00012 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00013}00013 \textcolor{comment}{// LIC// This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00014}00014 \textcolor{comment}{// LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00015}00015 \textcolor{comment}{// LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00016}00016 \textcolor{comment}{// LIC// Lesser General Public License for more details.}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00017}00017 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00018}00018 \textcolor{comment}{// LIC// You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00019}00019 \textcolor{comment}{// LIC// License along with this library; if not, write to the Free Software}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00020}00020 \textcolor{comment}{// LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00021}00021 \textcolor{comment}{// LIC// 02110-\/1301  USA.}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00022}00022 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00023}00023 \textcolor{comment}{// LIC// The authors may be contacted at oomph-\/lib@maths.man.ac.uk.}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00024}00024 \textcolor{comment}{// LIC//}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00025}00025 \textcolor{comment}{// LIC//====================================================================}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00026}00026 \textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00027}00027 \textcolor{comment}{// stacktrace.h (c) 2008, Timo Bingmann from http://idlebox.net/}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00028}00028 \textcolor{comment}{// published under the WTFPL v2.0}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00030}00030 \textcolor{comment}{// Modified by MH to take proper C++ output stream and to produce}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00031}00031 \textcolor{comment}{// code for retrieval of line numbers. Also obtains name of}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00032}00032 \textcolor{comment}{// executable from oomph-\/lib CommandLineArgs namespace (if it's been}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00033}00033 \textcolor{comment}{// set up)}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00034}00034 \textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00035}00035 \textcolor{preprocessor}{\#ifndef \_STACKTRACE\_H\_}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00036}00036 \textcolor{preprocessor}{\#define \_STACKTRACE\_H\_}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00038}00038 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00039}00039 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00040}00040 \textcolor{preprocessor}{\#include <execinfo.h>}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00041}00041 \textcolor{preprocessor}{\#include <cxxabi.h>}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00042}00042 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00043}00043 \textcolor{comment}{// Include oomph-\/utilities to be able to obtain name of executable}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00044}00044 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{oomph__utilities_8h}{oomph\_utilities.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00045}00045 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00046}00046 \textcolor{comment}{/** Print a demangled stack backtrace of the caller function */}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00047}\mbox{\hyperlink{stacktrace_8h_adcfca2f623b46c3c828797c1bf94f9a4}{00047}} \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{stacktrace_8h_adcfca2f623b46c3c828797c1bf94f9a4}{print\_stacktrace}}(std::ostream\& exception\_stream,}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00048}00048                                     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} max\_frames = 63)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00049}00049 \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00050}00050   exception\_stream << \textcolor{stringliteral}{"{}\(\backslash\)nStack trace:\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00051}00051   exception\_stream << \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00053}00053   \textcolor{comment}{// storage array for stack trace address data}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00054}00054   \textcolor{keywordtype}{void}* addrlist[max\_frames + 1];}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00056}00056   \textcolor{comment}{// retrieve current stack addresses}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00057}00057   \textcolor{keywordtype}{int} addrlen = backtrace(addrlist, \textcolor{keyword}{sizeof}(addrlist) / \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{void}*));}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00058}00058 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00059}00059   \textcolor{keywordflow}{if} (addrlen == 0)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00060}00060   \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00061}00061     exception\_stream << \textcolor{stringliteral}{"{}\(\backslash\)n<empty stack trace, possibly corrupt>\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00062}00062     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00063}00063   \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00064}00064 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00065}00065   \textcolor{comment}{// resolve addresses into strings containing "{}filename(function+address)"{},}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00066}00066   \textcolor{comment}{// this array must be free()-\/ed}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00067}00067   \textcolor{keywordtype}{char}** symbollist = backtrace\_symbols(addrlist, addrlen);}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00068}00068 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00069}00069   \textcolor{comment}{// allocate string which will be filled with the demangled function name}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00070}00070   \textcolor{keywordtype}{size\_t} funcnamesize = 256;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00071}00071   \textcolor{keywordtype}{char}* funcname = (\textcolor{keywordtype}{char}*)malloc(funcnamesize);}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00073}00073   \textcolor{comment}{// Stream to collect information that allows retrieval of line numbers}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00074}00074   std::stringstream address\_stream;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00076}00076   \textcolor{comment}{// iterate over the returned symbol lines. skip the first, it is the}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00077}00077   \textcolor{comment}{// address of this function.}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00078}00078   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} = 1; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}} < addrlen; \mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}++)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00079}00079   \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00080}00080     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ begin  mh addition -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00081}00081     \textcolor{keywordtype}{char} *begin\_absolute = 0, *end\_absolute = 0;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00083}00083     \textcolor{comment}{// find absolute address (in square brackets)}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00084}00084     \textcolor{comment}{// ./module(function+0x15c) [0x8048a6d]}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00085}00085     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char}* p = symbollist[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]; *p; ++p)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00086}00086     \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00087}00087       \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{'['}) begin\_absolute = p;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00088}00088       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{']'} \&\& begin\_absolute)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00089}00089       \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00090}00090         end\_absolute = p;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00091}00091         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00092}00092       \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00093}00093     \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00094}00094 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00095}00095     \textcolor{keywordflow}{if} (begin\_absolute)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00096}00096     \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00097}00097       *begin\_absolute++ = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00098}00098       *end\_absolute = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00099}00099       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_ab0f9a1024bd371139a86ee7db3ddfe83}{oomph::CommandLineArgs::Argc}} != 0)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00100}00100       \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00101}00101         address\_stream << \textcolor{stringliteral}{"{}addr2line -\/e "{}} << \mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_a3b51290f4dc7018bba2e46bfc6f8bedc}{oomph::CommandLineArgs::Argv}}[0]}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00102}00102                        << \textcolor{stringliteral}{"{} "{}} << begin\_absolute << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00103}00103       \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00104}00104       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00105}00105       \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00106}00106         address\_stream << \textcolor{stringliteral}{"{}addr2line -\/e [name\_of\_executable] "{}} << begin\_absolute}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00107}00107                        << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00108}00108       \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00109}00109     \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00110}00110 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00111}00111     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ end mh addition -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00112}00112 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00113}00113     \textcolor{keywordtype}{char} *begin\_name = 0, *begin\_offset = 0, *end\_offset = 0;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00115}00115     \textcolor{comment}{// find parentheses and +address offset surrounding the mangled name:}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00116}00116     \textcolor{comment}{// ./module(function+0x15c) [0x8048a6d]}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00117}00117     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{char}* p = symbollist[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}]; *p; ++p)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00118}00118     \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00119}00119       \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{'('}) begin\_name = p;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00120}00120       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{'+'})}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00121}00121         begin\_offset = p;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00122}00122       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{')'} \&\& begin\_offset)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00123}00123       \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00124}00124         end\_offset = p;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00125}00125         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00126}00126       \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00127}00127     \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00128}00128 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00129}00129     \textcolor{keywordflow}{if} (begin\_name \&\& begin\_offset \&\& end\_offset \&\& begin\_name < begin\_offset)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00130}00130     \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00131}00131       *begin\_name++ = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00132}00132       *begin\_offset++ = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00133}00133       *end\_offset = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00134}00134 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00135}00135       \textcolor{comment}{// mangled name is now in [begin\_name, begin\_offset) and caller}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00136}00136       \textcolor{comment}{// offset in [begin\_offset, end\_offset). now apply}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00137}00137       \textcolor{comment}{// \_\_cxa\_demangle():}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00138}00138 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00139}00139       \textcolor{keywordtype}{int} status;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00140}00140       \textcolor{keywordtype}{char}* ret =}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00141}00141         abi::\_\_cxa\_demangle(begin\_name, funcname, \&funcnamesize, \&status);}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00142}00142       \textcolor{keywordflow}{if} (status == 0)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00143}00143       \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00144}00144         funcname = ret; \textcolor{comment}{// use possibly realloc()-\/ed string}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00145}00145         \textcolor{comment}{/* fprintf(out, "{}  \%s : \%s+\%s\(\backslash\)n"{}, */}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00146}00146         \textcolor{comment}{/*         symbollist[i], funcname, begin\_offset); */}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00147}00147         exception\_stream << symbollist[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} : "{}} << funcname << \textcolor{stringliteral}{"{}+"{}}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00148}00148                          << begin\_offset << std::endl;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00149}00149       \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00150}00150       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00151}00151       \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00152}00152         \textcolor{comment}{// demangling failed. Output function name as a C function with}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00153}00153         \textcolor{comment}{// no arguments.}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00154}00154         \textcolor{comment}{/* fprintf(out, "{}  \%s : \%s()+\%s\(\backslash\)n"{}, */}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00155}00155         \textcolor{comment}{/*         symbollist[i], begin\_name, begin\_offset); */}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00156}00156 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00157}00157         exception\_stream << symbollist[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << \textcolor{stringliteral}{"{} : "{}} << begin\_name << \textcolor{stringliteral}{"{}+"{}}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00158}00158                          << begin\_offset << std::endl;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00159}00159       \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00160}00160     \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00161}00161     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00162}00162     \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00163}00163       \textcolor{comment}{// couldn't parse the line? print the whole line.}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00164}00164       \textcolor{comment}{// fprintf(out, "{}  \%s\(\backslash\)n"{}, symbollist[i]);}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00165}00165       exception\_stream << symbollist[\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}] << std::endl;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00166}00166     \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00167}00167   \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00168}00168 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00169}00169   exception\_stream << \textcolor{stringliteral}{"{}\(\backslash\)nHere are the commmands to obtain the line numbers:\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00170}00170 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00171}00171   exception\_stream << \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00172}00172   exception\_stream << address\_stream.str() << std::endl;}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00173}00173 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00174}00174 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00175}00175   \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceoomph_1_1CommandLineArgs_ab0f9a1024bd371139a86ee7db3ddfe83}{oomph::CommandLineArgs::Argc}} == 0)}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00176}00176   \{}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00177}00177     exception\_stream << \textcolor{stringliteral}{"{}\(\backslash\)nNOTE: Replace [name\_of\_executable] by the actual\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00178}00178                      << \textcolor{stringliteral}{"{}       name of the executable. I would have inserted\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00179}00179                      << \textcolor{stringliteral}{"{}       this for you if you had called \(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00180}00180                      << \textcolor{stringliteral}{"{}          CommandLineArgs::setup(argc,argv);\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00181}00181                      << \textcolor{stringliteral}{"{}       in your driver code...\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00182}00182   \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00183}00183 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00184}00184   free(funcname);}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00185}00185   free(symbollist);}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00186}00186 \}}
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00187}00187 }
+\DoxyCodeLine{\Hypertarget{stacktrace_8h_source_l00188}00188 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_STACKTRACE\_H\_}}
+
+\end{DoxyCode}

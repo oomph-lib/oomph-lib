@@ -2,6 +2,11 @@
 \label{classoomph_1_1AddedMainNumberingLookup}\index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}}
 
 
+Class to store bi-\/directional lookup between added matrix row/col numbers to main matrix (Sum\+Of\+Matrix) row/col numbers.  
+
+
+
+
 {\ttfamily \#include $<$sum\+\_\+of\+\_\+matrices.\+h$>$}
 
 \doxysubsection*{Public Member Functions}
@@ -10,9 +15,9 @@
 \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a46fceb572186ca8f41f158c9fddfc623}{Added\+Main\+Numbering\+Lookup}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a2697ff1ddcd2f6b0b7f22fb7cd56651b}{Added\+Main\+Numbering\+Lookup}} (const \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const unsigned \&dof\+\_\+index)
-\item 
+\begin{DoxyCompactList}\small\item\em Real constructor\+: construct lookup from node numbers in mesh and global equation numbers. Useful for the case when the main matrix is a Jacobian and the added matrix is a contribution only on a certain mesh. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a643646f38ca0d58f7e1ed32c06a18aa8}{Added\+Main\+Numbering\+Lookup}} (const int $\ast$lookup\+\_\+array, const unsigned \&length)
-\item 
+\begin{DoxyCompactList}\small\item\em Construct lookup schemes from int array (HLib\textquotesingle{}s format for this data). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_ae2748af464febc0fb1150e8cc7ab0d73}{$\sim$\+Added\+Main\+Numbering\+Lookup}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a3602f98bdd41d51ac36efeafdb58ceb0}{main\+\_\+to\+\_\+added}} (const int \&main) const
@@ -20,18 +25,18 @@ unsigned \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a3602f98bdd41d5
 int \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a880b713fdcd217099c6f8bbedd133d15}{unsafe\+\_\+main\+\_\+to\+\_\+added}} (const int \&main) const
 \begin{DoxyCompactList}\small\item\em Given a main matrix row/col number get the equivalent row/col in the added matrix. Return -\/1 if not found. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a65297d7f82675ef555e59a98875ead4d}{added\+\_\+to\+\_\+main}} (const unsigned \&added) const
-\item 
+\begin{DoxyCompactList}\small\item\em Given a row/col number in the added matrix return the equivalent row/col number in the main matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a8b0c78b4c7048915b3912af0b87f5a76}{build}} (const \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$mesh\+\_\+pt, const unsigned \&dof\+\_\+index)
-\item 
+\begin{DoxyCompactList}\small\item\em Construct the lookup schemes given a mesh and the degree of freedom to lookup main equation numbers for. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_aea76ee043104c63f3ecbd641f98ae10d}{build}} (const int $\ast$lookup\+\_\+array, const unsigned \&length)
-\item 
-void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_ab4cd3995826fd1aedc74fcf092e6c568}{build}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ const \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&bem\+\_\+lookup, const unsigned \&dof\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Construct lookup schemes from int array (HLib\textquotesingle{}s format for this data). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_ab4cd3995826fd1aedc74fcf092e6c568}{build}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ const Node $\ast$ $>$ \&bem\+\_\+lookup, const unsigned \&dof\+\_\+index)
 \begin{DoxyCompactList}\small\item\em Construct lookup using node vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a9c7ba1fc62b5943637f8e9f813a24e99}{build\+\_\+identity\+\_\+map}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}})
+void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a9c7ba1fc62b5943637f8e9f813a24e99}{build\+\_\+identity\+\_\+map}} (const unsigned \&n)
 \begin{DoxyCompactList}\small\item\em Construct an identity map (mostly for testing). \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a28e014d37c7dffa2365cb187464e02d7}{added\+\_\+to\+\_\+main\+\_\+mapping\+\_\+pt}} () const
+const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_ac02dcf19a1f6ec54ee41a3328d37b4ea}{added\+\_\+to\+\_\+main\+\_\+mapping\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Const access function for mapping. \end{DoxyCompactList}\item 
-const std\+::map$<$ unsigned, unsigned $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_aa9cd986afc15cd147266fce053d5cded}{main\+\_\+to\+\_\+added\+\_\+mapping\+\_\+pt}} () const
+const std\+::map$<$ unsigned, unsigned $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a67ee6affc0dbb0d20d34638468ed9310}{main\+\_\+to\+\_\+added\+\_\+mapping\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Const access function for mapping. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -40,23 +45,23 @@ void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a9fb7ccbac5f6339de9
 \begin{DoxyCompactList}\small\item\em Set up the lookup from added matrix row/col to main matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a4ec4ec12b1dc296741d228be01deb96f}{construct\+\_\+reverse\+\_\+mapping}} ()
 \begin{DoxyCompactList}\small\item\em Set up the main to added mapping using the added to main mapping. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a97713d9017f25616e315b85d869db35a}{Added\+Main\+Numbering\+Lookup}} (const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a7fc85fa8e77d54763c3123576b7eebc1}{Added\+Main\+Numbering\+Lookup}} (const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Inaccessible copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a9ccd56aeaa1b14bd688dac407b05f381}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \&dummy)
+void \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a9119df9d3eddd6919cfc7eda38e93b35}{operator=}} (const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Inaccessible assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_a6c172dfd7d00b7af01c83e46b072955b}{Added\+\_\+to\+\_\+main\+\_\+mapping}}
-\item 
+\begin{DoxyCompactList}\small\item\em Mapping from added matrix row/col numbers to main matrix row/col numbers. \end{DoxyCompactList}\item 
 std\+::map$<$ unsigned, unsigned $>$ \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup_ac37dc1a1c43aec35b3cdf57a6aaf838c}{Main\+\_\+to\+\_\+added\+\_\+mapping}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Mapping from main matrix row/col numbers to added matrix row/col numbers. Note that we cannot use a vector here because the main matrix rows/cols mapped onto are probably not contiguous. Access times are O(log N) so if you need to iterate over all elements then use the pointer access functions and use stl iterators properly. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class to store bi-\/directional lookup between added matrix row/col numbers to main matrix (Sum\+Of\+Matrix) row/col numbers. 
 
-Definition at line 46 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00046}{46}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
@@ -73,7 +78,7 @@ Default constructor.
 
 
 
-Definition at line 50 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00050}{50}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a2697ff1ddcd2f6b0b7f22fb7cd56651b}\label{classoomph_1_1AddedMainNumberingLookup_a2697ff1ddcd2f6b0b7f22fb7cd56651b}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!AddedMainNumberingLookup@{AddedMainNumberingLookup}}
@@ -81,9 +86,17 @@ Definition at line 50 of file sum\+\_\+of\+\_\+matrices.\+h.
 \doxysubsubsection{\texorpdfstring{AddedMainNumberingLookup()}{AddedMainNumberingLookup()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily oomph\+::\+Added\+Main\+Numbering\+Lookup\+::\+Added\+Main\+Numbering\+Lookup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const unsigned \&}]{dof\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
 Real constructor\+: construct lookup from node numbers in mesh and global equation numbers. Useful for the case when the main matrix is a Jacobian and the added matrix is a contribution only on a certain mesh. 
 
-Definition at line 56 of file sum\+\_\+of\+\_\+matrices.\+h.
+
+
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00056}{56}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00125}{build()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a643646f38ca0d58f7e1ed32c06a18aa8}\label{classoomph_1_1AddedMainNumberingLookup_a643646f38ca0d58f7e1ed32c06a18aa8}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!AddedMainNumberingLookup@{AddedMainNumberingLookup}}
@@ -91,9 +104,17 @@ Definition at line 56 of file sum\+\_\+of\+\_\+matrices.\+h.
 \doxysubsubsection{\texorpdfstring{AddedMainNumberingLookup()}{AddedMainNumberingLookup()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily oomph\+::\+Added\+Main\+Numbering\+Lookup\+::\+Added\+Main\+Numbering\+Lookup (\begin{DoxyParamCaption}\item[{const int $\ast$}]{lookup\+\_\+array,  }\item[{const unsigned \&}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Construct lookup schemes from int array (H\+Lib\textquotesingle{}s format for this data). 
 
-Definition at line 63 of file sum\+\_\+of\+\_\+matrices.\+h.
+
+Construct lookup schemes from int array (HLib\textquotesingle{}s format for this data). 
+
+
+
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00063}{63}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00125}{build()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_ae2748af464febc0fb1150e8cc7ab0d73}\label{classoomph_1_1AddedMainNumberingLookup_ae2748af464febc0fb1150e8cc7ab0d73}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!````~AddedMainNumberingLookup@{$\sim$AddedMainNumberingLookup}}
@@ -107,25 +128,17 @@ Destructor.
 
 
 
-Definition at line 69 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00069}{69}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a97713d9017f25616e315b85d869db35a}\label{classoomph_1_1AddedMainNumberingLookup_a97713d9017f25616e315b85d869db35a}} 
+\mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a7fc85fa8e77d54763c3123576b7eebc1}\label{classoomph_1_1AddedMainNumberingLookup_a7fc85fa8e77d54763c3123576b7eebc1}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!AddedMainNumberingLookup@{AddedMainNumberingLookup}}
 \index{AddedMainNumberingLookup@{AddedMainNumberingLookup}!oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}}
 \doxysubsubsection{\texorpdfstring{AddedMainNumberingLookup()}{AddedMainNumberingLookup()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily oomph\+::\+Added\+Main\+Numbering\+Lookup\+::\+Added\+Main\+Numbering\+Lookup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily oomph\+::\+Added\+Main\+Numbering\+Lookup\+::\+Added\+Main\+Numbering\+Lookup (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
 
 
 
 Inaccessible copy constructor. 
-
-
-
-Definition at line 244 of file sum\+\_\+of\+\_\+matrices.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -136,15 +149,23 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \doxysubsubsection{\texorpdfstring{added\_to\_main()}{added\_to\_main()}}
 {\footnotesize\ttfamily unsigned oomph\+::\+Added\+Main\+Numbering\+Lookup\+::added\+\_\+to\+\_\+main (\begin{DoxyParamCaption}\item[{const unsigned \&}]{added }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
 Given a row/col number in the added matrix return the equivalent row/col number in the main matrix. 
 
-Definition at line 118 of file sum\+\_\+of\+\_\+matrices.\+h.
 
-\mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a28e014d37c7dffa2365cb187464e02d7}\label{classoomph_1_1AddedMainNumberingLookup_a28e014d37c7dffa2365cb187464e02d7}} 
+
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00118}{118}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00234}{Added\+\_\+to\+\_\+main\+\_\+mapping}}.
+
+\mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_ac02dcf19a1f6ec54ee41a3328d37b4ea}\label{classoomph_1_1AddedMainNumberingLookup_ac02dcf19a1f6ec54ee41a3328d37b4ea}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!added\_to\_main\_mapping\_pt@{added\_to\_main\_mapping\_pt}}
 \index{added\_to\_main\_mapping\_pt@{added\_to\_main\_mapping\_pt}!oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}}
 \doxysubsubsection{\texorpdfstring{added\_to\_main\_mapping\_pt()}{added\_to\_main\_mapping\_pt()}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$$\ast$ oomph\+::\+Added\+Main\+Numbering\+Lookup\+::added\+\_\+to\+\_\+main\+\_\+mapping\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ unsigned $>$ $\ast$ oomph\+::\+Added\+Main\+Numbering\+Lookup\+::added\+\_\+to\+\_\+main\+\_\+mapping\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -152,11 +173,15 @@ Const access function for mapping.
 
 
 
-Definition at line 184 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00184}{184}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-Referenced by oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix().
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00234}{Added\+\_\+to\+\_\+main\+\_\+mapping}}.
+
+
+
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_aea76ee043104c63f3ecbd641f98ae10d}\label{classoomph_1_1AddedMainNumberingLookup_aea76ee043104c63f3ecbd641f98ae10d}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!build@{build}}
@@ -164,13 +189,17 @@ Referenced by oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix().
 \doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily void oomph\+::\+Added\+Main\+Numbering\+Lookup\+::build (\begin{DoxyParamCaption}\item[{const int $\ast$}]{lookup\+\_\+array,  }\item[{const unsigned \&}]{length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Construct lookup schemes from int array (H\+Lib\textquotesingle{}s format for this data). 
-
-Definition at line 133 of file sum\+\_\+of\+\_\+matrices.\+h.
 
 
+Construct lookup schemes from int array (HLib\textquotesingle{}s format for this data). 
 
-References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
+
+
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00133}{133}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00234}{Added\+\_\+to\+\_\+main\+\_\+mapping}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00209}{construct\+\_\+reverse\+\_\+mapping()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a8b0c78b4c7048915b3912af0b87f5a76}\label{classoomph_1_1AddedMainNumberingLookup_a8b0c78b4c7048915b3912af0b87f5a76}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!build@{build}}
@@ -178,15 +207,27 @@ References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 \doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily void oomph\+::\+Added\+Main\+Numbering\+Lookup\+::build (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{mesh\+\_\+pt,  }\item[{const unsigned \&}]{dof\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
 Construct the lookup schemes given a mesh and the degree of freedom to lookup main equation numbers for. 
 
-Definition at line 125 of file sum\+\_\+of\+\_\+matrices.\+h.
+
+
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00125}{125}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00197}{construct\+\_\+added\+\_\+to\+\_\+main\+\_\+mapping()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00209}{construct\+\_\+reverse\+\_\+mapping()}}.
+
+
+
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00056}{Added\+Main\+Numbering\+Lookup()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_ab4cd3995826fd1aedc74fcf092e6c568}\label{classoomph_1_1AddedMainNumberingLookup_ab4cd3995826fd1aedc74fcf092e6c568}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!build@{build}}
 \index{build@{build}!oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}}
 \doxysubsubsection{\texorpdfstring{build()}{build()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily void oomph\+::\+Added\+Main\+Numbering\+Lookup\+::build (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ const \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ $>$ \&}]{bem\+\_\+lookup,  }\item[{const unsigned \&}]{dof\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Added\+Main\+Numbering\+Lookup\+::build (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ const Node $\ast$ $>$ \&}]{bem\+\_\+lookup,  }\item[{const unsigned \&}]{dof\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -194,11 +235,11 @@ Construct lookup using node vector.
 
 
 
-Definition at line 155 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00155}{155}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-References i.
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00234}{Added\+\_\+to\+\_\+main\+\_\+mapping}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00209}{construct\+\_\+reverse\+\_\+mapping()}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a9c7ba1fc62b5943637f8e9f813a24e99}\label{classoomph_1_1AddedMainNumberingLookup_a9c7ba1fc62b5943637f8e9f813a24e99}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!build\_identity\_map@{build\_identity\_map}}
@@ -212,11 +253,11 @@ Construct an identity map (mostly for testing).
 
 
 
-Definition at line 169 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00169}{169}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-References n.
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00234}{Added\+\_\+to\+\_\+main\+\_\+mapping}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00209}{construct\+\_\+reverse\+\_\+mapping()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a9fb7ccbac5f6339de912449531e69cba}\label{classoomph_1_1AddedMainNumberingLookup_a9fb7ccbac5f6339de912449531e69cba}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!construct\_added\_to\_main\_mapping@{construct\_added\_to\_main\_mapping}}
@@ -230,11 +271,15 @@ Set up the lookup from added matrix row/col to main matrix.
 
 
 
-Definition at line 197 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00197}{197}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-References oomph\+::\+Data\+::eqn\+\_\+number(), oomph\+::\+Mesh\+::nnode(), and oomph\+::\+Mesh\+::node\+\_\+pt().
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00234}{Added\+\_\+to\+\_\+main\+\_\+mapping}}, \mbox{\hyperlink{mesh_8h_source_l00596}{oomph\+::\+Mesh\+::nnode()}}, and \mbox{\hyperlink{mesh_8h_source_l00436}{oomph\+::\+Mesh\+::node\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00125}{build()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a4ec4ec12b1dc296741d228be01deb96f}\label{classoomph_1_1AddedMainNumberingLookup_a4ec4ec12b1dc296741d228be01deb96f}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!construct\_reverse\_mapping@{construct\_reverse\_mapping}}
@@ -248,7 +293,15 @@ Set up the main to added mapping using the added to main mapping.
 
 
 
-Definition at line 209 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00209}{209}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00234}{Added\+\_\+to\+\_\+main\+\_\+mapping}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00241}{Main\+\_\+to\+\_\+added\+\_\+mapping}}.
+
+
+
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00125}{build()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00169}{build\+\_\+identity\+\_\+map()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a3602f98bdd41d51ac36efeafdb58ceb0}\label{classoomph_1_1AddedMainNumberingLookup_a3602f98bdd41d51ac36efeafdb58ceb0}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!main\_to\_added@{main\_to\_added}}
@@ -262,17 +315,17 @@ Given a main matrix row/col number get the equivalent row/col in the added matri
 
 
 
-Definition at line 73 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00073}{73}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-References oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and oomph\+::\+String\+Conversion\+::to\+\_\+string().
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00189}{oomph\+::\+String\+Conversion\+::to\+\_\+string()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00099}{unsafe\+\_\+main\+\_\+to\+\_\+added()}}.
 
-\mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_aa9cd986afc15cd147266fce053d5cded}\label{classoomph_1_1AddedMainNumberingLookup_aa9cd986afc15cd147266fce053d5cded}} 
+\mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a67ee6affc0dbb0d20d34638468ed9310}\label{classoomph_1_1AddedMainNumberingLookup_a67ee6affc0dbb0d20d34638468ed9310}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!main\_to\_added\_mapping\_pt@{main\_to\_added\_mapping\_pt}}
 \index{main\_to\_added\_mapping\_pt@{main\_to\_added\_mapping\_pt}!oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}}
 \doxysubsubsection{\texorpdfstring{main\_to\_added\_mapping\_pt()}{main\_to\_added\_mapping\_pt()}}
-{\footnotesize\ttfamily const std\+::map$<$unsigned, unsigned$>$$\ast$ oomph\+::\+Added\+Main\+Numbering\+Lookup\+::main\+\_\+to\+\_\+added\+\_\+mapping\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const std\+::map$<$ unsigned, unsigned $>$ $\ast$ oomph\+::\+Added\+Main\+Numbering\+Lookup\+::main\+\_\+to\+\_\+added\+\_\+mapping\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -280,29 +333,25 @@ Const access function for mapping.
 
 
 
-Definition at line 190 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00190}{190}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
 
 
 
-Referenced by oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix().
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00241}{Main\+\_\+to\+\_\+added\+\_\+mapping}}.
 
-\mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a9ccd56aeaa1b14bd688dac407b05f381}\label{classoomph_1_1AddedMainNumberingLookup_a9ccd56aeaa1b14bd688dac407b05f381}} 
+
+
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00415}{oomph\+::\+Sum\+Of\+Matrices\+::add\+\_\+matrix()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00099}{unsafe\+\_\+main\+\_\+to\+\_\+added()}}.
+
+\mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a9119df9d3eddd6919cfc7eda38e93b35}\label{classoomph_1_1AddedMainNumberingLookup_a9119df9d3eddd6919cfc7eda38e93b35}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Added\+Main\+Numbering\+Lookup\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void oomph\+::\+Added\+Main\+Numbering\+Lookup\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1AddedMainNumberingLookup}{Added\+Main\+Numbering\+Lookup}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
 
 
 
 Inaccessible assignment operator. 
-
-
-
-Definition at line 250 of file sum\+\_\+of\+\_\+matrices.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_a880b713fdcd217099c6f8bbedd133d15}\label{classoomph_1_1AddedMainNumberingLookup_a880b713fdcd217099c6f8bbedd133d15}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!unsafe\_main\_to\_added@{unsafe\_main\_to\_added}}
@@ -316,7 +365,15 @@ Given a main matrix row/col number get the equivalent row/col in the added matri
 
 
 
-Definition at line 99 of file sum\+\_\+of\+\_\+matrices.\+h.
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00099}{99}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+References \mbox{\hyperlink{sum__of__matrices_8h_source_l00241}{Main\+\_\+to\+\_\+added\+\_\+mapping}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00190}{main\+\_\+to\+\_\+added\+\_\+mapping\+\_\+pt()}}.
+
+
+
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00073}{main\+\_\+to\+\_\+added()}}.
 
 
 
@@ -327,9 +384,17 @@ Definition at line 99 of file sum\+\_\+of\+\_\+matrices.\+h.
 \doxysubsubsection{\texorpdfstring{Added\_to\_main\_mapping}{Added\_to\_main\_mapping}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$unsigned$>$ oomph\+::\+Added\+Main\+Numbering\+Lookup\+::\+Added\+\_\+to\+\_\+main\+\_\+mapping\hspace{0.3cm}{\ttfamily [private]}}
 
+
+
 Mapping from added matrix row/col numbers to main matrix row/col numbers. 
 
-Definition at line 234 of file sum\+\_\+of\+\_\+matrices.\+h.
+
+
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00234}{234}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00118}{added\+\_\+to\+\_\+main()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00184}{added\+\_\+to\+\_\+main\+\_\+mapping\+\_\+pt()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00133}{build()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00169}{build\+\_\+identity\+\_\+map()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00197}{construct\+\_\+added\+\_\+to\+\_\+main\+\_\+mapping()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00209}{construct\+\_\+reverse\+\_\+mapping()}}.
 
 \mbox{\Hypertarget{classoomph_1_1AddedMainNumberingLookup_ac37dc1a1c43aec35b3cdf57a6aaf838c}\label{classoomph_1_1AddedMainNumberingLookup_ac37dc1a1c43aec35b3cdf57a6aaf838c}} 
 \index{oomph::AddedMainNumberingLookup@{oomph::AddedMainNumberingLookup}!Main\_to\_added\_mapping@{Main\_to\_added\_mapping}}
@@ -337,9 +402,17 @@ Definition at line 234 of file sum\+\_\+of\+\_\+matrices.\+h.
 \doxysubsubsection{\texorpdfstring{Main\_to\_added\_mapping}{Main\_to\_added\_mapping}}
 {\footnotesize\ttfamily std\+::map$<$unsigned, unsigned$>$ oomph\+::\+Added\+Main\+Numbering\+Lookup\+::\+Main\+\_\+to\+\_\+added\+\_\+mapping\hspace{0.3cm}{\ttfamily [private]}}
 
+
+
 Mapping from main matrix row/col numbers to added matrix row/col numbers. Note that we cannot use a vector here because the main matrix rows/cols mapped onto are probably not contiguous. Access times are O(log N) so if you need to iterate over all elements then use the pointer access functions and use stl iterators properly. 
 
-Definition at line 241 of file sum\+\_\+of\+\_\+matrices.\+h.
+
+
+Definition at line \mbox{\hyperlink{sum__of__matrices_8h_source_l00241}{241}} of file \mbox{\hyperlink{sum__of__matrices_8h_source}{sum\+\_\+of\+\_\+matrices.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{sum__of__matrices_8h_source_l00209}{construct\+\_\+reverse\+\_\+mapping()}}, \mbox{\hyperlink{sum__of__matrices_8h_source_l00190}{main\+\_\+to\+\_\+added\+\_\+mapping\+\_\+pt()}}, and \mbox{\hyperlink{sum__of__matrices_8h_source_l00099}{unsafe\+\_\+main\+\_\+to\+\_\+added()}}.
 
 
 

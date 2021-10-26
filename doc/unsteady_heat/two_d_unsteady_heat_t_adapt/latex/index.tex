@@ -9,7 +9,7 @@ This example illustrates {\ttfamily oomph-\/lib\textquotesingle{}s} adaptive tim
 Here we choose the forcing function and the boundary and initial conditions so that \[ u_0(x_1,x_2,t) = \frac{1}{2} \bigg( 1 + \tanh\big(\gamma \cos(2\pi t)\big)\bigg) \sin\left(K \left( x_1 \cos \Phi + x_2 \sin \Phi\right)\right), \ \ \ \ \ \ \ \ \ \ (4) \] is the exact solution. The solution represents a 1D sin profile with wavenumber $ K $, rotated against the $x_1$-\/axis by an angle $ \Phi $, and modulated by a time-\/periodically varying amplitude. The parameter $ \gamma $ controls the rate at which the amplitude changes. For large ~\newline
  values of $ \gamma $, the amplitude remains constant for most of the period but changes rapidly at $ t = \left( 1/4 + i/2 \right), i=0,1,2,... $. To resolve these rapid changes accurately, very small timesteps are required. Conversely, relatively large timesteps could be employed during the phases when the solution remains approximately constant. The problem therefore presents an ideal test case for an adaptive timestepping scheme.
 
-The figure below shows a snapshot from the \href{../figures/unsteady_heat_soln.avi}{\texttt{ animation of the exact and computed solutions,}} obtained from a simulation with {\ttfamily oomph-\/lib\textquotesingle{}s} adaptive {\ttfamily B\+D\+F$<$2$>$} timestepper. Since the time interval between subsequent frames in this animation varies, each frame shows a blue line (in the top left corner) whose length is proportional to the elapsed time. The different rate at which the length of the line increases reflects the fact that smaller timesteps are taken when the solution varies rapidly.
+The figure below shows a snapshot from the \href{../figures/unsteady_heat_soln.avi}{\texttt{ animation of the exact and computed solutions,}} obtained from a simulation with {\ttfamily oomph-\/lib\textquotesingle{}s} adaptive {\ttfamily BDF$<$2$>$} timestepper. Since the time interval between subsequent frames in this animation varies, each frame shows a blue line (in the top left corner) whose length is proportional to the elapsed time. The different rate at which the length of the line increases reflects the fact that smaller timesteps are taken when the solution varies rapidly.
 
  
 \begin{DoxyImage}
@@ -29,7 +29,7 @@ The figure below shows the time trace of the solution and documents the timestep
 
 Most of the driver code for this example is identical to that discussed in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example,}} therefore we only discuss the modifications required to enable temporal adaptivity\+:
 \begin{DoxyItemize}
-\item We pass a boolean flag to the constructor of the {\ttfamily B\+D\+F$<$2$>$} timestepper.
+\item We pass a boolean flag to the constructor of the {\ttfamily BDF$<$2$>$} timestepper.
 \item We define a global error norm for the adaptive timestepper by overloading the (empty) virtual function {\ttfamily Problem\+::global\+\_\+temporal\+\_\+error\+\_\+norm()}.
 \item We replace the call to {\ttfamily Problem\+::unsteady\+\_\+newton\+\_\+solve(...)} by a call to {\ttfamily Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(...)} and specify a target for the temporal error norm. ~\newline
 
@@ -42,7 +42,7 @@ We store the problem parameters and define the source function and the exact sol
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_ExactSolnForUnsteadyHeat=====================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for forced exact solution for UnsteadyHeat equation }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceExactSolnForUnsteadyHeat}{ExactSolnForUnsteadyHeat}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -114,7 +114,7 @@ Here is the relevant code fragment from the otherwise unchanged {\ttfamily main}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Timestepping loop: Don't know how many steps we're going to take}}
 \DoxyCodeLine{ \textcolor{comment}{// in advance}}
-\DoxyCodeLine{ \textcolor{keywordflow}{while} (\mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.time\_pt()-\/>time()<t\_max)}
+\DoxyCodeLine{ \textcolor{keywordflow}{while} (problem.time\_pt()-\/>time()<t\_max)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{  }
 \DoxyCodeLine{   \textcolor{comment}{// Take an adaptive timestep -\/-\/ the input dt is the suggested timestep.}}
@@ -122,14 +122,14 @@ Here is the relevant code fragment from the otherwise unchanged {\ttfamily main}
 \DoxyCodeLine{   \textcolor{comment}{// tolerance is satisfied. The function returns a suggestion}}
 \DoxyCodeLine{   \textcolor{comment}{// for the timestep that should be taken for the next step. This}}
 \DoxyCodeLine{   \textcolor{comment}{// is either the actual timestep taken this time or a larger}}
-\DoxyCodeLine{   \textcolor{comment}{// value if the solution was found to be "too accurate". }}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} dt\_next=\mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.adaptive\_unsteady\_newton\_solve(dt,epsilon\_t);}
+\DoxyCodeLine{   \textcolor{comment}{// value if the solution was found to be "{}too accurate"{}. }}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} dt\_next=problem.adaptive\_unsteady\_newton\_solve(dt,epsilon\_t);}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Use dt\_next as suggestion for the next timestep}}
 \DoxyCodeLine{   dt=dt\_next;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{   \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a8d895bb93cd829890aa4c1a2d5682792}{problem}}.doc\_solution(doc\_info,trace\_file);}
+\DoxyCodeLine{   problem.doc\_solution(doc\_info,trace\_file);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Increment counter for solutions }}
 \DoxyCodeLine{   doc\_info.number()++;}
@@ -137,9 +137,7 @@ Here is the relevant code fragment from the otherwise unchanged {\ttfamily main}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of timestepping loop}}
 
 \end{DoxyCodeInclude}
-
-
-The rest of the main function is identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous, non-\/adaptive example.}}
+ The rest of the main function is identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous, non-\/adaptive example.}}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -148,18 +146,16 @@ The problem class contains a single additional member function
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Global error norm for adaptive time-\/stepping}}
+\DoxyCodeLine{\textcolor{comment}{ /// Global error norm for adaptive time-\/stepping}}
 \DoxyCodeLine{ \textcolor{keywordtype}{double} global\_temporal\_error\_norm();}
 
 \end{DoxyCodeInclude}
-
-
-which we will discuss below.
+ which we will discuss below.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
-The problem constructor is almost identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example.}} The only difference is that the boolean flag {\ttfamily true} is passed to the constructor of the {\ttfamily B\+D\+F$<$2$>$} timestepper, which means that a predictor step is computed for each timestep, see \href{\#back}{\texttt{ background }} for more details.
+The problem constructor is almost identical to that in the \href{../../two_d_unsteady_heat/html/index.html}{\texttt{ previous example.}} The only difference is that the boolean flag {\ttfamily true} is passed to the constructor of the {\ttfamily BDF$<$2$>$} timestepper, which means that a predictor step is computed for each timestep, see \href{\#back}{\texttt{ background }} for more details.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -202,7 +198,8 @@ Interfaces to the functions that compute the temporal error estimates are define
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{TimeStepper::temporal\_error\_in\_value(data\_pt,\mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a7ecbc76456a235fa534518d9250b4250}{i}})}
+\DoxyCodeLine{TimeStepper::temporal\_error\_in\_value(data\_pt,i)}
+
 \end{DoxyCode}
 
 
@@ -210,20 +207,21 @@ which computes an estimate of the error of {\ttfamily i} -\/ th value stored in 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{TimeStepper::temporal\_error\_in\_position(node\_pt,\mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a7ecbc76456a235fa534518d9250b4250}{i}})}
+\DoxyCodeLine{TimeStepper::temporal\_error\_in\_position(node\_pt,i)}
+
 \end{DoxyCode}
 
 
 may be used to obtain an estimate of the error in the {\ttfamily i} -\/ th nodal coordinate of the {\ttfamily Node} pointed to by {\ttfamily node\+\_\+pt}.
 
 These individual error estimates must be combined into a problem-\/specific, scalar error norm, ${\cal E}$ say, which forms the basis of the adaptive adjustment of the timestep in {\ttfamily Problem\+::adaptive\+\_\+unsteady\+\_\+newton\+\_\+solve(...)}.\hypertarget{index_impl}{}\doxysubsection{Implementation}\label{index_impl}
-In the present problem, we choose the R\+MS of the errors $ e_j \ (j=1,...,N_{node})$ at the nodes as the global error norm \[ {\cal E} = \sqrt{ \frac{1}{N_{node}} \sum_{j=1}^{N_{node}} e_j^2 }. \] This may be implemented in a few lines of code\+:
+In the present problem, we choose the RMS of the errors $ e_j \ (j=1,...,N_{node})$ at the nodes as the global error norm \[ {\cal E} = \sqrt{ \frac{1}{N_{node}} \sum_{j=1}^{N_{node}} e_j^2 }. \] This may be implemented in a few lines of code\+:
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_global\_temporal\_error\_norm==============================}}
-\DoxyCodeLine{\textcolor{comment}{/// Global error norm for adaptive timestepping: RMS error, based on}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// difference between predicted and actual value at all nodes.}}
+\DoxyCodeLine{\textcolor{comment}{/// Global error norm for adaptive timestepping: RMS error, based on}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// difference between predicted and actual value at all nodes.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} \mbox{\hyperlink{classUnsteadyHeatProblem_a888e25dd97e89d31e485cb188721dbe1}{UnsteadyHeatProblem<ELEMENT>::global\_temporal\_error\_norm}}()}
@@ -234,12 +232,12 @@ In the present problem, we choose the R\+MS of the errors $ e_j \ (j=1,...,N_{no
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_node = mesh\_pt()-\/>nnode();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Loop over the nodes and calculate the estimated error in the values}}
-\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a7ecbc76456a235fa534518d9250b4250}{i}}=0;\mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a7ecbc76456a235fa534518d9250b4250}{i}}<n\_node;\mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a7ecbc76456a235fa534518d9250b4250}{i}}++)}
+\DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_node;i++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Get error in solution: Difference between predicted and actual}}
 \DoxyCodeLine{   \textcolor{comment}{// value for nodal value 0}}
-\DoxyCodeLine{   \textcolor{keywordtype}{double} error = mesh\_pt()-\/>node\_pt(\mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a7ecbc76456a235fa534518d9250b4250}{i}})-\/>time\_stepper\_pt()-\/>}
-\DoxyCodeLine{    temporal\_error\_in\_value(mesh\_pt()-\/>node\_pt(\mbox{\hyperlink{two__d__unsteady__heat__t__adapt_8txt_a7ecbc76456a235fa534518d9250b4250}{i}}),0);}
+\DoxyCodeLine{   \textcolor{keywordtype}{double} error = mesh\_pt()-\/>node\_pt(i)-\/>time\_stepper\_pt()-\/>}
+\DoxyCodeLine{    temporal\_error\_in\_value(mesh\_pt()-\/>node\_pt(i),0);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Add the square of the individual error to the global error}}
 \DoxyCodeLine{   global\_error += error*error;}
@@ -259,7 +257,7 @@ In the present problem, we choose the R\+MS of the errors $ e_j \ (j=1,...,N_{no
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comments}{}\doxysection{Comments and Exercises}\label{index_comments}
-As demonstrated above, enabling temporal adaptivity for a given problem is extremely straightforward as it only requires the implementation of the problem-\/specific function {\ttfamily Problem\+::global\+\_\+temporal\+\_\+error\+\_\+norm()}. In most cases, the R\+MS of the nodal errors (or some suitable generalisation for vector-\/valued problems) is an obvious choice. In free-\/boundary problems, the R\+MS of the error estimate for the nodal positions is often a useful error measure.
+As demonstrated above, enabling temporal adaptivity for a given problem is extremely straightforward as it only requires the implementation of the problem-\/specific function {\ttfamily Problem\+::global\+\_\+temporal\+\_\+error\+\_\+norm()}. In most cases, the RMS of the nodal errors (or some suitable generalisation for vector-\/valued problems) is an obvious choice. In free-\/boundary problems, the RMS of the error estimate for the nodal positions is often a useful error measure.
 
 \DoxyHorRuler{0}
 \hypertarget{index_norm}{}\doxysubsection{How to choose the target for the temporal error norm}\label{index_norm}
@@ -294,5 +292,5 @@ Explain why the restarted simulation uses slightly different timesteps and modif
 \item The driver code is\+: \begin{center} \href{../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_t_adapt/two_d_unsteady_heat_t_adapt.cc}{\texttt{ demo\+\_\+drivers/unsteady\+\_\+heat/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+t\+\_\+adapt/two\+\_\+d\+\_\+unsteady\+\_\+heat\+\_\+t\+\_\+adapt.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

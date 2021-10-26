@@ -3,13 +3,13 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classScatteringProblem}{Scattering\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Problem class to compute scattering of planar wave from unit disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classScatteringProblem}{Scattering\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em ////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobalParameters}{Global\+Parameters}}
-\begin{DoxyCompactList}\small\item\em Namespace for \char`\"{}global\char`\"{} problem parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceGlobalParameters}{Global\+Parameters}}
+\begin{DoxyCompactList}\small\item\em ////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,7 +20,7 @@ void \mbox{\hyperlink{namespaceGlobalParameters_ae2320da6053f5527b2af5ebb362a8a0
 void \mbox{\hyperlink{namespaceGlobalParameters_a5183de63b992338ee60bb4da78a45039}{Global\+Parameters\+::prescribed\+\_\+incoming\+\_\+flux}} (const Vector$<$ double $>$ \&x, complex$<$ double $>$ \&flux)
 \begin{DoxyCompactList}\small\item\em Flux (normal derivative) on the unit disk for a planar incoming wave. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{scattering_8cc_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Solve 2D Helmholtz problem for scattering of a planar wave from a unit disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,8 +29,8 @@ double \mbox{\hyperlink{namespaceGlobalParameters_aae73cb63b27d51a87845c3392cd94
 unsigned \mbox{\hyperlink{namespaceGlobalParameters_ae4df03bf0ffa55b741ac846ca7b6c155}{Global\+Parameters\+::\+N\+\_\+fourier}} =10
 \begin{DoxyCompactList}\small\item\em Number of terms used in the computation of the exact solution. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespaceGlobalParameters_a6e2bba1769e86a5d3db88e2c7062bc63}{Global\+Parameters\+::\+Dt\+N\+\_\+\+BC}} =false
-\begin{DoxyCompactList}\small\item\em Flag to choose the Dirichlet to Neumann BC or A\+BC BC. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceGlobalParameters_a552eed3548a269715a95161ad3c4b96a}{Global\+Parameters\+::\+A\+B\+C\+\_\+order}} =3
+\begin{DoxyCompactList}\small\item\em Flag to choose the Dirichlet to Neumann BC or ABC BC. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceGlobalParameters_a552eed3548a269715a95161ad3c4b96a}{Global\+Parameters\+::\+ABC\+\_\+order}} =3
 \begin{DoxyCompactList}\small\item\em Flag to choose wich order to use. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobalParameters_a61b086072a6b8fd38af1a85f1dd1674a}{Global\+Parameters\+::\+Outer\+\_\+radius}} =1.\+5
 \begin{DoxyCompactList}\small\item\em Radius of outer boundary (must be a circle!) \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -43,12 +43,15 @@ double \mbox{\hyperlink{namespaceGlobalParameters_a61b086072a6b8fd38af1a85f1dd16
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
 
-Solve 2D Helmholtz problem for scattering of a planar wave from a unit disk ~\newline
- 
-
-Definition at line 709 of file scattering.\+cc.
 
 
+Solve 2D Helmholtz problem for scattering of a planar wave from a unit disk. 
 
-References Global\+Parameters\+::\+A\+B\+C\+\_\+order, Global\+Parameters\+::\+Dt\+N\+\_\+\+BC, and problem.
+
+
+Definition at line \mbox{\hyperlink{scattering_8cc_source_l00709}{709}} of file \mbox{\hyperlink{scattering_8cc_source}{scattering.\+cc}}.
+
+
+
+References \mbox{\hyperlink{scattering_8cc_source_l00076}{Global\+Parameters\+::\+ABC\+\_\+order}}, \mbox{\hyperlink{scattering_8cc_source_l00516}{Scattering\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, and \mbox{\hyperlink{scattering_8cc_source_l00072}{Global\+Parameters\+::\+Dt\+N\+\_\+\+BC}}.
 

@@ -61,7 +61,7 @@ namespace oomph
                                   public virtual ElementWithExternalElement
   {
   public:
-    ///\short Constructor which takes a pointer to a "bulk" element,
+    /// Constructor which takes a pointer to a "bulk" element,
     /// to which this element is attached. The face index, indicates
     /// the face (of the bulk element) that is to be constructed.
     /// Note that this element tends to be constructed
@@ -88,10 +88,7 @@ namespace oomph
 
 
     /// Broken copy constructor
-    FaceElementAsGeomObject(const FaceElementAsGeomObject&)
-    {
-      BrokenCopy::broken_copy("FaceElementAsGeomObject");
-    }
+    FaceElementAsGeomObject(const FaceElementAsGeomObject&) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -99,12 +96,9 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const FaceElementAsGeomObject&)
-     {
-      BrokenCopy::broken_assign("FaceElementAsGeomObject");
-      }*/
+    /*void operator=(const FaceElementAsGeomObject&) = delete;*/
 
-    /// \short The "global" intrinsic coordinate of the element when
+    /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default
     double zeta_nodal(const unsigned& n,
@@ -115,14 +109,14 @@ namespace oomph
     }
 
 
-    /// \short How many items of Data does the shape of the object depend on?
+    /// How many items of Data does the shape of the object depend on?
     /// None! We're dealing with a pure geometric FiniteElement!
     unsigned ngeom_data() const
     {
       return 0;
     }
 
-    /// \short Return pointer to the j-th Data item that the object's
+    /// Return pointer to the j-th Data item that the object's
     /// shape depends on. Object doesn't depend on any geom Data
     /// so we die if this gets called.
     Data* geom_data_pt(const unsigned& j)
@@ -155,7 +149,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
     }
 
-    /// \short Function to describe the local dofs of the element. The ostream
+    /// Function to describe the local dofs of the element. The ostream
     /// specifies the output stream to which the description
     /// is written; the string stores the currently
     /// assembled output that is ultimately written to the
@@ -181,7 +175,7 @@ namespace oomph
 
 
   //============================================================================
-  /// \short A class to do comparison of the elements by lexicographic
+  /// A class to do comparison of the elements by lexicographic
   /// ordering, based on the boundary coordinates at the element's first node.
   //============================================================================
   template<class ELEMENT>

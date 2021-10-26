@@ -3,7 +3,7 @@ In this tutorial we re-\/visit the solution of the time-\/harmonic equations of 
 \begin{center} \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
 \hline
-\begin{center} {\bfseries{Acknowledgement\+:}} This implementation of the equations and the documentation were developed jointly with Robert Harter (Thales Underwater Systems Ltd) with financial support from a K\+TA Secondment grant from University of Manchester\textquotesingle{}s E\+P\+S\+R\+C-\/funded Knowledge Transfer Account. \end{center}    \\\cline{1-1}
+\begin{center} {\bfseries{Acknowledgement\+:}} This implementation of the equations and the documentation were developed jointly with Robert Harter (Thales Underwater Systems Ltd) with financial support from a KTA Secondment grant from University of Manchester\textquotesingle{}s EPSRC-\/funded Knowledge Transfer Account. \end{center}    \\\cline{1-1}
 \end{longtabu}
 \end{center} 
 
@@ -17,7 +17,7 @@ Here is an animation of the resulting displacement field for $ r_{\rm min} = 0.1
  
 \begin{DoxyImage}
 \includegraphics[width=0.6\textwidth]{anim}
-\doxyfigcaption{Forced oscillations of a thick-\/walled, hollow cylinder, subject to a pressure load on its inner surface. The pink shape in the background shows the cylinder\textquotesingle{}s undeformed shape (in a radial plane); the mesh plotted in the region r $<$ 0 illustrates how spatial adaptivity refines the mesh in regions of sharp displacement gradients (near the loaded surface and the supports). }
+\doxyfigcaption{Forced oscillations of a thick-\/walled, hollow cylinder, subject to a pressure load on its inner surface. The pink shape in the background shows the cylinder\textquotesingle{}s undeformed shape (in a radial plane); the mesh plotted in the region r \texorpdfstring{$<$}{<} 0 illustrates how spatial adaptivity refines the mesh in regions of sharp displacement gradients (near the loaded surface and the supports). }
 \end{DoxyImage}
 
 
@@ -28,9 +28,9 @@ The driver code for this problem is very similar to the one discussed in \href{.
 \begin{DoxyItemize}
 \item The change of the forcing to a spatially constant pressure load on the inside boundary.
 \item The provision of the {\ttfamily actions\+\_\+before/after\+\_\+adapt}() functions and a helper function {\ttfamily complete\+\_\+problem\+\_\+setup()} which rebuilds the elements (by passing the problem parameters to the elements) following the unstructured mesh adaptation. (The need/rationale for such a function is discussed in \href{../../../meshes/mesh_from_inline_triangle/html/index.html}{\texttt{ another tutorial.}})
-\item The mesh generation and the application of boundary conditions at the upper and lower boundaries of the hollow cylinder.
-\end{DoxyItemize}~\newline
+\item The mesh generation and the application of boundary conditions at the upper and lower boundaries of the hollow cylinder. . ~\newline
  All of this is reasonably straightforward and provides a powerful code that automatically adapts the mesh in regions of large displacement gradients. Have a look through the driver code and play with it.
+\end{DoxyItemize}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -67,12 +67,12 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{// Driver }}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// The oomphlib headers}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "generic.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "time\_harmonic\_fourier\_decomposed\_linear\_elasticity.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}generic.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}time\_harmonic\_fourier\_decomposed\_linear\_elasticity.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// The mesh}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/rectangular\_quadmesh.h"}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include "meshes/triangle\_mesh.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/rectangular\_quadmesh.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}meshes/triangle\_mesh.h"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
 \DoxyCodeLine{}
@@ -93,7 +93,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\textcolor{comment}{ /// Define Fourier wavenumber}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespaceGlobal__Parameters_ae1198385d90f52c4ed921520ae43a9e7}{Fourier\_wavenumber}} = 0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Define the non-\/dimensional square angular frequency of }}
+\DoxyCodeLine{\textcolor{comment}{ /// Define the non-\/dimensional square angular frequency of }}
 \DoxyCodeLine{\textcolor{comment}{ /// time-\/harmonic motion}}
 \DoxyCodeLine{\textcolor{comment}{} std::complex<double> \mbox{\hyperlink{namespaceGlobal__Parameters_aa7f960ed4311ccf6e3dbf9371f13876a}{Omega\_sq}} (10.0,0.0);}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -141,31 +141,31 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass number of elements in r and z directions }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass number of elements in r and z directions }}
 \DoxyCodeLine{\textcolor{comment}{ /// and boundary locations}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem}{FourierDecomposedTimeHarmonicLinearElasticityProblem}}(}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_a52597ec969cbd2aaa9fde263594c1c32}{FourierDecomposedTimeHarmonicLinearElasticityProblem}}(}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nr, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nz,}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&\mbox{\hyperlink{namespaceGlobal__Parameters_ad454d80ae621f272dd1d7932249545a5}{rmin}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceGlobal__Parameters_a5d7fb394c980bb4bf2a52158f9d7cc50}{rmax}},}
 \DoxyCodeLine{ \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&\mbox{\hyperlink{namespaceGlobal__Parameters_ac6a17dbcf1b8f1136a1ec5c07efef708}{zmin}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{namespaceGlobal__Parameters_a8ee2afb91b9b105939f19a0efa8e1441}{zmax}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update before solve is empty}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_ad9a3f48c3b399c4595f73d3f1e9a14ef}{actions\_before\_newton\_solve}}() \{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update after solve is empty}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_newton\_solve() \{\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_ac5c25fb4658eaef91104ef7be1b0d25e}{actions\_after\_newton\_solve}}() \{\}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Delete traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} delete\_traction\_elements();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_ad51d1870683e0141c7854c583dd3916b}{delete\_traction\_elements}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Helper function to complete problem setup}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} complete\_problem\_setup();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_aeb3e1638026cb1cabf1b16a32496f63c}{complete\_problem\_setup}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt: Wipe the mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_adapt()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_a36fdaec8cffb1f6ac313515a86010d8d}{actions\_before\_adapt}}()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Kill the traction elements and wipe surface mesh}}
-\DoxyCodeLine{   delete\_traction\_elements();}
+\DoxyCodeLine{   \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_ad51d1870683e0141c7854c583dd3916b}{delete\_traction\_elements}}();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Rebuild the Problem's global mesh from its various sub-\/meshes}}
 \DoxyCodeLine{   rebuild\_global\_mesh();}
@@ -173,41 +173,41 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Actions after adapt: Rebuild the mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_after\_adapt()}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_a5b9d18ea43b802e8a2b1f3b50140054b}{actions\_after\_adapt}}()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Create traction elements from all elements that are }}
 \DoxyCodeLine{   \textcolor{comment}{// adjacent to FSI boundaries and add them to surface meshes}}
-\DoxyCodeLine{   assign\_traction\_elements();}
+\DoxyCodeLine{   \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_ab995077cbd92377b726d0ea0de81720e}{assign\_traction\_elements}}();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Rebuild the Problem's global mesh from its various sub-\/meshes}}
 \DoxyCodeLine{   rebuild\_global\_mesh();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Complete problem setup}}
-\DoxyCodeLine{   complete\_problem\_setup();   }
+\DoxyCodeLine{   \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_aeb3e1638026cb1cabf1b16a32496f63c}{complete\_problem\_setup}}();   }
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} doc\_solution(DocInfo\& doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_af328e5b2260377fa7df04b727ca130bd}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Allocate traction elements on the bottom surface}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} assign\_traction\_elements();}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_ab995077cbd92377b726d0ea0de81720e}{assign\_traction\_elements}}();}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef ADAPTIVE}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the bulk mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELEMENT>* Bulk\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} RefineableTriangleMesh<ELEMENT>* \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_abc7e142ef488a0533a2544ac302f8b08}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#else}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the bulk mesh}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* Bulk\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_abc7e142ef488a0533a2544ac302f8b08}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Pointer to the mesh of traction elements}}
-\DoxyCodeLine{\textcolor{comment}{} Mesh* Surface\_mesh\_pt;}
+\DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classFourierDecomposedTimeHarmonicLinearElasticityProblem_aaf7a1b8aadd027cf6ed340e31fb53550}{Surface\_mesh\_pt}};}
 \DoxyCodeLine{\}; \textcolor{comment}{// end\_of\_problem\_class}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -315,7 +315,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{ build\_global\_mesh();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Assign equation numbers}}
-\DoxyCodeLine{ cout << assign\_eqn\_numbers() << \textcolor{stringliteral}{" equations assigned"} << std::endl; }
+\DoxyCodeLine{ cout << assign\_eqn\_numbers() << \textcolor{stringliteral}{"{} equations assigned"{}} << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 \DoxyCodeLine{}
@@ -463,14 +463,14 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} npts=5; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln.dat"},doc\_info.directory().c\_str());}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln.dat"{}},doc\_info.directory().c\_str());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(some\_file,npts);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output norm of solution (to allow validation of solution even}}
 \DoxyCodeLine{ \textcolor{comment}{// if triangle generates a slightly different mesh)}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/norm.dat"},doc\_info.directory().c\_str());   }
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/norm.dat"{}},doc\_info.directory().c\_str());   }
 \DoxyCodeLine{ some\_file.open(filename);   }
 \DoxyCodeLine{ \textcolor{keywordtype}{double} norm=0.0;}
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} nel=Bulk\_mesh\_pt-\/>nelement();}
@@ -501,7 +501,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#ifdef ADAPTIVE}}
 \DoxyCodeLine{}
@@ -533,6 +533,7 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 \DoxyCodeLine{ problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_main}}
+
 \end{DoxyCodeInclude}
 
 
@@ -547,5 +548,5 @@ Here\textquotesingle{}s a listing of the complete driver code\+:
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

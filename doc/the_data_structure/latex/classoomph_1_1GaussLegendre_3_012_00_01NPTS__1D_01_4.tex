@@ -1,4 +1,4 @@
-\hypertarget{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4}{}\doxysection{oomph\+::Gauss\+Legendre$<$ 2, N\+P\+T\+S\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4}{}\doxysection{oomph\+::Gauss\+Legendre\texorpdfstring{$<$}{<} 2, NPTS\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4}\index{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}}
 
 
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$integral.\+h$>$}
 
-Inheritance diagram for oomph\+::Gauss\+Legendre$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Gauss\+Legendre\texorpdfstring{$<$}{<} 2, NPTS\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4}
@@ -19,7 +19,7 @@ Inheritance diagram for oomph\+::Gauss\+Legendre$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+:
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a1457debc6ebc05fbfc09392b3488463f}{Gauss\+Legendre}} ()
-\begin{DoxyCompactList}\small\item\em Deafault constructor. Calculates and stores G\+LL nodes. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Deafault constructor. Calculates and stores GLL nodes. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a5d7decc01653676a3a0a8c967bf17f9f}{nweight}} () const
 \begin{DoxyCompactList}\small\item\em Number of integration points of the scheme. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_aa06ad7b9d8c9100a033021bf0478fd93}{knot}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}, const unsigned \&j) const
@@ -29,24 +29,23 @@ double \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a60
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a6641e19f354c41913bb61c745d8a595c}{Knot}} \mbox{[}N\+P\+T\+S\+\_\+1D $\ast$N\+P\+T\+S\+\_\+1D\mbox{]}\mbox{[}2\mbox{]}
+double \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a6641e19f354c41913bb61c745d8a595c}{Knot}} \mbox{[}NPTS\+\_\+1D $\ast$NPTS\+\_\+1D\mbox{]}\mbox{[}2\mbox{]}
 \begin{DoxyCompactList}\small\item\em Array to hold weight and knot points. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a4918e5aa95262b12f4c4767c63fa2c43}{Weight}} \mbox{[}N\+P\+T\+S\+\_\+1D $\ast$N\+P\+T\+S\+\_\+1D\mbox{]}
+double \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a4918e5aa95262b12f4c4767c63fa2c43}{Weight}} \mbox{[}NPTS\+\_\+1D $\ast$NPTS\+\_\+1D\mbox{]}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const unsigned long int \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a897ee85bffd6510822ebdc5e60e5faee}{Npts}} = N\+P\+T\+S\+\_\+1D $\ast$ N\+P\+T\+S\+\_\+1D
+static const unsigned long int \mbox{\hyperlink{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a897ee85bffd6510822ebdc5e60e5faee}{Npts}} = NPTS\+\_\+1D $\ast$ NPTS\+\_\+1D
 \begin{DoxyCompactList}\small\item\em Number of integration points in scheme. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned N\+P\+T\+S\+\_\+1D$>$\newline
-class oomph\+::\+Gauss\+Legendre$<$ 2, N\+P\+T\+S\+\_\+1\+D $>$}
-
+\subsubsection*{template$<$unsigned NPTS\+\_\+1D$>$\newline
+class oomph\+::\+Gauss\+Legendre$<$ 2, NPTS\+\_\+1\+D $>$}
 2D \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} Legendre integration class 
 
-Definition at line 1709 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l01553}{1553}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
@@ -55,20 +54,20 @@ Definition at line 1709 of file integral.\+h.
 \index{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}!GaussLegendre@{GaussLegendre}}
 \index{GaussLegendre@{GaussLegendre}!oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{GaussLegendre()}{GaussLegendre()}}
-{\footnotesize\ttfamily template$<$unsigned N\+P\+T\+S\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1GaussLegendre}{Gauss\+Legendre}}}
+{\footnotesize\ttfamily template$<$unsigned NPTS\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, NPTS\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1GaussLegendre}{Gauss\+Legendre}}}
 
 
 
-Deafault constructor. Calculates and stores G\+LL nodes. 
+Deafault constructor. Calculates and stores GLL nodes. 
 
-Calculate positions and weights for the 2D \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} Legendre integration class 
+Calculate positions and weights for the 2D \mbox{\hyperlink{classoomph_1_1Gauss}{Gauss}} Legendre integration class. 
 
-Definition at line 1749 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l01593}{1593}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
-References oomph\+::\+Orthpoly\+::gl\+\_\+nodes(), i, and s.
+References \mbox{\hyperlink{orthpoly_8cc_source_l00105}{oomph\+::\+Orthpoly\+::gl\+\_\+nodes()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
@@ -77,8 +76,8 @@ References oomph\+::\+Orthpoly\+::gl\+\_\+nodes(), i, and s.
 \index{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}!knot@{knot}}
 \index{knot@{knot}!oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{knot()}{knot()}}
-{\footnotesize\ttfamily template$<$unsigned N\+P\+T\+S\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+::knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NPTS\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, NPTS\+\_\+1D $>$\+::knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -86,22 +85,18 @@ Return coordinate s\mbox{[}j\mbox{]} (j=0) of integration point i.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a2122f99a87c18649bafdd9ed739758}{oomph\+::\+Integral}}.
+Definition at line \mbox{\hyperlink{integral_8h_source_l01575}{1575}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
-Definition at line 1731 of file integral.\+h.
-
-
-
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a5d7decc01653676a3a0a8c967bf17f9f}\label{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a5d7decc01653676a3a0a8c967bf17f9f}} 
 \index{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}!nweight@{nweight}}
 \index{nweight@{nweight}!oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{nweight()}{nweight()}}
-{\footnotesize\ttfamily template$<$unsigned N\+P\+T\+S\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+::nweight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NPTS\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, NPTS\+\_\+1D $>$\+::nweight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -109,18 +104,14 @@ Number of integration points of the scheme.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1Integral_a1a270de9d99a1fcf1d25a6c1017f65fa}{oomph\+::\+Integral}}.
-
-
-
-Definition at line 1725 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l01569}{1569}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a6029854a1a1a55ff0d4ac37f936cdbb6}\label{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a6029854a1a1a55ff0d4ac37f936cdbb6}} 
 \index{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}!weight@{weight}}
 \index{weight@{weight}!oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{weight()}{weight()}}
-{\footnotesize\ttfamily template$<$unsigned N\+P\+T\+S\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+::weight (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NPTS\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, NPTS\+\_\+1D $>$\+::weight (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -128,15 +119,11 @@ Return weight of integration point i.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1Integral_ac65335e2aab120b285b3d6c294507b06}{oomph\+::\+Integral}}.
+Definition at line \mbox{\hyperlink{integral_8h_source_l01581}{1581}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 
-Definition at line 1737 of file integral.\+h.
-
-
-
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
@@ -145,8 +132,8 @@ References i.
 \index{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}!Knot@{Knot}}
 \index{Knot@{Knot}!oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Knot}{Knot}}
-{\footnotesize\ttfamily template$<$unsigned N\+P\+T\+S\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+::Knot\mbox{[}N\+P\+T\+S\+\_\+1D $\ast$N\+P\+T\+S\+\_\+1D\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NPTS\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, NPTS\+\_\+1D $>$\+::Knot\mbox{[}NPTS\+\_\+1D $\ast$NPTS\+\_\+1D\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -154,14 +141,14 @@ Array to hold weight and knot points.
 
 
 
-Definition at line 1716 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l01560}{1560}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a897ee85bffd6510822ebdc5e60e5faee}\label{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a897ee85bffd6510822ebdc5e60e5faee}} 
 \index{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}!Npts@{Npts}}
 \index{Npts@{Npts}!oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Npts}{Npts}}
-{\footnotesize\ttfamily template$<$unsigned N\+P\+T\+S\+\_\+1D$>$ \\
-const unsigned long int \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+::Npts = N\+P\+T\+S\+\_\+1D $\ast$ N\+P\+T\+S\+\_\+1D\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NPTS\+\_\+1D$>$ \\
+const unsigned long int \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, NPTS\+\_\+1D $>$\+::Npts = NPTS\+\_\+1D $\ast$ NPTS\+\_\+1D\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -169,18 +156,18 @@ Number of integration points in scheme.
 
 
 
-Definition at line 1713 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l01557}{1557}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a4918e5aa95262b12f4c4767c63fa2c43}\label{classoomph_1_1GaussLegendre_3_012_00_01NPTS__1D_01_4_a4918e5aa95262b12f4c4767c63fa2c43}} 
 \index{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}!Weight@{Weight}}
 \index{Weight@{Weight}!oomph::GaussLegendre$<$ 2, NPTS\_1D $>$@{oomph::GaussLegendre$<$ 2, NPTS\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{Weight}{Weight}}
-{\footnotesize\ttfamily template$<$unsigned N\+P\+T\+S\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, N\+P\+T\+S\+\_\+1D $>$\+::Weight\mbox{[}N\+P\+T\+S\+\_\+1D $\ast$N\+P\+T\+S\+\_\+1D\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$unsigned NPTS\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1GaussLegendre}{oomph\+::\+Gauss\+Legendre}}$<$ 2, NPTS\+\_\+1D $>$\+::Weight\mbox{[}NPTS\+\_\+1D $\ast$NPTS\+\_\+1D\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 1717 of file integral.\+h.
+Definition at line \mbox{\hyperlink{integral_8h_source_l01561}{1561}} of file \mbox{\hyperlink{integral_8h_source}{integral.\+h}}.
 
 
 

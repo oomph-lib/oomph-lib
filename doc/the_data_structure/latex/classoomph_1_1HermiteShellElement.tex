@@ -2,6 +2,11 @@
 \label{classoomph_1_1HermiteShellElement}\index{oomph::HermiteShellElement@{oomph::HermiteShellElement}}
 
 
+An element that solves the Kirchhoff-\/\+Love shell theory equations using Hermite interpolation (displacements and slopes are interpolated separately. The local and global (Lagrangian) coordinates are not assumed to be aligned. N.\+B. It will be DOG SLOW.  
+
+
+
+
 {\ttfamily \#include $<$shell\+\_\+elements.\+h$>$}
 
 Inheritance diagram for oomph\+::Hermite\+Shell\+Element\+:\begin{figure}[H]
@@ -15,23 +20,23 @@ Inheritance diagram for oomph\+::Hermite\+Shell\+Element\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1HermiteShellElement_afa11d38b6dd8d1705a6c8f4faf2b99a7}{Hermite\+Shell\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, there are no internal data points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a78713ac47c51ca8e8081ce7a5bfce592}{output\+\_\+with\+\_\+time\+\_\+dep\+\_\+quantities}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a78713ac47c51ca8e8081ce7a5bfce592}{output\+\_\+with\+\_\+time\+\_\+dep\+\_\+quantities}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output position veloc and accel. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_af2313040b66727088dc044738b652677}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a2f76280c3af060304800b5bc0aeb02d8}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a2f76280c3af060304800b5bc0aeb02d8}{output}} (std\+::ostream \&outfile, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a126ebcc503395e036c6bfaf8fabbc800}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a126ebcc503395e036c6bfaf8fabbc800}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Overload the output function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a805a6e65b4dbb7bcffab6180ff9686ba}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+void \mbox{\hyperlink{classoomph_1_1HermiteShellElement_a805a6e65b4dbb7bcffab6180ff9686ba}{output}} (FILE $\ast$file\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n\+\_\+plot)
 \begin{DoxyCompactList}\small\item\em Output function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-An element that solves the Kirchhoff-\/\+Love shell theory equations using Hermite interpolation (displacements and slopes are interpolated separately. The local and global (Lagrangian) coordinates are not assumed to be aligned. N.\+B. It will be D\+OG S\+L\+OW. 
+An element that solves the Kirchhoff-\/\+Love shell theory equations using Hermite interpolation (displacements and slopes are interpolated separately. The local and global (Lagrangian) coordinates are not assumed to be aligned. N.\+B. It will be DOG SLOW. 
 
-Definition at line 345 of file shell\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00345}{345}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
 
 
 
@@ -48,11 +53,11 @@ Constructor, there are no internal data points.
 
 
 
-Definition at line 350 of file shell\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00350}{350}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension().
+References \mbox{\hyperlink{elements_8h_source_l01390}{oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension()}}.
 
 
 
@@ -61,7 +66,7 @@ References oomph\+::\+Finite\+Element\+::set\+\_\+nodal\+\_\+dimension().
 \index{oomph::HermiteShellElement@{oomph::HermiteShellElement}!output@{output}}
 \index{output@{output}!oomph::HermiteShellElement@{oomph::HermiteShellElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Hermite\+Shell\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Shell\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -73,17 +78,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_ad
 
 
 
-Definition at line 371 of file shell\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00371}{371}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Solid\+Q\+Hermite\+Element$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{hermite__elements_8cc_source_l01072}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteShellElement_a805a6e65b4dbb7bcffab6180ff9686ba}\label{classoomph_1_1HermiteShellElement_a805a6e65b4dbb7bcffab6180ff9686ba}} 
 \index{oomph::HermiteShellElement@{oomph::HermiteShellElement}!output@{output}}
 \index{output@{output}!oomph::HermiteShellElement@{oomph::HermiteShellElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Hermite\+Shell\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Shell\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -95,11 +100,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a2
 
 
 
-Definition at line 1298 of file shell\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l01298}{1298}} of file \mbox{\hyperlink{shell__elements_8cc_source}{shell\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), and s.
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteShellElement_af2313040b66727088dc044738b652677}\label{classoomph_1_1HermiteShellElement_af2313040b66727088dc044738b652677}} 
 \index{oomph::HermiteShellElement@{oomph::HermiteShellElement}!output@{output}}
@@ -117,17 +122,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a7
 
 
 
-Definition at line 362 of file shell\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{shell__elements_8h_source_l00362}{362}} of file \mbox{\hyperlink{shell__elements_8h_source}{shell\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Solid\+Q\+Hermite\+Element$<$ D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{hermite__elements_8cc_source_l01072}{oomph\+::\+Solid\+QHermite\+Element$<$ DIM $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteShellElement_a2f76280c3af060304800b5bc0aeb02d8}\label{classoomph_1_1HermiteShellElement_a2f76280c3af060304800b5bc0aeb02d8}} 
 \index{oomph::HermiteShellElement@{oomph::HermiteShellElement}!output@{output}}
 \index{output@{output}!oomph::HermiteShellElement@{oomph::HermiteShellElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Hermite\+Shell\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Shell\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -139,17 +144,17 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1KirchhoffLoveShellEquations_a5
 
 
 
-Definition at line 1267 of file shell\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l01267}{1267}} of file \mbox{\hyperlink{shell__elements_8cc_source}{shell\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi(), and s.
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, \mbox{\hyperlink{elements_8cc_source_l07108}{oomph\+::\+Solid\+Finite\+Element\+::interpolated\+\_\+xi()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1HermiteShellElement_a78713ac47c51ca8e8081ce7a5bfce592}\label{classoomph_1_1HermiteShellElement_a78713ac47c51ca8e8081ce7a5bfce592}} 
 \index{oomph::HermiteShellElement@{oomph::HermiteShellElement}!output\_with\_time\_dep\_quantities@{output\_with\_time\_dep\_quantities}}
 \index{output\_with\_time\_dep\_quantities@{output\_with\_time\_dep\_quantities}!oomph::HermiteShellElement@{oomph::HermiteShellElement}}
 \doxysubsubsection{\texorpdfstring{output\_with\_time\_dep\_quantities()}{output\_with\_time\_dep\_quantities()}}
-{\footnotesize\ttfamily void oomph\+::\+Hermite\+Shell\+Element\+::output\+\_\+with\+\_\+time\+\_\+dep\+\_\+quantities (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oomph\+::\+Hermite\+Shell\+Element\+::output\+\_\+with\+\_\+time\+\_\+dep\+\_\+quantities (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})}
 
 
 
@@ -157,11 +162,11 @@ Output position veloc and accel.
 
 The output function\+: position, veloc and accel. 
 
-Definition at line 1233 of file shell\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{shell__elements_8cc_source_l01233}{1233}} of file \mbox{\hyperlink{shell__elements_8cc_source}{shell\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Finite\+Element\+::interpolated\+\_\+dxdt(), oomph\+::\+Finite\+Element\+::interpolated\+\_\+x(), and s.
+References \mbox{\hyperlink{classoomph_1_1FiniteElement_a408b7a4b9116c531fb9defa79783b226}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+dxdt()}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a40b7ab54112a2c6100da99ac801f7a06}{oomph\+::\+Finite\+Element\+::interpolated\+\_\+x()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 

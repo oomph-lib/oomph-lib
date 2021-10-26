@@ -164,7 +164,7 @@ automatically initialises the previous timestep; otherwise
 we have to perform the initialisation ourselves.
 
 \skipline start_of_set_initial_condition
-\until end of set_initial_condition  
+\until end of set_initial_condition
 
 <HR>
 <HR>

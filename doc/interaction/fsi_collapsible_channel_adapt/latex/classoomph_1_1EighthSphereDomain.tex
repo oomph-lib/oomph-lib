@@ -20,64 +20,64 @@ Inheritance diagram for oomph\+::Eighth\+Sphere\+Domain\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a82c8a6b479e41bf07b9478e3d903b465}{Eighth\+Sphere\+Domain}} (const double \&radius)
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass the radius of the sphere. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1EighthSphereDomain_af831fd06346e57808dca43940385e970}{Eighth\+Sphere\+Domain}} (const \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&)
+\mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a652f7f61796c1fe2f9597ab5fec1691b}{Eighth\+Sphere\+Domain}} (const \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a3533eb2f34986e995a779d2841267b12}{operator=}} (const \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a9aab5d92d917a847e677d176fed33333}{operator=}} (const \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ab299e8bd818573e3fca246973f1030b2}{$\sim$\+Eighth\+Sphere\+Domain}} ()
 \begin{DoxyCompactList}\small\item\em Destructor\+: Empty; cleanup done in base class. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a281727105819669ea9dab9fec120ea63}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const unsigned \&imacro, const unsigned \&idirect, const Vector$<$ double $>$ \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_abe1a872647b7cfc1c732b57adef7d1b9}{s}}, Vector$<$ double $>$ \&f)
-\begin{DoxyCompactList}\small\item\em Vector representation of the imacro-\/th macro element boundary idirect (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a281727105819669ea9dab9fec120ea63}{macro\+\_\+element\+\_\+boundary}} (const unsigned \&t, const unsigned \&imacro, const unsigned \&idirect, const Vector$<$ double $>$ \&s, Vector$<$ double $>$ \&f)
+\begin{DoxyCompactList}\small\item\em Vector representation of the imacro-\/th macro element boundary idirect (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_adc5634bf44b0689994ad68daf203e11f}{r\+\_\+centr\+\_\+L}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_adc5634bf44b0689994ad68daf203e11f}{r\+\_\+centr\+\_\+L}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a226c7c3bbcc59aa73c1033af523ef653}{r\+\_\+centr\+\_\+R}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a226c7c3bbcc59aa73c1033af523ef653}{r\+\_\+centr\+\_\+R}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa7c38e9c33934b556f59c044654500ce}{r\+\_\+centr\+\_\+D}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa7c38e9c33934b556f59c044654500ce}{r\+\_\+centr\+\_\+D}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_afda0d6220482758cc0ad81ea848de45b}{r\+\_\+centr\+\_\+U}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_afda0d6220482758cc0ad81ea848de45b}{r\+\_\+centr\+\_\+U}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a3ba94d9786fc6c544d82a392f8bf3dd6}{r\+\_\+centr\+\_\+B}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a3ba94d9786fc6c544d82a392f8bf3dd6}{r\+\_\+centr\+\_\+B}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a080334e0a4e7cd61c97f0b2bf1174f00}{r\+\_\+centr\+\_\+F}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a080334e0a4e7cd61c97f0b2bf1174f00}{r\+\_\+centr\+\_\+F}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of central box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad029a857dd1b83ed10281613e0c56800}{r\+\_\+right\+\_\+L}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad029a857dd1b83ed10281613e0c56800}{r\+\_\+right\+\_\+L}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a58ec95dc35f526fe5c6baa2578a2f786}{r\+\_\+right\+\_\+R}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a58ec95dc35f526fe5c6baa2578a2f786}{r\+\_\+right\+\_\+R}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a7a4a1a98b542afd49a5ec8abfda287fc}{r\+\_\+right\+\_\+D}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a7a4a1a98b542afd49a5ec8abfda287fc}{r\+\_\+right\+\_\+D}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a004a1adfe832e2b233f8ec1b6a58b9aa}{r\+\_\+right\+\_\+U}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a004a1adfe832e2b233f8ec1b6a58b9aa}{r\+\_\+right\+\_\+U}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ac013c364bfe2f0bb1d3393696149d249}{r\+\_\+right\+\_\+B}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ac013c364bfe2f0bb1d3393696149d249}{r\+\_\+right\+\_\+B}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa08635438bff5a3d377d45c8c9c2b377}{r\+\_\+right\+\_\+F}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa08635438bff5a3d377d45c8c9c2b377}{r\+\_\+right\+\_\+F}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of right box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_af9ab515958ed3699ea5ed95ec9a87d9e}{r\+\_\+up\+\_\+L}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_af9ab515958ed3699ea5ed95ec9a87d9e}{r\+\_\+up\+\_\+L}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad38d27ad06d83c94c768fbda98c939e7}{r\+\_\+up\+\_\+R}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad38d27ad06d83c94c768fbda98c939e7}{r\+\_\+up\+\_\+R}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad55bde69a74b24f1c9c6cc6bb277e39b}{r\+\_\+up\+\_\+D}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_ad55bde69a74b24f1c9c6cc6bb277e39b}{r\+\_\+up\+\_\+D}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a303c406fe673675f497522dae69f849c}{r\+\_\+up\+\_\+U}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a303c406fe673675f497522dae69f849c}{r\+\_\+up\+\_\+U}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aaac560ab6bbe35010c1ff61a466d1252}{r\+\_\+up\+\_\+B}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aaac560ab6bbe35010c1ff61a466d1252}{r\+\_\+up\+\_\+B}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a9e419235f4800eab872523bdbfe72fb6}{r\+\_\+up\+\_\+F}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a9e419235f4800eab872523bdbfe72fb6}{r\+\_\+up\+\_\+F}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a161d1ad8c0e991e9228a0725d7c9ccd9}{r\+\_\+front\+\_\+L}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a161d1ad8c0e991e9228a0725d7c9ccd9}{r\+\_\+front\+\_\+L}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a5d32fe51e8ca993b12f911593ad46ca7}{r\+\_\+front\+\_\+R}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a5d32fe51e8ca993b12f911593ad46ca7}{r\+\_\+front\+\_\+R}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a46ccabe44dd16cae048c302d5cfe26ee}{r\+\_\+front\+\_\+D}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a46ccabe44dd16cae048c302d5cfe26ee}{r\+\_\+front\+\_\+D}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aef12fa8f21592009e8ab51d88c301388}{r\+\_\+front\+\_\+U}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aef12fa8f21592009e8ab51d88c301388}{r\+\_\+front\+\_\+U}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa62bb16a2963530246c8cc9ef905c944}{r\+\_\+front\+\_\+B}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_aa62bb16a2963530246c8cc9ef905c944}{r\+\_\+front\+\_\+B}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a71d48567ee2661821f41dd50793a6eb1}{r\+\_\+front\+\_\+F}} (const unsigned \&\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a152339e6ee653f666802b0f8708a0ec3}{t}}, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
+void \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a71d48567ee2661821f41dd50793a6eb1}{r\+\_\+front\+\_\+F}} (const unsigned \&t, const Vector$<$ double $>$ \&zeta, Vector$<$ double $>$ \&f)
 \begin{DoxyCompactList}\small\item\em Boundary of top left box macro element zeta $ \in [-1,1]^2 $. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -89,7 +89,7 @@ double \mbox{\hyperlink{classoomph_1_1EighthSphereDomain_a9ef9d21c2c9ed0ea286520
 \doxysubsection{Detailed Description}
 Eighth sphere as domain. Domain is parametrised by four macro elements. 
 
-Definition at line 41 of file eighth\+\_\+sphere\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00041}{41}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
@@ -106,21 +106,17 @@ Constructor\+: Pass the radius of the sphere.
 
 
 
-Definition at line 45 of file eighth\+\_\+sphere\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00045}{45}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_af831fd06346e57808dca43940385e970}\label{classoomph_1_1EighthSphereDomain_af831fd06346e57808dca43940385e970}} 
+\mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a652f7f61796c1fe2f9597ab5fec1691b}\label{classoomph_1_1EighthSphereDomain_a652f7f61796c1fe2f9597ab5fec1691b}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!EighthSphereDomain@{EighthSphereDomain}}
 \index{EighthSphereDomain@{EighthSphereDomain}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
 \doxysubsubsection{\texorpdfstring{EighthSphereDomain()}{EighthSphereDomain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Eighth\+Sphere\+Domain\+::\+Eighth\+Sphere\+Domain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Eighth\+Sphere\+Domain\+::\+Eighth\+Sphere\+Domain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 61 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_ab299e8bd818573e3fca246973f1030b2}\label{classoomph_1_1EighthSphereDomain_ab299e8bd818573e3fca246973f1030b2}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!````~EighthSphereDomain@{$\sim$EighthSphereDomain}}
@@ -134,7 +130,7 @@ Destructor\+: Empty; cleanup done in base class.
 
 
 
-Definition at line 74 of file eighth\+\_\+sphere\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00067}{67}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
@@ -147,29 +143,25 @@ Definition at line 74 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
 
-Vector representation of the imacro-\/th macro element boundary idirect (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t$>$0\+: previous)\+: f(s). 
+Vector representation of the imacro-\/th macro element boundary idirect (L/\+R/\+D/\+U/\+B/F) at time level t (t=0\+: present; t\texorpdfstring{$>$}{>}0\+: previous)\+: f(s). 
 
 
 
-Definition at line 81 of file eighth\+\_\+sphere\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{74}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-References r\+\_\+centr\+\_\+\+B(), r\+\_\+centr\+\_\+\+D(), r\+\_\+centr\+\_\+\+F(), r\+\_\+centr\+\_\+\+L(), r\+\_\+centr\+\_\+\+R(), r\+\_\+centr\+\_\+\+U(), r\+\_\+front\+\_\+\+B(), r\+\_\+front\+\_\+\+D(), r\+\_\+front\+\_\+\+F(), r\+\_\+front\+\_\+\+L(), r\+\_\+front\+\_\+\+R(), r\+\_\+front\+\_\+\+U(), r\+\_\+right\+\_\+\+B(), r\+\_\+right\+\_\+\+D(), r\+\_\+right\+\_\+\+F(), r\+\_\+right\+\_\+\+L(), r\+\_\+right\+\_\+\+R(), r\+\_\+right\+\_\+\+U(), r\+\_\+up\+\_\+\+B(), r\+\_\+up\+\_\+\+D(), r\+\_\+up\+\_\+\+F(), r\+\_\+up\+\_\+\+L(), r\+\_\+up\+\_\+\+R(), r\+\_\+up\+\_\+\+U(), and s.
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00484}{r\+\_\+centr\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00456}{r\+\_\+centr\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00497}{r\+\_\+centr\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00428}{r\+\_\+centr\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00442}{r\+\_\+centr\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00470}{r\+\_\+centr\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00898}{r\+\_\+front\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00857}{r\+\_\+front\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00910}{r\+\_\+front\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00813}{r\+\_\+front\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00842}{r\+\_\+front\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00886}{r\+\_\+front\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00613}{r\+\_\+right\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00556}{r\+\_\+right\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00642}{r\+\_\+right\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00511}{r\+\_\+right\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00523}{r\+\_\+right\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00585}{r\+\_\+right\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00755}{r\+\_\+up\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00711}{r\+\_\+up\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00784}{r\+\_\+up\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00670}{r\+\_\+up\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00699}{r\+\_\+up\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00722}{r\+\_\+up\+\_\+\+U()}}.
 
-\mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a3533eb2f34986e995a779d2841267b12}\label{classoomph_1_1EighthSphereDomain_a3533eb2f34986e995a779d2841267b12}} 
+\mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a9aab5d92d917a847e677d176fed33333}\label{classoomph_1_1EighthSphereDomain_a9aab5d92d917a847e677d176fed33333}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::EighthSphereDomain@{oomph::EighthSphereDomain}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Eighth\+Sphere\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Eighth\+Sphere\+Domain\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1EighthSphereDomain}{Eighth\+Sphere\+Domain}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 67 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a3ba94d9786fc6c544d82a392f8bf3dd6}\label{classoomph_1_1EighthSphereDomain_a3ba94d9786fc6c544d82a392f8bf3dd6}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_B@{r\_centr\_B}}
@@ -181,17 +173,17 @@ Definition at line 67 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of central box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 491 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00484}{484}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_aa7c38e9c33934b556f59c044654500ce}\label{classoomph_1_1EighthSphereDomain_aa7c38e9c33934b556f59c044654500ce}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_D@{r\_centr\_D}}
@@ -203,17 +195,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of central box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 463 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00456}{456}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a080334e0a4e7cd61c97f0b2bf1174f00}\label{classoomph_1_1EighthSphereDomain_a080334e0a4e7cd61c97f0b2bf1174f00}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_F@{r\_centr\_F}}
@@ -225,17 +217,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of central box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 504 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00497}{497}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+front\+\_\+\+B().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00898}{r\+\_\+front\+\_\+\+B()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_adc5634bf44b0689994ad68daf203e11f}\label{classoomph_1_1EighthSphereDomain_adc5634bf44b0689994ad68daf203e11f}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_L@{r\_centr\_L}}
@@ -247,17 +239,19 @@ Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+front\+\_\+\+B().
 
 Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
 
+///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////
+
 Boundary of central box macro element zeta $ \in [-1,1]^2 $ 
 
-Definition at line 435 of file eighth\+\_\+sphere\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00428}{428}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-References Radius.
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a226c7c3bbcc59aa73c1033af523ef653}\label{classoomph_1_1EighthSphereDomain_a226c7c3bbcc59aa73c1033af523ef653}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_R@{r\_centr\_R}}
@@ -269,17 +263,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of central box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 449 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00442}{442}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+right\+\_\+\+L().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00511}{r\+\_\+right\+\_\+\+L()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_afda0d6220482758cc0ad81ea848de45b}\label{classoomph_1_1EighthSphereDomain_afda0d6220482758cc0ad81ea848de45b}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_centr\_U@{r\_centr\_U}}
@@ -291,17 +285,17 @@ Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+right\+\_\+\+L().
 
 Boundary of central box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of central box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 477 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00470}{470}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+up\+\_\+\+D().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00711}{r\+\_\+up\+\_\+\+D()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_aa62bb16a2963530246c8cc9ef905c944}\label{classoomph_1_1EighthSphereDomain_aa62bb16a2963530246c8cc9ef905c944}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_B@{r\_front\_B}}
@@ -313,17 +307,17 @@ Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+up\+\_\+\+D().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 905 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+centr\+\_\+\+F().
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00898}{898}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00497}{r\+\_\+centr\+\_\+\+F()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a46ccabe44dd16cae048c302d5cfe26ee}\label{classoomph_1_1EighthSphereDomain_a46ccabe44dd16cae048c302d5cfe26ee}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_D@{r\_front\_D}}
@@ -335,17 +329,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 864 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+front\+\_\+\+F(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00857}{857}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00910}{r\+\_\+front\+\_\+\+F()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a71d48567ee2661821f41dd50793a6eb1}\label{classoomph_1_1EighthSphereDomain_a71d48567ee2661821f41dd50793a6eb1}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_F@{r\_front\_F}}
@@ -357,17 +351,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 917 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00910}{910}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), r\+\_\+front\+\_\+\+D(), and r\+\_\+front\+\_\+\+L().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00857}{r\+\_\+front\+\_\+\+D()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00813}{r\+\_\+front\+\_\+\+L()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a161d1ad8c0e991e9228a0725d7c9ccd9}\label{classoomph_1_1EighthSphereDomain_a161d1ad8c0e991e9228a0725d7c9ccd9}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_L@{r\_front\_L}}
@@ -379,17 +373,17 @@ Referenced by macro\+\_\+element\+\_\+boundary(), r\+\_\+front\+\_\+\+D(), and r
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 820 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+front\+\_\+\+F(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00813}{813}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00910}{r\+\_\+front\+\_\+\+F()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a5d32fe51e8ca993b12f911593ad46ca7}\label{classoomph_1_1EighthSphereDomain_a5d32fe51e8ca993b12f911593ad46ca7}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_R@{r\_front\_R}}
@@ -401,17 +395,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 849 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+right\+\_\+\+F().
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00842}{842}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00642}{r\+\_\+right\+\_\+\+F()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_aef12fa8f21592009e8ab51d88c301388}\label{classoomph_1_1EighthSphereDomain_aef12fa8f21592009e8ab51d88c301388}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_front\_U@{r\_front\_U}}
@@ -423,17 +417,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 893 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+up\+\_\+\+F().
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00886}{886}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00784}{r\+\_\+up\+\_\+\+F()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_ac013c364bfe2f0bb1d3393696149d249}\label{classoomph_1_1EighthSphereDomain_ac013c364bfe2f0bb1d3393696149d249}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_B@{r\_right\_B}}
@@ -445,17 +439,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of right box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 620 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+right\+\_\+\+R(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00613}{613}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00523}{r\+\_\+right\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a7a4a1a98b542afd49a5ec8abfda287fc}\label{classoomph_1_1EighthSphereDomain_a7a4a1a98b542afd49a5ec8abfda287fc}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_D@{r\_right\_D}}
@@ -467,17 +461,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of right box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 563 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+right\+\_\+\+R(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00556}{556}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00523}{r\+\_\+right\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_aa08635438bff5a3d377d45c8c9c2b377}\label{classoomph_1_1EighthSphereDomain_aa08635438bff5a3d377d45c8c9c2b377}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_F@{r\_right\_F}}
@@ -489,17 +483,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of right box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 649 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+right\+\_\+\+R(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00642}{642}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+front\+\_\+\+R().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00523}{r\+\_\+right\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00842}{r\+\_\+front\+\_\+\+R()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_ad029a857dd1b83ed10281613e0c56800}\label{classoomph_1_1EighthSphereDomain_ad029a857dd1b83ed10281613e0c56800}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_L@{r\_right\_L}}
@@ -511,17 +505,17 @@ Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+front\+\_\+\+R().
 
 Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of right box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 518 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+centr\+\_\+\+R().
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00511}{511}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00442}{r\+\_\+centr\+\_\+\+R()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a58ec95dc35f526fe5c6baa2578a2f786}\label{classoomph_1_1EighthSphereDomain_a58ec95dc35f526fe5c6baa2578a2f786}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_R@{r\_right\_R}}
@@ -533,17 +527,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of right box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 530 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00523}{523}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), r\+\_\+right\+\_\+\+B(), r\+\_\+right\+\_\+\+D(), r\+\_\+right\+\_\+\+F(), and r\+\_\+right\+\_\+\+U().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00613}{r\+\_\+right\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00556}{r\+\_\+right\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00642}{r\+\_\+right\+\_\+\+F()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00585}{r\+\_\+right\+\_\+\+U()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a004a1adfe832e2b233f8ec1b6a58b9aa}\label{classoomph_1_1EighthSphereDomain_a004a1adfe832e2b233f8ec1b6a58b9aa}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_right\_U@{r\_right\_U}}
@@ -555,17 +549,17 @@ Referenced by macro\+\_\+element\+\_\+boundary(), r\+\_\+right\+\_\+\+B(), r\+\_
 
 Boundary of right box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of right box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 592 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+right\+\_\+\+R(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00585}{585}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+up\+\_\+\+R().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00523}{r\+\_\+right\+\_\+\+R()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00699}{r\+\_\+up\+\_\+\+R()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_aaac560ab6bbe35010c1ff61a466d1252}\label{classoomph_1_1EighthSphereDomain_aaac560ab6bbe35010c1ff61a466d1252}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_B@{r\_up\_B}}
@@ -577,17 +571,17 @@ Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+up\+\_\+\+R().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 762 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+up\+\_\+\+U(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00755}{755}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00722}{r\+\_\+up\+\_\+\+U()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_ad55bde69a74b24f1c9c6cc6bb277e39b}\label{classoomph_1_1EighthSphereDomain_ad55bde69a74b24f1c9c6cc6bb277e39b}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_D@{r\_up\_D}}
@@ -599,17 +593,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 718 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+centr\+\_\+\+U().
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00711}{711}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00470}{r\+\_\+centr\+\_\+\+U()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a9e419235f4800eab872523bdbfe72fb6}\label{classoomph_1_1EighthSphereDomain_a9e419235f4800eab872523bdbfe72fb6}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_F@{r\_up\_F}}
@@ -621,17 +615,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 791 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+up\+\_\+\+U(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00784}{784}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+front\+\_\+\+U().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00722}{r\+\_\+up\+\_\+\+U()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00886}{r\+\_\+front\+\_\+\+U()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_af9ab515958ed3699ea5ed95ec9a87d9e}\label{classoomph_1_1EighthSphereDomain_af9ab515958ed3699ea5ed95ec9a87d9e}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_L@{r\_up\_L}}
@@ -643,17 +637,17 @@ Referenced by macro\+\_\+element\+\_\+boundary(), and r\+\_\+front\+\_\+\+U().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 677 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+up\+\_\+\+U(), and Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00670}{670}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00722}{r\+\_\+up\+\_\+\+U()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_ad38d27ad06d83c94c768fbda98c939e7}\label{classoomph_1_1EighthSphereDomain_ad38d27ad06d83c94c768fbda98c939e7}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_R@{r\_up\_R}}
@@ -665,17 +659,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 706 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References r\+\_\+right\+\_\+\+U().
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00699}{699}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00585}{r\+\_\+right\+\_\+\+U()}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}.
 
 \mbox{\Hypertarget{classoomph_1_1EighthSphereDomain_a303c406fe673675f497522dae69f849c}\label{classoomph_1_1EighthSphereDomain_a303c406fe673675f497522dae69f849c}} 
 \index{oomph::EighthSphereDomain@{oomph::EighthSphereDomain}!r\_up\_U@{r\_up\_U}}
@@ -687,17 +681,17 @@ Referenced by macro\+\_\+element\+\_\+boundary().
 
 Boundary of top left box macro element zeta $ \in [-1,1]^2 $. 
 
-Boundary of top left box macro element zeta $ \in [-1,1]^2 $ 
-
-Definition at line 729 of file eighth\+\_\+sphere\+\_\+domain.\+h.
 
 
-
-References Radius.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00722}{722}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by macro\+\_\+element\+\_\+boundary(), r\+\_\+up\+\_\+\+B(), r\+\_\+up\+\_\+\+F(), and r\+\_\+up\+\_\+\+L().
+References \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{Radius}}.
+
+
+
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00074}{macro\+\_\+element\+\_\+boundary()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00755}{r\+\_\+up\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00784}{r\+\_\+up\+\_\+\+F()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00670}{r\+\_\+up\+\_\+\+L()}}.
 
 
 
@@ -710,11 +704,11 @@ Referenced by macro\+\_\+element\+\_\+boundary(), r\+\_\+up\+\_\+\+B(), r\+\_\+u
 
 
 
-Definition at line 279 of file eighth\+\_\+sphere\+\_\+domain.\+h.
+Definition at line \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00272}{272}} of file \mbox{\hyperlink{eighth__sphere__domain_8h_source}{eighth\+\_\+sphere\+\_\+domain.\+h}}.
 
 
 
-Referenced by r\+\_\+centr\+\_\+\+B(), r\+\_\+centr\+\_\+\+D(), r\+\_\+centr\+\_\+\+F(), r\+\_\+centr\+\_\+\+L(), r\+\_\+centr\+\_\+\+R(), r\+\_\+centr\+\_\+\+U(), r\+\_\+front\+\_\+\+D(), r\+\_\+front\+\_\+\+F(), r\+\_\+front\+\_\+\+L(), r\+\_\+right\+\_\+\+B(), r\+\_\+right\+\_\+\+D(), r\+\_\+right\+\_\+\+F(), r\+\_\+right\+\_\+\+R(), r\+\_\+right\+\_\+\+U(), r\+\_\+up\+\_\+\+B(), r\+\_\+up\+\_\+\+F(), r\+\_\+up\+\_\+\+L(), and r\+\_\+up\+\_\+\+U().
+Referenced by \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00484}{r\+\_\+centr\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00456}{r\+\_\+centr\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00497}{r\+\_\+centr\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00428}{r\+\_\+centr\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00442}{r\+\_\+centr\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00470}{r\+\_\+centr\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00857}{r\+\_\+front\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00910}{r\+\_\+front\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00813}{r\+\_\+front\+\_\+\+L()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00613}{r\+\_\+right\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00556}{r\+\_\+right\+\_\+\+D()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00642}{r\+\_\+right\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00523}{r\+\_\+right\+\_\+\+R()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00585}{r\+\_\+right\+\_\+\+U()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00755}{r\+\_\+up\+\_\+\+B()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00784}{r\+\_\+up\+\_\+\+F()}}, \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00670}{r\+\_\+up\+\_\+\+L()}}, and \mbox{\hyperlink{eighth__sphere__domain_8h_source_l00722}{r\+\_\+up\+\_\+\+U()}}.
 
 
 

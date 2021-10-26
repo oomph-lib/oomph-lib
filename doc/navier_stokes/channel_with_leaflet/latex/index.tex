@@ -1,4 +1,4 @@
-In this example we consider the flow in a 2D channel which is partially obstructed by an oscillating leaflet. We consider the case where the motion of the leaflet is prescribed -- this is a \char`\"{}warm-\/up exercise\char`\"{} for the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ corresponding F\+SI problem }} in which the leaflet is an elastic structure.
+In this example we consider the flow in a 2D channel which is partially obstructed by an oscillating leaflet. We consider the case where the motion of the leaflet is prescribed -- this is a \char`\"{}warm-\/up exercise\char`\"{} for the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ corresponding FSI problem }} in which the leaflet is an elastic structure.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -21,7 +21,7 @@ We non-\/dimensionalise all length and coordinates on the channel width, $ H^*_{
 \end{DoxyImage}
 
 
-An interesting feature of this problem is that even though the leaflet is assumed to have negligible thickness its presence will generate a pressure jump between its two faces. (The velocities are continuous because the no-\/slip condition imposes the same velocity on both faces.) When discretising the problem with {\ttfamily Q\+Taylor\+Hood} elements (for which the pressure varies continuously across the element boundaries), the mesh must therefore be \char`\"{}opened up\char`\"{} with a cut along the position of the leaflet. This is done in the constructor of the \href{../../../meshes/mesh_list/html/index.html\#channel_with_leaflet}{\texttt{ {\ttfamily Channel\+With\+Leaflet\+Mesh}}} which forms the basis of {\ttfamily Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh} used to discretise this problem. (See \mbox{\hyperlink{index_comm_and_ex}{Further comments and exercises}} for a more detailed discussion of the mesh.)
+An interesting feature of this problem is that even though the leaflet is assumed to have negligible thickness its presence will generate a pressure jump between its two faces. (The velocities are continuous because the no-\/slip condition imposes the same velocity on both faces.) When discretising the problem with {\ttfamily QTaylor\+Hood} elements (for which the pressure varies continuously across the element boundaries), the mesh must therefore be \char`\"{}opened up\char`\"{} with a cut along the position of the leaflet. This is done in the constructor of the \href{../../../meshes/mesh_list/html/index.html\#channel_with_leaflet}{\texttt{ {\ttfamily Channel\+With\+Leaflet\+Mesh}}} which forms the basis of {\ttfamily Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh} used to discretise this problem. (See \mbox{\hyperlink{index_comm_and_ex}{Further comments and exercises}} for a more detailed discussion of the mesh.)
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -47,7 +47,7 @@ As usual we use a namespace to define the (single) global parameter, the Reynold
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_global\_parameters=======================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{comment}{}}
@@ -57,9 +57,7 @@ As usual we use a namespace to define the (single) global parameter, the Reynold
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_leaflet}{}\doxysection{Specification of the leaflet geometry}\label{index_leaflet}
 We specify the leaflet geometry and its time-\/dependent motion by representing it as a {\ttfamily Geom\+Object}. The {\ttfamily Geom\+Object} has one Lagrangian and two Eulerian coordinates, and its geometry is characterised by its length, the x-\/coordinate of its origin, $ X_0 $, and the period and amplitude of the horizontal and vertical tip deflection.
@@ -67,29 +65,29 @@ We specify the leaflet geometry and its time-\/dependent motion by representing 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===start\_of\_leaflet\_class===========================================}}
-\DoxyCodeLine{\textcolor{comment}{/// GeomObject representing a vertical leaflet that performs}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// bending and stretching oscillations. }}
+\DoxyCodeLine{\textcolor{comment}{/// GeomObject representing a vertical leaflet that performs}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// bending and stretching oscillations. }}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classLeaflet}{Leaflet}} : \textcolor{keyword}{public} GeomObject}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: Pass length (in Lagrangian coordinates),}}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: Pass length (in Lagrangian coordinates),}}
 \DoxyCodeLine{\textcolor{comment}{ /// the amplitude of the horizontal and vertical deflection of the tip,}}
 \DoxyCodeLine{\textcolor{comment}{ /// the x-\/coordinate of the origin and the period of the oscillation.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Passes the number of Lagrangian and Eulerian coordinates to the}}
 \DoxyCodeLine{\textcolor{comment}{ /// constructor of the GeomObject base class.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classLeaflet_acb53ccf4578a9981216cf0afd4b38453}{Leaflet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a48e4d16790ffd9de527093eac8ff566c}{d\_x}},\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}},}
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classLeaflet_acb53ccf4578a9981216cf0afd4b38453}{Leaflet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}{d\_x}},\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}},}
 \DoxyCodeLine{         \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}{x\_0}}, \textcolor{keyword}{const} \textcolor{keywordtype}{double}\& period, Time* time\_pt)}
-\DoxyCodeLine{  : GeomObject(1,2), \mbox{\hyperlink{classLeaflet_a64c27b796ceece358d09d137f15bbf20}{Length}}(\mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}), \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}}(\mbox{\hyperlink{classLeaflet_a48e4d16790ffd9de527093eac8ff566c}{d\_x}}), \mbox{\hyperlink{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}{D\_y}}(\mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}}), \mbox{\hyperlink{classLeaflet_a29a25366a0cf97ad0dd36172fdfa3d0c}{X\_0}}(\mbox{\hyperlink{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}{x\_0}}),}
+\DoxyCodeLine{  : GeomObject(1,2), \mbox{\hyperlink{classLeaflet_a64c27b796ceece358d09d137f15bbf20}{Length}}(\mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}), \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}}(\mbox{\hyperlink{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}{d\_x}}), \mbox{\hyperlink{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}{D\_y}}(\mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}}), \mbox{\hyperlink{classLeaflet_a29a25366a0cf97ad0dd36172fdfa3d0c}{X\_0}}(\mbox{\hyperlink{classLeaflet_af4a819a3ba64960f4b796dc5a0d3eb5b}{x\_0}}),}
 \DoxyCodeLine{   \mbox{\hyperlink{classLeaflet_a0d78b5fb3ec71009d4a9bcc79f8a85a9}{T}}(period),\mbox{\hyperlink{classLeaflet_ac10f13ad45456dc714ab57042861de53}{Time\_pt}}(time\_pt) \{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor -\/-\/ emtpy}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \mbox{\hyperlink{classLeaflet_a0bbfaeec2534389b203fd2a2316db859}{\string~Leaflet}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Position vector, r, to the point identified by  }}
+\DoxyCodeLine{\textcolor{comment}{ /// Position vector, r, to the point identified by  }}
 \DoxyCodeLine{\textcolor{comment}{ /// its 1D Lagrangian coordinate, xi (passed as a 1D Vector) at discrete time}}
 \DoxyCodeLine{\textcolor{comment}{ /// level t (t=0: present; t>0: previous).}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classLeaflet_a5b78c2735652b6a5c08c6aa9d38b6232}{position}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned}\& t, \textcolor{keyword}{const} Vector<double>\& xi, }
@@ -115,7 +113,7 @@ We specify the leaflet geometry and its time-\/dependent motion by representing 
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_a7a28827b7081107ac9e33087598ca868}{length}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classLeaflet_a64c27b796ceece358d09d137f15bbf20}{Length}}; \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Amplitude of horizontal tip displacement}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a48e4d16790ffd9de527093eac8ff566c}{d\_x}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}};\}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double}\& \mbox{\hyperlink{classLeaflet_a48b7c945eca16ff01995cc70cbf54210}{d\_x}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}};\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Amplitude of vertical tip displacement}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_a8ff8044a3da540c7c9d7a89790b6ee58}{d\_y}}() \{\textcolor{keywordflow}{return} \mbox{\hyperlink{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}{D\_y}};\}}
@@ -128,19 +126,19 @@ We specify the leaflet geometry and its time-\/dependent motion by representing 
 \DoxyCodeLine{\textcolor{comment}{ /// Length in terms of Lagrangian coordinates}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_a64c27b796ceece358d09d137f15bbf20}{Length}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Horizontal displacement of tip}}
+\DoxyCodeLine{\textcolor{comment}{ /// Horizontal displacement of tip}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_a473b6f4ef98bfba9e2c6974027ba4f4b}{D\_x}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short Vertical displacement of tip}}
+\DoxyCodeLine{\textcolor{comment}{ /// Vertical displacement of tip}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_af9c75c7aeecae4b14f7ba0fb245eb8ee}{D\_y}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{///\(\backslash\)short Origin}}
+\DoxyCodeLine{\textcolor{comment}{/// Origin}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_a29a25366a0cf97ad0dd36172fdfa3d0c}{X\_0}};}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Period of the oscillations}}
+\DoxyCodeLine{\textcolor{comment}{ /// Period of the oscillations}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{classLeaflet_a0d78b5fb3ec71009d4a9bcc79f8a85a9}{T}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Pointer to the global time object}}
+\DoxyCodeLine{\textcolor{comment}{ /// Pointer to the global time object}}
 \DoxyCodeLine{\textcolor{comment}{} Time* \mbox{\hyperlink{classLeaflet_ac10f13ad45456dc714ab57042861de53}{Time\_pt}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\}; \textcolor{comment}{//end\_of\_the\_GeomObject}}
@@ -156,8 +154,8 @@ We store the command line arguments, create a {\ttfamily Doc\+Info} object, and 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_main==================================================}}
-\DoxyCodeLine{\textcolor{comment}{/// Driver code -\/-\/ pass a command line argument if you want to run}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the code in validation mode where it only performs a few steps}}
+\DoxyCodeLine{\textcolor{comment}{/// Driver code -\/-\/ pass a command line argument if you want to run}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// the code in validation mode where it only performs a few steps}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{channel__with__leaflet_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
@@ -167,7 +165,7 @@ We store the command line arguments, create a {\ttfamily Doc\+Info} object, and 
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set up doc info}}
 \DoxyCodeLine{ DocInfo doc\_info; }
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ doc\_info.number()=0;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Parameters for the leaflet}}
@@ -205,16 +203,14 @@ We store the command line arguments, create a {\ttfamily Doc\+Info} object, and 
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} ny2=2; }
 
 \end{DoxyCodeInclude}
-
-
-Next we build the problem and assign the time-\/stepping parameters (as usual, fewer timesteps are used during a validation run which is identified by a non-\/zero number of command line arguments)\+:
+ Next we build the problem and assign the time-\/stepping parameters (as usual, fewer timesteps are used during a validation run which is identified by a non-\/zero number of command line arguments)\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Build the problem}}
 \DoxyCodeLine{ \mbox{\hyperlink{classChannelWithLeafletProblem}{ChannelWithLeafletProblem<AlgebraicElement<RefineableQTaylorHoodElement<2>}} > >}
-\DoxyCodeLine{  \mbox{\hyperlink{channel__with__leaflet_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(l\_left, l\_right, h\_leaflet,}
+\DoxyCodeLine{  problem(l\_left, l\_right, h\_leaflet,}
 \DoxyCodeLine{          h\_tot,nleft, nright,ny1,ny2,}
 \DoxyCodeLine{          d\_x, d\_y, x\_0,}
 \DoxyCodeLine{          period);}
@@ -237,7 +233,7 @@ Next we build the problem and assign the time-\/stepping parameters (as usual, f
 \DoxyCodeLine{ \textcolor{keywordtype}{double} dt=period/double(nsteps\_per\_period);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Initialise timestep }}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{channel__with__leaflet_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.initialise\_dt(dt);}
+\DoxyCodeLine{\textcolor{comment}{} problem.initialise\_dt(dt);}
 
 \end{DoxyCodeInclude}
 
@@ -258,16 +254,14 @@ We start the simulation with a steady solve, allowing up to five levels of adapt
 \DoxyCodeLine{ \textcolor{comment}{// Do steady solve first -\/-\/ this also sets the history values}}
 \DoxyCodeLine{ \textcolor{comment}{// to those corresponding to an impulsive start from the}}
 \DoxyCodeLine{ \textcolor{comment}{// steady solution}}
-\DoxyCodeLine{ \mbox{\hyperlink{channel__with__leaflet_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.steady\_newton\_solve(max\_adapt);}
+\DoxyCodeLine{ problem.steady\_newton\_solve(max\_adapt);}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Output steady solution}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{channel__with__leaflet_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{\textcolor{comment}{} problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{ doc\_info.number()++;}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we enter the proper timestepping loop, allowing one spatial adaptation per timestep and suppressing the re-\/assignment of initial conditions following an adaptation by setting the parameter {\ttfamily first} to false (see the discussion of timestepping with automatic mesh adaptation in \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html}{\texttt{ another tutorial}}.)
+ Finally, we enter the proper timestepping loop, allowing one spatial adaptation per timestep and suppressing the re-\/assignment of initial conditions following an adaptation by setting the parameter {\ttfamily first} to false (see the discussion of timestepping with automatic mesh adaptation in \href{../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html}{\texttt{ another tutorial}}.)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -283,10 +277,10 @@ Finally, we enter the proper timestepping loop, allowing one spatial adaptation 
 \DoxyCodeLine{ \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} istep=0;istep<nstep;istep++)}
 \DoxyCodeLine{  \{ }
 \DoxyCodeLine{   \textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{   \mbox{\hyperlink{channel__with__leaflet_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.unsteady\_newton\_solve(dt,max\_adapt,first);}
+\DoxyCodeLine{   problem.unsteady\_newton\_solve(dt,max\_adapt,first);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Output the solution}}
-\DoxyCodeLine{   \mbox{\hyperlink{channel__with__leaflet_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{   problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Step number}}
 \DoxyCodeLine{   doc\_info.number()++;}
@@ -308,7 +302,7 @@ The problem class has the usual member functions to perform actions after the me
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_problem\_class===========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Problem class}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//===================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//===================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classChannelWithLeafletProblem}{ChannelWithLeafletProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
@@ -336,7 +330,7 @@ The problem class has the usual member functions to perform actions after the me
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classChannelWithLeafletProblem_a5dec8333d345e4bcaac7fcd5b463eafc}{\string~ChannelWithLeafletProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Overloaded access function to specific mesh}}
-\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{classChannelWithLeafletProblem_a023dc7718a98f820e4bc4541150a0c08}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>* \mbox{\hyperlink{classChannelWithLeafletProblem_acfb056c1240242094b953a80bbc36c4e}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Upcast from pointer to the Mesh base class to the specific }}
 \DoxyCodeLine{   \textcolor{comment}{// element type that we're using here.}}
@@ -367,9 +361,7 @@ The problem class has the usual member functions to perform actions after the me
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The problem constructor}\label{index_constructor}
 We construct the timestepper and the {\ttfamily Geom\+Object} that represents the leaflet, and pass it pointers to them to the constructor of the {\ttfamily Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh} (discussed in more detail in \mbox{\hyperlink{index_comm_and_ex}{Further comments and exercises}}).
@@ -409,9 +401,7 @@ We construct the timestepper and the {\ttfamily Geom\+Object} that represents th
 \DoxyCodeLine{ time\_stepper\_pt());     }
 
 \end{DoxyCodeInclude}
-
-
-Next we create the spatial error estimator and loop over the elements to set the pointers to the relevant physical parameters.
+ Next we create the spatial error estimator and loop over the elements to set the pointers to the relevant physical parameters.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -442,9 +432,7 @@ Next we create the spatial error estimator and loop over the elements to set the
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over elements}}
 
 \end{DoxyCodeInclude}
-
-
-The velocity is prescribed everywhere apart from the outflow boundary (boundary 1; see the sketch in \mbox{\hyperlink{index_comm_and_ex}{Further comments and exercises}} for the enumeration of the mesh boundaries). Along the inflow (boundary 3) we apply a parabolic velocity profile with unit flux\+:
+ The velocity is prescribed everywhere apart from the outflow boundary (boundary 1; see the sketch in \mbox{\hyperlink{index_comm_and_ex}{Further comments and exercises}} for the enumeration of the mesh boundaries). Along the inflow (boundary 3) we apply a parabolic velocity profile with unit flux\+:
 
 
 \begin{DoxyCodeInclude}{0}
@@ -479,9 +467,7 @@ The velocity is prescribed everywhere apart from the outflow boundary (boundary 
 \DoxyCodeLine{  \}\textcolor{comment}{// end of setup boundary condition}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we pin the redundant pressure degrees of freedom (see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details), and assign the equations numbers.
+ Finally, we pin the redundant pressure degrees of freedom (see \href{../../../navier_stokes/adaptive_driven_cavity/html/index.html}{\texttt{ another tutorial}} for details), and assign the equations numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -491,7 +477,7 @@ Finally, we pin the redundant pressure degrees of freedom (see \href{../../../na
 \DoxyCodeLine{  pin\_redundant\_nodal\_pressures(Problem::mesh\_pt()-\/>element\_pt());}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\}\textcolor{comment}{//end of constructor}}
 
@@ -506,8 +492,8 @@ Before each timestep we update the nodal positions in the mesh and re-\/apply th
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_actions\_before\_implicit\_timestep=========================}}
-\DoxyCodeLine{\textcolor{comment}{/// Actions before implicit timestep: Update domain shape and}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// the velocity boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{/// Actions before implicit timestep: Update domain shape and}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// the velocity boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classChannelWithLeafletProblem_acef6ec771775162f77295a8f92d695ac}{ChannelWithLeafletProblem<ELEMENT>::actions\_before\_implicit\_timestep}}()}
@@ -558,9 +544,7 @@ Once the mesh has been adapted, we free all pressure degrees of freedom and then
 \DoxyCodeLine{\} \textcolor{comment}{// end\_of\_actions\_after\_adapt}}
 
 \end{DoxyCodeInclude}
-
-
-Note that the default interpolation of the (quadratic!) inflow velocity profile from father to son elements during the mesh adaptation already ensures that the inflow profile remains quadratic, therefore no further action is required.
+ Note that the default interpolation of the (quadratic!) inflow velocity profile from father to son elements during the mesh adaptation already ensures that the inflow profile remains quadratic, therefore no further action is required.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -571,7 +555,7 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==start\_of\_doc\_solution=================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Doc the solution}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classChannelWithLeafletProblem_adb8e1420844f7b40d71beae81111c4d0}{ChannelWithLeafletProblem<ELEMENT>::doc\_solution}}(DocInfo\& doc\_info)}
 \DoxyCodeLine{\{ }
@@ -584,14 +568,14 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results.
 \DoxyCodeLine{ npts=5; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output solution }}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/soln\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/soln\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output(some\_file,npts);}
 \DoxyCodeLine{ some\_file.close();}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output boundaries}}
-\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"\%s/boundaries\%i.dat"},doc\_info.directory().c\_str(),}
+\DoxyCodeLine{ sprintf(filename,\textcolor{stringliteral}{"{}\%s/boundaries\%i.dat"{}},doc\_info.directory().c\_str(),}
 \DoxyCodeLine{         doc\_info.number());}
 \DoxyCodeLine{ some\_file.open(filename);}
 \DoxyCodeLine{ mesh\_pt()-\/>output\_boundaries(some\_file);}
@@ -606,7 +590,7 @@ The function {\ttfamily doc\+\_\+solution(...)} documents the results.
  \DoxyHorRuler{0}
 \hypertarget{index_comm_and_ex}{}\doxysection{Further comments and exercises}\label{index_comm_and_ex}
 \hypertarget{index_comm}{}\doxysubsection{Further comments\+: The algebraic node update procedure}\label{index_comm}
-The figure below illustrates the algebraic node update procedure employed in the {\ttfamily Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh}. The mesh employs four different node update functions, depending on which region a node is located in\+: Nodes in region I (or II) are located on straight lines that connect the upstream (or downstream) boundary with the leaflet; nodes in region I\+II (or IV) are located on straight lines that connect the upstream and (or downstream) boundary with the straight line from the tip of the leaflet to upper channel wall.
+The figure below illustrates the algebraic node update procedure employed in the {\ttfamily Refineable\+Algebraic\+Channel\+With\+Leaflet\+Mesh}. The mesh employs four different node update functions, depending on which region a node is located in\+: Nodes in region I (or II) are located on straight lines that connect the upstream (or downstream) boundary with the leaflet; nodes in region III (or IV) are located on straight lines that connect the upstream and (or downstream) boundary with the straight line from the tip of the leaflet to upper channel wall.
 
  
 \begin{DoxyImage}
@@ -620,7 +604,7 @@ The implementation of the node update functions is straightforward and can be fo
 and \begin{center} \href{
 ../../../../src/meshes/channel_with_leaflet_mesh.template.cc}{\texttt{ src/meshes/channel\+\_\+with\+\_\+leaflet\+\_\+mesh.\+template.\+cc }} \end{center} ~\newline
 which also illustrate how the mesh is constructed by inheritance from the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} (the main task being the creation of additional nodes in the interior to \char`\"{}cut open\char`\"{} the mesh along the position of the leaflet). The source files also contain other versions of the mesh in which the node update is performed with Domain/\+Macro\+Elements, using the technique described in \href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ another tutorial}}.\hypertarget{index_ex}{}\doxysubsection{Exercise}\label{index_ex}
-With the node update strategy illustrated above, the position of {\itshape all} nodes in the fluid mesh has to be updated when the leaflet moves. This is not a particular problem in the current application where the node-\/update is only performed once per timestep. However, in the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ corresponding F\+SI problem }}, the approach is costly because of the of large number of shape derivatives to be computed.
+With the node update strategy illustrated above, the position of {\itshape all} nodes in the fluid mesh has to be updated when the leaflet moves. This is not a particular problem in the current application where the node-\/update is only performed once per timestep. However, in the \href{../../../interaction/fsi_channel_with_leaflet/html/index.html}{\texttt{ corresponding FSI problem }}, the approach is costly because of the of large number of shape derivatives to be computed.
 
 As an exercise, we suggest to make the node-\/update procedure more efficient by sub-\/dividing the regions upstream and downstream of the leaflet into a central section in which the nodes move in response to the motion of the leaflet (the old regions I-\/\+IV) and two additional regions (regions V and VI) in which they remain stationary. This is easy because, as explained \href{../../algebraic_collapsible_channel/html/index.html\#comm}{\texttt{ elsewhere,}} all {\ttfamily Algebraic\+Nodes} already have a default node update function that leaves them stationary.
 
@@ -659,5 +643,5 @@ demo_drivers/navier_stokes/channel_with_leaflet/channel_with_leaflet.cc
 }{\texttt{ demo\+\_\+drivers/navier\+\_\+stokes/channel\+\_\+with\+\_\+leaflet/channel\+\_\+with\+\_\+leaflet.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

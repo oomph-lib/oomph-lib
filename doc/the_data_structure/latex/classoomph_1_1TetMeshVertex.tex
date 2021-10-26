@@ -2,6 +2,11 @@
 \label{classoomph_1_1TetMeshVertex}\index{oomph::TetMeshVertex@{oomph::TetMeshVertex}}
 
 
+Vertex for Tet mesh generation. Can lie on multiple boundaries (identified via one-\/based enumeration!) and can have intrinisic coordinates in a \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}}.  
+
+
+
+
 {\ttfamily \#include $<$tet\+\_\+mesh.\+h$>$}
 
 \doxysubsection*{Public Member Functions}
@@ -9,11 +14,11 @@
 \item 
 \mbox{\hyperlink{classoomph_1_1TetMeshVertex_af76c065906c82fa548ce145b6d34e7e1}{Tet\+Mesh\+Vertex}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass coordinates (length 3!) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}{Tet\+Mesh\+Vertex}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&node\+\_\+pt)
+\mbox{\hyperlink{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}{Tet\+Mesh\+Vertex}} (Node $\ast$const \&node\+\_\+pt)
 \item 
 void \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a25bf54df192efe3bdb74bc67983dea34}{set\+\_\+zeta\+\_\+in\+\_\+geom\+\_\+object}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta)
 \begin{DoxyCompactList}\small\item\em Set intrinisic coordinates in \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a6d6ea2c9ca186e0a377505f37800ddaa}{zeta\+\_\+in\+\_\+geom\+\_\+object}} () const
+\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a2eacd82ac6d8292ae8e33614cc23145d}{zeta\+\_\+in\+\_\+geom\+\_\+object}} () const
 \begin{DoxyCompactList}\small\item\em Get intrinisic coordinates in \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (returns zero sized vector if no such coordinates have been specified) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}{x}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em i-\/th coordinate \end{DoxyCompactList}\item 
@@ -23,14 +28,14 @@ unsigned \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a844ff66de0e3ed28b3ad186c8
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1TetMeshVertex_ae228ef9cdc61d5902ac8bffdf163c618}{set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id}} (const unsigned \&id)
-\begin{DoxyCompactList}\small\item\em Set of (one-\/based!) boundary I\+Ds this vertex lives on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set of (one-\/based!) boundary IDs this vertex lives on. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9}{X}}
 \begin{DoxyCompactList}\small\item\em Coordinate vector. \end{DoxyCompactList}\item 
 std\+::set$<$ unsigned $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a7bbd3bde4360f101314b6059abeecd8b}{One\+\_\+based\+\_\+boundary\+\_\+id}}
-\begin{DoxyCompactList}\small\item\em Set of (one-\/based!) boundary I\+Ds this vertex lives on. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set of (one-\/based!) boundary IDs this vertex lives on. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \mbox{\hyperlink{classoomph_1_1TetMeshVertex_a945dd663092098554d394e2b50ef9ef2}{Zeta\+\_\+in\+\_\+geom\+\_\+object}}
 \begin{DoxyCompactList}\small\item\em Intrinisic coordinates in \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} (zero sized if there isn\textquotesingle{}t one. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
@@ -43,7 +48,7 @@ class \mbox{\hyperlink{classoomph_1_1TetMeshVertex_ae3c796a1351f1249d195202d0115
 \doxysubsection{Detailed Description}
 Vertex for Tet mesh generation. Can lie on multiple boundaries (identified via one-\/based enumeration!) and can have intrinisic coordinates in a \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundaries}{Disk\+Like\+Geom\+Object\+With\+Boundaries}}. 
 
-Definition at line 49 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00049}{49}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
@@ -60,25 +65,25 @@ Constructor\+: Pass coordinates (length 3!)
 
 
 
-Definition at line 56 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00056}{56}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-References x(), and X.
+References \mbox{\hyperlink{tet__mesh_8h_source_l00124}{x()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00147}{X}}.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}\label{classoomph_1_1TetMeshVertex_a6226592d4d5ee64955d8652a2e818ee3}} 
 \index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!TetMeshVertex@{TetMeshVertex}}
 \index{TetMeshVertex@{TetMeshVertex}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
 \doxysubsubsection{\texorpdfstring{TetMeshVertex()}{TetMeshVertex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Tet\+Mesh\+Vertex\+::\+Tet\+Mesh\+Vertex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Tet\+Mesh\+Vertex\+::\+Tet\+Mesh\+Vertex (\begin{DoxyParamCaption}\item[{Node $\ast$const \&}]{node\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 72 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00072}{72}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-References i, oomph\+::\+Node\+::ndim(), X, and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00147}{X}}.
 
 
 
@@ -95,11 +100,11 @@ First (of possibly multiple) one-\/based boundary id.
 
 
 
-Definition at line 130 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00130}{130}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-References One\+\_\+based\+\_\+boundary\+\_\+id.
+References \mbox{\hyperlink{tet__mesh_8h_source_l00150}{One\+\_\+based\+\_\+boundary\+\_\+id}}.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshVertex_ae228ef9cdc61d5902ac8bffdf163c618}\label{classoomph_1_1TetMeshVertex_ae228ef9cdc61d5902ac8bffdf163c618}} 
 \index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!set\_one\_based\_boundary\_id@{set\_one\_based\_boundary\_id}}
@@ -109,19 +114,19 @@ References One\+\_\+based\+\_\+boundary\+\_\+id.
 
 
 
-Set of (one-\/based!) boundary I\+Ds this vertex lives on. 
+Set of (one-\/based!) boundary IDs this vertex lives on. 
 
 
 
-Definition at line 141 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00141}{141}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-References One\+\_\+based\+\_\+boundary\+\_\+id.
+References \mbox{\hyperlink{tet__mesh_8h_source_l00150}{One\+\_\+based\+\_\+boundary\+\_\+id}}.
 
 
 
-Referenced by oomph\+::\+Tet\+Mesh\+Facet\+::set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id(), and oomph\+::\+Tet\+Mesh\+Facet\+::set\+\_\+vertex\+\_\+pt().
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00214}{oomph\+::\+Tet\+Mesh\+Facet\+::set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00194}{oomph\+::\+Tet\+Mesh\+Facet\+::set\+\_\+vertex\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshVertex_a25bf54df192efe3bdb74bc67983dea34}\label{classoomph_1_1TetMeshVertex_a25bf54df192efe3bdb74bc67983dea34}} 
 \index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!set\_zeta\_in\_geom\_object@{set\_zeta\_in\_geom\_object}}
@@ -135,11 +140,11 @@ Set intrinisic coordinates in \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+O
 
 
 
-Definition at line 97 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00097}{97}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-References Zeta\+\_\+in\+\_\+geom\+\_\+object.
+References \mbox{\hyperlink{tet__mesh_8h_source_l00154}{Zeta\+\_\+in\+\_\+geom\+\_\+object}}.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}\label{classoomph_1_1TetMeshVertex_af579c7e0bb184bc2d67aa31f25872a2b}} 
 \index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!x@{x}}
@@ -153,21 +158,21 @@ i-\/th coordinate
 
 
 
-Definition at line 124 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00124}{124}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-References i, and X.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00147}{X}}.
 
 
 
-Referenced by oomph\+::\+Tet\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+coordinates(), Tet\+Mesh\+Vertex(), and oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file().
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l01092}{oomph\+::\+Tet\+Mesh\+Base\+::setup\+\_\+boundary\+\_\+coordinates()}}, \mbox{\hyperlink{tet__mesh_8h_source_l00056}{Tet\+Mesh\+Vertex()}}, and \mbox{\hyperlink{gmsh__tet__mesh_8template_8h_source_l01020}{oomph\+::\+Gmsh\+Tet\+Scaffold\+Mesh\+::write\+\_\+geo\+\_\+file()}}.
 
-\mbox{\Hypertarget{classoomph_1_1TetMeshVertex_a6d6ea2c9ca186e0a377505f37800ddaa}\label{classoomph_1_1TetMeshVertex_a6d6ea2c9ca186e0a377505f37800ddaa}} 
+\mbox{\Hypertarget{classoomph_1_1TetMeshVertex_a2eacd82ac6d8292ae8e33614cc23145d}\label{classoomph_1_1TetMeshVertex_a2eacd82ac6d8292ae8e33614cc23145d}} 
 \index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!zeta\_in\_geom\_object@{zeta\_in\_geom\_object}}
 \index{zeta\_in\_geom\_object@{zeta\_in\_geom\_object}!oomph::TetMeshVertex@{oomph::TetMeshVertex}}
 \doxysubsubsection{\texorpdfstring{zeta\_in\_geom\_object()}{zeta\_in\_geom\_object()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$double$>$ oomph\+::\+Tet\+Mesh\+Vertex\+::zeta\+\_\+in\+\_\+geom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ oomph\+::\+Tet\+Mesh\+Vertex\+::zeta\+\_\+in\+\_\+geom\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -175,15 +180,15 @@ Get intrinisic coordinates in \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+O
 
 
 
-Definition at line 118 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00118}{118}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-References Zeta\+\_\+in\+\_\+geom\+\_\+object.
+References \mbox{\hyperlink{tet__mesh_8h_source_l00154}{Zeta\+\_\+in\+\_\+geom\+\_\+object}}.
 
 
 
-Referenced by oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects().
+Referenced by \mbox{\hyperlink{tet__mesh_8cc_source_l00483}{oomph\+::\+Tet\+Mesh\+Base\+::snap\+\_\+nodes\+\_\+onto\+\_\+geometric\+\_\+objects()}}.
 
 
 
@@ -200,7 +205,7 @@ Only friends can set boundary ID -- the facet is my only friend!
 
 
 
-Definition at line 53 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00053}{53}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
@@ -213,15 +218,15 @@ Definition at line 53 of file tet\+\_\+mesh.\+h.
 
 
 
-Set of (one-\/based!) boundary I\+Ds this vertex lives on. 
+Set of (one-\/based!) boundary IDs this vertex lives on. 
 
 
 
-Definition at line 150 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00150}{150}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-Referenced by one\+\_\+based\+\_\+boundary\+\_\+id(), and set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id().
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00130}{one\+\_\+based\+\_\+boundary\+\_\+id()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00141}{set\+\_\+one\+\_\+based\+\_\+boundary\+\_\+id()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9}\label{classoomph_1_1TetMeshVertex_a32a797224c3506b9594b657e1032e7d9}} 
 \index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!X@{X}}
@@ -235,11 +240,11 @@ Coordinate vector.
 
 
 
-Definition at line 147 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00147}{147}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-Referenced by Tet\+Mesh\+Vertex(), and x().
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00056}{Tet\+Mesh\+Vertex()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00124}{x()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TetMeshVertex_a945dd663092098554d394e2b50ef9ef2}\label{classoomph_1_1TetMeshVertex_a945dd663092098554d394e2b50ef9ef2}} 
 \index{oomph::TetMeshVertex@{oomph::TetMeshVertex}!Zeta\_in\_geom\_object@{Zeta\_in\_geom\_object}}
@@ -253,11 +258,11 @@ Intrinisic coordinates in \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Objec
 
 
 
-Definition at line 154 of file tet\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{tet__mesh_8h_source_l00154}{154}} of file \mbox{\hyperlink{tet__mesh_8h_source}{tet\+\_\+mesh.\+h}}.
 
 
 
-Referenced by set\+\_\+zeta\+\_\+in\+\_\+geom\+\_\+object(), and zeta\+\_\+in\+\_\+geom\+\_\+object().
+Referenced by \mbox{\hyperlink{tet__mesh_8h_source_l00097}{set\+\_\+zeta\+\_\+in\+\_\+geom\+\_\+object()}}, and \mbox{\hyperlink{tet__mesh_8h_source_l00118}{zeta\+\_\+in\+\_\+geom\+\_\+object()}}.
 
 
 

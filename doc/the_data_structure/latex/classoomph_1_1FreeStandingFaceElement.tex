@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1FreeStandingFaceElement}{}\doxysection{oomph\+::Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1FreeStandingFaceElement}{}\doxysection{oomph\+::Free\+Standing\+Face\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1FreeStandingFaceElement}\index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
+
+
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Free\+Standing\+Face\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classoomph_1_1FreeStandingFaceElement}
@@ -15,11 +20,11 @@ Inheritance diagram for oomph\+::Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\
 \item 
 \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a9d87193db8d21a358eb6a0aa9881b90a}{Free\+Standing\+Face\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-const unsigned \& \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a6aeae669dbdc951e7df21422e693c991}{boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}} () const
+const unsigned \& \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a9dfd603fb10cd39d67d16db0aee3af2d}{boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}} () const
 \begin{DoxyCompactList}\small\item\em Access function for the boundary number in bulk mesh. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a6b91f7a2dfd03a0df308ab3d8730d7db}{set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}} (const unsigned \&b)
 \begin{DoxyCompactList}\small\item\em Set function for the boundary number in bulk mesh. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_ad566632e00ef3ad2d02d824e63a3dc0e}{zeta\+\_\+nodal}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
+double \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_ad566632e00ef3ad2d02d824e63a3dc0e}{zeta\+\_\+nodal}} (const unsigned \&n, const unsigned \&k, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em In a \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}, the \char`\"{}global\char`\"{} intrinsic coordinate of the element along the boundary, when viewed as part of a compound geometric object is specified using the boundary coordinate defined by the mesh. Note\+: Boundary coordinates will have been set up when creating the underlying mesh, and their values will have been stored at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -27,16 +32,17 @@ double \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_ad566632e00ef3ad2d
 unsigned \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_a8326eccc4018fcc1df6729a439549aa3}{Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}}
 \begin{DoxyCompactList}\small\item\em The boundary number in the bulk mesh to which this element is attached. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement_ad11e687447855005a5d79651c1aeb3b7}{Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set}}
-\begin{DoxyCompactList}\small\item\em Has the Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh been set? Only included if compiled with P\+A\+R\+A\+N\+O\+ID switched on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Has the Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh been set? Only included if compiled with PARANOID switched on. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$}
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
 Basic-\/ified \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}, without any of the functionality of of actual Face\+Elements -- it\textquotesingle{}s just a surface element of the same geometric type as the \mbox{\hyperlink{classoomph_1_1FaceGeometry}{Face\+Geometry}} associated with bulk element specified by the template parameter. The element can be used to represent boundaries without actually being attached to a bulk element. Used mainly during unstructured mesh generation. 
 
-Definition at line 5184 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05146}{5146}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
@@ -45,8 +51,8 @@ Definition at line 5184 of file elements.\+h.
 \index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!FreeStandingFaceElement@{FreeStandingFaceElement}}
 \index{FreeStandingFaceElement@{FreeStandingFaceElement}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{FreeStandingFaceElement()}{FreeStandingFaceElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{Free\+Standing\+Face\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{Free\+Standing\+Face\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -54,21 +60,21 @@ Constructor.
 
 
 
-Definition at line 5188 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05150}{5150}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-References oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set.
+References \mbox{\hyperlink{elements_8h_source_l05205}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set}}.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classoomph_1_1FreeStandingFaceElement_a6aeae669dbdc951e7df21422e693c991}\label{classoomph_1_1FreeStandingFaceElement_a6aeae669dbdc951e7df21422e693c991}} 
+\mbox{\Hypertarget{classoomph_1_1FreeStandingFaceElement_a9dfd603fb10cd39d67d16db0aee3af2d}\label{classoomph_1_1FreeStandingFaceElement_a9dfd603fb10cd39d67d16db0aee3af2d}} 
 \index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!boundary\_number\_in\_bulk\_mesh@{boundary\_number\_in\_bulk\_mesh}}
 \index{boundary\_number\_in\_bulk\_mesh@{boundary\_number\_in\_bulk\_mesh}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{boundary\_number\_in\_bulk\_mesh()}{boundary\_number\_in\_bulk\_mesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const unsigned\& \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+const unsigned \& \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -76,18 +82,18 @@ Access function for the boundary number in bulk mesh.
 
 
 
-Definition at line 5198 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05160}{5160}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-References oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh.
+References \mbox{\hyperlink{elements_8h_source_l05199}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}}.
 
 \mbox{\Hypertarget{classoomph_1_1FreeStandingFaceElement_a6b91f7a2dfd03a0df308ab3d8730d7db}\label{classoomph_1_1FreeStandingFaceElement_a6b91f7a2dfd03a0df308ab3d8730d7db}} 
 \index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!set\_boundary\_number\_in\_bulk\_mesh@{set\_boundary\_number\_in\_bulk\_mesh}}
 \index{set\_boundary\_number\_in\_bulk\_mesh@{set\_boundary\_number\_in\_bulk\_mesh}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{set\_boundary\_number\_in\_bulk\_mesh()}{set\_boundary\_number\_in\_bulk\_mesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh (\begin{DoxyParamCaption}\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -95,18 +101,18 @@ Set function for the boundary number in bulk mesh.
 
 
 
-Definition at line 5205 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05167}{5167}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-References oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh, and oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set.
+References \mbox{\hyperlink{elements_8h_source_l05199}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}}, and \mbox{\hyperlink{elements_8h_source_l05205}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set}}.
 
 \mbox{\Hypertarget{classoomph_1_1FreeStandingFaceElement_ad566632e00ef3ad2d02d824e63a3dc0e}\label{classoomph_1_1FreeStandingFaceElement_ad566632e00ef3ad2d02d824e63a3dc0e}} 
 \index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!zeta\_nodal@{zeta\_nodal}}
 \index{zeta\_nodal@{zeta\_nodal}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{zeta\_nodal()}{zeta\_nodal()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::zeta\+\_\+nodal (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{k,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -114,11 +120,11 @@ In a \mbox{\hyperlink{classoomph_1_1FaceElement}{Face\+Element}}, the \char`\"{}
 
 
 
-Definition at line 5220 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05182}{5182}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-References oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh, i, and n.
+References \mbox{\hyperlink{elements_8h_source_l05199}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
@@ -127,8 +133,8 @@ References oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+
 \index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!Boundary\_number\_in\_bulk\_mesh@{Boundary\_number\_in\_bulk\_mesh}}
 \index{Boundary\_number\_in\_bulk\_mesh@{Boundary\_number\_in\_bulk\_mesh}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Boundary\_number\_in\_bulk\_mesh}{Boundary\_number\_in\_bulk\_mesh}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -136,30 +142,30 @@ The boundary number in the bulk mesh to which this element is attached.
 
 
 
-Definition at line 5237 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05199}{5199}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh(), oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh(), and oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::zeta\+\_\+nodal().
+Referenced by \mbox{\hyperlink{elements_8h_source_l05160}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh()}}, \mbox{\hyperlink{elements_8h_source_l05167}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh()}}, and \mbox{\hyperlink{elements_8h_source_l05182}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::zeta\+\_\+nodal()}}.
 
 \mbox{\Hypertarget{classoomph_1_1FreeStandingFaceElement_ad11e687447855005a5d79651c1aeb3b7}\label{classoomph_1_1FreeStandingFaceElement_ad11e687447855005a5d79651c1aeb3b7}} 
 \index{oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}!Boundary\_number\_in\_bulk\_mesh\_has\_been\_set@{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set}}
 \index{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set@{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set}!oomph::FreeStandingFaceElement$<$ ELEMENT $>$@{oomph::FreeStandingFaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set}{Boundary\_number\_in\_bulk\_mesh\_has\_been\_set}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1FreeStandingFaceElement}{oomph\+::\+Free\+Standing\+Face\+Element}}$<$ ELEMENT $>$\+::Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh\+\_\+has\+\_\+been\+\_\+set\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Has the Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh been set? Only included if compiled with P\+A\+R\+A\+N\+O\+ID switched on. 
+Has the Boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh been set? Only included if compiled with PARANOID switched on. 
 
 
 
-Definition at line 5243 of file elements.\+h.
+Definition at line \mbox{\hyperlink{elements_8h_source_l05205}{5205}} of file \mbox{\hyperlink{elements_8h_source}{elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Free\+Standing\+Face\+Element(), and oomph\+::\+Free\+Standing\+Face\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh().
+Referenced by \mbox{\hyperlink{elements_8h_source_l05150}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::\+Free\+Standing\+Face\+Element()}}, and \mbox{\hyperlink{elements_8h_source_l05167}{oomph\+::\+Free\+Standing\+Face\+Element$<$ ELEMENT $>$\+::set\+\_\+boundary\+\_\+number\+\_\+in\+\_\+bulk\+\_\+mesh()}}.
 
 
 

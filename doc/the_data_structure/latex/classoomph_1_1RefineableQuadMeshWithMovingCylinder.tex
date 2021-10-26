@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{}\doxysection{oomph\+::Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{}\doxysection{oomph\+::Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RefineableQuadMeshWithMovingCylinder}\index{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}}
 
 
-My \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}.  
+///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////  
 
 
 
 
 {\ttfamily \#include $<$rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.409449cm]{classoomph_1_1RefineableQuadMeshWithMovingCylinder}
@@ -19,13 +19,13 @@ Inheritance diagram for oomph\+::Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder_a18e14998b6e6fdfbb1ab2b3d4acb2533}{Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}} (\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$cylinder\+\_\+pt, const double \&annular\+\_\+region\+\_\+radius, const double \&length\+\_\+of\+\_\+central\+\_\+box, const double \&x\+\_\+left, const double \&x\+\_\+right, const double \&height, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor. Pass pointer to geometric object that represents the cylinder; hierher the length and height of the domain. The \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. Timestepper defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} default timestepper. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder_aacd43dd5bd612a6fc4dd66560e73207b}{$\sim$\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Destructor\+: Delete the part of the mesh which has a \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineableRectangleWithHoleAndAnnularRegionMesh}{Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder_aa19ea4a382a764429a098e1e6103acda}{Central\+\_\+mesh\+\_\+pt}}
+\mbox{\hyperlink{classoomph_1_1RefineableRectangleWithHoleAndAnnularRegionMesh}{Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}}$<$ ELEMENT $>$ $\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder_aa19ea4a382a764429a098e1e6103acda}{Central\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the part of the mesh which has a \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} representation. We have to store it because we can\textquotesingle{}t delete it in the constructor as it would delete the \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} pointer which might be needed after the whole mesh has been constructed (e.\+g. for the mesh extrusion machinery)... \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder_a76e4364e55329eefbd8f5d0833779141}{Coarse\+\_\+problem}}
 \end{DoxyCompactItemize}
@@ -33,12 +33,13 @@ bool \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder_a76e436
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ ELEMENT $>$}
+///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
-My \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}}. 
+My \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} 
 
-Definition at line 320 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00320}{320}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -47,31 +48,41 @@ Definition at line 320 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_
 \index{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}!RefineableQuadMeshWithMovingCylinder@{RefineableQuadMeshWithMovingCylinder}}
 \index{RefineableQuadMeshWithMovingCylinder@{RefineableQuadMeshWithMovingCylinder}!oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableQuadMeshWithMovingCylinder()}{RefineableQuadMeshWithMovingCylinder()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{cylinder\+\_\+pt,  }\item[{const double \&}]{annular\+\_\+region\+\_\+radius,  }\item[{const double \&}]{length\+\_\+of\+\_\+central\+\_\+box,  }\item[{const double \&}]{x\+\_\+left,  }\item[{const double \&}]{x\+\_\+right,  }\item[{const double \&}]{height,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} $\ast$}]{cylinder\+\_\+pt,  }\item[{const double \&}]{annular\+\_\+region\+\_\+radius,  }\item[{const double \&}]{length\+\_\+of\+\_\+central\+\_\+box,  }\item[{const double \&}]{x\+\_\+left,  }\item[{const double \&}]{x\+\_\+right,  }\item[{const double \&}]{height,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})}
+
+
 
 Constructor. Pass pointer to geometric object that represents the cylinder; hierher the length and height of the domain. The \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. Timestepper defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} default timestepper. 
 
-Definition at line 1396 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc.
+///////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////
+
+Constructor. Pass pointer to geometric object that represents the cylinder; hierher the length and height of the domain. The \mbox{\hyperlink{classoomph_1_1GeomObject}{Geom\+Object}} must be parametrised such that $\zeta \in [0,2\pi]$ sweeps around the circumference in anticlockwise direction. Timestepper defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}} default timestepper. 
+
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source_l01395}{1395}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8cc_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh(), e, i, oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Mesh\+::nboundary\+\_\+node(), and oomph\+::\+Node\+::remove\+\_\+from\+\_\+boundary().
+References \mbox{\hyperlink{mesh_8h_source_l00493}{oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{pml__meshes_8h_source_l02367}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+bottom\+\_\+left\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l02103}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+bottom\+\_\+right\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l02234}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+top\+\_\+left\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{pml__meshes_8h_source_l01968}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::create\+\_\+top\+\_\+right\+\_\+pml\+\_\+mesh()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{mesh_8h_source_l00833}{oomph\+::\+Mesh\+::nboundary\+\_\+node()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQuadMeshWithMovingCylinder_aacd43dd5bd612a6fc4dd66560e73207b}\label{classoomph_1_1RefineableQuadMeshWithMovingCylinder_aacd43dd5bd612a6fc4dd66560e73207b}} 
 \index{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}!````~RefineableQuadMeshWithMovingCylinder@{$\sim$RefineableQuadMeshWithMovingCylinder}}
 \index{````~RefineableQuadMeshWithMovingCylinder@{$\sim$RefineableQuadMeshWithMovingCylinder}!oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$RefineableQuadMeshWithMovingCylinder()}{~RefineableQuadMeshWithMovingCylinder()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Destructor\+: Delete the part of the mesh which has a \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} representation 
-
-Definition at line 340 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-References oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Central\+\_\+mesh\+\_\+pt.
+Destructor\+: Delete the part of the mesh which has a \mbox{\hyperlink{classoomph_1_1Domain}{Domain}} representation. 
+
+
+
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00340}{340}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
+
+
+
+References \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00355}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ ELEMENT $>$\+::\+Central\+\_\+mesh\+\_\+pt}}.
 
 
 
@@ -80,8 +91,8 @@ References oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ E\+L\+E\
 \index{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}!Central\_mesh\_pt@{Central\_mesh\_pt}}
 \index{Central\_mesh\_pt@{Central\_mesh\_pt}!oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Central\_mesh\_pt}{Central\_mesh\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableRectangleWithHoleAndAnnularRegionMesh}{Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}}$<$E\+L\+E\+M\+E\+NT$>$$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Central\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableRectangleWithHoleAndAnnularRegionMesh}{Refineable\+Rectangle\+With\+Hole\+And\+Annular\+Region\+Mesh}}$<$ELEMENT$>$$\ast$ \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}}$<$ ELEMENT $>$\+::Central\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -89,22 +100,22 @@ Pointer to the part of the mesh which has a \mbox{\hyperlink{classoomph_1_1Domai
 
 
 
-Definition at line 355 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00355}{355}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ E\+L\+E\+M\+E\+N\+T $>$\+::$\sim$\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder().
+Referenced by \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00340}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder$<$ ELEMENT $>$\+::$\sim$\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableQuadMeshWithMovingCylinder_a76e4364e55329eefbd8f5d0833779141}\label{classoomph_1_1RefineableQuadMeshWithMovingCylinder_a76e4364e55329eefbd8f5d0833779141}} 
 \index{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}!Coarse\_problem@{Coarse\_problem}}
 \index{Coarse\_problem@{Coarse\_problem}!oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$@{oomph::RefineableQuadMeshWithMovingCylinder$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Coarse\_problem}{Coarse\_problem}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Coarse\+\_\+problem\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1RefineableQuadMeshWithMovingCylinder}{oomph\+::\+Refineable\+Quad\+Mesh\+With\+Moving\+Cylinder}}$<$ ELEMENT $>$\+::Coarse\+\_\+problem\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 358 of file rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source_l00358}{358}} of file \mbox{\hyperlink{rectangle__with__moving__cylinder__mesh_8template_8h_source}{rectangle\+\_\+with\+\_\+moving\+\_\+cylinder\+\_\+mesh.\+template.\+h}}.
 
 
 

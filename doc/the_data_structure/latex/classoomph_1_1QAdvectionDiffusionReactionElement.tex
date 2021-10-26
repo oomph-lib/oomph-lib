@@ -1,60 +1,61 @@
-\hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement}{}\doxysection{oomph\+::Q\+Advection\+Diffusion\+Reaction\+Element$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ Class Template Reference}
+\hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement}{}\doxysection{oomph\+::QAdvection\+Diffusion\+Reaction\+Element\texorpdfstring{$<$}{<} NREAGENT, DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1QAdvectionDiffusionReactionElement}\index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 
 
-\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function.  
+//////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////  
 
 
 
 
 {\ttfamily \#include $<$advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Q\+Advection\+Diffusion\+Reaction\+Element$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::QAdvection\+Diffusion\+Reaction\+Element\texorpdfstring{$<$}{<} NREAGENT, DIM, NNODE\+\_\+1D \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.751094cm]{classoomph_1_1QAdvectionDiffusionReactionElement}
+\includegraphics[height=1.575985cm]{classoomph_1_1QAdvectionDiffusionReactionElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_add22bb19f8f4a185e0e7820c7f43121f}{Q\+Advection\+Diffusion\+Reaction\+Element}} ()
-\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Advection Diffusion equations. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a4a319e1d78394fd5db9b9d63ca14cd1b}{Q\+Advection\+Diffusion\+Reaction\+Element}} (const \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&dummy)
+\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_add22bb19f8f4a185e0e7820c7f43121f}{QAdvection\+Diffusion\+Reaction\+Element}} ()
+\begin{DoxyCompactList}\small\item\em Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Advection Diffusion equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_aef049aaa3d88af391817ff275c1f5ab2}{QAdvection\+Diffusion\+Reaction\+Element}} (const \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$ \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a0c4f00cf6b1cd8a0bb0ec505ed319807}{operator=}} (const \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&)
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_accb3be408129427b803e9f52acaff350}{operator=}} (const \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$ \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_ac6a740436c52b5c541c1758508be0710}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_ac6a740436c52b5c541c1758508be0710}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Required \# of `values' (pinned or dofs) at node n. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_abea67b1715ee4b70086ee68dcddbc0b1}{output}} (std\+::ostream \&outfile)
 \begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_acafd4d0efa43a6c63600c8f1e8823c5b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a5a3333fcb25ba0d5e74e74c2964d8d1c}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a5a3333fcb25ba0d5e74e74c2964d8d1c}{output}} (FILE $\ast$file\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_abd8dbb087ca525304f3328d823311d6f}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_abd8dbb087ca525304f3328d823311d6f}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a4dcfb4e1778ee7e46c86609ea4d1ce30}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, \mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+DIM plot points. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_aced1d7c07e1e49b95aff9b354676808b}{output\+\_\+fct}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot, const double \&time, \mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}} exact\+\_\+soln\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points (Calls the steady version) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+DIM plot points (Calls the steady version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_acb2af6c72ae97ffe0c762c9df692c3ab}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff\+\_\+react}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
-\begin{DoxyCompactList}\small\item\em Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a2a52a7accae36bd8e3bb46e659f9c983}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_acb2af6c72ae97ffe0c762c9df692c3ab}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff\+\_\+react}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement_a2a52a7accae36bd8e3bb46e659f9c983}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff\+\_\+react}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. at integration point ipt. Return Jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$\newline
-class oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M, N\+N\+O\+D\+E\+\_\+1\+D $>$}
+\subsubsection*{template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$\newline
+class oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element$<$ NREAGENT, DIM, NNODE\+\_\+1\+D $>$}
+//////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
-\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function. 
+\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element}} elements are linear/quadrilateral/brick-\/shaped Advection Diffusion elements with isoparametric interpolation for the function. 
 
-Definition at line 672 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00666}{666}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 
@@ -63,35 +64,27 @@ Definition at line 672 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+eleme
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!QAdvectionDiffusionReactionElement@{QAdvectionDiffusionReactionElement}}
 \index{QAdvectionDiffusionReactionElement@{QAdvectionDiffusionReactionElement}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QAdvectionDiffusionReactionElement()}{QAdvectionDiffusionReactionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{Q\+Element}} and Advection Diffusion equations. 
+Constructor\+: Call constructors for \mbox{\hyperlink{classoomph_1_1QElement}{QElement}} and Advection Diffusion equations. 
 
 
 
-Definition at line 679 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00673}{673}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_a4a319e1d78394fd5db9b9d63ca14cd1b}\label{classoomph_1_1QAdvectionDiffusionReactionElement_a4a319e1d78394fd5db9b9d63ca14cd1b}} 
+\mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_aef049aaa3d88af391817ff275c1f5ab2}\label{classoomph_1_1QAdvectionDiffusionReactionElement_aef049aaa3d88af391817ff275c1f5ab2}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!QAdvectionDiffusionReactionElement@{QAdvectionDiffusionReactionElement}}
 \index{QAdvectionDiffusionReactionElement@{QAdvectionDiffusionReactionElement}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{QAdvectionDiffusionReactionElement()}{QAdvectionDiffusionReactionElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::\mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 686 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -100,33 +93,33 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_adv\_diff\_react@{dshape\_and\_dtest\_eulerian\_adv\_diff\_react}}
 \index{dshape\_and\_dtest\_eulerian\_adv\_diff\_react@{dshape\_and\_dtest\_eulerian\_adv\_diff\_react}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_adv\_diff\_react()}{dshape\_and\_dtest\_eulerian\_adv\_diff\_react()}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff\+\_\+react (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+adv\+\_\+diff\+\_\+react (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping. 
+\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian. 
 
-\mbox{\hyperlink{classoomph_1_1Shape}{Shape}}, test functions \& derivs. w.\+r.\+t. to global coords. Return Jacobian.
+Define the shape functions and test functions and derivatives w.\+r.\+t. global coordinates and return Jacobian of mapping.
 
 Galerkin\+: Test functions = shape functions 
 
-Implements \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a227bda2d1384aaa46dff37ccd370e6d6}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a9136ed44e7820d58983e2299bb721e50}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$}}.
 
 
 
-Definition at line 792 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00781}{781}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 
-References i, and s.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_a2a52a7accae36bd8e3bb46e659f9c983}\label{classoomph_1_1QAdvectionDiffusionReactionElement_a2a52a7accae36bd8e3bb46e659f9c983}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff\_react@{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff\_react}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff\_react@{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff\_react}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff\_react()}{dshape\_and\_dtest\_eulerian\_at\_knot\_adv\_diff\_react()}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff\+\_\+react (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+double \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+adv\+\_\+diff\+\_\+react (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -136,37 +129,29 @@ Define the shape functions and test functions and derivatives w.\+r.\+t. global 
 
 Galerkin\+: Test functions = shape functions 
 
-Implements \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_acd01ced36610cb5e69ee359df778ba09}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$}}.
+Implements \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a9c9e4d0b83ec320061bb4f5e98d60b61}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$}}.
 
 
 
-Definition at line 825 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00814}{814}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_a0c4f00cf6b1cd8a0bb0ec505ed319807}\label{classoomph_1_1QAdvectionDiffusionReactionElement_a0c4f00cf6b1cd8a0bb0ec505ed319807}} 
+\mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_accb3be408129427b803e9f52acaff350}\label{classoomph_1_1QAdvectionDiffusionReactionElement_accb3be408129427b803e9f52acaff350}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
 
-
-
-Definition at line 693 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
-
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_a5a3333fcb25ba0d5e74e74c2964d8d1c}\label{classoomph_1_1QAdvectionDiffusionReactionElement_a5a3333fcb25ba0d5e74e74c2964d8d1c}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -174,45 +159,37 @@ C-\/style output function\+: x,y,u or x,y,z,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_abb205e32ac157870312dd5d1180233b1}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00714}{714}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 
-Definition at line 724 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00201}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_abd8dbb087ca525304f3328d823311d6f}\label{classoomph_1_1QAdvectionDiffusionReactionElement_abd8dbb087ca525304f3328d823311d6f}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+C-\/style output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a1ada1e57cac4bff9ecf73520a907b7c8}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00721}{721}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 
-Definition at line 731 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00201}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_abea67b1715ee4b70086ee68dcddbc0b1}\label{classoomph_1_1QAdvectionDiffusionReactionElement_abea67b1715ee4b70086ee68dcddbc0b1}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -220,91 +197,79 @@ Output function\+: x,y,u or x,y,z,u.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a70be6733b56f27104a4a849c296b5b62}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00698}{698}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 
-Definition at line 708 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00201}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_acafd4d0efa43a6c63600c8f1e8823c5b}\label{classoomph_1_1QAdvectionDiffusionReactionElement_acafd4d0efa43a6c63600c8f1e8823c5b}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!output@{output}}
 \index{output@{output}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function\+: x,y,u or x,y,z,u at n\+\_\+plot$^\wedge$\+DIM plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a38aa99ed50cc082f0c9c7079a13a11da}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00705}{705}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 
-Definition at line 715 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::output().
+References \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00201}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_aced1d7c07e1e49b95aff9b354676808b}\label{classoomph_1_1QAdvectionDiffusionReactionElement_aced1d7c07e1e49b95aff9b354676808b}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{const double \&}]{time,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_ad4ecf2b61b158a4b4d351a60d23c633e}{Finite\+Element\+::\+Unsteady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points (Calls the steady version) 
+Output function for a time-\/dependent exact solution. x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+DIM plot points (Calls the steady version) 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_abfb9e33a5575df7f36cdee7e44b3d282}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$}}.
+Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_a3e08aa0bcdc081ee1b8775ed5c098c74}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ NREAGENT, DIM $>$}}.
 
 
 
-Definition at line 751 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00741}{741}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::output\+\_\+fct().
+References \mbox{\hyperlink{advection__diffusion__reaction__elements_8cc_source_l00519}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_a4dcfb4e1778ee7e46c86609ea4d1ce30}\label{classoomph_1_1QAdvectionDiffusionReactionElement_a4dcfb4e1778ee7e46c86609ea4d1ce30}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!output\_fct@{output\_fct}}
 \index{output\_fct@{output\_fct}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{output\_fct()}{output\_fct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+void \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::output\+\_\+fct (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a690fd33af26cc3e84f39bba6d5a85202}{Finite\+Element\+::\+Steady\+Exact\+Solution\+Fct\+Pt}}}]{exact\+\_\+soln\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+D\+IM plot points. 
+Output function for an exact solution\+: x,y,u\+\_\+exact or x,y,z,u\+\_\+exact at n\+\_\+plot$^\wedge$\+DIM plot points. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1AdvectionDiffusionReactionEquations_af540c03c411843c566c81af918d620c2}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$}}.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00729}{729}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 
-Definition at line 739 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Advection\+Diffusion\+Reaction\+Equations$<$ N\+R\+E\+A\+G\+E\+N\+T, D\+I\+M $>$\+::output\+\_\+fct().
+References \mbox{\hyperlink{advection__diffusion__reaction__elements_8cc_source_l00519}{oomph\+::\+Advection\+Diffusion\+Reaction\+Equations\+::output\+\_\+fct()}}.
 
 \mbox{\Hypertarget{classoomph_1_1QAdvectionDiffusionReactionElement_ac6a740436c52b5c541c1758508be0710}\label{classoomph_1_1QAdvectionDiffusionReactionElement_ac6a740436c52b5c541c1758508be0710}} 
 \index{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$@{oomph::QAdvectionDiffusionReactionElement$<$ NREAGENT, DIM, NNODE\_1D $>$}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily template$<$unsigned N\+R\+E\+A\+G\+E\+NT, unsigned D\+IM, unsigned N\+N\+O\+D\+E\+\_\+1D$>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+Q\+Advection\+Diffusion\+Reaction\+Element}}$<$ N\+R\+E\+A\+G\+E\+NT, D\+IM, N\+N\+O\+D\+E\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$unsigned NREAGENT, unsigned DIM, unsigned NNODE\+\_\+1D$>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1QAdvectionDiffusionReactionElement}{oomph\+::\+QAdvection\+Diffusion\+Reaction\+Element}}$<$ NREAGENT, DIM, NNODE\+\_\+1D $>$\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -312,11 +277,7 @@ Required \# of `values' (pinned or dofs) at node n.
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
-
-
-
-Definition at line 701 of file advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source_l00691}{691}} of file \mbox{\hyperlink{advection__diffusion__reaction__elements_8h_source}{advection\+\_\+diffusion\+\_\+reaction\+\_\+elements.\+h}}.
 
 
 

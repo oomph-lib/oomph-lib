@@ -20,8 +20,7 @@ In this document, we discuss the solution of a simple one-\/dimensional solid me
 \hypertarget{index_non_dim}{}\doxysection{Theory and non-\/dimensionalisation}\label{index_non_dim}
 {\ttfamily oomph-\/lib\textquotesingle{}s} beam elements are based on geometrically nonlinear Kirchhoff-\/\+Love beam theory with incrementally linear constitutive equations (Young\textquotesingle{}s modulus $ E $ and Poisson\textquotesingle{}s ratio $ \nu $). The equations are implemented in non-\/dimensional form, obtained by non-\/dimensionalising all length on some lengthscale $ {\cal L} $, by scaling the stresses and the applied traction on the beam\textquotesingle{}s effective Young\textquotesingle{}s modulus $ E_{eff} = E/(1-\nu^2) $ and by non-\/dimensionalising time on some timescale $ {\cal T} $ so that the dimensional (identified by an asterisk) and non-\/dimensional variables are related by \[ L^* = {\cal L} \ L, \] \[ h^* = {\cal L} \ h, \] \[ t^* = {\cal T} \ t, \] \[ p_{ext}^* = E_{eff} \ p_{ext}, \] and \[ \sigma_0^* = E_{eff} \ \sigma_0. \] The beam\textquotesingle{}s undeformed shape is parametrised by a non-\/dimensional Lagrangian coordinate $ \xi = \xi^*/{\cal L} $ so that the non-\/dimensional position vector to a material particle on the beam\textquotesingle{}s centreline in the undeformed configuration is given by $ {\bf r}_w(\xi) $ . We denote the unit normal to the beam\textquotesingle{}s undeformed centreline by $ {\bf n} $. The applied traction $ {\bf f} = {\bf f}^*/E_{eff} $ (a force per unit deformed length of the beam) deforms the beam, causing its material particles to be displaced to their new positions $ {\bf R}_w(\xi) $; the unit normal to the beam\textquotesingle{}s deformed centreline is $ {\bf N} $.
 
-The non-\/dimensional form of the principle of virtual displacements that governs the beams deformation is then given by \[ \int_0^{L} \left[ (\sigma_0 + \gamma) \ \delta \gamma + \frac{1}{12} h^2 \kappa \ \delta \kappa - \left(\frac{1}{h} \sqrt{\frac{A}{a}} \ {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot \delta {\bf R}_w \right] \ \sqrt{a} \ d\xi = 0, \ \ \ \ \ \ \ \ \ (1) \] where \[ a = \frac{\partial {\bf r}_w}{\partial \xi} \cdot \frac{\partial {\bf r}_w}{\partial \xi}, \] and \[ A = \frac{\partial {\bf R}_w}{\partial \xi} \cdot \frac{\partial {\bf R}_w}{\partial \xi}, \] represent the squares of the lengths of infinitesimal material line elements in the undeformed and the deformed configurations, respectively. \[ ds = \sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS = \sqrt{A} \ d\xi. \] $ A $ and $ a $ may be interpreted as the \char`\"{}1x1 metric
-tensors\char`\"{} of the beam\textquotesingle{}s centreline, in the deformed and undeformed configurations, respectively. The ratio $ \sqrt{A/a} $ represents the \char`\"{}extension ratio\char`\"{} or the \char`\"{}stretch\char`\"{} of the beam\textquotesingle{}s centreline.
+The non-\/dimensional form of the principle of virtual displacements that governs the beams deformation is then given by \[ \int_0^{L} \left[ (\sigma_0 + \gamma) \ \delta \gamma + \frac{1}{12} h^2 \kappa \ \delta \kappa - \left(\frac{1}{h} \sqrt{\frac{A}{a}} \ {\bf f} - \Lambda^2 \frac{\partial^2 {\bf R}_w}{\partial t^2} \right) \cdot \delta {\bf R}_w \right] \ \sqrt{a} \ d\xi = 0, \ \ \ \ \ \ \ \ \ (1) \] where \[ a = \frac{\partial {\bf r}_w}{\partial \xi} \cdot \frac{\partial {\bf r}_w}{\partial \xi}, \] and \[ A = \frac{\partial {\bf R}_w}{\partial \xi} \cdot \frac{\partial {\bf R}_w}{\partial \xi}, \] represent the squares of the lengths of infinitesimal material line elements in the undeformed and the deformed configurations, respectively. \[ ds = \sqrt{a} \ d\xi \mbox{\ \ \ \ and \ \ \ } dS = \sqrt{A} \ d\xi. \] $ A $ and $ a $ may be interpreted as the \char`\"{}1x1 metric tensors\char`\"{} of the beam\textquotesingle{}s centreline, in the deformed and undeformed configurations, respectively. The ratio $ \sqrt{A/a} $ represents the \char`\"{}extension ratio\char`\"{} or the \char`\"{}stretch\char`\"{} of the beam\textquotesingle{}s centreline.
 
 We represent the curvature of the beam\textquotesingle{}s centreline before and after the deformation by \[ b = {\bf n} \cdot \frac{\partial^2 {\bf r}_w}{d\xi^2} \] and \[ B = {\bf N} \cdot \frac{\partial^2 {\bf R}_w}{d\xi^2} \] respectively. The (\char`\"{}1x1\char`\"{}) strain and and bending \char`\"{}tensors\char`\"{} $ \gamma $ and $ \kappa $ are then given by \[ \gamma = \frac{1}{2}\left(A-a\right) \mbox{\ \ \ and \ \ \ } \kappa = - \left( B-b \right). \] Finally, \[ \Lambda = \frac{{\cal L}}{{\cal T}} \sqrt{\frac{\rho}{E_{eff}}} \] is the ratio of the natural timescale of the beam\textquotesingle{}s in-\/plane extensional oscillations, \[ {\cal T}_{natural} = {\cal L} \sqrt{\frac{\rho}{E_{eff}}}, \] to the timescale $ {\cal T}$ used in the non-\/dimensionalisation of the equations. $ \Lambda^2 $ may be interpreted as the non-\/dimensional wall density, therefore $ \Lambda=0 $ corresponds to the case without wall inertia.
 
@@ -102,8 +101,7 @@ The {\ttfamily Hermite\+Beam\+Element} provides default values for all non-\/dim
 \item the undeformed wall shape $ {\bf r}_w(\xi) $ as a {\ttfamily Geom\+Object} -- see the \href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ earlier example}} for a discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} geometric objects.
 \end{DoxyItemize}\DoxyHorRuler{0}
 \hypertarget{index_results}{}\doxysection{Results}\label{index_results}
-The animation shown below illustrates the deformation of the beam under increasing pressure. An increase in pressure initially deflects the beam vertically downwards. The pressure acts as a \char`\"{}follower
-load\char`\"{} since it always acts in the direction normal to the deformed beam. This causes the beam to deform into an approximately circular shape whose radius increases rapidly.
+The animation shown below illustrates the deformation of the beam under increasing pressure. An increase in pressure initially deflects the beam vertically downwards. The pressure acts as a \char`\"{}follower load\char`\"{} since it always acts in the direction normal to the deformed beam. This causes the beam to deform into an approximately circular shape whose radius increases rapidly.
 
  
 \begin{DoxyImage}
@@ -164,7 +162,7 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_namespace========================}}
 \DoxyCodeLine{\textcolor{comment}{/// Namespace for physical parameters}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//==================================================}}
+\DoxyCodeLine{\textcolor{comment}{//==================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Non-\/dimensional thickness}}
@@ -186,9 +184,7 @@ The namespace {\ttfamily \mbox{\hyperlink{namespaceGlobal__Physical__Variables}{
 \DoxyCodeLine{\} \textcolor{comment}{// end of namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 The main code is very short. The physical parameters $ h $, $ \sigma_{0} $ and $ L $ are initialised and the problem is constructed using 10 elements. Following the usual self-\/test, we call the function \mbox{\hyperlink{classElasticBeamProblem_a2da3cb02ce953da67fb27742e20774a5}{Elastic\+Beam\+Problem\+::parameter\+\_\+study()}} to compute the deformation of the beam for a range of external pressures.
@@ -197,7 +193,7 @@ The main code is very short. The physical parameters $ h $, $ \sigma_{0} $ and $
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//========start\_of\_main================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver for beam (string under tension) test problem }}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=====================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=====================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{tensioned__string_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -215,30 +211,28 @@ The main code is very short. The physical parameters $ h $, $ \sigma_{0} $ and $
 \DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_element = 10;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Construst the problem}}
-\DoxyCodeLine{ \mbox{\hyperlink{classElasticBeamProblem}{ElasticBeamProblem}} \mbox{\hyperlink{tensioned__string_8txt_a1ce091cd301555b09a13f3432beaf2fd}{problem}}(n\_element,L);}
+\DoxyCodeLine{ \mbox{\hyperlink{classElasticBeamProblem}{ElasticBeamProblem}} problem(n\_element,L);}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Check that we're ready to go:}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "};}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{tensioned__string_8txt_a1ce091cd301555b09a13f3432beaf2fd}{problem}}.self\_test()==0) }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "{}};}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (problem.self\_test()==0) }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"passed: Problem can be solved."} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}passed: Problem can be solved."{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"Self test failed"},}
+\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Self test failed"{}},}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Conduct parameter study}}
-\DoxyCodeLine{ \mbox{\hyperlink{tensioned__string_8txt_a1ce091cd301555b09a13f3432beaf2fd}{problem}}.parameter\_study();}
+\DoxyCodeLine{ problem.parameter\_study();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of main}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 The problem class has five member functions, only two of which are non-\/trivial\+:
@@ -247,7 +241,7 @@ The problem class has five member functions, only two of which are non-\/trivial
 \item the function {\ttfamily parameter\+\_\+study()}, which computes the beam\textquotesingle{}s deformation for a range of external pressures.
 \end{DoxyItemize}
 
-In the present problem, the functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve()} are not required, so remain empty. The function {\ttfamily \mbox{\hyperlink{classElasticBeamProblem_ae7d14ba8bec2325a82cbeed0c1b29910}{Elastic\+Beam\+Problem\+::mesh\+\_\+pt()}}} overloads the (virtual) function {\ttfamily Problem\+::mesh\+\_\+pt()} to return a pointer to the specific mesh used in this problem. This avoids explicit re-\/casts when member functions of the specific mesh need to be accessed.
+In the present problem, the functions {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve()} and {\ttfamily Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve()} are not required, so remain empty. The function {\ttfamily \mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{Elastic\+Beam\+Problem\+::mesh\+\_\+pt()}}} overloads the (virtual) function {\ttfamily Problem\+::mesh\+\_\+pt()} to return a pointer to the specific mesh used in this problem. This avoids explicit re-\/casts when member functions of the specific mesh need to be accessed.
 
 The class also includes three private data members which store a pointer to a node at which the displacement is documented, the length of the domain, and a pointer to the geometric object that specifies the beam\textquotesingle{}s undeformed shape.
 
@@ -255,12 +249,12 @@ The class also includes three private data members which store a pointer to a no
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//======start\_of\_problem\_class==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Beam problem object}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classElasticBeamProblem}{ElasticBeamProblem}} : \textcolor{keyword}{public} Problem}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{ \textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Constructor: The arguments are the number of elements, }}
+\DoxyCodeLine{\textcolor{comment}{ /// Constructor: The arguments are the number of elements, }}
 \DoxyCodeLine{\textcolor{comment}{ /// the length of domain}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classElasticBeamProblem_a1c62c2a14c9a5528a649700d16dac2ea}{ElasticBeamProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_elem, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length);}
 \DoxyCodeLine{ \textcolor{comment}{}}
@@ -268,9 +262,9 @@ The class also includes three private data members which store a pointer to a no
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticBeamProblem_a2da3cb02ce953da67fb27742e20774a5}{parameter\_study}}();}
 \DoxyCodeLine{ \textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Return pointer to the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<HermiteBeamElement>* \mbox{\hyperlink{classElasticBeamProblem_ae7d14ba8bec2325a82cbeed0c1b29910}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} OneDLagrangianMesh<HermiteBeamElement>* \mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{mesh\_pt}}() }
 \DoxyCodeLine{  \{\textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}OneDLagrangianMesh<HermiteBeamElement>*\textcolor{keyword}{>}}
-\DoxyCodeLine{    (\mbox{\hyperlink{tensioned__string_8txt_a0f5aaa7d7eab4fbec16d94c64db068d1}{Problem::mesh\_pt}}());\}}
+\DoxyCodeLine{    (Problem::mesh\_pt());\}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// No actions need to be performed after a solve}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticBeamProblem_a30dde8d0101a3d3994965d6e560cb585}{actions\_after\_newton\_solve}}() \{\}}
@@ -292,9 +286,7 @@ The class also includes three private data members which store a pointer to a no
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_constructor}{}\doxysection{The Problem constructor}\label{index_constructor}
 We start by creating the undeformed centreline of the beam as a {\ttfamily Straight\+Line}, one of {\ttfamily oomph-\/lib\textquotesingle{}s} standard geometric objects.
@@ -302,36 +294,27 @@ We start by creating the undeformed centreline of the beam as a {\ttfamily Strai
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=============start\_of\_constructor=====================================}}
-
-\end{DoxyCodeInclude}
- ~\newline
- 
-\begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for elastic beam problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//======================================================================}}
 \DoxyCodeLine{\mbox{\hyperlink{classElasticBeamProblem_a1c62c2a14c9a5528a649700d16dac2ea}{ElasticBeamProblem::ElasticBeamProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_elem,}
 \DoxyCodeLine{                                       \textcolor{keyword}{const} \textcolor{keywordtype}{double} \&length) : Length(length)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Set the undeformed beam to be a straight line at y=0}}
-\DoxyCodeLine{ \mbox{\hyperlink{tensioned__string_8txt_a3ce9132b2accc26a8e67d561a46891e5}{Undef\_beam\_pt}}=\textcolor{keyword}{new} StraightLine(0.0); }
+\DoxyCodeLine{ Undef\_beam\_pt=\textcolor{keyword}{new} StraightLine(0.0); }
 
 \end{DoxyCodeInclude}
-
-
-We then construct the a one-\/dimensional Lagrangian mesh in two-\/dimensional space, using the previously-\/constructed geometric object to set the initial positions of the nodes.
+ We then construct the a one-\/dimensional Lagrangian mesh in two-\/dimensional space, using the previously-\/constructed geometric object to set the initial positions of the nodes.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Create the (Lagrangian!) mesh, using the geometric object}}
 \DoxyCodeLine{ \textcolor{comment}{// Undef\_beam\_pt to specify the initial (Eulerian) position of the}}
 \DoxyCodeLine{ \textcolor{comment}{// nodes.}}
-\DoxyCodeLine{ \mbox{\hyperlink{tensioned__string_8txt_a0f5aaa7d7eab4fbec16d94c64db068d1}{Problem::mesh\_pt}}() = }
-\DoxyCodeLine{  \textcolor{keyword}{new} OneDLagrangianMesh<HermiteBeamElement>(n\_elem,length,\mbox{\hyperlink{tensioned__string_8txt_a3ce9132b2accc26a8e67d561a46891e5}{Undef\_beam\_pt}});}
+\DoxyCodeLine{ Problem::mesh\_pt() = }
+\DoxyCodeLine{  \textcolor{keyword}{new} OneDLagrangianMesh<HermiteBeamElement>(n\_elem,length,Undef\_beam\_pt);}
 
 \end{DoxyCodeInclude}
-
-
-The {\ttfamily One\+D\+Lagrangian\+Mesh} is a {\ttfamily Solid\+Mesh} whose constituent nodes are {\ttfamily Solid\+Nodes}. These nodes store not only their (variable) 2D Eulerian position, accessible via {\ttfamily Solid\+Node\+::x(...)}, but also their (fixed) 1D Lagrangian coordinates, accessible via {\ttfamily Solid\+Node\+::xi(...)}. The {\ttfamily One\+D\+Lagrangian\+Mesh} constructor assigns the nodes\textquotesingle{} Lagrangian coordinate, $ \xi $, by spacing them evenly in the range $ \xi \in [0,L] $. The {\ttfamily Geom\+Object} pointed to by {\ttfamily Undef\+\_\+beam\+\_\+pt}, provides a parametrisation of the beam\textquotesingle{}s undeformed shape in the form $ {\bf r}(\xi) $, and this is used to determine the nodes\textquotesingle{}s initial Eulerian position.
+ The {\ttfamily One\+DLagrangian\+Mesh} is a {\ttfamily Solid\+Mesh} whose constituent nodes are {\ttfamily Solid\+Nodes}. These nodes store not only their (variable) 2D Eulerian position, accessible via {\ttfamily Solid\+Node\+::x(...)}, but also their (fixed) 1D Lagrangian coordinates, accessible via {\ttfamily Solid\+Node\+::xi(...)}. The {\ttfamily One\+DLagrangian\+Mesh} constructor assigns the nodes\textquotesingle{} Lagrangian coordinate, $ \xi $, by spacing them evenly in the range $ \xi \in [0,L] $. The {\ttfamily Geom\+Object} pointed to by {\ttfamily Undef\+\_\+beam\+\_\+pt}, provides a parametrisation of the beam\textquotesingle{}s undeformed shape in the form $ {\bf r}(\xi) $, and this is used to determine the nodes\textquotesingle{}s initial Eulerian position.
 
 Next we pin the nodal positions on both boundaries
 
@@ -348,22 +331,20 @@ Next we pin the nodal positions on both boundaries
 \DoxyCodeLine{   \textcolor{comment}{//  from the SolidMesh class. In such meshes, all access functions}}
 \DoxyCodeLine{   \textcolor{comment}{//  to the nodes, such as boundary\_node\_pt(...), are overloaded}}
 \DoxyCodeLine{   \textcolor{comment}{//  to return pointers to SolidNodes (whose position can be}}
-\DoxyCodeLine{   \textcolor{comment}{//  pinned) rather than "normal" Nodes.]}}
-\DoxyCodeLine{   \mbox{\hyperlink{tensioned__string_8txt_a0f5aaa7d7eab4fbec16d94c64db068d1}{mesh\_pt}}()-\/>boundary\_node\_pt(b,0)-\/>pin\_position(0); }
-\DoxyCodeLine{   \mbox{\hyperlink{tensioned__string_8txt_a0f5aaa7d7eab4fbec16d94c64db068d1}{mesh\_pt}}()-\/>boundary\_node\_pt(b,0)-\/>pin\_position(1); }
+\DoxyCodeLine{   \textcolor{comment}{//  pinned) rather than "{}normal"{} Nodes.]}}
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(b,0)-\/>pin\_position(0); }
+\DoxyCodeLine{   mesh\_pt()-\/>boundary\_node\_pt(b,0)-\/>pin\_position(1); }
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-We then loop over the elements and set the pointers to the physical parameters (the pre-\/stress and the thickness), the function pointer to the load vector, and the pointer to the geometric object that specifies the undeformed beam shape. 
+ We then loop over the elements and set the pointers to the physical parameters (the pre-\/stress and the thickness), the function pointer to the load vector, and the pointer to the geometric object that specifies the undeformed beam shape. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{//Loop over the elements to set physical parameters etc.}}
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} e=0;e<n\_element;e++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Upcast to the specific element type}}
 \DoxyCodeLine{   HermiteBeamElement *elem\_pt = }
-\DoxyCodeLine{    \textcolor{keyword}{dynamic\_cast<}HermiteBeamElement*\textcolor{keyword}{>}(\mbox{\hyperlink{tensioned__string_8txt_a0f5aaa7d7eab4fbec16d94c64db068d1}{mesh\_pt}}()-\/>element\_pt(e));}
+\DoxyCodeLine{    \textcolor{keyword}{dynamic\_cast<}HermiteBeamElement*\textcolor{keyword}{>}(mesh\_pt()-\/>element\_pt(e));}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Set physical parameters for each element:}}
 \DoxyCodeLine{   elem\_pt-\/>sigma0\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a417dc688a70c4f06ef0faed047068ba2}{Global\_Physical\_Variables::Sigma0}};}
@@ -373,33 +354,29 @@ We then loop over the elements and set the pointers to the physical parameters (
 \DoxyCodeLine{   elem\_pt-\/>load\_vector\_fct\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a321267e1efb30b5d586302509354fb07}{Global\_Physical\_Variables::load}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{// Set the undeformed shape for each element}}
-\DoxyCodeLine{   elem\_pt-\/>undeformed\_beam\_pt() = \mbox{\hyperlink{tensioned__string_8txt_a3ce9132b2accc26a8e67d561a46891e5}{Undef\_beam\_pt}};}
+\DoxyCodeLine{   elem\_pt-\/>undeformed\_beam\_pt() = Undef\_beam\_pt;}
 \DoxyCodeLine{  \} \textcolor{comment}{// end of loop over elements}}
 
 \end{DoxyCodeInclude}
-
-
-We choose a node near the centre of the beam to monitor the displacements. (If the total number of nodes is even, the control node will not be located at the beam\textquotesingle{}s exact centre; its vertical displacement will therefore differ from the analytical solution that we output in {\ttfamily doc\+\_\+solution(...)} -- in this case we issue a suitable warning.) 
+ We choose a node near the centre of the beam to monitor the displacements. (If the total number of nodes is even, the control node will not be located at the beam\textquotesingle{}s exact centre; its vertical displacement will therefore differ from the analytical solution that we output in {\ttfamily doc\+\_\+solution(...)} -- in this case we issue a suitable warning.) 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Choose node at which displacement is documented (halfway along -\/-\/ provided}}
 \DoxyCodeLine{ \textcolor{comment}{// we have an odd number of nodes; complain if this is not the}}
 \DoxyCodeLine{ \textcolor{comment}{// case because the comparison with the exact solution will be wrong }}
 \DoxyCodeLine{ \textcolor{comment}{// otherwise!)}}
-\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_nod=\mbox{\hyperlink{tensioned__string_8txt_a0f5aaa7d7eab4fbec16d94c64db068d1}{mesh\_pt}}()-\/>nnode();}
+\DoxyCodeLine{ \textcolor{keywordtype}{unsigned} n\_nod=mesh\_pt()-\/>nnode();}
 \DoxyCodeLine{ \textcolor{keywordflow}{if} (n\_nod\%2!=1)}
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Warning: Even number of nodes "} << n\_nod << std::endl;}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"Comparison with exact solution will be misleading..."} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Warning: Even number of nodes "{}} << n\_nod << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}Comparison with exact solution will be misleading..."{}} << std::endl;}
 \DoxyCodeLine{  \}}
-\DoxyCodeLine{ Doc\_node\_pt=\mbox{\hyperlink{tensioned__string_8txt_a0f5aaa7d7eab4fbec16d94c64db068d1}{mesh\_pt}}()-\/>node\_pt((n\_nod+1)/2-\/1);}
+\DoxyCodeLine{ Doc\_node\_pt=mesh\_pt()-\/>node\_pt((n\_nod+1)/2-\/1);}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we assign the equation numbers 
+ Finally, we assign the equation numbers 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Assign the global and local equation numbers}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\# of dofs "} << assign\_eqn\_numbers() << std::endl;}
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\# of dofs "{}} << assign\_eqn\_numbers() << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
@@ -419,32 +396,32 @@ In the loop, we increment the external pressure $ P_{ext} $, solve the problem, 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_of\_parameter\_study==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Solver loop to perform parameter study}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classElasticBeamProblem_a2da3cb02ce953da67fb27742e20774a5}{ElasticBeamProblem::parameter\_study}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{ \textcolor{comment}{// Over-\/ride the default maximum value for the residuals}}
 \DoxyCodeLine{ Problem::Max\_residuals = 1.0e10;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set the increments in control parameters}}
-\DoxyCodeLine{ \textcolor{keywordtype}{double} \mbox{\hyperlink{tensioned__string_8txt_a7cf04bcca51c3cfd9e74200fb6c25b1d}{pext\_increment}} = 0.001;}
+\DoxyCodeLine{ \textcolor{keywordtype}{double} pext\_increment = 0.001;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set initial values for control parameters }}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\_Physical\_Variables::P\_ext}} = 0.0 -\/ \mbox{\hyperlink{tensioned__string_8txt_a7cf04bcca51c3cfd9e74200fb6c25b1d}{pext\_increment}};}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\_Physical\_Variables::P\_ext}} = 0.0 -\/ pext\_increment;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Create label for output}}
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory -\/-\/ this function checks if the output}}
 \DoxyCodeLine{ \textcolor{comment}{// directory exists and issues a warning if it doesn't.}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Open a trace file}}
-\DoxyCodeLine{ ofstream trace(\textcolor{stringliteral}{"RESLT/trace\_beam.dat"});}
+\DoxyCodeLine{ ofstream trace(\textcolor{stringliteral}{"{}RESLT/trace\_beam.dat"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Write a header for the trace file}}
 \DoxyCodeLine{ trace << }
-\DoxyCodeLine{  \textcolor{stringliteral}{"VARIABLES=\(\backslash\)"p\_e\_x\_t\(\backslash\)",\(\backslash\)"d\(\backslash\)""} << }
-\DoxyCodeLine{  \textcolor{stringliteral}{", \(\backslash\)"p\_e\_x\_t\_(\_e\_x\_a\_c\_t\_)\(\backslash\)""} << std::endl;}
+\DoxyCodeLine{  \textcolor{stringliteral}{"{}VARIABLES=\(\backslash\)"{}p\_e\_x\_t\(\backslash\)"{},\(\backslash\)"{}d\(\backslash\)"{}"{}} << }
+\DoxyCodeLine{  \textcolor{stringliteral}{"{}, \(\backslash\)"{}p\_e\_x\_t\_(\_e\_x\_a\_c\_t\_)\(\backslash\)"{}"{}} << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Output file stream used for writing results}}
 \DoxyCodeLine{ ofstream file;}
@@ -456,7 +433,7 @@ In the loop, we increment the external pressure $ P_{ext} $, solve the problem, 
 \DoxyCodeLine{ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=1;i<=nstep;i++)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Increment pressure}}
-\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\_Physical\_Variables::P\_ext}} += \mbox{\hyperlink{tensioned__string_8txt_a7cf04bcca51c3cfd9e74200fb6c25b1d}{pext\_increment}};}
+\DoxyCodeLine{   \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\_Physical\_Variables::P\_ext}} += pext\_increment;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Solve the system}}
 \DoxyCodeLine{   newton\_solve();}
@@ -487,16 +464,16 @@ In the loop, we increment the external pressure $ P_{ext} $, solve the problem, 
 \DoxyCodeLine{    \} }
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Document the solution}}
-\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"RESLT/beam\%i.dat"},i);}
+\DoxyCodeLine{   sprintf(filename,\textcolor{stringliteral}{"{}RESLT/beam\%i.dat"{}},i);}
 \DoxyCodeLine{   file.open(filename);}
-\DoxyCodeLine{   \mbox{\hyperlink{classElasticBeamProblem_ae7d14ba8bec2325a82cbeed0c1b29910}{mesh\_pt}}()-\/>output(file,5);}
+\DoxyCodeLine{   \mbox{\hyperlink{classElasticBeamProblem_a884541822d7272d343971d2b2e79a7c4}{mesh\_pt}}()-\/>output(file,5);}
 \DoxyCodeLine{   file.close();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{// Write trace file: Pressure, displacement and exact solution}}
 \DoxyCodeLine{   \textcolor{comment}{// (for string under tension)}}
-\DoxyCodeLine{   trace << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\_Physical\_Variables::P\_ext}}  << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{   trace << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0406c0cbd463d1df2458fe5de98a00eb}{Global\_Physical\_Variables::P\_ext}}  << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{         << abs(\mbox{\hyperlink{classElasticBeamProblem_a9c96cab7e71243e51f7c4040a84cdd5d}{Doc\_node\_pt}}-\/>x(1))}
-\DoxyCodeLine{         << \textcolor{stringliteral}{" "} << exact\_pressure }
+\DoxyCodeLine{         << \textcolor{stringliteral}{"{} "{}} << exact\_pressure }
 \DoxyCodeLine{         << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
@@ -513,7 +490,8 @@ In the loop, we increment the external pressure $ P_{ext} $, solve the problem, 
 \item Modify the code so that one end of the beam is no longer fixed in space. What happens? Why?
 \item Increase the bending effects by increasing the beam\textquotesingle{}s thickness to $ h=0.1 $, say, and by \char`\"{}clamping\char`\"{} its ends, so that $ d({\bf R}_w(\xi)\cdot {\bf e}_y)/d\xi = 0 $ at $ \xi=0 $ and $ \xi=L $. This condition can be enforced by pinning the \char`\"{}type 1\char`\"{} (slope) positional degree of freedom in the vertical (1) direction at both ends; this requires the insertion of the statement 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{tensioned__string_8txt_a0f5aaa7d7eab4fbec16d94c64db068d1}{mesh\_pt}}()-\/>boundary\_node\_pt(b,0)-\/>pin\_position(1,1); }
+\DoxyCodeLine{mesh\_pt()-\/>boundary\_node\_pt(b,0)-\/>pin\_position(1,1); }
+
 \end{DoxyCode}
  in the loop in the {\ttfamily Problem} constructor. You will have to adjust the number of elements to fully resolve the bending boundary layers.
 \item {\ttfamily oomph-\/lib\textquotesingle{}s} default\label{index_newton_cust}%
@@ -549,5 +527,5 @@ demo_drivers/beam/tensioned_string/tensioned_string.cc
 }{\texttt{ demo\+\_\+drivers/beam/tensioned\+\_\+string/tensioned\+\_\+string.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

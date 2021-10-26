@@ -3,12 +3,12 @@
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceoomph}{oomph}}
-\begin{DoxyCompactList}\small\item\em D\+R\+A\+IG\+: Change all instances of (S\+P\+A\+T\+I\+A\+L\+\_\+\+D\+IM) to (D\+I\+M-\/1). \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceoomph_1_1Hypre__default__settings}{oomph\+::\+Hypre\+\_\+default\+\_\+settings}}
-\begin{DoxyCompactList}\small\item\em Default settings for various uses of the H\+Y\+P\+RE solver. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers}{oomph\+::\+Hypre\+Helpers}}
-\begin{DoxyCompactList}\small\item\em Helper functions for use with the Hypre library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceoomph}{oomph}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1Hypre__default__settings}{oomph\+::\+Hypre\+\_\+default\+\_\+settings}}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers}{oomph\+::\+Hypre\+Helpers}}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -18,22 +18,22 @@ void \mbox{\hyperlink{namespaceoomph_1_1Hypre__default__settings_a8c726c9ee016fb
 \begin{DoxyCompactList}\small\item\em Set default parameters for use as preconditioner in 3D Poisson-\/type problem. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceoomph_1_1Hypre__default__settings_a2537d48181e8542f129522a06b457e11}{oomph\+::\+Hypre\+\_\+default\+\_\+settings\+::set\+\_\+defaults\+\_\+for\+\_\+navier\+\_\+stokes\+\_\+momentum\+\_\+block}} (Hypre\+Preconditioner $\ast$hypre\+\_\+preconditioner\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Set default parameters for use as preconditioner in for momentum block in Navier-\/\+Stokes problem. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a65765f3019c585e17822f30423b52096}{oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+H\+Y\+P\+R\+E\+\_\+error\+\_\+flag}} (std\+::ostringstream \&message)
-\begin{DoxyCompactList}\small\item\em Helper function to check the Hypre error flag, return the message associated with any error, and reset the error flag to zero. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a550031a0d3e8b60296e42ef5e87d7b7f}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector}} (const Double\+Vector \&oomph\+\_\+vec, const Linear\+Algebra\+Distribution $\ast$dist\+\_\+pt, H\+Y\+P\+R\+E\+\_\+\+I\+J\+Vector \&hypre\+\_\+ij\+\_\+vector, H\+Y\+P\+R\+E\+\_\+\+Par\+Vector \&hypre\+\_\+par\+\_\+vector)
-\begin{DoxyCompactList}\small\item\em Helper function to create a H\+Y\+P\+R\+E\+\_\+\+I\+J\+Vector and H\+Y\+P\+R\+E\+\_\+\+Par\+Vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a1954ae1f68448b32a57816f65c478481}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Vector}} (const Linear\+Algebra\+Distribution $\ast$oomph\+\_\+vec, H\+Y\+P\+R\+E\+\_\+\+I\+J\+Vector \&hypre\+\_\+ij\+\_\+vector, H\+Y\+P\+R\+E\+\_\+\+Par\+Vector \&hypre\+\_\+par\+\_\+vector)
-\begin{DoxyCompactList}\small\item\em Helper function to create an empty H\+Y\+P\+R\+E\+\_\+\+I\+J\+Vector and H\+Y\+P\+R\+E\+\_\+\+Par\+Vector. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a3c7d0df9c9c2ce939e071a16716d7734}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+H\+Y\+P\+R\+E\+\_\+\+Matrix}} (C\+R\+Double\+Matrix $\ast$oomph\+\_\+matrix, H\+Y\+P\+R\+E\+\_\+\+I\+J\+Matrix \&hypre\+\_\+ij\+\_\+matrix, H\+Y\+P\+R\+E\+\_\+\+Par\+C\+S\+R\+Matrix \&hypre\+\_\+par\+\_\+matrix, Linear\+Algebra\+Distribution $\ast$dist\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Helper function to create a serial H\+Y\+P\+R\+E\+\_\+\+I\+J\+Matrix and H\+Y\+P\+R\+E\+\_\+\+Par\+C\+S\+R\+Matrix from a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{C\+R\+Double\+Matrix}}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_ab0a885165f387f79bc30e19810d111d7}{oomph\+::\+Hypre\+Helpers\+::euclid\+\_\+settings\+\_\+helper}} (const bool \&use\+\_\+block\+\_\+jacobi, const bool \&use\+\_\+row\+\_\+scaling, const bool \&use\+\_\+ilut, const int \&\mbox{\hyperlink{the__data__structure_8txt_a1595240f817e8ed8141d94eae48bd2ed}{level}}, const double \&drop\+\_\+tol, const int \&print\+\_\+level, H\+Y\+P\+R\+E\+\_\+\+Solver \&euclid\+\_\+object)
+int \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a65765f3019c585e17822f30423b52096}{oomph\+::\+Hypre\+Helpers\+::check\+\_\+\+HYPRE\+\_\+error\+\_\+flag}} (std\+::ostringstream \&message)
+\begin{DoxyCompactList}\small\item\em Helper function to check the Hypre error flag, return the message associated with any error, and reset the global error flag to zero. This function also returns the error value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a550031a0d3e8b60296e42ef5e87d7b7f}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector}} (const Double\+Vector \&oomph\+\_\+vec, const Linear\+Algebra\+Distribution $\ast$dist\+\_\+pt, HYPRE\+\_\+\+IJVector \&hypre\+\_\+ij\+\_\+vector, HYPRE\+\_\+\+Par\+Vector \&hypre\+\_\+par\+\_\+vector)
+\begin{DoxyCompactList}\small\item\em Helper function to create a HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa56349b171f8dc464f527ab54a8b219a}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Vector}} (const Linear\+Algebra\+Distribution $\ast$dist\+\_\+pt, HYPRE\+\_\+\+IJVector \&hypre\+\_\+ij\+\_\+vector, HYPRE\+\_\+\+Par\+Vector \&hypre\+\_\+par\+\_\+vector)
+\begin{DoxyCompactList}\small\item\em Helper function to create a HYPRE\+\_\+\+IJVector and HYPRE\+\_\+\+Par\+Vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a3c7d0df9c9c2ce939e071a16716d7734}{oomph\+::\+Hypre\+Helpers\+::create\+\_\+\+HYPRE\+\_\+\+Matrix}} (CRDouble\+Matrix $\ast$oomph\+\_\+matrix, HYPRE\+\_\+\+IJMatrix \&hypre\+\_\+ij\+\_\+matrix, HYPRE\+\_\+\+Par\+CSRMatrix \&hypre\+\_\+par\+\_\+matrix, Linear\+Algebra\+Distribution $\ast$dist\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Helper function to create a serial HYPRE\+\_\+\+IJMatrix and HYPRE\+\_\+\+Par\+CSRMatrix from a \mbox{\hyperlink{classoomph_1_1CRDoubleMatrix}{CRDouble\+Matrix}} NOTE\+: dist\+\_\+pt is rebuilt to match the distribution of the hypre solver which is not necassarily the same as the oomph lib matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_ab0a885165f387f79bc30e19810d111d7}{oomph\+::\+Hypre\+Helpers\+::euclid\+\_\+settings\+\_\+helper}} (const bool \&use\+\_\+block\+\_\+jacobi, const bool \&use\+\_\+row\+\_\+scaling, const bool \&use\+\_\+ilut, const int \&level, const double \&drop\+\_\+tol, const int \&print\+\_\+level, HYPRE\+\_\+\+Solver \&euclid\+\_\+object)
 \begin{DoxyCompactList}\small\item\em Helper function to set Euclid options using a command line like array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa3d3b58e30a8eba0adce2c335d2fc437}{oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+strength}} = 0.\+25
-\begin{DoxyCompactList}\small\item\em Default for A\+MG strength (0.\+25 recommended for 2D problems; larger (0.\+5-\/0.\+75, say) for 3D. \end{DoxyCompactList}\item 
-unsigned \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a8d34acec927aff8f150737afaec9651a}{oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+coarsening}} = 6
-\begin{DoxyCompactList}\small\item\em Default A\+MG coarsening strategy. Coarsening types include\+: 0 = C\+L\+JP (parallel coarsening using independent sets) 1 = classical RS with no boundary treatment (not recommended in parallel) 3 = modified RS with 3rd pass to add C points on the boundaries 6 = Falgout (uses 1 then C\+L\+JP using interior coarse points as first independent set) 8 = P\+M\+IS (parallel coarsening using independent sets -\/ lower complexities than 0, maybe also slower convergence) 10= H\+M\+IS (one pass RS on each processor then P\+M\+IS on interior coarse points as first independent set) 11= One pass RS on each processor (not recommended) \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa32196f0215efa229ced79ce65e3887d}{oomph\+::\+Hypre\+Helpers\+::\+A\+M\+G\+\_\+truncation}} = 0.\+0
-\begin{DoxyCompactList}\small\item\em A\+MG interpolation truncation factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+double \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa3d3b58e30a8eba0adce2c335d2fc437}{oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+strength}} = 0.\+25
+\begin{DoxyCompactList}\small\item\em Default for AMG strength (0.\+25 recommended for 2D problems; larger (0.\+5-\/0.\+75, say) for 3D. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_a8d34acec927aff8f150737afaec9651a}{oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+coarsening}} = 6
+\begin{DoxyCompactList}\small\item\em Default AMG coarsening strategy. Coarsening types include\+: 0 = CLJP (parallel coarsening using independent sets) 1 = classical RS with no boundary treatment (not recommended in parallel) 3 = modified RS with 3rd pass to add C points on the boundaries 6 = Falgout (uses 1 then CLJP using interior coarse points as first independent set) 8 = PMIS (parallel coarsening using independent sets -\/ lower complexities than 0, maybe also slower convergence) 10= HMIS (one pass RS on each processor then PMIS on interior coarse points as first independent set) 11= One pass RS on each processor (not recommended) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespaceoomph_1_1HypreHelpers_aa32196f0215efa229ced79ce65e3887d}{oomph\+::\+Hypre\+Helpers\+::\+AMG\+\_\+truncation}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em AMG interpolation truncation factor. \end{DoxyCompactList}\end{DoxyCompactItemize}

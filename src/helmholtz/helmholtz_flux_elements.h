@@ -42,7 +42,7 @@
 namespace oomph
 {
   //======================================================================
-  /// \short A class for elements that allow the imposition of an
+  /// A class for elements that allow the imposition of an
   /// applied flux on the boundaries of Helmholtz elements.
   /// The element geometry is obtained from the  FaceGeometry<ELEMENT>
   /// policy class.
@@ -52,18 +52,18 @@ namespace oomph
                                public virtual FaceElement
   {
   public:
-    /// \short Function pointer to the prescribed-flux function fct(x,f(x)) --
+    /// Function pointer to the prescribed-flux function fct(x,f(x)) --
     /// x is a Vector and  the flux is a complex
 
     typedef void (*HelmholtzPrescribedFluxFctPt)(const Vector<double>& x,
                                                  std::complex<double>& flux);
 
-    /// \short Constructor, takes the pointer to the "bulk" element and the
+    /// Constructor, takes the pointer to the "bulk" element and the
     /// index of the face to which the element is attached.
     HelmholtzFluxElement(FiniteElement* const& bulk_el_pt,
                          const int& face_index);
 
-    ///\short  Broken empty constructor
+    /// Broken empty constructor
     HelmholtzFluxElement()
     {
       throw OomphLibError(
@@ -73,10 +73,7 @@ namespace oomph
     }
 
     /// Broken copy constructor
-    HelmholtzFluxElement(const HelmholtzFluxElement& dummy)
-    {
-      BrokenCopy::broken_copy("HelmholtzFluxElement");
-    }
+    HelmholtzFluxElement(const HelmholtzFluxElement& dummy) = delete;
 
     /// Broken assignment operator
     // Commented out broken assignment operator because this can lead to a
@@ -84,10 +81,7 @@ namespace oomph
     // Essentially the compiler doesn't realise that two separate
     // implementations of the broken function are the same and so, quite
     // rightly, it shouts.
-    /*void operator=(const HelmholtzFluxElement&)
-     {
-      BrokenCopy::broken_assign("HelmholtzFluxElement");
-      }*/
+    /*void operator=(const HelmholtzFluxElement&) = delete;*/
 
 
     /// Access function for the prescribed-flux function pointer
@@ -107,7 +101,7 @@ namespace oomph
     }
 
 
-    /// \short Add the element's contribution to its residual vector and its
+    /// Add the element's contribution to its residual vector and its
     /// Jacobian matrix
     inline void fill_in_contribution_to_jacobian(Vector<double>& residuals,
                                                  DenseMatrix<double>& jacobian)
@@ -118,7 +112,7 @@ namespace oomph
     }
 
 
-    /// \short Specify the value of nodal zeta from the face geometry
+    /// Specify the value of nodal zeta from the face geometry
     /// The "global" intrinsic coordinate of the element when
     /// viewed as part of a geometric object should be given by
     /// the FaceElement representation, by default (needed to break
@@ -138,7 +132,7 @@ namespace oomph
       FiniteElement::output(outfile);
     }
 
-    /// \short Output function -- forward to broken version in FiniteElement
+    /// Output function -- forward to broken version in FiniteElement
     /// until somebody decides what exactly they want to plot here...
     void output(std::ostream& outfile, const unsigned& n_plot)
     {
@@ -153,7 +147,7 @@ namespace oomph
       FiniteElement::output(file_pt);
     }
 
-    /// \short C-style output function -- forward to broken version in
+    /// C-style output function -- forward to broken version in
     /// FiniteElement until somebody decides what exactly they want to plot
     /// here...
     void output(FILE* file_pt, const unsigned& n_plot)
@@ -162,7 +156,7 @@ namespace oomph
     }
 
 
-    /// \short Return the index at which the unknown value
+    /// Return the index at which the unknown value
     /// is stored.
     virtual inline std::complex<unsigned> u_index_helmholtz() const
     {
@@ -172,7 +166,7 @@ namespace oomph
 
 
   protected:
-    /// \short Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test(const Vector<double>& s,
@@ -196,7 +190,7 @@ namespace oomph
     }
 
 
-    /// \short Function to compute the shape and test functions and to return
+    /// Function to compute the shape and test functions and to return
     /// the Jacobian of mapping between local and global (Eulerian)
     /// coordinates
     inline double shape_and_test_at_knot(const unsigned& ipt,
@@ -237,12 +231,12 @@ namespace oomph
     }
 
 
-    /// \short The index at which the real and imag part of the unknown is
+    /// The index at which the real and imag part of the unknown is
     /// stored at the nodes
     std::complex<unsigned> U_index_helmholtz;
 
 
-    /// \short Add the element's contribution to its residual vector.
+    /// Add the element's contribution to its residual vector.
     /// flag=1(or 0): do (or don't) compute the contribution to the
     /// Jacobian as well.
     virtual void fill_in_generic_residual_contribution_helmholtz_flux(
@@ -258,9 +252,9 @@ namespace oomph
     unsigned Dim;
   };
 
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////
 
 
   //===========================================================================

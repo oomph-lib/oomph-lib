@@ -1,46 +1,46 @@
-\_form#0:$ {\bf t}^{[prescribed]}$
-\_form#1:\[ t_i^{[prescribed]} = \tau_{ij} \ n_j = \left( -p\ \delta_{ij} + \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)\right) n_j \ \ \ \ \ \ \ \ \ \ (1) \]
-\_form#2:$ n_j $
-\_form#3:$ \delta_{ij} $
-\_form#4:$ \tau_{ij} $
-\_form#5:\[ Re\left(St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}\right) = - \frac{\partial p}{\partial x_i} + \frac{\partial }{\partial x_j} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \ (2) \]
-\_form#6:\[ \frac{\partial u_i}{\partial x_i} = 0, \]
-\_form#7:\[ D = \bigg\{(x_1,x_2) \ | \ x_1 \in [0,1], \ x_2 \in [0,1] \bigg\}. \]
-\_form#8:\[ \left. \mathbf{u}\right|_{\partial D_{lower}}=(0,0), \ \ \ \ \ \ \ \ \ \ (3) \]
-\_form#9:$ \partial D_{lower} = \big\{(x_1,x_2) \ | \ x_2=0 \big\} $
-\_form#10:\[ \mathbf{t}^{[prescribed]}= (\tau(t), 0) \ \ \ \ \ \ \ \ \ \ (4) \]
-\_form#11:$ \tau(t)$
-\_form#12:$ \partial D_{upper} = \big\{(x_1,x_2) \ | \ x_2=1 \big\} $
-\_form#13:\[ \left.\mathbf{u}\right|_{x_1=0} = \left.\mathbf{u}\right|_{x_1=1}. \ \ \ \ \ \ \ \ \ \ (5) \]
-\_form#14:\[ {\bf u}(x_1,x_2,t=0) = {\bf u}_{IC}(x_1,x_2), \]
-\_form#15:$ {\bf u}_{IC}(x_1,x_2)$
-\_form#16:$ {\bf t}^{[prescribed]} = (\tau(t), 0) $
-\_form#17:\[ {\bf u}_{exact}(x_1,x_2,t) = U(x_2,t) \ {\bf e}_1 \mbox{ \ \ \ \ \ and \ \ \ \ } p_{exact}(x_1,x_2,t) = 0, \]
-\_form#18:\[ \tau(t) = \left. \frac{\partial U(x_2,t)}{\partial x_2}\right|_{x_2=1}, \]
-\_form#19:\[ U(x_2,t) = Re\left\{\frac{e^{i\omega t}}{e^{i\lambda}-e^{-i\lambda}}\left(e^{i\lambda y}-e^{-i\lambda y} \right)\right\} \]
-\_form#20:\[ \lambda = i\sqrt{i\omega Re\, St}. \]
-\_form#21:$ \omega=2\pi, \ Re = ReSt = 10 $
-\_form#22:$ {\bf u}_{IC}(x_1,x_2) = {\bf u}_{exact}(x_1,x_2,t=0)$
-\_form#23:$ Re$
-\_form#24:$ Re\, St$
-\_form#25:$ {\bf u}_{exact}$
-\_form#26:$ x_2=0 $
-\_form#27:$ x_1=0 $
-\_form#28:$ x_1=1 $
-\_form#29:$ x_2=1 $
-\_form#30:$ Re $
-\_form#31:$ Re\, St $
-\_form#32:\[ Re\left(St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}\right) = \frac{\partial \tau_{ij}}{\partial x_j}, \ \ \ \ \ \ \ \ \ \ (6) \]
-\_form#33:$ \psi_l $
-\_form#34:\[ f_{il} = \int_D \left[ Re\left(St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}\right) \ \psi_l + \tau_{ij} \ \frac{\partial \psi_l}{\partial x_j} \right] \, dV - \int_{\partial D} \tau_{ij} \ n_j \ \psi_l \ dS = 0. \ \ \ \ \ \ \ \ \ \ (7) \]
-\_form#35:$ i $
-\_form#36:$ \partial D$
-\_form#37:$ \psi_l=0. $
-\_form#38:$ \partial D_{natural} \subset \partial D$
-\_form#39:$ \partial D_{natural} $
-\_form#40:\[ \tau_{ij} \ n_j = 0 \mbox{ \ \ \ on \ \ $\partial D_{natural}$} \]
-\_form#41:$ \partial D_{traction} \subset \partial D$
-\_form#42:\[ \int_{\partial D_{traction} } \tau_{ij} \ n_j \ \psi_l \ dS = \int_{\partial D_{traction} } t_i^{[prescribed]} \ \psi_l \ dS, \ \ \ \ \ \ \ \ \ \ (8) \]
-\_form#43:$ t_i^{[prescribed]} $
-\_form#44:$ x_2 = 1$
-\_form#45:$ t_2 $
+\_form#0=58x13:$ {\bf t}^{[prescribed]}$
+\_form#1=340x31:\[ t_i^{[prescribed]} = \tau_{ij} \ n_j = \left( -p\ \delta_{ij} + \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)\right) n_j \ \ \ \ \ \ \ \ \ \ (1) \]
+\_form#2=13x10:$ n_j $
+\_form#3=13x14:$ \delta_{ij} $
+\_form#4=14x10:$ \tau_{ij} $
+\_form#5=351x31:\[ Re\left(St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}\right) = - \frac{\partial p}{\partial x_i} + \frac{\partial }{\partial x_j} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right), \ \ \ \ \ \ \ \ \ \ (2) \]
+\_form#6=48x29:\[ \frac{\partial u_i}{\partial x_i} = 0, \]
+\_form#7=216x31:\[ D = \bigg\{(x_1,x_2) \ | \ x_1 \in [0,1], \ x_2 \in [0,1] \bigg\}. \]
+\_form#8=155x15:\[ \left. \mathbf{u}\right|_{\partial D_{lower}}=(0,0), \ \ \ \ \ \ \ \ \ \ (3) \]
+\_form#9=161x16:$ \partial D_{lower} = \big\{(x_1,x_2) \ | \ x_2=0 \big\} $
+\_form#10=175x16:\[ \mathbf{t}^{[prescribed]}= (\tau(t), 0) \ \ \ \ \ \ \ \ \ \ (4) \]
+\_form#11=21x14:$ \tau(t)$
+\_form#12=163x16:$ \partial D_{upper} = \big\{(x_1,x_2) \ | \ x_2=1 \big\} $
+\_form#13=150x15:\[ \left.\mathbf{u}\right|_{x_1=0} = \left.\mathbf{u}\right|_{x_1=1}. \ \ \ \ \ \ \ \ \ \ (5) \]
+\_form#14=164x14:\[ {\bf u}(x_1,x_2,t=0) = {\bf u}_{IC}(x_1,x_2), \]
+\_form#15=61x14:$ {\bf u}_{IC}(x_1,x_2)$
+\_form#16=118x16:$ {\bf t}^{[prescribed]} = (\tau(t), 0) $
+\_form#17=331x14:\[ {\bf u}_{exact}(x_1,x_2,t) = U(x_2,t) \ {\bf e}_1 \mbox{ \ \ \ \ \ and \ \ \ \ } p_{exact}(x_1,x_2,t) = 0, \]
+\_form#18=125x34:\[ \tau(t) = \left. \frac{\partial U(x_2,t)}{\partial x_2}\right|_{x_2=1}, \]
+\_form#19=230x33:\[ U(x_2,t) = Re\left\{\frac{e^{i\omega t}}{e^{i\lambda}-e^{-i\lambda}}\left(e^{i\lambda y}-e^{-i\lambda y} \right)\right\} \]
+\_form#20=84x14:\[ \lambda = i\sqrt{i\omega Re\, St}. \]
+\_form#21=139x13:$ \omega=2\pi, \ Re = ReSt = 10 $
+\_form#22=184x14:$ {\bf u}_{IC}(x_1,x_2) = {\bf u}_{exact}(x_1,x_2,t=0)$
+\_form#23=15x10:$ Re$
+\_form#24=30x10:$ Re\, St$
+\_form#25=31x9:$ {\bf u}_{exact}$
+\_form#26=36x11:$ x_2=0 $
+\_form#27=36x11:$ x_1=0 $
+\_form#28=36x11:$ x_1=1 $
+\_form#29=36x11:$ x_2=1 $
+\_form#30=15x10:$ Re $
+\_form#31=30x10:$ Re\, St $
+\_form#32=224x31:\[ Re\left(St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}\right) = \frac{\partial \tau_{ij}}{\partial x_j}, \ \ \ \ \ \ \ \ \ \ (6) \]
+\_form#33=13x13:$ \psi_l $
+\_form#34=441x31:\[ f_{il} = \int_D \left[ Re\left(St\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}\right) \ \psi_l + \tau_{ij} \ \frac{\partial \psi_l}{\partial x_j} \right] \, dV - \int_{\partial D} \tau_{ij} \ n_j \ \psi_l \ dS = 0. \ \ \ \ \ \ \ \ \ \ (7) \]
+\_form#35=5x9:$ i $
+\_form#36=18x10:$ \partial D$
+\_form#37=39x13:$ \psi_l=0. $
+\_form#38=88x13:$ \partial D_{natural} \subset \partial D$
+\_form#39=53x13:$ \partial D_{natural} $
+\_form#40=149x14:\[ \tau_{ij} \ n_j = 0 \mbox{ \ \ \ on \ \ $\partial D_{natural}$} \]
+\_form#41=89x13:$ \partial D_{traction} \subset \partial D$
+\_form#42=351x31:\[ \int_{\partial D_{traction} } \tau_{ij} \ n_j \ \psi_l \ dS = \int_{\partial D_{traction} } t_i^{[prescribed]} \ \psi_l \ dS, \ \ \ \ \ \ \ \ \ \ (8) \]
+\_form#43=58x19:$ t_i^{[prescribed]} $
+\_form#44=36x11:$ x_2 = 1$
+\_form#45=10x11:$ t_2 $

@@ -3,16 +3,16 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classMySolidTriangleMesh}{My\+Solid\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Triangle-\/based mesh upgraded to become a solid mesh. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classFluidTriangleMesh}{Fluid\+Triangle\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Triangle-\/based mesh upgraded to become a pseudo-\/solid mesh. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classUnstructuredFSIProblem}{Unstructured\+F\+S\+I\+Problem$<$ F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T, S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+N\+T $>$}}
-\begin{DoxyCompactList}\small\item\em Unstructured F\+SI Problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classMySolidTriangleMesh}{My\+Solid\+Triangle\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classFluidTriangleMesh}{Fluid\+Triangle\+Mesh$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classUnstructuredFSIProblem}{Unstructured\+FSIProblem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
+namespace \mbox{\hyperlink{namespaceGlobal__Parameters}{Global\+\_\+\+Parameters}}
 \begin{DoxyCompactList}\small\item\em Namespace for physical parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -22,14 +22,14 @@ void \mbox{\hyperlink{namespaceGlobal__Parameters_a200109847bf4cc26da4d00e8d68d5
 bool \mbox{\hyperlink{namespaceGlobal__Parameters_a655abf819eb3045dac883f2b7073ba22}{Global\+\_\+\+Parameters\+::is\+\_\+on\+\_\+fsi\+\_\+boundary}} (Node $\ast$nod\+\_\+pt)
 \begin{DoxyCompactList}\small\item\em Boolean to identify if node is on fsi boundary. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{unstructured__two__d__fsi_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
-\begin{DoxyCompactList}\small\item\em Driver for unstructured fsi problem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a9d72e94a9305c6a310940a6a427ebe06}{Global\+\_\+\+Parameters\+::\+Re}} =0.\+0
 \begin{DoxyCompactList}\small\item\em Reynolds number. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a7814fddf663e56168174a42d2cd6b4c1}{Global\+\_\+\+Parameters\+::Q}} =0.\+0
-\begin{DoxyCompactList}\small\item\em F\+SI parameter. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em FSI parameter. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a335000b5db4206486a116ae0468d2d0c}{Global\+\_\+\+Parameters\+::\+Gravity}} =0.\+0
 \begin{DoxyCompactList}\small\item\em Non-\/dim gravity. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{namespaceGlobal__Parameters_a20fccdcfa2c15ad8b951b9ada3bb1661}{Global\+\_\+\+Parameters\+::\+Nu}} =0.\+3
@@ -47,13 +47,13 @@ Constitutive\+Law $\ast$ \mbox{\hyperlink{namespaceGlobal__Parameters_adbd1f040f
 
 
 
-Driver for unstructured fsi problem. 
+///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
+
+Driver for unstructured fsi problem 
+
+Definition at line \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00786}{786}} of file \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source}{unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc}}.
 
 
 
-Definition at line 786 of file unstructured\+\_\+two\+\_\+d\+\_\+fsi.\+cc.
-
-
-
-References Global\+\_\+\+Parameters\+::\+Constitutive\+\_\+law\+\_\+pt, Global\+\_\+\+Parameters\+::\+Gravity, Global\+\_\+\+Parameters\+::\+Nu, problem, Global\+\_\+\+Parameters\+::Q, and Global\+\_\+\+Parameters\+::\+Re.
+References \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00067}{Global\+\_\+\+Parameters\+::\+Constitutive\+\_\+law\+\_\+pt}}, \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00285}{Unstructured\+FSIProblem$<$ FLUID\+\_\+\+ELEMENT, SOLID\+\_\+\+ELEMENT $>$\+::fluid\+\_\+mesh\+\_\+pt()}}, \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00052}{Global\+\_\+\+Parameters\+::\+Gravity}}, \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00064}{Global\+\_\+\+Parameters\+::\+Nu}}, \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00049}{Global\+\_\+\+Parameters\+::Q}}, and \mbox{\hyperlink{unstructured__two__d__fsi_8cc_source_l00046}{Global\+\_\+\+Parameters\+::\+Re}}.
 

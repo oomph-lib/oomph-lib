@@ -1,21 +1,26 @@
-\hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}{}\doxysection{oomph\+::Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element Class Reference}
+\hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}{}\doxysection{oomph\+::Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element Class Reference}
 \label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}\index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
+
+
+/////////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.994302cm]{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}
+\includegraphics[height=1.794872cm]{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aaa144c84efff61d34ba9c5769954d6c8}{Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element}} ()
+\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aaa144c84efff61d34ba9c5769954d6c8}{Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, there are three internal values (for the pressure) \end{DoxyCompactList}\item 
-virtual unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aa2a056b7c778f105ce71a2b4c884e6d7}{required\+\_\+nvalue}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+virtual unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aa2a056b7c778f105ce71a2b4c884e6d7}{required\+\_\+nvalue}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Number of values (pinned or dofs) required at local node n. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a09014883530f2debb0858fa669522c64}{p\+\_\+axi\+\_\+nst}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}}) const
 \begin{DoxyCompactList}\small\item\em Return the pressure values at internal dof i\+\_\+internal (Discontinous pressure interpolation -- no need to cater for hanging nodes). \end{DoxyCompactList}\item 
@@ -23,52 +28,53 @@ unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzei
 \begin{DoxyCompactList}\small\item\em Return number of pressure values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ac9f7cbb723c9abf2c6f34aef1cf999b0}{fix\+\_\+pressure}} (const unsigned \&p\+\_\+dof, const double \&pvalue)
 \begin{DoxyCompactList}\small\item\em Function to fix the internal pressure dof idof\+\_\+internal. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a1e70570e27e18c482df95595136876df}{get\+\_\+traction}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a8df8becab07205931682772c05d1de1c}{traction}}) const
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a1e70570e27e18c482df95595136876df}{get\+\_\+traction}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&N, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&traction) const
 \begin{DoxyCompactList}\small\item\em Compute traction at local coordinate s for outer unit normal N. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a96e455aa73cdc037153ccb6365f6b29c}{p\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}) const
+int \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a96e455aa73cdc037153ccb6365f6b29c}{p\+\_\+local\+\_\+eqn}} (const unsigned \&n) const
 \begin{DoxyCompactList}\small\item\em Overload the access function for the pressure\textquotesingle{}s local equation numbers. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ad4ddd436a6bb13b78e25abae6833ed72}{output}} (std\+::ostream \&outfile)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a9bf8fddef7384ba0a8966502a137584b}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aa35348f142e702e3590bc28d5001d492}{output}} (F\+I\+LE $\ast$file\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ad5949f8a416c48a56e82a154d9a9bfbe}{output}} (F\+I\+LE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
-\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aa35348f142e702e3590bc28d5001d492}{output}} (FILE $\ast$file\+\_\+pt)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ad5949f8a416c48a56e82a154d9a9bfbe}{output}} (FILE $\ast$file\+\_\+pt, const unsigned \&n\+\_\+plot)
+\begin{DoxyCompactList}\small\item\em Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_adabb660209259f2ac02d996e8401fc34}{ndof\+\_\+types}} () const
-\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a39c04b2ce4945386e707742eb86a45fa}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&dof\+\_\+lookup\+\_\+list) const
-\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a986a8326bbeda5ad9dd1f69c5d2b9e07}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns}} (std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&dof\+\_\+lookup\+\_\+list) const
+\begin{DoxyCompactList}\small\item\em Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a790d9775c51bfb95506c334f4fc3ec95}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a790d9775c51bfb95506c334f4fc3ec95}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at local coordinate s (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a323947d1bd37a0e58462726d69ba2efb}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx) const
+double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a323947d1bd37a0e58462726d69ba2efb}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx) const
 \begin{DoxyCompactList}\small\item\em Velocity shape and test functions and their derivs w.\+r.\+t. to global coords at ipt-\/th integation point (taken from geometry) Return Jacobian of mapping between local and global coordinates. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a5af9d208617374ffc4b0b7a9af35deaf}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
+double \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a5af9d208617374ffc4b0b7a9af35deaf}{dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dpsidx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dpsidx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test, \mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&dtestdx, \mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&d\+\_\+dtestdx\+\_\+dX, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&djacobian\+\_\+dX) const
 \begin{DoxyCompactList}\small\item\em Shape/test functions and derivs w.\+r.\+t. to global coords at integration point ipt; return Jacobian of mapping (J). Also compute derivatives of dpsidx, dtestdx and J w.\+r.\+t. nodal coordinates. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a06e8ec5317b4d6a746eaec17c65a2787}{pshape\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a06e8ec5317b4d6a746eaec17c65a2787}{pshape\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi) const
 \begin{DoxyCompactList}\small\item\em Pressure shape functions at local coordinate s. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aecfd9564c4afe408d610c7426c47ccf1}{pshape\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_acdf437512dc428cd2c5e8b3aa8b92896}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+void \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aecfd9564c4afe408d610c7426c47ccf1}{pshape\+\_\+axi\+\_\+nst}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{cfortran_8h_ab7123126e4885ef647dd9c6e3807a21c}{s}}, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
 \begin{DoxyCompactList}\small\item\em Pressure shape and test functions at local coordinte s. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ae3368d8be1a8378b3d0a61c5bc598f1f}{P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Internal index that indicates at which internal data the pressure is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 static const unsigned \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a7203020ddab5ddeb67a3957483bd41dc}{Initial\+\_\+\+Nvalue}} \mbox{[}$\,$\mbox{]}
 \begin{DoxyCompactList}\small\item\em Static array of ints to hold required number of variables at nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
+/////////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////////// 
+
 Crouzeix\+\_\+\+Raviart elements are Navier--Stokes elements with quadratic interpolation for velocities and positions, but a discontinuous linear pressure interpolation 
 
-Definition at line 1412 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01412}{1412}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
@@ -77,7 +83,7 @@ Definition at line 1412 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navi
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \index{GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement()}{GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement()}}
-{\footnotesize\ttfamily oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -85,11 +91,11 @@ Constructor, there are three internal values (for the pressure)
 
 
 
-Definition at line 1469 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01469}{1469}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), Data, and P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index.
+References \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01423}{P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index}}.
 
 
 
@@ -98,7 +104,7 @@ References oomph\+::\+Generalised\+Element\+::add\+\_\+internal\+\_\+data(), Dat
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily double oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dpsidx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx,  }\item[{\mbox{\hyperlink{classoomph_1_1RankFourTensor}{Rank\+Four\+Tensor}}$<$ double $>$ \&}]{d\+\_\+dtestdx\+\_\+dX,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{djacobian\+\_\+dX }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -108,21 +114,17 @@ Define the shape functions (psi) and test functions (test) and their derivatives
 
 Galerkin\+: Test functions = shape functions 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a768856dbac816acd9b207ed6065bcae7}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01620}{1620}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1621 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a323947d1bd37a0e58462726d69ba2efb}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a323947d1bd37a0e58462726d69ba2efb}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst@{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst()}{dshape\_and\_dtest\_eulerian\_at\_knot\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily double oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+at\+\_\+knot\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -130,21 +132,17 @@ Velocity shape and test functions and their derivs w.\+r.\+t. to global coords a
 
 Derivatives of the shape functions and test functions w.\+r.\+t. to global (Eulerian) coordinates. Return Jacobian of mapping between local and global coordinates. 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_aea547f513386ed96746cbf55f70d6f78}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01591}{1591}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1592 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian\+\_\+at\+\_\+knot(), and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a790d9775c51bfb95506c334f4fc3ec95}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a790d9775c51bfb95506c334f4fc3ec95}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!dshape\_and\_dtest\_eulerian\_axi\_nst@{dshape\_and\_dtest\_eulerian\_axi\_nst}}
 \index{dshape\_and\_dtest\_eulerian\_axi\_nst@{dshape\_and\_dtest\_eulerian\_axi\_nst}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{dshape\_and\_dtest\_eulerian\_axi\_nst()}{dshape\_and\_dtest\_eulerian\_axi\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{D\+Shape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::dshape\+\_\+and\+\_\+dtest\+\_\+eulerian\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dpsidx,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test,  }\item[{\mbox{\hyperlink{classoomph_1_1DShape}{DShape}} \&}]{dtestdx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -152,21 +150,17 @@ Velocity shape and test functions and their derivs w.\+r.\+t. to global coords a
 
 Derivatives of the shape functions and test functions w.\+r.\+t. to global (Eulerian) coordinates. Return Jacobian of mapping between local and global coordinates. 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a9321e8563cb2dfec9824024008a6914e}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01565}{1565}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1566 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Finite\+Element\+::dshape\+\_\+eulerian(), and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ac9f7cbb723c9abf2c6f34aef1cf999b0}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ac9f7cbb723c9abf2c6f34aef1cf999b0}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!fix\_pressure@{fix\_pressure}}
 \index{fix\_pressure@{fix\_pressure}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{fix\_pressure()}{fix\_pressure()}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p\+\_\+dof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::fix\+\_\+pressure (\begin{DoxyParamCaption}\item[{const unsigned \&}]{p\+\_\+dof,  }\item[{const double \&}]{pvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -174,39 +168,37 @@ Function to fix the internal pressure dof idof\+\_\+internal.
 
 
 
-Definition at line 1496 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01496}{1496}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index, oomph\+::\+Data\+::pin(), and oomph\+::\+Data\+::set\+\_\+value().
+References \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01423}{P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index}}.
 
-\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a39c04b2ce4945386e707742eb86a45fa}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a39c04b2ce4945386e707742eb86a45fa}} 
+\mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a986a8326bbeda5ad9dd1f69c5d2b9e07}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a986a8326bbeda5ad9dd1f69c5d2b9e07}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}}
 \index{get\_dof\_numbers\_for\_unknowns@{get\_dof\_numbers\_for\_unknowns}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{get\_dof\_numbers\_for\_unknowns()}{get\_dof\_numbers\_for\_unknowns()}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$$>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::pair$<$ unsigned long, unsigned $>$ $>$ \&}]{dof\+\_\+lookup\+\_\+list }\end{DoxyParamCaption}) const}
 
 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. 
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) Velocity=0; Pressure=1. 
 
-Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+D\+O\+F type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
+/////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a29c6fb71cd7cabb29b4c289598aec601}{oomph\+::\+Generalised\+Element}}.
+Create a list of pairs for all unknowns in this element, so that the first entry in each pair contains the global equation number of the unknown, while the second one contains the number of the \char`\"{}\+DOF type\char`\"{} that this unknown is associated with. (Function can obviously only be called if the equation numbering scheme has been set up.) 
 
-
-
-Definition at line 4499 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l04498}{4498}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::eqn\+\_\+number(), oomph\+::\+Generalised\+Element\+::local\+\_\+eqn\+\_\+number(), n, oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn(), oomph\+::\+Finite\+Element\+::node\+\_\+pt(), npres\+\_\+axi\+\_\+nst(), oomph\+::\+Data\+::nvalue(), and p\+\_\+local\+\_\+eqn().
+References \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01490}{npres\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01509}{p\+\_\+local\+\_\+eqn()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a1e70570e27e18c482df95595136876df}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a1e70570e27e18c482df95595136876df}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!get\_traction@{get\_traction}}
 \index{get\_traction@{get\_traction}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{get\_traction()}{get\_traction()}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::get\+\_\+traction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{N,  }\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{traction }\end{DoxyParamCaption}) const}
 
 
 
@@ -214,35 +206,31 @@ Compute traction at local coordinate s for outer unit normal N.
 
 
 
-Definition at line 4581 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l04581}{4581}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
 
 
 
-References oomph\+::\+Quad\+Tree\+Names\+::N, s, and oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::traction().
+References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_adabb660209259f2ac02d996e8401fc34}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_adabb660209259f2ac02d996e8401fc34}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!ndof\_types@{ndof\_types}}
 \index{ndof\_types@{ndof\_types}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{ndof\_types()}{ndof\_types()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::ndof\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-The number of \char`\"{}\+D\+O\+F types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. 
+The number of \char`\"{}\+DOF types\char`\"{} that degrees of freedom in this element are sub-\/divided into\+: Velocity and pressure. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a0c6037a870597b35dcf1c780710b9a56}{oomph\+::\+Generalised\+Element}}.
-
-
-
-Definition at line 1543 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01543}{1543}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ada9aded5d7ad32924db60b5af2b704c1}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ada9aded5d7ad32924db60b5af2b704c1}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!npres\_axi\_nst@{npres\_axi\_nst}}
 \index{npres\_axi\_nst@{npres\_axi\_nst}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{npres\_axi\_nst()}{npres\_axi\_nst()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::npres\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::npres\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -250,109 +238,89 @@ Return number of pressure values.
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a4c4c6c5ae937187b735e79451a0befbc}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01490}{1490}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1490 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-Referenced by get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns(), and oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
+Referenced by \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l04499}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()}}, and \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00780}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aa35348f142e702e3590bc28d5001d492}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aa35348f142e702e3590bc28d5001d492}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!output@{output}}
 \index{output@{output}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a34a51e3ad73df1ddca173e59a1404c90}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01529}{1529}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1529 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ad5949f8a416c48a56e82a154d9a9bfbe}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ad5949f8a416c48a56e82a154d9a9bfbe}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!output@{output}}
 \index{output@{output}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file\+\_\+pt,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a9aae32c881c1c55c2d20c579bf5438f7}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01535}{1535}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1535 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ad4ddd436a6bb13b78e25abae6833ed72}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ad4ddd436a6bb13b78e25abae6833ed72}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!output@{output}}
 \index{output@{output}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a25e906f89c3cec75081bd2fc88b37fd5}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01515}{1515}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1515 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a9bf8fddef7384ba0a8966502a137584b}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a9bf8fddef7384ba0a8966502a137584b}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!output@{output}}
 \index{output@{output}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Redirect output to \mbox{\hyperlink{classoomph_1_1NavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
+Redirect output to \mbox{\hyperlink{classNavierStokesEquations}{Navier\+Stokes\+Equations}} output. 
 
 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a7c80af0c22f64c3484cdeac1edcbe28c}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01521}{1521}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1521 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations\+::output().
+References \mbox{\hyperlink{oomph__utilities_8cc_source_l00436}{oomph\+::\+Command\+Line\+Args\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a09014883530f2debb0858fa669522c64}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a09014883530f2debb0858fa669522c64}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!p\_axi\_nst@{p\_axi\_nst}}
 \index{p\_axi\_nst@{p\_axi\_nst}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{p\_axi\_nst()}{p\_axi\_nst()}}
-{\footnotesize\ttfamily double oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily double oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::p\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -360,21 +328,17 @@ Return the pressure values at internal dof i\+\_\+internal (Discontinous pressur
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_ac0498239daebac18dd5edc754a8799f9}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01484}{1484}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1484 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References i, oomph\+::\+Generalised\+Element\+::internal\+\_\+data\+\_\+pt(), and oomph\+::\+Data\+::value().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01423}{P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a96e455aa73cdc037153ccb6365f6b29c}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a96e455aa73cdc037153ccb6365f6b29c}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!p\_local\_eqn@{p\_local\_eqn}}
 \index{p\_local\_eqn@{p\_local\_eqn}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{p\_local\_eqn()}{p\_local\_eqn()}}
-{\footnotesize\ttfamily int oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily int oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::p\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -382,25 +346,21 @@ Overload the access function for the pressure\textquotesingle{}s local equation 
 
 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a1432210bfed0cd920d1fb1c4d9e73d3f}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01509}{1509}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1509 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+References \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01423}{P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::internal\+\_\+local\+\_\+eqn(), n, and P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index.
-
-
-
-Referenced by get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns().
+Referenced by \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l04499}{get\+\_\+dof\+\_\+numbers\+\_\+for\+\_\+unknowns()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a06e8ec5317b4d6a746eaec17c65a2787}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_a06e8ec5317b4d6a746eaec17c65a2787}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!pshape\_axi\_nst@{pshape\_axi\_nst}}
 \index{pshape\_axi\_nst@{pshape\_axi\_nst}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{pshape\_axi\_nst()}{pshape\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::pshape\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::pshape\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -408,25 +368,21 @@ Pressure shape functions at local coordinate s.
 
 Pressure shape functions. 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a45e6df6b18daa524c32659572470cc7b}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01662}{1662}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1663 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+References \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 
 
-References s.
-
-
-
-Referenced by pshape\+\_\+axi\+\_\+nst().
+Referenced by \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01672}{pshape\+\_\+axi\+\_\+nst()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aecfd9564c4afe408d610c7426c47ccf1}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aecfd9564c4afe408d610c7426c47ccf1}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!pshape\_axi\_nst@{pshape\_axi\_nst}}
 \index{pshape\_axi\_nst@{pshape\_axi\_nst}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{pshape\_axi\_nst()}{pshape\_axi\_nst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::pshape\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::pshape\+\_\+axi\+\_\+nst (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{s,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -434,21 +390,17 @@ Pressure shape and test functions at local coordinte s.
 
 Define the pressure shape and test functions. 
 
-Implements \mbox{\hyperlink{classoomph_1_1GeneralisedNewtonianAxisymmetricNavierStokesEquations_a278087089b3cd5b354b57b997ce7a224}{oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Navier\+Stokes\+Equations}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01671}{1671}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Definition at line 1672 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
-
-
-
-References i, pshape\+\_\+axi\+\_\+nst(), and s.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01663}{pshape\+\_\+axi\+\_\+nst()}}, and \mbox{\hyperlink{cfortran_8h_source_l00568}{s}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aa2a056b7c778f105ce71a2b4c884e6d7}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_aa2a056b7c778f105ce71a2b4c884e6d7}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!required\_nvalue@{required\_nvalue}}
 \index{required\_nvalue@{required\_nvalue}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{required\_nvalue()}{required\_nvalue()}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::required\+\_\+nvalue (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -456,15 +408,11 @@ Number of values (pinned or dofs) required at local node n.
 
 Number of values (pinned or dofs) required at node n. 
 
-Reimplemented from \mbox{\hyperlink{classoomph_1_1FiniteElement_a56610c60d5bc2d7c27407a1455471b1a}{oomph\+::\+Finite\+Element}}.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l04572}{4572}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc}}.
 
 
 
-Definition at line 4573 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+cc.
-
-
-
-References Initial\+\_\+\+Nvalue, and n.
+References \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01418}{Initial\+\_\+\+Nvalue}}.
 
 
 
@@ -473,7 +421,7 @@ References Initial\+\_\+\+Nvalue, and n.
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!Initial\_Nvalue@{Initial\_Nvalue}}
 \index{Initial\_Nvalue@{Initial\_Nvalue}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{Initial\_Nvalue}{Initial\_Nvalue}}
-{\footnotesize\ttfamily const unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily const unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::\+Initial\+\_\+\+Nvalue\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -487,25 +435,29 @@ Static array of ints to hold required number of variables at nodes.
 
 Generalised\+Newtonian\+Axisymmetric Crouzeix-\/\+Raviart elements. 
 
-Definition at line 1418 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01418}{1418}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
 
 
 
-Referenced by required\+\_\+nvalue().
+Referenced by \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8cc_source_l04573}{required\+\_\+nvalue()}}.
 
 \mbox{\Hypertarget{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ae3368d8be1a8378b3d0a61c5bc598f1f}\label{classoomph_1_1GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement_ae3368d8be1a8378b3d0a61c5bc598f1f}} 
 \index{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}!P\_axi\_nst\_internal\_index@{P\_axi\_nst\_internal\_index}}
 \index{P\_axi\_nst\_internal\_index@{P\_axi\_nst\_internal\_index}!oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement@{oomph::GeneralisedNewtonianAxisymmetricQCrouzeixRaviartElement}}
 \doxysubsubsection{\texorpdfstring{P\_axi\_nst\_internal\_index}{P\_axi\_nst\_internal\_index}}
-{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::\+P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index\hspace{0.3cm}{\ttfamily [protected]}}
-
-Internal index that indicates at which internal data the pressure is stored 
-
-Definition at line 1423 of file generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h.
+{\footnotesize\ttfamily unsigned oomph\+::\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::\+P\+\_\+axi\+\_\+nst\+\_\+internal\+\_\+index\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Referenced by fix\+\_\+pressure(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::further\+\_\+build(), Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element(), p\+\_\+local\+\_\+eqn(), oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons(), and oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+Q\+Crouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs().
+Internal index that indicates at which internal data the pressure is stored. 
+
+
+
+Definition at line \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01423}{1423}} of file \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source}{generalised\+\_\+newtonian\+\_\+axisym\+\_\+navier\+\_\+stokes\+\_\+elements.\+h}}.
+
+
+
+Referenced by \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01496}{fix\+\_\+pressure()}}, \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00998}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::further\+\_\+build()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01469}{Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01484}{p\+\_\+axi\+\_\+nst()}}, \mbox{\hyperlink{generalised__newtonian__axisym__navier__stokes__elements_8h_source_l01509}{p\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00807}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::rebuild\+\_\+from\+\_\+sons()}}, and \mbox{\hyperlink{generalised__newtonian__refineable__axisym__navier__stokes__elements_8h_source_l00780}{oomph\+::\+Refineable\+Generalised\+Newtonian\+Axisymmetric\+QCrouzeix\+Raviart\+Element\+::unpin\+\_\+elemental\+\_\+pressure\+\_\+dofs()}}.
 
 
 

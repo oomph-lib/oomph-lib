@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1PMLQuadMesh}{}\doxysection{oomph\+::P\+M\+L\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1PMLQuadMesh}{}\doxysection{oomph\+::PMLQuad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1PMLQuadMesh}\index{oomph::PMLQuadMesh$<$ ELEMENT $>$@{oomph::PMLQuadMesh$<$ ELEMENT $>$}}
 
 
-P\+ML mesh, derived from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}}.  
+PML mesh, derived from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}}.  
 
 
 
 
 {\ttfamily \#include $<$pml\+\_\+meshes.\+h$>$}
 
-Inheritance diagram for oomph\+::P\+M\+L\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PMLQuad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.000000cm]{classoomph_1_1PMLQuadMesh}
@@ -18,18 +18,17 @@ Inheritance diagram for oomph\+::P\+M\+L\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PMLQuadMesh_a7559d700361ed44823a7b2f4be17e6ea}{P\+M\+L\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$bulk\+\_\+mesh\+\_\+pt, const unsigned \&boundary\+\_\+id, const unsigned \&quad\+\_\+boundary\+\_\+id, const unsigned \&n\+\_\+pml\+\_\+x, const unsigned \&n\+\_\+pml\+\_\+y, const double \&x\+\_\+pml\+\_\+start, const double \&x\+\_\+pml\+\_\+end, const double \&y\+\_\+pml\+\_\+start, const double \&y\+\_\+pml\+\_\+end, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1PMLQuadMesh_a7559d700361ed44823a7b2f4be17e6ea}{PMLQuad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$bulk\+\_\+mesh\+\_\+pt, const unsigned \&boundary\+\_\+id, const unsigned \&quad\+\_\+boundary\+\_\+id, const unsigned \&n\+\_\+pml\+\_\+x, const unsigned \&n\+\_\+pml\+\_\+y, const double \&x\+\_\+pml\+\_\+start, const double \&x\+\_\+pml\+\_\+end, const double \&y\+\_\+pml\+\_\+start, const double \&y\+\_\+pml\+\_\+end, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to \char`\"{}bulk\char`\"{} mesh, the boundary ID of axis aligned boundary to which the mesh is supposed to be attached and the boundary ID in the rectangular quad mesh that contains the pml elements. 0\+: constant y, bulk mesh below; 1\+: constant x, bulk mesh to the right; 2\+: constant y, bulk mesh above; 3\+: constant x, bulk mesh to left. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+P\+M\+L\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+PMLQuad\+Mesh$<$ ELEMENT $>$}
+PML mesh, derived from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}}. 
 
-P\+ML mesh, derived from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}}. 
-
-Definition at line 430 of file pml\+\_\+meshes.\+h.
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00430}{430}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
 
 
 
@@ -38,8 +37,8 @@ Definition at line 430 of file pml\+\_\+meshes.\+h.
 \index{oomph::PMLQuadMesh$<$ ELEMENT $>$@{oomph::PMLQuadMesh$<$ ELEMENT $>$}!PMLQuadMesh@{PMLQuadMesh}}
 \index{PMLQuadMesh@{PMLQuadMesh}!oomph::PMLQuadMesh$<$ ELEMENT $>$@{oomph::PMLQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PMLQuadMesh()}{PMLQuadMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLQuadMesh}{oomph\+::\+P\+M\+L\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLQuadMesh}{P\+M\+L\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{const unsigned \&}]{boundary\+\_\+id,  }\item[{const unsigned \&}]{quad\+\_\+boundary\+\_\+id,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+y,  }\item[{const double \&}]{x\+\_\+pml\+\_\+start,  }\item[{const double \&}]{x\+\_\+pml\+\_\+end,  }\item[{const double \&}]{y\+\_\+pml\+\_\+start,  }\item[{const double \&}]{y\+\_\+pml\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLQuadMesh}{oomph\+::\+PMLQuad\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLQuadMesh}{PMLQuad\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{const unsigned \&}]{boundary\+\_\+id,  }\item[{const unsigned \&}]{quad\+\_\+boundary\+\_\+id,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+y,  }\item[{const double \&}]{x\+\_\+pml\+\_\+start,  }\item[{const double \&}]{x\+\_\+pml\+\_\+end,  }\item[{const double \&}]{y\+\_\+pml\+\_\+start,  }\item[{const double \&}]{y\+\_\+pml\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -61,7 +60,7 @@ Lower right node in element
 
 Used to find nodes in top row
 
-Set all nodes from the P\+ML mesh that must disappear after merging as obsolete
+Set all nodes from the PML mesh that must disappear after merging as obsolete
 
 Simple interior element numbering helpers
 
@@ -69,11 +68,11 @@ Last element in mesh (top right)
 
 The alignment is done individually for each boundary and depends on the ordering of the nodes, in this case of the Rectangular\+Quad\+Mesh$<$2,3$>$ for each boundary. There are operations with mod and div 3 necessary in this case, as well as specific mechanisms to loop over the boundary in a certain way in order to obtain the convenient coordinates.
 
-Definition at line 441 of file pml\+\_\+meshes.\+h.
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00441}{441}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
 
 
 
-References oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), n, oomph\+::\+Mesh\+::nboundary\+\_\+node(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Mesh\+::prune\+\_\+dead\+\_\+nodes(), oomph\+::\+Node\+::set\+\_\+obsolete(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+bottom\+\_\+boundary(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+left\+\_\+boundary(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+right\+\_\+boundary(), and oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+top\+\_\+boundary().
+References \mbox{\hyperlink{mesh_8h_source_l00493}{oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00833}{oomph\+::\+Mesh\+::nboundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{mesh_8cc_source_l00966}{oomph\+::\+Mesh\+::prune\+\_\+dead\+\_\+nodes()}}, \mbox{\hyperlink{pml__meshes_8cc_source_l00057}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+bottom\+\_\+boundary()}}, \mbox{\hyperlink{pml__meshes_8cc_source_l00051}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+left\+\_\+boundary()}}, \mbox{\hyperlink{pml__meshes_8cc_source_l00039}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+right\+\_\+boundary()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00045}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+top\+\_\+boundary()}}.
 
 
 

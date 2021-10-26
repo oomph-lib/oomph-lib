@@ -3,26 +3,24 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classElasticFishBackElement}{Elastic\+Fish\+Back\+Element}}
-\begin{DoxyCompactList}\small\item\em Fish back as a Generalised\+Element\+: Circular ring whose position is given by. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem$<$ E\+L\+E\+M\+E\+N\+T $>$}}
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classRefineableFishPoissonProblem}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$}}
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\+Source\+For\+Poisson}}
-\begin{DoxyCompactList}\small\item\em Namespace for const source term in Poisson equation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+namespace \mbox{\hyperlink{namespaceConstSourceForPoisson}{Const\+Source\+For\+Poisson}}
+\begin{DoxyCompactList}\small\item\em //////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespaceConstSourceForPoisson_a40ef79083874b58ed42b4df2ca0f4c10}{Const\+Source\+For\+Poisson\+::get\+\_\+source}} (const Vector$<$ double $>$ \&x, double \&source)
 \begin{DoxyCompactList}\small\item\em Const source function. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{demo\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
-\item 
-{\footnotesize template$<$class E\+L\+E\+M\+E\+NT $>$ }\\void \mbox{\hyperlink{elastic__poisson_8cc_a28565f965d7ffb7f92f3773a6333023b}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
-\item 
+{\footnotesize template$<$class ELEMENT $>$ }\\void \mbox{\hyperlink{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}{demo\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
+\begin{DoxyCompactList}\small\item\em ///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// \end{DoxyCompactList}\item 
+{\footnotesize template$<$class ELEMENT $>$ }\\void \mbox{\hyperlink{elastic__poisson_8cc_a28565f965d7ffb7f92f3773a6333023b}{demo\+\_\+elastic\+\_\+fish\+\_\+poisson}} (const string \&directory\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Demonstrate how to solve \char`\"{}elastic\char`\"{} 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{elastic__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Driver for \char`\"{}elastic\char`\"{} fish poisson solver with adaptation. If there are any command line arguments, we regard this as a validation run and perform only a single step. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,31 +33,39 @@ double \mbox{\hyperlink{namespaceConstSourceForPoisson_add351c5acab2561d68d1fc9e
 \index{elastic\_poisson.cc@{elastic\_poisson.cc}!demo\_elastic\_fish\_poisson@{demo\_elastic\_fish\_poisson}}
 \index{demo\_elastic\_fish\_poisson@{demo\_elastic\_fish\_poisson}!elastic\_poisson.cc@{elastic\_poisson.cc}}
 \doxysubsubsection{\texorpdfstring{demo\_elastic\_fish\_poisson()}{demo\_elastic\_fish\_poisson()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
 void demo\+\_\+elastic\+\_\+fish\+\_\+poisson (\begin{DoxyParamCaption}\item[{const string \&}]{directory\+\_\+name }\end{DoxyParamCaption})}
+
+
 
 Demonstrate how to solve \char`\"{}elastic\char`\"{} 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. 
 
-Definition at line 578 of file elastic\+\_\+poisson.\+cc.
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00578}{578}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-References problem.
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00481}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00273}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::fish\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00279}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::load()}}.
 
 \mbox{\Hypertarget{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}\label{elastic__poisson_8cc_abb923e967929c29b3a4fa1693604952a}} 
 \index{elastic\_poisson.cc@{elastic\_poisson.cc}!demo\_fish\_poisson@{demo\_fish\_poisson}}
 \index{demo\_fish\_poisson@{demo\_fish\_poisson}!elastic\_poisson.cc@{elastic\_poisson.cc}}
 \doxysubsubsection{\texorpdfstring{demo\_fish\_poisson()}{demo\_fish\_poisson()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
 void demo\+\_\+fish\+\_\+poisson (\begin{DoxyParamCaption}\item[{const string \&}]{directory\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+///////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////// 
 
 Demonstrate how to solve 2D Poisson problem in deformable fish-\/shaped domain with mesh adaptation. 
 
-Definition at line 529 of file elastic\+\_\+poisson.\+cc.
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00529}{529}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 
 
 
-References problem.
+References \mbox{\hyperlink{elastic__poisson_8cc_source_l00288}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+info()}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00481}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::doc\+\_\+solution()}}, \mbox{\hyperlink{elastic__poisson_8cc_source_l00273}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::fish\+\_\+mesh\+\_\+pt()}}, and \mbox{\hyperlink{elastic__poisson_8cc_source_l00279}{Refineable\+Fish\+Poisson\+Problem$<$ ELEMENT $>$\+::load()}}.
 
 \mbox{\Hypertarget{elastic__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}\label{elastic__poisson_8cc_a0ddf1224851353fc92bfbff6f499fa97}} 
 \index{elastic\_poisson.cc@{elastic\_poisson.cc}!main@{main}}
@@ -67,7 +73,11 @@ References problem.
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
+
+
 Driver for \char`\"{}elastic\char`\"{} fish poisson solver with adaptation. If there are any command line arguments, we regard this as a validation run and perform only a single step. 
 
-Definition at line 613 of file elastic\+\_\+poisson.\+cc.
+
+
+Definition at line \mbox{\hyperlink{elastic__poisson_8cc_source_l00613}{613}} of file \mbox{\hyperlink{elastic__poisson_8cc_source}{elastic\+\_\+poisson.\+cc}}.
 

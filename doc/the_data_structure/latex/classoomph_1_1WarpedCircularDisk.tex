@@ -2,7 +2,7 @@
 \label{classoomph_1_1WarpedCircularDisk}\index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}}
 
 
-Warped disk in 3d\+: zeta\mbox{[}0\mbox{]}=x; zeta\mbox{[}1\mbox{]}=y (so it doesn\textquotesingle{}t have coordinate singularities), with specification of two boundaries (b=0,1) that turn the whole thing into a circular disk.  
+////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////  
 
 
 
@@ -18,22 +18,22 @@ Inheritance diagram for oomph\+::Warped\+Circular\+Disk\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a6dd95f7f2c2240022ae3b1278108e379}{Warped\+Circular\+Disk}} (const double \&\mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a275692443cbe30be492c6ef33040b0be}{epsilon}}, const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const double \&z\+\_\+offset=0.\+0)
-\item 
+\mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a6dd95f7f2c2240022ae3b1278108e379}{Warped\+Circular\+Disk}} (const double \&\mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a8072cb64a76120c34dd357319f5208b3}{epsilon}}, const unsigned \&n, const double \&z\+\_\+offset=0.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor. Pass amplitude and azimuthal wavenumber of warping as arguments. Can specify vertical offset as final, optional argument. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a6715e7330692a145513fe6c04cf57773}{Warped\+Circular\+Disk}} ()
 \begin{DoxyCompactList}\small\item\em Empty default constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_af7db1deb57f0f21ee5264a6590ccd5ee}{Warped\+Circular\+Disk}} (const \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{Warped\+Circular\+Disk}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a56d23d0e159757f0d4c9236b6db2241c}{Warped\+Circular\+Disk}} (const \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{Warped\+Circular\+Disk}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a08535ed3d62242444ab367f20f455c5b}{operator=}} (const \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{Warped\+Circular\+Disk}} \&)
+void \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a15373fbc5052d144b6cbc2544136dbe7}{operator=}} (const \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{Warped\+Circular\+Disk}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_ad56452d9635cd7ac0d09c547023d47ef}{$\sim$\+Warped\+Circular\+Disk}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-double \& \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a275692443cbe30be492c6ef33040b0be}{epsilon}} ()
+double \& \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a8072cb64a76120c34dd357319f5208b3}{epsilon}} ()
 \begin{DoxyCompactList}\small\item\em Access fct to amplitude of disk warping. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a270669e4e5424db18ad657f3876ed6bb}{position}} (const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
 \begin{DoxyCompactList}\small\item\em Position \mbox{\hyperlink{classoomph_1_1Vector}{Vector}} at Lagrangian coordinate zeta. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_afcc9e5e2c88d05b61006bd432e3aa31b}{position}} (const unsigned \&\mbox{\hyperlink{cfortran_8h_af6f0bd3dc13317f895c91323c25c2b8f}{t}}, const \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&zeta, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r) const
-\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Object is steady so calls time-\/independent version. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Object is steady so calls time-\/independent version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_aa24472806fff65e4950d71dd9536965f}{boundary\+\_\+triad}} (const unsigned \&b, const double \&zeta\+\_\+bound, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&r, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&tangent, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&normal, \mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&binormal)
 \begin{DoxyCompactList}\small\item\em Boundary triad on boundary b at boundary coordinate zeta\+\_\+bound. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
@@ -58,9 +58,11 @@ double \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk_a7f07f7318757578b6c703d
 
 
 \doxysubsection{Detailed Description}
+////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////// 
+
 Warped disk in 3d\+: zeta\mbox{[}0\mbox{]}=x; zeta\mbox{[}1\mbox{]}=y (so it doesn\textquotesingle{}t have coordinate singularities), with specification of two boundaries (b=0,1) that turn the whole thing into a circular disk. 
 
-Definition at line 341 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00341}{341}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
@@ -71,13 +73,17 @@ Definition at line 341 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
 \doxysubsubsection{\texorpdfstring{WarpedCircularDisk()}{WarpedCircularDisk()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily oomph\+::\+Warped\+Circular\+Disk\+::\+Warped\+Circular\+Disk (\begin{DoxyParamCaption}\item[{const double \&}]{epsilon,  }\item[{const unsigned \&}]{n,  }\item[{const double \&}]{z\+\_\+offset = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
 Constructor. Pass amplitude and azimuthal wavenumber of warping as arguments. Can specify vertical offset as final, optional argument. 
 
-Definition at line 347 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+
+
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00347}{347}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt, oomph\+::\+Mathematical\+Constants\+::\+Pi, oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+end, and oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+start.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00324}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00319}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+end}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00315}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Zeta\+\_\+boundary\+\_\+start}}.
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a6715e7330692a145513fe6c04cf57773}\label{classoomph_1_1WarpedCircularDisk_a6715e7330692a145513fe6c04cf57773}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!WarpedCircularDisk@{WarpedCircularDisk}}
@@ -91,25 +97,17 @@ Empty default constructor.
 
 
 
-Definition at line 370 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00370}{370}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_af7db1deb57f0f21ee5264a6590ccd5ee}\label{classoomph_1_1WarpedCircularDisk_af7db1deb57f0f21ee5264a6590ccd5ee}} 
+\mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a56d23d0e159757f0d4c9236b6db2241c}\label{classoomph_1_1WarpedCircularDisk_a56d23d0e159757f0d4c9236b6db2241c}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!WarpedCircularDisk@{WarpedCircularDisk}}
 \index{WarpedCircularDisk@{WarpedCircularDisk}!oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}}
 \doxysubsubsection{\texorpdfstring{WarpedCircularDisk()}{WarpedCircularDisk()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily oomph\+::\+Warped\+Circular\+Disk\+::\+Warped\+Circular\+Disk (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{Warped\+Circular\+Disk}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Warped\+Circular\+Disk\+::\+Warped\+Circular\+Disk (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{Warped\+Circular\+Disk}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 379 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_ad56452d9635cd7ac0d09c547023d47ef}\label{classoomph_1_1WarpedCircularDisk_ad56452d9635cd7ac0d09c547023d47ef}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!````~WarpedCircularDisk@{$\sim$WarpedCircularDisk}}
@@ -123,11 +121,11 @@ Destructor.
 
 
 
-Definition at line 391 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00385}{385}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt, n, and oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::nboundary().
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00324}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::\+Boundary\+\_\+parametrising\+\_\+geom\+\_\+object\+\_\+pt}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00073}{oomph\+::\+Disk\+Like\+Geom\+Object\+With\+Boundaries\+::nboundary()}}.
 
 
 
@@ -148,11 +146,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1DiskLikeGeomObjectWithBoundari
 
 
 
-Definition at line 431 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00425}{425}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References dwdphi(), dwdr(), w(), and Z\+\_\+offset.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00481}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00475}{dwdr()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00469}{w()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00493}{Z\+\_\+offset}}.
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a130db675bf148aa0a19395411dd5d3ce}\label{classoomph_1_1WarpedCircularDisk_a130db675bf148aa0a19395411dd5d3ce}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!dwdphi@{dwdphi}}
@@ -166,15 +164,15 @@ Deriv of vertical deflection w.\+r.\+t. angle.
 
 
 
-Definition at line 487 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00481}{481}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References Epsilon, and N.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00487}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00490}{N}}.
 
 
 
-Referenced by boundary\+\_\+triad().
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00425}{boundary\+\_\+triad()}}.
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_aed38bcf8e10ffcc2f978037d7201d6d2}\label{classoomph_1_1WarpedCircularDisk_aed38bcf8e10ffcc2f978037d7201d6d2}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!dwdr@{dwdr}}
@@ -188,21 +186,21 @@ Deriv of vertical deflection w.\+r.\+t. radius.
 
 
 
-Definition at line 481 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00475}{475}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References Epsilon, and N.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00487}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00490}{N}}.
 
 
 
-Referenced by boundary\+\_\+triad().
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00425}{boundary\+\_\+triad()}}.
 
-\mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a275692443cbe30be492c6ef33040b0be}\label{classoomph_1_1WarpedCircularDisk_a275692443cbe30be492c6ef33040b0be}} 
+\mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a8072cb64a76120c34dd357319f5208b3}\label{classoomph_1_1WarpedCircularDisk_a8072cb64a76120c34dd357319f5208b3}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!epsilon@{epsilon}}
 \index{epsilon@{epsilon}!oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}}
 \doxysubsubsection{\texorpdfstring{epsilon()}{epsilon()}}
-{\footnotesize\ttfamily double\& oomph\+::\+Warped\+Circular\+Disk\+::epsilon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily double \& oomph\+::\+Warped\+Circular\+Disk\+::epsilon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -210,29 +208,21 @@ Access fct to amplitude of disk warping.
 
 
 
-Definition at line 402 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00396}{396}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References Epsilon.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00487}{Epsilon}}.
 
-\mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a08535ed3d62242444ab367f20f455c5b}\label{classoomph_1_1WarpedCircularDisk_a08535ed3d62242444ab367f20f455c5b}} 
+\mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a15373fbc5052d144b6cbc2544136dbe7}\label{classoomph_1_1WarpedCircularDisk_a15373fbc5052d144b6cbc2544136dbe7}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Warped\+Circular\+Disk\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{Warped\+Circular\+Disk}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Warped\+Circular\+Disk\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1WarpedCircularDisk}{Warped\+Circular\+Disk}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 385 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_afcc9e5e2c88d05b61006bd432e3aa31b}\label{classoomph_1_1WarpedCircularDisk_afcc9e5e2c88d05b61006bd432e3aa31b}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!position@{position}}
@@ -242,7 +232,7 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 
-Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t$>$0\+: previous timestep. Object is steady so calls time-\/independent version. 
+Parametrised position on object\+: r(zeta). Evaluated at previous timestep. t=0\+: current time; t\texorpdfstring{$>$}{>}0\+: previous timestep. Object is steady so calls time-\/independent version. 
 
 
 
@@ -250,11 +240,11 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeomObject_ad44a736d23dcd63af1
 
 
 
-Definition at line 422 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00416}{416}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References position().
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00402}{position()}}.
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a270669e4e5424db18ad657f3876ed6bb}\label{classoomph_1_1WarpedCircularDisk_a270669e4e5424db18ad657f3876ed6bb}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!position@{position}}
@@ -272,15 +262,15 @@ Implements \mbox{\hyperlink{classoomph_1_1GeomObject_a0d04c9d4667817f3ef24bb660f
 
 
 
-Definition at line 408 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00402}{402}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References w(), and Z\+\_\+offset.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00469}{w()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00493}{Z\+\_\+offset}}.
 
 
 
-Referenced by position().
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00416}{position()}}.
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_abbb6f07ee89b3b87fa2edfee44beb7c9}\label{classoomph_1_1WarpedCircularDisk_abbb6f07ee89b3b87fa2edfee44beb7c9}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!w@{w}}
@@ -294,15 +284,15 @@ Vertical deflection.
 
 
 
-Definition at line 475 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00469}{469}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-References Epsilon, and N.
+References \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00487}{Epsilon}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00490}{N}}.
 
 
 
-Referenced by boundary\+\_\+triad(), and position().
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00425}{boundary\+\_\+triad()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00402}{position()}}.
 
 
 
@@ -319,11 +309,11 @@ Amplitude of non-\/axisymmetric deformation.
 
 
 
-Definition at line 493 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00487}{487}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-Referenced by dwdphi(), dwdr(), epsilon(), and w().
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00481}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00475}{dwdr()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00396}{epsilon()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00469}{w()}}.
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_ab2c77c18aedee5f502637dfbf96c0794}\label{classoomph_1_1WarpedCircularDisk_ab2c77c18aedee5f502637dfbf96c0794}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!N@{N}}
@@ -337,11 +327,11 @@ Wavenumber of non-\/axisymmetric deformation.
 
 
 
-Definition at line 496 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00490}{490}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-Referenced by dwdphi(), dwdr(), and w().
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00481}{dwdphi()}}, \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00475}{dwdr()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00469}{w()}}.
 
 \mbox{\Hypertarget{classoomph_1_1WarpedCircularDisk_a7f07f7318757578b6c703d518174a811}\label{classoomph_1_1WarpedCircularDisk_a7f07f7318757578b6c703d518174a811}} 
 \index{oomph::WarpedCircularDisk@{oomph::WarpedCircularDisk}!Z\_offset@{Z\_offset}}
@@ -355,11 +345,11 @@ Vertical offset.
 
 
 
-Definition at line 499 of file geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h.
+Definition at line \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00493}{493}} of file \mbox{\hyperlink{geom__obj__with__boundary_8h_source}{geom\+\_\+obj\+\_\+with\+\_\+boundary.\+h}}.
 
 
 
-Referenced by boundary\+\_\+triad(), and position().
+Referenced by \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00425}{boundary\+\_\+triad()}}, and \mbox{\hyperlink{geom__obj__with__boundary_8h_source_l00402}{position()}}.
 
 
 

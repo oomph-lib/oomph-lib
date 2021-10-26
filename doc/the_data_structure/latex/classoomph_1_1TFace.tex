@@ -1,8 +1,8 @@
-\hypertarget{classoomph_1_1TFace}{}\doxysection{oomph\+::T\+Face Class Reference}
+\hypertarget{classoomph_1_1TFace}{}\doxysection{oomph\+::TFace Class Reference}
 \label{classoomph_1_1TFace}\index{oomph::TFace@{oomph::TFace}}
 
 
-Triangular Face class.  
+//////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////////  
 
 
 
@@ -12,39 +12,41 @@ Triangular Face class.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1TFace_a7f4f3d45cde2ddb0cfe2ccad5e89d423}{T\+Face}} (\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1TFace_a9beeb47006fee3e8f0ee1abe0113c77d}{node1\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1TFace_a460a1e071534f0044b11e4143ccd0213}{node2\+\_\+pt}}, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$\mbox{\hyperlink{classoomph_1_1TFace_ade89b1a048f53fc0919d0bc6c0d837b8}{node3\+\_\+pt}})
+\mbox{\hyperlink{classoomph_1_1TFace_a7f4f3d45cde2ddb0cfe2ccad5e89d423}{TFace}} (Node $\ast$\mbox{\hyperlink{classoomph_1_1TFace_a7e88b219f64c39a500cd93a62955df6d}{node1\+\_\+pt}}, Node $\ast$\mbox{\hyperlink{classoomph_1_1TFace_af6e8ec5d536400fa823ccbe60db0fc0b}{node2\+\_\+pt}}, Node $\ast$\mbox{\hyperlink{classoomph_1_1TFace_a2585f2657077251c40fbee825dd4631e}{node3\+\_\+pt}})
 \begin{DoxyCompactList}\small\item\em Constructor\+: Pass in the three vertex nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_a9beeb47006fee3e8f0ee1abe0113c77d}{node1\+\_\+pt}} () const
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_a7e88b219f64c39a500cd93a62955df6d}{node1\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access to the first vertex node. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_a460a1e071534f0044b11e4143ccd0213}{node2\+\_\+pt}} () const
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_af6e8ec5d536400fa823ccbe60db0fc0b}{node2\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access to the second vertex node. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_ade89b1a048f53fc0919d0bc6c0d837b8}{node3\+\_\+pt}} () const
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_a2585f2657077251c40fbee825dd4631e}{node3\+\_\+pt}} () const
 \begin{DoxyCompactList}\small\item\em Access to the third vertex node. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1TFace_af7564b3292d27ca98a630564cf862b3a}{operator==}} (const \mbox{\hyperlink{classoomph_1_1TFace}{T\+Face}} \&other) const
+bool \mbox{\hyperlink{classoomph_1_1TFace_af7564b3292d27ca98a630564cf862b3a}{operator==}} (const \mbox{\hyperlink{classoomph_1_1TFace}{TFace}} \&other) const
 \begin{DoxyCompactList}\small\item\em Comparison operator. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classoomph_1_1TFace_aa99c3dec902942a67fea64ae6abecbac}{operator$<$}} (const \mbox{\hyperlink{classoomph_1_1TFace}{T\+Face}} \&other) const
+bool \mbox{\hyperlink{classoomph_1_1TFace_aa99c3dec902942a67fea64ae6abecbac}{operator$<$}} (const \mbox{\hyperlink{classoomph_1_1TFace}{TFace}} \&other) const
 \begin{DoxyCompactList}\small\item\em Less-\/than operator. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1TFace_a12c3aa641fc52d32d779de6c10a343be}{is\+\_\+on\+\_\+boundary}} () const
 \begin{DoxyCompactList}\small\item\em Test whether the face lies on a boundary. Relatively simple test, based on all vertices lying on (some) boundary. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classoomph_1_1TFace_ab36cf33b87bbadeb6d66e6583ae467c8}{is\+\_\+boundary\+\_\+face}} () const
 \begin{DoxyCompactList}\small\item\em Test whether the face is a boundary face, i.\+e. does it connnect three boundary nodes? \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1TFace_a603fb029127a3899e988d23e00615c22}{get\+\_\+boundaries\+\_\+pt}} (std\+::set$<$ unsigned $>$ $\ast$\&boundaries\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em Access to pointer to set of mesh boundaries that this face occupies; N\+U\+LL if the node is not on any boundary. Construct via set intersection of the boundary sets for the associated vertex nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Access to pointer to set of mesh boundaries that this face occupies; NULL if the node is not on any boundary. Construct via set intersection of the boundary sets for the associated vertex nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_aa41911e6e35f06bf9f22b4fda74ca96c}{Node1\+\_\+pt}}
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_aa41911e6e35f06bf9f22b4fda74ca96c}{Node1\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em First vertex node. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_a1b04ddf3bdd8e1a0b6c469450d598070}{Node2\+\_\+pt}}
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_a1b04ddf3bdd8e1a0b6c469450d598070}{Node2\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Second vertex node. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_a5cda3e55b6d46d3b6b08b7bf91591b4d}{Node3\+\_\+pt}}
+Node $\ast$ \mbox{\hyperlink{classoomph_1_1TFace_a5cda3e55b6d46d3b6b08b7bf91591b4d}{Node3\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Third vertex node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Triangular Face class. 
+//////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////// 
 
-Definition at line 55 of file Telements.\+h.
+Triangular Face class 
+
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00055}{55}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
@@ -53,7 +55,7 @@ Definition at line 55 of file Telements.\+h.
 \index{oomph::TFace@{oomph::TFace}!TFace@{TFace}}
 \index{TFace@{TFace}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{TFace()}{TFace()}}
-{\footnotesize\ttfamily oomph\+::\+T\+Face\+::\+T\+Face (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{node1\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{node2\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{node3\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+TFace\+::\+TFace (\begin{DoxyParamCaption}\item[{Node $\ast$}]{node1\+\_\+pt,  }\item[{Node $\ast$}]{node2\+\_\+pt,  }\item[{Node $\ast$}]{node3\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -61,11 +63,11 @@ Constructor\+: Pass in the three vertex nodes.
 
 
 
-Definition at line 59 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00059}{59}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References node1\+\_\+pt(), Node1\+\_\+pt, node2\+\_\+pt(), Node2\+\_\+pt, node3\+\_\+pt(), Node3\+\_\+pt, and nodes.
+References \mbox{\hyperlink{Telements_8h_source_l00088}{node1\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00205}{Node1\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00094}{node2\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00208}{Node2\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00100}{node3\+\_\+pt()}}, and \mbox{\hyperlink{Telements_8h_source_l00211}{Node3\+\_\+pt}}.
 
 
 
@@ -74,29 +76,29 @@ References node1\+\_\+pt(), Node1\+\_\+pt, node2\+\_\+pt(), Node2\+\_\+pt, node3
 \index{oomph::TFace@{oomph::TFace}!get\_boundaries\_pt@{get\_boundaries\_pt}}
 \index{get\_boundaries\_pt@{get\_boundaries\_pt}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{get\_boundaries\_pt()}{get\_boundaries\_pt()}}
-{\footnotesize\ttfamily void oomph\+::\+T\+Face\+::get\+\_\+boundaries\+\_\+pt (\begin{DoxyParamCaption}\item[{std\+::set$<$ unsigned $>$ $\ast$\&}]{boundaries\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+TFace\+::get\+\_\+boundaries\+\_\+pt (\begin{DoxyParamCaption}\item[{std\+::set$<$ unsigned $>$ $\ast$\&}]{boundaries\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Access to pointer to set of mesh boundaries that this face occupies; N\+U\+LL if the node is not on any boundary. Construct via set intersection of the boundary sets for the associated vertex nodes. 
+Access to pointer to set of mesh boundaries that this face occupies; NULL if the node is not on any boundary. Construct via set intersection of the boundary sets for the associated vertex nodes. 
 
 
 
-Definition at line 178 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00178}{178}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References oomph\+::\+Node\+::get\+\_\+boundaries\+\_\+pt(), Node1\+\_\+pt, Node2\+\_\+pt, and Node3\+\_\+pt.
+References \mbox{\hyperlink{Telements_8h_source_l00205}{Node1\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00208}{Node2\+\_\+pt}}, and \mbox{\hyperlink{Telements_8h_source_l00211}{Node3\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+Referenced by \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l00039}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TFace_ab36cf33b87bbadeb6d66e6583ae467c8}\label{classoomph_1_1TFace_ab36cf33b87bbadeb6d66e6583ae467c8}} 
 \index{oomph::TFace@{oomph::TFace}!is\_boundary\_face@{is\_boundary\_face}}
 \index{is\_boundary\_face@{is\_boundary\_face}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{is\_boundary\_face()}{is\_boundary\_face()}}
-{\footnotesize\ttfamily bool oomph\+::\+T\+Face\+::is\+\_\+boundary\+\_\+face (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool oomph\+::\+TFace\+::is\+\_\+boundary\+\_\+face (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -104,21 +106,21 @@ Test whether the face is a boundary face, i.\+e. does it connnect three boundary
 
 
 
-Definition at line 167 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00167}{167}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References Node1\+\_\+pt, Node2\+\_\+pt, and Node3\+\_\+pt.
+References \mbox{\hyperlink{Telements_8h_source_l00205}{Node1\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00208}{Node2\+\_\+pt}}, and \mbox{\hyperlink{Telements_8h_source_l00211}{Node3\+\_\+pt}}.
 
 
 
-Referenced by oomph\+::\+Brick\+From\+Tet\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+Referenced by \mbox{\hyperlink{brick__from__tet__mesh_8template_8cc_source_l00039}{oomph\+::\+Brick\+From\+Tet\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TFace_a12c3aa641fc52d32d779de6c10a343be}\label{classoomph_1_1TFace_a12c3aa641fc52d32d779de6c10a343be}} 
 \index{oomph::TFace@{oomph::TFace}!is\_on\_boundary@{is\_on\_boundary}}
 \index{is\_on\_boundary@{is\_on\_boundary}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{is\_on\_boundary()}{is\_on\_boundary()}}
-{\footnotesize\ttfamily bool oomph\+::\+T\+Face\+::is\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool oomph\+::\+TFace\+::is\+\_\+on\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -126,17 +128,17 @@ Test whether the face lies on a boundary. Relatively simple test, based on all v
 
 
 
-Definition at line 158 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00158}{158}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), Node1\+\_\+pt, Node2\+\_\+pt, and Node3\+\_\+pt.
+References \mbox{\hyperlink{Telements_8h_source_l00205}{Node1\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00208}{Node2\+\_\+pt}}, and \mbox{\hyperlink{Telements_8h_source_l00211}{Node3\+\_\+pt}}.
 
-\mbox{\Hypertarget{classoomph_1_1TFace_a9beeb47006fee3e8f0ee1abe0113c77d}\label{classoomph_1_1TFace_a9beeb47006fee3e8f0ee1abe0113c77d}} 
+\mbox{\Hypertarget{classoomph_1_1TFace_a7e88b219f64c39a500cd93a62955df6d}\label{classoomph_1_1TFace_a7e88b219f64c39a500cd93a62955df6d}} 
 \index{oomph::TFace@{oomph::TFace}!node1\_pt@{node1\_pt}}
 \index{node1\_pt@{node1\_pt}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{node1\_pt()}{node1\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+T\+Face\+::node1\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Node $\ast$ oomph\+::\+TFace\+::node1\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -144,21 +146,21 @@ Access to the first vertex node.
 
 
 
-Definition at line 88 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00088}{88}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References Node1\+\_\+pt.
+References \mbox{\hyperlink{Telements_8h_source_l00205}{Node1\+\_\+pt}}.
 
 
 
-Referenced by operator$<$(), operator==(), and T\+Face().
+Referenced by \mbox{\hyperlink{Telements_8h_source_l00121}{operator$<$()}}, \mbox{\hyperlink{Telements_8h_source_l00106}{operator==()}}, and \mbox{\hyperlink{Telements_8h_source_l00059}{TFace()}}.
 
-\mbox{\Hypertarget{classoomph_1_1TFace_a460a1e071534f0044b11e4143ccd0213}\label{classoomph_1_1TFace_a460a1e071534f0044b11e4143ccd0213}} 
+\mbox{\Hypertarget{classoomph_1_1TFace_af6e8ec5d536400fa823ccbe60db0fc0b}\label{classoomph_1_1TFace_af6e8ec5d536400fa823ccbe60db0fc0b}} 
 \index{oomph::TFace@{oomph::TFace}!node2\_pt@{node2\_pt}}
 \index{node2\_pt@{node2\_pt}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{node2\_pt()}{node2\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+T\+Face\+::node2\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Node $\ast$ oomph\+::\+TFace\+::node2\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -166,21 +168,21 @@ Access to the second vertex node.
 
 
 
-Definition at line 94 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00094}{94}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References Node2\+\_\+pt.
+References \mbox{\hyperlink{Telements_8h_source_l00208}{Node2\+\_\+pt}}.
 
 
 
-Referenced by operator$<$(), operator==(), and T\+Face().
+Referenced by \mbox{\hyperlink{Telements_8h_source_l00121}{operator$<$()}}, \mbox{\hyperlink{Telements_8h_source_l00106}{operator==()}}, and \mbox{\hyperlink{Telements_8h_source_l00059}{TFace()}}.
 
-\mbox{\Hypertarget{classoomph_1_1TFace_ade89b1a048f53fc0919d0bc6c0d837b8}\label{classoomph_1_1TFace_ade89b1a048f53fc0919d0bc6c0d837b8}} 
+\mbox{\Hypertarget{classoomph_1_1TFace_a2585f2657077251c40fbee825dd4631e}\label{classoomph_1_1TFace_a2585f2657077251c40fbee825dd4631e}} 
 \index{oomph::TFace@{oomph::TFace}!node3\_pt@{node3\_pt}}
 \index{node3\_pt@{node3\_pt}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{node3\_pt()}{node3\_pt()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+T\+Face\+::node3\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Node $\ast$ oomph\+::\+TFace\+::node3\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -188,21 +190,21 @@ Access to the third vertex node.
 
 
 
-Definition at line 100 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00100}{100}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References Node3\+\_\+pt.
+References \mbox{\hyperlink{Telements_8h_source_l00211}{Node3\+\_\+pt}}.
 
 
 
-Referenced by operator$<$(), operator==(), and T\+Face().
+Referenced by \mbox{\hyperlink{Telements_8h_source_l00121}{operator$<$()}}, \mbox{\hyperlink{Telements_8h_source_l00106}{operator==()}}, and \mbox{\hyperlink{Telements_8h_source_l00059}{TFace()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TFace_aa99c3dec902942a67fea64ae6abecbac}\label{classoomph_1_1TFace_aa99c3dec902942a67fea64ae6abecbac}} 
 \index{oomph::TFace@{oomph::TFace}!operator$<$@{operator$<$}}
 \index{operator$<$@{operator$<$}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
-{\footnotesize\ttfamily bool oomph\+::\+T\+Face\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TFace}{T\+Face}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool oomph\+::\+TFace\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TFace}{TFace}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -210,17 +212,17 @@ Less-\/than operator.
 
 
 
-Definition at line 121 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00121}{121}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References node1\+\_\+pt(), Node1\+\_\+pt, node2\+\_\+pt(), Node2\+\_\+pt, node3\+\_\+pt(), and Node3\+\_\+pt.
+References \mbox{\hyperlink{Telements_8h_source_l00088}{node1\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00205}{Node1\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00094}{node2\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00208}{Node2\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00100}{node3\+\_\+pt()}}, and \mbox{\hyperlink{Telements_8h_source_l00211}{Node3\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1TFace_af7564b3292d27ca98a630564cf862b3a}\label{classoomph_1_1TFace_af7564b3292d27ca98a630564cf862b3a}} 
 \index{oomph::TFace@{oomph::TFace}!operator==@{operator==}}
 \index{operator==@{operator==}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
-{\footnotesize\ttfamily bool oomph\+::\+T\+Face\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TFace}{T\+Face}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily bool oomph\+::\+TFace\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TFace}{TFace}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -228,11 +230,11 @@ Comparison operator.
 
 
 
-Definition at line 106 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00106}{106}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-References node1\+\_\+pt(), Node1\+\_\+pt, node2\+\_\+pt(), Node2\+\_\+pt, node3\+\_\+pt(), and Node3\+\_\+pt.
+References \mbox{\hyperlink{Telements_8h_source_l00088}{node1\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00205}{Node1\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00094}{node2\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00208}{Node2\+\_\+pt}}, \mbox{\hyperlink{Telements_8h_source_l00100}{node3\+\_\+pt()}}, and \mbox{\hyperlink{Telements_8h_source_l00211}{Node3\+\_\+pt}}.
 
 
 
@@ -241,7 +243,7 @@ References node1\+\_\+pt(), Node1\+\_\+pt, node2\+\_\+pt(), Node2\+\_\+pt, node3
 \index{oomph::TFace@{oomph::TFace}!Node1\_pt@{Node1\_pt}}
 \index{Node1\_pt@{Node1\_pt}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{Node1\_pt}{Node1\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+T\+Face\+::\+Node1\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Node$\ast$ oomph\+::\+TFace\+::\+Node1\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -249,17 +251,17 @@ First vertex node.
 
 
 
-Definition at line 205 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00205}{205}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-Referenced by get\+\_\+boundaries\+\_\+pt(), is\+\_\+boundary\+\_\+face(), is\+\_\+on\+\_\+boundary(), node1\+\_\+pt(), operator$<$(), operator==(), and T\+Face().
+Referenced by \mbox{\hyperlink{Telements_8h_source_l00178}{get\+\_\+boundaries\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00167}{is\+\_\+boundary\+\_\+face()}}, \mbox{\hyperlink{Telements_8h_source_l00158}{is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{Telements_8h_source_l00088}{node1\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00121}{operator$<$()}}, \mbox{\hyperlink{Telements_8h_source_l00106}{operator==()}}, and \mbox{\hyperlink{Telements_8h_source_l00059}{TFace()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TFace_a1b04ddf3bdd8e1a0b6c469450d598070}\label{classoomph_1_1TFace_a1b04ddf3bdd8e1a0b6c469450d598070}} 
 \index{oomph::TFace@{oomph::TFace}!Node2\_pt@{Node2\_pt}}
 \index{Node2\_pt@{Node2\_pt}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{Node2\_pt}{Node2\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+T\+Face\+::\+Node2\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Node$\ast$ oomph\+::\+TFace\+::\+Node2\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -267,17 +269,17 @@ Second vertex node.
 
 
 
-Definition at line 208 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00208}{208}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-Referenced by get\+\_\+boundaries\+\_\+pt(), is\+\_\+boundary\+\_\+face(), is\+\_\+on\+\_\+boundary(), node2\+\_\+pt(), operator$<$(), operator==(), and T\+Face().
+Referenced by \mbox{\hyperlink{Telements_8h_source_l00178}{get\+\_\+boundaries\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00167}{is\+\_\+boundary\+\_\+face()}}, \mbox{\hyperlink{Telements_8h_source_l00158}{is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{Telements_8h_source_l00094}{node2\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00121}{operator$<$()}}, \mbox{\hyperlink{Telements_8h_source_l00106}{operator==()}}, and \mbox{\hyperlink{Telements_8h_source_l00059}{TFace()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TFace_a5cda3e55b6d46d3b6b08b7bf91591b4d}\label{classoomph_1_1TFace_a5cda3e55b6d46d3b6b08b7bf91591b4d}} 
 \index{oomph::TFace@{oomph::TFace}!Node3\_pt@{Node3\_pt}}
 \index{Node3\_pt@{Node3\_pt}!oomph::TFace@{oomph::TFace}}
 \doxysubsubsection{\texorpdfstring{Node3\_pt}{Node3\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classoomph_1_1Node}{Node}}$\ast$ oomph\+::\+T\+Face\+::\+Node3\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Node$\ast$ oomph\+::\+TFace\+::\+Node3\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -285,11 +287,11 @@ Third vertex node.
 
 
 
-Definition at line 211 of file Telements.\+h.
+Definition at line \mbox{\hyperlink{Telements_8h_source_l00211}{211}} of file \mbox{\hyperlink{Telements_8h_source}{Telements.\+h}}.
 
 
 
-Referenced by get\+\_\+boundaries\+\_\+pt(), is\+\_\+boundary\+\_\+face(), is\+\_\+on\+\_\+boundary(), node3\+\_\+pt(), operator$<$(), operator==(), and T\+Face().
+Referenced by \mbox{\hyperlink{Telements_8h_source_l00178}{get\+\_\+boundaries\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00167}{is\+\_\+boundary\+\_\+face()}}, \mbox{\hyperlink{Telements_8h_source_l00158}{is\+\_\+on\+\_\+boundary()}}, \mbox{\hyperlink{Telements_8h_source_l00100}{node3\+\_\+pt()}}, \mbox{\hyperlink{Telements_8h_source_l00121}{operator$<$()}}, \mbox{\hyperlink{Telements_8h_source_l00106}{operator==()}}, and \mbox{\hyperlink{Telements_8h_source_l00059}{TFace()}}.
 
 
 

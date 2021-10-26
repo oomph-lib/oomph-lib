@@ -1,0 +1,141 @@
+\hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source}{}\doxysection{two\+\_\+d\+\_\+adv\+\_\+diff\+\_\+flux\+\_\+bc.\+txt\+\_\+doxygenified.\+h}
+\mbox{\hyperlink{two__d__adv__diff__flux__bc_8txt__doxygenified_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00001}00001 \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00002}00002 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00003}00003 \textcolor{comment}{\(\backslash\)mainpage Example problem: Adaptive solution of the 2D advection diffusion equation with flux boundary conditions}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00004}00004 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00005}00005 \textcolor{comment}{In this problem we will discuss the 2D advection-\/diffusion problem}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00006}00006 \textcolor{comment}{with Neumann (flux) boundary conditions, using \(\backslash\)c oomph-\/lib's }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00007}00007 \textcolor{comment}{mesh adaptation routines.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00008}00008 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00009}00009 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00010}00010 \textcolor{comment}{<TABLE>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00011}00011 \textcolor{comment}{<TR> }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00012}00012 \textcolor{comment}{<TD>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00013}00013 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00014}00014 \textcolor{comment}{<B>Two-\/dimensional advection-\/diffusion problem in a rectangular domain</B>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00015}00015 \textcolor{comment}{</CENTER> }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00016}00016 \textcolor{comment}{Solve}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00017}00017 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00018}00018 \textcolor{comment}{\(\backslash\)mbox\{Pe\}\(\backslash\) \(\backslash\)sum\_\{i=1\}\string^2 w\_i \(\backslash\)left(x\_1,x\_2 \(\backslash\)right) \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00019}00019 \textcolor{comment}{x\_i\} = \(\backslash\)sum\_\{i=1\}\string^2 \(\backslash\)frac\{\(\backslash\)partial\string^2u\}\{\(\backslash\)partial x\_i\string^2\} + f(x\_1,x\_2), }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00020}00020 \textcolor{comment}{ \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (1)}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00021}00021 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00022}00022 \textcolor{comment}{in the rectangular domain \(\backslash\)f\$D =\(\backslash\)left\(\backslash\)\{ (x\_1,x\_2) \(\backslash\)in }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00023}00023 \textcolor{comment}{[0,1] \(\backslash\)times [0,2]\(\backslash\)right\(\backslash\)\}\(\backslash\)f\$. We split the domain boundary \(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00024}00024 \textcolor{comment}{\(\backslash\)partial D \(\backslash\)f\$ into two parts so that}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00025}00025 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)partial D = \(\backslash\)partial D\_\{Neumann\} \(\backslash\)cup \(\backslash\)partial D\_\{Dirichlet\} \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00026}00026 \textcolor{comment}{where \(\backslash\)f\$ \(\backslash\)partial D\_\{Neumann\} }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00027}00027 \textcolor{comment}{= \(\backslash\)left\(\backslash\)\{ (x\_1,x\_2) | x\_1=1, \(\backslash\) x\_2\(\backslash\)in [0,2] \(\backslash\)right\(\backslash\)\} \(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00028}00028 \textcolor{comment}{On \(\backslash\)f\$ \(\backslash\)partial D\_\{Dirichlet\}\(\backslash\)f\$ we apply the Dirichlet boundary conditions}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00029}00029 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00030}00030 \textcolor{comment}{\(\backslash\)left. u\(\backslash\)right|\_\{\(\backslash\)partial D\_\{Dirichlet\}\}=u\_0,}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00031}00031 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (2)}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00032}00032 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00033}00033 \textcolor{comment}{where the function \(\backslash\)f\$ u\_0 \(\backslash\)f\$ is given. On  \(\backslash\)f\$ \(\backslash\)partial D\_\{Neumann\}\(\backslash\)f\$}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00034}00034 \textcolor{comment}{we apply the Neumann conditions }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00035}00035 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00036}00036 \textcolor{comment}{\(\backslash\)left. \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial n\}\(\backslash\)right|\_\{\(\backslash\)partial D\_\{Neumann\}\} = }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00037}00037 \textcolor{comment}{\(\backslash\)left. \(\backslash\)frac\{\(\backslash\)partial u\}\{\(\backslash\)partial x\_1\}\(\backslash\)right|\_\{\(\backslash\)partial D\_\{Neumann\}\}}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00038}00038 \textcolor{comment}{=g\_0,}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00039}00039 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) (3)}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00040}00040 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00041}00041 \textcolor{comment}{where the function \(\backslash\)f\$ g\_0 \(\backslash\)f\$ is given.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00042}00042 \textcolor{comment}{</TD>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00043}00043 \textcolor{comment}{</TR>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00044}00044 \textcolor{comment}{</TABLE>  }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00045}00045 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00046}00046 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00047}00047 \textcolor{comment}{As always, we validate the code by choosing the  boundary data and the}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00048}00048 \textcolor{comment}{source functions such that }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00049}00049 \textcolor{comment}{\(\backslash\)f[}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00050}00050 \textcolor{comment}{u(x\_1,x\_2) = \(\backslash\)tanh(1-\/\(\backslash\)alpha(x\_1 \(\backslash\)tan\(\backslash\)Phi -\/ x\_2)),}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00051}00051 \textcolor{comment}{\(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\) \(\backslash\)  (4)}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00052}00052 \textcolor{comment}{\(\backslash\)f]}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00053}00053 \textcolor{comment}{is the exact solution of the problem.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00054}00054 \textcolor{comment}{The plot below shows the numerical solution for \(\backslash\)f\$\(\backslash\)Phi=45\string^\(\backslash\)circ \(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00055}00055 \textcolor{comment}{a Peclet number of \(\backslash\)f\$\(\backslash\)mbox\{Pe\}= 200 \(\backslash\)f\$, and four }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00056}00056 \textcolor{comment}{different values of the "{}steepness parameter"{}, }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00057}00057 \textcolor{comment}{\(\backslash\)f\$ \(\backslash\)alpha =  0.2,\(\backslash\) 5,\(\backslash\) 10 \(\backslash\)f\$ and \(\backslash\)f\$ 15 \(\backslash\)f\$. }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00058}00058 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00059}00059 \textcolor{comment}{\(\backslash\)image html step\_soln.gif "{}Animation of the adaptive solution for various values of the `steepness parameter'. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00060}00060 \textcolor{comment}{\(\backslash\)image latex step\_soln.eps "{}Animation of the adaptive solution for various values of the `steepness parameter'. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00061}00061 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00062}00062 \textcolor{comment}{As in the  <A HREF="{}../../two\_d\_adv\_diff\_adapt/html/index.html"{}>example }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00063}00063 \textcolor{comment}{with Dirichlet boundary conditions</A>, the unforced case is a lot }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00064}00064 \textcolor{comment}{more interesting. The plot below shows the result for a zero source function}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00065}00065 \textcolor{comment}{\(\backslash\)f\$ f \(\backslash\)equiv 0 \(\backslash\)f\$, Dirichlet boundary conditions determined from}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00066}00066 \textcolor{comment}{the "{}exact solution"{} of the forced problem for \(\backslash\)f\$ \(\backslash\)alpha = 15\(\backslash\)f\$,}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00067}00067 \textcolor{comment}{and a prescribed flux of \(\backslash\)f\$ g\_0 = -\/1 \(\backslash\)f\$ on \(\backslash\)f\$ \(\backslash\)partial D\_\{Neumann\}\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00068}00068 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00069}00069 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00070}00070 \textcolor{comment}{\(\backslash\)image html no\_source.gif "{}Plot of the adaptive solution of the unforced problem. "{} }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00071}00071 \textcolor{comment}{\(\backslash\)image latex no\_source.eps "{}Plot of the adaptive solution of the unforced problem. "{} width=0.75\(\backslash\)textwidth}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00072}00072 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00073}00073 \textcolor{comment}{Along \(\backslash\)f\$ \(\backslash\)partial D\_\{Dirichlet\}\(\backslash\)f\$, the value of \(\backslash\)f\$ u \(\backslash\)f\$ is enforced}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00074}00074 \textcolor{comment}{by the Dirichlet boundary condition (2) and,}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00075}00075 \textcolor{comment}{as in the  <A HREF="{}../../two\_d\_adv\_diff\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00076}00076 \textcolor{comment}{previous example</A>, the "{}wind"{} either sweeps this value into the}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00077}00077 \textcolor{comment}{interior of the domain or creates a sharp boundary layer within}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00078}00078 \textcolor{comment}{which the solution that is "{}swept"{} along from the interior adjusts itself}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00079}00079 \textcolor{comment}{to the prescribed boundary value. Along \(\backslash\)f\$ \(\backslash\)partial D\_\{Neumann\}\(\backslash\)f\$, the}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00080}00080 \textcolor{comment}{flux boundary condition  (3) imposes the normal}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00081}00081 \textcolor{comment}{derivative of the solution. This boundary condition is much}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00082}00082 \textcolor{comment}{"{}softer"{} than the Dirichlet condition and does not create boundary}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00083}00083 \textcolor{comment}{layers that are as sharp as the ones that develop on }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00084}00084 \textcolor{comment}{ \(\backslash\)f\$ \(\backslash\)partial D\_\{Dirichlet\}\(\backslash\)f\$.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00085}00085 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00086}00086 \textcolor{comment}{<HR>   }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00087}00087 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00088}00088 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00089}00089 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00090}00090 \textcolor{comment}{\(\backslash\)section code The driver code}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00091}00091 \textcolor{comment}{The <A HREF="{}../../../../demo\_drivers/advection\_diffusion/two\_d\_adv\_diff\_flux\_bc/two\_d\_adv\_diff\_flux\_bc.cc"{}>driver}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00092}00092 \textcolor{comment}{code</A> for this problem is so similar to the }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00093}00093 \textcolor{comment}{<A HREF="{}../../../poisson/two\_d\_poisson\_flux\_bc\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00094}00094 \textcolor{comment}{corresponding Poisson problem</A> that we do not list it here.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00095}00095 \textcolor{comment}{The modifications are the same as those discussed}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00096}00096 \textcolor{comment}{in the  <A HREF="{}../../two\_d\_adv\_diff\_adapt/html/index.html"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00097}00097 \textcolor{comment}{advection diffusion problem with Dirichlet boundary conditions:</A>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00098}00098 \textcolor{comment}{We have to specify the wind function and the Peclet number. }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00099}00099 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00100}00100 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00101}00101 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00102}00102 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00103}00103 \textcolor{comment}{<HR>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00104}00104 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00105}00105 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00106}00106 \textcolor{comment}{\(\backslash\)section sources Source files for this tutorial}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00107}00107 \textcolor{comment}{-\/ The source files for this tutorial are located in the directory:}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00108}00108 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00109}00109 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/advection\_diffusion/two\_d\_adv\_diff\_flux\_bc/"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00110}00110 \textcolor{comment}{demo\_drivers/advection\_diffusion/two\_d\_adv\_diff\_flux\_bc/}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00111}00111 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00112}00112 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00113}00113 \textcolor{comment}{-\/ The driver code is: }}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00114}00114 \textcolor{comment}{<CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00115}00115 \textcolor{comment}{<A HREF="{}../../../../demo\_drivers/advection\_diffusion/two\_d\_adv\_diff\_flux\_bc/two\_d\_adv\_diff\_flux\_bc.cc"{}>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00116}00116 \textcolor{comment}{demo\_drivers/advection\_diffusion/two\_d\_adv\_diff\_flux\_bc/two\_d\_adv\_diff\_flux\_bc.cc}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00117}00117 \textcolor{comment}{</A>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00118}00118 \textcolor{comment}{</CENTER>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00119}00119 \textcolor{comment}{.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00120}00120 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00121}00121 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00122}00122 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00123}00123 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00124}00124 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00125}00125 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00126}00126 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00127}00127 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00128}00128 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00129}00129 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00130}00130 \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00131}00131 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00132}00132 \textcolor{comment}{<hr>}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00133}00133 \textcolor{comment}{\(\backslash\)section pdf PDF file}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00134}00134 \textcolor{comment}{A <a href="{}../latex/refman.pdf"{}>pdf version</a> of this document is available.}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00135}00135 \textcolor{comment}{**/}}
+\DoxyCodeLine{\Hypertarget{two__d__adv__diff__flux__bc_8txt__doxygenified_8h_source_l00136}00136 }
+
+\end{DoxyCode}

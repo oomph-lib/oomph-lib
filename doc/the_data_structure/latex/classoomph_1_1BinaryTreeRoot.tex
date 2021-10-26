@@ -2,6 +2,11 @@
 \label{classoomph_1_1BinaryTreeRoot}\index{oomph::BinaryTreeRoot@{oomph::BinaryTreeRoot}}
 
 
+\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} that forms the root of a (recursive) binary tree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours.  
+
+
+
+
 {\ttfamily \#include $<$binary\+\_\+tree.\+h$>$}
 
 Inheritance diagram for oomph\+::Binary\+Tree\+Root\+:\begin{figure}[H]
@@ -13,21 +18,21 @@ Inheritance diagram for oomph\+::Binary\+Tree\+Root\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot_a0041d849b67407699770118eaa06b52a}{Binary\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a2f2eeb0f1dd161f696cccc652974ff4c}{object\+\_\+pt}})
-\item 
-\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot_adadf7a81e693afcc94ee2ac1446730f0}{Binary\+Tree\+Root}} (const \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot_a0041d849b67407699770118eaa06b52a}{Binary\+Tree\+Root}} (\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&\mbox{\hyperlink{classoomph_1_1Tree_a7d630dad19ef861ab6a5f37ad6ea67f4}{object\+\_\+pt}})
+\begin{DoxyCompactList}\small\item\em Constructor for the (empty) root binary tree\+: Pass pointer to associated object, a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_011_01_4}{Refineable\+QElement$<$1$>$}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot_a7e218bf7162d8d1a49569d89eda8091b}{Binary\+Tree\+Root}} (const \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot_a1916638c64e0be6660bad778bf942576}{operator=}} (const \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} \&)
+void \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot_a2e6227a8c4adc5bee556f3ab8630bcb2}{operator=}} (const \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} \&)=delete
 \begin{DoxyCompactList}\small\item\em Broken assignment operator. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot_a2068dd13b3a8636bbcde996e39dc7d1c}{direction\+\_\+of\+\_\+neighbour}} (\mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} $\ast$binary\+\_\+tree\+\_\+root\+\_\+pt)
-\begin{DoxyCompactList}\small\item\em If binary\+\_\+tree\+\_\+root\+\_\+pt is a neighbour, return the direction (L/R) in which it is found, otherwise return O\+M\+E\+GA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em If binary\+\_\+tree\+\_\+root\+\_\+pt is a neighbour, return the direction (L/R) in which it is found, otherwise return OMEGA. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} is a \mbox{\hyperlink{classoomph_1_1BinaryTree}{Binary\+Tree}} that forms the root of a (recursive) binary tree. The \char`\"{}root node\char`\"{} is special as it holds additional information about its neighbours. 
 
-Definition at line 236 of file binary\+\_\+tree.\+h.
+Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00230}{230}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
 
 
 
@@ -38,31 +43,27 @@ Definition at line 236 of file binary\+\_\+tree.\+h.
 \doxysubsubsection{\texorpdfstring{BinaryTreeRoot()}{BinaryTreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily oomph\+::\+Binary\+Tree\+Root\+::\+Binary\+Tree\+Root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableElement}{Refineable\+Element}} $\ast$const \&}]{object\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Constructor for the (empty) root binary tree\+: Pass pointer to associated object, a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_011_01_4}{Refineable\+Q\+Element$<$1$>$}}. 
-
-Definition at line 241 of file binary\+\_\+tree.\+h.
 
 
+Constructor for the (empty) root binary tree\+: Pass pointer to associated object, a \mbox{\hyperlink{classoomph_1_1RefineableQElement_3_011_01_4}{Refineable\+QElement$<$1$>$}}. 
 
-References oomph\+::\+Binary\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup, and oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string().
 
-\mbox{\Hypertarget{classoomph_1_1BinaryTreeRoot_adadf7a81e693afcc94ee2ac1446730f0}\label{classoomph_1_1BinaryTreeRoot_adadf7a81e693afcc94ee2ac1446730f0}} 
+
+Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00235}{235}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
+
+
+
+References \mbox{\hyperlink{binary__tree_8h_source_l00193}{oomph\+::\+Binary\+Tree\+::\+Static\+\_\+data\+\_\+has\+\_\+been\+\_\+setup}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}.
+
+\mbox{\Hypertarget{classoomph_1_1BinaryTreeRoot_a7e218bf7162d8d1a49569d89eda8091b}\label{classoomph_1_1BinaryTreeRoot_a7e218bf7162d8d1a49569d89eda8091b}} 
 \index{oomph::BinaryTreeRoot@{oomph::BinaryTreeRoot}!BinaryTreeRoot@{BinaryTreeRoot}}
 \index{BinaryTreeRoot@{BinaryTreeRoot}!oomph::BinaryTreeRoot@{oomph::BinaryTreeRoot}}
 \doxysubsubsection{\texorpdfstring{BinaryTreeRoot()}{BinaryTreeRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily oomph\+::\+Binary\+Tree\+Root\+::\+Binary\+Tree\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily oomph\+::\+Binary\+Tree\+Root\+::\+Binary\+Tree\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
-
-
-
-Definition at line 261 of file binary\+\_\+tree.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
@@ -75,33 +76,25 @@ References oomph\+::\+Broken\+Copy\+::broken\+\_\+copy().
 
 
 
-If binary\+\_\+tree\+\_\+root\+\_\+pt is a neighbour, return the direction (L/R) in which it is found, otherwise return O\+M\+E\+GA. 
+If binary\+\_\+tree\+\_\+root\+\_\+pt is a neighbour, return the direction (L/R) in which it is found, otherwise return OMEGA. 
 
 
 
-Definition at line 274 of file binary\+\_\+tree.\+h.
+Definition at line \mbox{\hyperlink{binary__tree_8h_source_l00262}{262}} of file \mbox{\hyperlink{binary__tree_8h_source}{binary\+\_\+tree.\+h}}.
 
 
 
-References oomph\+::\+Binary\+Tree\+Names\+::L, oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt, oomph\+::\+Tree\+::\+O\+M\+E\+GA, and oomph\+::\+Binary\+Tree\+Names\+::R.
+References \mbox{\hyperlink{binary__tree_8h_source_l00050}{oomph\+::\+Binary\+Tree\+Names\+::L}}, \mbox{\hyperlink{tree_8h_source_l00330}{oomph\+::\+Tree\+Root\+::\+Neighbour\+\_\+pt}}, \mbox{\hyperlink{tree_8h_source_l00262}{oomph\+::\+Tree\+::\+OMEGA}}, and \mbox{\hyperlink{binary__tree_8h_source_l00051}{oomph\+::\+Binary\+Tree\+Names\+::R}}.
 
-\mbox{\Hypertarget{classoomph_1_1BinaryTreeRoot_a1916638c64e0be6660bad778bf942576}\label{classoomph_1_1BinaryTreeRoot_a1916638c64e0be6660bad778bf942576}} 
+\mbox{\Hypertarget{classoomph_1_1BinaryTreeRoot_a2e6227a8c4adc5bee556f3ab8630bcb2}\label{classoomph_1_1BinaryTreeRoot_a2e6227a8c4adc5bee556f3ab8630bcb2}} 
 \index{oomph::BinaryTreeRoot@{oomph::BinaryTreeRoot}!operator=@{operator=}}
 \index{operator=@{operator=}!oomph::BinaryTreeRoot@{oomph::BinaryTreeRoot}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void oomph\+::\+Binary\+Tree\+Root\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void oomph\+::\+Binary\+Tree\+Root\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1BinaryTreeRoot}{Binary\+Tree\+Root}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken assignment operator. 
-
-
-
-Definition at line 267 of file binary\+\_\+tree.\+h.
-
-
-
-References oomph\+::\+Broken\+Copy\+::broken\+\_\+assign().
 
 
 

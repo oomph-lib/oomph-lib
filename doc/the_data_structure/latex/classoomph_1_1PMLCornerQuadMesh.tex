@@ -1,15 +1,15 @@
-\hypertarget{classoomph_1_1PMLCornerQuadMesh}{}\doxysection{oomph\+::P\+M\+L\+Corner\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1PMLCornerQuadMesh}{}\doxysection{oomph\+::PMLCorner\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1PMLCornerQuadMesh}\index{oomph::PMLCornerQuadMesh$<$ ELEMENT $>$@{oomph::PMLCornerQuadMesh$<$ ELEMENT $>$}}
 
 
-P\+ML mesh, derived from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}}.  
+/////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////  
 
 
 
 
 {\ttfamily \#include $<$pml\+\_\+meshes.\+h$>$}
 
-Inheritance diagram for oomph\+::P\+M\+L\+Corner\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::PMLCorner\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.000000cm]{classoomph_1_1PMLCornerQuadMesh}
@@ -18,18 +18,19 @@ Inheritance diagram for oomph\+::P\+M\+L\+Corner\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1PMLCornerQuadMesh_ad3281c5cd6b8283ddab295c3acbaf218}{P\+M\+L\+Corner\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$P\+M\+L\+Quad\+\_\+mesh\+\_\+x\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$P\+M\+L\+Quad\+\_\+mesh\+\_\+y\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$bulk\+\_\+mesh\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$special\+\_\+corner\+\_\+node\+\_\+pt, const unsigned \&parent\+\_\+boundary\+\_\+x\+\_\+id, const unsigned \&parent\+\_\+boundary\+\_\+y\+\_\+id, const unsigned \&current\+\_\+boundary\+\_\+x\+\_\+id, const unsigned \&current\+\_\+boundary\+\_\+y\+\_\+id, const unsigned \&n\+\_\+pml\+\_\+x, const unsigned \&n\+\_\+pml\+\_\+y, const double \&x\+\_\+pml\+\_\+start, const double \&x\+\_\+pml\+\_\+end, const double \&y\+\_\+pml\+\_\+start, const double \&y\+\_\+pml\+\_\+end, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
-\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to \char`\"{}bulk\char`\"{} mesh and the two existing P\+ML meshes in order to construct the corner P\+ML mesh in between them based on their element number and coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classoomph_1_1PMLCornerQuadMesh_ad3281c5cd6b8283ddab295c3acbaf218}{PMLCorner\+Quad\+Mesh}} (\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$PMLQuad\+\_\+mesh\+\_\+x\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$PMLQuad\+\_\+mesh\+\_\+y\+\_\+pt, \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$bulk\+\_\+mesh\+\_\+pt, Node $\ast$special\+\_\+corner\+\_\+node\+\_\+pt, const unsigned \&parent\+\_\+boundary\+\_\+x\+\_\+id, const unsigned \&parent\+\_\+boundary\+\_\+y\+\_\+id, const unsigned \&current\+\_\+boundary\+\_\+x\+\_\+id, const unsigned \&current\+\_\+boundary\+\_\+y\+\_\+id, const unsigned \&n\+\_\+pml\+\_\+x, const unsigned \&n\+\_\+pml\+\_\+y, const double \&x\+\_\+pml\+\_\+start, const double \&x\+\_\+pml\+\_\+end, const double \&y\+\_\+pml\+\_\+start, const double \&y\+\_\+pml\+\_\+end, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em Constructor\+: Pass pointer to \char`\"{}bulk\char`\"{} mesh and the two existing PML meshes in order to construct the corner PML mesh in between them based on their element number and coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+P\+M\+L\+Corner\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+PMLCorner\+Quad\+Mesh$<$ ELEMENT $>$}
+/////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////// 
 
-P\+ML mesh, derived from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}}. 
+PML mesh, derived from \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}}. 
 
-Definition at line 776 of file pml\+\_\+meshes.\+h.
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00776}{776}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
 
 
 
@@ -38,12 +39,12 @@ Definition at line 776 of file pml\+\_\+meshes.\+h.
 \index{oomph::PMLCornerQuadMesh$<$ ELEMENT $>$@{oomph::PMLCornerQuadMesh$<$ ELEMENT $>$}!PMLCornerQuadMesh@{PMLCornerQuadMesh}}
 \index{PMLCornerQuadMesh@{PMLCornerQuadMesh}!oomph::PMLCornerQuadMesh$<$ ELEMENT $>$@{oomph::PMLCornerQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{PMLCornerQuadMesh()}{PMLCornerQuadMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1PMLCornerQuadMesh}{oomph\+::\+P\+M\+L\+Corner\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLCornerQuadMesh}{P\+M\+L\+Corner\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{P\+M\+L\+Quad\+\_\+mesh\+\_\+x\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{P\+M\+L\+Quad\+\_\+mesh\+\_\+y\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Node}{Node}} $\ast$}]{special\+\_\+corner\+\_\+node\+\_\+pt,  }\item[{const unsigned \&}]{parent\+\_\+boundary\+\_\+x\+\_\+id,  }\item[{const unsigned \&}]{parent\+\_\+boundary\+\_\+y\+\_\+id,  }\item[{const unsigned \&}]{current\+\_\+boundary\+\_\+x\+\_\+id,  }\item[{const unsigned \&}]{current\+\_\+boundary\+\_\+y\+\_\+id,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+y,  }\item[{const double \&}]{x\+\_\+pml\+\_\+start,  }\item[{const double \&}]{x\+\_\+pml\+\_\+end,  }\item[{const double \&}]{y\+\_\+pml\+\_\+start,  }\item[{const double \&}]{y\+\_\+pml\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1PMLCornerQuadMesh}{oomph\+::\+PMLCorner\+Quad\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1PMLCornerQuadMesh}{PMLCorner\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{PMLQuad\+\_\+mesh\+\_\+x\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{PMLQuad\+\_\+mesh\+\_\+y\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} $\ast$}]{bulk\+\_\+mesh\+\_\+pt,  }\item[{Node $\ast$}]{special\+\_\+corner\+\_\+node\+\_\+pt,  }\item[{const unsigned \&}]{parent\+\_\+boundary\+\_\+x\+\_\+id,  }\item[{const unsigned \&}]{parent\+\_\+boundary\+\_\+y\+\_\+id,  }\item[{const unsigned \&}]{current\+\_\+boundary\+\_\+x\+\_\+id,  }\item[{const unsigned \&}]{current\+\_\+boundary\+\_\+y\+\_\+id,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+x,  }\item[{const unsigned \&}]{n\+\_\+pml\+\_\+y,  }\item[{const double \&}]{x\+\_\+pml\+\_\+start,  }\item[{const double \&}]{x\+\_\+pml\+\_\+end,  }\item[{const double \&}]{y\+\_\+pml\+\_\+start,  }\item[{const double \&}]{y\+\_\+pml\+\_\+end,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor\+: Pass pointer to \char`\"{}bulk\char`\"{} mesh and the two existing P\+ML meshes in order to construct the corner P\+ML mesh in between them based on their element number and coordinates. 
+Constructor\+: Pass pointer to \char`\"{}bulk\char`\"{} mesh and the two existing PML meshes in order to construct the corner PML mesh in between them based on their element number and coordinates. 
 
 Simple interior node numbering helpers to be precomputed before the main loop
 
@@ -53,11 +54,11 @@ Lower right node in element
 
 Top right node in element
 
-Definition at line 783 of file pml\+\_\+meshes.\+h.
+Definition at line \mbox{\hyperlink{pml__meshes_8h_source_l00783}{783}} of file \mbox{\hyperlink{pml__meshes_8h_source}{pml\+\_\+meshes.\+h}}.
 
 
 
-References oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt(), e, oomph\+::\+Mesh\+::element\+\_\+pt(), oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt(), n, oomph\+::\+Mesh\+::nboundary\+\_\+node(), oomph\+::\+Mesh\+::nelement(), oomph\+::\+Finite\+Element\+::nnode\+\_\+1d(), oomph\+::\+Mesh\+::prune\+\_\+dead\+\_\+nodes(), oomph\+::\+Node\+::set\+\_\+obsolete(), oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+right\+\_\+boundary(), and oomph\+::\+Two\+Dimensional\+P\+M\+L\+Helper\+::sorter\+\_\+top\+\_\+boundary().
+References \mbox{\hyperlink{mesh_8h_source_l00493}{oomph\+::\+Mesh\+::boundary\+\_\+node\+\_\+pt()}}, \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{mesh_8h_source_l00460}{oomph\+::\+Mesh\+::element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00473}{oomph\+::\+Mesh\+::finite\+\_\+element\+\_\+pt()}}, \mbox{\hyperlink{mesh_8h_source_l00833}{oomph\+::\+Mesh\+::nboundary\+\_\+node()}}, \mbox{\hyperlink{mesh_8h_source_l00590}{oomph\+::\+Mesh\+::nelement()}}, \mbox{\hyperlink{elements_8h_source_l02223}{oomph\+::\+Finite\+Element\+::nnode\+\_\+1d()}}, \mbox{\hyperlink{mesh_8cc_source_l00966}{oomph\+::\+Mesh\+::prune\+\_\+dead\+\_\+nodes()}}, \mbox{\hyperlink{pml__meshes_8cc_source_l00039}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+right\+\_\+boundary()}}, and \mbox{\hyperlink{pml__meshes_8cc_source_l00045}{oomph\+::\+Two\+Dimensional\+PMLHelper\+::sorter\+\_\+top\+\_\+boundary()}}.
 
 
 

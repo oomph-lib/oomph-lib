@@ -14,7 +14,7 @@ The purpose of this tutorial is to show how to specify different linear solvers 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_overview}{}\doxysection{Overview}\label{index_overview}
-As discussed in the \href{../../the_data_structure/html/index.html}{\texttt{ bottom-\/up discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} data structure}}, by default {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solver, {\ttfamily Problem\+::newton\+\_\+solve(...)} solves the linear systems arising during the Newton iteration with its default linear solver, \href{../../the_data_structure/html/classoomph_1_1SuperLUSolver.html}{\texttt{ {\ttfamily  Super\+L\+U\+Solver}}}, a wrapper to Demmel, Eistenstat, Gilbert, Li \& Liu\textquotesingle{}s sparse direct solver \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU.}}
+As discussed in the \href{../../the_data_structure/html/index.html}{\texttt{ bottom-\/up discussion of {\ttfamily oomph-\/lib\textquotesingle{}s} data structure}}, by default {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solver, {\ttfamily Problem\+::newton\+\_\+solve(...)} solves the linear systems arising during the Newton iteration with its default linear solver, \href{../../the_data_structure/html/classoomph_1_1SuperLUSolver.html}{\texttt{ {\ttfamily  Super\+LUSolver}}}, a wrapper to Demmel, Eistenstat, Gilbert, Li \& Liu\textquotesingle{}s sparse direct solver \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU.}}
 
 {\ttfamily oomph-\/lib} provides a large number of alternative linear solvers that may be used instead. All linear solvers within the library are derived from the base class \href{../../the_data_structure/html/classoomph_1_1LinearSolver.html}{\texttt{ {\ttfamily  Linear\+Solver}}} which contains a single pure virtual function
 
@@ -23,9 +23,7 @@ As discussed in the \href{../../the_data_structure/html/index.html}{\texttt{ bot
 \DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} solve(Problem* \textcolor{keyword}{const}\& problem\_pt, DoubleVector\& result) = 0;}
 
 \end{DoxyCodeInclude}
-
-
-whose task it is to compute the solution $ \delta {\bf x} $ (returned in the vector {\ttfamily result}) of the linear system \[ {\cal J} \delta {\bf x} = -{\bf r} \] where $ {\bf r} $ and $ {\cal J} $ are the global Jacobian and the residual vector, computed by the {\ttfamily Problem} pointed to by {\ttfamily problem\+\_\+pt}. The \href{../../the_data_structure/html/classoomph_1_1LinearSolver.html}{\texttt{ {\ttfamily  Linear\+Solver}}} class also defines linear-\/algebra-\/type interfaces that allow the solution of linear systems with matrices other than the {\ttfamily Problem\textquotesingle{}s} Jacobian matrix. However, these methods may not be implemented for all linear solvers.
+ whose task it is to compute the solution $ \delta {\bf x} $ (returned in the vector {\ttfamily result}) of the linear system \[ {\cal J} \delta {\bf x} = -{\bf r} \] where $ {\bf r} $ and $ {\cal J} $ are the global Jacobian and the residual vector, computed by the {\ttfamily Problem} pointed to by {\ttfamily problem\+\_\+pt}. The \href{../../the_data_structure/html/classoomph_1_1LinearSolver.html}{\texttt{ {\ttfamily  Linear\+Solver}}} class also defines linear-\/algebra-\/type interfaces that allow the solution of linear systems with matrices other than the {\ttfamily Problem\textquotesingle{}s} Jacobian matrix. However, these methods may not be implemented for all linear solvers.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -42,18 +40,18 @@ whose task it is to compute the solution $ \delta {\bf x} $ (returned in the vec
 ~\newline
 
 \begin{DoxyItemize}
-\item \href{../../the_data_structure/html/classoomph_1_1SuperLUSolver.html}{\texttt{ {\ttfamily Super\+L\+U\+Solver}}}\+: {\ttfamily oomph-\/lib\textquotesingle{}s} default linear solver, a wrapper to Demmel, Eistenstat, Gilbert, Li \& Liu\textquotesingle{}s sparse direct solver \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU.}} ~\newline
+\item \href{../../the_data_structure/html/classoomph_1_1SuperLUSolver.html}{\texttt{ {\ttfamily Super\+LUSolver}}}\+: {\ttfamily oomph-\/lib\textquotesingle{}s} default linear solver, a wrapper to Demmel, Eistenstat, Gilbert, Li \& Liu\textquotesingle{}s sparse direct solver \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU.}} ~\newline
 ~\newline
 
-\item \href{../../the_data_structure/html/classoomph_1_1HSL__MA42.html}{\texttt{ {\ttfamily H\+S\+L\+\_\+\+M\+A42}}}\+: A wrapper to the frontal solver M\+A42 from the \href{http://www.hsl.rl.ac.uk/}{\texttt{ H\+SL library.}} This solver is available free-\/of-\/charge for UK academics. The source code can be dropped into the {\ttfamily oomph-\/lib} distribution; see the instructions in the dummy code~\newline
+\item \href{../../the_data_structure/html/classoomph_1_1HSL__MA42.html}{\texttt{ {\ttfamily HSL\+\_\+\+MA42}}}\+: A wrapper to the frontal solver MA42 from the \href{http://www.hsl.rl.ac.uk/}{\texttt{ HSL library.}} This solver is available free-\/of-\/charge for UK academics. The source code can be dropped into the {\ttfamily oomph-\/lib} distribution; see the instructions in the dummy code~\newline
 ~\newline
  \begin{center} \href{../../../external_src/oomph_hsl/dummy_frontal.f}{\texttt{ external\+\_\+src/oomph\+\_\+hsl/dummy\+\_\+frontal.\+f}}~\newline
 ~\newline
  \end{center} 
-\item \href{../../the_data_structure/html/classoomph_1_1DenseLU.html}{\texttt{ {\ttfamily Dense\+LU}}}\+: A direct solver, based on the LU decomposition of the Jacobian matrix which is stored as a dense matrix. Given that the Jacobian matrices arising from most problems are sparse, this is likely to be a very inefficient solver. It is mainly used by the derived (and even more inefficient!) solver \href{../../the_data_structure/html/classoomph_1_1FD__LU.html}{\texttt{ {\ttfamily F\+D\+\_\+\+LU}}}.~\newline
+\item \href{../../the_data_structure/html/classoomph_1_1DenseLU.html}{\texttt{ {\ttfamily Dense\+LU}}}\+: A direct solver, based on the LU decomposition of the Jacobian matrix which is stored as a dense matrix. Given that the Jacobian matrices arising from most problems are sparse, this is likely to be a very inefficient solver. It is mainly used by the derived (and even more inefficient!) solver \href{../../the_data_structure/html/classoomph_1_1FD__LU.html}{\texttt{ {\ttfamily FD\+\_\+\+LU}}}.~\newline
 ~\newline
 
-\item \href{../../the_data_structure/html/classoomph_1_1FD__LU.html}{\texttt{ {\ttfamily F\+D\+\_\+\+LU}}}\+: Almost certainly the world\textquotesingle{}s most inefficient solver. It computes the Jacobian matrix by finite differencing the global residual vector, without taking any sparsity into account. Mainly used by developers as a last-\/resort sanity check. ~\newline
+\item \href{../../the_data_structure/html/classoomph_1_1FD__LU.html}{\texttt{ {\ttfamily FD\+\_\+\+LU}}}\+: Almost certainly the world\textquotesingle{}s most inefficient solver. It computes the Jacobian matrix by finite differencing the global residual vector, without taking any sparsity into account. Mainly used by developers as a last-\/resort sanity check. ~\newline
 ~\newline
 
 \end{DoxyItemize}
@@ -61,14 +59,14 @@ whose task it is to compute the solution $ \delta {\bf x} $ (returned in the vec
 ~\newline
 
 \begin{DoxyItemize}
-\item {\ttfamily oomph-\/lib} provides its own implementations of various standard iterative linear solvers. They are derived from the base class \href{../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html}{\texttt{ {\ttfamily Iterative\+Linear\+Solver}}} and are typically templated by the matrix type used store the Jacobian matrix. In most cases you will want to set the template argument {\ttfamily M\+A\+T\+R\+IX} to {\ttfamily C\+R\+Double\+Matrix\+:} ~\newline
+\item {\ttfamily oomph-\/lib} provides its own implementations of various standard iterative linear solvers. They are derived from the base class \href{../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html}{\texttt{ {\ttfamily Iterative\+Linear\+Solver}}} and are typically templated by the matrix type used store the Jacobian matrix. In most cases you will want to set the template argument {\ttfamily MATRIX} to {\ttfamily CRDouble\+Matrix\+:} ~\newline
 ~\newline
 
 \begin{DoxyItemize}
-\item \href{../../the_data_structure/html/classoomph_1_1GMRES.html}{\texttt{ {\ttfamily G\+M\+R\+ES}}}\+: A Krylov subspace solver for symmetric and non-\/symmetric linear systems. The memory usage increases with each iteration but the iteration can be restarted. ~\newline
+\item \href{../../the_data_structure/html/classoomph_1_1GMRES.html}{\texttt{ {\ttfamily GMRES}}}\+: A Krylov subspace solver for symmetric and non-\/symmetric linear systems. The memory usage increases with each iteration but the iteration can be restarted. ~\newline
 ~\newline
 
-\item \href{../../the_data_structure/html/classoomph_1_1BiCGStab.html}{\texttt{ {\ttfamily Bi\+C\+G\+Stab}}}\+: A Krylov subspace method for symmetric and non-\/symmetric linear systems. The memory requirement remains constant throughout the iteration.~\newline
+\item \href{../../the_data_structure/html/classoomph_1_1BiCGStab.html}{\texttt{ {\ttfamily Bi\+CGStab}}}\+: A Krylov subspace method for symmetric and non-\/symmetric linear systems. The memory requirement remains constant throughout the iteration.~\newline
 ~\newline
 
 \item \href{../../the_data_structure/html/classoomph_1_1CG.html}{\texttt{ {\ttfamily CG}}}\+: The classical conjugate gradient method for symmetric positive definite matrices. The memory requirement remains constant throughout the iteration. ~\newline
@@ -77,14 +75,14 @@ whose task it is to compute the solution $ \delta {\bf x} $ (returned in the vec
 ~\newline
 
 \end{DoxyItemize}
-\item {\ttfamily oomph-\/lib} also provides wrappers to third-\/party iterative linear solvers. These tend to provide their own implementations of {\ttfamily G\+M\+R\+ES}, {\ttfamily Bi\+C\+G\+Stab}, {\ttfamily CG}, etc. but are not necessarily derived from {\ttfamily oomph-\/lib\textquotesingle{}s} own \href{../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html}{\texttt{ {\ttfamily Iterative\+Linear\+Solver}}} base class. ~\newline
+\item {\ttfamily oomph-\/lib} also provides wrappers to third-\/party iterative linear solvers. These tend to provide their own implementations of {\ttfamily GMRES}, {\ttfamily Bi\+CGStab}, {\ttfamily CG}, etc. but are not necessarily derived from {\ttfamily oomph-\/lib\textquotesingle{}s} own \href{../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html}{\texttt{ {\ttfamily Iterative\+Linear\+Solver}}} base class. ~\newline
 ~\newline
 
 \begin{DoxyItemize}
 \item \href{../../the_data_structure/html/classoomph_1_1HypreSolver.html}{\texttt{ {\ttfamily Hypre\+Solver}}}\+: A wrapper to the high-\/performance linear solvers/preconditioners from the \href{https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html}{\texttt{ Scalable Linear Solvers Project.}} ~\newline
 ~\newline
 
-\item \href{../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html}{\texttt{ {\ttfamily Trilinos\+Aztec\+O\+O\+Solver}}}\+: A wrapper to the linear solvers from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos Project.}}~\newline
+\item \href{../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html}{\texttt{ {\ttfamily Trilinos\+Aztec\+OOSolver}}}\+: A wrapper to the linear solvers from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos Project.}}~\newline
 ~\newline
 
 \end{DoxyItemize}
@@ -98,14 +96,15 @@ whose task it is to compute the solution $ \delta {\bf x} $ (returned in the vec
 ~\newline
 
 \begin{DoxyItemize}
-\item When {\ttfamily oomph-\/lib} is compiled with M\+PI support, its default linear solver \href{../../the_data_structure/html/classoomph_1_1SuperLUSolver.html}{\texttt{ {\ttfamily Super\+L\+U\+Solver}}} becomes a wrapper to Demmel, Eistenstat, Gilbert, Li \& Liu\textquotesingle{}s parallel sparse direct solver \href{http://crd.lbl.gov/~xiaoye/SuperLU\#superlu_dist}{\texttt{ Super\+L\+U\+\_\+\+D\+I\+ST.}} This behaviour can be over-\/ruled with the member function 
+\item When {\ttfamily oomph-\/lib} is compiled with MPI support, its default linear solver \href{../../the_data_structure/html/classoomph_1_1SuperLUSolver.html}{\texttt{ {\ttfamily Super\+LUSolver}}} becomes a wrapper to Demmel, Eistenstat, Gilbert, Li \& Liu\textquotesingle{}s parallel sparse direct solver \href{http://crd.lbl.gov/~xiaoye/SuperLU\#superlu_dist}{\texttt{ Super\+LU\+\_\+\+DIST.}} This behaviour can be over-\/ruled with the member function 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{SuperLUSolver::set\_solver\_type(...)}
+
 \end{DoxyCode}
- whose argument must specify one of the three options listed in the enumeration {\ttfamily Super\+L\+U\+Solver\+::\+Type}. This allows the serial solver \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU}} to be used even if {\ttfamily oomph-\/lib} is compiled with M\+PI support. ~\newline
+ whose argument must specify one of the three options listed in the enumeration {\ttfamily Super\+LUSolver\+::\+Type}. This allows the serial solver \href{http://crd.lbl.gov/~xiaoye/SuperLU}{\texttt{ Super\+LU}} to be used even if {\ttfamily oomph-\/lib} is compiled with MPI support. ~\newline
 ~\newline
 
-\item \href{../../the_data_structure/html/classoomph_1_1MumpsSolver.html}{\texttt{ {\ttfamily  Mumps\+Solver }}}\+: is a wrapper to the \href{http://graal.ens-lyon.fr/MUMPS/}{\texttt{ M\+U\+M\+PS }} multifrontal solver that is available when {\ttfamily oomph-\/lib} is compiled with M\+PI support and support for M\+U\+M\+PS.
+\item \href{../../the_data_structure/html/classoomph_1_1MumpsSolver.html}{\texttt{ {\ttfamily  Mumps\+Solver }}}\+: is a wrapper to the \href{http://graal.ens-lyon.fr/MUMPS/}{\texttt{ MUMPS }} multifrontal solver that is available when {\ttfamily oomph-\/lib} is compiled with MPI support and support for MUMPS.
 \end{DoxyItemize}
 \item {\bfseries{Iterative solvers\+:}} ~\newline
 ~\newline
@@ -114,7 +113,7 @@ whose task it is to compute the solution $ \delta {\bf x} $ (returned in the vec
 \item \href{../../the_data_structure/html/classoomph_1_1HypreSolver.html}{\texttt{ {\ttfamily Hypre\+Solver}}}\+: A wrapper to the high-\/performance linear solvers/preconditioners from the \href{https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html}{\texttt{ Scalable Linear Solvers Project.}} ~\newline
 ~\newline
 
-\item \href{../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html}{\texttt{ {\ttfamily Trilinos\+Aztec\+O\+O\+Solver}}}\+: A wrapper to the linear solvers from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos Project.}}~\newline
+\item \href{../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html}{\texttt{ {\ttfamily Trilinos\+Aztec\+OOSolver}}}\+: A wrapper to the linear solvers from the \href{http://trilinos.sandia.gov/}{\texttt{ Trilinos Project.}}~\newline
 ~\newline
 
 \end{DoxyItemize}
@@ -133,9 +132,7 @@ Changing {\ttfamily oomph-\/lib\textquotesingle{}s} linear solver is straightfor
 \DoxyCodeLine{ linear\_solver\_pt()=\textcolor{keyword}{new} DenseLU;}
 
 \end{DoxyCodeInclude}
-
-
-In any subsequent calls to {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solver, {\ttfamily Dense\+LU} will now be used to solve the linear systems arising during the Newton iteration.
+ In any subsequent calls to {\ttfamily oomph-\/lib\textquotesingle{}s} Newton solver, {\ttfamily Dense\+LU} will now be used to solve the linear systems arising during the Newton iteration.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -149,37 +146,31 @@ The specification of an iterative linear solver is just as easy\+: For instance,
 \DoxyCodeLine{ linear\_solver\_pt()=solver\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-to the problem constructor. We note that, by default, {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Iterative\+Linear\+Solvers} perform the preconditioning using the trivial \char`\"{}identity preconditioner\char`\"{}. Most Krylov subspace solvers perform very poorly without some sort of preconditioning.
+ to the problem constructor. We note that, by default, {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Iterative\+Linear\+Solvers} perform the preconditioning using the trivial \char`\"{}identity preconditioner\char`\"{}. Most Krylov subspace solvers perform very poorly without some sort of preconditioning.
 
 Specific preconditioners may be implemented by deriving from the {\ttfamily Preconditioner} base class, by implementing its two pure virtual functions
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Apply the preconditioner. Pure virtual generic interface}}
-\DoxyCodeLine{\textcolor{comment}{    /// function. This method should apply the preconditioner operator to the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{    /// vector r and return the vector z.}}
+\DoxyCodeLine{\textcolor{comment}{    /// Apply the preconditioner. Pure virtual generic interface}}
+\DoxyCodeLine{\textcolor{comment}{    /// function. This method should apply the preconditioner operator to the}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    /// vector r and return the vector z.}}
 \DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} preconditioner\_solve(\textcolor{keyword}{const} DoubleVector\& r,}
 \DoxyCodeLine{                                      DoubleVector\& z) = 0;}
 
 \end{DoxyCodeInclude}
-
-
-and
+ and
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{    \textcolor{comment}{/// \(\backslash\)short Setup the preconditioner. Pure virtual generic interface}}
+\DoxyCodeLine{\textcolor{comment}{    /// Setup the preconditioner. Pure virtual generic interface}}
 \DoxyCodeLine{\textcolor{comment}{    /// function.}}
-\DoxyCodeLine{\textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setup() = 0;}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setup() = 0;}
 
 \end{DoxyCodeInclude}
+ Note that, by default, {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Iterative\+Linear\+Solvers} employ left preconditioning.
 
-
-Note that, by default, {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Iterative\+Linear\+Solvers} employ left preconditioning.
-
-{\ttfamily oomph-\/lib} provides fully-\/functional implementations of several general-\/purpose preconditioners. For instance, the zero-\/fill-\/in incomplete LU factorisation preconditioner I\+L\+U(0) may be employed by adding the lines
+{\ttfamily oomph-\/lib} provides fully-\/functional implementations of several general-\/purpose preconditioners. For instance, the zero-\/fill-\/in incomplete LU factorisation preconditioner ILU(0) may be employed by adding the lines
 
  
 \begin{DoxyCodeInclude}{0}
@@ -187,17 +178,15 @@ Note that, by default, {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Ite
 \DoxyCodeLine{ solver\_pt-\/>preconditioner\_pt()=\textcolor{keyword}{new} ILUZeroPreconditioner<CRDoubleMatrix>; }
 
 \end{DoxyCodeInclude}
-
-
-to the {\ttfamily Problem} constructor.
+ to the {\ttfamily Problem} constructor.
 
 Of particular interest is the availability of an \char`\"{}exact preconditioner\char`\"{} ~\newline
- \href{../../the_data_structure/html/classoomph_1_1SuperLUPreconditioner.html}{\texttt{ {\ttfamily Super\+L\+U\+Preconditioner}}} whose use guarantees the convergence of any iterative solver within a single iteration -- useful for code development.
+ \href{../../the_data_structure/html/classoomph_1_1SuperLUPreconditioner.html}{\texttt{ {\ttfamily Super\+LUPreconditioner}}} whose use guarantees the convergence of any iterative solver within a single iteration -- useful for code development.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_third_party_iterative_linear_solvers}{}\doxysubsection{Third-\/party iterative linear solvers and preconditioners}\label{index_third_party_iterative_linear_solvers}
-{\ttfamily oomph-\/lib} provides wrappers to various third-\/party iterative linear solvers and preconditioners. We stress that these solvers are not necessarily implemented as {\ttfamily oomph-\/lib} {\ttfamily Iterative\+Linear\+Solvers} since their interfaces for the specification of preconditioners, etc may differ from those employed by {\ttfamily oomph-\/lib}. Furthermore, unlike {\ttfamily Super\+L\+U\+Solver} these solvers are not distributed as part of {\ttfamily oomph-\/lib} so you have to build/install them separately before installing {\ttfamily oomph-\/lib} ({\ttfamily oomph-\/lib\textquotesingle{}s} build machinery can do this for you if you wish; see \href{../../the_distribution/html/index.html\#external_dist}{\texttt{ installation instructions}} for details). Once this is done, they may be used like any other linear solver.
+{\ttfamily oomph-\/lib} provides wrappers to various third-\/party iterative linear solvers and preconditioners. We stress that these solvers are not necessarily implemented as {\ttfamily oomph-\/lib} {\ttfamily Iterative\+Linear\+Solvers} since their interfaces for the specification of preconditioners, etc may differ from those employed by {\ttfamily oomph-\/lib}. Furthermore, unlike {\ttfamily Super\+LUSolver} these solvers are not distributed as part of {\ttfamily oomph-\/lib} so you have to build/install them separately before installing {\ttfamily oomph-\/lib} ({\ttfamily oomph-\/lib\textquotesingle{}s} build machinery can do this for you if you wish; see \href{../../the_distribution/html/index.html\#external_dist}{\texttt{ installation instructions}} for details). Once this is done, they may be used like any other linear solver.
 
 \DoxyHorRuler{0}
 \hypertarget{index_trilinos}{}\doxysubsubsection{Trilinos}\label{index_trilinos}
@@ -222,9 +211,7 @@ The wrappers to Trilinos\textquotesingle{} Krylov subspace solvers are implement
 \DoxyCodeLine{  problem.linear\_solver\_pt() = linear\_solver\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-The actual Krylov subspace solver used by the {\ttfamily Trilinos} solver is specified by passing an enumerated flag (defined as static member data in the {\ttfamily Trilinos\+Aztec\+O\+O\+Solver} class) to the solver. For instance, {\ttfamily Trilinos\textquotesingle{}} CG, G\+M\+R\+ES and Bi\+C\+G\+Stab solvers are selected with
+ The actual Krylov subspace solver used by the {\ttfamily Trilinos} solver is specified by passing an enumerated flag (defined as static member data in the {\ttfamily Trilinos\+Aztec\+OOSolver} class) to the solver. For instance, {\ttfamily Trilinos\textquotesingle{}} CG, GMRES and Bi\+CGStab solvers are selected with
 
  
 \begin{DoxyCodeInclude}{0}
@@ -240,22 +227,18 @@ or
 \DoxyCodeLine{      linear\_solver\_pt-\/>solver\_type() = TrilinosAztecOOSolver::GMRES;}
 
 \end{DoxyCodeInclude}
-
-
-or
+ or
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{      linear\_solver\_pt-\/>solver\_type() = TrilinosAztecOOSolver::BiCGStab;}
 
 \end{DoxyCodeInclude}
-
-
-respectively.
+ respectively.
 
 {\bfseries{Trilinos preconditioners}}
 
-{\ttfamily oomph-\/lib} provides wrappers to {\ttfamily Trilinos\textquotesingle{}} ML and I\+F\+P\+A\+CK preconditioners that allows them to be used as {\ttfamily oomph-\/lib} {\ttfamily Preconditioners} that may be used with {\ttfamily oomph-\/lib\textquotesingle{}s} own {\ttfamily Iterative\+Linear\+Solvers}. Here is an example that shows how to build an instance of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily G\+M\+R\+ES}, preconditioned with its wrapper to {\ttfamily Trilinos\textquotesingle{}} {\ttfamily I\+F\+P\+A\+CK} preconditioner\+:
+{\ttfamily oomph-\/lib} provides wrappers to {\ttfamily Trilinos\textquotesingle{}} ML and IFPACK preconditioners that allows them to be used as {\ttfamily oomph-\/lib} {\ttfamily Preconditioners} that may be used with {\ttfamily oomph-\/lib\textquotesingle{}s} own {\ttfamily Iterative\+Linear\+Solvers}. Here is an example that shows how to build an instance of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily GMRES}, preconditioned with its wrapper to {\ttfamily Trilinos\textquotesingle{}} {\ttfamily IFPACK} preconditioner\+:
 
  
 \begin{DoxyCodeInclude}{0}
@@ -269,16 +252,14 @@ respectively.
 \DoxyCodeLine{   linear\_solver\_pt-\/>preconditioner\_pt()=preconditioner\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_hypre}{}\doxysubsubsection{Hypre}\label{index_hypre}
 {\ttfamily oomph-\/lib} provides wrappers to the high-\/performance linear solvers/preconditioners from the \href{https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html}{\texttt{ Scalable Linear Solvers Project.}} The demo code \href{../../../demo_drivers/linear_solvers/HypreSolver_test.cc}{\texttt{ Hypre\+Solver\+\_\+test.\+cc}} demonstrates how use various combinations of solvers/preconditioners. Here is a brief overview\+:
 
 {\bfseries{Hypre solvers}}
 
-The wrappers to Hypre\textquotesingle{}s Krylov subspace and A\+MG solvers are implemented as {\ttfamily oomph-\/lib} {\ttfamily Linear\+Solvers} (not {\ttfamily Iterative\+Linear\+Solvers!}) ~\newline
+The wrappers to Hypre\textquotesingle{}s Krylov subspace and AMG solvers are implemented as {\ttfamily oomph-\/lib} {\ttfamily Linear\+Solvers} (not {\ttfamily Iterative\+Linear\+Solvers!}) ~\newline
  so the interfaces for the specification of preconditioners etc. differ from those for {\ttfamily oomph-\/lib\textquotesingle{}s} own {\ttfamily Iterative\+Linear\+Solvers}.
 
 The {\ttfamily Hypre\+Solver} is set like any other {\ttfamily Linear\+Solver\+:} 
@@ -294,83 +275,69 @@ The {\ttfamily Hypre\+Solver} is set like any other {\ttfamily Linear\+Solver\+:
 \end{DoxyCodeInclude}
 
 
-The actual solver used by the {\ttfamily Hypre\+Solver} is specified by passing an enumerated flag (defined as static member data in the {\ttfamily Hypre\+Solver} class) to the solver. For instance, {\ttfamily Hypre\textquotesingle{}s} A\+MG, CG, G\+M\+R\+ES and Bi\+C\+G\+Stab solvers are selected with
+The actual solver used by the {\ttfamily Hypre\+Solver} is specified by passing an enumerated flag (defined as static member data in the {\ttfamily Hypre\+Solver} class) to the solver. For instance, {\ttfamily Hypre\textquotesingle{}s} AMG, CG, GMRES and Bi\+CGStab solvers are selected with
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{     hypre\_linear\_solver\_pt-\/>hypre\_method() = HypreSolver::BoomerAMG;}
 
 \end{DoxyCodeInclude}
-
-
-or
+ or
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{     hypre\_linear\_solver\_pt-\/>hypre\_method() = HypreSolver::CG;}
 
 \end{DoxyCodeInclude}
-
-
-or
+ or
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{     hypre\_linear\_solver\_pt-\/>hypre\_method() = HypreSolver::GMRES;}
 
 \end{DoxyCodeInclude}
-
-
-or
+ or
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{     hypre\_linear\_solver\_pt-\/>hypre\_method() = HypreSolver::BiCGStab;}
 
 \end{DoxyCodeInclude}
+ respectively.
 
-
-respectively.
-
-These Krylov subspace methods may then be preconditioned by {\ttfamily Hypre\textquotesingle{}s} own (internal) preconditioners, again by specifying the method via an enumerated flag. So, to use no preconditioning, or to precondition with {\ttfamily Boomer\+A\+MG} (and A\+M\+G-\/based preconditioner), {\ttfamily Euclid} (an I\+LU preconditioner) or {\ttfamily Para\+Sails} (a sparse approximate inverse preconditioner), set\+:
+These Krylov subspace methods may then be preconditioned by {\ttfamily Hypre\textquotesingle{}s} own (internal) preconditioners, again by specifying the method via an enumerated flag. So, to use no preconditioning, or to precondition with {\ttfamily Boomer\+AMG} (and AMG-\/based preconditioner), {\ttfamily Euclid} (an ILU preconditioner) or {\ttfamily Para\+Sails} (a sparse approximate inverse preconditioner), set\+:
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{       hypre\_linear\_solver\_pt-\/>internal\_preconditioner()=HypreSolver::None;}
 
 \end{DoxyCodeInclude}
-
-
-or
+ or
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{       hypre\_linear\_solver\_pt-\/>internal\_preconditioner()=HypreSolver::BoomerAMG;}
 
 \end{DoxyCodeInclude}
-
-
-or
+ or
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{       hypre\_linear\_solver\_pt-\/>internal\_preconditioner()=HypreSolver::Euclid;}
 
 \end{DoxyCodeInclude}
- or
+or
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{       hypre\_linear\_solver\_pt-\/>internal\_preconditioner()=HypreSolver::ParaSails;}
 
 \end{DoxyCodeInclude}
-
-
-respectively.
+ respectively.
 
 {\bfseries{Hypre preconditioners}}
 
-{\ttfamily oomph-\/lib} provides wrappers to {\ttfamily Hypre\textquotesingle{}s} preconditioners that allows them to be used as {\ttfamily oomph-\/lib} {\ttfamily Preconditioners} that may be used with {\ttfamily oomph-\/lib\textquotesingle{}s} own {\ttfamily Iterative\+Linear\+Solvers}. Here is an example that shows how to build an instance of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Bi\+C\+G\+Stab} and to use the {\ttfamily Hypre\+Preconditioner} as the preconditioner\+:
+{\ttfamily oomph-\/lib} provides wrappers to {\ttfamily Hypre\textquotesingle{}s} preconditioners that allows them to be used as {\ttfamily oomph-\/lib} {\ttfamily Preconditioners} that may be used with {\ttfamily oomph-\/lib\textquotesingle{}s} own {\ttfamily Iterative\+Linear\+Solvers}. Here is an example that shows how to build an instance of {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Bi\+CGStab} and to use the {\ttfamily Hypre\+Preconditioner} as the preconditioner\+:
 
  
 \begin{DoxyCodeInclude}{0}
@@ -380,32 +347,26 @@ respectively.
 \DoxyCodeLine{ problem.linear\_solver\_pt() = oomph\_linear\_solver\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-Now we build an instance of a {\ttfamily Hypre\+Preconditioner} 
+ Now we build an instance of a {\ttfamily Hypre\+Preconditioner} 
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{// Create a new Hypre preconditioner}}
-\DoxyCodeLine{ HyprePreconditioner* \mbox{\hyperlink{linear__solvers_8txt_a603c7efd1d7772457a5d74feae1f6a6c}{hypre\_preconditioner\_pt}} = \textcolor{keyword}{new} HyprePreconditioner;}
+\DoxyCodeLine{ HyprePreconditioner* hypre\_preconditioner\_pt = \textcolor{keyword}{new} HyprePreconditioner;}
 
 \end{DoxyCodeInclude}
-
-
-and set it as the {\ttfamily Preconditioner} for {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Bi\+C\+G\+Stab} solver\+:
+ and set it as the {\ttfamily Preconditioner} for {\ttfamily oomph-\/lib\textquotesingle{}s} {\ttfamily Bi\+CGStab} solver\+:
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{   oomph\_linear\_solver\_pt-\/>preconditioner\_pt()=\mbox{\hyperlink{linear__solvers_8txt_a603c7efd1d7772457a5d74feae1f6a6c}{hypre\_preconditioner\_pt}};}
+\DoxyCodeLine{   oomph\_linear\_solver\_pt-\/>preconditioner\_pt()=hypre\_preconditioner\_pt;}
 
 \end{DoxyCodeInclude}
-
-
-The actual preconditioning methodology to be used by the {\ttfamily Hypre\+Preconditioner} is again selected via enumerated flags, i.\+e.
+ The actual preconditioning methodology to be used by the {\ttfamily Hypre\+Preconditioner} is again selected via enumerated flags, i.\+e.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{     \mbox{\hyperlink{linear__solvers_8txt_a603c7efd1d7772457a5d74feae1f6a6c}{hypre\_preconditioner\_pt}}-\/>hypre\_method() = HyprePreconditioner::BoomerAMG;}
+\DoxyCodeLine{     hypre\_preconditioner\_pt-\/>hypre\_method() = HyprePreconditioner::BoomerAMG;}
 
 \end{DoxyCodeInclude}
 
@@ -414,16 +375,14 @@ or
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{     \mbox{\hyperlink{linear__solvers_8txt_a603c7efd1d7772457a5d74feae1f6a6c}{hypre\_preconditioner\_pt}}-\/>hypre\_method() = HyprePreconditioner::Euclid;}
+\DoxyCodeLine{     hypre\_preconditioner\_pt-\/>hypre\_method() = HyprePreconditioner::Euclid;}
 
 \end{DoxyCodeInclude}
-
-
-or
+ or
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{     \mbox{\hyperlink{linear__solvers_8txt_a603c7efd1d7772457a5d74feae1f6a6c}{hypre\_preconditioner\_pt}}-\/>hypre\_method() = HyprePreconditioner::ParaSails;}
+\DoxyCodeLine{     hypre\_preconditioner\_pt-\/>hypre\_method() = HyprePreconditioner::ParaSails;}
 
 \end{DoxyCodeInclude}
 
@@ -431,7 +390,7 @@ or
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_specific_precond}{}\doxysection{Problem-\/specific preconditioners}\label{index_specific_precond}
-In addition to \char`\"{}general-\/purpose\char`\"{} preconditioners like I\+LU, {\ttfamily oomph-\/lib} provides a number of problem-\/specific preconditioners which are typically based on the library\textquotesingle{}s block preconditioning framework. Separate documentation is available for these\+:
+In addition to \char`\"{}general-\/purpose\char`\"{} preconditioners like ILU, {\ttfamily oomph-\/lib} provides a number of problem-\/specific preconditioners which are typically based on the library\textquotesingle{}s block preconditioning framework. Separate documentation is available for these\+:
 
 
 \begin{DoxyItemize}
@@ -444,7 +403,7 @@ In addition to \char`\"{}general-\/purpose\char`\"{} preconditioners like I\+LU,
 \item The Navier\+Stokes\+Schur\+Complement\+Preconditioner for Navier-\/\+Stokes problems is described in its \href{../../preconditioners/lsc_navier_stokes/html/index.html}{\texttt{ own tutorial. }} ~\newline
 ~\newline
 
-\item The F\+S\+I\+Preconditioner for monolithically-\/discretised fluid-\/structure interaction problems is described in its \href{../../preconditioners/fsi/html/index.html}{\texttt{ own tutorial}} ~\newline
+\item The FSIPreconditioner for monolithically-\/discretised fluid-\/structure interaction problems is described in its \href{../../preconditioners/fsi/html/index.html}{\texttt{ own tutorial}} ~\newline
 ~\newline
 
 \item We provide a \href{../../preconditioners/prescribed_displ_lagr_mult/html/index.html}{\texttt{ preconditioner for large-\/displacement solid mechanics problems in which boundary displacements are prescribed.}}~\newline
@@ -455,5 +414,5 @@ In addition to \char`\"{}general-\/purpose\char`\"{} preconditioners like I\+LU,
 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

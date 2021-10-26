@@ -1,11 +1,11 @@
-\hypertarget{classElasticFishMesh}{}\doxysection{Elastic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classElasticFishMesh}{}\doxysection{Elastic\+Fish\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classElasticFishMesh}\index{ElasticFishMesh$<$ ELEMENT $>$@{ElasticFishMesh$<$ ELEMENT $>$}}
 
 
-Refineable fish mesh upgraded to become a solid mesh.  
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
 
 
-Inheritance diagram for Elastic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for Elastic\+Fish\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classElasticFishMesh}
@@ -22,16 +22,17 @@ virtual \mbox{\hyperlink{classElasticFishMesh_ab8e084bb7551b9765b95dc38e82ab1be}
 \begin{DoxyCompactItemize}
 \item 
 Domain $\ast$ \mbox{\hyperlink{classElasticFishMesh_aef83429a56e87c7218275c1da6c57087}{Undeformed\+\_\+domain\+\_\+pt}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pointer to \char`\"{}undeformed\char`\"{} Domain -- used to determine the Lagrangian coordinates of any newly created Solid\+Nodes during Mesh refinement. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class Elastic\+Fish\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class Elastic\+Fish\+Mesh$<$ ELEMENT $>$}
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
 
-Refineable fish mesh upgraded to become a solid mesh. 
+Refineable fish mesh upgraded to become a solid mesh 
 
-Definition at line 53 of file static\+\_\+fish.\+cc.
+Definition at line \mbox{\hyperlink{static__fish_8cc_source_l00053}{53}} of file \mbox{\hyperlink{static__fish_8cc_source}{static\+\_\+fish.\+cc}}.
 
 
 
@@ -40,8 +41,8 @@ Definition at line 53 of file static\+\_\+fish.\+cc.
 \index{ElasticFishMesh$<$ ELEMENT $>$@{ElasticFishMesh$<$ ELEMENT $>$}!ElasticFishMesh@{ElasticFishMesh}}
 \index{ElasticFishMesh@{ElasticFishMesh}!ElasticFishMesh$<$ ELEMENT $>$@{ElasticFishMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ElasticFishMesh()}{ElasticFishMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}} (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{back\+\_\+pt,  }\item[{Geom\+Object $\ast$}]{undeformed\+\_\+back\+\_\+pt,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}} (\begin{DoxyParamCaption}\item[{Geom\+Object $\ast$}]{back\+\_\+pt,  }\item[{Geom\+Object $\ast$}]{undeformed\+\_\+back\+\_\+pt,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -49,14 +50,18 @@ Constructor\+: Build underlying adaptive fish mesh and then set current Eulerian
 
 
 
-Definition at line 68 of file static\+\_\+fish.\+cc.
+Definition at line \mbox{\hyperlink{static__fish_8cc_source_l00068}{68}} of file \mbox{\hyperlink{static__fish_8cc_source}{static\+\_\+fish.\+cc}}.
+
+
+
+References \mbox{\hyperlink{static__fish_8cc_source_l00122}{Elastic\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Undeformed\+\_\+domain\+\_\+pt}}.
 
 \mbox{\Hypertarget{classElasticFishMesh_ab8e084bb7551b9765b95dc38e82ab1be}\label{classElasticFishMesh_ab8e084bb7551b9765b95dc38e82ab1be}} 
 \index{ElasticFishMesh$<$ ELEMENT $>$@{ElasticFishMesh$<$ ELEMENT $>$}!````~ElasticFishMesh@{$\sim$ElasticFishMesh}}
 \index{````~ElasticFishMesh@{$\sim$ElasticFishMesh}!ElasticFishMesh$<$ ELEMENT $>$@{ElasticFishMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$ElasticFishMesh()}{~ElasticFishMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual \mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual \mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -64,7 +69,11 @@ Destructor\+: Kill \char`\"{}undeformed\char`\"{} Domain.
 
 
 
-Definition at line 111 of file static\+\_\+fish.\+cc.
+Definition at line \mbox{\hyperlink{static__fish_8cc_source_l00111}{111}} of file \mbox{\hyperlink{static__fish_8cc_source}{static\+\_\+fish.\+cc}}.
+
+
+
+References \mbox{\hyperlink{static__fish_8cc_source_l00122}{Elastic\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Undeformed\+\_\+domain\+\_\+pt}}.
 
 
 
@@ -73,12 +82,20 @@ Definition at line 111 of file static\+\_\+fish.\+cc.
 \index{ElasticFishMesh$<$ ELEMENT $>$@{ElasticFishMesh$<$ ELEMENT $>$}!Undeformed\_domain\_pt@{Undeformed\_domain\_pt}}
 \index{Undeformed\_domain\_pt@{Undeformed\_domain\_pt}!ElasticFishMesh$<$ ELEMENT $>$@{ElasticFishMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Undeformed\_domain\_pt}{Undeformed\_domain\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-Domain$\ast$ \mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Undeformed\+\_\+domain\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+Domain$\ast$ \mbox{\hyperlink{classElasticFishMesh}{Elastic\+Fish\+Mesh}}$<$ ELEMENT $>$\+::Undeformed\+\_\+domain\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
-Pointer to \char`\"{}undeformed\char`\"{} Domain -- used to determine the Lagrangian coordinates of any newly created Solid\+Nodes during Mesh refinement 
 
-Definition at line 122 of file static\+\_\+fish.\+cc.
+
+Pointer to \char`\"{}undeformed\char`\"{} Domain -- used to determine the Lagrangian coordinates of any newly created Solid\+Nodes during Mesh refinement. 
+
+
+
+Definition at line \mbox{\hyperlink{static__fish_8cc_source_l00122}{122}} of file \mbox{\hyperlink{static__fish_8cc_source}{static\+\_\+fish.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{static__fish_8cc_source_l00068}{Elastic\+Fish\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Fish\+Mesh()}}, and \mbox{\hyperlink{static__fish_8cc_source_l00111}{Elastic\+Fish\+Mesh$<$ ELEMENT $>$\+::$\sim$\+Elastic\+Fish\+Mesh()}}.
 
 
 

@@ -23,7 +23,7 @@ The constraint that the droplet volume remains constant must be enforced explici
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_implementation}{}\doxysection{Implementation}\label{index_implementation}
-We use the same method as in the \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble problem, }} an A\+L\+E-\/based finite-\/element method with \href{../../single_layer_free_surface/html/index.html\#kinematic_condition_implementation}{\texttt{ a pseudo-\/elastic node-\/update procedure}}. In this case, there is a pressure jump across the interface between the fluids, which means that we use triangular Crouzeix--Raviart elements rather than the continuous-\/pressure Taylor--Hood elements. Again, we impose the kinematic and dynamic boundary conditions with {\ttfamily Face\+Elements}. The volume constraint for the static problem is also imposed in a similar way\+: we attach {\ttfamily Line\+Volume\+Constraint\+Bounding\+Solid\+Elements} to the droplet surface and create an additional {\ttfamily Volume\+Constraint\+Element}. Here, a pressure degree of freedom within the droplet is hijacked, see \href{../../static_two_layer/html/index.html}{\texttt{ another tutorial, }} to be used as the unknown associated with the volume constraint. Once the static initial problem has been solved, the \char`\"{}volume constraint\char`\"{} elements are deleted and the pressure degree of freedom is unhijacked.
+We use the same method as in the \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble problem, }} an ALE-\/based finite-\/element method with \href{../../single_layer_free_surface/html/index.html\#kinematic_condition_implementation}{\texttt{ a pseudo-\/elastic node-\/update procedure}}. In this case, there is a pressure jump across the interface between the fluids, which means that we use triangular Crouzeix--Raviart elements rather than the continuous-\/pressure Taylor--Hood elements. Again, we impose the kinematic and dynamic boundary conditions with {\ttfamily Face\+Elements}. The volume constraint for the static problem is also imposed in a similar way\+: we attach {\ttfamily Line\+Volume\+Constraint\+Bounding\+Solid\+Elements} to the droplet surface and create an additional {\ttfamily Volume\+Constraint\+Element}. Here, a pressure degree of freedom within the droplet is hijacked, see \href{../../static_two_layer/html/index.html}{\texttt{ another tutorial, }} to be used as the unknown associated with the volume constraint. Once the static initial problem has been solved, the \char`\"{}volume constraint\char`\"{} elements are deleted and the pressure degree of freedom is unhijacked.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -46,7 +46,7 @@ The namespace containing the dimensionless parameters contains an additional vis
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{  \textcolor{comment}{/// Viscosity ratio of the droplet to the surrounding fluid}}
+\DoxyCodeLine{\textcolor{comment}{  /// Viscosity ratio of the droplet to the surrounding fluid}}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceProblem__Parameter_afdb95f68bd3c77e4c12001a29bd26e31}{Viscosity\_ratio}} = 10.0;}
 
 \end{DoxyCodeInclude}
@@ -66,9 +66,7 @@ The first difference from the bubble problem is that the steady solver does not 
 \DoxyCodeLine{ problem.steady\_newton\_solve();}
 
 \end{DoxyCodeInclude}
-
-
-After documenting the solution, we remove the (explicit) volume constraint and then the remainder of the code is identical to that in the \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble tutorial. }}
+ After documenting the solution, we remove the (explicit) volume constraint and then the remainder of the code is identical to that in the \href{../../adaptive_bubble_in_channel/html/index.html}{\texttt{ bubble tutorial. }}
 
 
 \begin{DoxyCodeInclude}{0}
@@ -76,9 +74,7 @@ After documenting the solution, we remove the (explicit) volume constraint and t
 \DoxyCodeLine{ problem.remove\_volume\_constraint();}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem class}\label{index_problem}
 Other than trivial name changes from \char`\"{}bubble\char`\"{} to \char`\"{}drop\char`\"{}, there are a few significant changes between this problem and that in the ~\newline
@@ -115,9 +111,7 @@ When the bulk elements are made fully functional, we add the pointer to the visc
 \DoxyCodeLine{    \}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_face_elements}{}\doxysection{Generation of face elements}\label{index_face_elements}
 As usual we impose the kinematic and dynamic boundary condition at the interface by attaching {\ttfamily Face\+Elements} to the relevant boundaries of the bulk elements. However, we must be careful to add only a {\bfseries{single}} layer of elements. If we use the standard \char`\"{}boundary element\char`\"{} functions then we will be creating face elements on both sides of the internal boundary. Instead, we use the elements adjacent to the boundary within region 0, which ensures that only a single layer of interface elements are added.
@@ -125,8 +119,8 @@ As usual we impose the kinematic and dynamic boundary condition at the interface
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_free\_surface\_elements===============}}
-\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the kinematic and dynamic bcs}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
+\DoxyCodeLine{\textcolor{comment}{/// Create elements that impose the kinematic and dynamic bcs}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// for the pseudo-\/solid fluid mesh}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classDropInChannelProblem_a73b989e3bedbd3630f576b0dba0f724f}{DropInChannelProblem<ELEMENT>::create\_free\_surface\_elements}}()}
@@ -170,15 +164,13 @@ As usual we impose the kinematic and dynamic boundary condition at the interface
 \DoxyCodeLine{\textcolor{comment}{// end of create\_free\_surface\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-The volume constraint elements are only created if the boolean flag {\ttfamily Use\+\_\+volume\+\_\+constraint} is true (the default on construction of the problem). We hijack the pressure degree of freedom associated with the first element in region 1 and then the construction of the elements again uses the regions to ensure that a single layer of elements is created.
+ The volume constraint elements are only created if the boolean flag {\ttfamily Use\+\_\+volume\+\_\+constraint} is true (the default on construction of the problem). We hijack the pressure degree of freedom associated with the first element in region 1 and then the construction of the elements again uses the regions to ensure that a single layer of elements is created.
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//============start\_of\_create\_volume\_constraint\_elements=================}}
 \DoxyCodeLine{\textcolor{comment}{/// Create elements that impose volume constraint on the drop}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=======================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//=======================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classDropInChannelProblem_a53b96cd50b4e6c9bee294b8fb7dd51bd}{DropInChannelProblem<ELEMENT>::create\_volume\_constraint\_elements}}()}
 \DoxyCodeLine{\{ }
@@ -234,7 +226,7 @@ The volume constraint elements are only created if the boolean flag {\ttfamily U
 \DoxyCodeLine{      \textcolor{keyword}{new} ElasticLineVolumeConstraintBoundingElement<ELEMENT>(}
 \DoxyCodeLine{       bulk\_elem\_pt,face\_index);   }
 \DoxyCodeLine{     }
-\DoxyCodeLine{     \textcolor{comment}{//Set the "master" volume constraint element}}
+\DoxyCodeLine{     \textcolor{comment}{//Set the "{}master"{} volume constraint element}}
 \DoxyCodeLine{     el\_pt-\/>set\_volume\_constraint\_element(Vol\_constraint\_el\_pt);}
 \DoxyCodeLine{     }
 \DoxyCodeLine{     \textcolor{comment}{// Add it to the mesh}}
@@ -245,16 +237,14 @@ The volume constraint elements are only created if the boolean flag {\ttfamily U
 \DoxyCodeLine{\textcolor{comment}{// end of create\_volume\_constraint\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_remove}{}\doxysection{Removal of the volume constraint}\label{index_remove}
 The function {\ttfamily remove\+\_\+volume\+\_\+constraint()}, resets the boolean flag to false, clears the hijacked data, deletes the volume constraint elements and mesh and then removes the volume constraint mesh from the problem\textquotesingle{}s list of sub meshes, before reassigning the equation numbers.
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Change the boundary conditions to remove the volume constraint}}
+\DoxyCodeLine{\textcolor{comment}{ /// Change the boundary conditions to remove the volume constraint}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} remove\_volume\_constraint()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{// Ignore all volume constraint stuff from here onwards}}
@@ -286,8 +276,8 @@ The function {\ttfamily remove\+\_\+volume\+\_\+constraint()}, resets the boolea
 \DoxyCodeLine{   this-\/>rebuild\_global\_mesh();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Renumber the equations}}
-\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"Removed volume constraint to obtain "}}
-\DoxyCodeLine{             << this-\/>assign\_eqn\_numbers() << \textcolor{stringliteral}{" new equation numbers\(\backslash\)n"};}
+\DoxyCodeLine{   std::cout << \textcolor{stringliteral}{"{}Removed volume constraint to obtain "{}}}
+\DoxyCodeLine{             << this-\/>assign\_eqn\_numbers() << \textcolor{stringliteral}{"{} new equation numbers\(\backslash\)n"{}};}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
@@ -324,5 +314,5 @@ The computation of the initial static solution means that we must still include 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1TwoDAnnularMesh}{}\doxysection{oomph\+::Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1TwoDAnnularMesh}{}\doxysection{oomph\+::Two\+DAnnular\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1TwoDAnnularMesh}\index{oomph::TwoDAnnularMesh$<$ ELEMENT $>$@{oomph::TwoDAnnularMesh$<$ ELEMENT $>$}}
+
+
+2D annular mesh with a unit circle in the middle and a layer of thickness h surrounding it.  
+
+
 
 
 {\ttfamily \#include $<$annular\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Two\+DAnnular\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.000000cm]{classoomph_1_1TwoDAnnularMesh}
@@ -13,25 +18,24 @@ Inheritance diagram for oomph\+::Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_a4bb40bf0a81db8dc3493735007626c3b}{Two\+D\+Annular\+Mesh}} (const bool \&periodic, const double \&azimuthal\+\_\+fraction, const unsigned \&ntheta, const unsigned \&nr, const double \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const double \&h, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_a4bb40bf0a81db8dc3493735007626c3b}{Two\+DAnnular\+Mesh}} (const bool \&periodic, const double \&azimuthal\+\_\+fraction, const unsigned \&ntheta, const unsigned \&nr, const double \&a, const double \&h, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_a2d67eba43c6355893c7a95208068d387}{Two\+D\+Annular\+Mesh}} (const bool \&periodic, const double \&azimuthal\+\_\+fraction, const unsigned \&ntheta, const unsigned \&nr, const double \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const double \&h, const double \&phi, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_a2d67eba43c6355893c7a95208068d387}{Two\+DAnnular\+Mesh}} (const bool \&periodic, const double \&azimuthal\+\_\+fraction, const unsigned \&ntheta, const unsigned \&nr, const double \&a, const double \&h, const double \&phi, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor; rotate mesh by angle phi. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_adcf4ce1aefcce7a773c66ff0f496df9e}{wrap\+\_\+into\+\_\+annular\+\_\+shape}} (const double \&\mbox{\hyperlink{the__data__structure_8txt_a03668dd8951154b5a0d25cfd2a9483d9}{a}}, const double \&h, const double \&azimuthal\+\_\+fraction, const double \&phi)
+void \mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh_adcf4ce1aefcce7a773c66ff0f496df9e}{wrap\+\_\+into\+\_\+annular\+\_\+shape}} (const double \&a, const double \&h, const double \&azimuthal\+\_\+fraction, const double \&phi)
 \begin{DoxyCompactList}\small\item\em Wrap mesh into annular shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$}
 2D annular mesh with a unit circle in the middle and a layer of thickness h surrounding it. 
 
-Definition at line 45 of file annular\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{annular__mesh_8template_8h_source_l00045}{45}} of file \mbox{\hyperlink{annular__mesh_8template_8h_source}{annular\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -40,8 +44,8 @@ Definition at line 45 of file annular\+\_\+mesh.\+template.\+h.
 \index{oomph::TwoDAnnularMesh$<$ ELEMENT $>$@{oomph::TwoDAnnularMesh$<$ ELEMENT $>$}!TwoDAnnularMesh@{TwoDAnnularMesh}}
 \index{TwoDAnnularMesh@{TwoDAnnularMesh}!oomph::TwoDAnnularMesh$<$ ELEMENT $>$@{oomph::TwoDAnnularMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{TwoDAnnularMesh()}{TwoDAnnularMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{oomph\+::\+Two\+D\+Annular\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{Two\+D\+Annular\+Mesh}} (\begin{DoxyParamCaption}\item[{const bool \&}]{periodic,  }\item[{const double \&}]{azimuthal\+\_\+fraction,  }\item[{const unsigned \&}]{ntheta,  }\item[{const unsigned \&}]{nr,  }\item[{const double \&}]{a,  }\item[{const double \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{oomph\+::\+Two\+DAnnular\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{Two\+DAnnular\+Mesh}} (\begin{DoxyParamCaption}\item[{const bool \&}]{periodic,  }\item[{const double \&}]{azimuthal\+\_\+fraction,  }\item[{const unsigned \&}]{ntheta,  }\item[{const unsigned \&}]{nr,  }\item[{const double \&}]{a,  }\item[{const double \&}]{h,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -49,18 +53,18 @@ Constructor.
 
 
 
-Definition at line 49 of file annular\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{annular__mesh_8template_8h_source_l00049}{49}} of file \mbox{\hyperlink{annular__mesh_8template_8h_source}{annular\+\_\+mesh.\+template.\+h}}.
 
 
 
-References a(), and oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape().
+References \mbox{\hyperlink{annular__mesh_8template_8cc_source_l00037}{oomph\+::\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TwoDAnnularMesh_a2d67eba43c6355893c7a95208068d387}\label{classoomph_1_1TwoDAnnularMesh_a2d67eba43c6355893c7a95208068d387}} 
 \index{oomph::TwoDAnnularMesh$<$ ELEMENT $>$@{oomph::TwoDAnnularMesh$<$ ELEMENT $>$}!TwoDAnnularMesh@{TwoDAnnularMesh}}
 \index{TwoDAnnularMesh@{TwoDAnnularMesh}!oomph::TwoDAnnularMesh$<$ ELEMENT $>$@{oomph::TwoDAnnularMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{TwoDAnnularMesh()}{TwoDAnnularMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{oomph\+::\+Two\+D\+Annular\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{Two\+D\+Annular\+Mesh}} (\begin{DoxyParamCaption}\item[{const bool \&}]{periodic,  }\item[{const double \&}]{azimuthal\+\_\+fraction,  }\item[{const unsigned \&}]{ntheta,  }\item[{const unsigned \&}]{nr,  }\item[{const double \&}]{a,  }\item[{const double \&}]{h,  }\item[{const double \&}]{phi,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{oomph\+::\+Two\+DAnnular\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{Two\+DAnnular\+Mesh}} (\begin{DoxyParamCaption}\item[{const bool \&}]{periodic,  }\item[{const double \&}]{azimuthal\+\_\+fraction,  }\item[{const unsigned \&}]{ntheta,  }\item[{const unsigned \&}]{nr,  }\item[{const double \&}]{a,  }\item[{const double \&}]{h,  }\item[{const double \&}]{phi,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -68,11 +72,11 @@ Constructor; rotate mesh by angle phi.
 
 
 
-Definition at line 68 of file annular\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{annular__mesh_8template_8h_source_l00068}{68}} of file \mbox{\hyperlink{annular__mesh_8template_8h_source}{annular\+\_\+mesh.\+template.\+h}}.
 
 
 
-References a(), and oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape().
+References \mbox{\hyperlink{annular__mesh_8template_8cc_source_l00037}{oomph\+::\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape()}}.
 
 
 
@@ -81,8 +85,8 @@ References a(), and oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\
 \index{oomph::TwoDAnnularMesh$<$ ELEMENT $>$@{oomph::TwoDAnnularMesh$<$ ELEMENT $>$}!wrap\_into\_annular\_shape@{wrap\_into\_annular\_shape}}
 \index{wrap\_into\_annular\_shape@{wrap\_into\_annular\_shape}!oomph::TwoDAnnularMesh$<$ ELEMENT $>$@{oomph::TwoDAnnularMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{wrap\_into\_annular\_shape()}{wrap\_into\_annular\_shape()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{oomph\+::\+Two\+D\+Annular\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape (\begin{DoxyParamCaption}\item[{const double \&}]{a,  }\item[{const double \&}]{h,  }\item[{const double \&}]{azimuthal\+\_\+fraction,  }\item[{const double \&}]{phi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TwoDAnnularMesh}{oomph\+::\+Two\+DAnnular\+Mesh}}$<$ ELEMENT $>$\+::wrap\+\_\+into\+\_\+annular\+\_\+shape (\begin{DoxyParamCaption}\item[{const double \&}]{a,  }\item[{const double \&}]{h,  }\item[{const double \&}]{azimuthal\+\_\+fraction,  }\item[{const double \&}]{phi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -90,15 +94,15 @@ Wrap mesh into annular shape.
 
 Helper function to Wrap mesh into annular shape. 
 
-Definition at line 37 of file annular\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{annular__mesh_8template_8cc_source_l00037}{37}} of file \mbox{\hyperlink{annular__mesh_8template_8cc_source}{annular\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References a(), oomph\+::\+Node\+::is\+\_\+on\+\_\+boundary(), oomph\+::\+Quad\+Tree\+Names\+::N, n, oomph\+::\+Mathematical\+Constants\+::\+Pi, oomph\+::\+Ellipse\+::position(), oomph\+::\+Node\+::set\+\_\+coordinates\+\_\+on\+\_\+boundary(), and oomph\+::\+Node\+::x().
+References \mbox{\hyperlink{quadtree_8h_source_l00060}{oomph\+::\+Quad\+Tree\+Names\+::N}}, \mbox{\hyperlink{oomph__utilities_8h_source_l00157}{oomph\+::\+Mathematical\+Constants\+::\+Pi}}, and \mbox{\hyperlink{geom__objects_8h_source_l00745}{oomph\+::\+Ellipse\+::position()}}.
 
 
 
-Referenced by oomph\+::\+Two\+D\+Annular\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Two\+D\+Annular\+Mesh().
+Referenced by \mbox{\hyperlink{annular__mesh_8template_8h_source_l00049}{oomph\+::\+Two\+DAnnular\+Mesh$<$ ELEMENT $>$\+::\+Two\+DAnnular\+Mesh()}}.
 
 
 

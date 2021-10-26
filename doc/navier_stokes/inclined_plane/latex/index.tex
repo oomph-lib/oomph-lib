@@ -59,44 +59,42 @@ The global parameters are the Reynolds number, the dimensionless grouping $Re/Fr
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Reynolds number, based on the average velocity within the fluid film}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{inclined__plane_8txt_aa0f8159f7168040576baa2fd5f94acb1}{Re}}=0.0;}
+\DoxyCodeLine{\textcolor{comment}{ /// Reynolds number, based on the average velocity within the fluid film}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}}=0.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///The product of Reynolds number and inverse Froude number }}
-\DoxyCodeLine{\textcolor{comment}{ ///is set to two in this problem, which gives the free surface velocity}}
-\DoxyCodeLine{\textcolor{comment}{ ///to be sin(alpha). [Set to three in order to get the same scale as }}
-\DoxyCodeLine{\textcolor{comment}{ ///used by Yih, Benjamin, etc]}}
+\DoxyCodeLine{\textcolor{comment}{ /// The product of Reynolds number and inverse Froude number }}
+\DoxyCodeLine{\textcolor{comment}{ /// is set to two in this problem, which gives the free surface velocity}}
+\DoxyCodeLine{\textcolor{comment}{ /// to be sin(alpha). [Set to three in order to get the same scale as }}
+\DoxyCodeLine{\textcolor{comment}{ /// used by Yih, Benjamin, etc]}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}=2.0;}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Angle of incline of the slope (45 degrees)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Angle of incline of the slope (45 degrees)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}} = 1.0*atan(1.0);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///\(\backslash\)short The Vector direction of gravity, set in main()}}
-\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}(2,0.0);}
+\DoxyCodeLine{\textcolor{comment}{ /// The Vector direction of gravity, set in main()}}
+\DoxyCodeLine{\textcolor{comment}{} Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}(2,0.0);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///The Capillary number}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{inclined__plane_8txt_a578f5c14427faf3876df90e82c7d8fbe}{Ca}}= 1.0;}
+\DoxyCodeLine{\textcolor{comment}{ /// The Capillary number}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8b32b93d2e546f9375ec418474107838}{Ca}}= 1.0;}
 
 \end{DoxyCodeInclude}
-
-
-The hydrostatic pressure field is specified as an applied traction. At the outlet (inlet), the outer unit normal is in the positive (negative) $x$ direction and so the required traction is given by $-p$ ( $p$), \[ \mbox{\boldmath$t$}|_{\mbox{outlet}} = (- (Re/Fr)\cos\alpha (1 - y), 0), \qquad \mbox{\boldmath$t$}|_{\mbox{inlet}} = ((Re/Fr)\cos\alpha (1 - y), 0).\] These tractions are specified by the two different functions 
+ The hydrostatic pressure field is specified as an applied traction. At the outlet (inlet), the outer unit normal is in the positive (negative) $x$ direction and so the required traction is given by $-p$ ( $p$), \[ \mbox{\boldmath$t$}|_{\mbox{outlet}} = (- (Re/Fr)\cos\alpha (1 - y), 0), \qquad \mbox{\boldmath$t$}|_{\mbox{inlet}} = ((Re/Fr)\cos\alpha (1 - y), 0).\] These tractions are specified by the two different functions 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Function that prescribes the hydrostatic pressure field at the outlet}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab577639e7c51979d3db7565c08c69c70}{hydrostatic\_pressure\_outlet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} Vector<double> \&\mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}, }
+\DoxyCodeLine{\textcolor{comment}{ /// Function that prescribes the hydrostatic pressure field at the outlet}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab577639e7c51979d3db7565c08c69c70}{hydrostatic\_pressure\_outlet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} Vector<double> \&x, }
 \DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double> \&n, }
 \DoxyCodeLine{                                  Vector<double> \&traction)}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  traction[0] = \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}[1]*(1.0 -\/ \mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}[1]);}
+\DoxyCodeLine{  traction[0] = \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1]*(1.0 -\/ x[1]);}
 \DoxyCodeLine{  traction[1] = 0.0;}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Function that prescribes hydrostatic pressure field at the inlet}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af1f48eb04a3c7f97b1efacea533acdbc}{hydrostatic\_pressure\_inlet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} Vector<double> \&\mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}, }
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_af1f48eb04a3c7f97b1efacea533acdbc}{hydrostatic\_pressure\_inlet}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\& time, \textcolor{keyword}{const} Vector<double> \&x, }
 \DoxyCodeLine{                                 \textcolor{keyword}{const} Vector<double> \&n,}
 \DoxyCodeLine{                                 Vector<double> \&traction)}
 \DoxyCodeLine{ \{}
-\DoxyCodeLine{  traction[0] = -\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}[1]*(1.0 -\/ \mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}[1]);}
+\DoxyCodeLine{  traction[0] = -\/\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}}*\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1]*(1.0 -\/ x[1]);}
 \DoxyCodeLine{  traction[1] = 0.0;}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{ \textcolor{comment}{//end of traction functions}}
@@ -109,18 +107,18 @@ We must also specify the direction of the normals (directed out of the fluid) to
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{///Direction of the wall normal vector (at the inlet)}}
+\DoxyCodeLine{\textcolor{comment}{ /// Direction of the wall normal vector (at the inlet)}}
 \DoxyCodeLine{ Vector<double> \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Function that specifies the wall unit normal at the inlet}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa26e74c1f9f93f8212e45380f55fb562}{wall\_unit\_normal\_inlet\_fct}}(\textcolor{keyword}{const} Vector<double> \&\mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}, }
+\DoxyCodeLine{\textcolor{comment}{ /// Function that specifies the wall unit normal at the inlet}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa26e74c1f9f93f8212e45380f55fb562}{wall\_unit\_normal\_inlet\_fct}}(\textcolor{keyword}{const} Vector<double> \&x, }
 \DoxyCodeLine{                                 Vector<double> \&normal)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  normal=\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}};}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Function that specified the wall unit normal at the outlet}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8ab8f6e823e4cd204ed7264121a42bfb}{wall\_unit\_normal\_outlet\_fct}}(\textcolor{keyword}{const} Vector<double> \&\mbox{\hyperlink{inclined__plane_8txt_a54012ea45635a54675f4997d85309327}{x}}, }
+\DoxyCodeLine{\textcolor{comment}{ /// Function that specified the wall unit normal at the outlet}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a8ab8f6e823e4cd204ed7264121a42bfb}{wall\_unit\_normal\_outlet\_fct}}(\textcolor{keyword}{const} Vector<double> \&x, }
 \DoxyCodeLine{                                 Vector<double> \&normal)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Set the normal}}
@@ -130,13 +128,11 @@ We must also specify the direction of the normals (directed out of the fluid) to
 \DoxyCodeLine{  \textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_dim;++i) \{normal[i] *= -\/1.0;\}}
 \DoxyCodeLine{ \}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///The contact angle that is imposed at the inlet (pi)}}
+\DoxyCodeLine{\textcolor{comment}{ /// The contact angle that is imposed at the inlet (pi)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a1c3587461447262715bd444ac91a29c9}{Inlet\_Angle}} = 2.0*atan(1.0);}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
  \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We start by specifying the constitutive law used to define the mesh motion when pseudo-\/elastic deformation is used. 
@@ -163,11 +159,11 @@ We start by specifying the constitutive law used to define the mesh motion when 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{//Initialise physical parameters}}
 \DoxyCodeLine{ \textcolor{comment}{//Scale Reynolds number to be independent of alpha.}}
-\DoxyCodeLine{ \mbox{\hyperlink{inclined__plane_8txt_aa0f8159f7168040576baa2fd5f94acb1}{Re}} = 4.0/sin(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}}); }
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} = 4.0/sin(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}}); }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Set the direction of gravity}}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}[0] = sin(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
-\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}}[1] = -\/cos(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[0] = sin(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
+\DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}}[1] = -\/cos(\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa2e802ee7cc8e1ac900ba94c3ce86eb7}{Alpha}});}
 
 \end{DoxyCodeInclude}
  We also set the direction of the notional wall normal vector. 
@@ -179,26 +175,24 @@ We start by specifying the constitutive law used to define the mesh motion when 
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a5feb3df21fc4a0adefadecb8a8ed98d7}{Wall\_normal}}[1] = 0.0;}
 
 \end{DoxyCodeInclude}
-
-
-We now create the spine version of the problem, solve the steady problem, assign initial conditions by assuming that the problem has been at the steady state for all previous times, and then evolve the system in time. 
+ We now create the spine version of the problem, solve the steady problem, assign initial conditions by assuming that the problem has been at the steady state for all previous times, and then evolve the system in time. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{//Spine problem}}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \textcolor{comment}{//Create the problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classSpineInclinedPlaneProblem}{SpineInclinedPlaneProblem<SpineElement<FLUID\_ELEMENT >}}, BDF<2> > }
-\DoxyCodeLine{   \mbox{\hyperlink{inclined__plane_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(30,4,\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a987847160c3cfad8977836291fb9d0e0}{Global\_Physical\_Variables::Length}});}
+\DoxyCodeLine{   problem(30,4,\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a987847160c3cfad8977836291fb9d0e0}{Global\_Physical\_Variables::Length}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Solve the steady problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{inclined__plane_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.solve\_steady();}
+\DoxyCodeLine{  problem.solve\_steady();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Prepare the problem for timestepping }}
 \DoxyCodeLine{  \textcolor{comment}{//(assume that it's been at the flat-\/film solution for all previous time)}}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} dt = 0.1;}
-\DoxyCodeLine{  \mbox{\hyperlink{inclined__plane_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.assign\_initial\_values\_impulsive(dt);}
+\DoxyCodeLine{  problem.assign\_initial\_values\_impulsive(dt);}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Timestep it }}
-\DoxyCodeLine{  \mbox{\hyperlink{inclined__plane_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.timestep(dt,2);}
+\DoxyCodeLine{  problem.timestep(dt,2);}
 \DoxyCodeLine{ \} \textcolor{comment}{//End of spine problem}}
 
 \end{DoxyCodeInclude}
@@ -209,24 +203,22 @@ We now create the spine version of the problem, solve the steady problem, assign
 \DoxyCodeLine{  \textcolor{comment}{//Create the problem}}
 \DoxyCodeLine{  \mbox{\hyperlink{classElasticInclinedPlaneProblem}{ElasticInclinedPlaneProblem}}<}
 \DoxyCodeLine{   PseudoSolidNodeUpdateElement<FLUID\_ELEMENT,QPVDElement<2,3> >, BDF<2> > }
-\DoxyCodeLine{     \mbox{\hyperlink{inclined__plane_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(30,4,\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a987847160c3cfad8977836291fb9d0e0}{Global\_Physical\_Variables::Length}});}
+\DoxyCodeLine{     problem(30,4,\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a987847160c3cfad8977836291fb9d0e0}{Global\_Physical\_Variables::Length}});}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Solve the steady problem}}
-\DoxyCodeLine{  \mbox{\hyperlink{inclined__plane_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.solve\_steady();}
+\DoxyCodeLine{  problem.solve\_steady();}
 \DoxyCodeLine{  }
 \DoxyCodeLine{  \textcolor{comment}{//Prepare the problem for timestepping }}
 \DoxyCodeLine{  \textcolor{comment}{//(assume that it's been at the flat-\/film solution for all previous time)}}
 \DoxyCodeLine{  \textcolor{keywordtype}{double} dt = 0.1;}
-\DoxyCodeLine{  \mbox{\hyperlink{inclined__plane_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.assign\_initial\_values\_impulsive(dt);}
+\DoxyCodeLine{  problem.assign\_initial\_values\_impulsive(dt);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Timestep it}}
-\DoxyCodeLine{  \mbox{\hyperlink{inclined__plane_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.timestep(dt,2);}
+\DoxyCodeLine{  problem.timestep(dt,2);}
 \DoxyCodeLine{ \} \textcolor{comment}{//End of elastic problem}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
  \hypertarget{index_mesh}{}\doxysection{The mesh classes}\label{index_mesh}
 The base mesh class is the {\ttfamily Simple\+Rectangular\+Quad\+Mesh\+:} boundary 0 will be the wall; boundary 2 will be the free surface; and the remaining boundaries will be the inlet (3) and outlet (1). Below we shall demonstrate how to convert an existing mesh into a {\ttfamily Spine\+Mesh} and {\ttfamily Elastic\+Mesh} suitable for free-\/surface problems.\hypertarget{index_spine_mesh}{}\doxysubsection{Creating the spine mesh}\label{index_spine_mesh}
@@ -303,12 +295,12 @@ The {\ttfamily \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine\+Inclined\+Pl
 \DoxyCodeLine{  \} \textcolor{comment}{//end of constructor}}
 
 \end{DoxyCodeInclude}
- In addition, a {\ttfamily \mbox{\hyperlink{inclined__plane_8txt_ad5199b34b7a1112c88c22d9c0d5a7eda}{spine\+\_\+node\+\_\+update()}}} function must be provided that determines how the {\ttfamily Nodes} move as functions of the {\ttfamily Spines}. 
+In addition, a {\ttfamily spine\+\_\+node\+\_\+update()} function must be provided that determines how the {\ttfamily Nodes} move as functions of the {\ttfamily Spines}. 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// \(\backslash\)short General node update function implements pure virtual function }}
-\DoxyCodeLine{\textcolor{comment}{ /// defined in SpineMesh base class and performs specific node update}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// actions:  along vertical spines}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{inclined__plane_8txt_ad5199b34b7a1112c88c22d9c0d5a7eda}{spine\_node\_update}}(SpineNode* spine\_node\_pt)}
+\DoxyCodeLine{\textcolor{comment}{ /// General node update function implements pure virtual function }}
+\DoxyCodeLine{\textcolor{comment}{ /// defined in SpineMesh base class and performs specific node update}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// actions:  along vertical spines}}
+\DoxyCodeLine{\textcolor{comment}{} \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} spine\_node\_update(SpineNode* spine\_node\_pt)}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Get fraction along the spine}}
 \DoxyCodeLine{   \textcolor{keywordtype}{double} W = spine\_node\_pt-\/>fraction();}
@@ -319,7 +311,7 @@ The {\ttfamily \mbox{\hyperlink{classSpineInclinedPlaneMesh}{Spine\+Inclined\+Pl
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_elastic_mesh}{}\doxysubsection{Creating the Elastic\+Mesh}\label{index_elastic_mesh}
+ \hypertarget{index_elastic_mesh}{}\doxysubsection{Creating the Elastic\+Mesh}\label{index_elastic_mesh}
 The {\ttfamily \mbox{\hyperlink{classElasticInclinedPlaneMesh}{Elastic\+Inclined\+Plane\+Mesh}}} inherits from the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} and the undeformed (reference) configuration is set to be the current position of the {\ttfamily Nodes}. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/// Create an Elastic mesh for the problem}}
@@ -342,17 +334,17 @@ The {\ttfamily \mbox{\hyperlink{classElasticInclinedPlaneMesh}{Elastic\+Inclined
 \DoxyCodeLine{\};}
 
 \end{DoxyCodeInclude}
- Note that the specification of the Elastic\+Mesh is much simpler than that of a Spine\+Mesh because no decision needs to be taken about how to describe the motion using Spines.
+Note that the specification of the Elastic\+Mesh is much simpler than that of a Spine\+Mesh because no decision needs to be taken about how to describe the motion using Spines.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_problem}{}\doxysection{The problem classes}\label{index_problem}
 \hypertarget{index_generic_prob}{}\doxysubsection{The generic problem}\label{index_generic_prob}
-For ease of exposition, all generic functionality is included in the {\ttfamily \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}} class, which is templated by the bulk {\ttfamily E\+L\+E\+M\+E\+NT} and the {\ttfamily I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+NT}. The class includes storage for the different sub-\/meshes\+: Bulk, the Traction elements associated with the inlet and outlet, the (free) Surface elements and the point elements associated with the ends of the interface. In addition, a string {\ttfamily Output\+\_\+prefix} is used to distinguish between the output files from different formulations.  
+For ease of exposition, all generic functionality is included in the {\ttfamily \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}} class, which is templated by the bulk {\ttfamily ELEMENT} and the {\ttfamily INTERFACE\+\_\+\+ELEMENT}. The class includes storage for the different sub-\/meshes\+: Bulk, the Traction elements associated with the inlet and outlet, the (free) Surface elements and the point elements associated with the ends of the interface. In addition, a string {\ttfamily Output\+\_\+prefix} is used to distinguish between the output files from different formulations.  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{///\(\backslash\)short Generic problem class that will form the base class for both }}
-\DoxyCodeLine{\textcolor{comment}{///spine and elastic mesh-\/updates of the problem.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{///Templated by the bulk element and interface element types}}
+\DoxyCodeLine{\textcolor{comment}{/// Generic problem class that will form the base class for both }}
+\DoxyCodeLine{\textcolor{comment}{/// spine and elastic mesh-\/updates of the problem.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Templated by the bulk element and interface element types}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT, \textcolor{keyword}{class} INTERFACE\_ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classInclinedPlaneProblem}{InclinedPlaneProblem}} : \textcolor{keyword}{public} Problem}
@@ -360,25 +352,23 @@ For ease of exposition, all generic functionality is included in the {\ttfamily 
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{protected}:}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Bulk fluid mesh}}
+\DoxyCodeLine{\textcolor{comment}{ /// Bulk fluid mesh}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classInclinedPlaneProblem_a20c506fe684dc146424b8ec019239783}{Bulk\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Mesh for the traction elements that are added at inlet and outlet}}
+\DoxyCodeLine{\textcolor{comment}{ /// Mesh for the traction elements that are added at inlet and outlet}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classInclinedPlaneProblem_a85bcc36a8ad4ad7aa3595585e73a3197}{Traction\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Mesh for the free surface elements}}
+\DoxyCodeLine{\textcolor{comment}{ /// Mesh for the free surface elements}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classInclinedPlaneProblem_aba36d367278218bf00356c3bee0733a0}{Surface\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Mesh for the point elements at each end of the free surface}}
+\DoxyCodeLine{\textcolor{comment}{ /// Mesh for the point elements at each end of the free surface}}
 \DoxyCodeLine{\textcolor{comment}{} Mesh* \mbox{\hyperlink{classInclinedPlaneProblem_adefbac5880323d7de622e2ba0c526746}{Point\_mesh\_pt}};}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ ///Prefix for output files}}
+\DoxyCodeLine{\textcolor{comment}{ /// Prefix for output files}}
 \DoxyCodeLine{\textcolor{comment}{} std::string \mbox{\hyperlink{classInclinedPlaneProblem_a6ad45c76bd24f63c0162313042ce2e7d}{Output\_prefix}};}
 
 \end{DoxyCodeInclude}
-
-
-The time-\/dependent perturbation is introduced in the function {\ttfamily actions\+\_\+before\+\_\+implicit\+\_\+timestep()}, which sets the vertical velocity on the wall (boundary 0) \[ v = \epsilon \sin(K x) t \mbox{e}^{-t} \] 
+ The time-\/dependent perturbation is introduced in the function {\ttfamily actions\+\_\+before\+\_\+implicit\+\_\+timestep()}, which sets the vertical velocity on the wall (boundary 0) \[ v = \epsilon \sin(K x) t \mbox{e}^{-t} \] 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_implicit\_timestep()}
 \DoxyCodeLine{  \{}
@@ -399,13 +389,11 @@ The time-\/dependent perturbation is introduced in the function {\ttfamily actio
 \DoxyCodeLine{  \} \textcolor{comment}{//end\_of\_actions\_before\_implicit\_timestep}}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily make\+\_\+traction\+\_\+elements()} creates {\ttfamily Navier\+Stokes\+Traction\+Element} s adjacent to the mesh boundaries 3 (the inlet) and 1 (the inlet). These elements are added to the {\ttfamily Mesh} {\ttfamily Traction\+\_\+mesh\+\_\+pt}, which is itself constructed in the function and pointers to the appropriate traction functions are assigned. 
+ The function {\ttfamily make\+\_\+traction\+\_\+elements()} creates {\ttfamily Navier\+Stokes\+Traction\+Element} s adjacent to the mesh boundaries 3 (the inlet) and 1 (the inlet). These elements are added to the {\ttfamily Mesh} {\ttfamily Traction\+\_\+mesh\+\_\+pt}, which is itself constructed in the function and pointers to the appropriate traction functions are assigned. 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{///\(\backslash\)short Function to add the traction boundary elements to boundaries}}
+\DoxyCodeLine{\textcolor{comment}{ /// Function to add the traction boundary elements to boundaries}}
 \DoxyCodeLine{\textcolor{comment}{ /// 3(inlet) and 1(outlet) of the mesh}}
-\DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} make\_traction\_elements()}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} make\_traction\_elements()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Create a new (empty mesh)}}
 \DoxyCodeLine{   Traction\_mesh\_pt = \textcolor{keyword}{new} Mesh;}
@@ -451,9 +439,7 @@ The function {\ttfamily make\+\_\+traction\+\_\+elements()} creates {\ttfamily N
 \DoxyCodeLine{  \} \textcolor{comment}{//end of make\_traction\_elements}}
 
 \end{DoxyCodeInclude}
-
-
-The function {\ttfamily make\+\_\+free\+\_\+surface\+\_\+elements()} creates the appropriate {\ttfamily I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+E\+L\+E\+M\+E\+N\+Ts} adjacent to the free surface (boundary 2), sets the capillary number and also creates free-\/surface boundary elements at the left-\/ and right-\/hand ends of the interface. If these \char`\"{}point\char`\"{} elements are not included then the surface tension is not applied correctly at the edges of the domain. The contact angle is set to be the value {\ttfamily Inlet\+\_\+\+Angle} at the left-\/hand edge of the domain. 
+ The function {\ttfamily make\+\_\+free\+\_\+surface\+\_\+elements()} creates the appropriate {\ttfamily INTERFACE\+\_\+\+ELEMENTs} adjacent to the free surface (boundary 2), sets the capillary number and also creates free-\/surface boundary elements at the left-\/ and right-\/hand ends of the interface. If these \char`\"{}point\char`\"{} elements are not included then the surface tension is not applied correctly at the edges of the domain. The contact angle is set to be the value {\ttfamily Inlet\+\_\+\+Angle} at the left-\/hand edge of the domain. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{comment}{//Make the free surface elements on the top surface}}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} make\_free\_surface\_elements()}
@@ -540,7 +526,7 @@ The function {\ttfamily complete\+\_\+build()} assigns physical parameters to th
 \DoxyCodeLine{     \textcolor{comment}{//Set the Reynolds number / Froude number}}
 \DoxyCodeLine{     temp\_pt-\/>re\_invfr\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa6286f02b476912dd7550eced538331a}{ReInvFr}};}
 \DoxyCodeLine{     \textcolor{comment}{//Set the direction of gravity}}
-\DoxyCodeLine{     temp\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_aa868968dead376240a69f9152bd599b9}{G}};}
+\DoxyCodeLine{     temp\_pt-\/>g\_pt() = \&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_ad40b4c9ef4cf48648fee0914736e7341}{G}};}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/Set the boundary conditions for this problem-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -601,7 +587,7 @@ The function {\ttfamily complete\+\_\+build()} assigns physical parameters to th
 \DoxyCodeLine{   \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{   \textcolor{comment}{//Attach the boundary conditions to the mesh}}
-\DoxyCodeLine{   std::cout << assign\_eqn\_numbers() << \textcolor{stringliteral}{" in the main problem"} << std::endl; }
+\DoxyCodeLine{   std::cout << assign\_eqn\_numbers() << \textcolor{stringliteral}{"{} in the main problem"{}} << std::endl; }
 \DoxyCodeLine{  \} \textcolor{comment}{//end of complete\_build}}
 
 \end{DoxyCodeInclude}
@@ -630,16 +616,14 @@ The function {\ttfamily solve\+\_\+steady()} initialises the velocity of at all 
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Output the full flow field}}
 \DoxyCodeLine{ std::string filename = Output\_prefix;;}
-\DoxyCodeLine{ filename.append(\textcolor{stringliteral}{"\_output.dat"});}
+\DoxyCodeLine{ filename.append(\textcolor{stringliteral}{"{}\_output.dat"{}});}
 \DoxyCodeLine{ ofstream file(filename.c\_str());}
 \DoxyCodeLine{ Bulk\_mesh\_pt-\/>output(file,5);}
 \DoxyCodeLine{ file.close();}
 \DoxyCodeLine{\} \textcolor{comment}{//end of solve\_steady}}
 
 \end{DoxyCodeInclude}
-
-
-Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps writing vertical positions and the time to a trace file and writing the complete flow field to disk after a given number of timesteps. 
+ Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps writing vertical positions and the time to a trace file and writing the complete flow field to disk after a given number of timesteps. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{timestep(\textcolor{keyword}{const} \textcolor{keywordtype}{double} \&dt, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&n\_tsteps)}
 \DoxyCodeLine{\{}
@@ -648,7 +632,7 @@ Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps w
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Open an output file}}
 \DoxyCodeLine{ std::string filename = Output\_prefix;}
-\DoxyCodeLine{ filename.append(\textcolor{stringliteral}{"\_time\_trace.dat"});}
+\DoxyCodeLine{ filename.append(\textcolor{stringliteral}{"{}\_time\_trace.dat"{}});}
 \DoxyCodeLine{ ofstream trace(filename.c\_str()); }
 \DoxyCodeLine{ \textcolor{comment}{//Counter that will be used to output the full flowfield}}
 \DoxyCodeLine{ \textcolor{comment}{//at certain timesteps}}
@@ -656,12 +640,12 @@ Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps w
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Initial output of the time and the value of the vertical position at the}}
 \DoxyCodeLine{ \textcolor{comment}{//left and right-\/hand end of the free surface}}
-\DoxyCodeLine{ trace << time\_pt()-\/>time() << \textcolor{stringliteral}{" "} }
+\DoxyCodeLine{ trace << time\_pt()-\/>time() << \textcolor{stringliteral}{"{} "{}} }
 \DoxyCodeLine{       << Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>value(1) }
-\DoxyCodeLine{       << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{       << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{       <<  Bulk\_mesh\_pt-\/>}
 \DoxyCodeLine{  boundary\_node\_pt(2, Bulk\_mesh\_pt-\/>nboundary\_node(2)-\/1)-\/>x(1) }
-\DoxyCodeLine{       << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{       << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{       << std::endl;}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Loop over the desired number of timesteps}}
@@ -670,7 +654,7 @@ Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps w
 \DoxyCodeLine{   \textcolor{comment}{//Increase the counter}}
 \DoxyCodeLine{   counter++;}
 \DoxyCodeLine{   cout << std::endl;}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/TIMESTEP "} << t<< \textcolor{stringliteral}{" -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/TIMESTEP "{}} << t<< \textcolor{stringliteral}{"{} -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}} << std::endl;}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Take a timestep of size dt}}
 \DoxyCodeLine{   unsteady\_newton\_solve(dt);}
@@ -680,7 +664,7 @@ Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps w
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{     std::ofstream file;}
 \DoxyCodeLine{     std::ostringstream filename;}
-\DoxyCodeLine{     filename << Output\_prefix << \textcolor{stringliteral}{"\_step"} << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} << \textcolor{stringliteral}{"\_"} << t << \textcolor{stringliteral}{".dat"};}
+\DoxyCodeLine{     filename << Output\_prefix << \textcolor{stringliteral}{"{}\_step"{}} << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} << \textcolor{stringliteral}{"{}\_"{}} << t << \textcolor{stringliteral}{"{}.dat"{}};}
 \DoxyCodeLine{     file.open(filename.str().c\_str());}
 \DoxyCodeLine{     Bulk\_mesh\_pt-\/>output(file,5);}
 \DoxyCodeLine{     file.close();}
@@ -692,7 +676,7 @@ Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps w
 \DoxyCodeLine{   \{}
 \DoxyCodeLine{    std::ofstream file;}
 \DoxyCodeLine{     std::ostringstream filename;}
-\DoxyCodeLine{     filename << Output\_prefix << \textcolor{stringliteral}{"\_interface\_"} << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} << \textcolor{stringliteral}{"\_"} << t << \textcolor{stringliteral}{".dat"};}
+\DoxyCodeLine{     filename << Output\_prefix << \textcolor{stringliteral}{"{}\_interface\_"{}} << \mbox{\hyperlink{namespaceGlobal__Physical__Variables_ab814e627d2eb5bc50318879d19ab16b9}{Re}} << \textcolor{stringliteral}{"{}\_"{}} << t << \textcolor{stringliteral}{"{}.dat"{}};}
 \DoxyCodeLine{     file.open(filename.str().c\_str());}
 \DoxyCodeLine{     Surface\_mesh\_pt-\/>output(file,5);}
 \DoxyCodeLine{     file.close();}
@@ -700,17 +684,17 @@ Finally, the function {\ttfamily timestep()} takes a number of fixed timesteps w
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Output the time and value of the vertical position of the free surface}}
 \DoxyCodeLine{   \textcolor{comment}{//at the left-\/ and right-\/hand ends}}
-\DoxyCodeLine{   trace << time\_pt()-\/>time() << \textcolor{stringliteral}{" "}}
-\DoxyCodeLine{         << Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1) << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{   trace << time\_pt()-\/>time() << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{         << Bulk\_mesh\_pt-\/>boundary\_node\_pt(2,0)-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{         << }
 \DoxyCodeLine{    Bulk\_mesh\_pt-\/>}
-\DoxyCodeLine{    boundary\_node\_pt(2,Bulk\_mesh\_pt-\/>nboundary\_node(2)-\/1)-\/>x(1) << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{    boundary\_node\_pt(2,Bulk\_mesh\_pt-\/>nboundary\_node(2)-\/1)-\/>x(1) << \textcolor{stringliteral}{"{} "{}}}
 \DoxyCodeLine{         << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{\} \textcolor{comment}{//end of timestep}}
 
 \end{DoxyCodeInclude}
-\hypertarget{index_spine_prob}{}\doxysubsection{The spine-\/based formulation}\label{index_spine_prob}
+ \hypertarget{index_spine_prob}{}\doxysubsection{The spine-\/based formulation}\label{index_spine_prob}
 The class {\ttfamily \mbox{\hyperlink{classSpineInclinedPlaneProblem}{Spine\+Inclined\+Plane\+Problem}}} inherits from the generic {\ttfamily \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}} class and requires only minor modification. The constructor sets the string {\ttfamily Output\+\_\+prefix}, builds a timestepper, builds the specific {\ttfamily Spine\+Mesh}, creates the appropriate {\ttfamily Face\+Elements}, adds all sub-\/meshes to the {\ttfamily Problem}, builds the global mesh and then calls {\ttfamily \mbox{\hyperlink{classInclinedPlaneProblem_ae44e360be4a46e1343c3960c3a43380f}{Inclined\+Plane\+Problem\+::complete\+\_\+build()}}}. 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \mbox{\hyperlink{classSpineInclinedPlaneProblem}{SpineInclinedPlaneProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny,}
@@ -719,7 +703,7 @@ The class {\ttfamily \mbox{\hyperlink{classSpineInclinedPlaneProblem}{Spine\+Inc
 \DoxyCodeLine{  (nx,ny,length) }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Set the name}}
-\DoxyCodeLine{   this-\/>Output\_prefix = \textcolor{stringliteral}{"spine"};}
+\DoxyCodeLine{   this-\/>Output\_prefix = \textcolor{stringliteral}{"{}spine"{}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Create our one and only timestepper, with adaptive timestepping}}
 \DoxyCodeLine{   this-\/>add\_time\_stepper\_pt(\textcolor{keyword}{new} TIMESTEPPER);}
@@ -746,21 +730,17 @@ The class {\ttfamily \mbox{\hyperlink{classSpineInclinedPlaneProblem}{Spine\+Inc
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-In a spine-\/based formulation, the nodal positions must be updated after every Newton step, which is achieved by overloading the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} 
+ In a spine-\/based formulation, the nodal positions must be updated after every Newton step, which is achieved by overloading the function {\ttfamily Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()} 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Spine heights/lengths are unknowns in the problem so their}}
-\DoxyCodeLine{\textcolor{comment}{ /// values get corrected during each Newton step. However,}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// changing their value does not automatically change the}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{ /// nodal positions, so we need to update all of them}}
+\DoxyCodeLine{\textcolor{comment}{ /// Spine heights/lengths are unknowns in the problem so their}}
+\DoxyCodeLine{\textcolor{comment}{ /// values get corrected during each Newton step. However,}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{ /// changing their value does not automatically change the}}
+\DoxyCodeLine{\textcolor{comment}{ /// nodal positions, so we need to update all of them}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} actions\_before\_newton\_convergence\_check()}
 \DoxyCodeLine{  \{this-\/>Bulk\_mesh\_pt-\/>node\_update();\}}
 
 \end{DoxyCodeInclude}
-
-
-We also specify a destructor to clean up memory allocated by the class.\hypertarget{index_elastic_probe}{}\doxysubsection{The pseudo-\/solid-\/based formulation}\label{index_elastic_probe}
+ We also specify a destructor to clean up memory allocated by the class.\hypertarget{index_elastic_probe}{}\doxysubsection{The pseudo-\/solid-\/based formulation}\label{index_elastic_probe}
 The class {\ttfamily \mbox{\hyperlink{classElasticInclinedPlaneProblem}{Elastic\+Inclined\+Plane\+Problem}}} inherits from the generic {\ttfamily \mbox{\hyperlink{classInclinedPlaneProblem}{Inclined\+Plane\+Problem}}} class and also requires only minor modification. The constructor sets the string {\ttfamily Output\+\_\+prefix}, builds a timestepper, builds the specific {\ttfamily Solid\+Mesh}, sets the constitutive law for the bulk elements, creates the appropriate {\ttfamily Face\+Elements}, adds all sub-\/meshes to the {\ttfamily Problem}, builds the global mesh and then calls {\ttfamily \mbox{\hyperlink{classInclinedPlaneProblem_ae44e360be4a46e1343c3960c3a43380f}{Inclined\+Plane\+Problem\+::complete\+\_\+build()}}} 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \mbox{\hyperlink{classElasticInclinedPlaneProblem}{ElasticInclinedPlaneProblem}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&nx, \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&ny,}
@@ -769,7 +749,7 @@ The class {\ttfamily \mbox{\hyperlink{classElasticInclinedPlaneProblem}{Elastic\
 \DoxyCodeLine{  (nx,ny,length) }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Set the name}}
-\DoxyCodeLine{   this-\/>Output\_prefix = \textcolor{stringliteral}{"elastic"};}
+\DoxyCodeLine{   this-\/>Output\_prefix = \textcolor{stringliteral}{"{}elastic"{}};}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Create our one and only timestepper, with adaptive timestepping}}
 \DoxyCodeLine{   this-\/>add\_time\_stepper\_pt(\textcolor{keyword}{new} TIMESTEPPER);}
@@ -809,9 +789,7 @@ The class {\ttfamily \mbox{\hyperlink{classElasticInclinedPlaneProblem}{Elastic\
 \DoxyCodeLine{  \} \textcolor{comment}{//end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-In a pseudo-\/solid formulation, it is advantageous to reset the undeformed configuration after every timestep (an updated Lagrangian formulation). Hence, the {\ttfamily Problem\+::actions\+\_\+after\+\_\+implicit\+\_\+timestep()} function is overloaded 
+ In a pseudo-\/solid formulation, it is advantageous to reset the undeformed configuration after every timestep (an updated Lagrangian formulation). Hence, the {\ttfamily Problem\+::actions\+\_\+after\+\_\+implicit\+\_\+timestep()} function is overloaded 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_after\_implicit\_timestep()}
 \DoxyCodeLine{  \{}
@@ -827,9 +805,7 @@ In a pseudo-\/solid formulation, it is advantageous to reset the undeformed conf
 \DoxyCodeLine{  \} \textcolor{comment}{//end of actions\_after\_implicit\_timestep}}
 
 \end{DoxyCodeInclude}
-
-
-We also specify a destructor to clean up memory allocated by the class.
+ We also specify a destructor to clean up memory allocated by the class.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -858,5 +834,5 @@ We also specify a destructor to clean up memory allocated by the class.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

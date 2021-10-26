@@ -39,13 +39,13 @@ For simplicity the common boundaries between the fluid and solid mesh are assign
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_namespace}{}\doxysection{Problem Parameters}\label{index_namespace}
-The various problem parameters are defined in a global namespace. We define the Reynolds number, $ Re $, and the F\+SI interaction parameter $ Q $.
+The various problem parameters are defined in a global namespace. We define the Reynolds number, $ Re $, and the FSI interaction parameter $ Q $.
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=======start\_namespace==========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Global variables}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceGlobal__Physical__Variables}{Global\_Physical\_Variables}}}
 \DoxyCodeLine{\{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Reynolds number}}
@@ -55,9 +55,7 @@ The various problem parameters are defined in a global namespace. We define the 
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{double} \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Q}} = 0.0;}
 
 \end{DoxyCodeInclude}
-
-
-We specify the Poisson ratio of the solid and provide a pointer to the constitutive equation for the solid.
+ We specify the Poisson ratio of the solid and provide a pointer to the constitutive equation for the solid.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -69,9 +67,7 @@ We specify the Poisson ratio of the solid and provide a pointer to the constitut
 \DoxyCodeLine{\textcolor{comment}{} ConstitutiveLaw* \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Constitutive\_law\_pt}}=0;}
 
 \end{DoxyCodeInclude}
-
-
-The Poisson\textquotesingle{}s ratio and pointer to a constitutive law for the mesh deformation is specified separately.
+ The Poisson\textquotesingle{}s ratio and pointer to a constitutive law for the mesh deformation is specified separately.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -85,9 +81,7 @@ The Poisson\textquotesingle{}s ratio and pointer to a constitutive law for the m
 \DoxyCodeLine{\} \textcolor{comment}{//end namespace}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
 We set an output directory, trace file and instantiate the constitutive laws for the real and mesh solid mechanics computations with the appropriate Poisson ratios\+:
@@ -97,10 +91,10 @@ We set an output directory, trace file and instantiate the constitutive laws for
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{//Create a trace file}}
-\DoxyCodeLine{ std::ofstream trace(\textcolor{stringliteral}{"RESLT/trace.dat"});}
+\DoxyCodeLine{ std::ofstream trace(\textcolor{stringliteral}{"{}RESLT/trace.dat"{}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Create generalised Hookean constitutive equations}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a2a37fb040c832ee7a086bb13bb02a100}{Global\_Physical\_Variables::Constitutive\_law\_pt}} = }
@@ -111,9 +105,7 @@ We set an output directory, trace file and instantiate the constitutive laws for
 \DoxyCodeLine{  \textcolor{keyword}{new} GeneralisedHookean(\&\mbox{\hyperlink{namespaceGlobal__Physical__Variables_a0f1535b448627cbfa0acfb742120d96f}{Global\_Physical\_Variables::Mesh\_Nu}});}
 
 \end{DoxyCodeInclude}
-
-
-We then create the {\ttfamily Problem} object and output the initial guess for the solution
+ We then create the {\ttfamily Problem} object and output the initial guess for the solution
 
 
 \begin{DoxyCodeInclude}{0}
@@ -122,30 +114,28 @@ We then create the {\ttfamily Problem} object and output the initial guess for t
 \DoxyCodeLine{ \mbox{\hyperlink{classUnstructuredFSIProblem}{UnstructuredFSIProblem}}<}
 \DoxyCodeLine{ ProjectableTaylorHoodElement<}
 \DoxyCodeLine{ PseudoSolidNodeUpdateElement<TTaylorHoodElement<2>, TPVDElement<2,3> > >, }
-\DoxyCodeLine{  ProjectablePVDElement<TPVDElement<2,3> > > \mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}};}
+\DoxyCodeLine{  ProjectablePVDElement<TPVDElement<2,3> > > problem;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Output initial configuration}}
-\DoxyCodeLine{\mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{problem.\mbox{\hyperlink{classUnstructuredFSIProblem_a15f581318b505de07f50bd570da8c8d0}{doc\_solution}}(doc\_info);}
 \DoxyCodeLine{doc\_info.number()++;}
 
 \end{DoxyCodeInclude}
-
-
-Initially $ Q=0 $ and $ Re=0 $, so the solid should remain undeformed and the fluid problem is linear. We expect to obtain the solution in one Newton iteration and so we perform one steady solve with the default mesh and output the result. We also output the strain energy of the solid and dissipation of the fluid as global measures of the solution that can be used for validation. (The unstructured meshes generated are not guaranteed to be exactly the same on different computers.)
+ Initially $ Q=0 $ and $ Re=0 $, so the solid should remain undeformed and the fluid problem is linear. We expect to obtain the solution in one Newton iteration and so we perform one steady solve with the default mesh and output the result. We also output the strain energy of the solid and dissipation of the fluid as global measures of the solution that can be used for validation. (The unstructured meshes generated are not guaranteed to be exactly the same on different computers.)
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Solve the problem}}
-\DoxyCodeLine{\mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve();}
+\DoxyCodeLine{problem.newton\_solve();}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Output solution}}
-\DoxyCodeLine{\mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{doc\_info.number()++;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Calculate the strain energy of the solid and dissipation in the}}
 \DoxyCodeLine{\textcolor{comment}{//fluid as global output measures of the solution for validation purposes}}
-\DoxyCodeLine{\mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.output\_strain\_and\_dissipation(trace);}
+\DoxyCodeLine{problem.output\_strain\_and\_dissipation(trace);}
 
 \end{DoxyCodeInclude}
 
@@ -158,27 +148,25 @@ Finally, we perform a parameter study by increasing $ Q $, computing the result 
 \DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} i=0;i<n\_step;i++)}
 \DoxyCodeLine{ \{}
 \DoxyCodeLine{  \mbox{\hyperlink{namespaceGlobal__Physical__Variables_a66cb7ecda9ba0cd72367dd697f154545}{Global\_Physical\_Variables::Q}} += 1.0e-\/4;}
-\DoxyCodeLine{  \mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve(1);}
+\DoxyCodeLine{  problem.newton\_solve(1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Reset the lagrangian nodal coordinates in the fluid mesh}}
 \DoxyCodeLine{  \textcolor{comment}{//(Obviously we shouldn't do this in the solid mesh)}}
-\DoxyCodeLine{  \mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.Fluid\_mesh\_pt-\/>set\_lagrangian\_nodal\_coordinates();}
+\DoxyCodeLine{  problem.Fluid\_mesh\_pt-\/>set\_lagrangian\_nodal\_coordinates();}
 \DoxyCodeLine{  \textcolor{comment}{//Output solution}}
-\DoxyCodeLine{  \mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{  problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{  doc\_info.number()++;}
 \DoxyCodeLine{}
 \DoxyCodeLine{  \textcolor{comment}{//Calculate the strain energy of the solid and dissipation in the}}
 \DoxyCodeLine{  \textcolor{comment}{//fluid as global output measures of the solution for validation purposes}}
-\DoxyCodeLine{  \mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.output\_strain\_and\_dissipation(trace);}
+\DoxyCodeLine{  problem.output\_strain\_and\_dissipation(trace);}
 \DoxyCodeLine{ \}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_class}{}\doxysection{The Problem class}\label{index_class}
-The {\ttfamily Problem} class has a constructor, destructor and a post-\/processing member function. The class also includes the standard member functions {\ttfamily \mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a73d1d4f5dea4cd08cadd6cb7cb89b562}{actions\+\_\+before\+\_\+adapt()}}} and {\ttfamily actions\+\_\+after\+\_\+adapt()}. There are private member functions that create and destroy the required {\ttfamily F\+S\+I\+Solid\+Traction\+Elements} that apply the load from the fluid on the solid and the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} that are used to (weakly) align the boundary of the fluid mesh with the solid domain. There are also private member functions to compute the fluid dissipation, solid strain energy and a public member function that outputs the computed strain and dissipation to a specified trace file.
+The {\ttfamily Problem} class has a constructor, destructor and a post-\/processing member function. The class also includes the standard member functions {\ttfamily actions\+\_\+before\+\_\+adapt()} and {\ttfamily actions\+\_\+after\+\_\+adapt()}. There are private member functions that create and destroy the required {\ttfamily FSISolid\+Traction\+Elements} that apply the load from the fluid on the solid and the {\ttfamily Impose\+Displacement\+By\+Lagrange\+Multiplier\+Elements} that are used to (weakly) align the boundary of the fluid mesh with the solid domain. There are also private member functions to compute the fluid dissipation, solid strain energy and a public member function that outputs the computed strain and dissipation to a specified trace file.
 
 The class provided storage for pointers to the Solid Mesh, the Fluid Mesh and vectors of pointers to meshes of {\ttfamily Face\+Elements} on the boundaries over which the interaction takes place. There is also storage for the {\ttfamily Geom\+Object} incarnations of fsi boundaries of the solid mesh and polygonal representations of the boundaries of the fluid and solid meshes.
 
@@ -191,7 +179,7 @@ We start by building the solid mesh, an associated error estimator and then writ
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===============start\_constructor========================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for unstructured solid problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} FLUID\_ELEMENT, \textcolor{keyword}{class} SOLID\_ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classUnstructuredFSIProblem_a6a31fd839e0215ef1312942cf7284bd2}{UnstructuredFSIProblem<FLUID\_ELEMENT, SOLID\_ELEMENT>::UnstructuredFSIProblem}}() }
 \DoxyCodeLine{\{  }
@@ -306,13 +294,11 @@ We start by building the solid mesh, an associated error estimator and then writ
 \DoxyCodeLine{ Solid\_mesh\_pt-\/>min\_element\_size()=0.001; }
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Output boundary and mesh}}
-\DoxyCodeLine{ this-\/>Solid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"solid\_boundaries.dat"});}
-\DoxyCodeLine{ this-\/>Solid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"solid\_mesh.dat"});}
+\DoxyCodeLine{ this-\/>Solid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}solid\_boundaries.dat"{}});}
+\DoxyCodeLine{ this-\/>Solid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}solid\_mesh.dat"{}});}
 
 \end{DoxyCodeInclude}
-
-
-We next apply the boundary conditions to the solid mesh, by pinning the positions of the nodes on the lower boundary (boundary 3)
+ We next apply the boundary conditions to the solid mesh, by pinning the positions of the nodes on the lower boundary (boundary 3)
 
 
 \begin{DoxyCodeInclude}{0}
@@ -334,9 +320,7 @@ We next apply the boundary conditions to the solid mesh, by pinning the position
 \DoxyCodeLine{  \} \textcolor{comment}{// end\_solid\_boundary\_conditions}}
 
 \end{DoxyCodeInclude}
-
-
-and complete the build of the solid elements by passing the pointer to the constitutive law to all elements in the solid mesh.
+ and complete the build of the solid elements by passing the pointer to the constitutive law to all elements in the solid mesh.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -355,9 +339,7 @@ and complete the build of the solid elements by passing the pointer to the const
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-The next task is to build the fluid mesh, which uses three of the boundary segments already constructed for the solid mesh for the common boundaries
+ The next task is to build the fluid mesh, which uses three of the boundary segments already constructed for the solid mesh for the common boundaries
 
 
 \begin{DoxyCodeInclude}{0}
@@ -379,9 +361,7 @@ The next task is to build the fluid mesh, which uses three of the boundary segme
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-before constructing the remaining boundaries, building the mesh, an associated error estimator and writing the boundaries and mesh to output files.
+ before constructing the remaining boundaries, building the mesh, an associated error estimator and writing the boundaries and mesh to output files.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -488,13 +468,11 @@ before constructing the remaining boundaries, building the mesh, an associated e
 \DoxyCodeLine{ Fluid\_mesh\_pt-\/>min\_element\_size()=0.001; }
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Output boundary and mesh}}
-\DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"fluid\_boundaries.dat"});}
-\DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"fluid\_mesh.dat"});}
+\DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output\_boundaries(\textcolor{stringliteral}{"{}fluid\_boundaries.dat"{}});}
+\DoxyCodeLine{ this-\/>Fluid\_mesh\_pt-\/>output(\textcolor{stringliteral}{"{}fluid\_mesh.dat"{}});}
 
 \end{DoxyCodeInclude}
-
-
-We then apply boundary conditions to the fluid mesh by pinning velocity everywhere apart from at the outflow (boundary 4) and pinning all nodal positions on all boundaries that are not in contact with the solid.
+ We then apply boundary conditions to the fluid mesh by pinning velocity everywhere apart from at the outflow (boundary 4) and pinning all nodal positions on all boundaries that are not in contact with the solid.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -533,9 +511,7 @@ We then apply boundary conditions to the fluid mesh by pinning velocity everywhe
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over boundaries}}
 
 \end{DoxyCodeInclude}
-
-
-We next complete the build of the fluid elements by passing the Reynolds number and mesh constitutive law to all fluid elements
+ We next complete the build of the fluid elements by passing the Reynolds number and mesh constitutive law to all fluid elements
 
 
 \begin{DoxyCodeInclude}{0}
@@ -559,9 +535,7 @@ We next complete the build of the fluid elements by passing the Reynolds number 
 \DoxyCodeLine{  \} \textcolor{comment}{// end loop over elements}}
 
 \end{DoxyCodeInclude}
-
-
-and then set the Dirichlet boundary conditions for the fluid velocity on the inlet and channel walls.
+ and then set the Dirichlet boundary conditions for the fluid velocity on the inlet and channel walls.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -592,9 +566,7 @@ and then set the Dirichlet boundary conditions for the fluid velocity on the inl
 \DoxyCodeLine{  \} \textcolor{comment}{// end Poiseuille}}
 
 \end{DoxyCodeInclude}
-
-
-We then build three meshes of traction elements corresponding to the solid boundaries 0,1 and 2 that bound the fluid
+ We then build three meshes of traction elements corresponding to the solid boundaries 0,1 and 2 that bound the fluid
 
 
 \begin{DoxyCodeInclude}{0}
@@ -609,9 +581,7 @@ We then build three meshes of traction elements corresponding to the solid bound
 \DoxyCodeLine{ this-\/>create\_fsi\_traction\_elements();}
 
 \end{DoxyCodeInclude}
-
-
-and three analogous meshes of Lagrange multiplier elements.
+ and three analogous meshes of Lagrange multiplier elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -623,9 +593,7 @@ and three analogous meshes of Lagrange multiplier elements.
 \DoxyCodeLine{ this-\/>create\_lagrange\_multiplier\_elements();}
 
 \end{DoxyCodeInclude}
-
-
-The order matters because the Lagrange multiplier elements need pointers to the {\ttfamily Geom\+Object} incarnation of the {\ttfamily F\+S\+I\+Traction\+Elements}. Thus the traction elements must be created first.
+ The order matters because the Lagrange multiplier elements need pointers to the {\ttfamily Geom\+Object} incarnation of the {\ttfamily FSITraction\+Elements}. Thus the traction elements must be created first.
 
 We then combine all the sub meshes into a global mesh.
 
@@ -642,12 +610,10 @@ We then combine all the sub meshes into a global mesh.
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Build global mesh}}
-\DoxyCodeLine{ \mbox{\hyperlink{unstructured__adaptive__fsi_8txt_ab1de6bba12cf02b89aef37032980d827}{build\_global\_mesh}}();}
+\DoxyCodeLine{ build\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we setup the fluid-\/structure interaction for all three boundaries 0, 1 and 2 and then assign the equation numbers.
+ Finally, we setup the fluid-\/structure interaction for all three boundaries 0, 1 and 2 and then assign the equation numbers.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -665,35 +631,31 @@ Finally, we setup the fluid-\/structure interaction for all three boundaries 0, 
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{   }
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{//end constructor}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_actions_before}{}\doxysection{Actions before adaptation}\label{index_actions_before}
 Before any adaptation takes place all surface meshes are deleted and the global mesh is rebuilt.
 
  
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Actions before adapt}}
-\DoxyCodeLine{ \textcolor{keywordtype}{void} \mbox{\hyperlink{unstructured__adaptive__fsi_8txt_a73d1d4f5dea4cd08cadd6cb7cb89b562}{actions\_before\_adapt}}()}
+\DoxyCodeLine{\textcolor{comment}{ /// Actions before adapt}}
+\DoxyCodeLine{ \textcolor{keywordtype}{void} actions\_before\_adapt()}
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{comment}{//Delete the boundary meshes}}
 \DoxyCodeLine{   this-\/>delete\_lagrange\_multiplier\_elements();}
 \DoxyCodeLine{   this-\/>delete\_fsi\_traction\_elements();}
 \DoxyCodeLine{}
 \DoxyCodeLine{   \textcolor{comment}{//Rebuild the global mesh}}
-\DoxyCodeLine{   this-\/>\mbox{\hyperlink{unstructured__adaptive__fsi_8txt_aacb2e10a0cde0accbf6f8d9926f3694e}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{   this-\/>rebuild\_global\_mesh();}
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_actions_after}{}\doxysection{Actions after adaptation}\label{index_actions_after}
 The adaptation is performed separately on the fluid and solid meshes and the order does not matter. In fact, the first mesh to be refined will be the first that is added as a sub mesh (in this case the fluid mesh). After adaptation of all meshes, we first reset the Lagrangian coordinates of the Fluid mesh to ensure that the mesh deformation is as robust as possible.
@@ -710,9 +672,7 @@ The adaptation is performed separately on the fluid and solid meshes and the ord
 \DoxyCodeLine{   Fluid\_mesh\_pt-\/>set\_lagrangian\_nodal\_coordinates();}
 
 \end{DoxyCodeInclude}
-
-
-Note that we {\bfseries{ must }} not reset the Lagrangian coordinates of the solid mesh because that would change the undeformed configuration of the solid.
+ Note that we {\bfseries{ must }} not reset the Lagrangian coordinates of the solid mesh because that would change the undeformed configuration of the solid.
 
 We then reapply the solid boundary conditions and pass the constitutive law to the solid elements.
 
@@ -836,9 +796,7 @@ Next, the fluid boundary conditions are reapplied and the Reynolds number and me
 \DoxyCodeLine{    \} \textcolor{comment}{// end Poiseuille}}
 
 \end{DoxyCodeInclude}
-
-
-We then create the traction and Lagrange multiplier elements and rebuild the global mesh. Again the traction elements must be created first because they are used by the Lagrange multiplier elements.
+ We then create the traction and Lagrange multiplier elements and rebuild the global mesh. Again the traction elements must be created first because they are used by the Lagrange multiplier elements.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -848,12 +806,10 @@ We then create the traction and Lagrange multiplier elements and rebuild the glo
 \DoxyCodeLine{   this-\/>create\_lagrange\_multiplier\_elements();}
 \DoxyCodeLine{   }
 \DoxyCodeLine{   \textcolor{comment}{//Rebuild the global mesh}}
-\DoxyCodeLine{   this-\/>\mbox{\hyperlink{unstructured__adaptive__fsi_8txt_aacb2e10a0cde0accbf6f8d9926f3694e}{rebuild\_global\_mesh}}();}
+\DoxyCodeLine{   this-\/>rebuild\_global\_mesh();}
 
 \end{DoxyCodeInclude}
-
-
-Finally, we setup the F\+SI on the three boundaries that are in common between the fluid and the solid.
+ Finally, we setup the FSI on the three boundaries that are in common between the fluid and the solid.
 
 
 \begin{DoxyCodeInclude}{0}
@@ -871,11 +827,9 @@ Finally, we setup the F\+SI on the three boundaries that are in common between t
 \DoxyCodeLine{  \}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
  \DoxyHorRuler{0}
-\hypertarget{index_fsi_traction}{}\doxysection{Creating and destroying the F\+S\+I traction and Lagrange multiplier elements}\label{index_fsi_traction}
+ \DoxyHorRuler{0}
+\hypertarget{index_fsi_traction}{}\doxysection{Creating and destroying the FSI traction and Lagrange multiplier elements}\label{index_fsi_traction}
 These functions are exactly the same (apart from the obvious changes in boundary id) as those described in the \href{../../unstructured_fsi/html/index.html}{\texttt{ non-\/adaptive unstructured fsi tutorial. }} and are not repeated here.
 
 \DoxyHorRuler{0}
@@ -886,7 +840,7 @@ The post-\/processing routine simply executes the output functions for the fluid
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_comm_ex}{}\doxysection{Comments and Exercises}\label{index_comm_ex}
-The majority of comments in the \href{../../unstructured_fsi/html/index.html}{\texttt{ non-\/adaptive unstructured F\+SI tutorial }} also apply here. As mentioned above, the reason why the methodology works so straightforwardly is because the parametrisation of common boundaries must be the same in the fluid and solid meshes. If not, setting up the fluid-\/structure interaction will not work even before any adaptation takes place. Thus, provided that your unstructured F\+SI problem has been correctly set up in the case without adaptivity, adding adaptivity is completely straightforward.\hypertarget{index_ex}{}\doxysubsection{Exercises}\label{index_ex}
+The majority of comments in the \href{../../unstructured_fsi/html/index.html}{\texttt{ non-\/adaptive unstructured FSI tutorial }} also apply here. As mentioned above, the reason why the methodology works so straightforwardly is because the parametrisation of common boundaries must be the same in the fluid and solid meshes. If not, setting up the fluid-\/structure interaction will not work even before any adaptation takes place. Thus, provided that your unstructured FSI problem has been correctly set up in the case without adaptivity, adding adaptivity is completely straightforward.\hypertarget{index_ex}{}\doxysubsection{Exercises}\label{index_ex}
 
 \begin{DoxyEnumerate}
 \item Confirm that the order in which the sub-\/meshes are added does not affect the results. ~\newline
@@ -910,5 +864,5 @@ The majority of comments in the \href{../../unstructured_fsi/html/index.html}{\t
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

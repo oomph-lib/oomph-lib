@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1TreeBasedRefineableMesh}{}\doxysection{oomph\+::Tree\+Based\+Refineable\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1TreeBasedRefineableMesh}{}\doxysection{oomph\+::Tree\+Based\+Refineable\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1TreeBasedRefineableMesh}\index{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}}
+
+
+///////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$refineable\+\_\+mesh.\+h$>$}
 
-Inheritance diagram for oomph\+::Tree\+Based\+Refineable\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Tree\+Based\+Refineable\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.882829cm]{classoomph_1_1TreeBasedRefineableMesh}
@@ -15,7 +20,7 @@ Inheritance diagram for oomph\+::Tree\+Based\+Refineable\+Mesh$<$ E\+L\+E\+M\+E\
 \item 
 \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a6ac1734d39cf26e7f855b55ac8a3a760}{Tree\+Based\+Refineable\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Constructor, call the constructor of the base class. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_ac6057aeeec66fb9d0b5bbe0562a6e727}{Tree\+Based\+Refineable\+Mesh}} (const \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} \&dummy)
+\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a21353612dac4e14fdf92dfb99d33f0d6}{Tree\+Based\+Refineable\+Mesh}} (const \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} \&dummy)=delete
 \begin{DoxyCompactList}\small\item\em Broken copy constructor. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a0c7736c1b102c3699fdad63f2858492f}{$\sim$\+Tree\+Based\+Refineable\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Empty virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -23,7 +28,7 @@ virtual \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a0c7736c1b102c369
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a1af8d6a53048bd0d376f6a56bbd4c125}{additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes}} (const unsigned \&ncont\+\_\+interpolated\+\_\+values)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Additional setup of shared node scheme This is Required for reconcilliation of hanging nodes acrross processor boundaries when using elements with nonuniformly spaced nodes. ELEMENT template parameter is required so that Macro\+Element\+Node\+Update\+Nodes which are added as external halo master nodes can be made fully functional. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,12 +40,13 @@ void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_aa47363e7700089d4b87
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Tree\+Based\+Refineable\+Mesh$<$ ELEMENT $>$}
+///////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////// 
 
-Templated base class for refineable meshes. The use of the template parameter is required only for creating new elements during mesh adaptation. This class overloaded the template-\/free inteface to the function \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a43f134cb974f25f25d5ddfa88d56ef95}{split\+\_\+elements\+\_\+if\+\_\+required()}} to make use of the template parameter. All refineable meshes should inherit directly from Tree\+Based\+Refineable\+Mesh$<$\+E\+L\+E\+M\+E\+N\+T$>$ 
+Templated base class for refineable meshes. The use of the template parameter is required only for creating new elements during mesh adaptation. This class overloaded the template-\/free inteface to the function \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh_a43f134cb974f25f25d5ddfa88d56ef95}{split\+\_\+elements\+\_\+if\+\_\+required()}} to make use of the template parameter. All refineable meshes should inherit directly from Tree\+Based\+Refineable\+Mesh$<$\+ELEMENT$>$ 
 
-Definition at line 819 of file refineable\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__mesh_8h_source_l00808}{808}} of file \mbox{\hyperlink{refineable__mesh_8h_source}{refineable\+\_\+mesh.\+h}}.
 
 
 
@@ -49,8 +55,8 @@ Definition at line 819 of file refineable\+\_\+mesh.\+h.
 \index{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}!TreeBasedRefineableMesh@{TreeBasedRefineableMesh}}
 \index{TreeBasedRefineableMesh@{TreeBasedRefineableMesh}!oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{TreeBasedRefineableMesh()}{TreeBasedRefineableMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -58,29 +64,25 @@ Constructor, call the constructor of the base class.
 
 
 
-Definition at line 873 of file refineable\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__mesh_8h_source_l00862}{862}} of file \mbox{\hyperlink{refineable__mesh_8h_source}{refineable\+\_\+mesh.\+h}}.
 
-\mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMesh_ac6057aeeec66fb9d0b5bbe0562a6e727}\label{classoomph_1_1TreeBasedRefineableMesh_ac6057aeeec66fb9d0b5bbe0562a6e727}} 
+\mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMesh_a21353612dac4e14fdf92dfb99d33f0d6}\label{classoomph_1_1TreeBasedRefineableMesh_a21353612dac4e14fdf92dfb99d33f0d6}} 
 \index{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}!TreeBasedRefineableMesh@{TreeBasedRefineableMesh}}
 \index{TreeBasedRefineableMesh@{TreeBasedRefineableMesh}!oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{TreeBasedRefineableMesh()}{TreeBasedRefineableMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}}$<$ ELEMENT $>$ \&}]{dummy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
 
 
 
 Broken copy constructor. 
 
-
-
-Definition at line 876 of file refineable\+\_\+mesh.\+h.
-
 \mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMesh_a0c7736c1b102c3699fdad63f2858492f}\label{classoomph_1_1TreeBasedRefineableMesh_a0c7736c1b102c3699fdad63f2858492f}} 
 \index{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}!````~TreeBasedRefineableMesh@{$\sim$TreeBasedRefineableMesh}}
 \index{````~TreeBasedRefineableMesh@{$\sim$TreeBasedRefineableMesh}!oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$TreeBasedRefineableMesh()}{~TreeBasedRefineableMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{Tree\+Based\+Refineable\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -88,7 +90,7 @@ Empty virtual destructor.
 
 
 
-Definition at line 882 of file refineable\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__mesh_8h_source_l00868}{868}} of file \mbox{\hyperlink{refineable__mesh_8h_source}{refineable\+\_\+mesh.\+h}}.
 
 
 
@@ -97,25 +99,31 @@ Definition at line 882 of file refineable\+\_\+mesh.\+h.
 \index{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}!additional\_synchronise\_hanging\_nodes@{additional\_synchronise\_hanging\_nodes}}
 \index{additional\_synchronise\_hanging\_nodes@{additional\_synchronise\_hanging\_nodes}!oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{additional\_synchronise\_hanging\_nodes()}{additional\_synchronise\_hanging\_nodes()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ncont\+\_\+interpolated\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ ELEMENT $>$\+::additional\+\_\+synchronise\+\_\+hanging\+\_\+nodes (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ncont\+\_\+interpolated\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-Additional setup of shared node scheme This is Required for reconcilliation of hanging nodes acrross processor boundaries when using elements with nonuniformly spaced nodes. E\+L\+E\+M\+E\+NT template parameter is required so that Macro\+Element\+Node\+Update\+Nodes which are added as external halo master nodes can be made fully functional
 
-Additional actions required to synchronise halo nodes where master nodes could not be found during \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a0ba902eb4b63aaa8c4da1aadcf25709a}{synchronise\+\_\+hanging\+\_\+nodes()}}. Overloaded from \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} class to take care of master nodes on the outer edge of the halo layer which do not exist on that processor. This fixes problems with the synchronisation of hanging nodes for elements with non-\/uniformly spaced nodes. 
+
+Additional setup of shared node scheme This is Required for reconcilliation of hanging nodes acrross processor boundaries when using elements with nonuniformly spaced nodes. ELEMENT template parameter is required so that Macro\+Element\+Node\+Update\+Nodes which are added as external halo master nodes can be made fully functional. 
+
+Additional actions required to synchronise halo nodes where master nodes could not be found during \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a0ba902eb4b63aaa8c4da1aadcf25709a}{synchronise\+\_\+hanging\+\_\+nodes()}}. Overloaded from \mbox{\hyperlink{classoomph_1_1Mesh}{Mesh}} class to take care of master nodes on the outer edge of the halo layer which do not exist on that processor. This fixes problems with the synchronisation of hanging nodes for elements with non-\/uniformly spaced nodes. / Let my\+\_\+rank==A. If this has happened then it means that / duplicate haloed nodes exist on another processor (B). This / problem arises if a master of a haloed node with a discrepancy / is haloed with a different processor (C). A copy is constructed / in the external halo storage on processor (B) because that node / is not found in the (internal) haloed storage on (A) with (B) / but that node already exists on processor (B) in the (internal) / halo storage with processor (C). Thus two copies of this master / node now exist on processor (B).
 
 Implements \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a59d0404f8e5ebd7199f25c794c5c715c}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base}}.
 
 
 
-Definition at line 55 of file refineable\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{refineable__mesh_8template_8cc_source_l00055}{55}} of file \mbox{\hyperlink{refineable__mesh_8template_8cc_source}{refineable\+\_\+mesh.\+template.\+cc}}.
+
+
+
+References \mbox{\hyperlink{oomph__definitions_8cc_source_l00049}{oomph\+::\+Global\+\_\+timings\+::\+Doc\+\_\+comprehensive\+\_\+timings}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00319}{oomph\+::oomph\+\_\+info}}, \mbox{\hyperlink{missing__masters_8cc_source_l00106}{oomph\+::\+Missing\+\_\+masters\+\_\+functions\+::recursively\+\_\+add\+\_\+masters\+\_\+of\+\_\+external\+\_\+haloed\+\_\+node()}}, and \mbox{\hyperlink{oomph__utilities_8cc_source_l01295}{oomph\+::\+Timing\+Helpers\+::timer()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMesh_aa47363e7700089d4b8756b2339c4893c}\label{classoomph_1_1TreeBasedRefineableMesh_aa47363e7700089d4b8756b2339c4893c}} 
 \index{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}!p\_refine\_elements\_if\_required@{p\_refine\_elements\_if\_required}}
 \index{p\_refine\_elements\_if\_required@{p\_refine\_elements\_if\_required}!oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{p\_refine\_elements\_if\_required()}{p\_refine\_elements\_if\_required()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::p\+\_\+refine\+\_\+elements\+\_\+if\+\_\+required (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ ELEMENT $>$\+::p\+\_\+refine\+\_\+elements\+\_\+if\+\_\+required (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -127,14 +135,18 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a9a2f26f44
 
 
 
-Definition at line 841 of file refineable\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__mesh_8h_source_l00830}{830}} of file \mbox{\hyperlink{refineable__mesh_8h_source}{refineable\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00768}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Forest\+\_\+pt}}, \mbox{\hyperlink{tree_8h_source_l00460}{oomph\+::\+Tree\+Forest\+::ntree()}}, \mbox{\hyperlink{tree_8cc_source_l00207}{oomph\+::\+Tree\+::traverse\+\_\+leaves()}}, and \mbox{\hyperlink{tree_8h_source_l00466}{oomph\+::\+Tree\+Forest\+::tree\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1TreeBasedRefineableMesh_a43f134cb974f25f25d5ddfa88d56ef95}\label{classoomph_1_1TreeBasedRefineableMesh_a43f134cb974f25f25d5ddfa88d56ef95}} 
 \index{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}!split\_elements\_if\_required@{split\_elements\_if\_required}}
 \index{split\_elements\_if\_required@{split\_elements\_if\_required}!oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$@{oomph::TreeBasedRefineableMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{split\_elements\_if\_required()}{split\_elements\_if\_required()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::split\+\_\+elements\+\_\+if\+\_\+required (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMesh}{oomph\+::\+Tree\+Based\+Refineable\+Mesh}}$<$ ELEMENT $>$\+::split\+\_\+elements\+\_\+if\+\_\+required (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
 
 
 
@@ -146,7 +158,11 @@ Implements \mbox{\hyperlink{classoomph_1_1TreeBasedRefineableMeshBase_a86dace1f7
 
 
 
-Definition at line 825 of file refineable\+\_\+mesh.\+h.
+Definition at line \mbox{\hyperlink{refineable__mesh_8h_source_l00814}{814}} of file \mbox{\hyperlink{refineable__mesh_8h_source}{refineable\+\_\+mesh.\+h}}.
+
+
+
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, \mbox{\hyperlink{refineable__mesh_8h_source_l00768}{oomph\+::\+Tree\+Based\+Refineable\+Mesh\+Base\+::\+Forest\+\_\+pt}}, \mbox{\hyperlink{tree_8h_source_l00460}{oomph\+::\+Tree\+Forest\+::ntree()}}, \mbox{\hyperlink{tree_8cc_source_l00207}{oomph\+::\+Tree\+::traverse\+\_\+leaves()}}, and \mbox{\hyperlink{tree_8h_source_l00466}{oomph\+::\+Tree\+Forest\+::tree\+\_\+pt()}}.
 
 
 

@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1RectangularQuadMesh}{}\doxysection{oomph\+::Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RectangularQuadMesh}{}\doxysection{oomph\+::Rectangular\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RectangularQuadMesh}\index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
+
+
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} is a two-\/dimensional mesh of Quad elements with Nx elements in the \char`\"{}x\char`\"{} (horizonal) direction and Ny elements in the \char`\"{}y\char`\"{} (vertical) direction. Two Constructors are provided. The basic constructor assumes that the lower-\/left-\/hand corner of the mesh is (0,0) and takes only the arguments, Nx, Ny, Xmax and Ymax. The more complex constructor takes the additional arguments Xmin and Ymin.  
+
+
 
 
 {\ttfamily \#include $<$rectangular\+\_\+quadmesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Rectangular\+Quad\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=10.865671cm]{classoomph_1_1RectangularQuadMesh}
@@ -13,17 +18,17 @@ Inheritance diagram for oomph\+::Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+NT $>
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1f906bca42da3d44765382013667e40d}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&ly, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a1f906bca42da3d44765382013667e40d}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, const double \&lx, const double \&ly, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Also pass pointer to timestepper (defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aea506679674e4fc5c43b62a53798d0be}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&xmin, const double \&xmax, const double \&ymin, const double \&ymax, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aea506679674e4fc5c43b62a53798d0be}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, const double \&xmin, const double \&xmax, const double \&ymin, const double \&ymax, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a40f120e00d682026e54593ca0f823535}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&lx, const double \&ly, const bool \&periodic\+\_\+in\+\_\+x, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a40f120e00d682026e54593ca0f823535}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, const double \&lx, const double \&ly, const bool \&periodic\+\_\+in\+\_\+x, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of elements in y direction; lx, length of domain in x direction (0,lx); ly, length of domain in y direction (0,ly) Boolean flag specifies if the mesh is periodic in the x-\/direction. Also pass pointer to timestepper (defaults to \mbox{\hyperlink{classoomph_1_1Steady}{Steady}}) \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ac36869a7d72ec7524b18272657cb6167}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&xmin, const double \&xmax, const double \&ymin, const double \&ymax, const bool \&periodic\+\_\+in\+\_\+x, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ac36869a7d72ec7524b18272657cb6167}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, const double \&xmin, const double \&xmax, const double \&ymin, const double \&ymax, const bool \&periodic\+\_\+in\+\_\+x, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates. Boolean flag specifies if the mesh is periodic in the x-\/direction. \end{DoxyCompactList}\item 
-const unsigned \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}} () const
+const unsigned \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}} () const
 \begin{DoxyCompactList}\small\item\em Return number of elements in x direction. \end{DoxyCompactList}\item 
-const unsigned \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}} () const
+const unsigned \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}} () const
 \begin{DoxyCompactList}\small\item\em Return number of elements in y direction. \end{DoxyCompactList}\item 
 const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}{x\+\_\+min}} () const
 \begin{DoxyCompactList}\small\item\em Return the minimum value of x coordinate. \end{DoxyCompactList}\item 
@@ -44,8 +49,8 @@ virtual double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae78204de1f176
 \item 
 void \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_afa579b413a2d8120e8228d840cb3582c}{build\+\_\+mesh}} (\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
 \begin{DoxyCompactList}\small\item\em Generic mesh construction function\+: contains all the hard work. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aeda49fb3896e9e3aec328391b196a6bf}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}{ny}}, const double \&xmin, const double \&xmax, const double \&ymin, const double \&ymax, const bool \&periodic\+\_\+in\+\_\+x, const bool \&build, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
-\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. T\+His is scheduled to be changed, however. The reason why this M\+U\+ST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_aeda49fb3896e9e3aec328391b196a6bf}{Rectangular\+Quad\+Mesh}} (const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}{nx}}, const unsigned \&\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}{ny}}, const double \&xmin, const double \&xmax, const double \&ymin, const double \&ymax, const bool \&periodic\+\_\+in\+\_\+x, const bool \&build, \mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}})
+\begin{DoxyCompactList}\small\item\em Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -69,16 +74,15 @@ bool \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_a83dd0ace2eb47449f5e3052
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} is a two-\/dimensional mesh of Quad elements with Nx elements in the \char`\"{}x\char`\"{} (horizonal) direction and Ny elements in the \char`\"{}y\char`\"{} (vertical) direction. Two Constructors are provided. The basic constructor assumes that the lower-\/left-\/hand corner of the mesh is (0,0) and takes only the arguments, Nx, Ny, Xmax and Ymax. The more complex constructor takes the additional arguments Xmin and Ymin.
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$}
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} is a two-\/dimensional mesh of Quad elements with Nx elements in the \char`\"{}x\char`\"{} (horizonal) direction and Ny elements in the \char`\"{}y\char`\"{} (vertical) direction. Two Constructors are provided. The basic constructor assumes that the lower-\/left-\/hand corner of the mesh is (0,0) and takes only the arguments, Nx, Ny, Xmax and Ymax. The more complex constructor takes the additional arguments Xmin and Ymin. 
 
 This class is designed to be used as a Base class for more complex two dimensional meshes. The virtual functions \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}{x\+\_\+spacing\+\_\+function()}} and \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}{y\+\_\+spacing\+\_\+function()}} may be overloaded to provide arbitrary node spacing. The default is uniformly spaced nodes in each direction.
 
 It is also possible to make the solution periodic in the x direction. 
 
-Definition at line 58 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00058}{58}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
@@ -87,27 +91,27 @@ Definition at line 58 of file rectangular\+\_\+quadmesh.\+template.\+h.
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!RectangularQuadMesh@{RectangularQuadMesh}}
 \index{RectangularQuadMesh@{RectangularQuadMesh}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RectangularQuadMesh()}{RectangularQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{xmin,  }\item[{const double \&}]{xmax,  }\item[{const double \&}]{ymin,  }\item[{const double \&}]{ymax,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{const bool \&}]{build,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{xmin,  }\item[{const double \&}]{xmax,  }\item[{const double \&}]{ymin,  }\item[{const double \&}]{ymax,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{const bool \&}]{build,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
-Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. T\+His is scheduled to be changed, however. The reason why this M\+U\+ST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! 
+Constructor that allows the specification of minimum and maximum values of x and y coordinates and does not build the mesh This is intend to be used in derived classes that overload the spacing functions. THis is scheduled to be changed, however. The reason why this MUST be done is because the virtual spacing functions cannot be called in the base constructur, because they will not have been overloaded yet!! 
 
 
 
-Definition at line 93 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00093}{93}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00043}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a1f906bca42da3d44765382013667e40d}\label{classoomph_1_1RectangularQuadMesh_a1f906bca42da3d44765382013667e40d}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!RectangularQuadMesh@{RectangularQuadMesh}}
 \index{RectangularQuadMesh@{RectangularQuadMesh}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RectangularQuadMesh()}{RectangularQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{ly,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -115,18 +119,18 @@ Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of e
 
 
 
-Definition at line 123 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00123}{123}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00043}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_aea506679674e4fc5c43b62a53798d0be}\label{classoomph_1_1RectangularQuadMesh_aea506679674e4fc5c43b62a53798d0be}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!RectangularQuadMesh@{RectangularQuadMesh}}
 \index{RectangularQuadMesh@{RectangularQuadMesh}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RectangularQuadMesh()}{RectangularQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{xmin,  }\item[{const double \&}]{xmax,  }\item[{const double \&}]{ymin,  }\item[{const double \&}]{ymax,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{xmin,  }\item[{const double \&}]{xmax,  }\item[{const double \&}]{ymin,  }\item[{const double \&}]{ymax,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -134,18 +138,18 @@ Constructor that allows the specification of minimum and maximum values of x and
 
 
 
-Definition at line 146 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00146}{146}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00043}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a40f120e00d682026e54593ca0f823535}\label{classoomph_1_1RectangularQuadMesh_a40f120e00d682026e54593ca0f823535}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!RectangularQuadMesh@{RectangularQuadMesh}}
 \index{RectangularQuadMesh@{RectangularQuadMesh}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RectangularQuadMesh()}{RectangularQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{ly,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{lx,  }\item[{const double \&}]{ly,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -153,18 +157,18 @@ Simple constructor\+: nx\+: number of elements in x direction; ny\+: number of e
 
 
 
-Definition at line 174 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00174}{174}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00043}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_ac36869a7d72ec7524b18272657cb6167}\label{classoomph_1_1RectangularQuadMesh_ac36869a7d72ec7524b18272657cb6167}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!RectangularQuadMesh@{RectangularQuadMesh}}
 \index{RectangularQuadMesh@{RectangularQuadMesh}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RectangularQuadMesh()}{RectangularQuadMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{xmin,  }\item[{const double \&}]{xmax,  }\item[{const double \&}]{ymin,  }\item[{const double \&}]{ymax,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{Rectangular\+Quad\+Mesh}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nx,  }\item[{const unsigned \&}]{ny,  }\item[{const double \&}]{xmin,  }\item[{const double \&}]{xmax,  }\item[{const double \&}]{ymin,  }\item[{const double \&}]{ymax,  }\item[{const bool \&}]{periodic\+\_\+in\+\_\+x,  }\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -172,11 +176,11 @@ Constructor that allows the specification of minimum and maximum values of x and
 
 
 
-Definition at line 199 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00199}{199}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+mesh().
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00043}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::build\+\_\+mesh()}}.
 
 
 
@@ -185,8 +189,8 @@ References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::buil
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!build\_mesh@{build\_mesh}}
 \index{build\_mesh@{build\_mesh}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{build\_mesh()}{build\_mesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::build\+\_\+mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1TimeStepper}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&\mbox{\hyperlink{classoomph_1_1Mesh_a12243d0fee2b1fcee729ee5a4777ea10}{Mesh\+::\+Default\+\_\+\+Time\+Stepper}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -194,22 +198,22 @@ Generic mesh construction function\+: contains all the hard work.
 
 Generic mesh construction. This function contains the \char`\"{}guts\char`\"{} of the mesh generation process, including all the tedious loops, counting and spacing functions. The function should be called in all constuctors of any derived classes. 
 
-Definition at line 43 of file rectangular\+\_\+quadmesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00043}{43}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source}{rectangular\+\_\+quadmesh.\+template.\+cc}}.
 
 
 
-References i.
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
 
 
-Referenced by oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh(), oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+horizontal\+\_\+single\+\_\+layer\+\_\+mesh(), oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+single\+\_\+layer\+\_\+mesh(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Rectangular\+Quad\+Mesh(), and oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Two\+Layer\+Spine\+Mesh().
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8template_8cc_source_l00153}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+channel\+\_\+spine\+\_\+mesh()}}, \mbox{\hyperlink{horizontal__single__layer__spine__mesh_8template_8cc_source_l00075}{oomph\+::\+Horizontal\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+horizontal\+\_\+single\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{single__layer__spine__mesh_8template_8cc_source_l00114}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+single\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00267}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::build\+\_\+two\+\_\+layer\+\_\+mesh()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00093}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Rectangular\+Quad\+Mesh()}}, and \mbox{\hyperlink{two__layer__spine__mesh_8template_8cc_source_l00156}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::\+Two\+Layer\+Spine\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_ae1e1d67808d4efb6e16a3835162a4504}\label{classoomph_1_1RectangularQuadMesh_ae1e1d67808d4efb6e16a3835162a4504}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!element\_reorder@{element\_reorder}}
 \index{element\_reorder@{element\_reorder}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{element\_reorder()}{element\_reorder()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::element\+\_\+reorder\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::element\+\_\+reorder\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -217,22 +221,22 @@ Reorder the elements\+: By default they are ordered in \char`\"{}horizontal\char
 
 Reorder the elements so they are listed in vertical slices (more efficient during the frontal solution if the domain is long in the x-\/direction. 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_ad449460c4d06b2be64b53097143a3b09}{oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_ad449460c4d06b2be64b53097143a3b09}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 834 of file rectangular\+\_\+quadmesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source_l00834}{834}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8cc_source}{rectangular\+\_\+quadmesh.\+template.\+cc}}.
 
 
 
-References e, and i.
+References \mbox{\hyperlink{cfortran_8h_source_l00571}{e}}, and \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}.
 
-\mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}\label{classoomph_1_1RectangularQuadMesh_abfef93d6322886cdce14a437186e4821}} 
+\mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}\label{classoomph_1_1RectangularQuadMesh_a8755801661f2cec616527ecc3a43fd60}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!nx@{nx}}
 \index{nx@{nx}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{nx()}{nx()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const unsigned\& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::nx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+const unsigned \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::nx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -240,22 +244,22 @@ Return number of elements in x direction.
 
 
 
-Definition at line 224 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00224}{224}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Nx.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00063}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Nx}}.
 
 
 
-Referenced by oomph\+::\+Backward\+Step\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Backward\+Step\+Quad\+Mesh(), oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh(), and oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pml\+\_\+locate\+\_\+zeta().
+Referenced by \mbox{\hyperlink{backward__step__mesh_8template_8h_source_l00054}{oomph\+::\+Backward\+Step\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Backward\+Step\+Quad\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00060}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00212}{oomph\+::\+PMLQuad\+Mesh\+Base$<$ ELEMENT $>$\+::pml\+\_\+locate\+\_\+zeta()}}.
 
-\mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}\label{classoomph_1_1RectangularQuadMesh_a86d76a55eb7c4e8bca9b74d23c8b0412}} 
+\mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}\label{classoomph_1_1RectangularQuadMesh_a189759f02bc92144e4abc24cb5bae5a8}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!ny@{ny}}
 \index{ny@{ny}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{ny()}{ny()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const unsigned\& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::ny (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+const unsigned \& \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::ny (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -263,22 +267,22 @@ Return number of elements in y direction.
 
 
 
-Definition at line 231 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00231}{231}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00065}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ny}}.
 
 
 
-Referenced by oomph\+::\+Backward\+Step\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Backward\+Step\+Quad\+Mesh(), oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh(), and oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pml\+\_\+locate\+\_\+zeta().
+Referenced by \mbox{\hyperlink{backward__step__mesh_8template_8h_source_l00054}{oomph\+::\+Backward\+Step\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Backward\+Step\+Quad\+Mesh()}}, \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00060}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::\+Circular\+Cylindrical\+Shell\+Mesh()}}, and \mbox{\hyperlink{pml__meshes_8h_source_l00212}{oomph\+::\+PMLQuad\+Mesh\+Base$<$ ELEMENT $>$\+::pml\+\_\+locate\+\_\+zeta()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a3449b36a5e4fc4728e517bd38d7b0cc6}\label{classoomph_1_1RectangularQuadMesh_a3449b36a5e4fc4728e517bd38d7b0cc6}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!x\_max@{x\_max}}
 \index{x\_max@{x\_max}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{x\_max()}{x\_max()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::x\+\_\+max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::x\+\_\+max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -286,22 +290,22 @@ Return the maximum value of x coordinate.
 
 
 
-Definition at line 245 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00245}{245}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xmax.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00072}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xmax}}.
 
 
 
-Referenced by oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pml\+\_\+locate\+\_\+zeta().
+Referenced by \mbox{\hyperlink{pml__meshes_8h_source_l00212}{oomph\+::\+PMLQuad\+Mesh\+Base$<$ ELEMENT $>$\+::pml\+\_\+locate\+\_\+zeta()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}\label{classoomph_1_1RectangularQuadMesh_ab311c3bec7f9f721bae1f93e0798ab2c}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!x\_min@{x\_min}}
 \index{x\_min@{x\_min}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{x\_min()}{x\_min()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::x\+\_\+min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::x\+\_\+min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -309,22 +313,22 @@ Return the minimum value of x coordinate.
 
 
 
-Definition at line 238 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00238}{238}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xmin.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00070}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xmin}}.
 
 
 
-Referenced by oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pml\+\_\+locate\+\_\+zeta().
+Referenced by \mbox{\hyperlink{pml__meshes_8h_source_l00212}{oomph\+::\+PMLQuad\+Mesh\+Base$<$ ELEMENT $>$\+::pml\+\_\+locate\+\_\+zeta()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}\label{classoomph_1_1RectangularQuadMesh_ad4c2f349cf201cb3107f0a4e5447c16f}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!x\_spacing\_function@{x\_spacing\_function}}
 \index{x\_spacing\_function@{x\_spacing\_function}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{x\_spacing\_function()}{x\_spacing\_function()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::x\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{unsigned}]{xelement,  }\item[{unsigned}]{xnode,  }\item[{unsigned}]{yelement,  }\item[{unsigned}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{unsigned}]{xelement,  }\item[{unsigned}]{xnode,  }\item[{unsigned}]{yelement,  }\item[{unsigned}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -332,22 +336,22 @@ Return the value of the x-\/coordinate at the node given by the local node numbe
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a5fd9eae27ba19788e0b397936f0c5ead}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}, and \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a16e0d4264443b1beb274753b0d6b970e}{oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1ChannelSpineMesh_a16e0d4264443b1beb274753b0d6b970e}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$}}, and \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a5fd9eae27ba19788e0b397936f0c5ead}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 279 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00279}{279}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Np, oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Nx, oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xmax, and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Xmin.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00067}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Np}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00063}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Nx}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00072}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xmax}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00070}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Xmin}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a7d4a00a545efc20451b00a9b8ad1e17d}\label{classoomph_1_1RectangularQuadMesh_a7d4a00a545efc20451b00a9b8ad1e17d}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!y\_max@{y\_max}}
 \index{y\_max@{y\_max}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{y\_max()}{y\_max()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::y\+\_\+max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::y\+\_\+max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -355,22 +359,22 @@ Return the maximum value of y coordinate.
 
 
 
-Definition at line 259 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00259}{259}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ymax.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00077}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymax}}.
 
 
 
-Referenced by oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pml\+\_\+locate\+\_\+zeta().
+Referenced by \mbox{\hyperlink{pml__meshes_8h_source_l00212}{oomph\+::\+PMLQuad\+Mesh\+Base$<$ ELEMENT $>$\+::pml\+\_\+locate\+\_\+zeta()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a1c493af1dae35746bed7a31e61b46c5b}\label{classoomph_1_1RectangularQuadMesh_a1c493af1dae35746bed7a31e61b46c5b}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!y\_min@{y\_min}}
 \index{y\_min@{y\_min}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{y\_min()}{y\_min()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::y\+\_\+min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+const double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::y\+\_\+min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -378,22 +382,22 @@ Return the minimum value of y coordinate.
 
 
 
-Definition at line 252 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00252}{252}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ymin.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00075}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymin}}.
 
 
 
-Referenced by oomph\+::\+P\+M\+L\+Quad\+Mesh\+Base$<$ E\+L\+E\+M\+E\+N\+T $>$\+::pml\+\_\+locate\+\_\+zeta().
+Referenced by \mbox{\hyperlink{pml__meshes_8h_source_l00212}{oomph\+::\+PMLQuad\+Mesh\+Base$<$ ELEMENT $>$\+::pml\+\_\+locate\+\_\+zeta()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}\label{classoomph_1_1RectangularQuadMesh_ae78204de1f176cdf2e819673bd34e78a}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!y\_spacing\_function@{y\_spacing\_function}}
 \index{y\_spacing\_function@{y\_spacing\_function}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{y\_spacing\_function()}{y\_spacing\_function()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::y\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{unsigned}]{xelement,  }\item[{unsigned}]{xnode,  }\item[{unsigned}]{yelement,  }\item[{unsigned}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::y\+\_\+spacing\+\_\+function (\begin{DoxyParamCaption}\item[{unsigned}]{xelement,  }\item[{unsigned}]{xnode,  }\item[{unsigned}]{yelement,  }\item[{unsigned}]{ynode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -401,15 +405,15 @@ Return the value of the y-\/coordinate at the node given by the local node numbe
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a2d05d5228e3831021ab48dd429ada890}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1TwoLayerSpineMesh_a2d05d5228e3831021ab48dd429ada890}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 296 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00296}{296}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Np, oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ny, oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ymax, and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Ymin.
+References \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00067}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Np}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00065}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ny}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00077}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymax}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00075}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Ymin}}.
 
 
 
@@ -418,8 +422,8 @@ References oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Np
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Np@{Np}}
 \index{Np@{Np}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Np}{Np}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Np\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::Np\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -427,18 +431,18 @@ Np\+: number of (linear) points in the element.
 
 
 
-Definition at line 67 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00067}{67}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+spacing\+\_\+function(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+spacing\+\_\+function(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+spacing\+\_\+function().
+Referenced by \mbox{\hyperlink{channel__spine__mesh_8template_8h_source_l00156}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00279}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00296}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::y\+\_\+spacing\+\_\+function()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a1b2c0a2d1f8399713033953c72d399ee}\label{classoomph_1_1RectangularQuadMesh_a1b2c0a2d1f8399713033953c72d399ee}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Nx@{Nx}}
 \index{Nx@{Nx}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Nx}{Nx}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Nx\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::Nx\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -446,18 +450,18 @@ Nx\+: number of elements in x-\/direction.
 
 
 
-Definition at line 63 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00063}{63}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::nx(), oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+spacing\+\_\+function().
+Referenced by \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00224}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::nx()}}, \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00165}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct()}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00279}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a49a5ee7ef86ce837fb807eb6014a296d}\label{classoomph_1_1RectangularQuadMesh_a49a5ee7ef86ce837fb807eb6014a296d}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Ny@{Ny}}
 \index{Ny@{Ny}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ny}{Ny}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ny\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::Ny\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -465,18 +469,18 @@ Ny\+: number of elements in y-\/direction.
 
 
 
-Definition at line 65 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00065}{65}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::ny(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+spacing\+\_\+function().
+Referenced by \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00231}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::ny()}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00296}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::y\+\_\+spacing\+\_\+function()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_ab8e4ddba0ce8315cf480cdd1f3447684}\label{classoomph_1_1RectangularQuadMesh_ab8e4ddba0ce8315cf480cdd1f3447684}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Xmax@{Xmax}}
 \index{Xmax@{Xmax}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Xmax}{Xmax}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Xmax\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::Xmax\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -484,18 +488,18 @@ Maximum value of x coordinate.
 
 
 
-Definition at line 72 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00072}{72}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+max(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+spacing\+\_\+function().
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00165}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00245}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::x\+\_\+max()}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00279}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_af3aab508d077460545031e758396514a}\label{classoomph_1_1RectangularQuadMesh_af3aab508d077460545031e758396514a}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Xmin@{Xmin}}
 \index{Xmin@{Xmin}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Xmin}{Xmin}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Xmin\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::Xmin\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -503,18 +507,18 @@ Minimum value of x coordinate.
 
 
 
-Definition at line 70 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00070}{70}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+min(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+spacing\+\_\+function(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::x\+\_\+spacing\+\_\+function().
+Referenced by \mbox{\hyperlink{circular__shell__mesh_8template_8h_source_l00165}{oomph\+::\+Circular\+Cylindrical\+Shell\+Mesh$<$ ELEMENT $>$\+::piecewise\+\_\+linear\+\_\+axial\+\_\+bl\+\_\+stretching\+\_\+fct()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00238}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::x\+\_\+min()}}, \mbox{\hyperlink{channel__spine__mesh_8template_8h_source_l00156}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00279}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::x\+\_\+spacing\+\_\+function()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_a83dd0ace2eb47449f5e30522f71d9f59}\label{classoomph_1_1RectangularQuadMesh_a83dd0ace2eb47449f5e30522f71d9f59}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Xperiodic@{Xperiodic}}
 \index{Xperiodic@{Xperiodic}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Xperiodic}{Xperiodic}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Xperiodic\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::Xperiodic\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -522,14 +526,14 @@ Boolean variable used to determine whether the mesh is periodic in the x-\/direc
 
 
 
-Definition at line 81 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00081}{81}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}\label{classoomph_1_1RectangularQuadMesh_aacbacc3a0e6ea8508abb3140ba343ffa}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Ymax@{Ymax}}
 \index{Ymax@{Ymax}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ymax}{Ymax}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ymax\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::Ymax\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -537,18 +541,18 @@ Maximum value of y coordinate.
 
 
 
-Definition at line 77 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00077}{77}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+max(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+spacing\+\_\+function().
+Referenced by \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00579}{oomph\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00254}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00259}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::y\+\_\+max()}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00296}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::y\+\_\+spacing\+\_\+function()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}\label{classoomph_1_1RectangularQuadMesh_ade53fec7446044418ccba9f55d692adb}} 
 \index{oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}!Ymin@{Ymin}}
 \index{Ymin@{Ymin}!oomph::RectangularQuadMesh$<$ ELEMENT $>$@{oomph::RectangularQuadMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Ymin}{Ymin}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Ymin\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1RectangularQuadMesh}{oomph\+::\+Rectangular\+Quad\+Mesh}}$<$ ELEMENT $>$\+::Ymin\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -556,11 +560,11 @@ Minimum value of y coordinate.
 
 
 
-Definition at line 75 of file rectangular\+\_\+quadmesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00075}{75}} of file \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source}{rectangular\+\_\+quadmesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Elastic\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::set\+\_\+boundary\+\_\+coordinates(), oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Channel\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower(), oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper(), oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+min(), and oomph\+::\+Rectangular\+Quad\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::y\+\_\+spacing\+\_\+function().
+Referenced by \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00579}{oomph\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::\+Elastic\+Refineable\+Rectangular\+Quad\+Mesh()}}, \mbox{\hyperlink{channel__spine__mesh_8template_8h_source_l00133}{oomph\+::\+Channel\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{single__layer__spine__mesh_8template_8h_source_l00075}{oomph\+::\+Single\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00242}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+lower()}}, \mbox{\hyperlink{two__layer__spine__mesh_8template_8h_source_l00254}{oomph\+::\+Two\+Layer\+Spine\+Mesh$<$ ELEMENT $>$\+::spine\+\_\+node\+\_\+update\+\_\+upper()}}, \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00252}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::y\+\_\+min()}}, and \mbox{\hyperlink{rectangular__quadmesh_8template_8h_source_l00296}{oomph\+::\+Rectangular\+Quad\+Mesh$<$ ELEMENT $>$\+::y\+\_\+spacing\+\_\+function()}}.
 
 
 

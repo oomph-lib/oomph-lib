@@ -1,10 +1,15 @@
-\hypertarget{classoomph_1_1NavierStokesFluxControlElement}{}\doxysection{oomph\+::Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1NavierStokesFluxControlElement}{}\doxysection{oomph\+::Navier\+Stokes\+Flux\+Control\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1NavierStokesFluxControlElement}\index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
+
+
+/////////////////////////////////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////  
+
+
 
 
 {\ttfamily \#include $<$navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h$>$}
 
-Inheritance diagram for oomph\+::Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Navier\+Stokes\+Flux\+Control\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.159383cm]{classoomph_1_1NavierStokesFluxControlElement}
@@ -13,24 +18,24 @@ Inheritance diagram for oomph\+::Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a85e1b1b55072f13ca39219ca1fb9a4d6}{Navier\+Stokes\+Flux\+Control\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&element\+\_\+pt, const int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a478d577ac6db67ecc80f1f02ae3ab170}{face\+\_\+index}}, const bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
+\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a85e1b1b55072f13ca39219ca1fb9a4d6}{Navier\+Stokes\+Flux\+Control\+Element}} (\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&element\+\_\+pt, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&\mbox{\hyperlink{classoomph_1_1FaceElement_a14990bd081523c47cfe57e5ecf54dfe1}{face\+\_\+index}}, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&called\+\_\+from\+\_\+refineable\+\_\+constructor=false)
 \begin{DoxyCompactList}\small\item\em Constructor, which takes a \char`\"{}bulk\char`\"{} element and face index. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a5d2ae1598fc1a68be1abf01b20e54529}{$\sim$\+Navier\+Stokes\+Flux\+Control\+Element}} ()
 \begin{DoxyCompactList}\small\item\em Destructor should not delete anything. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_ad612e8f706ba627f11dd380cc20bfab2}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}})
+void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_ad612e8f706ba627f11dd380cc20bfab2}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals)
 \begin{DoxyCompactList}\small\item\em This function returns just the residuals. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6a745b0b8b1417b7f61782e959c31f69}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6a745b0b8b1417b7f61782e959c31f69}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}})
 \begin{DoxyCompactList}\small\item\em This function returns the residuals and the Jacobian including the Jacobian contribution from the flux control master element with respect to dof in this element. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a3a2ff525c8a522dff91efc61c0b52a80}{get\+\_\+volume\+\_\+flux}} ()
 \begin{DoxyCompactList}\small\item\em Function to get the integral of the volume flux. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_ab09c37065b0b92bf7d44973a0a6dcade}{u\+\_\+local\+\_\+eqn}} (const unsigned \&\mbox{\hyperlink{the__data__structure_8txt_af88b2d950fae19ab641bd1690e08445c}{n}}, const unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
-\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a4c203742bc44ab562fcb98eaa2380e3a}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (const unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) const
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_ab09c37065b0b92bf7d44973a0a6dcade}{u\+\_\+local\+\_\+eqn}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&n, \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&\mbox{\hyperlink{cfortran_8h_adb50e893b86b3e55e751a42eab3cba82}{i}})
+\begin{DoxyCompactList}\small\item\em Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a4c203742bc44ab562fcb98eaa2380e3a}{shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot}} (\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&ipt, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&psi, \mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&test) \mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}}
 \begin{DoxyCompactList}\small\item\em Function to compute the shape and test functions and to return the Jacobian of mapping. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a61f129d70845f43c8cb592a4f1258a9f}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&\mbox{\hyperlink{the__data__structure_8txt_a1400a973def57b85051cfe1070be1810}{residuals}}, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&jacobian, unsigned flag)
+void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a61f129d70845f43c8cb592a4f1258a9f}{fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction}} (\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&residuals, \mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&\mbox{\hyperlink{classoomph_1_1FiniteElement_aa6c806dab803b82ba4f02cf806971af8}{jacobian}}, unsigned flag)
 \begin{DoxyCompactList}\small\item\em This function returns the residuals for the traction function flag=1(or 0)\+: do (or don\textquotesingle{}t) compute the Jacobian as well. This function also calculates the Jacobian contribution for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -41,14 +46,15 @@ unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement_a6ae17dbe
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$}
+/////////////////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////////////// 
 
-A class of element to impose an applied boundary pressure to Navier-\/\+Stokes elements to control to control a volume flux. A mesh of these elements are used in conjunction with a \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}}. The template arguement E\+L\+E\+M\+E\+NT is a Navier-\/\+Stokes \char`\"{}bulk\char`\"{} element.
+A class of element to impose an applied boundary pressure to Navier-\/\+Stokes elements to control to control a volume flux. A mesh of these elements are used in conjunction with a \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}}. The template arguement ELEMENT is a Navier-\/\+Stokes \char`\"{}bulk\char`\"{} element.
 
 Note\+: This element calculates Jacobian contributions for both itself and also for the \mbox{\hyperlink{classoomph_1_1NetFluxControlElement}{Net\+Flux\+Control\+Element}} with respect to its unknowns. 
 
-Definition at line 355 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00348}{348}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
@@ -57,8 +63,8 @@ Definition at line 355 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+el
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!NavierStokesFluxControlElement@{NavierStokesFluxControlElement}}
 \index{NavierStokesFluxControlElement@{NavierStokesFluxControlElement}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{NavierStokesFluxControlElement()}{NavierStokesFluxControlElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index,  }\item[{const bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement}{Finite\+Element}} $\ast$\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} \&}]{element\+\_\+pt,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} int \&}]{face\+\_\+index,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} bool \&}]{called\+\_\+from\+\_\+refineable\+\_\+constructor = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -66,18 +72,18 @@ Constructor, which takes a \char`\"{}bulk\char`\"{} element and face index.
 
 
 
-Definition at line 361 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00354}{354}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Node\+::ndim(), and oomph\+::\+Finite\+Element\+::node\+\_\+pt().
+References \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00542}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::\+Dim}}, and \mbox{\hyperlink{elements_8h_source_l02180}{oomph\+::\+Finite\+Element\+::node\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesFluxControlElement_a5d2ae1598fc1a68be1abf01b20e54529}\label{classoomph_1_1NavierStokesFluxControlElement_a5d2ae1598fc1a68be1abf01b20e54529}} 
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!````~NavierStokesFluxControlElement@{$\sim$NavierStokesFluxControlElement}}
 \index{````~NavierStokesFluxControlElement@{$\sim$NavierStokesFluxControlElement}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$NavierStokesFluxControlElement()}{~NavierStokesFluxControlElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{Navier\+Stokes\+Flux\+Control\+Element}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -85,7 +91,7 @@ Destructor should not delete anything.
 
 
 
-Definition at line 400 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00393}{393}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
@@ -94,8 +100,8 @@ Definition at line 400 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+el
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -107,22 +113,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a6ae09fc0d6
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_a46659967091dc0f672d91f2ac339c304}{oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_a46659967091dc0f672d91f2ac339c304}{oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 414 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00407}{407}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00456}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, and \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesFluxControlElement_ad612e8f706ba627f11dd380cc20bfab2}\label{classoomph_1_1NavierStokesFluxControlElement_ad612e8f706ba627f11dd380cc20bfab2}} 
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}}
 \index{fill\_in\_contribution\_to\_residuals@{fill\_in\_contribution\_to\_residuals}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_residuals()}{fill\_in\_contribution\_to\_residuals()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -134,22 +140,22 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1GeneralisedElement_a310c97f515
 
 
 
-Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_ad1b969e5a71a212e297ece3a07b9f5cb}{oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}}.
+Reimplemented in \mbox{\hyperlink{classoomph_1_1RefineableNavierStokesFluxControlElement_ad1b969e5a71a212e297ece3a07b9f5cb}{oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$}}.
 
 
 
-Definition at line 403 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00396}{396}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix, oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and residuals().
+References \mbox{\hyperlink{elements_8h_source_l00227}{oomph\+::\+Generalised\+Element\+::\+Dummy\+\_\+matrix}}, and \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00456}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesFluxControlElement_a61f129d70845f43c8cb592a4f1258a9f}\label{classoomph_1_1NavierStokesFluxControlElement_a61f129d70845f43c8cb592a4f1258a9f}} 
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}}
 \index{fill\_in\_generic\_residual\_contribution\_fluid\_traction@{fill\_in\_generic\_residual\_contribution\_fluid\_traction}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}{fill\_in\_generic\_residual\_contribution\_fluid\_traction()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1Vector}{Vector}}$<$ double $>$ \&}]{residuals,  }\item[{\mbox{\hyperlink{classoomph_1_1DenseMatrix}{Dense\+Matrix}}$<$ double $>$ \&}]{jacobian,  }\item[{unsigned}]{flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -157,22 +163,22 @@ This function returns the residuals for the traction function flag=1(or 0)\+: do
 
 
 
-Definition at line 463 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00456}{456}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Dim, oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt(), oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn(), i, oomph\+::\+Finite\+Element\+::integral\+\_\+pt(), oomph\+::\+Finite\+Element\+::nnode(), oomph\+::\+Integral\+::nweight(), oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal(), oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::pressure\+\_\+data\+\_\+id(), residuals(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::u\+\_\+local\+\_\+eqn(), oomph\+::\+Data\+::value(), oomph\+::\+Quad\+Tree\+Names\+::W, and oomph\+::\+Integral\+::weight().
+References \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00542}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::\+Dim}}, \mbox{\hyperlink{elements_8h_source_l00659}{oomph\+::\+Generalised\+Element\+::external\+\_\+data\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l00311}{oomph\+::\+Generalised\+Element\+::external\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8h_source_l01968}{oomph\+::\+Finite\+Element\+::integral\+\_\+pt()}}, \mbox{\hyperlink{elements_8h_source_l01611}{oomph\+::\+Finite\+Element\+::jacobian}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, \mbox{\hyperlink{elements_8cc_source_l06010}{oomph\+::\+Face\+Element\+::outer\+\_\+unit\+\_\+normal()}}, \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00076}{oomph\+::\+Template\+Free\+Navier\+Stokes\+Flux\+Control\+Element\+Base\+::pressure\+\_\+data\+\_\+id()}}, \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00434}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00427}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::u\+\_\+local\+\_\+eqn()}}, \mbox{\hyperlink{nodes_8h_source_l00293}{oomph\+::\+Data\+::value()}}, and \mbox{\hyperlink{constitutive__laws_8h_source_l00142}{oomph\+::W}}.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian(), and oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals().
+Referenced by \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00407}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, and \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00396}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+residuals()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesFluxControlElement_a3a2ff525c8a522dff91efc61c0b52a80}\label{classoomph_1_1NavierStokesFluxControlElement_a3a2ff525c8a522dff91efc61c0b52a80}} 
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!get\_volume\_flux@{get\_volume\_flux}}
 \index{get\_volume\_flux@{get\_volume\_flux}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{get\_volume\_flux()}{get\_volume\_flux()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::get\+\_\+volume\+\_\+flux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::get\+\_\+volume\+\_\+flux (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -184,18 +190,18 @@ Implements \mbox{\hyperlink{classoomph_1_1TemplateFreeNavierStokesFluxControlEle
 
 
 
-Definition at line 423 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00416}{416}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
-References oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::get\+\_\+volume\+\_\+flux().
+References \mbox{\hyperlink{navier__stokes__surface__power__elements_8h_source_l00704}{oomph\+::\+Navier\+Stokes\+Surface\+Power\+Element$<$ ELEMENT $>$\+::get\+\_\+volume\+\_\+flux()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesFluxControlElement_a4c203742bc44ab562fcb98eaa2380e3a}\label{classoomph_1_1NavierStokesFluxControlElement_a4c203742bc44ab562fcb98eaa2380e3a}} 
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}}
 \index{shape\_and\_test\_at\_knot@{shape\_and\_test\_at\_knot}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{shape\_and\_test\_at\_knot()}{shape\_and\_test\_at\_knot()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{const unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::shape\+\_\+and\+\_\+test\+\_\+at\+\_\+knot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{ipt,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{psi,  }\item[{\mbox{\hyperlink{classoomph_1_1Shape}{Shape}} \&}]{test }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -203,38 +209,38 @@ Function to compute the shape and test functions and to return the Jacobian of m
 
 
 
-Definition at line 441 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00434}{434}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
-References i, oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot(), oomph\+::\+Finite\+Element\+::nnode(), and oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{elements_8cc_source_l05332}{oomph\+::\+Face\+Element\+::\+J\+\_\+eulerian\+\_\+at\+\_\+knot()}}, \mbox{\hyperlink{elements_8h_source_l02215}{oomph\+::\+Finite\+Element\+::nnode()}}, and \mbox{\hyperlink{classoomph_1_1FiniteElement_a2de680722518136b5c6bf2aacc267a31}{oomph\+::\+Finite\+Element\+::shape\+\_\+at\+\_\+knot()}}.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), and oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction().
+Referenced by \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00456}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, and \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00614}{oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}.
 
 \mbox{\Hypertarget{classoomph_1_1NavierStokesFluxControlElement_ab09c37065b0b92bf7d44973a0a6dcade}\label{classoomph_1_1NavierStokesFluxControlElement_ab09c37065b0b92bf7d44973a0a6dcade}} 
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!u\_local\_eqn@{u\_local\_eqn}}
 \index{u\_local\_eqn@{u\_local\_eqn}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{u\_local\_eqn()}{u\_local\_eqn()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{const unsigned \&}]{n,  }\item[{const unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual int \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::u\+\_\+local\+\_\+eqn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{n,  }\item[{\mbox{\hyperlink{classoomph_1_1FiniteElement_a9770e5512c9c7bcab17ddbdde169d588}{const}} unsigned \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
-Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or $<$ 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
+Access function that returns the local equation numbers for velocity components. u\+\_\+local\+\_\+eqn(n,i) = local equation number or \texorpdfstring{$<$}{<} 0 if pinned. The default is to asssume that n is the local node number and the i-\/th velocity component is the i-\/th unknown stored at the node. 
 
 
 
-Definition at line 434 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00427}{427}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
-References i, and oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn().
+References \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, and \mbox{\hyperlink{elements_8h_source_l01432}{oomph\+::\+Finite\+Element\+::nodal\+\_\+local\+\_\+eqn()}}.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction().
+Referenced by \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00456}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}.
 
 
 
@@ -243,8 +249,8 @@ Referenced by oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E
 \index{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}!Dim@{Dim}}
 \index{Dim@{Dim}!oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$@{oomph::NavierStokesFluxControlElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Dim}{Dim}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Dim\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1NavierStokesFluxControlElement}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element}}$<$ ELEMENT $>$\+::Dim\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -252,11 +258,11 @@ The highest dimension of the problem.
 
 
 
-Definition at line 549 of file navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h.
+Definition at line \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00542}{542}} of file \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source}{navier\+\_\+stokes\+\_\+flux\+\_\+control\+\_\+elements.\+h}}.
 
 
 
-Referenced by oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction(), oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Navier\+Stokes\+Flux\+Control\+Element(), and oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction().
+Referenced by \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00456}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}, \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00354}{oomph\+::\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::\+Navier\+Stokes\+Flux\+Control\+Element()}}, and \mbox{\hyperlink{navier__stokes__flux__control__elements_8h_source_l00614}{oomph\+::\+Refineable\+Navier\+Stokes\+Flux\+Control\+Element$<$ ELEMENT $>$\+::refineable\+\_\+fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+fluid\+\_\+traction()}}.
 
 
 

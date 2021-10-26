@@ -1,6 +1,11 @@
-\hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{}\doxysection{oomph\+::Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{}\doxysection{oomph\+::Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}\index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
-Inheritance diagram for oomph\+::Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+
+
+Spine-\/based Marangoni surface tension elements that add a linear dependence on concentration of a surface chemical to the surface tension, which decreases with increasing concentration. The non-\/dimensionalisation is the same as Campana et al (2004) but we may wish to revisit this.  
+
+
+Inheritance diagram for oomph\+::Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.515152cm]{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}
@@ -10,18 +15,18 @@ Inheritance diagram for oomph\+::Spine\+Axisymmetric\+Marangoni\+Surfactant\+Flu
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_acb97c1d7f3192309150432c840b34944}{Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}} (Finite\+Element $\ast$const \&element\+\_\+pt, const int \&face\+\_\+index)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor that passes the bulk element and face index down to the underlying. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a898d0f93192f1b42826a5fc1043f8534}{beta}} ()
 \begin{DoxyCompactList}\small\item\em Return the Elasticity number. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a6a927de4f0ec496fce8114f5710f1db2}{peclet\+\_\+s}} ()
 \begin{DoxyCompactList}\small\item\em Return the surface peclect number. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a3af89ee44ddbf97c56f44b13117f5e7e}{peclet\+\_\+strouhal\+\_\+s}} ()
 \begin{DoxyCompactList}\small\item\em Return the surface peclect strouhal number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_adb3f668c377e5a8c3362e7bd7ac1d989}{beta\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ae79d3fb090e0ba0bbbcf3d2ae92bbd17}{beta\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the Elasticity number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ae8e42e0510d001c3e4874b0ad32fbe44}{peclet\+\_\+s\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a479a6ec1c453fc7adcb36aeb0105f2d3}{peclet\+\_\+s\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the surface Peclet number. \end{DoxyCompactList}\item 
-double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a943d445ebca59b8c2eeb6584eeba366e}{peclet\+\_\+strouhal\+\_\+s\+\_\+pt}} ()
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a8ee80582c9379a82f35a88c5afebbb3f}{peclet\+\_\+strouhal\+\_\+s\+\_\+pt}} ()
 \begin{DoxyCompactList}\small\item\em Access function for pointer to the surface Peclet x Strouhal number. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ac69e8f0d0de52bcef7c2fa939c1ba2f1}{output}} (std\+::ostream \&outfile, const unsigned \&n\+\_\+plot)
 \item 
@@ -35,13 +40,13 @@ double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidI
 double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a7ee3faea2d8e082efde048e7adb9e9c1}{dcdt\+\_\+surface}} (const unsigned \&l) const
 \begin{DoxyCompactList}\small\item\em The time derivative of the surface concentration. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a7312e78a1b5449ea2ff6d856a4fd9c46}{sigma}} (const Vector$<$ double $>$ \&s)
-\item 
+\begin{DoxyCompactList}\small\item\em The surface tension function is linear in the concentration with constant of proportionality equal to the elasticity number. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_aa34b8b5ac73054e367fd321bf1ae6346}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian)
 \begin{DoxyCompactList}\small\item\em Fill in the contribution to the residuals Calculate the contribution to the jacobian. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a56c90572b8969dff01a4baa9de850d91}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const D\+Shape \&dpsifds, const D\+Shape \&dpsifdS, const D\+Shape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
+void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a56c90572b8969dff01a4baa9de850d91}{add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, const unsigned \&flag, const Shape \&psif, const DShape \&dpsifds, const DShape \&dpsifdS, const DShape \&dpsifd\+S\+\_\+div, const Vector$<$ double $>$ \&s, const Vector$<$ double $>$ \&interpolated\+\_\+x, const Vector$<$ double $>$ \&interpolated\+\_\+n, const double \&W, const double \&J)
 \begin{DoxyCompactList}\small\item\em Overload the Helper function to calculate the residuals and jacobian entries. This particular function ensures that the additional entries are calculated inside the integration loop. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ab8e6a649149c0e1aadb95dc820b8be86}{fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix}} (Vector$<$ double $>$ \&residuals, Dense\+Matrix$<$ double $>$ \&jacobian, Dense\+Matrix$<$ double $>$ \&mass\+\_\+matrix)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -52,7 +57,7 @@ double $\ast$ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactan
 double $\ast$ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a8e2a9a53bcc19471bcb36ed2c169fb57}{Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to the surface Peclect Strouhal number. \end{DoxyCompactList}\item 
 unsigned \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a81a18102b611767a582804f1acdc8143}{C\+\_\+index}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Index at which the surfactant concentration is stored at the nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -62,12 +67,11 @@ static double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactan
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ E\+L\+E\+M\+E\+N\+T $>$}
-
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$}
 Spine-\/based Marangoni surface tension elements that add a linear dependence on concentration of a surface chemical to the surface tension, which decreases with increasing concentration. The non-\/dimensionalisation is the same as Campana et al (2004) but we may wish to revisit this. 
 
-Definition at line 115 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00115}{115}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
@@ -76,12 +80,20 @@ Definition at line 115 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+sur
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement@{SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}}
 \index{SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement@{SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement()}{SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}} (\begin{DoxyParamCaption}\item[{Finite\+Element $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}} (\begin{DoxyParamCaption}\item[{Finite\+Element $\ast$const \&}]{element\+\_\+pt,  }\item[{const int \&}]{face\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Constructor that passes the bulk element and face index down to the underlying 
 
-Definition at line 532 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+
+Constructor that passes the bulk element and face index down to the underlying. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00532}{532}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00120}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Beta\+\_\+pt}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00130}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+index}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00133}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00123}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Peclet\+\_\+\+S\+\_\+pt}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00126}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt}}.
 
 
 
@@ -90,8 +102,8 @@ Definition at line 532 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+sur
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}}
 \index{add\_additional\_residual\_contributions\_interface@{add\_additional\_residual\_contributions\_interface}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{add\_additional\_residual\_contributions\_interface()}{add\_additional\_residual\_contributions\_interface()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const Shape \&}]{psif,  }\item[{const D\+Shape \&}]{dpsifds,  }\item[{const D\+Shape \&}]{dpsifdS,  }\item[{const D\+Shape \&}]{dpsifd\+S\+\_\+div,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W,  }\item[{const double \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{const unsigned \&}]{flag,  }\item[{const Shape \&}]{psif,  }\item[{const DShape \&}]{dpsifds,  }\item[{const DShape \&}]{dpsifdS,  }\item[{const DShape \&}]{dpsifd\+S\+\_\+div,  }\item[{const Vector$<$ double $>$ \&}]{s,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+x,  }\item[{const Vector$<$ double $>$ \&}]{interpolated\+\_\+n,  }\item[{const double \&}]{W,  }\item[{const double \&}]{J }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -103,14 +115,18 @@ Reimplemented from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a0bc278b
 
 
 
-Definition at line 279 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00279}{279}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00130}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+index}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00165}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::dcdt\+\_\+surface()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00138}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C()}}, \mbox{\hyperlink{interface__elements_8cc_source_l00442}{oomph\+::\+Fluid\+Interface\+Element\+::interpolated\+\_\+u()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00561}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::peclet\+\_\+s()}}, and \mbox{\hyperlink{interface__elements_8h_source_l00338}{oomph\+::\+Fluid\+Interface\+Element\+::\+U\+\_\+index\+\_\+interface}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a898d0f93192f1b42826a5fc1043f8534}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a898d0f93192f1b42826a5fc1043f8534}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!beta@{beta}}
 \index{beta@{beta}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{beta()}{beta()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::beta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::beta (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -118,14 +134,22 @@ Return the Elasticity number.
 
 
 
-Definition at line 558 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00558}{558}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
-\mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_adb3f668c377e5a8c3362e7bd7ac1d989}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_adb3f668c377e5a8c3362e7bd7ac1d989}} 
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00120}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Beta\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00192}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::sigma()}}.
+
+\mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ae79d3fb090e0ba0bbbcf3d2ae92bbd17}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ae79d3fb090e0ba0bbbcf3d2ae92bbd17}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!beta\_pt@{beta\_pt}}
 \index{beta\_pt@{beta\_pt}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{beta\_pt()}{beta\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::beta\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -133,18 +157,22 @@ Access function for pointer to the Elasticity number.
 
 
 
-Definition at line 567 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00567}{567}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Interface\+Problem().
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00120}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Beta\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00916}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a7ee3faea2d8e082efde048e7adb9e9c1}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a7ee3faea2d8e082efde048e7adb9e9c1}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!dcdt\_surface@{dcdt\_surface}}
 \index{dcdt\_surface@{dcdt\_surface}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{dcdt\_surface()}{dcdt\_surface()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::dcdt\+\_\+surface (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::dcdt\+\_\+surface (\begin{DoxyParamCaption}\item[{const unsigned \&}]{l }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -152,14 +180,22 @@ The time derivative of the surface concentration.
 
 
 
-Definition at line 165 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00165}{165}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00130}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+index}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00279}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_aa34b8b5ac73054e367fd321bf1ae6346}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_aa34b8b5ac73054e367fd321bf1ae6346}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}}
 \index{fill\_in\_contribution\_to\_jacobian@{fill\_in\_contribution\_to\_jacobian}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian()}{fill\_in\_contribution\_to\_jacobian()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -167,25 +203,41 @@ Fill in the contribution to the residuals Calculate the contribution to the jaco
 
 
 
-Definition at line 215 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00215}{215}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00130}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+index}}, and \mbox{\hyperlink{interface__elements_8cc_source_l00471}{oomph\+::\+Fluid\+Interface\+Element\+::fill\+\_\+in\+\_\+generic\+\_\+residual\+\_\+contribution\+\_\+interface()}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00521}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ab8e6a649149c0e1aadb95dc820b8be86}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ab8e6a649149c0e1aadb95dc820b8be86}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}}
 \index{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix@{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}{fill\_in\_contribution\_to\_jacobian\_and\_mass\_matrix()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian\+\_\+and\+\_\+mass\+\_\+matrix (\begin{DoxyParamCaption}\item[{Vector$<$ double $>$ \&}]{residuals,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{jacobian,  }\item[{Dense\+Matrix$<$ double $>$ \&}]{mass\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
-Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix 
 
-Definition at line 521 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+
+Add the element\textquotesingle{}s contribution to its residuals vector, jacobian matrix and mass matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00521}{521}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00215}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_aeb6b9fa726b084884c1e00291d077eea}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_aeb6b9fa726b084884c1e00291d077eea}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!integrate\_c@{integrate\_c}}
 \index{integrate\_c@{integrate\_c}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{integrate\_c()}{integrate\_c()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::integrate\+\_\+c (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::integrate\+\_\+c (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -193,18 +245,22 @@ Compute the concentration intergated over the area.
 
 
 
-Definition at line 627 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00627}{627}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::compute\+\_\+total\+\_\+mass().
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00130}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+index}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00855}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::compute\+\_\+total\+\_\+mass()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a8f0df8c1e9120011fa51b15ab2694d34}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a8f0df8c1e9120011fa51b15ab2694d34}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!interpolated\_C@{interpolated\_C}}
 \index{interpolated\_C@{interpolated\_C}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{interpolated\_C()}{interpolated\_C()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::interpolated\+\_\+C (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::interpolated\+\_\+C (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -212,29 +268,37 @@ Get the surfactant concentration.
 
 
 
-Definition at line 138 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00138}{138}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00130}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+index}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00279}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00575}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::output()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ac69e8f0d0de52bcef7c2fa939c1ba2f1}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ac69e8f0d0de52bcef7c2fa939c1ba2f1}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!output@{output}}
 \index{output@{output}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{output()}{output()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::output (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{outfile,  }\item[{const unsigned \&}]{n\+\_\+plot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 575 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00575}{575}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-References sigma.
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00138}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C()}}, \mbox{\hyperlink{interface__elements_8cc_source_l00442}{oomph\+::\+Fluid\+Interface\+Element\+::interpolated\+\_\+u()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00192}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::sigma()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a6a927de4f0ec496fce8114f5710f1db2}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a6a927de4f0ec496fce8114f5710f1db2}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!peclet\_s@{peclet\_s}}
 \index{peclet\_s@{peclet\_s}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{peclet\_s()}{peclet\_s()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::peclet\+\_\+s (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::peclet\+\_\+s (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -242,14 +306,22 @@ Return the surface peclect number.
 
 
 
-Definition at line 561 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00561}{561}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
-\mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ae8e42e0510d001c3e4874b0ad32fbe44}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_ae8e42e0510d001c3e4874b0ad32fbe44}} 
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00123}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Peclet\+\_\+\+S\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00279}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}.
+
+\mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a479a6ec1c453fc7adcb36aeb0105f2d3}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a479a6ec1c453fc7adcb36aeb0105f2d3}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!peclet\_s\_pt@{peclet\_s\_pt}}
 \index{peclet\_s\_pt@{peclet\_s\_pt}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{peclet\_s\_pt()}{peclet\_s\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::peclet\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::peclet\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -257,18 +329,22 @@ Access function for pointer to the surface Peclet number.
 
 
 
-Definition at line 570 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00570}{570}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Interface\+Problem().
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00123}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Peclet\+\_\+\+S\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00916}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a3af89ee44ddbf97c56f44b13117f5e7e}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a3af89ee44ddbf97c56f44b13117f5e7e}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!peclet\_strouhal\_s@{peclet\_strouhal\_s}}
 \index{peclet\_strouhal\_s@{peclet\_strouhal\_s}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{peclet\_strouhal\_s()}{peclet\_strouhal\_s()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::peclet\+\_\+strouhal\+\_\+s (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::peclet\+\_\+strouhal\+\_\+s (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -276,14 +352,18 @@ Return the surface peclect strouhal number.
 
 
 
-Definition at line 564 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00564}{564}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
-\mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a943d445ebca59b8c2eeb6584eeba366e}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a943d445ebca59b8c2eeb6584eeba366e}} 
+
+
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00126}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt}}.
+
+\mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a8ee80582c9379a82f35a88c5afebbb3f}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a8ee80582c9379a82f35a88c5afebbb3f}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!peclet\_strouhal\_s\_pt@{peclet\_strouhal\_s\_pt}}
 \index{peclet\_strouhal\_s\_pt@{peclet\_strouhal\_s\_pt}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{peclet\_strouhal\_s\_pt()}{peclet\_strouhal\_s\_pt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double $\ast$\& \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -291,30 +371,42 @@ Access function for pointer to the surface Peclet x Strouhal number.
 
 
 
-Definition at line 573 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00573}{573}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-Referenced by Interface\+Problem$<$ E\+L\+E\+M\+E\+N\+T, T\+I\+M\+E\+S\+T\+E\+P\+P\+E\+R $>$\+::\+Interface\+Problem().
+References \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00126}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00916}{Interface\+Problem$<$ ELEMENT, TIMESTEPPER $>$\+::\+Interface\+Problem()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a7312e78a1b5449ea2ff6d856a4fd9c46}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a7312e78a1b5449ea2ff6d856a4fd9c46}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!sigma@{sigma}}
 \index{sigma@{sigma}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{sigma()}{sigma()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::sigma (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::sigma (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
 
 The surface tension function is linear in the concentration with constant of proportionality equal to the elasticity number. 
+
+
 
 Reimplemented from \mbox{\hyperlink{classoomph_1_1FluidInterfaceElement_a7e5c3ca1eba5d4dd44c0eab9be252c2a}{oomph\+::\+Fluid\+Interface\+Element}}.
 
 
 
-Definition at line 192 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00192}{192}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta.
+References \mbox{\hyperlink{3d__rayleigh__instability__surfactant_8cc_source_l00078}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00558}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::beta()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00130}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+C\+\_\+index}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00575}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::output()}}.
 
 
 
@@ -323,8 +415,8 @@ References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Beta.
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!Beta\_pt@{Beta\_pt}}
 \index{Beta\_pt@{Beta\_pt}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Beta\_pt}{Beta\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Beta\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::Beta\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -332,25 +424,37 @@ Pointer to an Elasticity number.
 
 
 
-Definition at line 120 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00120}{120}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00558}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::beta()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00567}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::beta\+\_\+pt()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00532}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a81a18102b611767a582804f1acdc8143}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a81a18102b611767a582804f1acdc8143}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!C\_index@{C\_index}}
 \index{C\_index@{C\_index}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{C\_index}{C\_index}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::C\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::C\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}
 
-Index at which the surfactant concentration is stored at the nodes 
 
-Definition at line 130 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+
+Index at which the surfactant concentration is stored at the nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00130}{130}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00279}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::add\+\_\+additional\+\_\+residual\+\_\+contributions\+\_\+interface()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00165}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::dcdt\+\_\+surface()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00215}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::fill\+\_\+in\+\_\+contribution\+\_\+to\+\_\+jacobian()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00627}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::integrate\+\_\+c()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00138}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::interpolated\+\_\+\+C()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00192}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::sigma()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00532}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a652e8408b5cc7af8b934d895782b8ff5}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a652e8408b5cc7af8b934d895782b8ff5}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}}
 \index{Default\_Physical\_Constant\_Value@{Default\_Physical\_Constant\_Value}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Default\_Physical\_Constant\_Value}{Default\_Physical\_Constant\_Value}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::Default\+\_\+\+Physical\+\_\+\+Constant\+\_\+\+Value = 1.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
@@ -358,14 +462,18 @@ Default value of the physical constants.
 
 
 
-Definition at line 133 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00133}{133}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00532}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a71f8f35b8f8db2341c9eedee754c957a}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a71f8f35b8f8db2341c9eedee754c957a}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!Peclet\_S\_pt@{Peclet\_S\_pt}}
 \index{Peclet\_S\_pt@{Peclet\_S\_pt}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Peclet\_S\_pt}{Peclet\_S\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Peclet\+\_\+\+S\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::Peclet\+\_\+\+S\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -373,14 +481,18 @@ Pointer to Surface Peclet number.
 
 
 
-Definition at line 123 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00123}{123}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00561}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::peclet\+\_\+s()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00570}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::peclet\+\_\+s\+\_\+pt()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00532}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element()}}.
 
 \mbox{\Hypertarget{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a8e2a9a53bcc19471bcb36ed2c169fb57}\label{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement_a8e2a9a53bcc19471bcb36ed2c169fb57}} 
 \index{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}!Peclet\_Strouhal\_S\_pt@{Peclet\_Strouhal\_S\_pt}}
 \index{Peclet\_Strouhal\_S\_pt@{Peclet\_Strouhal\_S\_pt}!oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$@{oomph::SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Peclet\_Strouhal\_S\_pt}{Peclet\_Strouhal\_S\_pt}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-double$\ast$ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+double$\ast$ \mbox{\hyperlink{classoomph_1_1SpineAxisymmetricMarangoniSurfactantFluidInterfaceElement}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element}}$<$ ELEMENT $>$\+::Peclet\+\_\+\+Strouhal\+\_\+\+S\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -388,7 +500,11 @@ Pointer to the surface Peclect Strouhal number.
 
 
 
-Definition at line 126 of file rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc.
+Definition at line \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00126}{126}} of file \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source}{rayleigh\+\_\+instability\+\_\+insoluble\+\_\+surfactant.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00564}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::peclet\+\_\+strouhal\+\_\+s()}}, \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00573}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::peclet\+\_\+strouhal\+\_\+s\+\_\+pt()}}, and \mbox{\hyperlink{rayleigh__instability__insoluble__surfactant_8cc_source_l00532}{oomph\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element$<$ ELEMENT $>$\+::\+Spine\+Axisymmetric\+Marangoni\+Surfactant\+Fluid\+Interface\+Element()}}.
 
 
 

@@ -23,7 +23,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-///Driver for a 3D navier stokes entry flow problem in quarter tube domain
+/// Driver for a 3D navier stokes entry flow problem in quarter tube domain
 
 //Generic routines
 #include "generic.h"
@@ -45,10 +45,10 @@ namespace Global_Physical_Variables
  /// Reynolds number
  double Re= 0.0;
 
- ///Capillary number
+ /// Capillary number
  double Ca = 1.0;
 
- ///Rotation rate
+ /// Rotation rate
  double Omega = 0.0;
 
  //Inverse Froude number
@@ -109,14 +109,14 @@ public:
  Vector<GeneralisedElement*> &bulk_element_pt()
   {return Bulk_element_pt;}
 
- ///Access functions for pointers to elements in bulk
+ /// Access functions for pointers to elements in bulk
  GeneralisedElement* &bulk_element_pt(const unsigned long &i) 
   {return Bulk_element_pt[i];}
 
- ///Number of elements in bulk 
+ /// Number of elements in bulk 
  unsigned long nbulk() const {return Bulk_element_pt.size();}
 
- ///Constructor
+ /// Constructor
  AxialSpineQuarterTubeMesh(GeomObject* wall_pt,
                            const Vector<double>& xi_lo,
                            const double& fract_mid,
@@ -367,7 +367,7 @@ public:
   }
 
 
- ///Update nodal positions in response to spine changes
+ /// Update nodal positions in response to spine changes
  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
    //Get fraction along the spine
@@ -407,7 +407,7 @@ public:
    Doc_info.number()++;
   }
 
- /// \short Update the problem specs before solve 
+ /// Update the problem specs before solve 
  void actions_before_newton_solve() {}
 
  /// Spine heights/lengths are unknowns in the problem so their
@@ -423,7 +423,7 @@ public:
  /// Doc the solution
  void doc_solution();
 
- /// \short Overload generic access function by one that returns
+ /// Overload generic access function by one that returns
  /// a pointer to the specific  mesh
  AxialSpineQuarterTubeMesh<ELEMENT,SpineSurfaceFluidInterfaceElement<ELEMENT> >* mesh_pt() 
   {
@@ -652,9 +652,9 @@ void FreeSurfaceRotationProblem<ELEMENT>::doc_solution()
  
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
+/// /////////////////////////////////////////////////////////////////////
 
 
 //=start_of_main=======================================================

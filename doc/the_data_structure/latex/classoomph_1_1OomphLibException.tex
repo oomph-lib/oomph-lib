@@ -2,6 +2,11 @@
 \label{classoomph_1_1OomphLibException}\index{oomph::OomphLibException@{oomph::OomphLibException}}
 
 
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////  
+
+
+
+
 {\ttfamily \#include $<$oomph\+\_\+definitions.\+h$>$}
 
 Inheritance diagram for oomph\+::Oomph\+Lib\+Exception\+:\begin{figure}[H]
@@ -19,9 +24,9 @@ void \mbox{\hyperlink{classoomph_1_1OomphLibException_a92da7bc6b484044587ca2e8db
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classoomph_1_1OomphLibException_a2bcc47316fcc96608e79bec5ab49f82b}{Oomph\+Lib\+Exception}} (const std\+::string \&error\+\_\+description, const std\+::string \&function\+\_\+name, const char $\ast$location, const std\+::string \&exception\+\_\+type, std\+::ostream \&exception\+\_\+stream, const unsigned \&output\+\_\+width, bool list\+\_\+trace\+\_\+back)
-\begin{DoxyCompactList}\small\item\em Constructor takes the error description, function name and a location string provided by the O\+O\+M\+P\+H\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+L\+O\+C\+A\+T\+I\+ON macro and combines them into a standard header. The exception type will be the string \char`\"{}\+W\+A\+R\+N\+I\+N\+G\char`\"{} or \char`\"{}\+E\+R\+R\+O\+R\char`\"{} and the message is written to the exception\+\_\+stream, with a specified output\+\_\+width. Optionally provide a traceback of the function calls. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor takes the error description, function name and a location string provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION macro and combines them into a standard header. The exception type will be the string \char`\"{}\+WARNING\char`\"{} or \char`\"{}\+ERROR\char`\"{} and the message is written to the exception\+\_\+stream, with a specified output\+\_\+width. Optionally provide a traceback of the function calls. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classoomph_1_1OomphLibException_a0cc216d83aa854e965c3c8376d2c4d39}{$\sim$\+Oomph\+Lib\+Exception}} ()  throw ()
-\begin{DoxyCompactList}\small\item\em The destructor cannot throw an exception (C++ S\+TL standard) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The destructor cannot throw an exception (C++ STL standard) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -34,11 +39,13 @@ bool \mbox{\hyperlink{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778
 
 
 \doxysubsection{Detailed Description}
+//////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////// 
+
 ===================================================================== A Base class for oomph-\/lib run-\/time exception (error and warning) handling.
 
 The class can only be instantiated by the derived classes \mbox{\hyperlink{classoomph_1_1OomphLibError}{Oomph\+Lib\+Error}} and \mbox{\hyperlink{classoomph_1_1OomphLibWarning}{Oomph\+Lib\+Warning}}. The (protected) constructor combines its string arguments into a standard format for uniform exception reports which are written to the specified output stream. 
 
-Definition at line 173 of file oomph\+\_\+definitions.\+h.
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00173}{173}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
 
 
 
@@ -51,15 +58,15 @@ Definition at line 173 of file oomph\+\_\+definitions.\+h.
 
 
 
-Constructor takes the error description, function name and a location string provided by the O\+O\+M\+P\+H\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+L\+O\+C\+A\+T\+I\+ON macro and combines them into a standard header. The exception type will be the string \char`\"{}\+W\+A\+R\+N\+I\+N\+G\char`\"{} or \char`\"{}\+E\+R\+R\+O\+R\char`\"{} and the message is written to the exception\+\_\+stream, with a specified output\+\_\+width. Optionally provide a traceback of the function calls. 
+Constructor takes the error description, function name and a location string provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION macro and combines them into a standard header. The exception type will be the string \char`\"{}\+WARNING\char`\"{} or \char`\"{}\+ERROR\char`\"{} and the message is written to the exception\+\_\+stream, with a specified output\+\_\+width. Optionally provide a traceback of the function calls. 
 
-The \mbox{\hyperlink{classoomph_1_1OomphLibException}{Oomph\+Lib\+Exception}} constructor takes the error description, function name, a location string provided by the O\+O\+M\+P\+H\+\_\+\+E\+X\+C\+E\+P\+T\+I\+O\+N\+\_\+\+L\+O\+C\+A\+T\+I\+ON and an exception type \char`\"{}\+W\+A\+R\+N\+I\+N\+G\char`\"{} or \char`\"{}\+E\+R\+R\+O\+R\char`\"{} and combines them into a standard error message that is written to the exception stream. The output\+\_\+width of the message can also be specified. Optionally provide a traceback of the function calls. 
+The \mbox{\hyperlink{classoomph_1_1OomphLibException}{Oomph\+Lib\+Exception}} constructor takes the error description, function name, a location string provided by the OOMPH\+\_\+\+EXCEPTION\+\_\+\+LOCATION and an exception type \char`\"{}\+WARNING\char`\"{} or \char`\"{}\+ERROR\char`\"{} and combines them into a standard error message that is written to the exception stream. The output\+\_\+width of the message can also be specified. Optionally provide a traceback of the function calls. 
 
-Definition at line 144 of file oomph\+\_\+definitions.\+cc.
+Definition at line \mbox{\hyperlink{oomph__definitions_8cc_source_l00144}{144}} of file \mbox{\hyperlink{oomph__definitions_8cc_source}{oomph\+\_\+definitions.\+cc}}.
 
 
 
-References Exception\+\_\+stream\+\_\+pt, Exception\+\_\+stringstream\+\_\+pt, i, print\+\_\+stacktrace(), oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string(), and Suppress\+\_\+error\+\_\+message.
+References \mbox{\hyperlink{oomph__definitions_8h_source_l00206}{Exception\+\_\+stream\+\_\+pt}}, \mbox{\hyperlink{oomph__definitions_8h_source_l00209}{Exception\+\_\+stringstream\+\_\+pt}}, \mbox{\hyperlink{cfortran_8h_source_l00603}{i}}, \mbox{\hyperlink{stacktrace_8h_source_l00047}{print\+\_\+stacktrace()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00286}{oomph\+::\+Global\+\_\+string\+\_\+for\+\_\+annotation\+::string()}}, and \mbox{\hyperlink{oomph__definitions_8h_source_l00213}{Suppress\+\_\+error\+\_\+message}}.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibException_a0cc216d83aa854e965c3c8376d2c4d39}\label{classoomph_1_1OomphLibException_a0cc216d83aa854e965c3c8376d2c4d39}} 
 \index{oomph::OomphLibException@{oomph::OomphLibException}!````~OomphLibException@{$\sim$OomphLibException}}
@@ -69,15 +76,17 @@ References Exception\+\_\+stream\+\_\+pt, Exception\+\_\+stringstream\+\_\+pt, i
 
 
 
-The destructor cannot throw an exception (C++ S\+TL standard) 
+The destructor cannot throw an exception (C++ STL standard) 
+
+//////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////
 
 The \mbox{\hyperlink{classoomph_1_1OomphLibException}{Oomph\+Lib\+Exception}} destructor actually spawns the error message created in the constructor (unless suppresed) 
 
-Definition at line 126 of file oomph\+\_\+definitions.\+cc.
+Definition at line \mbox{\hyperlink{oomph__definitions_8cc_source_l00126}{126}} of file \mbox{\hyperlink{oomph__definitions_8cc_source}{oomph\+\_\+definitions.\+cc}}.
 
 
 
-References Exception\+\_\+stringstream\+\_\+pt, and Suppress\+\_\+error\+\_\+message.
+References \mbox{\hyperlink{oomph__definitions_8h_source_l00209}{Exception\+\_\+stringstream\+\_\+pt}}, and \mbox{\hyperlink{oomph__definitions_8h_source_l00213}{Suppress\+\_\+error\+\_\+message}}.
 
 
 
@@ -94,15 +103,11 @@ Suppress issueing of the error message in destructor (useful if error is caught 
 
 
 
-Definition at line 178 of file oomph\+\_\+definitions.\+h.
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00178}{178}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
 
 
 
-References Suppress\+\_\+error\+\_\+message, and oomph\+::\+Terminate\+Helper\+::suppress\+\_\+exception\+\_\+error\+\_\+messages().
-
-
-
-Referenced by oomph\+::\+Finite\+Element\+::locate\+\_\+zeta().
+References \mbox{\hyperlink{oomph__definitions_8h_source_l00213}{Suppress\+\_\+error\+\_\+message}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00072}{oomph\+::\+Terminate\+Helper\+::suppress\+\_\+exception\+\_\+error\+\_\+messages()}}.
 
 
 
@@ -119,11 +124,11 @@ Exception stream to which we write message in destructor.
 
 
 
-Definition at line 206 of file oomph\+\_\+definitions.\+h.
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00206}{206}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
 
 
 
-Referenced by Oomph\+Lib\+Exception().
+Referenced by \mbox{\hyperlink{oomph__definitions_8cc_source_l00144}{Oomph\+Lib\+Exception()}}.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibException_a94df333a8bdcb4b89eeb516a64a3429e}\label{classoomph_1_1OomphLibException_a94df333a8bdcb4b89eeb516a64a3429e}} 
 \index{oomph::OomphLibException@{oomph::OomphLibException}!Exception\_stringstream\_pt@{Exception\_stringstream\_pt}}
@@ -137,11 +142,11 @@ String stream that records the error message.
 
 
 
-Definition at line 209 of file oomph\+\_\+definitions.\+h.
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00209}{209}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
 
 
 
-Referenced by Oomph\+Lib\+Exception(), and $\sim$\+Oomph\+Lib\+Exception().
+Referenced by \mbox{\hyperlink{oomph__definitions_8cc_source_l00144}{Oomph\+Lib\+Exception()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00126}{$\sim$\+Oomph\+Lib\+Exception()}}.
 
 \mbox{\Hypertarget{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778779786d}\label{classoomph_1_1OomphLibException_ac374cd3358bf26639860a6778779786d}} 
 \index{oomph::OomphLibException@{oomph::OomphLibException}!Suppress\_error\_message@{Suppress\_error\_message}}
@@ -155,11 +160,11 @@ Boolean to suppress issuing of the error message in destructor (useful if error 
 
 
 
-Definition at line 213 of file oomph\+\_\+definitions.\+h.
+Definition at line \mbox{\hyperlink{oomph__definitions_8h_source_l00213}{213}} of file \mbox{\hyperlink{oomph__definitions_8h_source}{oomph\+\_\+definitions.\+h}}.
 
 
 
-Referenced by disable\+\_\+error\+\_\+message(), Oomph\+Lib\+Exception(), and $\sim$\+Oomph\+Lib\+Exception().
+Referenced by \mbox{\hyperlink{oomph__definitions_8h_source_l00178}{disable\+\_\+error\+\_\+message()}}, \mbox{\hyperlink{oomph__definitions_8cc_source_l00144}{Oomph\+Lib\+Exception()}}, and \mbox{\hyperlink{oomph__definitions_8cc_source_l00126}{$\sim$\+Oomph\+Lib\+Exception()}}.
 
 
 

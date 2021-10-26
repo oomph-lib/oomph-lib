@@ -3,9 +3,9 @@
 \mainpage Coding conventions and C++-style
 
 This document provides an overview of the general coding conventions that
-are used throughout \c oomph-lib. Knowledge of these conventions 
+are used throughout \c oomph-lib. Knowledge of these conventions
 will greatly facilitate the use of the library. Contributors
-to the library are expected to adhere to these standards. 
+to the library are expected to adhere to these standards.
 
 <br>
 Note that following our move to GitHub we have started to use
@@ -23,7 +23,7 @@ too much.
 <HR>
 
 \section naming Naming conventions
- 
+
  \subsection filenames File names
 
  All C++ source files end with the standard extensions *.h and *.cc.
@@ -31,8 +31,8 @@ too much.
  - \c *.h: Contains the class definitions and any inline functions.
  - \c *.cc: Contains all non-inline member functions that can be compiled
    once and for all. This includes
-   - member functions of classes that do not have any template parameters 
-   - member functions of templated  classes for which it is 
+   - member functions of classes that do not have any template parameters
+   - member functions of templated  classes for which it is
      known a priori which instantiations are required. Examples
      are classes that are templated by the spatial dimension. In this
      case we're unlikely to require instantiations for any values
@@ -41,8 +41,8 @@ too much.
  - \c *.template.cc: Contains any non-inline member function of
    templated classes.  This file must be included (together
    with the corresponding \c *.h file) when a specific instantiation
-   of a templated class is required. For instance, 
-   most specific \c Mesh classes are templated by 
+   of a templated class is required. For instance,
+   most specific \c Mesh classes are templated by
    the element type and the mesh writer can obviously not predict
    which element types his/her specific mesh is going to be
    used with.
@@ -51,11 +51,11 @@ too much.
 
  \subsection variables General variables
   - General variables are all lowercase
-  - Variables that contain multiple words contain underscores 
+  - Variables that contain multiple words contain underscores
     to separate them, e.g.
     \code FiniteElement* surface_element_pt; \endcode
   .
- 
+
 
  \subsection classes Classes
  - Classes start with capital letter, e.g.
@@ -73,14 +73,14 @@ too much.
  Use a capital first letter for private data, and the
  all-lowercase equivalent for the access functions. Examples:
  - This is a declaration for a private data member:
-   \code 
-   private: 
- 
+   \code
+   private:
+
      /// Pointer to boundary node
      Node* Boundary_node_pt; \endcode
- - Here are two public access functions to the private data member: 
+ - Here are two public access functions to the private data member:
    \code
-   public: 
+   public:
 
     /// Access to boundary node (const version)
     Node* boundary_node_pt() const {return Boundary_node_pt;}
@@ -92,18 +92,18 @@ too much.
 .
  \b Note: Do \b not use public data -- ever! Make it private and
  and provide an access function -- even if it seems "perfectly
- obvious" at the time of writing the class that the internal 
- storage for the data item is "never going to be changed". 
+ obvious" at the time of writing the class that the internal
+ storage for the data item is "never going to be changed".
 
  \subsection pointers Pointers
- - Pointers and access functions to pointers are identified 
-   explicitly by the postfix \a _pt to the variable names, 
+ - Pointers and access functions to pointers are identified
+   explicitly by the postfix \a _pt to the variable names,
    as shown in the previous examples.
 
  \subsection numbering Access functions to containers
 
  Many classes have member functions that provide access to data
- in private containers (e.g. vectors); they are usually accompanied 
+ in private containers (e.g. vectors); they are usually accompanied
  by a member function that returns the number of entries
  in that container. Naming conventions:
  - Use singular for the access function to the container, i.e.
@@ -112,18 +112,22 @@ too much.
    FiniteElement* element_pt(const unsigned& e);
    \endcode
    rather than \c elements_pt(...)
- - Use a prefix `\c n' for the access function for the 
+ - Use a prefix `\c n' for the access function for the
    number of entries in the container, i.e.
    \code
-   /// Total number of elements 
+   /// Total number of elements
    unsigned nelement();
    \endcode
- \b Notes: (i) No underscore between the "n" and the container's name.
+ \b Notes: (i) No underscore between the "n" and the container's name;
+ you can then use the underscore for the name of the local variable
+ that stores the value, e.g.
+ \c
+ unsigned \c n_element \c = \c my_mesh_pt->nelement();
 (ii) No trailing \c _pt in the function that returns the number
-of objects in the container. 
+of objects in the container.
 
- \subsection template Template parameters
-  - Template parameters are all caps, e.g.
+\subsection template Template parameters
+- Template parameters are all caps, e.g.
  \code
  template<unsigned DIM>
  class NavierStokesEquations
@@ -133,13 +137,25 @@ of objects in the container.
 
  };
  \endcode
-
-
+- Sometimes it is necessary to expose the template parameter to make it
+   accessible to the user. This should be done by adding a public \c static
+   \c const copy of the parameter to the class's member data, using the
+   prefix \c TEMPLATE_PARAMETER_ , so the template parameter
+   \c DIM in the above example would be exposed like this:
+\code
+   public:
+   /// Publicly exposed template parameter
+   static const unsigned TEMPLATE_PARAMETER_DIM = DIM;
+\endcode
+   Note the exposure of template parameters is optional and is only
+   implemented when we needed it. Feel free to modify existing code
+   yourself if required -- \c oomph-lib is open source!
+.
 
 \subsection verbose Use descriptive function/variable names
 
 - Make sure you choose descriptive names for functions and variables,
-  even if the names become long. 
+  even if the names become long.
 
 
 <HR>
@@ -151,7 +167,7 @@ of objects in the container.
 \subsection include_files Position of include statements
 - Place include statements at the beginning of each file.
 
-\subsection layout_blocks Layout of blocks 
+\subsection layout_blocks Layout of blocks
 - Braces on separate lines (unless the content is extremely short)
   \code
    for (unsigned i=0;i<10;i++)
@@ -166,11 +182,11 @@ of objects in the container.
      }
    \endcode
 
- 
+
 \subsection indentation Indentation
   - Indentation of blocks etc. should follow the emacs standards.
   .
-    
+
 
 \subsection layout_functions_etc Layout of functions, classes, etc.
 - Precede all functions by a comment block, enclosed between lines of `==='
@@ -196,7 +212,7 @@ of objects in the container.
    Note the triple slash "///" in the comment block that preceeds the
    function definition -- comments contained in such lines are
    automatically extracted by doxygen and inserted into the
-   code documentation. 
+   code documentation.
 
 
 \subsection oomph The oomph-lib namespace
@@ -211,34 +227,34 @@ of objects in the container.
   \endcode
   at the beginning of the source code (after the included header files).
   Any additions to the library (this includes the instantiation
-  of templated \c oomph-lib classes inside a driver code!) 
+  of templated \c oomph-lib classes inside a driver code!)
   must be included into the \c oomph namespace
-  by surrounding the code by 
+  by surrounding the code by
   \code
   namespace oomph
    {
 
       // Additions to the library go here...
       [...]
-   
+
    }
-  \endcode 
+  \endcode
 
 
 \subsection std Namespace pollution
-- To avoid namespace pollution, the namespace \c std \b must \b not be 
+- To avoid namespace pollution, the namespace \c std \b must \b not be
   included globally in any header files. The statement
   \code
   using namespace std;
   \endcode
-  may only be used in driver codes, in *.cc files, or inside 
-  specific functions in a *.h file. 
+  may only be used in driver codes, in *.cc files, or inside
+  specific functions in a *.h file.
 
 \subsection layout_classes Layout of class definitions and include guards.
 Here is an example of a complete header file, including include
 guards and library includes.
  \code
-     #ifndef OOMPH_SOME_CLASS_HEADER     // Assuming that the file is 
+     #ifndef OOMPH_SOME_CLASS_HEADER     // Assuming that the file is
      #define OOMPH_SOME_CLASS_HEADER     // called some_class.h
 
      // Include generic oomph-lib library
@@ -250,33 +266,33 @@ guards and library includes.
 
      // =============================================================
      /// Waffle about what the class does etc.
-     /// 
+     ///
      // =============================================================
      template<class T>
      class SomeClass : public SomeBaseClass
       {
-        public: 
+        public:
 
          /// Constructor: Pass coefficients n1 and n2
          SomeClass(const unsigned& n1, const T& n2) : N1(n1), N2(n2)
           {}
- 
-         /// Access function to coefficient 
+
+         /// Access function to coefficient
          inline unsigned n1() const
           {
            return N1;
           }
- 
+
          /// Access function to other coefficient
          inline T& n2() const
           {
            return N2;
           }
-        
+
 
         protected:
 
-           /// Coefficient 
+           /// Coefficient
            unsigned N1;
 
         private:
@@ -286,15 +302,15 @@ guards and library includes.
 
        };
 
-      } 
+      }
       #endif
 
   \endcode
 
-  - Order of public/protected/private may be reversed but 
+  - Order of public/protected/private may be reversed but
     the declarations should always be explicit (even though
     everything is private by default).
-  - Note the prefix <CODE> OOMPH_*</CODE> in the include guard. This is to 
+  - Note the prefix <CODE> OOMPH_*</CODE> in the include guard. This is to
     avoid clashes with include guards of other libraries.
 
 
@@ -305,19 +321,19 @@ guards and library includes.
 
 \section debug Debugging etc.
 
- 
+
  \subsection paranoia The PARANOID flag and error handling
   - Implement optional validation routines, self-tests, and other
-    sanity checks via conditional compilation, using the compiler 
+    sanity checks via conditional compilation, using the compiler
     flag PARANOID, so that the relevant statements are only activated if
     \c -DPARANOID is specified as a compilation flag
     for the C++ compiler.
     If errors are detected, a meaningful diagnostic should be issued,
-    by throwing an \c OomphLibError. 
+    by throwing an \c OomphLibError.
     If the code is compiled without
-    the PARANOID flag, all sanity checks are bypassed -- good for 
+    the PARANOID flag, all sanity checks are bypassed -- good for
     the overall execution speed, bad for error handling... The
-    user can choose. 
+    user can choose.
     \n\n
     Here's an example: \n\n
   \code
@@ -325,7 +341,7 @@ guards and library includes.
  // Has a global mesh already been built?
  if(Mesh_pt!=0)
   {
-   std::string error_message = 
+   std::string error_message =
     "Problem::build_global_mesh() called,\n";
    error_message += " but a global mesh has already been built:\n";
    error_message += "Problem::Mesh_pt is not zero!\n";
@@ -335,7 +351,7 @@ guards and library includes.
                        OOMPH_EXCEPTION_LOCATION);
   }
   \endcode
-  - \c oomph-lib also has an object that allows warning messages to 
+  - \c oomph-lib also has an object that allows warning messages to
     be issued in a uniform format. Here's an example of its use:
   \code
      // Was it a duplicate?
@@ -344,8 +360,8 @@ guards and library includes.
       {
        std::ostringstream warning_stream;
        warning_stream  <<"WARNING: " << std::endl
-                       <<"Element " << e << " in submesh " << imesh 
-                       <<" is a duplicate \n and was ignored when assembling " 
+                       <<"Element " << e << " in submesh " << imesh
+                       <<" is a duplicate \n and was ignored when assembling "
                        <<"global mesh." << std::endl;
        OomphLibWarning(warning_stream.str(),
                        OOMPH_CURRENT_FUNCTION,
@@ -353,9 +369,9 @@ guards and library includes.
       }
    \endcode
 
-  
+
 \subsection range Range checking
- 
+
 - Most access functions that provide indexed access to
   a private container, do, in fact, access a private STL vector.
   Explicit range checking for these (frequent!) cases can be avoided
@@ -366,14 +382,14 @@ guards and library includes.
   for the C++ compiler.
   \b Note: While it is generally a good idea to compile
   with \c PARANOID while developing code, \c RANGE_CHECKING
-  is \b very \b expensive and is therefore activated via 
+  is \b very \b expensive and is therefore activated via
   a second independent flag. We only tend to active this flag
   as a last resort, typically to track down particularly
   stubborn segmentation faults.
 
   \subsection self_test Self test routines
    - Every sufficiently complex class should come with its
-     own 
+     own
      \code unsigned self_test() \endcode
      routine which returns 1 for failure, 0 for successful test.
 
@@ -392,13 +408,13 @@ guards and library includes.
 \code
 
   // Return i-th coordinate of Point
-   double& operator[](const unsigned& i){return x[i];}  
+   double& operator[](const unsigned& i){return x[i];}
 
   // Return i-th coordinate of Point -- const version
-  const double& operator[](const unsigned& i) const {return x[i];} 
+  const double& operator[](const unsigned& i) const {return x[i];}
 
 \endcode
- 
+
 \subsection unsigned Only use int if a variable can actually take negative values
 
 - Just as the name of a variable gives some indication of its
@@ -410,28 +426,28 @@ guards and library includes.
   \endcode
   \n
   immediately raises the question why the programmer anticipates
-  circumstances in which the counter might be negative. Are negative 
+  circumstances in which the counter might be negative. Are negative
   values used to indicate special cases; etc? If the name of the
   variable was chosen correctly (i.e. if the variable really is
-  used as a counter) then 
+  used as a counter) then
   \n
   \code
   // Create a counter
   unsigned counter=0;
   \endcode
   \n
-  is much clearer and therefore preferable, even if the two versions 
+  is much clearer and therefore preferable, even if the two versions
   of the code would, of course, give the same result.
 .
-   
+
 \subsection pass_by_reference Only use "pass by reference"
 - Arguments to functions should only be passed "by reference",
   not "by value". Use "pass by constant reference" if you want
   to ensure the const-ness of any (input) arguments.
 - To "encourage" this behaviour, most \c oomph-lib objects
   have (deliberately) broken copy constructors and assignment
-  operators, making a "pass by value" impossible. 
-  The only exceptions are cases in which we could see 
+  operators, making a "pass by value" impossible.
+  The only exceptions are cases in which we could see
   a good reason why a fully-functional, non-memory-leaking
   copy/assignment operator might be required.
 
@@ -440,56 +456,46 @@ guards and library includes.
 - For the reasons mentioned above, "passing by value" is
   discouraged and we have only implemented copy constructors
   for very few classes. To make the use of C++'s default
-  copy constructor impossible (as their accidental use may lead to serious 
-  memory leaks) all classes should either have a deliberately-broken 
+  copy constructor impossible (as their accidental use may lead to serious
+  memory leaks) all classes should either have a deliberately-broken
   copy constructor or provide a "proper" implementation (as in the case of
   \c oomph-lib's \c Vector class). The same applies to assignment
-  operators. 
-  \n \n 
-  The namespace \c BrokenCopy provides two helper functions,
-  \c BrokenCopy::broken_copy(...) and \c
-  BrokenCopy::broken_assign(...) that issue a suitable error message
-  and then throw an \c OomphLibError. The name of the class
-  should be passed to these functions as a string, as in this
-  example from the \c Mesh class: \n\n
+  operators.
+  \n \n
+  With the advent of C++11, this can be done easily using the \c delete keyword:
+  \n\n
   \code
   /// Broken copy constructor
-  Mesh(const Mesh& dummy) 
-   { 
-    BrokenCopy::broken_copy("Mesh");
-   } 
- 
+  Mesh(const Mesh& dummy) = delete;
+
   /// Broken assignment operator
-  void operator=(const Mesh&) 
-   {
-    BrokenCopy::broken_assign("Mesh");
-   }
+  void operator=(const Mesh&) = delete;
   \endcode
 
 \subsection order_of_args Order of arguments
-- If values are returned from a function, put them at the end 
+- If values are returned from a function, put them at the end
   of the argument list.
 - "Time" arguments always come first, e.g.
   \code
   /// \short Return FE interpolated coordinate x[i] at local coordinate s
   /// at previous timestep t (t=0: present; t>0: previous timestep)
-  virtual double interpolated_x(const unsigned& t, 
+  virtual double interpolated_x(const unsigned& t,
                                 const Vector<double>& s,
                                 const unsigned& i) const;
   \endcode
 
 \subsection brackets Access to elements in containers
- - Avoid access via square brackets (i.e. via operators) and 
-   write access functions instead, as they can be overloaded more 
+ - Avoid access via square brackets (i.e. via operators) and
+   write access functions instead, as they can be overloaded more
    easily.
 
 \subsection boolean Boolean member data
  - Avoid access to boolean member data via trivial wrapper functions
-   that return references. These constructions lead to somewhat ugly 
+   that return references. These constructions lead to somewhat ugly
    driver codes and can lead to code that appears to set a boolean,
    when it does not. Instead the status of the boolean should be
    modified by two set/unset or enable/disable subroutines
-   (i.e. returning void) and tested using a (const) has_ or is_ 
+   (i.e. returning void) and tested using a (const) has_ or is_
    function that returns a bool . For example
    \code
     private:
@@ -498,10 +504,10 @@ guards and library includes.
       bool Doc_flag;
 
     public:
-    
+
       /// Enable documentation
       void enable_doc() {Doc_flag=true;}
-      
+
       /// Disable documentation
       void disable_doc() {Doc_flag=false;}
 
@@ -520,9 +526,9 @@ guards and library includes.
  \subsection inlining Inlining
  - Inline all simple set/get functions by placing them into the *.h
    file.
- - \b Careful: Inlined functions should not contain 
+ - \b Careful: Inlined functions should not contain
    calls to member functions of classes that are defined in other files
-   as this can lead to triangular dependencies. 
+   as this can lead to triangular dependencies.
 
 <hr>
 <hr>

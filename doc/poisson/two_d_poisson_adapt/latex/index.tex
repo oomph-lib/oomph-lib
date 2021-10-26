@@ -3,7 +3,7 @@ In a \href{../../../poisson/fish_poisson/html/index.html}{\texttt{ previous exam
 \item {\ttfamily Problem\+::refine\+\_\+uniformly()} which performs automatic, uniform refinement of a given (refineable) mesh.
 \item {\ttfamily Problem\+::adapt()} which performs automatic mesh adaptation (local refinement or unrefinement), based on error estimates that are computed (automatically) by a chosen error estimator.
 \item {\ttfamily Problem\+::newton\+\_\+solve(...)} -- a black-\/box adaptive Newton solver that automatically adapts the mesh and recomputes the solution until it satisfies the prescribed error bounds.
-\end{DoxyItemize}Provided the problem has been discretised with suitable \char`\"{}refineable mesh\char`\"{} and \char`\"{}refineable element\char`\"{} objects from {\ttfamily oomph-\/lib\textquotesingle{}s} mesh and finite element libraries, none of these functions require any intervention by the user. Most of {\ttfamily oomph-\/lib} finite elements are already available in \char`\"{}refineable\char`\"{} and \char`\"{}non-\/refineable\char`\"{} forms. For instance, the {\ttfamily Refineable\+Q\+Poisson\+Element} that we used in the \href{../../../poisson/fish_poisson/html/index.html}{\texttt{ previous example}} is the refineable equivalent of the 2D {\ttfamily Q\+Poisson\+Element}. \href{../../../to_be_written/html/index.html}{\texttt{ Another document}} describes how to create new refineable elements. Here we shall discuss how to \char`\"{}upgrade\char`\"{} existing meshes to {\ttfamily Refineable\+Meshes}, i.\+e. meshes that can be used with {\ttfamily oomph-\/lib\textquotesingle{}s} mesh adaptation routines.
+\end{DoxyItemize}Provided the problem has been discretised with suitable \char`\"{}refineable mesh\char`\"{} and \char`\"{}refineable element\char`\"{} objects from {\ttfamily oomph-\/lib\textquotesingle{}s} mesh and finite element libraries, none of these functions require any intervention by the user. Most of {\ttfamily oomph-\/lib} finite elements are already available in \char`\"{}refineable\char`\"{} and \char`\"{}non-\/refineable\char`\"{} forms. For instance, the {\ttfamily Refineable\+QPoisson\+Element} that we used in the \href{../../../poisson/fish_poisson/html/index.html}{\texttt{ previous example}} is the refineable equivalent of the 2D {\ttfamily QPoisson\+Element}. \href{../../../to_be_written/html/index.html}{\texttt{ Another document}} describes how to create new refineable elements. Here we shall discuss how to \char`\"{}upgrade\char`\"{} existing meshes to {\ttfamily Refineable\+Meshes}, i.\+e. meshes that can be used with {\ttfamily oomph-\/lib\textquotesingle{}s} mesh adaptation routines.
 
 The minimum functionality that must be provided by such meshes is specified by the pure virtual functions in the abstract base class {\ttfamily Refineable\+Mesh} and all refineable Meshes should be derived from this class. Here is a graphical representation of the typical inheritance structure for refineable meshes, illustrated for 2D quad meshes\+:
 
@@ -16,7 +16,7 @@ The minimum functionality that must be provided by such meshes is specified by t
 
 The diagram contains two fully-\/functional meshes\+:
 \begin{DoxyItemize}
-\item The {\ttfamily Some\+Mesh} is some basic, non-\/refineable mesh that is derived directly from the generic {\ttfamily Mesh} base class. Typically, it provides a coarse discretisation of a 2D domain with 2D elements from the {\ttfamily Q\+Element} family. Its constructor creates the mesh\textquotesingle{}s nodes and elements and initialises the various boundary lookup schemes. (Consult the \href{../../../quick_guide/html/index.html\#mesh}{\texttt{ \char`\"{}\+How to build a mesh\char`\"{}}} section of the \href{../../../quick_guide/html/index.html}{\texttt{ Quick Guide}} for details of the generic mesh generation process.)
+\item The {\ttfamily Some\+Mesh} is some basic, non-\/refineable mesh that is derived directly from the generic {\ttfamily Mesh} base class. Typically, it provides a coarse discretisation of a 2D domain with 2D elements from the {\ttfamily QElement} family. Its constructor creates the mesh\textquotesingle{}s nodes and elements and initialises the various boundary lookup schemes. (Consult the \href{../../../quick_guide/html/index.html\#mesh}{\texttt{ \char`\"{}\+How to build a mesh\char`\"{}}} section of the \href{../../../quick_guide/html/index.html}{\texttt{ Quick Guide}} for details of the generic mesh generation process.)
 \item The {\ttfamily Refineable\+Some\+Mesh} is the refineable equivalent of the basic {\ttfamily Some\+Mesh}. It inherits the original mesh layout from the {\ttfamily Some\+Mesh} class. Refineability is added by inheriting from the {\ttfamily Refineable\+Quad\+Mesh} class; this class implements the mesh adaptation procedures, specified as pure virtual functions in the {\ttfamily Refineable\+Mesh} class, for 2D quad meshes, employing {\ttfamily Quad\+Tree} -\/ based refinement techniques.
 \end{DoxyItemize}Equivalent inheritance structures can be/are implemented for meshes with different element topologies\+: For instance, the {\ttfamily Refineable\+Brick\+Mesh} class is the 3D equivalent of the {\ttfamily Refineable\+Quad\+Mesh} class\+: It performs the mesh adaptation for 3D brick meshes by {\ttfamily Oc\+Tree} -\/ based refinement techniques.
 
@@ -50,9 +50,9 @@ We shall discuss the driver code ~\newline
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//==============================start\_of\_mesh======================}}
-\DoxyCodeLine{\textcolor{comment}{/// Refineable equivalent of the SimpleRectangularQuadMesh.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// Refinement is performed by the QuadTree-\/based procedures}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// implemented in the RefineableQuadMesh base class.}}
+\DoxyCodeLine{\textcolor{comment}{/// Refineable equivalent of the SimpleRectangularQuadMesh.}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// Refinement is performed by the QuadTree-\/based procedures}}
+\DoxyCodeLine{\textcolor{comment}{/// implemented in the RefineableQuadMesh base class.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//=================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh}} : }
@@ -60,15 +60,13 @@ We shall discuss the driver code ~\newline
 \DoxyCodeLine{ \textcolor{keyword}{public} RefineableQuadMesh<ELEMENT>}
 
 \end{DoxyCodeInclude}
-
-
-The mesh constructor first calls the constructor of the underlying {\ttfamily Simple\+Rectangular\+Quad\+Mesh} to create the nodes and elements, and to set up the various boundary lookup schemes. The call to {\ttfamily Refineable\+Quad\+Mesh\+::setup\+\_\+quadtree\+\_\+forest()} creates the {\ttfamily Quad\+Tree\+Forest} representation of the mesh. That\textquotesingle{}s all!
+ The mesh constructor first calls the constructor of the underlying {\ttfamily Simple\+Rectangular\+Quad\+Mesh} to create the nodes and elements, and to set up the various boundary lookup schemes. The call to {\ttfamily Refineable\+Quad\+Mesh\+::setup\+\_\+quadtree\+\_\+forest()} creates the {\ttfamily Quad\+Tree\+Forest} representation of the mesh. That\textquotesingle{}s all!
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keyword}{public}: }
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short  Pass number of elements in the horizontal }}
+\DoxyCodeLine{\textcolor{comment}{ ///  Pass number of elements in the horizontal }}
 \DoxyCodeLine{\textcolor{comment}{ /// and vertical directions, and the corresponding dimensions.}}
 \DoxyCodeLine{\textcolor{comment}{ /// Timestepper defaults to Static.}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh_ae0eab85a2c97fce00d7c82a613378e79}{SimpleRefineableRectangularQuadMesh}}(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \&Nx,}
@@ -87,19 +85,15 @@ The mesh constructor first calls the constructor of the underlying {\ttfamily Si
 \DoxyCodeLine{  \} \textcolor{comment}{// end of constructor}}
 
 \end{DoxyCodeInclude}
-
-
-The destructor can remain empty, as all memory de-\/allocation is handled in the mesh base classes.
+ The destructor can remain empty, as all memory de-\/allocation is handled in the mesh base classes.
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{ \textcolor{comment}{/// Destructor: Empty}}
+\DoxyCodeLine{\textcolor{comment}{ /// Destructor: Empty}}
 \DoxyCodeLine{ \textcolor{keyword}{virtual} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh_a8f258e0b5178ccb33f0596ae5a33c3c5}{\string~SimpleRefineableRectangularQuadMesh}}() \{\}}
 
 \end{DoxyCodeInclude}
-
-
-\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_global}{}\doxysection{Global parameters and functions}\label{index_global}
 The specification of the source function and the exact solution in the namespace {\ttfamily \mbox{\hyperlink{namespaceTanhSolnForPoisson}{Tanh\+Soln\+For\+Poisson}}} is identical to that in the non-\/refineable version discussed in the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ previous example}}.
@@ -107,13 +101,13 @@ The specification of the source function and the exact solution in the namespace
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 \hypertarget{index_main}{}\doxysection{The driver code}\label{index_main}
-The driver code is very similar to that in the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ non-\/refineable version}}. We simply change the mesh from the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} to its refineable equivalent, and discretise the problem with nine-\/node {\ttfamily Refineable\+Q\+Poisson\+Elements} instead of nine-\/node 2D {\ttfamily Q\+Poisson\+Elements}. We choose a large value of $ \alpha = 50$ for the \char`\"{}steepness\char`\"{} parameter and solve the problem with the \char`\"{}black-\/box\char`\"{} Newton solver, allowing for up to four adaptive refinements\+:
+The driver code is very similar to that in the \href{../../../poisson/two_d_poisson/html/index.html}{\texttt{ non-\/refineable version}}. We simply change the mesh from the {\ttfamily Simple\+Rectangular\+Quad\+Mesh} to its refineable equivalent, and discretise the problem with nine-\/node {\ttfamily Refineable\+QPoisson\+Elements} instead of nine-\/node 2D {\ttfamily QPoisson\+Elements}. We choose a large value of $ \alpha = 50$ for the \char`\"{}steepness\char`\"{} parameter and solve the problem with the \char`\"{}black-\/box\char`\"{} Newton solver, allowing for up to four adaptive refinements\+:
 
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//===== start\_of\_main=====================================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Driver code for 2D Poisson problem}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{two__d__poisson__adapt_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{}
@@ -123,44 +117,44 @@ The driver code is very similar to that in the \href{../../../poisson/two_d_pois
 \DoxyCodeLine{ \textcolor{comment}{// Create the problem with 2D nine-\/node refineable elements from the}}
 \DoxyCodeLine{ \textcolor{comment}{// RefineableQuadPoissonElement family. Pass pointer to source function. }}
 \DoxyCodeLine{ \mbox{\hyperlink{classRefineablePoissonProblem}{RefineablePoissonProblem<RefineableQPoissonElement<2,3>}} > }
-\DoxyCodeLine{  \mbox{\hyperlink{two__d__poisson__adapt_8txt_a4074baada03976c061d5672f4237cca5}{problem}}(\&\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{TanhSolnForPoisson::get\_source}});}
+\DoxyCodeLine{  problem(\&\mbox{\hyperlink{namespaceTanhSolnForPoisson_ae1b9d6789ff301e3d63a4e292213036c}{TanhSolnForPoisson::get\_source}});}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{// Create label for output}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{ DocInfo doc\_info;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Set output directory}}
-\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"RESLT"});}
+\DoxyCodeLine{ doc\_info.set\_directory(\textcolor{stringliteral}{"{}RESLT"{}});}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Step number}}
 \DoxyCodeLine{ doc\_info.number()=0;}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Check if we're ready to go:}}
 \DoxyCodeLine{ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{ cout << \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "};}
-\DoxyCodeLine{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{two__d__poisson__adapt_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.self\_test()==0) }
+\DoxyCodeLine{ cout << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\(\backslash\)nProblem self-\/test "{}};}
+\DoxyCodeLine{ \textcolor{keywordflow}{if} (problem.self\_test()==0) }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   cout << \textcolor{stringliteral}{"passed: Problem can be solved."} << std::endl;}
+\DoxyCodeLine{   cout << \textcolor{stringliteral}{"{}passed: Problem can be solved."{}} << std::endl;}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{ \textcolor{keywordflow}{else} }
 \DoxyCodeLine{  \{}
-\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"Self test failed"},}
+\DoxyCodeLine{   \textcolor{keywordflow}{throw} OomphLibError(\textcolor{stringliteral}{"{}Self test failed"{}},}
 \DoxyCodeLine{                       OOMPH\_CURRENT\_FUNCTION,}
 \DoxyCodeLine{                       OOMPH\_EXCEPTION\_LOCATION);}
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Set the orientation of the "step" to 45 degrees}}
+\DoxyCodeLine{ \textcolor{comment}{// Set the orientation of the "{}step"{} to 45 degrees}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceTanhSolnForPoisson_a785ccd00a727125a5138fbbcac173294}{TanhSolnForPoisson::TanPhi}}=1.0;}
 \DoxyCodeLine{ }
-\DoxyCodeLine{ \textcolor{comment}{// Choose a large value for the steepness of the "step"}}
+\DoxyCodeLine{ \textcolor{comment}{// Choose a large value for the steepness of the "{}step"{}}}
 \DoxyCodeLine{ \mbox{\hyperlink{namespaceTanhSolnForPoisson_ae676ccd186d5df119cce811596d949c1}{TanhSolnForPoisson::Alpha}}=50.0; }
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Solve the problem, performing up to 4 adaptive refinements}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__poisson__adapt_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.newton\_solve(4);}
+\DoxyCodeLine{ problem.newton\_solve(4);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{ \textcolor{comment}{//Output the solution}}
-\DoxyCodeLine{ \mbox{\hyperlink{two__d__poisson__adapt_8txt_a4074baada03976c061d5672f4237cca5}{problem}}.doc\_solution(doc\_info);}
+\DoxyCodeLine{ problem.doc\_solution(doc\_info);}
 \DoxyCodeLine{ }
 \DoxyCodeLine{\} \textcolor{comment}{//end of main}}
 
@@ -175,9 +169,9 @@ The problem class definition is virtually identical to that in the \href{../../.
  
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//====== start\_of\_problem\_class=======================================}}
-\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// refineable 2D QPoisson elements. The specific type of element is}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/// specified via the template parameter.}}
+\DoxyCodeLine{\textcolor{comment}{/// 2D Poisson problem on rectangular domain, discretised with}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/// refineable 2D QPoisson elements. The specific type of element is}}
+\DoxyCodeLine{\textcolor{comment}{/// specified via the template parameter.}}
 \DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//====================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT> }
 \DoxyCodeLine{\textcolor{keyword}{class }\mbox{\hyperlink{classRefineablePoissonProblem}{RefineablePoissonProblem}} : \textcolor{keyword}{public} Problem}
@@ -192,21 +186,21 @@ The problem class definition is virtually identical to that in the \href{../../.
 \DoxyCodeLine{\textcolor{comment}{ /// Destructor (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classRefineablePoissonProblem_a84980680d8a6576e14af42a8639d391a}{\string~RefineablePoissonProblem}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Update the problem specs before solve: Reset boundary conditions}}
+\DoxyCodeLine{\textcolor{comment}{ /// Update the problem specs before solve: Reset boundary conditions}}
 \DoxyCodeLine{\textcolor{comment}{ /// to the values from the exact solution.}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineablePoissonProblem_a883906ab6c06ffa10ed55dc4fc02ce96}{actions\_before\_newton\_solve}}();}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{ /// Update the problem after solve (empty)}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineablePoissonProblem_ac4d433dad09bce5bd9be21e86d347e38}{actions\_after\_newton\_solve}}()\{\}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Doc the solution. DocInfo object stores flags/labels for where the}}
+\DoxyCodeLine{\textcolor{comment}{ /// Doc the solution. DocInfo object stores flags/labels for where the}}
 \DoxyCodeLine{\textcolor{comment}{ /// output gets written to}}
 \DoxyCodeLine{\textcolor{comment}{} \textcolor{keywordtype}{void} \mbox{\hyperlink{classRefineablePoissonProblem_aaf9482084473a6ca2bd0de24acae08e9}{doc\_solution}}(DocInfo\& doc\_info);}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{ /// \(\backslash\)short Overloaded version of the Problem's access function to }}
+\DoxyCodeLine{\textcolor{comment}{ /// Overloaded version of the Problem's access function to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the mesh. Recasts the pointer to the base Mesh object to }}
 \DoxyCodeLine{\textcolor{comment}{ /// the actual mesh type.}}
-\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh<ELEMENT>}}* \mbox{\hyperlink{classRefineablePoissonProblem_ad8148aada59e279cbd9eb34272b65fa5}{mesh\_pt}}() }
+\DoxyCodeLine{\textcolor{comment}{} \mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh<ELEMENT>}}* \mbox{\hyperlink{classRefineablePoissonProblem_a3cde3ea5577b065e081eb74ff870b5c3}{mesh\_pt}}() }
 \DoxyCodeLine{  \{}
 \DoxyCodeLine{   \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classSimpleRefineableRectangularQuadMesh}{SimpleRefineableRectangularQuadMesh<ELEMENT>}}*\textcolor{keyword}{>}(}
 \DoxyCodeLine{    Problem::mesh\_pt());}
@@ -220,9 +214,7 @@ The problem class definition is virtually identical to that in the \href{../../.
 \DoxyCodeLine{\}; \textcolor{comment}{// end of problem class}}
 
 \end{DoxyCodeInclude}
-
-
-\mbox{[}See the discussion of the \href{../../one_d_poisson/html/index.html}{\texttt{ 1D Poisson problem}} for a more detailed discussion of the function type Poisson\+Equations$<$2$>$\+::\+Poisson\+Source\+Fct\+Pt.\mbox{]}
+ \mbox{[}See the discussion of the \href{../../one_d_poisson/html/index.html}{\texttt{ 1D Poisson problem}} for a more detailed discussion of the function type Poisson\+Equations$<$2$>$\+::\+Poisson\+Source\+Fct\+Pt.\mbox{]}
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
@@ -233,7 +225,7 @@ The problem constructor is virtually identical to that in the \href{../../../poi
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{//=====start\_of\_constructor===============================================}}
 \DoxyCodeLine{\textcolor{comment}{/// Constructor for Poisson problem: Pass pointer to source function.}}
-\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{//========================================================================}}
+\DoxyCodeLine{\textcolor{comment}{//========================================================================}}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} ELEMENT>}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineablePoissonProblem_a019ec586c38163e04e177de92503c02f}{RefineablePoissonProblem<ELEMENT>::}}}
 \DoxyCodeLine{\mbox{\hyperlink{classRefineablePoissonProblem_a019ec586c38163e04e177de92503c02f}{      RefineablePoissonProblem}}(PoissonEquations<2>::PoissonSourceFctPt }
@@ -291,7 +283,7 @@ The problem constructor is virtually identical to that in the \href{../../../poi
 \DoxyCodeLine{  \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{ \textcolor{comment}{// Setup equation numbering scheme}}
-\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"Number of equations: "} << assign\_eqn\_numbers() << std::endl; }
+\DoxyCodeLine{ cout <<\textcolor{stringliteral}{"{}Number of equations: "{}} << assign\_eqn\_numbers() << std::endl; }
 \DoxyCodeLine{}
 \DoxyCodeLine{\} \textcolor{comment}{// end of constructor}}
 
@@ -315,14 +307,14 @@ Since most of the \char`\"{}hard work\char`\"{} involved in the mesh adaptation 
 The {\ttfamily Quad\+Tree} -\/ based mesh adaption routines, implemented in the {\ttfamily Refineable\+Quad\+Mesh} class, split elements into four \char`\"{}son elements\char`\"{} if the error estimate exceeds the acceptable maximum. By default, the position of any newly created nodes is determined from the geometric mapping of the \char`\"{}father\char`\"{} element. For instance, when a four-\/node quad \char`\"{}father\char`\"{} element is split into four \char`\"{}sons\char`\"{}, five new nodes are created and they are located at $ (s_0,s_1) = (0,-1), \ (1,0), \ (0,1), \ (-1,0) $ and $ (0,0)$ in the father element\textquotesingle{}s local coordinate system. This procedure is adequate for problems in which the coarse initial mesh provides a perfect representation of the domain (e.\+g. polygonal domains). If the domain has curvilinear boundaries, successive mesh refinements must generate a more and more accurate representation of these boundaries. This requires slight changes to the mesh adaptation procedures. We will discuss these in \href{../../../poisson/fish_poisson2/html/index.html}{\texttt{ another example}}.
 
 The splitting of \char`\"{}father\char`\"{} elements into four equal-\/sized \char`\"{}sons\char`\"{} maintains the aspect ratio of the elements during the mesh adaptation. The good news is that mesh adaption will not cause a deterioration in the element quality. The bad news is that poorly designed coarse meshes cannot be improved by mesh adaptation. It is therefore worthwhile to invest some time into the initial mesh design. For complicated domains, it may be sensible to perform the initial mesh generation with a dedicated, third-\/party mesh generator. (We provide \href{../../../meshes/third_party_meshes/html/index.html}{\texttt{ another example}} to illustrate how to build {\ttfamily oomph-\/lib} meshes based on the output from a third-\/party mesh generator.)\hypertarget{index_hang}{}\doxysubsection{Hanging nodes}\label{index_hang}
-The local splitting of elements can create so-\/called \char`\"{}hanging
-nodes\char`\"{} -- nodes on element edges that are not shared by any adjacent elements. The nodal values and coordinates at such nodes must be constrained to ensure the inter-\/element continuity of the solution. Specifically, the nodal values and coordinates at hanging nodes must be suitable linear combinations of the values at a number of \char`\"{}master nodes\char`\"{}. (In the first instance, the master nodes are the nodes on the adjacent element\textquotesingle{}s edge that {\itshape are} shared by adjacent elements. If there are multiple levels of refinement, such nodes can themselves be hanging; the ultimate set of master nodes is therefore be determined recursively.)
+The local splitting of elements can create so-\/called \char`\"{}hanging nodes\char`\"{} -- nodes on element edges that are not shared by any adjacent elements. The nodal values and coordinates at such nodes must be constrained to ensure the inter-\/element continuity of the solution. Specifically, the nodal values and coordinates at hanging nodes must be suitable linear combinations of the values at a number of \char`\"{}master nodes\char`\"{}. (In the first instance, the master nodes are the nodes on the adjacent element\textquotesingle{}s edge that {\itshape are} shared by adjacent elements. If there are multiple levels of refinement, such nodes can themselves be hanging; the ultimate set of master nodes is therefore be determined recursively.)
 
 The setup of the hanging node constraints is handled automatically by the mesh adaptation routines and the technical details are therefore of little relevance to the general user. (The \href{../../../the_data_structure/html/index.html}{\texttt{ \char`\"{}bottom up\char`\"{} discussion of the data structure}} provides details if you are interested.) One aspect of the way in which hanging nodes are handled in {\ttfamily oomph-\/lib} is important, however. Up to now we have accessed nodal values either via the function
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::set\_value(...)}
+
 \end{DoxyCode}
 
 
@@ -331,6 +323,7 @@ which sets the values stored at a {\ttfamily Node}, or the pointer-\/based acces
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::value\_pt(...)}
+
 \end{DoxyCode}
 
 
@@ -346,6 +339,7 @@ What happens when a node is hanging, i.\+e. if {\ttfamily Node\+::is\+\_\+hangin
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::set\_value(...)}
+
 \end{DoxyCode}
 
 
@@ -354,6 +348,7 @@ and
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::value\_pt(...)}
+
 \end{DoxyCode}
 
 
@@ -366,6 +361,7 @@ The correctly constrained nodal value must be computed \char`\"{}on the fly\char
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::value(...)}
+
 \end{DoxyCode}
 
 
@@ -376,6 +372,7 @@ We provide equivalent functions to access the nodal positions\+: The function
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::x(...)}
+
 \end{DoxyCode}
 
 
@@ -384,6 +381,7 @@ returns the values of (Eulerian) coordinates stored at the node. These values ca
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Node::position(...)}
+
 \end{DoxyCode}
 
 
@@ -404,5 +402,5 @@ Finally, we note that while the nodal values and coordinates stored at a node mi
 \item The driver code is\+: \begin{center} \href{../../../../demo_drivers/poisson/two_d_poisson_adapt/two_d_poisson_adapt.cc}{\texttt{ demo\+\_\+drivers/poisson/two\+\_\+d\+\_\+poisson\+\_\+adapt/two\+\_\+d\+\_\+poisson\+\_\+adapt.\+cc }} \end{center} 
 \end{DoxyItemize}\DoxyHorRuler{0}
  \DoxyHorRuler{0}
- \hypertarget{index_pdf}{}\doxysection{P\+D\+F file}\label{index_pdf}
+ \hypertarget{index_pdf}{}\doxysection{PDF file}\label{index_pdf}
 A \href{../latex/refman.pdf}{\texttt{ pdf version}} of this document is available. \end{document}

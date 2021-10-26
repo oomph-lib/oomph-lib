@@ -1,10 +1,10 @@
-\hypertarget{classoomph_1_1RefineableTetgenMesh}{}\doxysection{oomph\+::Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$ Class Template Reference}
+\hypertarget{classoomph_1_1RefineableTetgenMesh}{}\doxysection{oomph\+::Refineable\+Tetgen\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>} Class Template Reference}
 \label{classoomph_1_1RefineableTetgenMesh}\index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 
 
 {\ttfamily \#include $<$refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h$>$}
 
-Inheritance diagram for oomph\+::Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+NT $>$\+:\begin{figure}[H]
+Inheritance diagram for oomph\+::Refineable\+Tetgen\+Mesh\texorpdfstring{$<$}{<} ELEMENT \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.708609cm]{classoomph_1_1RefineableTetgenMesh}
@@ -13,7 +13,7 @@ Inheritance diagram for oomph\+::Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+NT $
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_ada94219c3458198308cae44387887de8}{Refineable\+Tetgen\+Mesh}} (Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&outer\+\_\+boundary\+\_\+pt, Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&internal\+\_\+closed\+\_\+surface\+\_\+pt, const double \&element\+\_\+volume, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false, const bool \&split\+\_\+corner\+\_\+elements=false)
+\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_abb04c6b7cd68bd23907886dd8d880e5f}{Refineable\+Tetgen\+Mesh}} (Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&outer\+\_\+boundary\+\_\+pt, Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&internal\+\_\+closed\+\_\+surface\+\_\+pt, const double \&element\+\_\+volume, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false, const bool \&split\+\_\+corner\+\_\+elements=false, Vector$<$ double $>$ $\ast$const \&target\+\_\+element\+\_\+volume\+\_\+in\+\_\+region\+\_\+pt=nullptr)
 \begin{DoxyCompactList}\small\item\em Build mesh, based on a Tet\+Mesh\+Faceted\+Closed\+Surface that specifies the outer boundary of the domain and any number of internal closed curves, specified by Tet\+Mesh\+Faceted\+Surfaces. Also specify target volume for uniform element size. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_ac2ac6c6961647d0f332a6742f52dd27d}{$\sim$\+Refineable\+Tetgen\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em Empty Destructor. \end{DoxyCompactList}\item 
@@ -32,7 +32,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_a7fabe6ae591918c313213f
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_ae1cdeb38e28b0840cc3b53d76f353e89}{Refineable\+Tetgen\+Mesh}} (const Vector$<$ double $>$ \&target\+\_\+volume, tetgenio $\ast$const \&tetgen\+\_\+io\+\_\+pt, Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&outer\+\_\+boundary\+\_\+pt, Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&internal\+\_\+surface\+\_\+pt, \mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false)
+\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_ae1cdeb38e28b0840cc3b53d76f353e89}{Refineable\+Tetgen\+Mesh}} (const Vector$<$ double $>$ \&target\+\_\+volume, tetgenio $\ast$const \&tetgen\+\_\+io\+\_\+pt, Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&outer\+\_\+boundary\+\_\+pt, Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&internal\+\_\+surface\+\_\+pt, Time\+Stepper $\ast$time\+\_\+stepper\+\_\+pt=\&Mesh\+::\+Default\+\_\+\+Time\+Stepper, const bool \&use\+\_\+attributes=false)
 \begin{DoxyCompactList}\small\item\em Specialised constructor used during adaptation only. Element sizes are specified by vector tetgen\+\_\+io is passed in from previous mesh (is then modified to build new mesh) Ditto with use\+\_\+attributes, which comes from the previous mesh. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_a78ed78a656617d294c73118eda904253}{initialise\+\_\+adaptation\+\_\+data}} ()
 \begin{DoxyCompactList}\small\item\em Helper function to initialise data associated with adaptation. \end{DoxyCompactList}\item 
@@ -40,7 +40,7 @@ void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_a48331c4310ecbad71e98b4
 \begin{DoxyCompactList}\small\item\em Helper function that updates the input faceted surface by using the flattened elements from Face\+Mesh(es) that are constructed for the boundaries associated with the segments of the polygon. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_a001c3ff513cabdfbd67c65bd97ebb768}{surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries}} ()
 \begin{DoxyCompactList}\small\item\em Generate a new faceted representation of the inner hole boundaries. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_acf9eea5998765dc36b96a2050db3e1e3}{snap\+\_\+nodes\+\_\+onto\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$\&new\+\_\+mesh\+\_\+pt, const unsigned \&b)
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_acf9eea5998765dc36b96a2050db3e1e3}{snap\+\_\+nodes\+\_\+onto\+\_\+boundary}} (\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$ $\ast$\&new\+\_\+mesh\+\_\+pt, const unsigned \&b)
 \begin{DoxyCompactList}\small\item\em Snap the boundary nodes onto any curvilinear boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -52,22 +52,21 @@ bool \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh_a72b505d4bfd018471ef154
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class E\+L\+E\+M\+E\+NT$>$\newline
-class oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$}
+\subsubsection*{template$<$class ELEMENT$>$\newline
+class oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$}
 
 
-
-Definition at line 47 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00047}{47}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_ada94219c3458198308cae44387887de8}\label{classoomph_1_1RefineableTetgenMesh_ada94219c3458198308cae44387887de8}} 
+\mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_abb04c6b7cd68bd23907886dd8d880e5f}\label{classoomph_1_1RefineableTetgenMesh_abb04c6b7cd68bd23907886dd8d880e5f}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!RefineableTetgenMesh@{RefineableTetgenMesh}}
 \index{RefineableTetgenMesh@{RefineableTetgenMesh}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableTetgenMesh()}{RefineableTetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}\item[{Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&}]{internal\+\_\+closed\+\_\+surface\+\_\+pt,  }\item[{const double \&}]{element\+\_\+volume,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{const bool \&}]{use\+\_\+attributes = {\ttfamily false},  }\item[{const bool \&}]{split\+\_\+corner\+\_\+elements = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}\item[{Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&}]{internal\+\_\+closed\+\_\+surface\+\_\+pt,  }\item[{const double \&}]{element\+\_\+volume,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{const bool \&}]{use\+\_\+attributes = {\ttfamily false},  }\item[{const bool \&}]{split\+\_\+corner\+\_\+elements = {\ttfamily false},  }\item[{Vector$<$ double $>$ $\ast$const \&}]{target\+\_\+element\+\_\+volume\+\_\+in\+\_\+region\+\_\+pt = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -75,18 +74,18 @@ Build mesh, based on a Tet\+Mesh\+Faceted\+Closed\+Surface that specifies the ou
 
 
 
-Definition at line 55 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00055}{55}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data().
+References \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00232}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::initialise\+\_\+adaptation\+\_\+data()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_ae1cdeb38e28b0840cc3b53d76f353e89}\label{classoomph_1_1RefineableTetgenMesh_ae1cdeb38e28b0840cc3b53d76f353e89}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!RefineableTetgenMesh@{RefineableTetgenMesh}}
 \index{RefineableTetgenMesh@{RefineableTetgenMesh}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{RefineableTetgenMesh()}{RefineableTetgenMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{target\+\_\+volume,  }\item[{tetgenio $\ast$const \&}]{tetgen\+\_\+io\+\_\+pt,  }\item[{Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&}]{internal\+\_\+surface\+\_\+pt,  }\item[{\mbox{\hyperlink{fsi__collapsible__channel__adapt_8txt_a76005d00b12acac8677ecc7c968ff865}{Time\+Stepper}} $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{const bool \&}]{use\+\_\+attributes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{target\+\_\+volume,  }\item[{tetgenio $\ast$const \&}]{tetgen\+\_\+io\+\_\+pt,  }\item[{Tet\+Mesh\+Faceted\+Closed\+Surface $\ast$const \&}]{outer\+\_\+boundary\+\_\+pt,  }\item[{Vector$<$ Tet\+Mesh\+Faceted\+Surface $\ast$ $>$ \&}]{internal\+\_\+surface\+\_\+pt,  }\item[{Time\+Stepper $\ast$}]{time\+\_\+stepper\+\_\+pt = {\ttfamily \&Mesh\+:\+:Default\+\_\+TimeStepper},  }\item[{const bool \&}]{use\+\_\+attributes = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -94,18 +93,18 @@ Specialised constructor used during adaptation only. Element sizes are specified
 
 
 
-Definition at line 80 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00082}{82}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::build\+\_\+from\+\_\+scaffold(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::deep\+\_\+copy\+\_\+of\+\_\+tetgenio(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::setup\+\_\+reverse\+\_\+lookup\+\_\+schemes\+\_\+for\+\_\+faceted\+\_\+surface(), oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Tetgenio\+\_\+exists, oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Tetgenio\+\_\+pt, and oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Tmp\+\_\+mesh\+\_\+pt.
+References \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00048}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::build\+\_\+from\+\_\+scaffold()}}, \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00865}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::deep\+\_\+copy\+\_\+of\+\_\+tetgenio()}}, \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00232}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::initialise\+\_\+adaptation\+\_\+data()}}, \mbox{\hyperlink{tetgen__mesh_8template_8cc_source_l00828}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::setup\+\_\+reverse\+\_\+lookup\+\_\+schemes\+\_\+for\+\_\+faceted\+\_\+surface()}}, \mbox{\hyperlink{tetgen__mesh_8template_8h_source_l00717}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+exists}}, \mbox{\hyperlink{tetgen__mesh_8template_8h_source_l00720}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tetgenio\+\_\+pt}}, and \mbox{\hyperlink{tetgen__mesh_8template_8h_source_l00713}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Tmp\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_ac2ac6c6961647d0f332a6742f52dd27d}\label{classoomph_1_1RefineableTetgenMesh_ac2ac6c6961647d0f332a6742f52dd27d}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!````~RefineableTetgenMesh@{$\sim$RefineableTetgenMesh}}
 \index{````~RefineableTetgenMesh@{$\sim$RefineableTetgenMesh}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{$\sim$RefineableTetgenMesh()}{~RefineableTetgenMesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-virtual \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+virtual \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::$\sim$\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -113,7 +112,7 @@ Empty Destructor.
 
 
 
-Definition at line 181 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00183}{183}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
@@ -122,8 +121,8 @@ Definition at line 181 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!adapt@{adapt}}
 \index{adapt@{adapt}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{adapt()}{adapt()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::adapt (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{elem\+\_\+error }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::adapt (\begin{DoxyParamCaption}\item[{const Vector$<$ double $>$ \&}]{elem\+\_\+error }\end{DoxyParamCaption})}
 
 
 
@@ -131,18 +130,18 @@ Adapt mesh, based on elemental error provided.
 
 Adapt problem based on specified elemental error estimates. 
 
-Definition at line 450 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8cc_source_l00450}{450}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8cc_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc}}.
 
 
 
-References Geom\+Object, s, and oomph\+::\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::tetgenio\+\_\+pt().
+References \mbox{\hyperlink{tetgen__mesh_8template_8h_source_l00679}{oomph\+::\+Tetgen\+Mesh$<$ ELEMENT $>$\+::tetgenio\+\_\+pt()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_af5342732d4a4e715a443688a53801c00}\label{classoomph_1_1RefineableTetgenMesh_af5342732d4a4e715a443688a53801c00}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!disable\_projection@{disable\_projection}}
 \index{disable\_projection@{disable\_projection}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{disable\_projection()}{disable\_projection()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::disable\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::disable\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -150,18 +149,18 @@ Disable projection of old solution onto new mesh.
 
 
 
-Definition at line 216 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00218}{218}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Projection\+\_\+is\+\_\+disabled.
+References \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00255}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Projection\+\_\+is\+\_\+disabled}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_a7fabe6ae591918c313213fd0528e21d1}\label{classoomph_1_1RefineableTetgenMesh_a7fabe6ae591918c313213fd0528e21d1}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!enable\_projection@{enable\_projection}}
 \index{enable\_projection@{enable\_projection}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{enable\_projection()}{enable\_projection()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::enable\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::enable\+\_\+projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -169,18 +168,18 @@ Disable projection of old solution onto new mesh.
 
 
 
-Definition at line 222 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00224}{224}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Projection\+\_\+is\+\_\+disabled.
+References \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00255}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Projection\+\_\+is\+\_\+disabled}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_a78ed78a656617d294c73118eda904253}\label{classoomph_1_1RefineableTetgenMesh_a78ed78a656617d294c73118eda904253}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!initialise\_adaptation\_data@{initialise\_adaptation\_data}}
 \index{initialise\_adaptation\_data@{initialise\_adaptation\_data}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{initialise\_adaptation\_data()}{initialise\_adaptation\_data()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::initialise\+\_\+adaptation\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::initialise\+\_\+adaptation\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
 
 
 
@@ -188,22 +187,22 @@ Helper function to initialise data associated with adaptation.
 
 By default we project solution onto new mesh during adaptation
 
-Definition at line 230 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00232}{232}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Projection\+\_\+is\+\_\+disabled.
+References \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00255}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Projection\+\_\+is\+\_\+disabled}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Refineable\+Tetgen\+Mesh().
+Referenced by \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00055}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Refineable\+Tetgen\+Mesh()}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_a3c2bb21844f02403fa687fefc55ba5ad}\label{classoomph_1_1RefineableTetgenMesh_a3c2bb21844f02403fa687fefc55ba5ad}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!projection\_is\_disabled@{projection\_is\_disabled}}
 \index{projection\_is\_disabled@{projection\_is\_disabled}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{projection\_is\_disabled()}{projection\_is\_disabled()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::projection\+\_\+is\+\_\+disabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::projection\+\_\+is\+\_\+disabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -211,18 +210,18 @@ Is projection of old solution onto new mesh disabled?
 
 
 
-Definition at line 210 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00212}{212}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
-References oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::\+Projection\+\_\+is\+\_\+disabled.
+References \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00255}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::\+Projection\+\_\+is\+\_\+disabled}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_a5ddc94b2545c82bfb2795583f9b98db2}\label{classoomph_1_1RefineableTetgenMesh_a5ddc94b2545c82bfb2795583f9b98db2}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!refine\_uniformly@{refine\_uniformly}}
 \index{refine\_uniformly@{refine\_uniformly}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{refine\_uniformly()}{refine\_uniformly()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::refine\+\_\+uniformly (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::refine\+\_\+uniformly (\begin{DoxyParamCaption}\item[{Doc\+Info \&}]{doc\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -230,14 +229,14 @@ Refine mesh uniformly and doc process.
 
 
 
-Definition at line 184 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00186}{186}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_acf9eea5998765dc36b96a2050db3e1e3}\label{classoomph_1_1RefineableTetgenMesh_acf9eea5998765dc36b96a2050db3e1e3}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!snap\_nodes\_onto\_boundary@{snap\_nodes\_onto\_boundary}}
 \index{snap\_nodes\_onto\_boundary@{snap\_nodes\_onto\_boundary}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{snap\_nodes\_onto\_boundary()}{snap\_nodes\_onto\_boundary()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$ $\ast$\&}]{new\+\_\+mesh\+\_\+pt,  }\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::snap\+\_\+nodes\+\_\+onto\+\_\+boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$ $\ast$\&}]{new\+\_\+mesh\+\_\+pt,  }\item[{const unsigned \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -245,18 +244,14 @@ Snap the boundary nodes onto any curvilinear boundaries.
 
 
 
-Definition at line 246 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc.
-
-
-
-References s.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8cc_source_l00246}{246}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8cc_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_a001c3ff513cabdfbd67c65bd97ebb768}\label{classoomph_1_1RefineableTetgenMesh_a001c3ff513cabdfbd67c65bd97ebb768}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!surface\_remesh\_for\_inner\_hole\_boundaries@{surface\_remesh\_for\_inner\_hole\_boundaries}}
 \index{surface\_remesh\_for\_inner\_hole\_boundaries@{surface\_remesh\_for\_inner\_hole\_boundaries}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{surface\_remesh\_for\_inner\_hole\_boundaries()}{surface\_remesh\_for\_inner\_hole\_boundaries()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::surface\+\_\+remesh\+\_\+for\+\_\+inner\+\_\+hole\+\_\+boundaries\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -264,14 +259,14 @@ Generate a new faceted representation of the inner hole boundaries.
 
 
 
-Definition at line 227 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8cc_source_l00227}{227}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8cc_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_add609c3184ffa1786e183f4c6dc24a57}\label{classoomph_1_1RefineableTetgenMesh_add609c3184ffa1786e183f4c6dc24a57}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!unrefine\_uniformly@{unrefine\_uniformly}}
 \index{unrefine\_uniformly@{unrefine\_uniformly}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{unrefine\_uniformly()}{unrefine\_uniformly()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-unsigned \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::unrefine\+\_\+uniformly (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+unsigned \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::unrefine\+\_\+uniformly (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -279,14 +274,14 @@ Unrefine mesh uniformly\+: Return 0 for success, 1 for failure (if unrefinement 
 
 
 
-Definition at line 195 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00197}{197}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_a48331c4310ecbad71e98b482d0d3ea0c}\label{classoomph_1_1RefineableTetgenMesh_a48331c4310ecbad71e98b482d0d3ea0c}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!update\_faceted\_surface\_using\_face\_mesh@{update\_faceted\_surface\_using\_face\_mesh}}
 \index{update\_faceted\_surface\_using\_face\_mesh@{update\_faceted\_surface\_using\_face\_mesh}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{update\_faceted\_surface\_using\_face\_mesh()}{update\_faceted\_surface\_using\_face\_mesh()}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::update\+\_\+faceted\+\_\+surface\+\_\+using\+\_\+face\+\_\+mesh (\begin{DoxyParamCaption}\item[{Tet\+Mesh\+Faceted\+Surface $\ast$\&}]{faceted\+\_\+surface\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+void \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::update\+\_\+faceted\+\_\+surface\+\_\+using\+\_\+face\+\_\+mesh (\begin{DoxyParamCaption}\item[{Tet\+Mesh\+Faceted\+Surface $\ast$\&}]{faceted\+\_\+surface\+\_\+pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -294,7 +289,7 @@ Helper function that updates the input faceted surface by using the flattened el
 
 List of vertex nodes
 
-Definition at line 49 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8cc_source_l00049}{49}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8cc_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc}}.
 
 
 
@@ -303,8 +298,8 @@ Definition at line 49 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+cc.
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!Corner\_elements\_must\_be\_split@{Corner\_elements\_must\_be\_split}}
 \index{Corner\_elements\_must\_be\_split@{Corner\_elements\_must\_be\_split}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Corner\_elements\_must\_be\_split}{Corner\_elements\_must\_be\_split}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Corner\+\_\+elements\+\_\+must\+\_\+be\+\_\+split\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::Corner\+\_\+elements\+\_\+must\+\_\+be\+\_\+split\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -312,14 +307,14 @@ Corner elements which have all of their nodes on the outer boundary are to be sp
 
 
 
-Definition at line 258 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00260}{260}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 \mbox{\Hypertarget{classoomph_1_1RefineableTetgenMesh_a274ebedf983f3b34620fa2bbb1980fcd}\label{classoomph_1_1RefineableTetgenMesh_a274ebedf983f3b34620fa2bbb1980fcd}} 
 \index{oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}!Projection\_is\_disabled@{Projection\_is\_disabled}}
 \index{Projection\_is\_disabled@{Projection\_is\_disabled}!oomph::RefineableTetgenMesh$<$ ELEMENT $>$@{oomph::RefineableTetgenMesh$<$ ELEMENT $>$}}
 \doxysubsubsection{\texorpdfstring{Projection\_is\_disabled}{Projection\_is\_disabled}}
-{\footnotesize\ttfamily template$<$class E\+L\+E\+M\+E\+NT $>$ \\
-bool \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ E\+L\+E\+M\+E\+NT $>$\+::Projection\+\_\+is\+\_\+disabled\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class ELEMENT $>$ \\
+bool \mbox{\hyperlink{classoomph_1_1RefineableTetgenMesh}{oomph\+::\+Refineable\+Tetgen\+Mesh}}$<$ ELEMENT $>$\+::Projection\+\_\+is\+\_\+disabled\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -327,11 +322,11 @@ Disable projection of solution onto new mesh during adaptation.
 
 
 
-Definition at line 253 of file refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h.
+Definition at line \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00255}{255}} of file \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source}{refineable\+\_\+tetgen\+\_\+mesh.\+template.\+h}}.
 
 
 
-Referenced by oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::disable\+\_\+projection(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::enable\+\_\+projection(), oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::initialise\+\_\+adaptation\+\_\+data(), and oomph\+::\+Refineable\+Tetgen\+Mesh$<$ E\+L\+E\+M\+E\+N\+T $>$\+::projection\+\_\+is\+\_\+disabled().
+Referenced by \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00218}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::disable\+\_\+projection()}}, \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00224}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::enable\+\_\+projection()}}, \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00232}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::initialise\+\_\+adaptation\+\_\+data()}}, and \mbox{\hyperlink{refineable__tetgen__mesh_8template_8h_source_l00212}{oomph\+::\+Refineable\+Tetgen\+Mesh$<$ ELEMENT $>$\+::projection\+\_\+is\+\_\+disabled()}}.
 
 
 

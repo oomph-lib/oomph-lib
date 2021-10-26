@@ -1,6 +1,11 @@
-\hypertarget{classFSIRingProblem}{}\doxysection{F\+S\+I\+Ring\+Problem Class Reference}
+\hypertarget{classFSIRingProblem}{}\doxysection{FSIRing\+Problem Class Reference}
 \label{classFSIRingProblem}\index{FSIRingProblem@{FSIRingProblem}}
-Inheritance diagram for F\+S\+I\+Ring\+Problem\+:\begin{figure}[H]
+
+
+FSI Ring problem\+: a fluid-\/structure interaction problem in which a viscous fluid bounded by an initially circular beam is set into motion by a small sinusoidal perturbation of the beam (the domain boundary).  
+
+
+Inheritance diagram for FSIRing\+Problem\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classFSIRingProblem}
@@ -9,8 +14,8 @@ Inheritance diagram for F\+S\+I\+Ring\+Problem\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classFSIRingProblem_a8f4969c6397bebe8afa2b9285ec908e6}{F\+S\+I\+Ring\+Problem}} (const unsigned \&nelement\+\_\+wall, const double \&eps\+\_\+ampl, const double \&pcos\+\_\+initial, const double \&pcos\+\_\+duration)
-\item 
+\mbox{\hyperlink{classFSIRingProblem_a8f4969c6397bebe8afa2b9285ec908e6}{FSIRing\+Problem}} (const unsigned \&nelement\+\_\+wall, const double \&eps\+\_\+ampl, const double \&pcos\+\_\+initial, const double \&pcos\+\_\+duration)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Number of elements in wall mesh, amplitude of the initial wall deformation, amplitude of pcos perturbation and its duration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSIRingProblem_a63a3da079b167ccdc288372bee6bdbc3}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
 \begin{DoxyCompactList}\small\item\em Update after solve (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSIRingProblem_a9fd26120e4e078bca685a5c94482ee12}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
@@ -23,8 +28,8 @@ void \mbox{\hyperlink{classFSIRingProblem_a686782b9af582b68e55c288e1fe4660e}{doc
 \begin{DoxyCompactList}\small\item\em Doc solution\+: Pass number of timestep, i (we append to tracefile after every timestep but do a full doc only at certain intervals), Doc\+Info object and tracefile. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSIRingProblem_acbb3bc5cd6d16cfee7a2f19a3b984ce7}{dynamic\+\_\+run}} ()
 \begin{DoxyCompactList}\small\item\em Do dynamic run. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classFSIRingProblem_a99a92bc3e2713063664277ce535c0af1}{F\+S\+I\+Ring\+Problem}} (const unsigned \&nelement\+\_\+wall, const double \&eps\+\_\+ampl, const double \&pcos\+\_\+initial, const double \&pcos\+\_\+duration, const unsigned \&i\+\_\+case)
-\item 
+\mbox{\hyperlink{classFSIRingProblem_a99a92bc3e2713063664277ce535c0af1}{FSIRing\+Problem}} (const unsigned \&nelement\+\_\+wall, const double \&eps\+\_\+ampl, const double \&pcos\+\_\+initial, const double \&pcos\+\_\+duration, const unsigned \&i\+\_\+case)
+\begin{DoxyCompactList}\small\item\em Constructor\+: Number of elements in wall mesh, amplitude of the initial wall deformation, amplitude of pcos perturbation and its duration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSIRingProblem_a63a3da079b167ccdc288372bee6bdbc3}{actions\+\_\+after\+\_\+newton\+\_\+solve}} ()
 \begin{DoxyCompactList}\small\item\em Update after solve (empty) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classFSIRingProblem_a9fd26120e4e078bca685a5c94482ee12}{actions\+\_\+before\+\_\+newton\+\_\+solve}} ()
@@ -40,13 +45,13 @@ void \mbox{\hyperlink{classFSIRingProblem_ac679e3984b85ddec7b8c2e8ab4511eac}{dyn
 \doxysubsection*{Private Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef Algebraic\+Element$<$ Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ 2 $>$ $>$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}}
+typedef Algebraic\+Element$<$ Refineable\+QCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{FLUID\+\_\+\+ELEMENT}}
 \begin{DoxyCompactList}\small\item\em There are very few element types that will work for this problem. Rather than passing the element type as a template parameter to the problem, we choose instead to use a typedef to specify the particular element fluid used. \end{DoxyCompactList}\item 
-typedef F\+S\+I\+Hermite\+Beam\+Element \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}}
+typedef FSIHermite\+Beam\+Element \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{SOLID\+\_\+\+ELEMENT}}
 \begin{DoxyCompactList}\small\item\em Typedef to specify the solid element used. \end{DoxyCompactList}\item 
-typedef Algebraic\+Element$<$ Refineable\+Q\+Crouzeix\+Raviart\+Element$<$ 2 $>$ $>$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}}
+typedef Algebraic\+Element$<$ Refineable\+QCrouzeix\+Raviart\+Element$<$ 2 $>$ $>$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{FLUID\+\_\+\+ELEMENT}}
 \begin{DoxyCompactList}\small\item\em There are very few element types that will work for this problem. Rather than passing the element type as a template parameter to the problem, we choose instead to use a typedef to specify the particular element fluid used. \end{DoxyCompactList}\item 
-typedef F\+S\+I\+Hermite\+Beam\+Element \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}}
+typedef FSIHermite\+Beam\+Element \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{SOLID\+\_\+\+ELEMENT}}
 \begin{DoxyCompactList}\small\item\em Typedef to specify the solid element used. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -66,17 +71,17 @@ void \mbox{\hyperlink{classFSIRingProblem_ad397e4e3b92845240dd6a996856f33e7}{set
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}} $\ast$ \mbox{\hyperlink{classFSIRingProblem_a85d9441c676456c71dffc27500bd0fec}{Doc\+\_\+displacement\+\_\+elem\+\_\+pt}}
+\mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{SOLID\+\_\+\+ELEMENT}} $\ast$ \mbox{\hyperlink{classFSIRingProblem_a85d9441c676456c71dffc27500bd0fec}{Doc\+\_\+displacement\+\_\+elem\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Element used for documenting displacement. \end{DoxyCompactList}\item 
-One\+D\+Lagrangian\+Mesh$<$ \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}} $>$ $\ast$ \mbox{\hyperlink{classFSIRingProblem_a112c5285b6ea49d0e003fc3bdd817332}{Wall\+\_\+mesh\+\_\+pt}}
+One\+DLagrangian\+Mesh$<$ \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{SOLID\+\_\+\+ELEMENT}} $>$ $\ast$ \mbox{\hyperlink{classFSIRingProblem_a112c5285b6ea49d0e003fc3bdd817332}{Wall\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to wall mesh. \end{DoxyCompactList}\item 
-Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}} $>$ $\ast$ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\+\_\+mesh\+\_\+pt}}
+Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{FLUID\+\_\+\+ELEMENT}} $>$ $\ast$ \mbox{\hyperlink{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}{Fluid\+\_\+mesh\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to fluid mesh. \end{DoxyCompactList}\item 
 Geom\+Object $\ast$ \mbox{\hyperlink{classFSIRingProblem_a1c7dfd9d2798fb518403e5ef99f1f69c}{Undef\+\_\+geom\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to geometric object that represents the undeformed wall shape. \end{DoxyCompactList}\item 
 Newmark$<$ 2 $>$ $\ast$ \mbox{\hyperlink{classFSIRingProblem_a67d7e17b8b0513e793f94fa4357b5784}{Wall\+\_\+time\+\_\+stepper\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to wall timestepper. \end{DoxyCompactList}\item 
-B\+DF$<$ 2 $>$ $\ast$ \mbox{\hyperlink{classFSIRingProblem_a6abf3345b68a0b4b671758439340138e}{Fluid\+\_\+time\+\_\+stepper\+\_\+pt}}
+BDF$<$ 2 $>$ $\ast$ \mbox{\hyperlink{classFSIRingProblem_a6abf3345b68a0b4b671758439340138e}{Fluid\+\_\+time\+\_\+stepper\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to fluid timestepper. \end{DoxyCompactList}\item 
 Node $\ast$ \mbox{\hyperlink{classFSIRingProblem_a2e64e4625ff61633607233d9a6205000}{Veloc\+\_\+trace\+\_\+node\+\_\+pt}}
 \begin{DoxyCompactList}\small\item\em Pointer to node on coarsest mesh on which velocity is traced. \end{DoxyCompactList}\item 
@@ -89,9 +94,9 @@ double \mbox{\hyperlink{classFSIRingProblem_a90ff979880dbecb47f8830f4217eb17f}{P
 
 
 \doxysubsection{Detailed Description}
-F\+SI Ring problem\+: a fluid-\/structure interaction problem in which a viscous fluid bounded by an initially circular beam is set into motion by a small sinusoidal perturbation of the beam (the domain boundary). 
+FSI Ring problem\+: a fluid-\/structure interaction problem in which a viscous fluid bounded by an initially circular beam is set into motion by a small sinusoidal perturbation of the beam (the domain boundary). 
 
-Definition at line 140 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00140}{140}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
@@ -100,7 +105,7 @@ Definition at line 140 of file fsi\+\_\+osc\+\_\+ring.\+cc.
 \index{FSIRingProblem@{FSIRingProblem}!FLUID\_ELEMENT@{FLUID\_ELEMENT}}
 \index{FLUID\_ELEMENT@{FLUID\_ELEMENT}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{FLUID\_ELEMENT}{FLUID\_ELEMENT}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily typedef Algebraic\+Element$<$Refineable\+Q\+Crouzeix\+Raviart\+Element$<$2$>$ $>$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{F\+S\+I\+Ring\+Problem\+::\+F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef Algebraic\+Element$<$Refineable\+QCrouzeix\+Raviart\+Element$<$2$>$ $>$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{FSIRing\+Problem\+::\+FLUID\+\_\+\+ELEMENT}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -108,13 +113,13 @@ There are very few element types that will work for this problem. Rather than pa
 
 
 
-Definition at line 146 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00146}{146}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}\label{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}} 
 \index{FSIRingProblem@{FSIRingProblem}!FLUID\_ELEMENT@{FLUID\_ELEMENT}}
 \index{FLUID\_ELEMENT@{FLUID\_ELEMENT}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{FLUID\_ELEMENT}{FLUID\_ELEMENT}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily typedef Algebraic\+Element$<$Refineable\+Q\+Crouzeix\+Raviart\+Element$<$2$>$ $>$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{F\+S\+I\+Ring\+Problem\+::\+F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef Algebraic\+Element$<$Refineable\+QCrouzeix\+Raviart\+Element$<$2$>$ $>$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{FSIRing\+Problem\+::\+FLUID\+\_\+\+ELEMENT}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -122,13 +127,13 @@ There are very few element types that will work for this problem. Rather than pa
 
 
 
-Definition at line 146 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00146}{146}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}\label{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}} 
 \index{FSIRingProblem@{FSIRingProblem}!SOLID\_ELEMENT@{SOLID\_ELEMENT}}
 \index{SOLID\_ELEMENT@{SOLID\_ELEMENT}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{SOLID\_ELEMENT}{SOLID\_ELEMENT}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily typedef F\+S\+I\+Hermite\+Beam\+Element \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{F\+S\+I\+Ring\+Problem\+::\+S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef FSIHermite\+Beam\+Element \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{FSIRing\+Problem\+::\+SOLID\+\_\+\+ELEMENT}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -136,13 +141,13 @@ Typedef to specify the solid element used.
 
 
 
-Definition at line 149 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00149}{149}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}\label{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}} 
 \index{FSIRingProblem@{FSIRingProblem}!SOLID\_ELEMENT@{SOLID\_ELEMENT}}
 \index{SOLID\_ELEMENT@{SOLID\_ELEMENT}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{SOLID\_ELEMENT}{SOLID\_ELEMENT}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily typedef F\+S\+I\+Hermite\+Beam\+Element \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{F\+S\+I\+Ring\+Problem\+::\+S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily typedef FSIHermite\+Beam\+Element \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{FSIRing\+Problem\+::\+SOLID\+\_\+\+ELEMENT}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -150,7 +155,7 @@ Typedef to specify the solid element used.
 
 
 
-Definition at line 149 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00149}{149}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
 
 
 
@@ -159,33 +164,37 @@ Definition at line 149 of file fsi\+\_\+osc\+\_\+ring.\+cc.
 \index{FSIRingProblem@{FSIRingProblem}!FSIRingProblem@{FSIRingProblem}}
 \index{FSIRingProblem@{FSIRingProblem}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{FSIRingProblem()}{FSIRingProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily F\+S\+I\+Ring\+Problem\+::\+F\+S\+I\+Ring\+Problem (\begin{DoxyParamCaption}\item[{const unsigned \&}]{N,  }\item[{const double \&}]{eps\+\_\+ampl,  }\item[{const double \&}]{pcos\+\_\+initial,  }\item[{const double \&}]{pcos\+\_\+duration }\end{DoxyParamCaption})}
-
-Constructor\+: Number of elements in wall mesh, amplitude of the initial wall deformation, amplitude of pcos perturbation and its duration.
-
-Constructor for F\+SI ring problem. Pass number of wall elements and length of wall (in Lagrangian coordinates) amplitude of initial deformation, pcos perturbation and duration. 
-
-Definition at line 430 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+{\footnotesize\ttfamily FSIRing\+Problem\+::\+FSIRing\+Problem (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nelement\+\_\+wall,  }\item[{const double \&}]{eps\+\_\+ampl,  }\item[{const double \&}]{pcos\+\_\+initial,  }\item[{const double \&}]{pcos\+\_\+duration }\end{DoxyParamCaption})}
 
 
 
-References Doc\+\_\+displacement\+\_\+elem\+\_\+pt, Fluid\+\_\+mesh\+\_\+pt, Fluid\+\_\+time\+\_\+stepper\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::H, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq, oomph\+::\+Sarah\+B\+L\+::N, Global\+\_\+\+Physical\+\_\+\+Variables\+::pcos\+\_\+load(), Global\+\_\+\+Physical\+\_\+\+Variables\+::Q, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St, Undef\+\_\+geom\+\_\+pt, Veloc\+\_\+trace\+\_\+node\+\_\+pt, Wall\+\_\+mesh\+\_\+pt, and Wall\+\_\+time\+\_\+stepper\+\_\+pt.
+Constructor\+: Number of elements in wall mesh, amplitude of the initial wall deformation, amplitude of pcos perturbation and its duration. 
+
+Constructor for FSI ring problem. Pass number of wall elements and length of wall (in Lagrangian coordinates) amplitude of initial deformation, pcos perturbation and duration. 
+
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{430}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00228}{Doc\+\_\+displacement\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00243}{Fluid\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00064}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00080}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq}}, \mbox{\hyperlink{osc__ring__sarah__asymptotics_8h_source_l00043}{oomph\+::\+Sarah\+BL\+::N}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00125}{Global\+\_\+\+Physical\+\_\+\+Variables\+::pcos\+\_\+load()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00083}{Global\+\_\+\+Physical\+\_\+\+Variables\+::Q}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00074}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00077}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00237}{Undef\+\_\+geom\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00246}{Veloc\+\_\+trace\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00231}{Wall\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00240}{Wall\+\_\+time\+\_\+stepper\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a99a92bc3e2713063664277ce535c0af1}\label{classFSIRingProblem_a99a92bc3e2713063664277ce535c0af1}} 
 \index{FSIRingProblem@{FSIRingProblem}!FSIRingProblem@{FSIRingProblem}}
 \index{FSIRingProblem@{FSIRingProblem}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{FSIRingProblem()}{FSIRingProblem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily F\+S\+I\+Ring\+Problem\+::\+F\+S\+I\+Ring\+Problem (\begin{DoxyParamCaption}\item[{const unsigned \&}]{N,  }\item[{const double \&}]{eps\+\_\+ampl,  }\item[{const double \&}]{pcos\+\_\+initial,  }\item[{const double \&}]{pcos\+\_\+duration,  }\item[{const unsigned \&}]{i\+\_\+case }\end{DoxyParamCaption})}
-
-Constructor\+: Number of elements in wall mesh, amplitude of the initial wall deformation, amplitude of pcos perturbation and its duration.
-
-Constructor for F\+SI ring problem. Pass number of wall elements and length of wall (in Lagrangian coordinates) amplitude of initial deformation, pcos perturbation and duration. 
-
-Definition at line 431 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+{\footnotesize\ttfamily FSIRing\+Problem\+::\+FSIRing\+Problem (\begin{DoxyParamCaption}\item[{const unsigned \&}]{nelement\+\_\+wall,  }\item[{const double \&}]{eps\+\_\+ampl,  }\item[{const double \&}]{pcos\+\_\+initial,  }\item[{const double \&}]{pcos\+\_\+duration,  }\item[{const unsigned \&}]{i\+\_\+case }\end{DoxyParamCaption})}
 
 
 
-References Doc\+\_\+displacement\+\_\+elem\+\_\+pt, Fluid\+\_\+mesh\+\_\+pt, Fluid\+\_\+time\+\_\+stepper\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::H, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq, oomph\+::\+Sarah\+B\+L\+::N, Global\+\_\+\+Physical\+\_\+\+Variables\+::pcos\+\_\+load(), Global\+\_\+\+Physical\+\_\+\+Variables\+::Q, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St, Undef\+\_\+geom\+\_\+pt, Veloc\+\_\+trace\+\_\+node\+\_\+pt, Wall\+\_\+mesh\+\_\+pt, and Wall\+\_\+time\+\_\+stepper\+\_\+pt.
+Constructor\+: Number of elements in wall mesh, amplitude of the initial wall deformation, amplitude of pcos perturbation and its duration. 
+
+Constructor for FSI ring problem. Pass number of wall elements and length of wall (in Lagrangian coordinates) amplitude of initial deformation, pcos perturbation and duration. 
+
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00431}{431}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00228}{Doc\+\_\+displacement\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00243}{Fluid\+\_\+time\+\_\+stepper\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00064}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00080}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Lambda\+\_\+sq}}, \mbox{\hyperlink{osc__ring__sarah__asymptotics_8h_source_l00043}{oomph\+::\+Sarah\+BL\+::N}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00125}{Global\+\_\+\+Physical\+\_\+\+Variables\+::pcos\+\_\+load()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00083}{Global\+\_\+\+Physical\+\_\+\+Variables\+::Q}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00074}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00077}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Re\+St}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00237}{Undef\+\_\+geom\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00246}{Veloc\+\_\+trace\+\_\+node\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00231}{Wall\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00240}{Wall\+\_\+time\+\_\+stepper\+\_\+pt}}.
 
 
 
@@ -194,7 +203,7 @@ References Doc\+\_\+displacement\+\_\+elem\+\_\+pt, Fluid\+\_\+mesh\+\_\+pt, Flu
 \index{FSIRingProblem@{FSIRingProblem}!actions\_after\_adapt@{actions\_after\_adapt}}
 \index{actions\_after\_adapt@{actions\_after\_adapt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -202,13 +211,17 @@ Update the problem specs after adaptation\+:
 
 
 
-Definition at line 175 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00175}{175}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00231}{Wall\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_af4ffa3d628230ef064a84b7c6e6a5fb8}\label{classFSIRingProblem_af4ffa3d628230ef064a84b7c6e6a5fb8}} 
 \index{FSIRingProblem@{FSIRingProblem}!actions\_after\_adapt@{actions\_after\_adapt}}
 \index{actions\_after\_adapt@{actions\_after\_adapt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_adapt()}{actions\_after\_adapt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::actions\+\_\+after\+\_\+adapt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -216,13 +229,17 @@ Update the problem specs after adaptation\+:
 
 
 
-Definition at line 175 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00175}{175}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00231}{Wall\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a63a3da079b167ccdc288372bee6bdbc3}\label{classFSIRingProblem_a63a3da079b167ccdc288372bee6bdbc3}} 
 \index{FSIRingProblem@{FSIRingProblem}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -230,13 +247,13 @@ Update after solve (empty)
 
 
 
-Definition at line 160 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00160}{160}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a63a3da079b167ccdc288372bee6bdbc3}\label{classFSIRingProblem_a63a3da079b167ccdc288372bee6bdbc3}} 
 \index{FSIRingProblem@{FSIRingProblem}!actions\_after\_newton\_solve@{actions\_after\_newton\_solve}}
 \index{actions\_after\_newton\_solve@{actions\_after\_newton\_solve}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_after\_newton\_solve()}{actions\_after\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::actions\+\_\+after\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -244,13 +261,13 @@ Update after solve (empty)
 
 
 
-Definition at line 160 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00160}{160}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_afaf315a9b0feb319cf66b21f959e465e}\label{classFSIRingProblem_afaf315a9b0feb319cf66b21f959e465e}} 
 \index{FSIRingProblem@{FSIRingProblem}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -258,13 +275,17 @@ Update the problem specs before checking Newton convergence.
 
 
 
-Definition at line 167 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00167}{167}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_afaf315a9b0feb319cf66b21f959e465e}\label{classFSIRingProblem_afaf315a9b0feb319cf66b21f959e465e}} 
 \index{FSIRingProblem@{FSIRingProblem}!actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}}
 \index{actions\_before\_newton\_convergence\_check@{actions\_before\_newton\_convergence\_check}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_convergence\_check()}{actions\_before\_newton\_convergence\_check()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -272,13 +293,17 @@ Update the problem specs before checking Newton convergence.
 
 
 
-Definition at line 167 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00167}{167}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a9fd26120e4e078bca685a5c94482ee12}\label{classFSIRingProblem_a9fd26120e4e078bca685a5c94482ee12}} 
 \index{FSIRingProblem@{FSIRingProblem}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -286,13 +311,13 @@ Update before solve (empty)
 
 
 
-Definition at line 163 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00163}{163}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a9fd26120e4e078bca685a5c94482ee12}\label{classFSIRingProblem_a9fd26120e4e078bca685a5c94482ee12}} 
 \index{FSIRingProblem@{FSIRingProblem}!actions\_before\_newton\_solve@{actions\_before\_newton\_solve}}
 \index{actions\_before\_newton\_solve@{actions\_before\_newton\_solve}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{actions\_before\_newton\_solve()}{actions\_before\_newton\_solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::actions\+\_\+before\+\_\+newton\+\_\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -300,13 +325,13 @@ Update before solve (empty)
 
 
 
-Definition at line 163 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00163}{163}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a686782b9af582b68e55c288e1fe4660e}\label{classFSIRingProblem_a686782b9af582b68e55c288e1fe4660e}} 
 \index{FSIRingProblem@{FSIRingProblem}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file }\end{DoxyParamCaption})}
 
 
 
@@ -314,17 +339,21 @@ Doc solution\+: Pass number of timestep, i (we append to tracefile after every t
 
 Document solution\+: Pass number of timestep, i; we append to trace file at every timestep and do a full doc only after a certain number of steps. Output the solution using 5x5 plot points
 
-Definition at line 352 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00352}{352}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by dynamic\+\_\+run().
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00228}{Doc\+\_\+displacement\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00246}{Veloc\+\_\+trace\+\_\+node\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{dynamic\+\_\+run()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a6ffbe3f55308ea33cf2cc204062ef4ea}\label{classFSIRingProblem_a6ffbe3f55308ea33cf2cc204062ef4ea}} 
 \index{FSIRingProblem@{FSIRingProblem}!doc\_solution@{doc\_solution}}
 \index{doc\_solution@{doc\_solution}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{doc\_solution()}{doc\_solution()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file,  }\item[{const unsigned \&}]{i\+\_\+case }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::doc\+\_\+solution (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{Doc\+Info \&}]{doc\+\_\+info,  }\item[{ofstream \&}]{trace\+\_\+file,  }\item[{const unsigned \&}]{i\+\_\+case }\end{DoxyParamCaption})}
 
 
 
@@ -332,13 +361,17 @@ Doc solution\+: Pass number of timestep, i (we append to tracefile after every t
 
 Document solution\+: Pass number of timestep, i; we append to trace file at every timestep and do a full doc only after a certain number of steps. Output the solution using 5x5 plot points
 
-Definition at line 353 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00353}{353}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00228}{Doc\+\_\+displacement\+\_\+elem\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00246}{Veloc\+\_\+trace\+\_\+node\+\_\+pt}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_acbb3bc5cd6d16cfee7a2f19a3b984ce7}\label{classFSIRingProblem_acbb3bc5cd6d16cfee7a2f19a3b984ce7}} 
 \index{FSIRingProblem@{FSIRingProblem}!dynamic\_run@{dynamic\_run}}
 \index{dynamic\_run@{dynamic\_run}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{dynamic\_run()}{dynamic\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::dynamic\+\_\+run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::dynamic\+\_\+run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -350,17 +383,21 @@ Perturbation pressure
 
 Switch off perturbation pressure
 
-Definition at line 656 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{656}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha\+\_\+sq, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+ratio, doc\+\_\+solution(), Fluid\+\_\+mesh\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::H, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos, Pcos\+\_\+duration, Pcos\+\_\+initial, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pext, set\+\_\+initial\+\_\+condition(), and Global\+\_\+\+Physical\+\_\+\+Variables\+::set\+\_\+params().
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00052}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha\+\_\+sq}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00055}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+ratio}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00352}{doc\+\_\+solution()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00064}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00067}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00255}{Pcos\+\_\+duration}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00252}{Pcos\+\_\+initial}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00058}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pext}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00264}{set\+\_\+initial\+\_\+condition()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{Global\+\_\+\+Physical\+\_\+\+Variables\+::set\+\_\+params()}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00815}{main()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_ac679e3984b85ddec7b8c2e8ab4511eac}\label{classFSIRingProblem_ac679e3984b85ddec7b8c2e8ab4511eac}} 
 \index{FSIRingProblem@{FSIRingProblem}!dynamic\_run@{dynamic\_run}}
 \index{dynamic\_run@{dynamic\_run}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{dynamic\_run()}{dynamic\_run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::dynamic\+\_\+run (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i\+\_\+case }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::dynamic\+\_\+run (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i\+\_\+case }\end{DoxyParamCaption})}
 
 
 
@@ -372,17 +409,17 @@ Perturbation pressure
 
 Switch off perturbation pressure
 
-Definition at line 699 of file fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source_l00699}{699}} of file \mbox{\hyperlink{fsi__osc__ring__compare__jacs_8cc_source}{fsi\+\_\+osc\+\_\+ring\+\_\+compare\+\_\+jacs.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha\+\_\+sq, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+ratio, doc\+\_\+solution(), Fluid\+\_\+mesh\+\_\+pt, Global\+\_\+\+Physical\+\_\+\+Variables\+::H, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos, Pcos\+\_\+duration, Pcos\+\_\+initial, Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pext, set\+\_\+initial\+\_\+condition(), and Global\+\_\+\+Physical\+\_\+\+Variables\+::set\+\_\+params().
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00052}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Alpha\+\_\+sq}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00055}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Density\+\_\+ratio}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00352}{doc\+\_\+solution()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00064}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00067}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pcos}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00255}{Pcos\+\_\+duration}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00252}{Pcos\+\_\+initial}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00058}{Global\+\_\+\+Physical\+\_\+\+Variables\+::\+Pext}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00264}{set\+\_\+initial\+\_\+condition()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00087}{Global\+\_\+\+Physical\+\_\+\+Variables\+::set\+\_\+params()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_ad397e4e3b92845240dd6a996856f33e7}\label{classFSIRingProblem_ad397e4e3b92845240dd6a996856f33e7}} 
 \index{FSIRingProblem@{FSIRingProblem}!set\_fluid\_initial\_condition@{set\_fluid\_initial\_condition}}
 \index{set\_fluid\_initial\_condition@{set\_fluid\_initial\_condition}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{set\_fluid\_initial\_condition()}{set\_fluid\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::set\+\_\+fluid\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::set\+\_\+fluid\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -390,13 +427,21 @@ Setup initial condition for fluid.
 
 Setup initial condition for fluid\+: Impulsive start. 
 
-Definition at line 279 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00279}{279}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
+
+
+
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{Fluid\+\_\+mesh\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00264}{set\+\_\+initial\+\_\+condition()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_ad397e4e3b92845240dd6a996856f33e7}\label{classFSIRingProblem_ad397e4e3b92845240dd6a996856f33e7}} 
 \index{FSIRingProblem@{FSIRingProblem}!set\_fluid\_initial\_condition@{set\_fluid\_initial\_condition}}
 \index{set\_fluid\_initial\_condition@{set\_fluid\_initial\_condition}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{set\_fluid\_initial\_condition()}{set\_fluid\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::set\+\_\+fluid\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::set\+\_\+fluid\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -406,7 +451,7 @@ Setup initial condition for fluid.
 \index{FSIRingProblem@{FSIRingProblem}!set\_initial\_condition@{set\_initial\_condition}}
 \index{set\_initial\_condition@{set\_initial\_condition}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -414,17 +459,21 @@ Setup initial condition for both domains.
 
 Setup initial condition\+: When we\textquotesingle{}re done here, all variables represent the state at the initial time. 
 
-Definition at line 264 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00264}{264}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by dynamic\+\_\+run().
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00279}{set\+\_\+fluid\+\_\+initial\+\_\+condition()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00318}{set\+\_\+wall\+\_\+initial\+\_\+condition()}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{dynamic\+\_\+run()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a309ea4c79fbae58020d94bf2c2318169}\label{classFSIRingProblem_a309ea4c79fbae58020d94bf2c2318169}} 
 \index{FSIRingProblem@{FSIRingProblem}!set\_initial\_condition@{set\_initial\_condition}}
 \index{set\_initial\_condition@{set\_initial\_condition}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{set\_initial\_condition()}{set\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::set\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -434,7 +483,7 @@ Setup initial condition for both domains.
 \index{FSIRingProblem@{FSIRingProblem}!set\_wall\_initial\_condition@{set\_wall\_initial\_condition}}
 \index{set\_wall\_initial\_condition@{set\_wall\_initial\_condition}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{set\_wall\_initial\_condition()}{set\_wall\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::set\+\_\+wall\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::set\+\_\+wall\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -442,17 +491,21 @@ Setup initial condition for wall.
 
 Setup initial condition\+: Impulsive start either from deformed or undeformed wall shape. 
 
-Definition at line 318 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00318}{318}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-References Global\+\_\+\+Physical\+\_\+\+Variables\+::H.
+References \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00249}{Eps\+\_\+ampl}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00064}{Global\+\_\+\+Physical\+\_\+\+Variables\+::H}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00231}{Wall\+\_\+mesh\+\_\+pt}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00240}{Wall\+\_\+time\+\_\+stepper\+\_\+pt}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00264}{set\+\_\+initial\+\_\+condition()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a5f987c1b22dc306cf7d26be7fa74e322}\label{classFSIRingProblem_a5f987c1b22dc306cf7d26be7fa74e322}} 
 \index{FSIRingProblem@{FSIRingProblem}!set\_wall\_initial\_condition@{set\_wall\_initial\_condition}}
 \index{set\_wall\_initial\_condition@{set\_wall\_initial\_condition}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{set\_wall\_initial\_condition()}{set\_wall\_initial\_condition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void F\+S\+I\+Ring\+Problem\+::set\+\_\+wall\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void FSIRing\+Problem\+::set\+\_\+wall\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -465,7 +518,7 @@ Setup initial condition for wall.
 \index{FSIRingProblem@{FSIRingProblem}!Doc\_displacement\_elem\_pt@{Doc\_displacement\_elem\_pt}}
 \index{Doc\_displacement\_elem\_pt@{Doc\_displacement\_elem\_pt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Doc\_displacement\_elem\_pt}{Doc\_displacement\_elem\_pt}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}} $\ast$ F\+S\+I\+Ring\+Problem\+::\+Doc\+\_\+displacement\+\_\+elem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{SOLID\+\_\+\+ELEMENT}} $\ast$ FSIRing\+Problem\+::\+Doc\+\_\+displacement\+\_\+elem\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -473,17 +526,17 @@ Element used for documenting displacement.
 
 
 
-Definition at line 228 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00228}{228}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00352}{doc\+\_\+solution()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a6e14af107a8f5b5a5254a55f0707ff4c}\label{classFSIRingProblem_a6e14af107a8f5b5a5254a55f0707ff4c}} 
 \index{FSIRingProblem@{FSIRingProblem}!Eps\_ampl@{Eps\_ampl}}
 \index{Eps\_ampl@{Eps\_ampl}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Eps\_ampl}{Eps\_ampl}}
-{\footnotesize\ttfamily double F\+S\+I\+Ring\+Problem\+::\+Eps\+\_\+ampl\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double FSIRing\+Problem\+::\+Eps\+\_\+ampl\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -491,13 +544,17 @@ Amplitude of initial deformation.
 
 
 
-Definition at line 249 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00249}{249}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
+
+
+
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00318}{set\+\_\+wall\+\_\+initial\+\_\+condition()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}\label{classFSIRingProblem_a33eec722bed7a0b02444c64d3e6c66fe}} 
 \index{FSIRingProblem@{FSIRingProblem}!Fluid\_mesh\_pt@{Fluid\_mesh\_pt}}
 \index{Fluid\_mesh\_pt@{Fluid\_mesh\_pt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Fluid\_mesh\_pt}{Fluid\_mesh\_pt}}
-{\footnotesize\ttfamily Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{F\+L\+U\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}} $>$ $\ast$ F\+S\+I\+Ring\+Problem\+::\+Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Algebraic\+Refineable\+Quarter\+Circle\+Sector\+Mesh$<$ \mbox{\hyperlink{classFSIRingProblem_a2ce9ba3122272853bfa6ec3fcf39b78a}{FLUID\+\_\+\+ELEMENT}} $>$ $\ast$ FSIRing\+Problem\+::\+Fluid\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -505,17 +562,17 @@ Pointer to fluid mesh.
 
 
 
-Definition at line 234 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00234}{234}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by dynamic\+\_\+run(), and F\+S\+I\+Ring\+Problem().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00175}{actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00167}{actions\+\_\+before\+\_\+newton\+\_\+convergence\+\_\+check()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00352}{doc\+\_\+solution()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{dynamic\+\_\+run()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00279}{set\+\_\+fluid\+\_\+initial\+\_\+condition()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a6abf3345b68a0b4b671758439340138e}\label{classFSIRingProblem_a6abf3345b68a0b4b671758439340138e}} 
 \index{FSIRingProblem@{FSIRingProblem}!Fluid\_time\_stepper\_pt@{Fluid\_time\_stepper\_pt}}
 \index{Fluid\_time\_stepper\_pt@{Fluid\_time\_stepper\_pt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Fluid\_time\_stepper\_pt}{Fluid\_time\_stepper\_pt}}
-{\footnotesize\ttfamily B\+DF$<$ 2 $>$ $\ast$ F\+S\+I\+Ring\+Problem\+::\+Fluid\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily BDF$<$ 2 $>$ $\ast$ FSIRing\+Problem\+::\+Fluid\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -523,17 +580,17 @@ Pointer to fluid timestepper.
 
 
 
-Definition at line 243 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00243}{243}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a90ff979880dbecb47f8830f4217eb17f}\label{classFSIRingProblem_a90ff979880dbecb47f8830f4217eb17f}} 
 \index{FSIRingProblem@{FSIRingProblem}!Pcos\_duration@{Pcos\_duration}}
 \index{Pcos\_duration@{Pcos\_duration}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Pcos\_duration}{Pcos\_duration}}
-{\footnotesize\ttfamily double F\+S\+I\+Ring\+Problem\+::\+Pcos\+\_\+duration\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double FSIRing\+Problem\+::\+Pcos\+\_\+duration\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -541,17 +598,17 @@ Duration of initial pcos.
 
 
 
-Definition at line 255 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00255}{255}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by dynamic\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{dynamic\+\_\+run()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a109eb6d9804264294357d6b76aa50ab6}\label{classFSIRingProblem_a109eb6d9804264294357d6b76aa50ab6}} 
 \index{FSIRingProblem@{FSIRingProblem}!Pcos\_initial@{Pcos\_initial}}
 \index{Pcos\_initial@{Pcos\_initial}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Pcos\_initial}{Pcos\_initial}}
-{\footnotesize\ttfamily double F\+S\+I\+Ring\+Problem\+::\+Pcos\+\_\+initial\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily double FSIRing\+Problem\+::\+Pcos\+\_\+initial\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -559,17 +616,17 @@ Initial pcos.
 
 
 
-Definition at line 252 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00252}{252}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by dynamic\+\_\+run().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00656}{dynamic\+\_\+run()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a1c7dfd9d2798fb518403e5ef99f1f69c}\label{classFSIRingProblem_a1c7dfd9d2798fb518403e5ef99f1f69c}} 
 \index{FSIRingProblem@{FSIRingProblem}!Undef\_geom\_pt@{Undef\_geom\_pt}}
 \index{Undef\_geom\_pt@{Undef\_geom\_pt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Undef\_geom\_pt}{Undef\_geom\_pt}}
-{\footnotesize\ttfamily Geom\+Object $\ast$ F\+S\+I\+Ring\+Problem\+::\+Undef\+\_\+geom\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Geom\+Object $\ast$ FSIRing\+Problem\+::\+Undef\+\_\+geom\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -577,17 +634,17 @@ Pointer to geometric object that represents the undeformed wall shape.
 
 
 
-Definition at line 237 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00237}{237}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a2e64e4625ff61633607233d9a6205000}\label{classFSIRingProblem_a2e64e4625ff61633607233d9a6205000}} 
 \index{FSIRingProblem@{FSIRingProblem}!Veloc\_trace\_node\_pt@{Veloc\_trace\_node\_pt}}
 \index{Veloc\_trace\_node\_pt@{Veloc\_trace\_node\_pt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Veloc\_trace\_node\_pt}{Veloc\_trace\_node\_pt}}
-{\footnotesize\ttfamily Node $\ast$ F\+S\+I\+Ring\+Problem\+::\+Veloc\+\_\+trace\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Node $\ast$ FSIRing\+Problem\+::\+Veloc\+\_\+trace\+\_\+node\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -595,17 +652,17 @@ Pointer to node on coarsest mesh on which velocity is traced.
 
 
 
-Definition at line 246 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00246}{246}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00352}{doc\+\_\+solution()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a112c5285b6ea49d0e003fc3bdd817332}\label{classFSIRingProblem_a112c5285b6ea49d0e003fc3bdd817332}} 
 \index{FSIRingProblem@{FSIRingProblem}!Wall\_mesh\_pt@{Wall\_mesh\_pt}}
 \index{Wall\_mesh\_pt@{Wall\_mesh\_pt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Wall\_mesh\_pt}{Wall\_mesh\_pt}}
-{\footnotesize\ttfamily One\+D\+Lagrangian\+Mesh$<$ \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{S\+O\+L\+I\+D\+\_\+\+E\+L\+E\+M\+E\+NT}} $>$ $\ast$ F\+S\+I\+Ring\+Problem\+::\+Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily One\+DLagrangian\+Mesh$<$ \mbox{\hyperlink{classFSIRingProblem_a96528378f3baf6100aeb6b4fe83bc870}{SOLID\+\_\+\+ELEMENT}} $>$ $\ast$ FSIRing\+Problem\+::\+Wall\+\_\+mesh\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -613,17 +670,17 @@ Pointer to wall mesh.
 
 
 
-Definition at line 231 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00231}{231}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00175}{actions\+\_\+after\+\_\+adapt()}}, \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00318}{set\+\_\+wall\+\_\+initial\+\_\+condition()}}.
 
 \mbox{\Hypertarget{classFSIRingProblem_a67d7e17b8b0513e793f94fa4357b5784}\label{classFSIRingProblem_a67d7e17b8b0513e793f94fa4357b5784}} 
 \index{FSIRingProblem@{FSIRingProblem}!Wall\_time\_stepper\_pt@{Wall\_time\_stepper\_pt}}
 \index{Wall\_time\_stepper\_pt@{Wall\_time\_stepper\_pt}!FSIRingProblem@{FSIRingProblem}}
 \doxysubsubsection{\texorpdfstring{Wall\_time\_stepper\_pt}{Wall\_time\_stepper\_pt}}
-{\footnotesize\ttfamily Newmark$<$ 2 $>$ $\ast$ F\+S\+I\+Ring\+Problem\+::\+Wall\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily Newmark$<$ 2 $>$ $\ast$ FSIRing\+Problem\+::\+Wall\+\_\+time\+\_\+stepper\+\_\+pt\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -631,11 +688,11 @@ Pointer to wall timestepper.
 
 
 
-Definition at line 240 of file fsi\+\_\+osc\+\_\+ring.\+cc.
+Definition at line \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00240}{240}} of file \mbox{\hyperlink{fsi__osc__ring_8cc_source}{fsi\+\_\+osc\+\_\+ring.\+cc}}.
 
 
 
-Referenced by F\+S\+I\+Ring\+Problem().
+Referenced by \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00430}{FSIRing\+Problem()}}, and \mbox{\hyperlink{fsi__osc__ring_8cc_source_l00318}{set\+\_\+wall\+\_\+initial\+\_\+condition()}}.
 
 
 
